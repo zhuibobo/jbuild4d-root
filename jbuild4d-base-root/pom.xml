@@ -12,8 +12,8 @@
     <artifactId>jbuild4d-base-root</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>build4d-base-tools</module>
-        <module>build4d-base-service</module>
+        <module>jbuild4d-base-tools</module>
+        <module>jbuild4d-base-service</module>
     </modules>
 
 </project>

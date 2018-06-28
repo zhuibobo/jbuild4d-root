@@ -15,4 +15,12 @@
         <module>jbuild4d-web-platform</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>jbuild4d</groupId>
+            <artifactId>jbuild4d-base-tools</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+    </dependencies>
+
 </project>

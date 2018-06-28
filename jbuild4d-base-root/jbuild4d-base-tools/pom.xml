@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>build4d-base-tools</artifactId>
+    <artifactId>jbuild4d-base-tools</artifactId>
 
 
 </project>
