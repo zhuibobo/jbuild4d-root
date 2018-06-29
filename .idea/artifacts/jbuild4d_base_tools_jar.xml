@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jbuild4d-base-tools:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jbuild4d_base_tools_jar</output-path>
+    <root id="archive" name="jbuild4d-base-tools.jar">
+      <element id="module-output" name="jbuild4d-base-tools" />
+    </root>
+  </artifact>
+</component>
