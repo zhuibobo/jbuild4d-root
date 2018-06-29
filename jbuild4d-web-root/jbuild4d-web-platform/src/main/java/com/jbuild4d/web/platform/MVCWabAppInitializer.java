@@ -1,7 +1,7 @@
 package com.jbuild4d.web.platform;
 
-import com.jbuild4d.web.platform.beanconfig.RootConfig;
-import com.jbuild4d.web.platform.beanconfig.WebConfig;
+import com.jbuild4d.web.platform.beanconfig.sys.RootConfig;
+import com.jbuild4d.web.platform.beanconfig.sys.WebConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import javax.servlet.Filter;

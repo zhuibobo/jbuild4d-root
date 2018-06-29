@@ -1,4 +1,4 @@
-package com.jbuild4d.web.platform.beanconfig;
+package com.jbuild4d.web.platform.beanconfig.sys;
 
 import com.jbuild4d.base.tools.common.PathUtility;
 import org.springframework.context.annotation.Bean;

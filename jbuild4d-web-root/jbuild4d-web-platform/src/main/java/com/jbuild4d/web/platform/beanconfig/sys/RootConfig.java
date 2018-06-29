@@ -1,4 +1,4 @@
-package com.jbuild4d.web.platform.beanconfig;
+package com.jbuild4d.web.platform.beanconfig.sys;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
