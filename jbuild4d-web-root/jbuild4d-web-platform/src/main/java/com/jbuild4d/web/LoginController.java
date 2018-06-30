@@ -15,9 +15,9 @@ public class LoginController {
     public ModelAndView login(HttpServletRequest request) {
         System.out.println("Home Controller Call");
         ModelAndView modelAndView=new ModelAndView("Login");
-        request.getSession().setAttribute("theme","1");
+
+        request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
         return modelAndView;
-        //return "Login";
     }
 
 }

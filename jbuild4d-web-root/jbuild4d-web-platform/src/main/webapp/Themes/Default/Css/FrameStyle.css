@@ -1,0 +1,159 @@
+[v-cloak]{
+    display: none;
+}
+
+.layout-header-wrap{
+    /*background-image: url("../Images/dingbu.png") !important;*/
+}
+
+.layout-header-shadow-line
+{
+    -moz-box-shadow:2px 2px 5px #7f7f7f;
+    -webkit-box-shadow:2px 2px 5px #7f7f7f;
+    box-shadow:-2px 2px 2px #7f7f7f;
+    z-index: 2200;
+}
+.layout{
+    border: 0px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow:auto;
+}
+.layout-logo{
+    width: 305px;
+    height: 40px;
+    /*background: #5b6270;*/
+    border-radius: 3px;
+    float: left;
+    position: relative;
+    top: 10px;
+    left: 4px;
+    color:#ffffff;
+    font-size: 20px;
+    line-height: 40px;
+    padding-left: 6px;
+    z-index: 2100;
+}
+.layout-nav{
+    width: 1220px;
+    margin: 0 auto;
+    margin-right: 0px;
+}
+
+.topMenuItem-warp{
+    /*background: #0f9087;*/
+    height: 50px;
+    left: 340px;
+    right: 300px;
+    position: absolute;
+    top: 4px
+}
+.topMenuItem-inner-warp{
+    float: right;
+    margin-right: 10px;
+}
+.topMenuItem{
+    height:29px;
+    float:left;
+    padding-left: 34px;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+    line-height: 20px !important;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 8px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.topMenuItem:hover{
+
+    color: #ff2848;
+}
+
+.Pastel_Icons_038{ background-image:url(../Images/32X32/Pastel_Icons_038.png);}
+.Pastel_Icons_037{ background-image:url(../Images/32X32/Pastel_Icons_037.png);}
+.Pastel_Icons_064{ background-image:url(../Images/32X32/Pastel_Icons_064.png);}
+
+.top-right-wrap{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    z-index: 901;
+    width: 280px;
+}
+
+.card-title-include-button{
+
+}
+
+.card-title-include-button .ivu-card-head{
+    padding: 9px;
+}
+
+.page2c{
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.page2c .c1{
+    float: left;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.page2c .c2{
+    float: right;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.general-edit-page-wrap{
+    margin-top: 15px;
+}
+
+.general-edit-page-bottom-wrap{
+    text-align: center;
+}
+
+.general-edit-page-bottom-wrap div{
+    margin-left: 0px !important;
+}
+
+.scroll-div-wrap::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scroll-div-wrap::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #eee;
+}
+
+.scroll-div-wrap::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: rgb(171, 175, 186);
+}
+
+.dialog-1-wrap-sy-nx{
+    height: 560px;
+    overflow-y: scroll;
+    overflow-x:hidden ;
+}
+
+.general-table-1sty{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.general-table-1sty th{
+    border: 1px solid #e9eaec;
+    padding: 6px;
+    background: #f8f8f9 ;
+}
+
+.general-table-1sty td{
+    border: 1px solid #e9eaec;
+    padding: 4px;
+    text-align: center;
+}

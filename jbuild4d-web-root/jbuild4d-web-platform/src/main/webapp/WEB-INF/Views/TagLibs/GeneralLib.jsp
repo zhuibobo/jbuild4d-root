@@ -8,8 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<link rel="stylesheet" type="text/css" href="${ctxpath}/Css/FrameStyle.css?urlts=${urlts}">
-<link rel="stylesheet" type="text/css" href="${ctxpath}/Css/ListPageStyle.css?urlts=${urlts}">
+
 <script type="text/javascript" src="${ctxpath}/Js/JQuery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="${ctxpath}/Js/B4DBaseLib.js?urlts=${urlts}"></script>
 <script type="text/javascript" src="${ctxpath}/Js/ProSelectComponent.js"></script>

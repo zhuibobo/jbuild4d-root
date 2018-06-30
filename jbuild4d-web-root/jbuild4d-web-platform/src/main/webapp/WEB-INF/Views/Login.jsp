@@ -9,13 +9,13 @@
 <%@ include file="/WEB-INF/Views/TagLibs/TagLib.jsp" %>
 <html>
 <head>
-    <title>MYWebApp</title>
+    <title>JBuild4D</title>
     <%@ include file="/WEB-INF/Views/TagLibs/GeneralLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/IViewLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
+    <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
-    ${theme}
     <div id="app">
         <row>
             <i-col span="6" offset="9">
