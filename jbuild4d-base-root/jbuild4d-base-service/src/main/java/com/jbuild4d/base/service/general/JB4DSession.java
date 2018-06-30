@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.List;
 import java.util.Map;
 
-public class B4DSession {
+public class JB4DSession {
 
     /**
      * 用户所在的组织ID
@@ -68,7 +68,7 @@ public class B4DSession {
     /**
      * @return 拷贝Session对象
      */
-    public B4DSession deepClone() {
+    public JB4DSession deepClone() {
         Object o = null;
         try {
             if (this != null) {
@@ -86,7 +86,7 @@ public class B4DSession {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return (B4DSession) o;
+        return (JB4DSession) o;
     }
 
     public String getOrganId() {

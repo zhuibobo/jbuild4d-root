@@ -6,10 +6,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class B4DSessionUtility {
+public class JB4DSessionUtility {
 
 
-    public static String UserLoginSessionKey="B4DSession";
+    public static String UserLoginSessionKey="JB4DSession";
     public static String EXSessionKey1="EXSessionKey1";
 
     /**
@@ -17,12 +17,12 @@ public class B4DSessionUtility {
      * @return
      * @throws SessionTimeoutException session超时时抛出
      */
-    public static B4DSession getSession() throws SessionTimeoutException {
+    public static JB4DSession getSession() throws SessionTimeoutException {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         if(request == null) {
             throw new SessionTimeoutException();
         }
-        B4DSession b4DSession = (B4DSession)request.getSession().getAttribute(UserLoginSessionKey);
+        JB4DSession b4DSession = (JB4DSession)request.getSession().getAttribute(UserLoginSessionKey);
         if(b4DSession == null) {
             throw new SessionTimeoutException();
         }
