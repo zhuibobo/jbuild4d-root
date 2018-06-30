@@ -11,4 +11,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s" %>
 <c:set var="ctxpath" value="${pageContext.request.contextPath}" scope="request"/>
 <c:set var="urlts" value="<%= new java.util.Date().getTime()%>" scope="request"/>
+<c:set var="theme" value="${sessionScope.theme}" scope="request"/>
 <!DOCTYPE html>

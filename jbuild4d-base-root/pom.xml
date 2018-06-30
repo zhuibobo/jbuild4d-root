@@ -14,6 +14,7 @@
     <modules>
         <module>jbuild4d-base-tools</module>
         <module>jbuild4d-base-service</module>
+        <module>jbuild4d-base-db-access</module>
     </modules>
 
 </project>

@@ -15,6 +15,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
 </head>
 <body>
+    ${theme}
     <div id="app">
         <row>
             <i-col span="6" offset="9">
