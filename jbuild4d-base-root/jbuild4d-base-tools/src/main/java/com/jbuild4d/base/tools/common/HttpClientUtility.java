@@ -29,7 +29,7 @@ public class HttpClientUtility {
 
     private Logger log = Logger.getLogger(HttpClientUtility.class);
 
-    public static Map<String, String> valueUrlDecode(Map<String, String> source) throws UnsupportedEncodingException {
+    public Map<String, String> valueUrlDecode(Map<String, String> source) throws UnsupportedEncodingException {
         for (Map.Entry<String, String> entry : source.entrySet()) {
             if (!entry.getValue().equals("")) {
                 entry.setValue(URLDecoder.decode(entry.getValue(), "utf-8"));
@@ -159,7 +159,7 @@ public class HttpClientUtility {
         return getHttpGetResult(url, 3);
     }
 
-    public static byte[] getPicByteArray(String picUrl) throws ClientProtocolException, IOException {
+    public byte[] getPicByteArray(String picUrl) throws ClientProtocolException, IOException {
 
         RequestConfig defaultRequestConfig = RequestConfig.custom()
                 .setSocketTimeout(5000)

@@ -57,7 +57,7 @@
                     }
                     AjaxUtility.Post(url, senddata , function (result) {
                         if (result.success) {
-                            window.location.href=B4D.BaseUtility.GetRootPath()+"/Frame.do"
+                            window.location.href=JB4D.BaseUtility.GetRootPath()+"/PlatForm/Base/Frame.do"
                         }
                         else
                         {

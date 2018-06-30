@@ -8,20 +8,20 @@ public class DateUtility {
     /**
      * 星期数组
      */
-    public static String[] weekDays_CN = new String[]{"日",
+    public String[] weekDays_CN = new String[]{"日",
             "一", "二", "三", "四", "五", "六"};
 
     /**
      * 星期数组
      */
-    public static String[] weekDays_EN = new String[]{"sun",
+    public String[] weekDays_EN = new String[]{"sun",
             "mon",  "tue", "wed", "thu", "fri", "sat"};
 
     /**
      * 获取当前年
      * @return
      */
-    public static int getYear() {
+    public int getYear() {
         Calendar cal = Calendar.getInstance();
         return cal.get(Calendar.YEAR);
     }
@@ -30,7 +30,7 @@ public class DateUtility {
      * 获取当前月
      * @return
      */
-    public static int getMonth() {
+    public int getMonth() {
         Calendar cal = Calendar.getInstance();
         return cal.get(Calendar.MONTH);
     }
@@ -39,7 +39,7 @@ public class DateUtility {
      * 获取当前日期
      * @return
      */
-    public static int getDayOfMonth() {
+    public int getDayOfMonth() {
         Calendar cal = Calendar.getInstance();
         return cal.get(Calendar.DAY_OF_MONTH);
     }
@@ -48,7 +48,7 @@ public class DateUtility {
      * 获取星期
      * @return
      */
-    public static int getDayOfWeek() {
+    public int getDayOfWeek() {
         Calendar cal = Calendar.getInstance();
         return cal.get(Calendar.DAY_OF_WEEK);
     }
@@ -57,7 +57,7 @@ public class DateUtility {
      * 获取星期
      * @return
      */
-    public static String getDayOfWeek_CN() {
+    public String getDayOfWeek_CN() {
         Calendar cal = Calendar.getInstance();
         return weekDays_CN[cal.get(Calendar.DAY_OF_WEEK) - 1];
     }
@@ -67,7 +67,7 @@ public class DateUtility {
      * @param date
      * @return
      */
-    public static String getDayOfWeek_EN(Date date) {
+    public String getDayOfWeek_EN(Date date) {
         Calendar cal = Calendar.getInstance();
         if(null != date)
             cal.setTime(date);
@@ -78,7 +78,7 @@ public class DateUtility {
      * 获取8位12小时制的时间
      * @return
      */
-    public static String getTime_hh_mm_ss() {
+    public String getTime_hh_mm_ss() {
         String sz10LenTime;
         Date date =  new Date();
         SimpleDateFormat formater = new SimpleDateFormat();
@@ -92,7 +92,7 @@ public class DateUtility {
      * @param date
      * @return
      */
-    public static String getTime_hh_mm_ss(Date date) {
+    public String getTime_hh_mm_ss(Date date) {
         String sz10LenTime;
         SimpleDateFormat formater = new SimpleDateFormat();
         formater.applyPattern("hh:mm:ss");
@@ -105,7 +105,7 @@ public class DateUtility {
      * @param date
      * @return
      */
-    public static String getTime_HH_mm_ss(Date date) {
+    public String getTime_HH_mm_ss(Date date) {
         String sz10LenDate;
         SimpleDateFormat formater = new SimpleDateFormat();
         formater.applyPattern("HH:mm:ss");
@@ -117,7 +117,7 @@ public class DateUtility {
      * 获取8位24小时制的时间
      * @return
      */
-    public static String getTime_HH_mm_ss() {
+    public String getTime_HH_mm_ss() {
         String sz10LenDate;
         Date date =  new Date();
         SimpleDateFormat formater = new SimpleDateFormat();
@@ -130,7 +130,7 @@ public class DateUtility {
      * 获取8位格式日期
      * @return
      */
-    public static String getDate_yyyyMMdd() {
+    public String getDate_yyyyMMdd() {
         String sz8LenDate;
         Date date = new Date();
         SimpleDateFormat formater=new SimpleDateFormat();
@@ -144,7 +144,7 @@ public class DateUtility {
      * @param date
      * @return
      */
-    public static String getDate_yyyyMMdd(Date date) {
+    public String getDate_yyyyMMdd(Date date) {
         String sz8LenDate;
         SimpleDateFormat formater=new SimpleDateFormat();
         formater.applyPattern("yyyyMMdd");
@@ -156,7 +156,7 @@ public class DateUtility {
      * 获取10位格式的日期
      * @return
      */
-    public static String getDate_yyyy_MM_dd() {
+    public String getDate_yyyy_MM_dd() {
         String sz10LenDate;
         Date date =  new Date();
 
@@ -171,7 +171,7 @@ public class DateUtility {
      * @param date
      * @return
      */
-    public static String getDate_yyyy_MM_dd(Date date) {
+    public String getDate_yyyy_MM_dd(Date date) {
         String sz10LenDate;
         SimpleDateFormat formater=new SimpleDateFormat();
         formater.applyPattern("yyyy-MM-dd");
@@ -183,7 +183,7 @@ public class DateUtility {
      * 获取yyyy-MM-dd HH:mm:ss
      * @return
      */
-    public static String getDate_yyyy_MM_dd_HH_mm_ss() {
+    public String getDate_yyyy_MM_dd_HH_mm_ss() {
         String sz10LenDate;
         Date date =  new Date();
         SimpleDateFormat formater=new SimpleDateFormat();
@@ -196,7 +196,7 @@ public class DateUtility {
      * 获取yyyy-MM-dd HH:mm:ss
      * @return
      */
-    public static String getDate_yyyy_MM_dd_HH_mm_ss_SSS() {
+    public String getDate_yyyy_MM_dd_HH_mm_ss_SSS() {
         String LenDate;
         Date date =  new Date();
         SimpleDateFormat formater=new SimpleDateFormat();
@@ -209,11 +209,11 @@ public class DateUtility {
      * 获取yyyy-MM-dd HH:mm:ss
      * @return
      */
-    public static String getDate_yyyyMMddHHmmssSSS() {
+    public String getDate_yyyyMMddHHmmssSSS() {
         String LenDate;
         Date date =  new Date();
         SimpleDateFormat formater=new SimpleDateFormat();
-        formater.applyPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        formater.applyPattern("yyyyMMddHHmmssSSS");
         LenDate = formater.format(date);
         return LenDate;
     }

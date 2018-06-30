@@ -14,19 +14,19 @@ import java.util.jar.JarFile;
 
 public final class ClassUtility {
 
-    private static final Logger LOGGER = Logger.getLogger(ClassUtility.class);
+    private final Logger LOGGER = Logger.getLogger(ClassUtility.class);
 
     /**
      * 获取类加载器
      */
-    public static ClassLoader getClassLoader() {
+    public ClassLoader getClassLoader() {
         return Thread.currentThread().getContextClassLoader();
     }
 
     /**
      * 加载类
      */
-    public static Class<?> loadClass(String className, boolean isInitialized) {
+    public Class<?> loadClass(String className, boolean isInitialized) {
         Class<?> cls;
         try {
             cls = Class.forName(className, isInitialized, getClassLoader());
@@ -40,14 +40,14 @@ public final class ClassUtility {
     /**
      * 加载类（默认将初始化类）
      */
-    public static Class<?> loadClass(String className) {
+    public Class<?> loadClass(String className) {
         return loadClass(className, true);
     }
 
     /**
      * 获取指定包名下的所有类
      */
-    public static Set<Class<?>> getClassSet(String packageName) {
+    public Set<Class<?>> getClassSet(String packageName) {
         Set<Class<?>> classSet = new HashSet<Class<?>>();
         try {
             Enumeration<URL> urls = getClassLoader().getResources(packageName.replace(".", "/"));
@@ -84,7 +84,7 @@ public final class ClassUtility {
         return classSet;
     }
 
-    private static void addClass(Set<Class<?>> classSet, String packagePath, String packageName) {
+    private void addClass(Set<Class<?>> classSet, String packagePath, String packageName) {
         File[] files = new File(packagePath).listFiles(new FileFilter() {
             public boolean accept(File file) {
                 return (file.isFile() && file.getName().endsWith(".class")) || file.isDirectory();
@@ -112,7 +112,7 @@ public final class ClassUtility {
         }
     }
 
-    private static void doAddClass(Set<Class<?>> classSet, String className) {
+    private void doAddClass(Set<Class<?>> classSet, String className) {
         Class<?> cls = loadClass(className, false);
         classSet.add(cls);
     }

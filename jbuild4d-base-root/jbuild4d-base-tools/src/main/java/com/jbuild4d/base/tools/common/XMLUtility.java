@@ -61,9 +61,9 @@ public class XMLUtility {
      * @throws ParserConfigurationException 如果无法创建满足所请求配置的 DocumentBuilder，将抛出该异常。
      * @throws NullPointerException         如果file为空时，抛出此异常。
      */
-    public static Document parseForDoc(final String file) throws SAXException, IOException, SecurityException,
+    public Document parseForDoc(final String file) throws SAXException, IOException, SecurityException,
             NullPointerException, ParserConfigurationException {
-        return XMLUtility.parseForDoc(new FileInputStream(file));
+        return parseForDoc(new FileInputStream(file));
     }
 
     /**
@@ -76,16 +76,16 @@ public class XMLUtility {
      * @throws SAXException                 如果发生任何解析错误时抛出此异常。
      * @throws ParserConfigurationException 如果无法创建满足所请求配置的 DocumentBuilder，将抛出该异常。
      */
-    public static Document parseForDoc(String xmlStr, String encoding) throws SAXException, IOException,
+    public Document parseForDoc(String xmlStr, String encoding) throws SAXException, IOException,
             ParserConfigurationException {
         if (xmlStr == null) {
             xmlStr = "";
         }
         ByteArrayInputStream byteInputStream = new ByteArrayInputStream(xmlStr.getBytes(encoding));
-        return XMLUtility.parseForDoc(byteInputStream);
+        return parseForDoc(byteInputStream);
     }
 
-    public static Document parseForDocUTF8(String xmlStr) throws ParserConfigurationException, SAXException, IOException {
+    public Document parseForDocUTF8(String xmlStr) throws ParserConfigurationException, SAXException, IOException {
         return parseForDoc(xmlStr,"utf-8");
     }
 
@@ -99,7 +99,7 @@ public class XMLUtility {
      * @throws ParserConfigurationException 如果无法创建满足所请求配置的 DocumentBuilder，将抛出该异常。
      * @throws IllegalArgumentException     当 is 为 null 时抛出此异常。
      */
-    public static Document parseForDoc(final InputStream is) throws SAXException, IOException, ParserConfigurationException,
+    public Document parseForDoc(final InputStream is) throws SAXException, IOException, ParserConfigurationException,
             IllegalArgumentException {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -121,7 +121,7 @@ public class XMLUtility {
      * @throws RuntimeException         创建默认对象模型的 XPathFactory 遇到故障时。
      * @throws NullPointerException     如果xPath为空时抛出时异常。
      */
-    private static Object parseByXpath(final Object obj, final String xPath, QName qName) throws NullPointerException,
+    private Object parseByXpath(final Object obj, final String xPath, QName qName) throws NullPointerException,
             RuntimeException, XPathExpressionException {
         XPathFactory xpathFactory = XPathFactory.newInstance();
 
@@ -139,11 +139,11 @@ public class XMLUtility {
      * @throws RuntimeException         创建默认对象模型的 XPathFactory 遇到故障时。
      * @throws NullPointerException     如果xPath为空时抛出时异常。
      */
-    public static Node parseForNode(final Object obj, final String xPath) throws NullPointerException, RuntimeException,
+    public Node parseForNode(final Object obj, final String xPath) throws NullPointerException, RuntimeException,
             XPathExpressionException
 
     {
-        return (Node) XMLUtility.parseByXpath(obj, xPath, XPathConstants.NODE);
+        return (Node)parseByXpath(obj, xPath, XPathConstants.NODE);
     }
 
     /**
@@ -156,18 +156,18 @@ public class XMLUtility {
      * @throws RuntimeException         创建默认对象模型的 XPathFactory 遇到故障时。
      * @throws NullPointerException     如果xPath为空时抛出时异常。
      */
-    public static String parseForString(final Object obj, final String xPath) throws NullPointerException, RuntimeException,
+    public String parseForString(final Object obj, final String xPath) throws NullPointerException, RuntimeException,
             XPathExpressionException
 
     {
 
-        return (String) XMLUtility.parseByXpath(obj, xPath, XPathConstants.STRING);
+        return (String)parseByXpath(obj, xPath, XPathConstants.STRING);
     }
 
     /*
      * 把dom文件转换为xml字符串
      */
-    public static String documentToString(Document document) {
+    public String documentToString(Document document) {
         String result = null;
 
         if (document != null) {
@@ -208,11 +208,11 @@ public class XMLUtility {
      * @throws RuntimeException         创建默认对象模型的 XPathFactory 遇到故障时。
      * @throws NullPointerException     如果xPath为空时抛出时异常。
      */
-    public static Boolean parseForBoolean(final Object obj, final String xPath) throws NullPointerException, RuntimeException,
+    public Boolean parseForBoolean(final Object obj, final String xPath) throws NullPointerException, RuntimeException,
             XPathExpressionException
 
     {
-        return (Boolean) XMLUtility.parseByXpath(obj, xPath, XPathConstants.BOOLEAN);
+        return (Boolean)parseByXpath(obj, xPath, XPathConstants.BOOLEAN);
     }
 
     /**
@@ -225,11 +225,11 @@ public class XMLUtility {
      * @throws RuntimeException         创建默认对象模型的 XPathFactory 遇到故障时。
      * @throws NullPointerException     如果xPath为空时抛出时异常。
      */
-    public static List parseForNodeList(final Object obj, final String xPath) throws NullPointerException,
+    public List parseForNodeList(final Object obj, final String xPath) throws NullPointerException,
             RuntimeException, XPathExpressionException
     {
         List lists = new ArrayList();
-        NodeList nList = (NodeList) XMLUtility.parseByXpath(obj, xPath, XPathConstants.NODESET);
+        NodeList nList = (NodeList) parseByXpath(obj, xPath, XPathConstants.NODESET);
         if (nList != null) {
             for (int i = 0; i < nList.getLength(); i++) {
                 lists.add(nList.item(i));
@@ -245,7 +245,7 @@ public class XMLUtility {
      * @param attrName 属性名。
      * @return 返回获取到的属性值。如果找不到相关的
      */
-    public static String getAttribute(final Object node, final String attrName) {
+    public String getAttribute(final Object node, final String attrName) {
         String result = "";
         if ((node != null) && (node instanceof Node)) {
             if (((Node) node).getNodeType() == Node.ELEMENT_NODE) {
@@ -277,7 +277,7 @@ public class XMLUtility {
      *                      NOT_SUPPORTED_ERR: 如果此节点为 Document 类型，则如果 DOM 实现不支持替换
      *                      DocumentType 子节点或 Element 子节点，则可能引发此异常。
      */
-    public static void replaceNode(Node oldNode, Node newNode) {
+    public void replaceNode(Node oldNode, Node newNode) {
         if ((oldNode != null) && (newNode != null)) {
             oldNode.getParentNode().replaceChild(newNode, oldNode);
         }
@@ -292,9 +292,9 @@ public class XMLUtility {
      * @throws FileNotFoundException 指定的文件名不存在时，抛出此异常。
      * @throws TransformerException  如果转换过程中发生不可恢复的错误时，抛出此异常。
      */
-    public static void saveXml(final String fileName, final Node node, String encoding) throws FileNotFoundException,
+    public void saveXml(final String fileName, final Node node, String encoding) throws FileNotFoundException,
             TransformerException {
-        XMLUtility.writeXml(new FileOutputStream(fileName), node, encoding);
+        writeXml(new FileOutputStream(fileName), node, encoding);
     }
 
     /**
@@ -306,13 +306,13 @@ public class XMLUtility {
      * @throws TransformerException         如果转换过程中发生不可恢复的错误时，抛出此异常。
      * @throws UnsupportedEncodingException 指定的字符串编码不支持时，抛出此异常。
      */
-    public static String nodeToString(Node node, String encoding) throws TransformerException, UnsupportedEncodingException {
+    public String nodeToString(Node node, String encoding) throws TransformerException, UnsupportedEncodingException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        XMLUtility.writeXml(outputStream, node, encoding);
+        writeXml(outputStream, node, encoding);
         return outputStream.toString(encoding);
     }
 
-    public static String nodeToStringUTF8(Node node) throws TransformerException, UnsupportedEncodingException {
+    public String nodeToStringUTF8(Node node) throws TransformerException, UnsupportedEncodingException {
         return nodeToString(node,"utf-8");
     }
 
@@ -324,7 +324,7 @@ public class XMLUtility {
      * @param node     Node节点。
      * @throws TransformerException 如果转换过程中发生不可恢复的错误时，抛出此异常。
      */
-    private static void writeXml(OutputStream os, Node node, String encoding) throws TransformerException {
+    private void writeXml(OutputStream os, Node node, String encoding) throws TransformerException {
         TransformerFactory transFactory = TransformerFactory.newInstance();
         Transformer transformer = transFactory.newTransformer();
         transformer.setOutputProperty("indent", "yes");

@@ -9,14 +9,14 @@ import java.security.NoSuchAlgorithmException;
 public class MD5Utility {
 
 	 /**全局数组**/
-    private final static String[] strDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
+    private final String[] strDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
 
     /**
      * 返回形式为数字跟字符串
      * @param bByte
      * @return
      */
-    private static String byteToArrayString(byte bByte) {
+    private String byteToArrayString(byte bByte) {
         int iRet = bByte;
         if (iRet < 0) {
             iRet += 256;
@@ -31,7 +31,7 @@ public class MD5Utility {
      * @param bByte
      * @return
      */
-    private static String byteToString(byte[] bByte) {
+    private String byteToString(byte[] bByte) {
         StringBuffer sBuffer = new StringBuffer();
         for (int i = 0; i < bByte.length; i++) {
             sBuffer.append(byteToArrayString(bByte[i]));
@@ -43,7 +43,7 @@ public class MD5Utility {
      * @param str 待加密的字符串
      * @return
      */
-    public static String GetMD5Code(String str) {
+    public String GetMD5Code(String str) {
         String result = null;
         try {
         	result = new String(str);
@@ -61,7 +61,7 @@ public class MD5Utility {
      * @param lowerCase 小写
      * @return
      */
-    public static String GetMD5Code(String str,boolean lowerCase) {
+    public String GetMD5Code(String str,boolean lowerCase) {
         String result = null;
         try {
         	result = new String(str);

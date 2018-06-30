@@ -10,6 +10,5 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 <script type="text/javascript" src="${ctxpath}/Js/JQuery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="${ctxpath}/Js/B4DBaseLib.js?urlts=${urlts}"></script>
-<script type="text/javascript" src="${ctxpath}/Js/ProSelectComponent.js"></script>
+<script type="text/javascript" src="${ctxpath}/Js/JBuild4DBaseLib.js?urlts=${urlts}"></script>
 <script src="${ctxpath}/Js/VUE-2.5.16/vue.js"></script>
