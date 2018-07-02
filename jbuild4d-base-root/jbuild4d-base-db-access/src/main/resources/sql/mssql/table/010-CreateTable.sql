@@ -4,9 +4,9 @@ CREATE TABLE [dbo].[TB4D_SETTING] (
   [SETTING_KEY]    [NVARCHAR](128) NULL,
   [SETTING_NAME]   [NVARCHAR](128) NULL,
   [SETTING_VALUE]  [NVARCHAR](500) NULL,
-  [SETTING_STATUS] [NVARCHAR](10)  NULL DEFAULT '是',
+  [SETTING_STATUS] [NVARCHAR](10)  NULL,
   [DESCRIPTION]    [NVARCHAR](MAX) NULL,
-  [CREATETIME]     [DATETIME]      NOT NULL,
+  [CREATETIME]     [DATETIME]      NULL,
   [USER_ID]        [NVARCHAR](128) NULL,
   [ORGAN_ID]       [NVARCHAR](128) NULL
 )
@@ -23,5 +23,47 @@ EXECUTE sp_addextendedproperty N'MS_Description', N'设置参数描述', N'user'
 EXECUTE sp_addextendedproperty N'MS_Description', N'设置参数创建时间', N'user', N'dbo', N'table', N'TB4D_SETTING', N'column', N'CREATETIME';
 EXECUTE sp_addextendedproperty N'MS_Description', N'设置参数创建用户ID', N'user', N'dbo', N'table', N'TB4D_SETTING', N'column', N'USER_ID';
 EXECUTE sp_addextendedproperty N'MS_Description', N'设置参数创建组织ID', N'user', N'dbo', N'table', N'TB4D_SETTING', N'column', N'ORGAN_ID';
+
+-----------------------------------------操作日志-----------------------------------------
+
+-----------------------------------------文件夹表-----------------------------------------
+CREATE TABLE [dbo].[TB4D_MENU] (
+  [FOLDER_ID]           [VARCHAR](100)   NOT NULL PRIMARY KEY,
+  [FOLDER_NAME]         [VARCHAR](100)   NULL,
+  [FOLDER_TEXT]         [VARCHAR](100)   NOT NULL,
+  [FOLDER_VALUE]        [VARCHAR](100)   NULL,
+  [FOLDER_TYPE]         [VARCHAR](100)   NOT NULL,
+  [IS_EXPAND]           [BIGINT]         NULL,
+  [IS_SYSTEM]           [BIGINT]         NULL,
+  [LEFT_URL]            [VARCHAR](600)   NULL,
+  [LEFT_URL_PARA]       [VARCHAR](600)   NULL,
+  [RIGHT_URL]           [VARCHAR](800)   NULL,
+  [RIGHT_URL_PARA]      [VARCHAR](600)   NULL,
+  [ORDER_ID]            [BIGINT]         NULL,
+  [ORGAN_ID]            [VARCHAR](100)   NOT NULL,
+  [PARENT_ID]           [VARCHAR](100)   NOT NULL,
+  [PARENT_ID_LIST]      [VARCHAR](1200)  NOT NULL,
+  [SHARE_TYPE]          [BIGINT]         NULL,
+  [TAG]                 [VARCHAR](100)   NULL,
+  [TARGET]              [BIGINT]         NULL,
+  [UPDATER]             [VARCHAR](200)   NULL,
+  [USE_ORGAN]           [VARCHAR](500)   NULL,
+  [USE_ORGAN_ID]        [VARCHAR](500)   NULL,
+  [USE_ORGAN_TYPE]      [VARCHAR](500)   NULL,
+  [USE_ORGAN_TYPE_ID]   [VARCHAR](500)   NULL,
+  [ICON_CLASS_NAME]     [VARCHAR](100)   NULL,
+  [HOVER_CLASS_NAME]    [VARCHAR](100)   NULL,
+  [SELECTED_CLASS_NAME] [VARCHAR](100)   NULL,
+  [CHILD_COUNT]         [BIGINT]         NOT NULL,
+  [CREATE_TIME]         [DATETIME]       NULL,
+  [CREATOR]             [VARCHAR](200)   NULL,
+  [DESCRIPTION]         [NVARCHAR](MAX)  NULL,
+  [UPDATE_TIME]         [DATETIME]       NULL,
+  [JS_EXPRESSION]       [NVARCHAR](1000) NULL
+)
+
+EXECUTE sp_addextendedproperty N'MS_Description', N'系统导航菜单表', N'user', N'dbo', N'table', N'TB4D_MENU', NULL, NULL;
+
+EXECUTE sp_addextendedproperty N'MS_Description', N'菜单ID', N'user', N'dbo', N'table', N'TB4D_MENU', N'column', N'FOLDER_ID';
 
 -----------------------------------------组织机构表-----------------------------------------

@@ -1,8 +1,12 @@
 package com.jbuild4d.web;
 
+import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +17,16 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 
 @Controller
 public class LoginController {
+
+    @Autowired
+    IMenuService menuService;
+
+    @Autowired
+    JsonUtility jsonUtility;
 
     @RequestMapping(value = "/Login", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request) {
@@ -34,6 +45,10 @@ public class LoginController {
         b4DSession.setUserName("Alex");
         JB4DSessionUtility.addSessionAttr(JB4DSessionUtility.UserLoginSessionKey, b4DSession);
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
+
+        List<MenuEntity> entityList=menuService.getALL();
+        System.out.println(jsonUtility.toObjectString(entityList));
+
         return JBuild4DResponseVo.opSuccess();
     }
 }

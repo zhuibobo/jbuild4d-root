@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jbuild4d-base-db-access:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jbuild4d_base_db_access_jar</output-path>
+    <root id="archive" name="jbuild4d-base-db-access.jar">
+      <element id="module-output" name="jbuild4d-base-db-access" />
+    </root>
+  </artifact>
+</component>

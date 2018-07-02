@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jbuild4d-platform-system:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jbuild4d_platform_system_jar</output-path>
+    <root id="archive" name="jbuild4d-platform-system.jar">
+      <element id="module-output" name="jbuild4d-platform-system" />
+    </root>
+  </artifact>
+</component>
