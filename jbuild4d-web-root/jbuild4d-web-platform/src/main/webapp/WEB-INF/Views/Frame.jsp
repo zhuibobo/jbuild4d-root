@@ -22,7 +22,7 @@
             <i-header style="padding: 0 10px" class="layout-header-wrap">
                 <div style="width: 100%;height: 65px">
                     <div class="layout-logo">
-                        <Icon type="ios-monitor-outline"></Icon>&nbsp;&nbsp;MYWebApp
+                        <Icon type="ios-monitor-outline"></Icon>&nbsp;&nbsp;JBuild4D-V-0.1
                     </div>
                     <div class="topMenuItem-warp">
                         <div class="topMenuItem-inner-warp">
@@ -82,8 +82,8 @@
     //var l1MenuArrayJson=null;
     //l1MenuArrayJson=[{"name":"0","parentName":"","text":"Root","iconType":"","url":"","openType":"","path":"Root/"},{"name":"Project-HardDiskTool-List","parentName":"Project-HardDiskTool","text":"硬盘管理","iconType":"soup-can-outline","url":"${ctxpath}/HardDiskTool/HardDiskList.do","openType":"","path":"HardDiskTool/硬盘管理"},{"name":"Project-HardDiskTool-Search","parentName":"Project-HardDiskTool","text":"文件检索","iconType":"ios-search","url":"${ctxpath}/HardDiskTool/HardDiskList.do","openType":"","path":"HardDiskTool/文件检索"},{"name":"Project-HardDiskTool","parentName":"0","text":"HardDiskTool","iconType":"Pastel_Icons_038","url":"","openType":"","path":"Root/HardDiskTool"},{"name":"Work-Tracking-File","parentName":"Work-Tracking-Management","text":"硬盘","iconType":"","url":"","openType":"","path":"RPGMV/硬盘"},{"name":"Work-Tracking-Management","parentName":"0","text":"RPGMV","iconType":"Pastel_Icons_037","url":"","openType":"","path":"Root/RPGMV"},{"name":"Base-Management-Setting","parentName":"Base-Management","text":"系统设置","iconType":"ios-gear-outline","url":"${ctxpath}//System/Setting/List.do","openType":"","path":"System/系统设置"},{"name":"Base-Management","parentName":"0","text":"System","iconType":"Pastel_Icons_064","url":"","openType":"","path":"Root/System"}];
     var menuJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
-        KeyField: "name",
-        RelationField: "parentName",
+        KeyField: "menuId",
+        RelationField: "parentId",
         ChildFieldName: "items"
     },menuJson,"0");
     var app=new Vue({

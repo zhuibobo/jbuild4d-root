@@ -1,420 +1,419 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.MenuMapper">
-  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
-    <constructor>
-      <idArg column="FOLDER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="FOLDER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="FOLDER_TEXT" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="FOLDER_VALUE" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="FOLDER_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="IS_EXPAND" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="IS_SYSTEM" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="LEFT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="LEFT_URL_PARA" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RIGHT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="RIGHT_URL_PARA" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="ORDER_ID" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="PARENT_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="PARENT_ID_LIST" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="SHARE_TYPE" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="TAG" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="TARGET" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="UPDATER" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="USE_ORGAN" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="USE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="USE_ORGAN_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="USE_ORGAN_TYPE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="ICON_CLASS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="HOVER_CLASS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="SELECTED_CLASS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="CHILD_COUNT" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="CREATOR" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="DESCRIPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="JS_EXPRESSION" javaType="java.lang.String" jdbcType="NVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    FOLDER_ID, FOLDER_NAME, FOLDER_TEXT, FOLDER_VALUE, FOLDER_TYPE, IS_EXPAND, IS_SYSTEM, 
-    LEFT_URL, LEFT_URL_PARA, RIGHT_URL, RIGHT_URL_PARA, ORDER_ID, ORGAN_ID, PARENT_ID, 
-    PARENT_ID_LIST, SHARE_TYPE, TAG, TARGET, UPDATER, USE_ORGAN, USE_ORGAN_ID, USE_ORGAN_TYPE, 
-    USE_ORGAN_TYPE_ID, ICON_CLASS_NAME, HOVER_CLASS_NAME, SELECTED_CLASS_NAME, CHILD_COUNT, 
-    CREATE_TIME, CREATOR, DESCRIPTION, UPDATE_TIME, JS_EXPRESSION
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from TB4D_MENU
-    where FOLDER_ID = #{folderId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from TB4D_MENU
-    where FOLDER_ID = #{folderId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
-    insert into TB4D_MENU (FOLDER_ID, FOLDER_NAME, FOLDER_TEXT, 
-      FOLDER_VALUE, FOLDER_TYPE, IS_EXPAND, 
-      IS_SYSTEM, LEFT_URL, LEFT_URL_PARA, 
-      RIGHT_URL, RIGHT_URL_PARA, ORDER_ID, 
-      ORGAN_ID, PARENT_ID, PARENT_ID_LIST, 
-      SHARE_TYPE, TAG, TARGET, 
-      UPDATER, USE_ORGAN, USE_ORGAN_ID, 
-      USE_ORGAN_TYPE, USE_ORGAN_TYPE_ID, ICON_CLASS_NAME, 
-      HOVER_CLASS_NAME, SELECTED_CLASS_NAME, CHILD_COUNT, 
-      CREATE_TIME, CREATOR, DESCRIPTION, 
-      UPDATE_TIME, JS_EXPRESSION)
-    values (#{folderId,jdbcType=VARCHAR}, #{folderName,jdbcType=VARCHAR}, #{folderText,jdbcType=VARCHAR}, 
-      #{folderValue,jdbcType=VARCHAR}, #{folderType,jdbcType=VARCHAR}, #{isExpand,jdbcType=BIGINT}, 
-      #{isSystem,jdbcType=BIGINT}, #{leftUrl,jdbcType=VARCHAR}, #{leftUrlPara,jdbcType=VARCHAR}, 
-      #{rightUrl,jdbcType=VARCHAR}, #{rightUrlPara,jdbcType=VARCHAR}, #{orderId,jdbcType=BIGINT}, 
-      #{organId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{parentIdList,jdbcType=VARCHAR}, 
-      #{shareType,jdbcType=BIGINT}, #{tag,jdbcType=VARCHAR}, #{target,jdbcType=BIGINT}, 
-      #{updater,jdbcType=VARCHAR}, #{useOrgan,jdbcType=VARCHAR}, #{useOrganId,jdbcType=VARCHAR}, 
-      #{useOrganType,jdbcType=VARCHAR}, #{useOrganTypeId,jdbcType=VARCHAR}, #{iconClassName,jdbcType=VARCHAR}, 
-      #{hoverClassName,jdbcType=VARCHAR}, #{selectedClassName,jdbcType=VARCHAR}, #{childCount,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{description,jdbcType=NVARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{jsExpression,jdbcType=NVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
-    insert into TB4D_MENU
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="folderId != null">
-        FOLDER_ID,
-      </if>
-      <if test="folderName != null">
-        FOLDER_NAME,
-      </if>
-      <if test="folderText != null">
-        FOLDER_TEXT,
-      </if>
-      <if test="folderValue != null">
-        FOLDER_VALUE,
-      </if>
-      <if test="folderType != null">
-        FOLDER_TYPE,
-      </if>
-      <if test="isExpand != null">
-        IS_EXPAND,
-      </if>
-      <if test="isSystem != null">
-        IS_SYSTEM,
-      </if>
-      <if test="leftUrl != null">
-        LEFT_URL,
-      </if>
-      <if test="leftUrlPara != null">
-        LEFT_URL_PARA,
-      </if>
-      <if test="rightUrl != null">
-        RIGHT_URL,
-      </if>
-      <if test="rightUrlPara != null">
-        RIGHT_URL_PARA,
-      </if>
-      <if test="orderId != null">
-        ORDER_ID,
-      </if>
-      <if test="organId != null">
-        ORGAN_ID,
-      </if>
-      <if test="parentId != null">
-        PARENT_ID,
-      </if>
-      <if test="parentIdList != null">
-        PARENT_ID_LIST,
-      </if>
-      <if test="shareType != null">
-        SHARE_TYPE,
-      </if>
-      <if test="tag != null">
-        TAG,
-      </if>
-      <if test="target != null">
-        TARGET,
-      </if>
-      <if test="updater != null">
-        UPDATER,
-      </if>
-      <if test="useOrgan != null">
-        USE_ORGAN,
-      </if>
-      <if test="useOrganId != null">
-        USE_ORGAN_ID,
-      </if>
-      <if test="useOrganType != null">
-        USE_ORGAN_TYPE,
-      </if>
-      <if test="useOrganTypeId != null">
-        USE_ORGAN_TYPE_ID,
-      </if>
-      <if test="iconClassName != null">
-        ICON_CLASS_NAME,
-      </if>
-      <if test="hoverClassName != null">
-        HOVER_CLASS_NAME,
-      </if>
-      <if test="selectedClassName != null">
-        SELECTED_CLASS_NAME,
-      </if>
-      <if test="childCount != null">
-        CHILD_COUNT,
-      </if>
-      <if test="createTime != null">
-        CREATE_TIME,
-      </if>
-      <if test="creator != null">
-        CREATOR,
-      </if>
-      <if test="description != null">
-        DESCRIPTION,
-      </if>
-      <if test="updateTime != null">
-        UPDATE_TIME,
-      </if>
-      <if test="jsExpression != null">
-        JS_EXPRESSION,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="folderId != null">
-        #{folderId,jdbcType=VARCHAR},
-      </if>
-      <if test="folderName != null">
-        #{folderName,jdbcType=VARCHAR},
-      </if>
-      <if test="folderText != null">
-        #{folderText,jdbcType=VARCHAR},
-      </if>
-      <if test="folderValue != null">
-        #{folderValue,jdbcType=VARCHAR},
-      </if>
-      <if test="folderType != null">
-        #{folderType,jdbcType=VARCHAR},
-      </if>
-      <if test="isExpand != null">
-        #{isExpand,jdbcType=BIGINT},
-      </if>
-      <if test="isSystem != null">
-        #{isSystem,jdbcType=BIGINT},
-      </if>
-      <if test="leftUrl != null">
-        #{leftUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="leftUrlPara != null">
-        #{leftUrlPara,jdbcType=VARCHAR},
-      </if>
-      <if test="rightUrl != null">
-        #{rightUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="rightUrlPara != null">
-        #{rightUrlPara,jdbcType=VARCHAR},
-      </if>
-      <if test="orderId != null">
-        #{orderId,jdbcType=BIGINT},
-      </if>
-      <if test="organId != null">
-        #{organId,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null">
-        #{parentId,jdbcType=VARCHAR},
-      </if>
-      <if test="parentIdList != null">
-        #{parentIdList,jdbcType=VARCHAR},
-      </if>
-      <if test="shareType != null">
-        #{shareType,jdbcType=BIGINT},
-      </if>
-      <if test="tag != null">
-        #{tag,jdbcType=VARCHAR},
-      </if>
-      <if test="target != null">
-        #{target,jdbcType=BIGINT},
-      </if>
-      <if test="updater != null">
-        #{updater,jdbcType=VARCHAR},
-      </if>
-      <if test="useOrgan != null">
-        #{useOrgan,jdbcType=VARCHAR},
-      </if>
-      <if test="useOrganId != null">
-        #{useOrganId,jdbcType=VARCHAR},
-      </if>
-      <if test="useOrganType != null">
-        #{useOrganType,jdbcType=VARCHAR},
-      </if>
-      <if test="useOrganTypeId != null">
-        #{useOrganTypeId,jdbcType=VARCHAR},
-      </if>
-      <if test="iconClassName != null">
-        #{iconClassName,jdbcType=VARCHAR},
-      </if>
-      <if test="hoverClassName != null">
-        #{hoverClassName,jdbcType=VARCHAR},
-      </if>
-      <if test="selectedClassName != null">
-        #{selectedClassName,jdbcType=VARCHAR},
-      </if>
-      <if test="childCount != null">
-        #{childCount,jdbcType=BIGINT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creator != null">
-        #{creator,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=NVARCHAR},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="jsExpression != null">
-        #{jsExpression,jdbcType=NVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
-    update TB4D_MENU
-    <set>
-      <if test="folderName != null">
-        FOLDER_NAME = #{folderName,jdbcType=VARCHAR},
-      </if>
-      <if test="folderText != null">
-        FOLDER_TEXT = #{folderText,jdbcType=VARCHAR},
-      </if>
-      <if test="folderValue != null">
-        FOLDER_VALUE = #{folderValue,jdbcType=VARCHAR},
-      </if>
-      <if test="folderType != null">
-        FOLDER_TYPE = #{folderType,jdbcType=VARCHAR},
-      </if>
-      <if test="isExpand != null">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
+        <constructor>
+            <idArg column="MENU_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="MENU_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="MENU_TEXT" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="MENU_VALUE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="MENU_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="IS_EXPAND" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="IS_SYSTEM" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="LEFT_URL" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="LEFT_URL_PARA" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="RIGHT_URL" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="RIGHT_URL_PARA" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="ORDER_NUM" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="PARENT_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="PARENT_ID_LIST" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="SHARE_TYPE" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="TAG" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="TARGET" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="UPDATER" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="USE_ORGAN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="USE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="USE_ORGAN_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="USE_ORGAN_TYPE_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="ICON_CLASS_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="HOVER_CLASS_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="SELECTED_CLASS_NAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="CHILD_COUNT" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="CREATOR" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="DESCRIPTION" javaType="java.lang.String" jdbcType="NVARCHAR"/>
+            <arg column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="JS_EXPRESSION" javaType="java.lang.String" jdbcType="NVARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        MENU_ID, MENU_NAME, MENU_TEXT, MENU_VALUE, MENU_TYPE, IS_EXPAND, IS_SYSTEM, LEFT_URL,
+        LEFT_URL_PARA, RIGHT_URL, RIGHT_URL_PARA, ORDER_NUM, ORGAN_ID, PARENT_ID, PARENT_ID_LIST,
+        SHARE_TYPE, TAG, TARGET, UPDATER, USE_ORGAN, USE_ORGAN_ID, USE_ORGAN_TYPE, USE_ORGAN_TYPE_ID,
+        ICON_CLASS_NAME, HOVER_CLASS_NAME, SELECTED_CLASS_NAME, CHILD_COUNT, CREATE_TIME,
+        CREATOR, DESCRIPTION, UPDATE_TIME, JS_EXPRESSION
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TB4D_MENU
+        where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_MENU
+        where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
+        insert into TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT,
+        MENU_VALUE, MENU_TYPE, IS_EXPAND,
+        IS_SYSTEM, LEFT_URL, LEFT_URL_PARA,
+        RIGHT_URL, RIGHT_URL_PARA, ORDER_NUM,
+        ORGAN_ID, PARENT_ID, PARENT_ID_LIST,
+        SHARE_TYPE, TAG, TARGET,
+        UPDATER, USE_ORGAN, USE_ORGAN_ID,
+        USE_ORGAN_TYPE, USE_ORGAN_TYPE_ID, ICON_CLASS_NAME,
+        HOVER_CLASS_NAME, SELECTED_CLASS_NAME, CHILD_COUNT,
+        CREATE_TIME, CREATOR, DESCRIPTION,
+        UPDATE_TIME, JS_EXPRESSION)
+        values (#{menuId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{menuText,jdbcType=VARCHAR},
+        #{menuValue,jdbcType=VARCHAR}, #{menuType,jdbcType=VARCHAR}, #{isExpand,jdbcType=BIGINT},
+        #{isSystem,jdbcType=BIGINT}, #{leftUrl,jdbcType=VARCHAR}, #{leftUrlPara,jdbcType=VARCHAR},
+        #{rightUrl,jdbcType=VARCHAR}, #{rightUrlPara,jdbcType=VARCHAR}, #{orderNum,jdbcType=BIGINT},
+        #{organId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{parentIdList,jdbcType=VARCHAR},
+        #{shareType,jdbcType=BIGINT}, #{tag,jdbcType=VARCHAR}, #{target,jdbcType=BIGINT},
+        #{updater,jdbcType=VARCHAR}, #{useOrgan,jdbcType=VARCHAR}, #{useOrganId,jdbcType=VARCHAR},
+        #{useOrganType,jdbcType=VARCHAR}, #{useOrganTypeId,jdbcType=VARCHAR}, #{iconClassName,jdbcType=VARCHAR},
+        #{hoverClassName,jdbcType=VARCHAR}, #{selectedClassName,jdbcType=VARCHAR}, #{childCount,jdbcType=BIGINT},
+        #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{description,jdbcType=NVARCHAR},
+        #{updateTime,jdbcType=TIMESTAMP}, #{jsExpression,jdbcType=NVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
+        insert into TB4D_MENU
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuId != null">
+                MENU_ID,
+            </if>
+            <if test="menuName != null">
+                MENU_NAME,
+            </if>
+            <if test="menuText != null">
+                MENU_TEXT,
+            </if>
+            <if test="menuValue != null">
+                MENU_VALUE,
+            </if>
+            <if test="menuType != null">
+                MENU_TYPE,
+            </if>
+            <if test="isExpand != null">
+                IS_EXPAND,
+            </if>
+            <if test="isSystem != null">
+                IS_SYSTEM,
+            </if>
+            <if test="leftUrl != null">
+                LEFT_URL,
+            </if>
+            <if test="leftUrlPara != null">
+                LEFT_URL_PARA,
+            </if>
+            <if test="rightUrl != null">
+                RIGHT_URL,
+            </if>
+            <if test="rightUrlPara != null">
+                RIGHT_URL_PARA,
+            </if>
+            <if test="orderNum != null">
+                ORDER_NUM,
+            </if>
+            <if test="organId != null">
+                ORGAN_ID,
+            </if>
+            <if test="parentId != null">
+                PARENT_ID,
+            </if>
+            <if test="parentIdList != null">
+                PARENT_ID_LIST,
+            </if>
+            <if test="shareType != null">
+                SHARE_TYPE,
+            </if>
+            <if test="tag != null">
+                TAG,
+            </if>
+            <if test="target != null">
+                TARGET,
+            </if>
+            <if test="updater != null">
+                UPDATER,
+            </if>
+            <if test="useOrgan != null">
+                USE_ORGAN,
+            </if>
+            <if test="useOrganId != null">
+                USE_ORGAN_ID,
+            </if>
+            <if test="useOrganType != null">
+                USE_ORGAN_TYPE,
+            </if>
+            <if test="useOrganTypeId != null">
+                USE_ORGAN_TYPE_ID,
+            </if>
+            <if test="iconClassName != null">
+                ICON_CLASS_NAME,
+            </if>
+            <if test="hoverClassName != null">
+                HOVER_CLASS_NAME,
+            </if>
+            <if test="selectedClassName != null">
+                SELECTED_CLASS_NAME,
+            </if>
+            <if test="childCount != null">
+                CHILD_COUNT,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="creator != null">
+                CREATOR,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
+            <if test="jsExpression != null">
+                JS_EXPRESSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuId != null">
+                #{menuId,jdbcType=VARCHAR},
+            </if>
+            <if test="menuName != null">
+                #{menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="menuText != null">
+                #{menuText,jdbcType=VARCHAR},
+            </if>
+            <if test="menuValue != null">
+                #{menuValue,jdbcType=VARCHAR},
+            </if>
+            <if test="menuType != null">
+                #{menuType,jdbcType=VARCHAR},
+            </if>
+            <if test="isExpand != null">
+                #{isExpand,jdbcType=BIGINT},
+            </if>
+            <if test="isSystem != null">
+                #{isSystem,jdbcType=BIGINT},
+            </if>
+            <if test="leftUrl != null">
+                #{leftUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="leftUrlPara != null">
+                #{leftUrlPara,jdbcType=VARCHAR},
+            </if>
+            <if test="rightUrl != null">
+                #{rightUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="rightUrlPara != null">
+                #{rightUrlPara,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=BIGINT},
+            </if>
+            <if test="organId != null">
+                #{organId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentIdList != null">
+                #{parentIdList,jdbcType=VARCHAR},
+            </if>
+            <if test="shareType != null">
+                #{shareType,jdbcType=BIGINT},
+            </if>
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="target != null">
+                #{target,jdbcType=BIGINT},
+            </if>
+            <if test="updater != null">
+                #{updater,jdbcType=VARCHAR},
+            </if>
+            <if test="useOrgan != null">
+                #{useOrgan,jdbcType=VARCHAR},
+            </if>
+            <if test="useOrganId != null">
+                #{useOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="useOrganType != null">
+                #{useOrganType,jdbcType=VARCHAR},
+            </if>
+            <if test="useOrganTypeId != null">
+                #{useOrganTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="iconClassName != null">
+                #{iconClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="hoverClassName != null">
+                #{hoverClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="selectedClassName != null">
+                #{selectedClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="childCount != null">
+                #{childCount,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=NVARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="jsExpression != null">
+                #{jsExpression,jdbcType=NVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
+        update TB4D_MENU
+        <set>
+            <if test="menuName != null">
+                MENU_NAME = #{menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="menuText != null">
+                MENU_TEXT = #{menuText,jdbcType=VARCHAR},
+            </if>
+            <if test="menuValue != null">
+                MENU_VALUE = #{menuValue,jdbcType=VARCHAR},
+            </if>
+            <if test="menuType != null">
+                MENU_TYPE = #{menuType,jdbcType=VARCHAR},
+            </if>
+            <if test="isExpand != null">
+                IS_EXPAND = #{isExpand,jdbcType=BIGINT},
+            </if>
+            <if test="isSystem != null">
+                IS_SYSTEM = #{isSystem,jdbcType=BIGINT},
+            </if>
+            <if test="leftUrl != null">
+                LEFT_URL = #{leftUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="leftUrlPara != null">
+                LEFT_URL_PARA = #{leftUrlPara,jdbcType=VARCHAR},
+            </if>
+            <if test="rightUrl != null">
+                RIGHT_URL = #{rightUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="rightUrlPara != null">
+                RIGHT_URL_PARA = #{rightUrlPara,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                ORDER_NUM = #{orderNum,jdbcType=BIGINT},
+            </if>
+            <if test="organId != null">
+                ORGAN_ID = #{organId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                PARENT_ID = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentIdList != null">
+                PARENT_ID_LIST = #{parentIdList,jdbcType=VARCHAR},
+            </if>
+            <if test="shareType != null">
+                SHARE_TYPE = #{shareType,jdbcType=BIGINT},
+            </if>
+            <if test="tag != null">
+                TAG = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="target != null">
+                TARGET = #{target,jdbcType=BIGINT},
+            </if>
+            <if test="updater != null">
+                UPDATER = #{updater,jdbcType=VARCHAR},
+            </if>
+            <if test="useOrgan != null">
+                USE_ORGAN = #{useOrgan,jdbcType=VARCHAR},
+            </if>
+            <if test="useOrganId != null">
+                USE_ORGAN_ID = #{useOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="useOrganType != null">
+                USE_ORGAN_TYPE = #{useOrganType,jdbcType=VARCHAR},
+            </if>
+            <if test="useOrganTypeId != null">
+                USE_ORGAN_TYPE_ID = #{useOrganTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="iconClassName != null">
+                ICON_CLASS_NAME = #{iconClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="hoverClassName != null">
+                HOVER_CLASS_NAME = #{hoverClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="selectedClassName != null">
+                SELECTED_CLASS_NAME = #{selectedClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="childCount != null">
+                CHILD_COUNT = #{childCount,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                CREATOR = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=NVARCHAR},
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="jsExpression != null">
+                JS_EXPRESSION = #{jsExpression,jdbcType=NVARCHAR},
+            </if>
+        </set>
+        where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
+        update TB4D_MENU
+        set MENU_NAME = #{menuName,jdbcType=VARCHAR},
+        MENU_TEXT = #{menuText,jdbcType=VARCHAR},
+        MENU_VALUE = #{menuValue,jdbcType=VARCHAR},
+        MENU_TYPE = #{menuType,jdbcType=VARCHAR},
         IS_EXPAND = #{isExpand,jdbcType=BIGINT},
-      </if>
-      <if test="isSystem != null">
         IS_SYSTEM = #{isSystem,jdbcType=BIGINT},
-      </if>
-      <if test="leftUrl != null">
         LEFT_URL = #{leftUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="leftUrlPara != null">
         LEFT_URL_PARA = #{leftUrlPara,jdbcType=VARCHAR},
-      </if>
-      <if test="rightUrl != null">
         RIGHT_URL = #{rightUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="rightUrlPara != null">
         RIGHT_URL_PARA = #{rightUrlPara,jdbcType=VARCHAR},
-      </if>
-      <if test="orderId != null">
-        ORDER_ID = #{orderId,jdbcType=BIGINT},
-      </if>
-      <if test="organId != null">
+        ORDER_NUM = #{orderNum,jdbcType=BIGINT},
         ORGAN_ID = #{organId,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null">
         PARENT_ID = #{parentId,jdbcType=VARCHAR},
-      </if>
-      <if test="parentIdList != null">
         PARENT_ID_LIST = #{parentIdList,jdbcType=VARCHAR},
-      </if>
-      <if test="shareType != null">
         SHARE_TYPE = #{shareType,jdbcType=BIGINT},
-      </if>
-      <if test="tag != null">
         TAG = #{tag,jdbcType=VARCHAR},
-      </if>
-      <if test="target != null">
         TARGET = #{target,jdbcType=BIGINT},
-      </if>
-      <if test="updater != null">
         UPDATER = #{updater,jdbcType=VARCHAR},
-      </if>
-      <if test="useOrgan != null">
         USE_ORGAN = #{useOrgan,jdbcType=VARCHAR},
-      </if>
-      <if test="useOrganId != null">
         USE_ORGAN_ID = #{useOrganId,jdbcType=VARCHAR},
-      </if>
-      <if test="useOrganType != null">
         USE_ORGAN_TYPE = #{useOrganType,jdbcType=VARCHAR},
-      </if>
-      <if test="useOrganTypeId != null">
         USE_ORGAN_TYPE_ID = #{useOrganTypeId,jdbcType=VARCHAR},
-      </if>
-      <if test="iconClassName != null">
         ICON_CLASS_NAME = #{iconClassName,jdbcType=VARCHAR},
-      </if>
-      <if test="hoverClassName != null">
         HOVER_CLASS_NAME = #{hoverClassName,jdbcType=VARCHAR},
-      </if>
-      <if test="selectedClassName != null">
         SELECTED_CLASS_NAME = #{selectedClassName,jdbcType=VARCHAR},
-      </if>
-      <if test="childCount != null">
         CHILD_COUNT = #{childCount,jdbcType=BIGINT},
-      </if>
-      <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creator != null">
         CREATOR = #{creator,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
         DESCRIPTION = #{description,jdbcType=NVARCHAR},
-      </if>
-      <if test="updateTime != null">
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="jsExpression != null">
-        JS_EXPRESSION = #{jsExpression,jdbcType=NVARCHAR},
-      </if>
-    </set>
-    where FOLDER_ID = #{folderId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
-    update TB4D_MENU
-    set FOLDER_NAME = #{folderName,jdbcType=VARCHAR},
-      FOLDER_TEXT = #{folderText,jdbcType=VARCHAR},
-      FOLDER_VALUE = #{folderValue,jdbcType=VARCHAR},
-      FOLDER_TYPE = #{folderType,jdbcType=VARCHAR},
-      IS_EXPAND = #{isExpand,jdbcType=BIGINT},
-      IS_SYSTEM = #{isSystem,jdbcType=BIGINT},
-      LEFT_URL = #{leftUrl,jdbcType=VARCHAR},
-      LEFT_URL_PARA = #{leftUrlPara,jdbcType=VARCHAR},
-      RIGHT_URL = #{rightUrl,jdbcType=VARCHAR},
-      RIGHT_URL_PARA = #{rightUrlPara,jdbcType=VARCHAR},
-      ORDER_ID = #{orderId,jdbcType=BIGINT},
-      ORGAN_ID = #{organId,jdbcType=VARCHAR},
-      PARENT_ID = #{parentId,jdbcType=VARCHAR},
-      PARENT_ID_LIST = #{parentIdList,jdbcType=VARCHAR},
-      SHARE_TYPE = #{shareType,jdbcType=BIGINT},
-      TAG = #{tag,jdbcType=VARCHAR},
-      TARGET = #{target,jdbcType=BIGINT},
-      UPDATER = #{updater,jdbcType=VARCHAR},
-      USE_ORGAN = #{useOrgan,jdbcType=VARCHAR},
-      USE_ORGAN_ID = #{useOrganId,jdbcType=VARCHAR},
-      USE_ORGAN_TYPE = #{useOrganType,jdbcType=VARCHAR},
-      USE_ORGAN_TYPE_ID = #{useOrganTypeId,jdbcType=VARCHAR},
-      ICON_CLASS_NAME = #{iconClassName,jdbcType=VARCHAR},
-      HOVER_CLASS_NAME = #{hoverClassName,jdbcType=VARCHAR},
-      SELECTED_CLASS_NAME = #{selectedClassName,jdbcType=VARCHAR},
-      CHILD_COUNT = #{childCount,jdbcType=BIGINT},
-      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      CREATOR = #{creator,jdbcType=VARCHAR},
-      DESCRIPTION = #{description,jdbcType=NVARCHAR},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      JS_EXPRESSION = #{jsExpression,jdbcType=NVARCHAR}
-    where FOLDER_ID = #{folderId,jdbcType=VARCHAR}
-  </update>
-
-  <select id="selectAll" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from TB4D_MENU ORDER by ORDER_ID ASC
-  </select>
+        JS_EXPRESSION = #{jsExpression,jdbcType=NVARCHAR}
+        where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TB4D_MENU ORDER by ORDER_NUM ASC
+    </select>
 </mapper>

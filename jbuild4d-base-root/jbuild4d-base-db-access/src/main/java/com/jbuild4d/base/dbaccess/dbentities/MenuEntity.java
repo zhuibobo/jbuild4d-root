@@ -3,15 +3,15 @@ package com.jbuild4d.base.dbaccess.dbentities;
 import java.util.Date;
 
 public class MenuEntity {
-    private String folderId;
+    private String menuId;
 
-    private String folderName;
+    private String menuName;
 
-    private String folderText;
+    private String menuText;
 
-    private String folderValue;
+    private String menuValue;
 
-    private String folderType;
+    private String menuType;
 
     private Long isExpand;
 
@@ -25,7 +25,7 @@ public class MenuEntity {
 
     private String rightUrlPara;
 
-    private Long orderId;
+    private Long orderNum;
 
     private String organId;
 
@@ -67,19 +67,19 @@ public class MenuEntity {
 
     private String jsExpression;
 
-    public MenuEntity(String folderId, String folderName, String folderText, String folderValue, String folderType, Long isExpand, Long isSystem, String leftUrl, String leftUrlPara, String rightUrl, String rightUrlPara, Long orderId, String organId, String parentId, String parentIdList, Long shareType, String tag, Long target, String updater, String useOrgan, String useOrganId, String useOrganType, String useOrganTypeId, String iconClassName, String hoverClassName, String selectedClassName, Long childCount, Date createTime, String creator, String description, Date updateTime, String jsExpression) {
-        this.folderId = folderId;
-        this.folderName = folderName;
-        this.folderText = folderText;
-        this.folderValue = folderValue;
-        this.folderType = folderType;
+    public MenuEntity(String menuId, String menuName, String menuText, String menuValue, String menuType, Long isExpand, Long isSystem, String leftUrl, String leftUrlPara, String rightUrl, String rightUrlPara, Long orderNum, String organId, String parentId, String parentIdList, Long shareType, String tag, Long target, String updater, String useOrgan, String useOrganId, String useOrganType, String useOrganTypeId, String iconClassName, String hoverClassName, String selectedClassName, Long childCount, Date createTime, String creator, String description, Date updateTime, String jsExpression) {
+        this.menuId = menuId;
+        this.menuName = menuName;
+        this.menuText = menuText;
+        this.menuValue = menuValue;
+        this.menuType = menuType;
         this.isExpand = isExpand;
         this.isSystem = isSystem;
         this.leftUrl = leftUrl;
         this.leftUrlPara = leftUrlPara;
         this.rightUrl = rightUrl;
         this.rightUrlPara = rightUrlPara;
-        this.orderId = orderId;
+        this.orderNum = orderNum;
         this.organId = organId;
         this.parentId = parentId;
         this.parentIdList = parentIdList;
@@ -106,44 +106,44 @@ public class MenuEntity {
         super();
     }
 
-    public String getFolderId() {
-        return folderId;
+    public String getMenuId() {
+        return menuId;
     }
 
-    public void setFolderId(String folderId) {
-        this.folderId = folderId == null ? null : folderId.trim();
+    public void setMenuId(String menuId) {
+        this.menuId = menuId == null ? null : menuId.trim();
     }
 
-    public String getFolderName() {
-        return folderName;
+    public String getMenuName() {
+        return menuName;
     }
 
-    public void setFolderName(String folderName) {
-        this.folderName = folderName == null ? null : folderName.trim();
+    public void setMenuName(String menuName) {
+        this.menuName = menuName == null ? null : menuName.trim();
     }
 
-    public String getFolderText() {
-        return folderText;
+    public String getMenuText() {
+        return menuText;
     }
 
-    public void setFolderText(String folderText) {
-        this.folderText = folderText == null ? null : folderText.trim();
+    public void setMenuText(String menuText) {
+        this.menuText = menuText == null ? null : menuText.trim();
     }
 
-    public String getFolderValue() {
-        return folderValue;
+    public String getMenuValue() {
+        return menuValue;
     }
 
-    public void setFolderValue(String folderValue) {
-        this.folderValue = folderValue == null ? null : folderValue.trim();
+    public void setMenuValue(String menuValue) {
+        this.menuValue = menuValue == null ? null : menuValue.trim();
     }
 
-    public String getFolderType() {
-        return folderType;
+    public String getMenuType() {
+        return menuType;
     }
 
-    public void setFolderType(String folderType) {
-        this.folderType = folderType == null ? null : folderType.trim();
+    public void setMenuType(String menuType) {
+        this.menuType = menuType == null ? null : menuType.trim();
     }
 
     public Long getIsExpand() {
@@ -194,12 +194,12 @@ public class MenuEntity {
         this.rightUrlPara = rightUrlPara == null ? null : rightUrlPara.trim();
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getOrderNum() {
+        return orderNum;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setOrderNum(Long orderNum) {
+        this.orderNum = orderNum;
     }
 
     public String getOrganId() {
