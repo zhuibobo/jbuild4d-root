@@ -78,19 +78,19 @@
 </div>
 <script>
     var IsTopWorkaroundPage = true;
-    var l1MenuArrayJson=null;
-    l1MenuArrayJson=[{"name":"0","parentName":"","text":"Root","iconType":"","url":"","openType":"","path":"Root/"},{"name":"Project-HardDiskTool-List","parentName":"Project-HardDiskTool","text":"硬盘管理","iconType":"soup-can-outline","url":"${ctxpath}/HardDiskTool/HardDiskList.do","openType":"","path":"HardDiskTool/硬盘管理"},{"name":"Project-HardDiskTool-Search","parentName":"Project-HardDiskTool","text":"文件检索","iconType":"ios-search","url":"${ctxpath}/HardDiskTool/HardDiskList.do","openType":"","path":"HardDiskTool/文件检索"},{"name":"Project-HardDiskTool","parentName":"0","text":"HardDiskTool","iconType":"Pastel_Icons_038","url":"","openType":"","path":"Root/HardDiskTool"},{"name":"Work-Tracking-File","parentName":"Work-Tracking-Management","text":"硬盘","iconType":"","url":"","openType":"","path":"RPGMV/硬盘"},{"name":"Work-Tracking-Management","parentName":"0","text":"RPGMV","iconType":"Pastel_Icons_037","url":"","openType":"","path":"Root/RPGMV"},{"name":"Base-Management-Setting","parentName":"Base-Management","text":"系统设置","iconType":"ios-gear-outline","url":"${ctxpath}//System/Setting/List.do","openType":"","path":"System/系统设置"},{"name":"Base-Management","parentName":"0","text":"System","iconType":"Pastel_Icons_064","url":"","openType":"","path":"Root/System"}];
-    var menuArrayJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
+    var menuJson=${menuJson};
+    //var l1MenuArrayJson=null;
+    //l1MenuArrayJson=[{"name":"0","parentName":"","text":"Root","iconType":"","url":"","openType":"","path":"Root/"},{"name":"Project-HardDiskTool-List","parentName":"Project-HardDiskTool","text":"硬盘管理","iconType":"soup-can-outline","url":"${ctxpath}/HardDiskTool/HardDiskList.do","openType":"","path":"HardDiskTool/硬盘管理"},{"name":"Project-HardDiskTool-Search","parentName":"Project-HardDiskTool","text":"文件检索","iconType":"ios-search","url":"${ctxpath}/HardDiskTool/HardDiskList.do","openType":"","path":"HardDiskTool/文件检索"},{"name":"Project-HardDiskTool","parentName":"0","text":"HardDiskTool","iconType":"Pastel_Icons_038","url":"","openType":"","path":"Root/HardDiskTool"},{"name":"Work-Tracking-File","parentName":"Work-Tracking-Management","text":"硬盘","iconType":"","url":"","openType":"","path":"RPGMV/硬盘"},{"name":"Work-Tracking-Management","parentName":"0","text":"RPGMV","iconType":"Pastel_Icons_037","url":"","openType":"","path":"Root/RPGMV"},{"name":"Base-Management-Setting","parentName":"Base-Management","text":"系统设置","iconType":"ios-gear-outline","url":"${ctxpath}//System/Setting/List.do","openType":"","path":"System/系统设置"},{"name":"Base-Management","parentName":"0","text":"System","iconType":"Pastel_Icons_064","url":"","openType":"","path":"Root/System"}];
+    var menuJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
         KeyField: "name",
         RelationField: "parentName",
         ChildFieldName: "items"
-    },l1MenuArrayJson,"0");
+    },menuJson,"0");
     var app=new Vue({
         data:{
-            l1MenuArrayJson:l1MenuArrayJson,
-            topMenuArrayJson:menuArrayJson.items,
-            leftMenuArrayJson:menuArrayJson.items[0].items,
-            breadcrumbArrayJson:[menuArrayJson.items[0],menuArrayJson.items[0].items[0]],
+            topMenuArrayJson:menuJson.items,
+            leftMenuArrayJson:menuJson.items[0].items,
+            breadcrumbArrayJson:[menuJson.items[0],menuJson.items[0].items[0]],
             frameHeight: 0,
             contentIframeUrl:"",
             userInfo:${currUserEntity}
