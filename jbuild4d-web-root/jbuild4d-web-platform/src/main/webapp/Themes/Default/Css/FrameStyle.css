@@ -54,7 +54,6 @@
     overflow: hidden;
     padding-right: 30px;
 }
-
 .frame-top-menu-item-inner-warp{
     position: absolute;
     left: 0;
@@ -75,7 +74,6 @@
     color: #ffffff;
     cursor: pointer;
 }
-
 .frame-top-menu-item:hover{
     color: #ff2848;
 }
@@ -115,6 +113,21 @@
 
 }
 
+.frame-left-menu-item{
+    height:22px;
+    float:left;
+    padding-left: 34px;
+    background-repeat: no-repeat;
+    line-height: 20px !important;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 1px;
+    color: #000000;
+    cursor: pointer;
+}
+.frame-left-menu-affairs{
+    background-image:url(Images/LeftMenu-Affairs.png);
+}
 
 .top-right-wrap{
     position: absolute;

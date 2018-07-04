@@ -51,21 +51,19 @@
             </i-header>
             <layout>
                 <sider hide-trigger :style="sider_style">
-                    <i-menu active-name="Project-SystemManagement-BusinessUsers" theme="light" width="auto" :open-names="['1']" @on-select="left_menu_click">
+                    <iframe id="leftMenuIframe" src="${ctxpath}/PlatForm/Base/LeftMenu.do" frameborder="0" style="width: 100%;height: 99%"></iframe>
+                    <%--<i-menu active-name="Project-SystemManagement-BusinessUsers" theme="light" width="auto" :open-names="['1']" @on-select="left_menu_click">
                         <menu-item :name="item.menuText" v-for="(item, key) in leftMenuArrayJson" v-if="item.items==undefined">
-                            <icon :type="item.iconType==''?'shuffle':item.iconType" size="20" color="#2d8cf0"></icon>
-                            {{item.text}}
+                            <div :class="LeftMenuItemClass(item)"></div>
+                            {{item.menuText}}
                         </menu-item>
-                        <Submenu :name="item.menuText"  v-else-if="item.items.length>0">
+                        <submenu name="item.menuId" v-else-if="item.items.length>0">
                             <template slot="title">
-                                <Icon :type="item.iconType==''?'shuffle':item.iconType" color="#2d8cf0"></Icon>
-                                {{ item.text }}
+                                <icon type="ios-analytics"></icon>
+                                {{item.menuText}}
                             </template>
-                            <template v-for="(i, k) in item.items">
-                                <Menu-item v-bind:name="i.menuText">{{ i.text }}</Menu-item>
-                            </template>
-                        </Submenu>
-                    </i-menu>
+                        </submenu>
+                    </i-menu>--%>
                 </sider>
                 <layout :style="{padding: '0 24px 24px'}">
                     <breadcrumb :style="{margin: '24px 0'}">
@@ -78,7 +76,6 @@
             </layout>
         </layout>
     </div>
-
 </div>
 <script>
     var IsTopWorkaroundPage = true;
@@ -102,9 +99,33 @@
             this.setFrameHeight();
             this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(this.contentIframeUrl);
             //alert(this.contentIframeUrl);
+
+            //设置默认的菜单
+            /*var iframeobj=$("#leftMenuIframe")[0];
+            if (iframeobj.attachEvent) {
+                iframeobj.attachEvent("onload", function () {
+                    $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
+                    $("#leftMenuIframe")[0].contentWindow.app.PageReady();
+                });
+            } else {
+                iframeobj.onload = function () {
+                    $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
+                    $("#leftMenuIframe")[0].contentWindow.app.PageReady();
+                };
+            }*/
+            $("#leftMenuIframe").on("load",function() {
+                $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
+                $("#leftMenuIframe")[0].contentWindow.app.PageReady();
+            });
         },
         created:function () {
             //this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(menuArrayJson.items[0].items[0].url);
+            //var _self=this;
+
+            /*$("#leftMenuIframe").on("load",function() {
+                alert("1");
+
+            });*/
         },
         methods:{
             TopMenuHasNextPage:function () {
@@ -156,6 +177,7 @@
                     }, 1000);
                 }
             },
+
             get_menu:function (name) {
                 for(var i=0;i<this.l1MenuArrayJson.length;i++){
                     if(this.l1MenuArrayJson[i].name==name){
@@ -177,11 +199,19 @@
                 this.breadcrumbArrayJson.reverse();
             },
             top_menu_click:function (name) {
-                for(var i=0;i<this.topMenuArrayJson.length;i++) {
+
+
+                //debugger;
+                //$("#leftMenuIframe").attr("s")
+                //$("#leftMenuIframe").on("load",function(){
+                    //debugger;
+                    //$("#message").text("");
+                //});
+                /*for(var i=0;i<this.topMenuArrayJson.length;i++) {
                     if(this.topMenuArrayJson[i].name==name){
                         this.leftMenuArrayJson = this.topMenuArrayJson[i].items;
                     }
-                }
+                }*/
             },
             left_menu_click:function (name) {
                 this.buildBreadcrumbArrayJson(name);

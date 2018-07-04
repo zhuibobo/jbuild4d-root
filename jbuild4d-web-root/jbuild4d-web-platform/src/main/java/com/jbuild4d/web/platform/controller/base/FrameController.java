@@ -30,4 +30,10 @@ public class FrameController {
         modelAndView.addObject("currUserEntity", jsonUtility.toObjectString(session));
         return modelAndView;
     }
+
+    @RequestMapping(value = "LeftMenu", method = RequestMethod.GET)
+    public ModelAndView leftMenu() throws JsonProcessingException {
+        ModelAndView modelAndView=new ModelAndView("LeftMenu");
+        return modelAndView;
+    }
 }
