@@ -411,9 +411,4 @@
         JS_EXPRESSION = #{jsExpression,jdbcType=NVARCHAR}
         where MENU_ID = #{menuId,jdbcType=VARCHAR}
     </update>
-    <select id="selectAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from TB4D_MENU ORDER by ORDER_NUM ASC
-    </select>
 </mapper>

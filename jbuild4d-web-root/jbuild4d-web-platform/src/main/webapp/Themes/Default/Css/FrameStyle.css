@@ -2,25 +2,19 @@
     display: none;
 }
 
-.layout-header-wrap{
-    /*background-image: url("../Images/dingbu.png") !important;*/
-}
-
-.layout-header-shadow-line
-{
-    -moz-box-shadow:2px 2px 5px #7f7f7f;
-    -webkit-box-shadow:2px 2px 5px #7f7f7f;
-    box-shadow:-2px 2px 2px #7f7f7f;
-    z-index: 2200;
-}
-.layout{
+.frame-layout{
     border: 0px solid #d7dde4;
     background: #f5f7f9;
     position: relative;
     border-radius: 4px;
     overflow:auto;
 }
-.layout-logo{
+
+.frame-layout-header-wrap{
+    /*background-image: url("../Images/dingbu.png") !important;*/
+}
+
+.frame-layout-logo{
     width: 305px;
     height: 40px;
     /*background: #5b6270;*/
@@ -35,45 +29,92 @@
     padding-left: 6px;
     z-index: 2100;
 }
-.layout-nav{
+
+.layout-header-shadow-line
+{
+    -moz-box-shadow:2px 2px 5px #7f7f7f;
+    -webkit-box-shadow:2px 2px 5px #7f7f7f;
+    box-shadow:-2px 2px 2px #7f7f7f;
+    z-index: 2200;
+}
+
+/*.layout-nav{
     width: 1220px;
     margin: 0 auto;
     margin-right: 0px;
-}
+}*/
 
-.topMenuItem-warp{
+.frame-top-menu-item-warp{
     /*background: #0f9087;*/
     height: 50px;
     left: 340px;
     right: 300px;
     position: absolute;
-    top: 4px
+    top: 4px;
+    overflow: hidden;
+    padding-right: 30px;
 }
-.topMenuItem-inner-warp{
-    float: right;
-    margin-right: 10px;
+
+.frame-top-menu-item-inner-warp{
+    position: absolute;
+    left: 0;
+    margin-right: 20px;
+    width: 3000px;
 }
-.topMenuItem{
-    height:29px;
+
+.frame-top-menu-item{
+    height:22px;
     float:left;
     padding-left: 34px;
     background-repeat: no-repeat;
-    margin-top: 10px;
+    margin-top: 16px;
     line-height: 20px !important;
     margin-left: 10px;
     margin-right: 10px;
-    padding-top: 8px;
+    padding-top: 1px;
     color: #ffffff;
     cursor: pointer;
 }
-.topMenuItem:hover{
 
+.frame-top-menu-item:hover{
     color: #ff2848;
 }
 
-.Pastel_Icons_038{ background-image:url(../Images/32X32/Pastel_Icons_038.png);}
-.Pastel_Icons_037{ background-image:url(../Images/32X32/Pastel_Icons_037.png);}
-.Pastel_Icons_064{ background-image:url(../Images/32X32/Pastel_Icons_064.png);}
+.frame-top-menu-data{ background-image:url(Images/TopMenu-Data.png);}
+.frame-top-menu-affairs{ background-image:url(Images/TopMenu-Affairs.png);}
+.frame-top-menu-assistance{ background-image:url(Images/TopMenu-Assistance.png);}
+.frame-top-menu-biangeng{ background-image:url(Images/TopMenu-Biangeng.png);}
+.frame-top-menu-bidui{ background-image:url(Images/TopMenu-Bidui.png);}
+.frame-top-menu-calendar{ background-image:url(Images/TopMenu-Calendar.png);}
+
+.frame-top-menu-op-c {
+    /*background-color: #416db8;*/
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    width: 30px;
+    z-index: 20;
+}
+.frame-top-menu-op-c div{
+    height: 20px;
+    width: 30px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+.frame-top-menu-op-c .right{
+    background: url("Images/Arrow_R.png") no-repeat right;
+}
+.frame-top-menu-op-c .right:hover{
+    background: url("Images/Arrow_R_Hover.png") no-repeat right;
+}
+.frame-top-menu-op-c .left{
+    background: url("Images/Arrow_L.png") no-repeat right;
+}
+.frame-top-menu-op-c .left:hover{
+    background: url("Images/Arrow_L_Hover.png") no-repeat right;
+
+}
+
 
 .top-right-wrap{
     position: absolute;
@@ -81,6 +122,42 @@
     right: 10px;
     z-index: 901;
     width: 280px;
+}
+
+.frame-user-warp {
+    display: inline-block;
+    float: left;
+    margin-left: 0px;
+    width:200px ;
+    color: #ffffff;
+}
+
+.frame-user-warp .user-header {
+    background: url(Images/User-Header.png) center no-repeat;
+    width: 52px;
+    height: 54px;
+    margin-top: 4px;
+    display: inline-block;
+    float: left;
+}
+
+.frame-user-warp .line {
+    border-right: 2px solid #509bf3;
+    width: 8px;
+    height: 46px;
+    display: inline-block;
+    float: left;
+    margin-top: 8px;
+    margin-right: 6px;
+}
+
+.logout {
+    background: url(Images/Logout.png) center no-repeat;
+    width: 78px;
+    height: 54px;
+    margin-top: 4px;
+    display: inline-block;
+    float: left;
 }
 
 .card-title-include-button{
