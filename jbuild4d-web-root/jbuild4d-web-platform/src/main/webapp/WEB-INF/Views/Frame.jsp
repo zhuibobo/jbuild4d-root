@@ -26,7 +26,7 @@
                     </div>
                     <div class="frame-top-menu-item-warp">
                         <div class="frame-top-menu-item-inner-warp">
-                            <div :class="topMenuItemClass(item)" @click="topMenuClick(item)" v-for="(item, key) in topMenuArrayJson" topmenu="true">
+                            <div :class="topMenuItemClass(item)" @click="topMenuClick(item,true)" v-for="(item, key) in topMenuArrayJson" topmenu="true">
                                 {{item.menuText}}
                             </div>
                         </div>
@@ -90,27 +90,14 @@
         mounted:function(){
             this.setFrameHeight();
             this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(this.contentIframeUrl);
-            //alert(this.contentIframeUrl);
-            //设置默认的菜单
-            /*var iframeobj=$("#leftMenuIframe")[0];
-            if (iframeobj.attachEvent) {
-                iframeobj.attachEvent("onload", function () {
-                    $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
-                    $("#leftMenuIframe")[0].contentWindow.app.PageReady();
-                });
-            } else {
-                iframeobj.onload = function () {
-                    $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
-                    $("#leftMenuIframe")[0].contentWindow.app.PageReady();
-                };
-            }*/
-            $("#leftMenuIframe").on("load",function() {
+            /*$("#leftMenuIframe").on("load",function() {
                 $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
                 $("#leftMenuIframe")[0].contentWindow.app.PageReady();
-            });
+            });*/
         },
         created:function () {
             //this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(menuArrayJson.items[0].items[0].url);
+            this.topMenuClick(this.topMenuArrayJson[0],false);
         },
         methods:{
             topMenuItemClass:function (item) {
@@ -193,9 +180,12 @@
                 }
                 this.breadcrumbArrayJson.reverse();
             },
-            topMenuClick:function (item) {
+            topMenuClick:function (item,reSetLeftMenu) {
                 this.unSelectedAllTopMenu();
                 item.selected=true;
+                if(reSetLeftMenu) {
+                    $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
+                }
             },
             leftMenuClick:function (name) {
                 this.buildBreadcrumbArrayJson(name);

@@ -32,17 +32,20 @@
     </div>
     <script>
         var app=new Vue({
+            el:"#app",
             data:{
-                leftMenuArrayJson:null
+                leftMenuArrayJson:[]
+            },
+            mounted:function(){
+                this.leftMenuArrayJson=window.parent.app.leftMenuArrayJson;
             },
             methods:{
                 LeftMenuItemClass:function (item) {
                     return "frame-left-menu-item frame-left-menu-affairs "+item.iconClassName;
                 },
-                PageReady:function () {
-                    //debugger;
+                /*PageReady:function () {
                     app.$mount('#app');
-                },
+                },*/
                 left_menu_click:function () {
                     
                 }
