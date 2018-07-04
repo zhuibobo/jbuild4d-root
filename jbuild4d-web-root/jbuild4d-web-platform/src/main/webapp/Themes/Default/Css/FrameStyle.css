@@ -78,6 +78,10 @@
     color: #ff2848;
 }
 
+.frame-top-menu-item-selected{
+    color: #eca19a;
+}
+
 .frame-top-menu-data{ background-image:url(Images/TopMenu-Data.png);}
 .frame-top-menu-affairs{ background-image:url(Images/TopMenu-Affairs.png);}
 .frame-top-menu-assistance{ background-image:url(Images/TopMenu-Assistance.png);}
@@ -129,7 +133,7 @@
     background-image:url(Images/LeftMenu-Affairs.png);
 }
 
-.top-right-wrap{
+.frame-top-right-wrap{
     position: absolute;
     top: 0px;
     right: 10px;

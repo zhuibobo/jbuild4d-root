@@ -40,7 +40,7 @@
                     return "frame-left-menu-item frame-left-menu-affairs "+item.iconClassName;
                 },
                 PageReady:function () {
-                    debugger;
+                    //debugger;
                     app.$mount('#app');
                 },
                 left_menu_click:function () {

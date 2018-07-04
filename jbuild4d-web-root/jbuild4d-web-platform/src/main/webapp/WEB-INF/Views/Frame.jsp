@@ -26,16 +26,16 @@
                     </div>
                     <div class="frame-top-menu-item-warp">
                         <div class="frame-top-menu-item-inner-warp">
-                            <div :class="top_menu_item_class(item)" @click="top_menu_click(item)" v-for="(item, key) in topMenuArrayJson" topmenu="true">
+                            <div :class="topMenuItemClass(item)" @click="topMenuClick(item)" v-for="(item, key) in topMenuArrayJson" topmenu="true">
                                 {{item.menuText}}
                             </div>
                         </div>
                         <div class="frame-top-menu-op-c">
-                            <div class="right" @click="NextTopMenu()"></div>
-                            <div class="left" @click="PrevTopMenu()"></div>
+                            <div class="right" @click="nextTopMenu()"></div>
+                            <div class="left" @click="prevTopMenu()"></div>
                         </div>
                     </div>
-                    <div class="top-right-wrap">
+                    <div class="frame-top-right-wrap">
                         <div class="frame-user-warp">
                             <div class="user-header"></div>
                             <div class="line"></div>
@@ -50,20 +50,8 @@
                 <div class="layout-header-shadow-line" style="height: 4px;width: 100%"></div>
             </i-header>
             <layout>
-                <sider hide-trigger :style="sider_style">
+                <sider hide-trigger :style="sider_style" width="300">
                     <iframe id="leftMenuIframe" src="${ctxpath}/PlatForm/Base/LeftMenu.do" frameborder="0" style="width: 100%;height: 99%"></iframe>
-                    <%--<i-menu active-name="Project-SystemManagement-BusinessUsers" theme="light" width="auto" :open-names="['1']" @on-select="left_menu_click">
-                        <menu-item :name="item.menuText" v-for="(item, key) in leftMenuArrayJson" v-if="item.items==undefined">
-                            <div :class="LeftMenuItemClass(item)"></div>
-                            {{item.menuText}}
-                        </menu-item>
-                        <submenu name="item.menuId" v-else-if="item.items.length>0">
-                            <template slot="title">
-                                <icon type="ios-analytics"></icon>
-                                {{item.menuText}}
-                            </template>
-                        </submenu>
-                    </i-menu>--%>
                 </sider>
                 <layout :style="{padding: '0 24px 24px'}">
                     <breadcrumb :style="{margin: '24px 0'}">
@@ -80,6 +68,10 @@
 <script>
     var IsTopWorkaroundPage = true;
     var menuJson=${menuJson};
+    //增加selected属性，用于选中状态控制。
+    for(var i=0;i<menuJson.length;i++){
+        menuJson[i].selected=false;
+    }
     var menuJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
         KeyField: "menuId",
         RelationField: "parentId",
@@ -99,7 +91,6 @@
             this.setFrameHeight();
             this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(this.contentIframeUrl);
             //alert(this.contentIframeUrl);
-
             //设置默认的菜单
             /*var iframeobj=$("#leftMenuIframe")[0];
             if (iframeobj.attachEvent) {
@@ -120,15 +111,20 @@
         },
         created:function () {
             //this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(menuArrayJson.items[0].items[0].url);
-            //var _self=this;
-
-            /*$("#leftMenuIframe").on("load",function() {
-                alert("1");
-
-            });*/
         },
         methods:{
-            TopMenuHasNextPage:function () {
+            topMenuItemClass:function (item) {
+                if(item.selected){
+                    return "frame-top-menu-item frame-top-menu-item-selected "+item.iconClassName;
+                }
+                return "frame-top-menu-item "+item.iconClassName;
+            },
+            unSelectedAllTopMenu:function () {
+                for(var i=0;i<this.topMenuArrayJson.length;i++){
+                    this.topMenuArrayJson[i].selected=false;
+                }
+            },
+            topMenuHasNextPage:function () {
                 var outerwidth = $(".frame-top-menu-item-warp").width();
                 var topmenus = $("[topmenu='true']");
                 var topmenuswidth = 0;
@@ -137,9 +133,9 @@
                 }
                 return topmenuswidth > outerwidth;
             },
-            NextTopMenu:function () {
+            nextTopMenu:function () {
                 //debugger;
-                if (this.TopMenuHasNextPage()) {
+                if (this.topMenuHasNextPage()) {
                     var warpObj=$(".frame-top-menu-item-warp");
                     var innerWarpObj=$(".frame-top-menu-item-inner-warp");
                     var outerWidth = warpObj.width() * 0.9;
@@ -162,7 +158,7 @@
 
                 }
             },
-            PrevTopMenu:function () {
+            prevTopMenu:function () {
                 var warpObj=$(".frame-top-menu-item-warp");
                 var innerWarpObj=$(".frame-top-menu-item-inner-warp");
                 var innerLeft = parseInt(innerWarpObj.css("left"));
@@ -177,8 +173,7 @@
                     }, 1000);
                 }
             },
-
-            get_menu:function (name) {
+            getMenu:function (name) {
                 for(var i=0;i<this.l1MenuArrayJson.length;i++){
                     if(this.l1MenuArrayJson[i].name==name){
                         return this.l1MenuArrayJson[i];
@@ -188,34 +183,23 @@
             },
             buildBreadcrumbArrayJson:function (name) {
                 this.breadcrumbArrayJson=new Array();
-                var lastMenu=this.get_menu(name);
+                var lastMenu=this.getMenu(name);
                 if(lastMenu!=null){
                     this.breadcrumbArrayJson.push(lastMenu);
                     if(lastMenu.parentName!="0"){
-                        var lastMenuL1=this.get_menu(lastMenu.parentName);
+                        var lastMenuL1=this.getMenu(lastMenu.parentName);
                         this.breadcrumbArrayJson.push(lastMenuL1);
                     }
                 }
                 this.breadcrumbArrayJson.reverse();
             },
-            top_menu_click:function (name) {
-
-
-                //debugger;
-                //$("#leftMenuIframe").attr("s")
-                //$("#leftMenuIframe").on("load",function(){
-                    //debugger;
-                    //$("#message").text("");
-                //});
-                /*for(var i=0;i<this.topMenuArrayJson.length;i++) {
-                    if(this.topMenuArrayJson[i].name==name){
-                        this.leftMenuArrayJson = this.topMenuArrayJson[i].items;
-                    }
-                }*/
+            topMenuClick:function (item) {
+                this.unSelectedAllTopMenu();
+                item.selected=true;
             },
-            left_menu_click:function (name) {
+            leftMenuClick:function (name) {
                 this.buildBreadcrumbArrayJson(name);
-                var menu=this.get_menu(name);
+                var menu=this.getMenu(name);
                 var url=BaseUtility.ReplaceUrlVariable(menu.url);
                 this.contentIframeUrl=url;
             },
@@ -224,10 +208,6 @@
                 //debugger;
                 this.mainHeight = PageStyleUtility.GetWindowHeigth()-90-90;
                 this.frameHeight = this.mainHeight-30;
-            },
-            top_menu_item_class:function (item) {
-                //debugger;
-                return "frame-top-menu-item "+item.iconClassName;
             }
         },
         computed:{
