@@ -1,8 +1,7 @@
 package com.jbuild4d.web.platform.beanconfig.mybatis;
 
 import com.github.pagehelper.PageInterceptor;
-import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
-import com.jbuild4d.base.dbaccess.dao.MenuMapper;
+import com.jbuild4d.base.dbaccess.dao.*;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.UniversalIntEnumHandler;
 import com.jbuild4d.base.dbaccess.general.DBProp;
@@ -78,6 +77,21 @@ public class MybatisBeansConfig {
     @Bean
     public MenuMapper menuMapper(SqlSessionTemplate sqlSessionTemplate) {
         return sqlSessionTemplate.getMapper(MenuMapper.class);
+    }
+
+    @Bean
+    public DictionaryGroupMapper dictionaryGroupMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(DictionaryGroupMapper.class);
+    }
+
+    @Bean
+    public DictionaryMapper dictionaryMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(DictionaryMapper.class);
+    }
+
+    @Bean
+    public SettingMapper settingMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(SettingMapper.class);
     }
 
     /*@Bean
