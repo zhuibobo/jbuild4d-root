@@ -13,6 +13,14 @@ public class MenuEntity {
 
     private String menuType;
 
+    private String menuUserId;
+
+    private String menuUserName;
+
+    private String menuOrganId;
+
+    private String menuOrganName;
+
     private Long isExpand;
 
     private Long isSystem;
@@ -67,12 +75,16 @@ public class MenuEntity {
 
     private String jsExpression;
 
-    public MenuEntity(String menuId, String menuName, String menuText, String menuValue, String menuType, Long isExpand, Long isSystem, String leftUrl, String leftUrlPara, String rightUrl, String rightUrlPara, Long orderNum, String organId, String parentId, String parentIdList, Long shareType, String tag, Long target, String updater, String useOrgan, String useOrganId, String useOrganType, String useOrganTypeId, String iconClassName, String hoverClassName, String selectedClassName, Long childCount, Date createTime, String creator, String description, Date updateTime, String jsExpression) {
+    public MenuEntity(String menuId, String menuName, String menuText, String menuValue, String menuType, String menuUserId, String menuUserName, String menuOrganId, String menuOrganName, Long isExpand, Long isSystem, String leftUrl, String leftUrlPara, String rightUrl, String rightUrlPara, Long orderNum, String organId, String parentId, String parentIdList, Long shareType, String tag, Long target, String updater, String useOrgan, String useOrganId, String useOrganType, String useOrganTypeId, String iconClassName, String hoverClassName, String selectedClassName, Long childCount, Date createTime, String creator, String description, Date updateTime, String jsExpression) {
         this.menuId = menuId;
         this.menuName = menuName;
         this.menuText = menuText;
         this.menuValue = menuValue;
         this.menuType = menuType;
+        this.menuUserId = menuUserId;
+        this.menuUserName = menuUserName;
+        this.menuOrganId = menuOrganId;
+        this.menuOrganName = menuOrganName;
         this.isExpand = isExpand;
         this.isSystem = isSystem;
         this.leftUrl = leftUrl;
@@ -144,6 +156,38 @@ public class MenuEntity {
 
     public void setMenuType(String menuType) {
         this.menuType = menuType == null ? null : menuType.trim();
+    }
+
+    public String getMenuUserId() {
+        return menuUserId;
+    }
+
+    public void setMenuUserId(String menuUserId) {
+        this.menuUserId = menuUserId == null ? null : menuUserId.trim();
+    }
+
+    public String getMenuUserName() {
+        return menuUserName;
+    }
+
+    public void setMenuUserName(String menuUserName) {
+        this.menuUserName = menuUserName == null ? null : menuUserName.trim();
+    }
+
+    public String getMenuOrganId() {
+        return menuOrganId;
+    }
+
+    public void setMenuOrganId(String menuOrganId) {
+        this.menuOrganId = menuOrganId == null ? null : menuOrganId.trim();
+    }
+
+    public String getMenuOrganName() {
+        return menuOrganName;
+    }
+
+    public void setMenuOrganName(String menuOrganName) {
+        this.menuOrganName = menuOrganName == null ? null : menuOrganName.trim();
     }
 
     public Long getIsExpand() {

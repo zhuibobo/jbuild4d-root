@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.DictionaryGroupMapper">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
+    <constructor>
+      <idArg column="DICT_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_GROUP_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_GROUP_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_GROUP_ORDER_NUM" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="DICT_GROUP_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB4D_DICTIONARY_GROUP
+    where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB4D_DICTIONARY_GROUP
+    where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
+    insert into TB4D_DICTIONARY_GROUP (DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, 
+      DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME
+      )
+    values (#{dictGroupId,jdbcType=NVARCHAR}, #{dictGroupValue,jdbcType=NVARCHAR}, #{dictGroupText,jdbcType=NVARCHAR}, 
+      #{dictGroupOrderNum,jdbcType=BIGINT}, #{dictGroupCreateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
+    insert into TB4D_DICTIONARY_GROUP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dictGroupId != null">
+        DICT_GROUP_ID,
+      </if>
+      <if test="dictGroupValue != null">
+        DICT_GROUP_VALUE,
+      </if>
+      <if test="dictGroupText != null">
+        DICT_GROUP_TEXT,
+      </if>
+      <if test="dictGroupOrderNum != null">
+        DICT_GROUP_ORDER_NUM,
+      </if>
+      <if test="dictGroupCreateTime != null">
+        DICT_GROUP_CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dictGroupId != null">
+        #{dictGroupId,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictGroupValue != null">
+        #{dictGroupValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictGroupText != null">
+        #{dictGroupText,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictGroupOrderNum != null">
+        #{dictGroupOrderNum,jdbcType=BIGINT},
+      </if>
+      <if test="dictGroupCreateTime != null">
+        #{dictGroupCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
+    update TB4D_DICTIONARY_GROUP
+    <set>
+      <if test="dictGroupValue != null">
+        DICT_GROUP_VALUE = #{dictGroupValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictGroupText != null">
+        DICT_GROUP_TEXT = #{dictGroupText,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictGroupOrderNum != null">
+        DICT_GROUP_ORDER_NUM = #{dictGroupOrderNum,jdbcType=BIGINT},
+      </if>
+      <if test="dictGroupCreateTime != null">
+        DICT_GROUP_CREATE_TIME = #{dictGroupCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
+    update TB4D_DICTIONARY_GROUP
+    set DICT_GROUP_VALUE = #{dictGroupValue,jdbcType=NVARCHAR},
+      DICT_GROUP_TEXT = #{dictGroupText,jdbcType=NVARCHAR},
+      DICT_GROUP_ORDER_NUM = #{dictGroupOrderNum,jdbcType=BIGINT},
+      DICT_GROUP_CREATE_TIME = #{dictGroupCreateTime,jdbcType=TIMESTAMP}
+    where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
+  </update>
+</mapper>

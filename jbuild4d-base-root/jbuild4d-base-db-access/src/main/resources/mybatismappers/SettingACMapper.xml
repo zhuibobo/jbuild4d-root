@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.SettingMapper">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.SettingEntity">
+    <constructor>
+      <idArg column="SETTING_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_KEY" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_CREATETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="SETTING_USER_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_USER_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_API" javaType="java.lang.String" jdbcType="NVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    SETTING_ID, SETTING_KEY, SETTING_NAME, SETTING_VALUE, SETTING_STATUS, SETTING_DESC, 
+    SETTING_CREATETIME, SETTING_USER_ID, SETTING_USER_NAME, SETTING_ORGAN_ID, SETTING_ORGAN_NAME, 
+    SETTING_API
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB4D_SETTING
+    where SETTING_ID = #{settingId,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB4D_SETTING
+    where SETTING_ID = #{settingId,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.SettingEntity">
+    insert into TB4D_SETTING (SETTING_ID, SETTING_KEY, SETTING_NAME, 
+      SETTING_VALUE, SETTING_STATUS, SETTING_DESC, 
+      SETTING_CREATETIME, SETTING_USER_ID, SETTING_USER_NAME, 
+      SETTING_ORGAN_ID, SETTING_ORGAN_NAME, SETTING_API
+      )
+    values (#{settingId,jdbcType=NVARCHAR}, #{settingKey,jdbcType=NVARCHAR}, #{settingName,jdbcType=NVARCHAR}, 
+      #{settingValue,jdbcType=NVARCHAR}, #{settingStatus,jdbcType=NVARCHAR}, #{settingDesc,jdbcType=NVARCHAR}, 
+      #{settingCreatetime,jdbcType=TIMESTAMP}, #{settingUserId,jdbcType=NVARCHAR}, #{settingUserName,jdbcType=NVARCHAR}, 
+      #{settingOrganId,jdbcType=NVARCHAR}, #{settingOrganName,jdbcType=NVARCHAR}, #{settingApi,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.SettingEntity">
+    insert into TB4D_SETTING
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="settingId != null">
+        SETTING_ID,
+      </if>
+      <if test="settingKey != null">
+        SETTING_KEY,
+      </if>
+      <if test="settingName != null">
+        SETTING_NAME,
+      </if>
+      <if test="settingValue != null">
+        SETTING_VALUE,
+      </if>
+      <if test="settingStatus != null">
+        SETTING_STATUS,
+      </if>
+      <if test="settingDesc != null">
+        SETTING_DESC,
+      </if>
+      <if test="settingCreatetime != null">
+        SETTING_CREATETIME,
+      </if>
+      <if test="settingUserId != null">
+        SETTING_USER_ID,
+      </if>
+      <if test="settingUserName != null">
+        SETTING_USER_NAME,
+      </if>
+      <if test="settingOrganId != null">
+        SETTING_ORGAN_ID,
+      </if>
+      <if test="settingOrganName != null">
+        SETTING_ORGAN_NAME,
+      </if>
+      <if test="settingApi != null">
+        SETTING_API,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="settingId != null">
+        #{settingId,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingKey != null">
+        #{settingKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingName != null">
+        #{settingName,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingValue != null">
+        #{settingValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingStatus != null">
+        #{settingStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingDesc != null">
+        #{settingDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingCreatetime != null">
+        #{settingCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settingUserId != null">
+        #{settingUserId,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingUserName != null">
+        #{settingUserName,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingOrganId != null">
+        #{settingOrganId,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingOrganName != null">
+        #{settingOrganName,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingApi != null">
+        #{settingApi,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.SettingEntity">
+    update TB4D_SETTING
+    <set>
+      <if test="settingKey != null">
+        SETTING_KEY = #{settingKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingName != null">
+        SETTING_NAME = #{settingName,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingValue != null">
+        SETTING_VALUE = #{settingValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingStatus != null">
+        SETTING_STATUS = #{settingStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingDesc != null">
+        SETTING_DESC = #{settingDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingCreatetime != null">
+        SETTING_CREATETIME = #{settingCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settingUserId != null">
+        SETTING_USER_ID = #{settingUserId,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingUserName != null">
+        SETTING_USER_NAME = #{settingUserName,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingOrganId != null">
+        SETTING_ORGAN_ID = #{settingOrganId,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingOrganName != null">
+        SETTING_ORGAN_NAME = #{settingOrganName,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingApi != null">
+        SETTING_API = #{settingApi,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where SETTING_ID = #{settingId,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.SettingEntity">
+    update TB4D_SETTING
+    set SETTING_KEY = #{settingKey,jdbcType=NVARCHAR},
+      SETTING_NAME = #{settingName,jdbcType=NVARCHAR},
+      SETTING_VALUE = #{settingValue,jdbcType=NVARCHAR},
+      SETTING_STATUS = #{settingStatus,jdbcType=NVARCHAR},
+      SETTING_DESC = #{settingDesc,jdbcType=NVARCHAR},
+      SETTING_CREATETIME = #{settingCreatetime,jdbcType=TIMESTAMP},
+      SETTING_USER_ID = #{settingUserId,jdbcType=NVARCHAR},
+      SETTING_USER_NAME = #{settingUserName,jdbcType=NVARCHAR},
+      SETTING_ORGAN_ID = #{settingOrganId,jdbcType=NVARCHAR},
+      SETTING_ORGAN_NAME = #{settingOrganName,jdbcType=NVARCHAR},
+      SETTING_API = #{settingApi,jdbcType=NVARCHAR}
+    where SETTING_ID = #{settingId,jdbcType=NVARCHAR}
+  </update>
+</mapper>

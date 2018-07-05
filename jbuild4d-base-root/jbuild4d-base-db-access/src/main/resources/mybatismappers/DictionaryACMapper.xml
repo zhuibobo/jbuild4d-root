@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.DictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity">
+    <constructor>
+      <idArg column="DICT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_KEY" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_GROUP_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_ORDER_NUM" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="DICT_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="DICT_PARENT_ID" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="DICT_PARENT_IDLIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_ISSYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_DEL_ENABLE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_IS_SELECTED" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_CHILD_COUNT" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="DICT_EX_ATTR1" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_EX_ATTR2" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_EX_ATTR3" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_EX_ATTR4" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_USER_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_USER_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    DICT_ID, DICT_KEY, DICT_VALUE, DICT_TEXT, DICT_GROUP_NAME, DICT_ORDER_NUM, DICT_CREATE_TIME, 
+    DICT_PARENT_ID, DICT_PARENT_IDLIST, DICT_ISSYSTEM, DICT_DEL_ENABLE, DICT_STATUS, 
+    DICT_IS_SELECTED, DICT_DESC, DICT_CHILD_COUNT, DICT_EX_ATTR1, DICT_EX_ATTR2, DICT_EX_ATTR3, 
+    DICT_EX_ATTR4, DICT_USER_ID, DICT_USER_NAME, DICT_ORGAN_ID, DICT_ORGAN_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB4D_DICTIONARY
+    where DICT_ID = #{dictId,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB4D_DICTIONARY
+    where DICT_ID = #{dictId,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity">
+    insert into TB4D_DICTIONARY (DICT_ID, DICT_KEY, DICT_VALUE, 
+      DICT_TEXT, DICT_GROUP_NAME, DICT_ORDER_NUM, 
+      DICT_CREATE_TIME, DICT_PARENT_ID, DICT_PARENT_IDLIST, 
+      DICT_ISSYSTEM, DICT_DEL_ENABLE, DICT_STATUS, 
+      DICT_IS_SELECTED, DICT_DESC, DICT_CHILD_COUNT, 
+      DICT_EX_ATTR1, DICT_EX_ATTR2, DICT_EX_ATTR3, 
+      DICT_EX_ATTR4, DICT_USER_ID, DICT_USER_NAME, 
+      DICT_ORGAN_ID, DICT_ORGAN_NAME)
+    values (#{dictId,jdbcType=NVARCHAR}, #{dictKey,jdbcType=NVARCHAR}, #{dictValue,jdbcType=NVARCHAR}, 
+      #{dictText,jdbcType=NVARCHAR}, #{dictGroupName,jdbcType=NVARCHAR}, #{dictOrderNum,jdbcType=BIGINT}, 
+      #{dictCreateTime,jdbcType=TIMESTAMP}, #{dictParentId,jdbcType=BIGINT}, #{dictParentIdlist,jdbcType=NVARCHAR}, 
+      #{dictIssystem,jdbcType=NVARCHAR}, #{dictDelEnable,jdbcType=NVARCHAR}, #{dictStatus,jdbcType=NVARCHAR}, 
+      #{dictIsSelected,jdbcType=NVARCHAR}, #{dictDesc,jdbcType=NVARCHAR}, #{dictChildCount,jdbcType=BIGINT}, 
+      #{dictExAttr1,jdbcType=NVARCHAR}, #{dictExAttr2,jdbcType=NVARCHAR}, #{dictExAttr3,jdbcType=NVARCHAR}, 
+      #{dictExAttr4,jdbcType=NVARCHAR}, #{dictUserId,jdbcType=NVARCHAR}, #{dictUserName,jdbcType=NVARCHAR}, 
+      #{dictOrganId,jdbcType=NVARCHAR}, #{dictOrganName,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity">
+    insert into TB4D_DICTIONARY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dictId != null">
+        DICT_ID,
+      </if>
+      <if test="dictKey != null">
+        DICT_KEY,
+      </if>
+      <if test="dictValue != null">
+        DICT_VALUE,
+      </if>
+      <if test="dictText != null">
+        DICT_TEXT,
+      </if>
+      <if test="dictGroupName != null">
+        DICT_GROUP_NAME,
+      </if>
+      <if test="dictOrderNum != null">
+        DICT_ORDER_NUM,
+      </if>
+      <if test="dictCreateTime != null">
+        DICT_CREATE_TIME,
+      </if>
+      <if test="dictParentId != null">
+        DICT_PARENT_ID,
+      </if>
+      <if test="dictParentIdlist != null">
+        DICT_PARENT_IDLIST,
+      </if>
+      <if test="dictIssystem != null">
+        DICT_ISSYSTEM,
+      </if>
+      <if test="dictDelEnable != null">
+        DICT_DEL_ENABLE,
+      </if>
+      <if test="dictStatus != null">
+        DICT_STATUS,
+      </if>
+      <if test="dictIsSelected != null">
+        DICT_IS_SELECTED,
+      </if>
+      <if test="dictDesc != null">
+        DICT_DESC,
+      </if>
+      <if test="dictChildCount != null">
+        DICT_CHILD_COUNT,
+      </if>
+      <if test="dictExAttr1 != null">
+        DICT_EX_ATTR1,
+      </if>
+      <if test="dictExAttr2 != null">
+        DICT_EX_ATTR2,
+      </if>
+      <if test="dictExAttr3 != null">
+        DICT_EX_ATTR3,
+      </if>
+      <if test="dictExAttr4 != null">
+        DICT_EX_ATTR4,
+      </if>
+      <if test="dictUserId != null">
+        DICT_USER_ID,
+      </if>
+      <if test="dictUserName != null">
+        DICT_USER_NAME,
+      </if>
+      <if test="dictOrganId != null">
+        DICT_ORGAN_ID,
+      </if>
+      <if test="dictOrganName != null">
+        DICT_ORGAN_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dictId != null">
+        #{dictId,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictKey != null">
+        #{dictKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictValue != null">
+        #{dictValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictText != null">
+        #{dictText,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictGroupName != null">
+        #{dictGroupName,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictOrderNum != null">
+        #{dictOrderNum,jdbcType=BIGINT},
+      </if>
+      <if test="dictCreateTime != null">
+        #{dictCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dictParentId != null">
+        #{dictParentId,jdbcType=BIGINT},
+      </if>
+      <if test="dictParentIdlist != null">
+        #{dictParentIdlist,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictIssystem != null">
+        #{dictIssystem,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictDelEnable != null">
+        #{dictDelEnable,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictStatus != null">
+        #{dictStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictIsSelected != null">
+        #{dictIsSelected,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictDesc != null">
+        #{dictDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictChildCount != null">
+        #{dictChildCount,jdbcType=BIGINT},
+      </if>
+      <if test="dictExAttr1 != null">
+        #{dictExAttr1,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictExAttr2 != null">
+        #{dictExAttr2,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictExAttr3 != null">
+        #{dictExAttr3,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictExAttr4 != null">
+        #{dictExAttr4,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictUserId != null">
+        #{dictUserId,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictUserName != null">
+        #{dictUserName,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictOrganId != null">
+        #{dictOrganId,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictOrganName != null">
+        #{dictOrganName,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity">
+    update TB4D_DICTIONARY
+    <set>
+      <if test="dictKey != null">
+        DICT_KEY = #{dictKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictValue != null">
+        DICT_VALUE = #{dictValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictText != null">
+        DICT_TEXT = #{dictText,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictGroupName != null">
+        DICT_GROUP_NAME = #{dictGroupName,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictOrderNum != null">
+        DICT_ORDER_NUM = #{dictOrderNum,jdbcType=BIGINT},
+      </if>
+      <if test="dictCreateTime != null">
+        DICT_CREATE_TIME = #{dictCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dictParentId != null">
+        DICT_PARENT_ID = #{dictParentId,jdbcType=BIGINT},
+      </if>
+      <if test="dictParentIdlist != null">
+        DICT_PARENT_IDLIST = #{dictParentIdlist,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictIssystem != null">
+        DICT_ISSYSTEM = #{dictIssystem,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictDelEnable != null">
+        DICT_DEL_ENABLE = #{dictDelEnable,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictStatus != null">
+        DICT_STATUS = #{dictStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictIsSelected != null">
+        DICT_IS_SELECTED = #{dictIsSelected,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictDesc != null">
+        DICT_DESC = #{dictDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictChildCount != null">
+        DICT_CHILD_COUNT = #{dictChildCount,jdbcType=BIGINT},
+      </if>
+      <if test="dictExAttr1 != null">
+        DICT_EX_ATTR1 = #{dictExAttr1,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictExAttr2 != null">
+        DICT_EX_ATTR2 = #{dictExAttr2,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictExAttr3 != null">
+        DICT_EX_ATTR3 = #{dictExAttr3,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictExAttr4 != null">
+        DICT_EX_ATTR4 = #{dictExAttr4,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictUserId != null">
+        DICT_USER_ID = #{dictUserId,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictUserName != null">
+        DICT_USER_NAME = #{dictUserName,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictOrganId != null">
+        DICT_ORGAN_ID = #{dictOrganId,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictOrganName != null">
+        DICT_ORGAN_NAME = #{dictOrganName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where DICT_ID = #{dictId,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity">
+    update TB4D_DICTIONARY
+    set DICT_KEY = #{dictKey,jdbcType=NVARCHAR},
+      DICT_VALUE = #{dictValue,jdbcType=NVARCHAR},
+      DICT_TEXT = #{dictText,jdbcType=NVARCHAR},
+      DICT_GROUP_NAME = #{dictGroupName,jdbcType=NVARCHAR},
+      DICT_ORDER_NUM = #{dictOrderNum,jdbcType=BIGINT},
+      DICT_CREATE_TIME = #{dictCreateTime,jdbcType=TIMESTAMP},
+      DICT_PARENT_ID = #{dictParentId,jdbcType=BIGINT},
+      DICT_PARENT_IDLIST = #{dictParentIdlist,jdbcType=NVARCHAR},
+      DICT_ISSYSTEM = #{dictIssystem,jdbcType=NVARCHAR},
+      DICT_DEL_ENABLE = #{dictDelEnable,jdbcType=NVARCHAR},
+      DICT_STATUS = #{dictStatus,jdbcType=NVARCHAR},
+      DICT_IS_SELECTED = #{dictIsSelected,jdbcType=NVARCHAR},
+      DICT_DESC = #{dictDesc,jdbcType=NVARCHAR},
+      DICT_CHILD_COUNT = #{dictChildCount,jdbcType=BIGINT},
+      DICT_EX_ATTR1 = #{dictExAttr1,jdbcType=NVARCHAR},
+      DICT_EX_ATTR2 = #{dictExAttr2,jdbcType=NVARCHAR},
+      DICT_EX_ATTR3 = #{dictExAttr3,jdbcType=NVARCHAR},
+      DICT_EX_ATTR4 = #{dictExAttr4,jdbcType=NVARCHAR},
+      DICT_USER_ID = #{dictUserId,jdbcType=NVARCHAR},
+      DICT_USER_NAME = #{dictUserName,jdbcType=NVARCHAR},
+      DICT_ORGAN_ID = #{dictOrganId,jdbcType=NVARCHAR},
+      DICT_ORGAN_NAME = #{dictOrganName,jdbcType=NVARCHAR}
+    where DICT_ID = #{dictId,jdbcType=NVARCHAR}
+  </update>
+</mapper>
