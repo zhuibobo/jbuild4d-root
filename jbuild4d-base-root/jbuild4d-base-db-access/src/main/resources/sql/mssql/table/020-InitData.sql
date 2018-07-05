@@ -6,7 +6,7 @@ VALUES (0, 'Root', 'Root', 'Root', 'Group', '1', '1', '', '', 1, '0', '-1', '-1*
 
 INSERT INTO
   TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT, MENU_VALUE, MENU_TYPE, IS_EXPAND, IS_SYSTEM, LEFT_URL, RIGHT_URL, ORDER_NUM, ORGAN_ID, PARENT_ID, PARENT_ID_LIST, ICON_CLASS_NAME, CHILD_COUNT)
-VALUES (100000, '应用管理', '应用管理', '应用管理', 'GroupTopMenu', '1', '1', 'LeftMenu.do', '', 2, '0', '0', '-1*0*100000', 'frame-top-menu-data', 1)
+VALUES (100000, '应用管理', '应用管理', '应用管理', 'GroupTopMenu', '1', '1', 'LeftMenu.do', '', 50, '0', '0', '-1*0*100000', 'frame-top-menu-data', 1)
 
 INSERT INTO
   TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT, MENU_VALUE, MENU_TYPE, IS_EXPAND, IS_SYSTEM, LEFT_URL, RIGHT_URL, ORDER_NUM, ORGAN_ID, PARENT_ID, PARENT_ID_LIST, ICON_CLASS_NAME, CHILD_COUNT)
@@ -114,13 +114,13 @@ VALUES (102000, '应用管理测试菜单17', '应用管理测试菜单17', '应
 
 INSERT INTO
   TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT, MENU_VALUE, MENU_TYPE, IS_EXPAND, IS_SYSTEM, LEFT_URL, RIGHT_URL, ORDER_NUM, ORGAN_ID, PARENT_ID, PARENT_ID_LIST, ICON_CLASS_NAME, CHILD_COUNT)
-VALUES (200000, '系统设置', '系统设置', '系统设置', 'GroupTopMenu', '1', '1', 'LeftMenu.do', '', 50, '0', '0', '-1*0*200000', 'frame-top-menu-data', 1)
+VALUES (200000, '系统设置', '系统设置', '系统设置', 'GroupTopMenu', '1', '1', 'LeftMenu.do', '', 2, '0', '0', '-1*0*200000', 'frame-top-menu-data', 1)
 
 INSERT INTO
   TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT, MENU_VALUE, MENU_TYPE, IS_EXPAND, IS_SYSTEM, LEFT_URL, RIGHT_URL, ORDER_NUM, ORGAN_ID, PARENT_ID, PARENT_ID_LIST, ICON_CLASS_NAME, CHILD_COUNT)
-VALUES (200100, '系统设置测试菜单1', '系统设置测试菜单1', '系统设置测试菜单1', 'Group', '1', '1', '', '', 51, '0', '200000', '-1*0*200000*200100', '', 1)
+VALUES (200100, '数据字典', '数据字典', '数据字典', 'Group', '1', '1', '', '/', 51, '0', '200000', '-1*0*200000*200100', '', 1)
 
-INSERT INTO
+/*INSERT INTO
   TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT, MENU_VALUE, MENU_TYPE, IS_EXPAND, IS_SYSTEM, LEFT_URL, RIGHT_URL, ORDER_NUM, ORGAN_ID, PARENT_ID, PARENT_ID_LIST, ICON_CLASS_NAME, CHILD_COUNT)
 VALUES (200200, '系统设置测试菜单2', '系统设置测试菜单2', '系统设置测试菜单2', 'Group', '1', '1', '', '', 52, '0', '200000', '-1*0*200000*200200', '', 1)
 
@@ -155,7 +155,7 @@ VALUES (200432, '系统设置测试菜单4-3-2', '系统设置测试菜单4-3-2'
 INSERT INTO
   TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT, MENU_VALUE, MENU_TYPE, IS_EXPAND, IS_SYSTEM, LEFT_URL, RIGHT_URL, ORDER_NUM, ORGAN_ID, PARENT_ID, PARENT_ID_LIST, ICON_CLASS_NAME, CHILD_COUNT)
 VALUES (200433, '系统设置测试菜单4-3-3', '系统设置测试菜单4-3-3', '系统设置测试菜单4-3-3', 'Group', '1', '1', '', '', 58, '0', '200430', '-1*0*200000*200400*200430*200433', '', 1)
-
+*/
 INSERT INTO
   TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT, MENU_VALUE, MENU_TYPE, IS_EXPAND, IS_SYSTEM, LEFT_URL, RIGHT_URL, ORDER_NUM, ORGAN_ID, PARENT_ID, PARENT_ID_LIST, ICON_CLASS_NAME, CHILD_COUNT)
 VALUES (300000, '桌面管理', '桌面管理', '桌面管理', 'GroupTopMenu', '1', '1', 'LeftMenu.do', '', 100, '0', '0', '-1*0*300000', 'frame-top-menu-data', 1)
