@@ -204,6 +204,12 @@
                     $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
                 };
                 this.buildBreadcrumbByMenuId(item.menuId);
+                debugger;
+                if(item.rightUrl!=""&&item.rightUrl!=null){
+                    this.contentIframeUrl=item.rightUrl;
+                }else{
+                    this.contentIframeUrl=this.defaultContentIframeUrl;
+                }
             },
             setFrameHeight:function(){
                 //调整掉一些补白的值
