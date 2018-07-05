@@ -10,13 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JsonUtility {
-    public String toObjectString(Object vo) throws JsonProcessingException {
+    public static String toObjectString(Object vo) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString=objectMapper.writeValueAsString(vo);
         return jsonString;
     }
 
-    public <T> T toObject(String str,Class<T> _class) throws IOException {
+    public static <T> T toObject(String str,Class<T> _class) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(str,_class);
     }

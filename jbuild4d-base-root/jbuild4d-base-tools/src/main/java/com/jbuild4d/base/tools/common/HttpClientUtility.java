@@ -27,9 +27,9 @@ import java.util.Map;
 
 public class HttpClientUtility {
 
-    private Logger log = Logger.getLogger(HttpClientUtility.class);
+    private static Logger log = Logger.getLogger(HttpClientUtility.class);
 
-    public Map<String, String> valueUrlDecode(Map<String, String> source) throws UnsupportedEncodingException {
+    public static Map<String, String> valueUrlDecode(Map<String, String> source) throws UnsupportedEncodingException {
         for (Map.Entry<String, String> entry : source.entrySet()) {
             if (!entry.getValue().equals("")) {
                 entry.setValue(URLDecoder.decode(entry.getValue(), "utf-8"));
@@ -38,7 +38,7 @@ public class HttpClientUtility {
         return source;
     }
 
-    public String getResponseText(CloseableHttpResponse response) throws IOException {
+    public static String getResponseText(CloseableHttpResponse response) throws IOException {
         String ServerResponeString = "";
         HttpEntity entity = response.getEntity();
         //log.info("-------------------getResponseText:begin-------------------");
@@ -51,11 +51,11 @@ public class HttpClientUtility {
             ServerResponeString = EntityUtils.toString(entity);
             //log.info("Response content: " + ServerResponeString);
         }
-       // log.info("----------------getResponseText:end--------------------");
+        // log.info("----------------getResponseText:end--------------------");
         return ServerResponeString;
     }
 
-    public String getHttpPostResult(String url, Map<String, String> senddata, boolean encode) {
+    public static String getHttpPostResult(String url, Map<String, String> senddata, boolean encode) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String ServerResponeString = "";
         try {
@@ -102,11 +102,11 @@ public class HttpClientUtility {
         return ServerResponeString;
     }
 
-    public String getHttpPostResult(String url, Map<String, String> senddata) {
+    public static String getHttpPostResult(String url, Map<String, String> senddata) {
         return getHttpPostResult(url, senddata, false);
     }
 
-    public String getHttpPostJsonResult(String url,String json) {
+    public static String getHttpPostJsonResult(String url,String json) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String ServerResponeString = "";
         try {
@@ -155,11 +155,11 @@ public class HttpClientUtility {
         return ServerResponeString;
     }
 
-    public String getHttpGetResult(String url) {
+    public static String getHttpGetResult(String url) {
         return getHttpGetResult(url, 3);
     }
 
-    public byte[] getPicByteArray(String picUrl) throws ClientProtocolException, IOException {
+    public static byte[] getPicByteArray(String picUrl) throws ClientProtocolException, IOException {
 
         RequestConfig defaultRequestConfig = RequestConfig.custom()
                 .setSocketTimeout(5000)
@@ -180,7 +180,7 @@ public class HttpClientUtility {
         }
     }
 
-    public String getHttpGetResult(String url, int retryTime) {
+    public static String getHttpGetResult(String url, int retryTime) {
         RequestConfig defaultRequestConfig = RequestConfig.custom()
                 .setSocketTimeout(5000)
                 .setConnectTimeout(5000)

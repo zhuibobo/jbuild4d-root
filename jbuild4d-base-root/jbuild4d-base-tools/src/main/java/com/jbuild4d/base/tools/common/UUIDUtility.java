@@ -9,13 +9,17 @@ public class UUIDUtility {
      *
      * @return
      */
-    public String getUUID(){
+    public static String getUUID(){
         return  UUID.randomUUID().toString();
     }
 
-    public String getUUIDNotSplit(){
+    public static String getUUIDNotSplit(){
         String uuid=getUUID();
         return uuid.replaceAll("-","");
+    }
+
+    public static String getFullTimeStr(){
+        return DateUtility.getDate_yyyyMMddHHmmssSSS();
     }
 }
 
