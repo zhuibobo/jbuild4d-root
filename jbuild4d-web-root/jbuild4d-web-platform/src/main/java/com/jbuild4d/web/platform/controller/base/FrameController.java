@@ -36,4 +36,10 @@ public class FrameController {
         ModelAndView modelAndView=new ModelAndView("LeftMenu");
         return modelAndView;
     }
+
+    @RequestMapping(value = "RightContent", method = RequestMethod.GET)
+    public ModelAndView rightContent() throws JsonProcessingException {
+        ModelAndView modelAndView=new ModelAndView("RightContent");
+        return modelAndView;
+    }
 }

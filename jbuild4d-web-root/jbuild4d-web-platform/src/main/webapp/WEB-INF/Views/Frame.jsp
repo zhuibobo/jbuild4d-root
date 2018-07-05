@@ -30,10 +30,10 @@
                                 {{item.menuText}}
                             </div>
                         </div>
-                        <div class="frame-top-menu-op-c">
-                            <div class="right" @click="nextTopMenu()"></div>
-                            <div class="left" @click="prevTopMenu()"></div>
-                        </div>
+                    </div>
+                    <div class="frame-top-menu-op-c">
+                        <div class="right" @click="nextTopMenu()"></div>
+                        <div class="left" @click="prevTopMenu()"></div>
                     </div>
                     <div class="frame-top-right-wrap">
                         <div class="frame-user-warp">
@@ -51,7 +51,7 @@
             </i-header>
             <layout>
                 <sider hide-trigger :style="sider_style" width="300">
-                    <iframe id="leftMenuIframe" src="${ctxpath}/PlatForm/Base/LeftMenu.do" frameborder="0" style="width: 100%;height: 99%"></iframe>
+                    <iframe id="leftMenuIframe" :src="leftIframeUrl" frameborder="0" style="width: 100%;height: 99%" ></iframe>
                 </sider>
                 <layout :style="{padding: '0 24px 24px'}">
                     <breadcrumb :style="{margin: '24px 0'}">
@@ -84,7 +84,8 @@
             leftMenuArrayJson:menuJson.items[0].items,
             /*breadcrumbArrayJson:[menuJson.items[0],menuJson.items[0].items[0]],*/
             frameHeight: 0,
-            contentIframeUrl:"",
+            contentIframeUrl:"${ctxpath}/PlatForm/Base/RightContent.do",
+            leftIframeUrl:"${ctxpath}/PlatForm/Base/LeftMenu.do",
             userInfo:${currUserEntity}
         },
         mounted:function(){
@@ -183,6 +184,7 @@
             topMenuClick:function (item,reSetLeftMenu) {
                 this.unSelectedAllTopMenu();
                 item.selected=true;
+                this.leftMenuArrayJson=item.items;
                 if(reSetLeftMenu) {
                     $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
                 }

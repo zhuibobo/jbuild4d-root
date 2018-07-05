@@ -7,7 +7,7 @@
     background: #f5f7f9;
     position: relative;
     border-radius: 4px;
-    overflow:auto;
+    overflow:hidden;
 }
 
 .frame-layout-header-wrap{
@@ -48,11 +48,11 @@
     /*background: #0f9087;*/
     height: 50px;
     left: 340px;
-    right: 300px;
+    right: 340px;
     position: absolute;
     top: 4px;
     overflow: hidden;
-    padding-right: 30px;
+    padding-right: 10px;
 }
 .frame-top-menu-item-inner-warp{
     position: absolute;
@@ -93,7 +93,8 @@
     /*background-color: #416db8;*/
     height: 100%;
     position: absolute;
-    right: 0px;
+    right: 300px;
+    top: 5px;
     width: 30px;
     z-index: 20;
 }
