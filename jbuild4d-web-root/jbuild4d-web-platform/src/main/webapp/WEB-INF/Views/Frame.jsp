@@ -204,7 +204,7 @@
                     $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
                 };
                 this.buildBreadcrumbByMenuId(item.menuId);
-                debugger;
+                //debugger;
                 if(item.rightUrl!=""&&item.rightUrl!=null){
                     this.contentIframeUrl=item.rightUrl;
                 }else{
@@ -219,6 +219,9 @@
             },
             setBreadcrumbArrayJson:function (jsonArray) {
                 this.breadcrumbArrayJson=jsonArray;
+            },
+            setContentIframeUrl:function (url) {
+                this.contentIframeUrl=BaseUtility.GetRootPath()+url;
             }
         },
         computed:{

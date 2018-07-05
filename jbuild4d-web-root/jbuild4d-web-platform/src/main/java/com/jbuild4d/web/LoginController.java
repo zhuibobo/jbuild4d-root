@@ -25,9 +25,6 @@ public class LoginController {
     @Autowired
     IMenuService menuService;
 
-    @Autowired
-    JsonUtility jsonUtility;
-
     @RequestMapping(value = "/Login", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request) {
         System.out.println("Home Controller Call");
@@ -47,7 +44,7 @@ public class LoginController {
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
 
         List<MenuEntity> entityList=menuService.getALL();
-        System.out.println(jsonUtility.toObjectString(entityList));
+        System.out.println(JsonUtility.toObjectString(entityList));
 
         return JBuild4DResponseVo.opSuccess();
     }

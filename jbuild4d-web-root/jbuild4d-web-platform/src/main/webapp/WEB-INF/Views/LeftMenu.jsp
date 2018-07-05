@@ -74,10 +74,11 @@
         var app=new Vue({
             el:"#app",
             data:{
-                leftMenuArrayJson:[]
+                leftMenuArrayJson:[],
+                parentApp:window.parent.app
             },
             mounted:function(){
-                this.leftMenuArrayJson=window.parent.app.leftMenuArrayJson;
+                this.leftMenuArrayJson=this.parentApp.leftMenuArrayJson;
             },
             methods:{
                 LeftMenuItemClass:function (item) {
@@ -89,8 +90,9 @@
                 leftMenuClick:function (menuId) {
                     var menuItem=window.parent.app.getMenu(menuId);
                     if(menuItem){
-                        window.parent.app.buildBreadcrumbByMenuId(menuId);
+                        this.parentApp.buildBreadcrumbByMenuId(menuId);
                     }
+                    this.parentApp.setContentIframeUrl(menuItem.rightUrl);
                     //alert(menuId);
                     /*this.buildBreadcrumbArrayJson(name);
                     var menu=this.getMenu(name);
