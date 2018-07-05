@@ -15,6 +15,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
     <style>
+
         body {
             SCROLLBAR-FACE-COLOR: #e8e7e7;
             SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
@@ -39,6 +40,7 @@
             border-radius: 5px;
             background: rgb(171, 175, 186);
         }
+
     </style>
 </head>
 <body style="height: 100%">
