@@ -54,8 +54,8 @@
                     <iframe id="leftMenuIframe" :src="leftIframeUrl" frameborder="0" style="width: 100%;height: 99%" ></iframe>
                 </sider>
                 <layout :style="{padding: '0 24px 24px'}">
-                    <breadcrumb :style="{margin: '24px 0'}">
-                        <%--<breadcrumb-item v-for="(item,key) in breadcrumbArrayJson">{{item.text}}</breadcrumb-item>--%>
+                    <breadcrumb :style="{margin: '10px 0'}">
+                        <breadcrumb-item v-for="(item,key) in breadcrumbArrayJson">{{item.text}}</breadcrumb-item>
                     </breadcrumb>
                     <i-content :style="{padding: '24px', minHeight: '480px', background: '#fff'}">
                         <iframe name="iframe" :src="contentIframeUrl" width="100%" :height="frameHeight" frameborder="0"></iframe>
@@ -67,25 +67,30 @@
 </div>
 <script>
     var IsTopWorkaroundPage = true;
-    var menuJson=${menuJson};
+    var menuJsonSource=[];
+    menuJsonSource=${menuJson};
     //增加selected属性，用于选中状态控制。
-    for(var i=0;i<menuJson.length;i++){
-        menuJson[i].selected=false;
+    for(var i=0;i<menuJsonSource.length;i++){
+        menuJsonSource[i].selected=false;
     }
     var menuJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
         KeyField: "menuId",
         RelationField: "parentId",
         ChildFieldName: "items"
-    },menuJson,"0");
+    },menuJsonSource,"0");
     console.log(menuJson.items);
     var app=new Vue({
         data:{
+            menuJson:menuJson,
+            menuJsonSource:menuJsonSource,
             topMenuArrayJson:menuJson.items,
             leftMenuArrayJson:menuJson.items[0].items,
-            /*breadcrumbArrayJson:[menuJson.items[0],menuJson.items[0].items[0]],*/
+            breadcrumbArrayJson:[{text:"JBuild4D"}],
             frameHeight: 0,
             contentIframeUrl:"${ctxpath}/PlatForm/Base/RightContent.do",
             leftIframeUrl:"${ctxpath}/PlatForm/Base/LeftMenu.do",
+            defaultLeftIframeUrl:"${ctxpath}/PlatForm/Base/LeftMenu.do",
+            defaultContentIframeUrl:"${ctxpath}/PlatForm/Base/RightContent.do",
             userInfo:${currUserEntity}
         },
         mounted:function(){
@@ -161,25 +166,35 @@
                     }, 1000);
                 }
             },
-            getMenu:function (name) {
-                for(var i=0;i<this.l1MenuArrayJson.length;i++){
-                    if(this.l1MenuArrayJson[i].name==name){
-                        return this.l1MenuArrayJson[i];
+            getMenu:function (menuId) {
+                for(var i=0;i<this.menuJsonSource.length;i++){
+                    if(this.menuJsonSource[i].menuId==menuId){
+                        return this.menuJsonSource[i];
                     }
                 }
                 return null;
             },
-            buildBreadcrumbArrayJson:function (name) {
-                this.breadcrumbArrayJson=new Array();
-                var lastMenu=this.getMenu(name);
+            buildBreadcrumbByMenuId:function (menuId) {
+                var lastMenu=this.getMenu(menuId);
+                var breadcrumbArrayJson=new Array();
+                //debugger;
                 if(lastMenu!=null){
-                    this.breadcrumbArrayJson.push(lastMenu);
-                    if(lastMenu.parentName!="0"){
-                        var lastMenuL1=this.getMenu(lastMenu.parentName);
-                        this.breadcrumbArrayJson.push(lastMenuL1);
+                    breadcrumbArrayJson.push({text:lastMenu.menuText});
+                    if(lastMenu.parentId!="0"){
+                        var lastMenuL1=this.getMenu(lastMenu.parentId);
+                        breadcrumbArrayJson.push({text:lastMenuL1.menuText});
+                        if(lastMenuL1.parentId!="0"){
+                            lastMenuL1=this.getMenu(lastMenuL1.parentId);
+                            breadcrumbArrayJson.push({text:lastMenuL1.menuText});
+                            if(lastMenuL1.parentId!="0"){
+                                lastMenuL1=this.getMenu(lastMenuL1.parentId);
+                                breadcrumbArrayJson.push({text:lastMenuL1.menuText});
+                            }
+                        }
                     }
                 }
-                this.breadcrumbArrayJson.reverse();
+                breadcrumbArrayJson=breadcrumbArrayJson.reverse();
+                this.setBreadcrumbArrayJson(breadcrumbArrayJson);
             },
             topMenuClick:function (item,reSetLeftMenu) {
                 this.unSelectedAllTopMenu();
@@ -187,19 +202,17 @@
                 this.leftMenuArrayJson=item.items;
                 if(reSetLeftMenu) {
                     $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
-                }
-            },
-            leftMenuClick:function (name) {
-                this.buildBreadcrumbArrayJson(name);
-                var menu=this.getMenu(name);
-                var url=BaseUtility.ReplaceUrlVariable(menu.url);
-                this.contentIframeUrl=url;
+                };
+                this.buildBreadcrumbByMenuId(item.menuId);
             },
             setFrameHeight:function(){
                 //调整掉一些补白的值
                 //debugger;
                 this.mainHeight = PageStyleUtility.GetWindowHeigth()-90-90;
                 this.frameHeight = this.mainHeight-30;
+            },
+            setBreadcrumbArrayJson:function (jsonArray) {
+                this.breadcrumbArrayJson=jsonArray;
             }
         },
         computed:{
