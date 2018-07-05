@@ -28,6 +28,7 @@ public class DictionaryController extends BaseController {
         return modelAndView;
     }
 
+    @Override
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListData(){

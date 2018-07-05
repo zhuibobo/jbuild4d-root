@@ -1,5 +1,6 @@
 package com.jbuild4d.web.platform.controller.base;
 
+import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -11,5 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public abstract class BaseController {
 
     public abstract ModelAndView list();
+
+    public abstract JBuild4DResponseVo getListData();
 
 }
