@@ -35,4 +35,6 @@ public class DictionaryController extends BaseController {
         //List<ProDictionaryEntity> proOrganPageInfo=proDictionaryService.getALL();
         return JBuild4DResponseVo.success("获取成功",null);
     }
+
+
 }

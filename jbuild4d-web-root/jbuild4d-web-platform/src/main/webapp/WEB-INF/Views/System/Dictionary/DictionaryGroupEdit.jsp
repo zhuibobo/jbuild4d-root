@@ -13,45 +13,19 @@
     <%@ include file="/WEB-INF/Views/TagLibs/GeneralLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/IViewLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
+    <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
 <div id="app" class="general-edit-page-wrap">
     <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
-        <form-item label="字典-值：" prop="dictValue">
-            <i-input v-model="formValidate.dictValue"></i-input>
+        <form-item label="分 组 值：" prop="dictGroupValue">
+            <i-input v-model="formValidate.dictGroupValue"></i-input>
         </form-item>
-        <form-item label="字典-字：" prop="dictText">
-            <i-input v-model="formValidate.dictText"></i-input>
-        </form-item>
-        <form-item label="父节点：" prop="dictParentId">
-            <i-input v-model="formValidate.dictParentId"></i-input>
-        </form-item>
-        <form-item label="状态：">
-            <radio-group v-model="formValidate.dictStatus">
-                <radio label="1">启动</radio>
-                <radio label="2">禁用</radio>
-            </radio-group>
+        <form-item label="分组名称：" prop="dictGroupText">
+            <i-input v-model="formValidate.dictGroupText"></i-input>
         </form-item>
         <form-item label="创建时间：">
-            <row>
-                <i-col span="10">
-                    <form-item prop="date">
-                        <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.dictCreateTime"></date-picker>
-                    </form-item>
-                </i-col>
-                <i-col span="4" style="text-align: center">默认选中：</i-col>
-                <i-col span="10">
-                    <form-item>
-                        <radio-group v-model="formValidate.dictIsSelected">
-                            <radio label="1">是</radio>
-                            <radio label="0">否</radio>
-                        </radio-group>
-                    </form-item>
-                </i-col>
-            </row>
-        </form-item>
-        <form-item label="备注：" prop="desc">
-            <i-input v-model="formValidate.dictDesc" type="textarea" :autosize="{minRows: 7,maxRows: 7}"></i-input>
+            <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.dictGroupCreateTime" disabled readonly></date-picker>
         </form-item>
         <form-item class="general-edit-page-bottom-wrap">
             <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保  存 </i-button>
@@ -59,26 +33,23 @@
         </form-item>
     </i-form>
 </div>
+
 <script>
     var Main = {
         data:function () {
             return {
                 formValidate: {
-                    dictSid: '${sId}',
-                    dictValue: '${entity.dictValue}',
-                    dictText: '${entity.dictText}',
-                    dictParentId: '${entity.dictParentId}'==""?'${dictParentId}':'${entity.dictParentId}',
-                    dictDesc: '${entity.dictDesc}',
-                    dictStatus: '${entity.dictStatus}'==''?'1':'${entity.dictStatus}',
-                    dictIsSelected:'${entity.dictIsSelected}'==''?'0':'${entity.dictIsSelected}',
-                    dictCreateTime:'${entity.dictCreateTime}'==''?B4D.DateUtility.GetCurrentDataString("-"):'${entity.dictCreateTime}'
+                    dictGroupId: '${recordId}',
+                    dictGroupValue: '${entity.dictGroupValue}',
+                    dictGroupText: '${entity.dictGroupText}',
+                    dictGroupCreateTime:'<fmt:formatDate value="${entity.dictGroupCreateTime}" pattern="yyyy-MM-dd" />'==''?JB4D.DateUtility.GetCurrentDataString("-"):'<fmt:formatDate value="${entity.dictGroupCreateTime}" pattern="yyyy-MM-dd" />'
                 },
                 ruleValidate: {
-                    dictValue: [
-                        { required: true, message: '【字典-值】不能空！', trigger: 'blur' }
+                    dictGroupValue: [
+                        { required: true, message: '【分组值】不能空！', trigger: 'blur' }
                     ],
-                    dictText: [
-                        { required: true, message: '【字典-字】不能空！', trigger: 'blur' }
+                    dictGroupText: [
+                        { required: true, message: '【分组名称】不能空！', trigger: 'blur' }
                     ]
                 },
                 status:'${op}'
@@ -91,7 +62,7 @@
                     if (valid) {
                         var sendData=JSON.stringify(_self.formValidate);
                         //debugger;
-                        var url='/project/system/dictionary/saveedit.do';
+                        var url='/PlatForm/System/DictionaryGroup/SaveEdit.do';
                         AjaxUtility.PostRequestBody(url,sendData,function (result) {
                             DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},result.message,function () {
                                 //debugger;

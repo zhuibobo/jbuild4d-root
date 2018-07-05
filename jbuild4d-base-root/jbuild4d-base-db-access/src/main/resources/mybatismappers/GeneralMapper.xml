@@ -7,4 +7,7 @@
     <select id="executeSqlMap" resultType="map">
         ${sql}
     </select>
+    <select id="nextOrderNum" resultType="long">
+        select case when max(${OrderFieldName}) is null then 1 else max(${OrderFieldName})+1 end ORDERNUM from ${TableName}
+    </select>
 </mapper>

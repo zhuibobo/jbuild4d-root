@@ -1,11 +1,20 @@
 package com.jbuild4d.web.platform.controller.system.dictionary;
 
+import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
+import com.jbuild4d.base.tools.common.StringUtility;
+import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import com.jbuild4d.web.platform.controller.base.BaseController;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,6 +26,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/PlatForm/System/DictionaryGroup")
 public class DictionaryGroupController extends BaseController {
 
+    @Autowired
+    IDictionaryGroupService dictionaryGroupService;
+
     @Override
     @RequestMapping(value = "List", method = RequestMethod.GET)
     public ModelAndView list() {
@@ -27,5 +39,30 @@ public class DictionaryGroupController extends BaseController {
     @Override
     public JBuild4DResponseVo getListData() {
         return null;
+    }
+
+    @RequestMapping(value = "Detail", method = RequestMethod.GET)
+    public ModelAndView detail(String recordId,String op) {
+        ModelAndView modelAndView=new ModelAndView("System/Dictionary/DictionaryGroupEdit");
+
+        DictionaryGroupEntity entity=null;
+        if(StringUtility.isEmpty(recordId)) {
+            entity=new DictionaryGroupEntity();
+            modelAndView.addObject("recordId", UUIDUtility.getUUID());
+        }
+        else {
+            entity=dictionaryGroupService.getByPrimaryKey(recordId);
+            modelAndView.addObject("recordId", recordId);
+        }
+        modelAndView.addObject("entity",entity);
+        modelAndView.addObject("op",op);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "SaveEdit", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo saveEdit(@RequestBody DictionaryGroupEntity dictionaryEntity) {
+        dictionaryGroupService.saveBySelective(dictionaryEntity.getDictGroupId(), dictionaryEntity);
+        return JBuild4DResponseVo.saveSuccess();
     }
 }

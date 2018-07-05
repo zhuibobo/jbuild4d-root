@@ -93,16 +93,6 @@ public class BaseService<T> implements IBaseService<T> {
     }
 
     @Override
-    public int save(int id,T record){
-        if(getByPrimaryKey(id)==null){
-            return add(record);
-        }
-        else{
-            return updateByKey(record);
-        }
-    }
-
-    @Override
     public int save(String id,T record){
         if(getByPrimaryKey(id)==null){
             return add(record);
@@ -113,30 +103,8 @@ public class BaseService<T> implements IBaseService<T> {
     }
 
     @Override
-    public int saveBySelective(int id,T record){
-        if(getByPrimaryKey(id)==null){
-            return addSelective(record);
-        }
-        else{
-
-            return updateByKeySelective(record);
-        }
-    }
-
-    @Override
     public int saveBySelective(String id,T record){
         if(getByPrimaryKey(id)==null){
-            return addSelective(record);
-        }
-        else{
-            return updateByKeySelective(record);
-        }
-    }
-
-    @Override
-    public int saveBySelective(int id, T record, IAddBefore<T> addBefore) {
-        if(getByPrimaryKey(id)==null){
-            record=addBefore.run(record);
             return addSelective(record);
         }
         else{

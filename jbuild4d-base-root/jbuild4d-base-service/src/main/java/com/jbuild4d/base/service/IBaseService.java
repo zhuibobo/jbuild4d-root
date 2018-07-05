@@ -42,15 +42,9 @@ public interface IBaseService<T> {
 
     int updateByKey(T record);
 
-    int save(int id, T record);
-
     int save(String id, T record);
 
-    int saveBySelective(int id, T record);
-
     int saveBySelective(String id, T record);
-
-    int saveBySelective(int id, T record,IAddBefore<T> addBefore);
 
     int saveBySelective(String id, T record,IAddBefore<T> addBefore);
 
