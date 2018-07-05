@@ -8,11 +8,11 @@ import com.jbuild4d.base.service.impl.BaseService;
 import com.jbuild4d.platform.system.service.IMenuService;
 import org.mybatis.spring.SqlSessionTemplate;
 
-public class MenuService extends BaseService<MenuEntity> implements IMenuService {
+public class MenuServiceImpl extends BaseService<MenuEntity> implements IMenuService {
 
     MenuMapper menuMapper;
 
-    public MenuService(MenuMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, GeneralMapper _generalMapper) {
+    public MenuServiceImpl(MenuMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, GeneralMapper _generalMapper) {
         super(_defaultBaseMapper, _sqlSessionTemplate, _generalMapper);
         menuMapper=_defaultBaseMapper;
     }
