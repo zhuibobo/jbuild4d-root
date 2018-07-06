@@ -82,12 +82,12 @@
     color: #eca19a;
 }
 
-.frame-top-menu-data{ background-image:url(Images/TopMenu-Data.png);}
-.frame-top-menu-affairs{ background-image:url(Images/TopMenu-Affairs.png);}
-.frame-top-menu-assistance{ background-image:url(Images/TopMenu-Assistance.png);}
-.frame-top-menu-biangeng{ background-image:url(Images/TopMenu-Biangeng.png);}
-.frame-top-menu-bidui{ background-image:url(Images/TopMenu-Bidui.png);}
-.frame-top-menu-calendar{ background-image:url(Images/TopMenu-Calendar.png);}
+.frame-top-menu-data{ background-image:url(Images/TopMenu/TopMenu-Data.png);}
+.frame-top-menu-affairs{ background-image:url(Images/TopMenu/TopMenu-Affairs.png);}
+.frame-top-menu-assistance{ background-image:url(Images/TopMenu/TopMenu-Assistance.png);}
+.frame-top-menu-biangeng{ background-image:url(Images/TopMenu/TopMenu-Biangeng.png);}
+.frame-top-menu-bidui{ background-image:url(Images/TopMenu/TopMenu-Bidui.png);}
+.frame-top-menu-calendar{ background-image:url(Images/TopMenu/TopMenu-Calendar.png);}
 
 .frame-top-menu-op-c {
     /*background-color: #416db8;*/
@@ -131,7 +131,7 @@
     cursor: pointer;
 }
 .frame-left-menu-affairs{
-    background-image:url(Images/LeftMenu-Affairs.png);
+    background-image:url(Images/LeftMenu/LeftMenu-Affairs.png);
 }
 
 .frame-top-right-wrap{
