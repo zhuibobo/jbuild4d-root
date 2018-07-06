@@ -31,7 +31,7 @@ public class DictionaryController extends BaseController {
     @Override
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo getListData(){
+    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition){
         //List<ProDictionaryEntity> proOrganPageInfo=proDictionaryService.getALL();
         return JBuild4DResponseVo.success("获取成功",null);
     }

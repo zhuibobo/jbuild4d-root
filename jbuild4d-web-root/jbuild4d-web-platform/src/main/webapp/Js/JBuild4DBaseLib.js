@@ -1276,7 +1276,7 @@ var ListPageUtility={
     IViewTableRenderer:{
         ToDateYYYY_MM_DD:function (h,datetime) {
             var date=new Date(datetime);
-            var dateStr=B4D.DateUtility.Format(date,'yyyy-MM-dd');
+            var dateStr=JB4D.DateUtility.Format(date,'yyyy-MM-dd');
             return h('div',dateStr);
         },
         ToStatusEnable:function (h,status) {

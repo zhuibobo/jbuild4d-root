@@ -24,9 +24,9 @@
         </div>
         <div style="clear: both"></div>
     </div>
-    <i-table :height="list_height" stripe border :columns="columns_config" :data="table_data" :style="{marginTop:'10px',marginBottom:'10px'}" :highlight-row="true" @on-current-change="currentSelectedSingleRow"></i-table>
+    <i-table :height="listHeight" stripe border :columns="columnsConfig" :data="tableData" :style="{marginTop:'10px',marginBottom:'10px'}" :highlight-row="true" @on-current-change="currentSelectedSingleRow"></i-table>
     <div style="float: right;">
-        <page @on-change="changePage" :current.sync="page_num" :page-size="page_size" show-total  :total="page_total"></page>
+        <page @on-change="changePage" :current.sync="pageNum" :page-size="pageSize" show-total  :total="pageTotal"></page>
     </div>
 </div>
 <script>
@@ -36,7 +36,7 @@
             this.reloadData();
         },
         data:{
-            columns_config: [
+            columnsConfig: [
                 {
                     title: '分组名称',
                     key: 'dictGroupText'
@@ -76,50 +76,32 @@
                     }
                 }
             ],
-            table_data: [],
-            current_selected_row:null,
-            page_total:0,
-            page_size:5,
-            page_num:1,
-            list_height:JB4D.ListPageUtility.GetGeneralPageHeight(JB4D.ListPageUtility.GetFixHeightNotSearch())
+            tableData: [],
+            currentSelectedRow:null,
+            pageTotal:0,
+            pageSize:10,
+            pageNum:1,
+            listHeight:JB4D.ListPageUtility.GetGeneralPageHeight(JB4D.ListPageUtility.GetFixHeightNotSearch())
         },
         methods:{
             currentSelectedSingleRow:function (currentRow,oldCurrentRow) {
                 this.current_selected_row=currentRow;
             },
             reloadData:function () {
-                var url='/project/system/role/listdata.do';
+                var url='/PlatForm/System/DictionaryGroup/GetListData.do';
                 var _self=this;
                 //debugger;
                 var senddata={
-                    page_num:_self.page_num,
-                    page_size:_self.page_size
+                    pageNum:_self.pageNum,
+                    pageSize:_self.pageSize
                 }
                 AjaxUtility.Post(url, senddata , function (result) {
                     if (result.success) {
-                        _self.table_data = new Array();
-                        _self.table_data = result.data.list;
-                        _self.page_total = result.data.total;
+                        _self.tableData = new Array();
+                        _self.tableData = result.data.list;
+                        _self.pageTotal = result.data.total;
                     }
                 },"json");
-            },
-            makingSureId:function (id) {
-                //debugger;
-                if(!id&&this.current_selected_row!=null) {
-                    id = this.current_selected_row.roleSid
-                }
-                if(!id) {
-                    B4D.DialogUtility.Alert(window, B4D.DialogUtility.DialogAlertId, {}, "请选中需要操作的行!", null);
-                    return {
-                        then:function (func) {
-                        }
-                    }
-                }
-                return {
-                    then:function (func) {
-                        func(id);
-                    }
-                }
             },
             add:function () {
                 var url=BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add");

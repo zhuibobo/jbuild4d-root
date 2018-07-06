@@ -1,6 +1,8 @@
 package com.jbuild4d.web.platform.controller.base;
 
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -13,6 +15,5 @@ public abstract class BaseController {
 
     public abstract ModelAndView list();
 
-    public abstract JBuild4DResponseVo getListData();
-
+    public abstract JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition);
 }

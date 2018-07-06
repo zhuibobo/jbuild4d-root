@@ -1,5 +1,6 @@
 package com.jbuild4d.web.platform.controller.system.dictionary;
 
+import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
@@ -37,8 +38,11 @@ public class DictionaryGroupController extends BaseController {
     }
 
     @Override
-    public JBuild4DResponseVo getListData() {
-        return null;
+    @RequestMapping(value = "GetListData", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition) {
+        PageInfo<DictionaryGroupEntity> proOrganPageInfo=dictionaryGroupService.getPage(pageNum,pageSize);
+        return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
     }
 
     @RequestMapping(value = "Detail", method = RequestMethod.GET)
