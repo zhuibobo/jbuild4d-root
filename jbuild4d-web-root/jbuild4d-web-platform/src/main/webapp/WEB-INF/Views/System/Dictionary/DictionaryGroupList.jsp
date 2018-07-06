@@ -127,19 +127,6 @@
             reloadData: function () {
                 var url = '/PlatForm/System/DictionaryGroup/GetListData.do';
                 JB4D.ListPageUtility.IViewTableLoadDataNoSearch(url,this.pageNum,this.pageSize,this);
-                /*var _self = this;
-                AjaxUtility.Post(url,
-                    {
-                        pageNum: _self.pageNum,
-                        pageSize: _self.pageSize
-                    },
-                    function (result) {
-                        if (result.success) {
-                            _self.tableData = new Array();
-                            _self.tableData = result.data.list;
-                            _self.pageTotal = result.data.total;
-                        }
-                    }, "json");*/
             },
             add: function () {
                 var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add");
