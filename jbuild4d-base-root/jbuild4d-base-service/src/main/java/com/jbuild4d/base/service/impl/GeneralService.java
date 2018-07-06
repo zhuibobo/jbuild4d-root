@@ -2,6 +2,8 @@ package com.jbuild4d.base.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
 import com.jbuild4d.base.service.IGeneralService;
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.tools.common.SQLKeyWordUtility;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.Map;
 public class GeneralService implements IGeneralService {
 
     GeneralMapper generalMapper;
-    protected SqlSessionTemplate sqlSessionTemplate = null;
+    protected SqlSessionTemplate sqlSessionTemplate;
 
     public GeneralService(GeneralMapper _generalMapper,SqlSessionTemplate _sqlSessionTemplate){
         generalMapper=_generalMapper;
@@ -34,12 +36,33 @@ public class GeneralService implements IGeneralService {
     }
 
     @Override
-    public Long nextOrderNum(String tableName, String orderFieldName) {
-        return generalMapper.nextOrderNum(tableName,orderFieldName);
+    public Long nextOrderNum(String tableName, String orderFieldName) throws JBuild4DGenerallyException {
+        if (SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(tableName)) {
+            if (SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(orderFieldName)) {
+                return generalMapper.nextOrderNum(tableName, orderFieldName);
+            } else {
+                throw new JBuild4DGenerallyException("存在SQL关键字:" + orderFieldName);
+            }
+        } else {
+            throw new JBuild4DGenerallyException("存在SQL关键字:" + tableName);
+        }
     }
 
     @Override
-    public void changeStatus(String tableName, String fieldName, String status) {
-
+    public void changeStatus(String tableName, String fieldName, String status) throws JBuild4DGenerallyException {
+        if (SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(tableName)) {
+            if (SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(fieldName)) {
+                if (SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(fieldName)) {
+                    generalMapper.changeStatus(tableName,fieldName,status);
+                }
+                else {
+                    throw new JBuild4DGenerallyException("存在SQL关键字:" + status);
+                }
+            } else {
+                throw new JBuild4DGenerallyException("存在SQL关键字:" + fieldName);
+            }
+        } else {
+            throw new JBuild4DGenerallyException("存在SQL关键字:" + tableName);
+        }
     }
 }

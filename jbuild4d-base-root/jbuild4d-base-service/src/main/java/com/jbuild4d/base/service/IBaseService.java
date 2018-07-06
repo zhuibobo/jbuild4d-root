@@ -3,6 +3,7 @@ package com.jbuild4d.base.service;
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
 import com.github.pagehelper.PageInfo;
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.impl.GeneralService;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -45,9 +46,9 @@ public interface IBaseService<T> {
 
     int save(String id, T record);
 
-    int saveBySelective(String id, T record);
+    int saveBySelective(String id, T record) throws JBuild4DGenerallyException;
 
-    int saveBySelective(String id, T record,IAddBefore<T> addBefore);
+    int saveBySelective(String id, T record,IAddBefore<T> addBefore) throws JBuild4DGenerallyException;
 
     PageInfo<T> getPage(int pageNum, int pageSize);
 

@@ -7,6 +7,7 @@ import com.jbuild4d.base.service.IBaseService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.service.IGeneralService;
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.List;
@@ -104,7 +105,7 @@ public class BaseService<T> implements IBaseService<T> {
     }
 
     @Override
-    public int saveBySelective(String id,T record){
+    public int saveBySelective(String id,T record) throws JBuild4DGenerallyException {
         if(getByPrimaryKey(id)==null){
             return addSelective(record);
         }
@@ -114,7 +115,7 @@ public class BaseService<T> implements IBaseService<T> {
     }
 
     @Override
-    public int saveBySelective(String id, T record, IAddBefore<T> addBefore) {
+    public int saveBySelective(String id, T record, IAddBefore<T> addBefore) throws JBuild4DGenerallyException {
         if(getByPrimaryKey(id)==null){
             record=addBefore.run(record);
             return addSelective(record);

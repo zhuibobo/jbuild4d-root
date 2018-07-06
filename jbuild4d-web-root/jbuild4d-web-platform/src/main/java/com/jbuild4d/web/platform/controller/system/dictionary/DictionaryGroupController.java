@@ -2,6 +2,7 @@ package com.jbuild4d.web.platform.controller.system.dictionary;
 
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
@@ -66,8 +67,12 @@ public class DictionaryGroupController extends BaseController {
     @RequestMapping(value = "SaveEdit", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo saveEdit(@RequestBody DictionaryGroupEntity dictionaryEntity) {
-        dictionaryGroupService.saveBySelective(dictionaryEntity.getDictGroupId(), dictionaryEntity);
-        return JBuild4DResponseVo.saveSuccess();
+        try {
+            dictionaryGroupService.saveBySelective(dictionaryEntity.getDictGroupId(), dictionaryEntity);
+            return JBuild4DResponseVo.saveSuccess();
+        } catch (JBuild4DGenerallyException e) {
+            return JBuild4DResponseVo.error(e.getMessage());
+        }
     }
 
     @RequestMapping(value = "StatusChange", method = RequestMethod.POST)

@@ -7,6 +7,7 @@ import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.IGeneralService;
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.impl.BaseService;
 import com.jbuild4d.base.service.impl.GeneralService;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
@@ -28,10 +29,10 @@ public class DictionaryGroupServiceImpl  extends BaseService<DictionaryGroupEnti
     }
 
     @Override
-    public int saveBySelective(String id, DictionaryGroupEntity record) {
+    public int saveBySelective(String id, DictionaryGroupEntity record) throws JBuild4DGenerallyException {
         return super.saveBySelective(id, record, new IAddBefore<DictionaryGroupEntity>() {
             @Override
-            public DictionaryGroupEntity run(DictionaryGroupEntity item) {
+            public DictionaryGroupEntity run(DictionaryGroupEntity item) throws JBuild4DGenerallyException {
                 item.setDictGroupOrderNum(generalService.nextOrderNum("TB4D_DICTIONARY_GROUP","DICT_GROUP_ORDER_NUM"));
                 item.setDictGroupStatus(EnableTypeEnum.enable.getDisplayName());
                 return item;

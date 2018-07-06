@@ -1,5 +1,6 @@
 package com.jbuild4d.base.service;
 
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface IGeneralService {
 
     List<Map> executeSqlMap(Map map);
 
-    Long nextOrderNum(String tableName,String orderFieldName);
+    Long nextOrderNum(String tableName,String orderFieldName) throws JBuild4DGenerallyException;
 
-    void changeStatus(String tableName,String fieldName,String status);
+    void changeStatus(String tableName,String fieldName,String status) throws JBuild4DGenerallyException;
 }
