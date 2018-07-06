@@ -15,12 +15,10 @@
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
-<div id="app">
+<div id="app" class="iv-list-page-wrap">
     <div style="width: 100%" id="list-button-wrap">
         <div style="float: right">
             <i-button type="primary" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
-            <i-button type="primary" @click="edit()"><Icon type="edit"></Icon> 修改 </i-button>
-            <i-button type="primary" @click="del()"><Icon type="trash-a"></Icon> 删除 </i-button>
         </div>
         <div style="clear: both"></div>
     </div>
@@ -36,21 +34,32 @@
             this.reloadData();
         },
         data:{
-            columnsConfig: [
+            columnsConfig: [{
+                    type: 'selection',
+                    width: 60,
+                    align: 'center'
+                },
                 {
                     title: '分组名称',
-                    key: 'dictGroupText'
+                    key: 'dictGroupText',
+                    align:"center"
                 },{
                     title: '分组值',
-                    key: 'dictGroupValue'
-
+                    key: 'dictGroupValue',
+                    align:"center"
                 },{
                     title: '备注',
                     key: 'dictGroupDesc'
-
+                },{
+                    title: '状态',
+                    width:100,
+                    align:"center",
+                    key: 'dictGroupStatus'
                 },{
                     title: '创建时间',
                     key: 'dictGroupCreateTime',
+                    width:100,
+                    align:"center",
                     render: function (h, params) {
                         return JB4D.ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h,params.row.dictGroupCreateTime);
                     }
@@ -58,6 +67,7 @@
                     title: '操作',
                     key: 'orgSid',
                     width:120,
+                    align:"center",
                     render:function (h, params) {
                         return h('div',{class:"list-row-button-wrap"},[
                             h('div', {
@@ -109,7 +119,7 @@
             },
             add:function () {
                 var url=BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add");
-                DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"数据字典分组管理"},4);
+                DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"数据字典分组管理"},3);
             },
             edit:function (id) {
                 this.makingSureId(id).then(function (id) {

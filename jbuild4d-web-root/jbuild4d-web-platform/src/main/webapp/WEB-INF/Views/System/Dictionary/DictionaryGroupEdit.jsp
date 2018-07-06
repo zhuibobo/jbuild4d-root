@@ -27,6 +27,9 @@
         <form-item label="创建时间：">
             <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.dictGroupCreateTime" disabled readonly></date-picker>
         </form-item>
+        <form-item label="备注：">
+            <i-input v-model="formValidate.dictGroupDesc" type="textarea" :autosize="{minRows: 3,maxRows: 3}"></i-input>
+        </form-item>
         <form-item class="general-edit-page-bottom-wrap">
             <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保  存 </i-button>
             <i-button type="ghost" v-if="status!='view'" @click="handleReset('formValidate')" style="margin-left: 8px"> 关  闭 </i-button>
@@ -42,7 +45,8 @@
                     dictGroupId: '${recordId}',
                     dictGroupValue: '${entity.dictGroupValue}',
                     dictGroupText: '${entity.dictGroupText}',
-                    dictGroupCreateTime:'<fmt:formatDate value="${entity.dictGroupCreateTime}" pattern="yyyy-MM-dd" />'==''?JB4D.DateUtility.GetCurrentDataString("-"):'<fmt:formatDate value="${entity.dictGroupCreateTime}" pattern="yyyy-MM-dd" />'
+                    dictGroupCreateTime:'<fmt:formatDate value="${entity.dictGroupCreateTime}" pattern="yyyy-MM-dd" />'==''?JB4D.DateUtility.GetCurrentDataString("-"):'<fmt:formatDate value="${entity.dictGroupCreateTime}" pattern="yyyy-MM-dd" />',
+                    dictGroupDesc:'${entity.dictGroupDesc}'
                 },
                 ruleValidate: {
                     dictGroupValue: [

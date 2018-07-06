@@ -4,6 +4,7 @@ import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dao.DictionaryGroupMapper;
 import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
+import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.impl.BaseService;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
@@ -30,6 +31,7 @@ public class DictionaryGroupServiceImpl  extends BaseService<DictionaryGroupEnti
             @Override
             public DictionaryGroupEntity run(DictionaryGroupEntity item) {
                 item.setDictGroupOrderNum(generalMapper.nextOrderNum("TB4D_DICTIONARY_GROUP","DICT_GROUP_ORDER_NUM"));
+                item.setDictGroupStatus(EnableTypeEnum.enable.getDisplayName());
                 return item;
             }
         });
