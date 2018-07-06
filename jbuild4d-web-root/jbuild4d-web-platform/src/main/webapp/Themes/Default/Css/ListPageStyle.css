@@ -4,3 +4,30 @@
 .iv-list-page-wrap .ivu-checkbox-wrapper{
     margin-right: 0px;
 }
+
+.list-row-button{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.list-row-button:hover{
+    background-color: #c8dcfe;
+    border-radius: 4px;
+}
+
+.list-row-button-wrap div:first-child{
+    margin-left: 0px;
+}
+
+.list-row-button-view{
+    background: url("Images/ListButton/kdvi.png");
+}
+.list-row-button-edit{
+    background: url("Images/ListButton/kedit.png");
+}
+.list-row-button-del{
+    background: url("Images/ListButton/del.png");
+}

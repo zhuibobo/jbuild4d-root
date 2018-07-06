@@ -65,7 +65,7 @@
                     }
                 },{
                     title: '操作',
-                    key: 'orgSid',
+                    key: 'dictGroupId',
                     width:120,
                     align:"center",
                     render:function (h, params) {
@@ -74,7 +74,7 @@
                                 class:"list-row-button list-row-button-edit",
                                 on: {
                                     click: function () {
-                                        app.edit(params.row.roleSid);
+                                        app.edit(params.row.dictGroupId);
                                     }
                                 }
                             }),
@@ -82,7 +82,7 @@
                                 class:"list-row-button list-row-button-del",
                                 on: {
                                     click: function () {
-                                        app.del(params.row.roleSid);
+                                        app.del(params.row.dictGroupId);
                                     }
                                 }
                             })
