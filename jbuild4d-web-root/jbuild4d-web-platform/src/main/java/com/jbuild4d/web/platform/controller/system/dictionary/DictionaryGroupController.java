@@ -69,4 +69,12 @@ public class DictionaryGroupController extends BaseController {
         dictionaryGroupService.saveBySelective(dictionaryEntity.getDictGroupId(), dictionaryEntity);
         return JBuild4DResponseVo.saveSuccess();
     }
+
+    @RequestMapping(value = "StatusChange", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo statusChange(String ids,String status) {
+        dictionaryGroupService.statusChange(ids,status);
+        //dictionaryGroupService.saveBySelective(dictionaryEntity.getDictGroupId(), dictionaryEntity);
+        return JBuild4DResponseVo.saveSuccess();
+    }
 }

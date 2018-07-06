@@ -5,7 +5,9 @@ import com.jbuild4d.base.dbaccess.dao.DictionaryMapper;
 import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
+import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.impl.BaseService;
+import com.jbuild4d.base.service.impl.GeneralService;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import com.jbuild4d.platform.system.service.IDictionaryService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,8 +22,8 @@ public class DictionaryServiceImpl  extends BaseService<DictionaryEntity> implem
 
     DictionaryMapper dictionaryMapper;
 
-    public DictionaryServiceImpl(DictionaryMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, GeneralMapper _generalMapper) {
-        super(_defaultBaseMapper, _sqlSessionTemplate, _generalMapper);
+    public DictionaryServiceImpl(DictionaryMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, IGeneralService _generalService) {
+        super(_defaultBaseMapper, _sqlSessionTemplate, _generalService);
         dictionaryMapper=_defaultBaseMapper;
     }
 }

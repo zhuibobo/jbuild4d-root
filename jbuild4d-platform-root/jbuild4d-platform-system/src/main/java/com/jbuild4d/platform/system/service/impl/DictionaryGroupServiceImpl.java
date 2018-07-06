@@ -6,7 +6,9 @@ import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.service.IAddBefore;
+import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.impl.BaseService;
+import com.jbuild4d.base.service.impl.GeneralService;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -20,8 +22,8 @@ public class DictionaryGroupServiceImpl  extends BaseService<DictionaryGroupEnti
 
     DictionaryGroupMapper dictionaryGroupMapper;
 
-    public DictionaryGroupServiceImpl(DictionaryGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, GeneralMapper _generalMapper) {
-        super(_defaultBaseMapper, _sqlSessionTemplate, _generalMapper);
+    public DictionaryGroupServiceImpl(DictionaryGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, IGeneralService _generalService) {
+        super(_defaultBaseMapper, _sqlSessionTemplate, _generalService);
         dictionaryGroupMapper=_defaultBaseMapper;
     }
 
@@ -30,10 +32,18 @@ public class DictionaryGroupServiceImpl  extends BaseService<DictionaryGroupEnti
         return super.saveBySelective(id, record, new IAddBefore<DictionaryGroupEntity>() {
             @Override
             public DictionaryGroupEntity run(DictionaryGroupEntity item) {
-                item.setDictGroupOrderNum(generalMapper.nextOrderNum("TB4D_DICTIONARY_GROUP","DICT_GROUP_ORDER_NUM"));
+                item.setDictGroupOrderNum(generalService.nextOrderNum("TB4D_DICTIONARY_GROUP","DICT_GROUP_ORDER_NUM"));
                 item.setDictGroupStatus(EnableTypeEnum.enable.getDisplayName());
                 return item;
             }
         });
+    }
+
+    @Override
+    public void statusChange(String ids,String status) {
+        String[] idArray=ids.split(";");
+        for(int i=0;i<idArray.length;i++){
+            //generalMapper.changeField("TB4D_DICTIONARY_GROUP","DICT_GROUP_ORDER_NUM",status);
+        }
     }
 }

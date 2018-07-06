@@ -6,6 +6,7 @@ import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.IBaseService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.jbuild4d.base.service.IGeneralService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.List;
@@ -20,17 +21,17 @@ import java.util.Map;
 public class BaseService<T> implements IBaseService<T> {
     private BaseMapper<T> defaultBaseMapper = null;
     protected SqlSessionTemplate sqlSessionTemplate = null;
-    protected GeneralMapper generalMapper = null;
+    protected IGeneralService generalService = null;
 
-    public BaseService(BaseMapper<T> _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, GeneralMapper _generalMapper){
+    public BaseService(BaseMapper<T> _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, IGeneralService _generalService){
         defaultBaseMapper= _defaultBaseMapper;
         sqlSessionTemplate=_sqlSessionTemplate;
-        generalMapper=_generalMapper;
+        generalService=_generalService;
     }
 
     @Override
-    public void setGeneralMapper(GeneralMapper _generalMapper) {
-        generalMapper = _generalMapper;
+    public void setGeneralService(GeneralService _generalService) {
+        generalService = _generalService;
     }
 
     @Override

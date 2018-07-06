@@ -3,6 +3,7 @@ package com.jbuild4d.base.service;
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
 import com.github.pagehelper.PageInfo;
+import com.jbuild4d.base.service.impl.GeneralService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 public interface IBaseService<T> {
 
-    void setGeneralMapper(GeneralMapper _generalMapper);
+    void setGeneralService(GeneralService _generalService);
 
     void setSqlSessionTemplate(SqlSessionTemplate _sqlSessionTemplate);
 
