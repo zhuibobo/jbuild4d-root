@@ -45,6 +45,10 @@
                     key: 'dictGroupValue'
 
                 },{
+                    title: '备注',
+                    key: 'dictGroupDesc'
+
+                },{
                     title: '创建时间',
                     key: 'dictGroupCreateTime',
                     render: function (h, params) {
@@ -105,7 +109,7 @@
             },
             add:function () {
                 var url=BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add");
-                DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"数据字典分组管理",width:400,height:310},4);
+                DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"数据字典分组管理"},4);
             },
             edit:function (id) {
                 this.makingSureId(id).then(function (id) {

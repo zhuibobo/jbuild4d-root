@@ -13,12 +13,18 @@ public class DictionaryGroupEntity {
 
     private Date dictGroupCreateTime;
 
-    public DictionaryGroupEntity(String dictGroupId, String dictGroupValue, String dictGroupText, Long dictGroupOrderNum, Date dictGroupCreateTime) {
+    private String dictGroupDesc;
+
+    private String dictGroupStatus;
+
+    public DictionaryGroupEntity(String dictGroupId, String dictGroupValue, String dictGroupText, Long dictGroupOrderNum, Date dictGroupCreateTime, String dictGroupDesc, String dictGroupStatus) {
         this.dictGroupId = dictGroupId;
         this.dictGroupValue = dictGroupValue;
         this.dictGroupText = dictGroupText;
         this.dictGroupOrderNum = dictGroupOrderNum;
         this.dictGroupCreateTime = dictGroupCreateTime;
+        this.dictGroupDesc = dictGroupDesc;
+        this.dictGroupStatus = dictGroupStatus;
     }
 
     public DictionaryGroupEntity() {
@@ -63,5 +69,21 @@ public class DictionaryGroupEntity {
 
     public void setDictGroupCreateTime(Date dictGroupCreateTime) {
         this.dictGroupCreateTime = dictGroupCreateTime;
+    }
+
+    public String getDictGroupDesc() {
+        return dictGroupDesc;
+    }
+
+    public void setDictGroupDesc(String dictGroupDesc) {
+        this.dictGroupDesc = dictGroupDesc == null ? null : dictGroupDesc.trim();
+    }
+
+    public String getDictGroupStatus() {
+        return dictGroupStatus;
+    }
+
+    public void setDictGroupStatus(String dictGroupStatus) {
+        this.dictGroupStatus = dictGroupStatus == null ? null : dictGroupStatus.trim();
     }
 }

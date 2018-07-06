@@ -69,11 +69,13 @@ EXECUTE sp_addextendedproperty N'MS_Description', N'菜单ID', N'user', N'dbo', 
 
 -----------------------------------------数据字典表-----------------------------------------
 CREATE TABLE TB4D_DICTIONARY_GROUP (
-  [DICT_GROUP_ID]            [NVARCHAR](100)  NOT NULL PRIMARY KEY,
-  [DICT_GROUP_VALUE]         [NVARCHAR](200)  NOT NULL,
-  [DICT_GROUP_TEXT]          [NVARCHAR](200)  NOT NULL,
-  [DICT_GROUP_ORDER_NUM]     [BIGINT]         NULL,
-  [DICT_GROUP_CREATE_TIME]   [DATETIME]       NULL,
+  [DICT_GROUP_ID]          [NVARCHAR](100) NOT NULL PRIMARY KEY,
+  [DICT_GROUP_VALUE]       [NVARCHAR](200) NOT NULL,
+  [DICT_GROUP_TEXT]        [NVARCHAR](200) NOT NULL,
+  [DICT_GROUP_ORDER_NUM]   [BIGINT]        NULL,
+  [DICT_GROUP_CREATE_TIME] [DATETIME]      NULL,
+  [DICT_GROUP_DESC]        [NVARCHAR](500) NULL,
+  [DICT_GROUP_STATUS]      [NVARCHAR](10)  NULL,
 )
 -----------------------------------------数据字典表-----------------------------------------
 CREATE TABLE TB4D_DICTIONARY (
