@@ -82,4 +82,11 @@ public class DictionaryGroupController extends BaseController {
         //dictionaryGroupService.saveBySelective(dictionaryEntity.getDictGroupId(), dictionaryEntity);
         return JBuild4DResponseVo.saveSuccess();
     }
+
+    @RequestMapping(value = "Delete", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo Delete(String recordId,String status) {
+        dictionaryGroupService.deleteByKey(recordId);
+        return JBuild4DResponseVo.opSuccess();
+    }
 }

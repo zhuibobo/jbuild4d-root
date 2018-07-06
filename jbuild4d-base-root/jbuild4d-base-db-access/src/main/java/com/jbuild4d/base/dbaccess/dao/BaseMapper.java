@@ -10,7 +10,7 @@ import java.util.Map;
  * @Version 1.0.0
  */
 public interface BaseMapper<T> {
-    int deleteByPrimaryKey(int id);
+    int deleteByPrimaryKey(String id);
 
     int deleteByPrimaryStringKey(String id);
 

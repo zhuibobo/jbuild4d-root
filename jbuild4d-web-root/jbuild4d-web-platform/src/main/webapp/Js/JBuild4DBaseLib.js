@@ -1295,6 +1295,74 @@ var ListPageUtility={
                 return h('div',"是");
             }
         }
+    },
+    IViewTableMareSureSelected:function (selectionRows) {
+        if(selectionRows!=null&&selectionRows.length>0) {
+            return {
+                then:function (func) {
+                    func(selectionRows);
+                }
+            }
+        }
+        else{
+            JB4D.DialogUtility.Alert(window, JB4D.DialogUtility.DialogAlertId, {}, "请选中需要操作的行!", null);
+            return {
+                then:function (func) {
+                }
+            }
+        }
+    },
+    IViewChangeServerStatus:function (url,selectionRows,idField, statusName,pageAppObj) {
+        var idArray=new Array();
+        for (var i=0;i<selectionRows.length;i++){
+            idArray.push(selectionRows[i][idField]);
+        }
+        AjaxUtility.Post(url,
+            {
+                ids: idArray.join(";"),
+                status: statusName
+            },
+            function (result) {
+                if (result.success) {
+                    pageAppObj.reloadData();
+                }
+            }, "json"
+        );
+    },
+    //改变状态封装
+    IViewChangeServerStatusFace:function (url,selectionRows,idField, statusName,pageAppObj) {
+        this.IViewTableMareSureSelected(selectionRows).then(function (selectionRows) {
+            JB4D.ListPageUtility.IViewChangeServerStatus(url,selectionRows,idField,statusName,pageAppObj);
+        });
+    },
+    IViewTableDeleteRow:function (url, recordId,pageAppObj) {
+        DialogUtility.Comfirm(window, "确认要删除当前记录吗？", function () {
+            AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                if (result.success) {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                        pageAppObj.reloadData();
+                    });
+                }
+                else {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                }
+            }, "json");
+        });
+    },
+    IViewTableLoadDataNoSearch:function (url,pageNum,pageSize,pageAppObj) {
+        //debugger;
+        AjaxUtility.Post(url,
+            {
+                pageNum: pageNum,
+                pageSize: pageSize
+            },
+            function (result) {
+                if (result.success) {
+                    pageAppObj.tableData = new Array();
+                    pageAppObj.tableData = result.data.list;
+                    pageAppObj.pageTotal = result.data.total;
+                }
+            }, "json");
     }
 }
 

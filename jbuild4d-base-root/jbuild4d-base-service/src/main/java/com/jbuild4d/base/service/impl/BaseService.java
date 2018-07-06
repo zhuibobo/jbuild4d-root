@@ -50,7 +50,7 @@ public class BaseService<T> implements IBaseService<T> {
     }
 
     @Override
-    public int deleteByKey(int id) {
+    public int deleteByKey(String id) {
         return defaultBaseMapper.deleteByPrimaryKey(id);
     }
 

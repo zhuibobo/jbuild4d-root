@@ -24,7 +24,7 @@ public interface IBaseService<T> {
 
     void setDefaultBaseMapper(BaseMapper<T> _defaultBaseMapper);
 
-    int deleteByKey(int id);
+    int deleteByKey(String id);
 
     int deleteAll();
 

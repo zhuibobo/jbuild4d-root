@@ -22,11 +22,11 @@
                 <Icon type="plus"></Icon>
                 新增
             </i-button>
-            <i-button type="primary" @click="statusEnable()">
+            <i-button type="primary" @click="statusEnable('启用')">
                 <Icon type="checkmark-round"></Icon>
                 启用
             </i-button>
-            <i-button type="primary" @click="add()">
+            <i-button type="primary" @click="statusEnable('禁用')">
                 <Icon type="minus-round"></Icon>
                 禁用
             </i-button>
@@ -126,7 +126,8 @@
             },
             reloadData: function () {
                 var url = '/PlatForm/System/DictionaryGroup/GetListData.do';
-                var _self = this;
+                JB4D.ListPageUtility.IViewTableLoadDataNoSearch(url,this.pageNum,this.pageSize,this);
+                /*var _self = this;
                 AjaxUtility.Post(url,
                     {
                         pageNum: _self.pageNum,
@@ -138,43 +139,26 @@
                             _self.tableData = result.data.list;
                             _self.pageTotal = result.data.total;
                         }
-                    }, "json");
+                    }, "json");*/
             },
             add: function () {
                 var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add");
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "数据字典分组管理"}, 3);
             },
-            edit: function (id) {
-                this.makingSureId(id).then(function (id) {
-                    var url = BaseUtility.BuildUrl("/project/system/role/detail.do?sId=" + id);
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "角色管理"}, 2);
-                });
+            edit: function (recordId) {
+                var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=update&recordId=" + recordId);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "数据字典分组管理"}, 3);
             },
-            del: function (id) {
-                this.makingSureId(id).then(function (id) {
-                    B4D.DialogUtility.Alert(window, B4D.DialogUtility.DialogAlertId, {}, "未实现!", null);
-                });
+            del: function (recordId) {
+                var url = '/PlatForm/System/DictionaryGroup/Delete.do';
+                JB4D.ListPageUtility.IViewTableDeleteRow(url,recordId,app);
             },
-            statusEnable: function () {
-                //debugger;
-                //console.log(this.selectionRows);
-                var url = '/PlatForm/System/DictionaryGroup/GetListData.do';
-                var _self = this;
-                AjaxUtility.Post(url,
-                    {
-                        pageNum: _self.pageNum,
-                        pageSize: _self.pageSize
-                    },
-                    function (result) {
-                        if (result.success) {
-                            _self.tableData = new Array();
-                            _self.tableData = result.data.list;
-                            _self.pageTotal = result.data.total;
-                        }
-                    }, "json");
+            statusEnable: function (statusName) {
+                var url = '/PlatForm/System/DictionaryGroup/StatusChange.do';
+                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"dictGroupId",statusName,app);
             },
-            changePage: function (page) {
-                this.page_num = page;
+            changePage: function (pageNum) {
+                this.pageNum = pageNum;
                 this.reloadData();
             }
         }
