@@ -47,22 +47,4 @@ public class GeneralService implements IGeneralService {
             throw new JBuild4DGenerallyException("存在SQL关键字:" + tableName);
         }
     }
-
-    @Override
-    public void changeStatus(String tableName, String fieldName, String status) throws JBuild4DGenerallyException {
-        if (SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(tableName)) {
-            if (SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(fieldName)) {
-                if (SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(fieldName)) {
-                    generalMapper.changeStatus(tableName,fieldName,status);
-                }
-                else {
-                    throw new JBuild4DGenerallyException("存在SQL关键字:" + status);
-                }
-            } else {
-                throw new JBuild4DGenerallyException("存在SQL关键字:" + fieldName);
-            }
-        } else {
-            throw new JBuild4DGenerallyException("存在SQL关键字:" + tableName);
-        }
-    }
 }

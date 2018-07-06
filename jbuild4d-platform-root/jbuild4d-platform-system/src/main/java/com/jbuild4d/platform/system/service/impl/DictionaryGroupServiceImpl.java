@@ -44,7 +44,9 @@ public class DictionaryGroupServiceImpl  extends BaseService<DictionaryGroupEnti
     public void statusChange(String ids,String status) {
         String[] idArray=ids.split(";");
         for(int i=0;i<idArray.length;i++){
-            //generalMapper.changeField("TB4D_DICTIONARY_GROUP","DICT_GROUP_ORDER_NUM",status);
+            DictionaryGroupEntity dictionaryGroupEntity=getByPrimaryKey(idArray[i]);
+            dictionaryGroupEntity.setDictGroupStatus(status);
+            dictionaryGroupMapper.updateByPrimaryKeySelective(dictionaryGroupEntity);
         }
     }
 }
