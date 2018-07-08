@@ -113,6 +113,7 @@
             reloadData: function () {
                 var url = '/PlatForm/System/DictionaryGroup/GetListData.do';
                 JB4D.ListPageUtility.IViewTableLoadDataNoSearch(url,this.pageNum,this.pageSize,this);
+                this.selectionRows=null;
             },
             add: function () {
                 var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add");
