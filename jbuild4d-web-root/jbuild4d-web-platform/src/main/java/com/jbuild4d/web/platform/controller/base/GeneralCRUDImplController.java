@@ -120,9 +120,14 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     @RequestMapping(value = "StatusChange", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo statusChange(String ids,String status) {
-        //BaseService.statusChange(ids,status);
+        try {
+            baseService.statusChange(ids,status);
+            return JBuild4DResponseVo.opSuccess();
+        } catch (JBuild4DGenerallyException e) {
+            return JBuild4DResponseVo.opError(e.getMessage());
+        }
         //dictionaryGroupService.saveBySelective(dictionaryEntity.getDictGroupId(), dictionaryEntity);
-        return JBuild4DResponseVo.saveSuccess();
+
     }
 
     @RequestMapping(value = "Delete", method = RequestMethod.POST)

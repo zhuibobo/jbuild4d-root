@@ -59,4 +59,6 @@ public interface IBaseService<T> {
     int getNextId();
 
     int getNextOrderNum();
+
+    void statusChange(String ids, String status) throws JBuild4DGenerallyException;
 }

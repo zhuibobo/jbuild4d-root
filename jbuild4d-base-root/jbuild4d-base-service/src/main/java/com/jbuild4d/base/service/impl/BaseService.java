@@ -159,6 +159,11 @@ public class BaseService<T> implements IBaseService<T> {
     }
 
     @Override
+    public void statusChange(String ids, String status) throws JBuild4DGenerallyException {
+        throw new JBuild4DGenerallyException("BaseService<T>未实现statusChange方法，请在具体的Service中实现");
+    }
+
+    @Override
     public  List<T> searchByMap(Map<String,Object> searchItemMap)
     {
         return defaultBaseMapper.searchByMap(searchItemMap);

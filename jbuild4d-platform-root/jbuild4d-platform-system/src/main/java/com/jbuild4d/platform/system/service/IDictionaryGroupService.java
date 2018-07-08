@@ -10,5 +10,5 @@ import com.jbuild4d.base.service.IBaseService;
  * To change this template use File | Settings | File Templates.
  */
 public interface IDictionaryGroupService extends IBaseService<DictionaryGroupEntity> {
-    void statusChange(String ids,String status);
+
 }

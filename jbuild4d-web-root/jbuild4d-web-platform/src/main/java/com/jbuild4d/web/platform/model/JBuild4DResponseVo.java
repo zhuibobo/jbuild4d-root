@@ -121,6 +121,10 @@ public class JBuild4DResponseVo {
     public static JBuild4DResponseVo opError(){
         return error("操作失败！");
     }
+
+    public static JBuild4DResponseVo opError(String msg){
+        return error(msg);
+    }
     /**
      * 返回SSSResponse实例 用于APP普通列表（分页列表还是用success方法）
      *
