@@ -34,7 +34,6 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        //setNullEntity(new DictionaryGroupEntity());
         setBaseService(dictionaryGroupService);
     }
 
@@ -48,10 +47,10 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
         return "System/Dictionary/DictionaryGroupEdit";
     }
 
-    @Override
+    /*@Override
     public String entityId(DictionaryGroupEntity entity) {
         return entity.getDictGroupId();
-    }
+    }*/
 
     /*@Autowired
     IDictionaryGroupService dictionaryGroupService;

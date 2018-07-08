@@ -109,8 +109,6 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         }
     }
 
-    public abstract String entityId(T entity);
-
     @RequestMapping(value = "StatusChange", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo statusChange(String ids,String status) {
