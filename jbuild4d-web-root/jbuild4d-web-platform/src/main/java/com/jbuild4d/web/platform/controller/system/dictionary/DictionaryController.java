@@ -1,15 +1,12 @@
 package com.jbuild4d.web.platform.controller.system.dictionary;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jbuild4d.web.platform.controller.base.BaseController;
+import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,16 +16,14 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/PlatForm/System/Dictionary")
-public class DictionaryController extends BaseController {
+public class DictionaryController {
 
-    @Override
     @RequestMapping(value = "List", method = RequestMethod.GET)
     public ModelAndView list() {
         ModelAndView modelAndView=new ModelAndView("System/Dictionary/DictionaryList");
         return modelAndView;
     }
 
-    @Override
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition){
@@ -36,5 +31,19 @@ public class DictionaryController extends BaseController {
         return JBuild4DResponseVo.success("获取成功",null);
     }
 
+    public ModelAndView detail(String recordId, String op) {
+        return null;
+    }
 
+    public JBuild4DResponseVo saveEdit(DictionaryGroupEntity dictionaryEntity) {
+        return null;
+    }
+
+    public JBuild4DResponseVo statusChange(String ids, String status) {
+        return null;
+    }
+
+    public JBuild4DResponseVo Delete(String recordId) {
+        return null;
+    }
 }

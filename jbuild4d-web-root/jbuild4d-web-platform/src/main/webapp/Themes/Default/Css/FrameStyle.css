@@ -209,14 +209,6 @@
     margin-top: 15px;
 }
 
-.general-edit-page-bottom-wrap{
-    text-align: center;
-}
-
-.general-edit-page-bottom-wrap div{
-    margin-left: 0px !important;
-}
-
 .scroll-div-wrap::-webkit-scrollbar {
     width: 10px;
 }

@@ -1,4 +1,7 @@
-var console=console||{log:function(){return;}}
+var console = console || {
+    log: function () {
+    }
+};
 //扩展js对象功能
 if (!Object.create) {
     Object.create = (function () {
@@ -83,8 +86,6 @@ var BaseUtility = {
 //浏览下信息类
 var BrowserInfoUtility = {
     BrowserAppName: function () {
-        //alert(navigator.userAgent);
-        var obj = navigator.userAgent;
         if (navigator.userAgent.indexOf("Firefox") > 0) {
             return "Firefox";
         }
@@ -96,10 +97,6 @@ var BrowserInfoUtility = {
         }
     },
     IsIE: function () {
-        /* if (this.BrowserAppName() == "IE") {
-             return true;
-         }
-         return false;*/
         if (!!window.ActiveXObject || "ActiveXObject" in window)
             return true;
         else
@@ -1363,6 +1360,28 @@ var ListPageUtility={
                     pageAppObj.pageTotal = result.data.total;
                 }
             }, "json");
+    },
+    IViewTableInnerButton:{
+        EditButton:function (h, params,idField,pageAppObj) {
+            return h('div', {
+                class: "list-row-button list-row-button-edit",
+                on: {
+                    click: function () {
+                        pageAppObj.edit(params.row[idField]);
+                    }
+                }
+            });
+        },
+        DeleteButton:function (h, params,idField,pageAppObj) {
+            return h('div', {
+                class: "list-row-button list-row-button-del",
+                on: {
+                    click: function () {
+                        pageAppObj.del(params.row[idField]);
+                    }
+                }
+            });
+        }
     }
 }
 

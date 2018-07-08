@@ -2,12 +2,15 @@ package com.jbuild4d.web.platform.controller.system.dictionary;
 
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
+import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
-import com.jbuild4d.web.platform.controller.base.BaseController;
+import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
+import com.jbuild4d.web.platform.controller.base.IGeneralCRUDController;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,9 +27,33 @@ import java.util.Date;
  */
 @Controller
 @RequestMapping(value = "/PlatForm/System/DictionaryGroup")
-public class DictionaryGroupController extends BaseController {
+public class DictionaryGroupController extends GeneralCRUDImplController<DictionaryGroupEntity> implements InitializingBean {
 
     @Autowired
+    IDictionaryGroupService dictionaryGroupService;
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        setNullEntity(new DictionaryGroupEntity());
+        setBaseService(dictionaryGroupService);
+    }
+
+    @Override
+    public String getListViewName() {
+        return "System/Dictionary/DictionaryGroupList";
+    }
+
+    @Override
+    public String getDetailViewName() {
+        return "System/Dictionary/DictionaryGroupEdit";
+    }
+
+    @Override
+    public String entityId(DictionaryGroupEntity entity) {
+        return entity.getDictGroupId();
+    }
+
+    /*@Autowired
     IDictionaryGroupService dictionaryGroupService;
 
     @Override
@@ -46,6 +71,7 @@ public class DictionaryGroupController extends BaseController {
         return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
     }
 
+    @Override
     @RequestMapping(value = "Detail", method = RequestMethod.GET)
     public ModelAndView detail(String recordId,String op) {
         ModelAndView modelAndView=new ModelAndView("System/Dictionary/DictionaryGroupEdit");
@@ -64,6 +90,7 @@ public class DictionaryGroupController extends BaseController {
         return modelAndView;
     }
 
+    @Override
     @RequestMapping(value = "SaveEdit", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo saveEdit(@RequestBody DictionaryGroupEntity dictionaryEntity) {
@@ -75,6 +102,7 @@ public class DictionaryGroupController extends BaseController {
         }
     }
 
+    @Override
     @RequestMapping(value = "StatusChange", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo statusChange(String ids,String status) {
@@ -83,10 +111,11 @@ public class DictionaryGroupController extends BaseController {
         return JBuild4DResponseVo.saveSuccess();
     }
 
+    @Override
     @RequestMapping(value = "Delete", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo Delete(String recordId,String status) {
+    public JBuild4DResponseVo Delete(String recordId) {
         dictionaryGroupService.deleteByKey(recordId);
         return JBuild4DResponseVo.opSuccess();
-    }
+    }*/
 }

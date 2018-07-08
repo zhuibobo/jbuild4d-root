@@ -42,7 +42,7 @@
         <div style="clear: both"></div>
     </div>
     <i-table :height="listHeight" stripe border :columns="columnsConfig" :data="tableData"
-             :style="{marginTop:'10px',marginBottom:'10px'}" :highlight-row="true"
+             class="iv-list-table" :highlight-row="true"
              @on-selection-change="selectionChange"></i-table>
     <div style="float: right;">
         <page @on-change="changePage" :current.sync="pageNum" :page-size="pageSize" show-total
@@ -92,23 +92,9 @@
                     width: 120,
                     align: "center",
                     render: function (h, params) {
-                        return h('div', {class: "list-row-button-wrap"}, [
-                            h('div', {
-                                class: "list-row-button list-row-button-edit",
-                                on: {
-                                    click: function () {
-                                        app.edit(params.row.dictGroupId);
-                                    }
-                                }
-                            }),
-                            h('div', {
-                                class: "list-row-button list-row-button-del",
-                                on: {
-                                    click: function () {
-                                        app.del(params.row.dictGroupId);
-                                    }
-                                }
-                            })
+                        return h('div',{class: "list-row-button-wrap"},[
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"dictGroupId",app),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"dictGroupId",app)
                         ]);
                     }
                 }

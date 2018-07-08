@@ -37,8 +37,8 @@ public class GeneralService implements IGeneralService {
 
     @Override
     public Long nextOrderNum(String tableName, String orderFieldName) throws JBuild4DGenerallyException {
-        if (SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(tableName)) {
-            if (SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(orderFieldName)) {
+        if (!SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(tableName)) {
+            if (!SQLKeyWordUtility.ValidateSqlInjectForSelectOnly(orderFieldName)) {
                 return generalMapper.nextOrderNum(tableName, orderFieldName);
             } else {
                 throw new JBuild4DGenerallyException("存在SQL关键字:" + orderFieldName);
