@@ -117,4 +117,8 @@ public final class ClassUtility {
         classSet.add(cls);
     }
 
+    public static <T> T newTclass(Class<T> clazz) throws InstantiationException, IllegalAccessException{
+        T a=clazz.newInstance();
+        return a;
+    }
 }

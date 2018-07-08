@@ -34,7 +34,7 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        setNullEntity(new DictionaryGroupEntity());
+        //setNullEntity(new DictionaryGroupEntity());
         setBaseService(dictionaryGroupService);
     }
 
