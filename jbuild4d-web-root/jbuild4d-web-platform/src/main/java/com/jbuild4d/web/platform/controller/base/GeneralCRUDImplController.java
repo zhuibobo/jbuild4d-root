@@ -1,5 +1,7 @@
 package com.jbuild4d.web.platform.controller.base;
 
+
+
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
 import com.jbuild4d.base.service.IBaseService;
@@ -17,6 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+/**
+ * Created with IntelliJ IDEA.
+ * User: zhuangrb
+ * Date: 2018/7/5
+ * To change this template use File | Settings | File Templates.
+ */
 public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDController<T> {
 
     IBaseService<T> baseService;
