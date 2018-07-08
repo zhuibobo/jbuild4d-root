@@ -1,5 +1,6 @@
 package com.jbuild4d.web;
 
+import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
@@ -27,6 +28,9 @@ public class LoginController {
 
     @RequestMapping(value = "/Login", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request) {
+
+        //DBAnnoUtility.getIDValue(null);
+
         System.out.println("Home Controller Call");
         ModelAndView modelAndView=new ModelAndView("Login");
 

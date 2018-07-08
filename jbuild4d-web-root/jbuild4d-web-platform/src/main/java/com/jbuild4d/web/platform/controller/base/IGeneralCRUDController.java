@@ -27,7 +27,7 @@ public interface IGeneralCRUDController<T> {
 
     public abstract ModelAndView detail(String recordId,String op) throws IllegalAccessException, InstantiationException;
 
-    public abstract JBuild4DResponseVo saveEdit(@RequestBody T entity);
+    public abstract JBuild4DResponseVo saveEdit(@RequestBody T entity) throws Exception;
 
     public abstract JBuild4DResponseVo statusChange(String ids,String status);
 

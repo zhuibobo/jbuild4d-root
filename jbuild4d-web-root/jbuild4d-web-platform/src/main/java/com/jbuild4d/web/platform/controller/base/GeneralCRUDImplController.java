@@ -1,6 +1,7 @@
 package com.jbuild4d.web.platform.controller.base;
 
 import com.github.pagehelper.PageInfo;
+import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.ClassUtility;
@@ -95,9 +96,13 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     @RequestMapping(value = "SaveEdit", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo saveEdit(@RequestBody T entity) {
+    public JBuild4DResponseVo saveEdit(@RequestBody T entity) throws Exception {
         try {
-            baseService.saveBySelective(entityId(entity), entity);
+            //entity.getClass().getDeclaredFields()[0].get
+            String recordID=DBAnnoUtility.getIDValue(entity);
+            //return null;
+            //baseService.saveBySelective(entityId(entity), entity);
+            baseService.saveBySelective(recordID, entity);
             return JBuild4DResponseVo.saveSuccess();
         } catch (JBuild4DGenerallyException e) {
             return JBuild4DResponseVo.error(e.getMessage());
