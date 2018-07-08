@@ -49,4 +49,12 @@ public class DictionaryGroupServiceImpl  extends BaseService<DictionaryGroupEnti
             dictionaryGroupMapper.updateByPrimaryKeySelective(dictionaryGroupEntity);
         }
     }
+
+    public void orderUp(String id){
+
+    }
+
+    public void orderDown(String id){
+
+    }
 }
