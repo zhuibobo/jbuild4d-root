@@ -3,6 +3,7 @@ package com.jbuild4d.platform.system.service.impl;
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dao.DictionaryGroupMapper;
 import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
+import com.jbuild4d.base.dbaccess.dao.SqlMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.service.IAddBefore;
@@ -10,8 +11,12 @@ import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.impl.BaseService;
 import com.jbuild4d.base.service.impl.GeneralService;
+import com.jbuild4d.base.tools.common.SQLKeyWordUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,6 +31,7 @@ public class DictionaryGroupServiceImpl  extends BaseService<DictionaryGroupEnti
     public DictionaryGroupServiceImpl(DictionaryGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, IGeneralService _generalService) {
         super(_defaultBaseMapper, _sqlSessionTemplate, _generalService);
         dictionaryGroupMapper=_defaultBaseMapper;
+        SqlMapper sqlMapper=new SqlMapper(_sqlSessionTemplate);
     }
 
     @Override
@@ -50,11 +56,16 @@ public class DictionaryGroupServiceImpl  extends BaseService<DictionaryGroupEnti
         }
     }
 
-    public void orderUp(String id){
-
+    @Override
+    public void moveUp(String id){
+        String sql="select min(DICT_GROUP_ORDER_NUM) from TB4D_DICTIONARY_GROUP where DICT_GROUP_ORDER_NUM>(select DICT_GROUP_ORDER_NUM from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID="+ SQLKeyWordUtility.stringWrap(id)+")";
+        Object gtMin=generalService.executeScalarSql(sql);
+        System.out.println(gtMin);
+        //System.out.printf(gtMin);
     }
 
-    public void orderDown(String id){
+    @Override
+    public void moveDown(String id){
 
     }
 }

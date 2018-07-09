@@ -11,5 +11,8 @@ public interface GeneralMapper {
     List<Map> executeSqlMap(Map map);
 
     Long nextOrderNum(@Param("TableName") String TableName, @Param("OrderFieldName") String OrderFieldName);
+
+    Object executeScalarSql(String sql);
+
 }
 

@@ -1309,6 +1309,22 @@ var ListPageUtility={
             }
         }
     },
+    IViewTableMareSureSelectedOne:function (selectionRows) {
+        if(selectionRows!=null&&selectionRows.length>0&&selectionRows.length==1) {
+            return {
+                then:function (func) {
+                    func(selectionRows);
+                }
+            }
+        }
+        else{
+            JB4D.DialogUtility.Alert(window, JB4D.DialogUtility.DialogAlertId, {}, "请选中需要操作的行，每次只能选中一行!", null);
+            return {
+                then:function (func) {
+                }
+            }
+        }
+    },
     IViewChangeServerStatus:function (url,selectionRows,idField, statusName,pageAppObj) {
         var idArray=new Array();
         for (var i=0;i<selectionRows.length;i++){

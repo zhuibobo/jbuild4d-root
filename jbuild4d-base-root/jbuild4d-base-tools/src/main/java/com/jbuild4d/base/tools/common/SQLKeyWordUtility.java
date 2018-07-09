@@ -8,7 +8,7 @@ package com.jbuild4d.base.tools.common;
  */
 public class SQLKeyWordUtility {
 
-    public static boolean ValidateSqlInjectForSelectOnly(String sqlString) {
+    public static boolean validateSqlInjectForSelectOnly(String sqlString) {
         boolean ReturnValue = false;
         try
         {
@@ -31,5 +31,9 @@ public class SQLKeyWordUtility {
             throw ex;
         }
         return ReturnValue;
+    }
+
+    public static String stringWrap(String source){
+        return "'"+source.replaceAll("'","''")+"'";
     }
 }

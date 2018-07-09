@@ -47,6 +47,13 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
         return "System/Dictionary/DictionaryGroupEdit";
     }
 
+    @RequestMapping(value = "MoveUp", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo moveUp(String recordId) {
+        dictionaryGroupService.moveUp(recordId);
+        return JBuild4DResponseVo.opSuccess();
+    }
+
     /*@Override
     public String entityId(DictionaryGroupEntity entity) {
         return entity.getDictGroupId();

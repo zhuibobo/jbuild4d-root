@@ -7,6 +7,6 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from TB4D_DICTIONARY_GROUP ORDER by DICT_GROUP_ORDER_NUM ASC
+    from TB4D_DICTIONARY_GROUP ORDER by DICT_GROUP_ORDER_NUM DESC
   </select>
 </mapper>

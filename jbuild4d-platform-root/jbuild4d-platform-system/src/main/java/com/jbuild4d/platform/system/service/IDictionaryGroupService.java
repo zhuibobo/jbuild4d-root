@@ -11,4 +11,7 @@ import com.jbuild4d.base.service.IBaseService;
  */
 public interface IDictionaryGroupService extends IBaseService<DictionaryGroupEntity> {
 
+    void moveUp(String id);
+
+    void moveDown(String id);
 }
