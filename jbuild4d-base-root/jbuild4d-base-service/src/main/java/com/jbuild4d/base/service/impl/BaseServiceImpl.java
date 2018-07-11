@@ -32,7 +32,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public void setGeneralService(GeneralServiceImpl _generalServiceImpl) {
+    public void setGeneralService(IGeneralService _generalServiceImpl) {
         generalService = _generalServiceImpl;
     }
 

@@ -36,14 +36,15 @@ public class SystemBeansConfig {
     }
 
     @Bean
-    public IMenuService menuService(ISQLBuilderService _sqlBuilderService,MenuMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
-        IMenuService bean=new MenuServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+    public IDictionaryGroupService dictionaryGroupService(ISQLBuilderService _sqlBuilderService, DictionaryGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate,IGeneralService generalService) {
+        IDictionaryGroupService bean=new DictionaryGroupServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        bean.setGeneralService(generalService);
         return bean;
     }
 
     @Bean
-    public IDictionaryGroupService dictionaryGroupService(ISQLBuilderService _sqlBuilderService, DictionaryGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
-        IDictionaryGroupService bean=new DictionaryGroupServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+    public IMenuService menuService(ISQLBuilderService _sqlBuilderService,MenuMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        IMenuService bean=new MenuServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
 

@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public interface IBaseService<T> {
 
-    void setGeneralService(GeneralServiceImpl _generalServiceImpl);
+    void setGeneralService(IGeneralService _generalServiceImpl);
 
     void setSqlSessionTemplate(SqlSessionTemplate _sqlSessionTemplate);
 
