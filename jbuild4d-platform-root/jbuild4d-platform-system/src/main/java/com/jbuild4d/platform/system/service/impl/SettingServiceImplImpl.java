@@ -3,6 +3,7 @@ package com.jbuild4d.platform.system.service.impl;
 import com.jbuild4d.base.dbaccess.dao.SettingMapper;
 import com.jbuild4d.base.dbaccess.dbentities.SettingEntity;
 import com.jbuild4d.base.service.IGeneralService;
+import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.system.service.ISettingService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,8 +18,8 @@ public class SettingServiceImplImpl extends BaseServiceImpl<SettingEntity> imple
 
     SettingMapper settingMapper;
 
-    public SettingServiceImplImpl(SettingMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, IGeneralService _generalService) {
-        super(_defaultBaseMapper, _sqlSessionTemplate, _generalService);
+    public SettingServiceImplImpl(SettingMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) {
+        super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         settingMapper = _defaultBaseMapper;
     }
 }

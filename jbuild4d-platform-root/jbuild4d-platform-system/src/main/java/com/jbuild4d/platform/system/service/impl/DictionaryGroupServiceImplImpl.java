@@ -6,6 +6,7 @@ import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.IGeneralService;
+import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.SQLKeyWordUtility;
@@ -23,12 +24,10 @@ import java.util.Map;
 public class DictionaryGroupServiceImplImpl extends BaseServiceImpl<DictionaryGroupEntity> implements IDictionaryGroupService {
 
     DictionaryGroupMapper dictionaryGroupMapper;
-    SQLBuilderMapper sqlMapper;
 
-    public DictionaryGroupServiceImplImpl(DictionaryGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, IGeneralService _generalService) {
-        super(_defaultBaseMapper, _sqlSessionTemplate, _generalService);
+    public DictionaryGroupServiceImplImpl(DictionaryGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) {
+        super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         dictionaryGroupMapper=_defaultBaseMapper;
-        sqlMapper=new SQLBuilderMapper(_sqlSessionTemplate);
     }
 
     @Override
@@ -57,7 +56,7 @@ public class DictionaryGroupServiceImplImpl extends BaseServiceImpl<DictionaryGr
     public void moveUp(String id){
         String sql="select min(DICT_GROUP_ORDER_NUM) from TB4D_DICTIONARY_GROUP where DICT_GROUP_ORDER_NUM>(select DICT_GROUP_ORDER_NUM from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID="+ SQLKeyWordUtility.stringWrap(id)+")";
         Object gtMin=generalService.executeScalarSql(sql);
-        Map<String, Object> map=sqlMapper.selectOne("select * from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID=#{ID}","21684b89-2126-4224-910e-18c90dd93489");
+        //Map<String, Object> map=sqlMapper.selectOne("select * from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID=#{ID}","21684b89-2126-4224-910e-18c90dd93489");
         System.out.println(gtMin);
         //System.out.printf(gtMin);
     }
