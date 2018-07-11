@@ -1,4 +1,4 @@
-package com.jbuild4d.base.dbaccess.dao;
+package com.jbuild4d.base.dbaccess.dynamic;
 
 import org.apache.ibatis.builder.StaticSqlSource;
 import org.apache.ibatis.mapping.*;
@@ -15,11 +15,11 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 
-public class MSUtils {
+public class SQLBuilderUtility {
     private Configuration configuration;
     private LanguageDriver languageDriver;
 
-    public MSUtils(Configuration configuration) {
+    public SQLBuilderUtility(Configuration configuration) {
         this.configuration = configuration;
         languageDriver = configuration.getDefaultScriptingLanuageInstance();
     }

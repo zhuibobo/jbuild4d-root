@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jbuild4d.base.dbaccess.dao.GeneralMapper">
+<mapper namespace="com.jbuild4d.base.dbaccess.dynamic.GeneralMapper">
     <select id="executeScalarSql" resultType="object">
         ${_parameter}
     </select>

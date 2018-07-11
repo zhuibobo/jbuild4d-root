@@ -2,6 +2,7 @@ package com.jbuild4d.web.platform.beanconfig.mybatis;
 
 import com.github.pagehelper.PageInterceptor;
 import com.jbuild4d.base.dbaccess.dao.*;
+import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.UniversalIntEnumHandler;
 import com.jbuild4d.base.dbaccess.general.DBProp;
@@ -11,7 +12,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;

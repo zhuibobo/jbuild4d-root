@@ -1,4 +1,4 @@
-package com.jbuild4d.base.dbaccess.dao;
+package com.jbuild4d.base.dbaccess.dynamic;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,8 +21,8 @@ import java.util.Map;
  * @author liuzh
  * @since 2015-03-10
  */
-public class SqlMapper {
-    private final MSUtils msUtils;
+public class SQLBuilderMapper implements ISQLBuilderMapper {
+    private final SQLBuilderUtility msUtils;
     private final SqlSession sqlSession;
 
     /**
@@ -30,9 +30,9 @@ public class SqlMapper {
      *
      * @param sqlSession
      */
-    public SqlMapper(SqlSession sqlSession) {
+    public SQLBuilderMapper(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
-        this.msUtils = new MSUtils(sqlSession.getConfiguration());
+        this.msUtils = new SQLBuilderUtility(sqlSession.getConfiguration());
     }
 
     /**
@@ -42,7 +42,8 @@ public class SqlMapper {
      * @param <T>  泛型类型
      * @return
      */
-    private <T> T getOne(List<T> list) {
+    @Override
+    public <T> T getOne(List<T> list) {
         if (list.size() == 1) {
             return list.get(0);
         } else if (list.size() > 1) {
@@ -58,6 +59,7 @@ public class SqlMapper {
      * @param sql 执行的sql
      * @return
      */
+    @Override
     public Map<String, Object> selectOne(String sql) {
         List<Map<String, Object>> list = selectList(sql);
         return getOne(list);
@@ -70,6 +72,7 @@ public class SqlMapper {
      * @param value 参数
      * @return
      */
+    @Override
     public Map<String, Object> selectOne(String sql, Object value) {
         List<Map<String, Object>> list = selectList(sql, value);
         return getOne(list);
@@ -83,6 +86,7 @@ public class SqlMapper {
      * @param <T>        泛型类型
      * @return
      */
+    @Override
     public <T> T selectOne(String sql, Class<T> resultType) {
         List<T> list = selectList(sql, resultType);
         return getOne(list);
@@ -97,6 +101,7 @@ public class SqlMapper {
      * @param <T>        泛型类型
      * @return
      */
+    @Override
     public <T> T selectOne(String sql, Object value, Class<T> resultType) {
         List<T> list = selectList(sql, value, resultType);
         return getOne(list);
@@ -108,6 +113,7 @@ public class SqlMapper {
      * @param sql 执行的sql
      * @return
      */
+    @Override
     public List<Map<String, Object>> selectList(String sql) {
         String msId = msUtils.select(sql);
         return sqlSession.selectList(msId);
@@ -120,6 +126,7 @@ public class SqlMapper {
      * @param value 参数
      * @return
      */
+    @Override
     public List<Map<String, Object>> selectList(String sql, Object value) {
         Class<?> parameterType = value != null ? value.getClass() : null;
         String msId = msUtils.selectDynamic(sql, parameterType);
@@ -134,6 +141,7 @@ public class SqlMapper {
      * @param <T>        泛型类型
      * @return
      */
+    @Override
     public <T> List<T> selectList(String sql, Class<T> resultType) {
         String msId;
         if (resultType == null) {
@@ -153,6 +161,7 @@ public class SqlMapper {
      * @param <T>        泛型类型
      * @return
      */
+    @Override
     public <T> List<T> selectList(String sql, Object value, Class<T> resultType) {
         String msId;
         Class<?> parameterType = value != null ? value.getClass() : null;
@@ -170,6 +179,7 @@ public class SqlMapper {
      * @param sql 执行的sql
      * @return
      */
+    @Override
     public int insert(String sql) {
         String msId = msUtils.insert(sql);
         return sqlSession.insert(msId);
@@ -182,6 +192,7 @@ public class SqlMapper {
      * @param value 参数
      * @return
      */
+    @Override
     public int insert(String sql, Object value) {
         Class<?> parameterType = value != null ? value.getClass() : null;
         String msId = msUtils.insertDynamic(sql, parameterType);
@@ -194,6 +205,7 @@ public class SqlMapper {
      * @param sql 执行的sql
      * @return
      */
+    @Override
     public int update(String sql) {
         String msId = msUtils.update(sql);
         return sqlSession.update(msId);
@@ -206,6 +218,7 @@ public class SqlMapper {
      * @param value 参数
      * @return
      */
+    @Override
     public int update(String sql, Object value) {
         Class<?> parameterType = value != null ? value.getClass() : null;
         String msId = msUtils.updateDynamic(sql, parameterType);
@@ -218,6 +231,7 @@ public class SqlMapper {
      * @param sql 执行的sql
      * @return
      */
+    @Override
     public int delete(String sql) {
         String msId = msUtils.delete(sql);
         return sqlSession.delete(msId);
@@ -230,11 +244,11 @@ public class SqlMapper {
      * @param value 参数
      * @return
      */
+    @Override
     public int delete(String sql, Object value) {
         Class<?> parameterType = value != null ? value.getClass() : null;
         String msId = msUtils.deleteDynamic(sql, parameterType);
         return sqlSession.delete(msId, value);
     }
-
 }
 

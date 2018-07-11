@@ -1,4 +1,4 @@
-package com.jbuild4d.base.dbaccess.dao;
+package com.jbuild4d.base.dbaccess.dynamic;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -13,6 +13,5 @@ public interface GeneralMapper {
     Long nextOrderNum(@Param("TableName") String TableName, @Param("OrderFieldName") String OrderFieldName);
 
     Object executeScalarSql(String sql);
-
 }
 

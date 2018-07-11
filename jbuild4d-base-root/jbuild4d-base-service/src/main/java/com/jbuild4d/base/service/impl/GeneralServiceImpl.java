@@ -1,6 +1,6 @@
 package com.jbuild4d.base.service.impl;
 
-import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
+import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.SQLKeyWordUtility;
@@ -15,12 +15,12 @@ import java.util.Map;
  * Date: 2018/7/6
  * To change this template use File | Settings | File Templates.
  */
-public class GeneralService implements IGeneralService {
+public class GeneralServiceImpl implements IGeneralService {
 
     GeneralMapper generalMapper;
     protected SqlSessionTemplate sqlSessionTemplate;
 
-    public GeneralService(GeneralMapper _generalMapper,SqlSessionTemplate _sqlSessionTemplate){
+    public GeneralServiceImpl(GeneralMapper _generalMapper, SqlSessionTemplate _sqlSessionTemplate){
         generalMapper=_generalMapper;
         sqlSessionTemplate=_sqlSessionTemplate;
     }

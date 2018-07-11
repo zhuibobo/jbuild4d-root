@@ -1,21 +1,17 @@
 package com.jbuild4d.platform.system.service.impl;
 
-import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dao.DictionaryGroupMapper;
-import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
-import com.jbuild4d.base.dbaccess.dao.SqlMapper;
+import com.jbuild4d.base.dbaccess.dynamic.SQLBuilderMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.impl.BaseService;
-import com.jbuild4d.base.service.impl.GeneralService;
+import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.SQLKeyWordUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,14 +20,15 @@ import java.util.Map;
  * Date: 2018/7/5
  * To change this template use File | Settings | File Templates.
  */
-public class DictionaryGroupServiceImpl  extends BaseService<DictionaryGroupEntity> implements IDictionaryGroupService {
+public class DictionaryGroupServiceImplImpl extends BaseServiceImpl<DictionaryGroupEntity> implements IDictionaryGroupService {
 
     DictionaryGroupMapper dictionaryGroupMapper;
+    SQLBuilderMapper sqlMapper;
 
-    public DictionaryGroupServiceImpl(DictionaryGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, IGeneralService _generalService) {
+    public DictionaryGroupServiceImplImpl(DictionaryGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, IGeneralService _generalService) {
         super(_defaultBaseMapper, _sqlSessionTemplate, _generalService);
         dictionaryGroupMapper=_defaultBaseMapper;
-        SqlMapper sqlMapper=new SqlMapper(_sqlSessionTemplate);
+        sqlMapper=new SQLBuilderMapper(_sqlSessionTemplate);
     }
 
     @Override
@@ -60,6 +57,7 @@ public class DictionaryGroupServiceImpl  extends BaseService<DictionaryGroupEnti
     public void moveUp(String id){
         String sql="select min(DICT_GROUP_ORDER_NUM) from TB4D_DICTIONARY_GROUP where DICT_GROUP_ORDER_NUM>(select DICT_GROUP_ORDER_NUM from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID="+ SQLKeyWordUtility.stringWrap(id)+")";
         Object gtMin=generalService.executeScalarSql(sql);
+        Map<String, Object> map=sqlMapper.selectOne("select * from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID=#{ID}","21684b89-2126-4224-910e-18c90dd93489");
         System.out.println(gtMin);
         //System.out.printf(gtMin);
     }

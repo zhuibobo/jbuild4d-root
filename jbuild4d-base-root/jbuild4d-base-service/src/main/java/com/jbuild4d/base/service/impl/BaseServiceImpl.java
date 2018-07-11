@@ -1,7 +1,6 @@
 package com.jbuild4d.base.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
-import com.jbuild4d.base.dbaccess.dao.GeneralMapper;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.IBaseService;
 import com.github.pagehelper.PageHelper;
@@ -19,20 +18,20 @@ import java.util.Map;
  * @Description:
  * @Version 1.0.0
  */
-public class BaseService<T> implements IBaseService<T> {
+public class BaseServiceImpl<T> implements IBaseService<T> {
     private BaseMapper<T> defaultBaseMapper = null;
     protected SqlSessionTemplate sqlSessionTemplate = null;
     protected IGeneralService generalService = null;
 
-    public BaseService(BaseMapper<T> _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, IGeneralService _generalService){
+    public BaseServiceImpl(BaseMapper<T> _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, IGeneralService _generalService){
         defaultBaseMapper= _defaultBaseMapper;
         sqlSessionTemplate=_sqlSessionTemplate;
         generalService=_generalService;
     }
 
     @Override
-    public void setGeneralService(GeneralService _generalService) {
-        generalService = _generalService;
+    public void setGeneralService(GeneralServiceImpl _generalServiceImpl) {
+        generalService = _generalServiceImpl;
     }
 
     @Override
@@ -160,7 +159,7 @@ public class BaseService<T> implements IBaseService<T> {
 
     @Override
     public void statusChange(String ids, String status) throws JBuild4DGenerallyException {
-        throw new JBuild4DGenerallyException("BaseService<T>未实现statusChange方法，请在具体的Service中实现");
+        throw new JBuild4DGenerallyException("BaseServiceImpl<T>未实现statusChange方法，请在具体的Service中实现");
     }
 
     @Override
