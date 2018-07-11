@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,6 +36,9 @@ public class DictionaryGroupServiceTest {
     public void crudSimple() throws JBuild4DGenerallyException {
         String key= UUID.randomUUID().toString();
         this.addSingle(key,key,key);
+        DictionaryGroupEntity newEntity=dictionaryGroupService.getByPrimaryKey(key);
+        Assert.assertEquals(key,newEntity.getDictGroupText());
+
     }
 
     private void addSingle(String key,String text,String value) throws JBuild4DGenerallyException {
@@ -42,6 +46,8 @@ public class DictionaryGroupServiceTest {
         groupEntity.setDictGroupId(key);
         groupEntity.setDictGroupText(text);
         groupEntity.setDictGroupValue(value);
+        groupEntity.setDictGroupCreateTime(new Date());
+        groupEntity.setDictGroupDesc("");
         dictionaryGroupService.saveBySelective(key,groupEntity);
     }
 }
