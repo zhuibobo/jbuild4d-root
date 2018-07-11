@@ -21,11 +21,11 @@ import java.util.Map;
  * Date: 2018/7/5
  * To change this template use File | Settings | File Templates.
  */
-public class DictionaryGroupServiceImplImpl extends BaseServiceImpl<DictionaryGroupEntity> implements IDictionaryGroupService {
+public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupEntity> implements IDictionaryGroupService {
 
     DictionaryGroupMapper dictionaryGroupMapper;
 
-    public DictionaryGroupServiceImplImpl(DictionaryGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) {
+    public DictionaryGroupServiceImpl(DictionaryGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) {
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         dictionaryGroupMapper=_defaultBaseMapper;
     }

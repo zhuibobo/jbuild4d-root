@@ -14,11 +14,11 @@ import org.mybatis.spring.SqlSessionTemplate;
  * Date: 2018/7/5
  * To change this template use File | Settings | File Templates.
  */
-public class DictionaryServiceImplImpl extends BaseServiceImpl<DictionaryEntity> implements IDictionaryService {
+public class DictionaryServiceImpl extends BaseServiceImpl<DictionaryEntity> implements IDictionaryService {
 
     DictionaryMapper dictionaryMapper;
 
-    public DictionaryServiceImplImpl(DictionaryMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) {
+    public DictionaryServiceImpl(DictionaryMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) {
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         dictionaryMapper=_defaultBaseMapper;
     }
