@@ -1,5 +1,7 @@
 package com.jbuild4d.base.service;
 
+import java.util.Map;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -7,4 +9,5 @@ package com.jbuild4d.base.service;
  * To change this template use File | Settings | File Templates.
  */
 public interface ISQLBuilderService {
+    Map<String,Object> selectOne(String s, Object value);
 }

@@ -2,6 +2,8 @@ package com.jbuild4d.web.platform.beanconfig.service;
 
 import com.jbuild4d.base.dbaccess.dao.*;
 import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
+import com.jbuild4d.base.dbaccess.dynamic.ISQLBuilderMapper;
+import com.jbuild4d.base.dbaccess.dynamic.SQLBuilderMapper;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.impl.GeneralServiceImpl;
@@ -30,8 +32,14 @@ public class SystemBeansConfig {
     }
 
     @Bean
-    public ISQLBuilderService sqlBuilderService(SqlSessionTemplate sqlSessionTemplate) {
-        ISQLBuilderService bean=new SQLBuilderServiceImpl();
+    public ISQLBuilderMapper sqlBuilderMapper(SqlSessionTemplate sqlSessionTemplate) {
+        ISQLBuilderMapper bean=new SQLBuilderMapper(sqlSessionTemplate);
+        return bean;
+    }
+
+    @Bean
+    public ISQLBuilderService sqlBuilderService(ISQLBuilderMapper sqlBuilderMapper) {
+        ISQLBuilderService bean=new SQLBuilderServiceImpl(sqlBuilderMapper);
         return bean;
     }
 

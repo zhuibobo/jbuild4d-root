@@ -18,8 +18,6 @@ import java.util.Map;
  *
  * 不建议将参数直接拼到字符串中，当大量这么使用的时候由于缓存MappedStatement而占用更多的内存
  *
- * @author liuzh
- * @since 2015-03-10
  */
 public class SQLBuilderMapper implements ISQLBuilderMapper {
     private final SQLBuilderUtility msUtils;

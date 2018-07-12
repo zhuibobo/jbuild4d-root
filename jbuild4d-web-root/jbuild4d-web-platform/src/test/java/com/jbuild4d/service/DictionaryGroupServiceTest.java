@@ -1,5 +1,6 @@
 package com.jbuild4d.service;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -34,11 +36,40 @@ public class DictionaryGroupServiceTest {
 
     @Test
     public void crudSimple() throws JBuild4DGenerallyException {
-        String key= UUID.randomUUID().toString();
-        this.addSingle(key,key,key);
-        DictionaryGroupEntity newEntity=dictionaryGroupService.getByPrimaryKey(key);
-        Assert.assertEquals(key,newEntity.getDictGroupText());
+        //String key= UUID.randomUUID().toString();
+        //this.addSingle(key,key,key);
+        //DictionaryGroupEntity newEntity=dictionaryGroupService.getByPrimaryKey(key);
+        //Assert.assertEquals(key,newEntity.getDictGroupText());
+        //dictionaryGroupService.moveUp("3ef083a7-eee9-4e55-b38c-215bbe11fc2c");
 
+        List<String> keys=new ArrayList<>();
+        int nextMaxOrderNum=dictionaryGroupService.getNextOrderNum();
+
+        try {
+            for (int i = 0; i < 100; i++) {
+                String key = UUID.randomUUID().toString();
+                this.addSingle(key, key, key);
+                keys.add(key);
+                DictionaryGroupEntity newEntity = dictionaryGroupService.getByPrimaryKey(key);
+                Assert.assertEquals(key, newEntity.getDictGroupText());
+                Assert.assertEquals(nextMaxOrderNum + i, Integer.parseInt(newEntity.getDictGroupOrderNum().toString()));
+            }
+
+            //测试升序，降序
+
+
+            for (String key : keys) {
+                dictionaryGroupService.deleteByKey(key);
+            }
+
+            DictionaryGroupEntity entity = dictionaryGroupService.getByPrimaryKey(keys.get(0));
+            Assert.assertEquals(null, entity);
+        }
+        finally {
+            for (String key : keys) {
+                dictionaryGroupService.deleteByKey(key);
+            }
+        }
     }
 
     private void addSingle(String key,String text,String value) throws JBuild4DGenerallyException {

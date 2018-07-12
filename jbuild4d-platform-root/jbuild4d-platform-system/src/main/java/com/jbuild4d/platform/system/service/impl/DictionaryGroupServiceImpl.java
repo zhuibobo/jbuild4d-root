@@ -13,6 +13,7 @@ import com.jbuild4d.base.tools.common.SQLKeyWordUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -54,10 +55,13 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
 
     @Override
     public void moveUp(String id){
-        String sql="select min(DICT_GROUP_ORDER_NUM) from TB4D_DICTIONARY_GROUP where DICT_GROUP_ORDER_NUM>(select DICT_GROUP_ORDER_NUM from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID="+ SQLKeyWordUtility.stringWrap(id)+")";
-        Object gtMin=generalService.executeScalarSql(sql);
-        //Map<String, Object> map=sqlMapper.selectOne("select * from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID=#{ID}","21684b89-2126-4224-910e-18c90dd93489");
-        System.out.println(gtMin);
+        //String sql="select min(DICT_GROUP_ORDER_NUM) from TB4D_DICTIONARY_GROUP where DICT_GROUP_ORDER_NUM>(select DICT_GROUP_ORDER_NUM from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID="+ SQLKeyWordUtility.stringWrap(id)+")";
+        //Object gtMin=generalService.executeScalarSql(sql);
+        Map<String,String> value=new HashMap<>();
+        value.put("ID","1");
+        value.put("ID1","2");
+        Map<String, Object> map=sqlBuilderService.selectOne("select min(DICT_GROUP_ORDER_NUM) from TB4D_DICTIONARY_GROUP where DICT_GROUP_ORDER_NUM>(select DICT_GROUP_ORDER_NUM from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID=#{ID} or DICT_GROUP_ID=#{ID1})",value);
+        //System.out.println(gtMin);
         //System.out.printf(gtMin);
     }
 
