@@ -57,4 +57,8 @@ public interface IBaseService<T> {
     int getNextOrderNum(JB4DSession jb4DSession);
 
     void statusChange(JB4DSession jb4DSession,String ids, String status) throws JBuild4DGenerallyException;
+
+    void moveUp(String id);
+
+    void moveDown(String id);
 }

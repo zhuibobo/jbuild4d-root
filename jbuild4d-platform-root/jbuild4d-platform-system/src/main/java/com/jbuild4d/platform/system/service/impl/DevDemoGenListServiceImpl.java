@@ -2,6 +2,7 @@ package com.jbuild4d.platform.system.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.DevDemoGenListMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
+import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
@@ -39,5 +40,15 @@ public class DevDemoGenListServiceImpl extends BaseServiceImpl<DevDemoGenListEnt
                 return item;
             }
         });
+    }
+
+    @Override
+    public void statusChange(JB4DSession jb4DSession,String ids,String status) {
+        String[] idArray=ids.split(";");
+        for(int i=0;i<idArray.length;i++){
+            DevDemoGenListEntity entity=getByPrimaryKey(jb4DSession,idArray[i]);
+            entity.setDdglStatus(status);
+            devDemoGenListMapper.updateByPrimaryKeySelective(entity);
+        }
     }
 }

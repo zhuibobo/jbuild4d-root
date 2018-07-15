@@ -20,7 +20,7 @@ import java.util.Map;
  * @Description:
  * @Version 1.0.0
  */
-public class BaseServiceImpl<T> implements IBaseService<T> {
+public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     private BaseMapper<T> defaultBaseMapper = null;
     protected SqlSessionTemplate sqlSessionTemplate = null;
     protected ISQLBuilderService sqlBuilderService = null;
@@ -101,7 +101,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
         }
     }
 
-    @Override
+    /*@Override
     public int saveBySelective(JB4DSession jb4DSession,String id,T record) throws JBuild4DGenerallyException {
         if(getByPrimaryKey(jb4DSession,id)==null){
             return addSelective(jb4DSession,record);
@@ -109,7 +109,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
         else{
             return updateByKeySelective(jb4DSession,record);
         }
-    }
+    }*/
 
     @Override
     public int saveBySelective(JB4DSession jb4DSession,String id, T record, IAddBefore<T> addBefore) throws JBuild4DGenerallyException {
@@ -159,5 +159,15 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     public  List<T> searchByMap(JB4DSession jb4DSession,Map<String,Object> searchItemMap)
     {
         return defaultBaseMapper.searchByMap(searchItemMap);
+    }
+
+    @Override
+    public void moveUp(String id){
+
+    }
+
+    @Override
+    public void moveDown(String id){
+
     }
 }
