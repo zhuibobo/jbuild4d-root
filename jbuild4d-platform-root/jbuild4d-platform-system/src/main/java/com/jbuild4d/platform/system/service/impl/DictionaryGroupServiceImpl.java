@@ -30,7 +30,7 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
     public int saveBySelective(JB4DSession jb4DSession, String id, DictionaryGroupEntity record) throws JBuild4DGenerallyException {
         return super.saveBySelective(jb4DSession,id, record, new IAddBefore<DictionaryGroupEntity>() {
             @Override
-            public DictionaryGroupEntity run(DictionaryGroupEntity item) throws JBuild4DGenerallyException {
+            public DictionaryGroupEntity run(JB4DSession jb4DSession1,DictionaryGroupEntity item) throws JBuild4DGenerallyException {
                 item.setDictGroupOrderNum(generalService.nextOrderNum("TB4D_DICTIONARY_GROUP","DICT_GROUP_ORDER_NUM"));
                 item.setDictGroupStatus(EnableTypeEnum.enable.getDisplayName());
                 return item;

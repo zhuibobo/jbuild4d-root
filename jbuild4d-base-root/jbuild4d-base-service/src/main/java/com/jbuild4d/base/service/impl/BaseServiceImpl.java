@@ -114,7 +114,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     @Override
     public int saveBySelective(JB4DSession jb4DSession,String id, T record, IAddBefore<T> addBefore) throws JBuild4DGenerallyException {
         if(getByPrimaryKey(jb4DSession,id)==null){
-            record=addBefore.run(record);
+            record=addBefore.run(jb4DSession,record);
             return addSelective(jb4DSession,record);
         }
         else{
