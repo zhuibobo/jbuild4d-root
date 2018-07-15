@@ -33,8 +33,8 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
     IDictionaryGroupService dictionaryGroupService;
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-        setBaseService(dictionaryGroupService);
+    protected IBaseService<DictionaryGroupEntity> getBaseService() {
+        return dictionaryGroupService;
     }
 
     @Override
@@ -52,6 +52,11 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
     public JBuild4DResponseVo moveUp(String recordId) {
         dictionaryGroupService.moveUp(recordId);
         return JBuild4DResponseVo.opSuccess();
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
     }
 
     /*@Override

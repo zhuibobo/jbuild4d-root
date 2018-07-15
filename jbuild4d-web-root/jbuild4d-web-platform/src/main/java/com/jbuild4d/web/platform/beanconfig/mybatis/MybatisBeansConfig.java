@@ -75,6 +75,11 @@ public class MybatisBeansConfig {
     }
 
     @Bean
+    public DevDemoGenListMapper devDemoGenListMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(DevDemoGenListMapper.class);
+    }
+
+    @Bean
     public MenuMapper menuMapper(SqlSessionTemplate sqlSessionTemplate) {
         return sqlSessionTemplate.getMapper(MenuMapper.class);
     }
