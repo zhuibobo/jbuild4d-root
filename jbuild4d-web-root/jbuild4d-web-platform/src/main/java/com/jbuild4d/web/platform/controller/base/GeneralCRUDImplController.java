@@ -132,7 +132,6 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
             return JBuild4DResponseVo.opError(e.getMessage());
         }
         //dictionaryGroupService.saveBySelective(dictionaryEntity.getDictGroupId(), dictionaryEntity);
-
     }
 
     @RequestMapping(value = "Delete", method = RequestMethod.POST)

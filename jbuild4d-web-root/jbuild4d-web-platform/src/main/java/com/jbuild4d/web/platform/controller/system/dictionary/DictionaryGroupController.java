@@ -50,7 +50,7 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
     @RequestMapping(value = "MoveUp", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo moveUp(String recordId) {
-        dictionaryGroupService.moveUp(recordId);
+        //dictionaryGroupService.moveUp(recordId);
         return JBuild4DResponseVo.opSuccess();
     }
 

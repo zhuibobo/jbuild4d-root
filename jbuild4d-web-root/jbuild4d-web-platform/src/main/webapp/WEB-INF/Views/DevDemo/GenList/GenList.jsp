@@ -30,6 +30,14 @@
                 <Icon type="minus-round"></Icon>
                 禁用
             </i-button>
+            <i-button type="primary" @click="moveUp('启用')">
+                <Icon type="arrow-up-b"></Icon>
+                上移
+            </i-button>
+            <i-button type="primary" @click="moveDown('禁用')">
+                <Icon type="arrow-down-b"></Icon>
+                下移
+            </i-button>
         </div>
         <div style="clear: both"></div>
     </div>
