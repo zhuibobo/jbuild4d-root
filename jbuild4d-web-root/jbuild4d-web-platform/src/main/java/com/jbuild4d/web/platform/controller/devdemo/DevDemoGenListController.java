@@ -29,12 +29,12 @@ public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoG
 
     @Override
     public String getListViewName() {
-        return null;
+        return "/DevDemo/GenList/GenList";
     }
 
     @Override
     public String getDetailViewName() {
-        return null;
+        return "/DevDemo/GenList/GenEdit";
     }
 
     @Override
