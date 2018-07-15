@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping(value = "/PlatForm/DevDemo/DevDemoGenList")
-public class DevDemoGenList extends GeneralCRUDImplController<DevDemoGenListEntity> implements InitializingBean {
+public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoGenListEntity> implements InitializingBean {
 
     @Autowired
     IDevDemoGenListService devDemoGenListService;

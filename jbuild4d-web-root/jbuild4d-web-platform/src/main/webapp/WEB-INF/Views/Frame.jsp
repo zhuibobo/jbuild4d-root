@@ -200,7 +200,8 @@
                 this.unSelectedAllTopMenu();
                 item.selected=true;
                 this.leftMenuArrayJson=item.items;
-                if(reSetLeftMenu) {
+                //debugger;
+                if(this.leftIframeUrl.indexOf("/PlatForm/Base/LeftMenu.do")>=0&&reSetLeftMenu) {
                     $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
                 };
                 this.buildBreadcrumbByMenuId(item.menuId);
@@ -209,6 +210,19 @@
                     this.contentIframeUrl=item.rightUrl;
                 }else{
                     this.contentIframeUrl=this.defaultContentIframeUrl;
+                }
+                //debugger;
+                if(item.leftUrl!=""&&item.leftUrl!=null&&item.leftUrl!="LeftMenu.do"){
+                    this.leftIframeUrl=JB4D.BaseUtility.BuildUrl(item.leftUrl);
+                    return;
+                }
+                else{
+                    this.leftIframeUrl=this.defaultLeftIframeUrl;
+                    $("#leftMenuIframe").on("load",function() {
+                        $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
+                        $("#leftMenuIframe").unbind("load");
+                        //$("#leftMenuIframe")[0].contentWindow.app.PageReady();
+                    });
                 }
             },
             setFrameHeight:function(){
