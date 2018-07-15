@@ -30,14 +30,6 @@
                 <Icon type="minus-round"></Icon>
                 禁用
             </i-button>
-            <i-button type="primary" @click="moveUp()">
-                <Icon type="chevron-up"></Icon>
-                上移
-            </i-button>
-            <i-button type="primary" @click="moveDown()">
-                <Icon type="chevron-down"></Icon>
-                下移
-            </i-button>
         </div>
         <div style="clear: both"></div>
     </div>
@@ -126,23 +118,6 @@
             del: function (recordId) {
                 var url = '/PlatForm/System/DictionaryGroup/Delete.do';
                 JB4D.ListPageUtility.IViewTableDeleteRow(url,recordId,app);
-            },
-            moveUp:function () {
-                var _self = this;
-                JB4D.ListPageUtility.IViewTableMareSureSelectedOne(this.selectionRows).then(function (selectionRows) {
-                    var url = "/PlatForm/System/DictionaryGroup/MoveUp.do";
-                    var recordId = selectionRows[0].dictGroupId;
-                    AjaxUtility.Post(url, {
-                        recordId: recordId
-                    }, function (result) {
-                        if (result.success) {
-                            _self.reloadData();
-                        }
-                    }, "json");
-                });
-            },
-            moveDown:function () {
-
             },
             statusEnable: function (statusName) {
                 var url = '/PlatForm/System/DictionaryGroup/StatusChange.do';

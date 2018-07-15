@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
@@ -47,7 +48,8 @@ public class DictionaryGroupServiceTest {
 
         try {
             for (int i = 0; i < 100; i++) {
-                String key = UUID.randomUUID().toString();
+                String key = UUIDUtility.getTestUUID();
+                Assert.assertTrue(key.indexOf(UUIDUtility.getTestPrefix())==0);
                 this.addSingle(key, key, key);
                 keys.add(key);
                 DictionaryGroupEntity newEntity = dictionaryGroupService.getByPrimaryKey(key);

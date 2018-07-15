@@ -1,4 +1,22 @@
 
+-----------------------------------------开发适用DEMO-----------------------------------------
+CREATE TABLE [dbo].[TB4D_DEV_DEMO_GEN_LIST] (
+  [DDGL_ID]         [NVARCHAR](128) NOT NULL PRIMARY KEY,
+  [DDGL_KEY]        [NVARCHAR](128) NULL,
+  [DDGL_NAME]       [NVARCHAR](128) NULL,
+  [DDGL_VALUE]      [NVARCHAR](500) NULL,
+  [DDGL_STATUS]     [NVARCHAR](10)  NULL,
+  [DDGL_DESC]       [NVARCHAR](MAX) NULL,
+  [DDGL_CREATETIME] [DATETIME]      NULL,
+  [DDGL_USER_ID]    [NVARCHAR](100) NULL,
+  [DDGL_USER_NAME]  [NVARCHAR](100) NULL,
+  [DDGL_ORGAN_ID]   [NVARCHAR](100) NULL,
+  [DDGL_ORGAN_NAME] [NVARCHAR](100) NULL,
+  [DDGL_API]        [NVARCHAR](100) NULL,
+  [DDGL_ORDER_NUM]  [BIGINT]        NULL
+)
+
+
 -----------------------------------------系统设置表-----------------------------------------
 CREATE TABLE [dbo].[TB4D_SETTING] (
   [SETTING_ID]         [NVARCHAR](128) NOT NULL PRIMARY KEY,

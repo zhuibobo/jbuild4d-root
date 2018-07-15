@@ -13,6 +13,14 @@ public class UUIDUtility {
         return  UUID.randomUUID().toString();
     }
 
+    public static String getTestPrefix(){
+        return "TESTSCOPE-";
+    }
+
+    public static String getTestUUID(){
+        return  getTestPrefix()+UUID.randomUUID().toString();
+    }
+
     public static String getUUIDNotSplit(){
         String uuid=getUUID();
         return uuid.replaceAll("-","");

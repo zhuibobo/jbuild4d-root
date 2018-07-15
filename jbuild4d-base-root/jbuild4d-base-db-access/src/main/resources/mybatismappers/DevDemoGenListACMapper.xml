@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.DevDemoGenListMapper">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
+    <constructor>
+      <idArg column="DDGL_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_KEY" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_CREATETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="DDGL_USER_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_USER_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_API" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_ORDER_NUM" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    DDGL_ID, DDGL_KEY, DDGL_NAME, DDGL_VALUE, DDGL_STATUS, DDGL_DESC, DDGL_CREATETIME, 
+    DDGL_USER_ID, DDGL_USER_NAME, DDGL_ORGAN_ID, DDGL_ORGAN_NAME, DDGL_API, DDGL_ORDER_NUM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB4D_DEV_DEMO_GEN_LIST
+    where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB4D_DEV_DEMO_GEN_LIST
+    where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
+    insert into TB4D_DEV_DEMO_GEN_LIST (DDGL_ID, DDGL_KEY, DDGL_NAME, 
+      DDGL_VALUE, DDGL_STATUS, DDGL_DESC, 
+      DDGL_CREATETIME, DDGL_USER_ID, DDGL_USER_NAME, 
+      DDGL_ORGAN_ID, DDGL_ORGAN_NAME, DDGL_API, 
+      DDGL_ORDER_NUM)
+    values (#{ddglId,jdbcType=NVARCHAR}, #{ddglKey,jdbcType=NVARCHAR}, #{ddglName,jdbcType=NVARCHAR}, 
+      #{ddglValue,jdbcType=NVARCHAR}, #{ddglStatus,jdbcType=NVARCHAR}, #{ddglDesc,jdbcType=NVARCHAR}, 
+      #{ddglCreatetime,jdbcType=TIMESTAMP}, #{ddglUserId,jdbcType=NVARCHAR}, #{ddglUserName,jdbcType=NVARCHAR}, 
+      #{ddglOrganId,jdbcType=NVARCHAR}, #{ddglOrganName,jdbcType=NVARCHAR}, #{ddglApi,jdbcType=NVARCHAR}, 
+      #{ddglOrderNum,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
+    insert into TB4D_DEV_DEMO_GEN_LIST
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ddglId != null">
+        DDGL_ID,
+      </if>
+      <if test="ddglKey != null">
+        DDGL_KEY,
+      </if>
+      <if test="ddglName != null">
+        DDGL_NAME,
+      </if>
+      <if test="ddglValue != null">
+        DDGL_VALUE,
+      </if>
+      <if test="ddglStatus != null">
+        DDGL_STATUS,
+      </if>
+      <if test="ddglDesc != null">
+        DDGL_DESC,
+      </if>
+      <if test="ddglCreatetime != null">
+        DDGL_CREATETIME,
+      </if>
+      <if test="ddglUserId != null">
+        DDGL_USER_ID,
+      </if>
+      <if test="ddglUserName != null">
+        DDGL_USER_NAME,
+      </if>
+      <if test="ddglOrganId != null">
+        DDGL_ORGAN_ID,
+      </if>
+      <if test="ddglOrganName != null">
+        DDGL_ORGAN_NAME,
+      </if>
+      <if test="ddglApi != null">
+        DDGL_API,
+      </if>
+      <if test="ddglOrderNum != null">
+        DDGL_ORDER_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ddglId != null">
+        #{ddglId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglKey != null">
+        #{ddglKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglName != null">
+        #{ddglName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglValue != null">
+        #{ddglValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglStatus != null">
+        #{ddglStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglDesc != null">
+        #{ddglDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglCreatetime != null">
+        #{ddglCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddglUserId != null">
+        #{ddglUserId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglUserName != null">
+        #{ddglUserName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglOrganId != null">
+        #{ddglOrganId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglOrganName != null">
+        #{ddglOrganName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglApi != null">
+        #{ddglApi,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglOrderNum != null">
+        #{ddglOrderNum,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
+    update TB4D_DEV_DEMO_GEN_LIST
+    <set>
+      <if test="ddglKey != null">
+        DDGL_KEY = #{ddglKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglName != null">
+        DDGL_NAME = #{ddglName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglValue != null">
+        DDGL_VALUE = #{ddglValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglStatus != null">
+        DDGL_STATUS = #{ddglStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglDesc != null">
+        DDGL_DESC = #{ddglDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglCreatetime != null">
+        DDGL_CREATETIME = #{ddglCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddglUserId != null">
+        DDGL_USER_ID = #{ddglUserId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglUserName != null">
+        DDGL_USER_NAME = #{ddglUserName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglOrganId != null">
+        DDGL_ORGAN_ID = #{ddglOrganId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglOrganName != null">
+        DDGL_ORGAN_NAME = #{ddglOrganName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglApi != null">
+        DDGL_API = #{ddglApi,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglOrderNum != null">
+        DDGL_ORDER_NUM = #{ddglOrderNum,jdbcType=BIGINT},
+      </if>
+    </set>
+    where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
+    update TB4D_DEV_DEMO_GEN_LIST
+    set DDGL_KEY = #{ddglKey,jdbcType=NVARCHAR},
+      DDGL_NAME = #{ddglName,jdbcType=NVARCHAR},
+      DDGL_VALUE = #{ddglValue,jdbcType=NVARCHAR},
+      DDGL_STATUS = #{ddglStatus,jdbcType=NVARCHAR},
+      DDGL_DESC = #{ddglDesc,jdbcType=NVARCHAR},
+      DDGL_CREATETIME = #{ddglCreatetime,jdbcType=TIMESTAMP},
+      DDGL_USER_ID = #{ddglUserId,jdbcType=NVARCHAR},
+      DDGL_USER_NAME = #{ddglUserName,jdbcType=NVARCHAR},
+      DDGL_ORGAN_ID = #{ddglOrganId,jdbcType=NVARCHAR},
+      DDGL_ORGAN_NAME = #{ddglOrganName,jdbcType=NVARCHAR},
+      DDGL_API = #{ddglApi,jdbcType=NVARCHAR},
+      DDGL_ORDER_NUM = #{ddglOrderNum,jdbcType=BIGINT}
+    where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
+  </update>
+</mapper>
