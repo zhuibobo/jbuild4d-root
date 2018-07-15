@@ -1,3 +1,4 @@
+
 -----------------------------------------系统设置表-----------------------------------------
 CREATE TABLE [dbo].[TB4D_SETTING] (
   [SETTING_ID]         [NVARCHAR](128) NOT NULL PRIMARY KEY,
@@ -11,8 +12,7 @@ CREATE TABLE [dbo].[TB4D_SETTING] (
   [SETTING_USER_NAME]  [NVARCHAR](100) NULL,
   [SETTING_ORGAN_ID]   [NVARCHAR](100) NULL,
   [SETTING_ORGAN_NAME] [NVARCHAR](100) NULL,
-  [SETTING_API]        [NVARCHAR](100) NULL,
-  [SETTING_SCOPE]      [NVARCHAR](50)  NULL
+  [SETTING_API]        [NVARCHAR](100) NULL
 )
 
 EXECUTE sp_addextendedproperty N'MS_Description', N'系统基础参数设置表', N'user', N'dbo', N'table', N'TB4D_SETTING', NULL, NULL;
@@ -59,8 +59,7 @@ CREATE TABLE [dbo].[TB4D_MENU] (
   [CREATOR]             [NVARCHAR](200)  NULL,
   [DESCRIPTION]         [NVARCHAR](MAX)  NULL,
   [UPDATE_TIME]         [DATETIME]       NULL,
-  [JS_EXPRESSION]       [NVARCHAR](1000) NULL,
-  [MENU_SCOPE]          [NVARCHAR](50)   NULL
+  [JS_EXPRESSION]       [NVARCHAR](1000) NULL
 )
 
 EXECUTE sp_addextendedproperty N'MS_Description', N'系统导航菜单表', N'user', N'dbo', N'table', N'TB4D_MENU', NULL, NULL;
@@ -77,8 +76,7 @@ CREATE TABLE TB4D_DICTIONARY_GROUP (
   [DICT_GROUP_ORDER_NUM]   [BIGINT]        NULL,
   [DICT_GROUP_CREATE_TIME] [DATETIME]      NULL,
   [DICT_GROUP_DESC]        [NVARCHAR](500) NULL,
-  [DICT_GROUP_STATUS]      [NVARCHAR](10)  NULL,
-  [DICT_GROUP_SCOPE]       [NVARCHAR](50)  NULL
+  [DICT_GROUP_STATUS]      [NVARCHAR](10)  NULL
 )
 -----------------------------------------数据字典表-----------------------------------------
 CREATE TABLE TB4D_DICTIONARY (
@@ -104,6 +102,5 @@ CREATE TABLE TB4D_DICTIONARY (
   [DICT_USER_ID]       [NVARCHAR](100)  NULL,
   [DICT_USER_NAME]     [NVARCHAR](100)  NULL,
   [DICT_ORGAN_ID]      [NVARCHAR](100)  NULL,
-  [DICT_ORGAN_NAME]    [NVARCHAR](100)  NULL,
-  [DICT_SCOPE]         [NVARCHAR](50)   NULL
+  [DICT_ORGAN_NAME]    [NVARCHAR](100)  NULL
 )
