@@ -126,7 +126,7 @@
             },
             statusEnable: function (statusName) {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/StatusChange.do';
-                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"dictGroupId",statusName,appList);
+                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;
