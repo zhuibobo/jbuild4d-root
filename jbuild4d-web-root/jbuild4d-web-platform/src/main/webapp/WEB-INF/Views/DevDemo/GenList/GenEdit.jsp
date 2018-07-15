@@ -31,7 +31,7 @@
         </form-item>
         <form-item class="general-edit-page-bottom-wrap">
             <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保 存</i-button>
-            <i-button type="ghost" v-if="status!='view'" @click="handleReset('formValidate')" style="margin-left: 8px"> 关 闭</i-button>
+            <i-button type="ghost" @click="handleClose('formValidate')" style="margin-left: 8px"> 关 闭</i-button>
         </form-item>
     </i-form>
 </div>
@@ -39,6 +39,11 @@
 <script>
     var appForm =new Vue({
         el: "#appForm",
+        mounted:function () {
+           if(this.status=="view") {
+               DetailPageUtility.IViewPageToViewSatatus();
+           }
+        },
         data: {
             formValidate: {
                 ddglId: '${recordId}',

@@ -1378,6 +1378,16 @@ var ListPageUtility={
             }, "json");
     },
     IViewTableInnerButton:{
+        ViewButton:function (h, params,idField,pageAppObj) {
+            return h('div', {
+                class: "list-row-button list-row-button-view",
+                on: {
+                    click: function () {
+                        pageAppObj.view(params.row[idField]);
+                    }
+                }
+            });
+        },
         EditButton:function (h, params,idField,pageAppObj) {
             return h('div', {
                 class: "list-row-button list-row-button-edit",
@@ -1401,6 +1411,23 @@ var ListPageUtility={
     }
 }
 
+var DetailPageUtility={
+    IViewPageToViewSatatus:function () {
+        $("input").each(function () {
+            $(this).hide();
+            var val = $(this).val();
+            $(this).after($("<label />").text(val));
+        });
+        $(".ivu-date-picker-editor").find(".ivu-icon").hide();
+
+        $("textarea").each(function () {
+            $(this).hide();
+            var val = $(this).val();
+            $(this).after($("<label />").text(val));
+        });
+    }
+}
+
 var JB4D={
     NsManager:NsManager,
     BaseUtility:BaseUtility,
@@ -1414,5 +1441,6 @@ var JB4D={
     DialogUtility:DialogUtility,
     AjaxUtility:AjaxUtility,
     SearchUtility:SearchUtility,
-    ListPageUtility:ListPageUtility
+    ListPageUtility:ListPageUtility,
+    DetailPageUtility:DetailPageUtility
 }

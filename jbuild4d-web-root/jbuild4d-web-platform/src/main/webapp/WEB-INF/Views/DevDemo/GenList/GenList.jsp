@@ -15,7 +15,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
-<div id="app" class="iv-list-page-wrap">
+<div id="appList" class="iv-list-page-wrap">
     <div style="width: 100%" id="list-button-wrap">
         <div style="float: right">
             <i-button type="primary" @click="add()">
@@ -42,8 +42,8 @@
     </div>
 </div>
 <script>
-    var app = new Vue({
-        el: "#app",
+    var appList = new Vue({
+        el: "#appList",
         mounted: function () {
             this.reloadData();
         },
@@ -85,8 +85,9 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"ddglId",app),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"ddglId",app)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,"ddglId",appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"ddglId",appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"ddglId",appList)
                         ]);
                     }
                 }
@@ -115,13 +116,17 @@
                 var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=update&recordId=" + recordId);
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 3);
             },
+            view:function (recordId) {
+                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=view&recordId=" + recordId);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 3);
+            },
             del: function (recordId) {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/Delete.do';
-                JB4D.ListPageUtility.IViewTableDeleteRow(url,recordId,app);
+                JB4D.ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
             },
             statusEnable: function (statusName) {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/StatusChange.do';
-                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"dictGroupId",statusName,app);
+                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"dictGroupId",statusName,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;
