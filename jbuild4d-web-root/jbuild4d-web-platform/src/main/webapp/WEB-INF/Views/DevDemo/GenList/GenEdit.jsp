@@ -17,16 +17,16 @@
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
     <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
-        <form-item label="分 组 值：" prop="dictGroupValue">
-            <i-input v-model="formValidate.dictGroupValue"></i-input>
+        <form-item label="ddglValue：" prop="ddglValue">
+            <i-input v-model="formValidate.ddglValue"></i-input>
         </form-item>
-        <form-item label="分组名称：" prop="dictGroupText">
-            <i-input v-model="formValidate.dictGroupText"></i-input>
+        <form-item label="ddglName：" prop="ddglName">
+            <i-input v-model="formValidate.ddglName"></i-input>
         </form-item>
-        <form-item label="创建时间：">
-            <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.dictGroupCreateTime" disabled readonly></date-picker>
+        <form-item label="ddglCreatetime：">
+            <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.ddglCreatetime" disabled readonly></date-picker>
         </form-item>
-        <form-item label="备注：">
+        <form-item label="dictGroupDesc：">
             <i-input v-model="formValidate.dictGroupDesc" type="textarea" :autosize="{minRows: 3,maxRows: 3}"></i-input>
         </form-item>
         <form-item class="general-edit-page-bottom-wrap">
@@ -41,18 +41,18 @@
         el: "#appForm",
         data: {
             formValidate: {
-                dictGroupId: '${recordId}',
-                dictGroupValue: '${entity.ddglValue}',
-                dictGroupText: '${entity.ddglName}',
-                dictGroupCreateTime: '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />' == '' ? JB4D.DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />',
-                dictGroupDesc: '${entity.ddglDesc}'
+                ddglId: '${recordId}',
+                ddglValue: '${entity.ddglValue}',
+                ddglName: '${entity.ddglName}',
+                ddglCreatetime: '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />' == '' ? JB4D.DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />',
+                ddglDesc: '${entity.ddglDesc}'
             },
             ruleValidate: {
-                dictGroupValue: [
-                    {required: true, message: '【分组值】不能空！', trigger: 'blur'}
+                ddglValue: [
+                    {required: true, message: '【ddglValue】不能空！', trigger: 'blur'}
                 ],
-                dictGroupText: [
-                    {required: true, message: '【分组名称】不能空！', trigger: 'blur'}
+                ddglName: [
+                    {required: true, message: '【ddglName】不能空！', trigger: 'blur'}
                 ]
             },
             status: '${op}'
@@ -64,7 +64,7 @@
                     if (valid) {
                         var sendData = JSON.stringify(_self.formValidate);
                         //debugger;
-                        var url = '/PlatForm/System/DictionaryGroup/SaveEdit.do';
+                        var url = '/PlatForm/DevDemo/DevDemoGenList/SaveEdit.do';
                         AjaxUtility.PostRequestBody(url, sendData, function (result) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 //debugger;
@@ -77,8 +77,8 @@
                     }
                 })
             },
-            handleReset: function (name) {
-                this.$refs[name].resetFields();
+            handleClose: function (name) {
+                DialogUtility.Frame_CloseDialog(window);
             }
         }
     });
