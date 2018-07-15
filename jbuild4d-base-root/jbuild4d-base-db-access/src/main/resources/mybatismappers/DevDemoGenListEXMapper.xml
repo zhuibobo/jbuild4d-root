@@ -9,4 +9,7 @@
         <include refid="Base_Column_List" />
         from TB4D_DEV_DEMO_GEN_LIST ORDER by DDGL_ORDER_NUM DESC
     </select>
+    <select id="nextOrderNum" resultType="integer">
+        select case when max(DDGL_ORDER_NUM) is null then 1 else max(DDGL_ORDER_NUM)+1 end ORDERNUM from TB4D_DEV_DEMO_GEN_LIST
+    </select>
 </mapper>
