@@ -103,24 +103,24 @@
                 this.selectionRows = selection;
             },
             reloadData: function () {
-                var url = '/PlatForm/System/DictionaryGroup/GetListData.do';
+                var url = '/PlatForm/DevDemo/DevDemoGenList/GetListData.do';
                 JB4D.ListPageUtility.IViewTableLoadDataNoSearch(url,this.pageNum,this.pageSize,this);
                 this.selectionRows=null;
             },
             add: function () {
-                var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add");
+                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=add");
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "数据字典分组管理"}, 3);
             },
             edit: function (recordId) {
-                var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=update&recordId=" + recordId);
+                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=update&recordId=" + recordId);
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "数据字典分组管理"}, 3);
             },
             del: function (recordId) {
-                var url = '/PlatForm/System/DictionaryGroup/Delete.do';
+                var url = '/PlatForm/DevDemo/DevDemoGenList/Delete.do';
                 JB4D.ListPageUtility.IViewTableDeleteRow(url,recordId,app);
             },
             statusEnable: function (statusName) {
-                var url = '/PlatForm/System/DictionaryGroup/StatusChange.do';
+                var url = '/PlatForm/DevDemo/DevDemoGenList/StatusChange.do';
                 JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"dictGroupId",statusName,app);
             },
             changePage: function (pageNum) {

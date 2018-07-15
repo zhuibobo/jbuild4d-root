@@ -55,28 +55,28 @@
                     align: 'center'
                 },
                 {
-                    title: '分组名称',
-                    key: 'dictGroupText',
+                    title: 'ddglKey',
+                    key: 'ddglKey',
                     align: "center"
                 }, {
-                    title: '分组值',
-                    key: 'dictGroupValue',
+                    title: 'ddglName',
+                    key: 'ddglName',
                     align: "center"
                 }, {
-                    title: '备注',
-                    key: 'dictGroupDesc'
+                    title: 'ddglDesc',
+                    key: 'ddglDesc'
                 }, {
-                    title: '状态',
+                    title: 'ddglStatus',
                     width: 100,
                     align: "center",
-                    key: 'dictGroupStatus'
+                    key: 'ddglStatus'
                 }, {
-                    title: '创建时间',
-                    key: 'dictGroupCreateTime',
+                    title: 'ddglCreatetime',
+                    key: 'ddglCreatetime',
                     width: 100,
                     align: "center",
                     render: function (h, params) {
-                        return JB4D.ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.dictGroupCreateTime);
+                        return JB4D.ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddglCreatetime);
                     }
                 }, {
                     title: '操作',
@@ -85,8 +85,8 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"dictGroupId",app),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"dictGroupId",app)
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"ddglId",app),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"ddglId",app)
                         ]);
                     }
                 }
@@ -109,11 +109,11 @@
             },
             add: function () {
                 var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add");
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "数据字典分组管理"}, 3);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "一般列表"}, 3);
             },
             edit: function (recordId) {
                 var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=update&recordId=" + recordId);
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "数据字典分组管理"}, 3);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "一般列表"}, 3);
             },
             del: function (recordId) {
                 var url = '/PlatForm/System/DictionaryGroup/Delete.do';
@@ -121,7 +121,7 @@
             },
             statusEnable: function (statusName) {
                 var url = '/PlatForm/System/DictionaryGroup/StatusChange.do';
-                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"dictGroupId",statusName,app);
+                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,app);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;
