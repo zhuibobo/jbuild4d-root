@@ -73,7 +73,7 @@
                         AjaxUtility.PostRequestBody(url, sendData, function (result) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 //debugger;
-                                window.OpenerWindowObj.app.reloadData();
+                                window.OpenerWindowObj.appList.reloadData();
                                 DialogUtility.Frame_CloseDialog(window);
                             });
                         }, "json");

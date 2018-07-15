@@ -34,6 +34,8 @@ public class DevDemoGenListServiceImpl extends BaseServiceImpl<DevDemoGenListEnt
                 item.setDdglUserName(jb4DSession.getUserName());
                 item.setDdglOrganId(jb4DSession.getOrganId());
                 item.setDdglOrganName(jb4DSession.getOrganName());
+                item.setDdglOrderNum((long) devDemoGenListMapper.nextOrderNum());
+                item.setDdglStatus("启用");
                 return item;
             }
         });
