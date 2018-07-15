@@ -74,7 +74,7 @@
     </script>
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
     <div style="width: 100%">
         <div style="float: right;margin-bottom: 15px">
             <i-button type="primary" @click="add()" ><Icon type="plus"></Icon> 新增 </i-button>

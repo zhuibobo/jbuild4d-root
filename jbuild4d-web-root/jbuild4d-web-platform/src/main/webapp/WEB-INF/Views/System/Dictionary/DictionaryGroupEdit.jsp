@@ -15,7 +15,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
-<div id="app" class="general-edit-page-wrap">
+<div id="app" class="general-edit-page-wrap" v-cloak>
     <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
         <form-item label="分 组 值：" prop="dictGroupValue">
             <i-input v-model="formValidate.dictGroupValue"></i-input>

@@ -15,7 +15,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
-<div id="app" class="iv-list-page-wrap">
+<div id="app" class="iv-list-page-wrap" v-cloak>
     <div style="width: 100%" id="list-button-wrap">
         <div style="float: right">
             <i-button type="primary" @click="add()">

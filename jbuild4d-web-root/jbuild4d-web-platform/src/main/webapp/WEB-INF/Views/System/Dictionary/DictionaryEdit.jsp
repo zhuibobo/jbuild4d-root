@@ -14,7 +14,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
 </head>
 <body>
-<div id="app" class="general-edit-page-wrap">
+<div id="app" class="general-edit-page-wrap" v-cloak>
     <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
         <form-item label="字典-值：" prop="dictValue">
             <i-input v-model="formValidate.dictValue"></i-input>
