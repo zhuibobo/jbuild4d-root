@@ -10,6 +10,6 @@
     <title>Title</title>
 </head>
 <body>
-GenEdit.jsp
+    GenEdit.jsp
 </body>
 </html>
