@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import com.jbuild4d.platform.system.service.IMenuService;
@@ -44,15 +46,15 @@ public class DictionaryGroupServiceTest {
         //dictionaryGroupService.moveUp("3ef083a7-eee9-4e55-b38c-215bbe11fc2c");
 
         List<String> keys=new ArrayList<>();
-        int nextMaxOrderNum=dictionaryGroupService.getNextOrderNum();
-
+        JB4DSession jb4DSession= JB4DSessionUtility.getSession();
+        int nextMaxOrderNum=dictionaryGroupService.getNextOrderNum(jb4DSession);
         try {
             for (int i = 0; i < 100; i++) {
                 String key = UUIDUtility.getTestUUID();
                 Assert.assertTrue(key.indexOf(UUIDUtility.getTestPrefix())==0);
                 this.addSingle(key, key, key);
                 keys.add(key);
-                DictionaryGroupEntity newEntity = dictionaryGroupService.getByPrimaryKey(key);
+                DictionaryGroupEntity newEntity = dictionaryGroupService.getByPrimaryKey(jb4DSession,key);
                 Assert.assertEquals(key, newEntity.getDictGroupText());
                 Assert.assertEquals(nextMaxOrderNum + i, Integer.parseInt(newEntity.getDictGroupOrderNum().toString()));
             }
@@ -61,15 +63,15 @@ public class DictionaryGroupServiceTest {
 
 
             for (String key : keys) {
-                dictionaryGroupService.deleteByKey(key);
+                dictionaryGroupService.deleteByKey(jb4DSession,key);
             }
 
-            DictionaryGroupEntity entity = dictionaryGroupService.getByPrimaryKey(keys.get(0));
+            DictionaryGroupEntity entity = dictionaryGroupService.getByPrimaryKey(jb4DSession,keys.get(0));
             Assert.assertEquals(null, entity);
         }
         finally {
             for (String key : keys) {
-                dictionaryGroupService.deleteByKey(key);
+                dictionaryGroupService.deleteByKey(jb4DSession,key);
             }
         }
     }
@@ -81,6 +83,7 @@ public class DictionaryGroupServiceTest {
         groupEntity.setDictGroupValue(value);
         groupEntity.setDictGroupCreateTime(new Date());
         groupEntity.setDictGroupDesc("");
-        dictionaryGroupService.saveBySelective(key,groupEntity);
+        JB4DSession jb4DSession= JB4DSessionUtility.getSession();
+        dictionaryGroupService.saveBySelective(jb4DSession,key,groupEntity);
     }
 }

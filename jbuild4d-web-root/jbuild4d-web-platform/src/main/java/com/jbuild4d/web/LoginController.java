@@ -46,8 +46,8 @@ public class LoginController {
         b4DSession.setUserName("Alex");
         JB4DSessionUtility.addSessionAttr(JB4DSessionUtility.UserLoginSessionKey, b4DSession);
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
-
-        List<MenuEntity> entityList=menuService.getALL();
+        JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+        List<MenuEntity> entityList=menuService.getALL(jb4DSession);
         System.out.println(JsonUtility.toObjectString(entityList));
 
         return JBuild4DResponseVo.opSuccess();

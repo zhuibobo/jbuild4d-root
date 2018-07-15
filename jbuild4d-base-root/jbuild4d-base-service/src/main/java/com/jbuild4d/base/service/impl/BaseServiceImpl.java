@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSession;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.List;
@@ -51,83 +52,78 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public int deleteByKey(String id) {
+    public int deleteByKey(JB4DSession jb4DSession, String id) {
         return defaultBaseMapper.deleteByPrimaryKey(id);
     }
 
     @Override
-    public int deleteAll() {
+    public int deleteAll(JB4DSession jb4DSession) {
         return defaultBaseMapper.deleteAll();
     }
 
     @Override
-    public int add(T record) {
+    public int add(JB4DSession jb4DSession,T record) {
         return defaultBaseMapper.insert(record);
     }
 
     @Override
-    public int addSelective(T record) {
+    public int addSelective(JB4DSession jb4DSession,T record) {
         return defaultBaseMapper.insertSelective(record);
     }
 
     @Override
-    public T getByPrimaryKey(int id) {
+    public T getByPrimaryKey(JB4DSession jb4DSession,String id) {
         return defaultBaseMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public T getByPrimaryKey(String id) {
-        return defaultBaseMapper.selectByPrimaryKey(id);
-    }
-
-    @Override
-    public List<T> selectAll() {
+    public List<T> selectAll(JB4DSession jb4DSession) {
         return defaultBaseMapper.selectAll();
     }
 
     @Override
-    public int updateByKeySelective(T record) {
+    public int updateByKeySelective(JB4DSession jb4DSession,T record) {
         return defaultBaseMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
-    public int updateByKey(T record) {
+    public int updateByKey(JB4DSession jb4DSession,T record) {
         return defaultBaseMapper.updateByPrimaryKey(record);
     }
 
     @Override
-    public int save(String id,T record){
-        if(getByPrimaryKey(id)==null){
-            return add(record);
+    public int save(JB4DSession jb4DSession,String id,T record){
+        if(getByPrimaryKey(jb4DSession,id)==null){
+            return add(jb4DSession,record);
         }
         else{
-            return updateByKey(record);
+            return updateByKey(jb4DSession,record);
         }
     }
 
     @Override
-    public int saveBySelective(String id,T record) throws JBuild4DGenerallyException {
-        if(getByPrimaryKey(id)==null){
-            return addSelective(record);
+    public int saveBySelective(JB4DSession jb4DSession,String id,T record) throws JBuild4DGenerallyException {
+        if(getByPrimaryKey(jb4DSession,id)==null){
+            return addSelective(jb4DSession,record);
         }
         else{
-            return updateByKeySelective(record);
+            return updateByKeySelective(jb4DSession,record);
         }
     }
 
     @Override
-    public int saveBySelective(String id, T record, IAddBefore<T> addBefore) throws JBuild4DGenerallyException {
-        if(getByPrimaryKey(id)==null){
+    public int saveBySelective(JB4DSession jb4DSession,String id, T record, IAddBefore<T> addBefore) throws JBuild4DGenerallyException {
+        if(getByPrimaryKey(jb4DSession,id)==null){
             record=addBefore.run(record);
-            return addSelective(record);
+            return addSelective(jb4DSession,record);
         }
         else{
-            return updateByKeySelective(record);
+            return updateByKeySelective(jb4DSession,record);
         }
     }
 
     @Override
-    public PageInfo<T> getPage(int pageNum, int pageSize){
+    public PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.
         List<T> lsit=defaultBaseMapper.selectAll();
@@ -136,7 +132,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public PageInfo<T> getPage(int pageNum, int pageSize, Map<String,Object> searchItemMap){
+    public PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize, Map<String,Object> searchItemMap){
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.
         List<T> lsit=defaultBaseMapper.searchByMap(searchItemMap);
@@ -145,27 +141,22 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public List<T> getALL() {
+    public List<T> getALL(JB4DSession jb4DSession) {
         return defaultBaseMapper.selectAll();
     }
 
     @Override
-    public int getNextId(){
-        return defaultBaseMapper.nextId();
-    }
-
-    @Override
-    public int getNextOrderNum(){
+    public int getNextOrderNum(JB4DSession jb4DSession){
         return defaultBaseMapper.nextOrderNum();
     }
 
     @Override
-    public void statusChange(String ids, String status) throws JBuild4DGenerallyException {
+    public void statusChange(JB4DSession jb4DSession,String ids, String status) throws JBuild4DGenerallyException {
         throw new JBuild4DGenerallyException("BaseServiceImpl<T>未实现statusChange方法，请在具体的Service中实现");
     }
 
     @Override
-    public  List<T> searchByMap(Map<String,Object> searchItemMap)
+    public  List<T> searchByMap(JB4DSession jb4DSession,Map<String,Object> searchItemMap)
     {
         return defaultBaseMapper.searchByMap(searchItemMap);
     }

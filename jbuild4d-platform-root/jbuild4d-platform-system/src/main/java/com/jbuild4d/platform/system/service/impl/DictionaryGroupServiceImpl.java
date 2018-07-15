@@ -6,6 +6,7 @@ import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -26,8 +27,8 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
     }
 
     @Override
-    public int saveBySelective(String id, DictionaryGroupEntity record) throws JBuild4DGenerallyException {
-        return super.saveBySelective(id, record, new IAddBefore<DictionaryGroupEntity>() {
+    public int saveBySelective(JB4DSession jb4DSession, String id, DictionaryGroupEntity record) throws JBuild4DGenerallyException {
+        return super.saveBySelective(jb4DSession,id, record, new IAddBefore<DictionaryGroupEntity>() {
             @Override
             public DictionaryGroupEntity run(DictionaryGroupEntity item) throws JBuild4DGenerallyException {
                 item.setDictGroupOrderNum(generalService.nextOrderNum("TB4D_DICTIONARY_GROUP","DICT_GROUP_ORDER_NUM"));
@@ -38,10 +39,10 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
     }
 
     @Override
-    public void statusChange(String ids,String status) {
+    public void statusChange(JB4DSession jb4DSession,String ids,String status) {
         String[] idArray=ids.split(";");
         for(int i=0;i<idArray.length;i++){
-            DictionaryGroupEntity dictionaryGroupEntity=getByPrimaryKey(idArray[i]);
+            DictionaryGroupEntity dictionaryGroupEntity=getByPrimaryKey(jb4DSession,idArray[i]);
             dictionaryGroupEntity.setDictGroupStatus(status);
             dictionaryGroupMapper.updateByPrimaryKeySelective(dictionaryGroupEntity);
         }

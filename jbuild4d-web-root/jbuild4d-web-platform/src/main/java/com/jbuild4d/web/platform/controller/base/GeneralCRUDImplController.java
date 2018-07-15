@@ -6,6 +6,8 @@ import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.ClassUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
@@ -77,7 +79,8 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition) {
-        PageInfo<T> proOrganPageInfo=getBaseService().getPage(pageNum,pageSize);
+        JB4DSession jb4DSession= JB4DSessionUtility.getSession();
+        PageInfo<T> proOrganPageInfo=getBaseService().getPage(jb4DSession,pageNum,pageSize);
         return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
     }
 
@@ -91,7 +94,8 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
             modelAndView.addObject("recordId", UUIDUtility.getUUID());
         }
         else {
-            entity=getBaseService().getByPrimaryKey(recordId);
+            JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+            entity=getBaseService().getByPrimaryKey(jb4DSession,recordId);
             modelAndView.addObject("recordId", recordId);
         }
         modelAndView.addObject("entity",entity);
@@ -109,7 +113,8 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
             String recordID=DBAnnoUtility.getIDValue(entity);
             //return null;
             //baseService.saveBySelective(entityId(entity), entity);
-            getBaseService().saveBySelective(recordID, entity);
+            JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+            getBaseService().saveBySelective(jb4DSession,recordID, entity);
             return JBuild4DResponseVo.saveSuccess();
         } catch (JBuild4DGenerallyException e) {
             return JBuild4DResponseVo.error(e.getMessage());
@@ -120,7 +125,8 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     @ResponseBody
     public JBuild4DResponseVo statusChange(String ids,String status) {
         try {
-            getBaseService().statusChange(ids,status);
+            JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+            getBaseService().statusChange(jb4DSession,ids,status);
             return JBuild4DResponseVo.opSuccess();
         } catch (JBuild4DGenerallyException e) {
             return JBuild4DResponseVo.opError(e.getMessage());
@@ -132,7 +138,8 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     @RequestMapping(value = "Delete", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo Delete(String recordId) {
-        getBaseService().deleteByKey(recordId);
+        JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+        getBaseService().deleteByKey(jb4DSession,recordId);
         return JBuild4DResponseVo.opSuccess();
     }
 }

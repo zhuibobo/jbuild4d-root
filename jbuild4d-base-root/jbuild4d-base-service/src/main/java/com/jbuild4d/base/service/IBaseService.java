@@ -3,6 +3,7 @@ package com.jbuild4d.base.service;
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.GeneralServiceImpl;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -23,41 +24,37 @@ public interface IBaseService<T> {
 
     void setDefaultBaseMapper(BaseMapper<T> _defaultBaseMapper);
 
-    int deleteByKey(String id);
+    int deleteByKey(JB4DSession jb4DSession, String id);
 
-    int deleteAll();
+    int deleteAll(JB4DSession jb4DSession);
 
-    int add(T record);
+    int add(JB4DSession jb4DSession,T record);
 
-    int addSelective(T record);
+    int addSelective(JB4DSession jb4DSession,T record);
 
-    T getByPrimaryKey(int id);
+    T getByPrimaryKey(JB4DSession jb4DSession,String id);
 
-    T getByPrimaryKey(String id);
+    List<T> selectAll(JB4DSession jb4DSession);
 
-    List<T> selectAll();
+    List<T> searchByMap(JB4DSession jb4DSession,Map<String,Object> searchItemMap);
 
-    List<T> searchByMap(Map<String,Object> searchItemMap);
+    int updateByKeySelective(JB4DSession jb4DSession,T record);
 
-    int updateByKeySelective(T record);
+    int updateByKey(JB4DSession jb4DSession,T record);
 
-    int updateByKey(T record);
+    int save(JB4DSession jb4DSession,String id, T record);
 
-    int save(String id, T record);
+    int saveBySelective(JB4DSession jb4DSession,String id, T record) throws JBuild4DGenerallyException;
 
-    int saveBySelective(String id, T record) throws JBuild4DGenerallyException;
+    int saveBySelective(JB4DSession jb4DSession,String id, T record,IAddBefore<T> addBefore) throws JBuild4DGenerallyException;
 
-    int saveBySelective(String id, T record,IAddBefore<T> addBefore) throws JBuild4DGenerallyException;
+    PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize);
 
-    PageInfo<T> getPage(int pageNum, int pageSize);
+    PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize, Map<String,Object> searchItemMap);
 
-    PageInfo<T> getPage(int pageNum, int pageSize, Map<String,Object> searchItemMap);
+    List<T> getALL(JB4DSession jb4DSession);
 
-    List<T> getALL();
+    int getNextOrderNum(JB4DSession jb4DSession);
 
-    int getNextId();
-
-    int getNextOrderNum();
-
-    void statusChange(String ids, String status) throws JBuild4DGenerallyException;
+    void statusChange(JB4DSession jb4DSession,String ids, String status) throws JBuild4DGenerallyException;
 }

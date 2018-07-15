@@ -1,6 +1,8 @@
 package com.jbuild4d.web.mybatis;
 
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
+import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
@@ -31,16 +33,18 @@ public class testcrud {
     @Test
     public void crudSimple(){
         String key= UUID.randomUUID().toString();
+        JB4DSession jb4DSession= JB4DSessionUtility.getSession();
         addSingle(key);
-        MenuEntity dbDemoEntity=menuService.getByPrimaryKey(key);
+        MenuEntity dbDemoEntity=menuService.getByPrimaryKey(jb4DSession,key);
         Assert.assertEquals(key,dbDemoEntity.getMenuId());
         //update
         dbDemoEntity.setMenuText("update_demo1");
-        menuService.updateByKey(dbDemoEntity);
-        dbDemoEntity=menuService.getByPrimaryKey(key);
+
+        menuService.updateByKey(jb4DSession,dbDemoEntity);
+        dbDemoEntity=menuService.getByPrimaryKey(jb4DSession,key);
         Assert.assertEquals("update_demo1",dbDemoEntity.getMenuText());
         //demo2Service.deleteAll();
-        List<MenuEntity> menuEntityList=menuService.getALL();
+        List<MenuEntity> menuEntityList=menuService.getALL(jb4DSession);
         System.out.println(menuEntityList.size());
     }
 
@@ -53,7 +57,8 @@ public class testcrud {
         demoEntity.setParentIdList("1");
         demoEntity.setMenuType("1");
         demoEntity.setChildCount(1l);
-        menuService.add(demoEntity);
+        JB4DSession jb4DSession= JB4DSessionUtility.getSession();
+        menuService.add(jb4DSession,demoEntity);
         return key;
     }
 }
