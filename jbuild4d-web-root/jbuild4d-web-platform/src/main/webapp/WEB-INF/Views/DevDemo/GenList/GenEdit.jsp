@@ -17,6 +17,9 @@
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
     <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
+        <form-item label="ddglKey：" prop="ddglKey">
+            <i-input v-model="formValidate.ddglKey"></i-input>
+        </form-item>
         <form-item label="ddglValue：" prop="ddglValue">
             <i-input v-model="formValidate.ddglValue"></i-input>
         </form-item>
@@ -47,6 +50,7 @@
         data: {
             formValidate: {
                 ddglId: '${recordId}',
+                ddglKey: '${entity.ddglKey}',
                 ddglValue: '${entity.ddglValue}',
                 ddglName: '${entity.ddglName}',
                 ddglCreatetime: '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />' == '' ? JB4D.DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />',
@@ -58,6 +62,9 @@
                 ],
                 ddglName: [
                     {required: true, message: '【ddglName】不能空！', trigger: 'blur'}
+                ],
+                ddglKey: [
+                    {required: true, message: '【ddglKey】不能空！', trigger: 'blur'}
                 ]
             },
             status: '${op}'
