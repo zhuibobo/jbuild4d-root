@@ -103,7 +103,7 @@
             tableData: [],
             selectionRows: null,
             pageTotal: 0,
-            pageSize: 10,
+            pageSize: 12,
             pageNum: 1,
             listHeight: JB4D.ListPageUtility.GetGeneralPageHeight(JB4D.ListPageUtility.GetFixHeightNotSearch())
         },
@@ -154,6 +154,7 @@
             changePage: function (pageNum) {
                 this.pageNum = pageNum;
                 this.reloadData();
+                this.selectionRows=null;
             }
         }
     });

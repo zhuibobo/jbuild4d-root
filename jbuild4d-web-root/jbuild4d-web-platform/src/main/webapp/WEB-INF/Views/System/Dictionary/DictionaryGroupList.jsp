@@ -15,7 +15,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
-<div id="app" class="iv-list-page-wrap">
+<div id="appList" class="iv-list-page-wrap">
     <div style="width: 100%" id="list-button-wrap">
         <div style="float: right">
             <i-button type="primary" @click="add()">
@@ -42,8 +42,8 @@
     </div>
 </div>
 <script>
-    var app = new Vue({
-        el: "#app",
+    var appList = new Vue({
+        el: "#appList",
         mounted: function () {
             this.reloadData();
         },
@@ -85,8 +85,8 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"dictGroupId",app),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"dictGroupId",app)
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"dictGroupId",appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"dictGroupId",appList)
                         ]);
                     }
                 }
@@ -117,11 +117,11 @@
             },
             del: function (recordId) {
                 var url = '/PlatForm/System/DictionaryGroup/Delete.do';
-                JB4D.ListPageUtility.IViewTableDeleteRow(url,recordId,app);
+                JB4D.ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
             },
             statusEnable: function (statusName) {
                 var url = '/PlatForm/System/DictionaryGroup/StatusChange.do';
-                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,app);
+                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;
