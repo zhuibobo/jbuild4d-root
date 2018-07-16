@@ -1342,6 +1342,22 @@ var ListPageUtility={
             }, "json"
         );
     },
+    //上下移动封装
+    IViewMoveFace:function (url,selectionRows,idField, type,pageAppObj) {
+        this.IViewTableMareSureSelectedOne(selectionRows).then(function (selectionRows) {
+            AjaxUtility.Post(url,
+                {
+                    recordId: selectionRows[0][idField],
+                    type: type
+                },
+                function (result) {
+                    if (result.success) {
+                        pageAppObj.reloadData();
+                    }
+                }, "json"
+            );
+        });
+    },
     //改变状态封装
     IViewChangeServerStatusFace:function (url,selectionRows,idField, statusName,pageAppObj) {
         this.IViewTableMareSureSelected(selectionRows).then(function (selectionRows) {

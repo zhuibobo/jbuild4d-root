@@ -49,7 +49,7 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
     }
 
     @Override
-    public void moveUp(String id){
+    public void moveUp(JB4DSession jb4DSession,String id){
         //String sql="select min(DICT_GROUP_ORDER_NUM) from TB4D_DICTIONARY_GROUP where DICT_GROUP_ORDER_NUM>(select DICT_GROUP_ORDER_NUM from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID="+ SQLKeyWordUtility.stringWrap(id)+")";
         //Object gtMin=generalService.executeScalarSql(sql);
         //Map<String,String> value=new HashMap<>();
@@ -61,7 +61,7 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
     }
 
     @Override
-    public void moveDown(String id){
+    public void moveDown(JB4DSession jb4DSession,String id){
 
     }
 }

@@ -162,12 +162,12 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public void moveUp(String id) throws JBuild4DGenerallyException {
+    public void moveUp(JB4DSession jb4DSession,String id) throws JBuild4DGenerallyException {
         throw new JBuild4DGenerallyException("请重写moveUp方法！");
     }
 
     @Override
-    public void moveDown(String id) throws JBuild4DGenerallyException {
+    public void moveDown(JB4DSession jb4DSession,String id) throws JBuild4DGenerallyException {
         throw new JBuild4DGenerallyException("请重写moveDown方法！");
     }
 }

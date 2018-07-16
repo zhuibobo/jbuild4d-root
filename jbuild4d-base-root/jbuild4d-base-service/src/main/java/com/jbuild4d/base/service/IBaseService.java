@@ -58,7 +58,7 @@ public interface IBaseService<T> {
 
     void statusChange(JB4DSession jb4DSession,String ids, String status) throws JBuild4DGenerallyException;
 
-    void moveUp(String id) throws JBuild4DGenerallyException;
+    void moveUp(JB4DSession jb4DSession,String id) throws JBuild4DGenerallyException;
 
-    void moveDown(String id) throws JBuild4DGenerallyException;
+    void moveDown(JB4DSession jb4DSession,String id) throws JBuild4DGenerallyException;
 }

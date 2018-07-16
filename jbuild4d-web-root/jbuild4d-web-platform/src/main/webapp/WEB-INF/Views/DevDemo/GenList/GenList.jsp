@@ -30,11 +30,11 @@
                 <Icon type="minus-round"></Icon>
                 禁用
             </i-button>
-            <i-button type="primary" @click="moveUp('启用')">
+            <i-button type="primary" @click="move('up')">
                 <Icon type="arrow-up-b"></Icon>
                 上移
             </i-button>
-            <i-button type="primary" @click="moveDown('禁用')">
+            <i-button type="primary" @click="move('down')">
                 <Icon type="arrow-down-b"></Icon>
                 下移
             </i-button>
@@ -135,6 +135,10 @@
             statusEnable: function (statusName) {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/StatusChange.do';
                 JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
+            },
+            move:function (type) {
+                var url = '/PlatForm/DevDemo/DevDemoGenList/Move.do';
+                JB4D.ListPageUtility.IViewMoveFace(url,this.selectionRows,"ddglId",type,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;
