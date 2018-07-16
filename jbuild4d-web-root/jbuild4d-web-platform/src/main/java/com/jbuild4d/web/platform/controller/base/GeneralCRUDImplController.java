@@ -146,11 +146,10 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     @ResponseBody
     public JBuild4DResponseVo Move(String recordId,String type) throws JBuild4DGenerallyException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-        if(type=="up") {
+        if(type.equals("up")) {
             getBaseService().moveUp(jb4DSession, recordId);
         }
-        else
-        {
+        else {
             getBaseService().moveDown(jb4DSession,recordId);
         }
         return JBuild4DResponseVo.opSuccess();

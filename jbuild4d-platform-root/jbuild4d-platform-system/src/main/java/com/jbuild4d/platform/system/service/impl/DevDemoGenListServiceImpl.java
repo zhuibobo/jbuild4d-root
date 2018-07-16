@@ -51,4 +51,27 @@ public class DevDemoGenListServiceImpl extends BaseServiceImpl<DevDemoGenListEnt
             devDemoGenListMapper.updateByPrimaryKeySelective(entity);
         }
     }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DevDemoGenListEntity gtEntity=devDemoGenListMapper.selectGreaterThanRecord(id);
+        switchOrder(id, gtEntity);
+    }
+
+    private void switchOrder(String id, DevDemoGenListEntity toEntity) {
+        if(toEntity !=null){
+            DevDemoGenListEntity selfEntity=devDemoGenListMapper.selectByPrimaryKey(id);
+            long newNum= toEntity.getDdglOrderNum();
+            toEntity.setDdglOrderNum(selfEntity.getDdglOrderNum());
+            selfEntity.setDdglOrderNum(newNum);
+            devDemoGenListMapper.updateByPrimaryKeySelective(toEntity);
+            devDemoGenListMapper.updateByPrimaryKeySelective(selfEntity);
+        }
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DevDemoGenListEntity ltEntity=devDemoGenListMapper.selectLessThanRecord(id);
+        switchOrder(id, ltEntity);
+    }
 }

@@ -12,4 +12,20 @@
     <select id="nextOrderNum" resultType="integer">
         select case when max(DDGL_ORDER_NUM) is null then 1 else max(DDGL_ORDER_NUM)+1 end ORDERNUM from TB4D_DEV_DEMO_GEN_LIST
     </select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+            select
+            *
+            from TB4D_DEV_DEMO_GEN_LIST
+            where DDGL_ORDER_NUM = (select max(DDGL_ORDER_NUM) from TB4D_DEV_DEMO_GEN_LIST where DDGL_ORDER_NUM<(select DDGL_ORDER_NUM from TB4D_DEV_DEMO_GEN_LIST where DDGL_ID=#{ddglId,jdbcType=NVARCHAR}))
+        ]]>
+    </select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+            select
+            *
+            from TB4D_DEV_DEMO_GEN_LIST
+            where DDGL_ORDER_NUM = (select min(DDGL_ORDER_NUM) from TB4D_DEV_DEMO_GEN_LIST where DDGL_ORDER_NUM>(select DDGL_ORDER_NUM from TB4D_DEV_DEMO_GEN_LIST where DDGL_ID=#{ddglId,jdbcType=NVARCHAR}))
+        ]]>
+    </select>
 </mapper>

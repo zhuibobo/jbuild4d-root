@@ -113,8 +113,19 @@
             },
             reloadData: function () {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/GetListData.do';
-                JB4D.ListPageUtility.IViewTableLoadDataNoSearch(url,this.pageNum,this.pageSize,this);
-                this.selectionRows=null;
+                JB4D.ListPageUtility.IViewTableLoadDataNoSearch(url,this.pageNum,this.pageSize,this,function (result,pageAppObj) {
+                    //debugger;
+                    if(appList.selectionRows!=null) {
+                        for (var i = 0; i < appList.tableData.length; i++) {
+                            for (var j = 0; j < appList.selectionRows.length;j++) {
+                                if(appList.selectionRows[j].ddglId==appList.tableData[i].ddglId){
+                                    appList.tableData[i]._checked=true;
+                                }
+                            }
+                        }
+                    }
+                });
+                //this.selectionRows=null;
             },
             add: function () {
                 var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=add");

@@ -1378,7 +1378,7 @@ var ListPageUtility={
             }, "json");
         });
     },
-    IViewTableLoadDataNoSearch:function (url,pageNum,pageSize,pageAppObj) {
+    IViewTableLoadDataNoSearch:function (url,pageNum,pageSize,pageAppObj,successFunc) {
         //debugger;
         AjaxUtility.Post(url,
             {
@@ -1390,6 +1390,9 @@ var ListPageUtility={
                     pageAppObj.tableData = new Array();
                     pageAppObj.tableData = result.data.list;
                     pageAppObj.pageTotal = result.data.total;
+                    if(typeof (successFunc)=="function") {
+                        successFunc(result,pageAppObj);
+                    }
                 }
             }, "json");
     },
