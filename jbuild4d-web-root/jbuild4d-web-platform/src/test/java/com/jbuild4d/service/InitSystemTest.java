@@ -49,6 +49,8 @@ public class InitSystemTest extends BaseTest {
                 MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/DictionaryGroup/List.do","");
         menuService.deleteByKey(jb4DSession,systemSettingDictionaryGroupId);
         menuService.saveBySelective(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId(),systemSettingDictionaryGroupMenu);
+
+
     }
 
     public MenuEntity getMenu(String parentId,String id,String name,String text,String value,String type,String leftUrl,String rightUrl,String iconClassName){
