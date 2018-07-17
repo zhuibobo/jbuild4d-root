@@ -8,16 +8,16 @@
       <arg column="DICT_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_GROUP_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="DICT_ORDER_NUM" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="DICT_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="DICT_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="DICT_PARENT_ID" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="DICT_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_PARENT_IDLIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_ISSYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_DEL_ENABLE" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_IS_SELECTED" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="DICT_CHILD_COUNT" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="DICT_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="DICT_EX_ATTR1" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_EX_ATTR2" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_EX_ATTR3" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -54,10 +54,10 @@
       DICT_EX_ATTR4, DICT_USER_ID, DICT_USER_NAME, 
       DICT_ORGAN_ID, DICT_ORGAN_NAME)
     values (#{dictId,jdbcType=NVARCHAR}, #{dictKey,jdbcType=NVARCHAR}, #{dictValue,jdbcType=NVARCHAR}, 
-      #{dictText,jdbcType=NVARCHAR}, #{dictGroupName,jdbcType=NVARCHAR}, #{dictOrderNum,jdbcType=BIGINT}, 
-      #{dictCreateTime,jdbcType=TIMESTAMP}, #{dictParentId,jdbcType=BIGINT}, #{dictParentIdlist,jdbcType=NVARCHAR}, 
+      #{dictText,jdbcType=NVARCHAR}, #{dictGroupName,jdbcType=NVARCHAR}, #{dictOrderNum,jdbcType=INTEGER}, 
+      #{dictCreateTime,jdbcType=TIMESTAMP}, #{dictParentId,jdbcType=NVARCHAR}, #{dictParentIdlist,jdbcType=NVARCHAR}, 
       #{dictIssystem,jdbcType=NVARCHAR}, #{dictDelEnable,jdbcType=NVARCHAR}, #{dictStatus,jdbcType=NVARCHAR}, 
-      #{dictIsSelected,jdbcType=NVARCHAR}, #{dictDesc,jdbcType=NVARCHAR}, #{dictChildCount,jdbcType=BIGINT}, 
+      #{dictIsSelected,jdbcType=NVARCHAR}, #{dictDesc,jdbcType=NVARCHAR}, #{dictChildCount,jdbcType=INTEGER}, 
       #{dictExAttr1,jdbcType=NVARCHAR}, #{dictExAttr2,jdbcType=NVARCHAR}, #{dictExAttr3,jdbcType=NVARCHAR}, 
       #{dictExAttr4,jdbcType=NVARCHAR}, #{dictUserId,jdbcType=NVARCHAR}, #{dictUserName,jdbcType=NVARCHAR}, 
       #{dictOrganId,jdbcType=NVARCHAR}, #{dictOrganName,jdbcType=NVARCHAR})
@@ -152,13 +152,13 @@
         #{dictGroupName,jdbcType=NVARCHAR},
       </if>
       <if test="dictOrderNum != null">
-        #{dictOrderNum,jdbcType=BIGINT},
+        #{dictOrderNum,jdbcType=INTEGER},
       </if>
       <if test="dictCreateTime != null">
         #{dictCreateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="dictParentId != null">
-        #{dictParentId,jdbcType=BIGINT},
+        #{dictParentId,jdbcType=NVARCHAR},
       </if>
       <if test="dictParentIdlist != null">
         #{dictParentIdlist,jdbcType=NVARCHAR},
@@ -179,7 +179,7 @@
         #{dictDesc,jdbcType=NVARCHAR},
       </if>
       <if test="dictChildCount != null">
-        #{dictChildCount,jdbcType=BIGINT},
+        #{dictChildCount,jdbcType=INTEGER},
       </if>
       <if test="dictExAttr1 != null">
         #{dictExAttr1,jdbcType=NVARCHAR},
@@ -223,13 +223,13 @@
         DICT_GROUP_NAME = #{dictGroupName,jdbcType=NVARCHAR},
       </if>
       <if test="dictOrderNum != null">
-        DICT_ORDER_NUM = #{dictOrderNum,jdbcType=BIGINT},
+        DICT_ORDER_NUM = #{dictOrderNum,jdbcType=INTEGER},
       </if>
       <if test="dictCreateTime != null">
         DICT_CREATE_TIME = #{dictCreateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="dictParentId != null">
-        DICT_PARENT_ID = #{dictParentId,jdbcType=BIGINT},
+        DICT_PARENT_ID = #{dictParentId,jdbcType=NVARCHAR},
       </if>
       <if test="dictParentIdlist != null">
         DICT_PARENT_IDLIST = #{dictParentIdlist,jdbcType=NVARCHAR},
@@ -250,7 +250,7 @@
         DICT_DESC = #{dictDesc,jdbcType=NVARCHAR},
       </if>
       <if test="dictChildCount != null">
-        DICT_CHILD_COUNT = #{dictChildCount,jdbcType=BIGINT},
+        DICT_CHILD_COUNT = #{dictChildCount,jdbcType=INTEGER},
       </if>
       <if test="dictExAttr1 != null">
         DICT_EX_ATTR1 = #{dictExAttr1,jdbcType=NVARCHAR},
@@ -285,16 +285,16 @@
       DICT_VALUE = #{dictValue,jdbcType=NVARCHAR},
       DICT_TEXT = #{dictText,jdbcType=NVARCHAR},
       DICT_GROUP_NAME = #{dictGroupName,jdbcType=NVARCHAR},
-      DICT_ORDER_NUM = #{dictOrderNum,jdbcType=BIGINT},
+      DICT_ORDER_NUM = #{dictOrderNum,jdbcType=INTEGER},
       DICT_CREATE_TIME = #{dictCreateTime,jdbcType=TIMESTAMP},
-      DICT_PARENT_ID = #{dictParentId,jdbcType=BIGINT},
+      DICT_PARENT_ID = #{dictParentId,jdbcType=NVARCHAR},
       DICT_PARENT_IDLIST = #{dictParentIdlist,jdbcType=NVARCHAR},
       DICT_ISSYSTEM = #{dictIssystem,jdbcType=NVARCHAR},
       DICT_DEL_ENABLE = #{dictDelEnable,jdbcType=NVARCHAR},
       DICT_STATUS = #{dictStatus,jdbcType=NVARCHAR},
       DICT_IS_SELECTED = #{dictIsSelected,jdbcType=NVARCHAR},
       DICT_DESC = #{dictDesc,jdbcType=NVARCHAR},
-      DICT_CHILD_COUNT = #{dictChildCount,jdbcType=BIGINT},
+      DICT_CHILD_COUNT = #{dictChildCount,jdbcType=INTEGER},
       DICT_EX_ATTR1 = #{dictExAttr1,jdbcType=NVARCHAR},
       DICT_EX_ATTR2 = #{dictExAttr2,jdbcType=NVARCHAR},
       DICT_EX_ATTR3 = #{dictExAttr3,jdbcType=NVARCHAR},

@@ -2,6 +2,7 @@ package com.jbuild4d.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
+import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
@@ -34,7 +35,8 @@ public class InitSystemTest {
         menuEntity.setMenuText("Root");
         menuEntity.setMenuValue("Root");
         menuEntity.setMenuType(MenuTypeEnum.Root.getDisplayName());
-        menuEntity.setIsExpand(1l);
+        menuEntity.setIsExpand(TrueFalseEnum.False.getValue());
+
         //menuEntity.setIsExpand();
     }
 }

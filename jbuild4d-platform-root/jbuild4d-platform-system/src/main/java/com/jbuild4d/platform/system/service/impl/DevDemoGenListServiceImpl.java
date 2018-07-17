@@ -35,7 +35,7 @@ public class DevDemoGenListServiceImpl extends BaseServiceImpl<DevDemoGenListEnt
                 item.setDdglUserName(jb4DSession.getUserName());
                 item.setDdglOrganId(jb4DSession.getOrganId());
                 item.setDdglOrganName(jb4DSession.getOrganName());
-                item.setDdglOrderNum((long) devDemoGenListMapper.nextOrderNum());
+                item.setDdglOrderNum(devDemoGenListMapper.nextOrderNum());
                 item.setDdglStatus("启用");
                 return item;
             }
@@ -61,7 +61,7 @@ public class DevDemoGenListServiceImpl extends BaseServiceImpl<DevDemoGenListEnt
     private void switchOrder(String id, DevDemoGenListEntity toEntity) {
         if(toEntity !=null){
             DevDemoGenListEntity selfEntity=devDemoGenListMapper.selectByPrimaryKey(id);
-            long newNum= toEntity.getDdglOrderNum();
+            int newNum= toEntity.getDdglOrderNum();
             toEntity.setDdglOrderNum(selfEntity.getDdglOrderNum());
             selfEntity.setDdglOrderNum(newNum);
             devDemoGenListMapper.updateByPrimaryKeySelective(toEntity);

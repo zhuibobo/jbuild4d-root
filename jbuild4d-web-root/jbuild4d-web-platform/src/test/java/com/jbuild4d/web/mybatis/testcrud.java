@@ -56,7 +56,7 @@ public class testcrud {
         demoEntity.setParentId("1");
         demoEntity.setParentIdList("1");
         demoEntity.setMenuType("1");
-        demoEntity.setChildCount(1l);
+        demoEntity.setChildCount(1);
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
         menuService.add(jb4DSession,demoEntity);
         return key;

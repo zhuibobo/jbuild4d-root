@@ -6,18 +6,18 @@
       <idArg column="DICT_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_GROUP_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_GROUP_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="DICT_GROUP_ORDER_NUM" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="DICT_GROUP_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="DICT_GROUP_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="DICT_GROUP_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_GROUP_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME,
+    DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME, 
     DICT_GROUP_DESC, DICT_GROUP_STATUS
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from TB4D_DICTIONARY_GROUP
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
@@ -27,12 +27,12 @@
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
-    insert into TB4D_DICTIONARY_GROUP (DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT,
-    DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME,
-    DICT_GROUP_DESC, DICT_GROUP_STATUS)
-    values (#{dictGroupId,jdbcType=NVARCHAR}, #{dictGroupValue,jdbcType=NVARCHAR}, #{dictGroupText,jdbcType=NVARCHAR},
-    #{dictGroupOrderNum,jdbcType=BIGINT}, #{dictGroupCreateTime,jdbcType=TIMESTAMP},
-    #{dictGroupDesc,jdbcType=NVARCHAR}, #{dictGroupStatus,jdbcType=NVARCHAR})
+    insert into TB4D_DICTIONARY_GROUP (DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, 
+      DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME, 
+      DICT_GROUP_DESC, DICT_GROUP_STATUS)
+    values (#{dictGroupId,jdbcType=NVARCHAR}, #{dictGroupValue,jdbcType=NVARCHAR}, #{dictGroupText,jdbcType=NVARCHAR}, 
+      #{dictGroupOrderNum,jdbcType=INTEGER}, #{dictGroupCreateTime,jdbcType=TIMESTAMP}, 
+      #{dictGroupDesc,jdbcType=NVARCHAR}, #{dictGroupStatus,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
     insert into TB4D_DICTIONARY_GROUP
@@ -70,7 +70,7 @@
         #{dictGroupText,jdbcType=NVARCHAR},
       </if>
       <if test="dictGroupOrderNum != null">
-        #{dictGroupOrderNum,jdbcType=BIGINT},
+        #{dictGroupOrderNum,jdbcType=INTEGER},
       </if>
       <if test="dictGroupCreateTime != null">
         #{dictGroupCreateTime,jdbcType=TIMESTAMP},
@@ -93,7 +93,7 @@
         DICT_GROUP_TEXT = #{dictGroupText,jdbcType=NVARCHAR},
       </if>
       <if test="dictGroupOrderNum != null">
-        DICT_GROUP_ORDER_NUM = #{dictGroupOrderNum,jdbcType=BIGINT},
+        DICT_GROUP_ORDER_NUM = #{dictGroupOrderNum,jdbcType=INTEGER},
       </if>
       <if test="dictGroupCreateTime != null">
         DICT_GROUP_CREATE_TIME = #{dictGroupCreateTime,jdbcType=TIMESTAMP},
@@ -111,7 +111,7 @@
     update TB4D_DICTIONARY_GROUP
     set DICT_GROUP_VALUE = #{dictGroupValue,jdbcType=NVARCHAR},
       DICT_GROUP_TEXT = #{dictGroupText,jdbcType=NVARCHAR},
-      DICT_GROUP_ORDER_NUM = #{dictGroupOrderNum,jdbcType=BIGINT},
+      DICT_GROUP_ORDER_NUM = #{dictGroupOrderNum,jdbcType=INTEGER},
       DICT_GROUP_CREATE_TIME = #{dictGroupCreateTime,jdbcType=TIMESTAMP},
       DICT_GROUP_DESC = #{dictGroupDesc,jdbcType=NVARCHAR},
       DICT_GROUP_STATUS = #{dictGroupStatus,jdbcType=NVARCHAR}

@@ -12,19 +12,19 @@
       <arg column="MENU_USER_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="MENU_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="MENU_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="IS_EXPAND" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="IS_SYSTEM" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="IS_EXPAND" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="IS_SYSTEM" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="LEFT_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="LEFT_URL_PARA" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="RIGHT_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="RIGHT_URL_PARA" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="ORDER_NUM" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="PARENT_ID_LIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="SHARE_TYPE" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="TAG" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="TARGET" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="TARGET" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="UPDATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="USE_ORGAN" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="USE_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -33,7 +33,7 @@
       <arg column="ICON_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="HOVER_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="SELECTED_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="CHILD_COUNT" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="CREATOR" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DESCRIPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -76,14 +76,14 @@
     values (#{menuId,jdbcType=NVARCHAR}, #{menuName,jdbcType=NVARCHAR}, #{menuText,jdbcType=NVARCHAR}, 
       #{menuValue,jdbcType=NVARCHAR}, #{menuType,jdbcType=NVARCHAR}, #{menuUserId,jdbcType=NVARCHAR}, 
       #{menuUserName,jdbcType=NVARCHAR}, #{menuOrganId,jdbcType=NVARCHAR}, #{menuOrganName,jdbcType=NVARCHAR}, 
-      #{isExpand,jdbcType=BIGINT}, #{isSystem,jdbcType=BIGINT}, #{leftUrl,jdbcType=NVARCHAR}, 
+      #{isExpand,jdbcType=INTEGER}, #{isSystem,jdbcType=INTEGER}, #{leftUrl,jdbcType=NVARCHAR}, 
       #{leftUrlPara,jdbcType=NVARCHAR}, #{rightUrl,jdbcType=NVARCHAR}, #{rightUrlPara,jdbcType=NVARCHAR}, 
-      #{orderNum,jdbcType=BIGINT}, #{organId,jdbcType=NVARCHAR}, #{parentId,jdbcType=NVARCHAR}, 
+      #{orderNum,jdbcType=INTEGER}, #{organId,jdbcType=NVARCHAR}, #{parentId,jdbcType=NVARCHAR}, 
       #{parentIdList,jdbcType=NVARCHAR}, #{shareType,jdbcType=BIGINT}, #{tag,jdbcType=NVARCHAR}, 
-      #{target,jdbcType=BIGINT}, #{updater,jdbcType=NVARCHAR}, #{useOrgan,jdbcType=NVARCHAR}, 
+      #{target,jdbcType=NVARCHAR}, #{updater,jdbcType=NVARCHAR}, #{useOrgan,jdbcType=NVARCHAR}, 
       #{useOrganId,jdbcType=NVARCHAR}, #{useOrganType,jdbcType=NVARCHAR}, #{useOrganTypeId,jdbcType=NVARCHAR}, 
       #{iconClassName,jdbcType=NVARCHAR}, #{hoverClassName,jdbcType=NVARCHAR}, #{selectedClassName,jdbcType=NVARCHAR}, 
-      #{childCount,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=NVARCHAR}, 
+      #{childCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=NVARCHAR}, 
       #{description,jdbcType=NVARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{jsExpression,jdbcType=NVARCHAR}
       )
   </insert>
@@ -228,10 +228,10 @@
         #{menuOrganName,jdbcType=NVARCHAR},
       </if>
       <if test="isExpand != null">
-        #{isExpand,jdbcType=BIGINT},
+        #{isExpand,jdbcType=INTEGER},
       </if>
       <if test="isSystem != null">
-        #{isSystem,jdbcType=BIGINT},
+        #{isSystem,jdbcType=INTEGER},
       </if>
       <if test="leftUrl != null">
         #{leftUrl,jdbcType=NVARCHAR},
@@ -246,7 +246,7 @@
         #{rightUrlPara,jdbcType=NVARCHAR},
       </if>
       <if test="orderNum != null">
-        #{orderNum,jdbcType=BIGINT},
+        #{orderNum,jdbcType=INTEGER},
       </if>
       <if test="organId != null">
         #{organId,jdbcType=NVARCHAR},
@@ -264,7 +264,7 @@
         #{tag,jdbcType=NVARCHAR},
       </if>
       <if test="target != null">
-        #{target,jdbcType=BIGINT},
+        #{target,jdbcType=NVARCHAR},
       </if>
       <if test="updater != null">
         #{updater,jdbcType=NVARCHAR},
@@ -291,7 +291,7 @@
         #{selectedClassName,jdbcType=NVARCHAR},
       </if>
       <if test="childCount != null">
-        #{childCount,jdbcType=BIGINT},
+        #{childCount,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -338,10 +338,10 @@
         MENU_ORGAN_NAME = #{menuOrganName,jdbcType=NVARCHAR},
       </if>
       <if test="isExpand != null">
-        IS_EXPAND = #{isExpand,jdbcType=BIGINT},
+        IS_EXPAND = #{isExpand,jdbcType=INTEGER},
       </if>
       <if test="isSystem != null">
-        IS_SYSTEM = #{isSystem,jdbcType=BIGINT},
+        IS_SYSTEM = #{isSystem,jdbcType=INTEGER},
       </if>
       <if test="leftUrl != null">
         LEFT_URL = #{leftUrl,jdbcType=NVARCHAR},
@@ -356,7 +356,7 @@
         RIGHT_URL_PARA = #{rightUrlPara,jdbcType=NVARCHAR},
       </if>
       <if test="orderNum != null">
-        ORDER_NUM = #{orderNum,jdbcType=BIGINT},
+        ORDER_NUM = #{orderNum,jdbcType=INTEGER},
       </if>
       <if test="organId != null">
         ORGAN_ID = #{organId,jdbcType=NVARCHAR},
@@ -374,7 +374,7 @@
         TAG = #{tag,jdbcType=NVARCHAR},
       </if>
       <if test="target != null">
-        TARGET = #{target,jdbcType=BIGINT},
+        TARGET = #{target,jdbcType=NVARCHAR},
       </if>
       <if test="updater != null">
         UPDATER = #{updater,jdbcType=NVARCHAR},
@@ -401,7 +401,7 @@
         SELECTED_CLASS_NAME = #{selectedClassName,jdbcType=NVARCHAR},
       </if>
       <if test="childCount != null">
-        CHILD_COUNT = #{childCount,jdbcType=BIGINT},
+        CHILD_COUNT = #{childCount,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
@@ -431,19 +431,19 @@
       MENU_USER_NAME = #{menuUserName,jdbcType=NVARCHAR},
       MENU_ORGAN_ID = #{menuOrganId,jdbcType=NVARCHAR},
       MENU_ORGAN_NAME = #{menuOrganName,jdbcType=NVARCHAR},
-      IS_EXPAND = #{isExpand,jdbcType=BIGINT},
-      IS_SYSTEM = #{isSystem,jdbcType=BIGINT},
+      IS_EXPAND = #{isExpand,jdbcType=INTEGER},
+      IS_SYSTEM = #{isSystem,jdbcType=INTEGER},
       LEFT_URL = #{leftUrl,jdbcType=NVARCHAR},
       LEFT_URL_PARA = #{leftUrlPara,jdbcType=NVARCHAR},
       RIGHT_URL = #{rightUrl,jdbcType=NVARCHAR},
       RIGHT_URL_PARA = #{rightUrlPara,jdbcType=NVARCHAR},
-      ORDER_NUM = #{orderNum,jdbcType=BIGINT},
+      ORDER_NUM = #{orderNum,jdbcType=INTEGER},
       ORGAN_ID = #{organId,jdbcType=NVARCHAR},
       PARENT_ID = #{parentId,jdbcType=NVARCHAR},
       PARENT_ID_LIST = #{parentIdList,jdbcType=NVARCHAR},
       SHARE_TYPE = #{shareType,jdbcType=BIGINT},
       TAG = #{tag,jdbcType=NVARCHAR},
-      TARGET = #{target,jdbcType=BIGINT},
+      TARGET = #{target,jdbcType=NVARCHAR},
       UPDATER = #{updater,jdbcType=NVARCHAR},
       USE_ORGAN = #{useOrgan,jdbcType=NVARCHAR},
       USE_ORGAN_ID = #{useOrganId,jdbcType=NVARCHAR},
@@ -452,7 +452,7 @@
       ICON_CLASS_NAME = #{iconClassName,jdbcType=NVARCHAR},
       HOVER_CLASS_NAME = #{hoverClassName,jdbcType=NVARCHAR},
       SELECTED_CLASS_NAME = #{selectedClassName,jdbcType=NVARCHAR},
-      CHILD_COUNT = #{childCount,jdbcType=BIGINT},
+      CHILD_COUNT = #{childCount,jdbcType=INTEGER},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       CREATOR = #{creator,jdbcType=NVARCHAR},
       DESCRIPTION = #{description,jdbcType=NVARCHAR},

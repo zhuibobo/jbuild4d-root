@@ -13,11 +13,11 @@ public class DictionaryEntity {
 
     private String dictGroupName;
 
-    private Long dictOrderNum;
+    private Integer dictOrderNum;
 
     private Date dictCreateTime;
 
-    private Long dictParentId;
+    private String dictParentId;
 
     private String dictParentIdlist;
 
@@ -31,7 +31,7 @@ public class DictionaryEntity {
 
     private String dictDesc;
 
-    private Long dictChildCount;
+    private Integer dictChildCount;
 
     private String dictExAttr1;
 
@@ -49,7 +49,7 @@ public class DictionaryEntity {
 
     private String dictOrganName;
 
-    public DictionaryEntity(String dictId, String dictKey, String dictValue, String dictText, String dictGroupName, Long dictOrderNum, Date dictCreateTime, Long dictParentId, String dictParentIdlist, String dictIssystem, String dictDelEnable, String dictStatus, String dictIsSelected, String dictDesc, Long dictChildCount, String dictExAttr1, String dictExAttr2, String dictExAttr3, String dictExAttr4, String dictUserId, String dictUserName, String dictOrganId, String dictOrganName) {
+    public DictionaryEntity(String dictId, String dictKey, String dictValue, String dictText, String dictGroupName, Integer dictOrderNum, Date dictCreateTime, String dictParentId, String dictParentIdlist, String dictIssystem, String dictDelEnable, String dictStatus, String dictIsSelected, String dictDesc, Integer dictChildCount, String dictExAttr1, String dictExAttr2, String dictExAttr3, String dictExAttr4, String dictUserId, String dictUserName, String dictOrganId, String dictOrganName) {
         this.dictId = dictId;
         this.dictKey = dictKey;
         this.dictValue = dictValue;
@@ -119,11 +119,11 @@ public class DictionaryEntity {
         this.dictGroupName = dictGroupName == null ? null : dictGroupName.trim();
     }
 
-    public Long getDictOrderNum() {
+    public Integer getDictOrderNum() {
         return dictOrderNum;
     }
 
-    public void setDictOrderNum(Long dictOrderNum) {
+    public void setDictOrderNum(Integer dictOrderNum) {
         this.dictOrderNum = dictOrderNum;
     }
 
@@ -135,12 +135,12 @@ public class DictionaryEntity {
         this.dictCreateTime = dictCreateTime;
     }
 
-    public Long getDictParentId() {
+    public String getDictParentId() {
         return dictParentId;
     }
 
-    public void setDictParentId(Long dictParentId) {
-        this.dictParentId = dictParentId;
+    public void setDictParentId(String dictParentId) {
+        this.dictParentId = dictParentId == null ? null : dictParentId.trim();
     }
 
     public String getDictParentIdlist() {
@@ -191,11 +191,11 @@ public class DictionaryEntity {
         this.dictDesc = dictDesc == null ? null : dictDesc.trim();
     }
 
-    public Long getDictChildCount() {
+    public Integer getDictChildCount() {
         return dictChildCount;
     }
 
-    public void setDictChildCount(Long dictChildCount) {
+    public void setDictChildCount(Integer dictChildCount) {
         this.dictChildCount = dictChildCount;
     }
 

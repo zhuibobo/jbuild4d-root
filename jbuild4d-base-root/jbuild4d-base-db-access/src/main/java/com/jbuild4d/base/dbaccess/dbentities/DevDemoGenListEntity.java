@@ -2,8 +2,6 @@ package com.jbuild4d.base.dbaccess.dbentities;
 
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
 
-import java.util.Date;
-
 public class DevDemoGenListEntity {
 
     @DBKeyField
@@ -19,7 +17,7 @@ public class DevDemoGenListEntity {
 
     private String ddglDesc;
 
-    private Date ddglCreatetime;
+    private Integer ddglCreatetime;
 
     private String ddglUserId;
 
@@ -31,9 +29,9 @@ public class DevDemoGenListEntity {
 
     private String ddglApi;
 
-    private Long ddglOrderNum;
+    private Integer ddglOrderNum;
 
-    public DevDemoGenListEntity(String ddglId, String ddglKey, String ddglName, String ddglValue, String ddglStatus, String ddglDesc, Date ddglCreatetime, String ddglUserId, String ddglUserName, String ddglOrganId, String ddglOrganName, String ddglApi, Long ddglOrderNum) {
+    public DevDemoGenListEntity(String ddglId, String ddglKey, String ddglName, String ddglValue, String ddglStatus, String ddglDesc, Integer ddglCreatetime, String ddglUserId, String ddglUserName, String ddglOrganId, String ddglOrganName, String ddglApi, Integer ddglOrderNum) {
         this.ddglId = ddglId;
         this.ddglKey = ddglKey;
         this.ddglName = ddglName;
@@ -101,11 +99,11 @@ public class DevDemoGenListEntity {
         this.ddglDesc = ddglDesc == null ? null : ddglDesc.trim();
     }
 
-    public Date getDdglCreatetime() {
+    public Integer getDdglCreatetime() {
         return ddglCreatetime;
     }
 
-    public void setDdglCreatetime(Date ddglCreatetime) {
+    public void setDdglCreatetime(Integer ddglCreatetime) {
         this.ddglCreatetime = ddglCreatetime;
     }
 
@@ -149,11 +147,11 @@ public class DevDemoGenListEntity {
         this.ddglApi = ddglApi == null ? null : ddglApi.trim();
     }
 
-    public Long getDdglOrderNum() {
+    public Integer getDdglOrderNum() {
         return ddglOrderNum;
     }
 
-    public void setDdglOrderNum(Long ddglOrderNum) {
+    public void setDdglOrderNum(Integer ddglOrderNum) {
         this.ddglOrderNum = ddglOrderNum;
     }
 }

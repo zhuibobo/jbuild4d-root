@@ -21,9 +21,9 @@ public class MenuEntity {
 
     private String menuOrganName;
 
-    private Long isExpand;
+    private Integer isExpand;
 
-    private Long isSystem;
+    private Integer isSystem;
 
     private String leftUrl;
 
@@ -33,7 +33,7 @@ public class MenuEntity {
 
     private String rightUrlPara;
 
-    private Long orderNum;
+    private Integer orderNum;
 
     private String organId;
 
@@ -45,7 +45,7 @@ public class MenuEntity {
 
     private String tag;
 
-    private Long target;
+    private String target;
 
     private String updater;
 
@@ -63,7 +63,7 @@ public class MenuEntity {
 
     private String selectedClassName;
 
-    private Long childCount;
+    private Integer childCount;
 
     private Date createTime;
 
@@ -75,7 +75,7 @@ public class MenuEntity {
 
     private String jsExpression;
 
-    public MenuEntity(String menuId, String menuName, String menuText, String menuValue, String menuType, String menuUserId, String menuUserName, String menuOrganId, String menuOrganName, Long isExpand, Long isSystem, String leftUrl, String leftUrlPara, String rightUrl, String rightUrlPara, Long orderNum, String organId, String parentId, String parentIdList, Long shareType, String tag, Long target, String updater, String useOrgan, String useOrganId, String useOrganType, String useOrganTypeId, String iconClassName, String hoverClassName, String selectedClassName, Long childCount, Date createTime, String creator, String description, Date updateTime, String jsExpression) {
+    public MenuEntity(String menuId, String menuName, String menuText, String menuValue, String menuType, String menuUserId, String menuUserName, String menuOrganId, String menuOrganName, Integer isExpand, Integer isSystem, String leftUrl, String leftUrlPara, String rightUrl, String rightUrlPara, Integer orderNum, String organId, String parentId, String parentIdList, Long shareType, String tag, String target, String updater, String useOrgan, String useOrganId, String useOrganType, String useOrganTypeId, String iconClassName, String hoverClassName, String selectedClassName, Integer childCount, Date createTime, String creator, String description, Date updateTime, String jsExpression) {
         this.menuId = menuId;
         this.menuName = menuName;
         this.menuText = menuText;
@@ -190,19 +190,19 @@ public class MenuEntity {
         this.menuOrganName = menuOrganName == null ? null : menuOrganName.trim();
     }
 
-    public Long getIsExpand() {
+    public Integer getIsExpand() {
         return isExpand;
     }
 
-    public void setIsExpand(Long isExpand) {
+    public void setIsExpand(Integer isExpand) {
         this.isExpand = isExpand;
     }
 
-    public Long getIsSystem() {
+    public Integer getIsSystem() {
         return isSystem;
     }
 
-    public void setIsSystem(Long isSystem) {
+    public void setIsSystem(Integer isSystem) {
         this.isSystem = isSystem;
     }
 
@@ -238,11 +238,11 @@ public class MenuEntity {
         this.rightUrlPara = rightUrlPara == null ? null : rightUrlPara.trim();
     }
 
-    public Long getOrderNum() {
+    public Integer getOrderNum() {
         return orderNum;
     }
 
-    public void setOrderNum(Long orderNum) {
+    public void setOrderNum(Integer orderNum) {
         this.orderNum = orderNum;
     }
 
@@ -286,12 +286,12 @@ public class MenuEntity {
         this.tag = tag == null ? null : tag.trim();
     }
 
-    public Long getTarget() {
+    public String getTarget() {
         return target;
     }
 
-    public void setTarget(Long target) {
-        this.target = target;
+    public void setTarget(String target) {
+        this.target = target == null ? null : target.trim();
     }
 
     public String getUpdater() {
@@ -358,11 +358,11 @@ public class MenuEntity {
         this.selectedClassName = selectedClassName == null ? null : selectedClassName.trim();
     }
 
-    public Long getChildCount() {
+    public Integer getChildCount() {
         return childCount;
     }
 
-    public void setChildCount(Long childCount) {
+    public void setChildCount(Integer childCount) {
         this.childCount = childCount;
     }
 
