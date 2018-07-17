@@ -42,14 +42,22 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                     if(parentEntity==null){
                         throw new JBuild4DGenerallyException("找不到父节点为"+sourceEntity.getParentId()+"的记录!");
                     }
+                    else
+                    {
+                        sourceEntity.setParentIdList(parentEntity.getParentIdList()+"*"+sourceEntity.getMenuId());
+                    }
                 }
-                sourceEntity.setParentIdList(parentEntity.getParentIdList()+"*"+sourceEntity.getMenuId());
+                else
+                {
+                    sourceEntity.setParentIdList("-1*"+sourceEntity.getMenuId());
+                }
+
                 sourceEntity.setCreateTime(new Date());
                 sourceEntity.setCreator(jb4DSession.getUserName());
                 sourceEntity.setChildCount(0);
                 sourceEntity.setUpdater(jb4DSession.getUserName());
                 sourceEntity.setUpdateTime(new Date());
-                return null;
+                return sourceEntity;
             }
         });
     }
