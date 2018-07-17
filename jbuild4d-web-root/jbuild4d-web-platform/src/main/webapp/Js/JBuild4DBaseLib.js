@@ -1378,7 +1378,7 @@ var ListPageUtility={
             }, "json");
         });
     },
-    IViewTableLoadDataNoSearch:function (url,pageNum,pageSize,pageAppObj,successFunc) {
+    IViewTableLoadDataNoSearch:function (url,pageNum,pageSize,pageAppObj,autoSelectedOldRows,successFunc) {
         //debugger;
         AjaxUtility.Post(url,
             {
@@ -1390,6 +1390,17 @@ var ListPageUtility={
                     pageAppObj.tableData = new Array();
                     pageAppObj.tableData = result.data.list;
                     pageAppObj.pageTotal = result.data.total;
+                    if(autoSelectedOldRows){
+                        if(pageAppObj.selectionRows!=null) {
+                            for (var i = 0; i < pageAppObj.tableData.length; i++) {
+                                for (var j = 0; j < pageAppObj.selectionRows.length;j++) {
+                                    if(pageAppObj.selectionRows[j].ddglId==pageAppObj.tableData[i].ddglId){
+                                        pageAppObj.tableData[i]._checked=true;
+                                    }
+                                }
+                            }
+                        }
+                    }
                     if(typeof (successFunc)=="function") {
                         successFunc(result,pageAppObj);
                     }

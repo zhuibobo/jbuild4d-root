@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="${theme}/Css/FrameStyle.css?urlts=${urlts}" />
 <link rel="stylesheet" type="text/css" href="${theme}/Css/ListPageStyle.css?urlts=${urlts}" />
 <link rel="stylesheet" type="text/css" href="${theme}/Css/DetailPageStyle.css?urlts=${urlts}" />
+<link rel="stylesheet" type="text/css" href="${theme}/Css/LeftMenus.css?urlts=${urlts}" />
 <link rel="stylesheet" type="text/css" href="${theme}/IView/iview.css" />
 <link rel="stylesheet" type="text/css" href="${theme}/JQueryUI/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="${theme}/TreeTable/TreeTable.css" />

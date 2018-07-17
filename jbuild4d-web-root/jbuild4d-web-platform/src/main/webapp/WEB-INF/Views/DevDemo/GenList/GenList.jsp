@@ -113,18 +113,7 @@
             },
             reloadData: function () {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/GetListData.do';
-                JB4D.ListPageUtility.IViewTableLoadDataNoSearch(url,this.pageNum,this.pageSize,this,function (result,pageAppObj) {
-                    //debugger;
-                    if(appList.selectionRows!=null) {
-                        for (var i = 0; i < appList.tableData.length; i++) {
-                            for (var j = 0; j < appList.selectionRows.length;j++) {
-                                if(appList.selectionRows[j].ddglId==appList.tableData[i].ddglId){
-                                    appList.tableData[i]._checked=true;
-                                }
-                            }
-                        }
-                    }
-                });
+                JB4D.ListPageUtility.IViewTableLoadDataNoSearch(url,this.pageNum,this.pageSize,this,true,null);
                 //this.selectionRows=null;
             },
             add: function () {

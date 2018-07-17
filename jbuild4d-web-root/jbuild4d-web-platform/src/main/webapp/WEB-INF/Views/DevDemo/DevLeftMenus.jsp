@@ -37,13 +37,28 @@
             }]
         }];
         $(document).ready(function () {
-            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            zTreeObj = $.fn.zTree.init($("#ztreeUL"), setting, zNodes);
         });
     </script>
 </head>
 <body>
 <div>
-    <ul id="treeDemo" class="ztree"></ul>
+    <div class="left-page-c">
+        <div class="tool-bar-c">
+            <div alt="新增分类组" title="新增分类组" class="add" onclick=""></div>
+            <div alt="修改分类组" title="修改分类组" class="edit" onclick=""></div>
+            <div alt="删除分类组" title="删除分类组" class="del" onclick=""></div>
+            <div alt="浏览分类组" title="浏览分类组" class="view" onclick=""></div>
+            <div alt="上移" title="上移" class="order-up" onclick=""></div>
+            <div alt="下移" title="下移" class="order-down last" onclick=""></div>
+        </div>
+        <div class="zTreeDemoBackground left">
+            <ul id="ztreeUL" class="ztree"></ul>
+        </div>
+    </div>
 </div>
+<style>
+
+</style>
 </body>
 </html>
