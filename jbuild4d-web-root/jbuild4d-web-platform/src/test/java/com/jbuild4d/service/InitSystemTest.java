@@ -28,25 +28,33 @@ public class InitSystemTest extends BaseTest {
 
     @Test
     public void initMenu() throws JBuild4DGenerallyException {
-        MenuEntity menuEntity=new MenuEntity();
-        String rootId="0";
+
         //根菜单
-        menuEntity.setMenuId(rootId);
-        menuEntity.setMenuName("Root");
-        menuEntity.setMenuText("Root");
-        menuEntity.setMenuValue("Root");
-        menuEntity.setMenuType(MenuTypeEnum.Root.getDisplayName());
+        String rootId="0";
+        MenuEntity rootMenu=getMenu("-1",rootId,"Root","Root","Root",MenuTypeEnum.Root.getDisplayName(),"","","");
+        menuService.deleteByKey(jb4DSession,rootId);
+        menuService.saveBySelective(jb4DSession,rootMenu.getMenuId(),rootMenu);
+
+        //第一层节点
+        String systemSettingId="JB4DSystemSettingId";
+        MenuEntity systemSettingMenu=getMenu(rootMenu.getMenuId(),systemSettingId,"系统设置","系统设置","系统设置",MenuTypeEnum.Root.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+        menuService.deleteByKey(jb4DSession,systemSettingId);
+        menuService.saveBySelective(jb4DSession,systemSettingMenu.getMenuId(),systemSettingMenu);
+    }
+
+    public MenuEntity getMenu(String parentId,String id,String name,String text,String value,String type,String leftUrl,String rightUrl,String iconClassName){
+        MenuEntity menuEntity=new MenuEntity();
+        menuEntity.setMenuId(id);
+        menuEntity.setMenuName(name);
+        menuEntity.setMenuText(text);
+        menuEntity.setMenuValue(value);
+        menuEntity.setMenuType(type);
         menuEntity.setIsExpand(TrueFalseEnum.False.getValue());
         menuEntity.setIsSystem(TrueFalseEnum.True.getValue());
-        menuEntity.setLeftUrl("");
-        menuEntity.setRightUrl("");
-        menuEntity.setOrderNum(menuService.getNextOrderNum(jb4DSession));
-        menuEntity.setOrganId(jb4DSession.getOrganId());
-        menuEntity.setParentId("-1");
-        menuEntity.setParentIdList("-1*0");
-        menuEntity.setIconClassName("");
-        menuEntity.setChildCount(1);
-        menuService.saveBySelective(jb4DSession,rootId,menuEntity);
-        //menuEntity.setIsExpand();
+        menuEntity.setLeftUrl(leftUrl);
+        menuEntity.setRightUrl(rightUrl);
+        menuEntity.setParentId(parentId);
+        menuEntity.setIconClassName(iconClassName);
+        return menuEntity;
     }
 }

@@ -58,7 +58,6 @@ CREATE TABLE [dbo].[TB4D_MENU] (
   [RIGHT_URL]           [NVARCHAR](800)  NULL,
   [RIGHT_URL_PARA]      [NVARCHAR](600)  NULL,
   [ORDER_NUM]           [BIGINT]         NULL,
-  [ORGAN_ID]            [NVARCHAR](100)  NOT NULL,
   [PARENT_ID]           [NVARCHAR](100)  NOT NULL,
   [PARENT_ID_LIST]      [NVARCHAR](1200) NOT NULL,
   [SHARE_TYPE]          [INT]         NULL,
