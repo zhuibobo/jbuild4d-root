@@ -6,4 +6,26 @@
         <include refid="Base_Column_List"/>
         from TB4D_MENU ORDER by ORDER_NUM ASC
     </select>
+    <delete id="deleteAll">
+        delete from TB4D_MENU
+    </delete>
+    <select id="nextOrderNum" resultType="integer">
+        select case when max(ORDER_NUM) is null then 1 else max(ORDER_NUM)+1 end ORDERNUM from TB4D_MENU
+    </select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+            select
+            *
+            from TB4D_MENU
+            where ORDER_NUM = (select max(ORDER_NUM) from TB4D_MENU where ORDER_NUM<(select ORDER_NUM from TB4D_MENU where MENU_ID=#{id,jdbcType=NVARCHAR}))
+        ]]>
+    </select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+            select
+            *
+            from TB4D_MENU
+            where ORDER_NUM = (select min(ORDER_NUM) from TB4D_MENU where ORDER_NUM>(select ORDER_NUM from TB4D_MENU where MENU_ID=#{id,jdbcType=NVARCHAR}))
+        ]]>
+    </select>
 </mapper>

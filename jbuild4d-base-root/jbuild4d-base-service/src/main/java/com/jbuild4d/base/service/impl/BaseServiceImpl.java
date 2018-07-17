@@ -62,13 +62,13 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public int add(JB4DSession jb4DSession,T record) {
-        return defaultBaseMapper.insert(record);
+    public int add(JB4DSession jb4DSession,T entity) {
+        return defaultBaseMapper.insert(entity);
     }
 
     @Override
-    public int addSelective(JB4DSession jb4DSession,T record) {
-        return defaultBaseMapper.insertSelective(record);
+    public int addSelective(JB4DSession jb4DSession,T entity) {
+        return defaultBaseMapper.insertSelective(entity);
     }
 
     @Override
@@ -82,22 +82,22 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public int updateByKeySelective(JB4DSession jb4DSession,T record) {
-        return defaultBaseMapper.updateByPrimaryKeySelective(record);
+    public int updateByKeySelective(JB4DSession jb4DSession,T entity) {
+        return defaultBaseMapper.updateByPrimaryKeySelective(entity);
     }
 
     @Override
-    public int updateByKey(JB4DSession jb4DSession,T record) {
-        return defaultBaseMapper.updateByPrimaryKey(record);
+    public int updateByKey(JB4DSession jb4DSession,T entity) {
+        return defaultBaseMapper.updateByPrimaryKey(entity);
     }
 
     @Override
-    public int save(JB4DSession jb4DSession,String id,T record){
+    public int save(JB4DSession jb4DSession,String id,T entity){
         if(getByPrimaryKey(jb4DSession,id)==null){
-            return add(jb4DSession,record);
+            return add(jb4DSession,entity);
         }
         else{
-            return updateByKey(jb4DSession,record);
+            return updateByKey(jb4DSession,entity);
         }
     }
 
@@ -112,13 +112,13 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }*/
 
     @Override
-    public int saveBySelective(JB4DSession jb4DSession,String id, T record, IAddBefore<T> addBefore) throws JBuild4DGenerallyException {
+    public int saveBySelective(JB4DSession jb4DSession,String id, T entity, IAddBefore<T> addBefore) throws JBuild4DGenerallyException {
         if(getByPrimaryKey(jb4DSession,id)==null){
-            record=addBefore.run(jb4DSession,record);
-            return addSelective(jb4DSession,record);
+            entity=addBefore.run(jb4DSession,entity);
+            return addSelective(jb4DSession,entity);
         }
         else{
-            return updateByKeySelective(jb4DSession,record);
+            return updateByKeySelective(jb4DSession,entity);
         }
     }
 

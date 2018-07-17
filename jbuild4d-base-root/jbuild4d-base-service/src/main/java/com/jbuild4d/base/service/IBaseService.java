@@ -28,9 +28,9 @@ public interface IBaseService<T> {
 
     int deleteAll(JB4DSession jb4DSession);
 
-    int add(JB4DSession jb4DSession,T record);
+    int add(JB4DSession jb4DSession,T entity);
 
-    int addSelective(JB4DSession jb4DSession,T record);
+    int addSelective(JB4DSession jb4DSession,T entity);
 
     T getByPrimaryKey(JB4DSession jb4DSession,String id);
 
@@ -38,15 +38,15 @@ public interface IBaseService<T> {
 
     List<T> searchByMap(JB4DSession jb4DSession,Map<String,Object> searchItemMap);
 
-    int updateByKeySelective(JB4DSession jb4DSession,T record);
+    int updateByKeySelective(JB4DSession jb4DSession,T entity);
 
-    int updateByKey(JB4DSession jb4DSession,T record);
+    int updateByKey(JB4DSession jb4DSession,T entity);
 
-    int save(JB4DSession jb4DSession,String id, T record);
+    int save(JB4DSession jb4DSession,String id, T entity);
 
-    int saveBySelective(JB4DSession jb4DSession,String id, T record) throws JBuild4DGenerallyException;
+    int saveBySelective(JB4DSession jb4DSession,String id, T entity) throws JBuild4DGenerallyException;
 
-    int saveBySelective(JB4DSession jb4DSession,String id, T record,IAddBefore<T> addBefore) throws JBuild4DGenerallyException;
+    int saveBySelective(JB4DSession jb4DSession,String id, T entity,IAddBefore<T> addBefore) throws JBuild4DGenerallyException;
 
     PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize);
 

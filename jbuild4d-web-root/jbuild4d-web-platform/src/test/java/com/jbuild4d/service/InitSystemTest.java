@@ -7,6 +7,7 @@ import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes= {MybatisBeansConfig.class,SystemBeansConfig.class})
-public class InitSystemTest {
+public class InitSystemTest extends BaseTest {
     @Autowired
     private IMenuService menuService;
 
@@ -36,7 +37,16 @@ public class InitSystemTest {
         menuEntity.setMenuValue("Root");
         menuEntity.setMenuType(MenuTypeEnum.Root.getDisplayName());
         menuEntity.setIsExpand(TrueFalseEnum.False.getValue());
-
+        menuEntity.setIsSystem(TrueFalseEnum.True.getValue());
+        menuEntity.setLeftUrl("");
+        menuEntity.setRightUrl("");
+        menuEntity.setOrderNum(menuService.getNextOrderNum(jb4DSession));
+        menuEntity.setOrganId(jb4DSession.getOrganId());
+        menuEntity.setParentId("-1");
+        menuEntity.setParentIdList("-1*0");
+        menuEntity.setIconClassName("");
+        menuEntity.setChildCount(1);
+        menuService.saveBySelective(jb4DSession,rootId,menuEntity);
         //menuEntity.setIsExpand();
     }
 }

@@ -12,17 +12,11 @@ import java.util.Map;
 public interface BaseMapper<T> {
     int deleteByPrimaryKey(String id);
 
-    int deleteByPrimaryStringKey(String id);
-
     int insert(T record);
 
     int insertSelective(T record);
 
-    T selectByPrimaryKey(int id);
-
     T selectByPrimaryKey(String id);
-
-    T selectByPrimaryStringKey(String id);
 
     int updateByPrimaryKeySelective(T record);
 
@@ -35,8 +29,6 @@ public interface BaseMapper<T> {
     List<T> searchByMap(Map<String, Object> searchItemMap);
 
     int count();
-
-    int nextId();
 
     int nextOrderNum();
 }
