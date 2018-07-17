@@ -36,10 +36,19 @@ public class InitSystemTest extends BaseTest {
         menuService.saveBySelective(jb4DSession,rootMenu.getMenuId(),rootMenu);
 
         //第一层节点
-        String systemSettingId="JB4DSystemSettingId";
-        MenuEntity systemSettingMenu=getMenu(rootMenu.getMenuId(),systemSettingId,"系统设置","系统设置","系统设置",MenuTypeEnum.Root.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+        //根菜单->系统设置分组
+        String systemSettingId="JB4DSystemSettingRoot";
+        MenuEntity systemSettingMenu=getMenu(rootMenu.getMenuId(),systemSettingId,"系统设置","系统设置","系统设置",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
         menuService.deleteByKey(jb4DSession,systemSettingId);
         menuService.saveBySelective(jb4DSession,systemSettingMenu.getMenuId(),systemSettingMenu);
+
+        //根菜单->系统设置分组->数据字典分组
+        String systemSettingDictionaryGroupId="JB4DSystemSettingDictionaryGroup";
+        MenuEntity systemSettingDictionaryGroupMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingDictionaryGroupId,"数据字典分组","数据字典分组","数据字典分组",
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/DictionaryGroup/List.do","");
+        menuService.deleteByKey(jb4DSession,systemSettingDictionaryGroupId);
+        menuService.saveBySelective(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId(),systemSettingDictionaryGroupMenu);
     }
 
     public MenuEntity getMenu(String parentId,String id,String name,String text,String value,String type,String leftUrl,String rightUrl,String iconClassName){
