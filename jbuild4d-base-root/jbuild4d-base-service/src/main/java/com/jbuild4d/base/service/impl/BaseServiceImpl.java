@@ -1,12 +1,9 @@
 package com.jbuild4d.base.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
-import com.jbuild4d.base.service.IAddBefore;
-import com.jbuild4d.base.service.IBaseService;
+import com.jbuild4d.base.service.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jbuild4d.base.service.IGeneralService;
-import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -118,6 +115,18 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
             return addSelective(jb4DSession,entity);
         }
         else{
+            return updateByKeySelective(jb4DSession,entity);
+        }
+    }
+
+    @Override
+    public int saveBySelective(JB4DSession jb4DSession, String id, T entity, IAddBefore<T> addBefore, IUpdateBefore<T> updateBefore) throws JBuild4DGenerallyException {
+        if(getByPrimaryKey(jb4DSession,id)==null){
+            entity=addBefore.run(jb4DSession,entity);
+            return addSelective(jb4DSession,entity);
+        }
+        else{
+            entity=updateBefore.run(jb4DSession,entity);
             return updateByKeySelective(jb4DSession,entity);
         }
     }
