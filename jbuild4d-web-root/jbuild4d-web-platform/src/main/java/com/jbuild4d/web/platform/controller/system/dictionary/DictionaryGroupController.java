@@ -27,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping(value = "/PlatForm/System/DictionaryGroup")
-public class DictionaryGroupController extends GeneralCRUDImplController<DictionaryGroupEntity> implements InitializingBean {
+public class DictionaryGroupController extends GeneralCRUDImplController<DictionaryGroupEntity> {
 
     @Autowired
     IDictionaryGroupService dictionaryGroupService;
@@ -39,7 +39,7 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
 
     @Override
     public String getListViewName() {
-        return "System/Dictionary/DictionaryGroupList";
+        return "";
     }
 
     @Override
@@ -52,11 +52,6 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
     public JBuild4DResponseVo moveUp(String recordId) {
         //dictionaryGroupService.moveUp(recordId);
         return JBuild4DResponseVo.opSuccess();
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-
     }
 
     /*@Override

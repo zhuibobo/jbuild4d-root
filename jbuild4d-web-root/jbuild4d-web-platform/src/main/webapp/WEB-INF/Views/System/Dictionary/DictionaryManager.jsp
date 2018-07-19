@@ -32,14 +32,14 @@
         <div class="left-outer-c">
             <div class="left-page-c">
                 <div class="tool-bar-c">
-                    <div alt="新增分类组" title="新增分类组" class="add" onclick=""></div>
-                    <div alt="修改分类组" title="修改分类组" class="edit" onclick=""></div>
-                    <div alt="删除分类组" title="删除分类组" class="del" onclick=""></div>
-                    <div alt="浏览分类组" title="浏览分类组" class="view" onclick=""></div>
-                    <div alt="上移" title="上移" class="order-up" onclick=""></div>
-                    <div alt="下移" title="下移" class="order-down last" onclick=""></div>
+                    <div alt="新增分类组" title="新增分类组" class="add" @click="addGroup()"></div>
+                    <div alt="修改分类组" title="修改分类组" class="edit" @click="editGroup"></div>
+                    <div alt="删除分类组" title="删除分类组" class="del" @click="delGroup"></div>
+                    <div alt="浏览分类组" title="浏览分类组" class="view" @click="viewGroup"></div>
+                    <div alt="上移" title="上移" class="order-up" @click=""></div>
+                    <div alt="下移" title="下移" class="order-down last" @click=""></div>
                 </div>
-                <div class="zTreeDemoBackground left">
+                <div>
                     <ul id="ztreeUL" class="ztree"></ul>
                 </div>
             </div>
@@ -63,15 +63,63 @@
         var appList=new Vue({
             el:"#appList",
             mounted:function () {
-                this.reloadData();
             },
             data:{
-                table_data:null
+                table_data:null,
+                treeSetting:{
+                    async : {
+                        enable : true,
+                        // Ajax 获取数据的 URL 地址
+                        url : BaseUtility.BuildUrl("/categoryGroupController/queryAjaxTreeData.do"),
+                        //ajax提交的时候，传的是id值
+                        autoParam : [ "categoryId", "categoryName" ]
+                    },
+                    // 必须使用data
+                    data:{
+                        key:{
+                            name:"categoryName"
+                        },
+                        simpleData : {
+                            enable : true,
+                            idKey : "categoryId", // id编号命名
+                            pIdKey : "parentId",  // 父id编号命名
+                            rootId : 0
+                        }
+                    },
+                    // 回调函数
+                    callback : {
+                        onClick : function(event, treeId, treeNode) {
+                            // 根节点不触发任何事件
+                            if(treeNode.level != 0) {
+
+                            }
+                        },
+                        //成功的回调函数
+                        onAsyncSuccess : function(event, treeId, treeNode, msg){
+
+                        }
+                    }
+                }
             },
             methods:{
-                refreshPage:function () {
-                    window.location.href=window.location.href;
+                <!--Group-->
+                initTree:function () {
+                    $.fn.zTree.init($("#ztreeUL"), this.treeSetting);
                 },
+                addGroup:function () {
+                    var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add");
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 3);
+                },
+                editGroup:function () {
+
+                },
+                delGroup:function () {
+
+                },
+                viewGroup:function () {
+
+                },
+                <!--Dictionary-->
                 reloadData:function () {
                     /*var url='/PlatForm/System/Dictionary/GetListData.do';
                     var _self=this;
