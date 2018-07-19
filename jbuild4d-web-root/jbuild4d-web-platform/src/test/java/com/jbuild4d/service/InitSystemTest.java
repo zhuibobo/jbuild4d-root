@@ -44,10 +44,10 @@ public class InitSystemTest extends BaseTest {
         menuService.saveBySelective(jb4DSession,systemSettingMenu.getMenuId(),systemSettingMenu);
 
         //根菜单->系统设置分组->数据字典分组
-        String systemSettingDictionaryGroupId="JB4DSystemSettingDictionaryGroup";
-        MenuEntity systemSettingDictionaryGroupMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingDictionaryGroupId,"数据字典分组","数据字典分组","数据字典分组",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/DictionaryGroup/List.do","");
-        menuService.deleteByKey(jb4DSession,systemSettingDictionaryGroupId);
+        String systemSettingDictionaryManagerId="JB4DSystemSettingDictionaryManager";
+        MenuEntity systemSettingDictionaryGroupMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingDictionaryManagerId,"数据字典","数据字典","数据字典",
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/Dictionary/DictionaryManager.do","");
+        menuService.deleteByKey(jb4DSession,systemSettingDictionaryManagerId);
         menuService.saveBySelective(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId(),systemSettingDictionaryGroupMenu);
 
 

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping(value = "/PlatForm/System/Dictionary")
+@RequestMapping(value = "/PlatForm/System/DictionaryOLD")
 public class DictionaryController {
 
     @RequestMapping(value = "List", method = RequestMethod.GET)

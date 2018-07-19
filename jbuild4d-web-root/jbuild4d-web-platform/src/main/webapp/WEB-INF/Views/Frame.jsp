@@ -15,7 +15,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
-<body style="height: 100%">
+<body style="height: 100%;overflow: hidden">
 <div id="app" v-cloak>
     <div class="frame-layout">
         <layout :style="{minHeight: '100vh'}">
@@ -228,7 +228,7 @@
             setFrameHeight:function(){
                 //调整掉一些补白的值
                 //debugger;
-                this.mainHeight = PageStyleUtility.GetWindowHeigth()-90-90;
+                this.mainHeight = PageStyleUtility.GetWindowHeigth()-90-60;
                 this.frameHeight = this.mainHeight-30;
             },
             setBreadcrumbArrayJson:function (jsonArray) {
