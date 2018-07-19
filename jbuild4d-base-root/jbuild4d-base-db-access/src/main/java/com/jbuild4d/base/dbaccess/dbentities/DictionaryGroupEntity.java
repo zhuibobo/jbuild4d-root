@@ -17,7 +17,9 @@ public class DictionaryGroupEntity {
 
     private String dictGroupStatus;
 
-    public DictionaryGroupEntity(String dictGroupId, String dictGroupValue, String dictGroupText, Integer dictGroupOrderNum, Date dictGroupCreateTime, String dictGroupDesc, String dictGroupStatus) {
+    private String dictGroupParentId;
+
+    public DictionaryGroupEntity(String dictGroupId, String dictGroupValue, String dictGroupText, Integer dictGroupOrderNum, Date dictGroupCreateTime, String dictGroupDesc, String dictGroupStatus, String dictGroupParentId) {
         this.dictGroupId = dictGroupId;
         this.dictGroupValue = dictGroupValue;
         this.dictGroupText = dictGroupText;
@@ -25,6 +27,7 @@ public class DictionaryGroupEntity {
         this.dictGroupCreateTime = dictGroupCreateTime;
         this.dictGroupDesc = dictGroupDesc;
         this.dictGroupStatus = dictGroupStatus;
+        this.dictGroupParentId = dictGroupParentId;
     }
 
     public DictionaryGroupEntity() {
@@ -85,5 +88,13 @@ public class DictionaryGroupEntity {
 
     public void setDictGroupStatus(String dictGroupStatus) {
         this.dictGroupStatus = dictGroupStatus == null ? null : dictGroupStatus.trim();
+    }
+
+    public String getDictGroupParentId() {
+        return dictGroupParentId;
+    }
+
+    public void setDictGroupParentId(String dictGroupParentId) {
+        this.dictGroupParentId = dictGroupParentId == null ? null : dictGroupParentId.trim();
     }
 }

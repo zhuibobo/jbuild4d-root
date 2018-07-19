@@ -57,7 +57,7 @@ CREATE TABLE [dbo].[TB4D_MENU] (
   [LEFT_URL_PARA]       [NVARCHAR](600)  NULL,
   [RIGHT_URL]           [NVARCHAR](800)  NULL,
   [RIGHT_URL_PARA]      [NVARCHAR](600)  NULL,
-  [ORDER_NUM]           [BIGINT]         NULL,
+  [ORDER_NUM]           [INT]         NULL,
   [PARENT_ID]           [NVARCHAR](100)  NOT NULL,
   [PARENT_ID_LIST]      [NVARCHAR](1200) NOT NULL,
   [SHARE_TYPE]          [INT]         NULL,
@@ -90,10 +90,11 @@ CREATE TABLE TB4D_DICTIONARY_GROUP (
   [DICT_GROUP_ID]          [NVARCHAR](100) NOT NULL PRIMARY KEY,
   [DICT_GROUP_VALUE]       [NVARCHAR](200) NOT NULL,
   [DICT_GROUP_TEXT]        [NVARCHAR](200) NOT NULL,
-  [DICT_GROUP_ORDER_NUM]   [INT]        NULL,
+  [DICT_GROUP_ORDER_NUM]   [INT]           NULL,
   [DICT_GROUP_CREATE_TIME] [DATETIME]      NULL,
   [DICT_GROUP_DESC]        [NVARCHAR](500) NULL,
-  [DICT_GROUP_STATUS]      [NVARCHAR](10)  NULL
+  [DICT_GROUP_STATUS]      [NVARCHAR](10)  NULL,
+  [DICT_GROUP_PARENT_ID]   [NVARCHAR]      NULL
 )
 -----------------------------------------数据字典表-----------------------------------------
 CREATE TABLE TB4D_DICTIONARY (

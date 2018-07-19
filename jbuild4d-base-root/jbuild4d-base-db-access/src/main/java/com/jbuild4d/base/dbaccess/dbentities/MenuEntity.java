@@ -35,13 +35,11 @@ public class MenuEntity {
 
     private Integer orderNum;
 
-    private String organId;
-
     private String parentId;
 
     private String parentIdList;
 
-    private Long shareType;
+    private Integer shareType;
 
     private String tag;
 
@@ -75,7 +73,7 @@ public class MenuEntity {
 
     private String jsExpression;
 
-    public MenuEntity(String menuId, String menuName, String menuText, String menuValue, String menuType, String menuUserId, String menuUserName, String menuOrganId, String menuOrganName, Integer isExpand, Integer isSystem, String leftUrl, String leftUrlPara, String rightUrl, String rightUrlPara, Integer orderNum, String organId, String parentId, String parentIdList, Long shareType, String tag, String target, String updater, String useOrgan, String useOrganId, String useOrganType, String useOrganTypeId, String iconClassName, String hoverClassName, String selectedClassName, Integer childCount, Date createTime, String creator, String description, Date updateTime, String jsExpression) {
+    public MenuEntity(String menuId, String menuName, String menuText, String menuValue, String menuType, String menuUserId, String menuUserName, String menuOrganId, String menuOrganName, Integer isExpand, Integer isSystem, String leftUrl, String leftUrlPara, String rightUrl, String rightUrlPara, Integer orderNum, String parentId, String parentIdList, Integer shareType, String tag, String target, String updater, String useOrgan, String useOrganId, String useOrganType, String useOrganTypeId, String iconClassName, String hoverClassName, String selectedClassName, Integer childCount, Date createTime, String creator, String description, Date updateTime, String jsExpression) {
         this.menuId = menuId;
         this.menuName = menuName;
         this.menuText = menuText;
@@ -92,7 +90,6 @@ public class MenuEntity {
         this.rightUrl = rightUrl;
         this.rightUrlPara = rightUrlPara;
         this.orderNum = orderNum;
-        this.organId = organId;
         this.parentId = parentId;
         this.parentIdList = parentIdList;
         this.shareType = shareType;
@@ -246,14 +243,6 @@ public class MenuEntity {
         this.orderNum = orderNum;
     }
 
-    public String getOrganId() {
-        return organId;
-    }
-
-    public void setOrganId(String organId) {
-        this.organId = organId == null ? null : organId.trim();
-    }
-
     public String getParentId() {
         return parentId;
     }
@@ -270,11 +259,11 @@ public class MenuEntity {
         this.parentIdList = parentIdList == null ? null : parentIdList.trim();
     }
 
-    public Long getShareType() {
+    public Integer getShareType() {
         return shareType;
     }
 
-    public void setShareType(Long shareType) {
+    public void setShareType(Integer shareType) {
         this.shareType = shareType;
     }
 

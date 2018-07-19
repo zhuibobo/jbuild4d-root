@@ -20,7 +20,7 @@ public class DictionaryController {
 
     @RequestMapping(value = "List", method = RequestMethod.GET)
     public ModelAndView list() {
-        ModelAndView modelAndView=new ModelAndView("System/Dictionary/DictionaryList");
+        ModelAndView modelAndView=new ModelAndView("System/Dictionary/OLD/DictionaryList");
         return modelAndView;
     }
 

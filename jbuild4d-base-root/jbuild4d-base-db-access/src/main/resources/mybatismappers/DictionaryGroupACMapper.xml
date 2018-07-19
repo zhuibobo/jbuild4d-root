@@ -10,11 +10,12 @@
       <arg column="DICT_GROUP_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="DICT_GROUP_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_GROUP_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_GROUP_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME, 
-    DICT_GROUP_DESC, DICT_GROUP_STATUS
+    DICT_GROUP_DESC, DICT_GROUP_STATUS, DICT_GROUP_PARENT_ID
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -29,10 +30,12 @@
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
     insert into TB4D_DICTIONARY_GROUP (DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, 
       DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME, 
-      DICT_GROUP_DESC, DICT_GROUP_STATUS)
+      DICT_GROUP_DESC, DICT_GROUP_STATUS, DICT_GROUP_PARENT_ID
+      )
     values (#{dictGroupId,jdbcType=NVARCHAR}, #{dictGroupValue,jdbcType=NVARCHAR}, #{dictGroupText,jdbcType=NVARCHAR}, 
       #{dictGroupOrderNum,jdbcType=INTEGER}, #{dictGroupCreateTime,jdbcType=TIMESTAMP}, 
-      #{dictGroupDesc,jdbcType=NVARCHAR}, #{dictGroupStatus,jdbcType=NVARCHAR})
+      #{dictGroupDesc,jdbcType=NVARCHAR}, #{dictGroupStatus,jdbcType=NVARCHAR}, #{dictGroupParentId,jdbcType=NVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
     insert into TB4D_DICTIONARY_GROUP
@@ -58,6 +61,9 @@
       <if test="dictGroupStatus != null">
         DICT_GROUP_STATUS,
       </if>
+      <if test="dictGroupParentId != null">
+        DICT_GROUP_PARENT_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="dictGroupId != null">
@@ -80,6 +86,9 @@
       </if>
       <if test="dictGroupStatus != null">
         #{dictGroupStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictGroupParentId != null">
+        #{dictGroupParentId,jdbcType=NVARCHAR},
       </if>
     </trim>
   </insert>
@@ -104,6 +113,9 @@
       <if test="dictGroupStatus != null">
         DICT_GROUP_STATUS = #{dictGroupStatus,jdbcType=NVARCHAR},
       </if>
+      <if test="dictGroupParentId != null">
+        DICT_GROUP_PARENT_ID = #{dictGroupParentId,jdbcType=NVARCHAR},
+      </if>
     </set>
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
   </update>
@@ -114,7 +126,8 @@
       DICT_GROUP_ORDER_NUM = #{dictGroupOrderNum,jdbcType=INTEGER},
       DICT_GROUP_CREATE_TIME = #{dictGroupCreateTime,jdbcType=TIMESTAMP},
       DICT_GROUP_DESC = #{dictGroupDesc,jdbcType=NVARCHAR},
-      DICT_GROUP_STATUS = #{dictGroupStatus,jdbcType=NVARCHAR}
+      DICT_GROUP_STATUS = #{dictGroupStatus,jdbcType=NVARCHAR},
+      DICT_GROUP_PARENT_ID = #{dictGroupParentId,jdbcType=NVARCHAR}
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
   </update>
 </mapper>

@@ -19,10 +19,9 @@
       <arg column="RIGHT_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="RIGHT_URL_PARA" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="PARENT_ID_LIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SHARE_TYPE" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="SHARE_TYPE" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="TAG" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="TARGET" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="UPDATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -44,10 +43,10 @@
   <sql id="Base_Column_List">
     MENU_ID, MENU_NAME, MENU_TEXT, MENU_VALUE, MENU_TYPE, MENU_USER_ID, MENU_USER_NAME, 
     MENU_ORGAN_ID, MENU_ORGAN_NAME, IS_EXPAND, IS_SYSTEM, LEFT_URL, LEFT_URL_PARA, RIGHT_URL, 
-    RIGHT_URL_PARA, ORDER_NUM, ORGAN_ID, PARENT_ID, PARENT_ID_LIST, SHARE_TYPE, TAG, 
-    TARGET, UPDATER, USE_ORGAN, USE_ORGAN_ID, USE_ORGAN_TYPE, USE_ORGAN_TYPE_ID, ICON_CLASS_NAME, 
-    HOVER_CLASS_NAME, SELECTED_CLASS_NAME, CHILD_COUNT, CREATE_TIME, CREATOR, DESCRIPTION, 
-    UPDATE_TIME, JS_EXPRESSION
+    RIGHT_URL_PARA, ORDER_NUM, PARENT_ID, PARENT_ID_LIST, SHARE_TYPE, TAG, TARGET, UPDATER, 
+    USE_ORGAN, USE_ORGAN_ID, USE_ORGAN_TYPE, USE_ORGAN_TYPE_ID, ICON_CLASS_NAME, HOVER_CLASS_NAME, 
+    SELECTED_CLASS_NAME, CHILD_COUNT, CREATE_TIME, CREATOR, DESCRIPTION, UPDATE_TIME, 
+    JS_EXPRESSION
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -65,27 +64,25 @@
       MENU_USER_NAME, MENU_ORGAN_ID, MENU_ORGAN_NAME, 
       IS_EXPAND, IS_SYSTEM, LEFT_URL, 
       LEFT_URL_PARA, RIGHT_URL, RIGHT_URL_PARA, 
-      ORDER_NUM, ORGAN_ID, PARENT_ID, 
-      PARENT_ID_LIST, SHARE_TYPE, TAG, 
-      TARGET, UPDATER, USE_ORGAN, 
-      USE_ORGAN_ID, USE_ORGAN_TYPE, USE_ORGAN_TYPE_ID, 
-      ICON_CLASS_NAME, HOVER_CLASS_NAME, SELECTED_CLASS_NAME, 
-      CHILD_COUNT, CREATE_TIME, CREATOR, 
-      DESCRIPTION, UPDATE_TIME, JS_EXPRESSION
-      )
+      ORDER_NUM, PARENT_ID, PARENT_ID_LIST, 
+      SHARE_TYPE, TAG, TARGET, 
+      UPDATER, USE_ORGAN, USE_ORGAN_ID, 
+      USE_ORGAN_TYPE, USE_ORGAN_TYPE_ID, ICON_CLASS_NAME, 
+      HOVER_CLASS_NAME, SELECTED_CLASS_NAME, CHILD_COUNT, 
+      CREATE_TIME, CREATOR, DESCRIPTION, 
+      UPDATE_TIME, JS_EXPRESSION)
     values (#{menuId,jdbcType=NVARCHAR}, #{menuName,jdbcType=NVARCHAR}, #{menuText,jdbcType=NVARCHAR}, 
       #{menuValue,jdbcType=NVARCHAR}, #{menuType,jdbcType=NVARCHAR}, #{menuUserId,jdbcType=NVARCHAR}, 
       #{menuUserName,jdbcType=NVARCHAR}, #{menuOrganId,jdbcType=NVARCHAR}, #{menuOrganName,jdbcType=NVARCHAR}, 
       #{isExpand,jdbcType=INTEGER}, #{isSystem,jdbcType=INTEGER}, #{leftUrl,jdbcType=NVARCHAR}, 
       #{leftUrlPara,jdbcType=NVARCHAR}, #{rightUrl,jdbcType=NVARCHAR}, #{rightUrlPara,jdbcType=NVARCHAR}, 
-      #{orderNum,jdbcType=INTEGER}, #{organId,jdbcType=NVARCHAR}, #{parentId,jdbcType=NVARCHAR}, 
-      #{parentIdList,jdbcType=NVARCHAR}, #{shareType,jdbcType=BIGINT}, #{tag,jdbcType=NVARCHAR}, 
-      #{target,jdbcType=NVARCHAR}, #{updater,jdbcType=NVARCHAR}, #{useOrgan,jdbcType=NVARCHAR}, 
-      #{useOrganId,jdbcType=NVARCHAR}, #{useOrganType,jdbcType=NVARCHAR}, #{useOrganTypeId,jdbcType=NVARCHAR}, 
-      #{iconClassName,jdbcType=NVARCHAR}, #{hoverClassName,jdbcType=NVARCHAR}, #{selectedClassName,jdbcType=NVARCHAR}, 
-      #{childCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=NVARCHAR}, 
-      #{description,jdbcType=NVARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{jsExpression,jdbcType=NVARCHAR}
-      )
+      #{orderNum,jdbcType=INTEGER}, #{parentId,jdbcType=NVARCHAR}, #{parentIdList,jdbcType=NVARCHAR}, 
+      #{shareType,jdbcType=INTEGER}, #{tag,jdbcType=NVARCHAR}, #{target,jdbcType=NVARCHAR}, 
+      #{updater,jdbcType=NVARCHAR}, #{useOrgan,jdbcType=NVARCHAR}, #{useOrganId,jdbcType=NVARCHAR}, 
+      #{useOrganType,jdbcType=NVARCHAR}, #{useOrganTypeId,jdbcType=NVARCHAR}, #{iconClassName,jdbcType=NVARCHAR}, 
+      #{hoverClassName,jdbcType=NVARCHAR}, #{selectedClassName,jdbcType=NVARCHAR}, #{childCount,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=NVARCHAR}, #{description,jdbcType=NVARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{jsExpression,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
     insert into TB4D_MENU
@@ -137,9 +134,6 @@
       </if>
       <if test="orderNum != null">
         ORDER_NUM,
-      </if>
-      <if test="organId != null">
-        ORGAN_ID,
       </if>
       <if test="parentId != null">
         PARENT_ID,
@@ -248,9 +242,6 @@
       <if test="orderNum != null">
         #{orderNum,jdbcType=INTEGER},
       </if>
-      <if test="organId != null">
-        #{organId,jdbcType=NVARCHAR},
-      </if>
       <if test="parentId != null">
         #{parentId,jdbcType=NVARCHAR},
       </if>
@@ -258,7 +249,7 @@
         #{parentIdList,jdbcType=NVARCHAR},
       </if>
       <if test="shareType != null">
-        #{shareType,jdbcType=BIGINT},
+        #{shareType,jdbcType=INTEGER},
       </if>
       <if test="tag != null">
         #{tag,jdbcType=NVARCHAR},
@@ -358,9 +349,6 @@
       <if test="orderNum != null">
         ORDER_NUM = #{orderNum,jdbcType=INTEGER},
       </if>
-      <if test="organId != null">
-        ORGAN_ID = #{organId,jdbcType=NVARCHAR},
-      </if>
       <if test="parentId != null">
         PARENT_ID = #{parentId,jdbcType=NVARCHAR},
       </if>
@@ -368,7 +356,7 @@
         PARENT_ID_LIST = #{parentIdList,jdbcType=NVARCHAR},
       </if>
       <if test="shareType != null">
-        SHARE_TYPE = #{shareType,jdbcType=BIGINT},
+        SHARE_TYPE = #{shareType,jdbcType=INTEGER},
       </if>
       <if test="tag != null">
         TAG = #{tag,jdbcType=NVARCHAR},
@@ -438,10 +426,9 @@
       RIGHT_URL = #{rightUrl,jdbcType=NVARCHAR},
       RIGHT_URL_PARA = #{rightUrlPara,jdbcType=NVARCHAR},
       ORDER_NUM = #{orderNum,jdbcType=INTEGER},
-      ORGAN_ID = #{organId,jdbcType=NVARCHAR},
       PARENT_ID = #{parentId,jdbcType=NVARCHAR},
       PARENT_ID_LIST = #{parentIdList,jdbcType=NVARCHAR},
-      SHARE_TYPE = #{shareType,jdbcType=BIGINT},
+      SHARE_TYPE = #{shareType,jdbcType=INTEGER},
       TAG = #{tag,jdbcType=NVARCHAR},
       TARGET = #{target,jdbcType=NVARCHAR},
       UPDATER = #{updater,jdbcType=NVARCHAR},

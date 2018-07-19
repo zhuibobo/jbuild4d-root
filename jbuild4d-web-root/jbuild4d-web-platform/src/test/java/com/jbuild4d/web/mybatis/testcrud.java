@@ -52,7 +52,6 @@ public class testcrud {
         MenuEntity demoEntity=new MenuEntity();
         demoEntity.setMenuId(key);
         demoEntity.setMenuText("");
-        demoEntity.setOrganId("1");
         demoEntity.setParentId("1");
         demoEntity.setParentIdList("1");
         demoEntity.setMenuType("1");

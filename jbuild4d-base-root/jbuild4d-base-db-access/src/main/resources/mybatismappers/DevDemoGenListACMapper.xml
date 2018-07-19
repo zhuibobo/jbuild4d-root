@@ -9,7 +9,7 @@
       <arg column="DDGL_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDGL_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDGL_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="DDGL_CREATETIME" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="DDGL_CREATETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="DDGL_USER_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDGL_USER_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDGL_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -40,7 +40,7 @@
       DDGL_ORDER_NUM)
     values (#{ddglId,jdbcType=NVARCHAR}, #{ddglKey,jdbcType=NVARCHAR}, #{ddglName,jdbcType=NVARCHAR}, 
       #{ddglValue,jdbcType=NVARCHAR}, #{ddglStatus,jdbcType=NVARCHAR}, #{ddglDesc,jdbcType=NVARCHAR}, 
-      #{ddglCreatetime,jdbcType=INTEGER}, #{ddglUserId,jdbcType=NVARCHAR}, #{ddglUserName,jdbcType=NVARCHAR}, 
+      #{ddglCreatetime,jdbcType=TIMESTAMP}, #{ddglUserId,jdbcType=NVARCHAR}, #{ddglUserName,jdbcType=NVARCHAR}, 
       #{ddglOrganId,jdbcType=NVARCHAR}, #{ddglOrganName,jdbcType=NVARCHAR}, #{ddglApi,jdbcType=NVARCHAR}, 
       #{ddglOrderNum,jdbcType=INTEGER})
   </insert>
@@ -107,7 +107,7 @@
         #{ddglDesc,jdbcType=NVARCHAR},
       </if>
       <if test="ddglCreatetime != null">
-        #{ddglCreatetime,jdbcType=INTEGER},
+        #{ddglCreatetime,jdbcType=TIMESTAMP},
       </if>
       <if test="ddglUserId != null">
         #{ddglUserId,jdbcType=NVARCHAR},
@@ -148,7 +148,7 @@
         DDGL_DESC = #{ddglDesc,jdbcType=NVARCHAR},
       </if>
       <if test="ddglCreatetime != null">
-        DDGL_CREATETIME = #{ddglCreatetime,jdbcType=INTEGER},
+        DDGL_CREATETIME = #{ddglCreatetime,jdbcType=TIMESTAMP},
       </if>
       <if test="ddglUserId != null">
         DDGL_USER_ID = #{ddglUserId,jdbcType=NVARCHAR},
@@ -178,7 +178,7 @@
       DDGL_VALUE = #{ddglValue,jdbcType=NVARCHAR},
       DDGL_STATUS = #{ddglStatus,jdbcType=NVARCHAR},
       DDGL_DESC = #{ddglDesc,jdbcType=NVARCHAR},
-      DDGL_CREATETIME = #{ddglCreatetime,jdbcType=INTEGER},
+      DDGL_CREATETIME = #{ddglCreatetime,jdbcType=TIMESTAMP},
       DDGL_USER_ID = #{ddglUserId,jdbcType=NVARCHAR},
       DDGL_USER_NAME = #{ddglUserName,jdbcType=NVARCHAR},
       DDGL_ORGAN_ID = #{ddglOrganId,jdbcType=NVARCHAR},
