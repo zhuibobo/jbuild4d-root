@@ -19,7 +19,11 @@ public class DictionaryGroupEntity {
 
     private String dictGroupParentId;
 
-    public DictionaryGroupEntity(String dictGroupId, String dictGroupValue, String dictGroupText, Integer dictGroupOrderNum, Date dictGroupCreateTime, String dictGroupDesc, String dictGroupStatus, String dictGroupParentId) {
+    private String dictGroupIssystem;
+
+    private String dictGroupDelEnable;
+
+    public DictionaryGroupEntity(String dictGroupId, String dictGroupValue, String dictGroupText, Integer dictGroupOrderNum, Date dictGroupCreateTime, String dictGroupDesc, String dictGroupStatus, String dictGroupParentId, String dictGroupIssystem, String dictGroupDelEnable) {
         this.dictGroupId = dictGroupId;
         this.dictGroupValue = dictGroupValue;
         this.dictGroupText = dictGroupText;
@@ -28,6 +32,8 @@ public class DictionaryGroupEntity {
         this.dictGroupDesc = dictGroupDesc;
         this.dictGroupStatus = dictGroupStatus;
         this.dictGroupParentId = dictGroupParentId;
+        this.dictGroupIssystem = dictGroupIssystem;
+        this.dictGroupDelEnable = dictGroupDelEnable;
     }
 
     public DictionaryGroupEntity() {
@@ -96,5 +102,21 @@ public class DictionaryGroupEntity {
 
     public void setDictGroupParentId(String dictGroupParentId) {
         this.dictGroupParentId = dictGroupParentId == null ? null : dictGroupParentId.trim();
+    }
+
+    public String getDictGroupIssystem() {
+        return dictGroupIssystem;
+    }
+
+    public void setDictGroupIssystem(String dictGroupIssystem) {
+        this.dictGroupIssystem = dictGroupIssystem == null ? null : dictGroupIssystem.trim();
+    }
+
+    public String getDictGroupDelEnable() {
+        return dictGroupDelEnable;
+    }
+
+    public void setDictGroupDelEnable(String dictGroupDelEnable) {
+        this.dictGroupDelEnable = dictGroupDelEnable == null ? null : dictGroupDelEnable.trim();
     }
 }

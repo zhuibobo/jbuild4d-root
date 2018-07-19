@@ -70,7 +70,7 @@
                     async : {
                         enable : true,
                         // Ajax 获取数据的 URL 地址
-                        url : BaseUtility.BuildUrl("/categoryGroupController/queryAjaxTreeData.do"),
+                        url : BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/GetListData.do"),
                         //ajax提交的时候，传的是id值
                         autoParam : [ "categoryId", "categoryName" ]
                     },
