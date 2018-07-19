@@ -1,5 +1,6 @@
 package com.jbuild4d.service;
 
+import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
@@ -27,12 +28,12 @@ public class InitSystemTest extends BaseTest {
     private IMenuService menuService;
 
     @Test
-    public void initMenu() throws JBuild4DGenerallyException {
+    public void initSystem() throws JBuild4DGenerallyException {
 
         //根菜单
-        String rootId="0";
-        MenuEntity rootMenu=getMenu("-1",rootId,"Root","Root","Root",MenuTypeEnum.Root.getDisplayName(),"","","");
-        menuService.deleteByKey(jb4DSession,rootId);
+        String rootMenuId="0";
+        MenuEntity rootMenu=getMenu("-1",rootMenuId,"Root","Root","Root",MenuTypeEnum.Root.getDisplayName(),"","","");
+        menuService.deleteByKey(jb4DSession,rootMenuId);
         menuService.saveBySelective(jb4DSession,rootMenu.getMenuId(),rootMenu);
 
         //第一层节点
@@ -50,7 +51,21 @@ public class InitSystemTest extends BaseTest {
         menuService.deleteByKey(jb4DSession,systemSettingDictionaryManagerId);
         menuService.saveBySelective(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId(),systemSettingDictionaryGroupMenu);
 
+        //跟字典分组
+        String rootDictionaryId="0";
 
+    }
+
+    public DictionaryGroupEntity getDictionaryGroup(String id){
+        DictionaryGroupEntity dictionaryGroupEntity=new DictionaryGroupEntity();
+        dictionaryGroupEntity.setDictGroupId(id);
+        dictionaryGroupEntity.setDictGroupValue(value);
+        dictionaryGroupEntity.setDictGroupText(text);
+        dictionaryGroupEntity.setDictGroupDesc(desc);
+        dictionaryGroupEntity.setDictGroupParentId(parendId);
+        dictionaryGroupEntity.setDictGroupIssystem(isSystem);
+        dictionaryGroupEntity.setDictGroupDelEnable(delEnable);
+        return dictionaryGroupEntity;
     }
 
     public MenuEntity getMenu(String parentId,String id,String name,String text,String value,String type,String leftUrl,String rightUrl,String iconClassName){
