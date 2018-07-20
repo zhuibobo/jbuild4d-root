@@ -44,7 +44,7 @@
         </div>
         <div class="right-outer-c">
             <div style="width: 100%">
-                <div style="float: right;margin-bottom: 15px">
+                <div style="float: right;margin-bottom: 15px;margin-top: 10px;margin-right: 10px">
                     <i-button type="primary" @click="add()" ><Icon type="plus"></Icon> 新增 </i-button>
                     <i-button type="primary" @click="edit()"><Icon type="edit"></Icon> 修改 </i-button>
                     <i-button type="primary" @click="del()"><Icon type="trash-a"></Icon> 删除 </i-button>
@@ -97,6 +97,62 @@
                             appList.treeObj.expandAll(true);
                         }
                     }
+                },
+                treeTableConfig:{
+                    CanDeleteWhenHasChild:false,
+                    IdField:"dictId",
+                    RowIdPrefix:"TreeTable_",
+                    LoadChildJsonURL:"",
+                    LoadChildFunc:null,
+                    OpenLevel:1,
+                    ChildTestField:"dictChildCount",//判断是否存在子节点的字段，是否>0或者为true，则支持展开
+                    Templates:[
+                        {
+                            Title:"字典名称",
+                            FieldName:"dictText",
+                            TitleCellClassName:"TitleCell",
+                            Renderer:"Lable",
+                            Hidden:false,
+                            TitleCellAttrs:{},
+                            Width:"30"
+                        },{
+                            Title:"字典值",
+                            FieldName:"dictValue",
+                            TitleCellClassName:"TitleCell",
+                            Renderer:"Lable",
+                            Hidden:false,
+                            TitleCellAttrs:{},
+                            Width:"30"
+                        },{
+                            Title:"字典状态",
+                            FieldName:"dictStatus",
+                            TitleCellClassName:"TitleCell",
+                            Renderer:"Lable",
+                            Hidden:false,
+                            TitleCellAttrs:{},
+                            Width:"10%"
+                        },{
+                            Title:"默认选中",
+                            FieldName:"dictIsSelected",
+                            TitleCellClassName:"TitleCell",
+                            Renderer:"Lable",
+                            Hidden:false,
+                            TitleCellAttrs:{},
+                            Width:"10%"
+                        },{
+                            Title:"创建时间",
+                            FieldName:"dictCreateTime",
+                            TitleCellClassName:"TitleCell",
+                            Renderer:"Lable",
+                            Hidden:false,
+                            TitleCellAttrs:{},
+                            Width:"20%"
+                        }
+                    ],
+                    TableClass:"TreeTable",
+                    RendererTo:"divEditTable",//div elem
+                    TableId:"TreeTable",
+                    TableAttrs:{cellpadding:"0",cellspacing:"0",border:"0"}
                 }
             },
             methods:{
@@ -181,7 +237,6 @@
                     }
                     var url=BaseUtility.BuildUrl("/project/system/dictionary/detail.do?dictParentId="+nodeData.dictSid+"&op=add");
                     DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"字典管理"},2);
-                    //treeTableObj.AppendChildRowToCurrentSelectedRow(newrowData);
                 },
                 edit:function(){
                     var nodeData=treeTableObj.GetSelectedRowData();

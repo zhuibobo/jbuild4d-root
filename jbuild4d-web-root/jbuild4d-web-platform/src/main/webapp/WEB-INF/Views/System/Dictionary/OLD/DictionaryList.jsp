@@ -76,7 +76,7 @@
 <body>
 <div id="app">
     <div style="width: 100%">
-        <div style="float: right;margin-bottom: 15px">
+        <div style="float: right;margin-bottom: 15px;">
             <i-button type="primary" @click="add()" ><Icon type="plus"></Icon> 新增 </i-button>
             <i-button type="primary" @click="edit()"><Icon type="edit"></Icon> 修改 </i-button>
             <i-button type="primary" @click="del()"><Icon type="trash-a"></Icon> 删除 </i-button>
@@ -102,7 +102,7 @@
                 window.location.href=window.location.href;
             },
             reloadData:function () {
-                /*var url='/PlatForm/System/Dictionary/GetListData.do';
+                var url='/project/system/dictionary/listdata.do';
                 var _self=this;
                 var senddata={};
                 AjaxUtility.Post(url, senddata , function (result) {
@@ -118,7 +118,7 @@
                         treeTableObj.Initialization(TreeTableConfig);
                         treeTableObj.LoadJsonData(treedata);
                     }
-                },"json");*/
+                },"json");
             },
             add:function(){
                 var nodeData=treeTableObj.GetSelectedRowData();
