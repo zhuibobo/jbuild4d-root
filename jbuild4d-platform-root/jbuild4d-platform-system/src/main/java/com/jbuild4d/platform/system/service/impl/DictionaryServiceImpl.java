@@ -10,6 +10,8 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.system.service.IDictionaryService;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -28,5 +30,10 @@ public class DictionaryServiceImpl extends BaseServiceImpl<DictionaryEntity> imp
     @Override
     public int saveBySelective(JB4DSession jb4DSession, String id, DictionaryEntity record) throws JBuild4DGenerallyException {
         return 0;
+    }
+
+    @Override
+    public List<DictionaryEntity> getListDataByGroupId(JB4DSession session, String groupId) {
+        return dictionaryMapper.selectByGroupId(groupId);
     }
 }

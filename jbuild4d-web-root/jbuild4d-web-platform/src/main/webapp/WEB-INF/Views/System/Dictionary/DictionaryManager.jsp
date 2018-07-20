@@ -13,6 +13,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/IViewLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/ZTreeLib.jsp" %>
+    <%@ include file="/WEB-INF/Views/TagLibs/TreeTableLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
     <style>
         .left-outer-c{
@@ -45,13 +46,13 @@
         <div class="right-outer-c">
             <div style="width: 100%">
                 <div style="float: right;margin-bottom: 15px;margin-top: 10px;margin-right: 10px">
-                    <i-button type="primary" @click="add()" ><Icon type="plus"></Icon> 新增 </i-button>
+                    <i-button type="primary" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
                     <i-button type="primary" @click="edit()"><Icon type="edit"></Icon> 修改 </i-button>
                     <i-button type="primary" @click="del()"><Icon type="trash-a"></Icon> 删除 </i-button>
                     <i-button type="primary" @click="view()"><Icon type="android-open"></Icon> 浏览 </i-button>
                 </div>
             </div>
-            <div id="divEditTable"></div>
+            <div id="divTreeTable" style="width: 98%;margin: auto"></div>
         </div>
     </div>
     <script>
@@ -90,6 +91,7 @@
                             // 根节点不触发任何事件
                             //if(treeNode.level != 0) {
                                 appList.treeSelectedNode=treeNode;
+                                appList.reloadTreeTableData();
                             //}
                         },
                         //成功的回调函数
@@ -98,6 +100,7 @@
                         }
                     }
                 },
+                treeTableObject:null,
                 treeTableConfig:{
                     CanDeleteWhenHasChild:false,
                     IdField:"dictId",
@@ -150,7 +153,7 @@
                         }
                     ],
                     TableClass:"TreeTable",
-                    RendererTo:"divEditTable",//div elem
+                    RendererTo:"divTreeTable",//div elem
                     TableId:"TreeTable",
                     TableAttrs:{cellpadding:"0",cellspacing:"0",border:"0"}
                 }
@@ -210,29 +213,33 @@
                     appList.treeObj.updateNode(this.treeSelectedNode);
                 },
                 <!--Dictionary-->
-                reloadData:function () {
-                    /*var url='/PlatForm/System/Dictionary/GetListData.do';
+                reloadTreeTableData:function () {
+                    var url='/PlatForm/System/Dictionary/GetListDataByGroupId.do';
                     var _self=this;
-                    var senddata={};
+                    var senddata={groupId:this.treeSelectedNode.dictGroupId,groupName:this.treeSelectedNode.dictGroupText};
                     AjaxUtility.Post(url, senddata , function (result) {
                         if (result.success) {
-                            _self.table_data = new Array();
-                            _self.table_data = result.data;
+                            //debugger;
+                            if(result.data==null){
+                                result.data=new Array();
+                            }
+                            result.data.push({dictId:senddata.groupId,dictKey:senddata.groupId,dictValue:senddata.groupName,dictText:senddata.groupName,dictStatus:"",dictIsSelected:"",dictCreateTime:""});
                             var treedata=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
-                                KeyField: "dictSid",
+                                KeyField: "dictId",
                                 RelationField:"dictParentId",
                                 ChildFieldName:"Nodes"
-                            },result.data,0);
-                            treeTableObj=Object.create(TreeTable);
-                            treeTableObj.Initialization(TreeTableConfig);
-                            treeTableObj.LoadJsonData(treedata);
+                            },result.data,senddata.groupId);
+                            $("#divTreeTable").html("");
+                            _self.treeTableObject=Object.create(TreeTable);
+                            _self.treeTableObject.Initialization(_self.treeTableConfig);
+                            _self.treeTableObject.LoadJsonData(treedata);
                         }
-                    },"json");*/
+                    },"json");
                 },
                 add:function(){
-                    var nodeData=treeTableObj.GetSelectedRowData();
+                    var nodeData=this.treeTableObject.GetSelectedRowData();
                     if(nodeData == null) {
-                        B4D.DialogUtility.Alert(window,B4D.DialogUtility.DialogAlertId,{},"请选择上级字典!",null);
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择上级字典!",null);
                         return false;
                     }
                     var url=BaseUtility.BuildUrl("/project/system/dictionary/detail.do?dictParentId="+nodeData.dictSid+"&op=add");

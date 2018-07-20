@@ -1,12 +1,20 @@
 package com.jbuild4d.web.platform.controller.system.dictionary;
 
+import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
+import com.jbuild4d.base.service.IBaseService;
+import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.platform.system.service.IDictionaryService;
+import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,35 +23,31 @@ import org.springframework.web.servlet.ModelAndView;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping(value = "/PlatForm/System/DictionaryOLD")
-public class DictionaryController {
+@RequestMapping(value = "/PlatForm/System/Dictionary")
+public class DictionaryController extends GeneralCRUDImplController<DictionaryEntity> {
 
-    @RequestMapping(value = "List", method = RequestMethod.GET)
-    public ModelAndView list() {
-        ModelAndView modelAndView=new ModelAndView("System/Dictionary/OLD/DictionaryList");
-        return modelAndView;
+    @Autowired
+    IDictionaryService dictionaryService;
+
+    @Override
+    protected IBaseService<DictionaryEntity> getBaseService() {
+        return dictionaryService;
     }
 
-    @RequestMapping(value = "GetListData", method = RequestMethod.POST)
+    @Override
+    public String getListViewName() {
+        return "";
+    }
+
+    @Override
+    public String getDetailViewName() {
+        return "System/Dictionary/DictionaryEdit";
+    }
+
+    @RequestMapping(value = "GetListDataByGroupId", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition){
-        //List<ProDictionaryEntity> proOrganPageInfo=proDictionaryService.getALL();
-        return JBuild4DResponseVo.success("获取成功",null);
-    }
-
-    public ModelAndView detail(String recordId, String op) {
-        return null;
-    }
-
-    public JBuild4DResponseVo saveEdit(DictionaryGroupEntity dictionaryEntity) {
-        return null;
-    }
-
-    public JBuild4DResponseVo statusChange(String ids, String status) {
-        return null;
-    }
-
-    public JBuild4DResponseVo Delete(String recordId) {
-        return null;
+    public JBuild4DResponseVo getListDataByGroupId(String groupId) {
+        List<DictionaryEntity> dictionaryEntityList=dictionaryService.getListDataByGroupId(JB4DSessionUtility.getSession(),groupId);
+        return JBuild4DResponseVo.success("");
     }
 }
