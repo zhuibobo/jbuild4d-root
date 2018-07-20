@@ -1,5 +1,6 @@
 package com.jbuild4d.web.platform.controller.base;
 
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,5 +23,5 @@ public interface IGeneralCRUDController<T> {
 
     public abstract JBuild4DResponseVo statusChange(String ids,String status);
 
-    public abstract JBuild4DResponseVo Delete(String recordId);
+    public abstract JBuild4DResponseVo Delete(String recordId) throws JBuild4DGenerallyException;
 }

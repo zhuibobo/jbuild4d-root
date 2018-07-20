@@ -3,6 +3,7 @@ package com.jbuild4d.platform.system.service.impl;
 import com.jbuild4d.base.dbaccess.dao.DictionaryGroupMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
+import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
@@ -12,6 +13,7 @@ import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -52,19 +54,24 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
     }
 
     @Override
-    public void moveUp(JB4DSession jb4DSession,String id){
-        //String sql="select min(DICT_GROUP_ORDER_NUM) from TB4D_DICTIONARY_GROUP where DICT_GROUP_ORDER_NUM>(select DICT_GROUP_ORDER_NUM from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID="+ SQLKeyWordUtility.stringWrap(id)+")";
-        //Object gtMin=generalService.executeScalarSql(sql);
-        //Map<String,String> value=new HashMap<>();
-        //value.put("ID","1");
-        //value.put("ID1","2");
-        //Map<String, Object> map=sqlBuilderService.selectOne("select min(DICT_GROUP_ORDER_NUM) from TB4D_DICTIONARY_GROUP where DICT_GROUP_ORDER_NUM>(select DICT_GROUP_ORDER_NUM from TB4D_DICTIONARY_GROUP where DICT_GROUP_ID=#{ID} or DICT_GROUP_ID=#{ID1})",value);
-        //System.out.println(gtMin);
-        //System.out.printf(gtMin);
-    }
-
-    @Override
-    public void moveDown(JB4DSession jb4DSession,String id){
-
+    public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DictionaryGroupEntity dictionaryGroupEntity=dictionaryGroupMapper.selectByPrimaryKey(id);
+        if(dictionaryGroupEntity!=null){
+            if(dictionaryGroupEntity.getDictGroupIssystem().equals(TrueFalseEnum.True.getDisplayName())){
+                throw JBuild4DGenerallyException.getSystemRecordDelException();
+            }
+            if(dictionaryGroupEntity.getDictGroupDelEnable().equals(TrueFalseEnum.True.getDisplayName())){
+                throw JBuild4DGenerallyException.getDBFieldSettingDelException();
+            }
+            List<DictionaryGroupEntity> childEntityList=dictionaryGroupMapper.selectChilds(id);
+            if(childEntityList!=null&&childEntityList.size()>0){
+                throw JBuild4DGenerallyException.getHadChildDelException();
+            }
+            return super.deleteByKey(jb4DSession, id);
+        }
+        else
+        {
+            throw new JBuild4DGenerallyException("找不到要删除的记录!");
+        }
     }
 }

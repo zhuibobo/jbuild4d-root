@@ -136,7 +136,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     @RequestMapping(value = "Delete", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo Delete(String recordId) {
+    public JBuild4DResponseVo Delete(String recordId) throws JBuild4DGenerallyException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
         getBaseService().deleteByKey(jb4DSession,recordId);
         return JBuild4DResponseVo.opSuccess();

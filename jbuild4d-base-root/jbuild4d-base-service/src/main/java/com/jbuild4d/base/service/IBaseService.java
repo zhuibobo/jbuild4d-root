@@ -24,7 +24,7 @@ public interface IBaseService<T> {
 
     void setDefaultBaseMapper(BaseMapper<T> _defaultBaseMapper);
 
-    int deleteByKey(JB4DSession jb4DSession, String id);
+    int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException;
 
     int deleteAll(JB4DSession jb4DSession);
 

@@ -49,7 +49,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public int deleteByKey(JB4DSession jb4DSession, String id) {
+    public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
         return defaultBaseMapper.deleteByPrimaryKey(id);
     }
 

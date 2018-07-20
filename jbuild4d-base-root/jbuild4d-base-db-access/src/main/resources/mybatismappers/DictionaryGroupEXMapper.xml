@@ -12,4 +12,9 @@
   <select id="nextOrderNum" resultType="integer">
     select case when max(DICT_GROUP_ORDER_NUM) is null then 1 else max(DICT_GROUP_ORDER_NUM)+1 end ORDERNUM from TB4D_DICTIONARY_GROUP
   </select>
+  <select id="selectChilds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from TB4D_DICTIONARY_GROUP where DICT_GROUP_PARENT_ID=#{id} ORDER by DICT_GROUP_ORDER_NUM ASC
+  </select>
 </mapper>
