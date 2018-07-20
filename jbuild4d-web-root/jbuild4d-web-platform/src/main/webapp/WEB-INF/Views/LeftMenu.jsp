@@ -92,7 +92,7 @@
                     if(menuItem){
                         this.parentApp.buildBreadcrumbByMenuId(menuId);
                     }
-                    this.parentApp.setContentIframeUrl(menuItem.rightUrl);
+                    this.parentApp.setContentIframeUrl(menuItem.menuRightUrl);
                     //alert(menuId);
                     /*this.buildBreadcrumbArrayJson(name);
                     var menu=this.getMenu(name);

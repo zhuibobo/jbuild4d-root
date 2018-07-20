@@ -75,7 +75,7 @@
     }
     var menuJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
         KeyField: "menuId",
-        RelationField: "parentId",
+        RelationField: "menuParentId",
         ChildFieldName: "items"
     },menuJsonSource,"0");
     console.log(menuJson.items);
@@ -108,9 +108,9 @@
         methods:{
             topMenuItemClass:function (item) {
                 if(item.selected){
-                    return "frame-top-menu-item frame-top-menu-item-selected "+item.iconClassName;
+                    return "frame-top-menu-item frame-top-menu-item-selected "+item.menuClassName;
                 }
-                return "frame-top-menu-item "+item.iconClassName;
+                return "frame-top-menu-item "+item.menuClassName;
             },
             unSelectedAllTopMenu:function () {
                 for(var i=0;i<this.topMenuArrayJson.length;i++){
@@ -180,14 +180,14 @@
                 //debugger;
                 if(lastMenu!=null){
                     breadcrumbArrayJson.push({text:lastMenu.menuText});
-                    if(lastMenu.parentId!="0"){
-                        var lastMenuL1=this.getMenu(lastMenu.parentId);
+                    if(lastMenu.menuParentId!="0"){
+                        var lastMenuL1=this.getMenu(lastMenu.menuParentId);
                         breadcrumbArrayJson.push({text:lastMenuL1.menuText});
-                        if(lastMenuL1.parentId!="0"){
-                            lastMenuL1=this.getMenu(lastMenuL1.parentId);
+                        if(lastMenuL1.menuParentId!="0"){
+                            lastMenuL1=this.getMenu(lastMenuL1.menuParentId);
                             breadcrumbArrayJson.push({text:lastMenuL1.menuText});
-                            if(lastMenuL1.parentId!="0"){
-                                lastMenuL1=this.getMenu(lastMenuL1.parentId);
+                            if(lastMenuL1.menuParentId!="0"){
+                                lastMenuL1=this.getMenu(lastMenuL1.menuParentId);
                                 breadcrumbArrayJson.push({text:lastMenuL1.menuText});
                             }
                         }
@@ -204,16 +204,17 @@
                 if(this.leftIframeUrl.indexOf("/PlatForm/Base/LeftMenu.do")>=0&&reSetLeftMenu) {
                     $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
                 };
+                //debugger;
                 this.buildBreadcrumbByMenuId(item.menuId);
                 //debugger;
-                if(item.rightUrl!=""&&item.rightUrl!=null){
-                    this.contentIframeUrl=item.rightUrl;
+                if(item.menuRightUrl!=""&&item.menuRightUrl!=null){
+                    this.contentIframeUrl=item.menuRightUrl;
                 }else{
                     this.contentIframeUrl=this.defaultContentIframeUrl;
                 }
                 //debugger;
-                if(item.leftUrl!=""&&item.leftUrl!=null&&item.leftUrl!="LeftMenu.do"){
-                    this.leftIframeUrl=JB4D.BaseUtility.BuildUrl(item.leftUrl);
+                if(item.menuRightUrl!=""&&item.menuLeftUrl!=null&&item.menuLeftUrl!="LeftMenu.do"){
+                    this.leftIframeUrl=JB4D.BaseUtility.BuildUrl(item.menuLeftUrl);
                     return;
                 }
                 else{
