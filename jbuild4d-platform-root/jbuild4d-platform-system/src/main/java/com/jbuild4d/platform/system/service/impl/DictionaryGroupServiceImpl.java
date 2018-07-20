@@ -11,6 +11,8 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -31,8 +33,9 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
         return super.saveBySelective(jb4DSession,id, record, new IAddBefore<DictionaryGroupEntity>() {
             @Override
             public DictionaryGroupEntity run(JB4DSession jb4DSession1,DictionaryGroupEntity item) throws JBuild4DGenerallyException {
-                //item.setDictGroupOrderNum(generalService.nextOrderNum("TB4D_DICTIONARY_GROUP","DICT_GROUP_ORDER_NUM"));
+                item.setDictGroupOrderNum(dictionaryGroupMapper.nextOrderNum());
                 item.setDictGroupStatus(EnableTypeEnum.enable.getDisplayName());
+                item.setDictGroupCreateTime(new Date());
                 return item;
             }
         });

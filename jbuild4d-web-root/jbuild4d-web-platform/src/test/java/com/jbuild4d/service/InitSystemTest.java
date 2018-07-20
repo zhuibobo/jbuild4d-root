@@ -5,6 +5,7 @@ import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
@@ -26,6 +27,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class InitSystemTest extends BaseTest {
     @Autowired
     private IMenuService menuService;
+
+    @Autowired
+    private IDictionaryGroupService dictionaryGroupService;
 
     @Test
     public void initSystem() throws JBuild4DGenerallyException {
@@ -53,18 +57,20 @@ public class InitSystemTest extends BaseTest {
 
         //跟字典分组
         String rootDictionaryId="0";
-
+        DictionaryGroupEntity rootDictionaryGroupEntity=getDictionaryGroup(rootDictionaryId,"数据字典分组","数据字典分组","","-1",TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
+        dictionaryGroupService.deleteByKey(jb4DSession,rootDictionaryId);
+        dictionaryGroupService.saveBySelective(jb4DSession,rootDictionaryGroupEntity.getDictGroupId(),rootDictionaryGroupEntity);
     }
 
-    public DictionaryGroupEntity getDictionaryGroup(String id){
+    public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){
         DictionaryGroupEntity dictionaryGroupEntity=new DictionaryGroupEntity();
-        /*dictionaryGroupEntity.setDictGroupId(id);
+        dictionaryGroupEntity.setDictGroupId(id);
         dictionaryGroupEntity.setDictGroupValue(value);
         dictionaryGroupEntity.setDictGroupText(text);
         dictionaryGroupEntity.setDictGroupDesc(desc);
         dictionaryGroupEntity.setDictGroupParentId(parendId);
         dictionaryGroupEntity.setDictGroupIssystem(isSystem);
-        dictionaryGroupEntity.setDictGroupDelEnable(delEnable);*/
+        dictionaryGroupEntity.setDictGroupDelEnable(delEnable);
         return dictionaryGroupEntity;
     }
 
