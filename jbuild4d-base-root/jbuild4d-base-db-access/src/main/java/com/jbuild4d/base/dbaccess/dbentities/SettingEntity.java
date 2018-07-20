@@ -27,7 +27,9 @@ public class SettingEntity {
 
     private String settingApi;
 
-    public SettingEntity(String settingId, String settingKey, String settingName, String settingValue, String settingStatus, String settingDesc, Date settingCreatetime, String settingUserId, String settingUserName, String settingOrganId, String settingOrganName, String settingApi) {
+    private String settingIsSystem;
+
+    public SettingEntity(String settingId, String settingKey, String settingName, String settingValue, String settingStatus, String settingDesc, Date settingCreatetime, String settingUserId, String settingUserName, String settingOrganId, String settingOrganName, String settingApi, String settingIsSystem) {
         this.settingId = settingId;
         this.settingKey = settingKey;
         this.settingName = settingName;
@@ -40,6 +42,7 @@ public class SettingEntity {
         this.settingOrganId = settingOrganId;
         this.settingOrganName = settingOrganName;
         this.settingApi = settingApi;
+        this.settingIsSystem = settingIsSystem;
     }
 
     public SettingEntity() {
@@ -140,5 +143,13 @@ public class SettingEntity {
 
     public void setSettingApi(String settingApi) {
         this.settingApi = settingApi == null ? null : settingApi.trim();
+    }
+
+    public String getSettingIsSystem() {
+        return settingIsSystem;
+    }
+
+    public void setSettingIsSystem(String settingIsSystem) {
+        this.settingIsSystem = settingIsSystem == null ? null : settingIsSystem.trim();
     }
 }

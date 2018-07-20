@@ -21,59 +21,55 @@ public class MenuEntity {
 
     private String menuOrganName;
 
-    private Integer isExpand;
+    private String menuIsExpand;
 
-    private Integer isSystem;
+    private String menuIsSystem;
 
-    private String leftUrl;
+    private String menuLeftUrl;
 
-    private String leftUrlPara;
+    private String menuLeftUrlPara;
 
-    private String rightUrl;
+    private String menuRightUrl;
 
-    private String rightUrlPara;
+    private String menuRightUrlPara;
 
-    private Integer orderNum;
+    private Integer menuOrderNum;
 
-    private String parentId;
+    private String menuParentId;
 
-    private String parentIdList;
+    private String menuParentIdList;
 
-    private Integer shareType;
+    private String menuTarget;
 
-    private String tag;
+    private String menuCreator;
 
-    private String target;
+    private Date menuCreateTime;
 
-    private String updater;
+    private String menuUpdater;
 
-    private String useOrgan;
+    private Date menuUpdateTime;
 
-    private String useOrganId;
+    private String menuUseOrganName;
 
-    private String useOrganType;
+    private String menuUseOrganId;
 
-    private String useOrganTypeId;
+    private String menuUseOrganTypeName;
 
-    private String iconClassName;
+    private String menuUseOrganTypeId;
 
-    private String hoverClassName;
+    private String menuClassName;
 
-    private String selectedClassName;
+    private String menuClassNameHover;
 
-    private Integer childCount;
+    private String menuClassNameSelected;
 
-    private Date createTime;
+    private Integer menuMenuChildCount;
 
-    private String creator;
+    private String menuMenuDescription;
 
-    private String description;
+    private String menuJsExpression;
 
-    private Date updateTime;
-
-    private String jsExpression;
-
-    public MenuEntity(String menuId, String menuName, String menuText, String menuValue, String menuType, String menuUserId, String menuUserName, String menuOrganId, String menuOrganName, Integer isExpand, Integer isSystem, String leftUrl, String leftUrlPara, String rightUrl, String rightUrlPara, Integer orderNum, String parentId, String parentIdList, Integer shareType, String tag, String target, String updater, String useOrgan, String useOrganId, String useOrganType, String useOrganTypeId, String iconClassName, String hoverClassName, String selectedClassName, Integer childCount, Date createTime, String creator, String description, Date updateTime, String jsExpression) {
+    public MenuEntity(String menuId, String menuName, String menuText, String menuValue, String menuType, String menuUserId, String menuUserName, String menuOrganId, String menuOrganName, String menuIsExpand, String menuIsSystem, String menuLeftUrl, String menuLeftUrlPara, String menuRightUrl, String menuRightUrlPara, Integer menuOrderNum, String menuParentId, String menuParentIdList, String menuTarget, String menuCreator, Date menuCreateTime, String menuUpdater, Date menuUpdateTime, String menuUseOrganName, String menuUseOrganId, String menuUseOrganTypeName, String menuUseOrganTypeId, String menuClassName, String menuClassNameHover, String menuClassNameSelected, Integer menuMenuChildCount, String menuMenuDescription, String menuJsExpression) {
         this.menuId = menuId;
         this.menuName = menuName;
         this.menuText = menuText;
@@ -83,32 +79,30 @@ public class MenuEntity {
         this.menuUserName = menuUserName;
         this.menuOrganId = menuOrganId;
         this.menuOrganName = menuOrganName;
-        this.isExpand = isExpand;
-        this.isSystem = isSystem;
-        this.leftUrl = leftUrl;
-        this.leftUrlPara = leftUrlPara;
-        this.rightUrl = rightUrl;
-        this.rightUrlPara = rightUrlPara;
-        this.orderNum = orderNum;
-        this.parentId = parentId;
-        this.parentIdList = parentIdList;
-        this.shareType = shareType;
-        this.tag = tag;
-        this.target = target;
-        this.updater = updater;
-        this.useOrgan = useOrgan;
-        this.useOrganId = useOrganId;
-        this.useOrganType = useOrganType;
-        this.useOrganTypeId = useOrganTypeId;
-        this.iconClassName = iconClassName;
-        this.hoverClassName = hoverClassName;
-        this.selectedClassName = selectedClassName;
-        this.childCount = childCount;
-        this.createTime = createTime;
-        this.creator = creator;
-        this.description = description;
-        this.updateTime = updateTime;
-        this.jsExpression = jsExpression;
+        this.menuIsExpand = menuIsExpand;
+        this.menuIsSystem = menuIsSystem;
+        this.menuLeftUrl = menuLeftUrl;
+        this.menuLeftUrlPara = menuLeftUrlPara;
+        this.menuRightUrl = menuRightUrl;
+        this.menuRightUrlPara = menuRightUrlPara;
+        this.menuOrderNum = menuOrderNum;
+        this.menuParentId = menuParentId;
+        this.menuParentIdList = menuParentIdList;
+        this.menuTarget = menuTarget;
+        this.menuCreator = menuCreator;
+        this.menuCreateTime = menuCreateTime;
+        this.menuUpdater = menuUpdater;
+        this.menuUpdateTime = menuUpdateTime;
+        this.menuUseOrganName = menuUseOrganName;
+        this.menuUseOrganId = menuUseOrganId;
+        this.menuUseOrganTypeName = menuUseOrganTypeName;
+        this.menuUseOrganTypeId = menuUseOrganTypeId;
+        this.menuClassName = menuClassName;
+        this.menuClassNameHover = menuClassNameHover;
+        this.menuClassNameSelected = menuClassNameSelected;
+        this.menuMenuChildCount = menuMenuChildCount;
+        this.menuMenuDescription = menuMenuDescription;
+        this.menuJsExpression = menuJsExpression;
     }
 
     public MenuEntity() {
@@ -187,211 +181,195 @@ public class MenuEntity {
         this.menuOrganName = menuOrganName == null ? null : menuOrganName.trim();
     }
 
-    public Integer getIsExpand() {
-        return isExpand;
+    public String getMenuIsExpand() {
+        return menuIsExpand;
     }
 
-    public void setIsExpand(Integer isExpand) {
-        this.isExpand = isExpand;
+    public void setMenuIsExpand(String menuIsExpand) {
+        this.menuIsExpand = menuIsExpand == null ? null : menuIsExpand.trim();
     }
 
-    public Integer getIsSystem() {
-        return isSystem;
+    public String getMenuIsSystem() {
+        return menuIsSystem;
     }
 
-    public void setIsSystem(Integer isSystem) {
-        this.isSystem = isSystem;
+    public void setMenuIsSystem(String menuIsSystem) {
+        this.menuIsSystem = menuIsSystem == null ? null : menuIsSystem.trim();
     }
 
-    public String getLeftUrl() {
-        return leftUrl;
+    public String getMenuLeftUrl() {
+        return menuLeftUrl;
     }
 
-    public void setLeftUrl(String leftUrl) {
-        this.leftUrl = leftUrl == null ? null : leftUrl.trim();
+    public void setMenuLeftUrl(String menuLeftUrl) {
+        this.menuLeftUrl = menuLeftUrl == null ? null : menuLeftUrl.trim();
     }
 
-    public String getLeftUrlPara() {
-        return leftUrlPara;
+    public String getMenuLeftUrlPara() {
+        return menuLeftUrlPara;
     }
 
-    public void setLeftUrlPara(String leftUrlPara) {
-        this.leftUrlPara = leftUrlPara == null ? null : leftUrlPara.trim();
+    public void setMenuLeftUrlPara(String menuLeftUrlPara) {
+        this.menuLeftUrlPara = menuLeftUrlPara == null ? null : menuLeftUrlPara.trim();
     }
 
-    public String getRightUrl() {
-        return rightUrl;
+    public String getMenuRightUrl() {
+        return menuRightUrl;
     }
 
-    public void setRightUrl(String rightUrl) {
-        this.rightUrl = rightUrl == null ? null : rightUrl.trim();
+    public void setMenuRightUrl(String menuRightUrl) {
+        this.menuRightUrl = menuRightUrl == null ? null : menuRightUrl.trim();
     }
 
-    public String getRightUrlPara() {
-        return rightUrlPara;
+    public String getMenuRightUrlPara() {
+        return menuRightUrlPara;
     }
 
-    public void setRightUrlPara(String rightUrlPara) {
-        this.rightUrlPara = rightUrlPara == null ? null : rightUrlPara.trim();
+    public void setMenuRightUrlPara(String menuRightUrlPara) {
+        this.menuRightUrlPara = menuRightUrlPara == null ? null : menuRightUrlPara.trim();
     }
 
-    public Integer getOrderNum() {
-        return orderNum;
+    public Integer getMenuOrderNum() {
+        return menuOrderNum;
     }
 
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
+    public void setMenuOrderNum(Integer menuOrderNum) {
+        this.menuOrderNum = menuOrderNum;
     }
 
-    public String getParentId() {
-        return parentId;
+    public String getMenuParentId() {
+        return menuParentId;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId == null ? null : parentId.trim();
+    public void setMenuParentId(String menuParentId) {
+        this.menuParentId = menuParentId == null ? null : menuParentId.trim();
     }
 
-    public String getParentIdList() {
-        return parentIdList;
+    public String getMenuParentIdList() {
+        return menuParentIdList;
     }
 
-    public void setParentIdList(String parentIdList) {
-        this.parentIdList = parentIdList == null ? null : parentIdList.trim();
+    public void setMenuParentIdList(String menuParentIdList) {
+        this.menuParentIdList = menuParentIdList == null ? null : menuParentIdList.trim();
     }
 
-    public Integer getShareType() {
-        return shareType;
+    public String getMenuTarget() {
+        return menuTarget;
     }
 
-    public void setShareType(Integer shareType) {
-        this.shareType = shareType;
+    public void setMenuTarget(String menuTarget) {
+        this.menuTarget = menuTarget == null ? null : menuTarget.trim();
     }
 
-    public String getTag() {
-        return tag;
+    public String getMenuCreator() {
+        return menuCreator;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag == null ? null : tag.trim();
+    public void setMenuCreator(String menuCreator) {
+        this.menuCreator = menuCreator == null ? null : menuCreator.trim();
     }
 
-    public String getTarget() {
-        return target;
+    public Date getMenuCreateTime() {
+        return menuCreateTime;
     }
 
-    public void setTarget(String target) {
-        this.target = target == null ? null : target.trim();
+    public void setMenuCreateTime(Date menuCreateTime) {
+        this.menuCreateTime = menuCreateTime;
     }
 
-    public String getUpdater() {
-        return updater;
+    public String getMenuUpdater() {
+        return menuUpdater;
     }
 
-    public void setUpdater(String updater) {
-        this.updater = updater == null ? null : updater.trim();
+    public void setMenuUpdater(String menuUpdater) {
+        this.menuUpdater = menuUpdater == null ? null : menuUpdater.trim();
     }
 
-    public String getUseOrgan() {
-        return useOrgan;
+    public Date getMenuUpdateTime() {
+        return menuUpdateTime;
     }
 
-    public void setUseOrgan(String useOrgan) {
-        this.useOrgan = useOrgan == null ? null : useOrgan.trim();
+    public void setMenuUpdateTime(Date menuUpdateTime) {
+        this.menuUpdateTime = menuUpdateTime;
     }
 
-    public String getUseOrganId() {
-        return useOrganId;
+    public String getMenuUseOrganName() {
+        return menuUseOrganName;
     }
 
-    public void setUseOrganId(String useOrganId) {
-        this.useOrganId = useOrganId == null ? null : useOrganId.trim();
+    public void setMenuUseOrganName(String menuUseOrganName) {
+        this.menuUseOrganName = menuUseOrganName == null ? null : menuUseOrganName.trim();
     }
 
-    public String getUseOrganType() {
-        return useOrganType;
+    public String getMenuUseOrganId() {
+        return menuUseOrganId;
     }
 
-    public void setUseOrganType(String useOrganType) {
-        this.useOrganType = useOrganType == null ? null : useOrganType.trim();
+    public void setMenuUseOrganId(String menuUseOrganId) {
+        this.menuUseOrganId = menuUseOrganId == null ? null : menuUseOrganId.trim();
     }
 
-    public String getUseOrganTypeId() {
-        return useOrganTypeId;
+    public String getMenuUseOrganTypeName() {
+        return menuUseOrganTypeName;
     }
 
-    public void setUseOrganTypeId(String useOrganTypeId) {
-        this.useOrganTypeId = useOrganTypeId == null ? null : useOrganTypeId.trim();
+    public void setMenuUseOrganTypeName(String menuUseOrganTypeName) {
+        this.menuUseOrganTypeName = menuUseOrganTypeName == null ? null : menuUseOrganTypeName.trim();
     }
 
-    public String getIconClassName() {
-        return iconClassName;
+    public String getMenuUseOrganTypeId() {
+        return menuUseOrganTypeId;
     }
 
-    public void setIconClassName(String iconClassName) {
-        this.iconClassName = iconClassName == null ? null : iconClassName.trim();
+    public void setMenuUseOrganTypeId(String menuUseOrganTypeId) {
+        this.menuUseOrganTypeId = menuUseOrganTypeId == null ? null : menuUseOrganTypeId.trim();
     }
 
-    public String getHoverClassName() {
-        return hoverClassName;
+    public String getMenuClassName() {
+        return menuClassName;
     }
 
-    public void setHoverClassName(String hoverClassName) {
-        this.hoverClassName = hoverClassName == null ? null : hoverClassName.trim();
+    public void setMenuClassName(String menuClassName) {
+        this.menuClassName = menuClassName == null ? null : menuClassName.trim();
     }
 
-    public String getSelectedClassName() {
-        return selectedClassName;
+    public String getMenuClassNameHover() {
+        return menuClassNameHover;
     }
 
-    public void setSelectedClassName(String selectedClassName) {
-        this.selectedClassName = selectedClassName == null ? null : selectedClassName.trim();
+    public void setMenuClassNameHover(String menuClassNameHover) {
+        this.menuClassNameHover = menuClassNameHover == null ? null : menuClassNameHover.trim();
     }
 
-    public Integer getChildCount() {
-        return childCount;
+    public String getMenuClassNameSelected() {
+        return menuClassNameSelected;
     }
 
-    public void setChildCount(Integer childCount) {
-        this.childCount = childCount;
+    public void setMenuClassNameSelected(String menuClassNameSelected) {
+        this.menuClassNameSelected = menuClassNameSelected == null ? null : menuClassNameSelected.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Integer getMenuMenuChildCount() {
+        return menuMenuChildCount;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setMenuMenuChildCount(Integer menuMenuChildCount) {
+        this.menuMenuChildCount = menuMenuChildCount;
     }
 
-    public String getCreator() {
-        return creator;
+    public String getMenuMenuDescription() {
+        return menuMenuDescription;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
+    public void setMenuMenuDescription(String menuMenuDescription) {
+        this.menuMenuDescription = menuMenuDescription == null ? null : menuMenuDescription.trim();
     }
 
-    public String getDescription() {
-        return description;
+    public String getMenuJsExpression() {
+        return menuJsExpression;
     }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getJsExpression() {
-        return jsExpression;
-    }
-
-    public void setJsExpression(String jsExpression) {
-        this.jsExpression = jsExpression == null ? null : jsExpression.trim();
+    public void setMenuJsExpression(String menuJsExpression) {
+        this.menuJsExpression = menuJsExpression == null ? null : menuJsExpression.trim();
     }
 }

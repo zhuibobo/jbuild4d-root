@@ -58,13 +58,13 @@ public class InitSystemTest extends BaseTest {
 
     public DictionaryGroupEntity getDictionaryGroup(String id){
         DictionaryGroupEntity dictionaryGroupEntity=new DictionaryGroupEntity();
-        dictionaryGroupEntity.setDictGroupId(id);
+        /*dictionaryGroupEntity.setDictGroupId(id);
         dictionaryGroupEntity.setDictGroupValue(value);
         dictionaryGroupEntity.setDictGroupText(text);
         dictionaryGroupEntity.setDictGroupDesc(desc);
         dictionaryGroupEntity.setDictGroupParentId(parendId);
         dictionaryGroupEntity.setDictGroupIssystem(isSystem);
-        dictionaryGroupEntity.setDictGroupDelEnable(delEnable);
+        dictionaryGroupEntity.setDictGroupDelEnable(delEnable);*/
         return dictionaryGroupEntity;
     }
 
@@ -75,12 +75,12 @@ public class InitSystemTest extends BaseTest {
         menuEntity.setMenuText(text);
         menuEntity.setMenuValue(value);
         menuEntity.setMenuType(type);
-        menuEntity.setIsExpand(TrueFalseEnum.False.getValue());
-        menuEntity.setIsSystem(TrueFalseEnum.True.getValue());
-        menuEntity.setLeftUrl(leftUrl);
-        menuEntity.setRightUrl(rightUrl);
-        menuEntity.setParentId(parentId);
-        menuEntity.setIconClassName(iconClassName);
+        menuEntity.setMenuIsExpand(TrueFalseEnum.False.getDisplayName());
+        menuEntity.setMenuIsSystem(TrueFalseEnum.True.getDisplayName());
+        menuEntity.setMenuLeftUrl(leftUrl);
+        menuEntity.setMenuRightUrl(rightUrl);
+        menuEntity.setMenuParentId(parentId);
+        menuEntity.setMenuClassName(iconClassName);
         return menuEntity;
     }
 }

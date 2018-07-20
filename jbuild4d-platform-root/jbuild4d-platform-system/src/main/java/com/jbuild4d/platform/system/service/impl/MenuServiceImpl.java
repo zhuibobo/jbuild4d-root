@@ -32,31 +32,31 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 sourceEntity.setMenuOrganName(jb4DSession.getOrganName());
                 sourceEntity.setMenuUserId(jb4DSession.getUserId());
                 sourceEntity.setMenuUserName(jb4DSession.getUserName());
-                sourceEntity.setOrderNum(menuMapper.nextOrderNum());
+                sourceEntity.setMenuOrderNum(menuMapper.nextOrderNum());
                 MenuEntity parentEntity=null;
-                if(StringUtility.isEmpty(sourceEntity.getParentId())){
+                if(StringUtility.isEmpty(sourceEntity.getMenuParentId())){
                     throw new JBuild4DGenerallyException("请在实体中设置ParentId的值!");
                 }
-                if(!sourceEntity.getParentId().equals("-1")){
-                    parentEntity=menuMapper.selectByPrimaryKey(sourceEntity.getParentId());
+                if(!sourceEntity.getMenuParentId().equals("-1")){
+                    parentEntity=menuMapper.selectByPrimaryKey(sourceEntity.getMenuParentId());
                     if(parentEntity==null){
-                        throw new JBuild4DGenerallyException("找不到父节点为"+sourceEntity.getParentId()+"的记录!");
+                        throw new JBuild4DGenerallyException("找不到父节点为"+sourceEntity.getMenuParentId()+"的记录!");
                     }
                     else
                     {
-                        sourceEntity.setParentIdList(parentEntity.getParentIdList()+"*"+sourceEntity.getMenuId());
+                        sourceEntity.setMenuParentIdList(parentEntity.getMenuParentIdList()+"*"+sourceEntity.getMenuId());
                     }
                 }
                 else
                 {
-                    sourceEntity.setParentIdList("-1*"+sourceEntity.getMenuId());
+                    sourceEntity.setMenuParentIdList("-1*"+sourceEntity.getMenuId());
                 }
 
-                sourceEntity.setCreateTime(new Date());
-                sourceEntity.setCreator(jb4DSession.getUserName());
-                sourceEntity.setChildCount(0);
-                sourceEntity.setUpdater(jb4DSession.getUserName());
-                sourceEntity.setUpdateTime(new Date());
+                sourceEntity.setMenuCreateTime(new Date());
+                sourceEntity.setMenuCreator(jb4DSession.getUserName());
+                sourceEntity.setMenuMenuChildCount(0);
+                sourceEntity.setMenuUpdater(jb4DSession.getUserName());
+                sourceEntity.setMenuUpdateTime(new Date());
                 return sourceEntity;
             }
         });

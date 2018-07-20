@@ -15,12 +15,13 @@
       <arg column="SETTING_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="SETTING_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="SETTING_API" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_IS_SYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     SETTING_ID, SETTING_KEY, SETTING_NAME, SETTING_VALUE, SETTING_STATUS, SETTING_DESC, 
     SETTING_CREATETIME, SETTING_USER_ID, SETTING_USER_NAME, SETTING_ORGAN_ID, SETTING_ORGAN_NAME, 
-    SETTING_API
+    SETTING_API, SETTING_IS_SYSTEM
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -36,13 +37,13 @@
     insert into TB4D_SETTING (SETTING_ID, SETTING_KEY, SETTING_NAME, 
       SETTING_VALUE, SETTING_STATUS, SETTING_DESC, 
       SETTING_CREATETIME, SETTING_USER_ID, SETTING_USER_NAME, 
-      SETTING_ORGAN_ID, SETTING_ORGAN_NAME, SETTING_API
-      )
+      SETTING_ORGAN_ID, SETTING_ORGAN_NAME, SETTING_API, 
+      SETTING_IS_SYSTEM)
     values (#{settingId,jdbcType=NVARCHAR}, #{settingKey,jdbcType=NVARCHAR}, #{settingName,jdbcType=NVARCHAR}, 
       #{settingValue,jdbcType=NVARCHAR}, #{settingStatus,jdbcType=NVARCHAR}, #{settingDesc,jdbcType=NVARCHAR}, 
       #{settingCreatetime,jdbcType=TIMESTAMP}, #{settingUserId,jdbcType=NVARCHAR}, #{settingUserName,jdbcType=NVARCHAR}, 
-      #{settingOrganId,jdbcType=NVARCHAR}, #{settingOrganName,jdbcType=NVARCHAR}, #{settingApi,jdbcType=NVARCHAR}
-      )
+      #{settingOrganId,jdbcType=NVARCHAR}, #{settingOrganName,jdbcType=NVARCHAR}, #{settingApi,jdbcType=NVARCHAR}, 
+      #{settingIsSystem,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.SettingEntity">
     insert into TB4D_SETTING
@@ -83,6 +84,9 @@
       <if test="settingApi != null">
         SETTING_API,
       </if>
+      <if test="settingIsSystem != null">
+        SETTING_IS_SYSTEM,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="settingId != null">
@@ -120,6 +124,9 @@
       </if>
       <if test="settingApi != null">
         #{settingApi,jdbcType=NVARCHAR},
+      </if>
+      <if test="settingIsSystem != null">
+        #{settingIsSystem,jdbcType=NVARCHAR},
       </if>
     </trim>
   </insert>
@@ -159,6 +166,9 @@
       <if test="settingApi != null">
         SETTING_API = #{settingApi,jdbcType=NVARCHAR},
       </if>
+      <if test="settingIsSystem != null">
+        SETTING_IS_SYSTEM = #{settingIsSystem,jdbcType=NVARCHAR},
+      </if>
     </set>
     where SETTING_ID = #{settingId,jdbcType=NVARCHAR}
   </update>
@@ -174,7 +184,8 @@
       SETTING_USER_NAME = #{settingUserName,jdbcType=NVARCHAR},
       SETTING_ORGAN_ID = #{settingOrganId,jdbcType=NVARCHAR},
       SETTING_ORGAN_NAME = #{settingOrganName,jdbcType=NVARCHAR},
-      SETTING_API = #{settingApi,jdbcType=NVARCHAR}
+      SETTING_API = #{settingApi,jdbcType=NVARCHAR},
+      SETTING_IS_SYSTEM = #{settingIsSystem,jdbcType=NVARCHAR}
     where SETTING_ID = #{settingId,jdbcType=NVARCHAR}
   </update>
 </mapper>

@@ -12,41 +12,40 @@
       <arg column="MENU_USER_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="MENU_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="MENU_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="IS_EXPAND" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="IS_SYSTEM" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="LEFT_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="LEFT_URL_PARA" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="RIGHT_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="RIGHT_URL_PARA" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="PARENT_ID_LIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SHARE_TYPE" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="TAG" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="TARGET" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="UPDATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="USE_ORGAN" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="USE_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="USE_ORGAN_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="USE_ORGAN_TYPE_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="ICON_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="HOVER_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SELECTED_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="CREATOR" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="DESCRIPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="JS_EXPRESSION" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_IS_EXPAND" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_IS_SYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_LEFT_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_LEFT_URL_PARA" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_RIGHT_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_RIGHT_URL_PARA" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="MENU_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_PARENT_ID_LIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_TARGET" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_CREATOR" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="MENU_UPDATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="MENU_USE_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_USE_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_USE_ORGAN_TYPE_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_USE_ORGAN_TYPE_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_CLASS_NAME_HOVER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_CLASS_NAME_SELECTED" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_MENU_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="MENU_MENU_DESCRIPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="MENU_JS_EXPRESSION" javaType="java.lang.String" jdbcType="NVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     MENU_ID, MENU_NAME, MENU_TEXT, MENU_VALUE, MENU_TYPE, MENU_USER_ID, MENU_USER_NAME, 
-    MENU_ORGAN_ID, MENU_ORGAN_NAME, IS_EXPAND, IS_SYSTEM, LEFT_URL, LEFT_URL_PARA, RIGHT_URL, 
-    RIGHT_URL_PARA, ORDER_NUM, PARENT_ID, PARENT_ID_LIST, SHARE_TYPE, TAG, TARGET, UPDATER, 
-    USE_ORGAN, USE_ORGAN_ID, USE_ORGAN_TYPE, USE_ORGAN_TYPE_ID, ICON_CLASS_NAME, HOVER_CLASS_NAME, 
-    SELECTED_CLASS_NAME, CHILD_COUNT, CREATE_TIME, CREATOR, DESCRIPTION, UPDATE_TIME, 
-    JS_EXPRESSION
+    MENU_ORGAN_ID, MENU_ORGAN_NAME, MENU_IS_EXPAND, MENU_IS_SYSTEM, MENU_LEFT_URL, MENU_LEFT_URL_PARA, 
+    MENU_RIGHT_URL, MENU_RIGHT_URL_PARA, MENU_ORDER_NUM, MENU_PARENT_ID, MENU_PARENT_ID_LIST, 
+    MENU_TARGET, MENU_CREATOR, MENU_CREATE_TIME, MENU_UPDATER, MENU_UPDATE_TIME, MENU_USE_ORGAN_NAME, 
+    MENU_USE_ORGAN_ID, MENU_USE_ORGAN_TYPE_NAME, MENU_USE_ORGAN_TYPE_ID, MENU_CLASS_NAME, 
+    MENU_CLASS_NAME_HOVER, MENU_CLASS_NAME_SELECTED, MENU_MENU_CHILD_COUNT, MENU_MENU_DESCRIPTION, 
+    MENU_JS_EXPRESSION
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -62,27 +61,29 @@
     insert into TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT, 
       MENU_VALUE, MENU_TYPE, MENU_USER_ID, 
       MENU_USER_NAME, MENU_ORGAN_ID, MENU_ORGAN_NAME, 
-      IS_EXPAND, IS_SYSTEM, LEFT_URL, 
-      LEFT_URL_PARA, RIGHT_URL, RIGHT_URL_PARA, 
-      ORDER_NUM, PARENT_ID, PARENT_ID_LIST, 
-      SHARE_TYPE, TAG, TARGET, 
-      UPDATER, USE_ORGAN, USE_ORGAN_ID, 
-      USE_ORGAN_TYPE, USE_ORGAN_TYPE_ID, ICON_CLASS_NAME, 
-      HOVER_CLASS_NAME, SELECTED_CLASS_NAME, CHILD_COUNT, 
-      CREATE_TIME, CREATOR, DESCRIPTION, 
-      UPDATE_TIME, JS_EXPRESSION)
+      MENU_IS_EXPAND, MENU_IS_SYSTEM, MENU_LEFT_URL, 
+      MENU_LEFT_URL_PARA, MENU_RIGHT_URL, MENU_RIGHT_URL_PARA, 
+      MENU_ORDER_NUM, MENU_PARENT_ID, MENU_PARENT_ID_LIST, 
+      MENU_TARGET, MENU_CREATOR, MENU_CREATE_TIME, 
+      MENU_UPDATER, MENU_UPDATE_TIME, MENU_USE_ORGAN_NAME, 
+      MENU_USE_ORGAN_ID, MENU_USE_ORGAN_TYPE_NAME, 
+      MENU_USE_ORGAN_TYPE_ID, MENU_CLASS_NAME, MENU_CLASS_NAME_HOVER, 
+      MENU_CLASS_NAME_SELECTED, MENU_MENU_CHILD_COUNT, 
+      MENU_MENU_DESCRIPTION, MENU_JS_EXPRESSION
+      )
     values (#{menuId,jdbcType=NVARCHAR}, #{menuName,jdbcType=NVARCHAR}, #{menuText,jdbcType=NVARCHAR}, 
       #{menuValue,jdbcType=NVARCHAR}, #{menuType,jdbcType=NVARCHAR}, #{menuUserId,jdbcType=NVARCHAR}, 
       #{menuUserName,jdbcType=NVARCHAR}, #{menuOrganId,jdbcType=NVARCHAR}, #{menuOrganName,jdbcType=NVARCHAR}, 
-      #{isExpand,jdbcType=INTEGER}, #{isSystem,jdbcType=INTEGER}, #{leftUrl,jdbcType=NVARCHAR}, 
-      #{leftUrlPara,jdbcType=NVARCHAR}, #{rightUrl,jdbcType=NVARCHAR}, #{rightUrlPara,jdbcType=NVARCHAR}, 
-      #{orderNum,jdbcType=INTEGER}, #{parentId,jdbcType=NVARCHAR}, #{parentIdList,jdbcType=NVARCHAR}, 
-      #{shareType,jdbcType=INTEGER}, #{tag,jdbcType=NVARCHAR}, #{target,jdbcType=NVARCHAR}, 
-      #{updater,jdbcType=NVARCHAR}, #{useOrgan,jdbcType=NVARCHAR}, #{useOrganId,jdbcType=NVARCHAR}, 
-      #{useOrganType,jdbcType=NVARCHAR}, #{useOrganTypeId,jdbcType=NVARCHAR}, #{iconClassName,jdbcType=NVARCHAR}, 
-      #{hoverClassName,jdbcType=NVARCHAR}, #{selectedClassName,jdbcType=NVARCHAR}, #{childCount,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=NVARCHAR}, #{description,jdbcType=NVARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{jsExpression,jdbcType=NVARCHAR})
+      #{menuIsExpand,jdbcType=NVARCHAR}, #{menuIsSystem,jdbcType=NVARCHAR}, #{menuLeftUrl,jdbcType=NVARCHAR}, 
+      #{menuLeftUrlPara,jdbcType=NVARCHAR}, #{menuRightUrl,jdbcType=NVARCHAR}, #{menuRightUrlPara,jdbcType=NVARCHAR}, 
+      #{menuOrderNum,jdbcType=INTEGER}, #{menuParentId,jdbcType=NVARCHAR}, #{menuParentIdList,jdbcType=NVARCHAR}, 
+      #{menuTarget,jdbcType=NVARCHAR}, #{menuCreator,jdbcType=NVARCHAR}, #{menuCreateTime,jdbcType=TIMESTAMP}, 
+      #{menuUpdater,jdbcType=NVARCHAR}, #{menuUpdateTime,jdbcType=TIMESTAMP}, #{menuUseOrganName,jdbcType=NVARCHAR}, 
+      #{menuUseOrganId,jdbcType=NVARCHAR}, #{menuUseOrganTypeName,jdbcType=NVARCHAR}, 
+      #{menuUseOrganTypeId,jdbcType=NVARCHAR}, #{menuClassName,jdbcType=NVARCHAR}, #{menuClassNameHover,jdbcType=NVARCHAR}, 
+      #{menuClassNameSelected,jdbcType=NVARCHAR}, #{menuMenuChildCount,jdbcType=INTEGER}, 
+      #{menuMenuDescription,jdbcType=NVARCHAR}, #{menuJsExpression,jdbcType=NVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.MenuEntity">
     insert into TB4D_MENU
@@ -114,83 +115,77 @@
       <if test="menuOrganName != null">
         MENU_ORGAN_NAME,
       </if>
-      <if test="isExpand != null">
-        IS_EXPAND,
+      <if test="menuIsExpand != null">
+        MENU_IS_EXPAND,
       </if>
-      <if test="isSystem != null">
-        IS_SYSTEM,
+      <if test="menuIsSystem != null">
+        MENU_IS_SYSTEM,
       </if>
-      <if test="leftUrl != null">
-        LEFT_URL,
+      <if test="menuLeftUrl != null">
+        MENU_LEFT_URL,
       </if>
-      <if test="leftUrlPara != null">
-        LEFT_URL_PARA,
+      <if test="menuLeftUrlPara != null">
+        MENU_LEFT_URL_PARA,
       </if>
-      <if test="rightUrl != null">
-        RIGHT_URL,
+      <if test="menuRightUrl != null">
+        MENU_RIGHT_URL,
       </if>
-      <if test="rightUrlPara != null">
-        RIGHT_URL_PARA,
+      <if test="menuRightUrlPara != null">
+        MENU_RIGHT_URL_PARA,
       </if>
-      <if test="orderNum != null">
-        ORDER_NUM,
+      <if test="menuOrderNum != null">
+        MENU_ORDER_NUM,
       </if>
-      <if test="parentId != null">
-        PARENT_ID,
+      <if test="menuParentId != null">
+        MENU_PARENT_ID,
       </if>
-      <if test="parentIdList != null">
-        PARENT_ID_LIST,
+      <if test="menuParentIdList != null">
+        MENU_PARENT_ID_LIST,
       </if>
-      <if test="shareType != null">
-        SHARE_TYPE,
+      <if test="menuTarget != null">
+        MENU_TARGET,
       </if>
-      <if test="tag != null">
-        TAG,
+      <if test="menuCreator != null">
+        MENU_CREATOR,
       </if>
-      <if test="target != null">
-        TARGET,
+      <if test="menuCreateTime != null">
+        MENU_CREATE_TIME,
       </if>
-      <if test="updater != null">
-        UPDATER,
+      <if test="menuUpdater != null">
+        MENU_UPDATER,
       </if>
-      <if test="useOrgan != null">
-        USE_ORGAN,
+      <if test="menuUpdateTime != null">
+        MENU_UPDATE_TIME,
       </if>
-      <if test="useOrganId != null">
-        USE_ORGAN_ID,
+      <if test="menuUseOrganName != null">
+        MENU_USE_ORGAN_NAME,
       </if>
-      <if test="useOrganType != null">
-        USE_ORGAN_TYPE,
+      <if test="menuUseOrganId != null">
+        MENU_USE_ORGAN_ID,
       </if>
-      <if test="useOrganTypeId != null">
-        USE_ORGAN_TYPE_ID,
+      <if test="menuUseOrganTypeName != null">
+        MENU_USE_ORGAN_TYPE_NAME,
       </if>
-      <if test="iconClassName != null">
-        ICON_CLASS_NAME,
+      <if test="menuUseOrganTypeId != null">
+        MENU_USE_ORGAN_TYPE_ID,
       </if>
-      <if test="hoverClassName != null">
-        HOVER_CLASS_NAME,
+      <if test="menuClassName != null">
+        MENU_CLASS_NAME,
       </if>
-      <if test="selectedClassName != null">
-        SELECTED_CLASS_NAME,
+      <if test="menuClassNameHover != null">
+        MENU_CLASS_NAME_HOVER,
       </if>
-      <if test="childCount != null">
-        CHILD_COUNT,
+      <if test="menuClassNameSelected != null">
+        MENU_CLASS_NAME_SELECTED,
       </if>
-      <if test="createTime != null">
-        CREATE_TIME,
+      <if test="menuMenuChildCount != null">
+        MENU_MENU_CHILD_COUNT,
       </if>
-      <if test="creator != null">
-        CREATOR,
+      <if test="menuMenuDescription != null">
+        MENU_MENU_DESCRIPTION,
       </if>
-      <if test="description != null">
-        DESCRIPTION,
-      </if>
-      <if test="updateTime != null">
-        UPDATE_TIME,
-      </if>
-      <if test="jsExpression != null">
-        JS_EXPRESSION,
+      <if test="menuJsExpression != null">
+        MENU_JS_EXPRESSION,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -221,83 +216,77 @@
       <if test="menuOrganName != null">
         #{menuOrganName,jdbcType=NVARCHAR},
       </if>
-      <if test="isExpand != null">
-        #{isExpand,jdbcType=INTEGER},
+      <if test="menuIsExpand != null">
+        #{menuIsExpand,jdbcType=NVARCHAR},
       </if>
-      <if test="isSystem != null">
-        #{isSystem,jdbcType=INTEGER},
+      <if test="menuIsSystem != null">
+        #{menuIsSystem,jdbcType=NVARCHAR},
       </if>
-      <if test="leftUrl != null">
-        #{leftUrl,jdbcType=NVARCHAR},
+      <if test="menuLeftUrl != null">
+        #{menuLeftUrl,jdbcType=NVARCHAR},
       </if>
-      <if test="leftUrlPara != null">
-        #{leftUrlPara,jdbcType=NVARCHAR},
+      <if test="menuLeftUrlPara != null">
+        #{menuLeftUrlPara,jdbcType=NVARCHAR},
       </if>
-      <if test="rightUrl != null">
-        #{rightUrl,jdbcType=NVARCHAR},
+      <if test="menuRightUrl != null">
+        #{menuRightUrl,jdbcType=NVARCHAR},
       </if>
-      <if test="rightUrlPara != null">
-        #{rightUrlPara,jdbcType=NVARCHAR},
+      <if test="menuRightUrlPara != null">
+        #{menuRightUrlPara,jdbcType=NVARCHAR},
       </if>
-      <if test="orderNum != null">
-        #{orderNum,jdbcType=INTEGER},
+      <if test="menuOrderNum != null">
+        #{menuOrderNum,jdbcType=INTEGER},
       </if>
-      <if test="parentId != null">
-        #{parentId,jdbcType=NVARCHAR},
+      <if test="menuParentId != null">
+        #{menuParentId,jdbcType=NVARCHAR},
       </if>
-      <if test="parentIdList != null">
-        #{parentIdList,jdbcType=NVARCHAR},
+      <if test="menuParentIdList != null">
+        #{menuParentIdList,jdbcType=NVARCHAR},
       </if>
-      <if test="shareType != null">
-        #{shareType,jdbcType=INTEGER},
+      <if test="menuTarget != null">
+        #{menuTarget,jdbcType=NVARCHAR},
       </if>
-      <if test="tag != null">
-        #{tag,jdbcType=NVARCHAR},
+      <if test="menuCreator != null">
+        #{menuCreator,jdbcType=NVARCHAR},
       </if>
-      <if test="target != null">
-        #{target,jdbcType=NVARCHAR},
+      <if test="menuCreateTime != null">
+        #{menuCreateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updater != null">
-        #{updater,jdbcType=NVARCHAR},
+      <if test="menuUpdater != null">
+        #{menuUpdater,jdbcType=NVARCHAR},
       </if>
-      <if test="useOrgan != null">
-        #{useOrgan,jdbcType=NVARCHAR},
+      <if test="menuUpdateTime != null">
+        #{menuUpdateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="useOrganId != null">
-        #{useOrganId,jdbcType=NVARCHAR},
+      <if test="menuUseOrganName != null">
+        #{menuUseOrganName,jdbcType=NVARCHAR},
       </if>
-      <if test="useOrganType != null">
-        #{useOrganType,jdbcType=NVARCHAR},
+      <if test="menuUseOrganId != null">
+        #{menuUseOrganId,jdbcType=NVARCHAR},
       </if>
-      <if test="useOrganTypeId != null">
-        #{useOrganTypeId,jdbcType=NVARCHAR},
+      <if test="menuUseOrganTypeName != null">
+        #{menuUseOrganTypeName,jdbcType=NVARCHAR},
       </if>
-      <if test="iconClassName != null">
-        #{iconClassName,jdbcType=NVARCHAR},
+      <if test="menuUseOrganTypeId != null">
+        #{menuUseOrganTypeId,jdbcType=NVARCHAR},
       </if>
-      <if test="hoverClassName != null">
-        #{hoverClassName,jdbcType=NVARCHAR},
+      <if test="menuClassName != null">
+        #{menuClassName,jdbcType=NVARCHAR},
       </if>
-      <if test="selectedClassName != null">
-        #{selectedClassName,jdbcType=NVARCHAR},
+      <if test="menuClassNameHover != null">
+        #{menuClassNameHover,jdbcType=NVARCHAR},
       </if>
-      <if test="childCount != null">
-        #{childCount,jdbcType=INTEGER},
+      <if test="menuClassNameSelected != null">
+        #{menuClassNameSelected,jdbcType=NVARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="menuMenuChildCount != null">
+        #{menuMenuChildCount,jdbcType=INTEGER},
       </if>
-      <if test="creator != null">
-        #{creator,jdbcType=NVARCHAR},
+      <if test="menuMenuDescription != null">
+        #{menuMenuDescription,jdbcType=NVARCHAR},
       </if>
-      <if test="description != null">
-        #{description,jdbcType=NVARCHAR},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="jsExpression != null">
-        #{jsExpression,jdbcType=NVARCHAR},
+      <if test="menuJsExpression != null">
+        #{menuJsExpression,jdbcType=NVARCHAR},
       </if>
     </trim>
   </insert>
@@ -328,83 +317,77 @@
       <if test="menuOrganName != null">
         MENU_ORGAN_NAME = #{menuOrganName,jdbcType=NVARCHAR},
       </if>
-      <if test="isExpand != null">
-        IS_EXPAND = #{isExpand,jdbcType=INTEGER},
+      <if test="menuIsExpand != null">
+        MENU_IS_EXPAND = #{menuIsExpand,jdbcType=NVARCHAR},
       </if>
-      <if test="isSystem != null">
-        IS_SYSTEM = #{isSystem,jdbcType=INTEGER},
+      <if test="menuIsSystem != null">
+        MENU_IS_SYSTEM = #{menuIsSystem,jdbcType=NVARCHAR},
       </if>
-      <if test="leftUrl != null">
-        LEFT_URL = #{leftUrl,jdbcType=NVARCHAR},
+      <if test="menuLeftUrl != null">
+        MENU_LEFT_URL = #{menuLeftUrl,jdbcType=NVARCHAR},
       </if>
-      <if test="leftUrlPara != null">
-        LEFT_URL_PARA = #{leftUrlPara,jdbcType=NVARCHAR},
+      <if test="menuLeftUrlPara != null">
+        MENU_LEFT_URL_PARA = #{menuLeftUrlPara,jdbcType=NVARCHAR},
       </if>
-      <if test="rightUrl != null">
-        RIGHT_URL = #{rightUrl,jdbcType=NVARCHAR},
+      <if test="menuRightUrl != null">
+        MENU_RIGHT_URL = #{menuRightUrl,jdbcType=NVARCHAR},
       </if>
-      <if test="rightUrlPara != null">
-        RIGHT_URL_PARA = #{rightUrlPara,jdbcType=NVARCHAR},
+      <if test="menuRightUrlPara != null">
+        MENU_RIGHT_URL_PARA = #{menuRightUrlPara,jdbcType=NVARCHAR},
       </if>
-      <if test="orderNum != null">
-        ORDER_NUM = #{orderNum,jdbcType=INTEGER},
+      <if test="menuOrderNum != null">
+        MENU_ORDER_NUM = #{menuOrderNum,jdbcType=INTEGER},
       </if>
-      <if test="parentId != null">
-        PARENT_ID = #{parentId,jdbcType=NVARCHAR},
+      <if test="menuParentId != null">
+        MENU_PARENT_ID = #{menuParentId,jdbcType=NVARCHAR},
       </if>
-      <if test="parentIdList != null">
-        PARENT_ID_LIST = #{parentIdList,jdbcType=NVARCHAR},
+      <if test="menuParentIdList != null">
+        MENU_PARENT_ID_LIST = #{menuParentIdList,jdbcType=NVARCHAR},
       </if>
-      <if test="shareType != null">
-        SHARE_TYPE = #{shareType,jdbcType=INTEGER},
+      <if test="menuTarget != null">
+        MENU_TARGET = #{menuTarget,jdbcType=NVARCHAR},
       </if>
-      <if test="tag != null">
-        TAG = #{tag,jdbcType=NVARCHAR},
+      <if test="menuCreator != null">
+        MENU_CREATOR = #{menuCreator,jdbcType=NVARCHAR},
       </if>
-      <if test="target != null">
-        TARGET = #{target,jdbcType=NVARCHAR},
+      <if test="menuCreateTime != null">
+        MENU_CREATE_TIME = #{menuCreateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updater != null">
-        UPDATER = #{updater,jdbcType=NVARCHAR},
+      <if test="menuUpdater != null">
+        MENU_UPDATER = #{menuUpdater,jdbcType=NVARCHAR},
       </if>
-      <if test="useOrgan != null">
-        USE_ORGAN = #{useOrgan,jdbcType=NVARCHAR},
+      <if test="menuUpdateTime != null">
+        MENU_UPDATE_TIME = #{menuUpdateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="useOrganId != null">
-        USE_ORGAN_ID = #{useOrganId,jdbcType=NVARCHAR},
+      <if test="menuUseOrganName != null">
+        MENU_USE_ORGAN_NAME = #{menuUseOrganName,jdbcType=NVARCHAR},
       </if>
-      <if test="useOrganType != null">
-        USE_ORGAN_TYPE = #{useOrganType,jdbcType=NVARCHAR},
+      <if test="menuUseOrganId != null">
+        MENU_USE_ORGAN_ID = #{menuUseOrganId,jdbcType=NVARCHAR},
       </if>
-      <if test="useOrganTypeId != null">
-        USE_ORGAN_TYPE_ID = #{useOrganTypeId,jdbcType=NVARCHAR},
+      <if test="menuUseOrganTypeName != null">
+        MENU_USE_ORGAN_TYPE_NAME = #{menuUseOrganTypeName,jdbcType=NVARCHAR},
       </if>
-      <if test="iconClassName != null">
-        ICON_CLASS_NAME = #{iconClassName,jdbcType=NVARCHAR},
+      <if test="menuUseOrganTypeId != null">
+        MENU_USE_ORGAN_TYPE_ID = #{menuUseOrganTypeId,jdbcType=NVARCHAR},
       </if>
-      <if test="hoverClassName != null">
-        HOVER_CLASS_NAME = #{hoverClassName,jdbcType=NVARCHAR},
+      <if test="menuClassName != null">
+        MENU_CLASS_NAME = #{menuClassName,jdbcType=NVARCHAR},
       </if>
-      <if test="selectedClassName != null">
-        SELECTED_CLASS_NAME = #{selectedClassName,jdbcType=NVARCHAR},
+      <if test="menuClassNameHover != null">
+        MENU_CLASS_NAME_HOVER = #{menuClassNameHover,jdbcType=NVARCHAR},
       </if>
-      <if test="childCount != null">
-        CHILD_COUNT = #{childCount,jdbcType=INTEGER},
+      <if test="menuClassNameSelected != null">
+        MENU_CLASS_NAME_SELECTED = #{menuClassNameSelected,jdbcType=NVARCHAR},
       </if>
-      <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      <if test="menuMenuChildCount != null">
+        MENU_MENU_CHILD_COUNT = #{menuMenuChildCount,jdbcType=INTEGER},
       </if>
-      <if test="creator != null">
-        CREATOR = #{creator,jdbcType=NVARCHAR},
+      <if test="menuMenuDescription != null">
+        MENU_MENU_DESCRIPTION = #{menuMenuDescription,jdbcType=NVARCHAR},
       </if>
-      <if test="description != null">
-        DESCRIPTION = #{description,jdbcType=NVARCHAR},
-      </if>
-      <if test="updateTime != null">
-        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="jsExpression != null">
-        JS_EXPRESSION = #{jsExpression,jdbcType=NVARCHAR},
+      <if test="menuJsExpression != null">
+        MENU_JS_EXPRESSION = #{menuJsExpression,jdbcType=NVARCHAR},
       </if>
     </set>
     where MENU_ID = #{menuId,jdbcType=NVARCHAR}
@@ -419,32 +402,30 @@
       MENU_USER_NAME = #{menuUserName,jdbcType=NVARCHAR},
       MENU_ORGAN_ID = #{menuOrganId,jdbcType=NVARCHAR},
       MENU_ORGAN_NAME = #{menuOrganName,jdbcType=NVARCHAR},
-      IS_EXPAND = #{isExpand,jdbcType=INTEGER},
-      IS_SYSTEM = #{isSystem,jdbcType=INTEGER},
-      LEFT_URL = #{leftUrl,jdbcType=NVARCHAR},
-      LEFT_URL_PARA = #{leftUrlPara,jdbcType=NVARCHAR},
-      RIGHT_URL = #{rightUrl,jdbcType=NVARCHAR},
-      RIGHT_URL_PARA = #{rightUrlPara,jdbcType=NVARCHAR},
-      ORDER_NUM = #{orderNum,jdbcType=INTEGER},
-      PARENT_ID = #{parentId,jdbcType=NVARCHAR},
-      PARENT_ID_LIST = #{parentIdList,jdbcType=NVARCHAR},
-      SHARE_TYPE = #{shareType,jdbcType=INTEGER},
-      TAG = #{tag,jdbcType=NVARCHAR},
-      TARGET = #{target,jdbcType=NVARCHAR},
-      UPDATER = #{updater,jdbcType=NVARCHAR},
-      USE_ORGAN = #{useOrgan,jdbcType=NVARCHAR},
-      USE_ORGAN_ID = #{useOrganId,jdbcType=NVARCHAR},
-      USE_ORGAN_TYPE = #{useOrganType,jdbcType=NVARCHAR},
-      USE_ORGAN_TYPE_ID = #{useOrganTypeId,jdbcType=NVARCHAR},
-      ICON_CLASS_NAME = #{iconClassName,jdbcType=NVARCHAR},
-      HOVER_CLASS_NAME = #{hoverClassName,jdbcType=NVARCHAR},
-      SELECTED_CLASS_NAME = #{selectedClassName,jdbcType=NVARCHAR},
-      CHILD_COUNT = #{childCount,jdbcType=INTEGER},
-      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      CREATOR = #{creator,jdbcType=NVARCHAR},
-      DESCRIPTION = #{description,jdbcType=NVARCHAR},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      JS_EXPRESSION = #{jsExpression,jdbcType=NVARCHAR}
+      MENU_IS_EXPAND = #{menuIsExpand,jdbcType=NVARCHAR},
+      MENU_IS_SYSTEM = #{menuIsSystem,jdbcType=NVARCHAR},
+      MENU_LEFT_URL = #{menuLeftUrl,jdbcType=NVARCHAR},
+      MENU_LEFT_URL_PARA = #{menuLeftUrlPara,jdbcType=NVARCHAR},
+      MENU_RIGHT_URL = #{menuRightUrl,jdbcType=NVARCHAR},
+      MENU_RIGHT_URL_PARA = #{menuRightUrlPara,jdbcType=NVARCHAR},
+      MENU_ORDER_NUM = #{menuOrderNum,jdbcType=INTEGER},
+      MENU_PARENT_ID = #{menuParentId,jdbcType=NVARCHAR},
+      MENU_PARENT_ID_LIST = #{menuParentIdList,jdbcType=NVARCHAR},
+      MENU_TARGET = #{menuTarget,jdbcType=NVARCHAR},
+      MENU_CREATOR = #{menuCreator,jdbcType=NVARCHAR},
+      MENU_CREATE_TIME = #{menuCreateTime,jdbcType=TIMESTAMP},
+      MENU_UPDATER = #{menuUpdater,jdbcType=NVARCHAR},
+      MENU_UPDATE_TIME = #{menuUpdateTime,jdbcType=TIMESTAMP},
+      MENU_USE_ORGAN_NAME = #{menuUseOrganName,jdbcType=NVARCHAR},
+      MENU_USE_ORGAN_ID = #{menuUseOrganId,jdbcType=NVARCHAR},
+      MENU_USE_ORGAN_TYPE_NAME = #{menuUseOrganTypeName,jdbcType=NVARCHAR},
+      MENU_USE_ORGAN_TYPE_ID = #{menuUseOrganTypeId,jdbcType=NVARCHAR},
+      MENU_CLASS_NAME = #{menuClassName,jdbcType=NVARCHAR},
+      MENU_CLASS_NAME_HOVER = #{menuClassNameHover,jdbcType=NVARCHAR},
+      MENU_CLASS_NAME_SELECTED = #{menuClassNameSelected,jdbcType=NVARCHAR},
+      MENU_MENU_CHILD_COUNT = #{menuMenuChildCount,jdbcType=INTEGER},
+      MENU_MENU_DESCRIPTION = #{menuMenuDescription,jdbcType=NVARCHAR},
+      MENU_JS_EXPRESSION = #{menuJsExpression,jdbcType=NVARCHAR}
     where MENU_ID = #{menuId,jdbcType=NVARCHAR}
   </update>
 </mapper>
