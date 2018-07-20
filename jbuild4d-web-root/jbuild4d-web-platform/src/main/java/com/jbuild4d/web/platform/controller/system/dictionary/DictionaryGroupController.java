@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -54,5 +57,11 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
         return JBuild4DResponseVo.opSuccess();
     }
 
-
+    @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
+    @ResponseBody
+    public List<DictionaryGroupEntity> getTreeData() {
+        //dictionaryGroupService.moveUp(recordId);
+        List<DictionaryGroupEntity> dictionaryGroupEntityList=dictionaryGroupService.getALL(JB4DSessionUtility.getSession());
+        return dictionaryGroupEntityList;
+    }
 }

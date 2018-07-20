@@ -63,26 +63,28 @@
         var appList=new Vue({
             el:"#appList",
             mounted:function () {
+                this.initTree();
             },
             data:{
                 table_data:null,
+                treeSelectedNode:null,
                 treeSetting:{
                     async : {
                         enable : true,
                         // Ajax 获取数据的 URL 地址
-                        url : BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/GetListData.do"),
+                        url : BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/GetTreeData.do?pageNum=1&pageSize=1000"),
                         //ajax提交的时候，传的是id值
                         autoParam : [ "categoryId", "categoryName" ]
                     },
                     // 必须使用data
                     data:{
                         key:{
-                            name:"categoryName"
+                            name:"dictGroupText"
                         },
                         simpleData : {
                             enable : true,
-                            idKey : "categoryId", // id编号命名
-                            pIdKey : "parentId",  // 父id编号命名
+                            idKey : "dictGroupId", // id编号命名
+                            pIdKey : "dictGroupParentId",  // 父id编号命名
                             rootId : 0
                         }
                     },
@@ -90,9 +92,9 @@
                     callback : {
                         onClick : function(event, treeId, treeNode) {
                             // 根节点不触发任何事件
-                            if(treeNode.level != 0) {
-
-                            }
+                            //if(treeNode.level != 0) {
+                                appList.treeSelectedNode=treeNode;
+                            //}
                         },
                         //成功的回调函数
                         onAsyncSuccess : function(event, treeId, treeNode, msg){
@@ -107,8 +109,13 @@
                     $.fn.zTree.init($("#ztreeUL"), this.treeSetting);
                 },
                 addGroup:function () {
-                    var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add");
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 3);
+                    if(this.treeSelectedNode!=null) {
+                        var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add&parentId="+this.treeSelectedNode.dictGroupId);
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 3);
+                    }
+                    else {
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择父节点!",null);
+                    }
                 },
                 editGroup:function () {
 
