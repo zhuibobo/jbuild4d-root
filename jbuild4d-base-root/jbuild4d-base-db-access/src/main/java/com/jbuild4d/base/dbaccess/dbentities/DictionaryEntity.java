@@ -11,7 +11,7 @@ public class DictionaryEntity {
 
     private String dictText;
 
-    private String dictGroupName;
+    private String dictGroupId;
 
     private Integer dictOrderNum;
 
@@ -49,12 +49,12 @@ public class DictionaryEntity {
 
     private String dictOrganName;
 
-    public DictionaryEntity(String dictId, String dictKey, String dictValue, String dictText, String dictGroupName, Integer dictOrderNum, Date dictCreateTime, String dictParentId, String dictParentIdlist, String dictIssystem, String dictDelEnable, String dictStatus, String dictIsSelected, String dictDesc, Integer dictChildCount, String dictExAttr1, String dictExAttr2, String dictExAttr3, String dictExAttr4, String dictUserId, String dictUserName, String dictOrganId, String dictOrganName) {
+    public DictionaryEntity(String dictId, String dictKey, String dictValue, String dictText, String dictGroupId, Integer dictOrderNum, Date dictCreateTime, String dictParentId, String dictParentIdlist, String dictIssystem, String dictDelEnable, String dictStatus, String dictIsSelected, String dictDesc, Integer dictChildCount, String dictExAttr1, String dictExAttr2, String dictExAttr3, String dictExAttr4, String dictUserId, String dictUserName, String dictOrganId, String dictOrganName) {
         this.dictId = dictId;
         this.dictKey = dictKey;
         this.dictValue = dictValue;
         this.dictText = dictText;
-        this.dictGroupName = dictGroupName;
+        this.dictGroupId = dictGroupId;
         this.dictOrderNum = dictOrderNum;
         this.dictCreateTime = dictCreateTime;
         this.dictParentId = dictParentId;
@@ -111,12 +111,12 @@ public class DictionaryEntity {
         this.dictText = dictText == null ? null : dictText.trim();
     }
 
-    public String getDictGroupName() {
-        return dictGroupName;
+    public String getDictGroupId() {
+        return dictGroupId;
     }
 
-    public void setDictGroupName(String dictGroupName) {
-        this.dictGroupName = dictGroupName == null ? null : dictGroupName.trim();
+    public void setDictGroupId(String dictGroupId) {
+        this.dictGroupId = dictGroupId == null ? null : dictGroupId.trim();
     }
 
     public Integer getDictOrderNum() {

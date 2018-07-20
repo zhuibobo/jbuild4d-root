@@ -7,7 +7,7 @@
       <arg column="DICT_KEY" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="DICT_GROUP_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="DICT_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="DICT_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -29,7 +29,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    DICT_ID, DICT_KEY, DICT_VALUE, DICT_TEXT, DICT_GROUP_NAME, DICT_ORDER_NUM, DICT_CREATE_TIME, 
+    DICT_ID, DICT_KEY, DICT_VALUE, DICT_TEXT, DICT_GROUP_ID, DICT_ORDER_NUM, DICT_CREATE_TIME, 
     DICT_PARENT_ID, DICT_PARENT_IDLIST, DICT_ISSYSTEM, DICT_DEL_ENABLE, DICT_STATUS, 
     DICT_IS_SELECTED, DICT_DESC, DICT_CHILD_COUNT, DICT_EX_ATTR1, DICT_EX_ATTR2, DICT_EX_ATTR3, 
     DICT_EX_ATTR4, DICT_USER_ID, DICT_USER_NAME, DICT_ORGAN_ID, DICT_ORGAN_NAME
@@ -46,7 +46,7 @@
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity">
     insert into TB4D_DICTIONARY (DICT_ID, DICT_KEY, DICT_VALUE, 
-      DICT_TEXT, DICT_GROUP_NAME, DICT_ORDER_NUM, 
+      DICT_TEXT, DICT_GROUP_ID, DICT_ORDER_NUM, 
       DICT_CREATE_TIME, DICT_PARENT_ID, DICT_PARENT_IDLIST, 
       DICT_ISSYSTEM, DICT_DEL_ENABLE, DICT_STATUS, 
       DICT_IS_SELECTED, DICT_DESC, DICT_CHILD_COUNT, 
@@ -54,7 +54,7 @@
       DICT_EX_ATTR4, DICT_USER_ID, DICT_USER_NAME, 
       DICT_ORGAN_ID, DICT_ORGAN_NAME)
     values (#{dictId,jdbcType=NVARCHAR}, #{dictKey,jdbcType=NVARCHAR}, #{dictValue,jdbcType=NVARCHAR}, 
-      #{dictText,jdbcType=NVARCHAR}, #{dictGroupName,jdbcType=NVARCHAR}, #{dictOrderNum,jdbcType=INTEGER}, 
+      #{dictText,jdbcType=NVARCHAR}, #{dictGroupId,jdbcType=NVARCHAR}, #{dictOrderNum,jdbcType=INTEGER}, 
       #{dictCreateTime,jdbcType=TIMESTAMP}, #{dictParentId,jdbcType=NVARCHAR}, #{dictParentIdlist,jdbcType=NVARCHAR}, 
       #{dictIssystem,jdbcType=NVARCHAR}, #{dictDelEnable,jdbcType=NVARCHAR}, #{dictStatus,jdbcType=NVARCHAR}, 
       #{dictIsSelected,jdbcType=NVARCHAR}, #{dictDesc,jdbcType=NVARCHAR}, #{dictChildCount,jdbcType=INTEGER}, 
@@ -77,8 +77,8 @@
       <if test="dictText != null">
         DICT_TEXT,
       </if>
-      <if test="dictGroupName != null">
-        DICT_GROUP_NAME,
+      <if test="dictGroupId != null">
+        DICT_GROUP_ID,
       </if>
       <if test="dictOrderNum != null">
         DICT_ORDER_NUM,
@@ -148,8 +148,8 @@
       <if test="dictText != null">
         #{dictText,jdbcType=NVARCHAR},
       </if>
-      <if test="dictGroupName != null">
-        #{dictGroupName,jdbcType=NVARCHAR},
+      <if test="dictGroupId != null">
+        #{dictGroupId,jdbcType=NVARCHAR},
       </if>
       <if test="dictOrderNum != null">
         #{dictOrderNum,jdbcType=INTEGER},
@@ -219,8 +219,8 @@
       <if test="dictText != null">
         DICT_TEXT = #{dictText,jdbcType=NVARCHAR},
       </if>
-      <if test="dictGroupName != null">
-        DICT_GROUP_NAME = #{dictGroupName,jdbcType=NVARCHAR},
+      <if test="dictGroupId != null">
+        DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR},
       </if>
       <if test="dictOrderNum != null">
         DICT_ORDER_NUM = #{dictOrderNum,jdbcType=INTEGER},
@@ -284,7 +284,7 @@
     set DICT_KEY = #{dictKey,jdbcType=NVARCHAR},
       DICT_VALUE = #{dictValue,jdbcType=NVARCHAR},
       DICT_TEXT = #{dictText,jdbcType=NVARCHAR},
-      DICT_GROUP_NAME = #{dictGroupName,jdbcType=NVARCHAR},
+      DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR},
       DICT_ORDER_NUM = #{dictOrderNum,jdbcType=INTEGER},
       DICT_CREATE_TIME = #{dictCreateTime,jdbcType=TIMESTAMP},
       DICT_PARENT_ID = #{dictParentId,jdbcType=NVARCHAR},
