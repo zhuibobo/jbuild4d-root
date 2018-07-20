@@ -4,20 +4,20 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from TB4D_MENU ORDER by ORDER_NUM ASC
+        from TB4D_MENU ORDER by MENU_ORDER_NUM ASC
     </select>
     <delete id="deleteAll">
         delete from TB4D_MENU
     </delete>
     <select id="nextOrderNum" resultType="integer">
-        select case when max(ORDER_NUM) is null then 1 else max(ORDER_NUM)+1 end ORDERNUM from TB4D_MENU
+        select case when max(MENU_ORDER_NUM) is null then 1 else max(MENU_ORDER_NUM)+1 end ORDERNUM from TB4D_MENU
     </select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
             select
             *
             from TB4D_MENU
-            where ORDER_NUM = (select max(ORDER_NUM) from TB4D_MENU where ORDER_NUM<(select ORDER_NUM from TB4D_MENU where MENU_ID=#{id,jdbcType=NVARCHAR}))
+            where MENU_ORDER_NUM = (select max(MENU_ORDER_NUM) from TB4D_MENU where MENU_ORDER_NUM<(select MENU_ORDER_NUM from TB4D_MENU where MENU_ID=#{id,jdbcType=NVARCHAR}))
         ]]>
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -25,7 +25,7 @@
             select
             *
             from TB4D_MENU
-            where ORDER_NUM = (select min(ORDER_NUM) from TB4D_MENU where ORDER_NUM>(select ORDER_NUM from TB4D_MENU where MENU_ID=#{id,jdbcType=NVARCHAR}))
+            where MENU_ORDER_NUM = (select min(MENU_ORDER_NUM) from TB4D_MENU where MENU_ORDER_NUM>(select MENU_ORDER_NUM from TB4D_MENU where MENU_ID=#{id,jdbcType=NVARCHAR}))
         ]]>
     </select>
 </mapper>
