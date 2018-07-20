@@ -97,8 +97,8 @@
                 <i-col span="10">
                     <form-item>
                         <radio-group v-model="formValidate.dictIsSelected">
-                            <radio label="1">是</radio>
-                            <radio label="0">否</radio>
+                            <radio label="是">是</radio>
+                            <radio label="否">否</radio>
                         </radio-group>
                     </form-item>
                 </i-col>
@@ -126,7 +126,7 @@
                     dictText: '${entity.dictText}',
                     dictDesc: '${entity.dictDesc}',
                     dictStatus: '${entity.dictStatus}'==''?'1':'${entity.dictStatus}',
-                    dictIsSelected:'${entity.dictIsSelected}'==''?'0':'${entity.dictIsSelected}',
+                    dictIsSelected:'${entity.dictIsSelected}'==''?'否':'${entity.dictIsSelected}',
                     dictCreateTime:'${entity.dictCreateTime}'==''?DateUtility.GetCurrentDataString("-"):'${entity.dictCreateTime}',
                     dictIssystem: '${entity.dictIssystem}' == '' ? '否' : '${entity.dictIssystem}',
                     dictDelEnable: '${entity.dictDelEnable}' == '' ? '是' : '${entity.dictDelEnable}'
@@ -148,11 +148,17 @@
                     if (valid) {
                         var sendData=JSON.stringify(_self.formValidate);
                         //debugger;
-                        var url='/project/system/dictionary/saveedit.do';
+                        var url='/PlatForm/System/Dictionary/SaveEdit.do';
                         AjaxUtility.PostRequestBody(url,sendData,function (result) {
                             DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},result.message,function () {
                                 //debugger;
-                                window.OpenerWindowObj.app.refreshPage();
+                                if (appForm.status=="add") {
+                                    window.OpenerWindowObj.appList.newTreeTableNode(_self.formValidate.dictId, _self.formValidate.dictKey,
+                                        _self.formValidate.dictValue, _self.formValidate.dictText, _self.formValidate.dictGroupId, _self.formValidate.dictCreateTime, _self.formValidate.dictStatus, _self.formValidate.dictIsSelected);
+                                }
+                                else if(appForm.status=="update"){
+
+                                }
                                 DialogUtility.Frame_CloseDialog(window);
                             });
                         },"json");

@@ -103,7 +103,7 @@
                         AjaxUtility.PostRequestBody(url, sendData, function (result) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 if (appForm.status=="add") {
-                                    window.OpenerWindowObj.appList.newNodeTree(_self.formValidate.dictGroupId, _self.formValidate.dictGroupValue, _self.formValidate.dictGroupText, _self.formValidate.dictGroupParentId);
+                                    window.OpenerWindowObj.appList.newTreeNode(_self.formValidate.dictGroupId, _self.formValidate.dictGroupValue, _self.formValidate.dictGroupText, _self.formValidate.dictGroupParentId);
                                 }
                                 else if(appForm.status=="update"){
                                     window.OpenerWindowObj.appList.updateNode(_self.formValidate.dictGroupValue, _self.formValidate.dictGroupText);

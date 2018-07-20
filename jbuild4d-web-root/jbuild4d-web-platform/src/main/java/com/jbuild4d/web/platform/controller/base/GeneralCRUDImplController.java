@@ -107,7 +107,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     @RequestMapping(value = "SaveEdit", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo saveEdit(@RequestBody T entity) throws Exception {
+    public JBuild4DResponseVo saveEdit(@RequestBody T entity) throws JBuild4DGenerallyException {
         try {
             //entity.getClass().getDeclaredFields()[0].get
             String recordID=DBAnnoUtility.getIDValue(entity);
@@ -117,6 +117,9 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
             getBaseService().saveBySelective(jb4DSession,recordID, entity);
             return JBuild4DResponseVo.saveSuccess();
         } catch (JBuild4DGenerallyException e) {
+            return JBuild4DResponseVo.error(e.getMessage());
+        }
+        catch (Exception e){
             return JBuild4DResponseVo.error(e.getMessage());
         }
     }

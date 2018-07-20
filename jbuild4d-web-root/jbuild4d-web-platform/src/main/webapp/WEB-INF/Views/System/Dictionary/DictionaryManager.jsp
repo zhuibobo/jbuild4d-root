@@ -202,7 +202,7 @@
                         }, "json");
                     });
                 },
-                newNodeTree : function (dictGroupId, dictGroupValue,dictGroupText,dictGroupParentId) {
+                newTreeNode : function (dictGroupId, dictGroupValue,dictGroupText,dictGroupParentId) {
                     var silent = false;
                     var newNode = {dictGroupId:dictGroupId, dictGroupValue:dictGroupValue,dictGroupText:dictGroupText,dictGroupParentId:dictGroupParentId};
                     appList.treeObj.addNodes(this.treeSelectedNode,newNode,silent);
@@ -287,6 +287,24 @@
                     }
                     var nodeData=treeTableObj.GetSelectedRowData();
                     treeTableObj.MoveDownRow(nodeData.Organ_Id);
+                },
+                newTreeTableNode : function (dictId, dictKey,dictValue,dictText,dictGroupId,dictCreateTime,dictStatus,dictIsSelected) {
+                    var newrowData={
+                        dictId:dictId,
+                        dictKey:dictKey,
+                        dictValue:dictValue,
+                        dictText:dictText,
+                        dictGroupId:dictGroupId,
+                        dictCreateTime:dictCreateTime,
+                        dictStatus:dictStatus,
+                        dictIsSelected:dictIsSelected
+                    };
+                    this.treeTableObject.AppendChildRowToCurrentSelectedRow(newrowData);
+                },
+                updateTreeTableNode : function (dictGroupValue,dictGroupText) {
+                    this.treeSelectedNode.dictGroupValue=dictGroupValue;
+                    this.treeSelectedNode.dictGroupText=dictGroupText;
+                    appList.treeObj.updateNode(this.treeSelectedNode);
                 }
             }
         });

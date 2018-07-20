@@ -43,7 +43,9 @@ public class LoginController {
     public JBuild4DResponseVo validateAccount(String account, String password,HttpServletRequest request) throws IOException, ParseException {
         JB4DSession b4DSession = new JB4DSession();
         b4DSession.setOrganName("4D");
+        b4DSession.setOrganId("OrganId");
         b4DSession.setUserName("Alex");
+        b4DSession.setUserId("UserId");
         JB4DSessionUtility.addSessionAttr(JB4DSessionUtility.UserLoginSessionKey, b4DSession);
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
