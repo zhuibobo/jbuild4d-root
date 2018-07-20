@@ -36,8 +36,6 @@
                     <div alt="修改分类组" title="修改分类组" class="edit" @click="editGroup"></div>
                     <div alt="删除分类组" title="删除分类组" class="del" @click="delGroup"></div>
                     <div alt="浏览分类组" title="浏览分类组" class="view" @click="viewGroup"></div>
-                    <div alt="上移" title="上移" class="order-up" @click=""></div>
-                    <div alt="下移" title="下移" class="order-down last" @click=""></div>
                 </div>
                 <div>
                     <ul id="ztreeUL" class="ztree"></ul>
@@ -124,6 +122,10 @@
                         DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
                     }
                 },
+                viewGroup:function () {
+                    var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=view&recordId=" + this.treeSelectedNode.dictGroupId);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 2);
+                },
                 delGroup:function () {
                     var url="/PlatForm/System/DictionaryGroup/Delete.do";
                     var recordId=this.treeSelectedNode.dictGroupId;
@@ -140,9 +142,6 @@
                             }
                         }, "json");
                     });
-                },
-                viewGroup:function () {
-
                 },
                 newNodeTree : function (dictGroupId, dictGroupValue,dictGroupText,dictGroupParentId) {
                     var silent = false;
