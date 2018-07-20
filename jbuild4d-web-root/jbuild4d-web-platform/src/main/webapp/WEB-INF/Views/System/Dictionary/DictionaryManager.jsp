@@ -242,7 +242,7 @@
                         DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择上级字典!",null);
                         return false;
                     }
-                    var url=BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?dictParentId="+nodeData.dictSid+"&op=add");
+                    var url=BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?dictParentId="+nodeData.dictId+"&op=add&dictGroupId="+this.treeSelectedNode.dictGroupId);
                     DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"字典管理"},2);
                 },
                 edit:function(){

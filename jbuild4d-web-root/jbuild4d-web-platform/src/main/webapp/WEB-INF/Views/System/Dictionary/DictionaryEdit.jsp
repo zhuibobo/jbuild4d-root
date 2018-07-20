@@ -12,24 +12,79 @@
     <%@ include file="/WEB-INF/Views/TagLibs/GeneralLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/IViewLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
+    <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
-<div id="app" class="general-edit-page-wrap" v-cloak>
+<div id="appForm" class="general-edit-page-wrap" v-cloak>
     <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
-        <form-item label="字典-值：" prop="dictValue">
-            <i-input v-model="formValidate.dictValue"></i-input>
+        <form-item label="dictGroupId：">
+            <row>
+                <i-col span="10">
+                    <form-item>
+                        <i-input v-model="formValidate.dictGroupId"></i-input>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center">dictParentId：</i-col>
+                <i-col span="10">
+                    <form-item>
+                        <i-input v-model="formValidate.dictParentId"></i-input>
+                    </form-item>
+                </i-col>
+            </row>
         </form-item>
-        <form-item label="字典-字：" prop="dictText">
-            <i-input v-model="formValidate.dictText"></i-input>
+        <form-item label="Key：">
+            <row>
+                <i-col span="10">
+                    <form-item prop="dictKey">
+                        <i-input v-model="formValidate.dictKey"></i-input>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center">状态：</i-col>
+                <i-col span="10">
+                    <form-item>
+                        <radio-group v-model="formValidate.dictStatus">
+                            <radio label="1">启动</radio>
+                            <radio label="2">禁用</radio>
+                        </radio-group>
+                    </form-item>
+                </i-col>
+            </row>
         </form-item>
-        <form-item label="父节点：" prop="dictParentId">
-            <i-input v-model="formValidate.dictParentId"></i-input>
+        <form-item label="值：" prop="dictValue">
+            <row>
+                <i-col span="10">
+                    <form-item prop="dictValue">
+                        <i-input v-model="formValidate.dictValue"></i-input>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center"><span style="color: red">*</span> 文本：</i-col>
+                <i-col span="10">
+                    <form-item prop="dictText">
+                        <i-input v-model="formValidate.dictText"></i-input>
+                    </form-item>
+                </i-col>
+            </row>
         </form-item>
-        <form-item label="状态：">
-            <radio-group v-model="formValidate.dictStatus">
-                <radio label="1">启动</radio>
-                <radio label="2">禁用</radio>
-            </radio-group>
+        <form-item label="是否系统：">
+            <row>
+                <i-col span="10">
+                    <form-item>
+                        <radio-group v-model="formValidate.dictIssystem">
+                            <radio label="是">是</radio>
+                            <radio label="否">否</radio>
+                        </radio-group>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center">能否删除：</i-col>
+                <i-col span="10">
+                    <form-item>
+                        <radio-group v-model="formValidate.dictDelEnable">
+                            <radio label="是">是</radio>
+                            <radio label="否">否</radio>
+                        </radio-group>
+                    </form-item>
+                </i-col>
+            </row>
         </form-item>
         <form-item label="创建时间：">
             <row>
@@ -49,7 +104,7 @@
                 </i-col>
             </row>
         </form-item>
-        <form-item label="备注：" prop="desc">
+        <form-item label="备注：">
             <i-input v-model="formValidate.dictDesc" type="textarea" :autosize="{minRows: 7,maxRows: 7}"></i-input>
         </form-item>
         <form-item class="general-edit-page-bottom-wrap">
@@ -59,18 +114,22 @@
     </i-form>
 </div>
 <script>
-    var Main = {
-        data:function () {
-            return {
+    var appForm = new Vue({
+        el:"#appForm",
+        data: {
                 formValidate: {
-                    dictSid: '${recordId}',
+                    dictId: '${recordId}',
+                    dictParentId:'${entity.dictParentId}' == '' ? StringUtility.QueryString("dictParentId") : '${entity.dictParentId}',
+                    dictGroupId:'${entity.dictGroupId}' == '' ? StringUtility.QueryString("dictGroupId") : '${entity.dictGroupId}',
+                    dictKey: '${entity.dictKey}',
                     dictValue: '${entity.dictValue}',
                     dictText: '${entity.dictText}',
-                    dictParentId: '${entity.dictParentId}'==""?'${dictParentId}':'${entity.dictParentId}',
                     dictDesc: '${entity.dictDesc}',
                     dictStatus: '${entity.dictStatus}'==''?'1':'${entity.dictStatus}',
                     dictIsSelected:'${entity.dictIsSelected}'==''?'0':'${entity.dictIsSelected}',
-                    dictCreateTime:'${entity.dictCreateTime}'==''?B4D.DateUtility.GetCurrentDataString("-"):'${entity.dictCreateTime}'
+                    dictCreateTime:'${entity.dictCreateTime}'==''?DateUtility.GetCurrentDataString("-"):'${entity.dictCreateTime}',
+                    dictIssystem: '${entity.dictIssystem}' == '' ? '否' : '${entity.dictIssystem}',
+                    dictDelEnable: '${entity.dictDelEnable}' == '' ? '是' : '${entity.dictDelEnable}'
                 },
                 ruleValidate: {
                     dictValue: [
@@ -81,7 +140,6 @@
                     ]
                 },
                 status:'${op}'
-            };
         },
         methods: {
             handleSubmit: function (name) {
@@ -107,9 +165,7 @@
                 this.$refs[name].resetFields();
             }
         }
-    }
-    var Component = Vue.extend(Main)
-    new Component().$mount('#app')
+    });
 </script>
 </body>
 </html>
