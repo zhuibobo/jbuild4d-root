@@ -43,8 +43,8 @@
                 <i-col span="10">
                     <form-item>
                         <radio-group v-model="formValidate.dictStatus">
-                            <radio label="1">启动</radio>
-                            <radio label="2">禁用</radio>
+                            <radio label="启动">启动</radio>
+                            <radio label="禁用">禁用</radio>
                         </radio-group>
                     </form-item>
                 </i-col>
@@ -125,7 +125,7 @@
                     dictValue: '${entity.dictValue}',
                     dictText: '${entity.dictText}',
                     dictDesc: '${entity.dictDesc}',
-                    dictStatus: '${entity.dictStatus}'==''?'1':'${entity.dictStatus}',
+                    dictStatus: '${entity.dictStatus}'==''?'启动':'${entity.dictStatus}',
                     dictIsSelected:'${entity.dictIsSelected}'==''?'否':'${entity.dictIsSelected}',
                     dictCreateTime:'${entity.dictCreateTime}'==''?DateUtility.GetCurrentDataString("-"):'${entity.dictCreateTime}',
                     dictIssystem: '${entity.dictIssystem}' == '' ? '否' : '${entity.dictIssystem}',

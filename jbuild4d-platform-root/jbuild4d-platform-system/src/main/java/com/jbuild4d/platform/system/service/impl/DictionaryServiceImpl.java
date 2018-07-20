@@ -45,6 +45,8 @@ public class DictionaryServiceImpl extends BaseServiceImpl<DictionaryEntity> imp
                 {
                     DictionaryEntity parentDictionEntity=dictionaryMapper.selectByPrimaryKey(sourceEntity.getDictParentId());
                     parentIdList=parentDictionEntity.getDictParentIdlist();
+                    parentDictionEntity.setDictChildCount(parentDictionEntity.getDictChildCount()+1);
+                    dictionaryMapper.updateByPrimaryKeySelective(parentDictionEntity);
                 }
                 sourceEntity.setDictParentIdlist(parentIdList+"*"+sourceEntity.getDictId());
                 sourceEntity.setDictOrganId(jb4DSession.getOrganId());
