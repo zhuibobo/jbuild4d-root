@@ -51,8 +51,6 @@
                     <i-button type="primary" @click="edit()"><Icon type="edit"></Icon> 修改 </i-button>
                     <i-button type="primary" @click="del()"><Icon type="trash-a"></Icon> 删除 </i-button>
                     <i-button type="primary" @click="view()"><Icon type="android-open"></Icon> 浏览 </i-button>
-                    <i-button type="primary" @click="moveUp()"><Icon type="android-open"></Icon> 上移 </i-button>
-                    <i-button type="primary" @click="moveDown()"><Icon type="android-open"></Icon> 下移 </i-button>
                 </div>
             </div>
             <div id="divEditTable"></div>
@@ -66,13 +64,13 @@
                 this.initTree();
             },
             data:{
-                table_data:null,
+                treeObj:null,
                 treeSelectedNode:null,
                 treeSetting:{
                     async : {
                         enable : true,
                         // Ajax 获取数据的 URL 地址
-                        url : BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/GetTreeData.do?pageNum=1&pageSize=1000"),
+                        url : BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/GetTreeData.do"),
                         //ajax提交的时候，传的是id值
                         autoParam : [ "categoryId", "categoryName" ]
                     },
@@ -98,7 +96,7 @@
                         },
                         //成功的回调函数
                         onAsyncSuccess : function(event, treeId, treeNode, msg){
-
+                            appList.treeObj.expandAll(true);
                         }
                     }
                 }
@@ -106,25 +104,41 @@
             methods:{
                 <!--Group-->
                 initTree:function () {
-                    $.fn.zTree.init($("#ztreeUL"), this.treeSetting);
+                   this.treeObj=$.fn.zTree.init($("#ztreeUL"), this.treeSetting);
                 },
                 addGroup:function () {
                     if(this.treeSelectedNode!=null) {
                         var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add&parentId="+this.treeSelectedNode.dictGroupId);
-                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 3);
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 2);
                     }
                     else {
                         DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择父节点!",null);
                     }
                 },
                 editGroup:function () {
-
+                    if(this.treeSelectedNode!=null) {
+                        var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=update&recordId="+this.treeSelectedNode.dictGroupId);
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 2);
+                    }
+                    else {
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
+                    }
                 },
                 delGroup:function () {
 
                 },
                 viewGroup:function () {
 
+                },
+                newNodeTree : function (dictGroupId, dictGroupValue,dictGroupText,dictGroupParentId) {
+                    var silent = false;
+                    var newNode = {dictGroupId:dictGroupId, dictGroupValue:dictGroupValue,dictGroupText:dictGroupText,dictGroupParentId:dictGroupParentId};
+                    appList.treeObj.addNodes(this.treeSelectedNode,newNode,silent);
+                },
+                updateNode : function (dictGroupValue,dictGroupText) {
+                    this.treeSelectedNode.dictGroupValue=dictGroupValue;
+                    this.treeSelectedNode.dictGroupText=dictGroupText;
+                    appList.treeObj.updateNode(this.treeSelectedNode);
                 },
                 <!--Dictionary-->
                 reloadData:function () {
