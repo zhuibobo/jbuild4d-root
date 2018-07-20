@@ -48,6 +48,6 @@ public class DictionaryController extends GeneralCRUDImplController<DictionaryEn
     @ResponseBody
     public JBuild4DResponseVo getListDataByGroupId(String groupId) {
         List<DictionaryEntity> dictionaryEntityList=dictionaryService.getListDataByGroupId(JB4DSessionUtility.getSession(),groupId);
-        return JBuild4DResponseVo.success("");
+        return JBuild4DResponseVo.success("",dictionaryEntityList);
     }
 }

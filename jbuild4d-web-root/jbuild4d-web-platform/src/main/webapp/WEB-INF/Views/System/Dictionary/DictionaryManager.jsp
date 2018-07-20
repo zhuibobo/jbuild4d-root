@@ -142,14 +142,6 @@
                             Hidden:false,
                             TitleCellAttrs:{},
                             Width:"10%"
-                        },{
-                            Title:"创建时间",
-                            FieldName:"dictCreateTime",
-                            TitleCellClassName:"TitleCell",
-                            Renderer:"Lable",
-                            Hidden:false,
-                            TitleCellAttrs:{},
-                            Width:"20%"
                         }
                     ],
                     TableClass:"TreeTable",
