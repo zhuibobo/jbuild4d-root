@@ -125,7 +125,21 @@
                     }
                 },
                 delGroup:function () {
-
+                    var url="/PlatForm/System/DictionaryGroup/Delete.do";
+                    var recordId=this.treeSelectedNode.dictGroupId;
+                    DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
+                        AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    appList.treeObj.removeNode(appList.treeSelectedNode);
+                                    appList.treeSelectedNode=null;
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                            }
+                        }, "json");
+                    });
                 },
                 viewGroup:function () {
 
