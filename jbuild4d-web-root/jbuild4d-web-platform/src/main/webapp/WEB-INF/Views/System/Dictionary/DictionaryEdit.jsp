@@ -157,7 +157,8 @@
                                         _self.formValidate.dictValue, _self.formValidate.dictText, _self.formValidate.dictGroupId, _self.formValidate.dictCreateTime, _self.formValidate.dictStatus, _self.formValidate.dictIsSelected);
                                 }
                                 else if(appForm.status=="update"){
-
+                                    window.OpenerWindowObj.appList.updateTreeTableNode(_self.formValidate.dictId, _self.formValidate.dictKey,
+                                        _self.formValidate.dictValue, _self.formValidate.dictText, _self.formValidate.dictStatus, _self.formValidate.dictIsSelected);
                                 }
                                 DialogUtility.Frame_CloseDialog(window);
                             });
