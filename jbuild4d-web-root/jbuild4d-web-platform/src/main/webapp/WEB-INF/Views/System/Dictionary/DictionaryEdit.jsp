@@ -63,7 +63,7 @@
         data:function () {
             return {
                 formValidate: {
-                    dictSid: '${sId}',
+                    dictSid: '${recordId}',
                     dictValue: '${entity.dictValue}',
                     dictText: '${entity.dictText}',
                     dictParentId: '${entity.dictParentId}'==""?'${dictParentId}':'${entity.dictParentId}',
