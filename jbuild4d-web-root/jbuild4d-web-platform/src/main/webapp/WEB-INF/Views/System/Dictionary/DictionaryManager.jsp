@@ -52,7 +52,7 @@
                     <i-button type="primary" @click="view()"><Icon type="android-open"></Icon> 浏览 </i-button>
                     <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
                     <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
-                    <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 选中 </i-button>
+                    <i-button type="primary" @click="setSelected()"><Icon type="checkmark-round"></Icon> 选中 </i-button>
                     <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移</i-button>
                     <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
                 </div>
@@ -233,6 +233,37 @@
                         }
                     },"json");
                 },
+                mareSureSelectedTreeTableRow:function (actionText) {
+                    if(this.treeTableObject!=null) {
+                        var nodeData = this.treeTableObject.GetSelectedRowData();
+                        if (nodeData == null) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要"+actionText+"的字典!", null);
+                            return {
+                                then:function (func) {
+                                }
+                            }
+                        }
+                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能编辑根节点!", null);
+                            return {
+                                then:function (func) {
+                                }
+                            }
+                        }
+                        return {
+                            then:function (func) {
+                                func(nodeData);
+                            }
+                        }
+                    }
+                    else{
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请先选定分组!", null);
+                    }
+                    return {
+                        then:function (func) {
+                        }
+                    }
+                },
                 add:function(){
                     if(this.treeTableObject!=null){
                         var nodeData=this.treeTableObject.GetSelectedRowData();
@@ -245,7 +276,11 @@
                     }
                 },
                 edit:function(){
-                    if(this.treeTableObject!=null) {
+                    this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
+                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=update&recordId=" + nodeData.dictId);
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
+                    })
+                    /*if(this.treeTableObject!=null) {
                         var nodeData = this.treeTableObject.GetSelectedRowData();
                         if (nodeData == null) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要编辑的字典!", null);
@@ -257,10 +292,28 @@
                         }
                         var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=update&recordId=" + nodeData.dictId);
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
-                    }
+                    }*/
                 },
                 del:function(){
-                    if(this.treeTableObject!=null) {
+                    var _self=this;
+                    this.mareSureSelectedTreeTableRow("删除").then(function (nodeData) {
+                        var url="/PlatForm/System/Dictionary/Delete.do";
+                        var recordId=nodeData.dictId;
+                        DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
+                            AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                                if (result.success) {
+                                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                        _self.treeTableObject.DeleteRow(recordId);
+
+                                    });
+                                }
+                                else {
+                                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                                }
+                            }, "json");
+                        });
+                    })
+                    /*if(this.treeTableObject!=null) {
                         var nodeData = this.treeTableObject.GetSelectedRowData();
                         if (nodeData == null) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要删除的字典!", null);
@@ -286,10 +339,14 @@
                                 }
                             }, "json");
                         });
-                    }
+                    }*/
                 },
                 view:function(){
-                    if(this.treeTableObject!=null) {
+                    this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
+                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=view&recordId=" + nodeData.dictId);
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
+                    });
+                    /*if(this.treeTableObject!=null) {
                         var nodeData = this.treeTableObject.GetSelectedRowData();
                         if (nodeData == null) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要查看的字典!", null);
@@ -301,7 +358,28 @@
                         }
                         var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=view&recordId=" + nodeData.dictId);
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
-                    }
+                    }*/
+                },
+                statusEnable:function (statusName) {
+                    var _self=this;
+                    this.mareSureSelectedTreeTableRow("启用").then(function (nodeData) {
+                        var url = "/PlatForm/System/Dictionary/StatusChange.do";
+                        var recordId = nodeData.dictId;
+                        AjaxUtility.Post(url, {ids: recordId,statusName:statusName}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    nodeData.dictStatus=statusName;
+                                    _self.treeTableObject.UpdateToRow(nodeData.dictId,nodeData);
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
+                            }
+                        }, "json");
+                    });
+                },
+                setSelected:function () {
+
                 },
                 moveUp:function(){
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现!",null);

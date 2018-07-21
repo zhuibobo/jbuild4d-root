@@ -1,6 +1,7 @@
 package com.jbuild4d.platform.system.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.DictionaryMapper;
+import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.IGeneralService;
@@ -61,5 +62,16 @@ public class DictionaryServiceImpl extends BaseServiceImpl<DictionaryEntity> imp
     @Override
     public List<DictionaryEntity> getListDataByGroupId(JB4DSession session, String groupId) {
         return dictionaryMapper.selectByGroupId(groupId);
+    }
+
+
+    @Override
+    public void statusChange(JB4DSession jb4DSession, String ids, String status) throws JBuild4DGenerallyException {
+        String[] idArray=ids.split(";");
+        for(int i=0;i<idArray.length;i++){
+            DictionaryEntity entity=getByPrimaryKey(jb4DSession,idArray[i]);
+            entity.setDictStatus(status);
+            dictionaryMapper.updateByPrimaryKeySelective(entity);
+        }
     }
 }
