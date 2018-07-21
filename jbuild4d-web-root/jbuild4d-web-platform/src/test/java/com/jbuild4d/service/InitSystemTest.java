@@ -65,7 +65,7 @@ public class InitSystemTest extends BaseTest {
         //根菜单->系统设置分组->参数设置
         String systemSettingParasSettingId="JB4DSystemSettingParasSetting";
         MenuEntity systemSettingParasSettingMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingParasSettingId,"参数设置","参数设置","参数设置",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/Dictionary/DictionaryManager.do","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
         menuService.deleteByKey(jb4DSession,systemSettingParasSettingId);
         menuService.saveBySelective(jb4DSession,systemSettingParasSettingMenu.getMenuId(),systemSettingParasSettingMenu);
 
