@@ -11,6 +11,7 @@ import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.ClassUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -78,9 +82,10 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition) {
+    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
-        PageInfo<T> proOrganPageInfo=getBaseService().getPage(jb4DSession,pageNum,pageSize);
+        Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
+        PageInfo<T> proOrganPageInfo=getBaseService().getPage(jb4DSession,pageNum,pageSize,searchMap);
         return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
     }
 

@@ -11,23 +11,20 @@
         <include refid="Base_Column_List" />
         from TB4D_DEV_DEMO_GEN_LIST
         <where>
-            <if test="orgName != null and orgName != ''">
-                ORG_NAME like "%"#{orgName}"%"
+            <if test="ddglKey != null and ddglKey != ''">
+                DDGL_KEY like #{ddglKey}
             </if>
-            <if test="orgCode != null and orgCode != ''">
-                and ORG_CODE like "%"#{orgCode}"%"
+            <if test="ddglName != null and ddglName != ''">
+                and DDGL_NAME like "%"#{ddglName}"%"
             </if>
-            <if test="orgCreateTime_s != null and orgCreateTime_s != ''">
-                and ORG_CREATE_TIME >= #{orgCreateTime_s}
+            <if test="ddglCreatetime_s != null and ddglCreatetime_s != ''">
+                and DDGL_CREATETIME >= #{ddglCreatetime_s}
             </if>
-            <if test="orgCreateTime_e != null and orgCreateTime_e != ''">
-                and ORG_CREATE_TIME &lt;= #{orgCreateTime_e}
-            </if>
-            <if test="creatreOrgId != null and creatreOrgId != ''">
-                and CREATRE_ORG_ID like "%"#{creatreOrgId}"%"
+            <if test="ddglCreatetime_e != null and ddglCreatetime_e != ''">
+                and DDGL_CREATETIME &lt;= #{orgCreateTime_e}
             </if>
         </where>
-        ORDER by ORG_ORDER ASC
+        ORDER by DDGL_ORDER_NUM DESC
     </select>
     <delete id="deleteAll">
         delete from TB4D_DEV_DEMO_GEN_LIST

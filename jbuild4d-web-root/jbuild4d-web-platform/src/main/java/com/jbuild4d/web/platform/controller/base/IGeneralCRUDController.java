@@ -5,6 +5,9 @@ import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.text.ParseException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -15,7 +18,7 @@ public interface IGeneralCRUDController<T> {
 
     public abstract ModelAndView list();
 
-    public abstract JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition);
+    public abstract JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition) throws IOException, ParseException;
 
     public abstract ModelAndView detail(String recordId,String op) throws IllegalAccessException, InstantiationException;
 

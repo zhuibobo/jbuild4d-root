@@ -1398,6 +1398,7 @@ var ListPageUtility={
         });
     },
     IViewTableLoadDataSearch:function (url,pageNum,pageSize,searchCondition,pageAppObj,autoSelectedOldRows,successFunc) {
+        //debugger;
         AjaxUtility.Post(url,
             {
                 pageNum: pageNum,

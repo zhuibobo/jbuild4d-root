@@ -198,7 +198,7 @@
                 this.selectionRows=null;
             },
             search:function () {
-                this.page_num=1;
+                this.pageNum=1;
                 this.reloadData();
             }
         }
