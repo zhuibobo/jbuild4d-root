@@ -143,9 +143,14 @@ var TreeTable={
             var _cc = _c.Templates[i];
             var _cd = rowData[_cc.FieldName];
             var _width=_cc.Width;
-            var $td=$("<td bindField=\""+_cc.FieldName+"\">" + _cd + "</td>").css("width",_width);
-            if (i == 0) {
 
+            var $td=$("<td bindField=\""+_cc.FieldName+"\">" + _cd + "</td>").css("width",_width);
+
+            if(_cc.TextAlign){
+                $td.css("textAlign",_cc.TextAlign);
+            }
+
+            if (i == 0) {
                 //$td=$("<td></td>").append(this._CreateRowSwitchElem(hasChild,rowIsOpen,rowId)).append(_cd);
                 //$td.css("padding-left",this._Prop_FirstColumn_Inden*currentLevel);
             }

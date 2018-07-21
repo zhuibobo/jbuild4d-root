@@ -52,7 +52,7 @@
                     <i-button type="primary" @click="view()"><Icon type="android-open"></Icon> 浏览 </i-button>
                     <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
                     <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
-                    <i-button type="primary" @click="setSelected()"><Icon type="checkmark-round"></Icon> 选中 </i-button>
+                    <i-button type="primary" @click="setSelected()"><Icon type="checkmark-round"></Icon> 设为选中 </i-button>
                     <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移</i-button>
                     <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
                 </div>
@@ -122,7 +122,7 @@
                             Renderer:"Lable",
                             Hidden:false,
                             TitleCellAttrs:{},
-                            Width:"30"
+                            Width:"40"
                         },{
                             Title:"字典值",
                             FieldName:"dictValue",
@@ -130,7 +130,8 @@
                             Renderer:"Lable",
                             Hidden:false,
                             TitleCellAttrs:{},
-                            Width:"30"
+                            Width:"40",
+                            TextAlign:"center"
                         },{
                             Title:"字典状态",
                             FieldName:"dictStatus",
@@ -138,7 +139,8 @@
                             Renderer:"Lable",
                             Hidden:false,
                             TitleCellAttrs:{},
-                            Width:"10%"
+                            Width:"10%",
+                            TextAlign:"center"
                         },{
                             Title:"默认选中",
                             FieldName:"dictIsSelected",
@@ -146,7 +148,8 @@
                             Renderer:"Lable",
                             Hidden:false,
                             TitleCellAttrs:{},
-                            Width:"10%"
+                            Width:"10%",
+                            TextAlign:"center"
                         }
                     ],
                     TableClass:"TreeTable",
