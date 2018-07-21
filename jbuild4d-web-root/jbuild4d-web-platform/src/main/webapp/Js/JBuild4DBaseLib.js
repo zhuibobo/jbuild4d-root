@@ -1208,6 +1208,18 @@ var AjaxUtility={
             dataType: dataType,
             data: sendData,
             success: function (result) {
+                try{
+                    if(result!=null&&result.success!=null&&!result.success){
+                        if(result.message=="登录Session过期"){
+                            DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"Session超时，请重新登陆系统",function () {
+                                BaseUtility.RedirectToLogin();
+                            });
+                        }
+                    }
+                }
+                catch(e) {
+                    console.log("AjaxUtility.Post Exception "+url);
+                }
                 func(result);
                 innerResult=result;
             },
