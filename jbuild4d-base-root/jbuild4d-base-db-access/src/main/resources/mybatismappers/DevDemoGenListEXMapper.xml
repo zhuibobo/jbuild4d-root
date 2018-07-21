@@ -15,7 +15,7 @@
                 DDGL_KEY like #{ddglKey}
             </if>
             <if test="ddglName != null and ddglName != ''">
-                and DDGL_NAME like "%"#{ddglName}"%"
+                and DDGL_NAME like #{ddglName}
             </if>
             <if test="ddglCreatetime_s != null and ddglCreatetime_s != ''">
                 and DDGL_CREATETIME >= #{ddglCreatetime_s}

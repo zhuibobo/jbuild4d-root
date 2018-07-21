@@ -93,7 +93,7 @@
             searchCondition:{
                 ddglKey:{
                     value:"",
-                    type:SearchUtility.SearchFieldType.StringType
+                    type:SearchUtility.SearchFieldType.LikeStringType
                 },
                 ddglName:{
                     value:"",

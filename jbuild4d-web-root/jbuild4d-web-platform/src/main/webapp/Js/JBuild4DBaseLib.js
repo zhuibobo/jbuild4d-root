@@ -1270,6 +1270,9 @@ var SearchUtility={
         IntType:"IntType",
         NumberType:"NumberType",
         DataType:"DateType",
+        LikeStringType:"LikeStringType",
+        LeftLikeStringType:"LeftLikeStringType",
+        RightLikeStringType:"RightLikeStringType",
         StringType:"StringType",
         DataStringType:"DateStringType"
     }

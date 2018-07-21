@@ -43,9 +43,10 @@ public class GeneralSearchUtility {
 
     private static void resolveSearchMapResult(Map<String, GeneralSearchItem> mapResult) throws ParseException {
         for (Map.Entry<String, GeneralSearchItem> stringGeneralSearchItemEntry : mapResult.entrySet()) {
+            GeneralSearchItem generalSearchItem= stringGeneralSearchItemEntry.getValue();
+            Object value=generalSearchItem.value;
+
             if(stringGeneralSearchItemEntry.getValue().getType()==GeneralSearchItemTypeEnum.DateStringType){
-                GeneralSearchItem generalSearchItem= stringGeneralSearchItemEntry.getValue();
-                Object value=generalSearchItem.value;
                 if(value!=""&&!value.toString().equals("")&&value.toString().indexOf("T")>0) {
                     String stringValue=value.toString();
                     stringValue = stringValue.replace("Z", " UTC");
@@ -57,6 +58,21 @@ public class GeneralSearchUtility {
                     String newDateValue= DateUtility.getDate_yyyy_MM_dd(d);
                     System.out.println(newDateValue);
                     generalSearchItem.setValue(newDateValue);
+                }
+            }
+            else if(stringGeneralSearchItemEntry.getValue().getType()==GeneralSearchItemTypeEnum.LikeStringType){
+                if(value!=""&&!value.toString().equals("")) {
+                    generalSearchItem.setValue("%"+value+"%");
+                }
+            }
+            else if(stringGeneralSearchItemEntry.getValue().getType()==GeneralSearchItemTypeEnum.LeftLikeStringType){
+                if(value!=""&&!value.toString().equals("")) {
+                    generalSearchItem.setValue("%"+value);
+                }
+            }
+            else if(stringGeneralSearchItemEntry.getValue().getType()==GeneralSearchItemTypeEnum.RightLikeStringType){
+                if(value!=""&&!value.toString().equals("")) {
+                    generalSearchItem.setValue(value+"%");
                 }
             }
         }
