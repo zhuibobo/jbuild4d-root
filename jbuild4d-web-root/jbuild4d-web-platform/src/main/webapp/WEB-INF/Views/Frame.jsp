@@ -213,7 +213,7 @@
                     this.contentIframeUrl=this.defaultContentIframeUrl;
                 }
                 //debugger;
-                if(item.menuRightUrl!=""&&item.menuLeftUrl!=null&&item.menuLeftUrl!="LeftMenu.do"){
+                if(item.menuLeftUrl!=""&&item.menuLeftUrl!=null&&item.menuLeftUrl!="LeftMenu.do"){
                     this.leftIframeUrl=JB4D.BaseUtility.BuildUrl(item.menuLeftUrl);
                     return;
                 }

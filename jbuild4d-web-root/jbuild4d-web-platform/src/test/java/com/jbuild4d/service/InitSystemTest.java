@@ -40,12 +40,11 @@ public class InitSystemTest extends BaseTest {
         menuService.deleteByKey(jb4DSession,rootMenuId);
         menuService.saveBySelective(jb4DSession,rootMenu.getMenuId(),rootMenu);
 
-        //第一层节点
         //根菜单->系统设置分组
-        String systemSettingId="JB4DSystemSettingRoot";
-        MenuEntity systemSettingMenu=getMenu(rootMenu.getMenuId(),systemSettingId,"系统设置","系统设置","系统设置",
+        String systemSettingRootId="JB4DSystemSettingRoot";
+        MenuEntity systemSettingMenu=getMenu(rootMenu.getMenuId(),systemSettingRootId,"系统设置","系统设置","系统设置",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
-        menuService.deleteByKey(jb4DSession,systemSettingId);
+        menuService.deleteByKey(jb4DSession,systemSettingRootId);
         menuService.saveBySelective(jb4DSession,systemSettingMenu.getMenuId(),systemSettingMenu);
 
         //根菜单->系统设置分组->数据字典分组
@@ -55,11 +54,18 @@ public class InitSystemTest extends BaseTest {
         menuService.deleteByKey(jb4DSession,systemSettingDictionaryManagerId);
         menuService.saveBySelective(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId(),systemSettingDictionaryGroupMenu);
 
+        //根菜单->开发示例
+        String devDemoRootId="JB4DDevDemoRoot";
+        MenuEntity devDemoRootMenu=getMenu(rootMenu.getMenuId(),devDemoRootId,"开发示例","开发示例","开发示例",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/PlatForm/DevDemo/Menus.do","","frame-top-menu-data");
+        menuService.deleteByKey(jb4DSession,devDemoRootId);
+        menuService.saveBySelective(jb4DSession,devDemoRootMenu.getMenuId(),devDemoRootMenu);
+
         //跟字典分组
-        String rootDictionaryId="0";
-        DictionaryGroupEntity rootDictionaryGroupEntity=getDictionaryGroup(rootDictionaryId,"数据字典分组","数据字典分组","","-1",TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
-        dictionaryGroupService.deleteByKey(jb4DSession,rootDictionaryId);
-        dictionaryGroupService.saveBySelective(jb4DSession,rootDictionaryGroupEntity.getDictGroupId(),rootDictionaryGroupEntity);
+        //String rootDictionaryId="0";
+        //DictionaryGroupEntity rootDictionaryGroupEntity=getDictionaryGroup(rootDictionaryId,"数据字典分组","数据字典分组","","-1",TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
+        //dictionaryGroupService.deleteByKey(jb4DSession,rootDictionaryId);
+        //dictionaryGroupService.saveBySelective(jb4DSession,rootDictionaryGroupEntity.getDictGroupId(),rootDictionaryGroupEntity);
     }
 
     public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){
