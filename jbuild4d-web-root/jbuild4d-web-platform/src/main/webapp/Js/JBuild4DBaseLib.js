@@ -749,6 +749,14 @@ var DialogUtility={
     _TestRunEnable:function(){
         return true;
     },
+    AlertError:function (opererWindow,dialogId,config,htmlmsg,sFunc) {
+        var defaultConfig={
+            height: 400,
+            width: 600
+        };
+        defaultConfig = $.extend(true, {}, defaultConfig, config);
+        this.Alert(opererWindow,dialogId,defaultConfig,htmlmsg,sFunc);
+    },
     Alert:function(opererWindow,dialogId,config,htmlmsg,sFunc) {
         //debugger;
         var htmlElem = this._CreateDialogElem(opererWindow.document.body,dialogId);
@@ -1427,6 +1435,10 @@ var ListPageUtility={
                     if(typeof (successFunc)=="function") {
                         successFunc(result,pageAppObj);
                     }
+                }
+                else
+                {
+                    DialogUtility.AlertError(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
                 }
             }, "json");
     },

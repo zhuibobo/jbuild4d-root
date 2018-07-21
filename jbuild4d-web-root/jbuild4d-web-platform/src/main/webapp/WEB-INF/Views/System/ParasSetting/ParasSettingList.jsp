@@ -124,28 +124,28 @@
                 this.selectionRows = selection;
             },
             reloadData: function () {
-                var url = '/PlatForm/DevDemo/DevDemoGenList/GetListData.do';
+                var url = '/PlatForm/System/ParasSetting/GetListData.do';
                 JB4D.ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,true,null);
                 //this.selectionRows=null;
             },
             add: function () {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=add");
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+                var url = BaseUtility.BuildUrl("/PlatForm/System/ParasSetting/Detail.do?op=add");
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "参数设置"}, 2);
             },
             edit: function (recordId) {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=update&recordId=" + recordId);
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+                var url = BaseUtility.BuildUrl("/PlatForm/System/ParasSetting/Detail.do?op=update&recordId=" + recordId);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "参数设置"}, 2);
             },
             view:function (recordId) {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=view&recordId=" + recordId);
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+                var url = BaseUtility.BuildUrl("/PlatForm/System/ParasSetting/Detail.do?op=view&recordId=" + recordId);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "参数设置"}, 2);
             },
             del: function (recordId) {
-                var url = '/PlatForm/DevDemo/DevDemoGenList/Delete.do';
+                var url = '/PlatForm/System/ParasSetting/Delete.do';
                 JB4D.ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
             },
             statusEnable: function (statusName) {
-                var url = '/PlatForm/DevDemo/DevDemoGenList/StatusChange.do';
+                var url = '/PlatForm/System/ParasSetting/StatusChange.do';
                 JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
             },
             changePage: function (pageNum) {
