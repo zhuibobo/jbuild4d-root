@@ -10,6 +10,29 @@
     margin-bottom:10px
 }
 
+.list-simple-search-wrap {
+    margin-bottom: 8px;
+    border: #d7d7d8 solid 1px;
+    border-radius: 4px;
+    min-height: 42px;
+}
+
+.list-simple-search-wrap .ls-table {
+    width: 100%;
+}
+
+.list-simple-search-wrap .ls-table .ls-table-row {
+    height: 40px;
+}
+
+.list-simple-search-wrap .ls-table td{
+    text-align: center;
+}
+
+.list-simple-search-wrap .ls-table td{
+    text-align: center;
+}
+
 .list-row-button{
     width: 16px;
     height: 16px;

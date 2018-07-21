@@ -16,6 +16,40 @@
 </head>
 <body>
 <div id="appList" class="iv-list-page-wrap">
+    <div class="list-simple-search-wrap" id="list-simple-search-wrap">
+        <table class="ls-table">
+            <colgroup>
+                <col style="width: 80px">
+                <col style="">
+                <col style="width: 80px">
+                <col style="">
+                <col style="width: 100px">
+                <col style="">
+                <col style="width: 80px">
+                <col style="">
+                <col style="width: 80px">
+            </colgroup>
+            <tr class="ls-table-row">
+                <td>机构名称：</td>
+                <td>
+                    <i-input v-model="search_condition.ddglKey.value" placeholder="请输入机构名称"></i-input>
+                </td>
+                <td>机构代码：</td>
+                <td>
+                    <i-input v-model="search_condition.ddglKey.value" placeholder="请输入机构代码"></i-input>
+                </td>
+                <td>创建时间（从）：</td>
+                <td>
+                    <date-picker v-model="search_condition.ddglKey.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                </td>
+                <td>（到）：</td>
+                <td>
+                    <date-picker v-model="search_condition.ddglKey.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                </td>
+                <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
+            </tr>
+        </table>
+    </div>
     <div style="width: 100%" id="list-button-wrap">
         <div style="float: right">
             <i-button type="primary" @click="add()">
@@ -56,6 +90,12 @@
             this.reloadData();
         },
         data: {
+            search_condition:{
+                ddglKey:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.StringType
+                }
+            },
             columnsConfig: [
                 {
                     type: 'selection',
@@ -144,6 +184,9 @@
                 this.pageNum = pageNum;
                 this.reloadData();
                 this.selectionRows=null;
+            },
+            search:function () {
+                
             }
         }
     });

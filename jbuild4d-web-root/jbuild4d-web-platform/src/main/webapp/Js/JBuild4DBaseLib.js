@@ -1281,6 +1281,9 @@ var ListPageUtility={
         var pageHeight=jQuery(window.document).height();
         //alert(pageHeight);
         pageHeight=pageHeight-$("#list-button-wrap").height()+fixHeight;
+        if($("#list-simple-search-wrap").length>0){
+            pageHeight=pageHeight-$("#list-simple-search-wrap").outerHeight()-6;
+        }
         return pageHeight;
     },
     GetFixHeightNotSearch:function () {
