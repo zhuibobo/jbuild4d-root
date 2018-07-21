@@ -50,4 +50,11 @@ public class DictionaryController extends GeneralCRUDImplController<DictionaryEn
         List<DictionaryEntity> dictionaryEntityList=dictionaryService.getListDataByGroupId(JB4DSessionUtility.getSession(),groupId);
         return JBuild4DResponseVo.success("",dictionaryEntityList);
     }
+
+    @RequestMapping(value = "SetSelected", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo setSelected(String recordId) {
+        dictionaryService.setSelected(JB4DSessionUtility.getSession(),recordId);
+        return JBuild4DResponseVo.opSuccess();
+    }
 }

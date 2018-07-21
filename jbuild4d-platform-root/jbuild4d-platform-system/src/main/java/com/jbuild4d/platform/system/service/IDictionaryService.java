@@ -13,5 +13,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface IDictionaryService  extends IBaseService<DictionaryEntity> {
-    List<DictionaryEntity> getListDataByGroupId(JB4DSession session, String groupId);
+    List<DictionaryEntity> getListDataByGroupId(JB4DSession jb4DSession, String groupId);
+
+    void setSelected(JB4DSession jb4DSession, String recordId);
 }

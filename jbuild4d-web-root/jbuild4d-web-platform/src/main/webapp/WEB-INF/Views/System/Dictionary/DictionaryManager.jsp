@@ -379,7 +379,22 @@
                     });
                 },
                 setSelected:function () {
-
+                    var _self=this;
+                    this.mareSureSelectedTreeTableRow("选中").then(function (nodeData) {
+                        var url = "/PlatForm/System/Dictionary/SetSelected.do";
+                        var recordId = nodeData.dictId;
+                        AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    nodeData.dictIsSelected="是";
+                                    _self.treeTableObject.UpdateToRow(nodeData.dictId,nodeData);
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
+                            }
+                        }, "json");
+                    });
                 },
                 moveUp:function(){
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现!",null);

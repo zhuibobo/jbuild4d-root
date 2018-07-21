@@ -3,6 +3,7 @@ package com.jbuild4d.platform.system.service.impl;
 import com.jbuild4d.base.dbaccess.dao.DictionaryMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
+import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.ISQLBuilderService;
@@ -64,6 +65,22 @@ public class DictionaryServiceImpl extends BaseServiceImpl<DictionaryEntity> imp
         return dictionaryMapper.selectByGroupId(groupId);
     }
 
+    @Override
+    public void setSelected(JB4DSession jb4DSession, String recordId) {
+        DictionaryEntity entity=getByPrimaryKey(jb4DSession,recordId);
+
+        String parentId=entity.getDictParentId();
+        List<DictionaryEntity> dictionaryEntityList=dictionaryMapper.selectByParentId(parentId);
+        if(dictionaryEntityList!=null&&dictionaryEntityList.size()>0){
+            for (DictionaryEntity dictionaryEntity : dictionaryEntityList) {
+                dictionaryEntity.setDictIsSelected(TrueFalseEnum.False.getDisplayName());
+                dictionaryMapper.updateByPrimaryKeySelective(dictionaryEntity);
+            }
+        }
+
+        entity.setDictIsSelected(TrueFalseEnum.True.getDisplayName());
+        dictionaryMapper.updateByPrimaryKeySelective(entity);
+    }
 
     @Override
     public void statusChange(JB4DSession jb4DSession, String ids, String status) throws JBuild4DGenerallyException {

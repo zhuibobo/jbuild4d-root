@@ -9,4 +9,9 @@
     <select id="nextOrderNum" resultType="integer">
         select case when max(DICT_ORDER_NUM) is null then 1 else max(DICT_ORDER_NUM)+1 end ORDERNUM from TB4D_DICTIONARY
     </select>
+    <select id="selectByParentId" resultType="com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_DICTIONARY where DICT_PARENT_ID=#{id} ORDER by DICT_ORDER_NUM ASC
+    </select>
 </mapper>

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface DictionaryMapper extends BaseMapper<DictionaryEntity> {
     List<DictionaryEntity> selectByGroupId(String groupId);
+
+    List<DictionaryEntity> selectByParentId(String parentId);
 }
