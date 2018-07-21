@@ -16,40 +16,6 @@
 </head>
 <body>
 <div id="appList" class="iv-list-page-wrap">
-    <div class="list-simple-search-wrap" id="list-simple-search-wrap">
-        <table class="ls-table">
-            <colgroup>
-                <col style="width: 80px">
-                <col style="">
-                <col style="width: 80px">
-                <col style="">
-                <col style="width: 100px">
-                <col style="">
-                <col style="width: 80px">
-                <col style="">
-                <col style="width: 80px">
-            </colgroup>
-            <tr class="ls-table-row">
-                <td>ddglKey：</td>
-                <td>
-                    <i-input v-model="searchCondition.ddglKey.value" placeholder="ddglKey"></i-input>
-                </td>
-                <td>ddglName：</td>
-                <td>
-                    <i-input v-model="searchCondition.ddglName.value" placeholder="ddglName"></i-input>
-                </td>
-                <td>ddglCreatetime（从）：</td>
-                <td>
-                    <date-picker v-model="searchCondition.ddglCreatetime_s.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
-                </td>
-                <td>（到）：</td>
-                <td>
-                    <date-picker v-model="searchCondition.ddglCreatetime_e.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
-                </td>
-                <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
-            </tr>
-        </table>
-    </div>
     <div style="width: 100%" id="list-button-wrap">
         <div style="float: right">
             <i-button type="primary" @click="add()">

@@ -30,10 +30,11 @@
             name: "开发示例",
             open: true,
             children: [{
-                name: "通用列表",
+                name: "通用列表(带查询)",
                 contentUrl:BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/List.do")
             }, {
-                name: "test1_2"
+                name: "通用列表(不带查询)",
+                contentUrl:BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/ListNotSearch.do")
             }]
         }];
         $(document).ready(function () {

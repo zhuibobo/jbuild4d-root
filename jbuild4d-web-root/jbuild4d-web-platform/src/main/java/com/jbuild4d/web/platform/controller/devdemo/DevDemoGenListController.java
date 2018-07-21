@@ -8,6 +8,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping(value = "/PlatForm/DevDemo/DevDemoGenList")
-public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoGenListEntity> implements InitializingBean {
+public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoGenListEntity> {
 
     @Autowired
     IDevDemoGenListService devDemoGenListService;
@@ -37,8 +39,9 @@ public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoG
         return "/DevDemo/GenList/GenEdit";
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-
+    @RequestMapping(value = "ListNotSearch", method = RequestMethod.GET)
+    public ModelAndView listNotSearch() {
+        ModelAndView modelAndView=new ModelAndView("/DevDemo/GenList/GenListNotSearch");
+        return modelAndView;
     }
 }

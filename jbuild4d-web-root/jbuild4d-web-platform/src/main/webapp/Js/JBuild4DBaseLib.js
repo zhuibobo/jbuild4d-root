@@ -1289,7 +1289,7 @@ var ListPageUtility={
         }
         return pageHeight;
     },
-    GetFixHeightNotSearch:function () {
+    GetFixHeight:function () {
         return -70;
     },
     IViewTableRenderer:{
