@@ -26,7 +26,7 @@ public interface BaseMapper<T> {
 
     List<T> selectAll();
 
-    List<T> searchByMap(Map<String, Object> searchItemMap);
+    List<T> selectBySearch(Map<String, Object> searchItemMap);
 
     int count();
 

@@ -34,10 +34,6 @@ public interface IBaseService<T> {
 
     T getByPrimaryKey(JB4DSession jb4DSession,String id);
 
-    List<T> selectAll(JB4DSession jb4DSession);
-
-    List<T> searchByMap(JB4DSession jb4DSession,Map<String,Object> searchItemMap);
-
     int updateByKeySelective(JB4DSession jb4DSession,T entity);
 
     int updateByKey(JB4DSession jb4DSession,T entity);

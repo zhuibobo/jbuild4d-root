@@ -74,11 +74,6 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public List<T> selectAll(JB4DSession jb4DSession) {
-        return defaultBaseMapper.selectAll();
-    }
-
-    @Override
     public int updateByKeySelective(JB4DSession jb4DSession,T entity) {
         return defaultBaseMapper.updateByPrimaryKeySelective(entity);
     }
@@ -132,6 +127,11 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
+    public List<T> getALL(JB4DSession jb4DSession) {
+        return defaultBaseMapper.selectAll();
+    }
+
+    @Override
     public PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.
@@ -144,14 +144,9 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     public PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize, Map<String,Object> searchItemMap){
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.
-        List<T> lsit=defaultBaseMapper.searchByMap(searchItemMap);
+        List<T> lsit=defaultBaseMapper.selectBySearch(searchItemMap);
         PageInfo<T> pageInfo = new PageInfo<T>(lsit);
         return pageInfo;
-    }
-
-    @Override
-    public List<T> getALL(JB4DSession jb4DSession) {
-        return defaultBaseMapper.selectAll();
     }
 
     @Override
@@ -162,12 +157,6 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     @Override
     public void statusChange(JB4DSession jb4DSession,String ids, String status) throws JBuild4DGenerallyException {
         throw new JBuild4DGenerallyException("BaseServiceImpl<T>未实现statusChange方法，请在具体的Service中实现");
-    }
-
-    @Override
-    public  List<T> searchByMap(JB4DSession jb4DSession,Map<String,Object> searchItemMap)
-    {
-        return defaultBaseMapper.searchByMap(searchItemMap);
     }
 
     @Override

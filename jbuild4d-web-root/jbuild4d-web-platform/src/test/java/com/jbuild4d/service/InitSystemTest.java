@@ -1,13 +1,17 @@
 package com.jbuild4d.service;
 
+import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.platform.system.service.IDevDemoGenListService;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
+import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,13 +27,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * To change this template use File | Settings | File Templates.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= {MybatisBeansConfig.class,SystemBeansConfig.class})
+@ContextConfiguration(classes= {MybatisBeansConfig.class,SystemBeansConfig.class, DevDemoBeansConfig.class})
 public class InitSystemTest extends BaseTest {
     @Autowired
     private IMenuService menuService;
 
     @Autowired
     private IDictionaryGroupService dictionaryGroupService;
+
+
+    @Autowired
+    private IDevDemoGenListService devDemoGenListService;
 
     @Test
     public void initSystem() throws JBuild4DGenerallyException {
@@ -66,6 +74,16 @@ public class InitSystemTest extends BaseTest {
         //DictionaryGroupEntity rootDictionaryGroupEntity=getDictionaryGroup(rootDictionaryId,"数据字典分组","数据字典分组","","-1",TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
         //dictionaryGroupService.deleteByKey(jb4DSession,rootDictionaryId);
         //dictionaryGroupService.saveBySelective(jb4DSession,rootDictionaryGroupEntity.getDictGroupId(),rootDictionaryGroupEntity);
+
+        //测试数据
+        for(int i=0;i<100;i++){
+            DevDemoGenListEntity ddglEntity=new DevDemoGenListEntity();
+            ddglEntity.setDdglId(UUIDUtility.getUUID());
+            ddglEntity.setDdglKey("key"+i);
+            ddglEntity.setDdglName("name"+i);
+            ddglEntity.setDdglValue("value"+i);
+            devDemoGenListService.saveBySelective(jb4DSession,ddglEntity.getDdglId(),ddglEntity);
+        }
     }
 
     public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){

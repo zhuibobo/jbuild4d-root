@@ -6,6 +6,29 @@
         <include refid="Base_Column_List" />
         from TB4D_DEV_DEMO_GEN_LIST ORDER by DDGL_ORDER_NUM DESC
     </select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_DEV_DEMO_GEN_LIST
+        <where>
+            <if test="orgName != null and orgName != ''">
+                ORG_NAME like "%"#{orgName}"%"
+            </if>
+            <if test="orgCode != null and orgCode != ''">
+                and ORG_CODE like "%"#{orgCode}"%"
+            </if>
+            <if test="orgCreateTime_s != null and orgCreateTime_s != ''">
+                and ORG_CREATE_TIME >= #{orgCreateTime_s}
+            </if>
+            <if test="orgCreateTime_e != null and orgCreateTime_e != ''">
+                and ORG_CREATE_TIME &lt;= #{orgCreateTime_e}
+            </if>
+            <if test="creatreOrgId != null and creatreOrgId != ''">
+                and CREATRE_ORG_ID like "%"#{creatreOrgId}"%"
+            </if>
+        </where>
+        ORDER by ORG_ORDER ASC
+    </select>
     <delete id="deleteAll">
         delete from TB4D_DEV_DEMO_GEN_LIST
     </delete>

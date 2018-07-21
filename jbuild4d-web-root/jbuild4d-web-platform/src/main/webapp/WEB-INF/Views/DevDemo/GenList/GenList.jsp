@@ -30,21 +30,21 @@
                 <col style="width: 80px">
             </colgroup>
             <tr class="ls-table-row">
-                <td>机构名称：</td>
+                <td>ddglKey：</td>
                 <td>
-                    <i-input v-model="search_condition.ddglKey.value" placeholder="请输入机构名称"></i-input>
+                    <i-input v-model="searchCondition.ddglKey.value" placeholder="ddglKey"></i-input>
                 </td>
-                <td>机构代码：</td>
+                <td>ddglName：</td>
                 <td>
-                    <i-input v-model="search_condition.ddglKey.value" placeholder="请输入机构代码"></i-input>
+                    <i-input v-model="searchCondition.ddglName.value" placeholder="ddglName"></i-input>
                 </td>
-                <td>创建时间（从）：</td>
+                <td>ddglCreatetime（从）：</td>
                 <td>
-                    <date-picker v-model="search_condition.ddglKey.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                    <date-picker v-model="searchCondition.ddglCreatetime_s.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
                 </td>
                 <td>（到）：</td>
                 <td>
-                    <date-picker v-model="search_condition.ddglKey.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                    <date-picker v-model="searchCondition.ddglCreatetime_e.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
                 </td>
                 <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
             </tr>
@@ -90,10 +90,22 @@
             this.reloadData();
         },
         data: {
-            search_condition:{
+            searchCondition:{
                 ddglKey:{
                     value:"",
                     type:SearchUtility.SearchFieldType.StringType
+                },
+                ddglName:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.StringType
+                },
+                ddglCreatetime_s:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.DataStringType
+                },
+                ddglCreatetime_e:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.DataStringType
                 }
             },
             columnsConfig: [
@@ -153,7 +165,7 @@
             },
             reloadData: function () {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/GetListData.do';
-                JB4D.ListPageUtility.IViewTableLoadDataNoSearch(url,this.pageNum,this.pageSize,this,true,null);
+                JB4D.ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,true,null);
                 //this.selectionRows=null;
             },
             add: function () {
@@ -186,7 +198,8 @@
                 this.selectionRows=null;
             },
             search:function () {
-                
+                this.page_num=1;
+                this.reloadData();
             }
         }
     });
