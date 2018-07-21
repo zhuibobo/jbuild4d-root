@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -37,11 +38,12 @@ public class ExceptionControllerAdvice {
     }
 
     @ExceptionHandler(SessionTimeoutException.class)
-    public ModelAndView processSessionTimeoutException(HttpServletResponse response, NativeWebRequest request, SessionTimeoutException e) {
+    public ModelAndView processSessionTimeoutException(HttpServletResponse response, HttpServletRequest request, SessionTimeoutException e) {
         e.printStackTrace();
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json;charset=UTF-8");
         try {
+            request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
             response.getWriter().print(JsonUtility.toObjectString(JBuild4DResponseVo.error(e.getMessage())));
         } catch (IOException e1) {
             e1.printStackTrace();

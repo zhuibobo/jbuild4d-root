@@ -91,4 +91,28 @@ public class DictionaryServiceImpl extends BaseServiceImpl<DictionaryEntity> imp
             dictionaryMapper.updateByPrimaryKeySelective(entity);
         }
     }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DictionaryEntity selfEntity=dictionaryMapper.selectByPrimaryKey(id);
+        DictionaryEntity ltEntity=dictionaryMapper.selectLessThanRecord(id,selfEntity.getDictParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DictionaryEntity selfEntity=dictionaryMapper.selectByPrimaryKey(id);
+        DictionaryEntity ltEntity=dictionaryMapper.selectGreaterThanRecord(id,selfEntity.getDictParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    private void switchOrder(DictionaryEntity toEntity,DictionaryEntity selfEntity) {
+        if(toEntity !=null){
+            int newNum= toEntity.getDictOrderNum();
+            toEntity.setDictOrderNum(selfEntity.getDictOrderNum());
+            selfEntity.setDictOrderNum(newNum);
+            dictionaryMapper.updateByPrimaryKeySelective(toEntity);
+            dictionaryMapper.updateByPrimaryKeySelective(selfEntity);
+        }
+    }
 }

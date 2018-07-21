@@ -3,6 +3,8 @@ package com.jbuild4d.web.platform.controller.system.dictionary;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.service.IBaseService;
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.system.service.IDictionaryService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;

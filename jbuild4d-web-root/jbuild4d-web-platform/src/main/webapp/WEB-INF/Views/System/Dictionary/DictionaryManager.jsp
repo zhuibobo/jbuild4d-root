@@ -405,19 +405,27 @@
                         }, "json");
                     });
                 },
-                moveUp:function(){
-                    //todo 做到这里
-                },
-                moveDown:function(){
-                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现!",null);
-                    return false;
-                    var nodeData=treeTableObj.GetSelectedRowData();
-                    if(nodeData == null) {
-                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现!",null);
-                        return false;
-                    }
-                    var nodeData=treeTableObj.GetSelectedRowData();
-                    treeTableObj.MoveDownRow(nodeData.Organ_Id);
+                move:function(type){
+                    var _self=this;
+                    this.mareSureSelectedTreeTableRow("选中").then(function (nodeData) {
+                        var url = '/PlatForm/System/Dictionary/Move.do';
+                        var recordId = nodeData.dictId;
+                        AjaxUtility.Post(url, {recordId: recordId,type:type}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    if(type=="down") {
+                                        _self.treeTableObject.MoveDownRow(nodeData.dictId);
+                                    }else{
+                                        _self.treeTableObject.MoveUpRow(nodeData.dictId);
+                                    }
+                                    //_self.treeTableObject.UpdateToRow(nodeData.dictId,nodeData);
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
+                            }
+                        }, "json");
+                    });
                 },
                 newTreeTableNode : function (dictId, dictKey,dictValue,dictText,dictGroupId,dictCreateTime,dictStatus,dictIsSelected) {
                     var newData={
