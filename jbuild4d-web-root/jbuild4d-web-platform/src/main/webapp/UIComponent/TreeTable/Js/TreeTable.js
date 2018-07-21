@@ -463,6 +463,18 @@ var TreeTable={
         movetrs.insertAfter(offlasttr);
     },
 
+    GetBrothersNodeDatasByParentId:function (rowId) {
+        //debugger;
+        var thistr=$("tr[rowid='"+rowId+"']");
+        var pid=thistr.attr("pid");
+        var brotherstr=$(thistr.parent().find("[pid='"+pid+"']"));
+        var result=new Array();
+        for(var i=0;i<brotherstr.length;i++){
+            result.push(this.GetRowDataByRowId($(brotherstr[i]).attr("rowid")));
+        }
+        return result;
+    },
+
     // 移除所有行(不包括表头)
     RemoveAllRow : function(){
         if (this._$Prop_TableElem != null) {

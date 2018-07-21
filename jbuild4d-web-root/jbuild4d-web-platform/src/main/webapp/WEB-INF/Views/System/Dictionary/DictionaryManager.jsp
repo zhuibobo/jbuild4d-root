@@ -389,6 +389,12 @@
                         AjaxUtility.Post(url, {recordId: recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    //debugger;
+                                    var brothersDatas=_self.treeTableObject.GetBrothersNodeDatasByParentId(nodeData.dictId);
+                                    for(var i=0;i<brothersDatas.length;i++){
+                                        brothersDatas[i].dictIsSelected="否";
+                                        _self.treeTableObject.UpdateToRow(brothersDatas[i].dictId, brothersDatas[i]);
+                                    }
                                     nodeData.dictIsSelected="是";
                                     _self.treeTableObject.UpdateToRow(nodeData.dictId,nodeData);
                                 });
@@ -400,15 +406,7 @@
                     });
                 },
                 moveUp:function(){
-                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现!",null);
-                    return false;
-                    var nodeData=treeTableObj.GetSelectedRowData();
-                    if(nodeData == null) {
-                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现!",null);
-                        return false;
-                    }
-                    var nodeData=treeTableObj.GetSelectedRowData();
-                    treeTableObj.MoveUpRow(nodeData.Organ_Id);
+                    //todo 做到这里
                 },
                 moveDown:function(){
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现!",null);
