@@ -1495,18 +1495,26 @@ var ListPageUtility={
 
 var DetailPageUtility={
     IViewPageToViewStatus:function () {
-        $("input").each(function () {
-            $(this).hide();
-            var val = $(this).val();
-            $(this).after($("<label />").text(val));
-        });
-        $(".ivu-date-picker-editor").find(".ivu-icon").hide();
+        //alert("1");
+        window.setTimeout(function () {
+            //alert("1");
+            $("input").each(function () {
+                $(this).hide();
+                var val = $(this).val();
+                $(this).after($("<label />").text(val));
+            });
+            $(".ivu-date-picker-editor").find(".ivu-icon").hide();
+            $(".ivu-radio").hide();
+            $(".ivu-radio-group-item").hide();
+            $(".ivu-radio-wrapper-checked").show();
+            $(".ivu-radio-wrapper-checked").find("span").hide();
 
-        $("textarea").each(function () {
-            $(this).hide();
-            var val = $(this).val();
-            $(this).after($("<label />").text(val));
-        });
+            $("textarea").each(function () {
+                $(this).hide();
+                var val = $(this).val();
+                $(this).after($("<label />").text(val));
+            });
+        },100)
     }
 }
 
