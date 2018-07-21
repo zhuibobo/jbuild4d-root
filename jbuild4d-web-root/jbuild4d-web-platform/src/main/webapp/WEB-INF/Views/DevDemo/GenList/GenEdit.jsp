@@ -44,7 +44,7 @@
         el: "#appForm",
         mounted:function () {
            if(this.status=="view") {
-               DetailPageUtility.IViewPageToViewSatatus();
+               DetailPageUtility.IViewPageToViewStatus();
            }
         },
         data: {

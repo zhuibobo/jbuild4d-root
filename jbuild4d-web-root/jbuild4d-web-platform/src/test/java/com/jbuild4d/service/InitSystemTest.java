@@ -62,6 +62,13 @@ public class InitSystemTest extends BaseTest {
         menuService.deleteByKey(jb4DSession,systemSettingDictionaryManagerId);
         menuService.saveBySelective(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId(),systemSettingDictionaryGroupMenu);
 
+        //根菜单->系统设置分组->参数设置
+        String systemSettingParasSettingId="JB4DSystemSettingParasSetting";
+        MenuEntity systemSettingParasSettingMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingParasSettingId,"参数设置","参数设置","参数设置",
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/Dictionary/DictionaryManager.do","");
+        menuService.deleteByKey(jb4DSession,systemSettingParasSettingId);
+        menuService.saveBySelective(jb4DSession,systemSettingParasSettingMenu.getMenuId(),systemSettingParasSettingMenu);
+
         //根菜单->开发示例
         String devDemoRootId="JB4DDevDemoRoot";
         MenuEntity devDemoRootMenu=getMenu(rootMenu.getMenuId(),devDemoRootId,"开发示例","开发示例","开发示例",
@@ -70,11 +77,12 @@ public class InitSystemTest extends BaseTest {
         menuService.saveBySelective(jb4DSession,devDemoRootMenu.getMenuId(),devDemoRootMenu);
 
         //跟字典分组
-        //String rootDictionaryId="0";
-        //DictionaryGroupEntity rootDictionaryGroupEntity=getDictionaryGroup(rootDictionaryId,"数据字典分组","数据字典分组","","-1",TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
-        //dictionaryGroupService.deleteByKey(jb4DSession,rootDictionaryId);
-        //dictionaryGroupService.saveBySelective(jb4DSession,rootDictionaryGroupEntity.getDictGroupId(),rootDictionaryGroupEntity);
+        String rootDictionaryId="0";
+        DictionaryGroupEntity rootDictionaryGroupEntity=getDictionaryGroup(rootDictionaryId,"数据字典分组","数据字典分组","","-1",TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
+        dictionaryGroupService.deleteByKeyNotValidate(jb4DSession,rootDictionaryId);
+        dictionaryGroupService.saveBySelective(jb4DSession,rootDictionaryGroupEntity.getDictGroupId(),rootDictionaryGroupEntity);
 
+        devDemoGenListService.deleteAll(jb4DSession);
         //测试数据
         for(int i=0;i<100;i++){
             DevDemoGenListEntity ddglEntity=new DevDemoGenListEntity();

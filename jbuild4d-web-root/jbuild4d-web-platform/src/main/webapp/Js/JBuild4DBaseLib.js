@@ -1494,7 +1494,7 @@ var ListPageUtility={
 }
 
 var DetailPageUtility={
-    IViewPageToViewSatatus:function () {
+    IViewPageToViewStatus:function () {
         $("input").each(function () {
             $(this).hide();
             var val = $(this).val();
