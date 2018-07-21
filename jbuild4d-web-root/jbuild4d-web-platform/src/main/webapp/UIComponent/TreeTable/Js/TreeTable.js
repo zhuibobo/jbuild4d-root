@@ -343,8 +343,6 @@ var TreeTable={
         }
         //console.log(this._Prop_CurrentSelectedRowId);
         //console.log(this._Prop_JsonData);
-
-
         this._GetSelectedRowData(this._Prop_JsonData,this._Prop_CurrentSelectedRowId,true);
         return this._Prop_SelectedRowData;
     },

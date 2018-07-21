@@ -43,7 +43,7 @@
                 <i-col span="10">
                     <form-item>
                         <radio-group v-model="formValidate.dictStatus">
-                            <radio label="启动">启动</radio>
+                            <radio label="启用">启用</radio>
                             <radio label="禁用">禁用</radio>
                         </radio-group>
                     </form-item>
@@ -140,6 +140,11 @@
                     ]
                 },
                 status:'${op}'
+        },
+        mounted:function () {
+            if(this.status=="view") {
+                DetailPageUtility.IViewPageToViewSatatus();
+            }
         },
         methods: {
             handleSubmit: function (name) {

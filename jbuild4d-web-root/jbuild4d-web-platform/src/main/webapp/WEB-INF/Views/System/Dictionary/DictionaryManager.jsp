@@ -46,26 +46,15 @@
         <div class="right-outer-c">
             <div style="width: 100%">
                 <div style="float: right;margin-bottom: 15px;margin-top: 10px;margin-right: 10px">
-                    <i-button type="primary" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
+                    <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
                     <i-button type="primary" @click="edit()"><Icon type="edit"></Icon> 修改 </i-button>
                     <i-button type="primary" @click="del()"><Icon type="trash-a"></Icon> 删除 </i-button>
                     <i-button type="primary" @click="view()"><Icon type="android-open"></Icon> 浏览 </i-button>
-                    <i-button type="primary" @click="statusEnable('启用')">
-                        <Icon type="checkmark-round"></Icon>
-                        启用
-                    </i-button>
-                    <i-button type="primary" @click="statusEnable('禁用')">
-                        <Icon type="minus-round"></Icon>
-                        禁用
-                    </i-button>
-                    <i-button type="primary" @click="move('up')">
-                        <Icon type="arrow-up-b"></Icon>
-                        上移
-                    </i-button>
-                    <i-button type="primary" @click="move('down')">
-                        <Icon type="arrow-down-b"></Icon>
-                        下移
-                    </i-button>
+                    <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
+                    <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
+                    <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 选中 </i-button>
+                    <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移</i-button>
+                    <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
                 </div>
             </div>
             <div id="divTreeTable" style="width: 98%;margin: auto"></div>
@@ -258,13 +247,13 @@
                 edit:function(){
                     if(this.treeTableObject!=null) {
                         var nodeData = this.treeTableObject.GetSelectedRowData();
-                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能编辑根节点!", null);
-                            return;
-                        }
                         if (nodeData == null) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要编辑的字典!", null);
                             return false;
+                        }
+                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能编辑根节点!", null);
+                            return;
                         }
                         var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=update&recordId=" + nodeData.dictId);
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
@@ -273,23 +262,23 @@
                 del:function(){
                     if(this.treeTableObject!=null) {
                         var nodeData = this.treeTableObject.GetSelectedRowData();
-                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能删除根节点!", null);
-                            return;
-                        }
                         if (nodeData == null) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要删除的字典!", null);
                             return false;
                         }
-                        //todo 做到这里
-                        var url="/PlatForm/System/DictionaryGroup/Delete.do";
-                        var recordId=this.treeSelectedNode.dictGroupId;
+                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能删除根节点!", null);
+                            return;
+                        }
+                        var url="/PlatForm/System/Dictionary/Delete.do";
+                        var recordId=nodeData.dictId;
+                        var _self=this;
                         DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
                             AjaxUtility.Post(url, {recordId: recordId}, function (result) {
                                 if (result.success) {
                                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                        appList.treeObj.removeNode(appList.treeSelectedNode);
-                                        appList.treeSelectedNode=null;
+                                        _self.treeTableObject.DeleteRow(recordId);
+
                                     });
                                 }
                                 else {
@@ -300,13 +289,19 @@
                     }
                 },
                 view:function(){
-                    var nodeData=treeTableObj.GetSelectedRowData();
-                    if(nodeData == null) {
-                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要查看的字典!",null);
-                        return false;
+                    if(this.treeTableObject!=null) {
+                        var nodeData = this.treeTableObject.GetSelectedRowData();
+                        if (nodeData == null) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要查看的字典!", null);
+                            return false;
+                        }
+                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能查看根节点!", null);
+                            return;
+                        }
+                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=view&recordId=" + nodeData.dictId);
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                     }
-                    var url=BaseUtility.BuildUrl("/project/system/dictionary/detail.do?sId="+nodeData.dictSid+"&op=view");
-                    DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"字典管理"},2);
                 },
                 moveUp:function(){
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现!",null);
