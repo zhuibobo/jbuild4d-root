@@ -47,6 +47,6 @@ public class DevDemoGenListBindDictionaryController  extends GeneralCRUDImplCont
         groupValueList.add("DevDemoDictionaryGroupBindSelect");
         groupValueList.add("DevDemoDictionaryGroupBindRadio");
         groupValueList.add("DevDemoDictionaryGroupBindCheckbox");
-        return super.bindDictionaryToPage();
+        return groupValueList;
     }
 }

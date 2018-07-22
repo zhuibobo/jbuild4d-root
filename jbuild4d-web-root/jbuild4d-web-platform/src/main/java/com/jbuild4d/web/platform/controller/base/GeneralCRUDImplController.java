@@ -85,9 +85,9 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         ModelAndView modelAndView=new ModelAndView(getListViewName());
 
         List<String> dictionaryGroupValueList=bindDictionaryToPage();
-        String dictionarysMapJsonString=getDictionaryJsonString(dictionaryGroupValueList);
+        String dictionaryJsonString=getDictionaryJsonString(dictionaryGroupValueList);
 
-        modelAndView.addObject("dictionarysMap", dictionarysMapJsonString);
+        modelAndView.addObject("dictionaryJson", dictionaryJsonString);
 
         return modelAndView;
     }

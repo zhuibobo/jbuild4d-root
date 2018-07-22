@@ -90,6 +90,7 @@
             this.reloadData();
         },
         data: {
+            dictionaryJson:${dictionaryJson},
             searchCondition:{
                 ddglKey:{
                     value:"",
