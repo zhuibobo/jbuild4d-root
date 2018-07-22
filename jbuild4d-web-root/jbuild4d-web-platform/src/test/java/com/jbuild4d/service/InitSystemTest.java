@@ -134,6 +134,11 @@ public class InitSystemTest extends BaseTest {
             ddglEntity.setDdglKey("key"+i);
             ddglEntity.setDdglName("name"+i);
             ddglEntity.setDdglValue("value"+i);
+            ddglEntity.setDdglBindDicSelected("Select-Value-"+i);
+            ddglEntity.setDdglBindDicRadio("Radio-Value-"+i);
+            ddglEntity.setDdglBindDicCheckbox1("1");
+            ddglEntity.setDdglBindDicCheckbox2("1");
+            ddglEntity.setDdglBindDicCheckbox3("0");
             devDemoGenListService.save(jb4DSession,ddglEntity.getDdglId(),ddglEntity);
         }
     }

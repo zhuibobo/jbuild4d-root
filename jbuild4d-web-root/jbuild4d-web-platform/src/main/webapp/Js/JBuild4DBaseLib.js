@@ -1321,6 +1321,29 @@ var ListPageUtility={
             else if(status==1){
                 return h('div',"是");
             }
+        },
+        ToDictionaryText:function (h,dictionaryJson,groupValue,dictionaryValue) {
+            //debugger;
+            var simpleDictionaryJson=DictionaryUtility.GroupValueListJsonToSimpleJson(dictionaryJson);
+            if(dictionaryValue==null||dictionaryValue==""){
+                return h('div', "");
+            }
+            if(simpleDictionaryJson[groupValue]!=undefined) {
+                if (simpleDictionaryJson[groupValue]) {
+                    if(simpleDictionaryJson[groupValue][dictionaryValue]) {
+                        return h('div', simpleDictionaryJson[groupValue][dictionaryValue]);
+                    }
+                    else {
+                        return h('div', "找不到装换的TEXT");
+                    }
+                }
+                else {
+                    return h('div', "找不到装换的分组");
+                }
+            }
+            else {
+                return h('div', "找不到装换的分组");
+            }
         }
     },
     IViewTableMareSureSelected:function (selectionRows) {
@@ -1527,6 +1550,25 @@ var DetailPageUtility={
                 $(this).after($("<label />").text(val));
             });
         },100)
+    }
+}
+
+var DictionaryUtility={
+    _GroupValueListJsonToSimpleJson:null,
+    GroupValueListJsonToSimpleJson:function (sourceDictionaryJson) {
+        if(this._GroupValueListJsonToSimpleJson==null) {
+            if (sourceDictionaryJson != null) {
+                var result = {};
+                for (var groupValue in sourceDictionaryJson) {
+                    result[groupValue] = {};
+                    for (var i = 0; i < sourceDictionaryJson[groupValue].length; i++) {
+                        result[groupValue][sourceDictionaryJson[groupValue][i].dictValue] = sourceDictionaryJson[groupValue][i].dictText;
+                    }
+                }
+                this._GroupValueListJsonToSimpleJson=result;
+            }
+        }
+        return this._GroupValueListJsonToSimpleJson;
     }
 }
 

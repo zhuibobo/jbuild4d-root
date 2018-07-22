@@ -48,6 +48,28 @@
                 </td>
                 <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
             </tr>
+            <tr class="ls-table-row">
+                <td>SELECTED：</td>
+                <td>
+                    <i-select clearable v-model="searchCondition.ddgl_bind_dic_selected.value" style="width:100%">
+                        <i-option v-for="item in dictionaryJson.DevDemoDictionaryGroupBindSelect" :value="item.dictValue" :key="item.dictValue">{{ item.dictText }}</i-option>
+                    </i-select>
+                </td>
+                <td>RADIO</td>
+                <td colspan="2">
+                    <radio-group v-model="searchCondition.ddgl_bind_dic_radio.value" style="width: 100%">
+                        <radio v-for="item in dictionaryJson.DevDemoDictionaryGroupBindSelect" label="item.dictValue">{{item.dictText}}</radio>
+                    </radio-group>
+                </td>
+                <td>
+                    CHECKBOX
+                </td>
+                <td colspan="2">
+                    <checkbox-group>
+                        <checkbox  v-for="item in dictionaryJson.DevDemoDictionaryGroupBindCheckbox" label="item.dictValue">{{item.dictText}}</checkbox>
+                    </checkbox-group>
+                </td>
+            </tr>
         </table>
     </div>
     <div style="width: 100%" id="list-button-wrap">
@@ -107,6 +129,14 @@
                 ddglCreatetime_e:{
                     value:"",
                     type:SearchUtility.SearchFieldType.DataStringType
+                },
+                ddgl_bind_dic_selected:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.StringType
+                },
+                ddgl_bind_dic_radio:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.StringType
                 }
             },
             columnsConfig: [
@@ -126,6 +156,22 @@
                 }, {
                     title: 'ddglDesc',
                     key: 'ddglDesc'
+                }, {
+                    title: 'ddglBindDicSelected',
+                    width: 100,
+                    align: "center",
+                    key: 'ddglBindDicSelected',
+                    render: function (h, params) {
+                        return JB4D.ListPageUtility.IViewTableRenderer.ToDictionaryText(h,appList.dictionaryJson,"DevDemoDictionaryGroupBindSelect", params.row.ddglBindDicSelected);
+                    }
+                }, {
+                    title: 'ddglBindDicRadio',
+                    width: 100,
+                    align: "center",
+                    key: 'ddglBindDicRadio',
+                    render: function (h, params) {
+                        return JB4D.ListPageUtility.IViewTableRenderer.ToDictionaryText(h,appList.dictionaryJson,"DevDemoDictionaryGroupBindRadio", params.row.ddglBindDicRadio);
+                    }
                 }, {
                     title: 'ddglStatus',
                     width: 100,
