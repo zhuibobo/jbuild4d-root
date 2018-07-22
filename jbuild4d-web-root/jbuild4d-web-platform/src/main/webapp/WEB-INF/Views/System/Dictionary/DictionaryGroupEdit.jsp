@@ -28,7 +28,7 @@
         </form-item>
         <form-item label="是否系统：">
             <row>
-                <i-col span="10">
+                <i-col span="6">
                     <form-item>
                         <radio-group v-model="formValidate.dictGroupIssystem">
                             <radio label="是">是</radio>
@@ -36,10 +36,19 @@
                         </radio-group>
                     </form-item>
                 </i-col>
-                <i-col span="4" style="text-align: center">能否删除：</i-col>
-                <i-col span="10">
+                <i-col span="3" style="text-align: center">能否删除：</i-col>
+                <i-col span="6">
                     <form-item>
                         <radio-group v-model="formValidate.dictGroupDelEnable">
+                            <radio label="是">是</radio>
+                            <radio label="否">否</radio>
+                        </radio-group>
+                    </form-item>
+                </i-col>
+                <i-col span="3" style="text-align: center">空选项：</i-col>
+                <i-col span="6">
+                    <form-item>
+                        <radio-group v-model="formValidate.dictGroupEnpItem">
                             <radio label="是">是</radio>
                             <radio label="否">否</radio>
                         </radio-group>
@@ -56,7 +65,7 @@
         </form-item>
         <form-item class="general-edit-page-bottom-wrap">
             <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保 存</i-button>
-            <i-button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">
+            <i-button type="ghost" @click="handleClose()" style="margin-left: 8px">
                 关 闭
             </i-button>
         </form-item>
@@ -75,7 +84,8 @@
                 dictGroupDesc: '${entity.dictGroupDesc}',
                 dictGroupParentId: '${entity.dictGroupParentId}' == '' ? StringUtility.QueryString("parentId") : '${entity.dictGroupParentId}',
                 dictGroupIssystem: '${entity.dictGroupIssystem}' == '' ? '否' : '${entity.dictGroupIssystem}',
-                dictGroupDelEnable: '${entity.dictGroupDelEnable}' == '' ? '是' : '${entity.dictGroupDelEnable}'
+                dictGroupDelEnable: '${entity.dictGroupDelEnable}' == '' ? '是' : '${entity.dictGroupDelEnable}',
+                dictGroupEnpItem: '${entity.dictGroupEnpItem}' == '' ? '是' : '${entity.dictGroupEnpItem}'
             },
             ruleValidate: {
                 dictGroupValue: [
@@ -102,11 +112,13 @@
                         var url = '/PlatForm/System/DictionaryGroup/SaveEdit.do';
                         AjaxUtility.PostRequestBody(url, sendData, function (result) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                if (appForm.status=="add") {
-                                    window.OpenerWindowObj.appList.newTreeNode(_self.formValidate.dictGroupId, _self.formValidate.dictGroupValue, _self.formValidate.dictGroupText, _self.formValidate.dictGroupParentId);
-                                }
-                                else if(appForm.status=="update"){
-                                    window.OpenerWindowObj.appList.updateNode(_self.formValidate.dictGroupValue, _self.formValidate.dictGroupText);
+                                if(result.success) {
+                                    if (appForm.status == "add") {
+                                        window.OpenerWindowObj.appList.newTreeNode(_self.formValidate.dictGroupId, _self.formValidate.dictGroupValue, _self.formValidate.dictGroupText, _self.formValidate.dictGroupParentId);
+                                    }
+                                    else if (appForm.status == "update") {
+                                        window.OpenerWindowObj.appList.updateNode(_self.formValidate.dictGroupValue, _self.formValidate.dictGroupText);
+                                    }
                                 }
                                 DialogUtility.Frame_CloseDialog(window);
                             });
@@ -116,8 +128,8 @@
                     }
                 })
             },
-            handleReset: function (name) {
-                this.$refs[name].resetFields();
+            handleClose: function (name) {
+                DialogUtility.Frame_CloseDialog(window);
             }
         }
     })

@@ -103,6 +103,7 @@ public class InitSystemTest extends BaseTest {
         dictionaryGroupEntity.setDictGroupParentId(parendId);
         dictionaryGroupEntity.setDictGroupIssystem(isSystem);
         dictionaryGroupEntity.setDictGroupDelEnable(delEnable);
+        dictionaryGroupEntity.setDictGroupEnpItem(TrueFalseEnum.True.getDisplayName());
         return dictionaryGroupEntity;
     }
 
