@@ -119,7 +119,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
             //return null;
             //baseService.saveBySelective(entityId(entity), entity);
             JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-            getBaseService().saveBySelective(jb4DSession,recordID, entity);
+            getBaseService().save(jb4DSession,recordID, entity);
             return JBuild4DResponseVo.saveSuccess();
         } catch (JBuild4DGenerallyException e) {
             return JBuild4DResponseVo.error(e.getMessage());

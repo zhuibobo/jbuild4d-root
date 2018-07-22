@@ -31,10 +31,10 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
     }
 
     @Override
-    public int saveBySelective(JB4DSession jb4DSession, String id, DictionaryGroupEntity record) throws JBuild4DGenerallyException {
+    public int save(JB4DSession jb4DSession, String id, DictionaryGroupEntity record) throws JBuild4DGenerallyException {
         //未字典组同时创建
 
-        return super.saveBySelective(jb4DSession,id, record, new IAddBefore<DictionaryGroupEntity>() {
+        return super.save(jb4DSession,id, record, new IAddBefore<DictionaryGroupEntity>() {
             @Override
             public DictionaryGroupEntity run(JB4DSession jb4DSession1,DictionaryGroupEntity item) throws JBuild4DGenerallyException {
                 item.setDictGroupOrderNum(dictionaryGroupMapper.nextOrderNum());

@@ -84,6 +84,6 @@ public class DictionaryGroupServiceTest {
         groupEntity.setDictGroupCreateTime(new Date());
         groupEntity.setDictGroupDesc("");
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
-        dictionaryGroupService.saveBySelective(jb4DSession,key,groupEntity);
+        dictionaryGroupService.save(jb4DSession,key,groupEntity);
     }
 }

@@ -35,6 +35,9 @@
             }, {
                 name: "通用列表(不带查询)",
                 contentUrl:BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/ListNotSearch.do")
+            }, {
+                name: "通用列表(绑定数据字典)",
+                contentUrl: BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenListBindDictionary/List.do")
             }]
         }];
         $(document).ready(function () {

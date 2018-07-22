@@ -24,8 +24,8 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
     }
 
     @Override
-    public int saveBySelective(JB4DSession jb4DSession, String id, MenuEntity entity) throws JBuild4DGenerallyException {
-        return super.saveBySelective(jb4DSession, id, entity, new IAddBefore<MenuEntity>() {
+    public int save(JB4DSession jb4DSession, String id, MenuEntity entity) throws JBuild4DGenerallyException {
+        return super.save(jb4DSession, id, entity, new IAddBefore<MenuEntity>() {
             @Override
             public MenuEntity run(JB4DSession jb4DSession, MenuEntity sourceEntity) throws JBuild4DGenerallyException {
                 sourceEntity.setMenuOrganId(jb4DSession.getOrganId());

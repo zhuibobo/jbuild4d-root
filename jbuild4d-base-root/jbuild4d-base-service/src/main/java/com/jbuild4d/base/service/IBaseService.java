@@ -40,13 +40,11 @@ public interface IBaseService<T> {
 
     int updateByKey(JB4DSession jb4DSession,T entity);
 
-    int save(JB4DSession jb4DSession,String id, T entity);
+    int save(JB4DSession jb4DSession,String id, T entity) throws JBuild4DGenerallyException;
 
-    int saveBySelective(JB4DSession jb4DSession,String id, T entity) throws JBuild4DGenerallyException;
+    int save(JB4DSession jb4DSession,String id, T entity,IAddBefore<T> addBefore) throws JBuild4DGenerallyException;
 
-    int saveBySelective(JB4DSession jb4DSession,String id, T entity,IAddBefore<T> addBefore) throws JBuild4DGenerallyException;
-
-    int saveBySelective(JB4DSession jb4DSession,String id, T entity,IAddBefore<T> addBefore,IUpdateBefore<T> updateBefore) throws JBuild4DGenerallyException;
+    int save(JB4DSession jb4DSession,String id, T entity,IAddBefore<T> addBefore,IUpdateBefore<T> updateBefore) throws JBuild4DGenerallyException;
 
     PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize);
 

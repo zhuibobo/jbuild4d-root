@@ -25,7 +25,7 @@ public class SettingServiceImpl extends BaseServiceImpl<SettingEntity> implement
     }
 
     @Override
-    public int saveBySelective(JB4DSession jb4DSession, String id, SettingEntity record) throws JBuild4DGenerallyException {
+    public int save(JB4DSession jb4DSession, String id, SettingEntity record) throws JBuild4DGenerallyException {
         return 0;
     }
 }

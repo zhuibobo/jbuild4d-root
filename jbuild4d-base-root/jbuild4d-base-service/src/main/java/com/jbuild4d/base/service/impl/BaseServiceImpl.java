@@ -88,7 +88,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
         return defaultBaseMapper.updateByPrimaryKey(entity);
     }
 
-    @Override
+    /*@Override
     public int save(JB4DSession jb4DSession,String id,T entity){
         if(getByPrimaryKey(jb4DSession,id)==null){
             return add(jb4DSession,entity);
@@ -96,7 +96,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
         else{
             return updateByKey(jb4DSession,entity);
         }
-    }
+    }*/
 
     /*@Override
     public int saveBySelective(JB4DSession jb4DSession,String id,T record) throws JBuild4DGenerallyException {
@@ -109,7 +109,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }*/
 
     @Override
-    public int saveBySelective(JB4DSession jb4DSession,String id, T entity, IAddBefore<T> addBefore) throws JBuild4DGenerallyException {
+    public int save(JB4DSession jb4DSession,String id, T entity, IAddBefore<T> addBefore) throws JBuild4DGenerallyException {
         if(getByPrimaryKey(jb4DSession,id)==null){
             entity=addBefore.run(jb4DSession,entity);
             return addSelective(jb4DSession,entity);
@@ -120,7 +120,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public int saveBySelective(JB4DSession jb4DSession, String id, T entity, IAddBefore<T> addBefore, IUpdateBefore<T> updateBefore) throws JBuild4DGenerallyException {
+    public int save(JB4DSession jb4DSession, String id, T entity, IAddBefore<T> addBefore, IUpdateBefore<T> updateBefore) throws JBuild4DGenerallyException {
         if(getByPrimaryKey(jb4DSession,id)==null){
             entity=addBefore.run(jb4DSession,entity);
             return addSelective(jb4DSession,entity);

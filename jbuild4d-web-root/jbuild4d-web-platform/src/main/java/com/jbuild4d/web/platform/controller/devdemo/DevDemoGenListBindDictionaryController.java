@@ -37,10 +37,4 @@ public class DevDemoGenListBindDictionaryController  extends GeneralCRUDImplCont
     public String getDetailViewName() {
         return "/DevDemo/GenList/GenEditBindDictionary";
     }
-
-    @RequestMapping(value = "ListNotSearch", method = RequestMethod.GET)
-    public ModelAndView listNotSearch() {
-        ModelAndView modelAndView=new ModelAndView("/DevDemo/GenList/GenListNotSearch");
-        return modelAndView;
-    }
 }
