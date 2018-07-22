@@ -43,7 +43,7 @@
                 </i-col>
             </row>
         </form-item>
-        <form-item label="ddglName：">
+        <form-item label="Mucheckbox：">
             <checkbox-group v-model="formValidate.ddglBindDicMucheckbox">
                 <checkbox  v-for="item in dictionaryJson.DevDemoDictionaryGroupBindCheckbox" :label="item.dictValue">{{item.dictText}}</checkbox>
             </checkbox-group>
