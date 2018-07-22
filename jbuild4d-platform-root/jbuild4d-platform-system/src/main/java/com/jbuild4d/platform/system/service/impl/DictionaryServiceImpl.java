@@ -83,6 +83,11 @@ public class DictionaryServiceImpl extends BaseServiceImpl<DictionaryEntity> imp
     }
 
     @Override
+    public List<DictionaryEntity> getListDataByGroupValue(JB4DSession session, String groupValue) {
+        return dictionaryMapper.selectByGroupValue(groupValue);
+    }
+
+    @Override
     public void statusChange(JB4DSession jb4DSession, String ids, String status) throws JBuild4DGenerallyException {
         String[] idArray=ids.split(";");
         for(int i=0;i<idArray.length;i++){

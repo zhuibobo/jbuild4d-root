@@ -30,4 +30,9 @@
         where DICT_ORDER_NUM = (select min(DICT_ORDER_NUM) from TB4D_DICTIONARY where DICT_ORDER_NUM>(select DICT_ORDER_NUM from TB4D_DICTIONARY where DICT_ID=#{dictId,jdbcType=NVARCHAR} and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR})) and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR}
         ]]>
     </select>
+    <select id="selectByGroupValue" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_DICTIONARY where DICT_GROUP_ID=(select DICT_GROUP_ID from TB4D_DICTIONARY_GROUP where DICT_GROUP_VALUE=#{id}) ORDER by DICT_ORDER_NUM ASC
+    </select>
 </mapper>

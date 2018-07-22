@@ -16,4 +16,6 @@ public interface IDictionaryService  extends IBaseService<DictionaryEntity> {
     List<DictionaryEntity> getListDataByGroupId(JB4DSession jb4DSession, String groupId);
 
     void setSelected(JB4DSession jb4DSession, String recordId);
+
+    List<DictionaryEntity> getListDataByGroupValue(JB4DSession session, String groupValue);
 }

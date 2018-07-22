@@ -26,8 +26,23 @@
         <form-item label="ddglName：" prop="ddglName">
             <i-input v-model="formValidate.ddglName"></i-input>
         </form-item>
-        <form-item label="ddglCreatetime：">
-            <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.ddglCreatetime" disabled readonly></date-picker>
+        <form-item label="number：" prop="ddglInputnumber">
+            <row>
+                <i-col span="10">
+                    <form-item prop="ddglInputnumber">
+                        <input-number :max="10" :min="1" v-model="ddglInputnumber" style="width: 100%"></input-number>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center">默认选中：</i-col>
+                <i-col span="10">
+                    <form-item>
+                        <radio-group v-model="formValidate.dictIsSelected">
+                            <radio label="是">是</radio>
+                            <radio label="否">否</radio>
+                        </radio-group>
+                    </form-item>
+                </i-col>
+            </row>
         </form-item>
         <form-item label="ddglCreatetime：">
             <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.ddglCreatetime" disabled readonly></date-picker>
@@ -68,6 +83,9 @@
                 ],
                 ddglKey: [
                     {required: true, message: '【ddglKey】不能空！', trigger: 'blur'}
+                ],
+                ddglInputnumber: [
+                    {required: true, message: '【ddglInputnumber】不能空！', trigger: 'blur'}
                 ]
             },
             status: '${op}'

@@ -2,17 +2,22 @@ package com.jbuild4d.web.platform.controller.base;
 
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
+import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.ClassUtility;
+import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
+import com.jbuild4d.platform.system.service.IDictionaryService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +28,7 @@ import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.text.ParseException;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,6 +41,9 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     //IBaseService<T> baseService;
     //T nullEntity;
     //protected abstract IBaseService<T> getBaseService();
+
+    @Autowired
+    IDictionaryService dictionaryService;
 
     //得到泛型类T
     public Class getMyClass(){
@@ -69,13 +77,35 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     }
 
     public void setNullEntity(T nullEntity) {
-        this.nullEntity = nullEntity;
+        this.ullEntity = nullEntity;
     }*/
 
     @RequestMapping(value = "List", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list() throws JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView(getListViewName());
+
+        List<String> dictionaryGroupValueList=bindDictionaryToPage();
+        String dictionarysMapJsonString=getDictionaryJsonString(dictionaryGroupValueList);
+
+        modelAndView.addObject("dictionarysMap", dictionarysMapJsonString);
+
         return modelAndView;
+    }
+
+    protected String getDictionaryJsonString(List<String> groupValueList) throws JsonProcessingException {
+        Map<String,List<DictionaryEntity>> dictionarysMap=new HashMap<>();
+
+        if(groupValueList!=null&&groupValueList.size()>0){
+            for (String groupValue : groupValueList) {
+                List<DictionaryEntity> dictionaryEntityList=dictionaryService.getListDataByGroupValue(JB4DSessionUtility.getSession(),groupValue);
+                if(dictionaryEntityList==null){
+                    dictionaryEntityList=new ArrayList<>();
+                }
+                dictionarysMap.put(groupValue,dictionaryEntityList);
+            }
+        }
+
+        return JsonUtility.toObjectString(dictionarysMap);
     }
 
     public abstract String getListViewName();
@@ -144,7 +174,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     @RequestMapping(value = "Delete", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo Delete(String recordId) throws JBuild4DGenerallyException {
+    public JBuild4DResponseVo delete(String recordId) throws JBuild4DGenerallyException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
         getBaseService().deleteByKey(jb4DSession,recordId);
         return JBuild4DResponseVo.opSuccess();
@@ -152,7 +182,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     @RequestMapping(value = "Move", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo Move(String recordId,String type) throws JBuild4DGenerallyException {
+    public JBuild4DResponseVo move(String recordId,String type) throws JBuild4DGenerallyException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
         if(type.equals("up")) {
             getBaseService().moveUp(jb4DSession, recordId);
@@ -161,5 +191,9 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
             getBaseService().moveDown(jb4DSession,recordId);
         }
         return JBuild4DResponseVo.opSuccess();
+    }
+
+    public List<String> bindDictionaryToPage(){
+        return null;
     }
 }
