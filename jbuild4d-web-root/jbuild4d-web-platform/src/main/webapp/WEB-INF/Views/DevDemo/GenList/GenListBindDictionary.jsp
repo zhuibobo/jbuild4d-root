@@ -58,7 +58,7 @@
                 <td>RADIO</td>
                 <td colspan="2">
                     <radio-group v-model="searchCondition.ddgl_bind_dic_radio.value" style="width: 100%">
-                        <radio v-for="item in dictionaryJson.DevDemoDictionaryGroupBindSelect" label="item.dictValue">{{item.dictText}}</radio>
+                        <radio v-for="item in dictionaryJson.DevDemoDictionaryGroupBindRadio" :label="item.dictValue">{{item.dictText}}</radio>
                     </radio-group>
                 </td>
                 <td>

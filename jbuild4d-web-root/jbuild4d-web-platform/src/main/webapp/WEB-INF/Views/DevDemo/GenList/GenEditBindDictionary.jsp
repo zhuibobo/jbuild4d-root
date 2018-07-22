@@ -33,12 +33,11 @@
                         <input-number :max="10" :min="0" v-model="formValidate.ddglInputnumber" style="width: 100%"></input-number>
                     </form-item>
                 </i-col>
-                <i-col span="4" style="text-align: center">默认选中：</i-col>
+                <i-col span="4" style="text-align: center">radio：</i-col>
                 <i-col span="10">
                     <form-item>
-                        <radio-group v-model="formValidate.dictIsSelected">
-                            <radio label="是">是</radio>
-                            <radio label="否">否</radio>
+                        <radio-group v-model="formValidate.ddglBindDicRadio" style="width: 100%">
+                            <radio v-for="item in dictionaryJson.DevDemoDictionaryGroupBindRadio" :label="item.dictValue">{{item.dictText}}</radio>
                         </radio-group>
                     </form-item>
                 </i-col>
@@ -55,7 +54,7 @@
                     selected
                 </i-col>
                 <i-col span="10">
-                    <form-item>
+                    <form-item prop="ddglBindDicSelected">
                         <i-select clearable v-model="formValidate.ddglBindDicSelected" style="width:100%">
                             <i-option v-for="item in dictionaryJson.DevDemoDictionaryGroupBindSelect" :value="item.dictValue" :key="item.dictValue">{{ item.dictText }}</i-option>
                         </i-select>
@@ -91,7 +90,8 @@
                 ddglCreatetime: '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />' == '' ? JB4D.DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />',
                 ddglDesc: '${entity.ddglDesc}',
                 ddglInputnumber:0,
-                ddglBindDicSelected:''
+                ddglBindDicSelected:'',
+                ddglBindDicRadio:'Radio-Value-5'
             },
             ruleValidate: {
                 ddglValue: [
@@ -105,6 +105,9 @@
                 ],
                 ddglInputnumber: [
                     {required: true, message: '【ddglInputnumber】不能空！', trigger: 'blur'}
+                ],
+                ddglBindDicSelected:[
+                    {required: true, message: '【ddglBindDicSelected】不能空！', trigger: 'blur'}
                 ]
             },
             status: '${op}'
