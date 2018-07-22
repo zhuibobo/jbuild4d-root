@@ -30,7 +30,7 @@
             <row>
                 <i-col span="10">
                     <form-item prop="ddglInputnumber">
-                        <input-number :max="10" :min="1" v-model="ddglInputnumber" style="width: 100%"></input-number>
+                        <input-number :max="10" :min="0" v-model="formValidate.ddglInputnumber" style="width: 100%"></input-number>
                     </form-item>
                 </i-col>
                 <i-col span="4" style="text-align: center">默认选中：</i-col>
@@ -45,7 +45,23 @@
             </row>
         </form-item>
         <form-item label="ddglCreatetime：">
-            <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.ddglCreatetime" disabled readonly></date-picker>
+            <row>
+                <i-col span="10">
+                    <form-item>
+                        <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.ddglCreatetime" disabled readonly></date-picker>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center">
+                    selected
+                </i-col>
+                <i-col span="10">
+                    <form-item>
+                        <i-select clearable v-model="formValidate.ddglBindDicSelected" style="width:100%">
+                            <i-option v-for="item in dictionaryJson.DevDemoDictionaryGroupBindSelect" :value="item.dictValue" :key="item.dictValue">{{ item.dictText }}</i-option>
+                        </i-select>
+                    </form-item>
+                </i-col>
+            </row>
         </form-item>
         <form-item label="dictGroupDesc：">
             <i-input v-model="formValidate.dictGroupDesc" type="textarea" :autosize="{minRows: 3,maxRows: 3}"></i-input>
@@ -66,13 +82,16 @@
             }
         },
         data: {
+            dictionaryJson:${dictionaryJson},
             formValidate: {
                 ddglId: '${recordId}',
                 ddglKey: '${entity.ddglKey}',
                 ddglValue: '${entity.ddglValue}',
                 ddglName: '${entity.ddglName}',
                 ddglCreatetime: '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />' == '' ? JB4D.DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />',
-                ddglDesc: '${entity.ddglDesc}'
+                ddglDesc: '${entity.ddglDesc}',
+                ddglInputnumber:0,
+                ddglBindDicSelected:''
             },
             ruleValidate: {
                 ddglValue: [

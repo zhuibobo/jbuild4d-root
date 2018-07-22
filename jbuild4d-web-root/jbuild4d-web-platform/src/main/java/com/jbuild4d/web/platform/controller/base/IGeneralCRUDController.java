@@ -21,7 +21,7 @@ public interface IGeneralCRUDController<T> {
 
     public abstract JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition) throws IOException, ParseException;
 
-    public abstract ModelAndView detail(String recordId,String op) throws IllegalAccessException, InstantiationException;
+    public abstract ModelAndView detail(String recordId,String op) throws IllegalAccessException, InstantiationException, JsonProcessingException;
 
     public abstract JBuild4DResponseVo saveEdit(@RequestBody T entity) throws Exception;
 

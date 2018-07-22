@@ -86,7 +86,6 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
         List<String> dictionaryGroupValueList=bindDictionaryToPage();
         String dictionaryJsonString=getDictionaryJsonString(dictionaryGroupValueList);
-
         modelAndView.addObject("dictionaryJson", dictionaryJsonString);
 
         return modelAndView;
@@ -120,7 +119,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     }
 
     @RequestMapping(value = "Detail", method = RequestMethod.GET)
-    public ModelAndView detail(String recordId,String op) throws IllegalAccessException, InstantiationException {
+    public ModelAndView detail(String recordId,String op) throws IllegalAccessException, InstantiationException, JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView(getDetailViewName());
 
         T entity=null;
@@ -133,6 +132,11 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
             entity=getBaseService().getByPrimaryKey(jb4DSession,recordId);
             modelAndView.addObject("recordId", recordId);
         }
+
+        List<String> dictionaryGroupValueList=bindDictionaryToPage();
+        String dictionaryJsonString=getDictionaryJsonString(dictionaryGroupValueList);
+        modelAndView.addObject("dictionaryJson", dictionaryJsonString);
+
         modelAndView.addObject("entity",entity);
         modelAndView.addObject("op",op);
         return modelAndView;

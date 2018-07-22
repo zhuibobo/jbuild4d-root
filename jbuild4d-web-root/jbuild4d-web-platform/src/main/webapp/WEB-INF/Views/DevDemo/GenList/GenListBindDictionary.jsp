@@ -110,6 +110,7 @@
         el: "#appList",
         mounted: function () {
             this.reloadData();
+            this.listHeight=JB4D.ListPageUtility.GetGeneralPageHeight(JB4D.ListPageUtility.GetFixHeight()-10);
         },
         data: {
             dictionaryJson:${dictionaryJson},
