@@ -660,12 +660,18 @@ var JsonUtility = {
         FindChildNodeAndResolve(rootNodeId, result);
         return result;
     },
-
     SimpleCloneAttr: function (toObj, fromObj) {
         for (var attr in fromObj) {
             toObj[attr] = fromObj[attr];
         }
         return toObj;
+    },
+    CloneSimple:function (source) {
+        var result={}
+        for(var key in source){
+            result[key]=source[key];
+        }
+        return result;
     }
 };
 

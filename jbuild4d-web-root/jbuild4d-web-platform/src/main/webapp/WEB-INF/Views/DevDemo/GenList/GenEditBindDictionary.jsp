@@ -43,9 +43,9 @@
                 </i-col>
             </row>
         </form-item>
-        <form-item label="ddglName：" prop="ddglName">
-            <checkbox-group>
-                <checkbox  v-for="item in dictionaryJson.DevDemoDictionaryGroupBindCheckbox" label="item.dictValue">{{item.dictText}}</checkbox>
+        <form-item label="ddglName：">
+            <checkbox-group v-model="formValidate.ddglBindDicMucheckbox">
+                <checkbox  v-for="item in dictionaryJson.DevDemoDictionaryGroupBindCheckbox" :label="item.dictValue">{{item.dictText}}</checkbox>
             </checkbox-group>
         </form-item>
         <form-item label="ddglCreatetime：">
@@ -84,6 +84,9 @@
             if(this.status=="view") {
                 DetailPageUtility.IViewPageToViewStatus();
             }
+            if('${entity.ddglBindDicMucheckbox}'!=""){
+                this.formValidate.ddglBindDicMucheckbox='${entity.ddglBindDicMucheckbox}'.split(";");
+            }
         },
         data: {
             dictionaryJson:${dictionaryJson},
@@ -96,7 +99,8 @@
                 ddglDesc: '${entity.ddglDesc}',
                 ddglInputnumber:0,
                 ddglBindDicSelected:'',
-                ddglBindDicRadio:'Radio-Value-5'
+                ddglBindDicRadio:'Radio-Value-5',
+                ddglBindDicMucheckbox:[]
             },
             ruleValidate: {
                 ddglValue: [
@@ -122,7 +126,9 @@
                 var _self = this;
                 this.$refs[name].validate(function (valid) {
                     if (valid) {
-                        var sendData = JSON.stringify(_self.formValidate);
+                        var sendData=JsonUtility.CloneSimple(_self.formValidate);
+                        sendData.ddglBindDicMucheckbox=sendData.ddglBindDicMucheckbox.join(";");
+                        var sendData = JSON.stringify(sendData);
                         //debugger;
                         var url = '/PlatForm/DevDemo/DevDemoGenList/SaveEdit.do';
                         AjaxUtility.PostRequestBody(url, sendData, function (result) {
