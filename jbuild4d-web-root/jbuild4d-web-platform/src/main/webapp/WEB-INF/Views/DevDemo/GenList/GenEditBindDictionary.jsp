@@ -29,7 +29,7 @@
         <form-item label="number：" prop="ddglInputnumber">
             <row>
                 <i-col span="10">
-                    <form-item prop="ddglInputnumber">
+                    <form-item>
                         <input-number :max="10" :min="0" v-model="formValidate.ddglInputnumber" style="width: 100%"></input-number>
                     </form-item>
                 </i-col>
@@ -104,7 +104,7 @@
                     {required: true, message: '【ddglKey】不能空！', trigger: 'blur'}
                 ],
                 ddglInputnumber: [
-                    {required: true, message: '【ddglInputnumber】不能空！', trigger: 'blur'}
+                    {required: true, message: '【ddglInputnumber】不能空！', trigger: 'blur',type:"number"}
                 ],
                 ddglBindDicSelected:[
                     {required: true, message: '【ddglBindDicSelected】不能空！', trigger: 'blur'}
