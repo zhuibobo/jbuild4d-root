@@ -13,11 +13,13 @@
       <arg column="DICT_GROUP_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_GROUP_ISSYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_GROUP_DEL_ENABLE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DICT_GROUP_ENP_ITEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME, 
-    DICT_GROUP_DESC, DICT_GROUP_STATUS, DICT_GROUP_PARENT_ID, DICT_GROUP_ISSYSTEM, DICT_GROUP_DEL_ENABLE
+    DICT_GROUP_DESC, DICT_GROUP_STATUS, DICT_GROUP_PARENT_ID, DICT_GROUP_ISSYSTEM, DICT_GROUP_DEL_ENABLE, 
+    DICT_GROUP_ENP_ITEM
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -33,13 +35,13 @@
     insert into TB4D_DICTIONARY_GROUP (DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, 
       DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME, 
       DICT_GROUP_DESC, DICT_GROUP_STATUS, DICT_GROUP_PARENT_ID, 
-      DICT_GROUP_ISSYSTEM, DICT_GROUP_DEL_ENABLE
-      )
+      DICT_GROUP_ISSYSTEM, DICT_GROUP_DEL_ENABLE, 
+      DICT_GROUP_ENP_ITEM)
     values (#{dictGroupId,jdbcType=NVARCHAR}, #{dictGroupValue,jdbcType=NVARCHAR}, #{dictGroupText,jdbcType=NVARCHAR}, 
       #{dictGroupOrderNum,jdbcType=INTEGER}, #{dictGroupCreateTime,jdbcType=TIMESTAMP}, 
       #{dictGroupDesc,jdbcType=NVARCHAR}, #{dictGroupStatus,jdbcType=NVARCHAR}, #{dictGroupParentId,jdbcType=NVARCHAR}, 
-      #{dictGroupIssystem,jdbcType=NVARCHAR}, #{dictGroupDelEnable,jdbcType=NVARCHAR}
-      )
+      #{dictGroupIssystem,jdbcType=NVARCHAR}, #{dictGroupDelEnable,jdbcType=NVARCHAR}, 
+      #{dictGroupEnpItem,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
     insert into TB4D_DICTIONARY_GROUP
@@ -74,6 +76,9 @@
       <if test="dictGroupDelEnable != null">
         DICT_GROUP_DEL_ENABLE,
       </if>
+      <if test="dictGroupEnpItem != null">
+        DICT_GROUP_ENP_ITEM,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="dictGroupId != null">
@@ -105,6 +110,9 @@
       </if>
       <if test="dictGroupDelEnable != null">
         #{dictGroupDelEnable,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictGroupEnpItem != null">
+        #{dictGroupEnpItem,jdbcType=NVARCHAR},
       </if>
     </trim>
   </insert>
@@ -138,6 +146,9 @@
       <if test="dictGroupDelEnable != null">
         DICT_GROUP_DEL_ENABLE = #{dictGroupDelEnable,jdbcType=NVARCHAR},
       </if>
+      <if test="dictGroupEnpItem != null">
+        DICT_GROUP_ENP_ITEM = #{dictGroupEnpItem,jdbcType=NVARCHAR},
+      </if>
     </set>
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
   </update>
@@ -151,7 +162,8 @@
       DICT_GROUP_STATUS = #{dictGroupStatus,jdbcType=NVARCHAR},
       DICT_GROUP_PARENT_ID = #{dictGroupParentId,jdbcType=NVARCHAR},
       DICT_GROUP_ISSYSTEM = #{dictGroupIssystem,jdbcType=NVARCHAR},
-      DICT_GROUP_DEL_ENABLE = #{dictGroupDelEnable,jdbcType=NVARCHAR}
+      DICT_GROUP_DEL_ENABLE = #{dictGroupDelEnable,jdbcType=NVARCHAR},
+      DICT_GROUP_ENP_ITEM = #{dictGroupEnpItem,jdbcType=NVARCHAR}
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
   </update>
 </mapper>

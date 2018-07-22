@@ -1,12 +1,9 @@
 package com.jbuild4d.base.dbaccess.dbentities;
 
-import com.jbuild4d.base.dbaccess.anno.DBKeyField;
-
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class DevDemoGenListEntity {
-
-    @DBKeyField
     private String ddglId;
 
     private String ddglKey;
@@ -33,7 +30,19 @@ public class DevDemoGenListEntity {
 
     private Integer ddglOrderNum;
 
-    public DevDemoGenListEntity(String ddglId, String ddglKey, String ddglName, String ddglValue, String ddglStatus, String ddglDesc, Date ddglCreatetime, String ddglUserId, String ddglUserName, String ddglOrganId, String ddglOrganName, String ddglApi, Integer ddglOrderNum) {
+    private BigDecimal ddglInputnumber;
+
+    private String ddglBindDicSelected;
+
+    private String ddglBindDicRadio;
+
+    private String ddglBindDicCheckbox1;
+
+    private String ddglBindDicCheckbox2;
+
+    private String ddglBindDicCheckbox3;
+
+    public DevDemoGenListEntity(String ddglId, String ddglKey, String ddglName, String ddglValue, String ddglStatus, String ddglDesc, Date ddglCreatetime, String ddglUserId, String ddglUserName, String ddglOrganId, String ddglOrganName, String ddglApi, Integer ddglOrderNum, BigDecimal ddglInputnumber, String ddglBindDicSelected, String ddglBindDicRadio, String ddglBindDicCheckbox1, String ddglBindDicCheckbox2, String ddglBindDicCheckbox3) {
         this.ddglId = ddglId;
         this.ddglKey = ddglKey;
         this.ddglName = ddglName;
@@ -47,6 +56,12 @@ public class DevDemoGenListEntity {
         this.ddglOrganName = ddglOrganName;
         this.ddglApi = ddglApi;
         this.ddglOrderNum = ddglOrderNum;
+        this.ddglInputnumber = ddglInputnumber;
+        this.ddglBindDicSelected = ddglBindDicSelected;
+        this.ddglBindDicRadio = ddglBindDicRadio;
+        this.ddglBindDicCheckbox1 = ddglBindDicCheckbox1;
+        this.ddglBindDicCheckbox2 = ddglBindDicCheckbox2;
+        this.ddglBindDicCheckbox3 = ddglBindDicCheckbox3;
     }
 
     public DevDemoGenListEntity() {
@@ -155,5 +170,53 @@ public class DevDemoGenListEntity {
 
     public void setDdglOrderNum(Integer ddglOrderNum) {
         this.ddglOrderNum = ddglOrderNum;
+    }
+
+    public BigDecimal getDdglInputnumber() {
+        return ddglInputnumber;
+    }
+
+    public void setDdglInputnumber(BigDecimal ddglInputnumber) {
+        this.ddglInputnumber = ddglInputnumber;
+    }
+
+    public String getDdglBindDicSelected() {
+        return ddglBindDicSelected;
+    }
+
+    public void setDdglBindDicSelected(String ddglBindDicSelected) {
+        this.ddglBindDicSelected = ddglBindDicSelected == null ? null : ddglBindDicSelected.trim();
+    }
+
+    public String getDdglBindDicRadio() {
+        return ddglBindDicRadio;
+    }
+
+    public void setDdglBindDicRadio(String ddglBindDicRadio) {
+        this.ddglBindDicRadio = ddglBindDicRadio == null ? null : ddglBindDicRadio.trim();
+    }
+
+    public String getDdglBindDicCheckbox1() {
+        return ddglBindDicCheckbox1;
+    }
+
+    public void setDdglBindDicCheckbox1(String ddglBindDicCheckbox1) {
+        this.ddglBindDicCheckbox1 = ddglBindDicCheckbox1 == null ? null : ddglBindDicCheckbox1.trim();
+    }
+
+    public String getDdglBindDicCheckbox2() {
+        return ddglBindDicCheckbox2;
+    }
+
+    public void setDdglBindDicCheckbox2(String ddglBindDicCheckbox2) {
+        this.ddglBindDicCheckbox2 = ddglBindDicCheckbox2 == null ? null : ddglBindDicCheckbox2.trim();
+    }
+
+    public String getDdglBindDicCheckbox3() {
+        return ddglBindDicCheckbox3;
+    }
+
+    public void setDdglBindDicCheckbox3(String ddglBindDicCheckbox3) {
+        this.ddglBindDicCheckbox3 = ddglBindDicCheckbox3 == null ? null : ddglBindDicCheckbox3.trim();
     }
 }

@@ -52,6 +52,7 @@
                     <i-button type="primary" @click="view()"><Icon type="android-open"></Icon> 浏览 </i-button>
                     <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
                     <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
+                    <i-button type="primary" @click="setSelected()"><Icon type="checkmark-round"></Icon> 设为不选中 </i-button>
                     <i-button type="primary" @click="setSelected()"><Icon type="checkmark-round"></Icon> 设为选中 </i-button>
                     <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移</i-button>
                     <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>

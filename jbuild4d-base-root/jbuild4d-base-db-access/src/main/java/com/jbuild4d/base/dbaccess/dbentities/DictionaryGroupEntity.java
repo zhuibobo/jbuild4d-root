@@ -1,12 +1,8 @@
 package com.jbuild4d.base.dbaccess.dbentities;
 
-import com.jbuild4d.base.dbaccess.anno.DBKeyField;
-
 import java.util.Date;
 
 public class DictionaryGroupEntity {
-
-    @DBKeyField
     private String dictGroupId;
 
     private String dictGroupValue;
@@ -27,7 +23,9 @@ public class DictionaryGroupEntity {
 
     private String dictGroupDelEnable;
 
-    public DictionaryGroupEntity(String dictGroupId, String dictGroupValue, String dictGroupText, Integer dictGroupOrderNum, Date dictGroupCreateTime, String dictGroupDesc, String dictGroupStatus, String dictGroupParentId, String dictGroupIssystem, String dictGroupDelEnable) {
+    private String dictGroupEnpItem;
+
+    public DictionaryGroupEntity(String dictGroupId, String dictGroupValue, String dictGroupText, Integer dictGroupOrderNum, Date dictGroupCreateTime, String dictGroupDesc, String dictGroupStatus, String dictGroupParentId, String dictGroupIssystem, String dictGroupDelEnable, String dictGroupEnpItem) {
         this.dictGroupId = dictGroupId;
         this.dictGroupValue = dictGroupValue;
         this.dictGroupText = dictGroupText;
@@ -38,6 +36,7 @@ public class DictionaryGroupEntity {
         this.dictGroupParentId = dictGroupParentId;
         this.dictGroupIssystem = dictGroupIssystem;
         this.dictGroupDelEnable = dictGroupDelEnable;
+        this.dictGroupEnpItem = dictGroupEnpItem;
     }
 
     public DictionaryGroupEntity() {
@@ -122,5 +121,13 @@ public class DictionaryGroupEntity {
 
     public void setDictGroupDelEnable(String dictGroupDelEnable) {
         this.dictGroupDelEnable = dictGroupDelEnable == null ? null : dictGroupDelEnable.trim();
+    }
+
+    public String getDictGroupEnpItem() {
+        return dictGroupEnpItem;
+    }
+
+    public void setDictGroupEnpItem(String dictGroupEnpItem) {
+        this.dictGroupEnpItem = dictGroupEnpItem == null ? null : dictGroupEnpItem.trim();
     }
 }
