@@ -43,6 +43,11 @@
                 </i-col>
             </row>
         </form-item>
+        <form-item label="ddglName：" prop="ddglName">
+            <checkbox-group>
+                <checkbox  v-for="item in dictionaryJson.DevDemoDictionaryGroupBindCheckbox" label="item.dictValue">{{item.dictText}}</checkbox>
+            </checkbox-group>
+        </form-item>
         <form-item label="ddglCreatetime：">
             <row>
                 <i-col span="10">

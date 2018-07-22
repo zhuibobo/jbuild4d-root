@@ -22,13 +22,14 @@
       <arg column="DDGL_BIND_DIC_CHECKBOX1" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDGL_BIND_DIC_CHECKBOX2" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDGL_BIND_DIC_CHECKBOX3" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_BIND_DIC_MUCHECKBOX" javaType="java.lang.String" jdbcType="NVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     DDGL_ID, DDGL_KEY, DDGL_NAME, DDGL_VALUE, DDGL_STATUS, DDGL_DESC, DDGL_CREATETIME, 
     DDGL_USER_ID, DDGL_USER_NAME, DDGL_ORGAN_ID, DDGL_ORGAN_NAME, DDGL_API, DDGL_ORDER_NUM, 
     DDGL_INPUTNUMBER, DDGL_BIND_DIC_SELECTED, DDGL_BIND_DIC_RADIO, DDGL_BIND_DIC_CHECKBOX1, 
-    DDGL_BIND_DIC_CHECKBOX2, DDGL_BIND_DIC_CHECKBOX3
+    DDGL_BIND_DIC_CHECKBOX2, DDGL_BIND_DIC_CHECKBOX3, DDGL_BIND_DIC_MUCHECKBOX
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -47,16 +48,16 @@
       DDGL_ORGAN_ID, DDGL_ORGAN_NAME, DDGL_API, 
       DDGL_ORDER_NUM, DDGL_INPUTNUMBER, DDGL_BIND_DIC_SELECTED, 
       DDGL_BIND_DIC_RADIO, DDGL_BIND_DIC_CHECKBOX1, 
-      DDGL_BIND_DIC_CHECKBOX2, DDGL_BIND_DIC_CHECKBOX3
-      )
+      DDGL_BIND_DIC_CHECKBOX2, DDGL_BIND_DIC_CHECKBOX3, 
+      DDGL_BIND_DIC_MUCHECKBOX)
     values (#{ddglId,jdbcType=NVARCHAR}, #{ddglKey,jdbcType=NVARCHAR}, #{ddglName,jdbcType=NVARCHAR}, 
       #{ddglValue,jdbcType=NVARCHAR}, #{ddglStatus,jdbcType=NVARCHAR}, #{ddglDesc,jdbcType=NVARCHAR}, 
       #{ddglCreatetime,jdbcType=TIMESTAMP}, #{ddglUserId,jdbcType=NVARCHAR}, #{ddglUserName,jdbcType=NVARCHAR}, 
       #{ddglOrganId,jdbcType=NVARCHAR}, #{ddglOrganName,jdbcType=NVARCHAR}, #{ddglApi,jdbcType=NVARCHAR}, 
       #{ddglOrderNum,jdbcType=INTEGER}, #{ddglInputnumber,jdbcType=DECIMAL}, #{ddglBindDicSelected,jdbcType=NVARCHAR}, 
       #{ddglBindDicRadio,jdbcType=NVARCHAR}, #{ddglBindDicCheckbox1,jdbcType=NVARCHAR}, 
-      #{ddglBindDicCheckbox2,jdbcType=NVARCHAR}, #{ddglBindDicCheckbox3,jdbcType=NVARCHAR}
-      )
+      #{ddglBindDicCheckbox2,jdbcType=NVARCHAR}, #{ddglBindDicCheckbox3,jdbcType=NVARCHAR}, 
+      #{ddglBindDicMucheckbox,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
     insert into TB4D_DEV_DEMO_GEN_LIST
@@ -118,6 +119,9 @@
       <if test="ddglBindDicCheckbox3 != null">
         DDGL_BIND_DIC_CHECKBOX3,
       </if>
+      <if test="ddglBindDicMucheckbox != null">
+        DDGL_BIND_DIC_MUCHECKBOX,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="ddglId != null">
@@ -176,6 +180,9 @@
       </if>
       <if test="ddglBindDicCheckbox3 != null">
         #{ddglBindDicCheckbox3,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglBindDicMucheckbox != null">
+        #{ddglBindDicMucheckbox,jdbcType=NVARCHAR},
       </if>
     </trim>
   </insert>
@@ -236,6 +243,9 @@
       <if test="ddglBindDicCheckbox3 != null">
         DDGL_BIND_DIC_CHECKBOX3 = #{ddglBindDicCheckbox3,jdbcType=NVARCHAR},
       </if>
+      <if test="ddglBindDicMucheckbox != null">
+        DDGL_BIND_DIC_MUCHECKBOX = #{ddglBindDicMucheckbox,jdbcType=NVARCHAR},
+      </if>
     </set>
     where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
   </update>
@@ -258,7 +268,8 @@
       DDGL_BIND_DIC_RADIO = #{ddglBindDicRadio,jdbcType=NVARCHAR},
       DDGL_BIND_DIC_CHECKBOX1 = #{ddglBindDicCheckbox1,jdbcType=NVARCHAR},
       DDGL_BIND_DIC_CHECKBOX2 = #{ddglBindDicCheckbox2,jdbcType=NVARCHAR},
-      DDGL_BIND_DIC_CHECKBOX3 = #{ddglBindDicCheckbox3,jdbcType=NVARCHAR}
+      DDGL_BIND_DIC_CHECKBOX3 = #{ddglBindDicCheckbox3,jdbcType=NVARCHAR},
+      DDGL_BIND_DIC_MUCHECKBOX = #{ddglBindDicMucheckbox,jdbcType=NVARCHAR}
     where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
   </update>
 </mapper>

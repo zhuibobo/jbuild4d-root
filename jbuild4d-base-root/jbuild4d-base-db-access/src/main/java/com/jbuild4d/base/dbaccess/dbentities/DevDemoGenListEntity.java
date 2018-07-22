@@ -1,13 +1,9 @@
 package com.jbuild4d.base.dbaccess.dbentities;
 
-import com.jbuild4d.base.dbaccess.anno.DBKeyField;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class DevDemoGenListEntity {
-
-    @DBKeyField
     private String ddglId;
 
     private String ddglKey;
@@ -46,7 +42,9 @@ public class DevDemoGenListEntity {
 
     private String ddglBindDicCheckbox3;
 
-    public DevDemoGenListEntity(String ddglId, String ddglKey, String ddglName, String ddglValue, String ddglStatus, String ddglDesc, Date ddglCreatetime, String ddglUserId, String ddglUserName, String ddglOrganId, String ddglOrganName, String ddglApi, Integer ddglOrderNum, BigDecimal ddglInputnumber, String ddglBindDicSelected, String ddglBindDicRadio, String ddglBindDicCheckbox1, String ddglBindDicCheckbox2, String ddglBindDicCheckbox3) {
+    private String ddglBindDicMucheckbox;
+
+    public DevDemoGenListEntity(String ddglId, String ddglKey, String ddglName, String ddglValue, String ddglStatus, String ddglDesc, Date ddglCreatetime, String ddglUserId, String ddglUserName, String ddglOrganId, String ddglOrganName, String ddglApi, Integer ddglOrderNum, BigDecimal ddglInputnumber, String ddglBindDicSelected, String ddglBindDicRadio, String ddglBindDicCheckbox1, String ddglBindDicCheckbox2, String ddglBindDicCheckbox3, String ddglBindDicMucheckbox) {
         this.ddglId = ddglId;
         this.ddglKey = ddglKey;
         this.ddglName = ddglName;
@@ -66,6 +64,7 @@ public class DevDemoGenListEntity {
         this.ddglBindDicCheckbox1 = ddglBindDicCheckbox1;
         this.ddglBindDicCheckbox2 = ddglBindDicCheckbox2;
         this.ddglBindDicCheckbox3 = ddglBindDicCheckbox3;
+        this.ddglBindDicMucheckbox = ddglBindDicMucheckbox;
     }
 
     public DevDemoGenListEntity() {
@@ -222,5 +221,13 @@ public class DevDemoGenListEntity {
 
     public void setDdglBindDicCheckbox3(String ddglBindDicCheckbox3) {
         this.ddglBindDicCheckbox3 = ddglBindDicCheckbox3 == null ? null : ddglBindDicCheckbox3.trim();
+    }
+
+    public String getDdglBindDicMucheckbox() {
+        return ddglBindDicMucheckbox;
+    }
+
+    public void setDdglBindDicMucheckbox(String ddglBindDicMucheckbox) {
+        this.ddglBindDicMucheckbox = ddglBindDicMucheckbox == null ? null : ddglBindDicMucheckbox.trim();
     }
 }
