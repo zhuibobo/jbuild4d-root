@@ -1,17 +1,11 @@
 package com.jbuild4d.service;
 
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
-import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
-import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
-import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
+import com.jbuild4d.base.dbaccess.dbentities.*;
 import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.UUIDUtility;
-import com.jbuild4d.platform.system.service.IDevDemoGenListService;
-import com.jbuild4d.platform.system.service.IDictionaryGroupService;
-import com.jbuild4d.platform.system.service.IDictionaryService;
-import com.jbuild4d.platform.system.service.IMenuService;
+import com.jbuild4d.platform.system.service.*;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
@@ -41,6 +35,9 @@ public class InitSystemTest extends BaseTest {
 
     @Autowired
     private IDevDemoGenListService devDemoGenListService;
+
+    @Autowired
+    private IDevDemoTreeTableService devDemoTreeTableService;
 
     @Autowired
     private IDictionaryService dictionaryService;
@@ -158,6 +155,11 @@ public class InitSystemTest extends BaseTest {
             }
             devDemoGenListService.save(jb4DSession,ddglEntity.getDdglId(),ddglEntity);
         }
+
+        //DevDemoTreeTable根节点
+        DevDemoTreeTableEntity treeTableEntity=new DevDemoTreeTableEntity();
+
+        devDemoTreeTableService.createRootNode(jb4DSession);
     }
 
     public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){

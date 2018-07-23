@@ -36,7 +36,8 @@ CREATE TABLE [dbo].[TB4D_DEV_DEMO_TREE_TABLE] (
   [DDTT_BIND_DIC_RADIO]           [NVARCHAR](100)  NULL,
   [DDGL_DDTT_BIND_DIC_MUCHECKBOX] [NVARCHAR](1000) NULL,
   [DDGL_PARENT_ID]                [NVARCHAR](100)  NULL,
-  [DDGL_PARENT_IDLIST]            [NVARCHAR](1200) NULL
+  [DDGL_PARENT_IDLIST]            [NVARCHAR](1200) NULL,
+  [DDGL_CHILD_COUNT]              [INT]            NULL
 )
 
 -----------------------------------------系统设置表-----------------------------------------
