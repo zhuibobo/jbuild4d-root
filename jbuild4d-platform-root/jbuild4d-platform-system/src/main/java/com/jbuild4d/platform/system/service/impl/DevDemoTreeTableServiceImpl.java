@@ -13,6 +13,8 @@ import com.jbuild4d.platform.system.service.IDevDemoGenListService;
 import com.jbuild4d.platform.system.service.IDevDemoTreeTableService;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -22,6 +24,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 public class DevDemoTreeTableServiceImpl extends BaseServiceImpl<DevDemoTreeTableEntity> implements IDevDemoTreeTableService {
 
     DevDemoTreeTableMapper devDemoTreeTableMapper;
+
+    private String rootId="0";
 
     public DevDemoTreeTableServiceImpl(DevDemoTreeTableMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) {
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
@@ -33,8 +37,23 @@ public class DevDemoTreeTableServiceImpl extends BaseServiceImpl<DevDemoTreeTabl
         return this.save(jb4DSession, id, entity, new IAddBefore<DevDemoTreeTableEntity>() {
             @Override
             public DevDemoTreeTableEntity run(JB4DSession jb4DSession, DevDemoTreeTableEntity sourceEntity) throws JBuild4DGenerallyException {
-
-                return null;
+                sourceEntity.setDdglChildCount(0);
+                sourceEntity.setDdttOrderNum(devDemoTreeTableMapper.nextOrderNum());
+                sourceEntity.setDdttCreatetime(new Date());
+                String parentIdList;
+                if(sourceEntity.getDdttId().equals(rootId)){
+                    parentIdList="-1";
+                    sourceEntity.setDdglParentId("-1");
+                }
+                else
+                {
+                    DevDemoTreeTableEntity parentEntity=devDemoTreeTableMapper.selectByPrimaryKey(sourceEntity.getDdglParentId());
+                    parentIdList=parentEntity.getDdglParentIdlist();
+                    parentEntity.setDdglChildCount(parentEntity.getDdglChildCount()+1);
+                    devDemoTreeTableMapper.updateByPrimaryKeySelective(parentEntity);
+                }
+                sourceEntity.setDdglParentIdlist(parentIdList+"*"+sourceEntity.getDdttId());
+                return sourceEntity;
             }
         });
     }
@@ -42,11 +61,12 @@ public class DevDemoTreeTableServiceImpl extends BaseServiceImpl<DevDemoTreeTabl
     @Override
     public DevDemoTreeTableEntity createRootNode(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
         DevDemoTreeTableEntity treeTableEntity=new DevDemoTreeTableEntity();
-        treeTableEntity.setDdglParentId("-1");
+        //treeTableEntity.setDdglParentId(rootId);
         treeTableEntity.setDdttId("0");
         treeTableEntity.setDdttKey("Root");
         treeTableEntity.setDdttName("Root");
         treeTableEntity.setDdttValue("Root");
+        treeTableEntity.setDdttStatus("启用");
         this.save(jb4DSession,treeTableEntity.getDdttId(),treeTableEntity);
         return treeTableEntity;
     }

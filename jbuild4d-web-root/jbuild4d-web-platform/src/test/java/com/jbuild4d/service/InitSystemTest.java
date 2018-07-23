@@ -157,9 +157,9 @@ public class InitSystemTest extends BaseTest {
         }
 
         //DevDemoTreeTable根节点
-        DevDemoTreeTableEntity treeTableEntity=new DevDemoTreeTableEntity();
-
-        devDemoTreeTableService.createRootNode(jb4DSession);
+        //DevDemoTreeTableEntity treeTableEntity=new DevDemoTreeTableEntity();
+        devDemoTreeTableService.deleteByKey(jb4DSession,"0");
+        DevDemoTreeTableEntity treeTableRootEntity=devDemoTreeTableService.createRootNode(jb4DSession);
     }
 
     public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){
