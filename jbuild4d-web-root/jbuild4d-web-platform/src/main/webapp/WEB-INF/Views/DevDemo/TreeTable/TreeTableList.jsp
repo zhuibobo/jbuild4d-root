@@ -56,16 +56,16 @@
                 treeTableObject:null,
                 treeTableConfig:{
                     CanDeleteWhenHasChild:false,
-                    IdField:"dictId",
+                    IdField:"ddttId",
                     RowIdPrefix:"TreeTable_",
                     LoadChildJsonURL:"",
                     LoadChildFunc:null,
                     OpenLevel:1,
-                    ChildTestField:"dictChildCount",//判断是否存在子节点的字段，是否>0或者为true，则支持展开
+                    ChildTestField:"ddglChildCount",//判断是否存在子节点的字段，是否>0或者为true，则支持展开
                     Templates:[
                         {
                             Title:"字典名称",
-                            FieldName:"dictText",
+                            FieldName:"ddttName",
                             TitleCellClassName:"TitleCell",
                             Renderer:"Lable",
                             Hidden:false,
@@ -73,7 +73,7 @@
                             Width:"40"
                         },{
                             Title:"字典值",
-                            FieldName:"dictValue",
+                            FieldName:"ddttValue",
                             TitleCellClassName:"TitleCell",
                             Renderer:"Lable",
                             Hidden:false,
@@ -82,16 +82,7 @@
                             TextAlign:"center"
                         },{
                             Title:"字典状态",
-                            FieldName:"dictStatus",
-                            TitleCellClassName:"TitleCell",
-                            Renderer:"Lable",
-                            Hidden:false,
-                            TitleCellAttrs:{},
-                            Width:"10%",
-                            TextAlign:"center"
-                        },{
-                            Title:"默认选中",
-                            FieldName:"dictIsSelected",
+                            FieldName:"ddttStatus",
                             TitleCellClassName:"TitleCell",
                             Renderer:"Lable",
                             Hidden:false,
@@ -109,7 +100,7 @@
             methods:{
                 <!--Dictionary-->
                 reloadTreeTableData:function () {
-                    var url='/PlatForm/System/Dictionary/GetListDataByGroupId.do';
+                    var url='/PlatForm/DevDemo/DevDemoGenListBindDictionary/GetListData.do';
                     var _self=this;
                     var senddata={groupId:this.treeSelectedNode.dictGroupId,groupName:this.treeSelectedNode.dictGroupText};
                     AjaxUtility.Post(url, senddata , function (result) {
@@ -120,7 +111,7 @@
                             }
                             result.data.push({dictId:senddata.groupId,dictKey:senddata.groupId,dictValue:senddata.groupName,dictText:senddata.groupName,dictStatus:"",dictIsSelected:"",dictCreateTime:""});
                             var treedata=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
-                                KeyField: "dictId",
+                                KeyField: "ddttId",
                                 RelationField:"dictParentId",
                                 ChildFieldName:"Nodes"
                             },result.data,senddata.groupId);
@@ -178,19 +169,6 @@
                         var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=update&recordId=" + nodeData.dictId);
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                     })
-                    /*if(this.treeTableObject!=null) {
-                        var nodeData = this.treeTableObject.GetSelectedRowData();
-                        if (nodeData == null) {
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要编辑的字典!", null);
-                            return false;
-                        }
-                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能编辑根节点!", null);
-                            return;
-                        }
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=update&recordId=" + nodeData.dictId);
-                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
-                    }*/
                 },
                 del:function(){
                     var _self=this;
