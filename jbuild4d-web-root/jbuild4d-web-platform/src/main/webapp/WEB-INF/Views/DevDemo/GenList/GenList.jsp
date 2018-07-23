@@ -89,7 +89,7 @@
         mounted: function () {
             this.reloadData();
             window.setTimeout(function () {
-                appList.listHeight=JB4D.ListPageUtility.GetGeneralPageHeight(0);
+                appList.listHeight=ListPageUtility.GetGeneralPageHeight(0);
             },500);
         },
         data: {
@@ -139,7 +139,7 @@
                     width: 100,
                     align: "center",
                     render: function (h, params) {
-                        return JB4D.ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddglCreatetime);
+                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddglCreatetime);
                     }
                 }, {
                     title: '操作',

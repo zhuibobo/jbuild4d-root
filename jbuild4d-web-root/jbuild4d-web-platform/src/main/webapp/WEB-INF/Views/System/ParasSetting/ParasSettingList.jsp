@@ -135,7 +135,8 @@
             },
             statusEnable: function (statusName) {
                 var url = '/PlatForm/System/ParasSetting/StatusChange.do';
-                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
+                //debugger;
+                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"settingId",statusName,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;

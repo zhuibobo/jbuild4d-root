@@ -111,7 +111,7 @@
         mounted: function () {
             this.reloadData();
             window.setTimeout(function () {
-                appList.listHeight=JB4D.ListPageUtility.GetGeneralPageHeight(0);
+                appList.listHeight=ListPageUtility.GetGeneralPageHeight(0);
             },500);
         },
         data: {
