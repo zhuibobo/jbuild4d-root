@@ -1321,12 +1321,17 @@ var SearchUtility={
 //列表页面处理工具类
 var ListPageUtility={
     GetGeneralPageHeight:function (fixHeight) {
-        var pageHeight=jQuery(window.document).height();
+        var pageHeight=jQuery(document).height();
         //alert(pageHeight);
-        pageHeight=pageHeight-$("#list-button-wrap").height()+fixHeight;
+        //alert(pageHeight);
         if($("#list-simple-search-wrap").length>0){
-            pageHeight=pageHeight-$("#list-simple-search-wrap").outerHeight()-6;
+            //alert($("#list-button-wrap").height()+"||"+$("#list-simple-search-wrap").outerHeight());
+            pageHeight=pageHeight-$("#list-simple-search-wrap").outerHeight()-$("#list-button-wrap").outerHeight()-$("#list-pager-wrap").outerHeight()-30;
         }
+        else {
+            pageHeight=pageHeight-$("#list-button-wrap").outerHeight()+fixHeight-$("#list-pager-wrap").outerHeight()-30;
+        }
+        //alert(pageHeight);
         return pageHeight;
     },
     GetFixHeight:function () {

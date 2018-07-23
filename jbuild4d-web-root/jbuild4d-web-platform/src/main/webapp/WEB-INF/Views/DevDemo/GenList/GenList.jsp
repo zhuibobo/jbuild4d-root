@@ -78,7 +78,7 @@
     <i-table :height="listHeight" stripe border :columns="columnsConfig" :data="tableData"
              class="iv-list-table" :highlight-row="true"
              @on-selection-change="selectionChange"></i-table>
-    <div style="float: right;">
+    <div style="float: right;" id="list-pager-wrap">
         <page @on-change="changePage" :current.sync="pageNum" :page-size="pageSize" show-total
               :total="pageTotal"></page>
     </div>
@@ -88,6 +88,9 @@
         el: "#appList",
         mounted: function () {
             this.reloadData();
+            window.setTimeout(function () {
+                appList.listHeight=JB4D.ListPageUtility.GetGeneralPageHeight(0);
+            },500);
         },
         data: {
             searchCondition:{
@@ -157,7 +160,7 @@
             pageTotal: 0,
             pageSize: 12,
             pageNum: 1,
-            listHeight: JB4D.ListPageUtility.GetGeneralPageHeight(JB4D.ListPageUtility.GetFixHeight())
+            listHeight: 300
         },
         methods: {
             selectionChange: function (selection) {
