@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.DevDemoTreeTableMapper">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity">
+    <constructor>
+      <idArg column="DDTT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_KEY" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_CREATETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="DDTT_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="DDTT_BIND_DIC_SELECTED" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_BIND_DIC_RADIO" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_DDTT_BIND_DIC_MUCHECKBOX" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDGL_PARENT_IDLIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    DDTT_ID, DDTT_KEY, DDTT_NAME, DDTT_VALUE, DDTT_STATUS, DDTT_DESC, DDTT_CREATETIME, 
+    DDTT_ORDER_NUM, DDTT_BIND_DIC_SELECTED, DDTT_BIND_DIC_RADIO, DDGL_DDTT_BIND_DIC_MUCHECKBOX, 
+    DDGL_PARENT_ID, DDGL_PARENT_IDLIST
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB4D_DEV_DEMO_TREE_TABLE
+    where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB4D_DEV_DEMO_TREE_TABLE
+    where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity">
+    insert into TB4D_DEV_DEMO_TREE_TABLE (DDTT_ID, DDTT_KEY, DDTT_NAME, 
+      DDTT_VALUE, DDTT_STATUS, DDTT_DESC, 
+      DDTT_CREATETIME, DDTT_ORDER_NUM, DDTT_BIND_DIC_SELECTED, 
+      DDTT_BIND_DIC_RADIO, DDGL_DDTT_BIND_DIC_MUCHECKBOX, 
+      DDGL_PARENT_ID, DDGL_PARENT_IDLIST)
+    values (#{ddttId,jdbcType=NVARCHAR}, #{ddttKey,jdbcType=NVARCHAR}, #{ddttName,jdbcType=NVARCHAR}, 
+      #{ddttValue,jdbcType=NVARCHAR}, #{ddttStatus,jdbcType=NVARCHAR}, #{ddttDesc,jdbcType=NVARCHAR}, 
+      #{ddttCreatetime,jdbcType=TIMESTAMP}, #{ddttOrderNum,jdbcType=INTEGER}, #{ddttBindDicSelected,jdbcType=NVARCHAR}, 
+      #{ddttBindDicRadio,jdbcType=NVARCHAR}, #{ddglDdttBindDicMucheckbox,jdbcType=NVARCHAR}, 
+      #{ddglParentId,jdbcType=NVARCHAR}, #{ddglParentIdlist,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity">
+    insert into TB4D_DEV_DEMO_TREE_TABLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ddttId != null">
+        DDTT_ID,
+      </if>
+      <if test="ddttKey != null">
+        DDTT_KEY,
+      </if>
+      <if test="ddttName != null">
+        DDTT_NAME,
+      </if>
+      <if test="ddttValue != null">
+        DDTT_VALUE,
+      </if>
+      <if test="ddttStatus != null">
+        DDTT_STATUS,
+      </if>
+      <if test="ddttDesc != null">
+        DDTT_DESC,
+      </if>
+      <if test="ddttCreatetime != null">
+        DDTT_CREATETIME,
+      </if>
+      <if test="ddttOrderNum != null">
+        DDTT_ORDER_NUM,
+      </if>
+      <if test="ddttBindDicSelected != null">
+        DDTT_BIND_DIC_SELECTED,
+      </if>
+      <if test="ddttBindDicRadio != null">
+        DDTT_BIND_DIC_RADIO,
+      </if>
+      <if test="ddglDdttBindDicMucheckbox != null">
+        DDGL_DDTT_BIND_DIC_MUCHECKBOX,
+      </if>
+      <if test="ddglParentId != null">
+        DDGL_PARENT_ID,
+      </if>
+      <if test="ddglParentIdlist != null">
+        DDGL_PARENT_IDLIST,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ddttId != null">
+        #{ddttId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttKey != null">
+        #{ddttKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttName != null">
+        #{ddttName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttValue != null">
+        #{ddttValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttStatus != null">
+        #{ddttStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttDesc != null">
+        #{ddttDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttCreatetime != null">
+        #{ddttCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddttOrderNum != null">
+        #{ddttOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="ddttBindDicSelected != null">
+        #{ddttBindDicSelected,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttBindDicRadio != null">
+        #{ddttBindDicRadio,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglDdttBindDicMucheckbox != null">
+        #{ddglDdttBindDicMucheckbox,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglParentId != null">
+        #{ddglParentId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglParentIdlist != null">
+        #{ddglParentIdlist,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity">
+    update TB4D_DEV_DEMO_TREE_TABLE
+    <set>
+      <if test="ddttKey != null">
+        DDTT_KEY = #{ddttKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttName != null">
+        DDTT_NAME = #{ddttName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttValue != null">
+        DDTT_VALUE = #{ddttValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttStatus != null">
+        DDTT_STATUS = #{ddttStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttDesc != null">
+        DDTT_DESC = #{ddttDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttCreatetime != null">
+        DDTT_CREATETIME = #{ddttCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddttOrderNum != null">
+        DDTT_ORDER_NUM = #{ddttOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="ddttBindDicSelected != null">
+        DDTT_BIND_DIC_SELECTED = #{ddttBindDicSelected,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttBindDicRadio != null">
+        DDTT_BIND_DIC_RADIO = #{ddttBindDicRadio,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglDdttBindDicMucheckbox != null">
+        DDGL_DDTT_BIND_DIC_MUCHECKBOX = #{ddglDdttBindDicMucheckbox,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglParentId != null">
+        DDGL_PARENT_ID = #{ddglParentId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddglParentIdlist != null">
+        DDGL_PARENT_IDLIST = #{ddglParentIdlist,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity">
+    update TB4D_DEV_DEMO_TREE_TABLE
+    set DDTT_KEY = #{ddttKey,jdbcType=NVARCHAR},
+      DDTT_NAME = #{ddttName,jdbcType=NVARCHAR},
+      DDTT_VALUE = #{ddttValue,jdbcType=NVARCHAR},
+      DDTT_STATUS = #{ddttStatus,jdbcType=NVARCHAR},
+      DDTT_DESC = #{ddttDesc,jdbcType=NVARCHAR},
+      DDTT_CREATETIME = #{ddttCreatetime,jdbcType=TIMESTAMP},
+      DDTT_ORDER_NUM = #{ddttOrderNum,jdbcType=INTEGER},
+      DDTT_BIND_DIC_SELECTED = #{ddttBindDicSelected,jdbcType=NVARCHAR},
+      DDTT_BIND_DIC_RADIO = #{ddttBindDicRadio,jdbcType=NVARCHAR},
+      DDGL_DDTT_BIND_DIC_MUCHECKBOX = #{ddglDdttBindDicMucheckbox,jdbcType=NVARCHAR},
+      DDGL_PARENT_ID = #{ddglParentId,jdbcType=NVARCHAR},
+      DDGL_PARENT_IDLIST = #{ddglParentIdlist,jdbcType=NVARCHAR}
+    where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
+  </update>
+</mapper>
