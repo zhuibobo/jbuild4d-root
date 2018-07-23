@@ -51,29 +51,43 @@ public class InitSystemTest extends BaseTest {
         //根菜单
         String rootMenuId="0";
         MenuEntity rootMenu=getMenu("-1",rootMenuId,"Root","Root","Root",MenuTypeEnum.Root.getDisplayName(),"","","");
-        menuService.deleteByKey(jb4DSession,rootMenuId);
+        menuService.deleteByKey(jb4DSession,rootMenu.getMenuId());
         menuService.save(jb4DSession,rootMenu.getMenuId(),rootMenu);
 
         //根菜单->系统设置分组
         String systemSettingRootId="JB4DSystemSettingRoot";
         MenuEntity systemSettingMenu=getMenu(rootMenu.getMenuId(),systemSettingRootId,"系统设置","系统设置","系统设置",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
-        menuService.deleteByKey(jb4DSession,systemSettingRootId);
+        menuService.deleteByKey(jb4DSession,systemSettingMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingMenu.getMenuId(),systemSettingMenu);
 
         //根菜单->系统设置分组->数据字典分组
         String systemSettingDictionaryManagerId="JB4DSystemSettingDictionaryManager";
         MenuEntity systemSettingDictionaryGroupMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingDictionaryManagerId,"数据字典","数据字典","数据字典",
                 MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/Dictionary/DictionaryManager.do","");
-        menuService.deleteByKey(jb4DSession,systemSettingDictionaryManagerId);
+        menuService.deleteByKey(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId(),systemSettingDictionaryGroupMenu);
 
         //根菜单->系统设置分组->参数设置
         String systemSettingParasSettingId="JB4DSystemSettingParasSetting";
         MenuEntity systemSettingParasSettingMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingParasSettingId,"参数设置","参数设置","参数设置",
                 MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
-        menuService.deleteByKey(jb4DSession,systemSettingParasSettingId);
+        menuService.deleteByKey(jb4DSession,systemSettingParasSettingMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingParasSettingMenu.getMenuId(),systemSettingParasSettingMenu);
+
+        //根菜单->系统设置分组->组织管理
+        String systemSettingOrganManageId="JB4DSystemSettingOrganManage";
+        MenuEntity systemSettingOrganManageMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOrganManageId,"组织管理","组织管理","组织管理",
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
+        menuService.deleteByKey(jb4DSession,systemSettingOrganManageMenu.getMenuId());
+        menuService.save(jb4DSession,systemSettingOrganManageMenu.getMenuId(),systemSettingOrganManageMenu);
+
+        //根菜单->系统设置分组->操作日志
+        String systemSettingOperationLogId="JB4DSystemSettingOperationLog";
+        MenuEntity systemSettingOperationLogMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOperationLogId,"操作日志","操作日志","操作日志",
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
+        menuService.deleteByKey(jb4DSession,systemSettingOperationLogMenu.getMenuId());
+        menuService.save(jb4DSession,systemSettingOperationLogMenu.getMenuId(),systemSettingOperationLogMenu);
 
         //根菜单->开发示例
         String devDemoRootId="JB4DDevDemoRoot";
