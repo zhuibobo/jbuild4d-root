@@ -80,6 +80,9 @@ public class MybatisBeansConfig {
     }
 
     @Bean
+    public DevDemoTreeTableMapper devDemoTreeTableMapper(SqlSessionTemplate sqlSessionTemplate){ return sqlSessionTemplate.getMapper(DevDemoTreeTableMapper.class); }
+
+    @Bean
     public MenuMapper menuMapper(SqlSessionTemplate sqlSessionTemplate) {
         return sqlSessionTemplate.getMapper(MenuMapper.class);
     }
