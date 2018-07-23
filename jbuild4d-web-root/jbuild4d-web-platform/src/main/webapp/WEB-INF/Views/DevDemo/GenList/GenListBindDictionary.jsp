@@ -51,13 +51,13 @@
             <tr class="ls-table-row">
                 <td>SELECTED：</td>
                 <td>
-                    <i-select clearable v-model="searchCondition.ddgl_bind_dic_selected.value" style="width:100%">
+                    <i-select clearable v-model="searchCondition.ddglBindDicSelected.value" style="width:100%">
                         <i-option v-for="item in dictionaryJson.DevDemoDictionaryGroupBindSelect" :value="item.dictValue" :key="item.dictValue">{{ item.dictText }}</i-option>
                     </i-select>
                 </td>
                 <td>RADIO</td>
                 <td colspan="2">
-                    <radio-group v-model="searchCondition.ddgl_bind_dic_radio.value" style="width: 100%">
+                    <radio-group v-model="searchCondition.ddglBindDicRadio.value" style="width: 100%">
                         <radio v-for="item in dictionaryJson.DevDemoDictionaryGroupBindRadio" :label="item.dictValue">{{item.dictText}}</radio>
                     </radio-group>
                 </td>
@@ -65,8 +65,8 @@
                     CHECKBOX
                 </td>
                 <td colspan="2">
-                    <checkbox-group>
-                        <checkbox  v-for="item in dictionaryJson.DevDemoDictionaryGroupBindCheckbox" label="item.dictValue">{{item.dictText}}</checkbox>
+                    <checkbox-group v-model="searchCondition.ddglBindDicMucheckbox.value">
+                        <checkbox v-for="item in dictionaryJson.DevDemoDictionaryGroupBindCheckbox" :label="item.dictValue">{{item.dictText}}</checkbox>
                     </checkbox-group>
                 </td>
             </tr>
@@ -131,13 +131,17 @@
                     value:"",
                     type:SearchUtility.SearchFieldType.DataStringType
                 },
-                ddgl_bind_dic_selected:{
+                ddglBindDicSelected:{
                     value:"",
                     type:SearchUtility.SearchFieldType.StringType
                 },
-                ddgl_bind_dic_radio:{
+                ddglBindDicRadio:{
                     value:"",
                     type:SearchUtility.SearchFieldType.StringType
+                },
+                ddglBindDicMucheckbox:{
+                    value:[],
+                    type:SearchUtility.SearchFieldType.ArrayLikeStringType
                 }
             },
             columnsConfig: [

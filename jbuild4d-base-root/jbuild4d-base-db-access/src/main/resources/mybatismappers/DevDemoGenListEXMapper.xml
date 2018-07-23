@@ -23,6 +23,15 @@
             <if test="ddglCreatetime_e != null and ddglCreatetime_e != ''">
                 and DDGL_CREATETIME &lt;= #{orgCreateTime_e}
             </if>
+            <if test="ddglBindDicSelected != null and ddglBindDicSelected != ''">
+                and DDGL_BIND_DIC_SELECTED = #{ddglBindDicSelected}
+            </if>
+            <if test="ddglBindDicRadio != null and ddglBindDicRadio != ''">
+                and DDGL_BIND_DIC_RADIO = #{ddglBindDicRadio}
+            </if>
+            <if test="ddglBindDicMucheckbox != null and ddglBindDicMucheckbox != ''">
+                and DDGL_BIND_DIC_MUCHECKBOX like #{ddglBindDicMucheckbox}
+            </if>
         </where>
         ORDER by DDGL_ORDER_NUM DESC
     </select>

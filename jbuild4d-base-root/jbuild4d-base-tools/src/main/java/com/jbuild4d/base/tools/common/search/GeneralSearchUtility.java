@@ -75,6 +75,16 @@ public class GeneralSearchUtility {
                     generalSearchItem.setValue(value+"%");
                 }
             }
+            else if(stringGeneralSearchItemEntry.getValue().getType()==GeneralSearchItemTypeEnum.ArrayLikeStringType){
+                if(value!=""&&!value.toString().equals("")) {
+                    String[] arrayValue=value.toString().split(";");
+                    String temp="";
+                    for (String singleValue : arrayValue) {
+                        temp+="%"+singleValue+"%";
+                    }
+                    generalSearchItem.setValue(temp);
+                }
+            }
         }
     }
 }

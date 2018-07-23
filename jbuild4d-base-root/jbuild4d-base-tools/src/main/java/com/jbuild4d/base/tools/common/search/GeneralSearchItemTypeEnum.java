@@ -9,7 +9,8 @@ public enum GeneralSearchItemTypeEnum {
     LikeStringType("%字符串%",5),
     LeftLikeStringType("%字符串",6),
     RightLikeStringType("字符串%",7),
-    DateStringType("日期字符串",8);
+    DateStringType("日期字符串",8),
+    ArrayLikeStringType("数据字符串",9);
 
     private String _nText;
     private long _nCode;

@@ -667,11 +667,20 @@ var JsonUtility = {
         return toObj;
     },
     CloneSimple:function (source) {
+        var newJson = jQuery.extend(true,{}, source);
+        return newJson;
+        /*debugger;
         var result={}
         for(var key in source){
             result[key]=source[key];
+            if(typeof(source[key])=="object"){
+                for(var keyl2 in source[key]){
+                    if()
+                    result[key][keyl2]=source[key][keyl2];
+                }
+            }
         }
-        return result;
+        return result;*/
     }
 };
 
@@ -1288,7 +1297,24 @@ var SearchUtility={
         LeftLikeStringType:"LeftLikeStringType",
         RightLikeStringType:"RightLikeStringType",
         StringType:"StringType",
-        DataStringType:"DateStringType"
+        DataStringType:"DateStringType",
+        ArrayLikeStringType:"ArrayLikeStringType"
+    },
+    SerializationSearchCondition:function (searchCondition) {
+        var searchConditionClone=JsonUtility.CloneSimple(searchCondition);
+        //debugger;
+        for(var key in searchConditionClone){
+            if(searchConditionClone[key].type==SearchUtility.SearchFieldType.ArrayLikeStringType){
+                if(searchConditionClone[key].value!=null&&searchConditionClone[key].value.length>0) {
+                    searchConditionClone[key].value = searchConditionClone[key].value.join(";");
+                }
+                else{
+                    searchConditionClone[key].value="";
+                }
+            }
+        }
+        //debugger;
+        return JSON.stringify(searchConditionClone);
     }
 }
 
@@ -1437,13 +1463,14 @@ var ListPageUtility={
             }, "json");
         });
     },
+
     IViewTableLoadDataSearch:function (url,pageNum,pageSize,searchCondition,pageAppObj,autoSelectedOldRows,successFunc) {
         //debugger;
         AjaxUtility.Post(url,
             {
                 pageNum: pageNum,
                 pageSize: pageSize,
-                searchCondition:JSON.stringify(searchCondition)
+                searchCondition:SearchUtility.SerializationSearchCondition(searchCondition)
             },
             function (result) {
                 if (result.success) {

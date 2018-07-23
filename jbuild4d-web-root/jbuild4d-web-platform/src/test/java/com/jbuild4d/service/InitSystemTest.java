@@ -139,6 +139,9 @@ public class InitSystemTest extends BaseTest {
             ddglEntity.setDdglBindDicCheckbox1("1");
             ddglEntity.setDdglBindDicCheckbox2("1");
             ddglEntity.setDdglBindDicCheckbox3("0");
+            if(i<=10) {
+                ddglEntity.setDdglBindDicMucheckbox("Checkbox-Value-0;Checkbox-Value-"+i);
+            }
             devDemoGenListService.save(jb4DSession,ddglEntity.getDdglId(),ddglEntity);
         }
     }
