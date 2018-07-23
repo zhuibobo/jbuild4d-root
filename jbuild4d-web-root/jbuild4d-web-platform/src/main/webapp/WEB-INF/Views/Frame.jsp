@@ -214,7 +214,7 @@
                 }
                 //debugger;
                 if(item.menuLeftUrl!=""&&item.menuLeftUrl!=null&&item.menuLeftUrl!="LeftMenu.do"){
-                    this.leftIframeUrl=JB4D.BaseUtility.BuildUrl(item.menuLeftUrl);
+                    this.leftIframeUrl=BaseUtility.BuildUrl(item.menuLeftUrl);
                     return;
                 }
                 else{
