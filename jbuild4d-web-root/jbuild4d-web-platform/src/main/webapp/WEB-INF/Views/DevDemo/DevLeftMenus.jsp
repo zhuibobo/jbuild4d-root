@@ -38,6 +38,12 @@
             }, {
                 name: "通用列表(绑定数据字典)",
                 contentUrl: BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenListBindDictionary/List.do")
+            }, {
+                name: "树形表格",
+                contentUrl: BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenListBindDictionary/List.do")
+            }, {
+                name: "树与列表",
+                contentUrl: BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenListBindDictionary/List.do")
             }]
         }];
         $(document).ready(function () {
