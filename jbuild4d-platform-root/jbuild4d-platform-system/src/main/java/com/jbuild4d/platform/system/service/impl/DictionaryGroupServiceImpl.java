@@ -32,8 +32,13 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
 
     @Override
     public int save(JB4DSession jb4DSession, String id, DictionaryGroupEntity record) throws JBuild4DGenerallyException {
-        //未字典组同时创建
-
+        //判定是否存在同Value的记录
+        DictionaryGroupEntity theSameValueEntity=dictionaryGroupMapper.selectByValue(record.getDictGroupValue());
+        if(theSameValueEntity!=null) {
+            if (!theSameValueEntity.getDictGroupId().equals(record.getDictGroupId())){
+                throw new JBuild4DGenerallyException("已经存在相同Value的记录!");
+            }
+        }
         return super.save(jb4DSession,id, record, new IAddBefore<DictionaryGroupEntity>() {
             @Override
             public DictionaryGroupEntity run(JB4DSession jb4DSession1,DictionaryGroupEntity item) throws JBuild4DGenerallyException {
