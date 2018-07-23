@@ -23,6 +23,21 @@ CREATE TABLE [dbo].[TB4D_DEV_DEMO_GEN_LIST] (
   [DDGL_BIND_DIC_MUCHECKBOX] [NVARCHAR](1000)  NULL
 )
 
+CREATE TABLE [dbo].[TB4D_DEV_DEMO_TREE_TABLE] (
+  [DDTT_ID]                 [NVARCHAR](128)  NOT NULL PRIMARY KEY,
+  [DDTT_KEY]                [NVARCHAR](128)  NULL,
+  [DDTT_NAME]               [NVARCHAR](128)  NULL,
+  [DDTT_VALUE]              [NVARCHAR](500)  NULL,
+  [DDTT_STATUS]             [NVARCHAR](10)   NULL,
+  [DDTT_DESC]               [NVARCHAR](MAX)  NULL,
+  [DDTT_CREATETIME]         [DATETIME]       NULL,
+  [DDTT_ORDER_NUM]          [INT]            NULL,
+  [DDTT_BIND_DIC_SELECTED]  [NVARCHAR](100)  NULL,
+  [DDTT_BIND_DIC_RADIO]     [NVARCHAR](100)  NULL,
+  [DDGL_DDTT_BIND_DIC_MUCHECKBOX] [NVARCHAR](1000)  NULL,
+  [DDGL_PARENT_ID]     [NVARCHAR](100)      NULL,
+  [DDGL_PARENT_IDLIST] [NVARCHAR](1200) NULL
+)
 
 -----------------------------------------系统设置表-----------------------------------------
 CREATE TABLE [dbo].[TB4D_SETTING] (
@@ -39,6 +54,7 @@ CREATE TABLE [dbo].[TB4D_SETTING] (
   [SETTING_ORGAN_NAME] [NVARCHAR](100) NULL,
   [SETTING_API]        [NVARCHAR](100) NULL,
   [SETTING_IS_SYSTEM]  [NVARCHAR](10)  NULL
+
 )
 
 EXECUTE sp_addextendedproperty N'MS_Description', N'系统基础参数设置表', N'user', N'dbo', N'table', N'TB4D_SETTING', NULL, NULL;
