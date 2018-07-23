@@ -13,19 +13,19 @@
       <arg column="DDTT_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="DDTT_BIND_DIC_SELECTED" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDTT_BIND_DIC_RADIO" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="DDGL_DDTT_BIND_DIC_MUCHECKBOX" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="DDGL_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="DDGL_PARENT_IDLIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="DDGL_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="DDTT_DDTT_BIND_DIC_MUCHECKBOX" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_PARENT_IDLIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    DDTT_ID, DDTT_KEY, DDTT_NAME, DDTT_VALUE, DDTT_STATUS, DDTT_DESC, DDTT_CREATETIME,
-    DDTT_ORDER_NUM, DDTT_BIND_DIC_SELECTED, DDTT_BIND_DIC_RADIO, DDGL_DDTT_BIND_DIC_MUCHECKBOX,
-    DDGL_PARENT_ID, DDGL_PARENT_IDLIST, DDGL_CHILD_COUNT
+    DDTT_ID, DDTT_KEY, DDTT_NAME, DDTT_VALUE, DDTT_STATUS, DDTT_DESC, DDTT_CREATETIME, 
+    DDTT_ORDER_NUM, DDTT_BIND_DIC_SELECTED, DDTT_BIND_DIC_RADIO, DDTT_DDTT_BIND_DIC_MUCHECKBOX, 
+    DDTT_PARENT_ID, DDTT_PARENT_IDLIST, DDTT_CHILD_COUNT
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from TB4D_DEV_DEMO_TREE_TABLE
     where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
@@ -35,18 +35,18 @@
     where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity">
-    insert into TB4D_DEV_DEMO_TREE_TABLE (DDTT_ID, DDTT_KEY, DDTT_NAME,
-    DDTT_VALUE, DDTT_STATUS, DDTT_DESC,
-    DDTT_CREATETIME, DDTT_ORDER_NUM, DDTT_BIND_DIC_SELECTED,
-    DDTT_BIND_DIC_RADIO, DDGL_DDTT_BIND_DIC_MUCHECKBOX,
-    DDGL_PARENT_ID, DDGL_PARENT_IDLIST, DDGL_CHILD_COUNT
-    )
-    values (#{ddttId,jdbcType=NVARCHAR}, #{ddttKey,jdbcType=NVARCHAR}, #{ddttName,jdbcType=NVARCHAR},
-    #{ddttValue,jdbcType=NVARCHAR}, #{ddttStatus,jdbcType=NVARCHAR}, #{ddttDesc,jdbcType=NVARCHAR},
-    #{ddttCreatetime,jdbcType=TIMESTAMP}, #{ddttOrderNum,jdbcType=INTEGER}, #{ddttBindDicSelected,jdbcType=NVARCHAR},
-    #{ddttBindDicRadio,jdbcType=NVARCHAR}, #{ddglDdttBindDicMucheckbox,jdbcType=NVARCHAR},
-    #{ddglParentId,jdbcType=NVARCHAR}, #{ddglParentIdlist,jdbcType=NVARCHAR}, #{ddglChildCount,jdbcType=INTEGER}
-    )
+    insert into TB4D_DEV_DEMO_TREE_TABLE (DDTT_ID, DDTT_KEY, DDTT_NAME, 
+      DDTT_VALUE, DDTT_STATUS, DDTT_DESC, 
+      DDTT_CREATETIME, DDTT_ORDER_NUM, DDTT_BIND_DIC_SELECTED, 
+      DDTT_BIND_DIC_RADIO, DDTT_DDTT_BIND_DIC_MUCHECKBOX, 
+      DDTT_PARENT_ID, DDTT_PARENT_IDLIST, DDTT_CHILD_COUNT
+      )
+    values (#{ddttId,jdbcType=NVARCHAR}, #{ddttKey,jdbcType=NVARCHAR}, #{ddttName,jdbcType=NVARCHAR}, 
+      #{ddttValue,jdbcType=NVARCHAR}, #{ddttStatus,jdbcType=NVARCHAR}, #{ddttDesc,jdbcType=NVARCHAR}, 
+      #{ddttCreatetime,jdbcType=TIMESTAMP}, #{ddttOrderNum,jdbcType=INTEGER}, #{ddttBindDicSelected,jdbcType=NVARCHAR}, 
+      #{ddttBindDicRadio,jdbcType=NVARCHAR}, #{ddttDdttBindDicMucheckbox,jdbcType=NVARCHAR}, 
+      #{ddttParentId,jdbcType=NVARCHAR}, #{ddttParentIdlist,jdbcType=NVARCHAR}, #{ddttChildCount,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity">
     insert into TB4D_DEV_DEMO_TREE_TABLE
@@ -81,17 +81,17 @@
       <if test="ddttBindDicRadio != null">
         DDTT_BIND_DIC_RADIO,
       </if>
-      <if test="ddglDdttBindDicMucheckbox != null">
-        DDGL_DDTT_BIND_DIC_MUCHECKBOX,
+      <if test="ddttDdttBindDicMucheckbox != null">
+        DDTT_DDTT_BIND_DIC_MUCHECKBOX,
       </if>
-      <if test="ddglParentId != null">
-        DDGL_PARENT_ID,
+      <if test="ddttParentId != null">
+        DDTT_PARENT_ID,
       </if>
-      <if test="ddglParentIdlist != null">
-        DDGL_PARENT_IDLIST,
+      <if test="ddttParentIdlist != null">
+        DDTT_PARENT_IDLIST,
       </if>
-      <if test="ddglChildCount != null">
-        DDGL_CHILD_COUNT,
+      <if test="ddttChildCount != null">
+        DDTT_CHILD_COUNT,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -125,17 +125,17 @@
       <if test="ddttBindDicRadio != null">
         #{ddttBindDicRadio,jdbcType=NVARCHAR},
       </if>
-      <if test="ddglDdttBindDicMucheckbox != null">
-        #{ddglDdttBindDicMucheckbox,jdbcType=NVARCHAR},
+      <if test="ddttDdttBindDicMucheckbox != null">
+        #{ddttDdttBindDicMucheckbox,jdbcType=NVARCHAR},
       </if>
-      <if test="ddglParentId != null">
-        #{ddglParentId,jdbcType=NVARCHAR},
+      <if test="ddttParentId != null">
+        #{ddttParentId,jdbcType=NVARCHAR},
       </if>
-      <if test="ddglParentIdlist != null">
-        #{ddglParentIdlist,jdbcType=NVARCHAR},
+      <if test="ddttParentIdlist != null">
+        #{ddttParentIdlist,jdbcType=NVARCHAR},
       </if>
-      <if test="ddglChildCount != null">
-        #{ddglChildCount,jdbcType=INTEGER},
+      <if test="ddttChildCount != null">
+        #{ddttChildCount,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -169,17 +169,17 @@
       <if test="ddttBindDicRadio != null">
         DDTT_BIND_DIC_RADIO = #{ddttBindDicRadio,jdbcType=NVARCHAR},
       </if>
-      <if test="ddglDdttBindDicMucheckbox != null">
-        DDGL_DDTT_BIND_DIC_MUCHECKBOX = #{ddglDdttBindDicMucheckbox,jdbcType=NVARCHAR},
+      <if test="ddttDdttBindDicMucheckbox != null">
+        DDTT_DDTT_BIND_DIC_MUCHECKBOX = #{ddttDdttBindDicMucheckbox,jdbcType=NVARCHAR},
       </if>
-      <if test="ddglParentId != null">
-        DDGL_PARENT_ID = #{ddglParentId,jdbcType=NVARCHAR},
+      <if test="ddttParentId != null">
+        DDTT_PARENT_ID = #{ddttParentId,jdbcType=NVARCHAR},
       </if>
-      <if test="ddglParentIdlist != null">
-        DDGL_PARENT_IDLIST = #{ddglParentIdlist,jdbcType=NVARCHAR},
+      <if test="ddttParentIdlist != null">
+        DDTT_PARENT_IDLIST = #{ddttParentIdlist,jdbcType=NVARCHAR},
       </if>
-      <if test="ddglChildCount != null">
-        DDGL_CHILD_COUNT = #{ddglChildCount,jdbcType=INTEGER},
+      <if test="ddttChildCount != null">
+        DDTT_CHILD_COUNT = #{ddttChildCount,jdbcType=INTEGER},
       </if>
     </set>
     where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
@@ -195,10 +195,10 @@
       DDTT_ORDER_NUM = #{ddttOrderNum,jdbcType=INTEGER},
       DDTT_BIND_DIC_SELECTED = #{ddttBindDicSelected,jdbcType=NVARCHAR},
       DDTT_BIND_DIC_RADIO = #{ddttBindDicRadio,jdbcType=NVARCHAR},
-      DDGL_DDTT_BIND_DIC_MUCHECKBOX = #{ddglDdttBindDicMucheckbox,jdbcType=NVARCHAR},
-      DDGL_PARENT_ID = #{ddglParentId,jdbcType=NVARCHAR},
-      DDGL_PARENT_IDLIST = #{ddglParentIdlist,jdbcType=NVARCHAR},
-      DDGL_CHILD_COUNT = #{ddglChildCount,jdbcType=INTEGER}
+      DDTT_DDTT_BIND_DIC_MUCHECKBOX = #{ddttDdttBindDicMucheckbox,jdbcType=NVARCHAR},
+      DDTT_PARENT_ID = #{ddttParentId,jdbcType=NVARCHAR},
+      DDTT_PARENT_IDLIST = #{ddttParentIdlist,jdbcType=NVARCHAR},
+      DDTT_CHILD_COUNT = #{ddttChildCount,jdbcType=INTEGER}
     where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
   </update>
 </mapper>

@@ -23,15 +23,15 @@ public class DevDemoTreeTableEntity {
 
     private String ddttBindDicRadio;
 
-    private String ddglDdttBindDicMucheckbox;
+    private String ddttDdttBindDicMucheckbox;
 
-    private String ddglParentId;
+    private String ddttParentId;
 
-    private String ddglParentIdlist;
+    private String ddttParentIdlist;
 
-    private Integer ddglChildCount;
+    private Integer ddttChildCount;
 
-    public DevDemoTreeTableEntity(String ddttId, String ddttKey, String ddttName, String ddttValue, String ddttStatus, String ddttDesc, Date ddttCreatetime, Integer ddttOrderNum, String ddttBindDicSelected, String ddttBindDicRadio, String ddglDdttBindDicMucheckbox, String ddglParentId, String ddglParentIdlist, Integer ddglChildCount) {
+    public DevDemoTreeTableEntity(String ddttId, String ddttKey, String ddttName, String ddttValue, String ddttStatus, String ddttDesc, Date ddttCreatetime, Integer ddttOrderNum, String ddttBindDicSelected, String ddttBindDicRadio, String ddttDdttBindDicMucheckbox, String ddttParentId, String ddttParentIdlist, Integer ddttChildCount) {
         this.ddttId = ddttId;
         this.ddttKey = ddttKey;
         this.ddttName = ddttName;
@@ -42,10 +42,10 @@ public class DevDemoTreeTableEntity {
         this.ddttOrderNum = ddttOrderNum;
         this.ddttBindDicSelected = ddttBindDicSelected;
         this.ddttBindDicRadio = ddttBindDicRadio;
-        this.ddglDdttBindDicMucheckbox = ddglDdttBindDicMucheckbox;
-        this.ddglParentId = ddglParentId;
-        this.ddglParentIdlist = ddglParentIdlist;
-        this.ddglChildCount = ddglChildCount;
+        this.ddttDdttBindDicMucheckbox = ddttDdttBindDicMucheckbox;
+        this.ddttParentId = ddttParentId;
+        this.ddttParentIdlist = ddttParentIdlist;
+        this.ddttChildCount = ddttChildCount;
     }
 
     public DevDemoTreeTableEntity() {
@@ -132,35 +132,35 @@ public class DevDemoTreeTableEntity {
         this.ddttBindDicRadio = ddttBindDicRadio == null ? null : ddttBindDicRadio.trim();
     }
 
-    public String getDdglDdttBindDicMucheckbox() {
-        return ddglDdttBindDicMucheckbox;
+    public String getDdttDdttBindDicMucheckbox() {
+        return ddttDdttBindDicMucheckbox;
     }
 
-    public void setDdglDdttBindDicMucheckbox(String ddglDdttBindDicMucheckbox) {
-        this.ddglDdttBindDicMucheckbox = ddglDdttBindDicMucheckbox == null ? null : ddglDdttBindDicMucheckbox.trim();
+    public void setDdttDdttBindDicMucheckbox(String ddttDdttBindDicMucheckbox) {
+        this.ddttDdttBindDicMucheckbox = ddttDdttBindDicMucheckbox == null ? null : ddttDdttBindDicMucheckbox.trim();
     }
 
-    public String getDdglParentId() {
-        return ddglParentId;
+    public String getDdttParentId() {
+        return ddttParentId;
     }
 
-    public void setDdglParentId(String ddglParentId) {
-        this.ddglParentId = ddglParentId == null ? null : ddglParentId.trim();
+    public void setDdttParentId(String ddttParentId) {
+        this.ddttParentId = ddttParentId == null ? null : ddttParentId.trim();
     }
 
-    public String getDdglParentIdlist() {
-        return ddglParentIdlist;
+    public String getDdttParentIdlist() {
+        return ddttParentIdlist;
     }
 
-    public void setDdglParentIdlist(String ddglParentIdlist) {
-        this.ddglParentIdlist = ddglParentIdlist == null ? null : ddglParentIdlist.trim();
+    public void setDdttParentIdlist(String ddttParentIdlist) {
+        this.ddttParentIdlist = ddttParentIdlist == null ? null : ddttParentIdlist.trim();
     }
 
-    public Integer getDdglChildCount() {
-        return ddglChildCount;
+    public Integer getDdttChildCount() {
+        return ddttChildCount;
     }
 
-    public void setDdglChildCount(Integer ddglChildCount) {
-        this.ddglChildCount = ddglChildCount;
+    public void setDdttChildCount(Integer ddttChildCount) {
+        this.ddttChildCount = ddttChildCount;
     }
 }

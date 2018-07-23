@@ -37,22 +37,22 @@ public class DevDemoTreeTableServiceImpl extends BaseServiceImpl<DevDemoTreeTabl
         return this.save(jb4DSession, id, entity, new IAddBefore<DevDemoTreeTableEntity>() {
             @Override
             public DevDemoTreeTableEntity run(JB4DSession jb4DSession, DevDemoTreeTableEntity sourceEntity) throws JBuild4DGenerallyException {
-                sourceEntity.setDdglChildCount(0);
+                sourceEntity.setDdttChildCount(0);
                 sourceEntity.setDdttOrderNum(devDemoTreeTableMapper.nextOrderNum());
                 sourceEntity.setDdttCreatetime(new Date());
                 String parentIdList;
                 if(sourceEntity.getDdttId().equals(rootId)){
                     parentIdList="-1";
-                    sourceEntity.setDdglParentId("-1");
+                    sourceEntity.setDdttParentId("-1");
                 }
                 else
                 {
-                    DevDemoTreeTableEntity parentEntity=devDemoTreeTableMapper.selectByPrimaryKey(sourceEntity.getDdglParentId());
-                    parentIdList=parentEntity.getDdglParentIdlist();
-                    parentEntity.setDdglChildCount(parentEntity.getDdglChildCount()+1);
+                    DevDemoTreeTableEntity parentEntity=devDemoTreeTableMapper.selectByPrimaryKey(sourceEntity.getDdttParentId());
+                    parentIdList=parentEntity.getDdttParentIdlist();
+                    parentEntity.setDdttChildCount(parentEntity.getDdttChildCount()+1);
                     devDemoTreeTableMapper.updateByPrimaryKeySelective(parentEntity);
                 }
-                sourceEntity.setDdglParentIdlist(parentIdList+"*"+sourceEntity.getDdttId());
+                sourceEntity.setDdttParentIdlist(parentIdList+"*"+sourceEntity.getDdttId());
                 return sourceEntity;
             }
         });
