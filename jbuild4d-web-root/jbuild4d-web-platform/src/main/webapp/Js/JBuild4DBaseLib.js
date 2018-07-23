@@ -1,5 +1,9 @@
 var console = console || {
     log: function () {
+    },
+    warn:function () {
+    },
+    error:function () {
     }
 };
 //扩展js对象功能
