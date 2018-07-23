@@ -29,7 +29,9 @@ public class DevDemoTreeTableEntity {
 
     private String ddglParentIdlist;
 
-    public DevDemoTreeTableEntity(String ddttId, String ddttKey, String ddttName, String ddttValue, String ddttStatus, String ddttDesc, Date ddttCreatetime, Integer ddttOrderNum, String ddttBindDicSelected, String ddttBindDicRadio, String ddglDdttBindDicMucheckbox, String ddglParentId, String ddglParentIdlist) {
+    private Integer ddglChildCount;
+
+    public DevDemoTreeTableEntity(String ddttId, String ddttKey, String ddttName, String ddttValue, String ddttStatus, String ddttDesc, Date ddttCreatetime, Integer ddttOrderNum, String ddttBindDicSelected, String ddttBindDicRadio, String ddglDdttBindDicMucheckbox, String ddglParentId, String ddglParentIdlist, Integer ddglChildCount) {
         this.ddttId = ddttId;
         this.ddttKey = ddttKey;
         this.ddttName = ddttName;
@@ -43,6 +45,7 @@ public class DevDemoTreeTableEntity {
         this.ddglDdttBindDicMucheckbox = ddglDdttBindDicMucheckbox;
         this.ddglParentId = ddglParentId;
         this.ddglParentIdlist = ddglParentIdlist;
+        this.ddglChildCount = ddglChildCount;
     }
 
     public DevDemoTreeTableEntity() {
@@ -151,5 +154,13 @@ public class DevDemoTreeTableEntity {
 
     public void setDdglParentIdlist(String ddglParentIdlist) {
         this.ddglParentIdlist = ddglParentIdlist == null ? null : ddglParentIdlist.trim();
+    }
+
+    public Integer getDdglChildCount() {
+        return ddglChildCount;
+    }
+
+    public void setDdglChildCount(Integer ddglChildCount) {
+        this.ddglChildCount = ddglChildCount;
     }
 }
