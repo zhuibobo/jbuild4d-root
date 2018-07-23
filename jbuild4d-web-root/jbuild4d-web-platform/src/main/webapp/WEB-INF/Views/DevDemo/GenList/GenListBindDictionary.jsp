@@ -115,6 +115,7 @@
             },500);
         },
         data: {
+            idFieldName:"ddglId",
             dictionaryJson:${dictionaryJson},
             searchCondition:{
                 ddglKey:{
@@ -169,7 +170,7 @@
                     align: "center",
                     key: 'ddglBindDicSelected',
                     render: function (h, params) {
-                        return JB4D.ListPageUtility.IViewTableRenderer.ToDictionaryText(h,appList.dictionaryJson,"DevDemoDictionaryGroupBindSelect", params.row.ddglBindDicSelected);
+                        return ListPageUtility.IViewTableRenderer.ToDictionaryText(h,appList.dictionaryJson,"DevDemoDictionaryGroupBindSelect", params.row.ddglBindDicSelected);
                     }
                 }, {
                     title: 'ddglBindDicRadio',
@@ -177,7 +178,7 @@
                     align: "center",
                     key: 'ddglBindDicRadio',
                     render: function (h, params) {
-                        return JB4D.ListPageUtility.IViewTableRenderer.ToDictionaryText(h,appList.dictionaryJson,"DevDemoDictionaryGroupBindRadio", params.row.ddglBindDicRadio);
+                        return ListPageUtility.IViewTableRenderer.ToDictionaryText(h,appList.dictionaryJson,"DevDemoDictionaryGroupBindRadio", params.row.ddglBindDicRadio);
                     }
                 }, {
                     title: 'ddglStatus',
@@ -190,7 +191,7 @@
                     width: 100,
                     align: "center",
                     render: function (h, params) {
-                        return JB4D.ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddglCreatetime);
+                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddglCreatetime);
                     }
                 }, {
                     title: '操作',
@@ -199,9 +200,9 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,"ddglId",appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"ddglId",appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"ddglId",appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
                         ]);
                     }
                 }
@@ -240,11 +241,11 @@
             },
             statusEnable: function (statusName) {
                 var url = '/PlatForm/DevDemo/DevDemoGenListBindDictionary/StatusChange.do';
-                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
+                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,appList.idFieldName,statusName,appList);
             },
             move:function (type) {
                 var url = '/PlatForm/DevDemo/DevDemoGenListBindDictionary/Move.do';
-                ListPageUtility.IViewMoveFace(url,this.selectionRows,"ddglId",type,appList);
+                ListPageUtility.IViewMoveFace(url,this.selectionRows,appList.idFieldName,type,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;

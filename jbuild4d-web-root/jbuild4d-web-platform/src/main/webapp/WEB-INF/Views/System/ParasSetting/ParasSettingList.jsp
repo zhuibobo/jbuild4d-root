@@ -51,6 +51,7 @@
             },500);
         },
         data: {
+            idFieldName:"settingId",
             columnsConfig: [
                 {
                     type: 'selection',
@@ -94,9 +95,9 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,"settingId",appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"settingId",appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"settingId",appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
                         ]);
                     }
                 }
@@ -136,7 +137,7 @@
             statusEnable: function (statusName) {
                 var url = '/PlatForm/System/ParasSetting/StatusChange.do';
                 //debugger;
-                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"settingId",statusName,appList);
+                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,appList.idFieldName,statusName,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;

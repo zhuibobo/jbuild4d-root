@@ -93,6 +93,7 @@
             },500);
         },
         data: {
+            idFieldName:"ddglId",
             searchCondition:{
                 ddglKey:{
                     value:"",
@@ -148,9 +149,9 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,"ddglId",appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"ddglId",appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"ddglId",appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
                         ]);
                     }
                 }
@@ -189,11 +190,11 @@
             },
             statusEnable: function (statusName) {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/StatusChange.do';
-                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
+                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,appList.idFieldName,statusName,appList);
             },
             move:function (type) {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/Move.do';
-                ListPageUtility.IViewMoveFace(url,this.selectionRows,"ddglId",type,appList);
+                ListPageUtility.IViewMoveFace(url,this.selectionRows,appList.idFieldName,type,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;
