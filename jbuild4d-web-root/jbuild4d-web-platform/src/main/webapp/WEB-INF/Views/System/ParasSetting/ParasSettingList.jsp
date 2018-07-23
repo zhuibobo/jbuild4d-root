@@ -58,39 +58,45 @@
                     align: 'center'
                 },
                 {
-                    title: 'ddglKey',
-                    key: 'ddglKey',
+                    title: 'Key',
+                    key: 'settingKey',
                     align: "center"
                 }, {
-                    title: 'ddglName',
-                    key: 'ddglName',
+                    title: '名称',
+                    key: 'settingName',
                     align: "center"
                 }, {
-                    title: 'ddglDesc',
-                    key: 'ddglDesc'
+                    title: '值',
+                    key: 'settingValue',
+                    align: "center"
                 }, {
-                    title: 'ddglStatus',
+                    title: '状态',
                     width: 100,
                     align: "center",
-                    key: 'ddglStatus'
+                    key: 'settingStatus'
                 }, {
-                    title: 'CT',
-                    key: 'ddglCreatetime',
+                    title: '备注',
+                    width: 100,
+                    align: "center",
+                    key: 'settingDesc'
+                }, {
+                    title: '创建时间',
+                    key: 'settingCreatetime',
                     width: 100,
                     align: "center",
                     render: function (h, params) {
-                        return JB4D.ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddglCreatetime);
+                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.settingCreatetime);
                     }
                 }, {
                     title: '操作',
-                    key: 'dictGroupId',
+                    key: 'settingId',
                     width: 120,
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,"ddglId",appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"ddglId",appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"ddglId",appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,"settingId",appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"settingId",appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"settingId",appList)
                         ]);
                     }
                 }
@@ -108,7 +114,7 @@
             },
             reloadData: function () {
                 var url = '/PlatForm/System/ParasSetting/GetListData.do';
-                JB4D.ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,true,null);
+                ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,true,null);
                 //this.selectionRows=null;
             },
             add: function () {
@@ -125,11 +131,11 @@
             },
             del: function (recordId) {
                 var url = '/PlatForm/System/ParasSetting/Delete.do';
-                JB4D.ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
+                ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
             },
             statusEnable: function (statusName) {
                 var url = '/PlatForm/System/ParasSetting/StatusChange.do';
-                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
+                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;

@@ -161,7 +161,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
 
     @Override
     public void statusChange(JB4DSession jb4DSession,String ids, String status) throws JBuild4DGenerallyException {
-        throw new JBuild4DGenerallyException("BaseServiceImpl<T>未实现statusChange方法，请在具体的Service中实现");
+        throw new JBuild4DGenerallyException("请在"+this.getClass().getSimpleName()+"中实现statusChange方法!");
     }
 
     @Override

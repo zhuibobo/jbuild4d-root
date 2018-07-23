@@ -125,7 +125,7 @@
                     dictValue: '${entity.dictValue}',
                     dictText: '${entity.dictText}',
                     dictDesc: '${entity.dictDesc}',
-                    dictStatus: '${entity.dictStatus}'==''?'启动':'${entity.dictStatus}',
+                    dictStatus: '${entity.dictStatus}'==''?'启用':'${entity.dictStatus}',
                     dictIsSelected:'${entity.dictIsSelected}'==''?'否':'${entity.dictIsSelected}',
                     dictCreateTime:'${entity.dictCreateTime}'==''?DateUtility.GetCurrentDataString("-"):'${entity.dictCreateTime}',
                     dictIssystem: '${entity.dictIssystem}' == '' ? '否' : '${entity.dictIssystem}',

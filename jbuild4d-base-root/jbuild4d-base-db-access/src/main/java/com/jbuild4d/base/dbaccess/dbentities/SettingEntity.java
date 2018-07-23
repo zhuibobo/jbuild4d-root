@@ -1,8 +1,12 @@
 package com.jbuild4d.base.dbaccess.dbentities;
 
+import com.jbuild4d.base.dbaccess.anno.DBKeyField;
+
 import java.util.Date;
 
 public class SettingEntity {
+
+    @DBKeyField
     private String settingId;
 
     private String settingKey;

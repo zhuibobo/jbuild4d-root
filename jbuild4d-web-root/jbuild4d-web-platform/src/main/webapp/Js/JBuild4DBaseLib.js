@@ -1433,6 +1433,9 @@ var ListPageUtility={
                 if (result.success) {
                     pageAppObj.reloadData();
                 }
+                else{
+                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},result.message,null);
+                }
             }, "json"
         );
     },

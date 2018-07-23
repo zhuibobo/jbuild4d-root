@@ -9,6 +9,7 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -52,11 +53,13 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
 
     @Override
     public void statusChange(JB4DSession jb4DSession,String ids,String status) {
-        String[] idArray=ids.split(";");
-        for(int i=0;i<idArray.length;i++){
-            DictionaryGroupEntity dictionaryGroupEntity=getByPrimaryKey(jb4DSession,idArray[i]);
-            dictionaryGroupEntity.setDictGroupStatus(status);
-            dictionaryGroupMapper.updateByPrimaryKeySelective(dictionaryGroupEntity);
+        if(StringUtility.isNotEmpty(ids)) {
+            String[] idArray = ids.split(";");
+            for (int i = 0; i < idArray.length; i++) {
+                DictionaryGroupEntity dictionaryGroupEntity = getByPrimaryKey(jb4DSession, idArray[i]);
+                dictionaryGroupEntity.setDictGroupStatus(status);
+                dictionaryGroupMapper.updateByPrimaryKeySelective(dictionaryGroupEntity);
+            }
         }
     }
 

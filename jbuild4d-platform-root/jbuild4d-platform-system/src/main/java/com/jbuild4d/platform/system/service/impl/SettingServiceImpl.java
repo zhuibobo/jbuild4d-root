@@ -1,13 +1,18 @@
 package com.jbuild4d.platform.system.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.SettingMapper;
+import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
 import com.jbuild4d.base.dbaccess.dbentities.SettingEntity;
+import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.system.service.ISettingService;
 import org.mybatis.spring.SqlSessionTemplate;
+
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,7 +30,29 @@ public class SettingServiceImpl extends BaseServiceImpl<SettingEntity> implement
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, SettingEntity record) throws JBuild4DGenerallyException {
-        return 0;
+    public int save(JB4DSession jb4DSession, String id, SettingEntity entity) throws JBuild4DGenerallyException {
+        return this.save(jb4DSession, id, entity, new IAddBefore<SettingEntity>() {
+            @Override
+            public SettingEntity run(JB4DSession jb4DSession, SettingEntity sourceEntity) throws JBuild4DGenerallyException {
+                sourceEntity.setSettingCreatetime(new Date());
+                sourceEntity.setSettingUserId(jb4DSession.getUserId());
+                sourceEntity.setSettingUserName(jb4DSession.getUserName());
+                sourceEntity.setSettingOrganId(jb4DSession.getOrganId());
+                sourceEntity.setSettingOrganName(jb4DSession.getOrganName());
+                return sourceEntity;
+            }
+        });
+    }
+
+    @Override
+    public void statusChange(JB4DSession jb4DSession, String ids, String status) throws JBuild4DGenerallyException {
+        if(StringUtility.isNotEmpty(ids)) {
+            String[] idArray = ids.split(";");
+            for (int i = 0; i < idArray.length; i++) {
+                SettingEntity entity = getByPrimaryKey(jb4DSession, idArray[i]);
+                entity.setSettingStatus(status);
+                settingMapper.updateByPrimaryKeySelective(entity);
+            }
+        }
     }
 }
