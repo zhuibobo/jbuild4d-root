@@ -80,7 +80,7 @@
                 dictGroupId: '${recordId}',
                 dictGroupValue: '${entity.dictGroupValue}',
                 dictGroupText: '${entity.dictGroupText}',
-                dictGroupCreateTime: '<fmt:formatDate value="${entity.dictGroupCreateTime}" pattern="yyyy-MM-dd" />' == '' ? JB4D.DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.dictGroupCreateTime}" pattern="yyyy-MM-dd" />',
+                dictGroupCreateTime: '<fmt:formatDate value="${entity.dictGroupCreateTime}" pattern="yyyy-MM-dd" />' == '' ? DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.dictGroupCreateTime}" pattern="yyyy-MM-dd" />',
                 dictGroupDesc: '${entity.dictGroupDesc}',
                 dictGroupParentId: '${entity.dictGroupParentId}' == '' ? StringUtility.QueryString("parentId") : '${entity.dictGroupParentId}',
                 dictGroupIssystem: '${entity.dictGroupIssystem}' == '' ? '否' : '${entity.dictGroupIssystem}',

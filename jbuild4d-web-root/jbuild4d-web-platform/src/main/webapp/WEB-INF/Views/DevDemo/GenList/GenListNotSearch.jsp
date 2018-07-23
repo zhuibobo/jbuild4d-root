@@ -134,7 +134,7 @@
             },
             reloadData: function () {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/GetListData.do';
-                JB4D.ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,true,null);
+                ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,true,null);
                 //this.selectionRows=null;
             },
             add: function () {
@@ -151,15 +151,15 @@
             },
             del: function (recordId) {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/Delete.do';
-                JB4D.ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
+                ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
             },
             statusEnable: function (statusName) {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/StatusChange.do';
-                JB4D.ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
+                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,"ddglId",statusName,appList);
             },
             move:function (type) {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/Move.do';
-                JB4D.ListPageUtility.IViewMoveFace(url,this.selectionRows,"ddglId",type,appList);
+                ListPageUtility.IViewMoveFace(url,this.selectionRows,"ddglId",type,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;

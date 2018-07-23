@@ -53,7 +53,7 @@
                 ddglKey: '${entity.ddglKey}',
                 ddglValue: '${entity.ddglValue}',
                 ddglName: '${entity.ddglName}',
-                ddglCreatetime: '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />' == '' ? JB4D.DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />',
+                ddglCreatetime: '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />' == '' ? DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />',
                 ddglDesc: '${entity.ddglDesc}'
             },
             ruleValidate: {

@@ -1344,7 +1344,7 @@ var ListPageUtility={
     IViewTableRenderer:{
         ToDateYYYY_MM_DD:function (h,datetime) {
             var date=new Date(datetime);
-            var dateStr=JB4D.DateUtility.Format(date,'yyyy-MM-dd');
+            var dateStr=DateUtility.Format(date,'yyyy-MM-dd');
             return h('div',dateStr);
         },
         ToStatusEnable:function (h,status) {
@@ -1396,7 +1396,7 @@ var ListPageUtility={
             }
         }
         else{
-            JB4D.DialogUtility.Alert(window, JB4D.DialogUtility.DialogAlertId, {}, "请选中需要操作的行!", null);
+            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选中需要操作的行!", null);
             return {
                 then:function (func) {
                 }
@@ -1412,7 +1412,7 @@ var ListPageUtility={
             }
         }
         else{
-            JB4D.DialogUtility.Alert(window, JB4D.DialogUtility.DialogAlertId, {}, "请选中需要操作的行，每次只能选中一行!", null);
+            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选中需要操作的行，每次只能选中一行!", null);
             return {
                 then:function (func) {
                 }
@@ -1455,7 +1455,7 @@ var ListPageUtility={
     //改变状态封装
     IViewChangeServerStatusFace:function (url,selectionRows,idField, statusName,pageAppObj) {
         this.IViewTableMareSureSelected(selectionRows).then(function (selectionRows) {
-            JB4D.ListPageUtility.IViewChangeServerStatus(url,selectionRows,idField,statusName,pageAppObj);
+            ListPageUtility.IViewChangeServerStatus(url,selectionRows,idField,statusName,pageAppObj);
         });
     },
     IViewTableDeleteRow:function (url, recordId,pageAppObj) {
@@ -1612,21 +1612,4 @@ var DictionaryUtility={
         }
         return this._GroupValueListJsonToSimpleJson;
     }
-}
-
-var JB4D={
-    NsManager:NsManager,
-    BaseUtility:BaseUtility,
-    BrowserInfoUtility:BrowserInfoUtility,
-    BrowserUtility:BrowserUtility,
-    StringUtility:StringUtility,
-    DateUtility:DateUtility,
-    JsonUtility:JsonUtility,
-    PageStyleUtility:PageStyleUtility,
-    XMLUtility:XMLUtility,
-    DialogUtility:DialogUtility,
-    AjaxUtility:AjaxUtility,
-    SearchUtility:SearchUtility,
-    ListPageUtility:ListPageUtility,
-    DetailPageUtility:DetailPageUtility
 }

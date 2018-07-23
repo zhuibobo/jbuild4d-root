@@ -36,7 +36,7 @@
     <i-table :height="listHeight" stripe border :columns="columnsConfig" :data="tableData"
              class="iv-list-table" :highlight-row="true"
              @on-selection-change="selectionChange"></i-table>
-    <div style="float: right;">
+    <div style="float: right;" id="list-pager-wrap">
         <page @on-change="changePage" :current.sync="pageNum" :page-size="pageSize" show-total
               :total="pageTotal"></page>
     </div>
@@ -46,26 +46,11 @@
         el: "#appList",
         mounted: function () {
             this.reloadData();
+            window.setTimeout(function () {
+                appList.listHeight=ListPageUtility.GetGeneralPageHeight(0);
+            },500);
         },
         data: {
-            searchCondition:{
-                ddglKey:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.LikeStringType
-                },
-                ddglName:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.StringType
-                },
-                ddglCreatetime_s:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.DataStringType
-                },
-                ddglCreatetime_e:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.DataStringType
-                }
-            },
             columnsConfig: [
                 {
                     type: 'selection',
@@ -73,23 +58,21 @@
                     align: 'center'
                 },
                 {
-                    title: '键值',
-                    width: 200,
-                    key: 'settingKey',
+                    title: 'ddglKey',
+                    key: 'ddglKey',
                     align: "center"
                 }, {
-                    title: '名称',
-                    width: 200,
-                    key: 'settingName',
+                    title: 'ddglName',
+                    key: 'ddglName',
                     align: "center"
                 }, {
-                    title: '使用值',
-                    key: 'settingValue'
+                    title: 'ddglDesc',
+                    key: 'ddglDesc'
                 }, {
-                    title: '状态',
+                    title: 'ddglStatus',
                     width: 100,
                     align: "center",
-                    key: 'settingStatus'
+                    key: 'ddglStatus'
                 }, {
                     title: 'CT',
                     key: 'ddglCreatetime',
@@ -117,7 +100,7 @@
             pageTotal: 0,
             pageSize: 12,
             pageNum: 1,
-            listHeight: JB4D.ListPageUtility.GetGeneralPageHeight(JB4D.ListPageUtility.GetFixHeight())
+            listHeight: 300
         },
         methods: {
             selectionChange: function (selection) {
@@ -152,10 +135,6 @@
                 this.pageNum = pageNum;
                 this.reloadData();
                 this.selectionRows=null;
-            },
-            search:function () {
-                this.pageNum=1;
-                this.reloadData();
             }
         }
     });
