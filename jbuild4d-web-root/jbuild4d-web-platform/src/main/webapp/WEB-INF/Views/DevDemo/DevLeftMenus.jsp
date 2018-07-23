@@ -40,7 +40,7 @@
                 contentUrl: BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenListBindDictionary/List.do")
             }, {
                 name: "树形表格",
-                contentUrl: BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenListBindDictionary/List.do")
+                contentUrl: BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoTreeTable/List.do")
             }, {
                 name: "树与列表",
                 contentUrl: BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenListBindDictionary/List.do")
