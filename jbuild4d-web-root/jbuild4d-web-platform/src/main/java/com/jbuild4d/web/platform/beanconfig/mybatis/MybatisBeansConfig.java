@@ -108,6 +108,11 @@ public class MybatisBeansConfig {
         return sqlSessionTemplate.getMapper(SettingMapper.class);
     }
 
+    @Bean
+    public OperationLogMapper operationLogMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(OperationLogMapper.class);
+    }
+
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);
