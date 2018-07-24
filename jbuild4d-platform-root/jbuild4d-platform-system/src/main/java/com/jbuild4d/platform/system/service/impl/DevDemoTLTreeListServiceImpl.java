@@ -3,12 +3,15 @@ package com.jbuild4d.platform.system.service.impl;
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dao.DevDemoTLTreeListMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeListEntity;
+import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.system.service.IDevDemoTLTreeListService;
 import org.mybatis.spring.SqlSessionTemplate;
+
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +30,13 @@ public class DevDemoTLTreeListServiceImpl extends BaseServiceImpl<DevDemoTLTreeL
 
     @Override
     public int save(JB4DSession jb4DSession, String id, DevDemoTLTreeListEntity entity) throws JBuild4DGenerallyException {
-        return 0;
+        return this.save(jb4DSession, id, entity, new IAddBefore<DevDemoTLTreeListEntity>() {
+            @Override
+            public DevDemoTLTreeListEntity run(JB4DSession jb4DSession, DevDemoTLTreeListEntity sourceEntity) throws JBuild4DGenerallyException {
+                sourceEntity.setDdtlCreatetime(new Date());
+                sourceEntity.setDdtlOrderNum(devDemoTLTreeListMapper.nextOrderNum());
+                return sourceEntity;
+            }
+        });
     }
 }
