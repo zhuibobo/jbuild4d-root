@@ -127,6 +127,7 @@
                         appList.treeSelectedNode=treeNode;
                         appList.searchCondition.ddtlGroupId.value=appList.treeSelectedNode[appList.treeIdFieldName];
                         appList.reloadData();
+                        appList.selectionRows=null;
                         //appList.reloadTreeTableData();
                         //}
                     },
