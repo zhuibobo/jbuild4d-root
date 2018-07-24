@@ -15,22 +15,10 @@
     <%@ include file="/WEB-INF/Views/TagLibs/ZTreeLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/TreeTableLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
-    <style>
-        .left-outer-c{
-            position: absolute;left: 0px;top: 0px;width:185px;bottom: 0px;
-            border: #0B61A4 1px solid;
-            border-radius: 4px;
-        }
-        .right-outer-c{
-            position: absolute;left: 200px;top: 0px;right:10px;bottom: 0px;
-            border: #0B61A4 1px solid;
-            border-radius: 4px;
-        }
-    </style>
 </head>
 <body>
-    <div id="appList">
-        <div class="left-outer-c">
+    <div id="appList" class="list-2column">
+        <div class="left-outer-wrap-c">
             <div class="left-page-c">
                 <div class="tool-bar-c">
                     <div alt="新增分类组" title="新增分类组" class="add" @click="addGroup()"></div>
@@ -43,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="right-outer-c">
+        <div class="right-outer-wrap-c">
             <div style="width: 100%">
                 <div style="float: right;margin-bottom: 15px;margin-top: 10px;margin-right: 10px">
                     <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
