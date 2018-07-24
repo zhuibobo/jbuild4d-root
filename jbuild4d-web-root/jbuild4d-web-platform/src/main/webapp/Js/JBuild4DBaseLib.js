@@ -1337,7 +1337,7 @@ var ListPageUtility={
         //alert(pageHeight);
         if($("#list-simple-search-wrap").length>0){
             //alert($("#list-button-wrap").height()+"||"+$("#list-simple-search-wrap").outerHeight());
-            pageHeight=pageHeight-$("#list-simple-search-wrap").outerHeight()-$("#list-button-wrap").outerHeight()-$("#list-pager-wrap").outerHeight()-30;
+            pageHeight=pageHeight-$("#list-simple-search-wrap").outerHeight()+fixHeight-$("#list-button-wrap").outerHeight()-$("#list-pager-wrap").outerHeight()-30;
         }
         else {
             pageHeight=pageHeight-$("#list-button-wrap").outerHeight()+fixHeight-$("#list-pager-wrap").outerHeight()-30;
