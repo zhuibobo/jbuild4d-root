@@ -8,14 +8,8 @@ import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.impl.GeneralServiceImpl;
 import com.jbuild4d.base.service.impl.SQLBuilderServiceImpl;
-import com.jbuild4d.platform.system.service.IDictionaryGroupService;
-import com.jbuild4d.platform.system.service.IDictionaryService;
-import com.jbuild4d.platform.system.service.IMenuService;
-import com.jbuild4d.platform.system.service.ISettingService;
-import com.jbuild4d.platform.system.service.impl.DictionaryGroupServiceImpl;
-import com.jbuild4d.platform.system.service.impl.DictionaryServiceImpl;
-import com.jbuild4d.platform.system.service.impl.MenuServiceImpl;
-import com.jbuild4d.platform.system.service.impl.SettingServiceImpl;
+import com.jbuild4d.platform.system.service.*;
+import com.jbuild4d.platform.system.service.impl.*;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,6 +59,12 @@ public class SystemBeansConfig {
     @Bean
     public ISettingService settingService(ISQLBuilderService _sqlBuilderService, SettingMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
         ISettingService bean=new SettingServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
+    public IOperationLogService operationLogService(ISQLBuilderService _sqlBuilderService, OperationLogMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        IOperationLogService bean=new OperationLogServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
 }
