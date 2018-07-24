@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.DevDemoTLTreeACMapper">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity">
+    <constructor>
+      <idArg column="DDTT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_KEY" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_CREATETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="DDTT_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="DDTT_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_PARENT_IDLIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTT_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    DDTT_ID, DDTT_KEY, DDTT_NAME, DDTT_VALUE, DDTT_STATUS, DDTT_DESC, DDTT_CREATETIME, 
+    DDTT_ORDER_NUM, DDTT_PARENT_ID, DDTT_PARENT_IDLIST, DDTT_CHILD_COUNT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB4D_DEV_DEMO_TL_TREE
+    where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB4D_DEV_DEMO_TL_TREE
+    where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity">
+    insert into TB4D_DEV_DEMO_TL_TREE (DDTT_ID, DDTT_KEY, DDTT_NAME, 
+      DDTT_VALUE, DDTT_STATUS, DDTT_DESC, 
+      DDTT_CREATETIME, DDTT_ORDER_NUM, DDTT_PARENT_ID, 
+      DDTT_PARENT_IDLIST, DDTT_CHILD_COUNT)
+    values (#{ddttId,jdbcType=NVARCHAR}, #{ddttKey,jdbcType=NVARCHAR}, #{ddttName,jdbcType=NVARCHAR}, 
+      #{ddttValue,jdbcType=NVARCHAR}, #{ddttStatus,jdbcType=NVARCHAR}, #{ddttDesc,jdbcType=NVARCHAR}, 
+      #{ddttCreatetime,jdbcType=TIMESTAMP}, #{ddttOrderNum,jdbcType=INTEGER}, #{ddttParentId,jdbcType=NVARCHAR}, 
+      #{ddttParentIdlist,jdbcType=NVARCHAR}, #{ddttChildCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity">
+    insert into TB4D_DEV_DEMO_TL_TREE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ddttId != null">
+        DDTT_ID,
+      </if>
+      <if test="ddttKey != null">
+        DDTT_KEY,
+      </if>
+      <if test="ddttName != null">
+        DDTT_NAME,
+      </if>
+      <if test="ddttValue != null">
+        DDTT_VALUE,
+      </if>
+      <if test="ddttStatus != null">
+        DDTT_STATUS,
+      </if>
+      <if test="ddttDesc != null">
+        DDTT_DESC,
+      </if>
+      <if test="ddttCreatetime != null">
+        DDTT_CREATETIME,
+      </if>
+      <if test="ddttOrderNum != null">
+        DDTT_ORDER_NUM,
+      </if>
+      <if test="ddttParentId != null">
+        DDTT_PARENT_ID,
+      </if>
+      <if test="ddttParentIdlist != null">
+        DDTT_PARENT_IDLIST,
+      </if>
+      <if test="ddttChildCount != null">
+        DDTT_CHILD_COUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ddttId != null">
+        #{ddttId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttKey != null">
+        #{ddttKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttName != null">
+        #{ddttName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttValue != null">
+        #{ddttValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttStatus != null">
+        #{ddttStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttDesc != null">
+        #{ddttDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttCreatetime != null">
+        #{ddttCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddttOrderNum != null">
+        #{ddttOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="ddttParentId != null">
+        #{ddttParentId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttParentIdlist != null">
+        #{ddttParentIdlist,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttChildCount != null">
+        #{ddttChildCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity">
+    update TB4D_DEV_DEMO_TL_TREE
+    <set>
+      <if test="ddttKey != null">
+        DDTT_KEY = #{ddttKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttName != null">
+        DDTT_NAME = #{ddttName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttValue != null">
+        DDTT_VALUE = #{ddttValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttStatus != null">
+        DDTT_STATUS = #{ddttStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttDesc != null">
+        DDTT_DESC = #{ddttDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttCreatetime != null">
+        DDTT_CREATETIME = #{ddttCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddttOrderNum != null">
+        DDTT_ORDER_NUM = #{ddttOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="ddttParentId != null">
+        DDTT_PARENT_ID = #{ddttParentId,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttParentIdlist != null">
+        DDTT_PARENT_IDLIST = #{ddttParentIdlist,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddttChildCount != null">
+        DDTT_CHILD_COUNT = #{ddttChildCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity">
+    update TB4D_DEV_DEMO_TL_TREE
+    set DDTT_KEY = #{ddttKey,jdbcType=NVARCHAR},
+      DDTT_NAME = #{ddttName,jdbcType=NVARCHAR},
+      DDTT_VALUE = #{ddttValue,jdbcType=NVARCHAR},
+      DDTT_STATUS = #{ddttStatus,jdbcType=NVARCHAR},
+      DDTT_DESC = #{ddttDesc,jdbcType=NVARCHAR},
+      DDTT_CREATETIME = #{ddttCreatetime,jdbcType=TIMESTAMP},
+      DDTT_ORDER_NUM = #{ddttOrderNum,jdbcType=INTEGER},
+      DDTT_PARENT_ID = #{ddttParentId,jdbcType=NVARCHAR},
+      DDTT_PARENT_IDLIST = #{ddttParentIdlist,jdbcType=NVARCHAR},
+      DDTT_CHILD_COUNT = #{ddttChildCount,jdbcType=INTEGER}
+    where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
+  </update>
+</mapper>
