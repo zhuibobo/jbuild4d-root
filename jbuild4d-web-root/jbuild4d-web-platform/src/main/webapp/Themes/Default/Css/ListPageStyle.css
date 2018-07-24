@@ -80,7 +80,7 @@
     position: absolute;
     left: 0px;
     top: 0px;
-    width: 185px;
+    width: 235px;
     bottom: 0px;
     border: #0B61A4 1px solid;
     border-radius: 4px;
@@ -88,7 +88,7 @@
 
 .list-2column .right-outer-wrap-c {
     position: absolute;
-    left: 200px;
+    left: 250px;
     top: 0px;
     right: 10px;
     bottom: 0px;

@@ -52,7 +52,7 @@
     </div>
     <div id="list-button-wrap" class="list-button-outer-wrap">
         <div class="list-button-inner-wrap">
-            <i-button type="primary" @click="add()">
+            <i-button type="success" @click="add()">
                 <Icon type="plus"></Icon>
                 新增
             </i-button>
