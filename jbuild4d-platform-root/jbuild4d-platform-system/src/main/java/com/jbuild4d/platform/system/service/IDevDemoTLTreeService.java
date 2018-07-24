@@ -2,6 +2,8 @@ package com.jbuild4d.platform.system.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity;
 import com.jbuild4d.base.service.IBaseService;
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSession;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,4 +12,5 @@ import com.jbuild4d.base.service.IBaseService;
  * To change this template use File | Settings | File Templates.
  */
 public interface IDevDemoTLTreeService extends IBaseService<DevDemoTLTreeEntity> {
+    DevDemoTLTreeEntity createRootNode(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
 }

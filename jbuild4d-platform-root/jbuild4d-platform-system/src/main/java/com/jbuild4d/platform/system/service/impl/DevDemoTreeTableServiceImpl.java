@@ -27,6 +27,7 @@ public class DevDemoTreeTableServiceImpl extends BaseServiceImpl<DevDemoTreeTabl
     DevDemoTreeTableMapper devDemoTreeTableMapper;
 
     private String rootId="0";
+    private String rootParentId="-1";
 
     public DevDemoTreeTableServiceImpl(DevDemoTreeTableMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) {
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
@@ -43,8 +44,8 @@ public class DevDemoTreeTableServiceImpl extends BaseServiceImpl<DevDemoTreeTabl
                 sourceEntity.setDdttCreatetime(new Date());
                 String parentIdList;
                 if(sourceEntity.getDdttId().equals(rootId)){
-                    parentIdList="-1";
-                    sourceEntity.setDdttParentId("-1");
+                    parentIdList=rootParentId;
+                    sourceEntity.setDdttParentId(rootParentId);
                 }
                 else
                 {
