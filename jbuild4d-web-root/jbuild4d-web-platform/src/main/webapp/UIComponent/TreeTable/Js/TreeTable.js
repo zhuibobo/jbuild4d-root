@@ -143,9 +143,14 @@ var TreeTable={
             var _cc = _c.Templates[i];
             var _cd = rowData[_cc.FieldName];
             var _width=_cc.Width;
-
+            var _renderer=_cc.Renderer;
+            //debugger;
             var $td=$("<td bindField=\""+_cc.FieldName+"\">" + _cd + "</td>").css("width",_width);
-
+            if(_renderer=="DateTime"){
+                var date=new Date(_cd);
+                var dateStr=DateUtility.Format(date,'yyyy-MM-dd');
+                $td.text(dateStr);
+            }
             if(_cc.TextAlign){
                 $td.css("textAlign",_cc.TextAlign);
             }

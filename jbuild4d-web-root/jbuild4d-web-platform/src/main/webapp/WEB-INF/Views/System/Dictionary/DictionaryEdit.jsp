@@ -127,7 +127,7 @@
                     dictDesc: '${entity.dictDesc}',
                     dictStatus: '${entity.dictStatus}'==''?'启用':'${entity.dictStatus}',
                     dictIsSelected:'${entity.dictIsSelected}'==''?'否':'${entity.dictIsSelected}',
-                    dictCreateTime:'${entity.dictCreateTime}'==''?DateUtility.GetCurrentDataString("-"):'${entity.dictCreateTime}',
+                    dictCreateTime:'<fmt:formatDate value="${entity.dictCreateTime}" pattern="yyyy-MM-dd" />'==''?DateUtility.GetCurrentDataString("-"): '<fmt:formatDate value="${entity.dictCreateTime}" pattern="yyyy-MM-dd" />',
                     dictIssystem: '${entity.dictIssystem}' == '' ? '否' : '${entity.dictIssystem}',
                     dictDelEnable: '${entity.dictDelEnable}' == '' ? '是' : '${entity.dictDelEnable}'
                 },

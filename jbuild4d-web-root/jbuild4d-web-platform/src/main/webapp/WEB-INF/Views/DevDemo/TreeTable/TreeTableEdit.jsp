@@ -77,7 +77,7 @@
                 ddttName: '${entity.ddttName}',
                 ddttDesc: '${entity.ddttDesc}',
                 ddttStatus: '${entity.ddttStatus}'==''?'启用':'${entity.ddttStatus}',
-                ddttCreatetime:'${entity.ddttCreatetime}'==''?DateUtility.GetCurrentDataString("-"):'${entity.ddttCreatetime}'
+                ddttCreatetime:'<fmt:formatDate value="${entity.ddttCreatetime}" pattern="yyyy-MM-dd" />'==''?DateUtility.GetCurrentDataString("-"): '<fmt:formatDate value="${entity.ddttCreatetime}" pattern="yyyy-MM-dd" />'
             },
             ruleValidate: {
                 ddttValue: [

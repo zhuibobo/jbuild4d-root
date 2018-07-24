@@ -70,6 +70,15 @@
                             Width:"40",
                             TextAlign:"center"
                         },{
+                            Title:"创建时间",
+                            FieldName:"ddttCreatetime",
+                            TitleCellClassName:"TitleCell",
+                            Renderer:"DateTime",
+                            Hidden:false,
+                            TitleCellAttrs:{},
+                            Width:"40",
+                            TextAlign:"center"
+                        },{
                             Title:"字典状态",
                             FieldName:"ddttStatus",
                             TitleCellClassName:"TitleCell",
@@ -114,33 +123,28 @@
                     },"json");
                 },
                 mareSureSelectedTreeTableRow:function (actionText) {
-                    if(this.treeTableObject!=null) {
-                        var nodeData = this.treeTableObject.GetSelectedRowData();
-                        if (nodeData == null) {
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要"+actionText+"的字典!", null);
-                            return {
-                                then:function (func) {
-                                }
-                            }
-                        }
-                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能编辑根节点!", null);
-                            return {
-                                then:function (func) {
-                                }
-                            }
-                        }
+                    var nodeData = this.treeTableObject.GetSelectedRowData();
+                    if (nodeData == null) {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要" + actionText + "的节点!", null);
                         return {
-                            then:function (func) {
-                                func(nodeData);
+                            then: function (func) {
                             }
                         }
                     }
-                    else{
-                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请先选定分组!", null);
+                    if (nodeData[appList.treeTableConfig.IdField] == "0") {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能编辑根节点!", null);
+                        return {
+                            then: function (func) {
+                            }
+                        }
                     }
                     return {
-                        then:function (func) {
+                        then: function (func) {
+                            func(nodeData);
+                        }
+                    }
+                    return {
+                        then: function (func) {
                         }
                     }
                 },
@@ -228,27 +232,10 @@
                     });
                 },
                 newTreeTableNode : function (newData) {
-                    /*var newData={
-                        ddttId:ddttId,
-                        ddttKey:ddttKey,
-                        ddttValue:ddttValue,
-                        ddttName:ddttName,
-                        ddttCreatetime:ddttCreatetime,
-                        ddttStatus:ddttStatus
-                    };*/
                     this.treeTableObject.AppendChildRowToCurrentSelectedRow(newData);
                 },
                 updateTreeTableNode : function (newData) {
-                    //debugger;
-                    /*var newData={
-                        ddttId:ddttId,
-                        ddttKey:ddttKey,
-                        ddttValue:ddttValue,
-                        ddttName:ddttName,
-                        ddttCreatetime:ddttCreatetime,
-                        ddttStatus:ddttStatus
-                    };*/
-                    this.treeTableObject.UpdateToRow(ddttId,newData);
+                    this.treeTableObject.UpdateToRow(newData[appList.treeTableConfig.IdField],newData);
                 }
             }
         });
