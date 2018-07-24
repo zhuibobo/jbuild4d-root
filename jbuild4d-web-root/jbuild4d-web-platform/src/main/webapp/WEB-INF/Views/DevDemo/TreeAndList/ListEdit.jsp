@@ -17,6 +17,9 @@
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
     <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
+        <form-item label="ddtlGroupId：">
+            <i-input v-model="formValidate.ddtlGroupId"></i-input>
+        </form-item>
         <form-item label="ddtlKey：" prop="ddtlKey">
             <i-input v-model="formValidate.ddtlKey"></i-input>
         </form-item>
@@ -60,6 +63,9 @@
             if(this.status=="view") {
                 DetailPageUtility.IViewPageToViewStatus();
             }
+            if(this.formValidate.ddtlGroupId==""){
+                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "分组ID不能为空!",null);
+            }
         },
         data: {
             formValidate: {
@@ -69,7 +75,8 @@
                 ddtlName: '${entity.ddtlName}',
                 ddtlStatus: '${entity.ddtlStatus}' == '' ? '启用' : '${entity.ddtlStatus}',
                 ddtlCreatetime: '<fmt:formatDate value="${entity.ddtlCreatetime}" pattern="yyyy-MM-dd" />' == '' ? DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.ddtlCreatetime}" pattern="yyyy-MM-dd" />',
-                ddtlDesc: '${entity.ddtlDesc}'
+                ddtlDesc: '${entity.ddtlDesc}',
+                ddtlGroupId:'${entity.ddtlGroupId}' == '' ? StringUtility.QueryString("groupId") : '${entity.ddtlGroupId}',
             },
             ruleValidate: {
                 ddtlValue: [

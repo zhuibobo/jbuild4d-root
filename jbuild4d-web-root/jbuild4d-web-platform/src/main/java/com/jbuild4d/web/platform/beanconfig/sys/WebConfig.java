@@ -1,6 +1,7 @@
 package com.jbuild4d.web.platform.beanconfig.sys;
 
 import com.jbuild4d.base.tools.common.PathUtility;
+import com.jbuild4d.web.platform.interceptor.LoginedInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -64,7 +65,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //registry.addInterceptor(new InterceptorDemo1());
+        registry.addInterceptor(new LoginedInterceptor());
     }
 
     @Override

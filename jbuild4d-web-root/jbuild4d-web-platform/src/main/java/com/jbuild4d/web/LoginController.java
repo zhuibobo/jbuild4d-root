@@ -38,6 +38,14 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/RedirectLogin", method = RequestMethod.GET)
+    public ModelAndView RedirectLogin(HttpServletRequest request) {
+
+        ModelAndView modelAndView=new ModelAndView("SessionTimeout");
+        request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/ValidateAccount", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo validateAccount(String account, String password,HttpServletRequest request) throws IOException, ParseException {
