@@ -40,6 +40,9 @@ public class InitSystemTest extends BaseTest {
     private IDevDemoTreeTableService devDemoTreeTableService;
 
     @Autowired
+    private IDevDemoTLTreeService devDemoTLTreeService;
+
+    @Autowired
     private IDictionaryService dictionaryService;
 
     @Test
@@ -160,6 +163,9 @@ public class InitSystemTest extends BaseTest {
         //DevDemoTreeTableEntity treeTableEntity=new DevDemoTreeTableEntity();
         devDemoTreeTableService.deleteByKey(jb4DSession,"0");
         DevDemoTreeTableEntity treeTableRootEntity=devDemoTreeTableService.createRootNode(jb4DSession);
+
+        devDemoTLTreeService.deleteByKey(jb4DSession,"0");
+        devDemoTLTreeService.createRootNode(jb4DSession);
     }
 
     public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){
