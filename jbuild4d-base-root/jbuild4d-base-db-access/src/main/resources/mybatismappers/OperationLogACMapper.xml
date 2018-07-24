@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.OperationLogMapper">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.OperationLogEntity">
+    <constructor>
+      <idArg column="LOG_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="LOG_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="LOG_SYSTEM_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_MODULE_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_ACTION_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_DATA" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_USER_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_USER_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_IP" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="LOG_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    LOG_ID, LOG_TEXT, LOG_ORDER_NUM, LOG_CREATE_TIME, LOG_SYSTEM_NAME, LOG_MODULE_NAME, 
+    LOG_ACTION_NAME, LOG_DATA, LOG_USER_ID, LOG_USER_NAME, LOG_ORGAN_ID, LOG_ORGAN_NAME, 
+    LOG_IP, LOG_TYPE, LOG_CLASS_NAME, LOG_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB4D_OPERATION_LOG
+    where LOG_ID = #{logId,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB4D_OPERATION_LOG
+    where LOG_ID = #{logId,jdbcType=NVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.OperationLogEntity">
+    insert into TB4D_OPERATION_LOG (LOG_ID, LOG_TEXT, LOG_ORDER_NUM, 
+      LOG_CREATE_TIME, LOG_SYSTEM_NAME, LOG_MODULE_NAME, 
+      LOG_ACTION_NAME, LOG_DATA, LOG_USER_ID, 
+      LOG_USER_NAME, LOG_ORGAN_ID, LOG_ORGAN_NAME, 
+      LOG_IP, LOG_TYPE, LOG_CLASS_NAME, 
+      LOG_STATUS)
+    values (#{logId,jdbcType=NVARCHAR}, #{logText,jdbcType=NVARCHAR}, #{logOrderNum,jdbcType=INTEGER}, 
+      #{logCreateTime,jdbcType=TIMESTAMP}, #{logSystemName,jdbcType=NVARCHAR}, #{logModuleName,jdbcType=NVARCHAR}, 
+      #{logActionName,jdbcType=NVARCHAR}, #{logData,jdbcType=NVARCHAR}, #{logUserId,jdbcType=NVARCHAR}, 
+      #{logUserName,jdbcType=NVARCHAR}, #{logOrganId,jdbcType=NVARCHAR}, #{logOrganName,jdbcType=NVARCHAR}, 
+      #{logIp,jdbcType=NVARCHAR}, #{logType,jdbcType=NVARCHAR}, #{logClassName,jdbcType=NVARCHAR}, 
+      #{logStatus,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.OperationLogEntity">
+    insert into TB4D_OPERATION_LOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        LOG_ID,
+      </if>
+      <if test="logText != null">
+        LOG_TEXT,
+      </if>
+      <if test="logOrderNum != null">
+        LOG_ORDER_NUM,
+      </if>
+      <if test="logCreateTime != null">
+        LOG_CREATE_TIME,
+      </if>
+      <if test="logSystemName != null">
+        LOG_SYSTEM_NAME,
+      </if>
+      <if test="logModuleName != null">
+        LOG_MODULE_NAME,
+      </if>
+      <if test="logActionName != null">
+        LOG_ACTION_NAME,
+      </if>
+      <if test="logData != null">
+        LOG_DATA,
+      </if>
+      <if test="logUserId != null">
+        LOG_USER_ID,
+      </if>
+      <if test="logUserName != null">
+        LOG_USER_NAME,
+      </if>
+      <if test="logOrganId != null">
+        LOG_ORGAN_ID,
+      </if>
+      <if test="logOrganName != null">
+        LOG_ORGAN_NAME,
+      </if>
+      <if test="logIp != null">
+        LOG_IP,
+      </if>
+      <if test="logType != null">
+        LOG_TYPE,
+      </if>
+      <if test="logClassName != null">
+        LOG_CLASS_NAME,
+      </if>
+      <if test="logStatus != null">
+        LOG_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=NVARCHAR},
+      </if>
+      <if test="logText != null">
+        #{logText,jdbcType=NVARCHAR},
+      </if>
+      <if test="logOrderNum != null">
+        #{logOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="logCreateTime != null">
+        #{logCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logSystemName != null">
+        #{logSystemName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logModuleName != null">
+        #{logModuleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logActionName != null">
+        #{logActionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logData != null">
+        #{logData,jdbcType=NVARCHAR},
+      </if>
+      <if test="logUserId != null">
+        #{logUserId,jdbcType=NVARCHAR},
+      </if>
+      <if test="logUserName != null">
+        #{logUserName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logOrganId != null">
+        #{logOrganId,jdbcType=NVARCHAR},
+      </if>
+      <if test="logOrganName != null">
+        #{logOrganName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logIp != null">
+        #{logIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=NVARCHAR},
+      </if>
+      <if test="logClassName != null">
+        #{logClassName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logStatus != null">
+        #{logStatus,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.OperationLogEntity">
+    update TB4D_OPERATION_LOG
+    <set>
+      <if test="logText != null">
+        LOG_TEXT = #{logText,jdbcType=NVARCHAR},
+      </if>
+      <if test="logOrderNum != null">
+        LOG_ORDER_NUM = #{logOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="logCreateTime != null">
+        LOG_CREATE_TIME = #{logCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logSystemName != null">
+        LOG_SYSTEM_NAME = #{logSystemName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logModuleName != null">
+        LOG_MODULE_NAME = #{logModuleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logActionName != null">
+        LOG_ACTION_NAME = #{logActionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logData != null">
+        LOG_DATA = #{logData,jdbcType=NVARCHAR},
+      </if>
+      <if test="logUserId != null">
+        LOG_USER_ID = #{logUserId,jdbcType=NVARCHAR},
+      </if>
+      <if test="logUserName != null">
+        LOG_USER_NAME = #{logUserName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logOrganId != null">
+        LOG_ORGAN_ID = #{logOrganId,jdbcType=NVARCHAR},
+      </if>
+      <if test="logOrganName != null">
+        LOG_ORGAN_NAME = #{logOrganName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logIp != null">
+        LOG_IP = #{logIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="logType != null">
+        LOG_TYPE = #{logType,jdbcType=NVARCHAR},
+      </if>
+      <if test="logClassName != null">
+        LOG_CLASS_NAME = #{logClassName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logStatus != null">
+        LOG_STATUS = #{logStatus,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.OperationLogEntity">
+    update TB4D_OPERATION_LOG
+    set LOG_TEXT = #{logText,jdbcType=NVARCHAR},
+      LOG_ORDER_NUM = #{logOrderNum,jdbcType=INTEGER},
+      LOG_CREATE_TIME = #{logCreateTime,jdbcType=TIMESTAMP},
+      LOG_SYSTEM_NAME = #{logSystemName,jdbcType=NVARCHAR},
+      LOG_MODULE_NAME = #{logModuleName,jdbcType=NVARCHAR},
+      LOG_ACTION_NAME = #{logActionName,jdbcType=NVARCHAR},
+      LOG_DATA = #{logData,jdbcType=NVARCHAR},
+      LOG_USER_ID = #{logUserId,jdbcType=NVARCHAR},
+      LOG_USER_NAME = #{logUserName,jdbcType=NVARCHAR},
+      LOG_ORGAN_ID = #{logOrganId,jdbcType=NVARCHAR},
+      LOG_ORGAN_NAME = #{logOrganName,jdbcType=NVARCHAR},
+      LOG_IP = #{logIp,jdbcType=NVARCHAR},
+      LOG_TYPE = #{logType,jdbcType=NVARCHAR},
+      LOG_CLASS_NAME = #{logClassName,jdbcType=NVARCHAR},
+      LOG_STATUS = #{logStatus,jdbcType=NVARCHAR}
+    where LOG_ID = #{logId,jdbcType=NVARCHAR}
+  </update>
+</mapper>
