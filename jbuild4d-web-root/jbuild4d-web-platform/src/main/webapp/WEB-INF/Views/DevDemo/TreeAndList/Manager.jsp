@@ -140,6 +140,8 @@
                         // 根节点不触发任何事件
                         //if(treeNode.level != 0) {
                         appList.treeSelectedNode=treeNode;
+                        appList.searchCondition.ddtlGroupId.value=appList.treeSelectedNode[appList.treeIdFieldName];
+                        appList.reloadData();
                         //appList.reloadTreeTableData();
                         //}
                     },
@@ -152,6 +154,10 @@
             <!--List-->
             idFieldName:"ddtlId",
             searchCondition:{
+                ddtlGroupId:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.StringType
+                },
                 ddglKey:{
                     value:"",
                     type:SearchUtility.SearchFieldType.LikeStringType
@@ -176,28 +182,28 @@
                     align: 'center'
                 },
                 {
-                    title: 'ddglKey',
-                    key: 'ddglKey',
+                    title: 'ddtlKey',
+                    key: 'ddtlKey',
                     align: "center"
                 }, {
-                    title: 'ddglName',
-                    key: 'ddglName',
+                    title: 'ddtlName',
+                    key: 'ddtlName',
                     align: "center"
                 }, {
-                    title: 'ddglDesc',
-                    key: 'ddglDesc'
+                    title: 'ddtlDesc',
+                    key: 'ddtlDesc'
                 }, {
-                    title: 'ddglStatus',
+                    title: 'ddtlStatus',
                     width: 100,
                     align: "center",
-                    key: 'ddglStatus'
+                    key: 'ddtlStatus'
                 }, {
                     title: 'CT',
-                    key: 'ddglCreatetime',
+                    key: 'ddtlCreatetime',
                     width: 100,
                     align: "center",
                     render: function (h, params) {
-                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddglCreatetime);
+                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddtlCreatetime);
                     }
                 }, {
                     title: '操作',
