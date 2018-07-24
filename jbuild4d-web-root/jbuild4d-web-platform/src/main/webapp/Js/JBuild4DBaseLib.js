@@ -1449,7 +1449,7 @@ var ListPageUtility={
     //上下移动封装
     IViewMoveFace:function (url,selectionRows,idField, type,pageAppObj) {
         this.IViewTableMareSureSelectedOne(selectionRows).then(function (selectionRows) {
-            debugger;
+            //debugger;
             AjaxUtility.Post(url,
                 {
                     recordId: selectionRows[0][idField],
@@ -1487,7 +1487,7 @@ var ListPageUtility={
         });
     },
 
-    IViewTableLoadDataSearch:function (url,pageNum,pageSize,searchCondition,pageAppObj,autoSelectedOldRows,successFunc) {
+    IViewTableLoadDataSearch:function (url,pageNum,pageSize,searchCondition,pageAppObj,idField,autoSelectedOldRows,successFunc) {
         //debugger;
         AjaxUtility.Post(url,
             {
@@ -1504,7 +1504,7 @@ var ListPageUtility={
                         if(pageAppObj.selectionRows!=null) {
                             for (var i = 0; i < pageAppObj.tableData.length; i++) {
                                 for (var j = 0; j < pageAppObj.selectionRows.length;j++) {
-                                    if(pageAppObj.selectionRows[j].ddglId==pageAppObj.tableData[i].ddglId){
+                                    if(pageAppObj.selectionRows[j][idField]==pageAppObj.tableData[i][idField]){
                                         pageAppObj.tableData[i]._checked=true;
                                     }
                                 }
@@ -1521,7 +1521,7 @@ var ListPageUtility={
                 }
             }, "json");
     },
-    IViewTableLoadDataNoSearch:function (url,pageNum,pageSize,pageAppObj,autoSelectedOldRows,successFunc) {
+    IViewTableLoadDataNoSearch:function (url,pageNum,pageSize,pageAppObj,idField,autoSelectedOldRows,successFunc) {
         //debugger;
         AjaxUtility.Post(url,
             {
@@ -1537,7 +1537,7 @@ var ListPageUtility={
                         if(pageAppObj.selectionRows!=null) {
                             for (var i = 0; i < pageAppObj.tableData.length; i++) {
                                 for (var j = 0; j < pageAppObj.selectionRows.length;j++) {
-                                    if(pageAppObj.selectionRows[j].ddglId==pageAppObj.tableData[i].ddglId){
+                                    if(pageAppObj.selectionRows[j][idField]==pageAppObj.tableData[i][idField]){
                                         pageAppObj.tableData[i]._checked=true;
                                     }
                                 }
