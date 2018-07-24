@@ -48,21 +48,21 @@
                     <col style="width: 80px">
                 </colgroup>
                 <tr class="ls-table-row">
-                    <td>ddglKey：</td>
+                    <td>ddtlName：</td>
                     <td>
-                        <i-input v-model="searchCondition.ddglKey.value" placeholder="ddglKey"></i-input>
+                        <i-input v-model="searchCondition.ddtlName.value" placeholder="ddtlName"></i-input>
                     </td>
-                    <td>ddglName：</td>
+                    <td>ddtlValue：</td>
                     <td>
-                        <i-input v-model="searchCondition.ddglName.value" placeholder="ddglName"></i-input>
+                        <i-input v-model="searchCondition.ddtlValue.value" placeholder="ddtlValue"></i-input>
                     </td>
-                    <td>ddglCreatetime（从）：</td>
+                    <td>ddtlCreatetime（从）：</td>
                     <td>
-                        <date-picker v-model="searchCondition.ddglCreatetime_s.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                        <date-picker v-model="searchCondition.ddtlCreatetime_s.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
                     </td>
                     <td>（到）：</td>
                     <td>
-                        <date-picker v-model="searchCondition.ddglCreatetime_e.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                        <date-picker v-model="searchCondition.ddtlCreatetime_e.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
                     </td>
                     <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
                 </tr>
@@ -122,15 +122,7 @@
                 // 回调函数
                 callback : {
                     onClick : function(event, treeId, treeNode) {
-                        // 根节点不触发任何事件
-                        //if(treeNode.level != 0) {
-                        appList.treeSelectedNode=treeNode;
-                        appList.selectionRows=null;
-                        appList.pageNum=1;
-                        appList.searchCondition.ddtlGroupId.value=appList.treeSelectedNode[appList.treeIdFieldName];
-                        appList.reloadData();
-                        //appList.reloadTreeTableData();
-                        //}
+                        appList.treeNodeSelected(event,treeId,treeNode);
                     },
                     //成功的回调函数
                     onAsyncSuccess : function(event, treeId, treeNode, msg){
@@ -145,19 +137,19 @@
                     value:"",
                     type:SearchUtility.SearchFieldType.StringType
                 },
-                ddglKey:{
+                ddtlName:{
                     value:"",
                     type:SearchUtility.SearchFieldType.LikeStringType
                 },
-                ddglName:{
+                ddtlValue:{
                     value:"",
-                    type:SearchUtility.SearchFieldType.StringType
+                    type:SearchUtility.SearchFieldType.LikeStringType
                 },
-                ddglCreatetime_s:{
+                ddtlCreatetime_s:{
                     value:"",
                     type:SearchUtility.SearchFieldType.DataStringType
                 },
-                ddglCreatetime_e:{
+                ddtlCreatetime_e:{
                     value:"",
                     type:SearchUtility.SearchFieldType.DataStringType
                 }
@@ -217,6 +209,17 @@
             <!--Tree-->
             initTree:function () {
                 this.treeObj=$.fn.zTree.init($("#ztreeUL"), this.treeSetting);
+            },
+            treeNodeSelected:function (event, treeId, treeNode) {
+                // 根节点不触发任何事件
+                //if(treeNode.level != 0) {
+                this.treeSelectedNode=treeNode;
+                this.selectionRows=null;
+                this.pageNum=1;
+                this.searchCondition.ddtlGroupId.value=appList.treeSelectedNode[appList.treeIdFieldName];
+                this.reloadData();
+                //appList.reloadTreeTableData();
+                //}
             },
             addGroup:function () {
                 if(this.treeSelectedNode!=null) {

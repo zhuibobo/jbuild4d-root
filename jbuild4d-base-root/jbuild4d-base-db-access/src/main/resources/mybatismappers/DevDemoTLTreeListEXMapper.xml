@@ -14,6 +14,12 @@
             <if test="ddtlGroupId != null and ddtlGroupId != ''">
                 DDTL_GROUP_ID like #{ddtlGroupId}
             </if>
+            <if test="ddtlName != null and ddtlName != ''">
+                and DDTL_NAME like #{ddtlName}
+            </if>
+            <if test="ddtlValue != null and ddtlValue != ''">
+                and DDTL_VALUE like #{ddtlValue}
+            </if>
         </where>
         ORDER by DDTL_ORDER_NUM DESC
     </select>
