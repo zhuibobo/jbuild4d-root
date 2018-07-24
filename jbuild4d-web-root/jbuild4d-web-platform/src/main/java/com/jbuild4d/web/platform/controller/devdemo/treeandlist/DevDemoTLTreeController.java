@@ -23,11 +23,11 @@ public class DevDemoTLTreeController  extends GeneralCRUDImplController<DevDemoT
 
     @Override
     public String getListViewName() {
-        return null;
+        return "DevDemo/TreeAndList/Manager";
     }
 
     @Override
     public String getDetailViewName() {
-        return null;
+        return "DevDemo/TreeAndList/TreeEdit";
     }
 }
