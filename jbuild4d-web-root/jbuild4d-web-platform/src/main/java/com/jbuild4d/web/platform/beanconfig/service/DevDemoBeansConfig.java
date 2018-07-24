@@ -1,12 +1,18 @@
 package com.jbuild4d.web.platform.beanconfig.service;
 
 import com.jbuild4d.base.dbaccess.dao.DevDemoGenListMapper;
+import com.jbuild4d.base.dbaccess.dao.DevDemoTLTreeListMapper;
+import com.jbuild4d.base.dbaccess.dao.DevDemoTLTreeMapper;
 import com.jbuild4d.base.dbaccess.dao.DevDemoTreeTableMapper;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.platform.system.service.IDevDemoGenListService;
+import com.jbuild4d.platform.system.service.IDevDemoTLTreeListService;
+import com.jbuild4d.platform.system.service.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.service.IDevDemoTreeTableService;
 import com.jbuild4d.platform.system.service.impl.DevDemoGenListServiceImpl;
+import com.jbuild4d.platform.system.service.impl.DevDemoTLTreeListServiceImpl;
+import com.jbuild4d.platform.system.service.impl.DevDemoTLTreeServiceImpl;
 import com.jbuild4d.platform.system.service.impl.DevDemoTreeTableServiceImpl;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +40,18 @@ public class DevDemoBeansConfig {
     @Bean
     public IDevDemoTreeTableService devDemoTreeTableService(ISQLBuilderService _sqlBuilderService, DevDemoTreeTableMapper mapper, SqlSessionTemplate sqlSessionTemplate, IGeneralService generalService) {
         IDevDemoTreeTableService bean=new DevDemoTreeTableServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
+    public IDevDemoTLTreeService devDemoTLTreeService(ISQLBuilderService _sqlBuilderService, DevDemoTLTreeMapper mapper, SqlSessionTemplate sqlSessionTemplate, IGeneralService generalService) {
+        IDevDemoTLTreeService bean=new DevDemoTLTreeServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
+    public IDevDemoTLTreeListService devDemoTLTreeListService(ISQLBuilderService _sqlBuilderService, DevDemoTLTreeListMapper mapper, SqlSessionTemplate sqlSessionTemplate, IGeneralService generalService) {
+        IDevDemoTLTreeListService bean=new DevDemoTLTreeListServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
 }
