@@ -1255,6 +1255,13 @@ var AjaxUtility={
             },
             error: function (msg) {
                 debugger;
+                try{
+                    if(msg.responseText.indexOf("请重新登录系统")>=0){
+                        BaseUtility.RedirectToLogin();
+                    }
+                }catch (e){
+
+                }
             }
         });
         return innerResult;

@@ -9,6 +9,7 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.system.service.IDevDemoGenListService;
 import com.jbuild4d.platform.system.service.IDevDemoTreeTableService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -69,5 +70,18 @@ public class DevDemoTreeTableServiceImpl extends BaseServiceImpl<DevDemoTreeTabl
         treeTableEntity.setDdttStatus("启用");
         this.save(jb4DSession,treeTableEntity.getDdttId(),treeTableEntity);
         return treeTableEntity;
+    }
+
+
+    @Override
+    public void statusChange(JB4DSession jb4DSession, String ids, String status) throws JBuild4DGenerallyException {
+        if(StringUtility.isNotEmpty(ids)) {
+            String[] idArray = ids.split(";");
+            for (int i = 0; i < idArray.length; i++) {
+                DevDemoTreeTableEntity entity = getByPrimaryKey(jb4DSession, idArray[i]);
+                entity.setDdttStatus(status);
+                devDemoTreeTableMapper.updateByPrimaryKeySelective(entity);
+            }
+        }
     }
 }

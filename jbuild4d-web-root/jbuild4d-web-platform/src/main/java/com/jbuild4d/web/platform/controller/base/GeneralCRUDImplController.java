@@ -167,6 +167,12 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     @ResponseBody
     public JBuild4DResponseVo statusChange(String ids,String status) {
         try {
+            if(StringUtility.isEmpty(ids)){
+                throw new JBuild4DGenerallyException("参数Ids不能为空或空串!");
+            }
+            if(StringUtility.isEmpty(status)){
+                throw new JBuild4DGenerallyException("参数status不能为空或空串!");
+            }
             JB4DSession jb4DSession=JB4DSessionUtility.getSession();
             getBaseService().statusChange(jb4DSession,ids,status);
             return JBuild4DResponseVo.opSuccess();

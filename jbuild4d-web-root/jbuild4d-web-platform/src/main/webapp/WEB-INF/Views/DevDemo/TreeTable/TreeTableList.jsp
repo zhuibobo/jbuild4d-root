@@ -196,10 +196,11 @@
                     this.mareSureSelectedTreeTableRow("启用").then(function (nodeData) {
                         var url = "/PlatForm/DevDemo/DevDemoTreeTable/StatusChange.do";
                         var recordId = nodeData[appList.treeTableConfig.IdField];
-                        AjaxUtility.Post(url, {ids: recordId,statusName:statusName}, function (result) {
+                        debugger;
+                        AjaxUtility.Post(url, {ids: recordId,status:statusName}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                    nodeData.dictStatus=statusName;
+                                    nodeData.ddttStatus=statusName;
                                     _self.treeTableObject.UpdateToRow(nodeData[appList.treeTableConfig.IdField],nodeData);
                                 });
                             }
