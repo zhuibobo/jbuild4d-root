@@ -1583,6 +1583,7 @@ var ListPageUtility={
 var DetailPageUtility={
     IViewPageToViewStatus:function () {
         //alert("1");
+        return;
         window.setTimeout(function () {
             //alert("1");
             $("input").each(function () {
