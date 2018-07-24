@@ -95,9 +95,9 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,this.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,this.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,this.idFieldName,appList)
                         ]);
                     }
                 }
@@ -115,7 +115,7 @@
             },
             reloadData: function () {
                 var url = '/PlatForm/System/ParasSetting/GetListData.do';
-                ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,appList.idFieldName,true,null);
+                ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                 //this.selectionRows=null;
             },
             add: function () {
