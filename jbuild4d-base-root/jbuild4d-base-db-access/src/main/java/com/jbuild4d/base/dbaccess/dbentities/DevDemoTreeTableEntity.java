@@ -1,8 +1,12 @@
 package com.jbuild4d.base.dbaccess.dbentities;
 
+import com.jbuild4d.base.dbaccess.anno.DBKeyField;
+
 import java.util.Date;
 
 public class DevDemoTreeTableEntity {
+
+    @DBKeyField
     private String ddttId;
 
     private String ddttKey;
