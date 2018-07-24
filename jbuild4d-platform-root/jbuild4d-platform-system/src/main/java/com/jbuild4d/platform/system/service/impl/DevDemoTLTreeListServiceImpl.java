@@ -3,6 +3,7 @@ package com.jbuild4d.platform.system.service.impl;
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dao.DevDemoTLTreeListMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeListEntity;
+import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
@@ -38,5 +39,30 @@ public class DevDemoTLTreeListServiceImpl extends BaseServiceImpl<DevDemoTLTreeL
                 return sourceEntity;
             }
         });
+    }
+
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DevDemoTLTreeListEntity selfEntity=devDemoTLTreeListMapper.selectByPrimaryKey(id);
+        DevDemoTLTreeListEntity ltEntity=devDemoTLTreeListMapper.selectGreaterThanRecord(id,selfEntity.getDdtlGroupId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DevDemoTLTreeListEntity selfEntity=devDemoTLTreeListMapper.selectByPrimaryKey(id);
+        DevDemoTLTreeListEntity ltEntity=devDemoTLTreeListMapper.selectLessThanRecord(id,selfEntity.getDdtlGroupId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    private void switchOrder(DevDemoTLTreeListEntity toEntity,DevDemoTLTreeListEntity selfEntity) {
+        if(toEntity !=null){
+            int newNum= toEntity.getDdtlOrderNum();
+            toEntity.setDdtlOrderNum(selfEntity.getDdtlOrderNum());
+            selfEntity.setDdtlOrderNum(newNum);
+            devDemoTLTreeListMapper.updateByPrimaryKeySelective(toEntity);
+            devDemoTLTreeListMapper.updateByPrimaryKeySelective(selfEntity);
+        }
     }
 }

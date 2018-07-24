@@ -1449,6 +1449,7 @@ var ListPageUtility={
     //上下移动封装
     IViewMoveFace:function (url,selectionRows,idField, type,pageAppObj) {
         this.IViewTableMareSureSelectedOne(selectionRows).then(function (selectionRows) {
+            debugger;
             AjaxUtility.Post(url,
                 {
                     recordId: selectionRows[0][idField],
@@ -1457,6 +1458,9 @@ var ListPageUtility={
                 function (result) {
                     if (result.success) {
                         pageAppObj.reloadData();
+                    }
+                    else{
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},result.message,null);
                     }
                 }, "json"
             );

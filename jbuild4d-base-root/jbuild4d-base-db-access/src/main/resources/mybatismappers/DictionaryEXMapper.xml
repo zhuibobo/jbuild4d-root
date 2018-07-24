@@ -16,18 +16,22 @@
     </select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select
-            *
-        from TB4D_DICTIONARY
-        where DICT_ORDER_NUM = (select max(DICT_ORDER_NUM) from TB4D_DICTIONARY where DICT_ORDER_NUM<(select DICT_ORDER_NUM from TB4D_DICTIONARY where DICT_ID=#{dictId,jdbcType=NVARCHAR} and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR})) and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR}
+        select * from TB4D_DICTIONARY
+        where DICT_ORDER_NUM = (
+                select max(DICT_ORDER_NUM) from TB4D_DICTIONARY
+                    where DICT_ORDER_NUM<(select DICT_ORDER_NUM from TB4D_DICTIONARY where DICT_ID=#{dictId,jdbcType=NVARCHAR})
+                          and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR})
+              and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR}
         ]]>
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select
-            *
-        from TB4D_DICTIONARY
-        where DICT_ORDER_NUM = (select min(DICT_ORDER_NUM) from TB4D_DICTIONARY where DICT_ORDER_NUM>(select DICT_ORDER_NUM from TB4D_DICTIONARY where DICT_ID=#{dictId,jdbcType=NVARCHAR} and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR})) and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR}
+        select * from TB4D_DICTIONARY
+        where DICT_ORDER_NUM = (
+            select min(DICT_ORDER_NUM) from TB4D_DICTIONARY
+            where DICT_ORDER_NUM>(select DICT_ORDER_NUM from TB4D_DICTIONARY where DICT_ID=#{dictId,jdbcType=NVARCHAR})
+                  and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR})
+              and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR}
         ]]>
     </select>
     <select id="selectByGroupValue" resultMap="BaseResultMap">

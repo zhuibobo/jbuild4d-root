@@ -70,26 +70,11 @@
         </div>
         <div id="list-button-wrap" class="list-button-outer-wrap">
             <div class="list-button-inner-wrap">
-                <i-button type="success" @click="add()">
-                    <Icon type="plus"></Icon>
-                    新增
-                </i-button>
-                <i-button type="primary" @click="statusEnable('启用')">
-                    <Icon type="checkmark-round"></Icon>
-                    启用
-                </i-button>
-                <i-button type="primary" @click="statusEnable('禁用')">
-                    <Icon type="minus-round"></Icon>
-                    禁用
-                </i-button>
-                <i-button type="primary" @click="move('up')">
-                    <Icon type="arrow-up-b"></Icon>
-                    上移
-                </i-button>
-                <i-button type="primary" @click="move('down')">
-                    <Icon type="arrow-down-b"></Icon>
-                    下移
-                </i-button>
+                <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
+                <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
+                <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
+                <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移 </i-button>
+                <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
             </div>
             <div style="clear: both"></div>
         </div>

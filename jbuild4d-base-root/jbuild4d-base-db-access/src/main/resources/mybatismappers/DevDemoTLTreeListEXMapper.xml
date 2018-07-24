@@ -23,4 +23,28 @@
     <select id="nextOrderNum" resultType="integer">
         select case when max(DDTL_ORDER_NUM) is null then 1 else max(DDTL_ORDER_NUM)+1 end ORDERNUM from TB4D_DEV_DEMO_TL_TREE_LIST
     </select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select * from TB4D_DEV_DEMO_TL_TREE_LIST
+        where DDTL_ORDER_NUM = (
+                    select max(DDTL_ORDER_NUM) from TB4D_DEV_DEMO_TL_TREE_LIST
+                    where DDTL_ORDER_NUM<(select DDTL_ORDER_NUM from TB4D_DEV_DEMO_TL_TREE_LIST where DDTL_ID=#{id,jdbcType=NVARCHAR})
+                          and
+                          DDTL_GROUP_ID=#{groupId,jdbcType=NVARCHAR})
+              and
+              DDTL_GROUP_ID=#{groupId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select * from TB4D_DEV_DEMO_TL_TREE_LIST
+        where DDTL_ORDER_NUM = (
+            select min(DDTL_ORDER_NUM) from TB4D_DEV_DEMO_TL_TREE_LIST
+            where DDTL_ORDER_NUM>(select DDTL_ORDER_NUM from TB4D_DEV_DEMO_TL_TREE_LIST where DDTL_ID=#{id,jdbcType=NVARCHAR})
+                  and
+                  DDTL_GROUP_ID=#{groupId,jdbcType=NVARCHAR})
+              and
+              DDTL_GROUP_ID=#{groupId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
 </mapper>
