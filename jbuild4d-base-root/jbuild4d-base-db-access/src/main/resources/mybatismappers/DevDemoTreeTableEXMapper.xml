@@ -10,4 +10,20 @@
         from TB4D_DEV_DEMO_TREE_TABLE
         ORDER by DDTT_ORDER_NUM ASC
     </select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select
+            *
+        from TB4D_DEV_DEMO_TREE_TABLE
+        where DDTT_ORDER_NUM = (select max(DDTT_ORDER_NUM) from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ORDER_NUM<(select DDTT_ORDER_NUM from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ID=#{id,jdbcType=NVARCHAR} and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR})) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select
+            *
+        from TB4D_DEV_DEMO_TREE_TABLE
+        where DDTT_ORDER_NUM = (select min(DDTT_ORDER_NUM) from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ORDER_NUM>(select DDTT_ORDER_NUM from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ID=#{id,jdbcType=NVARCHAR} and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR})) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
 </mapper>

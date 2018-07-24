@@ -84,4 +84,28 @@ public class DevDemoTreeTableServiceImpl extends BaseServiceImpl<DevDemoTreeTabl
             }
         }
     }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DevDemoTreeTableEntity selfEntity=devDemoTreeTableMapper.selectByPrimaryKey(id);
+        DevDemoTreeTableEntity ltEntity=devDemoTreeTableMapper.selectLessThanRecord(id,selfEntity.getDdttParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DevDemoTreeTableEntity selfEntity=devDemoTreeTableMapper.selectByPrimaryKey(id);
+        DevDemoTreeTableEntity ltEntity=devDemoTreeTableMapper.selectGreaterThanRecord(id,selfEntity.getDdttParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    private void switchOrder(DevDemoTreeTableEntity toEntity,DevDemoTreeTableEntity selfEntity) {
+        if(toEntity !=null){
+            int newNum= toEntity.getDdttOrderNum();
+            toEntity.setDdttOrderNum(selfEntity.getDdttOrderNum());
+            selfEntity.setDdttOrderNum(newNum);
+            devDemoTreeTableMapper.updateByPrimaryKeySelective(toEntity);
+            devDemoTreeTableMapper.updateByPrimaryKeySelective(selfEntity);
+        }
+    }
 }
