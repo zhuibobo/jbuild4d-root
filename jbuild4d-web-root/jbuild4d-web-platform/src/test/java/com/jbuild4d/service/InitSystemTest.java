@@ -68,6 +68,13 @@ public class InitSystemTest extends BaseTest {
         menuService.deleteByKey(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId(),systemSettingDictionaryGroupMenu);
 
+        //根菜单->系统设置分组->操作日志
+        String systemSettingOperationLogId="JB4DSystemSettingOperationLog";
+        MenuEntity systemSettingOperationLogMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOperationLogId,"操作日志","操作日志","操作日志",
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
+        menuService.deleteByKey(jb4DSession,systemSettingOperationLogMenu.getMenuId());
+        menuService.save(jb4DSession,systemSettingOperationLogMenu.getMenuId(),systemSettingOperationLogMenu);
+
         //根菜单->系统设置分组->参数设置
         String systemSettingParasSettingId="JB4DSystemSettingParasSetting";
         MenuEntity systemSettingParasSettingMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingParasSettingId,"参数设置","参数设置","参数设置",
@@ -82,12 +89,6 @@ public class InitSystemTest extends BaseTest {
         menuService.deleteByKey(jb4DSession,systemSettingOrganManageMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingOrganManageMenu.getMenuId(),systemSettingOrganManageMenu);
 
-        //根菜单->系统设置分组->操作日志
-        String systemSettingOperationLogId="JB4DSystemSettingOperationLog";
-        MenuEntity systemSettingOperationLogMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOperationLogId,"操作日志","操作日志","操作日志",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
-        menuService.deleteByKey(jb4DSession,systemSettingOperationLogMenu.getMenuId());
-        menuService.save(jb4DSession,systemSettingOperationLogMenu.getMenuId(),systemSettingOperationLogMenu);
 
         //根菜单->开发示例
         String devDemoRootId="JB4DDevDemoRoot";
