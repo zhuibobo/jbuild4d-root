@@ -125,9 +125,10 @@
                         // 根节点不触发任何事件
                         //if(treeNode.level != 0) {
                         appList.treeSelectedNode=treeNode;
+                        appList.selectionRows=null;
+                        appList.pageNum=1;
                         appList.searchCondition.ddtlGroupId.value=appList.treeSelectedNode[appList.treeIdFieldName];
                         appList.reloadData();
-                        appList.selectionRows=null;
                         //appList.reloadTreeTableData();
                         //}
                     },
