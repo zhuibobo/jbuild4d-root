@@ -135,7 +135,7 @@
             },
             reloadData: function () {
                 var url = '/PlatForm/DevDemo/DevDemoGenList/GetListData.do';
-                ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,appList.idFieldName,true,null);
+                ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                 //this.selectionRows=null;
             },
             add: function () {

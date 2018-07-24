@@ -217,7 +217,7 @@
                 this.selectionRows=null;
                 this.pageNum=1;
                 this.clearSearchCondition();
-                this.searchCondition.groupId.value=appList.treeSelectedNode[appList.treeIdFieldName];
+                this.searchCondition.groupId.value=this.treeSelectedNode[this.treeIdFieldName];
                 this.reloadData();
                 //appList.reloadTreeTableData();
                 //}
@@ -308,7 +308,7 @@
             reloadData: function () {
                 var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/GetListData.do';
                 //debugger;
-                ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,appList.idFieldName,true,null);
+                ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                 //this.selectionRows=null;
             },
             add: function () {
