@@ -309,7 +309,7 @@
                 //this.selectionRows=null;
             },
             add: function () {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=add");
+                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=add&groupId="+this.treeSelectedNode[appList.treeIdFieldName]);
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
             },
             edit: function (recordId) {

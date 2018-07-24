@@ -14,11 +14,13 @@
       <arg column="DDTL_BIND_DIC_SELECTED" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDTL_BIND_DIC_RADIO" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDTL_DDTT_BIND_DIC_MUCHECKBOX" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="DDTL_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     DDTL_ID, DDTL_KEY, DDTL_NAME, DDTL_VALUE, DDTL_STATUS, DDTL_DESC, DDTL_CREATETIME, 
-    DDTL_ORDER_NUM, DDTL_BIND_DIC_SELECTED, DDTL_BIND_DIC_RADIO, DDTL_DDTT_BIND_DIC_MUCHECKBOX
+    DDTL_ORDER_NUM, DDTL_BIND_DIC_SELECTED, DDTL_BIND_DIC_RADIO, DDTL_DDTT_BIND_DIC_MUCHECKBOX, 
+    DDTL_GROUP_ID
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -34,13 +36,13 @@
     insert into TB4D_DEV_DEMO_TL_TREE_LIST (DDTL_ID, DDTL_KEY, DDTL_NAME, 
       DDTL_VALUE, DDTL_STATUS, DDTL_DESC, 
       DDTL_CREATETIME, DDTL_ORDER_NUM, DDTL_BIND_DIC_SELECTED, 
-      DDTL_BIND_DIC_RADIO, DDTL_DDTT_BIND_DIC_MUCHECKBOX
-      )
+      DDTL_BIND_DIC_RADIO, DDTL_DDTT_BIND_DIC_MUCHECKBOX, 
+      DDTL_GROUP_ID)
     values (#{ddtlId,jdbcType=NVARCHAR}, #{ddtlKey,jdbcType=NVARCHAR}, #{ddtlName,jdbcType=NVARCHAR}, 
       #{ddtlValue,jdbcType=NVARCHAR}, #{ddtlStatus,jdbcType=NVARCHAR}, #{ddtlDesc,jdbcType=NVARCHAR}, 
       #{ddtlCreatetime,jdbcType=TIMESTAMP}, #{ddtlOrderNum,jdbcType=INTEGER}, #{ddtlBindDicSelected,jdbcType=NVARCHAR}, 
-      #{ddtlBindDicRadio,jdbcType=NVARCHAR}, #{ddtlDdttBindDicMucheckbox,jdbcType=NVARCHAR}
-      )
+      #{ddtlBindDicRadio,jdbcType=NVARCHAR}, #{ddtlDdttBindDicMucheckbox,jdbcType=NVARCHAR}, 
+      #{ddtlGroupId,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeListEntity">
     insert into TB4D_DEV_DEMO_TL_TREE_LIST
@@ -78,6 +80,9 @@
       <if test="ddtlDdttBindDicMucheckbox != null">
         DDTL_DDTT_BIND_DIC_MUCHECKBOX,
       </if>
+      <if test="ddtlGroupId != null">
+        DDTL_GROUP_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="ddtlId != null">
@@ -112,6 +117,9 @@
       </if>
       <if test="ddtlDdttBindDicMucheckbox != null">
         #{ddtlDdttBindDicMucheckbox,jdbcType=NVARCHAR},
+      </if>
+      <if test="ddtlGroupId != null">
+        #{ddtlGroupId,jdbcType=NVARCHAR},
       </if>
     </trim>
   </insert>
@@ -148,6 +156,9 @@
       <if test="ddtlDdttBindDicMucheckbox != null">
         DDTL_DDTT_BIND_DIC_MUCHECKBOX = #{ddtlDdttBindDicMucheckbox,jdbcType=NVARCHAR},
       </if>
+      <if test="ddtlGroupId != null">
+        DDTL_GROUP_ID = #{ddtlGroupId,jdbcType=NVARCHAR},
+      </if>
     </set>
     where DDTL_ID = #{ddtlId,jdbcType=NVARCHAR}
   </update>
@@ -162,7 +173,8 @@
       DDTL_ORDER_NUM = #{ddtlOrderNum,jdbcType=INTEGER},
       DDTL_BIND_DIC_SELECTED = #{ddtlBindDicSelected,jdbcType=NVARCHAR},
       DDTL_BIND_DIC_RADIO = #{ddtlBindDicRadio,jdbcType=NVARCHAR},
-      DDTL_DDTT_BIND_DIC_MUCHECKBOX = #{ddtlDdttBindDicMucheckbox,jdbcType=NVARCHAR}
+      DDTL_DDTT_BIND_DIC_MUCHECKBOX = #{ddtlDdttBindDicMucheckbox,jdbcType=NVARCHAR},
+      DDTL_GROUP_ID = #{ddtlGroupId,jdbcType=NVARCHAR}
     where DDTL_ID = #{ddtlId,jdbcType=NVARCHAR}
   </update>
 </mapper>

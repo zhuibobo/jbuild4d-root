@@ -25,7 +25,9 @@ public class DevDemoTLTreeListEntity {
 
     private String ddtlDdttBindDicMucheckbox;
 
-    public DevDemoTLTreeListEntity(String ddtlId, String ddtlKey, String ddtlName, String ddtlValue, String ddtlStatus, String ddtlDesc, Date ddtlCreatetime, Integer ddtlOrderNum, String ddtlBindDicSelected, String ddtlBindDicRadio, String ddtlDdttBindDicMucheckbox) {
+    private String ddtlGroupId;
+
+    public DevDemoTLTreeListEntity(String ddtlId, String ddtlKey, String ddtlName, String ddtlValue, String ddtlStatus, String ddtlDesc, Date ddtlCreatetime, Integer ddtlOrderNum, String ddtlBindDicSelected, String ddtlBindDicRadio, String ddtlDdttBindDicMucheckbox, String ddtlGroupId) {
         this.ddtlId = ddtlId;
         this.ddtlKey = ddtlKey;
         this.ddtlName = ddtlName;
@@ -37,6 +39,7 @@ public class DevDemoTLTreeListEntity {
         this.ddtlBindDicSelected = ddtlBindDicSelected;
         this.ddtlBindDicRadio = ddtlBindDicRadio;
         this.ddtlDdttBindDicMucheckbox = ddtlDdttBindDicMucheckbox;
+        this.ddtlGroupId = ddtlGroupId;
     }
 
     public DevDemoTLTreeListEntity() {
@@ -129,5 +132,13 @@ public class DevDemoTLTreeListEntity {
 
     public void setDdtlDdttBindDicMucheckbox(String ddtlDdttBindDicMucheckbox) {
         this.ddtlDdttBindDicMucheckbox = ddtlDdttBindDicMucheckbox == null ? null : ddtlDdttBindDicMucheckbox.trim();
+    }
+
+    public String getDdtlGroupId() {
+        return ddtlGroupId;
+    }
+
+    public void setDdtlGroupId(String ddtlGroupId) {
+        this.ddtlGroupId = ddtlGroupId == null ? null : ddtlGroupId.trim();
     }
 }

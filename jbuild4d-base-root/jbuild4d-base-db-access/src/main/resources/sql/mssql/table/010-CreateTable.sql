@@ -56,6 +56,7 @@ CREATE TABLE [dbo].[TB4D_DEV_DEMO_TL_TREE] (
 
 CREATE TABLE [dbo].[TB4D_DEV_DEMO_TL_TREE_LIST] (
   [DDTL_ID]                       [NVARCHAR](128)  NOT NULL PRIMARY KEY,
+  [DDTL_GROUP_ID]                 [NVARCHAR](128)  NULL,
   [DDTL_KEY]                      [NVARCHAR](128)  NULL,
   [DDTL_NAME]                     [NVARCHAR](128)  NULL,
   [DDTL_VALUE]                    [NVARCHAR](500)  NULL,
