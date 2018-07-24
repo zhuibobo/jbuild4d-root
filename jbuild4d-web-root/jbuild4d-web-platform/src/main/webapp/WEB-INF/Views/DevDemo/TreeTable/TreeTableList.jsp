@@ -213,7 +213,7 @@
                 move:function(type){
                     var _self=this;
                     this.mareSureSelectedTreeTableRow("选中").then(function (nodeData) {
-                        var url = '/PlatForm/System/Dictionary/Move.do';
+                        var url = '/PlatForm/DevDemo/DevDemoTreeTable/Move.do';
                         var recordId = nodeData[appList.treeTableConfig.IdField];
                         AjaxUtility.Post(url, {recordId: recordId,type:type}, function (result) {
                             if (result.success) {
@@ -223,7 +223,6 @@
                                     }else{
                                         _self.treeTableObject.MoveUpRow(nodeData[appList.treeTableConfig.IdField]);
                                     }
-                                    //_self.treeTableObject.UpdateToRow(nodeData.dictId,nodeData);
                                 });
                             }
                             else {
