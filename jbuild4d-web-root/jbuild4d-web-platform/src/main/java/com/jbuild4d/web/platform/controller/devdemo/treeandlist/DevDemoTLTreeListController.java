@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/PlatForm/DevDemo/TreeAndList/DevDemoTLList")
 public class DevDemoTLTreeListController   extends GeneralCRUDImplController<DevDemoTLTreeListEntity> {
+
     @Override
     protected IBaseService<DevDemoTLTreeListEntity> getBaseService() {
         return null;
