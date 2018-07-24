@@ -145,7 +145,7 @@ var TreeTable={
             var _width=_cc.Width;
             var _renderer=_cc.Renderer;
             //debugger;
-            var $td=$("<td bindField=\""+_cc.FieldName+"\">" + _cd + "</td>").css("width",_width);
+            var $td=$("<td bindField=\""+_cc.FieldName+"\" Renderer='"+_renderer+"'>" + _cd + "</td>").css("width",_width);
             if(_renderer=="DateTime"){
                 var date=new Date(_cd);
                 var dateStr=DateUtility.Format(date,'yyyy-MM-dd');
@@ -406,6 +406,11 @@ var TreeTable={
         $tr.find("td").each(function(){
             var bindField=$(this).attr("bindField");
             var newtext=selectedRowData[bindField];
+            var renderer=$(this).attr("Renderer");
+            if(renderer=="DateTime"){
+                var date=new Date(newtext);
+                newtext=DateUtility.Format(date,'yyyy-MM-dd');
+            }
             if($(this).find("[isswitch='true']").length>0) {
                 //$(this).text();
                 $(this).find("span").text(newtext);

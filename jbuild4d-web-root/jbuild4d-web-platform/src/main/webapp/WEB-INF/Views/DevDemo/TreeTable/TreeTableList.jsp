@@ -196,7 +196,7 @@
                     this.mareSureSelectedTreeTableRow("启用").then(function (nodeData) {
                         var url = "/PlatForm/DevDemo/DevDemoTreeTable/StatusChange.do";
                         var recordId = nodeData[appList.treeTableConfig.IdField];
-                        debugger;
+                        //debugger;
                         AjaxUtility.Post(url, {ids: recordId,status:statusName}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
