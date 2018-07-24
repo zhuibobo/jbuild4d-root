@@ -44,6 +44,7 @@
             this.initTree();
         },
         data:{
+            treeIdFieldName:"ddttId",
             treeObj:null,
             treeSelectedNode:null,
             treeSetting:{
@@ -87,8 +88,8 @@
             },
             addGroup:function () {
                 if(this.treeSelectedNode!=null) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add&parentId="+this.treeSelectedNode.dictGroupId);
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 2);
+                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Detail.do?op=add&parentId="+this.treeSelectedNode[appList.treeIdFieldName]);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
                 }
                 else {
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择父节点!",null);
@@ -124,10 +125,10 @@
                     }, "json");
                 });
             },
-            newTreeNode : function (dictGroupId, dictGroupValue,dictGroupText,dictGroupParentId) {
+            newTreeNode : function (newNodeData) {
                 var silent = false;
-                var newNode = {dictGroupId:dictGroupId, dictGroupValue:dictGroupValue,dictGroupText:dictGroupText,dictGroupParentId:dictGroupParentId};
-                appList.treeObj.addNodes(this.treeSelectedNode,newNode,silent);
+                //var newNode = {dictGroupId:dictGroupId, dictGroupValue:dictGroupValue,dictGroupText:dictGroupText,dictGroupParentId:dictGroupParentId};
+                appList.treeObj.addNodes(this.treeSelectedNode,newNodeData,silent);
             },
             updateNode : function (dictGroupValue,dictGroupText) {
                 this.treeSelectedNode.dictGroupValue=dictGroupValue;

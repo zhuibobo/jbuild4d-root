@@ -21,10 +21,10 @@
         <div class="left-outer-wrap-c">
             <div class="left-page-c">
                 <div class="tool-bar-c">
-                    <div alt="新增分类组" title="新增分类组" class="add" @click="addGroup()"></div>
-                    <div alt="修改分类组" title="修改分类组" class="edit" @click="editGroup"></div>
-                    <div alt="删除分类组" title="删除分类组" class="del" @click="delGroup"></div>
-                    <div alt="浏览分类组" title="浏览分类组" class="view" @click="viewGroup"></div>
+                    <div alt="新增组" title="新增组" class="add" @click="addGroup()"></div>
+                    <div alt="修改组" title="修改组" class="edit" @click="editGroup"></div>
+                    <div alt="删除组" title="删除组" class="del" @click="delGroup"></div>
+                    <div alt="浏览组" title="浏览组" class="view" @click="viewGroup"></div>
                 </div>
                 <div>
                     <ul id="ztreeUL" class="ztree"></ul>
@@ -63,9 +63,7 @@
                     async : {
                         enable : true,
                         // Ajax 获取数据的 URL 地址
-                        url : BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/GetTreeData.do"),
-                        //ajax提交的时候，传的是id值
-                        autoParam : [ "categoryId", "categoryName" ]
+                        url : BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/GetTreeData.do")
                     },
                     // 必须使用data
                     data:{

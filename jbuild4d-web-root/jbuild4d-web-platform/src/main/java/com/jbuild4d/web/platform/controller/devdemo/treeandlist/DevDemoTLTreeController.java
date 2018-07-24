@@ -29,7 +29,7 @@ public class DevDemoTLTreeController  extends GeneralCRUDImplController<DevDemoT
 
     @Override
     protected IBaseService<DevDemoTLTreeEntity> getBaseService() {
-        return null;
+        return devDemoTLTreeService;
     }
 
     @Override

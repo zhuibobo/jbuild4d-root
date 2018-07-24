@@ -153,6 +153,9 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
             //return null;
             //baseService.saveBySelective(entityId(entity), entity);
             JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+            if(getBaseService()==null){
+                throw new JBuild4DGenerallyException(this.getClass().getSimpleName()+".getBaseService()返回的对象为Null");
+            }
             getBaseService().save(jb4DSession,recordID, entity);
             return JBuild4DResponseVo.saveSuccess();
         } catch (JBuild4DGenerallyException e) {
