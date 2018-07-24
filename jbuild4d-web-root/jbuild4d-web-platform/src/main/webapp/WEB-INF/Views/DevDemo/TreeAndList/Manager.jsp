@@ -133,7 +133,7 @@
             <!--List-->
             idFieldName:"ddtlId",
             searchCondition:{
-                ddtlGroupId:{
+                groupId:{
                     value:"",
                     type:SearchUtility.SearchFieldType.StringType
                 },
@@ -216,7 +216,8 @@
                 this.treeSelectedNode=treeNode;
                 this.selectionRows=null;
                 this.pageNum=1;
-                this.searchCondition.ddtlGroupId.value=appList.treeSelectedNode[appList.treeIdFieldName];
+                this.clearSearchCondition();
+                this.searchCondition.groupId.value=appList.treeSelectedNode[appList.treeIdFieldName];
                 this.reloadData();
                 //appList.reloadTreeTableData();
                 //}
@@ -296,6 +297,11 @@
                 appList.treeObj.updateNode(this.treeSelectedNode);
             },
             <!--List-->
+            clearSearchCondition:function () {
+                for(var key in this.searchCondition){
+                    this.searchCondition[key].value="";
+                }
+            },
             selectionChange: function (selection) {
                 this.selectionRows = selection;
             },

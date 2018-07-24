@@ -11,8 +11,8 @@
         <include refid="Base_Column_List" />
         from TB4D_DEV_DEMO_TL_TREE_LIST
         <where>
-            <if test="ddtlGroupId != null and ddtlGroupId != ''">
-                DDTL_GROUP_ID like #{ddtlGroupId}
+            <if test="groupId != null and groupId != ''">
+                DDTL_GROUP_ID like #{groupId}
             </if>
             <if test="ddtlName != null and ddtlName != ''">
                 and DDTL_NAME like #{ddtlName}
