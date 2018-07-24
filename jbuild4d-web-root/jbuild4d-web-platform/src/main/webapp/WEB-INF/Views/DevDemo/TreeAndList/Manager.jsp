@@ -34,18 +34,6 @@
         </div>
     </div>
     <div class="right-outer-wrap-c">
-        <div style="width: 100%">
-            <div style="float: right;margin-bottom: 15px;margin-top: 10px;margin-right: 10px">
-                <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
-                <i-button type="primary" @click="edit()"><Icon type="edit"></Icon> 修改 </i-button>
-                <i-button type="primary" @click="del()"><Icon type="trash-a"></Icon> 删除 </i-button>
-                <i-button type="primary" @click="view()"><Icon type="android-open"></Icon> 浏览 </i-button>
-                <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
-                <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
-                <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移</i-button>
-                <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
-            </div>
-        </div>
 
     </div>
 </div>
@@ -62,19 +50,17 @@
                 async : {
                     enable : true,
                     // Ajax 获取数据的 URL 地址
-                    url : BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/GetTreeData.do"),
-                    //ajax提交的时候，传的是id值
-                    autoParam : [ "categoryId", "categoryName" ]
+                    url : BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/GetTreeData.do")
                 },
                 // 必须使用data
                 data:{
                     key:{
-                        name:"dictGroupText"
+                        name:"ddttName"
                     },
                     simpleData : {
                         enable : true,
-                        idKey : "dictGroupId", // id编号命名
-                        pIdKey : "dictGroupParentId",  // 父id编号命名
+                        idKey : "ddttId", // id编号命名
+                        pIdKey : "ddttParentId",  // 父id编号命名
                         rootId : 0
                     }
                 },
@@ -84,7 +70,7 @@
                         // 根节点不触发任何事件
                         //if(treeNode.level != 0) {
                         appList.treeSelectedNode=treeNode;
-                        appList.reloadTreeTableData();
+                        //appList.reloadTreeTableData();
                         //}
                     },
                     //成功的回调函数
