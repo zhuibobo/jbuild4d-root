@@ -38,6 +38,14 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/LoginOut", method = RequestMethod.GET)
+    public ModelAndView loginOut(HttpServletRequest request) {
+
+        ModelAndView modelAndView=new ModelAndView("Login");
+        JB4DSessionUtility.clearMySession();
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/RedirectLogin", method = RequestMethod.GET)
     public ModelAndView RedirectLogin(HttpServletRequest request) {
 

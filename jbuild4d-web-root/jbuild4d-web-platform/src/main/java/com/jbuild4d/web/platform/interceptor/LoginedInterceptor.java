@@ -25,6 +25,7 @@ public class LoginedInterceptor implements HandlerInterceptor {
         igUrl.put("/Login.do","");
         igUrl.put("/RedirectLogin.do","");
         igUrl.put("/ValidateAccount.do","");
+        igUrl.put("/LoginOut.do","");
         String absPath=request.getRequestURI();
         String appName=request.getContextPath();
         String url=absPath.replaceAll(appName,"");

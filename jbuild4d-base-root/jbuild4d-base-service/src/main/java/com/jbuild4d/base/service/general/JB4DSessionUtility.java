@@ -57,4 +57,8 @@ public class JB4DSessionUtility {
         return true;
     }
 
+    public static void clearMySession() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        request.getSession().removeAttribute(UserLoginSessionKey);
+    }
 }
