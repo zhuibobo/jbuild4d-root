@@ -151,7 +151,7 @@
                             DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择上级字典!",null);
                             return false;
                         }
-                        var url=BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoTreeTable/Detail.do?dictParentId="+nodeData[appList.treeTableConfig.IdField]+"&op=add");
+                        var url=BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoTreeTable/Detail.do?parentId="+nodeData[appList.treeTableConfig.IdField]+"&op=add");
                         DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"字典管理"},2);
                     }
                 },
@@ -227,27 +227,27 @@
                         }, "json");
                     });
                 },
-                newTreeTableNode : function (ddttId, ddttKey,ddttValue,ddttName,ddttCreatetime,ddttStatus) {
-                    var newData={
+                newTreeTableNode : function (newData) {
+                    /*var newData={
                         ddttId:ddttId,
                         ddttKey:ddttKey,
                         ddttValue:ddttValue,
                         ddttName:ddttName,
                         ddttCreatetime:ddttCreatetime,
                         ddttStatus:ddttStatus
-                    };
+                    };*/
                     this.treeTableObject.AppendChildRowToCurrentSelectedRow(newData);
                 },
-                updateTreeTableNode : function (ddttId, ddttKey,ddttValue,ddttName,ddttCreatetime,ddttStatus) {
+                updateTreeTableNode : function (newData) {
                     //debugger;
-                    var newData={
+                    /*var newData={
                         ddttId:ddttId,
                         ddttKey:ddttKey,
                         ddttValue:ddttValue,
                         ddttName:ddttName,
                         ddttCreatetime:ddttCreatetime,
                         ddttStatus:ddttStatus
-                    };
+                    };*/
                     this.treeTableObject.UpdateToRow(ddttId,newData);
                 }
             }
