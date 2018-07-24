@@ -4,4 +4,10 @@
     <select id="nextOrderNum" resultType="integer">
         select case when max(DDTT_ORDER_NUM) is null then 1 else max(DDTT_ORDER_NUM)+1 end ORDERNUM from TB4D_DEV_DEMO_TREE_TABLE
     </select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_DEV_DEMO_TREE_TABLE
+        ORDER by DDTT_ORDER_NUM ASC
+    </select>
 </mapper>

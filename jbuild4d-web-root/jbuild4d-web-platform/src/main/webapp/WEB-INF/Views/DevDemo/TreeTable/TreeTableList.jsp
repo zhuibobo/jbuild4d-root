@@ -18,32 +18,20 @@
 </head>
 <body>
     <div id="appList">
-        <div style="width: 100%" id="list-button-wrap">
-            <div style="float: right">
-                <i-button type="primary" @click="add()">
-                    <Icon type="plus"></Icon>
-                    新增
-                </i-button>
-                <i-button type="primary" @click="statusEnable('启用')">
-                    <Icon type="checkmark-round"></Icon>
-                    启用
-                </i-button>
-                <i-button type="primary" @click="statusEnable('禁用')">
-                    <Icon type="minus-round"></Icon>
-                    禁用
-                </i-button>
-                <i-button type="primary" @click="move('up')">
-                    <Icon type="arrow-up-b"></Icon>
-                    上移
-                </i-button>
-                <i-button type="primary" @click="move('down')">
-                    <Icon type="arrow-down-b"></Icon>
-                    下移
-                </i-button>
+        <div class="list-button-outer-wrap" id="list-button-wrap">
+            <div class="list-button-inner-wrap" style="margin-bottom: 10px">
+                <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
+                <i-button type="primary" @click="edit()"><Icon type="edit"></Icon> 修改 </i-button>
+                <i-button type="primary" @click="del()"><Icon type="trash-a"></Icon> 删除 </i-button>
+                <i-button type="primary" @click="view()"><Icon type="android-open"></Icon> 浏览 </i-button>
+                <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
+                <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
+                <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移</i-button>
+                <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
             </div>
             <div style="clear: both"></div>
         </div>
-        <div id="divTreeTable" style="width: 98%;margin: auto"></div>
+        <div id="divTreeTable" style="width: 100%;margin: auto"></div>
         </div>
     </div>
     <script>
@@ -51,6 +39,7 @@
         var appList=new Vue({
             el:"#appList",
             mounted:function () {
+                this.reloadTreeTableData();
             },
             data:{
                 treeTableObject:null,
@@ -61,7 +50,7 @@
                     LoadChildJsonURL:"",
                     LoadChildFunc:null,
                     OpenLevel:1,
-                    ChildTestField:"ddglChildCount",//判断是否存在子节点的字段，是否>0或者为true，则支持展开
+                    ChildTestField:"ddttChildCount",//判断是否存在子节点的字段，是否>0或者为true，则支持展开
                     Templates:[
                         {
                             Title:"字典名称",
@@ -100,25 +89,27 @@
             methods:{
                 <!--Dictionary-->
                 reloadTreeTableData:function () {
-                    var url='/PlatForm/DevDemo/DevDemoGenListBindDictionary/GetListData.do';
+                    var url='/PlatForm/DevDemo/DevDemoTreeTable/GetListData.do';
                     var _self=this;
-                    var senddata={groupId:this.treeSelectedNode.dictGroupId,groupName:this.treeSelectedNode.dictGroupText};
+                    var senddata={pageSize:2000,pageNum:1};
                     AjaxUtility.Post(url, senddata , function (result) {
                         if (result.success) {
                             //debugger;
                             if(result.data==null){
                                 result.data=new Array();
                             }
-                            result.data.push({dictId:senddata.groupId,dictKey:senddata.groupId,dictValue:senddata.groupName,dictText:senddata.groupName,dictStatus:"",dictIsSelected:"",dictCreateTime:""});
                             var treedata=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
                                 KeyField: "ddttId",
-                                RelationField:"dictParentId",
+                                RelationField:"ddttParentId",
                                 ChildFieldName:"Nodes"
-                            },result.data,senddata.groupId);
+                            },result.data.list,"0");
                             $("#divTreeTable").html("");
                             _self.treeTableObject=Object.create(TreeTable);
                             _self.treeTableObject.Initialization(_self.treeTableConfig);
                             _self.treeTableObject.LoadJsonData(treedata);
+                        }
+                        else{
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                         }
                     },"json");
                 },
@@ -160,21 +151,21 @@
                             DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择上级字典!",null);
                             return false;
                         }
-                        var url=BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?dictParentId="+nodeData.dictId+"&op=add&dictGroupId="+this.treeSelectedNode.dictGroupId);
+                        var url=BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoTreeTable/Detail.do?dictParentId="+nodeData[appList.treeTableConfig.IdField]+"&op=add");
                         DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"字典管理"},2);
                     }
                 },
                 edit:function(){
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=update&recordId=" + nodeData.dictId);
+                        var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoTreeTable/Detail.do?op=update&recordId=" + nodeData[appList.treeTableConfig.IdField]);
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                     })
                 },
                 del:function(){
                     var _self=this;
                     this.mareSureSelectedTreeTableRow("删除").then(function (nodeData) {
-                        var url="/PlatForm/System/Dictionary/Delete.do";
-                        var recordId=nodeData.dictId;
+                        var url="/PlatForm/DevDemo/DevDemoTreeTable/Delete.do";
+                        var recordId=nodeData[appList.treeTableConfig.IdField];
                         DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
                             AjaxUtility.Post(url, {recordId: recordId}, function (result) {
                                 if (result.success) {
@@ -192,44 +183,20 @@
                 },
                 view:function(){
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=view&recordId=" + nodeData.dictId);
+                        var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoTreeTable/Detail.do?op=view&recordId=" + nodeData[appList.treeTableConfig.IdField]);
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                     });
                 },
                 statusEnable:function (statusName) {
                     var _self=this;
                     this.mareSureSelectedTreeTableRow("启用").then(function (nodeData) {
-                        var url = "/PlatForm/System/Dictionary/StatusChange.do";
-                        var recordId = nodeData.dictId;
+                        var url = "/PlatForm/DevDemo/DevDemoTreeTable/StatusChange.do";
+                        var recordId = nodeData[appList.treeTableConfig.IdField];
                         AjaxUtility.Post(url, {ids: recordId,statusName:statusName}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     nodeData.dictStatus=statusName;
-                                    _self.treeTableObject.UpdateToRow(nodeData.dictId,nodeData);
-                                });
-                            }
-                            else {
-                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
-                            }
-                        }, "json");
-                    });
-                },
-                setSelected:function () {
-                    var _self=this;
-                    this.mareSureSelectedTreeTableRow("选中").then(function (nodeData) {
-                        var url = "/PlatForm/System/Dictionary/SetSelected.do";
-                        var recordId = nodeData.dictId;
-                        AjaxUtility.Post(url, {recordId: recordId}, function (result) {
-                            if (result.success) {
-                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                    //debugger;
-                                    var brothersDatas=_self.treeTableObject.GetBrothersNodeDatasByParentId(nodeData.dictId);
-                                    for(var i=0;i<brothersDatas.length;i++){
-                                        brothersDatas[i].dictIsSelected="否";
-                                        _self.treeTableObject.UpdateToRow(brothersDatas[i].dictId, brothersDatas[i]);
-                                    }
-                                    nodeData.dictIsSelected="是";
-                                    _self.treeTableObject.UpdateToRow(nodeData.dictId,nodeData);
+                                    _self.treeTableObject.UpdateToRow(nodeData[appList.treeTableConfig.IdField],nodeData);
                                 });
                             }
                             else {
@@ -242,14 +209,14 @@
                     var _self=this;
                     this.mareSureSelectedTreeTableRow("选中").then(function (nodeData) {
                         var url = '/PlatForm/System/Dictionary/Move.do';
-                        var recordId = nodeData.dictId;
+                        var recordId = nodeData[appList.treeTableConfig.IdField];
                         AjaxUtility.Post(url, {recordId: recordId,type:type}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     if(type=="down") {
-                                        _self.treeTableObject.MoveDownRow(nodeData.dictId);
+                                        _self.treeTableObject.MoveDownRow(nodeData[appList.treeTableConfig.IdField]);
                                     }else{
-                                        _self.treeTableObject.MoveUpRow(nodeData.dictId);
+                                        _self.treeTableObject.MoveUpRow(nodeData[appList.treeTableConfig.IdField]);
                                     }
                                     //_self.treeTableObject.UpdateToRow(nodeData.dictId,nodeData);
                                 });
@@ -260,30 +227,28 @@
                         }, "json");
                     });
                 },
-                newTreeTableNode : function (dictId, dictKey,dictValue,dictText,dictGroupId,dictCreateTime,dictStatus,dictIsSelected) {
+                newTreeTableNode : function (ddttId, ddttKey,ddttValue,ddttName,ddttCreatetime,ddttStatus) {
                     var newData={
-                        dictId:dictId,
-                        dictKey:dictKey,
-                        dictValue:dictValue,
-                        dictText:dictText,
-                        dictGroupId:dictGroupId,
-                        dictCreateTime:dictCreateTime,
-                        dictStatus:dictStatus,
-                        dictIsSelected:dictIsSelected
+                        ddttId:ddttId,
+                        ddttKey:ddttKey,
+                        ddttValue:ddttValue,
+                        ddttName:ddttName,
+                        ddttCreatetime:ddttCreatetime,
+                        ddttStatus:ddttStatus
                     };
                     this.treeTableObject.AppendChildRowToCurrentSelectedRow(newData);
                 },
-                updateTreeTableNode : function (dictId,dictKey,dictValue,dictText,dictStatus,dictIsSelected) {
+                updateTreeTableNode : function (ddttId, ddttKey,ddttValue,ddttName,ddttCreatetime,ddttStatus) {
                     //debugger;
                     var newData={
-                        dictId:dictId,
-                        dictKey:dictKey,
-                        dictValue:dictValue,
-                        dictText:dictText,
-                        dictStatus:dictStatus,
-                        dictIsSelected:dictIsSelected
+                        ddttId:ddttId,
+                        ddttKey:ddttKey,
+                        ddttValue:ddttValue,
+                        ddttName:ddttName,
+                        ddttCreatetime:ddttCreatetime,
+                        ddttStatus:ddttStatus
                     };
-                    this.treeTableObject.UpdateToRow(dictId,newData);
+                    this.treeTableObject.UpdateToRow(ddttId,newData);
                 }
             }
         });

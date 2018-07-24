@@ -2858,3 +2858,38 @@ Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireInc
 ----------------------------------------------------------------------------------------------------------
 Closing org.springframework.context.support.GenericApplicationContext@61f8bee4: startup date [Mon Jul 23 21:28:09 CST 2018]; root of context hierarchy
 ----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-24 09:32:22,700 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-24 09:32:22,726 [org.springframework.test.context.support.DefaultTestContextBootstrapper]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@14bf9759, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5f341870, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@553f17c, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4f7d0008, org.springframework.test.context.transaction.TransactionalTestExecutionListener@271053e1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@589838eb]
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-24 09:32:22,880 [org.springframework.context.support.GenericApplicationContext]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Refreshing org.springframework.context.support.GenericApplicationContext@61f8bee4: startup date [Tue Jul 24 09:32:22 CST 2018]; root of context hierarchy
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-24 09:32:23,496 [com.mchange.v2.log.MLog]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+MLog clients using slf4j logging.
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-24 09:32:23,868 [com.mchange.v2.c3p0.C3P0Registry]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-24 09:32:24,716 [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> 1hge77l9w1k0vq7z1pd4vgw|306f16f3, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.microsoft.sqlserver.jdbc.SQLServerDriver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> 1hge77l9w1k0vq7z1pd4vgw|306f16f3, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:sqlserver://120.77.56.220:1433; DatabaseName=JBuild4D, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-24 09:32:32,451 [org.springframework.context.support.GenericApplicationContext]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Closing org.springframework.context.support.GenericApplicationContext@61f8bee4: startup date [Tue Jul 24 09:32:22 CST 2018]; root of context hierarchy
+----------------------------------------------------------------------------------------------------------

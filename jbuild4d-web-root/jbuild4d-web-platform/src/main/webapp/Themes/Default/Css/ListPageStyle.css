@@ -33,6 +33,18 @@
     text-align: center;
 }
 
+.list-button-wrap{
+
+}
+
+.list-button-outer-wrap{
+    width: 100%;
+}
+
+.list-button-outer-wrap .list-button-inner-wrap{
+    float: right;
+}
+
 .list-row-button{
     width: 16px;
     height: 16px;
