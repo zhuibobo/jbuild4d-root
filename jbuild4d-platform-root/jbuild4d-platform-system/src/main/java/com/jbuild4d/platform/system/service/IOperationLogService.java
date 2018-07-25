@@ -15,5 +15,8 @@ import javax.servlet.http.HttpServletRequest;
  * To change this template use File | Settings | File Templates.
  */
 public interface IOperationLogService extends IBaseService<OperationLogEntity> {
+
     void writeUserLoginLog(JB4DSession jb4DSession,Class targetClass,HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException;
+
+    void writeUserExitLog(JB4DSession jb4DSession,Class targetClass,HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException;
 }

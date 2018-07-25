@@ -65,6 +65,32 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogEntity>
                 return sourceEntity;
             }
         });
-        //logEntity.setLogIp();
+    }
+
+    @Override
+    public void writeUserExitLog(JB4DSession jb4DSession,Class targetClass,HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException {
+        OperationLogEntity logEntity=new OperationLogEntity();
+        logEntity.setLogActionName("退出系统");
+        logEntity.setLogClassName(targetClass.getName());
+        logEntity.setLogCreateTime(new Date());
+        logEntity.setLogId(UUIDUtility.getUUID());
+        logEntity.setLogModuleName("基础信息");
+        logEntity.setLogSystemName("应用系统");
+        logEntity.setLogOrderNum(operationLogMapper.nextOrderNum());
+        logEntity.setLogOrganId(jb4DSession.getOrganId());
+        logEntity.setLogOrganName(jb4DSession.getOrganName());
+        logEntity.setLogUserId(jb4DSession.getUserId());
+        logEntity.setLogUserName(jb4DSession.getUserName());
+        logEntity.setLogStatus("正常");
+        logEntity.setLogText("用户["+jb4DSession.getUserName()+"]退出了系统!");
+        logEntity.setLogData(JsonUtility.toObjectString(jb4DSession));
+        logEntity.setLogType("登录日志");
+        logEntity.setLogIp(IpAddressUtility.getIpAdrress(request));
+        this.save(jb4DSession, logEntity.getLogId(), logEntity, new IAddBefore<OperationLogEntity>() {
+            @Override
+            public OperationLogEntity run(JB4DSession jb4DSession, OperationLogEntity sourceEntity) throws JBuild4DGenerallyException {
+                return sourceEntity;
+            }
+        });
     }
 }
