@@ -4,4 +4,24 @@
     <select id="nextOrderNum" resultType="integer">
         select case when max(LOG_ORDER_NUM) is null then 1 else max(LOG_ORDER_NUM)+1 end ORDERNUM from TB4D_OPERATION_LOG
     </select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_OPERATION_LOG
+        <where>
+            <if test="logText != null and logText != ''">
+                logText like #{LOG_TEXT}
+            </if>
+            <if test="logUserName != null and logUserName != ''">
+                and LOG_USER_NAME like #{logUserName}
+            </if>
+            <if test="logCreateTime_s != null and logCreateTime_s != ''">
+                and LOG_CREATE_TIME >= #{logCreateTime_s}
+            </if>
+            <if test="logCreateTime_e != null and logCreateTime_e != ''">
+                and LOG_CREATE_TIME &lt;= #{logCreateTime_e}
+            </if>
+        </where>
+        ORDER by LOG_CREATE_TIME DESC
+    </select>
 </mapper>

@@ -71,7 +71,7 @@ public class InitSystemTest extends BaseTest {
         //根菜单->系统设置分组->操作日志
         String systemSettingOperationLogId="JB4DSystemSettingOperationLog";
         MenuEntity systemSettingOperationLogMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOperationLogId,"操作日志","操作日志","操作日志",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/OperationLog/List.do","");
         menuService.deleteByKey(jb4DSession,systemSettingOperationLogMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingOperationLogMenu.getMenuId(),systemSettingOperationLogMenu);
 

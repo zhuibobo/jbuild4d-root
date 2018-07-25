@@ -1,7 +1,7 @@
 <%--
   Created by IntelliJ IDEA.
   User: zhuangrb
-  Date: 2018/7/15
+  Date: 2018/7/25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -30,21 +30,21 @@
                 <col style="width: 80px">
             </colgroup>
             <tr class="ls-table-row">
-                <td>ddglKey：</td>
+                <td>内容：</td>
                 <td>
-                    <i-input v-model="searchCondition.ddglKey.value" placeholder="ddglKey"></i-input>
+                    <i-input v-model="searchCondition.logText.value" placeholder="ddglKey"></i-input>
                 </td>
-                <td>ddglName：</td>
+                <td>用户：</td>
                 <td>
-                    <i-input v-model="searchCondition.ddglName.value" placeholder="ddglName"></i-input>
+                    <i-input v-model="searchCondition.logUserName.value" placeholder="ddglName"></i-input>
                 </td>
-                <td>ddglCreatetime（从）：</td>
+                <td>时间（从）：</td>
                 <td>
-                    <date-picker v-model="searchCondition.ddglCreatetime_s.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                    <date-picker v-model="searchCondition.logCreateTime_s.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
                 </td>
                 <td>（到）：</td>
                 <td>
-                    <date-picker v-model="searchCondition.ddglCreatetime_e.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                    <date-picker v-model="searchCondition.logCreateTime_e.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
                 </td>
                 <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
             </tr>
@@ -52,26 +52,6 @@
     </div>
     <div id="list-button-wrap" class="list-button-outer-wrap">
         <div class="list-button-inner-wrap">
-            <i-button type="success" @click="add()">
-                <Icon type="plus"></Icon>
-                新增
-            </i-button>
-            <i-button type="primary" @click="statusEnable('启用')">
-                <Icon type="checkmark-round"></Icon>
-                启用
-            </i-button>
-            <i-button type="primary" @click="statusEnable('禁用')">
-                <Icon type="minus-round"></Icon>
-                禁用
-            </i-button>
-            <i-button type="primary" @click="move('up')">
-                <Icon type="arrow-up-b"></Icon>
-                上移
-            </i-button>
-            <i-button type="primary" @click="move('down')">
-                <Icon type="arrow-down-b"></Icon>
-                下移
-            </i-button>
         </div>
         <div style="clear: both"></div>
     </div>
@@ -93,21 +73,21 @@
             },500);
         },
         data: {
-            idFieldName:"ddglId",
+            idFieldName:"logId",
             searchCondition:{
-                ddglKey:{
+                logText:{
                     value:"",
                     type:SearchUtility.SearchFieldType.LikeStringType
                 },
-                ddglName:{
+                logUserName:{
                     value:"",
-                    type:SearchUtility.SearchFieldType.StringType
+                    type:SearchUtility.SearchFieldType.LikeStringType
                 },
-                ddglCreatetime_s:{
+                logCreateTime_s:{
                     value:"",
                     type:SearchUtility.SearchFieldType.DataStringType
                 },
-                ddglCreatetime_e:{
+                logCreateTime_e:{
                     value:"",
                     type:SearchUtility.SearchFieldType.DataStringType
                 }
@@ -119,39 +99,41 @@
                     align: 'center'
                 },
                 {
-                    title: 'ddglKey',
-                    key: 'ddglKey',
+                    title: '内容',
+                    key: 'logText',
+                    align: "left"
+                }, {
+                    title: '子系统名称',
+                    width: 150,
+                    key: 'logSystemName',
                     align: "center"
                 }, {
-                    title: 'ddglName',
-                    key: 'ddglName',
+                    title: '模块名称',
+                    width: 150,
+                    key: 'logModuleName',
                     align: "center"
                 }, {
-                    title: 'ddglDesc',
-                    key: 'ddglDesc'
-                }, {
-                    title: 'ddglStatus',
+                    title: '用户名称',
                     width: 100,
                     align: "center",
-                    key: 'ddglStatus'
+                    width: 100,
+                    key: 'logUserName'
                 }, {
-                    title: 'CT',
-                    key: 'ddglCreatetime',
+                    title: '记录时间',
+                    key: 'logCreateTime',
                     width: 100,
                     align: "center",
                     render: function (h, params) {
-                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddglCreatetime);
+                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.logCreateTime);
                     }
                 }, {
                     title: '操作',
                     key: 'dictGroupId',
-                    width: 120,
+                    width: 70,
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList)
                         ]);
                     }
                 }
@@ -168,34 +150,13 @@
                 this.selectionRows = selection;
             },
             reloadData: function () {
-                var url = '/PlatForm/DevDemo/DevDemoGenList/GetListData.do';
+                var url = '/PlatForm/System/OperationLog/GetListData.do';
                 ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                 //this.selectionRows=null;
             },
-            add: function () {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=add");
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
-            },
-            edit: function (recordId) {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=update&recordId=" + recordId);
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
-            },
             view:function (recordId) {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=view&recordId=" + recordId);
+                var url = BaseUtility.BuildUrl("/PlatForm/System/OperationLog/Detail.do?op=view&recordId=" + recordId);
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
-            },
-            del: function (recordId) {
-                //debugger;
-                var url = '/PlatForm/DevDemo/DevDemoGenList/Delete.do';
-                ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
-            },
-            statusEnable: function (statusName) {
-                var url = '/PlatForm/DevDemo/DevDemoGenList/StatusChange.do';
-                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,appList.idFieldName,statusName,appList);
-            },
-            move:function (type) {
-                var url = '/PlatForm/DevDemo/DevDemoGenList/Move.do';
-                ListPageUtility.IViewMoveFace(url,this.selectionRows,appList.idFieldName,type,appList);
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;

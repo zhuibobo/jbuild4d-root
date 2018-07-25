@@ -59,7 +59,7 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogEntity>
         logEntity.setLogCreateTime(new Date());
         logEntity.setLogId(UUIDUtility.getUUID());
         logEntity.setLogModuleName("基础信息");
-        logEntity.setLogSystemName("应用系统");
+        logEntity.setLogSystemName("应用管理系统");
         logEntity.setLogOrderNum(operationLogMapper.nextOrderNum());
         logEntity.setLogOrganId(jb4DSession.getOrganId());
         logEntity.setLogOrganName(jb4DSession.getOrganName());
@@ -86,7 +86,7 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogEntity>
         logEntity.setLogCreateTime(new Date());
         logEntity.setLogId(UUIDUtility.getUUID());
         logEntity.setLogModuleName("基础信息");
-        logEntity.setLogSystemName("应用系统");
+        logEntity.setLogSystemName("应用管理系统");
         logEntity.setLogOrderNum(operationLogMapper.nextOrderNum());
         logEntity.setLogOrganId(jb4DSession.getOrganId());
         logEntity.setLogOrganName(jb4DSession.getOrganName());
