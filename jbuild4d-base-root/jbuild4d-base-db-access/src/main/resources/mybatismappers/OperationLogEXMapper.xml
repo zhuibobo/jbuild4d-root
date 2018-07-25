@@ -10,7 +10,7 @@
         from TB4D_OPERATION_LOG
         <where>
             <if test="logText != null and logText != ''">
-                logText like #{LOG_TEXT}
+                LOG_TEXT like #{logText}
             </if>
             <if test="logUserName != null and logUserName != ''">
                 and LOG_USER_NAME like #{logUserName}
