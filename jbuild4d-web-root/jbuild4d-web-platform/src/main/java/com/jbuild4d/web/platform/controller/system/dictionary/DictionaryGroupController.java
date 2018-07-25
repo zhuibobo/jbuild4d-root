@@ -50,6 +50,16 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
         return "System/Dictionary/DictionaryGroupEdit";
     }
 
+    @Override
+    public String getSubSystemName() {
+        return this.subSystemName;
+    }
+
+    @Override
+    public String getModuleName() {
+        return "开发示例";
+    }
+
     @RequestMapping(value = "MoveUp", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo moveUp(String recordId) {

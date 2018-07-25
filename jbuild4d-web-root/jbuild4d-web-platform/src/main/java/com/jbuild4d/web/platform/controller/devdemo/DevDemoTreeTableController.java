@@ -35,4 +35,14 @@ public class DevDemoTreeTableController  extends GeneralCRUDImplController<DevDe
     public String getDetailViewName() {
         return "DevDemo/TreeTable/TreeTableEdit";
     }
+
+    @Override
+    public String getSubSystemName() {
+        return this.subSystemName;
+    }
+
+    @Override
+    public String getModuleName() {
+        return "开发示例";
+    }
 }

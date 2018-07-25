@@ -49,4 +49,14 @@ public class DevDemoGenListBindDictionaryController  extends GeneralCRUDImplCont
         groupValueList.add("DevDemoDictionaryGroupBindCheckbox");
         return groupValueList;
     }
+
+    @Override
+    public String getSubSystemName() {
+        return this.subSystemName;
+    }
+
+    @Override
+    public String getModuleName() {
+        return "开发示例";
+    }
 }

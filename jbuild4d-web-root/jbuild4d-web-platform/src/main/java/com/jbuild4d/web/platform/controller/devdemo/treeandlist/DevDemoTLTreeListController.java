@@ -42,4 +42,14 @@ public class DevDemoTLTreeListController extends GeneralCRUDImplController<DevDe
     public String getDetailViewName() {
         return "DevDemo/TreeAndList/ListEdit";
     }
+
+    @Override
+    public String getSubSystemName() {
+        return this.subSystemName;
+    }
+
+    @Override
+    public String getModuleName() {
+        return "开发示例";
+    }
 }

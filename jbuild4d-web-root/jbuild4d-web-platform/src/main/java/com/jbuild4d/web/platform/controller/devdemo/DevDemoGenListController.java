@@ -44,4 +44,14 @@ public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoG
         ModelAndView modelAndView=new ModelAndView("/DevDemo/GenList/GenListNotSearch");
         return modelAndView;
     }
+
+    @Override
+    public String getSubSystemName() {
+        return this.subSystemName;
+    }
+
+    @Override
+    public String getModuleName() {
+        return "开发示例";
+    }
 }

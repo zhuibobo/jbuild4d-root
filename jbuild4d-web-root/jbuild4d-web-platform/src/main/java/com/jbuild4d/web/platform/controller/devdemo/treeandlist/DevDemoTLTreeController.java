@@ -42,6 +42,16 @@ public class DevDemoTLTreeController  extends GeneralCRUDImplController<DevDemoT
         return "DevDemo/TreeAndList/TreeEdit";
     }
 
+    @Override
+    public String getSubSystemName() {
+        return this.subSystemName;
+    }
+
+    @Override
+    public String getModuleName() {
+        return "开发示例";
+    }
+
     @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
     @ResponseBody
     public List<DevDemoTLTreeEntity> getTreeData() {

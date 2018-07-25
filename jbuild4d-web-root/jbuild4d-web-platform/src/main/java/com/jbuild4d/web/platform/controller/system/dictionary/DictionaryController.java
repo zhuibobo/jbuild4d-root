@@ -59,4 +59,14 @@ public class DictionaryController extends GeneralCRUDImplController<DictionaryEn
         dictionaryService.setSelected(JB4DSessionUtility.getSession(),recordId);
         return JBuild4DResponseVo.opSuccess();
     }
+
+    @Override
+    public String getSubSystemName() {
+        return this.subSystemName;
+    }
+
+    @Override
+    public String getModuleName() {
+        return "数据字典";
+    }
 }

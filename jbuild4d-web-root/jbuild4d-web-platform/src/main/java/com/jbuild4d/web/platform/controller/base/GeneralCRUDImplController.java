@@ -38,12 +38,12 @@ import java.util.*;
  */
 public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDController<T> {
 
-    //IBaseService<T> baseService;
-    //T nullEntity;
-    //protected abstract IBaseService<T> getBaseService();
-
     @Autowired
     IDictionaryService dictionaryService;
+
+    protected String subSystemName="应用管理系统";
+    protected String moduleName="";
+    protected String logTypeName="操作日志";
 
     //得到泛型类T
     public Class getMyClass(){
@@ -68,17 +68,17 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     protected abstract IBaseService<T> getBaseService();
 
-    /*public void setBaseService(IBaseService<T> baseService) {
-        this.baseService = baseService;
-    }*/
+    public abstract String getListViewName();
 
-    /*public T getNullEntity() {
-        return nullEntity;
+    public abstract String getDetailViewName();
+
+    public abstract String getSubSystemName();
+
+    public abstract String getModuleName();
+
+    protected String getLogTypeName(){
+        return logTypeName;
     }
-
-    public void setNullEntity(T nullEntity) {
-        this.ullEntity = nullEntity;
-    }*/
 
     @RequestMapping(value = "List", method = RequestMethod.GET)
     public ModelAndView list() throws JsonProcessingException {
@@ -106,8 +106,6 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
         return JsonUtility.toObjectString(dictionarysMap);
     }
-
-    public abstract String getListViewName();
 
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
@@ -141,8 +139,6 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         modelAndView.addObject("op",op);
         return modelAndView;
     }
-
-    public abstract String getDetailViewName();
 
     @RequestMapping(value = "SaveEdit", method = RequestMethod.POST)
     @ResponseBody

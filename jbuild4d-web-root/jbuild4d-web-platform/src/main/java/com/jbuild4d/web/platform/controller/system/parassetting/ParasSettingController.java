@@ -35,4 +35,14 @@ public class ParasSettingController  extends GeneralCRUDImplController<SettingEn
     public String getDetailViewName() {
         return "System/ParasSetting/ParasSettingEdit";
     }
+
+    @Override
+    public String getSubSystemName() {
+        return this.subSystemName;
+    }
+
+    @Override
+    public String getModuleName() {
+        return "系统参数设置";
+    }
 }

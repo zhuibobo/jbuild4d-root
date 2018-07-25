@@ -1,5 +1,7 @@
 package com.jbuild4d.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.itextpdf.io.image.Jbig2ImageData;
 import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
@@ -44,9 +46,9 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/LoginOut", method = RequestMethod.GET)
-    public ModelAndView loginOut(HttpServletRequest request) {
-
+    public ModelAndView loginOut(HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException {
         ModelAndView modelAndView=new ModelAndView("Login");
+        operationLogService.writeUserExitLog(JB4DSessionUtility.getSession(),this.getClass(),request);
         JB4DSessionUtility.clearMySession();
         return modelAndView;
     }
