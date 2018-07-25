@@ -2,10 +2,12 @@ package com.jbuild4d.web;
 
 import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.system.service.IMenuService;
+import com.jbuild4d.platform.system.service.IOperationLogService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -25,6 +27,9 @@ public class LoginController {
 
     @Autowired
     IMenuService menuService;
+
+    @Autowired
+    IOperationLogService operationLogService;
 
     @RequestMapping(value = "/Login", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request) {
@@ -56,7 +61,7 @@ public class LoginController {
 
     @RequestMapping(value = "/ValidateAccount", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo validateAccount(String account, String password,HttpServletRequest request) throws IOException, ParseException {
+    public JBuild4DResponseVo validateAccount(String account, String password,HttpServletRequest request) throws IOException, ParseException, JBuild4DGenerallyException {
         JB4DSession b4DSession = new JB4DSession();
         b4DSession.setOrganName("4D");
         b4DSession.setOrganId("OrganId");
@@ -67,7 +72,7 @@ public class LoginController {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
         List<MenuEntity> entityList=menuService.getALL(jb4DSession);
         System.out.println(JsonUtility.toObjectString(entityList));
-
+        operationLogService.writeUserLoginLog(jb4DSession,this.getClass());
         return JBuild4DResponseVo.opSuccess();
     }
 }
