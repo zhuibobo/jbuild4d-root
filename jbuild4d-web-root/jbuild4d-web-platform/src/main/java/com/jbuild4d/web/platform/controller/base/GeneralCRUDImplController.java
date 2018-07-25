@@ -16,6 +16,7 @@ import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
 import com.jbuild4d.platform.system.service.IDictionaryService;
+import com.jbuild4d.platform.system.service.IOperationLogService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -40,6 +42,9 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     @Autowired
     IDictionaryService dictionaryService;
+
+    @Autowired
+    IOperationLogService operationLogService;
 
     protected String subSystemName="应用管理系统";
     protected String moduleName="";
@@ -80,14 +85,16 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         return logTypeName;
     }
 
+    protected void writeOperationLog(String actionName,String text,String data,HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException {
+        operationLogService.writeOperationLog(JB4DSessionUtility.getSession(),getSubSystemName(),getModuleName(),actionName,getLogTypeName(),text,data,this.getClass(),request);
+    }
+
     @RequestMapping(value = "List", method = RequestMethod.GET)
     public ModelAndView list() throws JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView(getListViewName());
-
         List<String> dictionaryGroupValueList=bindDictionaryToPage();
         String dictionaryJsonString=getDictionaryJsonString(dictionaryGroupValueList);
         modelAndView.addObject("dictionaryJson", dictionaryJsonString);
-
         return modelAndView;
     }
 
@@ -142,15 +149,18 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     @RequestMapping(value = "SaveEdit", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo saveEdit(@RequestBody T entity) throws JBuild4DGenerallyException {
+    public JBuild4DResponseVo saveEdit(@RequestBody T entity,HttpServletRequest request) throws JBuild4DGenerallyException {
         try {
-            //entity.getClass().getDeclaredFields()[0].get
             String recordID=DBAnnoUtility.getIDValue(entity);
-            //return null;
-            //baseService.saveBySelective(entityId(entity), entity);
             JB4DSession jb4DSession=JB4DSessionUtility.getSession();
             if(getBaseService()==null){
                 throw new JBuild4DGenerallyException(this.getClass().getSimpleName()+".getBaseService()返回的对象为Null");
+            }
+            if(getBaseService().getByPrimaryKey(jb4DSession,recordID)==null){
+                this.writeOperationLog("新增数据","用户["+jb4DSession.getUserName()+"]新增了ID为"+recordID+"的数据",JsonUtility.toObjectString(entity),request);
+            }
+            else{
+                this.writeOperationLog("修改数据","用户["+jb4DSession.getUserName()+"]修改了ID为"+recordID+"的数据",JsonUtility.toObjectString(entity),request);
             }
             getBaseService().save(jb4DSession,recordID, entity);
             return JBuild4DResponseVo.saveSuccess();

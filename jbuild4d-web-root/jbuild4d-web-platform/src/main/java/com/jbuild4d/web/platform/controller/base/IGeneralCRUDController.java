@@ -6,6 +6,7 @@ import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -23,7 +24,7 @@ public interface IGeneralCRUDController<T> {
 
     public abstract ModelAndView detail(String recordId,String op) throws IllegalAccessException, InstantiationException, JsonProcessingException;
 
-    public abstract JBuild4DResponseVo saveEdit(@RequestBody T entity) throws Exception;
+    public abstract JBuild4DResponseVo saveEdit(@RequestBody T entity,HttpServletRequest request) throws Exception;
 
     public abstract JBuild4DResponseVo statusChange(String ids,String status);
 

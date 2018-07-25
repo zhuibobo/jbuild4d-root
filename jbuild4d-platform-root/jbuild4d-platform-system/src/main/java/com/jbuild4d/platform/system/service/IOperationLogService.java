@@ -19,4 +19,6 @@ public interface IOperationLogService extends IBaseService<OperationLogEntity> {
     void writeUserLoginLog(JB4DSession jb4DSession,Class targetClass,HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException;
 
     void writeUserExitLog(JB4DSession jb4DSession,Class targetClass,HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException;
+
+    void writeOperationLog(JB4DSession jb4DSession,String subSystemName,String moduleName,String actionName,String type,String text,String data,Class targetClass,HttpServletRequest request)  throws JsonProcessingException, JBuild4DGenerallyException;
 }

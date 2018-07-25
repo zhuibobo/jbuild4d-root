@@ -37,7 +37,18 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogEntity>
 
     @Override
     public int save(JB4DSession jb4DSession, String id, OperationLogEntity entity) throws JBuild4DGenerallyException {
-        return 0;
+        return this.save(jb4DSession, id, entity, new IAddBefore<OperationLogEntity>() {
+            @Override
+            public OperationLogEntity run(JB4DSession jb4DSession, OperationLogEntity sourceEntity) throws JBuild4DGenerallyException {
+                sourceEntity.setLogOrderNum(operationLogMapper.nextOrderNum());
+                sourceEntity.setLogOrganId(jb4DSession.getOrganId());
+                sourceEntity.setLogOrganName(jb4DSession.getOrganName());
+                sourceEntity.setLogUserId(jb4DSession.getUserId());
+                sourceEntity.setLogUserName(jb4DSession.getUserName());
+                sourceEntity.setLogCreateTime(new Date());
+                return sourceEntity;
+            }
+        });
     }
 
     @Override
@@ -92,5 +103,21 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogEntity>
                 return sourceEntity;
             }
         });
+    }
+
+    @Override
+    public void writeOperationLog(JB4DSession jb4DSession, String subSystemName, String moduleName, String actionName, String type, String text, String data, Class targetClass, HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException {
+        OperationLogEntity logEntity=new OperationLogEntity();
+        logEntity.setLogSystemName(subSystemName);
+        logEntity.setLogModuleName(moduleName);
+        logEntity.setLogActionName(actionName);
+        logEntity.setLogType(type);
+        logEntity.setLogText(text);
+        logEntity.setLogData(data);
+        logEntity.setLogClassName(targetClass.getName());
+        logEntity.setLogId(UUIDUtility.getUUID());
+        logEntity.setLogStatus("正常");
+        logEntity.setLogIp(IpAddressUtility.getIpAdrress(request));
+        this.save(jb4DSession, logEntity.getLogId(), logEntity);
     }
 }
