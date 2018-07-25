@@ -61,15 +61,18 @@
                 {
                     title: 'Key',
                     key: 'settingKey',
-                    align: "center"
+                    align: "center",
+                    width: 130,
                 }, {
                     title: '名称',
                     key: 'settingName',
-                    align: "center"
+                    align: "center",
+                    width: 200
                 }, {
                     title: '值',
                     key: 'settingValue',
-                    align: "center"
+                    align: "center",
+                    width: 400
                 }, {
                     title: '状态',
                     width: 100,
@@ -77,7 +80,6 @@
                     key: 'settingStatus'
                 }, {
                     title: '备注',
-                    width: 100,
                     align: "center",
                     key: 'settingDesc'
                 }, {
@@ -95,9 +97,9 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,this.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,this.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,this.idFieldName,appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
                         ]);
                     }
                 }
