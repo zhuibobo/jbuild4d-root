@@ -14,5 +14,9 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
     ISQLBuilderService sqlBuilderService;
     public CodeGenerateServiceImpl(ISQLBuilderService _sqlBuilderService) {
         sqlBuilderService=_sqlBuilderService;
+        //Select Name FROM SysObjects Where XType='U' orDER BY Name
+        //DBType=MSSQLSERVER
+        //#DBType=ORACLE
+        //#DBType=MYSQL
     }
 }
