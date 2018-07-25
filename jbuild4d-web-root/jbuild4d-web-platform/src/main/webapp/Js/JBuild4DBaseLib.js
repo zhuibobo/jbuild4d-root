@@ -1576,6 +1576,7 @@ var ListPageUtility={
                 class: "list-row-button list-row-button-del",
                 on: {
                     click: function () {
+                        //debugger;
                         pageAppObj.del(params.row[idField]);
                     }
                 }

@@ -115,9 +115,9 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,this.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,this.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,this.idFieldName,appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
                         ]);
                     }
                 }

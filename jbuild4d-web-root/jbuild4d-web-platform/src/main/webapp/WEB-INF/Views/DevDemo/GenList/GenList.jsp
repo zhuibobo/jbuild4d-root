@@ -149,9 +149,9 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,this.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,this.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,this.idFieldName,appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
                         ]);
                     }
                 }
@@ -185,6 +185,7 @@
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
             },
             del: function (recordId) {
+                debugger;
                 var url = '/PlatForm/DevDemo/DevDemoGenList/Delete.do';
                 ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
             },

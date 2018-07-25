@@ -196,7 +196,8 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     @ResponseBody
     public JBuild4DResponseVo delete(String recordId,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-        this.writeOperationLog("删除数据","用户["+jb4DSession.getUserName()+"]删除了ID为"+recordId+"的数据["+getMyClass().getSimpleName()+"]",recordId,request);
+        T entity=getBaseService().getByPrimaryKey(jb4DSession,recordId);
+        this.writeOperationLog("删除数据","用户["+jb4DSession.getUserName()+"]删除了ID为"+recordId+"的数据["+getMyClass().getSimpleName()+"]",JsonUtility.toObjectString(entity),request);
         getBaseService().deleteByKey(jb4DSession,recordId);
         return JBuild4DResponseVo.opSuccess();
     }
