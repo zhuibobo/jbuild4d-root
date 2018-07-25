@@ -82,6 +82,13 @@ public class InitSystemTest extends BaseTest {
         menuService.deleteByKey(jb4DSession,systemSettingParasSettingMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingParasSettingMenu.getMenuId(),systemSettingParasSettingMenu);
 
+        //根菜单->系统设置分组->代码生成
+        String systemSettingCodeGenerateId="JB4DSystemSettingCodeGenerate";
+        MenuEntity systemSettingCodeGenerateMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingCodeGenerateId,"代码生成","代码生成","代码生成",
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
+        menuService.deleteByKey(jb4DSession,systemSettingCodeGenerateMenu.getMenuId());
+        menuService.save(jb4DSession,systemSettingCodeGenerateMenu.getMenuId(),systemSettingCodeGenerateMenu);
+
         //根菜单->系统设置分组->组织管理
         String systemSettingOrganManageId="JB4DSystemSettingOrganManage";
         MenuEntity systemSettingOrganManageMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOrganManageId,"组织管理","组织管理","组织管理",
