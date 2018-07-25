@@ -72,7 +72,7 @@ public class LoginController {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
         List<MenuEntity> entityList=menuService.getALL(jb4DSession);
         System.out.println(JsonUtility.toObjectString(entityList));
-        operationLogService.writeUserLoginLog(jb4DSession,this.getClass());
+        operationLogService.writeUserLoginLog(jb4DSession,this.getClass(),request);
         return JBuild4DResponseVo.opSuccess();
     }
 }

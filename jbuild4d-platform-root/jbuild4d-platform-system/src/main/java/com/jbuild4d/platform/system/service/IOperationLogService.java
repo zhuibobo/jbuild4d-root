@@ -6,6 +6,8 @@ import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -13,5 +15,5 @@ import com.jbuild4d.base.service.general.JB4DSession;
  * To change this template use File | Settings | File Templates.
  */
 public interface IOperationLogService extends IBaseService<OperationLogEntity> {
-    void writeUserLoginLog(JB4DSession jb4DSession,Class targetClass) throws JsonProcessingException, JBuild4DGenerallyException;
+    void writeUserLoginLog(JB4DSession jb4DSession,Class targetClass,HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException;
 }

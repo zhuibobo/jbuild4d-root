@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
  * Date: 2018/7/25
  * To change this template use File | Settings | File Templates.
  */
-public class IpAdrressUtility {
+public class IpAddressUtility {
     /**
      * 获取Ip地址
      * @param request
      * @return
      */
-    private static String getIpAdrress(HttpServletRequest request) {
+    public static String getIpAdrress(HttpServletRequest request) {
         String Xip = request.getHeader("X-Real-IP");
         String XFor = request.getHeader("X-Forwarded-For");
         if(StringUtils.isNotEmpty(XFor) && !"unKnown".equalsIgnoreCase(XFor)){
