@@ -57,7 +57,7 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
 
     @Override
     public String getModuleName() {
-        return "开发示例";
+        return "数据字典分组";
     }
 
     @RequestMapping(value = "MoveUp", method = RequestMethod.POST)
