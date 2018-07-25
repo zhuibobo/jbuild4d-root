@@ -157,10 +157,10 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
                 throw new JBuild4DGenerallyException(this.getClass().getSimpleName()+".getBaseService()返回的对象为Null");
             }
             if(getBaseService().getByPrimaryKey(jb4DSession,recordID)==null){
-                this.writeOperationLog("新增数据","用户["+jb4DSession.getUserName()+"]新增了ID为"+recordID+"的数据",JsonUtility.toObjectString(entity),request);
+                this.writeOperationLog("新增数据","用户["+jb4DSession.getUserName()+"]新增了ID为"+recordID+"的数据["+getMyClass().getSimpleName()+"]",JsonUtility.toObjectString(entity),request);
             }
             else{
-                this.writeOperationLog("修改数据","用户["+jb4DSession.getUserName()+"]修改了ID为"+recordID+"的数据",JsonUtility.toObjectString(entity),request);
+                this.writeOperationLog("修改数据","用户["+jb4DSession.getUserName()+"]修改了ID为"+recordID+"的数据["+getMyClass().getSimpleName()+"]",JsonUtility.toObjectString(entity),request);
             }
             getBaseService().save(jb4DSession,recordID, entity);
             return JBuild4DResponseVo.saveSuccess();
@@ -183,7 +183,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
                 throw new JBuild4DGenerallyException("参数status不能为空或空串!");
             }
             JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-            this.writeOperationLog("修改数据","用户["+jb4DSession.getUserName()+"]修改了ID为"+ids+"的数据状态",status,request);
+            this.writeOperationLog("修改数据","用户["+jb4DSession.getUserName()+"]修改了ID为"+ids+"的数据状态["+getMyClass().getSimpleName()+"]",status,request);
             getBaseService().statusChange(jb4DSession,ids,status);
             return JBuild4DResponseVo.opSuccess();
         } catch (JBuild4DGenerallyException e) {
@@ -196,7 +196,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     @ResponseBody
     public JBuild4DResponseVo delete(String recordId,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-        this.writeOperationLog("删除数据","用户["+jb4DSession.getUserName()+"]删除了ID为"+recordId+"的数据",recordId,request);
+        this.writeOperationLog("删除数据","用户["+jb4DSession.getUserName()+"]删除了ID为"+recordId+"的数据["+getMyClass().getSimpleName()+"]",recordId,request);
         getBaseService().deleteByKey(jb4DSession,recordId);
         return JBuild4DResponseVo.opSuccess();
     }
@@ -205,7 +205,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     @ResponseBody
     public JBuild4DResponseVo move(String recordId,String type,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-        this.writeOperationLog("修改数据","用户["+jb4DSession.getUserName()+"]移动了ID为"+recordId+"的数据",recordId,request);
+        this.writeOperationLog("修改数据","用户["+jb4DSession.getUserName()+"]移动了ID为"+recordId+"的数据["+getMyClass().getSimpleName()+"]",recordId,request);
         if(type.equals("up")) {
             getBaseService().moveUp(jb4DSession, recordId);
         }
