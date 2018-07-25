@@ -174,7 +174,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     @RequestMapping(value = "StatusChange", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo statusChange(String ids,String status) {
+    public JBuild4DResponseVo statusChange(String ids,String status,HttpServletRequest request) throws JsonProcessingException {
         try {
             if(StringUtility.isEmpty(ids)){
                 throw new JBuild4DGenerallyException("参数Ids不能为空或空串!");
@@ -183,6 +183,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
                 throw new JBuild4DGenerallyException("参数status不能为空或空串!");
             }
             JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+            this.writeOperationLog("修改数据","用户["+jb4DSession.getUserName()+"]修改了ID为"+ids+"的数据状态",status,request);
             getBaseService().statusChange(jb4DSession,ids,status);
             return JBuild4DResponseVo.opSuccess();
         } catch (JBuild4DGenerallyException e) {
@@ -193,16 +194,18 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
     @RequestMapping(value = "Delete", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo delete(String recordId) throws JBuild4DGenerallyException {
+    public JBuild4DResponseVo delete(String recordId,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+        this.writeOperationLog("删除数据","用户["+jb4DSession.getUserName()+"]删除了ID为"+recordId+"的数据",recordId,request);
         getBaseService().deleteByKey(jb4DSession,recordId);
         return JBuild4DResponseVo.opSuccess();
     }
 
     @RequestMapping(value = "Move", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo move(String recordId,String type) throws JBuild4DGenerallyException {
+    public JBuild4DResponseVo move(String recordId,String type,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+        this.writeOperationLog("修改数据","用户["+jb4DSession.getUserName()+"]移动了ID为"+recordId+"的数据",recordId,request);
         if(type.equals("up")) {
             getBaseService().moveUp(jb4DSession, recordId);
         }
