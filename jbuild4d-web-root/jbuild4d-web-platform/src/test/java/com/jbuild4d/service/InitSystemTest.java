@@ -85,7 +85,7 @@ public class InitSystemTest extends BaseTest {
         //根菜单->系统设置分组->代码生成
         String systemSettingCodeGenerateId="JB4DSystemSettingCodeGenerate";
         MenuEntity systemSettingCodeGenerateMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingCodeGenerateId,"代码生成","代码生成","代码生成",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/CodeGenerate/Manager.do","");
         menuService.deleteByKey(jb4DSession,systemSettingCodeGenerateMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingCodeGenerateMenu.getMenuId(),systemSettingCodeGenerateMenu);
 
