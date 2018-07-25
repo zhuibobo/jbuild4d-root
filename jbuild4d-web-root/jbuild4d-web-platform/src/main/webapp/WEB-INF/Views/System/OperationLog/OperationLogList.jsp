@@ -32,19 +32,19 @@
             <tr class="ls-table-row">
                 <td>内容：</td>
                 <td>
-                    <i-input v-model="searchCondition.logText.value" placeholder="ddglKey"></i-input>
+                    <i-input v-model="searchCondition.logText.value" placeholder=""></i-input>
                 </td>
                 <td>用户：</td>
                 <td>
-                    <i-input v-model="searchCondition.logUserName.value" placeholder="ddglName"></i-input>
+                    <i-input v-model="searchCondition.logUserName.value" placeholder=""></i-input>
                 </td>
                 <td>时间（从）：</td>
                 <td>
-                    <date-picker v-model="searchCondition.logCreateTime_s.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                    <date-picker v-model="searchCondition.logCreateTime_s.value" type="date" placeholder="" style="width: 100%"></date-picker>
                 </td>
                 <td>（到）：</td>
                 <td>
-                    <date-picker v-model="searchCondition.logCreateTime_e.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                    <date-picker v-model="searchCondition.logCreateTime_e.value" type="date" placeholder="" style="width: 100%"></date-picker>
                 </td>
                 <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
             </tr>

@@ -50,19 +50,19 @@
                 <tr class="ls-table-row">
                     <td>ddtlName：</td>
                     <td>
-                        <i-input v-model="searchCondition.ddtlName.value" placeholder="ddtlName"></i-input>
+                        <i-input v-model="searchCondition.ddtlName.value" placeholder=""></i-input>
                     </td>
                     <td>ddtlValue：</td>
                     <td>
-                        <i-input v-model="searchCondition.ddtlValue.value" placeholder="ddtlValue"></i-input>
+                        <i-input v-model="searchCondition.ddtlValue.value" placeholder=""></i-input>
                     </td>
                     <td>ddtlCreatetime（从）：</td>
                     <td>
-                        <date-picker v-model="searchCondition.ddtlCreatetime_s.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                        <date-picker v-model="searchCondition.ddtlCreatetime_s.value" type="date" placeholder="" style="width: 100%"></date-picker>
                     </td>
                     <td>（到）：</td>
                     <td>
-                        <date-picker v-model="searchCondition.ddtlCreatetime_e.value" type="date" placeholder="Select date" style="width: 100%"></date-picker>
+                        <date-picker v-model="searchCondition.ddtlCreatetime_e.value" type="date" placeholder="" style="width: 100%"></date-picker>
                     </td>
                     <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
                 </tr>
