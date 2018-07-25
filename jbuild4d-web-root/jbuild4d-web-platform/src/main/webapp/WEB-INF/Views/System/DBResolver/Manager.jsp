@@ -49,7 +49,8 @@
     <div class="right-outer-wrap-c" style="padding: 10px;left: 450px;">
         <tabs type="card">
             <tab-pane label="Entity">标签一的内容</tab-pane>
-            <tab-pane label="Mapper">标签二的内容</tab-pane>
+            <tab-pane label="MapperAC">标签二的内容</tab-pane>
+            <tab-pane label="MapperEX">标签二的内容</tab-pane>
             <tab-pane label="Service">标签二的内容</tab-pane>
             <tab-pane label="Bean">标签三的内容</tab-pane>
             <tab-pane label="Controller">标签二的内容</tab-pane>
