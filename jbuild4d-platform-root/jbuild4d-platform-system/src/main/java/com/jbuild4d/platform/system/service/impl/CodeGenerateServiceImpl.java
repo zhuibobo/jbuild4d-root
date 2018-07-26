@@ -56,23 +56,53 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         return pageInfo;
     }
 
+    private String EntityRootFolderKey="EntityRootFolderKey";
+    private String DaoRootFolderKey="DaoRootFolderKey";
+    private String XmlRootFolderKey="XmlRootFolderKey";
+    private Map<String,String> createAboutFolder(){
+        String GenerateCodeFilesPath=PathUtility.getWebInfPath()+"/GenerateCodeFiles"+"/"+DateUtility.getDate_yyyyMMddHHmmssSSS();
+        File tempRootFolder=new File(GenerateCodeFilesPath);
+        tempRootFolder.mkdirs();
+
+        Map<String,String> result=new HashMap<>();
+        //Entity
+        String tempPath=GenerateCodeFilesPath+"/Entity";
+        File temp=new File(tempPath);
+        temp.mkdirs();
+        result.put(EntityRootFolderKey,tempPath);
+
+        //Dao
+        tempPath=GenerateCodeFilesPath+"/Dao";
+        temp=new File(tempPath);
+        temp.mkdirs();
+        result.put(DaoRootFolderKey,tempPath);
+
+        //Xml
+        tempPath=GenerateCodeFilesPath+"/XMLACMapper";
+        temp=new File(tempPath);
+        temp.mkdirs();
+        result.put(XmlRootFolderKey,tempPath);
+
+        return result;
+    }
+
     @Override
-    public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName) throws FileNotFoundException {
+    public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String entityPackage,String daoPackage,String xmlPackage) throws FileNotFoundException {
         //根据单表生成代码
         Map<String, String> generateCodeMap = new HashMap<>();
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
-        //String genCfg = "D:/JavaProject/SelfProject/jbuild4d-project/jbuild4d-root/libs/MybatisGenerator/generatorConfigToCode.xml";
+
         InputStream is = this.getClass().getClassLoader().getResourceAsStream("MybatisGenerator/generatorConfigToCode.xml");
 
-        //PathUtility pathUtility=new PathUtility();
+        /*//PathUtility pathUtility=new PathUtility();
         //String generateCodeFilesPath= PathUtility
         //InputStream is=new FileInputStream(configFile);
         String GenerateCodeFilesPath=PathUtility.getWebInfPath()+"/GenerateCodeFiles";
 
-        String tempRootFolderStr= GenerateCodeFilesPath+"/"+DateUtility.getDate_yyyyMMddHHmmssSSS();
-        File tempRootFolder=new File(tempRootFolderStr);
-        tempRootFolder.mkdirs();
+        String tempRootFolderStr= GenerateCodeFilesPath+"/"+DateUtility.getDate_yyyyMMddHHmmssSSS();*/
+
+        Map<String,String> rootPath=createAboutFolder();
 
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = null;
@@ -97,20 +127,20 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
 
         //设置modelde的相关信息
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration=context.getJavaModelGeneratorConfiguration();
-        javaModelGeneratorConfiguration.setTargetPackage("Entity");
-        javaModelGeneratorConfiguration.setTargetProject(tempRootFolderStr);
+        javaModelGeneratorConfiguration.setTargetPackage(entityPackage);
+        javaModelGeneratorConfiguration.setTargetProject(rootPath.get(EntityRootFolderKey));
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
         //设置mapper的相关信息
         SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration=context.getSqlMapGeneratorConfiguration();
-        sqlMapGeneratorConfiguration.setTargetPackage("MapperAC");
-        sqlMapGeneratorConfiguration.setTargetProject(tempRootFolderStr);
+        sqlMapGeneratorConfiguration.setTargetPackage(xmlPackage);
+        sqlMapGeneratorConfiguration.setTargetProject(rootPath.get(XmlRootFolderKey));
         context.setSqlMapGeneratorConfiguration(sqlMapGeneratorConfiguration);
 
         //设置dao的相关的信息
         JavaClientGeneratorConfiguration javaClientGeneratorConfiguration=context.getJavaClientGeneratorConfiguration();
-        javaClientGeneratorConfiguration.setTargetPackage("Dao");
-        javaClientGeneratorConfiguration.setTargetProject(tempRootFolderStr);
+        javaClientGeneratorConfiguration.setTargetPackage(daoPackage);
+        javaClientGeneratorConfiguration.setTargetProject(rootPath.get(DaoRootFolderKey));
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
         String domainObjectName= StringUtility.fisrtCharUpper(tableName)+"Entity";

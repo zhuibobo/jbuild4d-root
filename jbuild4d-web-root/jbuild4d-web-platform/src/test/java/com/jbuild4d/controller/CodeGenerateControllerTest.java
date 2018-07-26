@@ -55,6 +55,10 @@ public class CodeGenerateControllerTest {
         //context.getServletContext().
         MockHttpServletRequestBuilder requestBuilder =post("/PlatForm/System/CodeGenerate/GetTableGenerateCode.do");
         requestBuilder.param("tableName","TB4D_SETTING");
+        requestBuilder.param("entityPackage","com.jbuild4d.base.dbaccess.dbentities");
+        requestBuilder.param("daoPackage","com.jbuild4d.base.dbaccess.dao");
+        requestBuilder.param("xmlPackage","mybatismappers");
+
         JB4DSession b4DSession = new JB4DSession();
         b4DSession.setOrganName("4D");
         b4DSession.setOrganId("OrganId");
