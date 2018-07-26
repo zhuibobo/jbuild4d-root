@@ -177,6 +177,41 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        //读取文件作为结果返回
+        //Entity文件
+        String tempPath=rootPath.get(EntityRootFolderKey)+"/"+entityPackage.replaceAll("\\.","/");
+
+        generateCodeMap.put(EntityRootFolderKey,readFolderSingleFileToString(tempPath));
+
         return generateCodeMap;
+    }
+
+    private String readFolderSingleFileToString(String folder){
+        File file=new File(folder);
+        if(file.exists()){
+            File[] files=file.listFiles();
+            if(files.length>0){
+                File singleFile=files[0];
+                Long filelength = singleFile.length();
+                byte[] filecontent = new byte[filelength.intValue()];
+                try {
+                    FileInputStream in = new FileInputStream(singleFile);
+                    in.read(filecontent);
+                    in.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    return new String(filecontent, "utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        }
+        return "";
     }
 }

@@ -50,7 +50,7 @@
         <card :bordered="false" style="margin-bottom: 10px">
             <p slot="title">参数设置</p>
             <row>
-                <i-col span="20">
+                <i-col span="21">
                     <row>
                         <i-col span="2" style="text-align: center;padding-top: 6px">表名：</i-col>
                         <i-col span="10">
@@ -58,47 +58,39 @@
                         </i-col>
                         <i-col span="3" style="text-align: center;padding-top: 6px">实体包名：</i-col>
                         <i-col span="9">
-                            <radio-group v-model="vertical" vertical>
-                                <radio label="com.jbuild4d.base.dbaccess.dbentities">
-                                </radio>
-                                <radio label="android">
-                                    <span>Android</span>
-                                </radio>
+                            <radio-group v-model="formValidate.entityPackage" vertical>
+                                <radio label="com.jbuild4d.base.dbaccess.dbentities"></radio>
+                                <radio label="android"></radio>
                             </radio-group>
                         </i-col>
                     </row>
                     <row>
                         <i-col span="2" style="text-align: center;padding-top: 6px">Dao包名：</i-col>
                         <i-col span="10">
-                            <radio-group v-model="vertical" vertical>
-                                <radio label="com.jbuild4d.base.dbaccess.dao">
-                                </radio>
-                                <radio label="android">
-                                    <span>Android</span>
-                                </radio>
+                            <radio-group v-model="formValidate.daoPackage" vertical>
+                                <radio label="com.jbuild4d.base.dbaccess.dao"></radio>
+                                <radio label="android"></radio>
                             </radio-group>
                         </i-col>
                         <i-col span="3" style="text-align: center;padding-top: 6px">Mapper：</i-col>
                         <i-col span="9">
-                            <radio-group v-model="vertical" vertical>
-                                <radio label="apple">
-                                    <span>Apple</span>
-                                </radio>
-                                <radio label="android">
-                                    <span>Android</span>
-                                </radio>
+                            <radio-group v-model="formValidate.xmlPackage" vertical>
+                                <radio label="apple"></radio>
+                                <radio label="android"></radio>
                             </radio-group>
                         </i-col>
                     </row>
                 </i-col>
-                <i-col span="4" style="text-align: center">
-                    <i-button type="success" @click="handleSubmit('formValidate')"> 生 成 </i-button>
+                <i-col span="3" style="text-align: center">
+                    <i-button type="success" @click="beginGenerateCode()"> 生 成 </i-button>
                 </i-col>
             </row>
         </card>
         <tabs type="card">
             <tab-pane label="Entity">
-                <textarea name="txtAreaCode" id="txtAreaEntity" style="width: 100%;"></textarea>
+                <textarea name="txtAreaCode" id="txtAreaEntity" style="width: 100%;">
+                    {{generateCode.txtAreaEntity}}
+                </textarea>
             </tab-pane>
             <tab-pane label="Dao">
                 <textarea name="txtAreaCode" id="txtAreaDao" style="width: 100%;"></textarea>
@@ -141,8 +133,14 @@
             },500);
         },
         data:{
-            formValidate:{
-
+            formValidate: {
+                tableName: "",
+                entityPackage: "com.jbuild4d.base.dbaccess.dbentities",
+                daoPackage: "com.jbuild4d.base.dbaccess.dao",
+                xmlPackage: "apple"
+            },
+            generateCode:{
+                txtAreaEntity:"1"
             },
             <!--List-->
             idFieldName:"TableName",
@@ -164,7 +162,14 @@
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList)
+                            h('div', {
+                                class: "list-row-button list-row-button-view",
+                                on: {
+                                    click: function () {
+                                        appList.selectedTable(params.row.TableName);
+                                    }
+                                }
+                            })
                         ]);
                     }
                 }
@@ -177,6 +182,16 @@
             listHeight: 300
         },
         methods:{
+            beginGenerateCode:function () {
+                var _self=this;
+                var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode.do';
+                AjaxUtility.Post(url, this.formValidate, function (result) {
+                    _self.generateCode.txtAreaEntity=result.data.EntityRootFolderKey;
+                    /*DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+
+                    });*/
+                }, "json");
+            },
             <!--List-->
             selectionChange: function (selection) {
                 this.selectionRows = selection;
@@ -187,23 +202,8 @@
                 ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                 //this.selectionRows=null;
             },
-            view:function (tableName) {
-                //var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=view&recordId=" + recordId);
-                //DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
-                var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode.do';
-                AjaxUtility.Post(url,
-                    {
-                        tableName: tableName
-                    },
-                    function (result) {
-                        if (result.success) {
-
-                        }
-                        else
-                        {
-                            DialogUtility.AlertError(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
-                        }
-                    }, "json");
+            selectedTable:function (tableName) {
+                this.formValidate.tableName=tableName;
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;
