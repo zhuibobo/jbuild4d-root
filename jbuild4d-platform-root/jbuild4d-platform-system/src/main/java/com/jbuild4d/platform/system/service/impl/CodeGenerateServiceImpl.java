@@ -45,7 +45,9 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
 
     @Override
     public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName) {
+        //根据单表生成代码
+        Map<String,String> generateCodeMap=new HashMap<>();
 
-        return null;
+        return generateCodeMap;
     }
 }
