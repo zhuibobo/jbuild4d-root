@@ -9,7 +9,9 @@ import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.DateUtility;
 import com.jbuild4d.base.tools.common.PathUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
+import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
 import com.jbuild4d.platform.system.service.ICodeGenerateService;
+import com.jbuild4d.platform.system.vo.CodeGenerateVo;
 import org.apache.poi.ss.formula.functions.T;
 import org.jsoup.helper.StringUtil;
 import org.mybatis.generatorex.api.MyBatisGenerator;
@@ -59,35 +61,36 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
     private String EntityRootFolderKey="EntityRootFolderKey";
     private String DaoRootFolderKey="DaoRootFolderKey";
     private String XmlRootFolderKey="XmlRootFolderKey";
-    private Map<String,String> createAboutFolder(){
+    private Map<CodeGenerateTypeEnum,CodeGenerateVo> createAboutFolder(Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap){
         String GenerateCodeFilesPath=PathUtility.getWebInfPath()+"/GenerateCodeFiles"+"/"+DateUtility.getDate_yyyyMMddHHmmssSSS();
         File tempRootFolder=new File(GenerateCodeFilesPath);
         tempRootFolder.mkdirs();
 
         Map<String,String> result=new HashMap<>();
         //Entity
-        String tempPath=GenerateCodeFilesPath+"/Entity";
+        String tempPath=GenerateCodeFilesPath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).saveFolderName;
         File temp=new File(tempPath);
         temp.mkdirs();
-        result.put(EntityRootFolderKey,tempPath);
+        codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).setFullSavePath(tempPath);
+        //result.put(EntityRootFolderKey,tempPath);
 
         //Dao
-        tempPath=GenerateCodeFilesPath+"/Dao";
+        tempPath=GenerateCodeFilesPath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).saveFolderName;
         temp=new File(tempPath);
         temp.mkdirs();
-        result.put(DaoRootFolderKey,tempPath);
+        codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).setFullSavePath(tempPath);
 
-        //Xml
-        tempPath=GenerateCodeFilesPath+"/XMLACMapper";
+        //XmlMapperAC
+        tempPath=GenerateCodeFilesPath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).saveFolderName;
         temp=new File(tempPath);
         temp.mkdirs();
-        result.put(XmlRootFolderKey,tempPath);
+        codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).setFullSavePath(tempPath);
 
-        return result;
+        return codeGenerateVoMap;
     }
 
     @Override
-    public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String entityPackage,String daoPackage,String xmlPackage) throws FileNotFoundException {
+    public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String packageType) throws FileNotFoundException {
         //根据单表生成代码
         Map<String, String> generateCodeMap = new HashMap<>();
         List<String> warnings = new ArrayList<String>();
@@ -102,7 +105,9 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
 
         String tempRootFolderStr= GenerateCodeFilesPath+"/"+DateUtility.getDate_yyyyMMddHHmmssSSS();*/
 
-        Map<String,String> rootPath=createAboutFolder();
+        Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap=CodeGenerateVo.generateTypeEnumCodeGenerateVoMap().get(packageType);
+
+        codeGenerateVoMap=createAboutFolder(codeGenerateVoMap);
 
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = null;
@@ -127,21 +132,21 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
 
         //设置modelde的相关信息
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration=context.getJavaModelGeneratorConfiguration();
-        javaModelGeneratorConfiguration.setTargetPackage(entityPackage);
-        javaModelGeneratorConfiguration.setTargetProject(rootPath.get(EntityRootFolderKey));
+        javaModelGeneratorConfiguration.setTargetPackage(codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).packageName);
+        javaModelGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).saveFolderName);
+        context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
+
+        //设置dao的相关的信息
+        JavaClientGeneratorConfiguration javaClientGeneratorConfiguration=context.getJavaClientGeneratorConfiguration();
+        javaClientGeneratorConfiguration.setTargetPackage(codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).packageName);
+        javaClientGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).saveFolderName);
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
         //设置mapper的相关信息
         SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration=context.getSqlMapGeneratorConfiguration();
-        sqlMapGeneratorConfiguration.setTargetPackage(xmlPackage);
-        sqlMapGeneratorConfiguration.setTargetProject(rootPath.get(XmlRootFolderKey));
+        sqlMapGeneratorConfiguration.setTargetPackage(codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).packageName);
+        sqlMapGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).saveFolderName);
         context.setSqlMapGeneratorConfiguration(sqlMapGeneratorConfiguration);
-
-        //设置dao的相关的信息
-        JavaClientGeneratorConfiguration javaClientGeneratorConfiguration=context.getJavaClientGeneratorConfiguration();
-        javaClientGeneratorConfiguration.setTargetPackage(daoPackage);
-        javaClientGeneratorConfiguration.setTargetProject(rootPath.get(DaoRootFolderKey));
-        context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
         String domainObjectName= StringUtility.fisrtCharUpper(tableName)+"Entity";
         String MapperName=StringUtility.fisrtCharUpper(tableName)+"ACMapper";
@@ -180,13 +185,13 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
 
         //读取文件作为结果返回
         //Entity文件
-        String tempPath=rootPath.get(EntityRootFolderKey)+"/"+entityPackage.replaceAll("\\.","/");
+        String tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).fullSavePath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).packageName.replaceAll("\\.","/");
         generateCodeMap.put("EntityContent",readFolderSingleFileToString(tempPath));
 
-        tempPath=rootPath.get(DaoRootFolderKey)+"/"+daoPackage.replaceAll("\\.","/");
+        tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).fullSavePath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).packageName.replaceAll("\\.","/");
         generateCodeMap.put("DaoContent",readFolderSingleFileToString(tempPath));
 
-        tempPath=rootPath.get(XmlRootFolderKey)+"/"+xmlPackage.replaceAll("\\.","/");
+        tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).fullSavePath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).packageName.replaceAll("\\.","/");
         generateCodeMap.put("MapperACContent",readFolderSingleFileToString(tempPath));
 
         return generateCodeMap;

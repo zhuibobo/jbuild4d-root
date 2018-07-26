@@ -56,11 +56,15 @@
                         <i-col span="10">
                             <i-input v-model="formValidate.tableName"></i-input>
                         </i-col>
-                        <i-col span="3" style="text-align: center;padding-top: 6px">实体包名：</i-col>
+                        <i-col span="3" style="text-align: center;padding-top: 6px">包名类型：</i-col>
                         <i-col span="9">
                             <radio-group v-model="formValidate.entityPackage" vertical>
-                                <radio label="com.jbuild4d.base.dbaccess.dbentities"></radio>
-                                <radio label="android"></radio>
+                                <radio label="com.jbuild4d.base.dbaccess.dbentities">
+                                    <span>JBuild4D-PlatForm</span>
+                                </radio>
+                                <radio label="android">
+                                    <span>JBuild4D-Project</span>
+                                </radio>
                             </radio-group>
                         </i-col>
                     </row>

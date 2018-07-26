@@ -14,5 +14,5 @@ import java.util.Map; /**
 public interface ICodeGenerateService {
     PageInfo<List<Map<String, Object>>> getTables(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, Map<String, Object> searchMap);
 
-    Map<String,String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String entityPackage,String daoPackage,String xmlPackage) throws FileNotFoundException;
+    Map<String,String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String packageType) throws FileNotFoundException;
 }
