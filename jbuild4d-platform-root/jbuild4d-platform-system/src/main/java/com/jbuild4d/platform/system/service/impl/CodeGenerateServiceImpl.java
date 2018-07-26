@@ -38,7 +38,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         }
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.
-        List<Map<String, Object>> list=sqlBuilderService.selectList(sql,new HashMap());
+        List<Map<String, Object>> list=sqlBuilderService.selectList(sql);
         PageInfo<List<Map<String, Object>>> pageInfo = new PageInfo(list);
         return pageInfo;
     }

@@ -13,4 +13,6 @@ public interface ISQLBuilderService {
     Map<String,Object> selectOne(String sql, Object value);
 
     List<Map<String,Object>> selectList(String sql,Map paras);
+
+    List<Map<String,Object>> selectList(String sql);
 }
