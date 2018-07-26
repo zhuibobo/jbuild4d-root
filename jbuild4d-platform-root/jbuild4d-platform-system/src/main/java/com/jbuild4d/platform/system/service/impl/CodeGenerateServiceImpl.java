@@ -181,8 +181,15 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         //读取文件作为结果返回
         //Entity文件
         String tempPath=rootPath.get(EntityRootFolderKey)+"/"+entityPackage.replaceAll("\\.","/");
+        generateCodeMap.put("EntityContent",readFolderSingleFileToString(tempPath));
 
-        generateCodeMap.put(EntityRootFolderKey,readFolderSingleFileToString(tempPath));
+        tempPath=rootPath.get(DaoRootFolderKey)+"/"+daoPackage.replaceAll("\\.","/");
+        generateCodeMap.put("DaoContent",readFolderSingleFileToString(tempPath));
+
+        tempPath=rootPath.get(XmlRootFolderKey)+"/"+xmlPackage.replaceAll("\\.","/");
+        generateCodeMap.put("DaoContent",readFolderSingleFileToString(tempPath));
+
+
 
         return generateCodeMap;
     }

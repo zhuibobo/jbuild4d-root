@@ -89,9 +89,7 @@
         </card>
         <tabs type="card">
             <tab-pane label="Entity">
-                <textarea name="txtAreaCode" id="txtAreaEntity" style="width: 100%;">
-                    {{generateCode.txtAreaEntity}}
-                </textarea>
+                <textarea name="txtAreaCode" id="txtAreaEntity" style="width: 100%;">{{generateCode.txtAreaEntity}}</textarea>
             </tab-pane>
             <tab-pane label="Dao">
                 <textarea name="txtAreaCode" id="txtAreaDao" style="width: 100%;"></textarea>
@@ -188,9 +186,6 @@
                 var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode.do';
                 AjaxUtility.Post(url, this.formValidate, function (result) {
                     _self.generateCode.txtAreaEntity=result.data.EntityRootFolderKey;
-                    /*DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-
-                    });*/
                 }, "json");
             },
             <!--List-->
