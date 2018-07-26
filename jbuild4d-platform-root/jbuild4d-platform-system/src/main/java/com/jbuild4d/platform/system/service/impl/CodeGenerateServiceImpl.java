@@ -8,8 +8,10 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.DateUtility;
 import com.jbuild4d.base.tools.common.PathUtility;
+import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.system.service.ICodeGenerateService;
 import org.apache.poi.ss.formula.functions.T;
+import org.jsoup.helper.StringUtil;
 import org.mybatis.generatorex.api.MyBatisGenerator;
 import org.mybatis.generatorex.config.*;
 import org.mybatis.generatorex.config.xml.ConfigurationParser;
@@ -99,11 +101,31 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         javaModelGeneratorConfiguration.setTargetProject(tempRootFolderStr);
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
+        //设置mapper的相关信息
+        SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration=context.getSqlMapGeneratorConfiguration();
+        sqlMapGeneratorConfiguration.setTargetPackage("MapperAC");
+        sqlMapGeneratorConfiguration.setTargetProject(tempRootFolderStr);
+        context.setSqlMapGeneratorConfiguration(sqlMapGeneratorConfiguration);
+
+        //设置dao的相关的信息
+        JavaClientGeneratorConfiguration javaClientGeneratorConfiguration=context.getJavaClientGeneratorConfiguration();
+        javaClientGeneratorConfiguration.setTargetPackage("Dao");
+        javaClientGeneratorConfiguration.setTargetProject(tempRootFolderStr);
+        context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
+
+        String domainObjectName= StringUtility.fisrtCharUpper(tableName)+"Entity";
+        String MapperName=StringUtility.fisrtCharUpper(tableName)+"ACMapper";
+
+        if(tableName.indexOf("_")>0){
+            String shortName=tableName.split("_")[1];
+            domainObjectName=StringUtility.fisrtCharUpper(shortName)+"Entity";
+            MapperName=StringUtility.fisrtCharUpper(shortName)+"ACMapper";
+        }
         //设置表名称
         TableConfiguration tc = new TableConfiguration(context);
-        tc.setTableName("TB4D_MENU");
-        tc.setDomainObjectName("MenuEntity");
-        tc.setMapperName("MenuACMapper");
+        tc.setTableName(tableName);
+        tc.setDomainObjectName(domainObjectName);
+        tc.setMapperName(MapperName);
         tc.setCountByExampleStatementEnabled(false);
         tc.setUpdateByExampleStatementEnabled(false);
         tc.setDeleteByExampleStatementEnabled(false);
