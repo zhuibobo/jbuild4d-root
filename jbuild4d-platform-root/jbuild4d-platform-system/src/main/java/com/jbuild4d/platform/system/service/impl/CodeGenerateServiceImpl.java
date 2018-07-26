@@ -98,13 +98,6 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
 
         InputStream is = this.getClass().getClassLoader().getResourceAsStream("MybatisGenerator/generatorConfigToCode.xml");
 
-        /*//PathUtility pathUtility=new PathUtility();
-        //String generateCodeFilesPath= PathUtility
-        //InputStream is=new FileInputStream(configFile);
-        String GenerateCodeFilesPath=PathUtility.getWebInfPath()+"/GenerateCodeFiles";
-
-        String tempRootFolderStr= GenerateCodeFilesPath+"/"+DateUtility.getDate_yyyyMMddHHmmssSSS();*/
-
         Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap=CodeGenerateVo.generateTypeEnumCodeGenerateVoMap().get(packageType);
 
         codeGenerateVoMap=createAboutFolder(codeGenerateVoMap);
