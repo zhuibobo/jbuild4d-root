@@ -47,9 +47,61 @@
         </div>
     </div>
     <div class="right-outer-wrap-c" style="padding: 10px;left: 450px;">
+        <card :bordered="false" style="margin-bottom: 10px">
+            <p slot="title">参数设置</p>
+            <row>
+                <i-col span="20">
+                    <row>
+                        <i-col span="2" style="text-align: center;padding-top: 6px">表名：</i-col>
+                        <i-col span="10">
+                            <i-input v-model="formValidate.tableName"></i-input>
+                        </i-col>
+                        <i-col span="3" style="text-align: center;padding-top: 6px">实体包名：</i-col>
+                        <i-col span="9">
+                            <radio-group v-model="vertical" vertical>
+                                <radio label="com.jbuild4d.base.dbaccess.dbentities">
+                                </radio>
+                                <radio label="android">
+                                    <span>Android</span>
+                                </radio>
+                            </radio-group>
+                        </i-col>
+                    </row>
+                    <row>
+                        <i-col span="2" style="text-align: center;padding-top: 6px">Dao包名：</i-col>
+                        <i-col span="10">
+                            <radio-group v-model="vertical" vertical>
+                                <radio label="com.jbuild4d.base.dbaccess.dao">
+                                </radio>
+                                <radio label="android">
+                                    <span>Android</span>
+                                </radio>
+                            </radio-group>
+                        </i-col>
+                        <i-col span="3" style="text-align: center;padding-top: 6px">Mapper：</i-col>
+                        <i-col span="9">
+                            <radio-group v-model="vertical" vertical>
+                                <radio label="apple">
+                                    <span>Apple</span>
+                                </radio>
+                                <radio label="android">
+                                    <span>Android</span>
+                                </radio>
+                            </radio-group>
+                        </i-col>
+                    </row>
+                </i-col>
+                <i-col span="4" style="text-align: center">
+                    <i-button type="success" @click="handleSubmit('formValidate')"> 生 成 </i-button>
+                </i-col>
+            </row>
+        </card>
         <tabs type="card">
             <tab-pane label="Entity">
                 <textarea name="txtAreaCode" id="txtAreaEntity" style="width: 100%;"></textarea>
+            </tab-pane>
+            <tab-pane label="Dao">
+                <textarea name="txtAreaCode" id="txtAreaDao" style="width: 100%;"></textarea>
             </tab-pane>
             <tab-pane label="MapperAC">
                 <textarea name="txtAreaCode" id="txtAreaMapperAC" style="width: 100%;"></textarea>
@@ -57,8 +109,11 @@
             <tab-pane label="MapperEX">
                 <textarea name="txtAreaCode" id="txtAreaMapperEX" style="width: 100%;"></textarea>
             </tab-pane>
-            <tab-pane label="Service">
-                <textarea name="txtAreaCode" id="txtAreaService" style="width: 100%;"></textarea>
+            <tab-pane label="IService">
+                <textarea name="txtAreaCode" id="txtAreaIService" style="width: 100%;"></textarea>
+            </tab-pane>
+            <tab-pane label="ServiceImpl">
+                <textarea name="txtAreaCode" id="txtAreaServiceImpl" style="width: 100%;"></textarea>
             </tab-pane>
             <tab-pane label="Bean">
                 <textarea name="txtAreaCode" id="txtAreaBean" style="width: 100%;"></textarea>
@@ -82,10 +137,13 @@
             this.reloadData();
             window.setTimeout(function () {
                 appList.listHeight=ListPageUtility.GetGeneralPageHeight(-20);
-                $("[name='txtAreaCode']").css("height",appList.listHeight+50);
+                $("[name='txtAreaCode']").css("height",appList.listHeight-160);
             },500);
         },
         data:{
+            formValidate:{
+
+            },
             <!--List-->
             idFieldName:"TableName",
             searchCondition:{
