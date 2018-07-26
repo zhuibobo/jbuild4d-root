@@ -11,39 +11,39 @@ import java.net.URL;
 
 public class PathUtility {
 
-    private WebApplicationContext context;
+    private static WebApplicationContext context;
 
-    public WebApplicationContext getContext() {
+    public static WebApplicationContext getContext() {
         return context;
     }
 
-    public void setContext(WebApplicationContext context) {
-        this.context = context;
+    public static void setContext(WebApplicationContext _context) {
+        context = _context;
     }
 
-    public ServletContext getServletContext(){
+    public static ServletContext getServletContext(){
         return context.getServletContext();
     }
 
-    public String getServletContextRealPath(){
+    public static String getServletContextRealPath(){
         return getServletContext().getRealPath("");
     }
 
-    public String getServletContextRealPath(String path){
+    public static String getServletContextRealPath(String path){
         return getServletContext().getRealPath(path);
     }
 
-    public String getAbsoluteUrl(String path){
+    public static String getAbsoluteUrl(String path){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return  "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+path;
     }
 
-    public String getWebInfPath(){
+    public static String getWebInfPath(){
         //return Thread.currentThread().getContextClassLoader().getResource("").getPath();
         return getServletContextRealPath("WEB-INF");
     }
 
-    public URL getResource(String path) throws MalformedURLException {
+    public static URL getResource(String path) throws MalformedURLException {
         return getServletContext().getResource(path);
     }
 }

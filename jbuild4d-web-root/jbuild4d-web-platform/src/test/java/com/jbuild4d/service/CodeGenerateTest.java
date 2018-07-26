@@ -66,14 +66,13 @@ public class CodeGenerateTest {
             tc.setTableName("TB4D_MENU");
             tc.setDomainObjectName("MenuEntity");
             tc.setMapperName("MenuACMapper");
-            tc.setCountByExampleStatementEnabled(false);
+            /*tc.setCountByExampleStatementEnabled(false);
             tc.setUpdateByExampleStatementEnabled(false);
             tc.setDeleteByExampleStatementEnabled(false);
             tc.setSelectByExampleStatementEnabled(false);
-            tc.setDeleteByPrimaryKeyStatementEnabled(false);
+            tc.setDeleteByPrimaryKeyStatementEnabled(false);*/
             context.addTableConfiguration(tc);
         }
-
 
         try {
             myBatisGenerator = new MyBatisGenerator(config, callback, warnings);

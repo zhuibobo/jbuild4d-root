@@ -57,4 +57,20 @@ public class DBProp {
         }
         return DBTypeEnum.sqlserver;
     }
+
+    public static String getDriverName(){
+        return getValue("DriverName");
+    }
+
+    public static String getUrl(){
+        return getValue("Url");
+    }
+
+    public static String getUser(){
+        return getValue("User");
+    }
+
+    public static String getPassword(){
+        return getValue("Password");
+    }
 }

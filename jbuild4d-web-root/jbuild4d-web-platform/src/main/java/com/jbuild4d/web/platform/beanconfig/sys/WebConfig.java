@@ -45,12 +45,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-/*    @Bean
+    @Bean
     public PathUtility pathUtility(WebApplicationContext context){
         PathUtility pathUtility=new PathUtility();
         pathUtility.setContext(context);
         return pathUtility;
-    }*/
+    }
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
