@@ -40,10 +40,17 @@ public class CodeGenerateController {
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize, Integer pageNum, String searchCondition) throws IOException, ParseException {
-        JB4DSession jb4DSession;
-        jb4DSession = JB4DSessionUtility.getSession();
+        JB4DSession jb4DSession = JB4DSessionUtility.getSession();
         Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
         PageInfo<List<Map<String, Object>>> proOrganPageInfo=codeGenerateService.getTables(jb4DSession,pageNum,pageSize,searchMap);
         return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
+    }
+
+    @RequestMapping(value = "GetTableGenerateCode", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo getTableGenerateCode(String tableName) throws IOException, ParseException {
+        JB4DSession jb4DSession = JB4DSessionUtility.getSession();
+        Map<String,String> result=codeGenerateService.getTableGenerateCode(jb4DSession,tableName);
+        return JBuild4DResponseVo.success("获取成功",result);
     }
 }

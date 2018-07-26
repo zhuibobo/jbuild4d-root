@@ -42,4 +42,10 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         PageInfo<List<Map<String, Object>>> pageInfo = new PageInfo(list);
         return pageInfo;
     }
+
+    @Override
+    public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName) {
+
+        return null;
+    }
 }

@@ -87,7 +87,7 @@
         },
         data:{
             <!--List-->
-            idFieldName:"ddtlId",
+            idFieldName:"TableName",
             searchCondition:{
                 tableName:{
                     value:"",
@@ -129,9 +129,23 @@
                 ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                 //this.selectionRows=null;
             },
-            view:function (recordId) {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=view&recordId=" + recordId);
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
+            view:function (tableName) {
+                //var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=view&recordId=" + recordId);
+                //DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
+                var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode.do';
+                AjaxUtility.Post(url,
+                    {
+                        tableName: tableName
+                    },
+                    function (result) {
+                        if (result.success) {
+
+                        }
+                        else
+                        {
+                            DialogUtility.AlertError(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
+                    }, "json");
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;
