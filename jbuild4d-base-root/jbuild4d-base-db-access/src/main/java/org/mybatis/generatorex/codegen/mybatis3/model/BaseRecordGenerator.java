@@ -67,7 +67,9 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
         if (superClass != null) {
             topLevelClass.setSuperClass(superClass);
             topLevelClass.addImportedType(superClass);
+
         }
+        topLevelClass.addImportedType("com.jbuild4d.base.dbaccess.anno.DBKeyField");
         commentGenerator.addModelClassComment(topLevelClass, introspectedTable);
 
         List<IntrospectedColumn> introspectedColumns = getColumnsInThisClass();

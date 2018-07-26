@@ -1,72 +1,107 @@
 package com.jbuild4d.base.dbaccess.dbentities;
 
+import javax.persistence.Id;
 import java.util.Date;
 
 public class MenuEntity {
+    //MENU_ID
+    @Id
     private String menuId;
 
+    //MENU_NAME
     private String menuName;
 
+    //MENU_TEXT
     private String menuText;
 
+    //MENU_VALUE
     private String menuValue;
 
+    //MENU_TYPE
     private String menuType;
 
+    //MENU_USER_ID
     private String menuUserId;
 
+    //MENU_USER_NAME
     private String menuUserName;
 
+    //MENU_ORGAN_ID
     private String menuOrganId;
 
+    //MENU_ORGAN_NAME
     private String menuOrganName;
 
+    //MENU_IS_EXPAND
     private String menuIsExpand;
 
+    //MENU_IS_SYSTEM
     private String menuIsSystem;
 
+    //MENU_LEFT_URL
     private String menuLeftUrl;
 
+    //MENU_LEFT_URL_PARA
     private String menuLeftUrlPara;
 
+    //MENU_RIGHT_URL
     private String menuRightUrl;
 
+    //MENU_RIGHT_URL_PARA
     private String menuRightUrlPara;
 
+    //MENU_ORDER_NUM
     private Integer menuOrderNum;
 
+    //MENU_PARENT_ID
     private String menuParentId;
 
+    //MENU_PARENT_ID_LIST
     private String menuParentIdList;
 
+    //MENU_TARGET
     private String menuTarget;
 
+    //MENU_CREATOR
     private String menuCreator;
 
+    //MENU_CREATE_TIME
     private Date menuCreateTime;
 
+    //MENU_UPDATER
     private String menuUpdater;
 
+    //MENU_UPDATE_TIME
     private Date menuUpdateTime;
 
+    //MENU_USE_ORGAN_NAME
     private String menuUseOrganName;
 
+    //MENU_USE_ORGAN_ID
     private String menuUseOrganId;
 
+    //MENU_USE_ORGAN_TYPE_NAME
     private String menuUseOrganTypeName;
 
+    //MENU_USE_ORGAN_TYPE_ID
     private String menuUseOrganTypeId;
 
+    //MENU_CLASS_NAME
     private String menuClassName;
 
+    //MENU_CLASS_NAME_HOVER
     private String menuClassNameHover;
 
+    //MENU_CLASS_NAME_SELECTED
     private String menuClassNameSelected;
 
+    //MENU_MENU_CHILD_COUNT
     private Integer menuMenuChildCount;
 
+    //MENU_MENU_DESCRIPTION
     private String menuMenuDescription;
 
+    //MENU_JS_EXPRESSION
     private String menuJsExpression;
 
     public MenuEntity(String menuId, String menuName, String menuText, String menuValue, String menuType, String menuUserId, String menuUserName, String menuOrganId, String menuOrganName, String menuIsExpand, String menuIsSystem, String menuLeftUrl, String menuLeftUrlPara, String menuRightUrl, String menuRightUrlPara, Integer menuOrderNum, String menuParentId, String menuParentIdList, String menuTarget, String menuCreator, Date menuCreateTime, String menuUpdater, Date menuUpdateTime, String menuUseOrganName, String menuUseOrganId, String menuUseOrganTypeName, String menuUseOrganTypeId, String menuClassName, String menuClassNameHover, String menuClassNameSelected, Integer menuMenuChildCount, String menuMenuDescription, String menuJsExpression) {

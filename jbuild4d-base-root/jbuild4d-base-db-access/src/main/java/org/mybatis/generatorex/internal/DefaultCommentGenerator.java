@@ -221,9 +221,9 @@ public class DefaultCommentGenerator implements CommentGenerator {
     @Override
     public void addModelClassComment(TopLevelClass topLevelClass,
             IntrospectedTable introspectedTable) {
-        if (suppressAllComments  || !addRemarkComments) {
+        /*if (suppressAllComments  || !addRemarkComments) {
             return;
-        }
+        }*/
 
         topLevelClass.addJavaDocLine("/**"); //$NON-NLS-1$
 
