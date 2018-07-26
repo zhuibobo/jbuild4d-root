@@ -54,7 +54,8 @@
             <tab-pane label="Service">标签二的内容</tab-pane>
             <tab-pane label="Bean">标签三的内容</tab-pane>
             <tab-pane label="Controller">标签二的内容</tab-pane>
-            <tab-pane label="Jsp">标签二的内容</tab-pane>
+            <tab-pane label="ListJsp">标签二的内容</tab-pane>
+            <tab-pane label="DetailJsp">标签二的内容</tab-pane>
         </tabs>
     </div>
 </div>
