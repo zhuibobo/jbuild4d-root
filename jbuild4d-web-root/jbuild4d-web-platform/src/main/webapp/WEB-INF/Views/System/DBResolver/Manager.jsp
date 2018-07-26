@@ -89,13 +89,13 @@
         </card>
         <tabs type="card">
             <tab-pane label="Entity">
-                <textarea name="txtAreaCode" id="txtAreaEntity" style="width: 100%;">{{generateCode.txtAreaEntity}}</textarea>
+                <textarea name="txtAreaCode" id="txtAreaEntity" style="width: 100%;">{{generateCode.EntityContent}}</textarea>
             </tab-pane>
             <tab-pane label="Dao">
-                <textarea name="txtAreaCode" id="txtAreaDao" style="width: 100%;"></textarea>
+                <textarea name="txtAreaCode" id="txtAreaDao" style="width: 100%;">{{generateCode.DaoContent}}</textarea>
             </tab-pane>
             <tab-pane label="MapperAC">
-                <textarea name="txtAreaCode" id="txtAreaMapperAC" style="width: 100%;"></textarea>
+                <textarea name="txtAreaCode" id="txtAreaMapperAC" style="width: 100%;">{{generateCode.MapperACContent}}</textarea>
             </tab-pane>
             <tab-pane label="MapperEX">
                 <textarea name="txtAreaCode" id="txtAreaMapperEX" style="width: 100%;"></textarea>
@@ -139,7 +139,9 @@
                 xmlPackage: "apple"
             },
             generateCode:{
-                txtAreaEntity:"1"
+                EntityContent:"1",
+                DaoContent:"",
+                MapperACContent:""
             },
             <!--List-->
             idFieldName:"TableName",
@@ -185,7 +187,9 @@
                 var _self=this;
                 var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode.do';
                 AjaxUtility.Post(url, this.formValidate, function (result) {
-                    _self.generateCode.txtAreaEntity=result.data.EntityRootFolderKey;
+                    _self.generateCode.EntityContent=result.data.EntityContent;
+                    _self.generateCode.DaoContent=result.data.DaoContent;
+                    _self.generateCode.MapperACContent=result.data.MapperACContent;
                 }, "json");
             },
             <!--List-->

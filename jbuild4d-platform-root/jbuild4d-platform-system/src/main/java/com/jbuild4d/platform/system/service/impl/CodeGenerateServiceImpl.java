@@ -187,9 +187,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         generateCodeMap.put("DaoContent",readFolderSingleFileToString(tempPath));
 
         tempPath=rootPath.get(XmlRootFolderKey)+"/"+xmlPackage.replaceAll("\\.","/");
-        generateCodeMap.put("DaoContent",readFolderSingleFileToString(tempPath));
-
-
+        generateCodeMap.put("MapperACContent",readFolderSingleFileToString(tempPath));
 
         return generateCodeMap;
     }
