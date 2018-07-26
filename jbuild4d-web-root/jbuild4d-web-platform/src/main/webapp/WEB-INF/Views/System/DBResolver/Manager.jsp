@@ -63,6 +63,7 @@
     var appList=new Vue({
         el:"#appList",
         mounted:function () {
+            this.reloadData();
             window.setTimeout(function () {
                 appList.listHeight=ListPageUtility.GetGeneralPageHeight(-20);
             },500);
@@ -79,12 +80,12 @@
             columnsConfig: [
                 {
                     title: '表名',
-                    key: 'ddtlKey',
+                    key: 'TableName',
                     align: "center"
                 },{
                     title: '操作',
-                    key: 'dictGroupId',
-                    width: 120,
+                    key: 'TableName',
+                    width: 80,
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
@@ -106,7 +107,7 @@
                 this.selectionRows = selection;
             },
             reloadData: function () {
-                var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/GetListData.do';
+                var url = '/PlatForm/System/CodeGenerate/GetListData.do';
                 //debugger;
                 ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                 //this.selectionRows=null;

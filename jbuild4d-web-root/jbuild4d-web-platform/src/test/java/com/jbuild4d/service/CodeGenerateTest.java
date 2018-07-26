@@ -3,6 +3,8 @@ package com.jbuild4d.service;
 import org.junit.Test;
 import org.mybatis.generatorex.api.MyBatisGenerator;
 import org.mybatis.generatorex.config.Configuration;
+import org.mybatis.generatorex.config.Context;
+import org.mybatis.generatorex.config.TableConfiguration;
 import org.mybatis.generatorex.config.xml.ConfigurationParser;
 import org.mybatis.generatorex.exception.InvalidConfigurationException;
 import org.mybatis.generatorex.exception.XMLParserException;
@@ -47,6 +49,32 @@ public class CodeGenerateTest {
         }
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = null;
+
+        //设置表名称
+        for (Context context : config.getContexts()) {
+            TableConfiguration tc=new TableConfiguration(context);
+            //<table
+            // tableName="TB4D_MENU"
+            // domainObjectName="MenuEntity"
+            // mapperName="MenuACMapper"
+            // enableCountByExample="false"
+            // enableUpdateByExample="false"
+            // enableDeleteByExample="false"
+            // enableSelectByExample="false"
+            // selectByExampleQueryId="false">
+            //</table>
+            tc.setTableName("TB4D_MENU");
+            tc.setDomainObjectName("MenuEntity");
+            tc.setMapperName("MenuACMapper");
+            tc.setCountByExampleStatementEnabled(false);
+            tc.setUpdateByExampleStatementEnabled(false);
+            tc.setDeleteByExampleStatementEnabled(false);
+            tc.setSelectByExampleStatementEnabled(false);
+            tc.setDeleteByPrimaryKeyStatementEnabled(false);
+            context.addTableConfiguration(tc);
+        }
+
+
         try {
             myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         } catch (InvalidConfigurationException e) {

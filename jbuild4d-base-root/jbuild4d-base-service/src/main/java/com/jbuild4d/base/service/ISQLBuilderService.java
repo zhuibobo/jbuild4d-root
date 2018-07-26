@@ -1,5 +1,6 @@
 package com.jbuild4d.base.service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,5 +10,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public interface ISQLBuilderService {
-    Map<String,Object> selectOne(String s, Object value);
+    Map<String,Object> selectOne(String sql, Object value);
+
+    List<Map<String,Object>> selectList(String sql,Map paras);
 }

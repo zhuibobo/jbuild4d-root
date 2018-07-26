@@ -3,6 +3,7 @@ package com.jbuild4d.base.service.impl;
 import com.jbuild4d.base.dbaccess.dynamic.ISQLBuilderMapper;
 import com.jbuild4d.base.service.ISQLBuilderService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,7 +21,12 @@ public class SQLBuilderServiceImpl implements ISQLBuilderService {
     }
 
     @Override
-    public Map<String, Object> selectOne(String s, Object value) {
-        return sqlBuilderMapper.selectOne(s,value);
+    public Map<String, Object> selectOne(String sql, Object value) {
+        return sqlBuilderMapper.selectOne(sql,value);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectList(String sql, Map paras) {
+        return sqlBuilderMapper.selectList(sql,paras);
     }
 }

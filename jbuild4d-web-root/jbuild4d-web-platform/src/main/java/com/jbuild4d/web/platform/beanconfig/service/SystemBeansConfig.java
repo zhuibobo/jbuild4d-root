@@ -67,4 +67,10 @@ public class SystemBeansConfig {
         IOperationLogService bean=new OperationLogServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
+
+    @Bean
+    public ICodeGenerateService codeGenerateService(ISQLBuilderService _sqlBuilderService){
+        ICodeGenerateService bean=new CodeGenerateServiceImpl(_sqlBuilderService);
+        return bean;
+    }
 }

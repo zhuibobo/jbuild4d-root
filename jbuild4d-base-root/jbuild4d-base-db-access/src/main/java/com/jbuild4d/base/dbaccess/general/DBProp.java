@@ -1,5 +1,7 @@
 package com.jbuild4d.base.dbaccess.general;
 
+import com.jbuild4d.base.dbaccess.exenum.DBTypeEnum;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,5 +31,30 @@ public class DBProp {
             return value;
         } else
             return "";
+    }
+
+    public static boolean isSqlServer(){
+        return getDBType()==DBTypeEnum.sqlserver;
+    }
+
+    public static boolean isMySql(){
+        return getDBType()==DBTypeEnum.mysql;
+    }
+
+    public static boolean isOracle(){
+        return getDBType()==DBTypeEnum.oracle;
+    }
+
+    public static DBTypeEnum getDBType(){
+        if(getValue("DBType").toLowerCase().equals("sqlserver")){
+            return DBTypeEnum.sqlserver;
+        }
+        else if(getValue("DBType").toLowerCase().equals("oracle")){
+            return DBTypeEnum.mysql;
+        }
+        else if(getValue("DBType").toLowerCase().equals("mysql")){
+            return DBTypeEnum.oracle;
+        }
+        return DBTypeEnum.sqlserver;
     }
 }
