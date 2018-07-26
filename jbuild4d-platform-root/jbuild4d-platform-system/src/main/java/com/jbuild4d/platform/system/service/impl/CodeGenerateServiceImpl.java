@@ -133,19 +133,19 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         //设置modelde的相关信息
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration=context.getJavaModelGeneratorConfiguration();
         javaModelGeneratorConfiguration.setTargetPackage(codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).packageName);
-        javaModelGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).saveFolderName);
+        javaModelGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).getFullSavePath());
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
         //设置dao的相关的信息
         JavaClientGeneratorConfiguration javaClientGeneratorConfiguration=context.getJavaClientGeneratorConfiguration();
         javaClientGeneratorConfiguration.setTargetPackage(codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).packageName);
-        javaClientGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).saveFolderName);
+        javaClientGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).getFullSavePath());
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
         //设置mapper的相关信息
         SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration=context.getSqlMapGeneratorConfiguration();
         sqlMapGeneratorConfiguration.setTargetPackage(codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).packageName);
-        sqlMapGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).saveFolderName);
+        sqlMapGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).getFullSavePath());
         context.setSqlMapGeneratorConfiguration(sqlMapGeneratorConfiguration);
 
         String domainObjectName= StringUtility.fisrtCharUpper(tableName)+"Entity";

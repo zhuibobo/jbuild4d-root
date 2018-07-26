@@ -58,29 +58,13 @@
                         </i-col>
                         <i-col span="3" style="text-align: center;padding-top: 6px">包名类型：</i-col>
                         <i-col span="9">
-                            <radio-group v-model="formValidate.entityPackage" vertical>
-                                <radio label="com.jbuild4d.base.dbaccess.dbentities">
+                            <radio-group v-model="formValidate.packageType" vertical>
+                                <radio label="JBuild4D-PlatForm">
                                     <span>JBuild4D-PlatForm</span>
                                 </radio>
-                                <radio label="android">
+                                <radio label="JBuild4D-Project">
                                     <span>JBuild4D-Project</span>
                                 </radio>
-                            </radio-group>
-                        </i-col>
-                    </row>
-                    <row>
-                        <i-col span="2" style="text-align: center;padding-top: 6px">Dao包名：</i-col>
-                        <i-col span="10">
-                            <radio-group v-model="formValidate.daoPackage" vertical>
-                                <radio label="com.jbuild4d.base.dbaccess.dao"></radio>
-                                <radio label="android"></radio>
-                            </radio-group>
-                        </i-col>
-                        <i-col span="3" style="text-align: center;padding-top: 6px">Mapper：</i-col>
-                        <i-col span="9">
-                            <radio-group v-model="formValidate.xmlPackage" vertical>
-                                <radio label="apple"></radio>
-                                <radio label="android"></radio>
                             </radio-group>
                         </i-col>
                     </row>
@@ -138,12 +122,10 @@
         data:{
             formValidate: {
                 tableName: "",
-                entityPackage: "com.jbuild4d.base.dbaccess.dbentities",
-                daoPackage: "com.jbuild4d.base.dbaccess.dao",
-                xmlPackage: "apple"
+                packageType: "JBuild4D-PlatForm"
             },
             generateCode:{
-                EntityContent:"1",
+                EntityContent:"",
                 DaoContent:"",
                 MapperACContent:""
             },
