@@ -48,14 +48,30 @@
     </div>
     <div class="right-outer-wrap-c" style="padding: 10px;left: 450px;">
         <tabs type="card">
-            <tab-pane label="Entity">标签一的内容</tab-pane>
-            <tab-pane label="MapperAC">标签二的内容</tab-pane>
-            <tab-pane label="MapperEX">标签二的内容</tab-pane>
-            <tab-pane label="Service">标签二的内容</tab-pane>
-            <tab-pane label="Bean">标签三的内容</tab-pane>
-            <tab-pane label="Controller">标签二的内容</tab-pane>
-            <tab-pane label="ListJsp">标签二的内容</tab-pane>
-            <tab-pane label="DetailJsp">标签二的内容</tab-pane>
+            <tab-pane label="Entity">
+                <textarea name="txtAreaCode" id="txtAreaEntity" style="width: 100%;"></textarea>
+            </tab-pane>
+            <tab-pane label="MapperAC">
+                <textarea name="txtAreaCode" id="txtAreaMapperAC" style="width: 100%;"></textarea>
+            </tab-pane>
+            <tab-pane label="MapperEX">
+                <textarea name="txtAreaCode" id="txtAreaMapperEX" style="width: 100%;"></textarea>
+            </tab-pane>
+            <tab-pane label="Service">
+                <textarea name="txtAreaCode" id="txtAreaService" style="width: 100%;"></textarea>
+            </tab-pane>
+            <tab-pane label="Bean">
+                <textarea name="txtAreaCode" id="txtAreaBean" style="width: 100%;"></textarea>
+            </tab-pane>
+            <tab-pane label="Controller">
+                <textarea name="txtAreaCode" id="txtAreaController" style="width: 100%;"></textarea>
+            </tab-pane>
+            <tab-pane label="ListJsp">
+                <textarea name="txtAreaCode" id="txtAreaListJsp" style="width: 100%;"></textarea>
+            </tab-pane>
+            <tab-pane label="DetailJsp">
+                <textarea name="txtAreaCode" id="txtAreaDetailJsp" style="width: 100%;"></textarea>
+            </tab-pane>
         </tabs>
     </div>
 </div>
@@ -66,6 +82,7 @@
             this.reloadData();
             window.setTimeout(function () {
                 appList.listHeight=ListPageUtility.GetGeneralPageHeight(-20);
+                $("[name='txtAreaCode']").css("height",appList.listHeight+50);
             },500);
         },
         data:{
