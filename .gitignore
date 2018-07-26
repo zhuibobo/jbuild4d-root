@@ -5,6 +5,7 @@ target
 out
 libs
 GenerateCodeFiles/
+!GenerateCodeFiles/GenerateCodeFiles.txt
 
 ##############################
 ## Files                    ##
