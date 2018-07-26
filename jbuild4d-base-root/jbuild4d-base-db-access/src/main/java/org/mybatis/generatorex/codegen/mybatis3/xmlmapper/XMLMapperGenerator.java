@@ -60,7 +60,7 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
         progressCallback.startTask(getString(
                 "Progress.12", table.toString())); //$NON-NLS-1$
         XmlElement answer = new XmlElement("mapper"); //$NON-NLS-1$
-        String namespace = introspectedTable.getMyBatis3SqlMapNamespace();
+        String namespace = introspectedTable.getMyBatis3SqlMapNamespace().replace("ACMapper","Mapper");
         answer.addAttribute(new Attribute("namespace", //$NON-NLS-1$
                 namespace));
 

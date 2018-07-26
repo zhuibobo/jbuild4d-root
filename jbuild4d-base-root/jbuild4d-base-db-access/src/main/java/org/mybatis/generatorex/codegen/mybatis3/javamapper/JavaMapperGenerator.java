@@ -67,7 +67,7 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
         CommentGenerator commentGenerator = context.getCommentGenerator();
 
         FullyQualifiedJavaType type = new FullyQualifiedJavaType(
-                introspectedTable.getMyBatis3JavaMapperType());
+                introspectedTable.getMyBatis3JavaMapperType().replace("ACMapper","Mapper"));
         Interface interfaze = new Interface(type);
         interfaze.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(interfaze);
