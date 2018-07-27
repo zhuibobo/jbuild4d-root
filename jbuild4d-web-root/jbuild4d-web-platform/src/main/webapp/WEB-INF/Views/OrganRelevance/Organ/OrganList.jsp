@@ -45,24 +45,24 @@
             treeTableObject:null,
             treeTableConfig:{
                 CanDeleteWhenHasChild:false,
-                IdField:"ddttId",
+                IdField:"organId",
                 RowIdPrefix:"TreeTable_",
                 LoadChildJsonURL:"",
                 LoadChildFunc:null,
                 OpenLevel:1,
-                ChildTestField:"ddttChildCount",//判断是否存在子节点的字段，是否>0或者为true，则支持展开
+                ChildTestField:"organChildCount",//判断是否存在子节点的字段，是否>0或者为true，则支持展开
                 Templates:[
                     {
-                        Title:"字典名称",
-                        FieldName:"ddttName",
+                        Title:"组织名称",
+                        FieldName:"organName",
                         TitleCellClassName:"TitleCell",
                         Renderer:"Lable",
                         Hidden:false,
                         TitleCellAttrs:{},
                         Width:"40"
                     },{
-                        Title:"字典值",
-                        FieldName:"ddttValue",
+                        Title:"简称",
+                        FieldName:"organShortName",
                         TitleCellClassName:"TitleCell",
                         Renderer:"Lable",
                         Hidden:false,
@@ -71,7 +71,7 @@
                         TextAlign:"center"
                     },{
                         Title:"创建时间",
-                        FieldName:"ddttCreatetime",
+                        FieldName:"organCreateTime",
                         TitleCellClassName:"TitleCell",
                         Renderer:"DateTime",
                         Hidden:false,
@@ -79,8 +79,8 @@
                         Width:"40",
                         TextAlign:"center"
                     },{
-                        Title:"字典状态",
-                        FieldName:"ddttStatus",
+                        Title:"状态",
+                        FieldName:"organStatus",
                         TitleCellClassName:"TitleCell",
                         Renderer:"Lable",
                         Hidden:false,
@@ -98,7 +98,7 @@
         methods:{
             <!--Dictionary-->
             reloadTreeTableData:function () {
-                var url='/PlatForm/DevDemo/DevDemoTreeTable/GetListData.do';
+                var url='/PlatForm/OrganRelevance/Organ/GetListData.do';
                 var _self=this;
                 var senddata={pageSize:2000,pageNum:1};
                 AjaxUtility.Post(url, senddata , function (result) {
@@ -108,8 +108,8 @@
                             result.data=new Array();
                         }
                         var treedata=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
-                            KeyField: "ddttId",
-                            RelationField:"ddttParentId",
+                            KeyField: "organId",
+                            RelationField:"organParentId",
                             ChildFieldName:"Nodes"
                         },result.data.list,"0");
                         $("#divTreeTable").html("");
@@ -155,20 +155,20 @@
                         DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择上级字典!",null);
                         return false;
                     }
-                    var url=BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoTreeTable/Detail.do?parentId="+nodeData[appList.treeTableConfig.IdField]+"&op=add");
-                    DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"字典管理"},2);
+                    var url=BaseUtility.BuildUrl("/PlatForm/OrganRelevance/Organ/Detail.do?parentId="+nodeData[appList.treeTableConfig.IdField]+"&op=add");
+                    DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"字典管理"},1);
                 }
             },
             edit:function(){
                 this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoTreeTable/Detail.do?op=update&recordId=" + nodeData[appList.treeTableConfig.IdField]);
+                    var url = BaseUtility.BuildUrl("/PlatForm/OrganRelevance/Organ/Detail.do?op=update&recordId=" + nodeData[appList.treeTableConfig.IdField]);
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                 })
             },
             del:function(){
                 var _self=this;
                 this.mareSureSelectedTreeTableRow("删除").then(function (nodeData) {
-                    var url="/PlatForm/DevDemo/DevDemoTreeTable/Delete.do";
+                    var url="/PlatForm/OrganRelevance/Organ/Delete.do";
                     var recordId=nodeData[appList.treeTableConfig.IdField];
                     DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
                         AjaxUtility.Post(url, {recordId: recordId}, function (result) {
@@ -187,14 +187,14 @@
             },
             view:function(){
                 this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoTreeTable/Detail.do?op=view&recordId=" + nodeData[appList.treeTableConfig.IdField]);
+                    var url = BaseUtility.BuildUrl("/PlatForm/OrganRelevance/Organ/Detail.do?op=view&recordId=" + nodeData[appList.treeTableConfig.IdField]);
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                 });
             },
             statusEnable:function (statusName) {
                 var _self=this;
                 this.mareSureSelectedTreeTableRow("启用").then(function (nodeData) {
-                    var url = "/PlatForm/DevDemo/DevDemoTreeTable/StatusChange.do";
+                    var url = "/PlatForm/OrganRelevance/Organ/StatusChange.do";
                     var recordId = nodeData[appList.treeTableConfig.IdField];
                     //debugger;
                     AjaxUtility.Post(url, {ids: recordId,status:statusName}, function (result) {
@@ -213,7 +213,7 @@
             move:function(type){
                 var _self=this;
                 this.mareSureSelectedTreeTableRow("选中").then(function (nodeData) {
-                    var url = '/PlatForm/DevDemo/DevDemoTreeTable/Move.do';
+                    var url = '/PlatForm/OrganRelevance/Organ/Move.do';
                     var recordId = nodeData[appList.treeTableConfig.IdField];
                     AjaxUtility.Post(url, {recordId: recordId,type:type}, function (result) {
                         if (result.success) {
