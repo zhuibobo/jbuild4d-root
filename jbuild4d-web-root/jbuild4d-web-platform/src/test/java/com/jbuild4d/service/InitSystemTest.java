@@ -92,7 +92,7 @@ public class InitSystemTest extends BaseTest {
         //根菜单->系统设置分组->组织管理
         String systemSettingOrganManageId="JB4DSystemSettingOrganManage";
         MenuEntity systemSettingOrganManageMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOrganManageId,"组织管理","组织管理","组织管理",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/OrganRelevance/Organ/List.do","");
         menuService.deleteByKey(jb4DSession,systemSettingOrganManageMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingOrganManageMenu.getMenuId(),systemSettingOrganManageMenu);
 
