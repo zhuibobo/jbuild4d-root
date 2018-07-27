@@ -96,7 +96,7 @@
                 <textarea name="txtAreaCode" id="txtAreaMapperAC" style="width: 100%;">{{generateCode.MapperACContent}}</textarea>
             </tab-pane>
             <tab-pane label="MapperEX">
-                <textarea name="txtAreaCode" id="txtAreaMapperEX" style="width: 100%;"></textarea>
+                <textarea name="txtAreaCode" id="txtAreaMapperEX" style="width: 100%;">{{generateCode.MapperEXContent}}</textarea>
             </tab-pane>
             <tab-pane label="IService">
                 <textarea name="txtAreaCode" id="txtAreaIService" style="width: 100%;"></textarea>
@@ -132,12 +132,15 @@
         data:{
             formValidate: {
                 tableName: "",
-                packageType: "JBuild4D-PlatForm"
+                packageType: "JBuild4D-PlatForm",
+                orderFieldName:"",
+                statusFieldName:""
             },
             generateCode:{
                 EntityContent:"",
                 DaoContent:"",
-                MapperACContent:""
+                MapperACContent:"",
+                MapperEXContent:""
             },
             <!--List-->
             idFieldName:"TableName",
@@ -186,6 +189,7 @@
                     _self.generateCode.EntityContent=result.data.EntityContent;
                     _self.generateCode.DaoContent=result.data.DaoContent;
                     _self.generateCode.MapperACContent=result.data.MapperACContent;
+                    _self.generateCode.MapperEXContent=result.data.MapperEXContent;
                 }, "json");
             },
             <!--List-->
@@ -200,6 +204,24 @@
             },
             selectedTable:function (tableName) {
                 this.formValidate.tableName=tableName;
+                var _self=this;
+                var url = '/PlatForm/System/CodeGenerate/GetTableFields.do';
+                AjaxUtility.Post(url, this.formValidate, function (result) {
+                    if(result.success){
+                        for(var i=0;i<result.data.length;i++){
+                            var field=result.data[i];
+                            if(field.fieldName.toUpperCase().indexOf("ORDER")>=0){
+                                _self.formValidate.orderFieldName=field.fieldName;
+                            }
+                            if(field.fieldName.toUpperCase().indexOf("STATUS")>=0){
+                                _self.formValidate.statusFieldName=field.fieldName;
+                            }
+                        }
+                    }
+                    else {
+                        DialogUtility.AlertError(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                    }
+                }, "json");
             },
             changePage: function (pageNum) {
                 this.pageNum = pageNum;

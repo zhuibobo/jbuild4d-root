@@ -11,6 +11,7 @@ import com.jbuild4d.base.tools.common.PathUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
 import com.jbuild4d.platform.system.service.ICodeGenerateService;
+import com.jbuild4d.platform.system.service.impl.codegenerate.CGMapperEX;
 import com.jbuild4d.platform.system.vo.CodeGenerateVo;
 import com.jbuild4d.platform.system.vo.SimpleTableFieldVo;
 import org.apache.poi.ss.formula.functions.T;
@@ -22,7 +23,10 @@ import org.mybatis.generatorex.config.xml.ConfigurationParser;
 import org.mybatis.generatorex.exception.InvalidConfigurationException;
 import org.mybatis.generatorex.exception.XMLParserException;
 import org.mybatis.generatorex.internal.DefaultShellCallback;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -61,7 +65,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
     }
 
     @Override
-    public List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession,String tableName){
+    public List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession, String tableName){
         String sql="";
         List<SimpleTableFieldVo> result=new ArrayList<>();
         if(DBProp.isSqlServer()){
@@ -110,7 +114,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
     }
 
     @Override
-    public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String packageType) throws FileNotFoundException {
+    public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String orderFieldName,String statusFieldName,String packageType) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
         //根据单表生成代码
         Map<String, String> generateCodeMap = new HashMap<>();
         List<String> warnings = new ArrayList<String>();
@@ -196,14 +200,6 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
             e.printStackTrace();
         }
 
-        System.out.println("---------------------------打印表信息---------------------------");
-        List<IntrospectedTable> introspectedTableList=context.getIntrospectedTables();
-        for (IntrospectedTable introspectedTable : introspectedTableList) {
-            System.out.println(introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
-        }
-        System.out.println("---------------------------打印表信息---------------------------");
-
-
         //读取文件作为结果返回
         //Entity文件
         String tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).fullSavePath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).packageName.replaceAll("\\.","/");
@@ -214,6 +210,21 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
 
         tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).fullSavePath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).packageName.replaceAll("\\.","/");
         generateCodeMap.put("MapperACContent",readFolderSingleFileToString(tempPath));
+
+        System.out.println("---------------------------打印表信息---------------------------");
+        List<IntrospectedTable> introspectedTableList=context.getIntrospectedTables();
+        for (IntrospectedTable introspectedTable : introspectedTableList) {
+            System.out.println(introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
+        }
+        System.out.println("---------------------------打印表信息---------------------------");
+        //生成MapperEX
+        generateCodeMap.put("MapperEXContent", CGMapperEX.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent")));
+        //生成IService
+        //生成ServiceImpl
+        //生成Bean
+        //生成Controller
+        //生成ListJsp
+        //生成DetailJsp
 
         return generateCodeMap;
     }

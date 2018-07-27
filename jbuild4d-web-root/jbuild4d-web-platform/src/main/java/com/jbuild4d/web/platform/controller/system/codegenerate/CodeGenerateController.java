@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
@@ -49,15 +52,15 @@ public class CodeGenerateController {
 
     @RequestMapping(value = "GetTableGenerateCode", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo getTableGenerateCode(String tableName,String packageType) throws IOException, ParseException {
+    public JBuild4DResponseVo getTableGenerateCode(String tableName,String packageType,String orderFieldName,String statusFieldName) throws IOException, ParseException, XPathExpressionException, SAXException, ParserConfigurationException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
-        Map<String,String> result=codeGenerateService.getTableGenerateCode(jb4DSession,tableName,packageType);
+        Map<String,String> result=codeGenerateService.getTableGenerateCode(jb4DSession,tableName,orderFieldName,statusFieldName,packageType);
         return JBuild4DResponseVo.success("获取成功",result);
     }
 
-    @RequestMapping(value = "GetTableField", method = RequestMethod.POST)
+    @RequestMapping(value = "GetTableFields", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo getTableField(String tableName) throws IOException, ParseException {
+    public JBuild4DResponseVo getTableFields(String tableName) throws IOException, ParseException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
         List<SimpleTableFieldVo> result=codeGenerateService.getTableFields(jb4DSession,tableName);
         return JBuild4DResponseVo.success("获取成功",result);
