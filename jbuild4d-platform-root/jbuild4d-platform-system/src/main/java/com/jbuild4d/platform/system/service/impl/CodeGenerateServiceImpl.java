@@ -170,9 +170,14 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         String MapperName=StringUtility.fisrtCharUpper(tableName)+"ACMapper";
 
         if(tableName.indexOf("_")>0){
-            String shortName=tableName.split("_")[1];
-            domainObjectName=StringUtility.fisrtCharUpper(shortName)+"Entity";
-            MapperName=StringUtility.fisrtCharUpper(shortName)+"ACMapper";
+            //String shortName=tableName.substring(tableName.indexOf("_")+1);
+            String name="";
+            String[] names=tableName.split("_");
+            for(int i=1;i<names.length;i++){
+                name+=StringUtility.fisrtCharUpper(names[i]);
+            }
+            domainObjectName=name+"Entity";
+            MapperName=StringUtility.fisrtCharUpper(name)+"ACMapper";
         }
         //设置表名称
         TableConfiguration tc = new TableConfiguration(context);

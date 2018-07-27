@@ -18,7 +18,12 @@ public class CGIService {
                                   Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap, String xmlMapperACStr){
         StringBuilder builder=new StringBuilder();
 
-        builder.append("CGIService");
+        IntrospectedTable introspectedTable=introspectedTableList.get(0);
+
+        builder.append("public interface I"+introspectedTable.getFullyQualifiedTable().getDomainObjectName().replace("Entity","")+"Service");
+        builder.append(" extends IBaseService<"+introspectedTable.getFullyQualifiedTable().getDomainObjectName()+">");
+        builder.append("{");
+        builder.append("}");
 
         return builder.toString();
     }
