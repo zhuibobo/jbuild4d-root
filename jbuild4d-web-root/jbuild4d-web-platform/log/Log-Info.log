@@ -1013,3 +1013,483 @@ Closing org.springframework.web.context.support.GenericWebApplicationContext@c46
 ----------------------------------------------------------------------------------------------------------
 Closing org.springframework.web.context.support.GenericWebApplicationContext@79be0360: startup date [Fri Jul 27 09:23:35 CST 2018]; parent: org.springframework.web.context.support.GenericWebApplicationContext@c46bcd4
 ----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:25,741 [org.springframework.test.context.web.WebTestContextBootstrapper]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:25,758 [org.springframework.test.context.web.WebTestContextBootstrapper]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@13805618, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@56ef9176, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4566e5bd, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1ed4004b, org.springframework.test.context.transaction.TransactionalTestExecutionListener@ff5b51f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@25bbe1b6]
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:25,912 [org.springframework.web.context.support.GenericWebApplicationContext]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Refreshing org.springframework.web.context.support.GenericWebApplicationContext@c46bcd4: startup date [Fri Jul 27 10:00:25 CST 2018]; root of context hierarchy
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:26,190 [org.springframework.web.context.support.GenericWebApplicationContext]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Refreshing org.springframework.web.context.support.GenericWebApplicationContext@79be0360: startup date [Fri Jul 27 10:00:26 CST 2018]; parent: org.springframework.web.context.support.GenericWebApplicationContext@c46bcd4
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:26,879 [com.mchange.v2.log.MLog]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+MLog clients using slf4j logging.
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:27,233 [com.mchange.v2.c3p0.C3P0Registry]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,251 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/Login],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.LoginController.login(javax.servlet.http.HttpServletRequest)
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,252 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/ValidateAccount],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.LoginController.validateAccount(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws java.io.IOException,java.text.ParseException,com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,252 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/LoginOut],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.LoginController.loginOut(javax.servlet.http.HttpServletRequest) throws com.fasterxml.jackson.core.JsonProcessingException,com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,253 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/RedirectLogin],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.LoginController.RedirectLogin(javax.servlet.http.HttpServletRequest)
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,254 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/Base/LeftMenu],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.FrameController.leftMenu() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,255 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/Base/RightContent],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.FrameController.rightContent() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,255 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/Base/Frame],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.FrameController.frame() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,257 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenListBindDictionary/Delete],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.delete(java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,258 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenListBindDictionary/List],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.list() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,258 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenListBindDictionary/Detail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.detail(java.lang.String,java.lang.String) throws java.lang.IllegalAccessException,java.lang.InstantiationException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,258 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenListBindDictionary/GetListData],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.getListData(java.lang.Integer,java.lang.Integer,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,259 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenListBindDictionary/StatusChange],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.statusChange(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,259 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenListBindDictionary/Move],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.move(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,260 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenListBindDictionary/SaveEdit],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.saveEdit(T,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,267 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenList/ListNotSearch],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.devdemo.DevDemoGenListController.listNotSearch()
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,267 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenList/Delete],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.delete(java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,268 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenList/List],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.list() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,268 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenList/Detail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.detail(java.lang.String,java.lang.String) throws java.lang.IllegalAccessException,java.lang.InstantiationException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,268 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenList/GetListData],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.getListData(java.lang.Integer,java.lang.Integer,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,269 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenList/StatusChange],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.statusChange(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,269 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenList/Move],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.move(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,270 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoGenList/SaveEdit],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.saveEdit(T,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,272 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoTreeTable/Delete],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.delete(java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,272 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoTreeTable/List],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.list() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,273 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoTreeTable/Detail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.detail(java.lang.String,java.lang.String) throws java.lang.IllegalAccessException,java.lang.InstantiationException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,273 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoTreeTable/GetListData],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.getListData(java.lang.Integer,java.lang.Integer,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,274 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoTreeTable/StatusChange],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.statusChange(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,274 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoTreeTable/Move],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.move(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,274 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/DevDemoTreeTable/SaveEdit],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.saveEdit(T,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,275 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/Menus],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.devdemo.DevMenusController.menus()
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,278 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/GetTreeData],methods=[POST]}" onto public java.util.List<com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity> com.jbuild4d.web.platform.controller.devdemo.treeandlist.DevDemoTLTreeController.getTreeData()
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,279 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Delete],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.delete(java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,279 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/List],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.list() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,279 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Detail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.detail(java.lang.String,java.lang.String) throws java.lang.IllegalAccessException,java.lang.InstantiationException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,279 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/GetListData],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.getListData(java.lang.Integer,java.lang.Integer,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,280 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/StatusChange],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.statusChange(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,280 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Move],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.move(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,281 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/SaveEdit],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.saveEdit(T,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,283 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Delete],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.delete(java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,283 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLList/List],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.list() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,283 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.detail(java.lang.String,java.lang.String) throws java.lang.IllegalAccessException,java.lang.InstantiationException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,283 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLList/GetListData],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.getListData(java.lang.Integer,java.lang.Integer,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,284 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLList/StatusChange],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.statusChange(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,284 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Move],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.move(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,284 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/DevDemo/TreeAndList/DevDemoTLList/SaveEdit],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.saveEdit(T,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,286 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/CodeGenerate/GetTableGenerateCode],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.system.codegenerate.CodeGenerateController.getTableGenerateCode(java.lang.String,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,286 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/CodeGenerate/GetListData],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.system.codegenerate.CodeGenerateController.getListData(java.lang.Integer,java.lang.Integer,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,286 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/CodeGenerate/Manager],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.system.codegenerate.CodeGenerateController.manger()
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,290 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/Dictionary/GetListDataByGroupId],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.system.dictionary.DictionaryController.getListDataByGroupId(java.lang.String)
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,291 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/Dictionary/SetSelected],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.system.dictionary.DictionaryController.setSelected(java.lang.String)
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,291 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/Dictionary/Delete],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.delete(java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,291 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/Dictionary/List],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.list() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,291 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/Dictionary/Detail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.detail(java.lang.String,java.lang.String) throws java.lang.IllegalAccessException,java.lang.InstantiationException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,292 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/Dictionary/GetListData],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.getListData(java.lang.Integer,java.lang.Integer,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,292 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/Dictionary/StatusChange],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.statusChange(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,293 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/Dictionary/Move],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.move(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,293 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/Dictionary/SaveEdit],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.saveEdit(T,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,297 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/DictionaryGroup/MoveUp],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.system.dictionary.DictionaryGroupController.moveUp(java.lang.String)
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,297 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/DictionaryGroup/GetTreeData],methods=[POST]}" onto public java.util.List<com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity> com.jbuild4d.web.platform.controller.system.dictionary.DictionaryGroupController.getTreeData()
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,298 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/DictionaryGroup/Delete],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.delete(java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,298 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/DictionaryGroup/List],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.list() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,299 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/DictionaryGroup/Detail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.detail(java.lang.String,java.lang.String) throws java.lang.IllegalAccessException,java.lang.InstantiationException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,299 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/DictionaryGroup/GetListData],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.getListData(java.lang.Integer,java.lang.Integer,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,299 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/DictionaryGroup/StatusChange],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.statusChange(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,300 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/DictionaryGroup/Move],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.move(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,300 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/DictionaryGroup/SaveEdit],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.saveEdit(T,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,301 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/Dictionary/DictionaryManager],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.system.dictionary.DictionaryManagerController.dictionaryManager()
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,303 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/OperationLog/Delete],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.delete(java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,304 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/OperationLog/List],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.list() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,304 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/OperationLog/Detail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.detail(java.lang.String,java.lang.String) throws java.lang.IllegalAccessException,java.lang.InstantiationException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,305 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/OperationLog/GetListData],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.getListData(java.lang.Integer,java.lang.Integer,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,305 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/OperationLog/StatusChange],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.statusChange(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,305 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/OperationLog/Move],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.move(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,306 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/OperationLog/SaveEdit],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.saveEdit(T,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,308 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/ParasSetting/Delete],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.delete(java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,309 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/ParasSetting/List],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.list() throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,309 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/ParasSetting/Detail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.detail(java.lang.String,java.lang.String) throws java.lang.IllegalAccessException,java.lang.InstantiationException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,310 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/ParasSetting/GetListData],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.getListData(java.lang.Integer,java.lang.Integer,java.lang.String) throws java.io.IOException,java.text.ParseException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,310 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/ParasSetting/StatusChange],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.statusChange(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,310 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/ParasSetting/Move],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.move(java.lang.String,java.lang.String,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException,com.fasterxml.jackson.core.JsonProcessingException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,310 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped "{[/PlatForm/System/ParasSetting/SaveEdit],methods=[POST]}" onto public com.jbuild4d.web.platform.model.JBuild4DResponseVo com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController.saveEdit(T,javax.servlet.http.HttpServletRequest) throws com.jbuild4d.base.service.exception.JBuild4DGenerallyException
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,347 [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler]
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,680 [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@79be0360: startup date [Fri Jul 27 10:00:26 CST 2018]; parent: org.springframework.web.context.support.GenericWebApplicationContext@c46bcd4
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,754 [org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Detected @ExceptionHandler methods in exceptionControllerAdvice
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,884 [org.springframework.mock.web.MockServletContext]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Initializing Spring FrameworkServlet ''
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,884 [org.springframework.test.web.servlet.TestDispatcherServlet]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+FrameworkServlet '': initialization started
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:28,906 [org.springframework.test.web.servlet.TestDispatcherServlet]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+FrameworkServlet '': initialization completed in 22 ms
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:29,032 [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> 1hge77l9w1oc7d4w15fbbqv|14f232c4, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.microsoft.sqlserver.jdbc.SQLServerDriver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> 1hge77l9w1oc7d4w15fbbqv|14f232c4, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:sqlserver://120.77.56.220:1433; DatabaseName=JBuild4D, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:30,156 [org.springframework.web.context.support.GenericWebApplicationContext]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Closing org.springframework.web.context.support.GenericWebApplicationContext@79be0360: startup date [Fri Jul 27 10:00:26 CST 2018]; parent: org.springframework.web.context.support.GenericWebApplicationContext@c46bcd4
+----------------------------------------------------------------------------------------------------------
+**********************************************************************************************************
+2018-07-27 10:00:30,156 [org.springframework.web.context.support.GenericWebApplicationContext]-[INFO] 
+----------------------------------------------------------------------------------------------------------
+Closing org.springframework.web.context.support.GenericWebApplicationContext@c46bcd4: startup date [Fri Jul 27 10:00:25 CST 2018]; root of context hierarchy
+----------------------------------------------------------------------------------------------------------

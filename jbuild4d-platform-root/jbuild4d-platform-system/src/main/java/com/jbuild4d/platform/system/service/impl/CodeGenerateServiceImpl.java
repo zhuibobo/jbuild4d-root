@@ -14,6 +14,7 @@ import com.jbuild4d.platform.system.service.ICodeGenerateService;
 import com.jbuild4d.platform.system.vo.CodeGenerateVo;
 import org.apache.poi.ss.formula.functions.T;
 import org.jsoup.helper.StringUtil;
+import org.mybatis.generatorex.api.IntrospectedTable;
 import org.mybatis.generatorex.api.MyBatisGenerator;
 import org.mybatis.generatorex.config.*;
 import org.mybatis.generatorex.config.xml.ConfigurationParser;
@@ -175,6 +176,14 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        System.out.println("---------------------------打印表信息---------------------------");
+        List<IntrospectedTable> introspectedTableList=context.getIntrospectedTables();
+        for (IntrospectedTable introspectedTable : introspectedTableList) {
+            System.out.println(introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
+        }
+        System.out.println("---------------------------打印表信息---------------------------");
+
 
         //读取文件作为结果返回
         //Entity文件

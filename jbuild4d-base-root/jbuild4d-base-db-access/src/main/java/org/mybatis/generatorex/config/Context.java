@@ -391,7 +391,12 @@ public class Context extends PropertyHolder {
     // 4. generateFiles()
     //
 
+    public List<IntrospectedTable> getIntrospectedTables() {
+        return introspectedTables;
+    }
+
     private List<IntrospectedTable> introspectedTables;
+
 
     public int getIntrospectionSteps() {
         int steps = 0;
