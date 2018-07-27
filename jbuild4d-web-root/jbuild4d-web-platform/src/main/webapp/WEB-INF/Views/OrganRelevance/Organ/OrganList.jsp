@@ -200,7 +200,7 @@
                     AjaxUtility.Post(url, {ids: recordId,status:statusName}, function (result) {
                         if (result.success) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                nodeData.ddttStatus=statusName;
+                                nodeData.organStatus=statusName;
                                 _self.treeTableObject.UpdateToRow(nodeData[appList.treeTableConfig.IdField],nodeData);
                             });
                         }

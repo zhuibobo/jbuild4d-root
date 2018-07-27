@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.OrganMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_ORGAN ORDER by ORGAN_ORDER_NUM DESC</select>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_ORGAN ORDER by ORGAN_ORDER_NUM ASC</select>
     <delete id="deleteAll">delete from TB4D_ORGAN</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(ORGAN_ORDER_NUM) is null then 1 else max(ORGAN_ORDER_NUM)+1 end ORDERNUM from TB4D_ORGAN</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_ORGAN<where>
@@ -24,9 +24,21 @@
         <if test="organCreatreOrgId !=null and organCreatreOrgId !=''"> and ORGAN_CREATRE_ORG_ID like #{organCreatreOrgId} </if>
         <if test="organOuterId !=null and organOuterId !=''"> and ORGAN_OUTER_ID like #{organOuterId} </if>
         <if test="organOuterType !=null and organOuterType !=''"> and ORGAN_OUTER_TYPE like #{organOuterType} </if>
-    </where>ORDER by ORGAN_ORDER_NUM DESC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ORGAN
-    where ORGAN_ORDER_NUM = (select max(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM<(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ORGAN
-    where ORGAN_ORDER_NUM = (select min(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM>(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    </where>ORDER by ORGAN_ORDER_NUM ASC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select
+            *
+        from TB4D_ORGAN
+        where ORGAN_ORDER_NUM = (select max(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM<(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{id,jdbcType=NVARCHAR}) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select
+            *
+        from TB4D_ORGAN
+        where ORGAN_ORDER_NUM = (select min(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM>(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{id,jdbcType=NVARCHAR} ) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
 </mapper>
