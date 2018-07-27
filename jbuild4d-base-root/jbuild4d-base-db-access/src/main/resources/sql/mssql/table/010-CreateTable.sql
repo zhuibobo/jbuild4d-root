@@ -93,7 +93,7 @@ EXECUTE sp_addextendedproperty N'MS_Description', N'系统基础参数设置表'
 
 -----------------------------------------操作日志-----------------------------------------
 
------------------------------------------文件夹表-----------------------------------------
+-----------------------------------------菜单表-----------------------------------------
 CREATE TABLE [dbo].[TB4D_MENU] (
   [MENU_ID]                  [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [MENU_NAME]                [NVARCHAR](100)  NULL,
@@ -135,6 +135,31 @@ EXECUTE sp_addextendedproperty N'MS_Description', N'系统导航菜单表', N'us
 EXECUTE sp_addextendedproperty N'MS_Description', N'菜单ID', N'user', N'dbo', N'table', N'TB4D_MENU', N'column', N'MENU_ID';
 
 -----------------------------------------组织机构表-----------------------------------------
+CREATE TABLE [dbo].[TB4D_ORGAN] (
+  ORGAN_ID               [NVARCHAR](100)  NOT NULL PRIMARY KEY,
+  ORGAN_NAME             [NVARCHAR](300)  NOT NULL,
+  ORGAN_NO               [NVARCHAR](200)  NULL,
+  ORGAN_CODE             [NVARCHAR](200)  NULL,
+  ORGAN_CREATE_TIME      [DATETIME]       NULL,
+  ORGAN_PHONE            [NVARCHAR](100)  NULL,
+  ORGAN_POST             [NVARCHAR](20)   NULL,
+  ORGAN_TYPE_VALUE       [NVARCHAR](50)   NULL,
+  ORGAN_ADDRESS          [NVARCHAR](1000) NULL,
+  ORGAN_CONTACTOR        [NVARCHAR](100)  NULL,
+  ORGAN_CONTACTOR_MOBILE [NVARCHAR](100)  NULL,
+  ORGAN_DOMAIN           [NVARCHAR](300)  NULL,
+  ORGAN_FAX              [NVARCHAR](100)  NULL,
+  ORGAN_CHILD_COUNT      [INT]            NULL,
+  ORGAN_IS_VIRTUAL       [NVARCHAR](10)   NULL,
+  ORGAN_ORDER_NUM        [INT]            NULL,
+  ORGAN_PARENT_ID        [NVARCHAR](100)  NULL,
+  ORGAN_PARENT_ID_LIST   [NVARCHAR](1200) NULL,
+  ORGAN_SHORT_NAME       [NVARCHAR](150)  NULL,
+  ORGAN_ORGAN_STATUS     [NVARCHAR](10)   NULL,
+  ORGAN_CREATRE_ORG_ID   [NVARCHAR](100)  NULL,
+  ORGAN_OUTER_ID         [NVARCHAR](100)  NULL,
+  ORGAN_OUTER_TYPE       [NVARCHAR](100)  NULL
+)
 
 -----------------------------------------数据字典表-----------------------------------------
 CREATE TABLE TB4D_DICTIONARY_GROUP (
@@ -176,7 +201,6 @@ CREATE TABLE TB4D_DICTIONARY (
   [DICT_ORGAN_ID]      [NVARCHAR](100)  NULL,
   [DICT_ORGAN_NAME]    [NVARCHAR](100)  NULL
 )
-
 -----------------------------------------操作日志表-----------------------------------------
 CREATE TABLE TB4D_OPERATION_LOG (
   [LOG_ID]          [NVARCHAR](100)  NOT NULL PRIMARY KEY,
