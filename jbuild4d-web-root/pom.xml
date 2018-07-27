@@ -36,6 +36,11 @@
             <artifactId>jbuild4d-platform-system</artifactId>
             <version>${platform.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jbuild4d</groupId>
+            <artifactId>jbuild4d-platform-organ</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
