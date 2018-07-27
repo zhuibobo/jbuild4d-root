@@ -12,6 +12,7 @@ import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
 import com.jbuild4d.platform.system.service.ICodeGenerateService;
 import com.jbuild4d.platform.system.vo.CodeGenerateVo;
+import com.jbuild4d.platform.system.vo.SimpleTableFieldVo;
 import org.apache.poi.ss.formula.functions.T;
 import org.jsoup.helper.StringUtil;
 import org.mybatis.generatorex.api.IntrospectedTable;
@@ -57,6 +58,24 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         List<Map<String, Object>> list=sqlBuilderService.selectList(sql);
         PageInfo<List<Map<String, Object>>> pageInfo = new PageInfo(list);
         return pageInfo;
+    }
+
+    @Override
+    public List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession,String tableName){
+        String sql="";
+        List<SimpleTableFieldVo> result=new ArrayList<>();
+        if(DBProp.isSqlServer()){
+            sql="SELECT * FROM INFORMATION_SCHEMA.columns WHERE TABLE_NAME=#{tableName}";
+            List<Map<String, Object>> fieldList=sqlBuilderService.selectList(sql,tableName);
+            for (Map<String, Object> map : fieldList) {
+                SimpleTableFieldVo simpleTableFieldVo=new SimpleTableFieldVo();
+                simpleTableFieldVo.setTableName(map.get("TABLE_NAME").toString());
+                simpleTableFieldVo.setFieldName(map.get("COLUMN_NAME").toString());
+                simpleTableFieldVo.setFieldType(map.get("DATA_TYPE").toString());
+                result.add(simpleTableFieldVo);
+            }
+        }
+        return result;
     }
 
     private String EntityRootFolderKey="EntityRootFolderKey";

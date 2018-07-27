@@ -68,6 +68,16 @@
                             </radio-group>
                         </i-col>
                     </row>
+                    <row>
+                        <i-col span="2" style="text-align: center;padding-top: 6px">排序字段：</i-col>
+                        <i-col span="10">
+                            <i-input v-model="formValidate.orderFieldName"></i-input>
+                        </i-col>
+                        <i-col span="3" style="text-align: center;padding-top: 6px">状态字段：</i-col>
+                        <i-col span="9">
+                            <i-input v-model="formValidate.statusFieldName"></i-input>
+                        </i-col>
+                    </row>
                 </i-col>
                 <i-col span="3" style="text-align: center">
                     <i-button type="success" @click="beginGenerateCode()"> 生 成 </i-button>
@@ -150,7 +160,7 @@
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
                             h('div', {
-                                class: "list-row-button list-row-button-view",
+                                class: "list-row-button list-row-button-selected",
                                 on: {
                                     click: function () {
                                         appList.selectedTable(params.row.TableName);

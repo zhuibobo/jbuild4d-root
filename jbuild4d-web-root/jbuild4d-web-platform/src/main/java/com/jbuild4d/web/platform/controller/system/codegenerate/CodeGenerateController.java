@@ -5,6 +5,7 @@ import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
 import com.jbuild4d.platform.system.service.ICodeGenerateService;
+import com.jbuild4d.platform.system.vo.SimpleTableFieldVo;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,6 +52,14 @@ public class CodeGenerateController {
     public JBuild4DResponseVo getTableGenerateCode(String tableName,String packageType) throws IOException, ParseException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
         Map<String,String> result=codeGenerateService.getTableGenerateCode(jb4DSession,tableName,packageType);
+        return JBuild4DResponseVo.success("获取成功",result);
+    }
+
+    @RequestMapping(value = "GetTableField", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo getTableField(String tableName) throws IOException, ParseException {
+        JB4DSession jb4DSession = JB4DSessionUtility.getSession();
+        List<SimpleTableFieldVo> result=codeGenerateService.getTableFields(jb4DSession,tableName);
         return JBuild4DResponseVo.success("获取成功",result);
     }
 }

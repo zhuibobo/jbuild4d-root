@@ -65,11 +65,17 @@
 .list-row-button-view{
     background: url("Images/ListButton/kdvi.png");
 }
+
 .list-row-button-edit{
     background: url("Images/ListButton/kedit.png");
 }
+
 .list-row-button-del{
     background: url("Images/ListButton/del.png");
+}
+
+.list-row-button-selected{
+    background: url("Images/ListButton/selected.png");
 }
 
 .list-2column{
