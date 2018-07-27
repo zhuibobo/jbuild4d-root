@@ -152,17 +152,17 @@
                 if(this.treeTableObject!=null){
                     var nodeData=this.treeTableObject.GetSelectedRowData();
                     if(nodeData == null) {
-                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择上级字典!",null);
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择上级组织!",null);
                         return false;
                     }
                     var url=BaseUtility.BuildUrl("/PlatForm/OrganRelevance/Organ/Detail.do?parentId="+nodeData[appList.treeTableConfig.IdField]+"&op=add");
-                    DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"字典管理"},1);
+                    DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"组织管理"},1);
                 }
             },
             edit:function(){
                 this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
                     var url = BaseUtility.BuildUrl("/PlatForm/OrganRelevance/Organ/Detail.do?op=update&recordId=" + nodeData[appList.treeTableConfig.IdField]);
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "组织管理"}, 1);
                 })
             },
             del:function(){
@@ -188,7 +188,7 @@
             view:function(){
                 this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
                     var url = BaseUtility.BuildUrl("/PlatForm/OrganRelevance/Organ/Detail.do?op=view&recordId=" + nodeData[appList.treeTableConfig.IdField]);
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "组织管理"}, 1);
                 });
             },
             statusEnable:function (statusName) {
