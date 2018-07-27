@@ -3,7 +3,9 @@ package com.jbuild4d.web.platform.controller.organrelevance.organ;
 import com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.OrganEntity;
 import com.jbuild4d.base.service.IBaseService;
+import com.jbuild4d.platform.organ.service.IOrganService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,28 +18,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/PlatForm/OrganRelevance/Organ")
 public class OrganController extends GeneralCRUDImplController<OrganEntity> {
+    @Autowired
+    IOrganService organService;
+
     @Override
     protected IBaseService<OrganEntity> getBaseService() {
-        return null;
+        return organService;
     }
 
     @Override
     public String getListViewName() {
-        return null;
+        return "OrganRelevance/Organ/OrganList";
     }
 
     @Override
     public String getDetailViewName() {
-        return null;
+        return "OrganRelevance/Organ/OrganEdit";
     }
 
     @Override
     public String getSubSystemName() {
-        return null;
+        return this.subSystemName;
     }
 
     @Override
     public String getModuleName() {
-        return null;
+        return "组织管理";
     }
 }

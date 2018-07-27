@@ -47,6 +47,7 @@
         </div>
     </div>
     <div class="right-outer-wrap-c" style="padding: 10px;left: 450px;">
+        <spin size="large" fix v-if="codeisgenerateing"></spin>
         <card :bordered="false" style="margin-bottom: 10px">
             <p slot="title">参数设置</p>
             <row>
@@ -124,6 +125,7 @@
             },500);
         },
         data:{
+            codeisgenerateing:false,
             formValidate: {
                 tableName: "",
                 packageType: "JBuild4D-PlatForm",
@@ -180,6 +182,7 @@
         methods:{
             beginGenerateCode:function () {
                 var _self=this;
+                _self.codeisgenerateing=true;
                 var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode.do';
                 AjaxUtility.Post(url, this.formValidate, function (result) {
                     _self.generateCode.EntityContent=result.data.EntityContent;
@@ -188,6 +191,7 @@
                     _self.generateCode.MapperEXContent=result.data.MapperEXContent;
                     _self.generateCode.IServiceContent=result.data.IServiceContent;
                     _self.generateCode.ServiceImplContent=result.data.ServiceImplContent;
+                    _self.codeisgenerateing=false;
                 }, "json");
             },
             <!--List-->
