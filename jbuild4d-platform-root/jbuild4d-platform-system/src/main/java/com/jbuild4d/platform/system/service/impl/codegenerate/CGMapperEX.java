@@ -26,6 +26,8 @@ public class CGMapperEX {
                                   Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap,String xmlMapperACStr) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
         StringBuilder builder=new StringBuilder();
 
+        String idFieldName=introspectedTableList.get(0).getPrimaryKeyColumns().get(0).getActualColumnName();
+
         Document document=XMLUtility.parseForDoc(xmlMapperACStr,"utf-8");
         Node mapperNode=XMLUtility.parseForNode(document.getDocumentElement(),"//mapper");
         List<Node> mapperChildNodeList=XMLUtility.parseForNodeList(document,"//mapper/*");
@@ -64,10 +66,6 @@ public class CGMapperEX {
         deleteAllElem.setTextContent("select case when max("+nextOrderNumElem+") is null then 1 else max("+nextOrderNumElem+")+1 end ORDERNUM from "+tableName);
         mapperNode.appendChild(nextOrderNumElem);
 
-        //-----selectLessThanRecord
-
-        //-----selectGreaterThanRecord
-
         //-----selectBySearch
         Element selectBySearchElem=document.createElement("select");
         selectBySearchElem.setAttribute("id","selectBySearch");
@@ -89,6 +87,30 @@ public class CGMapperEX {
         selectBySearchElem.appendChild(whereElem);
         selectBySearchElem.appendChild(document.createTextNode("ORDER by "+orderFieldName+" DESC"));
         mapperNode.appendChild(selectBySearchElem);
+
+        //-----selectLessThanRecord
+        Element selectLessThanRecordElem=document.createElement("select");
+        selectLessThanRecordElem.setAttribute("id","selectLessThanRecord");
+        selectLessThanRecordElem.setAttribute("parameterType","java.lang.String");
+        selectLessThanRecordElem.setAttribute("resultMap","BaseResultMap");
+        String ltSqlText="select * from "+tableName;
+        ltSqlText+=CGTool.newLineChar();
+        ltSqlText+=" where "+orderFieldName+" = (select max("+orderFieldName+") from "+tableName+" where "+orderFieldName+"<(select "+orderFieldName+" from "+tableName+" where "+idFieldName+"=#{Id,jdbcType=NVARCHAR}))";
+        CDATASection ltTextElem=document.createCDATASection(ltSqlText);
+        selectLessThanRecordElem.appendChild(ltTextElem);
+        mapperNode.appendChild(selectLessThanRecordElem);
+
+        //-----selectGreaterThanRecord
+        Element selectGreaterThanRecordElem=document.createElement("select");
+        selectGreaterThanRecordElem.setAttribute("id","selectGreaterThanRecord");
+        selectGreaterThanRecordElem.setAttribute("parameterType","java.lang.String");
+        selectGreaterThanRecordElem.setAttribute("resultMap","BaseResultMap");
+        String gtSqlText="select * from "+tableName;
+        gtSqlText+=CGTool.newLineChar();
+        gtSqlText+=" where "+orderFieldName+" = (select min("+orderFieldName+") from "+tableName+" where "+orderFieldName+">(select "+orderFieldName+" from "+tableName+" where "+idFieldName+"=#{Id,jdbcType=NVARCHAR}))";
+        CDATASection gtTextElem=document.createCDATASection(gtSqlText);
+        selectGreaterThanRecordElem.appendChild(gtTextElem);
+        mapperNode.appendChild(selectGreaterThanRecordElem);
 
         builder.append(XMLUtility.documentToString(document).replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>","<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">\n"));
