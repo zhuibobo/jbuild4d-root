@@ -41,6 +41,10 @@
         from TB4D_ORGAN
         where ORGAN_ID = #{organId,jdbcType=NVARCHAR}
     </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_ORGAN
+        where ORGAN_ID = #{organId,jdbcType=NVARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
         insert into TB4D_ORGAN (ORGAN_ID, ORGAN_NAME, ORGAN_NO,
         ORGAN_CODE, ORGAN_CREATE_TIME, ORGAN_PHONE,
@@ -281,27 +285,27 @@
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
         update TB4D_ORGAN
         set ORGAN_NAME = #{organName,jdbcType=NVARCHAR},
-        ORGAN_NO = #{organNo,jdbcType=NVARCHAR},
-        ORGAN_CODE = #{organCode,jdbcType=NVARCHAR},
-        ORGAN_CREATE_TIME = #{organCreateTime,jdbcType=TIMESTAMP},
-        ORGAN_PHONE = #{organPhone,jdbcType=NVARCHAR},
-        ORGAN_POST = #{organPost,jdbcType=NVARCHAR},
-        ORGAN_TYPE_VALUE = #{organTypeValue,jdbcType=NVARCHAR},
-        ORGAN_ADDRESS = #{organAddress,jdbcType=NVARCHAR},
-        ORGAN_CONTACTOR = #{organContactor,jdbcType=NVARCHAR},
-        ORGAN_CONTACTOR_MOBILE = #{organContactorMobile,jdbcType=NVARCHAR},
-        ORGAN_DOMAIN = #{organDomain,jdbcType=NVARCHAR},
-        ORGAN_FAX = #{organFax,jdbcType=NVARCHAR},
-        ORGAN_CHILD_COUNT = #{organChildCount,jdbcType=INTEGER},
-        ORGAN_IS_VIRTUAL = #{organIsVirtual,jdbcType=NVARCHAR},
-        ORGAN_ORDER_NUM = #{organOrderNum,jdbcType=INTEGER},
-        ORGAN_PARENT_ID = #{organParentId,jdbcType=NVARCHAR},
-        ORGAN_PARENT_ID_LIST = #{organParentIdList,jdbcType=NVARCHAR},
-        ORGAN_SHORT_NAME = #{organShortName,jdbcType=NVARCHAR},
-        ORGAN_STATUS = #{organStatus,jdbcType=NVARCHAR},
-        ORGAN_CREATRE_ORG_ID = #{organCreatreOrgId,jdbcType=NVARCHAR},
-        ORGAN_OUTER_ID = #{organOuterId,jdbcType=NVARCHAR},
-        ORGAN_OUTER_TYPE = #{organOuterType,jdbcType=NVARCHAR}
+            ORGAN_NO = #{organNo,jdbcType=NVARCHAR},
+            ORGAN_CODE = #{organCode,jdbcType=NVARCHAR},
+            ORGAN_CREATE_TIME = #{organCreateTime,jdbcType=TIMESTAMP},
+            ORGAN_PHONE = #{organPhone,jdbcType=NVARCHAR},
+            ORGAN_POST = #{organPost,jdbcType=NVARCHAR},
+            ORGAN_TYPE_VALUE = #{organTypeValue,jdbcType=NVARCHAR},
+            ORGAN_ADDRESS = #{organAddress,jdbcType=NVARCHAR},
+            ORGAN_CONTACTOR = #{organContactor,jdbcType=NVARCHAR},
+            ORGAN_CONTACTOR_MOBILE = #{organContactorMobile,jdbcType=NVARCHAR},
+            ORGAN_DOMAIN = #{organDomain,jdbcType=NVARCHAR},
+            ORGAN_FAX = #{organFax,jdbcType=NVARCHAR},
+            ORGAN_CHILD_COUNT = #{organChildCount,jdbcType=INTEGER},
+            ORGAN_IS_VIRTUAL = #{organIsVirtual,jdbcType=NVARCHAR},
+            ORGAN_ORDER_NUM = #{organOrderNum,jdbcType=INTEGER},
+            ORGAN_PARENT_ID = #{organParentId,jdbcType=NVARCHAR},
+            ORGAN_PARENT_ID_LIST = #{organParentIdList,jdbcType=NVARCHAR},
+            ORGAN_SHORT_NAME = #{organShortName,jdbcType=NVARCHAR},
+            ORGAN_STATUS = #{organStatus,jdbcType=NVARCHAR},
+            ORGAN_CREATRE_ORG_ID = #{organCreatreOrgId,jdbcType=NVARCHAR},
+            ORGAN_OUTER_ID = #{organOuterId,jdbcType=NVARCHAR},
+            ORGAN_OUTER_TYPE = #{organOuterType,jdbcType=NVARCHAR}
         where ORGAN_ID = #{organId,jdbcType=NVARCHAR}
     </update>
 </mapper>

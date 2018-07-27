@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.OrganMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select from TB4D_ORGAN ORDER by ORGAN_ORDER_NUM DESCselect<include refid="Base_Column_List"/>from TB4D_ORGAN</select>
-    <delete id="deleteAll">select case when max([select: null]) is null then 1 else max([select: null])+1 end ORDERNUM from TB4D_ORGAN</delete>
-    <select id="nextOrderNum" resultType="integer"/>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">
-        <where>
-            <if test="organName !=null and organName !=''"> and ORGAN_NAME like #{organName} </if>
-            <if test="organNo !=null and organNo !=''"> and ORGAN_NO like #{organNo} </if>
-            <if test="organCode !=null and organCode !=''"> and ORGAN_CODE like #{organCode} </if>
-            <if test="organPhone !=null and organPhone !=''"> and ORGAN_PHONE like #{organPhone} </if>
-            <if test="organPost !=null and organPost !=''"> and ORGAN_POST like #{organPost} </if>
-            <if test="organTypeValue !=null and organTypeValue !=''"> and ORGAN_TYPE_VALUE like #{organTypeValue} </if>
-            <if test="organAddress !=null and organAddress !=''"> and ORGAN_ADDRESS like #{organAddress} </if>
-            <if test="organContactor !=null and organContactor !=''"> and ORGAN_CONTACTOR like #{organContactor} </if>
-            <if test="organContactorMobile !=null and organContactorMobile !=''"> and ORGAN_CONTACTOR_MOBILE like #{organContactorMobile} </if>
-            <if test="organDomain !=null and organDomain !=''"> and ORGAN_DOMAIN like #{organDomain} </if>
-            <if test="organFax !=null and organFax !=''"> and ORGAN_FAX like #{organFax} </if>
-            <if test="organIsVirtual !=null and organIsVirtual !=''"> and ORGAN_IS_VIRTUAL like #{organIsVirtual} </if>
-            <if test="organParentId !=null and organParentId !=''"> and ORGAN_PARENT_ID like #{organParentId} </if>
-            <if test="organParentIdList !=null and organParentIdList !=''"> and ORGAN_PARENT_ID_LIST like #{organParentIdList} </if>
-            <if test="organShortName !=null and organShortName !=''"> and ORGAN_SHORT_NAME like #{organShortName} </if>
-            <if test="organStatus !=null and organStatus !=''"> and ORGAN_STATUS like #{organStatus} </if>
-            <if test="organCreatreOrgId !=null and organCreatreOrgId !=''"> and ORGAN_CREATRE_ORG_ID like #{organCreatreOrgId} </if>
-            <if test="organOuterId !=null and organOuterId !=''"> and ORGAN_OUTER_ID like #{organOuterId} </if>
-            <if test="organOuterType !=null and organOuterType !=''"> and ORGAN_OUTER_TYPE like #{organOuterType} </if>
-        </where>ORDER by ORGAN_ORDER_NUM DESC</select>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_ORGAN ORDER by ORGAN_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_ORGAN</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(ORGAN_ORDER_NUM) is null then 1 else max(ORGAN_ORDER_NUM)+1 end ORDERNUM from TB4D_ORGAN</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_ORGAN<where>
+        <if test="organName !=null and organName !=''"> and ORGAN_NAME like #{organName} </if>
+        <if test="organNo !=null and organNo !=''"> and ORGAN_NO like #{organNo} </if>
+        <if test="organCode !=null and organCode !=''"> and ORGAN_CODE like #{organCode} </if>
+        <if test="organPhone !=null and organPhone !=''"> and ORGAN_PHONE like #{organPhone} </if>
+        <if test="organPost !=null and organPost !=''"> and ORGAN_POST like #{organPost} </if>
+        <if test="organTypeValue !=null and organTypeValue !=''"> and ORGAN_TYPE_VALUE like #{organTypeValue} </if>
+        <if test="organAddress !=null and organAddress !=''"> and ORGAN_ADDRESS like #{organAddress} </if>
+        <if test="organContactor !=null and organContactor !=''"> and ORGAN_CONTACTOR like #{organContactor} </if>
+        <if test="organContactorMobile !=null and organContactorMobile !=''"> and ORGAN_CONTACTOR_MOBILE like #{organContactorMobile} </if>
+        <if test="organDomain !=null and organDomain !=''"> and ORGAN_DOMAIN like #{organDomain} </if>
+        <if test="organFax !=null and organFax !=''"> and ORGAN_FAX like #{organFax} </if>
+        <if test="organIsVirtual !=null and organIsVirtual !=''"> and ORGAN_IS_VIRTUAL like #{organIsVirtual} </if>
+        <if test="organParentId !=null and organParentId !=''"> and ORGAN_PARENT_ID like #{organParentId} </if>
+        <if test="organParentIdList !=null and organParentIdList !=''"> and ORGAN_PARENT_ID_LIST like #{organParentIdList} </if>
+        <if test="organShortName !=null and organShortName !=''"> and ORGAN_SHORT_NAME like #{organShortName} </if>
+        <if test="organStatus !=null and organStatus !=''"> and ORGAN_STATUS like #{organStatus} </if>
+        <if test="organCreatreOrgId !=null and organCreatreOrgId !=''"> and ORGAN_CREATRE_ORG_ID like #{organCreatreOrgId} </if>
+        <if test="organOuterId !=null and organOuterId !=''"> and ORGAN_OUTER_ID like #{organOuterId} </if>
+        <if test="organOuterType !=null and organOuterType !=''"> and ORGAN_OUTER_TYPE like #{organOuterType} </if>
+    </where>ORDER by ORGAN_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ORGAN
- where ORGAN_ORDER_NUM = (select max(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM<(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    where ORGAN_ORDER_NUM = (select max(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM<(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ORGAN
- where ORGAN_ORDER_NUM = (select min(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM>(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    where ORGAN_ORDER_NUM = (select min(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM>(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
 </mapper>

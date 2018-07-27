@@ -191,7 +191,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         tc.setUpdateByExampleStatementEnabled(false);
         tc.setDeleteByExampleStatementEnabled(false);
         tc.setSelectByExampleStatementEnabled(false);
-        tc.setDeleteByPrimaryKeyStatementEnabled(false);
+        //tc.setDeleteByPrimaryKeyStatementEnabled(false);
         context.addTableConfiguration(tc);
 
         try {

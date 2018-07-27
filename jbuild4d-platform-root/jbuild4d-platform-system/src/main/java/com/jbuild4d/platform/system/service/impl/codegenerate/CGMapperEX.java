@@ -49,7 +49,7 @@ public class CGMapperEX {
         selectAllElem.setAttribute("id","selectAll");
         selectAllElem.setAttribute("resultMap","BaseResultMap");
         selectAllElem.appendChild(document.createTextNode("select"));
-        selectAllElem.appendChild(includeElem);
+        selectAllElem.appendChild(includeElem.cloneNode(true));
         selectAllElem.appendChild(document.createTextNode( " from "+tableName+" ORDER by "+orderFieldName+" DESC"));
         mapperNode.appendChild(selectAllElem);
 
@@ -63,7 +63,7 @@ public class CGMapperEX {
         Element nextOrderNumElem=document.createElement("select");
         nextOrderNumElem.setAttribute("id","nextOrderNum");
         nextOrderNumElem.setAttribute("resultType","integer");
-        deleteAllElem.setTextContent("select case when max("+nextOrderNumElem+") is null then 1 else max("+nextOrderNumElem+")+1 end ORDERNUM from "+tableName);
+        nextOrderNumElem.setTextContent("select case when max("+orderFieldName+") is null then 1 else max("+orderFieldName+")+1 end ORDERNUM from "+tableName);
         mapperNode.appendChild(nextOrderNumElem);
 
         //-----selectBySearch
@@ -71,9 +71,9 @@ public class CGMapperEX {
         selectBySearchElem.setAttribute("id","selectBySearch");
         selectBySearchElem.setAttribute("parameterType","java.util.Map");
         selectBySearchElem.setAttribute("resultMap","BaseResultMap");
-        selectAllElem.appendChild(document.createTextNode("select"));
-        selectAllElem.appendChild(includeElem);
-        selectAllElem.appendChild(document.createTextNode("from "+tableName));
+        selectBySearchElem.appendChild(document.createTextNode("select"));
+        selectBySearchElem.appendChild(includeElem.cloneNode(true));
+        selectBySearchElem.appendChild(document.createTextNode("from "+tableName));
         Element whereElem=document.createElement("where");
         IntrospectedTable introspectedTable=introspectedTableList.get(0);
         for (IntrospectedColumn introspectedColumn : introspectedTable.getNonPrimaryKeyColumns()) {
