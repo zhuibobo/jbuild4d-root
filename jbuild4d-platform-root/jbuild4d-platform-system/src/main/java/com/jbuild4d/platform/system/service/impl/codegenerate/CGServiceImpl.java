@@ -55,11 +55,11 @@ public class CGServiceImpl {
         builder.append(CGTool.newLineChar());
         builder.append(CGTool.tabChar(3)+"@Override");
         builder.append(CGTool.newLineChar());
-        builder.append(CGTool.tabChar(3)+"public "+domainObjectName+" run(JB4DSession jb4DSession,"+domainObjectName+" item) throws JBuild4DGenerallyException {");
+        builder.append(CGTool.tabChar(3)+"public "+domainObjectName+" run(JB4DSession jb4DSession,"+domainObjectName+" sourceEntity) throws JBuild4DGenerallyException {");
         builder.append(CGTool.newLineChar());
         builder.append(CGTool.tabChar(4)+"//设置排序,以及其他参数--nextOrderNum()");
         builder.append(CGTool.newLineChar());
-        builder.append(CGTool.tabChar(4)+"return item;");
+        builder.append(CGTool.tabChar(4)+"return sourceEntity;");
         builder.append(CGTool.newLineChar());
         builder.append(CGTool.tabChar(3)+"}");
         builder.append(CGTool.newLineChar());
