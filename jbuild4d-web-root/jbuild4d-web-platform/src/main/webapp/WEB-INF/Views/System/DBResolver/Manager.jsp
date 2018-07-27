@@ -81,7 +81,7 @@
                 </i-col>
                 <i-col span="3" style="text-align: center">
                     <i-button type="success" @click="beginGenerateCode()"> 生 成 </i-button>
-                    <i-button type="success" @click="beginGenerateCode()"> 清 空 </i-button>
+                    <i-button type="primary" @click="beginGenerateCode()"> 清 空 </i-button>
                 </i-col>
             </row>
         </card>
