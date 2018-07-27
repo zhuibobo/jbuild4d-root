@@ -11,6 +11,7 @@ import com.jbuild4d.base.tools.common.PathUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
 import com.jbuild4d.platform.system.service.ICodeGenerateService;
+import com.jbuild4d.platform.system.service.impl.codegenerate.CGIService;
 import com.jbuild4d.platform.system.service.impl.codegenerate.CGMapperEX;
 import com.jbuild4d.platform.system.vo.CodeGenerateVo;
 import com.jbuild4d.platform.system.vo.SimpleTableFieldVo;
@@ -220,6 +221,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         //生成MapperEX
         generateCodeMap.put("MapperEXContent", CGMapperEX.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent")));
         //生成IService
+        generateCodeMap.put("IServiceContent", CGIService.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent")));
         //生成ServiceImpl
         //生成Bean
         //生成Controller
