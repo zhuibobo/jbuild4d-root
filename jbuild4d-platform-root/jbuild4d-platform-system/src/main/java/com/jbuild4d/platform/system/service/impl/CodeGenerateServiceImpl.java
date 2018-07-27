@@ -13,6 +13,7 @@ import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
 import com.jbuild4d.platform.system.service.ICodeGenerateService;
 import com.jbuild4d.platform.system.service.impl.codegenerate.CGIService;
 import com.jbuild4d.platform.system.service.impl.codegenerate.CGMapperEX;
+import com.jbuild4d.platform.system.service.impl.codegenerate.CGServiceImpl;
 import com.jbuild4d.platform.system.vo.CodeGenerateVo;
 import com.jbuild4d.platform.system.vo.SimpleTableFieldVo;
 import org.apache.poi.ss.formula.functions.T;
@@ -166,24 +167,26 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         sqlMapGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).getFullSavePath());
         context.setSqlMapGeneratorConfiguration(sqlMapGeneratorConfiguration);
 
-        String domainObjectName= StringUtility.fisrtCharUpper(tableName)+"Entity";
-        String MapperName=StringUtility.fisrtCharUpper(tableName)+"ACMapper";
+        String domainObjectName= StringUtility.fisrtCharUpperThenLower(tableName)+"Entity";
+        String mapperName=StringUtility.fisrtCharUpperThenLower(tableName)+"ACMapper";
+        String daoMapperName=StringUtility.fisrtCharUpperThenLower(tableName)+"Mapper";
 
         if(tableName.indexOf("_")>0){
             //String shortName=tableName.substring(tableName.indexOf("_")+1);
             String name="";
             String[] names=tableName.split("_");
             for(int i=1;i<names.length;i++){
-                name+=StringUtility.fisrtCharUpper(names[i]);
+                name+=StringUtility.fisrtCharUpperThenLower(names[i]);
             }
             domainObjectName=name+"Entity";
-            MapperName=StringUtility.fisrtCharUpper(name)+"ACMapper";
+            mapperName=name+"ACMapper";
+            daoMapperName=name+"Mapper";
         }
         //设置表名称
         TableConfiguration tc = new TableConfiguration(context);
         tc.setTableName(tableName);
         tc.setDomainObjectName(domainObjectName);
-        tc.setMapperName(MapperName);
+        tc.setMapperName(mapperName);
         tc.setCountByExampleStatementEnabled(false);
         tc.setUpdateByExampleStatementEnabled(false);
         tc.setDeleteByExampleStatementEnabled(false);
@@ -228,6 +231,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         //生成IService
         generateCodeMap.put("IServiceContent", CGIService.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent")));
         //生成ServiceImpl
+        generateCodeMap.put("ServiceImplContent", CGServiceImpl.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent"),daoMapperName));
         //生成Bean
         //生成Controller
         //生成ListJsp

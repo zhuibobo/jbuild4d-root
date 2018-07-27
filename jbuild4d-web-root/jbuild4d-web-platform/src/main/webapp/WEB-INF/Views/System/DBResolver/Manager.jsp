@@ -102,7 +102,7 @@
                 <textarea name="txtAreaCode" id="txtAreaIService" style="width: 100%;">{{generateCode.IServiceContent}}</textarea>
             </tab-pane>
             <tab-pane label="ServiceImpl">
-                <textarea name="txtAreaCode" id="txtAreaServiceImpl" style="width: 100%;"></textarea>
+                <textarea name="txtAreaCode" id="txtAreaServiceImpl" style="width: 100%;">{{generateCode.ServiceImplContent}}</textarea>
             </tab-pane>
             <tab-pane label="Bean">
                 <textarea name="txtAreaCode" id="txtAreaBean" style="width: 100%;"></textarea>
@@ -141,7 +141,8 @@
                 DaoContent:"",
                 MapperACContent:"",
                 MapperEXContent:"",
-                IServiceContent:""
+                IServiceContent:"",
+                ServiceImplContent:""
             },
             <!--List-->
             idFieldName:"TableName",
@@ -192,6 +193,7 @@
                     _self.generateCode.MapperACContent=result.data.MapperACContent;
                     _self.generateCode.MapperEXContent=result.data.MapperEXContent;
                     _self.generateCode.IServiceContent=result.data.IServiceContent;
+                    _self.generateCode.ServiceImplContent=result.data.ServiceImplContent;
                 }, "json");
             },
             <!--List-->
