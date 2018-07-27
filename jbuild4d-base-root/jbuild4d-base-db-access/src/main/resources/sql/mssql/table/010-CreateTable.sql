@@ -142,6 +142,8 @@ CREATE TABLE [dbo].[TB4D_ORGAN_TYPE] (
   ORGAN_TYPE_DESC  [NVARCHAR](2000) NULL
 )
 
+INSERT into TB4D_ORGAN_TYPE(ORGAN_TYPE_ID,ORGAN_TYPE_VALUE,ORGAN_TYPE_NAME) VALUES (1,'10001','一般组织');
+
 -----------------------------------------组织机构表-----------------------------------------
 CREATE TABLE [dbo].[TB4D_ORGAN] (
   ORGAN_ID               [NVARCHAR](100)  NOT NULL PRIMARY KEY,
