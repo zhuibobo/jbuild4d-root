@@ -105,10 +105,10 @@
                 <textarea name="txtAreaCode" id="txtAreaServiceImpl" style="width: 100%;">{{generateCode.ServiceImplContent}}</textarea>
             </tab-pane>
             <tab-pane label="ListJsp">
-                <textarea name="txtAreaCode" id="txtAreaListJsp" style="width: 100%;"></textarea>
+                <textarea name="txtAreaCode" id="txtAreaListJsp" style="width: 100%;">参考开发示例</textarea>
             </tab-pane>
             <tab-pane label="DetailJsp">
-                <textarea name="txtAreaCode" id="txtAreaDetailJsp" style="width: 100%;"></textarea>
+                <textarea name="txtAreaCode" id="txtAreaDetailJsp" style="width: 100%;">参考开发示例</textarea>
             </tab-pane>
         </tabs>
     </div>
