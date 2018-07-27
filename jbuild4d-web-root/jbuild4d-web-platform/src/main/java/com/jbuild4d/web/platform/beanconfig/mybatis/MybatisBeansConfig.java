@@ -118,6 +118,11 @@ public class MybatisBeansConfig {
         return sqlSessionTemplate.getMapper(OrganMapper.class);
     }
 
+    @Bean
+    public OrganTypeMapper organTypeMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(OrganTypeMapper.class);
+    }
+
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);
