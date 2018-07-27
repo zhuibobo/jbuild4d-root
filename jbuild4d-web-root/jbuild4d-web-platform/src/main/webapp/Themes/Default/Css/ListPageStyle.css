@@ -78,6 +78,10 @@
     background: url("Images/ListButton/selected.png");
 }
 
+.list-row-button-listmanager{
+    background: url("Images/ListButton/List manager.png");
+}
+
 .list-2column{
 
 }

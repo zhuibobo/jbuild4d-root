@@ -160,7 +160,7 @@
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
                             h('div', {
-                                class: "list-row-button list-row-button-selected",
+                                class: "list-row-button list-row-button-listmanager",
                                 on: {
                                     click: function () {
                                         appList.selectedTable(params.row.TableName);
