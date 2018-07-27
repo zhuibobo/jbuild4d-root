@@ -114,6 +114,8 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         return JsonUtility.toObjectString(dictionarysMap);
     }
 
+
+
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
@@ -144,6 +146,12 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
         modelAndView.addObject("entity",entity);
         modelAndView.addObject("op",op);
+
+        Map<String,Object> bindObjectsToMVData=this.bindObjectsToMV();
+        if(bindObjectsToMVData!=null){
+            modelAndView.addObject("exObjectsJson", JsonUtility.toObjectString(bindObjectsToMVData));
+        }
+
         return modelAndView;
     }
 
@@ -217,6 +225,10 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     }
 
     public List<String> bindDictionaryToPage(){
+        return null;
+    }
+
+    protected Map<String,Object> bindObjectsToMV(){
         return null;
     }
 }

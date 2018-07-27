@@ -117,9 +117,8 @@
                 <i-col span="4" style="text-align: center">组织类型：</i-col>
                 <i-col span="10">
                     <form-item>
-                        <radio-group v-model="formValidate.organTypeValue">
-                            <radio label="是">是</radio>
-                            <radio label="否">否</radio>
+                        <radio-group v-model="formValidate.organTypeValue" style="width: 100%">
+                            <radio v-for="item in exObjectsJson.OrganType" :label="item.organTypeValue">{{item.organTypeName}}</radio>
                         </radio-group>
                     </form-item>
                 </i-col>
@@ -135,6 +134,7 @@
     var appForm = new Vue({
         el:"#appForm",
         data: {
+            exObjectsJson:${exObjectsJson},
             formValidate: {
                 organId: '${recordId}',
                 organParentId:'${entity.organParentId}' == '' ? StringUtility.QueryString("parentId") : '${entity.organParentId}',
@@ -151,7 +151,8 @@
                 organIsVirtual: '${entity.organIsVirtual}' == '' ? '否' : '${entity.organIsVirtual}',
                 organShortName: '${entity.organShortName}',
                 organStatus: '${entity.organStatus}'==''?'启用':'${entity.organStatus}',
-                organCreateTime:'<fmt:formatDate value="${entity.organCreateTime}" pattern="yyyy-MM-dd" />'==''?DateUtility.GetCurrentDataString("-"): '<fmt:formatDate value="${entity.organCreateTime}" pattern="yyyy-MM-dd" />'
+                organCreateTime:'<fmt:formatDate value="${entity.organCreateTime}" pattern="yyyy-MM-dd" />'==''?DateUtility.GetCurrentDataString("-"): '<fmt:formatDate value="${entity.organCreateTime}" pattern="yyyy-MM-dd" />',
+                organTypeValue:'${entity.organTypeValue}'
             },
             ruleValidate: {
                 organName: [
@@ -166,6 +167,9 @@
         mounted:function () {
             if(this.status=="view") {
                 DetailPageUtility.IViewPageToViewStatus();
+            }
+            if(this.status=="add"){
+                this.formValidate.organTypeValue=this.exObjectsJson.OrganType[0].organTypeValue;
             }
         },
         methods: {
