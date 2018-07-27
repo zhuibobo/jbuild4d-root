@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.OrganMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
+        <constructor>
+            <idArg column="ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_NO" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_CODE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="ORGAN_PHONE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_POST" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_TYPE_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_ADDRESS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_CONTACTOR" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_CONTACTOR_MOBILE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_DOMAIN" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_FAX" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="ORGAN_IS_VIRTUAL" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="ORGAN_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_PARENT_ID_LIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_SHORT_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_CREATRE_ORG_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_OUTER_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="ORGAN_OUTER_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ORGAN_ID, ORGAN_NAME, ORGAN_NO, ORGAN_CODE, ORGAN_CREATE_TIME, ORGAN_PHONE, ORGAN_POST,
+        ORGAN_TYPE_VALUE, ORGAN_ADDRESS, ORGAN_CONTACTOR, ORGAN_CONTACTOR_MOBILE, ORGAN_DOMAIN,
+        ORGAN_FAX, ORGAN_CHILD_COUNT, ORGAN_IS_VIRTUAL, ORGAN_ORDER_NUM, ORGAN_PARENT_ID,
+        ORGAN_PARENT_ID_LIST, ORGAN_SHORT_NAME, ORGAN_STATUS, ORGAN_CREATRE_ORG_ID, ORGAN_OUTER_ID,
+        ORGAN_OUTER_TYPE
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_ORGAN
+        where ORGAN_ID = #{organId,jdbcType=NVARCHAR}
+    </select>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
+        insert into TB4D_ORGAN (ORGAN_ID, ORGAN_NAME, ORGAN_NO,
+        ORGAN_CODE, ORGAN_CREATE_TIME, ORGAN_PHONE,
+        ORGAN_POST, ORGAN_TYPE_VALUE, ORGAN_ADDRESS,
+        ORGAN_CONTACTOR, ORGAN_CONTACTOR_MOBILE,
+        ORGAN_DOMAIN, ORGAN_FAX, ORGAN_CHILD_COUNT,
+        ORGAN_IS_VIRTUAL, ORGAN_ORDER_NUM, ORGAN_PARENT_ID,
+        ORGAN_PARENT_ID_LIST, ORGAN_SHORT_NAME, ORGAN_STATUS,
+        ORGAN_CREATRE_ORG_ID, ORGAN_OUTER_ID, ORGAN_OUTER_TYPE
+        )
+        values (#{organId,jdbcType=NVARCHAR}, #{organName,jdbcType=NVARCHAR}, #{organNo,jdbcType=NVARCHAR},
+        #{organCode,jdbcType=NVARCHAR}, #{organCreateTime,jdbcType=TIMESTAMP}, #{organPhone,jdbcType=NVARCHAR},
+        #{organPost,jdbcType=NVARCHAR}, #{organTypeValue,jdbcType=NVARCHAR}, #{organAddress,jdbcType=NVARCHAR},
+        #{organContactor,jdbcType=NVARCHAR}, #{organContactorMobile,jdbcType=NVARCHAR},
+        #{organDomain,jdbcType=NVARCHAR}, #{organFax,jdbcType=NVARCHAR}, #{organChildCount,jdbcType=INTEGER},
+        #{organIsVirtual,jdbcType=NVARCHAR}, #{organOrderNum,jdbcType=INTEGER}, #{organParentId,jdbcType=NVARCHAR},
+        #{organParentIdList,jdbcType=NVARCHAR}, #{organShortName,jdbcType=NVARCHAR}, #{organStatus,jdbcType=NVARCHAR},
+        #{organCreatreOrgId,jdbcType=NVARCHAR}, #{organOuterId,jdbcType=NVARCHAR}, #{organOuterType,jdbcType=NVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
+        insert into TB4D_ORGAN
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="organId != null">
+                ORGAN_ID,
+            </if>
+            <if test="organName != null">
+                ORGAN_NAME,
+            </if>
+            <if test="organNo != null">
+                ORGAN_NO,
+            </if>
+            <if test="organCode != null">
+                ORGAN_CODE,
+            </if>
+            <if test="organCreateTime != null">
+                ORGAN_CREATE_TIME,
+            </if>
+            <if test="organPhone != null">
+                ORGAN_PHONE,
+            </if>
+            <if test="organPost != null">
+                ORGAN_POST,
+            </if>
+            <if test="organTypeValue != null">
+                ORGAN_TYPE_VALUE,
+            </if>
+            <if test="organAddress != null">
+                ORGAN_ADDRESS,
+            </if>
+            <if test="organContactor != null">
+                ORGAN_CONTACTOR,
+            </if>
+            <if test="organContactorMobile != null">
+                ORGAN_CONTACTOR_MOBILE,
+            </if>
+            <if test="organDomain != null">
+                ORGAN_DOMAIN,
+            </if>
+            <if test="organFax != null">
+                ORGAN_FAX,
+            </if>
+            <if test="organChildCount != null">
+                ORGAN_CHILD_COUNT,
+            </if>
+            <if test="organIsVirtual != null">
+                ORGAN_IS_VIRTUAL,
+            </if>
+            <if test="organOrderNum != null">
+                ORGAN_ORDER_NUM,
+            </if>
+            <if test="organParentId != null">
+                ORGAN_PARENT_ID,
+            </if>
+            <if test="organParentIdList != null">
+                ORGAN_PARENT_ID_LIST,
+            </if>
+            <if test="organShortName != null">
+                ORGAN_SHORT_NAME,
+            </if>
+            <if test="organStatus != null">
+                ORGAN_STATUS,
+            </if>
+            <if test="organCreatreOrgId != null">
+                ORGAN_CREATRE_ORG_ID,
+            </if>
+            <if test="organOuterId != null">
+                ORGAN_OUTER_ID,
+            </if>
+            <if test="organOuterType != null">
+                ORGAN_OUTER_TYPE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="organId != null">
+                #{organId,jdbcType=NVARCHAR},
+            </if>
+            <if test="organName != null">
+                #{organName,jdbcType=NVARCHAR},
+            </if>
+            <if test="organNo != null">
+                #{organNo,jdbcType=NVARCHAR},
+            </if>
+            <if test="organCode != null">
+                #{organCode,jdbcType=NVARCHAR},
+            </if>
+            <if test="organCreateTime != null">
+                #{organCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="organPhone != null">
+                #{organPhone,jdbcType=NVARCHAR},
+            </if>
+            <if test="organPost != null">
+                #{organPost,jdbcType=NVARCHAR},
+            </if>
+            <if test="organTypeValue != null">
+                #{organTypeValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="organAddress != null">
+                #{organAddress,jdbcType=NVARCHAR},
+            </if>
+            <if test="organContactor != null">
+                #{organContactor,jdbcType=NVARCHAR},
+            </if>
+            <if test="organContactorMobile != null">
+                #{organContactorMobile,jdbcType=NVARCHAR},
+            </if>
+            <if test="organDomain != null">
+                #{organDomain,jdbcType=NVARCHAR},
+            </if>
+            <if test="organFax != null">
+                #{organFax,jdbcType=NVARCHAR},
+            </if>
+            <if test="organChildCount != null">
+                #{organChildCount,jdbcType=INTEGER},
+            </if>
+            <if test="organIsVirtual != null">
+                #{organIsVirtual,jdbcType=NVARCHAR},
+            </if>
+            <if test="organOrderNum != null">
+                #{organOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="organParentId != null">
+                #{organParentId,jdbcType=NVARCHAR},
+            </if>
+            <if test="organParentIdList != null">
+                #{organParentIdList,jdbcType=NVARCHAR},
+            </if>
+            <if test="organShortName != null">
+                #{organShortName,jdbcType=NVARCHAR},
+            </if>
+            <if test="organStatus != null">
+                #{organStatus,jdbcType=NVARCHAR},
+            </if>
+            <if test="organCreatreOrgId != null">
+                #{organCreatreOrgId,jdbcType=NVARCHAR},
+            </if>
+            <if test="organOuterId != null">
+                #{organOuterId,jdbcType=NVARCHAR},
+            </if>
+            <if test="organOuterType != null">
+                #{organOuterType,jdbcType=NVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
+        update TB4D_ORGAN
+        <set>
+            <if test="organName != null">
+                ORGAN_NAME = #{organName,jdbcType=NVARCHAR},
+            </if>
+            <if test="organNo != null">
+                ORGAN_NO = #{organNo,jdbcType=NVARCHAR},
+            </if>
+            <if test="organCode != null">
+                ORGAN_CODE = #{organCode,jdbcType=NVARCHAR},
+            </if>
+            <if test="organCreateTime != null">
+                ORGAN_CREATE_TIME = #{organCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="organPhone != null">
+                ORGAN_PHONE = #{organPhone,jdbcType=NVARCHAR},
+            </if>
+            <if test="organPost != null">
+                ORGAN_POST = #{organPost,jdbcType=NVARCHAR},
+            </if>
+            <if test="organTypeValue != null">
+                ORGAN_TYPE_VALUE = #{organTypeValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="organAddress != null">
+                ORGAN_ADDRESS = #{organAddress,jdbcType=NVARCHAR},
+            </if>
+            <if test="organContactor != null">
+                ORGAN_CONTACTOR = #{organContactor,jdbcType=NVARCHAR},
+            </if>
+            <if test="organContactorMobile != null">
+                ORGAN_CONTACTOR_MOBILE = #{organContactorMobile,jdbcType=NVARCHAR},
+            </if>
+            <if test="organDomain != null">
+                ORGAN_DOMAIN = #{organDomain,jdbcType=NVARCHAR},
+            </if>
+            <if test="organFax != null">
+                ORGAN_FAX = #{organFax,jdbcType=NVARCHAR},
+            </if>
+            <if test="organChildCount != null">
+                ORGAN_CHILD_COUNT = #{organChildCount,jdbcType=INTEGER},
+            </if>
+            <if test="organIsVirtual != null">
+                ORGAN_IS_VIRTUAL = #{organIsVirtual,jdbcType=NVARCHAR},
+            </if>
+            <if test="organOrderNum != null">
+                ORGAN_ORDER_NUM = #{organOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="organParentId != null">
+                ORGAN_PARENT_ID = #{organParentId,jdbcType=NVARCHAR},
+            </if>
+            <if test="organParentIdList != null">
+                ORGAN_PARENT_ID_LIST = #{organParentIdList,jdbcType=NVARCHAR},
+            </if>
+            <if test="organShortName != null">
+                ORGAN_SHORT_NAME = #{organShortName,jdbcType=NVARCHAR},
+            </if>
+            <if test="organStatus != null">
+                ORGAN_STATUS = #{organStatus,jdbcType=NVARCHAR},
+            </if>
+            <if test="organCreatreOrgId != null">
+                ORGAN_CREATRE_ORG_ID = #{organCreatreOrgId,jdbcType=NVARCHAR},
+            </if>
+            <if test="organOuterId != null">
+                ORGAN_OUTER_ID = #{organOuterId,jdbcType=NVARCHAR},
+            </if>
+            <if test="organOuterType != null">
+                ORGAN_OUTER_TYPE = #{organOuterType,jdbcType=NVARCHAR},
+            </if>
+        </set>
+        where ORGAN_ID = #{organId,jdbcType=NVARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
+        update TB4D_ORGAN
+        set ORGAN_NAME = #{organName,jdbcType=NVARCHAR},
+        ORGAN_NO = #{organNo,jdbcType=NVARCHAR},
+        ORGAN_CODE = #{organCode,jdbcType=NVARCHAR},
+        ORGAN_CREATE_TIME = #{organCreateTime,jdbcType=TIMESTAMP},
+        ORGAN_PHONE = #{organPhone,jdbcType=NVARCHAR},
+        ORGAN_POST = #{organPost,jdbcType=NVARCHAR},
+        ORGAN_TYPE_VALUE = #{organTypeValue,jdbcType=NVARCHAR},
+        ORGAN_ADDRESS = #{organAddress,jdbcType=NVARCHAR},
+        ORGAN_CONTACTOR = #{organContactor,jdbcType=NVARCHAR},
+        ORGAN_CONTACTOR_MOBILE = #{organContactorMobile,jdbcType=NVARCHAR},
+        ORGAN_DOMAIN = #{organDomain,jdbcType=NVARCHAR},
+        ORGAN_FAX = #{organFax,jdbcType=NVARCHAR},
+        ORGAN_CHILD_COUNT = #{organChildCount,jdbcType=INTEGER},
+        ORGAN_IS_VIRTUAL = #{organIsVirtual,jdbcType=NVARCHAR},
+        ORGAN_ORDER_NUM = #{organOrderNum,jdbcType=INTEGER},
+        ORGAN_PARENT_ID = #{organParentId,jdbcType=NVARCHAR},
+        ORGAN_PARENT_ID_LIST = #{organParentIdList,jdbcType=NVARCHAR},
+        ORGAN_SHORT_NAME = #{organShortName,jdbcType=NVARCHAR},
+        ORGAN_STATUS = #{organStatus,jdbcType=NVARCHAR},
+        ORGAN_CREATRE_ORG_ID = #{organCreatreOrgId,jdbcType=NVARCHAR},
+        ORGAN_OUTER_ID = #{organOuterId,jdbcType=NVARCHAR},
+        ORGAN_OUTER_TYPE = #{organOuterType,jdbcType=NVARCHAR}
+        where ORGAN_ID = #{organId,jdbcType=NVARCHAR}
+    </update>
+</mapper>
