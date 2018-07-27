@@ -134,6 +134,14 @@ EXECUTE sp_addextendedproperty N'MS_Description', N'系统导航菜单表', N'us
 
 EXECUTE sp_addextendedproperty N'MS_Description', N'菜单ID', N'user', N'dbo', N'table', N'TB4D_MENU', N'column', N'MENU_ID';
 
+-----------------------------------------组织机构类型表-----------------------------------------
+CREATE TABLE [dbo].[TB4D_ORGAN_TYPE] (
+  ORGAN_TYPE_ID    [NVARCHAR](100) NOT NULL PRIMARY KEY,
+  ORGAN_TYPE_VALUE [NVARCHAR](300) NOT NULL,
+  ORGAN_TYPE_NAME  [NVARCHAR](300) NOT NULL,
+  ORGAN_TYPE_DESC  [NVARCHAR](2000) NULL
+)
+
 -----------------------------------------组织机构表-----------------------------------------
 CREATE TABLE [dbo].[TB4D_ORGAN] (
   ORGAN_ID               [NVARCHAR](100)  NOT NULL PRIMARY KEY,
