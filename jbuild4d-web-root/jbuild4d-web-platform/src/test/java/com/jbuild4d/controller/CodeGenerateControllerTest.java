@@ -2,8 +2,10 @@ package com.jbuild4d.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.web.platform.beanconfig.sys.RootConfig;
 import com.jbuild4d.web.platform.beanconfig.sys.WebConfig;
+import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,10 +15,12 @@ import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -55,9 +59,7 @@ public class CodeGenerateControllerTest {
         //context.getServletContext().
         MockHttpServletRequestBuilder requestBuilder =post("/PlatForm/System/CodeGenerate/GetTableGenerateCode.do");
         requestBuilder.param("tableName","TB4D_SETTING");
-        requestBuilder.param("entityPackage","com.jbuild4d.base.dbaccess.dbentities");
-        requestBuilder.param("daoPackage","com.jbuild4d.base.dbaccess.dao");
-        requestBuilder.param("xmlPackage","mybatismappers");
+        requestBuilder.param("packageType","JBuild4D-PlatForm");
 
         JB4DSession b4DSession = new JB4DSession();
         b4DSession.setOrganName("4D");
@@ -65,6 +67,10 @@ public class CodeGenerateControllerTest {
         b4DSession.setUserName("Alex");
         b4DSession.setUserId("UserId");
         requestBuilder.sessionAttr("JB4DSession",b4DSession);
-        mockMvc.perform(requestBuilder);
+        MvcResult result=mockMvc.perform(requestBuilder).andReturn();
+        String json=result.getResponse().getContentAsString();
+        //JBuild4DResponseVo jBuild4DResponseVo= JsonUtility.toObject(json,JBuild4DResponseVo<Map<String,String>>.class);
+        Map<String,Object> resultMap=JsonUtility.toObject(json,Map.class);
+        System.out.println(((Map)resultMap.get("data")).get("DaoContent"));
     }
 }
