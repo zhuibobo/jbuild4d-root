@@ -104,12 +104,6 @@
             <tab-pane label="ServiceImpl">
                 <textarea name="txtAreaCode" id="txtAreaServiceImpl" style="width: 100%;">{{generateCode.ServiceImplContent}}</textarea>
             </tab-pane>
-            <tab-pane label="Bean">
-                <textarea name="txtAreaCode" id="txtAreaBean" style="width: 100%;"></textarea>
-            </tab-pane>
-            <tab-pane label="Controller">
-                <textarea name="txtAreaCode" id="txtAreaController" style="width: 100%;"></textarea>
-            </tab-pane>
             <tab-pane label="ListJsp">
                 <textarea name="txtAreaCode" id="txtAreaListJsp" style="width: 100%;"></textarea>
             </tab-pane>
