@@ -109,6 +109,13 @@ public class InitSystemTest extends BaseTest {
         menuService.deleteByKey(jb4DSession,devDemoRootId);
         menuService.save(jb4DSession,devDemoRootMenu.getMenuId(),devDemoRootMenu);
 
+        //根菜单->应用管理
+        String appManagerRootId="JB4DSystemAppManagerRoot";
+        MenuEntity appManagerRootMenu=getMenu(rootMenu.getMenuId(),appManagerRootId,"应用管理","应用管理","应用管理",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+        menuService.deleteByKey(jb4DSession,appManagerRootMenu.getMenuId());
+        menuService.save(jb4DSession,appManagerRootMenu.getMenuId(),appManagerRootMenu);
+
         //根字典分组
         String rootDictionaryId="0";
         DictionaryGroupEntity rootDictionaryGroupEntity=getDictionaryGroup(rootDictionaryId,"数据字典分组","数据字典分组","","-1",TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
