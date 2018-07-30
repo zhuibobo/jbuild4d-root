@@ -306,8 +306,8 @@
             },
             add: function () {
                 if(this.treeSelectedNode!=null) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=add&groupId=" + this.treeSelectedNode[appList.treeIdFieldName]);
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
+                    var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=add&groupId=" + this.treeSelectedNode[appList.treeIdFieldName]);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 0);
                 }
                 else {
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择分组!",null);

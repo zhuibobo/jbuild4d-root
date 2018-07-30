@@ -1114,7 +1114,11 @@ var DialogUtility={
                     }
                 }
             };
-            if (whtype == 1) {
+            if (whtype == 0) {
+                options.width = PageStyleUtility.GetPageWidth()-20;
+                options.height = PageStyleUtility.GetPageHeight()-10;
+            }
+            else if (whtype == 1) {
                 defaultoptions = $.extend(true, {}, defaultoptions, {height: 680, width: 980});
             }
             else if (whtype == 2) {
