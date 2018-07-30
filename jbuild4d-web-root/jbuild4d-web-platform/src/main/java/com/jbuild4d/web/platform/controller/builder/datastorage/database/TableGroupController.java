@@ -27,12 +27,12 @@ public class TableGroupController extends GeneralCRUDImplController<TableGroupEn
 
     @Override
     public String getListViewName() {
-        return "Builder/DataStorage/DataBase/Manger.jsp";
+        return "Builder/DataStorage/DataBase/Manger";
     }
 
     @Override
     public String getDetailViewName() {
-        return "Builder/DataStorage/DataBase/TableGroupEdit.jsp";
+        return "Builder/DataStorage/DataBase/TableGroupEdit";
     }
 
     @Override
