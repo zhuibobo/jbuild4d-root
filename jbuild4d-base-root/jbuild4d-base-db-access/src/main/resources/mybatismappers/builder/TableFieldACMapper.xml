@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.TableFieldMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+        <constructor>
+            <idArg column="FIELD_FIELD_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_TABLE_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_CAPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_IS_PK" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="FIELD_ALLOW_NULL" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_DATA_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_DATA_LENGTH" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="FIELD_DECIMAL_LENGTH" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="FIELD_DEFAULT_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="FIELD_CREATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="FIELD_UPDATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        FIELD_FIELD_ID, FIELD_TABLE_ID, FIELD_NAME, FIELD_CAPTION, FIELD_IS_PK, FIELD_ALLOW_NULL,
+        FIELD_DATA_TYPE, FIELD_DATA_LENGTH, FIELD_DECIMAL_LENGTH, FIELD_DEFAULT_VALUE, FIELD_CREATE_TIME,
+        FIELD_CREATER, FIELD_UPDATE_TIME, FIELD_UPDATER, FIELD_DESC, FIELD_ORDER_NUM
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_TABLE_FIELD
+        where FIELD_FIELD_ID = #{fieldFieldId,jdbcType=NVARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_TABLE_FIELD
+        where FIELD_FIELD_ID = #{fieldFieldId,jdbcType=NVARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+        insert into TB4D_TABLE_FIELD (FIELD_FIELD_ID, FIELD_TABLE_ID, FIELD_NAME,
+        FIELD_CAPTION, FIELD_IS_PK, FIELD_ALLOW_NULL,
+        FIELD_DATA_TYPE, FIELD_DATA_LENGTH, FIELD_DECIMAL_LENGTH,
+        FIELD_DEFAULT_VALUE, FIELD_CREATE_TIME,
+        FIELD_CREATER, FIELD_UPDATE_TIME, FIELD_UPDATER,
+        FIELD_DESC, FIELD_ORDER_NUM)
+        values (#{fieldFieldId,jdbcType=NVARCHAR}, #{fieldTableId,jdbcType=NVARCHAR}, #{fieldName,jdbcType=NVARCHAR},
+        #{fieldCaption,jdbcType=NVARCHAR}, #{fieldIsPk,jdbcType=INTEGER}, #{fieldAllowNull,jdbcType=NVARCHAR},
+        #{fieldDataType,jdbcType=NVARCHAR}, #{fieldDataLength,jdbcType=INTEGER}, #{fieldDecimalLength,jdbcType=INTEGER},
+        #{fieldDefaultValue,jdbcType=NVARCHAR}, #{fieldCreateTime,jdbcType=TIMESTAMP},
+        #{fieldCreater,jdbcType=NVARCHAR}, #{fieldUpdateTime,jdbcType=TIMESTAMP}, #{fieldUpdater,jdbcType=NVARCHAR},
+        #{fieldDesc,jdbcType=NVARCHAR}, #{fieldOrderNum,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+        insert into TB4D_TABLE_FIELD
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fieldFieldId != null">
+                FIELD_FIELD_ID,
+            </if>
+            <if test="fieldTableId != null">
+                FIELD_TABLE_ID,
+            </if>
+            <if test="fieldName != null">
+                FIELD_NAME,
+            </if>
+            <if test="fieldCaption != null">
+                FIELD_CAPTION,
+            </if>
+            <if test="fieldIsPk != null">
+                FIELD_IS_PK,
+            </if>
+            <if test="fieldAllowNull != null">
+                FIELD_ALLOW_NULL,
+            </if>
+            <if test="fieldDataType != null">
+                FIELD_DATA_TYPE,
+            </if>
+            <if test="fieldDataLength != null">
+                FIELD_DATA_LENGTH,
+            </if>
+            <if test="fieldDecimalLength != null">
+                FIELD_DECIMAL_LENGTH,
+            </if>
+            <if test="fieldDefaultValue != null">
+                FIELD_DEFAULT_VALUE,
+            </if>
+            <if test="fieldCreateTime != null">
+                FIELD_CREATE_TIME,
+            </if>
+            <if test="fieldCreater != null">
+                FIELD_CREATER,
+            </if>
+            <if test="fieldUpdateTime != null">
+                FIELD_UPDATE_TIME,
+            </if>
+            <if test="fieldUpdater != null">
+                FIELD_UPDATER,
+            </if>
+            <if test="fieldDesc != null">
+                FIELD_DESC,
+            </if>
+            <if test="fieldOrderNum != null">
+                FIELD_ORDER_NUM,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fieldFieldId != null">
+                #{fieldFieldId,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldTableId != null">
+                #{fieldTableId,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldName != null">
+                #{fieldName,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldCaption != null">
+                #{fieldCaption,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldIsPk != null">
+                #{fieldIsPk,jdbcType=INTEGER},
+            </if>
+            <if test="fieldAllowNull != null">
+                #{fieldAllowNull,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldDataType != null">
+                #{fieldDataType,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldDataLength != null">
+                #{fieldDataLength,jdbcType=INTEGER},
+            </if>
+            <if test="fieldDecimalLength != null">
+                #{fieldDecimalLength,jdbcType=INTEGER},
+            </if>
+            <if test="fieldDefaultValue != null">
+                #{fieldDefaultValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldCreateTime != null">
+                #{fieldCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fieldCreater != null">
+                #{fieldCreater,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldUpdateTime != null">
+                #{fieldUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fieldUpdater != null">
+                #{fieldUpdater,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldDesc != null">
+                #{fieldDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldOrderNum != null">
+                #{fieldOrderNum,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+        update TB4D_TABLE_FIELD
+        <set>
+            <if test="fieldTableId != null">
+                FIELD_TABLE_ID = #{fieldTableId,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldName != null">
+                FIELD_NAME = #{fieldName,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldCaption != null">
+                FIELD_CAPTION = #{fieldCaption,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldIsPk != null">
+                FIELD_IS_PK = #{fieldIsPk,jdbcType=INTEGER},
+            </if>
+            <if test="fieldAllowNull != null">
+                FIELD_ALLOW_NULL = #{fieldAllowNull,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldDataType != null">
+                FIELD_DATA_TYPE = #{fieldDataType,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldDataLength != null">
+                FIELD_DATA_LENGTH = #{fieldDataLength,jdbcType=INTEGER},
+            </if>
+            <if test="fieldDecimalLength != null">
+                FIELD_DECIMAL_LENGTH = #{fieldDecimalLength,jdbcType=INTEGER},
+            </if>
+            <if test="fieldDefaultValue != null">
+                FIELD_DEFAULT_VALUE = #{fieldDefaultValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldCreateTime != null">
+                FIELD_CREATE_TIME = #{fieldCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fieldCreater != null">
+                FIELD_CREATER = #{fieldCreater,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldUpdateTime != null">
+                FIELD_UPDATE_TIME = #{fieldUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fieldUpdater != null">
+                FIELD_UPDATER = #{fieldUpdater,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldDesc != null">
+                FIELD_DESC = #{fieldDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldOrderNum != null">
+                FIELD_ORDER_NUM = #{fieldOrderNum,jdbcType=INTEGER},
+            </if>
+        </set>
+        where FIELD_FIELD_ID = #{fieldFieldId,jdbcType=NVARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+        update TB4D_TABLE_FIELD
+        set FIELD_TABLE_ID = #{fieldTableId,jdbcType=NVARCHAR},
+        FIELD_NAME = #{fieldName,jdbcType=NVARCHAR},
+        FIELD_CAPTION = #{fieldCaption,jdbcType=NVARCHAR},
+        FIELD_IS_PK = #{fieldIsPk,jdbcType=INTEGER},
+        FIELD_ALLOW_NULL = #{fieldAllowNull,jdbcType=NVARCHAR},
+        FIELD_DATA_TYPE = #{fieldDataType,jdbcType=NVARCHAR},
+        FIELD_DATA_LENGTH = #{fieldDataLength,jdbcType=INTEGER},
+        FIELD_DECIMAL_LENGTH = #{fieldDecimalLength,jdbcType=INTEGER},
+        FIELD_DEFAULT_VALUE = #{fieldDefaultValue,jdbcType=NVARCHAR},
+        FIELD_CREATE_TIME = #{fieldCreateTime,jdbcType=TIMESTAMP},
+        FIELD_CREATER = #{fieldCreater,jdbcType=NVARCHAR},
+        FIELD_UPDATE_TIME = #{fieldUpdateTime,jdbcType=TIMESTAMP},
+        FIELD_UPDATER = #{fieldUpdater,jdbcType=NVARCHAR},
+        FIELD_DESC = #{fieldDesc,jdbcType=NVARCHAR},
+        FIELD_ORDER_NUM = #{fieldOrderNum,jdbcType=INTEGER}
+        where FIELD_FIELD_ID = #{fieldFieldId,jdbcType=NVARCHAR}
+    </update>
+</mapper>

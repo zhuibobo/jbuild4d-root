@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.TableMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
+        <constructor>
+            <idArg column="TABLE_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_CAPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_DBNAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_ORGAN_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="TABLE_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="TABLE_CREATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="TABLE_UPDATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_SERVICE_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_ISSYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="TABLE_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        TABLE_ID, TABLE_CAPTION, TABLE_NAME, TABLE_DBNAME, TABLE_ORGAN_ID, TABLE_CREATE_TIME,
+        TABLE_CREATER, TABLE_UPDATE_TIME, TABLE_UPDATER, TABLE_SERVICE_VALUE, TABLE_TYPE,
+        TABLE_ISSYSTEM, TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_TABLE
+        where TABLE_ID = #{tableId,jdbcType=NVARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_TABLE
+        where TABLE_ID = #{tableId,jdbcType=NVARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
+        insert into TB4D_TABLE (TABLE_ID, TABLE_CAPTION, TABLE_NAME,
+        TABLE_DBNAME, TABLE_ORGAN_ID, TABLE_CREATE_TIME,
+        TABLE_CREATER, TABLE_UPDATE_TIME, TABLE_UPDATER,
+        TABLE_SERVICE_VALUE, TABLE_TYPE, TABLE_ISSYSTEM,
+        TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID
+        )
+        values (#{tableId,jdbcType=NVARCHAR}, #{tableCaption,jdbcType=NVARCHAR}, #{tableName,jdbcType=NVARCHAR},
+        #{tableDbname,jdbcType=NVARCHAR}, #{tableOrganId,jdbcType=INTEGER}, #{tableCreateTime,jdbcType=TIMESTAMP},
+        #{tableCreater,jdbcType=NVARCHAR}, #{tableUpdateTime,jdbcType=TIMESTAMP}, #{tableUpdater,jdbcType=NVARCHAR},
+        #{tableServiceValue,jdbcType=NVARCHAR}, #{tableType,jdbcType=NVARCHAR}, #{tableIssystem,jdbcType=NVARCHAR},
+        #{tableOrderNum,jdbcType=INTEGER}, #{tableDesc,jdbcType=NVARCHAR}, #{tableGroupId,jdbcType=NVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
+        insert into TB4D_TABLE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tableId != null">
+                TABLE_ID,
+            </if>
+            <if test="tableCaption != null">
+                TABLE_CAPTION,
+            </if>
+            <if test="tableName != null">
+                TABLE_NAME,
+            </if>
+            <if test="tableDbname != null">
+                TABLE_DBNAME,
+            </if>
+            <if test="tableOrganId != null">
+                TABLE_ORGAN_ID,
+            </if>
+            <if test="tableCreateTime != null">
+                TABLE_CREATE_TIME,
+            </if>
+            <if test="tableCreater != null">
+                TABLE_CREATER,
+            </if>
+            <if test="tableUpdateTime != null">
+                TABLE_UPDATE_TIME,
+            </if>
+            <if test="tableUpdater != null">
+                TABLE_UPDATER,
+            </if>
+            <if test="tableServiceValue != null">
+                TABLE_SERVICE_VALUE,
+            </if>
+            <if test="tableType != null">
+                TABLE_TYPE,
+            </if>
+            <if test="tableIssystem != null">
+                TABLE_ISSYSTEM,
+            </if>
+            <if test="tableOrderNum != null">
+                TABLE_ORDER_NUM,
+            </if>
+            <if test="tableDesc != null">
+                TABLE_DESC,
+            </if>
+            <if test="tableGroupId != null">
+                TABLE_GROUP_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tableId != null">
+                #{tableId,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableCaption != null">
+                #{tableCaption,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableName != null">
+                #{tableName,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableDbname != null">
+                #{tableDbname,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableOrganId != null">
+                #{tableOrganId,jdbcType=INTEGER},
+            </if>
+            <if test="tableCreateTime != null">
+                #{tableCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tableCreater != null">
+                #{tableCreater,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableUpdateTime != null">
+                #{tableUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tableUpdater != null">
+                #{tableUpdater,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableServiceValue != null">
+                #{tableServiceValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableType != null">
+                #{tableType,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableIssystem != null">
+                #{tableIssystem,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableOrderNum != null">
+                #{tableOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="tableDesc != null">
+                #{tableDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupId != null">
+                #{tableGroupId,jdbcType=NVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
+        update TB4D_TABLE
+        <set>
+            <if test="tableCaption != null">
+                TABLE_CAPTION = #{tableCaption,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableName != null">
+                TABLE_NAME = #{tableName,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableDbname != null">
+                TABLE_DBNAME = #{tableDbname,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableOrganId != null">
+                TABLE_ORGAN_ID = #{tableOrganId,jdbcType=INTEGER},
+            </if>
+            <if test="tableCreateTime != null">
+                TABLE_CREATE_TIME = #{tableCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tableCreater != null">
+                TABLE_CREATER = #{tableCreater,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableUpdateTime != null">
+                TABLE_UPDATE_TIME = #{tableUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tableUpdater != null">
+                TABLE_UPDATER = #{tableUpdater,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableServiceValue != null">
+                TABLE_SERVICE_VALUE = #{tableServiceValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableType != null">
+                TABLE_TYPE = #{tableType,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableIssystem != null">
+                TABLE_ISSYSTEM = #{tableIssystem,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableOrderNum != null">
+                TABLE_ORDER_NUM = #{tableOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="tableDesc != null">
+                TABLE_DESC = #{tableDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupId != null">
+                TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR},
+            </if>
+        </set>
+        where TABLE_ID = #{tableId,jdbcType=NVARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
+        update TB4D_TABLE
+        set TABLE_CAPTION = #{tableCaption,jdbcType=NVARCHAR},
+        TABLE_NAME = #{tableName,jdbcType=NVARCHAR},
+        TABLE_DBNAME = #{tableDbname,jdbcType=NVARCHAR},
+        TABLE_ORGAN_ID = #{tableOrganId,jdbcType=INTEGER},
+        TABLE_CREATE_TIME = #{tableCreateTime,jdbcType=TIMESTAMP},
+        TABLE_CREATER = #{tableCreater,jdbcType=NVARCHAR},
+        TABLE_UPDATE_TIME = #{tableUpdateTime,jdbcType=TIMESTAMP},
+        TABLE_UPDATER = #{tableUpdater,jdbcType=NVARCHAR},
+        TABLE_SERVICE_VALUE = #{tableServiceValue,jdbcType=NVARCHAR},
+        TABLE_TYPE = #{tableType,jdbcType=NVARCHAR},
+        TABLE_ISSYSTEM = #{tableIssystem,jdbcType=NVARCHAR},
+        TABLE_ORDER_NUM = #{tableOrderNum,jdbcType=INTEGER},
+        TABLE_DESC = #{tableDesc,jdbcType=NVARCHAR},
+        TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR}
+        where TABLE_ID = #{tableId,jdbcType=NVARCHAR}
+    </update>
+</mapper>

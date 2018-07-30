@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.TableFieldMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE_FIELD ORDER by FIELD_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_TABLE_FIELD</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(FIELD_ORDER_NUM) is null then 1 else max(FIELD_ORDER_NUM)+1 end ORDERNUM from TB4D_TABLE_FIELD</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_TABLE_FIELD<where>
+        <if test="fieldTableId !=null and fieldTableId !=''"> and FIELD_TABLE_ID like #{fieldTableId} </if>
+        <if test="fieldName !=null and fieldName !=''"> and FIELD_NAME like #{fieldName} </if>
+        <if test="fieldCaption !=null and fieldCaption !=''"> and FIELD_CAPTION like #{fieldCaption} </if>
+        <if test="fieldAllowNull !=null and fieldAllowNull !=''"> and FIELD_ALLOW_NULL like #{fieldAllowNull} </if>
+        <if test="fieldDataType !=null and fieldDataType !=''"> and FIELD_DATA_TYPE like #{fieldDataType} </if>
+        <if test="fieldDefaultValue !=null and fieldDefaultValue !=''"> and FIELD_DEFAULT_VALUE like #{fieldDefaultValue} </if>
+        <if test="fieldCreater !=null and fieldCreater !=''"> and FIELD_CREATER like #{fieldCreater} </if>
+        <if test="fieldUpdater !=null and fieldUpdater !=''"> and FIELD_UPDATER like #{fieldUpdater} </if>
+        <if test="fieldDesc !=null and fieldDesc !=''"> and FIELD_DESC like #{fieldDesc} </if>
+    </where>ORDER by FIELD_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_FIELD
+ where FIELD_ORDER_NUM = (select max(FIELD_ORDER_NUM) from TB4D_TABLE_FIELD where FIELD_ORDER_NUM<(select FIELD_ORDER_NUM from TB4D_TABLE_FIELD where FIELD_FIELD_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_FIELD
+ where FIELD_ORDER_NUM = (select min(FIELD_ORDER_NUM) from TB4D_TABLE_FIELD where FIELD_ORDER_NUM>(select FIELD_ORDER_NUM from TB4D_TABLE_FIELD where FIELD_FIELD_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

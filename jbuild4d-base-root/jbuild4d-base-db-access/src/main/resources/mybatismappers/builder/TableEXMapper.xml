@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.TableMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE ORDER by TABLE_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_TABLE</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(TABLE_ORDER_NUM) is null then 1 else max(TABLE_ORDER_NUM)+1 end ORDERNUM from TB4D_TABLE</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_TABLE<where>
+        <if test="tableCaption !=null and tableCaption !=''"> and TABLE_CAPTION like #{tableCaption} </if>
+        <if test="tableName !=null and tableName !=''"> and TABLE_NAME like #{tableName} </if>
+        <if test="tableDbname !=null and tableDbname !=''"> and TABLE_DBNAME like #{tableDbname} </if>
+        <if test="tableCreater !=null and tableCreater !=''"> and TABLE_CREATER like #{tableCreater} </if>
+        <if test="tableUpdater !=null and tableUpdater !=''"> and TABLE_UPDATER like #{tableUpdater} </if>
+        <if test="tableServiceValue !=null and tableServiceValue !=''"> and TABLE_SERVICE_VALUE like #{tableServiceValue} </if>
+        <if test="tableType !=null and tableType !=''"> and TABLE_TYPE like #{tableType} </if>
+        <if test="tableIssystem !=null and tableIssystem !=''"> and TABLE_ISSYSTEM like #{tableIssystem} </if>
+        <if test="tableDesc !=null and tableDesc !=''"> and TABLE_DESC like #{tableDesc} </if>
+        <if test="tableGroupId !=null and tableGroupId !=''"> and TABLE_GROUP_ID like #{tableGroupId} </if>
+    </where>ORDER by TABLE_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE
+ where TABLE_ORDER_NUM = (select max(TABLE_ORDER_NUM) from TB4D_TABLE where TABLE_ORDER_NUM<(select TABLE_ORDER_NUM from TB4D_TABLE where TABLE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE
+ where TABLE_ORDER_NUM = (select min(TABLE_ORDER_NUM) from TB4D_TABLE where TABLE_ORDER_NUM>(select TABLE_ORDER_NUM from TB4D_TABLE where TABLE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

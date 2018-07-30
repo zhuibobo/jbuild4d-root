@@ -300,7 +300,8 @@ CREATE TABLE TB4D_TABLE_FIELD (
   [FIELD_CREATER]        [NVARCHAR](100)  NULL,
   [FIELD_UPDATE_TIME]    [DATETIME]       NOT NULL,
   [FIELD_UPDATER]        [NVARCHAR](100)  NULL,
-  [FIELD_DESC]           [NVARCHAR](500)  NULL
+  [FIELD_DESC]           [NVARCHAR](500)  NULL,
+  [FIELD_ORDER_NUM]      [INT]            NULL
 )
 
 -----------------------------------------应用设计相关表--结束-----------------------------------------
