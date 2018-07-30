@@ -10,6 +10,6 @@
     <title>Title</title>
 </head>
 <body>
-    Manager.jsp
+
 </body>
 </html>
