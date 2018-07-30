@@ -285,6 +285,23 @@ CREATE TABLE TB4D_TABLE (
   [TABLE_GROUP_ID]      [NVARCHAR](100)  NOT NULL
 )
 
-
+-----------------------------------------表字段信息-----------------------------------------
+CREATE TABLE TB4D_TABLE_FIELD (
+  [FIELD_FIELD_ID]       [NVARCHAR](100)  NOT NULL PRIMARY KEY,
+  [FIELD_TABLE_ID]       [NVARCHAR](100)  NOT NULL,
+  [FIELD_NAME]           [NVARCHAR](100)  NOT NULL,
+  [FIELD_CAPTION]        [NVARCHAR](100)  NOT NULL,
+  [FIELD_IS_PK]          [INT]            NOT NULL,
+  [FIELD_ALLOW_NULL]     [NVARCHAR](10)   NULL,
+  [FIELD_DATA_TYPE]      [NVARCHAR](50)   NOT NULL,
+  [FIELD_DATA_LENGTH]    [INT]            NULL,
+  [FIELD_DECIMAL_LENGTH] [INT]            NULL,
+  [FIELD_DEFAULT_VALUE]  [NVARCHAR](2000) NULL,
+  [FIELD_CREATE_TIME]    [DATETIME]       NOT NULL,
+  [FIELD_CREATER]        [NVARCHAR](100)  NULL,
+  [FIELD_UPDATE_TIME]    [DATETIME]       NOT NULL,
+  [FIELD_UPDATER]        [NVARCHAR](100)  NULL,
+  [FIELD_DESC]           [NVARCHAR](200)  NULL
+)
 
 -----------------------------------------应用设计相关表--结束-----------------------------------------
