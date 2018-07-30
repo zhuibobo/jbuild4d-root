@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.DatabaseLinkMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DatabaseLinkEntity">
+        <constructor>
+            <idArg column="DBLINK_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DBLINK_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DBLINK_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DBLINK_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DBLINK_DRIVERNAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DBLINK_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DBLINK_USER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DBLINK_PASSWORD" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DBLINK_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="DBLINK_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="DBLINK_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DBLINK_IS_LOCATION" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DBLINK_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        DBLINK_ID, DBLINK_VALUE, DBLINK_NAME, DBLINK_TYPE, DBLINK_DRIVERNAME, DBLINK_URL,
+        DBLINK_USER, DBLINK_PASSWORD, DBLINK_CREATE_TIME, DBLINK_ORDER_NUM, DBLINK_DESC,
+        DBLINK_IS_LOCATION, DBLINK_STATUS
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_DATABASE_LINK
+        where DBLINK_ID = #{dblinkId,jdbcType=NVARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_DATABASE_LINK
+        where DBLINK_ID = #{dblinkId,jdbcType=NVARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatabaseLinkEntity">
+        insert into TB4D_DATABASE_LINK (DBLINK_ID, DBLINK_VALUE, DBLINK_NAME,
+        DBLINK_TYPE, DBLINK_DRIVERNAME, DBLINK_URL,
+        DBLINK_USER, DBLINK_PASSWORD, DBLINK_CREATE_TIME,
+        DBLINK_ORDER_NUM, DBLINK_DESC, DBLINK_IS_LOCATION,
+        DBLINK_STATUS)
+        values (#{dblinkId,jdbcType=NVARCHAR}, #{dblinkValue,jdbcType=NVARCHAR}, #{dblinkName,jdbcType=NVARCHAR},
+        #{dblinkType,jdbcType=NVARCHAR}, #{dblinkDrivername,jdbcType=NVARCHAR}, #{dblinkUrl,jdbcType=NVARCHAR},
+        #{dblinkUser,jdbcType=NVARCHAR}, #{dblinkPassword,jdbcType=NVARCHAR}, #{dblinkCreateTime,jdbcType=TIMESTAMP},
+        #{dblinkOrderNum,jdbcType=INTEGER}, #{dblinkDesc,jdbcType=NVARCHAR}, #{dblinkIsLocation,jdbcType=NVARCHAR},
+        #{dblinkStatus,jdbcType=NVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatabaseLinkEntity">
+        insert into TB4D_DATABASE_LINK
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dblinkId != null">
+                DBLINK_ID,
+            </if>
+            <if test="dblinkValue != null">
+                DBLINK_VALUE,
+            </if>
+            <if test="dblinkName != null">
+                DBLINK_NAME,
+            </if>
+            <if test="dblinkType != null">
+                DBLINK_TYPE,
+            </if>
+            <if test="dblinkDrivername != null">
+                DBLINK_DRIVERNAME,
+            </if>
+            <if test="dblinkUrl != null">
+                DBLINK_URL,
+            </if>
+            <if test="dblinkUser != null">
+                DBLINK_USER,
+            </if>
+            <if test="dblinkPassword != null">
+                DBLINK_PASSWORD,
+            </if>
+            <if test="dblinkCreateTime != null">
+                DBLINK_CREATE_TIME,
+            </if>
+            <if test="dblinkOrderNum != null">
+                DBLINK_ORDER_NUM,
+            </if>
+            <if test="dblinkDesc != null">
+                DBLINK_DESC,
+            </if>
+            <if test="dblinkIsLocation != null">
+                DBLINK_IS_LOCATION,
+            </if>
+            <if test="dblinkStatus != null">
+                DBLINK_STATUS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dblinkId != null">
+                #{dblinkId,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkValue != null">
+                #{dblinkValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkName != null">
+                #{dblinkName,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkType != null">
+                #{dblinkType,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkDrivername != null">
+                #{dblinkDrivername,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkUrl != null">
+                #{dblinkUrl,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkUser != null">
+                #{dblinkUser,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkPassword != null">
+                #{dblinkPassword,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkCreateTime != null">
+                #{dblinkCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dblinkOrderNum != null">
+                #{dblinkOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="dblinkDesc != null">
+                #{dblinkDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkIsLocation != null">
+                #{dblinkIsLocation,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkStatus != null">
+                #{dblinkStatus,jdbcType=NVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatabaseLinkEntity">
+        update TB4D_DATABASE_LINK
+        <set>
+            <if test="dblinkValue != null">
+                DBLINK_VALUE = #{dblinkValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkName != null">
+                DBLINK_NAME = #{dblinkName,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkType != null">
+                DBLINK_TYPE = #{dblinkType,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkDrivername != null">
+                DBLINK_DRIVERNAME = #{dblinkDrivername,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkUrl != null">
+                DBLINK_URL = #{dblinkUrl,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkUser != null">
+                DBLINK_USER = #{dblinkUser,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkPassword != null">
+                DBLINK_PASSWORD = #{dblinkPassword,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkCreateTime != null">
+                DBLINK_CREATE_TIME = #{dblinkCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dblinkOrderNum != null">
+                DBLINK_ORDER_NUM = #{dblinkOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="dblinkDesc != null">
+                DBLINK_DESC = #{dblinkDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkIsLocation != null">
+                DBLINK_IS_LOCATION = #{dblinkIsLocation,jdbcType=NVARCHAR},
+            </if>
+            <if test="dblinkStatus != null">
+                DBLINK_STATUS = #{dblinkStatus,jdbcType=NVARCHAR},
+            </if>
+        </set>
+        where DBLINK_ID = #{dblinkId,jdbcType=NVARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatabaseLinkEntity">
+        update TB4D_DATABASE_LINK
+        set DBLINK_VALUE = #{dblinkValue,jdbcType=NVARCHAR},
+        DBLINK_NAME = #{dblinkName,jdbcType=NVARCHAR},
+        DBLINK_TYPE = #{dblinkType,jdbcType=NVARCHAR},
+        DBLINK_DRIVERNAME = #{dblinkDrivername,jdbcType=NVARCHAR},
+        DBLINK_URL = #{dblinkUrl,jdbcType=NVARCHAR},
+        DBLINK_USER = #{dblinkUser,jdbcType=NVARCHAR},
+        DBLINK_PASSWORD = #{dblinkPassword,jdbcType=NVARCHAR},
+        DBLINK_CREATE_TIME = #{dblinkCreateTime,jdbcType=TIMESTAMP},
+        DBLINK_ORDER_NUM = #{dblinkOrderNum,jdbcType=INTEGER},
+        DBLINK_DESC = #{dblinkDesc,jdbcType=NVARCHAR},
+        DBLINK_IS_LOCATION = #{dblinkIsLocation,jdbcType=NVARCHAR},
+        DBLINK_STATUS = #{dblinkStatus,jdbcType=NVARCHAR}
+        where DBLINK_ID = #{dblinkId,jdbcType=NVARCHAR}
+    </update>
+</mapper>

@@ -60,7 +60,7 @@ public class MybatisBeansConfig {
     public SqlSessionFactoryBean sqlSessionFactoryBean(PageInterceptor pageInterceptor) throws PropertyVetoException, IOException {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSourceBean());
-        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mybatismappers/*.xml"));
+        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mybatismappers/*/*.xml"));
         TypeHandler[] typeHandlers = {new UniversalIntEnumHandler(EnableTypeEnum.class)};
         sessionFactory.setTypeHandlers(typeHandlers);
         Interceptor[] interceptors={pageInterceptor};

@@ -110,61 +110,61 @@ public class InitSystemTest extends BaseTest {
         menuService.save(jb4DSession,devDemoRootMenu.getMenuId(),devDemoRootMenu);
 
         //根菜单->应用设计
-        String appDesignRootId="JB4DSystemAppDesignRoot";
-        MenuEntity appDesignRootMenu=getMenu(rootMenu.getMenuId(),appDesignRootId,"应用设计","应用设计","应用设计",
+        String appBuilderRootId="JB4DSystemAppBuilderRoot";
+        MenuEntity appBuilderRootMenu=getMenu(rootMenu.getMenuId(),appBuilderRootId,"应用设计","应用设计","应用设计",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
-        menuService.deleteByKey(jb4DSession,appDesignRootMenu.getMenuId());
-        menuService.save(jb4DSession,appDesignRootMenu.getMenuId(),appDesignRootMenu);
+        menuService.deleteByKey(jb4DSession,appBuilderRootMenu.getMenuId());
+        menuService.save(jb4DSession,appBuilderRootMenu.getMenuId(),appBuilderRootMenu);
 
         //根菜单->应用管理->存储设计
-        String appDesignDataStorageDesignId="JB4DSystemAppDesignDataStorageDesign";
-        MenuEntity appManagerDataStorageMenu=getMenu(appDesignRootMenu.getMenuId(),appDesignDataStorageDesignId,"存储设计","存储设计","存储设计",
+        String appBuilderDataStorageBuilderId="JB4DSystemAppBuilderDataStorageBuilder";
+        MenuEntity appManagerDataStorageMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderDataStorageBuilderId,"存储设计","存储设计","存储设计",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
         menuService.deleteByKey(jb4DSession,appManagerDataStorageMenu.getMenuId());
         menuService.save(jb4DSession,appManagerDataStorageMenu.getMenuId(),appManagerDataStorageMenu);
 
 
         //根菜单->应用管理->存储设计->链接管理
-        String appDesignDataLinkId="JB4DSystemAppDesignDataLink";
-        MenuEntity appDesignDataLinkMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appDesignDataLinkId,"链接管理","链接管理","链接管理",
+        String appBuilderDataLinkId="JB4DSystemAppBuilderDataLink";
+        MenuEntity appBuilderDataLinkMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appBuilderDataLinkId,"链接管理","链接管理","链接管理",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
-        menuService.deleteByKey(jb4DSession,appDesignDataLinkMenu.getMenuId());
-        menuService.save(jb4DSession,appDesignDataLinkMenu.getMenuId(),appDesignDataLinkMenu);
+        menuService.deleteByKey(jb4DSession,appBuilderDataLinkMenu.getMenuId());
+        menuService.save(jb4DSession,appBuilderDataLinkMenu.getMenuId(),appBuilderDataLinkMenu);
 
         //根菜单->应用管理->存储设计->数据库管理
-        String appDesignDataBaseId="JB4DSystemAppDesignDataBase";
-        MenuEntity appDesignDataBaseMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appDesignDataBaseId,"数据库管理","数据库管理","数据库管理",
+        String appBuilderDataBaseId="JB4DSystemAppBuilderDataBase";
+        MenuEntity appBuilderDataBaseMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appBuilderDataBaseId,"数据库管理","数据库管理","数据库管理",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
-        menuService.deleteByKey(jb4DSession,appDesignDataBaseMenu.getMenuId());
-        menuService.save(jb4DSession,appDesignDataBaseMenu.getMenuId(),appDesignDataBaseMenu);
+        menuService.deleteByKey(jb4DSession,appBuilderDataBaseMenu.getMenuId());
+        menuService.save(jb4DSession,appBuilderDataBaseMenu.getMenuId(),appBuilderDataBaseMenu);
 
         //根菜单->应用管理->存储设计->数据关系
-        String appDesignDataRelationId="JB4DSystemAppDesignDataRelation";
-        MenuEntity appDesignDataRelationMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appDesignDataRelationId,"数据关系","数据关系","数据关系",
+        String appBuilderDataRelationId="JB4DSystemAppBuilderDataRelation";
+        MenuEntity appBuilderDataRelationMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appBuilderDataRelationId,"数据关系","数据关系","数据关系",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
-        menuService.deleteByKey(jb4DSession,appDesignDataRelationMenu.getMenuId());
-        menuService.save(jb4DSession,appDesignDataRelationMenu.getMenuId(),appDesignDataRelationMenu);
+        menuService.deleteByKey(jb4DSession,appBuilderDataRelationMenu.getMenuId());
+        menuService.save(jb4DSession,appBuilderDataRelationMenu.getMenuId(),appBuilderDataRelationMenu);
 
         //根菜单->应用管理->数据集设计
-        String appDesignDataSetId="JB4DSystemAppDesignDataSetDesign";
-        MenuEntity appDesignDataSetMenu=getMenu(appDesignRootMenu.getMenuId(),appDesignDataSetId,"数据集设计","数据集设计","数据集设计",
+        String appBuilderDataSetId="JB4DSystemAppBuilderDataSetBuilder";
+        MenuEntity appBuilderDataSetMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderDataSetId,"数据集设计","数据集设计","数据集设计",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
-        menuService.deleteByKey(jb4DSession,appDesignDataSetMenu.getMenuId());
-        menuService.save(jb4DSession,appDesignDataSetMenu.getMenuId(),appDesignDataSetMenu);
+        menuService.deleteByKey(jb4DSession,appBuilderDataSetMenu.getMenuId());
+        menuService.save(jb4DSession,appBuilderDataSetMenu.getMenuId(),appBuilderDataSetMenu);
 
         //根菜单->应用管理->模块设计
-        String appDesignModuleDesignId="JB4DSystemAppDesignModuleDesign";
-        MenuEntity appDesignModuleDesignMenu=getMenu(appDesignRootMenu.getMenuId(),appDesignModuleDesignId,"模块设计","模块设计","模块设计",
+        String appBuilderModuleBuilderId="JB4DSystemAppBuilderModuleBuilder";
+        MenuEntity appBuilderModuleBuilderMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderModuleBuilderId,"模块设计","模块设计","模块设计",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
-        menuService.deleteByKey(jb4DSession,appDesignModuleDesignMenu.getMenuId());
-        menuService.save(jb4DSession,appDesignModuleDesignMenu.getMenuId(),appDesignModuleDesignMenu);
+        menuService.deleteByKey(jb4DSession,appBuilderModuleBuilderMenu.getMenuId());
+        menuService.save(jb4DSession,appBuilderModuleBuilderMenu.getMenuId(),appBuilderModuleBuilderMenu);
 
         //根菜单->应用管理->菜单设计
-        String appDesignMenuDesignId="JB4DSystemAppDesignMenuDesign";
-        MenuEntity appDesignMenuDesignMenu=getMenu(appDesignRootMenu.getMenuId(),appDesignMenuDesignId,"菜单设计","菜单设计","菜单设计",
+        String appBuilderMenuBuilderId="JB4DSystemAppBuilderMenuBuilder";
+        MenuEntity appBuilderMenuBuilderMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderMenuBuilderId,"菜单设计","菜单设计","菜单设计",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
-        menuService.deleteByKey(jb4DSession,appDesignMenuDesignMenu.getMenuId());
-        menuService.save(jb4DSession,appDesignMenuDesignMenu.getMenuId(),appDesignMenuDesignMenu);
+        menuService.deleteByKey(jb4DSession,appBuilderMenuBuilderMenu.getMenuId());
+        menuService.save(jb4DSession,appBuilderMenuBuilderMenu.getMenuId(),appBuilderMenuBuilderMenu);
 
         //根字典分组
         String rootDictionaryId="0";
