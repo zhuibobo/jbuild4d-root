@@ -9,7 +9,8 @@
 <link rel="stylesheet" type="text/css" href="${theme}/Css/ListPageStyle.css?urlts=${urlts}" />
 <link rel="stylesheet" type="text/css" href="${theme}/Css/DetailPageStyle.css?urlts=${urlts}" />
 <link rel="stylesheet" type="text/css" href="${theme}/Css/LeftMenus.css?urlts=${urlts}" />
-<link rel="stylesheet" type="text/css" href="${theme}/IView/iview.css" />
+<%--<link rel="stylesheet" type="text/css" href="${theme}/IView/iview.css" />--%>
+<link rel="stylesheet" type="text/css" href="${theme}/IView-3.X/iview.css" />
 <link rel="stylesheet" type="text/css" href="${theme}/JQueryUI/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="${theme}/TreeTable/TreeTable.css" />
 <link rel="stylesheet" type="text/css" href="${theme}/ZTree/zTreeStyle/zTreeStyle.css" />
