@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping(value = "/PlatForm/Builder/DataLink")
+@RequestMapping(value = "/PlatForm/Builder/DataStorage/DataLink")
 public class DatabaseLinkController extends GeneralCRUDImplController<DatabaseLinkEntity> {
 
     @Autowired
