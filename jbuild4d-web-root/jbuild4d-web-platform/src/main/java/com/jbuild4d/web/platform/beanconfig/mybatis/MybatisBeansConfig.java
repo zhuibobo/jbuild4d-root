@@ -123,6 +123,11 @@ public class MybatisBeansConfig {
         return sqlSessionTemplate.getMapper(OrganTypeMapper.class);
     }
 
+    @Bean
+    public DatabaseServiceLinkMapper databaseServiceLinkMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(DatabaseServiceLinkMapper.class);
+    }
+
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);
