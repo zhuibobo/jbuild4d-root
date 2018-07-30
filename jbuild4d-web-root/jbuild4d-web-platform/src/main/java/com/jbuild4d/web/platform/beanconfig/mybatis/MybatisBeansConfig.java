@@ -128,6 +128,10 @@ public class MybatisBeansConfig {
         return sqlSessionTemplate.getMapper(DatabaseServiceLinkMapper.class);
     }
 
+    @Bean
+    public TableGroupMapper tableGroupMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(TableGroupMapper.class);
+    }
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);

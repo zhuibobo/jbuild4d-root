@@ -1,9 +1,12 @@
 package com.jbuild4d.web.platform.beanconfig.service;
 
 import com.jbuild4d.base.dbaccess.dao.DatabaseServiceLinkMapper;
+import com.jbuild4d.base.dbaccess.dao.TableGroupMapper;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.platform.builder.service.IDatabaseServiceLinkService;
+import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.builder.service.impl.DatabaseServiceLinkServiceImpl;
+import com.jbuild4d.platform.builder.service.impl.TableGroupServiceImpl;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +25,12 @@ public class BuildBeansConfig {
     @Bean
     public IDatabaseServiceLinkService databaseServiceLinkService(ISQLBuilderService _sqlBuilderService, DatabaseServiceLinkMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
         IDatabaseServiceLinkService bean=new DatabaseServiceLinkServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
+    public ITableGroupService tableGroupService(ISQLBuilderService _sqlBuilderService, TableGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        ITableGroupService bean=new TableGroupServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
 }

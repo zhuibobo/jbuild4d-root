@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.TableGroupMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
+        <constructor>
+            <idArg column="TABLE_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="TABLE_GROUP_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="TABLE_GROUP_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_ISSYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_DEL_ENABLE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_ENP_ITEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        TABLE_GROUP_ID, TABLE_GROUP_VALUE, TABLE_GROUP_TEXT, TABLE_GROUP_ORDER_NUM, TABLE_GROUP_CREATE_TIME,
+        TABLE_GROUP_DESC, TABLE_GROUP_STATUS, TABLE_GROUP_PARENT_ID, TABLE_GROUP_ISSYSTEM,
+        TABLE_GROUP_DEL_ENABLE, TABLE_GROUP_ENP_ITEM
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_TABLE_GROUP
+        where TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_TABLE_GROUP
+        where TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
+        insert into TB4D_TABLE_GROUP (TABLE_GROUP_ID, TABLE_GROUP_VALUE,
+        TABLE_GROUP_TEXT, TABLE_GROUP_ORDER_NUM, TABLE_GROUP_CREATE_TIME,
+        TABLE_GROUP_DESC, TABLE_GROUP_STATUS, TABLE_GROUP_PARENT_ID,
+        TABLE_GROUP_ISSYSTEM, TABLE_GROUP_DEL_ENABLE,
+        TABLE_GROUP_ENP_ITEM)
+        values (#{tableGroupId,jdbcType=NVARCHAR}, #{tableGroupValue,jdbcType=NVARCHAR},
+        #{tableGroupText,jdbcType=NVARCHAR}, #{tableGroupOrderNum,jdbcType=INTEGER}, #{tableGroupCreateTime,jdbcType=TIMESTAMP},
+        #{tableGroupDesc,jdbcType=NVARCHAR}, #{tableGroupStatus,jdbcType=NVARCHAR}, #{tableGroupParentId,jdbcType=NVARCHAR},
+        #{tableGroupIssystem,jdbcType=NVARCHAR}, #{tableGroupDelEnable,jdbcType=NVARCHAR},
+        #{tableGroupEnpItem,jdbcType=NVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
+        insert into TB4D_TABLE_GROUP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tableGroupId != null">
+                TABLE_GROUP_ID,
+            </if>
+            <if test="tableGroupValue != null">
+                TABLE_GROUP_VALUE,
+            </if>
+            <if test="tableGroupText != null">
+                TABLE_GROUP_TEXT,
+            </if>
+            <if test="tableGroupOrderNum != null">
+                TABLE_GROUP_ORDER_NUM,
+            </if>
+            <if test="tableGroupCreateTime != null">
+                TABLE_GROUP_CREATE_TIME,
+            </if>
+            <if test="tableGroupDesc != null">
+                TABLE_GROUP_DESC,
+            </if>
+            <if test="tableGroupStatus != null">
+                TABLE_GROUP_STATUS,
+            </if>
+            <if test="tableGroupParentId != null">
+                TABLE_GROUP_PARENT_ID,
+            </if>
+            <if test="tableGroupIssystem != null">
+                TABLE_GROUP_ISSYSTEM,
+            </if>
+            <if test="tableGroupDelEnable != null">
+                TABLE_GROUP_DEL_ENABLE,
+            </if>
+            <if test="tableGroupEnpItem != null">
+                TABLE_GROUP_ENP_ITEM,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tableGroupId != null">
+                #{tableGroupId,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupValue != null">
+                #{tableGroupValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupText != null">
+                #{tableGroupText,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupOrderNum != null">
+                #{tableGroupOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="tableGroupCreateTime != null">
+                #{tableGroupCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tableGroupDesc != null">
+                #{tableGroupDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupStatus != null">
+                #{tableGroupStatus,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupParentId != null">
+                #{tableGroupParentId,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupIssystem != null">
+                #{tableGroupIssystem,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupDelEnable != null">
+                #{tableGroupDelEnable,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupEnpItem != null">
+                #{tableGroupEnpItem,jdbcType=NVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
+        update TB4D_TABLE_GROUP
+        <set>
+            <if test="tableGroupValue != null">
+                TABLE_GROUP_VALUE = #{tableGroupValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupText != null">
+                TABLE_GROUP_TEXT = #{tableGroupText,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupOrderNum != null">
+                TABLE_GROUP_ORDER_NUM = #{tableGroupOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="tableGroupCreateTime != null">
+                TABLE_GROUP_CREATE_TIME = #{tableGroupCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tableGroupDesc != null">
+                TABLE_GROUP_DESC = #{tableGroupDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupStatus != null">
+                TABLE_GROUP_STATUS = #{tableGroupStatus,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupParentId != null">
+                TABLE_GROUP_PARENT_ID = #{tableGroupParentId,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupIssystem != null">
+                TABLE_GROUP_ISSYSTEM = #{tableGroupIssystem,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupDelEnable != null">
+                TABLE_GROUP_DEL_ENABLE = #{tableGroupDelEnable,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupEnpItem != null">
+                TABLE_GROUP_ENP_ITEM = #{tableGroupEnpItem,jdbcType=NVARCHAR},
+            </if>
+        </set>
+        where TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
+        update TB4D_TABLE_GROUP
+        set TABLE_GROUP_VALUE = #{tableGroupValue,jdbcType=NVARCHAR},
+        TABLE_GROUP_TEXT = #{tableGroupText,jdbcType=NVARCHAR},
+        TABLE_GROUP_ORDER_NUM = #{tableGroupOrderNum,jdbcType=INTEGER},
+        TABLE_GROUP_CREATE_TIME = #{tableGroupCreateTime,jdbcType=TIMESTAMP},
+        TABLE_GROUP_DESC = #{tableGroupDesc,jdbcType=NVARCHAR},
+        TABLE_GROUP_STATUS = #{tableGroupStatus,jdbcType=NVARCHAR},
+        TABLE_GROUP_PARENT_ID = #{tableGroupParentId,jdbcType=NVARCHAR},
+        TABLE_GROUP_ISSYSTEM = #{tableGroupIssystem,jdbcType=NVARCHAR},
+        TABLE_GROUP_DEL_ENABLE = #{tableGroupDelEnable,jdbcType=NVARCHAR},
+        TABLE_GROUP_ENP_ITEM = #{tableGroupEnpItem,jdbcType=NVARCHAR}
+        where TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR}
+    </update>
+</mapper>
