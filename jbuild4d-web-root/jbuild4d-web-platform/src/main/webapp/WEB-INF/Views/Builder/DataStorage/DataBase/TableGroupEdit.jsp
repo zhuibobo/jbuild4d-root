@@ -66,7 +66,7 @@
         </form-item>
         <form-item class="general-edit-page-bottom-wrap">
             <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保 存</i-button>
-            <i-button type="ghost" @click="handleClose()" style="margin-left: 8px">
+            <i-button @click="handleClose()" style="margin-left: 8px">
                 关 闭
             </i-button>
         </form-item>
