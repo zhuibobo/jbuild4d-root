@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class BuildBeansConfig {
 
     @Bean
-    public IDatabaseServiceLinkService organTypeService(ISQLBuilderService _sqlBuilderService, DatabaseServiceLinkMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+    public IDatabaseServiceLinkService databaseServiceLinkService(ISQLBuilderService _sqlBuilderService, DatabaseServiceLinkMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
         IDatabaseServiceLinkService bean=new DatabaseServiceLinkServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
