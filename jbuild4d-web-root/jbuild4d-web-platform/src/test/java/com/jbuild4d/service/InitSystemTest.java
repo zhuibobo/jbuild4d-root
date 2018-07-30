@@ -5,12 +5,15 @@ import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.organ.service.IOrganService;
 import com.jbuild4d.platform.system.service.*;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
+import com.jbuild4d.web.platform.beanconfig.service.BuildBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.OrganBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
+import org.apache.poi.ss.formula.functions.T;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +30,13 @@ import java.util.PrimitiveIterator;
  * To change this template use File | Settings | File Templates.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= {MybatisBeansConfig.class,SystemBeansConfig.class, DevDemoBeansConfig.class, OrganBeansConfig.class})
+@ContextConfiguration(classes= {
+        MybatisBeansConfig.class,
+        SystemBeansConfig.class,
+        DevDemoBeansConfig.class,
+        OrganBeansConfig.class,
+        BuildBeansConfig.class
+})
 public class InitSystemTest extends BaseTest {
     @Autowired
     private IMenuService menuService;
@@ -49,6 +58,9 @@ public class InitSystemTest extends BaseTest {
 
     @Autowired
     private IOrganService organService;
+
+    @Autowired
+    private ITableGroupService tableGroupService;
 
     @Test
     public void initSystem() throws JBuild4DGenerallyException {
@@ -239,6 +251,9 @@ public class InitSystemTest extends BaseTest {
 
         organService.deleteByKey(jb4DSession,"0");
         organService.createRootOrgan(jb4DSession);
+
+        tableGroupService.deleteByKey(jb4DSession,"0");
+        TableGroupEntity tableGroupEntity=tableGroupService.createRootNode(jb4DSession);
     }
 
     public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){

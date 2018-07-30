@@ -1,12 +1,18 @@
 package com.jbuild4d.web.platform.controller.builder.datastorage.database;
 
+import com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity;
 import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
 import com.jbuild4d.base.service.IBaseService;
+import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,5 +49,12 @@ public class TableGroupController extends GeneralCRUDImplController<TableGroupEn
     @Override
     public String getModuleName() {
         return "表分组";
+    }
+
+    @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
+    @ResponseBody
+    public List<TableGroupEntity> getTreeData() {
+        List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALL(JB4DSessionUtility.getSession());
+        return tableGroupEntityList;
     }
 }

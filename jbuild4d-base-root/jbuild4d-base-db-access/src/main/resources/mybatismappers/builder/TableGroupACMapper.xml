@@ -13,13 +13,14 @@
             <arg column="TABLE_GROUP_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="TABLE_GROUP_ISSYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="TABLE_GROUP_DEL_ENABLE" javaType="java.lang.String" jdbcType="NVARCHAR" />
-            <arg column="TABLE_GROUP_ENP_ITEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_PID_LIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         TABLE_GROUP_ID, TABLE_GROUP_VALUE, TABLE_GROUP_TEXT, TABLE_GROUP_ORDER_NUM, TABLE_GROUP_CREATE_TIME,
         TABLE_GROUP_DESC, TABLE_GROUP_STATUS, TABLE_GROUP_PARENT_ID, TABLE_GROUP_ISSYSTEM,
-        TABLE_GROUP_DEL_ENABLE, TABLE_GROUP_ENP_ITEM
+        TABLE_GROUP_DEL_ENABLE, TABLE_GROUP_PID_LIST, TABLE_GROUP_CHILD_COUNT
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -36,12 +37,14 @@
         TABLE_GROUP_TEXT, TABLE_GROUP_ORDER_NUM, TABLE_GROUP_CREATE_TIME,
         TABLE_GROUP_DESC, TABLE_GROUP_STATUS, TABLE_GROUP_PARENT_ID,
         TABLE_GROUP_ISSYSTEM, TABLE_GROUP_DEL_ENABLE,
-        TABLE_GROUP_ENP_ITEM)
+        TABLE_GROUP_PID_LIST, TABLE_GROUP_CHILD_COUNT
+        )
         values (#{tableGroupId,jdbcType=NVARCHAR}, #{tableGroupValue,jdbcType=NVARCHAR},
         #{tableGroupText,jdbcType=NVARCHAR}, #{tableGroupOrderNum,jdbcType=INTEGER}, #{tableGroupCreateTime,jdbcType=TIMESTAMP},
         #{tableGroupDesc,jdbcType=NVARCHAR}, #{tableGroupStatus,jdbcType=NVARCHAR}, #{tableGroupParentId,jdbcType=NVARCHAR},
         #{tableGroupIssystem,jdbcType=NVARCHAR}, #{tableGroupDelEnable,jdbcType=NVARCHAR},
-        #{tableGroupEnpItem,jdbcType=NVARCHAR})
+        #{tableGroupPidList,jdbcType=NVARCHAR}, #{tableGroupChildCount,jdbcType=INTEGER}
+        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
         insert into TB4D_TABLE_GROUP
@@ -76,8 +79,11 @@
             <if test="tableGroupDelEnable != null">
                 TABLE_GROUP_DEL_ENABLE,
             </if>
-            <if test="tableGroupEnpItem != null">
-                TABLE_GROUP_ENP_ITEM,
+            <if test="tableGroupPidList != null">
+                TABLE_GROUP_PID_LIST,
+            </if>
+            <if test="tableGroupChildCount != null">
+                TABLE_GROUP_CHILD_COUNT,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -111,8 +117,11 @@
             <if test="tableGroupDelEnable != null">
                 #{tableGroupDelEnable,jdbcType=NVARCHAR},
             </if>
-            <if test="tableGroupEnpItem != null">
-                #{tableGroupEnpItem,jdbcType=NVARCHAR},
+            <if test="tableGroupPidList != null">
+                #{tableGroupPidList,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupChildCount != null">
+                #{tableGroupChildCount,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -146,8 +155,11 @@
             <if test="tableGroupDelEnable != null">
                 TABLE_GROUP_DEL_ENABLE = #{tableGroupDelEnable,jdbcType=NVARCHAR},
             </if>
-            <if test="tableGroupEnpItem != null">
-                TABLE_GROUP_ENP_ITEM = #{tableGroupEnpItem,jdbcType=NVARCHAR},
+            <if test="tableGroupPidList != null">
+                TABLE_GROUP_PID_LIST = #{tableGroupPidList,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableGroupChildCount != null">
+                TABLE_GROUP_CHILD_COUNT = #{tableGroupChildCount,jdbcType=INTEGER},
             </if>
         </set>
         where TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR}
@@ -155,15 +167,16 @@
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
         update TB4D_TABLE_GROUP
         set TABLE_GROUP_VALUE = #{tableGroupValue,jdbcType=NVARCHAR},
-        TABLE_GROUP_TEXT = #{tableGroupText,jdbcType=NVARCHAR},
-        TABLE_GROUP_ORDER_NUM = #{tableGroupOrderNum,jdbcType=INTEGER},
-        TABLE_GROUP_CREATE_TIME = #{tableGroupCreateTime,jdbcType=TIMESTAMP},
-        TABLE_GROUP_DESC = #{tableGroupDesc,jdbcType=NVARCHAR},
-        TABLE_GROUP_STATUS = #{tableGroupStatus,jdbcType=NVARCHAR},
-        TABLE_GROUP_PARENT_ID = #{tableGroupParentId,jdbcType=NVARCHAR},
-        TABLE_GROUP_ISSYSTEM = #{tableGroupIssystem,jdbcType=NVARCHAR},
-        TABLE_GROUP_DEL_ENABLE = #{tableGroupDelEnable,jdbcType=NVARCHAR},
-        TABLE_GROUP_ENP_ITEM = #{tableGroupEnpItem,jdbcType=NVARCHAR}
+            TABLE_GROUP_TEXT = #{tableGroupText,jdbcType=NVARCHAR},
+            TABLE_GROUP_ORDER_NUM = #{tableGroupOrderNum,jdbcType=INTEGER},
+            TABLE_GROUP_CREATE_TIME = #{tableGroupCreateTime,jdbcType=TIMESTAMP},
+            TABLE_GROUP_DESC = #{tableGroupDesc,jdbcType=NVARCHAR},
+            TABLE_GROUP_STATUS = #{tableGroupStatus,jdbcType=NVARCHAR},
+            TABLE_GROUP_PARENT_ID = #{tableGroupParentId,jdbcType=NVARCHAR},
+            TABLE_GROUP_ISSYSTEM = #{tableGroupIssystem,jdbcType=NVARCHAR},
+            TABLE_GROUP_DEL_ENABLE = #{tableGroupDelEnable,jdbcType=NVARCHAR},
+            TABLE_GROUP_PID_LIST = #{tableGroupPidList,jdbcType=NVARCHAR},
+            TABLE_GROUP_CHILD_COUNT = #{tableGroupChildCount,jdbcType=INTEGER}
         where TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR}
     </update>
 </mapper>

@@ -98,24 +98,24 @@
         },
         data:{
             <!--Tree-->
-            treeIdFieldName:"ddttId",
+            treeIdFieldName:"tableGroupId",
             treeObj:null,
             treeSelectedNode:null,
             treeSetting:{
                 async : {
                     enable : true,
                     // Ajax 获取数据的 URL 地址
-                    url : BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/GetTreeData.do")
+                    url : BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/GetTreeData.do")
                 },
                 // 必须使用data
                 data:{
                     key:{
-                        name:"ddttName"
+                        name:"tableGroupText"
                     },
                     simpleData : {
                         enable : true,
-                        idKey : "ddttId", // id编号命名
-                        pIdKey : "ddttParentId",  // 父id编号命名
+                        idKey : "tableGroupId", // id编号命名
+                        pIdKey : "tableGroupParentId",  // 父id编号命名
                         rootId : 0
                     }
                 },

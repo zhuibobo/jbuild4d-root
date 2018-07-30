@@ -42,10 +42,13 @@ public class TableGroupEntity {
     //TABLE_GROUP_DEL_ENABLE
     private String tableGroupDelEnable;
 
-    //TABLE_GROUP_ENP_ITEM
-    private String tableGroupEnpItem;
+    //TABLE_GROUP_PID_LIST
+    private String tableGroupPidList;
 
-    public TableGroupEntity(String tableGroupId, String tableGroupValue, String tableGroupText, Integer tableGroupOrderNum, Date tableGroupCreateTime, String tableGroupDesc, String tableGroupStatus, String tableGroupParentId, String tableGroupIssystem, String tableGroupDelEnable, String tableGroupEnpItem) {
+    //TABLE_GROUP_CHILD_COUNT
+    private Integer tableGroupChildCount;
+
+    public TableGroupEntity(String tableGroupId, String tableGroupValue, String tableGroupText, Integer tableGroupOrderNum, Date tableGroupCreateTime, String tableGroupDesc, String tableGroupStatus, String tableGroupParentId, String tableGroupIssystem, String tableGroupDelEnable, String tableGroupPidList, Integer tableGroupChildCount) {
         this.tableGroupId = tableGroupId;
         this.tableGroupValue = tableGroupValue;
         this.tableGroupText = tableGroupText;
@@ -56,7 +59,8 @@ public class TableGroupEntity {
         this.tableGroupParentId = tableGroupParentId;
         this.tableGroupIssystem = tableGroupIssystem;
         this.tableGroupDelEnable = tableGroupDelEnable;
-        this.tableGroupEnpItem = tableGroupEnpItem;
+        this.tableGroupPidList = tableGroupPidList;
+        this.tableGroupChildCount = tableGroupChildCount;
     }
 
     public TableGroupEntity() {
@@ -143,11 +147,19 @@ public class TableGroupEntity {
         this.tableGroupDelEnable = tableGroupDelEnable == null ? null : tableGroupDelEnable.trim();
     }
 
-    public String getTableGroupEnpItem() {
-        return tableGroupEnpItem;
+    public String getTableGroupPidList() {
+        return tableGroupPidList;
     }
 
-    public void setTableGroupEnpItem(String tableGroupEnpItem) {
-        this.tableGroupEnpItem = tableGroupEnpItem == null ? null : tableGroupEnpItem.trim();
+    public void setTableGroupPidList(String tableGroupPidList) {
+        this.tableGroupPidList = tableGroupPidList == null ? null : tableGroupPidList.trim();
+    }
+
+    public Integer getTableGroupChildCount() {
+        return tableGroupChildCount;
+    }
+
+    public void setTableGroupChildCount(Integer tableGroupChildCount) {
+        this.tableGroupChildCount = tableGroupChildCount;
     }
 }
