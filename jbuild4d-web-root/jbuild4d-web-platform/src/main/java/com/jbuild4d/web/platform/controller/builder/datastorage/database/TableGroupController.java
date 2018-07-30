@@ -21,7 +21,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping(value = "/PlatForm/Builder/DataStorage/DataBase/")
+@RequestMapping(value = "/PlatForm/Builder/DataStorage/DataBase/TableGroup")
 public class TableGroupController extends GeneralCRUDImplController<TableGroupEntity> {
     @Autowired
     ITableGroupService tableGroupService;

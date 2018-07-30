@@ -105,7 +105,7 @@
                 async : {
                     enable : true,
                     // Ajax 获取数据的 URL 地址
-                    url : BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/GetTreeData.do")
+                    url : BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/TableGroup/GetTreeData.do")
                 },
                 // 必须使用data
                 data:{
@@ -224,7 +224,7 @@
             },
             addGroup:function () {
                 if(this.treeSelectedNode!=null) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Detail.do?op=add&parentId="+this.treeSelectedNode[appList.treeIdFieldName]);
+                    var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/TableGroup/Detail.do?op=add&parentId="+this.treeSelectedNode[appList.treeIdFieldName]);
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
                 }
                 else {
@@ -233,7 +233,7 @@
             },
             editGroup:function () {
                 if(this.treeSelectedNode!=null) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Detail.do?op=update&recordId="+this.treeSelectedNode[appList.treeIdFieldName]);
+                    var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/TableGroup/Detail.do?op=update&recordId="+this.treeSelectedNode[appList.treeIdFieldName]);
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
                 }
                 else {
@@ -241,11 +241,11 @@
                 }
             },
             viewGroup:function () {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Detail.do?op=view&recordId=" + this.treeSelectedNode[appList.treeIdFieldName]);
+                var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/TableGroup/Detail.do?op=view&recordId=" + this.treeSelectedNode[appList.treeIdFieldName]);
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
             },
             delGroup:function () {
-                var url="/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Delete.do";
+                var url="/PlatForm/Builder/DataStorage/DataBase/TableGroup/Delete.do";
                 var recordId=this.treeSelectedNode[appList.treeIdFieldName];
                 DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
                     AjaxUtility.Post(url, {recordId: recordId}, function (result) {
@@ -263,7 +263,7 @@
             },
             moveGroup:function (type) {
                 if(this.treeSelectedNode!=null) {
-                    var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Move.do';
+                    var url = '/PlatForm/Builder/DataStorage/DataBase/TableGroup/Move.do';
                     var recordId = this.treeSelectedNode[appList.treeIdFieldName];
                     AjaxUtility.Post(url, {recordId: recordId,type:type}, function (result) {
                         if (result.success) {

@@ -146,7 +146,7 @@ public class InitSystemTest extends BaseTest {
         //根菜单->应用管理->存储设计->数据库管理
         String appBuilderDataBaseId="JB4DSystemAppBuilderDataBase";
         MenuEntity appBuilderDataBaseMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appBuilderDataBaseId,"数据库管理","数据库管理","数据库管理",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/DataStorage/DataBase/List.do","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/DataStorage/DataBase/TableGroup/List.do","frame-top-menu-data");
         menuService.deleteByKey(jb4DSession,appBuilderDataBaseMenu.getMenuId());
         menuService.save(jb4DSession,appBuilderDataBaseMenu.getMenuId(),appBuilderDataBaseMenu);
 
