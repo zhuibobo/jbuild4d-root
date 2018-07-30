@@ -233,7 +233,6 @@ CREATE TABLE TB4D_OPERATION_LOG (
 
 -----------------------------------------应用设计相关表--开始-----------------------------------------
 
-
 -----------------------------------------数据库连接-----------------------------------------
 CREATE TABLE TB4D_DATABASE_SERVICE_LINK (
   [DBLINK_ID]          [NVARCHAR](100)  NOT NULL PRIMARY KEY,
@@ -296,12 +295,12 @@ CREATE TABLE TB4D_TABLE_FIELD (
   [FIELD_DATA_TYPE]      [NVARCHAR](50)   NOT NULL,
   [FIELD_DATA_LENGTH]    [INT]            NULL,
   [FIELD_DECIMAL_LENGTH] [INT]            NULL,
-  [FIELD_DEFAULT_VALUE]  [NVARCHAR](2000) NULL,
+  [FIELD_DEFAULT_VALUE]  [NVARCHAR](1000) NULL,
   [FIELD_CREATE_TIME]    [DATETIME]       NOT NULL,
   [FIELD_CREATER]        [NVARCHAR](100)  NULL,
   [FIELD_UPDATE_TIME]    [DATETIME]       NOT NULL,
   [FIELD_UPDATER]        [NVARCHAR](100)  NULL,
-  [FIELD_DESC]           [NVARCHAR](200)  NULL
+  [FIELD_DESC]           [NVARCHAR](500)  NULL
 )
 
 -----------------------------------------应用设计相关表--结束-----------------------------------------
