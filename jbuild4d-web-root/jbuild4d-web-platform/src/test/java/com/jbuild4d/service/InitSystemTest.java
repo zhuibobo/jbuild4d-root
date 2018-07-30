@@ -109,12 +109,62 @@ public class InitSystemTest extends BaseTest {
         menuService.deleteByKey(jb4DSession,devDemoRootId);
         menuService.save(jb4DSession,devDemoRootMenu.getMenuId(),devDemoRootMenu);
 
-        //根菜单->应用管理
-        String appManagerRootId="JB4DSystemAppManagerRoot";
-        MenuEntity appManagerRootMenu=getMenu(rootMenu.getMenuId(),appManagerRootId,"应用管理","应用管理","应用管理",
+        //根菜单->应用设计
+        String appDesignRootId="JB4DSystemAppDesignRoot";
+        MenuEntity appDesignRootMenu=getMenu(rootMenu.getMenuId(),appDesignRootId,"应用设计","应用设计","应用设计",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
-        menuService.deleteByKey(jb4DSession,appManagerRootMenu.getMenuId());
-        menuService.save(jb4DSession,appManagerRootMenu.getMenuId(),appManagerRootMenu);
+        menuService.deleteByKey(jb4DSession,appDesignRootMenu.getMenuId());
+        menuService.save(jb4DSession,appDesignRootMenu.getMenuId(),appDesignRootMenu);
+
+        //根菜单->应用管理->存储设计
+        String appDesignDataStorageDesignId="JB4DSystemAppDesignDataStorageDesign";
+        MenuEntity appManagerDataStorageMenu=getMenu(appDesignRootMenu.getMenuId(),appDesignDataStorageDesignId,"存储设计","存储设计","存储设计",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+        menuService.deleteByKey(jb4DSession,appManagerDataStorageMenu.getMenuId());
+        menuService.save(jb4DSession,appManagerDataStorageMenu.getMenuId(),appManagerDataStorageMenu);
+
+
+        //根菜单->应用管理->存储设计->链接管理
+        String appDesignDataLinkId="JB4DSystemAppDesignDataLink";
+        MenuEntity appDesignDataLinkMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appDesignDataLinkId,"链接管理","链接管理","链接管理",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+        menuService.deleteByKey(jb4DSession,appDesignDataLinkMenu.getMenuId());
+        menuService.save(jb4DSession,appDesignDataLinkMenu.getMenuId(),appDesignDataLinkMenu);
+
+        //根菜单->应用管理->存储设计->数据库管理
+        String appDesignDataBaseId="JB4DSystemAppDesignDataBase";
+        MenuEntity appDesignDataBaseMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appDesignDataBaseId,"数据库管理","数据库管理","数据库管理",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+        menuService.deleteByKey(jb4DSession,appDesignDataBaseMenu.getMenuId());
+        menuService.save(jb4DSession,appDesignDataBaseMenu.getMenuId(),appDesignDataBaseMenu);
+
+        //根菜单->应用管理->存储设计->数据关系
+        String appDesignDataRelationId="JB4DSystemAppDesignDataRelation";
+        MenuEntity appDesignDataRelationMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appDesignDataRelationId,"数据关系","数据关系","数据关系",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+        menuService.deleteByKey(jb4DSession,appDesignDataRelationMenu.getMenuId());
+        menuService.save(jb4DSession,appDesignDataRelationMenu.getMenuId(),appDesignDataRelationMenu);
+
+        //根菜单->应用管理->数据集设计
+        String appDesignDataSetId="JB4DSystemAppDesignDataSetDesign";
+        MenuEntity appDesignDataSetMenu=getMenu(appDesignRootMenu.getMenuId(),appDesignDataSetId,"数据集设计","数据集设计","数据集设计",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+        menuService.deleteByKey(jb4DSession,appDesignDataSetMenu.getMenuId());
+        menuService.save(jb4DSession,appDesignDataSetMenu.getMenuId(),appDesignDataSetMenu);
+
+        //根菜单->应用管理->模块设计
+        String appDesignModuleDesignId="JB4DSystemAppDesignModuleDesign";
+        MenuEntity appDesignModuleDesignMenu=getMenu(appDesignRootMenu.getMenuId(),appDesignModuleDesignId,"模块设计","模块设计","模块设计",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+        menuService.deleteByKey(jb4DSession,appDesignModuleDesignMenu.getMenuId());
+        menuService.save(jb4DSession,appDesignModuleDesignMenu.getMenuId(),appDesignModuleDesignMenu);
+
+        //根菜单->应用管理->菜单设计
+        String appDesignMenuDesignId="JB4DSystemAppDesignMenuDesign";
+        MenuEntity appDesignMenuDesignMenu=getMenu(appDesignRootMenu.getMenuId(),appDesignMenuDesignId,"菜单设计","菜单设计","菜单设计",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+        menuService.deleteByKey(jb4DSession,appDesignMenuDesignMenu.getMenuId());
+        menuService.save(jb4DSession,appDesignMenuDesignMenu.getMenuId(),appDesignMenuDesignMenu);
 
         //根字典分组
         String rootDictionaryId="0";
@@ -143,7 +193,7 @@ public class InitSystemTest extends BaseTest {
         dictionaryGroupService.save(jb4DSession,DevDemoDictionaryGroupBindCheckboxEntity.getDictGroupId(),DevDemoDictionaryGroupBindCheckboxEntity);
 
         //生成开发示例中使用到的数据字典项
-        for(int i=0;i<10;i++){
+        /*for(int i=0;i<10;i++){
             String select_dic_id=DevDemoDictionaryGroupBindSelect+String.valueOf(i);
             DictionaryEntity selectDictionaryEntity=getDictionary(DevDemoDictionaryGroupBindSelect,select_dic_id,DevDemoDictionaryGroupBindSelect,"Select-Key-"+i,"Select-Value-"+i,"Select-Text-"+i);
             dictionaryService.deleteByKeyNotValidate(jb4DSession,select_dic_id);
@@ -158,10 +208,11 @@ public class InitSystemTest extends BaseTest {
             DictionaryEntity checkboxDictionaryEntity=getDictionary(DevDemoDictionaryGroupBindCheckbox,checkbox_dic_id,DevDemoDictionaryGroupBindCheckbox,"Checkbox-Key-"+i,"Checkbox-Value-"+i,"Checkbox-Text-"+i);
             dictionaryService.deleteByKeyNotValidate(jb4DSession,checkbox_dic_id);
             dictionaryService.save(jb4DSession,checkbox_dic_id,checkboxDictionaryEntity);
-        }
+        }*/
 
-        devDemoGenListService.deleteAll(jb4DSession);
+
         //测试数据
+        /*devDemoGenListService.deleteAll(jb4DSession);
         for(int i=0;i<20;i++){
             DevDemoGenListEntity ddglEntity=new DevDemoGenListEntity();
             ddglEntity.setDdglId(UUIDUtility.getUUID());
@@ -177,10 +228,9 @@ public class InitSystemTest extends BaseTest {
                 ddglEntity.setDdglBindDicMucheckbox("Checkbox-Value-0;Checkbox-Value-"+i);
             }
             devDemoGenListService.save(jb4DSession,ddglEntity.getDdglId(),ddglEntity);
-        }
+        }*/
 
         //DevDemoTreeTable根节点
-        //DevDemoTreeTableEntity treeTableEntity=new DevDemoTreeTableEntity();
         devDemoTreeTableService.deleteByKey(jb4DSession,"0");
         DevDemoTreeTableEntity treeTableRootEntity=devDemoTreeTableService.createRootNode(jb4DSession);
 
