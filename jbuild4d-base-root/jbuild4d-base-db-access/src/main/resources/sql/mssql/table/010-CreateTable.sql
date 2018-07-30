@@ -235,7 +235,7 @@ CREATE TABLE TB4D_OPERATION_LOG (
 
 
 -----------------------------------------数据库连接-----------------------------------------
-CREATE TABLE TB4D_DATABASE_LINK (
+CREATE TABLE TB4D_DATABASE_SERVICE_LINK (
   [DBLINK_ID]          [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [DBLINK_VALUE]       [NVARCHAR](200)  NULL,
   [DBLINK_NAME]        [NVARCHAR](200)  NULL,

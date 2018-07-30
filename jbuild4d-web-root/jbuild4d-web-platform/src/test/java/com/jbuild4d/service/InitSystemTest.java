@@ -124,9 +124,9 @@ public class InitSystemTest extends BaseTest {
         menuService.save(jb4DSession,appManagerDataStorageMenu.getMenuId(),appManagerDataStorageMenu);
 
 
-        //根菜单->应用管理->存储设计->链接管理
+        //根菜单->应用管理->存储设计->服务链接
         String appBuilderDataLinkId="JB4DSystemAppBuilderDataLink";
-        MenuEntity appBuilderDataLinkMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appBuilderDataLinkId,"链接管理","链接管理","链接管理",
+        MenuEntity appBuilderDataLinkMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appBuilderDataLinkId,"服务链接","服务链接","服务链接",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/DataStorage/DataLink/List.do","frame-top-menu-data");
         menuService.deleteByKey(jb4DSession,appBuilderDataLinkMenu.getMenuId());
         menuService.save(jb4DSession,appBuilderDataLinkMenu.getMenuId(),appBuilderDataLinkMenu);
