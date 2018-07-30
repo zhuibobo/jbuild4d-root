@@ -251,4 +251,40 @@ CREATE TABLE TB4D_DATABASE_SERVICE_LINK (
   [DBLINK_STATUS]      [NVARCHAR](50)  NULL
 )
 
+-----------------------------------------表分组-----------------------------------------
+CREATE TABLE TB4D_TABLE_GROUP (
+  [TABLE_GROUP_ID]          [NVARCHAR](100) NOT NULL PRIMARY KEY,
+  [TABLE_GROUP_VALUE]       [NVARCHAR](200) NOT NULL,
+  [TABLE_GROUP_TEXT]        [NVARCHAR](200) NOT NULL,
+  [TABLE_GROUP_ORDER_NUM]   [INT]           NULL,
+  [TABLE_GROUP_CREATE_TIME] [DATETIME]      NULL,
+  [TABLE_GROUP_DESC]        [NVARCHAR](500) NULL,
+  [TABLE_GROUP_STATUS]      [NVARCHAR](10)  NULL,
+  [TABLE_GROUP_PARENT_ID]   [NVARCHAR](100) NULL,
+  [TABLE_GROUP_ISSYSTEM]    [NVARCHAR](10)  NULL,
+  [TABLE_GROUP_DEL_ENABLE]  [NVARCHAR](10)  NULL,
+  [TABLE_GROUP_ENP_ITEM]    [NVARCHAR](10)  NULL
+)
+
+-----------------------------------------表基础信息-----------------------------------------
+CREATE TABLE TB4D_TABLE (
+  [TABLE_ID]            [NVARCHAR](100)  NOT NULL PRIMARY KEY,
+  [TABLE_CAPTION]       [NVARCHAR](200)  NOT NULL,
+  [TABLE_NAME]          [NVARCHAR](200)  NOT NULL,
+  [TABLE_DBNAME]        [NVARCHAR](200)  NOT NULL,
+  [TABLE_ORGAN_ID]      [INT]            NULL,
+  [TABLE_CREATE_TIME]   [DATETIME]       NULL,
+  [TABLE_CREATER]       [NVARCHAR](100)  NULL,
+  [TABLE_UPDATE_TIME]   [DATETIME]       NULL,
+  [TABLE_UPDATER]       [NVARCHAR](100)  NULL,
+  [TABLE_SERVICE_VALUE] [NVARCHAR](100)  NULL,
+  [TABLE_TYPE]          [NVARCHAR](100)  NULL,
+  [TABLE_ISSYSTEM]      [NVARCHAR](10)   NULL,
+  [TABLE_ORDER_NUM]     [INT]            NULL,
+  [TABLE_DESC]          [NVARCHAR](2000) NULL,
+  [TABLE_GROUP_ID]      [NVARCHAR](100)  NOT NULL
+)
+
+
+
 -----------------------------------------应用设计相关表--结束-----------------------------------------
