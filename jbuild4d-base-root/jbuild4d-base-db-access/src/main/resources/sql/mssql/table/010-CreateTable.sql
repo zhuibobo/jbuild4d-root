@@ -228,7 +228,7 @@ CREATE TABLE TB4D_OPERATION_LOG (
   [LOG_IP]          [NVARCHAR](100)  NULL,
   [LOG_TYPE]        [NVARCHAR](100)  NULL,
   [LOG_CLASS_NAME]  [NVARCHAR](200)  NULL,
-  [LOG_STATUS]      [NVARCHAR](100)  NULL
+  [LOG_STATUS]      [NVARCHAR](50)  NULL
 )
 
 -----------------------------------------应用设计相关表--开始-----------------------------------------
@@ -247,7 +247,8 @@ CREATE TABLE TB4D_DATABASE_LINK (
   [DBLINK_CREATE_TIME] [DATETIME]       NULL,
   [DBLINK_ORDER_NUM]   [INT]            NULL,
   [DBLINK_DESC]        [NVARCHAR](500)  NULL,
-  [DBLINK_IS_LOCATION] [NVARCHAR](10)   NULL
+  [DBLINK_IS_LOCATION] [NVARCHAR](10)   NULL,
+  [DBLINK_STATUS]      [NVARCHAR](50)  NULL
 )
 
 -----------------------------------------应用设计相关表--结束-----------------------------------------
