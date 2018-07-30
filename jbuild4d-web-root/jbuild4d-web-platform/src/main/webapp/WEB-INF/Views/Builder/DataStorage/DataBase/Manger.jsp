@@ -71,8 +71,6 @@
         <div id="list-button-wrap" class="list-button-outer-wrap">
             <div class="list-button-inner-wrap">
                 <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
-                <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
-                <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
                 <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移 </i-button>
                 <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
             </div>
@@ -131,7 +129,7 @@
                 }
             },
             <!--List-->
-            idFieldName:"ddtlId",
+            idFieldName:"tableId",
             searchCondition:{
                 groupId:{
                     value:"",
@@ -161,32 +159,27 @@
                     align: 'center'
                 },
                 {
-                    title: 'ddtlKey',
-                    key: 'ddtlKey',
+                    title: '标题',
+                    key: 'tableCaption',
                     align: "center"
                 }, {
-                    title: 'ddtlName',
-                    key: 'ddtlName',
+                    title: '名称',
+                    key: 'tableName',
                     align: "center"
                 }, {
-                    title: 'ddtlDesc',
-                    key: 'ddtlDesc'
+                    title: '备注',
+                    key: 'tableDesc'
                 }, {
-                    title: 'ddtlStatus',
-                    width: 100,
-                    align: "center",
-                    key: 'ddtlStatus'
-                }, {
-                    title: 'CT',
-                    key: 'ddtlCreatetime',
+                    title: '更新时间',
+                    key: 'tableUpdateTime',
                     width: 100,
                     align: "center",
                     render: function (h, params) {
-                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddtlCreatetime);
+                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.tableUpdateTime);
                     }
                 }, {
                     title: '操作',
-                    key: 'dictGroupId',
+                    key: 'tableId',
                     width: 120,
                     align: "center",
                     render: function (h, params) {
@@ -331,10 +324,6 @@
             del: function (recordId) {
                 var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Delete.do';
                 ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
-            },
-            statusEnable: function (statusName) {
-                var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/StatusChange.do';
-                ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,appList.idFieldName,statusName,appList);
             },
             move:function (type) {
                 var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Move.do';
