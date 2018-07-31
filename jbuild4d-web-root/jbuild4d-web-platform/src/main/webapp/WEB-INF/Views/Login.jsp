@@ -30,7 +30,7 @@
                         </form-item>
                         <form-item class="general-edit-page-bottom-wrap">
                             <i-button type="primary" @click="handleSubmit('formValidate')">登陆</i-button>
-                            <i-button type="ghost" style="margin-left: 8px">重置</i-button>
+                            <i-button style="margin-left: 8px">重置</i-button>
                         </form-item>
                     </i-form>
                 </card>
