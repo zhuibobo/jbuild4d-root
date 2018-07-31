@@ -7,8 +7,13 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.base.tools.common.list.IListWhereCondition;
+import com.jbuild4d.base.tools.common.list.ListUtility;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import org.mybatis.spring.SqlSessionTemplate;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,5 +38,29 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
                 return sourceEntity;
             }
         });
+    }
+
+    @Override
+    public List<String> getFieldTemplateName() {
+        return tableFieldMapper.selectFieldTemplateName();
+    }
+
+    @Override
+    public List<TableFieldEntity> getTemplateFieldsByName(String templateName) {
+        return tableFieldMapper.selectTemplateFieldsByName(templateName);
+    }
+
+    @Override
+    public void createGeneralTemplate() {
+        String generalTemplateName="GeneralTemplate";
+        tableFieldMapper.deleteTemplate(generalTemplateName);
+        //
+        TableFieldEntity fieldEntity=new TableFieldEntity();
+    }
+
+    private TableFieldEntity newFiled(){
+        TableFieldEntity fieldEntity=new TableFieldEntity();
+        fieldEntity.setFieldFieldId(UUIDUtility.getUUID());
+        fieldEntity.set
     }
 }

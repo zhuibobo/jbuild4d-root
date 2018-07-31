@@ -19,4 +19,13 @@
  where FIELD_ORDER_NUM = (select max(FIELD_ORDER_NUM) from TB4D_TABLE_FIELD where FIELD_ORDER_NUM<(select FIELD_ORDER_NUM from TB4D_TABLE_FIELD where FIELD_FIELD_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_FIELD
  where FIELD_ORDER_NUM = (select min(FIELD_ORDER_NUM) from TB4D_TABLE_FIELD where FIELD_ORDER_NUM>(select FIELD_ORDER_NUM from TB4D_TABLE_FIELD where FIELD_FIELD_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectFieldTemplateName" resultType="string">
+        select distinct FIELD_TEMPLATE_NAME from TB4D_TABLE_FIELD where FIELD_TEMPLATE_NAME!='' and FIELD_TEMPLATE_NAME is not null
+    </select>
+    <select id="selectTemplateFieldsByName" resultMap="BaseResultMap">
+        select<include refid="Base_Column_List"/> from TB4D_TABLE_FIELD where FIELD_TEMPLATE_NAME=#{templateName}
+    </select>
+    <select id="deleteTemplate">
+        delete from TB4D_TABLE_FIELD where FIELD_TEMPLATE_NAME=#{templateName}
+    </select>
 </mapper>

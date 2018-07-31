@@ -56,8 +56,8 @@ public class TableController {
 
     @RequestMapping(value = "/GetTemplateFieldsByName")
     @ResponseBody
-    public JBuild4DResponseVo getFieldTemplateName(String templateName){
-        List<TableFieldEntity> tableFieldEntityList=tableFieldService.getFieldTemplateName(templateName);
+    public JBuild4DResponseVo getTemplateFieldsByName(String templateName){
+        List<TableFieldEntity> tableFieldEntityList=tableFieldService.getTemplateFieldsByName(templateName);
         return JBuild4DResponseVo.success("",tableFieldEntityList);
     }
 }

@@ -5,6 +5,7 @@ import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.organ.service.IOrganService;
 import com.jbuild4d.platform.system.service.*;
@@ -61,6 +62,9 @@ public class InitSystemTest extends BaseTest {
 
     @Autowired
     private ITableGroupService tableGroupService;
+
+    @Autowired
+    private ITableFieldService tableFieldService;
 
     @Test
     public void initSystem() throws JBuild4DGenerallyException {
@@ -254,6 +258,8 @@ public class InitSystemTest extends BaseTest {
 
         tableGroupService.deleteByKey(jb4DSession,"0");
         TableGroupEntity tableGroupEntity=tableGroupService.createRootNode(jb4DSession);
+
+        tableFieldService.createGeneralTemplate();
     }
 
     public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){

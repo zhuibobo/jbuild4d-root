@@ -54,6 +54,9 @@
                 <divider orientation="left" :dashed="true" style="font-size: 12px">表字段</divider>
                 <div style="width: 100%">
                     <div style="float: right;margin-bottom: 8px">
+                        <i-select v-model="model2" size="small" style="width:100px">
+                            <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+                        </i-select>
                         <button-group>
                             <i-button size="small" type="primary" icon="md-add" @click="addField"></i-button>
                             <i-button size="small" type="primary" icon="md-close"></i-button>
