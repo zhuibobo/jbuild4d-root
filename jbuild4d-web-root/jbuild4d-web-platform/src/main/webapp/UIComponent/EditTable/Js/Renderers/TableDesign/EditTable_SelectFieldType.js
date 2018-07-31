@@ -89,7 +89,7 @@ var EditTable_SelectFieldType={
             $elem.val(val);
         }
         else {
-            $elem.val(EditTable_SelectFieldTypeDataLoader.GetFieldDataTypeObjectByText("字符串").Code);
+            $elem.val(EditTable_SelectFieldTypeDataLoader.GetFieldDataTypeObjectByText("字符串").Value);
         }
 
        /* for (var _index = 0; _index < this.fieldArray.length; _index++) {
@@ -144,8 +144,8 @@ var EditTable_SelectFieldType={
             this.initFieldTypes();
         }*/
         var value = editStausHtmlElem.val();
-        var text= EditTable_SelectFieldTypeDataLoader.GetFieldDataTypeObjectByCode(value).Text;
-        var $elem = $("<label IsSerialize='true' BindName='"+template.BindName+"' Value='"+code+"'>" + text + "</label>");
+        var text= EditTable_SelectFieldTypeDataLoader.GetFieldDataTypeObjectByValue(value).Text;
+        var $elem = $("<label IsSerialize='true' BindName='"+template.BindName+"' Value='"+value+"'>" + text + "</label>");
         return $elem;
     },
     ValidateToCompletedEnable:function(_config,template,hostCell,hostRow,hostTable,editStausHtmlElem) {
