@@ -63,7 +63,10 @@ public class TableFieldEntity {
     //FIELD_ORDER_NUM
     private Integer fieldOrderNum;
 
-    public TableFieldEntity(String fieldFieldId, String fieldTableId, String fieldName, String fieldCaption, String fieldIsPk, String fieldAllowNull, String fieldDataType, Integer fieldDataLength, Integer fieldDecimalLength, String fieldDefaultValue, String fieldDefaultText, Date fieldCreateTime, String fieldCreater, Date fieldUpdateTime, String fieldUpdater, String fieldDesc, Integer fieldOrderNum) {
+    //FIELD_TEMPLATE_NAME
+    private String fieldTemplateName;
+
+    public TableFieldEntity(String fieldFieldId, String fieldTableId, String fieldName, String fieldCaption, String fieldIsPk, String fieldAllowNull, String fieldDataType, Integer fieldDataLength, Integer fieldDecimalLength, String fieldDefaultValue, String fieldDefaultText, Date fieldCreateTime, String fieldCreater, Date fieldUpdateTime, String fieldUpdater, String fieldDesc, Integer fieldOrderNum, String fieldTemplateName) {
         this.fieldFieldId = fieldFieldId;
         this.fieldTableId = fieldTableId;
         this.fieldName = fieldName;
@@ -81,6 +84,7 @@ public class TableFieldEntity {
         this.fieldUpdater = fieldUpdater;
         this.fieldDesc = fieldDesc;
         this.fieldOrderNum = fieldOrderNum;
+        this.fieldTemplateName = fieldTemplateName;
     }
 
     public TableFieldEntity() {
@@ -221,5 +225,13 @@ public class TableFieldEntity {
 
     public void setFieldOrderNum(Integer fieldOrderNum) {
         this.fieldOrderNum = fieldOrderNum;
+    }
+
+    public String getFieldTemplateName() {
+        return fieldTemplateName;
+    }
+
+    public void setFieldTemplateName(String fieldTemplateName) {
+        this.fieldTemplateName = fieldTemplateName == null ? null : fieldTemplateName.trim();
     }
 }
