@@ -119,7 +119,7 @@
                         },{
                             Title:"字段名称",
                             BindName:"fieldName",
-                            Renderer:"EditTable_TextBox",
+                            Renderer:"EditTable_FieldName",
                             Validate:{
                                 Type:"SQLKeyWord"
                             },
@@ -134,7 +134,7 @@
                         },{
                             Title:"字段类型",
                             BindName:"fieldDataType",
-                            Renderer:"EditTable_Select",
+                            Renderer:"EditTable_SelectFieldType",
                             Hidden:false,
                             Style:{
                                 width:100,

@@ -13,3 +13,5 @@
 <script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/EditTable_SelectRowCheckBox.js" type="text/javascript"></script>
 <script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/EditTable_TextBox.js" type="text/javascript"></script>
 <script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/EditTable_SelectDefaultValue.js" type="text/javascript"></script>
+<script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_FieldName.js" type="text/javascript"></script>
+<script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_SelectFieldType.js" type="text/javascript"></script>
