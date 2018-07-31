@@ -1,4 +1,4 @@
-.EditTable {
+.edit-table {
     width: 100%;
     border-collapse:collapse;
 }
@@ -7,12 +7,17 @@
 
 }
 
-.EditTable::-webkit-scrollbar{
+.edit-table-wrap::-webkit-scrollbar{
     width: 8px;
     height: 8px;
 }
 
-.EditTable tr th{
+.edit-table-wrap::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #3b97ed;
+}
+
+.edit-table tr th{
     border:1px solid #c5dbec;
     padding:8px 6px;
     color:#4c4c4c;
@@ -20,7 +25,7 @@
     font-size: 12px;
 }
 
-.EditTable tr td{
+.edit-table tr td{
     padding: 5px;
     border:1px solid #c5dbec;
     font-size: 12px;

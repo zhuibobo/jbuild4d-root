@@ -13,7 +13,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/IViewLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/ZTreeLib.jsp" %>
-    <%@ include file="/WEB-INF/Views/TagLibs/TreeTableLib.jsp" %>
+    <%@ include file="/WEB-INF/Views/TagLibs/EditTable.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
@@ -52,6 +52,16 @@
             </div>
             <div class="right-outer-wrap-c" style="bottom: 50px;left: 350px;padding: 10px">
                 <divider orientation="left" :dashed="true" style="font-size: 12px">表字段</divider>
+                <div style="width: 100%">
+                    <div style="float: right;margin-bottom: 8px">
+                        <button-group>
+                            <i-button size="small" type="primary" icon="md-add" @click="addField"></i-button>
+                            <i-button size="small" type="primary" icon="md-close"></i-button>
+                        </button-group>
+                    </div>
+                    <div style="clear: bottom"></div>
+                </div>
+                <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 100%"></div>
             </div>
         </div>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
@@ -75,6 +85,143 @@
                     tableIssystem:'${tableEntity.tableIssystem}' == '' ? '否' : '${tableEntity.tableIssystem}',
                     tableDesc: '${tableEntity.tableDesc}',
                     tableGroupId:'${tableEntity.tableGroupId}' == '' ? StringUtility.QueryString("groupId") : '${tableEntity.tableGroupId}'
+                },
+                editTableObj:null,
+                editTableConfig:{
+                    Status:"Edit",//状态 编辑 Edit 浏览 View
+                    DataField:"fieldName",
+                    //AddAfterRowEvent:TableDetailUtil.AfterInitEvent,
+                    Templates:[
+                        {
+                            Title:"字段ID",
+                            BindName:"fieldFieldId",
+                            Renderer:"EditTable_Lable",
+                            TitleCellClassName:"TitleCell",
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:0//默认值0
+                            },
+                            Hidden:true
+                        },
+                        {
+                            Title:"字段标题",
+                            BindName:"fieldCaption",
+                            Renderer:"EditTable_TextBox",
+                            TitleCellClassName:"TitleCell",
+                            Validate:{
+                                Type:"NotEmpty"
+                            },
+                            Hidden:false,
+                            TitleCellAttrs:{},
+                            Style:{
+                                width:150
+                            }
+                        },{
+                            Title:"字段名称",
+                            BindName:"fieldName",
+                            Renderer:"EditTable_TextBox",
+                            Validate:{
+                                Type:"SQLKeyWord"
+                            },
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"F_"
+                            },
+                            Style:{
+                                width:150
+                            },
+                            Hidden:false
+                        },{
+                            Title:"字段类型",
+                            BindName:"fieldDataType",
+                            Renderer:"EditTable_Select",
+                            Hidden:false,
+                            Style:{
+                                width:100,
+                                textAlign:"center"
+                            },
+                            ClientDataSource:[{"Text": "之前", "Value": "之前"}, {"Text": "之后", "Value": "之后"}]
+                        },{
+                            Title:"字段长度",
+                            BindName:"fieldDataLength",
+                            Renderer:"EditTable_TextBox",
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"50"
+                            },
+                            Style:{
+                                width:80,
+                                textAlign:"center"
+                            },
+                            Hidden:false
+                        },{
+                            Title:"小数位数",
+                            BindName:"fieldDecimalLength",
+                            Renderer:"EditTable_TextBox",
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"0"
+                            },
+                            Style:{
+                                width:80,
+                                textAlign:"center"
+                            },
+                            Hidden:false
+                        },{
+                            Title:"是否主键",
+                            BindName:"fieldIsPk",
+                            Renderer:"EditTable_CheckBox",
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"否"
+                            },
+                            Style:{
+                                width:80,
+                                textAlign:"center"
+                            },
+                            Hidden:false
+                        },{
+                            Title:"允许为空",
+                            BindName:"fieldAllowNull",
+                            Renderer:"EditTable_CheckBox",
+                            Hidden:false,
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"是"
+                            },
+                            Style:{
+                                width:80,
+                                textAlign:"center"
+                            }
+                        },{
+                            Title:"默认值",
+                            BindName:"fieldDefaultEntity.fieldDefaultValue",
+                            Renderer:"EditTable_SelectDefaultValue",
+                            Hidden:false
+                        }
+                    ],
+                    RowIdCreater:function(){
+
+                    },
+                    TableClass:"edit-table",
+                    RendererTo:"divEditTable",//div elem
+                    TableId:"TableFields",
+                    TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
+                },
+                tableFieldsData:[]
+            },
+            mounted:function () {
+                this.editTableObj=Object.create(EditTable);
+                this.editTableObj.Initialization(this.editTableConfig);
+                for(var i=0;i<100;i++){
+                    this.tableFieldsData.push({fieldCaption:"你",fieldName:"d"});
+                }
+                this.editTableObj.LoadJsonData(this.tableFieldsData);
+                $("#divEditTable").height($(".right-outer-wrap-c").height()-85);
+            },
+            methods:{
+                addField:function(){
+                    this.editTableObj.AddEditingRowByTemplate();
                 }
             }
         });

@@ -76,7 +76,7 @@ var EditTable= {
     // 往表格中增加新行,并注册相关的事件
     AddEditingRowByTemplate: function (jsonDatas, jsonDataSingle) {
         if(this.CompletedEditingRow()) {
-            var rowId = StringLib.Guid();
+            var rowId = StringUtility.Guid();
             var $rowElem = $("<tr />");
             $rowElem.attr("id", rowId);
             this._$Prop_EditingRowElem = $rowElem;
@@ -249,11 +249,7 @@ var EditTable= {
         }
         if(!result && validateMsg != null) {
            // alert(validateMsg);
-            Dialog.Alert(window,
-                "ValidateCompletedEditingRowEnable","",
-                validateMsg,function(){
-                    //window.close();
-                });
+            DialogUtility.Alert(window, DialogUtility.DialogAlertId,{}, validateMsg,null);
         }
         return result;
     },
@@ -486,7 +482,7 @@ var EditTableConfigManager={
         var _templates= this._Prop_Config.Templates;
         for(var i=0;i<_templates.length;i++) {
             var template=_templates[i];
-            template.TemplateId=StringLib.Guid();
+            template.TemplateId=StringUtility.Guid();
         }
     },
     GetConfig:function(){
