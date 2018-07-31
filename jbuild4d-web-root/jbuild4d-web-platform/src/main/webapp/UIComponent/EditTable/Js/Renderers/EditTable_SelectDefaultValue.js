@@ -44,11 +44,11 @@ var EditTable_SelectDefaultValue={
         }
 
         var $elem=$("<div></div>");
-        var $inputtxt = $("<input type='text' style='width: 350px' />");
+        var $inputtxt = $("<input type='text' style='width: 95%' />");
         $inputtxt.val(defaultText);
         $inputtxt.attr("defaulttype",defaultType);
         $inputtxt.attr("defaultval",defaultValue);
-        var $inputbtn = $("<input class='normalbutton-v1' style='margin-left: 4px' type='button' value='...'/>")
+        var $inputbtn = $("<input class='normalbutton-v1' style='margin-left: 4px;' type='button' value='...'/>")
         if(null != viewStausHtmlElem && undefined != viewStausHtmlElem){
             $inputtxt.val(viewStausHtmlElem.text());
         }

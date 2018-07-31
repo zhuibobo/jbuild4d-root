@@ -1,0 +1,12 @@
+input{
+    height: 22px;
+    border-radius: 3px;
+    border: #d7d7d8 1px solid;
+    padding: 2px;
+}
+select{
+    height: 22px;
+    border-radius: 3px;
+    border: #d7d7d8 1px solid;
+    padding: 2px;
+}

@@ -15,3 +15,4 @@
 <link rel="stylesheet" type="text/css" href="${theme}/TreeTable/TreeTable.css" />
 <link rel="stylesheet" type="text/css" href="${theme}/ZTree/zTreeStyle/zTreeStyle.css" />
 <link rel="stylesheet" type="text/css" href="${theme}/EditTable/EditTable.css" />
+<link rel="stylesheet" type="text/css" href="${theme}/Css/GeneralHTMLElem.css" />
