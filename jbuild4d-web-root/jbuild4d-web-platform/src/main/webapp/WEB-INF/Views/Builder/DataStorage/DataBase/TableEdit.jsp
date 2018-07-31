@@ -213,9 +213,9 @@
             mounted:function () {
                 this.editTableObj=Object.create(EditTable);
                 this.editTableObj.Initialization(this.editTableConfig);
-                for(var i=0;i<100;i++){
+                /*for(var i=0;i<100;i++){
                     this.tableFieldsData.push({fieldCaption:"你",fieldName:"d"});
-                }
+                }*/
                 this.editTableObj.LoadJsonData(this.tableFieldsData);
                 $("#divEditTable").height($(".right-outer-wrap-c").height()-85);
             },
