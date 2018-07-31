@@ -25,7 +25,7 @@ public class TableFieldEntity {
     private String fieldCaption;
 
     //FIELD_IS_PK
-    private Integer fieldIsPk;
+    private String fieldIsPk;
 
     //FIELD_ALLOW_NULL
     private String fieldAllowNull;
@@ -41,6 +41,9 @@ public class TableFieldEntity {
 
     //FIELD_DEFAULT_VALUE
     private String fieldDefaultValue;
+
+    //FIELD_DEFAULT_TEXT
+    private String fieldDefaultText;
 
     //FIELD_CREATE_TIME
     private Date fieldCreateTime;
@@ -60,7 +63,7 @@ public class TableFieldEntity {
     //FIELD_ORDER_NUM
     private Integer fieldOrderNum;
 
-    public TableFieldEntity(String fieldFieldId, String fieldTableId, String fieldName, String fieldCaption, Integer fieldIsPk, String fieldAllowNull, String fieldDataType, Integer fieldDataLength, Integer fieldDecimalLength, String fieldDefaultValue, Date fieldCreateTime, String fieldCreater, Date fieldUpdateTime, String fieldUpdater, String fieldDesc, Integer fieldOrderNum) {
+    public TableFieldEntity(String fieldFieldId, String fieldTableId, String fieldName, String fieldCaption, String fieldIsPk, String fieldAllowNull, String fieldDataType, Integer fieldDataLength, Integer fieldDecimalLength, String fieldDefaultValue, String fieldDefaultText, Date fieldCreateTime, String fieldCreater, Date fieldUpdateTime, String fieldUpdater, String fieldDesc, Integer fieldOrderNum) {
         this.fieldFieldId = fieldFieldId;
         this.fieldTableId = fieldTableId;
         this.fieldName = fieldName;
@@ -71,6 +74,7 @@ public class TableFieldEntity {
         this.fieldDataLength = fieldDataLength;
         this.fieldDecimalLength = fieldDecimalLength;
         this.fieldDefaultValue = fieldDefaultValue;
+        this.fieldDefaultText = fieldDefaultText;
         this.fieldCreateTime = fieldCreateTime;
         this.fieldCreater = fieldCreater;
         this.fieldUpdateTime = fieldUpdateTime;
@@ -115,12 +119,12 @@ public class TableFieldEntity {
         this.fieldCaption = fieldCaption == null ? null : fieldCaption.trim();
     }
 
-    public Integer getFieldIsPk() {
+    public String getFieldIsPk() {
         return fieldIsPk;
     }
 
-    public void setFieldIsPk(Integer fieldIsPk) {
-        this.fieldIsPk = fieldIsPk;
+    public void setFieldIsPk(String fieldIsPk) {
+        this.fieldIsPk = fieldIsPk == null ? null : fieldIsPk.trim();
     }
 
     public String getFieldAllowNull() {
@@ -161,6 +165,14 @@ public class TableFieldEntity {
 
     public void setFieldDefaultValue(String fieldDefaultValue) {
         this.fieldDefaultValue = fieldDefaultValue == null ? null : fieldDefaultValue.trim();
+    }
+
+    public String getFieldDefaultText() {
+        return fieldDefaultText;
+    }
+
+    public void setFieldDefaultText(String fieldDefaultText) {
+        this.fieldDefaultText = fieldDefaultText == null ? null : fieldDefaultText.trim();
     }
 
     public Date getFieldCreateTime() {

@@ -7,12 +7,13 @@
             <arg column="FIELD_TABLE_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_CAPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
-            <arg column="FIELD_IS_PK" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="FIELD_IS_PK" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_ALLOW_NULL" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_DATA_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_DATA_LENGTH" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="FIELD_DECIMAL_LENGTH" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="FIELD_DEFAULT_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_DEFAULT_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="FIELD_CREATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -23,8 +24,8 @@
     </resultMap>
     <sql id="Base_Column_List">
         FIELD_FIELD_ID, FIELD_TABLE_ID, FIELD_NAME, FIELD_CAPTION, FIELD_IS_PK, FIELD_ALLOW_NULL,
-        FIELD_DATA_TYPE, FIELD_DATA_LENGTH, FIELD_DECIMAL_LENGTH, FIELD_DEFAULT_VALUE, FIELD_CREATE_TIME,
-        FIELD_CREATER, FIELD_UPDATE_TIME, FIELD_UPDATER, FIELD_DESC, FIELD_ORDER_NUM
+        FIELD_DATA_TYPE, FIELD_DATA_LENGTH, FIELD_DECIMAL_LENGTH, FIELD_DEFAULT_VALUE, FIELD_DEFAULT_TEXT,
+        FIELD_CREATE_TIME, FIELD_CREATER, FIELD_UPDATE_TIME, FIELD_UPDATER, FIELD_DESC, FIELD_ORDER_NUM
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -40,15 +41,17 @@
         insert into TB4D_TABLE_FIELD (FIELD_FIELD_ID, FIELD_TABLE_ID, FIELD_NAME,
         FIELD_CAPTION, FIELD_IS_PK, FIELD_ALLOW_NULL,
         FIELD_DATA_TYPE, FIELD_DATA_LENGTH, FIELD_DECIMAL_LENGTH,
-        FIELD_DEFAULT_VALUE, FIELD_CREATE_TIME,
-        FIELD_CREATER, FIELD_UPDATE_TIME, FIELD_UPDATER,
-        FIELD_DESC, FIELD_ORDER_NUM)
+        FIELD_DEFAULT_VALUE, FIELD_DEFAULT_TEXT,
+        FIELD_CREATE_TIME, FIELD_CREATER, FIELD_UPDATE_TIME,
+        FIELD_UPDATER, FIELD_DESC, FIELD_ORDER_NUM
+        )
         values (#{fieldFieldId,jdbcType=NVARCHAR}, #{fieldTableId,jdbcType=NVARCHAR}, #{fieldName,jdbcType=NVARCHAR},
-        #{fieldCaption,jdbcType=NVARCHAR}, #{fieldIsPk,jdbcType=INTEGER}, #{fieldAllowNull,jdbcType=NVARCHAR},
+        #{fieldCaption,jdbcType=NVARCHAR}, #{fieldIsPk,jdbcType=NVARCHAR}, #{fieldAllowNull,jdbcType=NVARCHAR},
         #{fieldDataType,jdbcType=NVARCHAR}, #{fieldDataLength,jdbcType=INTEGER}, #{fieldDecimalLength,jdbcType=INTEGER},
-        #{fieldDefaultValue,jdbcType=NVARCHAR}, #{fieldCreateTime,jdbcType=TIMESTAMP},
-        #{fieldCreater,jdbcType=NVARCHAR}, #{fieldUpdateTime,jdbcType=TIMESTAMP}, #{fieldUpdater,jdbcType=NVARCHAR},
-        #{fieldDesc,jdbcType=NVARCHAR}, #{fieldOrderNum,jdbcType=INTEGER})
+        #{fieldDefaultValue,jdbcType=NVARCHAR}, #{fieldDefaultText,jdbcType=NVARCHAR},
+        #{fieldCreateTime,jdbcType=TIMESTAMP}, #{fieldCreater,jdbcType=NVARCHAR}, #{fieldUpdateTime,jdbcType=TIMESTAMP},
+        #{fieldUpdater,jdbcType=NVARCHAR}, #{fieldDesc,jdbcType=NVARCHAR}, #{fieldOrderNum,jdbcType=INTEGER}
+        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
         insert into TB4D_TABLE_FIELD
@@ -83,6 +86,9 @@
             <if test="fieldDefaultValue != null">
                 FIELD_DEFAULT_VALUE,
             </if>
+            <if test="fieldDefaultText != null">
+                FIELD_DEFAULT_TEXT,
+            </if>
             <if test="fieldCreateTime != null">
                 FIELD_CREATE_TIME,
             </if>
@@ -116,7 +122,7 @@
                 #{fieldCaption,jdbcType=NVARCHAR},
             </if>
             <if test="fieldIsPk != null">
-                #{fieldIsPk,jdbcType=INTEGER},
+                #{fieldIsPk,jdbcType=NVARCHAR},
             </if>
             <if test="fieldAllowNull != null">
                 #{fieldAllowNull,jdbcType=NVARCHAR},
@@ -132,6 +138,9 @@
             </if>
             <if test="fieldDefaultValue != null">
                 #{fieldDefaultValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldDefaultText != null">
+                #{fieldDefaultText,jdbcType=NVARCHAR},
             </if>
             <if test="fieldCreateTime != null">
                 #{fieldCreateTime,jdbcType=TIMESTAMP},
@@ -166,7 +175,7 @@
                 FIELD_CAPTION = #{fieldCaption,jdbcType=NVARCHAR},
             </if>
             <if test="fieldIsPk != null">
-                FIELD_IS_PK = #{fieldIsPk,jdbcType=INTEGER},
+                FIELD_IS_PK = #{fieldIsPk,jdbcType=NVARCHAR},
             </if>
             <if test="fieldAllowNull != null">
                 FIELD_ALLOW_NULL = #{fieldAllowNull,jdbcType=NVARCHAR},
@@ -182,6 +191,9 @@
             </if>
             <if test="fieldDefaultValue != null">
                 FIELD_DEFAULT_VALUE = #{fieldDefaultValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldDefaultText != null">
+                FIELD_DEFAULT_TEXT = #{fieldDefaultText,jdbcType=NVARCHAR},
             </if>
             <if test="fieldCreateTime != null">
                 FIELD_CREATE_TIME = #{fieldCreateTime,jdbcType=TIMESTAMP},
@@ -207,20 +219,21 @@
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
         update TB4D_TABLE_FIELD
         set FIELD_TABLE_ID = #{fieldTableId,jdbcType=NVARCHAR},
-        FIELD_NAME = #{fieldName,jdbcType=NVARCHAR},
-        FIELD_CAPTION = #{fieldCaption,jdbcType=NVARCHAR},
-        FIELD_IS_PK = #{fieldIsPk,jdbcType=INTEGER},
-        FIELD_ALLOW_NULL = #{fieldAllowNull,jdbcType=NVARCHAR},
-        FIELD_DATA_TYPE = #{fieldDataType,jdbcType=NVARCHAR},
-        FIELD_DATA_LENGTH = #{fieldDataLength,jdbcType=INTEGER},
-        FIELD_DECIMAL_LENGTH = #{fieldDecimalLength,jdbcType=INTEGER},
-        FIELD_DEFAULT_VALUE = #{fieldDefaultValue,jdbcType=NVARCHAR},
-        FIELD_CREATE_TIME = #{fieldCreateTime,jdbcType=TIMESTAMP},
-        FIELD_CREATER = #{fieldCreater,jdbcType=NVARCHAR},
-        FIELD_UPDATE_TIME = #{fieldUpdateTime,jdbcType=TIMESTAMP},
-        FIELD_UPDATER = #{fieldUpdater,jdbcType=NVARCHAR},
-        FIELD_DESC = #{fieldDesc,jdbcType=NVARCHAR},
-        FIELD_ORDER_NUM = #{fieldOrderNum,jdbcType=INTEGER}
+            FIELD_NAME = #{fieldName,jdbcType=NVARCHAR},
+            FIELD_CAPTION = #{fieldCaption,jdbcType=NVARCHAR},
+            FIELD_IS_PK = #{fieldIsPk,jdbcType=NVARCHAR},
+            FIELD_ALLOW_NULL = #{fieldAllowNull,jdbcType=NVARCHAR},
+            FIELD_DATA_TYPE = #{fieldDataType,jdbcType=NVARCHAR},
+            FIELD_DATA_LENGTH = #{fieldDataLength,jdbcType=INTEGER},
+            FIELD_DECIMAL_LENGTH = #{fieldDecimalLength,jdbcType=INTEGER},
+            FIELD_DEFAULT_VALUE = #{fieldDefaultValue,jdbcType=NVARCHAR},
+            FIELD_DEFAULT_TEXT = #{fieldDefaultText,jdbcType=NVARCHAR},
+            FIELD_CREATE_TIME = #{fieldCreateTime,jdbcType=TIMESTAMP},
+            FIELD_CREATER = #{fieldCreater,jdbcType=NVARCHAR},
+            FIELD_UPDATE_TIME = #{fieldUpdateTime,jdbcType=TIMESTAMP},
+            FIELD_UPDATER = #{fieldUpdater,jdbcType=NVARCHAR},
+            FIELD_DESC = #{fieldDesc,jdbcType=NVARCHAR},
+            FIELD_ORDER_NUM = #{fieldOrderNum,jdbcType=INTEGER}
         where FIELD_FIELD_ID = #{fieldFieldId,jdbcType=NVARCHAR}
     </update>
 </mapper>
