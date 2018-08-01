@@ -259,7 +259,7 @@ public class InitSystemTest extends BaseTest {
         tableGroupService.deleteByKey(jb4DSession,"0");
         TableGroupEntity tableGroupEntity=tableGroupService.createRootNode(jb4DSession);
 
-        tableFieldService.createGeneralTemplate();
+        tableFieldService.createGeneralTemplate(jb4DSession);
     }
 
     public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){

@@ -2,6 +2,7 @@ package com.jbuild4d.platform.builder.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.service.IBaseService;
+import com.jbuild4d.base.service.general.JB4DSession;
 
 import java.util.List;
 
@@ -16,6 +17,6 @@ public interface ITableFieldService extends IBaseService<TableFieldEntity> {
 
     List<TableFieldEntity> getTemplateFieldsByName(String templateName);
 
-    void createGeneralTemplate();
+    void createGeneralTemplate(JB4DSession jb4DSession);
 
 }

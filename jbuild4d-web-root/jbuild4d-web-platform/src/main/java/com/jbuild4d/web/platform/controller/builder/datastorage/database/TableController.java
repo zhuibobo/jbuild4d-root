@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,13 @@ public class TableController {
     @RequestMapping(value = "EditTable", method = RequestMethod.GET)
     public ModelAndView editTable(String recordId, String op) throws IllegalAccessException, InstantiationException, JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataStorage/DataBase/TableEdit");
+        List<String> templateNames=tableFieldService.getFieldTemplateName();
+        Map<String,List<TableFieldEntity>> templateFieldMap=new HashMap<>();
+        for (String templateName : templateNames) {
+            List<TableFieldEntity> fields=tableFieldService.getTemplateFieldsByName(templateName);
+            templateFieldMap.put(templateName,fields);
+        }
+        modelAndView.addObject("templateFieldGroup",JsonUtility.toObjectString(templateFieldMap));
         return modelAndView;
     }
 

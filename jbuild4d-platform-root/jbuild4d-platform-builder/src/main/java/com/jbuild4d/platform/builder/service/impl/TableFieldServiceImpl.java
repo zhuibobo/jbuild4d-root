@@ -2,6 +2,7 @@ package com.jbuild4d.platform.builder.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
+import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
@@ -10,9 +11,11 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.base.tools.common.list.IListWhereCondition;
 import com.jbuild4d.base.tools.common.list.ListUtility;
+import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,16 +54,45 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
     }
 
     @Override
-    public void createGeneralTemplate() {
+    public void createGeneralTemplate(JB4DSession jb4DSession) {
         String generalTemplateName="GeneralTemplate";
         tableFieldMapper.deleteTemplate(generalTemplateName);
-        //
-        TableFieldEntity fieldEntity=new TableFieldEntity();
+        TableFieldEntity idField=newFiled(jb4DSession,"Template","ID","ID",
+                TrueFalseEnum.True,TrueFalseEnum.False,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "","","表主键",generalTemplateName);
+        TableFieldEntity createTimeField=newFiled(jb4DSession,"Tempalte","F_CREATE_TIEE","记录时间",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.DataTimeType,20,0,
+                "","","",generalTemplateName);
+        tableFieldMapper.insert(idField);
+        tableFieldMapper.insert(createTimeField);
     }
 
-    private TableFieldEntity newFiled(){
+    private TableFieldEntity newFiled(JB4DSession jb4DSession, String tableId, String fieldName, String fieldCaption,
+                                      TrueFalseEnum pk, TrueFalseEnum allowNull,
+                                      TableFieldTypeEnum fieldDataType,int dataLength,int decimalLength,
+                                      String fieldDefaultValue,String fieldDefaultText,String fieldDesc,String templateName
+    ){
         TableFieldEntity fieldEntity=new TableFieldEntity();
         fieldEntity.setFieldFieldId(UUIDUtility.getUUID());
-        fieldEntity.set
+        fieldEntity.setFieldTableId(tableId);
+        fieldEntity.setFieldName(fieldName);
+        fieldEntity.setFieldCaption(fieldCaption);
+        fieldEntity.setFieldIsPk(pk.getDisplayName());
+        fieldEntity.setFieldAllowNull(allowNull.getDisplayName());
+        fieldEntity.setFieldDataType(fieldDataType.getValue());
+        fieldEntity.setFieldDataLength(dataLength);
+        fieldEntity.setFieldDecimalLength(decimalLength);
+        fieldEntity.setFieldDefaultValue(fieldDefaultValue);
+        fieldEntity.setFieldDefaultText(fieldDefaultText);
+        fieldEntity.setFieldCreateTime(new Date());
+        fieldEntity.setFieldCreater(jb4DSession.getUserName());
+        fieldEntity.setFieldUpdateTime(new Date());
+        fieldEntity.setFieldUpdater(jb4DSession.getUserName());
+        fieldEntity.setFieldDesc(fieldDesc);
+        fieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNum());
+        fieldEntity.setFieldTemplateName(templateName);
+        return fieldEntity;
     }
 }
