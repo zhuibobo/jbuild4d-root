@@ -1,6 +1,10 @@
 package com.jbuild4d.platform.builder.vo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
+import com.jbuild4d.base.tools.common.JsonUtility;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,5 +26,11 @@ public class TableFieldVO extends TableFieldEntity {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    public List<TableFieldEntity> VoListToEntityList(List<TableFieldVO> tableFieldVOList) throws JsonProcessingException {
+        String json= JsonUtility.toObjectString(tableFieldVOList);
+        List<TableFieldEntity> entityList=JsonUtility.toObject(json,List<TableFieldEntity>.getClass());
+        return entityList;
     }
 }
