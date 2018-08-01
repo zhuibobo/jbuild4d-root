@@ -5,10 +5,12 @@ import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.ISQLBuilderService;
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.builder.dbtablebuilder.BuilderResultMessage;
 import com.jbuild4d.platform.builder.dbtablebuilder.MSSQLTableBuilder;
+import com.jbuild4d.platform.builder.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
@@ -49,15 +51,15 @@ public class MSSQLTableBuilderTest extends BaseTest {
     TableFieldMapper tableFieldMapper;
 
     @Test
-    public void testNewTable() {
+    public void testNewTable() throws JBuild4DGenerallyException {
         this.newTable(true);
     }
 
     String newTableName="Table1";
 
-    public List<TableFieldVO> newTable(boolean autoDeleteTable){
-        MSSQLTableBuilder mssqlTableBuilder=new MSSQLTableBuilder();
-        mssqlTableBuilder.setSqlBuilderService(sqlBuilderService);
+    public List<TableFieldVO> newTable(boolean autoDeleteTable) throws JBuild4DGenerallyException {
+        TableBuilederFace tableBuilederFace= TableBuilederFace.getInstance(sqlBuilderService);
+        //mssqlTableBuilder.setSqlBuilderService(sqlBuilderService);
         TableEntity tableEntity=new TableEntity();
         tableEntity.setTableName(newTableName);
         List<TableFieldVO> fieldEntities=new ArrayList<>();
@@ -97,14 +99,14 @@ public class MSSQLTableBuilderTest extends BaseTest {
         fieldEntities.add(decimalField);
         fieldEntities.add(nvarcharField);
         fieldEntities.add(ntextField);
-        BuilderResultMessage builderResultMessage=mssqlTableBuilder.newTable(tableEntity,fieldEntities);
+        BuilderResultMessage builderResultMessage=tableBuilederFace.newTable(tableEntity,fieldEntities);
 
         if(builderResultMessage.isSuccess()) {
             String selectSql = "select * from " + newTableName;
             sqlBuilderService.selectList(selectSql);
 
             if(autoDeleteTable) {
-                mssqlTableBuilder.deleteTable(tableEntity);
+                tableBuilederFace.deleteTable(tableEntity);
                 System.out.println("删除表成功!");
             }
         }
@@ -117,7 +119,7 @@ public class MSSQLTableBuilderTest extends BaseTest {
     }
 
     @Test
-    public void testUpdateTable(){
+    public void testUpdateTable() throws JBuild4DGenerallyException {
         List<TableFieldVO> fieldVos=this.newTable(false);
 
         //设置新增列
@@ -141,11 +143,10 @@ public class MSSQLTableBuilderTest extends BaseTest {
         List<TableFieldVO> deleteFieldVos=new ArrayList<>();
         deleteFieldVos.add(delField);
 
-        MSSQLTableBuilder mssqlTableBuilder=new MSSQLTableBuilder();
-        mssqlTableBuilder.setSqlBuilderService(sqlBuilderService);
+        TableBuilederFace tableBuilederFace= TableBuilederFace.getInstance(sqlBuilderService);
         TableEntity tableEntity=new TableEntity();
         tableEntity.setTableName(newTableName);
-        mssqlTableBuilder.updateTable(tableEntity,newFieldVos,updateFieldVos,deleteFieldVos);
+        tableBuilederFace.updateTable(tableEntity,newFieldVos,updateFieldVos,deleteFieldVos);
     }
 
     private TableFieldVO newFiled(JB4DSession jb4DSession, String tableId, String fieldName, String fieldCaption,
