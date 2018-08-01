@@ -20,4 +20,7 @@
  where TABLE_ORDER_NUM = (select max(TABLE_ORDER_NUM) from TB4D_TABLE where TABLE_ORDER_NUM<(select TABLE_ORDER_NUM from TB4D_TABLE where TABLE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE
  where TABLE_ORDER_NUM = (select min(TABLE_ORDER_NUM) from TB4D_TABLE where TABLE_ORDER_NUM>(select TABLE_ORDER_NUM from TB4D_TABLE where TABLE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectByTableName" resultMap="BaseResultMap">
+        select<include refid="Base_Column_List"/> from TB4D_TABLE where TABLE_NAME=#{tableName}
+    </select>
 </mapper>

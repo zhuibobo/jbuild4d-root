@@ -30,7 +30,7 @@ public class TableFieldVO extends TableFieldEntity {
         return super.toString();
     }
 
-    public List<TableFieldEntity> VoListToEntityList(List<TableFieldVO> tableFieldVOList) throws IOException {
+    public static List<TableFieldEntity> VoListToEntityList(List<TableFieldVO> tableFieldVOList) throws IOException {
         String json= JsonUtility.toObjectString(tableFieldVOList);
         List<TableFieldEntity> entityList=JsonUtility.toObjectList(json,TableFieldEntity.class);
         return entityList;

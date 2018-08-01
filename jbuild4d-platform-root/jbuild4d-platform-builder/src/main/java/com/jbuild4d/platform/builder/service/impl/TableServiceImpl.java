@@ -3,11 +3,13 @@ package com.jbuild4d.platform.builder.service.impl;
 import com.jbuild4d.base.dbaccess.dao.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dao.TableMapper;
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.list.ListUtility;
 import com.jbuild4d.platform.builder.dbtablebuilder.BuilderResultMessage;
 import com.jbuild4d.platform.builder.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.service.ITableService;
@@ -15,6 +17,7 @@ import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,10 +52,27 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                 //创建物理表
                 BuilderResultMessage builderResultMessage = tableBuilederFace.newTable(tableEntity, tableFieldVOList);
                 if (builderResultMessage.isSuccess()) {
-                    //写入逻辑表
-                    tableMapper.insertSelective(tableEntity);
-                    //写入字段
 
+                    try {
+                        //写入逻辑表
+                        tableEntity.setTableCreater(jb4DSession.getUserName());
+                        tableEntity.setTableCreateTime(new Date());
+                        tableEntity.setTableOrderNum(tableMapper.nextOrderNum());
+                        tableEntity.setTableUpdater(jb4DSession.getUserName());
+                        tableEntity.setTableUpdateTime(new Date());
+                        tableEntity.setTableType(TableTypeEnum);
+                        tableMapper.insertSelective(tableEntity);
+                        //写入字段
+                        List<TableFieldEntity> tableFieldEntityList = TableFieldVO.VoListToEntityList(tableFieldVOList);
+                        for (TableFieldEntity fieldEntity : tableFieldEntityList) {
+                            tableFieldMapper.insertSelective(fieldEntity);
+                        }
+                    }
+                    catch (Exception ex){
+                        tableBuilederFace.deleteTable(tableEntity);
+                        tableMapper.deleteByPrimaryKey(tableEntity.getTableId());
+                        tableFieldMapper.deleteByTableId(tableEntity.getTableId());
+                    }
                 }
                 else{
                     throw new JBuild4DGenerallyException(builderResultMessage.getMessage());
@@ -63,5 +83,14 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             ex.printStackTrace();
             throw new JBuild4DGenerallyException(ex.getMessage());
         }
+    }
+
+    public void updateTable(JB4DSession jb4DSession,String tableId,TableEntity tableEntity,List<TableFieldVO> tableFieldVOList){
+
+    }
+
+    @Override
+    public boolean existTableName(String tableName) {
+        return tableMapper.selectByTableName(tableName)==null;
     }
 }

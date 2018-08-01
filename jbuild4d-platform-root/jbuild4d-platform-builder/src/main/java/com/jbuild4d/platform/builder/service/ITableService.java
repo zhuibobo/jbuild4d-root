@@ -9,4 +9,6 @@ import com.jbuild4d.base.service.IBaseService;
  * Date: 2018/7/30
  * To change this template use File | Settings | File Templates.
  */
-public interface ITableService extends IBaseService<TableEntity> {}
+public interface ITableService extends IBaseService<TableEntity> {
+    boolean existTableName(String tableName);
+}

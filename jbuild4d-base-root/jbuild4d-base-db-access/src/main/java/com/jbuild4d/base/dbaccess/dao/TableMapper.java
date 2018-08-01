@@ -10,4 +10,5 @@ import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
  * To change this template use File | Settings | File Templates.
  */
 public interface TableMapper extends BaseMapper<TableEntity> {
+    TableEntity selectByTableName(String tableName);
 }

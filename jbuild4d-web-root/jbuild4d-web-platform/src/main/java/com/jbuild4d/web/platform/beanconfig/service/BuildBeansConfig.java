@@ -5,6 +5,7 @@ import com.jbuild4d.base.dbaccess.dao.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dao.TableGroupMapper;
 import com.jbuild4d.base.dbaccess.dao.TableMapper;
 import com.jbuild4d.base.service.ISQLBuilderService;
+import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.builder.service.IDatabaseServiceLinkService;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
@@ -41,8 +42,8 @@ public class BuildBeansConfig {
     }
 
     @Bean
-    public ITableService tableService(ISQLBuilderService _sqlBuilderService, TableMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
-        ITableService bean=new TableServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+    public ITableService tableService(ISQLBuilderService _sqlBuilderService, TableMapper mapper, SqlSessionTemplate sqlSessionTemplate, TableFieldMapper tableFieldMapper) throws JBuild4DGenerallyException {
+        ITableService bean=new TableServiceImpl(mapper,tableFieldMapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
 
