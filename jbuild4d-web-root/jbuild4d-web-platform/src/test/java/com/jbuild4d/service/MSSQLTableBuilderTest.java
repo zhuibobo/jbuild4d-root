@@ -10,6 +10,7 @@ import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.builder.dbtablebuilder.BuilderResultMessage;
 import com.jbuild4d.platform.builder.dbtablebuilder.MSSQLTableBuilder;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
+import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.BuildBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
@@ -54,25 +55,50 @@ public class MSSQLTableBuilderTest extends BaseTest {
         mssqlTableBuilder.setSqlBuilderService(sqlBuilderService);
         TableEntity tableEntity=new TableEntity();
         tableEntity.setTableName(newTableName);
-        List<TableFieldEntity> fieldEntities=new ArrayList<>();
+        List<TableFieldVO> fieldEntities=new ArrayList<>();
 
-        TableFieldEntity idField=newFiled(jb4DSession,"Template","ID","ID",
+        TableFieldVO idField=newFiled(jb4DSession,"Template","ID","ID",
                 TrueFalseEnum.True,TrueFalseEnum.False,
                 TableFieldTypeEnum.NVarCharType,50,0,
                 "","","表主键","");
-        TableFieldEntity createTimeField=newFiled(jb4DSession,"Tempalte","F_CREATE_TIEE","记录时间",
+        TableFieldVO createTimeField=newFiled(jb4DSession,"Tempalte","F_CREATE_TIEE","记录时间",
                 TrueFalseEnum.False,TrueFalseEnum.True,
                 TableFieldTypeEnum.DataTimeType,20,0,
                 "","","","");
+
+        TableFieldVO intField=newFiled(jb4DSession,"Tempalte","F_INT","F_INT",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.IntType,0,0,
+                "","","","");
+
+        TableFieldVO decimalField=newFiled(jb4DSession,"Tempalte","F_DECIMAL","F_DECIMAL",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NumberType,20,2,
+                "","","","");
+
+        TableFieldVO nvarcharField=newFiled(jb4DSession,"Tempalte","F_NVARCHAR","F_NVARCHAR",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,200,0,
+                "","","","");
+
+        TableFieldVO ntextField=newFiled(jb4DSession,"Tempalte","F_NTEXT","F_NTEXT",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.TextType,0,0,
+                "","","","");
+
         fieldEntities.add(idField);
         fieldEntities.add(createTimeField);
+        fieldEntities.add(intField);
+        fieldEntities.add(decimalField);
+        fieldEntities.add(nvarcharField);
+        fieldEntities.add(ntextField);
         BuilderResultMessage builderResultMessage=mssqlTableBuilder.newTable(tableEntity,fieldEntities);
 
         if(builderResultMessage.isSuccess()) {
             String selectSql = "select * from " + newTableName;
             sqlBuilderService.selectList(selectSql);
 
-            //mssqlTableBuilder.deleteTable(tableEntity);
+            mssqlTableBuilder.deleteTable(tableEntity);
             System.out.println("删除表成功!");
         }
         else
@@ -81,30 +107,30 @@ public class MSSQLTableBuilderTest extends BaseTest {
         }
     }
 
-    private TableFieldEntity newFiled(JB4DSession jb4DSession, String tableId, String fieldName, String fieldCaption,
+    private TableFieldVO newFiled(JB4DSession jb4DSession, String tableId, String fieldName, String fieldCaption,
                                       TrueFalseEnum pk, TrueFalseEnum allowNull,
                                       TableFieldTypeEnum fieldDataType, int dataLength, int decimalLength,
                                       String fieldDefaultValue, String fieldDefaultText, String fieldDesc, String templateName
     ){
-        TableFieldEntity fieldEntity=new TableFieldEntity();
-        fieldEntity.setFieldFieldId(UUIDUtility.getUUIDNotSplit());
-        fieldEntity.setFieldTableId(tableId);
-        fieldEntity.setFieldName(fieldName);
-        fieldEntity.setFieldCaption(fieldCaption);
-        fieldEntity.setFieldIsPk(pk.getDisplayName());
-        fieldEntity.setFieldAllowNull(allowNull.getDisplayName());
-        fieldEntity.setFieldDataType(fieldDataType.getValue());
-        fieldEntity.setFieldDataLength(dataLength);
-        fieldEntity.setFieldDecimalLength(decimalLength);
-        fieldEntity.setFieldDefaultValue(fieldDefaultValue);
-        fieldEntity.setFieldDefaultText(fieldDefaultText);
-        fieldEntity.setFieldCreateTime(new Date());
-        fieldEntity.setFieldCreater(jb4DSession.getUserName());
-        fieldEntity.setFieldUpdateTime(new Date());
-        fieldEntity.setFieldUpdater(jb4DSession.getUserName());
-        fieldEntity.setFieldDesc(fieldDesc);
-        fieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNum());
-        fieldEntity.setFieldTemplateName(templateName);
-        return fieldEntity;
+        TableFieldVO fieldVO=new TableFieldVO();
+        fieldVO.setFieldFieldId(UUIDUtility.getUUIDNotSplit());
+        fieldVO.setFieldTableId(tableId);
+        fieldVO.setFieldName(fieldName);
+        fieldVO.setFieldCaption(fieldCaption);
+        fieldVO.setFieldIsPk(pk.getDisplayName());
+        fieldVO.setFieldAllowNull(allowNull.getDisplayName());
+        fieldVO.setFieldDataType(fieldDataType.getValue());
+        fieldVO.setFieldDataLength(dataLength);
+        fieldVO.setFieldDecimalLength(decimalLength);
+        fieldVO.setFieldDefaultValue(fieldDefaultValue);
+        fieldVO.setFieldDefaultText(fieldDefaultText);
+        fieldVO.setFieldCreateTime(new Date());
+        fieldVO.setFieldCreater(jb4DSession.getUserName());
+        fieldVO.setFieldUpdateTime(new Date());
+        fieldVO.setFieldUpdater(jb4DSession.getUserName());
+        fieldVO.setFieldDesc(fieldDesc);
+        fieldVO.setFieldOrderNum(tableFieldMapper.nextOrderNum());
+        fieldVO.setFieldTemplateName(templateName);
+        return fieldVO;
     }
 }

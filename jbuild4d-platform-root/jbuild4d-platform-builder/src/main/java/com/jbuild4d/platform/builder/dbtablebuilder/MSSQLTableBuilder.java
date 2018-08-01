@@ -5,6 +5,7 @@ import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
+import com.jbuild4d.platform.builder.vo.TableFieldVO;
 
 import java.util.List;
 import java.util.Map;
@@ -27,9 +28,9 @@ public class MSSQLTableBuilder {
         this.sqlBuilderService = sqlBuilderService;
     }
 
-    public BuilderResultMessage newTable(TableEntity tableEntity, List<TableFieldEntity> fieldEntities){
+    public BuilderResultMessage newTable(TableEntity tableEntity, List<TableFieldVO> fieldVos){
         try{
-            if(fieldEntities==null||fieldEntities.size()==0){
+            if(fieldVos==null||fieldVos.size()==0){
                 return BuilderResultMessage.getFieldsCannotBeNullError();
             }
 
@@ -49,7 +50,7 @@ public class MSSQLTableBuilder {
             }
 
             //在表中加入表字段
-            for (TableFieldEntity fieldEntity : fieldEntities) {
+            for (TableFieldEntity fieldEntity : fieldVos) {
                 BuilderResultMessage newFieldResult=newField(tableEntity,fieldEntity);
                 if(!newFieldResult.isSuccess()){
                     throw new Exception("新增列错误!"+newFieldResult.getMessage());
@@ -68,6 +69,59 @@ public class MSSQLTableBuilder {
             deleteTable(tableEntity);
             return BuilderResultMessage.getCreateTableError(ex);
         }
+    }
+
+
+    public BuilderResultMessage updateTable(TableEntity tableEntity,List<TableFieldVO> newFields,List<TableFieldVO> updateFields,List<TableFieldVO> deleteFields){
+        try{
+            //判断是否存在表
+            if(!isExistTable(tableEntity)){
+                return BuilderResultMessage.getTableIsNotExistError(tableEntity.getTableName());
+            }
+
+            //新增字段
+            for (TableFieldEntity fieldEntity : newFields) {
+                BuilderResultMessage newFieldResult=newField(tableEntity,fieldEntity);
+                if(!newFieldResult.isSuccess()){
+                    throw new Exception("新增列错误!"+newFieldResult.getMessage());
+                }
+            }
+
+            //修改字段,暂时只是支持修改类型
+            for (TableFieldVO updateField : updateFields) {
+                BuilderResultMessage newFieldResult=this.updateField(tableEntity,updateField);
+                    if(!newFieldResult.isSuccess()){
+                        throw new Exception("修改列错误!"+newFieldResult.getMessage());
+                    }
+            }
+
+            //删除字段
+            for (TableFieldVO deleteField : deleteFields) {
+                deleteField(tableEntity,deleteField);
+            }
+
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return BuilderResultMessage.getUpdateTableError(ex);
+        }
+        return BuilderResultMessage.getSuccess();
+    }
+
+    public BuilderResultMessage deleteTable(TableEntity tableEntity){
+        //如果表中已经存在数据,提示需要先手工删除数据后,才能删除物理表.
+        if(isExistRecord(tableEntity)){
+            return BuilderResultMessage.getTableExistRecordError(tableEntity.getTableName());
+        }
+        String dropSQL="drop table "+tableEntity.getTableName();
+        try{
+            sqlBuilderService.execute(dropSQL);
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return BuilderResultMessage.getDeleteTableError(ex);
+        }
+        return BuilderResultMessage.getSuccess();
     }
 
     private boolean isExistTable(TableEntity tableEntity) {
@@ -98,7 +152,7 @@ public class MSSQLTableBuilder {
                 sqlBuilder.append(" int ");
             }
             else if(TableFieldTypeEnum.NumberType.getValue().equals(fieldEntity.getFieldDataType())){
-                sqlBuilder.append(" decimal("+fieldEntity.getFieldDataLength().toString()+fieldEntity.getFieldDecimalLength().toString()+") ");
+                sqlBuilder.append(" decimal("+fieldEntity.getFieldDataLength().toString()+","+fieldEntity.getFieldDecimalLength().toString()+") ");
             }
             else if(TableFieldTypeEnum.DataTimeType.getValue().equals(fieldEntity.getFieldDataType())){
                 sqlBuilder.append(" datetime ");
@@ -121,40 +175,58 @@ public class MSSQLTableBuilder {
             }
 
             sqlBuilderService.execute(sqlBuilder.toString());
-        }
-        catch (Exception ex){
-
-        }
-        return BuilderResultMessage.getSuccess();
-    }
-
-    public BuilderResultMessage updateTable(){
-
-        return BuilderResultMessage.getSuccess();
-    }
-
-    public BuilderResultMessage updateField(){
-
-        return BuilderResultMessage.getSuccess();
-    }
-
-    public BuilderResultMessage deleteTable(TableEntity tableEntity){
-        //如果表中已经存在数据,提示需要先手工删除数据后,才能删除物理表.
-        if(isExistRecord(tableEntity)){
-            return BuilderResultMessage.getTableExistRecordError(tableEntity.getTableName());
-        }
-        String dropSQL="drop table "+tableEntity.getTableName();
-        try{
-            sqlBuilderService.execute(dropSQL);
+            return BuilderResultMessage.getSuccess();
         }
         catch (Exception ex){
             ex.printStackTrace();
-            return BuilderResultMessage.getDeleteTableError(ex);
+            return BuilderResultMessage.getFieldCreateError(ex);
         }
-        return BuilderResultMessage.getSuccess();
     }
 
-    public BuilderResultMessage deleteField(){
+    private BuilderResultMessage updateField(TableEntity tableEntity,TableFieldVO fieldVO){
+        try
+        {
+            StringBuilder sqlBuilder=new StringBuilder();
+            sqlBuilder.append("alter table ");
+            sqlBuilder.append(tableEntity.getTableName()+" alter "+fieldVO.getFieldName());
+            if(TableFieldTypeEnum.IntType.getValue().equals(fieldVO.getFieldDataType())){
+                sqlBuilder.append(" int ");
+            }
+            else if(TableFieldTypeEnum.NumberType.getValue().equals(fieldVO.getFieldDataType())){
+                sqlBuilder.append(" decimal("+fieldVO.getFieldDataLength().toString()+","+fieldVO.getFieldDecimalLength().toString()+") ");
+            }
+            else if(TableFieldTypeEnum.DataTimeType.getValue().equals(fieldVO.getFieldDataType())){
+                sqlBuilder.append(" datetime ");
+            }
+            else if(TableFieldTypeEnum.NVarCharType.getValue().equals(fieldVO.getFieldDataType())){
+                sqlBuilder.append(" nvarchar("+fieldVO.getFieldDataLength().toString()+")  ");
+            }
+            else if(TableFieldTypeEnum.TextType.getValue().equals(fieldVO.getFieldDataType())){
+                sqlBuilder.append(" ntext ");
+            }
+            else {
+                return BuilderResultMessage.getFieldTypeNodeSupportError(fieldVO.getFieldDataType());
+            }
+
+            if(TrueFalseEnum.True.getDisplayName().equals(fieldVO.getFieldIsPk())){
+                sqlBuilder.append(" NOT NULL PRIMARY KEY");
+            }
+            else if(TrueFalseEnum.False.getDisplayName().equals(fieldVO.getFieldAllowNull())){
+                sqlBuilder.append(" NOT NULL");
+            }
+
+            sqlBuilderService.execute(sqlBuilder.toString());
+            return BuilderResultMessage.getSuccess();
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return BuilderResultMessage.getFieldCreateError(ex);
+        }
+    }
+
+    public BuilderResultMessage deleteField(TableEntity tableEntity,TableFieldVO fieldVO){
+        String dropTempFieldSQL="alter table "+tableEntity.getTableName()+" drop column "+fieldVO.getFieldName();
+        sqlBuilderService.execute(dropTempFieldSQL);
         return BuilderResultMessage.getSuccess();
     }
 }

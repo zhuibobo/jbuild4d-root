@@ -1,9 +1,5 @@
 package com.jbuild4d.platform.builder.dbtablebuilder;
 
-import org.mybatis.generatorex.api.dom.java.PrimitiveTypeWrapper;
-
-import java.sql.Statement;
-
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -15,13 +11,16 @@ public class BuilderResultMessage {
     private static String SuccessCode="100000";
 
     private static String ErrorCode_CreateTableError="200000";
-    private static String ErrorCode_TableIsExist="200001";
-    private static String ErrorCode_TableIsExistRecord="200002";
-    private static String ErrorCode_DeleteTableError="200003";
+    private static String ErrorCode_TableIsExistError ="200001";
+    private static String ErrorCode_TableIsExistRecordError ="200002";
+    private static String ErrorCode_TableIsNotExistError="200003";
+    private static String ErrorCode_DeleteTableError="200004";
+    private static String ErrorCode_UpdateTableError="200005";
 
     private static String ErrorCode_CreateFieldError="300000";
-    private static String ErrorCode_FieldsCannotBeNull="300001";
-    private static String ErrorCode_FieldTypeNodeSupport="300002";
+    private static String ErrorCode_FieldsCannotBeNullError ="300001";
+    private static String ErrorCode_FieldTypeNodeSupportError ="300002";
+
 
 
     private boolean success;
@@ -67,15 +66,20 @@ public class BuilderResultMessage {
     }
 
     public static BuilderResultMessage getFieldsCannotBeNullError(){
-        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_FieldsCannotBeNull,"字段不能为空");
+        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_FieldsCannotBeNullError,"字段不能为空");
     }
 
     public static BuilderResultMessage getTableIsExistError(String tableName){
-        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_TableIsExist,"已经存在名称为"+tableName+"的表!");
+        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_TableIsExistError,"已经存在名称为"+tableName+"的表!");
+    }
+
+
+    public static BuilderResultMessage getTableIsNotExistError(String tableName) {
+        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_TableIsNotExistError,"已经不存在名称为"+tableName+"的表!");
     }
 
     public static BuilderResultMessage getTableExistRecordError(String tableName) {
-        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_TableIsExistRecord,"表"+tableName+"中存在记录,请先手工删除该表的记录!");
+        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_TableIsExistRecordError,"表"+tableName+"中存在记录,请先手工删除该表的记录!");
     }
 
     public static BuilderResultMessage getDeleteTableError(Exception ex){
@@ -83,6 +87,14 @@ public class BuilderResultMessage {
     }
 
     public static BuilderResultMessage getFieldTypeNodeSupportError(String typeName) {
-        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_FieldTypeNodeSupport,"不支持字段类型"+typeName+"!");
+        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_FieldTypeNodeSupportError,"不支持字段类型"+typeName+"!");
+    }
+
+    public static BuilderResultMessage getFieldCreateError(Exception ex) {
+        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_CreateFieldError,ex.getMessage());
+    }
+
+    public static BuilderResultMessage getUpdateTableError(Exception ex) {
+        return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_UpdateTableError,ex.getMessage());
     }
 }
