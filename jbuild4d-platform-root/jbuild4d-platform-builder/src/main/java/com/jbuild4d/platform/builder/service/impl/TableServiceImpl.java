@@ -8,7 +8,11 @@ import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.builder.service.ITableService;
+import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,12 +30,16 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Override
     public int save(JB4DSession jb4DSession, String id, TableEntity record) throws JBuild4DGenerallyException {
-        return super.save(jb4DSession,id, record, new IAddBefore<TableEntity>() {
-            @Override
-            public TableEntity run(JB4DSession jb4DSession,TableEntity sourceEntity) throws JBuild4DGenerallyException {
-                //设置排序,以及其他参数--nextOrderNum()
-                return sourceEntity;
-            }
-        });
+        throw new JBuild4DGenerallyException("未使用改方法");
+    }
+
+    @Transactional(rollbackFor=JBuild4DGenerallyException.class)
+    public void newTable(JB4DSession jb4DSession, String tableId, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException {
+        if(this.existTableName(tableEntity.getTableName())){
+           throw new JBuild4DGenerallyException("已经存在表名为"+tableEntity.getTableName()+"的表!");
+        }
+        else{
+
+        }
     }
 }
