@@ -49,8 +49,13 @@ public class MSSQLTableBuilderTest extends BaseTest {
     TableFieldMapper tableFieldMapper;
 
     @Test
-    public void testNewTable(){
-        String newTableName="Table1";
+    public void testNewTable() {
+        this.newTable(true);
+    }
+
+    String newTableName="Table1";
+
+    public List<TableFieldVO> newTable(boolean autoDeleteTable){
         MSSQLTableBuilder mssqlTableBuilder=new MSSQLTableBuilder();
         mssqlTableBuilder.setSqlBuilderService(sqlBuilderService);
         TableEntity tableEntity=new TableEntity();
@@ -98,13 +103,49 @@ public class MSSQLTableBuilderTest extends BaseTest {
             String selectSql = "select * from " + newTableName;
             sqlBuilderService.selectList(selectSql);
 
-            mssqlTableBuilder.deleteTable(tableEntity);
-            System.out.println("删除表成功!");
+            if(autoDeleteTable) {
+                mssqlTableBuilder.deleteTable(tableEntity);
+                System.out.println("删除表成功!");
+            }
         }
         else
         {
             System.out.println(builderResultMessage.getMessage());
         }
+
+        return fieldEntities;
+    }
+
+    @Test
+    public void testUpdateTable(){
+        List<TableFieldVO> fieldVos=this.newTable(false);
+
+        //设置新增列
+        List<TableFieldVO> newFieldVos=new ArrayList<>();
+        TableFieldVO intField1=newFiled(jb4DSession,"Tempalte","F_INT_1","F_INT_1",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.IntType,0,0,
+                "","","","");
+        newFieldVos.add(intField1);
+
+        //设置修改列
+        TableFieldVO intField=fieldVos.get(2);
+        intField.setFieldDataType(TableFieldTypeEnum.NumberType.getValue());
+        intField.setFieldDataLength(20);
+        intField.setFieldDecimalLength(2);
+        List<TableFieldVO> updateFieldVos=new ArrayList<>();
+        updateFieldVos.add(intField);
+
+        //设置删除列
+        TableFieldVO delField=fieldVos.get(3);
+        List<TableFieldVO> deleteFieldVos=new ArrayList<>();
+        deleteFieldVos.add(delField);
+
+        MSSQLTableBuilder mssqlTableBuilder=new MSSQLTableBuilder();
+        mssqlTableBuilder.setSqlBuilderService(sqlBuilderService);
+        TableEntity tableEntity=new TableEntity();
+        tableEntity.setTableName(newTableName);
+        mssqlTableBuilder.updateTable(tableEntity,newFieldVos,updateFieldVos,deleteFieldVos);
     }
 
     private TableFieldVO newFiled(JB4DSession jb4DSession, String tableId, String fieldName, String fieldCaption,

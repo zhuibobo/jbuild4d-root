@@ -80,26 +80,31 @@ public class MSSQLTableBuilder {
             }
 
             //新增字段
-            for (TableFieldEntity fieldEntity : newFields) {
-                BuilderResultMessage newFieldResult=newField(tableEntity,fieldEntity);
-                if(!newFieldResult.isSuccess()){
-                    throw new Exception("新增列错误!"+newFieldResult.getMessage());
+            if(newFields!=null) {
+                for (TableFieldEntity fieldEntity : newFields) {
+                    BuilderResultMessage newFieldResult = newField(tableEntity, fieldEntity);
+                    if (!newFieldResult.isSuccess()) {
+                        throw new Exception("新增列错误!" + newFieldResult.getMessage());
+                    }
                 }
             }
 
             //修改字段,暂时只是支持修改类型
-            for (TableFieldVO updateField : updateFields) {
-                BuilderResultMessage newFieldResult=this.updateField(tableEntity,updateField);
-                    if(!newFieldResult.isSuccess()){
-                        throw new Exception("修改列错误!"+newFieldResult.getMessage());
+            if(updateFields!=null) {
+                for (TableFieldVO updateField : updateFields) {
+                    BuilderResultMessage newFieldResult = this.updateField(tableEntity, updateField);
+                    if (!newFieldResult.isSuccess()) {
+                        throw new Exception("修改列错误!" + newFieldResult.getMessage());
                     }
+                }
             }
 
             //删除字段
-            for (TableFieldVO deleteField : deleteFields) {
-                deleteField(tableEntity,deleteField);
+            if(deleteFields!=null) {
+                for (TableFieldVO deleteField : deleteFields) {
+                    deleteField(tableEntity, deleteField);
+                }
             }
-
         }
         catch (Exception ex){
             ex.printStackTrace();
@@ -188,7 +193,7 @@ public class MSSQLTableBuilder {
         {
             StringBuilder sqlBuilder=new StringBuilder();
             sqlBuilder.append("alter table ");
-            sqlBuilder.append(tableEntity.getTableName()+" alter "+fieldVO.getFieldName());
+            sqlBuilder.append(tableEntity.getTableName()+" alter column "+fieldVO.getFieldName());
             if(TableFieldTypeEnum.IntType.getValue().equals(fieldVO.getFieldDataType())){
                 sqlBuilder.append(" int ");
             }
