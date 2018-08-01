@@ -46,6 +46,7 @@ public class TableController {
             templateFieldMap.put(templateName,fields);
         }
         modelAndView.addObject("templateFieldGroup",JsonUtility.toObjectString(templateFieldMap));
+        modelAndView.addObject("op",op);
         return modelAndView;
     }
 

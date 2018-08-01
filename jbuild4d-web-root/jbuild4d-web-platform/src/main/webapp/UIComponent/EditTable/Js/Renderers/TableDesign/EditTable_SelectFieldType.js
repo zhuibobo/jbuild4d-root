@@ -10,7 +10,7 @@ var EditTable_SelectFieldTypeDataLoader={
             var _self = this;
 
             AjaxUtility.PostSync("/PlatForm/Builder/DataStorage/DataBase/Table/GetTableFieldType.do",{},function(data){
-                debugger;
+                //debugger;
                 if (data.success == true) {
                     var list = StringUtility.StringToJson(data.data);
                     if (list != null && list != undefined) {
@@ -24,6 +24,7 @@ var EditTable_SelectFieldTypeDataLoader={
         return this._fieldDataTypeArray;
     },
     GetFieldDataTypeObjectByValue:function(Value){
+        //debugger;
         var arrayData=this.GetFieldDataTypeArray();
         for(var i=0;i<arrayData.length;i++){
             var obj=arrayData[i];
@@ -31,9 +32,11 @@ var EditTable_SelectFieldTypeDataLoader={
                 return obj;
             }
         }
+
         alert("找不到指定的数据类型，请确认是否支持该类型！");
     },
     GetFieldDataTypeObjectByText:function(text) {
+        //debugger;
         var arrayData=this.GetFieldDataTypeArray();
         for(var i=0;i<arrayData.length;i++){
             var obj=arrayData[i];
@@ -41,6 +44,7 @@ var EditTable_SelectFieldTypeDataLoader={
                 return obj;
             }
         }
+
         alert("找不到指定的数据类型，请确认是否支持该类型！");
     }
 }
@@ -62,7 +66,7 @@ var EditTable_SelectFieldType={
         var val = "";//从单元格中获取到的值
         var $elem = $("<select />");
         if (jsonDataSingle != null && jsonDataSingle != undefined) {
-            val = jsonDataSingle["fieldEntity.dataType"];
+            val = jsonDataSingle["fieldDataType"];
         }
         if (viewStausHtmlElem != null && viewStausHtmlElem != undefined) {
             val = viewStausHtmlElem.attr("Value");
@@ -143,6 +147,7 @@ var EditTable_SelectFieldType={
         /*if(null == this.fieldTypes || this.fieldTypes.size() < 1){
             this.initFieldTypes();
         }*/
+        //debugger;
         var value = editStausHtmlElem.val();
         var text= EditTable_SelectFieldTypeDataLoader.GetFieldDataTypeObjectByValue(value).Text;
         var $elem = $("<label IsSerialize='true' BindName='"+template.BindName+"' Value='"+value+"'>" + text + "</label>");

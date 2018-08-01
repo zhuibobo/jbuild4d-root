@@ -54,8 +54,8 @@
                 <divider orientation="left" :dashed="true" style="font-size: 12px">表字段</divider>
                 <div style="width: 100%">
                     <div style="float: right;margin-bottom: 8px">
-                        <i-select v-model="model2" size="small" style="width:100px">
-                            <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+                        <i-select v-model="useTemplateName" size="small" style="width:200px">
+                            <i-option v-for="(item,key) in templateFieldGroup" :value="key" :key="key">使用模版:{{key}}</i-option>
                         </i-select>
                         <button-group>
                             <i-button size="small" type="primary" icon="md-add" @click="addField"></i-button>
@@ -76,6 +76,8 @@
         var appForm = new Vue({
             el:"#appForm",
             data:{
+                useTemplateName:"GeneralTemplate",
+                templateFieldGroup:${templateFieldGroup},
                 tableEntity:{
                     tableId:'${tableEntity.tableId}',
                     tableCaption:'${tableEntity.tableCaption}',
@@ -142,8 +144,7 @@
                             Style:{
                                 width:100,
                                 textAlign:"center"
-                            },
-                            ClientDataSource:[{"Text": "之前", "Value": "之前"}, {"Text": "之后", "Value": "之后"}]
+                            }
                         },{
                             Title:"字段长度",
                             BindName:"fieldDataLength",
@@ -211,7 +212,8 @@
                     TableId:"TableFields",
                     TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
                 },
-                tableFieldsData:[]
+                tableFieldsData:[],
+                status: '${op}'
             },
             mounted:function () {
                 this.editTableObj=Object.create(EditTable);
@@ -219,7 +221,12 @@
                 /*for(var i=0;i<100;i++){
                     this.tableFieldsData.push({fieldCaption:"你",fieldName:"d"});
                 }*/
-                this.editTableObj.LoadJsonData(this.tableFieldsData);
+                if(this.status=="add"){
+                    this.editTableObj.LoadJsonData(this.templateFieldGroup[this.useTemplateName]);
+                }
+                else {
+                    this.editTableObj.LoadJsonData(this.tableFieldsData);
+                }
                 $("#divEditTable").height($(".right-outer-wrap-c").height()-85);
             },
             methods:{
