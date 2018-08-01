@@ -17,4 +17,6 @@ public interface ISQLBuilderService {
     List<Map<String,Object>> selectList(String sql,String value);
 
     List<Map<String,Object>> selectList(String sql);
+
+    int execute(String sql);
 }

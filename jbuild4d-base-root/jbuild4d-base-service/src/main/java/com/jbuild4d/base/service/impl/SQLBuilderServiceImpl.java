@@ -39,4 +39,9 @@ public class SQLBuilderServiceImpl implements ISQLBuilderService {
     public List<Map<String, Object>> selectList(String sql) {
         return sqlBuilderMapper.selectList(sql);
     }
+
+    @Override
+    public int execute(String sql){
+        return sqlBuilderMapper.insert(sql);
+    }
 }
