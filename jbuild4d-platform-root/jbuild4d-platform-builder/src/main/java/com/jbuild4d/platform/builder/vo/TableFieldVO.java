@@ -1,9 +1,11 @@
 package com.jbuild4d.platform.builder.vo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.tools.common.JsonUtility;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -28,9 +30,9 @@ public class TableFieldVO extends TableFieldEntity {
         return super.toString();
     }
 
-    public List<TableFieldEntity> VoListToEntityList(List<TableFieldVO> tableFieldVOList) throws JsonProcessingException {
+    public List<TableFieldEntity> VoListToEntityList(List<TableFieldVO> tableFieldVOList) throws IOException {
         String json= JsonUtility.toObjectString(tableFieldVOList);
-        List<TableFieldEntity> entityList=JsonUtility.toObject(json,List<TableFieldEntity>.getClass());
+        List<TableFieldEntity> entityList=JsonUtility.toObjectList(json,TableFieldEntity.class);
         return entityList;
     }
 }

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JsonUtility {
@@ -21,6 +22,11 @@ public class JsonUtility {
         return objectMapper.readValue(str,_class);
     }
 
+    public static <T> List<T> toObjectList(String str,Class<T> _class) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        List<T> listT = mapper.readValue(str,new TypeReference<List<T>>() { });
+        return listT;
+    }
     /*public static <T> Map<String,T> toMapT(String jsonString,T obj) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
