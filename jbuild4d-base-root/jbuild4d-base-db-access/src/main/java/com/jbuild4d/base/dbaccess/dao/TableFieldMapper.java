@@ -20,4 +20,6 @@ public interface TableFieldMapper extends BaseMapper<TableFieldEntity> {
     void deleteByTableId(String tableId);
 
     List<TableFieldEntity> selectByTableId(String tableId);
+
+    int nextOrderNumInTable(String tableId);
 }

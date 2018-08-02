@@ -69,7 +69,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                         //写入字段
                         List<TableFieldEntity> tableFieldEntityList = TableFieldVO.VoListToEntityList(tableFieldVOList);
                         for (TableFieldEntity fieldEntity : tableFieldEntityList) {
-                            fieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNum());
+                            fieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNumInTable(tableEntity.getTableId()));
                             fieldEntity.setFieldTableId(tableEntity.getTableId());
                             fieldEntity.setFieldCreater(jb4DSession.getUserName());
                             fieldEntity.setFieldCreateTime(new Date());
@@ -96,7 +96,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Override
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    public void updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> newTableFieldVOList){
+    public void updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException {
         //计算出新增列,修改列,删除列的列表
         List<TableFieldEntity> oldTableFieldEntityList=tableFieldMapper.selectByTableId(tableEntity.getTableId());
 
@@ -119,11 +119,73 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             if(!ListUtility.Exist(oldTableFieldEntityList, new IListWhereCondition<TableFieldEntity>() {
                 @Override
                 public boolean Condition(TableFieldEntity item) {
-                    return false;
+                    return item.getFieldId().equals(tableFieldVO.getFieldId());
                 }
-            }));
+            })){
+                newFields.add(tableFieldVO);
+            }
         }
 
+        //修改的字段
+        List<TableFieldVO> updateFields=new ArrayList<>();
+        for (TableFieldEntity tableFieldEntity : oldTableFieldEntityList) {
+            TableFieldVO newVo = ListUtility.WhereSingle(newTableFieldVOList, new IListWhereCondition<TableFieldVO>() {
+                @Override
+                public boolean Condition(TableFieldVO item) {
+                    return item.getFieldId().equals(tableFieldEntity.getFieldId());
+                }
+            });
+            if(TableFieldVO.isUpdate((TableFieldVO) tableFieldEntity,newVo)){
+                newVo.setOldFieldName(tableFieldEntity.getFieldName());
+                updateFields.add(newVo);
+            }
+        }
+
+        try
+        {
+            //修改物理表结构
+            try
+            {
+                tableBuilederFace.updateTable(tableEntity,newFields,updateFields,deleteFields);
+            }
+            catch (Exception ex){
+                if(ignorePhysicalError){
+
+                }
+                else{
+                    throw ex;
+                }
+            }
+            //修改表的逻辑结构
+            tableMapper.updateByPrimaryKeySelective(tableEntity);
+            //写入逻辑表
+            tableEntity.setTableUpdater(jb4DSession.getUserName());
+            tableEntity.setTableUpdateTime(new Date());
+            tableMapper.updateByPrimaryKeySelective(tableEntity);
+            //新增字段
+            for (TableFieldEntity newfieldEntity : newFields) {
+                newfieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNumInTable(tableEntity.getTableId()));
+                newfieldEntity.setFieldTableId(tableEntity.getTableId());
+                newfieldEntity.setFieldCreater(jb4DSession.getUserName());
+                newfieldEntity.setFieldCreateTime(new Date());
+                int i;
+                newfieldEntity.setFieldUpdater(jb4DSession.getUserName());
+                newfieldEntity.setFieldUpdateTime(new Date());
+                tableFieldMapper.insertSelective(newfieldEntity);
+            }
+            //修改字段
+            for (TableFieldVO updateField : updateFields) {
+                updateField.setFieldUpdater(jb4DSession.getUserName());
+                updateField.setFieldUpdateTime(new Date());
+            }
+            //删除字段
+            for (TableFieldEntity fieldEntity : deleteFields) {
+                tableFieldMapper.deleteByPrimaryKey(fieldEntity.getFieldId());
+            }
+        }
+        catch (Exception ex){
+
+        }
     }
 
     @Override

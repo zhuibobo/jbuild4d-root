@@ -20,7 +20,7 @@ public interface ITableService extends IBaseService<TableEntity> {
     void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException;
 
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    void updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList);
+    void updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException;
 
     boolean existTableName(String tableName);
 
