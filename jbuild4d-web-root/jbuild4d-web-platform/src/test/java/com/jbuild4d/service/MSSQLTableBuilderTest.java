@@ -54,6 +54,38 @@ public class MSSQLTableBuilderTest extends BaseTest {
         this.newTable(true);
     }
 
+    @Test
+    public void testUpdateTable() throws JBuild4DGenerallyException, JBuild4DSQLKeyWordException {
+        List<TableFieldVO> fieldVos=this.newTable(false);
+
+        //设置新增列
+        List<TableFieldVO> newFieldVos=new ArrayList<>();
+        TableFieldVO intField1=newFiled(jb4DSession,"Tempalte","F_INT_1","F_INT_1",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.IntType,0,0,
+                "","","","");
+        newFieldVos.add(intField1);
+
+        //设置修改列
+        TableFieldVO intField=fieldVos.get(2);
+        intField.setFieldDataType(TableFieldTypeEnum.NumberType.getValue());
+        intField.setFieldDataLength(20);
+        intField.setFieldDecimalLength(2);
+        List<TableFieldVO> updateFieldVos=new ArrayList<>();
+        updateFieldVos.add(intField);
+
+        //设置删除列
+        TableFieldVO delField=fieldVos.get(3);
+        List<TableFieldVO> deleteFieldVos=new ArrayList<>();
+        deleteFieldVos.add(delField);
+
+        TableBuilederFace tableBuilederFace= TableBuilederFace.getInstance(sqlBuilderService);
+        TableEntity tableEntity=new TableEntity();
+        tableEntity.setTableName(newTableName);
+        tableBuilederFace.updateTable(tableEntity,newFieldVos,updateFieldVos,deleteFieldVos);
+    }
+
+
     String newTableName="Table1";
 
     public List<TableFieldVO> newTable(boolean autoDeleteTable) throws JBuild4DGenerallyException, JBuild4DSQLKeyWordException {
@@ -117,36 +149,6 @@ public class MSSQLTableBuilderTest extends BaseTest {
         return fieldEntities;
     }
 
-    @Test
-    public void testUpdateTable() throws JBuild4DGenerallyException, JBuild4DSQLKeyWordException {
-        List<TableFieldVO> fieldVos=this.newTable(false);
-
-        //设置新增列
-        List<TableFieldVO> newFieldVos=new ArrayList<>();
-        TableFieldVO intField1=newFiled(jb4DSession,"Tempalte","F_INT_1","F_INT_1",
-                TrueFalseEnum.False,TrueFalseEnum.True,
-                TableFieldTypeEnum.IntType,0,0,
-                "","","","");
-        newFieldVos.add(intField1);
-
-        //设置修改列
-        TableFieldVO intField=fieldVos.get(2);
-        intField.setFieldDataType(TableFieldTypeEnum.NumberType.getValue());
-        intField.setFieldDataLength(20);
-        intField.setFieldDecimalLength(2);
-        List<TableFieldVO> updateFieldVos=new ArrayList<>();
-        updateFieldVos.add(intField);
-
-        //设置删除列
-        TableFieldVO delField=fieldVos.get(3);
-        List<TableFieldVO> deleteFieldVos=new ArrayList<>();
-        deleteFieldVos.add(delField);
-
-        TableBuilederFace tableBuilederFace= TableBuilederFace.getInstance(sqlBuilderService);
-        TableEntity tableEntity=new TableEntity();
-        tableEntity.setTableName(newTableName);
-        tableBuilederFace.updateTable(tableEntity,newFieldVos,updateFieldVos,deleteFieldVos);
-    }
 
     private TableFieldVO newFiled(JB4DSession jb4DSession, String tableId, String fieldName, String fieldCaption,
                                       TrueFalseEnum pk, TrueFalseEnum allowNull,
