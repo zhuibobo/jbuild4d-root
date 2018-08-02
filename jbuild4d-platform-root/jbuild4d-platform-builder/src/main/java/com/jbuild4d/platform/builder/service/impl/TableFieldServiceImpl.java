@@ -73,7 +73,7 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
                                       String fieldDefaultValue,String fieldDefaultText,String fieldDesc,String templateName
     ){
         TableFieldEntity fieldEntity=new TableFieldEntity();
-        fieldEntity.setFieldFieldId(UUIDUtility.getUUID());
+        fieldEntity.setFieldId(UUIDUtility.getUUID());
         fieldEntity.setFieldTableId(tableId);
         fieldEntity.setFieldName(fieldName);
         fieldEntity.setFieldCaption(fieldCaption);

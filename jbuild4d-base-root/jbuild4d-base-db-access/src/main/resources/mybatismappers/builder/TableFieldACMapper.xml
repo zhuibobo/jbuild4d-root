@@ -3,7 +3,7 @@
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.TableFieldMapper">
     <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
         <constructor>
-            <idArg column="FIELD_FIELD_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <idArg column="FIELD_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_TABLE_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_CAPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -24,7 +24,7 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        FIELD_FIELD_ID, FIELD_TABLE_ID, FIELD_NAME, FIELD_CAPTION, FIELD_IS_PK, FIELD_ALLOW_NULL,
+        FIELD_ID, FIELD_TABLE_ID, FIELD_NAME, FIELD_CAPTION, FIELD_IS_PK, FIELD_ALLOW_NULL,
         FIELD_DATA_TYPE, FIELD_DATA_LENGTH, FIELD_DECIMAL_LENGTH, FIELD_DEFAULT_VALUE, FIELD_DEFAULT_TEXT,
         FIELD_CREATE_TIME, FIELD_CREATER, FIELD_UPDATE_TIME, FIELD_UPDATER, FIELD_DESC, FIELD_ORDER_NUM,
         FIELD_TEMPLATE_NAME
@@ -33,21 +33,21 @@
         select
         <include refid="Base_Column_List" />
         from TB4D_TABLE_FIELD
-        where FIELD_FIELD_ID = #{fieldFieldId,jdbcType=NVARCHAR}
+        where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from TB4D_TABLE_FIELD
-        where FIELD_FIELD_ID = #{fieldFieldId,jdbcType=NVARCHAR}
+        where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
-        insert into TB4D_TABLE_FIELD (FIELD_FIELD_ID, FIELD_TABLE_ID, FIELD_NAME,
+        insert into TB4D_TABLE_FIELD (FIELD_ID, FIELD_TABLE_ID, FIELD_NAME,
         FIELD_CAPTION, FIELD_IS_PK, FIELD_ALLOW_NULL,
         FIELD_DATA_TYPE, FIELD_DATA_LENGTH, FIELD_DECIMAL_LENGTH,
         FIELD_DEFAULT_VALUE, FIELD_DEFAULT_TEXT,
         FIELD_CREATE_TIME, FIELD_CREATER, FIELD_UPDATE_TIME,
         FIELD_UPDATER, FIELD_DESC, FIELD_ORDER_NUM,
         FIELD_TEMPLATE_NAME)
-        values (#{fieldFieldId,jdbcType=NVARCHAR}, #{fieldTableId,jdbcType=NVARCHAR}, #{fieldName,jdbcType=NVARCHAR},
+        values (#{fieldId,jdbcType=NVARCHAR}, #{fieldTableId,jdbcType=NVARCHAR}, #{fieldName,jdbcType=NVARCHAR},
         #{fieldCaption,jdbcType=NVARCHAR}, #{fieldIsPk,jdbcType=NVARCHAR}, #{fieldAllowNull,jdbcType=NVARCHAR},
         #{fieldDataType,jdbcType=NVARCHAR}, #{fieldDataLength,jdbcType=INTEGER}, #{fieldDecimalLength,jdbcType=INTEGER},
         #{fieldDefaultValue,jdbcType=NVARCHAR}, #{fieldDefaultText,jdbcType=NVARCHAR},
@@ -58,8 +58,8 @@
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
         insert into TB4D_TABLE_FIELD
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="fieldFieldId != null">
-                FIELD_FIELD_ID,
+            <if test="fieldId != null">
+                FIELD_ID,
             </if>
             <if test="fieldTableId != null">
                 FIELD_TABLE_ID,
@@ -114,8 +114,8 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="fieldFieldId != null">
-                #{fieldFieldId,jdbcType=NVARCHAR},
+            <if test="fieldId != null">
+                #{fieldId,jdbcType=NVARCHAR},
             </if>
             <if test="fieldTableId != null">
                 #{fieldTableId,jdbcType=NVARCHAR},
@@ -225,7 +225,7 @@
                 FIELD_TEMPLATE_NAME = #{fieldTemplateName,jdbcType=NVARCHAR},
             </if>
         </set>
-        where FIELD_FIELD_ID = #{fieldFieldId,jdbcType=NVARCHAR}
+        where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
         update TB4D_TABLE_FIELD
@@ -246,6 +246,6 @@
             FIELD_DESC = #{fieldDesc,jdbcType=NVARCHAR},
             FIELD_ORDER_NUM = #{fieldOrderNum,jdbcType=INTEGER},
             FIELD_TEMPLATE_NAME = #{fieldTemplateName,jdbcType=NVARCHAR}
-        where FIELD_FIELD_ID = #{fieldFieldId,jdbcType=NVARCHAR}
+        where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </update>
 </mapper>

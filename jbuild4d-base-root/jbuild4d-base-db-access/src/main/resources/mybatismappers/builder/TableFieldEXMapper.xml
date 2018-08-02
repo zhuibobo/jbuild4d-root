@@ -31,4 +31,7 @@
     <select id="deleteTemplate">
         delete from TB4D_TABLE_FIELD where FIELD_TEMPLATE_NAME=#{templateName}
     </select>
+    <select id="selectByTableId" resultType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+        select<include refid="Base_Column_List"/> from TB4D_TABLE_FIELD WHERE FIELD_TABLE_ID=#{tableId}
+    </select>
 </mapper>

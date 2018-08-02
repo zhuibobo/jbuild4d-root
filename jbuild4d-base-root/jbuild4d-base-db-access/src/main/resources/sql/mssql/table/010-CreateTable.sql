@@ -282,12 +282,13 @@ CREATE TABLE TB4D_TABLE (
   [TABLE_ISSYSTEM]      [NVARCHAR](10)   NULL,
   [TABLE_ORDER_NUM]     [INT]            NULL,
   [TABLE_DESC]          [NVARCHAR](2000) NULL,
-  [TABLE_GROUP_ID]      [NVARCHAR](100)  NOT NULL
+  [TABLE_GROUP_ID]      [NVARCHAR](100)  NOT NULL,
+  [TABLE_STATUS]        [NVARCHAR](10)   NULL
 )
 
 -----------------------------------------表字段信息-----------------------------------------
 CREATE TABLE TB4D_TABLE_FIELD (
-  [FIELD_FIELD_ID]       [NVARCHAR](100)  NOT NULL PRIMARY KEY,
+  [FIELD_ID]             [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [FIELD_TABLE_ID]       [NVARCHAR](100)  NOT NULL,
   [FIELD_NAME]           [NVARCHAR](100)  NOT NULL,
   [FIELD_CAPTION]        [NVARCHAR](100)  NOT NULL,

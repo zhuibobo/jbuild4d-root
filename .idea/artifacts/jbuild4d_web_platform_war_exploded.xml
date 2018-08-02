@@ -67,6 +67,7 @@
           <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.1.4" />
           <element id="artifact" artifact-name="jbuild4d-platform-organ:jar" />
           <element id="artifact" artifact-name="jbuild4d-platform-builder:jar" />
+          <element id="artifact" artifact-name="jbuild4d-base-exception:jar" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="jbuild4d-web-platform/web/Web" />

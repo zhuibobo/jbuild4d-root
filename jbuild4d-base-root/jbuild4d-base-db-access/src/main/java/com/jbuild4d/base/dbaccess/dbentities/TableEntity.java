@@ -57,7 +57,10 @@ public class TableEntity {
     //TABLE_GROUP_ID
     private String tableGroupId;
 
-    public TableEntity(String tableId, String tableCaption, String tableName, String tableDbname, Integer tableOrganId, Date tableCreateTime, String tableCreater, Date tableUpdateTime, String tableUpdater, String tableServiceValue, String tableType, String tableIssystem, Integer tableOrderNum, String tableDesc, String tableGroupId) {
+    //TABLE_STATUS
+    private String tableStatus;
+
+    public TableEntity(String tableId, String tableCaption, String tableName, String tableDbname, Integer tableOrganId, Date tableCreateTime, String tableCreater, Date tableUpdateTime, String tableUpdater, String tableServiceValue, String tableType, String tableIssystem, Integer tableOrderNum, String tableDesc, String tableGroupId, String tableStatus) {
         this.tableId = tableId;
         this.tableCaption = tableCaption;
         this.tableName = tableName;
@@ -73,6 +76,7 @@ public class TableEntity {
         this.tableOrderNum = tableOrderNum;
         this.tableDesc = tableDesc;
         this.tableGroupId = tableGroupId;
+        this.tableStatus = tableStatus;
     }
 
     public TableEntity() {
@@ -197,5 +201,13 @@ public class TableEntity {
 
     public void setTableGroupId(String tableGroupId) {
         this.tableGroupId = tableGroupId == null ? null : tableGroupId.trim();
+    }
+
+    public String getTableStatus() {
+        return tableStatus;
+    }
+
+    public void setTableStatus(String tableStatus) {
+        this.tableStatus = tableStatus == null ? null : tableStatus.trim();
     }
 }

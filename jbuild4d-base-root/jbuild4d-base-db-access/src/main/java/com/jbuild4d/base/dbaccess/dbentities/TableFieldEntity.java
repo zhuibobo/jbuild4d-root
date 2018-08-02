@@ -11,9 +11,9 @@ import java.util.Date;
  * @mbg.generated do_not_delete_during_merge
  */
 public class TableFieldEntity {
-    //FIELD_FIELD_ID
+    //FIELD_ID
     @DBKeyField
-    private String fieldFieldId;
+    private String fieldId;
 
     //FIELD_TABLE_ID
     private String fieldTableId;
@@ -66,8 +66,8 @@ public class TableFieldEntity {
     //FIELD_TEMPLATE_NAME
     private String fieldTemplateName;
 
-    public TableFieldEntity(String fieldFieldId, String fieldTableId, String fieldName, String fieldCaption, String fieldIsPk, String fieldAllowNull, String fieldDataType, Integer fieldDataLength, Integer fieldDecimalLength, String fieldDefaultValue, String fieldDefaultText, Date fieldCreateTime, String fieldCreater, Date fieldUpdateTime, String fieldUpdater, String fieldDesc, Integer fieldOrderNum, String fieldTemplateName) {
-        this.fieldFieldId = fieldFieldId;
+    public TableFieldEntity(String fieldId, String fieldTableId, String fieldName, String fieldCaption, String fieldIsPk, String fieldAllowNull, String fieldDataType, Integer fieldDataLength, Integer fieldDecimalLength, String fieldDefaultValue, String fieldDefaultText, Date fieldCreateTime, String fieldCreater, Date fieldUpdateTime, String fieldUpdater, String fieldDesc, Integer fieldOrderNum, String fieldTemplateName) {
+        this.fieldId = fieldId;
         this.fieldTableId = fieldTableId;
         this.fieldName = fieldName;
         this.fieldCaption = fieldCaption;
@@ -91,12 +91,12 @@ public class TableFieldEntity {
         super();
     }
 
-    public String getFieldFieldId() {
-        return fieldFieldId;
+    public String getFieldId() {
+        return fieldId;
     }
 
-    public void setFieldFieldId(String fieldFieldId) {
-        this.fieldFieldId = fieldFieldId == null ? null : fieldFieldId.trim();
+    public void setFieldId(String fieldId) {
+        this.fieldId = fieldId == null ? null : fieldId.trim();
     }
 
     public String getFieldTableId() {

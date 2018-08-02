@@ -18,12 +18,13 @@
             <arg column="TABLE_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="TABLE_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="TABLE_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         TABLE_ID, TABLE_CAPTION, TABLE_NAME, TABLE_DBNAME, TABLE_ORGAN_ID, TABLE_CREATE_TIME,
         TABLE_CREATER, TABLE_UPDATE_TIME, TABLE_UPDATER, TABLE_SERVICE_VALUE, TABLE_TYPE,
-        TABLE_ISSYSTEM, TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID
+        TABLE_ISSYSTEM, TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID, TABLE_STATUS
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -40,14 +41,14 @@
         TABLE_DBNAME, TABLE_ORGAN_ID, TABLE_CREATE_TIME,
         TABLE_CREATER, TABLE_UPDATE_TIME, TABLE_UPDATER,
         TABLE_SERVICE_VALUE, TABLE_TYPE, TABLE_ISSYSTEM,
-        TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID
-        )
+        TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID,
+        TABLE_STATUS)
         values (#{tableId,jdbcType=NVARCHAR}, #{tableCaption,jdbcType=NVARCHAR}, #{tableName,jdbcType=NVARCHAR},
         #{tableDbname,jdbcType=NVARCHAR}, #{tableOrganId,jdbcType=INTEGER}, #{tableCreateTime,jdbcType=TIMESTAMP},
         #{tableCreater,jdbcType=NVARCHAR}, #{tableUpdateTime,jdbcType=TIMESTAMP}, #{tableUpdater,jdbcType=NVARCHAR},
         #{tableServiceValue,jdbcType=NVARCHAR}, #{tableType,jdbcType=NVARCHAR}, #{tableIssystem,jdbcType=NVARCHAR},
-        #{tableOrderNum,jdbcType=INTEGER}, #{tableDesc,jdbcType=NVARCHAR}, #{tableGroupId,jdbcType=NVARCHAR}
-        )
+        #{tableOrderNum,jdbcType=INTEGER}, #{tableDesc,jdbcType=NVARCHAR}, #{tableGroupId,jdbcType=NVARCHAR},
+        #{tableStatus,jdbcType=NVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
         insert into TB4D_TABLE
@@ -97,6 +98,9 @@
             <if test="tableGroupId != null">
                 TABLE_GROUP_ID,
             </if>
+            <if test="tableStatus != null">
+                TABLE_STATUS,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="tableId != null">
@@ -143,6 +147,9 @@
             </if>
             <if test="tableGroupId != null">
                 #{tableGroupId,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableStatus != null">
+                #{tableStatus,jdbcType=NVARCHAR},
             </if>
         </trim>
     </insert>
@@ -191,25 +198,29 @@
             <if test="tableGroupId != null">
                 TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR},
             </if>
+            <if test="tableStatus != null">
+                TABLE_STATUS = #{tableStatus,jdbcType=NVARCHAR},
+            </if>
         </set>
         where TABLE_ID = #{tableId,jdbcType=NVARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
         update TB4D_TABLE
         set TABLE_CAPTION = #{tableCaption,jdbcType=NVARCHAR},
-        TABLE_NAME = #{tableName,jdbcType=NVARCHAR},
-        TABLE_DBNAME = #{tableDbname,jdbcType=NVARCHAR},
-        TABLE_ORGAN_ID = #{tableOrganId,jdbcType=INTEGER},
-        TABLE_CREATE_TIME = #{tableCreateTime,jdbcType=TIMESTAMP},
-        TABLE_CREATER = #{tableCreater,jdbcType=NVARCHAR},
-        TABLE_UPDATE_TIME = #{tableUpdateTime,jdbcType=TIMESTAMP},
-        TABLE_UPDATER = #{tableUpdater,jdbcType=NVARCHAR},
-        TABLE_SERVICE_VALUE = #{tableServiceValue,jdbcType=NVARCHAR},
-        TABLE_TYPE = #{tableType,jdbcType=NVARCHAR},
-        TABLE_ISSYSTEM = #{tableIssystem,jdbcType=NVARCHAR},
-        TABLE_ORDER_NUM = #{tableOrderNum,jdbcType=INTEGER},
-        TABLE_DESC = #{tableDesc,jdbcType=NVARCHAR},
-        TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR}
+            TABLE_NAME = #{tableName,jdbcType=NVARCHAR},
+            TABLE_DBNAME = #{tableDbname,jdbcType=NVARCHAR},
+            TABLE_ORGAN_ID = #{tableOrganId,jdbcType=INTEGER},
+            TABLE_CREATE_TIME = #{tableCreateTime,jdbcType=TIMESTAMP},
+            TABLE_CREATER = #{tableCreater,jdbcType=NVARCHAR},
+            TABLE_UPDATE_TIME = #{tableUpdateTime,jdbcType=TIMESTAMP},
+            TABLE_UPDATER = #{tableUpdater,jdbcType=NVARCHAR},
+            TABLE_SERVICE_VALUE = #{tableServiceValue,jdbcType=NVARCHAR},
+            TABLE_TYPE = #{tableType,jdbcType=NVARCHAR},
+            TABLE_ISSYSTEM = #{tableIssystem,jdbcType=NVARCHAR},
+            TABLE_ORDER_NUM = #{tableOrderNum,jdbcType=INTEGER},
+            TABLE_DESC = #{tableDesc,jdbcType=NVARCHAR},
+            TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR},
+            TABLE_STATUS = #{tableStatus,jdbcType=NVARCHAR}
         where TABLE_ID = #{tableId,jdbcType=NVARCHAR}
     </update>
 </mapper>

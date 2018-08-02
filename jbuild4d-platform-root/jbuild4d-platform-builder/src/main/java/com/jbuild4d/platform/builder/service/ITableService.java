@@ -19,6 +19,9 @@ public interface ITableService extends IBaseService<TableEntity> {
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
     void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException;
 
+    @Transactional(rollbackFor=JBuild4DGenerallyException.class)
+    void updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList);
+
     boolean existTableName(String tableName);
 
     void deleteTable(TableEntity tableEntity);

@@ -107,7 +107,7 @@ public class TableServiceTest extends BaseTest  {
                                   String fieldDefaultValue, String fieldDefaultText, String fieldDesc, String templateName
     ){
         TableFieldVO fieldVO=new TableFieldVO();
-        fieldVO.setFieldFieldId(UUIDUtility.getUUIDNotSplit());
+        fieldVO.setFieldId(UUIDUtility.getUUIDNotSplit());
         fieldVO.setFieldTableId(tableId);
         fieldVO.setFieldName(fieldName);
         fieldVO.setFieldCaption(fieldCaption);

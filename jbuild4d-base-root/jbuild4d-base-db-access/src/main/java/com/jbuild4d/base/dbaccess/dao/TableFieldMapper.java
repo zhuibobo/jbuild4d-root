@@ -18,4 +18,6 @@ public interface TableFieldMapper extends BaseMapper<TableFieldEntity> {
     void deleteTemplate(String generalTemplateName);
 
     void deleteByTableId(String tableId);
+
+    List<TableFieldEntity> selectByTableId(String tableId);
 }

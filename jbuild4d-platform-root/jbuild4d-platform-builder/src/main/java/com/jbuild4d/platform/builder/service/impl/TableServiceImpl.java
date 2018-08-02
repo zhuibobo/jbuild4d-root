@@ -8,6 +8,8 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.list.IListWhereCondition;
+import com.jbuild4d.base.tools.common.list.ListUtility;
 import com.jbuild4d.platform.builder.dbtablebuilder.BuilderResultMessage;
 import com.jbuild4d.platform.builder.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableTypeEnum;
@@ -16,6 +18,7 @@ import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -91,7 +94,35 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         }
     }
 
-    public void updateTable(JB4DSession jb4DSession,String tableId,TableEntity tableEntity,List<TableFieldVO> tableFieldVOList){
+    @Override
+    @Transactional(rollbackFor=JBuild4DGenerallyException.class)
+    public void updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> newTableFieldVOList){
+        //计算出新增列,修改列,删除列的列表
+        List<TableFieldEntity> oldTableFieldEntityList=tableFieldMapper.selectByTableId(tableEntity.getTableId());
+
+        //待删除的字段
+        List<TableFieldVO> deleteFields=new ArrayList<>();
+        for (TableFieldEntity tableFieldEntity : oldTableFieldEntityList) {
+            if(!ListUtility.Exist(newTableFieldVOList, new IListWhereCondition<TableFieldVO>() {
+                @Override
+                public boolean Condition(TableFieldVO item) {
+                    return item.getFieldId().equals(tableEntity.getTableId());
+                }
+            })){
+                deleteFields.add((TableFieldVO) tableFieldEntity);
+            }
+        }
+
+        //新增的字段
+        List<TableFieldVO> newFields=new ArrayList<>();
+        for (TableFieldVO tableFieldVO : newTableFieldVOList) {
+            if(!ListUtility.Exist(oldTableFieldEntityList, new IListWhereCondition<TableFieldEntity>() {
+                @Override
+                public boolean Condition(TableFieldEntity item) {
+                    return false;
+                }
+            }));
+        }
 
     }
 
