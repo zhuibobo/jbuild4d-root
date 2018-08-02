@@ -35,7 +35,7 @@ public class GeneralServiceImpl implements IGeneralService {
         return generalMapper.executeSqlMap(map);
     }
 
-    @Override
+    /*@Override
     public Long nextOrderNum(String tableName, String orderFieldName) throws JBuild4DGenerallyException {
         if (!SQLKeyWordUtility.validateSqlInjectForSelectOnly(tableName)) {
             if (!SQLKeyWordUtility.validateSqlInjectForSelectOnly(orderFieldName)) {
@@ -46,7 +46,7 @@ public class GeneralServiceImpl implements IGeneralService {
         } else {
             throw new JBuild4DGenerallyException("存在SQL关键字:" + tableName);
         }
-    }
+    }*/
 
     @Override
     public Object executeScalarSql(String sql) {

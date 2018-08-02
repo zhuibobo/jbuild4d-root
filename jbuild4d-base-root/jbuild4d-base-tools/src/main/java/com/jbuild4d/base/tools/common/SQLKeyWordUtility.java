@@ -1,5 +1,7 @@
 package com.jbuild4d.base.tools.common;
 
+import com.jbuild4d.base.exception.JBuild4DSQLKeyWordException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -8,8 +10,8 @@ package com.jbuild4d.base.tools.common;
  */
 public class SQLKeyWordUtility {
 
-    public static boolean validateSqlInjectForSelectOnly(String sqlString) {
-        boolean ReturnValue = false;
+    public static boolean validateSqlInjectForSelectOnly(String sqlString) throws JBuild4DSQLKeyWordException {
+        //boolean ReturnValue = false;
         try
         {
             if (!sqlString.equals(""))
@@ -21,23 +23,32 @@ public class SQLKeyWordUtility {
                 String[] anySqlStr = SqlStrKeyWord.split("\\|");
                 for (String keyWord : anySqlStr) {
                     if(sqlString.indexOf(keyWord)>0){
-                        ReturnValue=true;
+                        throw new JBuild4DSQLKeyWordException(sqlString + "中可能存在SQL关键字"+keyWord);
                     }
                 }
             }
+            return true;
         }
         catch(Exception ex)
         {
-            throw ex;
+            throw new JBuild4DSQLKeyWordException(ex.getMessage());
         }
-        return ReturnValue;
     }
 
     public static String stringWrap(String source){
         return "'"+source.replaceAll("'","''")+"'";
     }
 
-    /*public static boolean singleWord(String source){
-        if(source)
-    }*/
+    public static boolean singleWord(String source) throws JBuild4DSQLKeyWordException {
+        if(StringUtility.isNotEmpty(source)){
+            source=source.trim();
+            if(source.indexOf(" ")>=0){
+                throw new JBuild4DSQLKeyWordException("单词"+source+"中不能存在空格");
+            }
+            if(source.indexOf("'")>=0){
+                throw new JBuild4DSQLKeyWordException("单词"+source+"中不能存在单引号");
+            }
+        }
+        return true;
+    }
 }
