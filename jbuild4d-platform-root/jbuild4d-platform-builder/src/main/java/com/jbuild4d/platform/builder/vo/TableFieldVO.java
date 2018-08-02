@@ -54,6 +54,11 @@ public class TableFieldVO extends TableFieldEntity {
         return result;
     }
 
+    public static TableFieldVO parse(TableFieldEntity entity){
+        TableFieldVO vo=new TableFieldVO();
+        vo.setF(entity.getFieldUpdateTime());
+    }
+
     public static boolean isUpdate(TableFieldVO oldVo,TableFieldVO newVo) throws JBuild4DGenerallyException {
         if(oldVo.getFieldId().equals(newVo.getFieldId())){
             if(!newVo.getFieldName().equals(oldVo.getFieldName())){

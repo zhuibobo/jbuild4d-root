@@ -56,7 +56,11 @@ public class TableServiceTest extends BaseTest  {
     public void testUpdateTable() throws JBuild4DGenerallyException, IOException {
         testNewTable();
         TableEntity tableEntity=tableService.getByTableName(newTableName);
-        List<TableFieldVO> tableFieldEntityList=tableFieldService.getTableFieldsByTableId(tableEntity.getTableId());
+        List<TableFieldVO> tableFieldVoList=tableFieldService.getTableFieldsByTableId(tableEntity.getTableId());
+
+        tableEntity.setTableCaption("我叫新表");
+
+        tableService.updateTable(jb4DSession,tableEntity,tableFieldVoList,false);
     }
 
     String newTableName="Table2";
