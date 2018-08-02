@@ -1,12 +1,14 @@
 package com.jbuild4d.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
+import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
@@ -20,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +47,17 @@ public class TableServiceTest extends BaseTest  {
     ITableService tableService;
 
     @Autowired
+    ITableFieldService tableFieldService;
+
+    @Autowired
     ISQLBuilderService sqlBuilderService;
+
+    @Test
+    public void testUpdateTable() throws JBuild4DGenerallyException, IOException {
+        testNewTable();
+        TableEntity tableEntity=tableService.getByTableName(newTableName);
+        List<TableFieldVO> tableFieldEntityList=tableFieldService.getTableFieldsByTableId(tableEntity.getTableId());
+    }
 
     String newTableName="Table2";
     @Test
@@ -92,12 +105,6 @@ public class TableServiceTest extends BaseTest  {
         fieldEntities.add(nvarcharField);
         fieldEntities.add(ntextField);
         tableService.newTable(jb4DSession, tableEntity, fieldEntities);
-
-        String selectSql = "select * from " + newTableName;
-        sqlBuilderService.selectList(selectSql);
-        tableService.deleteTable(tableEntity);
-        System.out.println("删除表成功!");
-
         //return fieldEntities;
     }
 

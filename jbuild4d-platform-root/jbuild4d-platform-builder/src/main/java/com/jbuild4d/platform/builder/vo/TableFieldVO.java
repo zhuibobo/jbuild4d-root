@@ -7,6 +7,7 @@ import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.JsonUtility;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,9 +33,25 @@ public class TableFieldVO extends TableFieldEntity {
     }
 
     public static List<TableFieldEntity> VoListToEntityList(List<TableFieldVO> tableFieldVOList) throws IOException {
+        if(tableFieldVOList==null)
+            return null;
+        else if(tableFieldVOList.size()==0){
+            return new ArrayList<>();
+        }
         String json= JsonUtility.toObjectString(tableFieldVOList);
         List<TableFieldEntity> entityList=JsonUtility.toObjectList(json,TableFieldEntity.class);
         return entityList;
+    }
+
+    public static List<TableFieldVO> EntityListToVoList(List<TableFieldEntity> source) throws IOException {
+        if(source==null)
+            return null;
+        else if(source.size()==0){
+            return new ArrayList<>();
+        }
+        String json= JsonUtility.toObjectString(source);
+        List<TableFieldVO> result=JsonUtility.toObjectList(json,TableFieldVO.class);
+        return result;
     }
 
     public static boolean isUpdate(TableFieldVO oldVo,TableFieldVO newVo) throws JBuild4DGenerallyException {

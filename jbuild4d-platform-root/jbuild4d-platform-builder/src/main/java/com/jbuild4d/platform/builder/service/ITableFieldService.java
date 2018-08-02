@@ -3,7 +3,9 @@ package com.jbuild4d.platform.builder.service;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.platform.builder.vo.TableFieldVO;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,8 +17,9 @@ import java.util.List;
 public interface ITableFieldService extends IBaseService<TableFieldEntity> {
     List<String> getFieldTemplateName();
 
-    List<TableFieldEntity> getTemplateFieldsByName(String templateName);
+    List<TableFieldVO> getTemplateFieldsByName(String templateName) throws IOException;
 
     void createGeneralTemplate(JB4DSession jb4DSession);
 
+    List<TableFieldVO> getTableFieldsByTableId(String tableId) throws IOException;
 }

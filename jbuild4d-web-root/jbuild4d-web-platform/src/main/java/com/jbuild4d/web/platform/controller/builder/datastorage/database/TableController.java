@@ -6,6 +6,7 @@ import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
+import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,12 +34,12 @@ public class TableController {
     ITableFieldService tableFieldService;
 
     @RequestMapping(value = "EditTable", method = RequestMethod.GET)
-    public ModelAndView editTable(String recordId, String op) throws IllegalAccessException, InstantiationException, JsonProcessingException {
+    public ModelAndView editTable(String recordId, String op) throws IllegalAccessException, InstantiationException, IOException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataStorage/DataBase/TableEdit");
         List<String> templateNames=tableFieldService.getFieldTemplateName();
-        Map<String,List<TableFieldEntity>> templateFieldMap=new HashMap<>();
+        Map<String,List<TableFieldVO>> templateFieldMap=new HashMap<>();
         for (String templateName : templateNames) {
-            List<TableFieldEntity> fields=tableFieldService.getTemplateFieldsByName(templateName);
+            List<TableFieldVO> fields=tableFieldService.getTemplateFieldsByName(templateName);
             templateFieldMap.put(templateName,fields);
         }
         modelAndView.addObject("templateFieldGroup",JsonUtility.toObjectString(templateFieldMap));
@@ -60,8 +62,8 @@ public class TableController {
 
     @RequestMapping(value = "/GetTemplateFieldsByName")
     @ResponseBody
-    public JBuild4DResponseVo getTemplateFieldsByName(String templateName){
-        List<TableFieldEntity> tableFieldEntityList=tableFieldService.getTemplateFieldsByName(templateName);
+    public JBuild4DResponseVo getTemplateFieldsByName(String templateName) throws IOException {
+        List<TableFieldVO> tableFieldEntityList=tableFieldService.getTemplateFieldsByName(templateName);
         return JBuild4DResponseVo.success("",tableFieldEntityList);
     }
 }

@@ -1,5 +1,6 @@
 package com.jbuild4d.platform.builder.service.impl;
 
+import com.itextpdf.io.image.Jbig2ImageData;
 import com.jbuild4d.base.dbaccess.dao.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dao.TableMapper;
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
@@ -96,9 +97,15 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Override
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    public void updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException {
+    public void updateTable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException {
+        TableEntity oldTableEntity=tableMapper.selectByPrimaryKey(newTableEntity.getTableId());
+
+        if(!oldTableEntity.getTableName().equals(newTableEntity.getTableName())){
+            throw new JBuild4DGenerallyException("表名不能修改!");
+        }
+
         //计算出新增列,修改列,删除列的列表
-        List<TableFieldEntity> oldTableFieldEntityList=tableFieldMapper.selectByTableId(tableEntity.getTableId());
+        List<TableFieldEntity> oldTableFieldEntityList=tableFieldMapper.selectByTableId(newTableEntity.getTableId());
 
         //待删除的字段
         List<TableFieldVO> deleteFields=new ArrayList<>();
@@ -106,7 +113,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             if(!ListUtility.Exist(newTableFieldVOList, new IListWhereCondition<TableFieldVO>() {
                 @Override
                 public boolean Condition(TableFieldVO item) {
-                    return item.getFieldId().equals(tableEntity.getTableId());
+                    return item.getFieldId().equals(newTableEntity.getTableId());
                 }
             })){
                 deleteFields.add((TableFieldVO) tableFieldEntity);
@@ -146,7 +153,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             //修改物理表结构
             try
             {
-                tableBuilederFace.updateTable(tableEntity,newFields,updateFields,deleteFields);
+                tableBuilederFace.updateTable(newTableEntity,newFields,updateFields,deleteFields);
             }
             catch (Exception ex){
                 if(ignorePhysicalError){
@@ -157,15 +164,15 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                 }
             }
             //修改表的逻辑结构
-            tableMapper.updateByPrimaryKeySelective(tableEntity);
+            tableMapper.updateByPrimaryKeySelective(newTableEntity);
             //写入逻辑表
-            tableEntity.setTableUpdater(jb4DSession.getUserName());
-            tableEntity.setTableUpdateTime(new Date());
-            tableMapper.updateByPrimaryKeySelective(tableEntity);
+            newTableEntity.setTableUpdater(jb4DSession.getUserName());
+            newTableEntity.setTableUpdateTime(new Date());
+            tableMapper.updateByPrimaryKeySelective(newTableEntity);
             //新增字段
             for (TableFieldEntity newfieldEntity : newFields) {
-                newfieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNumInTable(tableEntity.getTableId()));
-                newfieldEntity.setFieldTableId(tableEntity.getTableId());
+                newfieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNumInTable(newTableEntity.getTableId()));
+                newfieldEntity.setFieldTableId(newTableEntity.getTableId());
                 newfieldEntity.setFieldCreater(jb4DSession.getUserName());
                 newfieldEntity.setFieldCreateTime(new Date());
                 int i;
@@ -196,5 +203,10 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     @Override
     public void deleteTable(TableEntity tableEntity) {
 
+    }
+
+    @Override
+    public TableEntity getByTableName(String newTableName) {
+        return tableMapper.selectByTableName(newTableName);
     }
 }

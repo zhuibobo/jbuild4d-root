@@ -11,8 +11,10 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
+import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -47,8 +49,8 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
     }
 
     @Override
-    public List<TableFieldEntity> getTemplateFieldsByName(String templateName) {
-        return tableFieldMapper.selectTemplateFieldsByName(templateName);
+    public List<TableFieldVO> getTemplateFieldsByName(String templateName) throws IOException {
+        return TableFieldVO.EntityListToVoList(tableFieldMapper.selectTemplateFieldsByName(templateName));
     }
 
     @Override
@@ -65,6 +67,11 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
                 "","","",generalTemplateName);
         tableFieldMapper.insert(idField);
         tableFieldMapper.insert(createTimeField);
+    }
+
+    @Override
+    public List<TableFieldVO> getTableFieldsByTableId(String tableId) throws IOException {
+        return TableFieldVO.EntityListToVoList(tableFieldMapper.selectByTableId(tableId));
     }
 
     private TableFieldEntity newFiled(JB4DSession jb4DSession, String tableId, String fieldName, String fieldCaption,
