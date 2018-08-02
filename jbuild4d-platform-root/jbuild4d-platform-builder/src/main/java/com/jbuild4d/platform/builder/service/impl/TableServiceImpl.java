@@ -12,6 +12,7 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.list.ListUtility;
 import com.jbuild4d.platform.builder.dbtablebuilder.BuilderResultMessage;
 import com.jbuild4d.platform.builder.dbtablebuilder.TableBuilederFace;
+import com.jbuild4d.platform.builder.exenum.TableTypeEnum;
 import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -43,8 +44,9 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         throw new JBuild4DGenerallyException("未使用改方法");
     }
 
+    @Override
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    public void newTable(JB4DSession jb4DSession, String tableId, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException {
+    public void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException {
         try {
             if (this.existTableName(tableEntity.getTableName())) {
                 throw new JBuild4DGenerallyException("已经存在表名为" + tableEntity.getTableName() + "的表!");
@@ -60,18 +62,27 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                         tableEntity.setTableOrderNum(tableMapper.nextOrderNum());
                         tableEntity.setTableUpdater(jb4DSession.getUserName());
                         tableEntity.setTableUpdateTime(new Date());
-                        tableEntity.setTableType(TableTypeEnum);
+                        tableEntity.setTableType(TableTypeEnum.Builder.getText());
+                        tableEntity.setTableDbname("JBuild4D");
                         tableMapper.insertSelective(tableEntity);
                         //写入字段
                         List<TableFieldEntity> tableFieldEntityList = TableFieldVO.VoListToEntityList(tableFieldVOList);
                         for (TableFieldEntity fieldEntity : tableFieldEntityList) {
+                            fieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNum());
+                            fieldEntity.setFieldTableId(tableEntity.getTableId());
+                            fieldEntity.setFieldCreater(jb4DSession.getUserName());
+                            fieldEntity.setFieldCreateTime(new Date());
+                            fieldEntity.setFieldUpdater(jb4DSession.getUserName());
+                            fieldEntity.setFieldUpdateTime(new Date());
                             tableFieldMapper.insertSelective(fieldEntity);
                         }
                     }
                     catch (Exception ex){
+                        //清空数据
                         tableBuilederFace.deleteTable(tableEntity);
                         tableMapper.deleteByPrimaryKey(tableEntity.getTableId());
                         tableFieldMapper.deleteByTableId(tableEntity.getTableId());
+                        throw ex;
                     }
                 }
                 else{
@@ -91,6 +102,11 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Override
     public boolean existTableName(String tableName) {
-        return tableMapper.selectByTableName(tableName)==null;
+        return tableMapper.selectByTableName(tableName)!=null;
+    }
+
+    @Override
+    public void deleteTable(TableEntity tableEntity) {
+
     }
 }

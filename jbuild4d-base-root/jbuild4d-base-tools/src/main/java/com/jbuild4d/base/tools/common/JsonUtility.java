@@ -1,14 +1,12 @@
 package com.jbuild4d.base.tools.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class JsonUtility {
     public static String toObjectString(Object vo) throws JsonProcessingException {
@@ -24,8 +22,15 @@ public class JsonUtility {
 
     public static <T> List<T> toObjectList(String str,Class<T> _class) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        List<T> listT = mapper.readValue(str,new TypeReference<List<T>>() { });
-        return listT;
+        List<T> objList = null;
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        JavaType t = mapper.getTypeFactory().constructParametricType(
+                List.class, _class);
+        objList = mapper.readValue(str, t);
+
+        return objList;
+        /*List<_class> listT = mapper.readValue(str,new TypeReference<List<_class>>() { });
+        return listT;*/
     }
     /*public static <T> Map<String,T> toMapT(String jsonString,T obj) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
