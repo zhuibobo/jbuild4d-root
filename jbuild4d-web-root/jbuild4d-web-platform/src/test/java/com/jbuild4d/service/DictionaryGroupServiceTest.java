@@ -1,14 +1,11 @@
 package com.jbuild4d.service;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
-import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
-import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
 import org.junit.Assert;
@@ -21,7 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created with IntelliJ IDEA.

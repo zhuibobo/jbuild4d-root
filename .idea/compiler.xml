@@ -9,6 +9,7 @@
         <module name="build4d-base-service" />
         <module name="build4d-base-tools" />
         <module name="jbuild4d-base-db-access" />
+        <module name="jbuild4d-base-exception" />
         <module name="jbuild4d-base-service" />
         <module name="jbuild4d-base-tools" />
         <module name="jbuild4d-platform-builder" />
@@ -21,6 +22,7 @@
       <module name="build4d-base-service" target="1.8" />
       <module name="build4d-base-tools" target="1.8" />
       <module name="jbuild4d-base-db-access" target="1.8" />
+      <module name="jbuild4d-base-exception" target="1.8" />
       <module name="jbuild4d-base-root" target="1.8" />
       <module name="jbuild4d-base-service" target="1.8" />
       <module name="jbuild4d-base-tools" target="1.8" />

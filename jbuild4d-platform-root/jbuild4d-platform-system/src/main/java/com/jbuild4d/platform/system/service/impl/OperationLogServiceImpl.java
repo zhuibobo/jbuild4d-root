@@ -1,12 +1,11 @@
 package com.jbuild4d.platform.system.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dao.OperationLogMapper;
 import com.jbuild4d.base.dbaccess.dbentities.OperationLogEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.IpAddressUtility;
@@ -14,11 +13,9 @@ import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.system.service.IOperationLogService;
 import org.mybatis.spring.SqlSessionTemplate;
-import sun.net.util.IPAddressUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,9 +1,8 @@
 package com.jbuild4d.platform.builder.service;
 
-import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 
 /**

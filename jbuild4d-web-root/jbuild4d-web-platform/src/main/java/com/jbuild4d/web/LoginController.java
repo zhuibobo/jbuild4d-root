@@ -1,10 +1,8 @@
 package com.jbuild4d.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.itextpdf.io.image.Jbig2ImageData;
-import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.JsonUtility;
@@ -12,7 +10,6 @@ import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.platform.system.service.IOperationLogService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

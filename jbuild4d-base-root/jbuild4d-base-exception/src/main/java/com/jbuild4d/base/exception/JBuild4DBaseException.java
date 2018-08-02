@@ -1,4 +1,4 @@
-package com.jbuild4d.base.service.exception;
+package com.jbuild4d.base.exception;
 
 public class JBuild4DBaseException extends Exception {
     /**

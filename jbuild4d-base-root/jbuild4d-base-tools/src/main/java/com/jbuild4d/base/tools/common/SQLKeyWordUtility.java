@@ -36,4 +36,8 @@ public class SQLKeyWordUtility {
     public static String stringWrap(String source){
         return "'"+source.replaceAll("'","''")+"'";
     }
+
+    /*public static boolean singleWord(String source){
+        if(source)
+    }*/
 }

@@ -1,12 +1,11 @@
 package com.jbuild4d.platform.organ.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.OrganMapper;
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.OrganEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.StringUtility;

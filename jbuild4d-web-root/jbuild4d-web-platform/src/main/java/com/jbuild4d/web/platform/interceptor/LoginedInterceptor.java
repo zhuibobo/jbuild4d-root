@@ -1,6 +1,6 @@
 package com.jbuild4d.web.platform.interceptor;
 
-import com.jbuild4d.base.service.exception.SessionTimeoutException;
+import com.jbuild4d.base.exception.SessionTimeoutException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import org.springframework.web.servlet.HandlerInterceptor;

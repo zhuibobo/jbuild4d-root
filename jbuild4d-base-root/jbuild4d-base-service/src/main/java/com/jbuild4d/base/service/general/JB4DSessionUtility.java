@@ -1,6 +1,6 @@
 package com.jbuild4d.base.service.general;
 
-import com.jbuild4d.base.service.exception.SessionTimeoutException;
+import com.jbuild4d.base.exception.SessionTimeoutException;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 

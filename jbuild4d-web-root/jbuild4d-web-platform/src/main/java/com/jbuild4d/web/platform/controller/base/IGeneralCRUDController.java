@@ -1,7 +1,7 @@
 package com.jbuild4d.web.platform.controller.base;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;

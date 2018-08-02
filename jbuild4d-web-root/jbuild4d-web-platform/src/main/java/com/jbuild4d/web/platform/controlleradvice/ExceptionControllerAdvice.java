@@ -1,7 +1,7 @@
 package com.jbuild4d.web.platform.controlleradvice;
 
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.exception.SessionTimeoutException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.SessionTimeoutException;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.apache.ibatis.binding.BindingException;

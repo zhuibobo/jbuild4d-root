@@ -3,8 +3,7 @@ package com.jbuild4d.service;
 import com.jbuild4d.base.dbaccess.dbentities.*;
 import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.organ.service.IOrganService;
@@ -14,15 +13,11 @@ import com.jbuild4d.web.platform.beanconfig.service.BuildBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.OrganBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
-import org.apache.poi.ss.formula.functions.T;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.PrimitiveIterator;
 
 /**
  * Created with IntelliJ IDEA.

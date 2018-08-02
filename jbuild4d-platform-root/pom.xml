@@ -20,6 +20,11 @@
     <dependencies>
         <dependency>
             <groupId>jbuild4d</groupId>
+            <artifactId>jbuild4d-base-exception</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jbuild4d</groupId>
             <artifactId>jbuild4d-base-tools</artifactId>
             <version>${platform.version}</version>
         </dependency>

@@ -1,7 +1,6 @@
 package com.jbuild4d.base.service;
 
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
-import org.apache.ibatis.annotations.Param;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 
 import java.util.List;
 import java.util.Map;

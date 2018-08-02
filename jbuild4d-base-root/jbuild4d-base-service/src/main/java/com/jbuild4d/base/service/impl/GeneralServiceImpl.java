@@ -2,7 +2,7 @@ package com.jbuild4d.base.service.impl;
 
 import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.service.IGeneralService;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.SQLKeyWordUtility;
 import org.mybatis.spring.SqlSessionTemplate;
 

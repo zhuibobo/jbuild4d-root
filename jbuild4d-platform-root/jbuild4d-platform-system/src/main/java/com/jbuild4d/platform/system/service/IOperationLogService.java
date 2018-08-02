@@ -3,7 +3,7 @@ package com.jbuild4d.platform.system.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.base.dbaccess.dbentities.OperationLogEntity;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 
 import javax.servlet.http.HttpServletRequest;

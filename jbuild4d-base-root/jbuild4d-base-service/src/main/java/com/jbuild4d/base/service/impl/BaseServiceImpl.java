@@ -4,7 +4,7 @@ import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.service.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import org.mybatis.spring.SqlSessionTemplate;
 

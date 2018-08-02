@@ -5,7 +5,7 @@ import com.jbuild4d.base.dbaccess.dao.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dao.TableGroupMapper;
 import com.jbuild4d.base.dbaccess.dao.TableMapper;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.builder.service.IDatabaseServiceLinkService;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;

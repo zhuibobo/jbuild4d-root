@@ -2,14 +2,12 @@ package com.jbuild4d.service;
 
 import com.jbuild4d.base.dbaccess.dao.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.builder.dbtablebuilder.BuilderResultMessage;
-import com.jbuild4d.platform.builder.dbtablebuilder.MSSQLTableBuilder;
 import com.jbuild4d.platform.builder.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-db-access/jbuild4d-base-db-access.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-db-access/jbuild4d-base-db-access.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-exception/jbuild4d-base-exception.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-exception/jbuild4d-base-exception.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-root.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-service/jbuild4d-base-service.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-service/jbuild4d-base-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-tools/jbuild4d-base-tools.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-tools/jbuild4d-base-tools.iml" />

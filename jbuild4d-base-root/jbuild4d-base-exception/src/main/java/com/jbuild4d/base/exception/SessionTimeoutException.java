@@ -1,4 +1,4 @@
-package com.jbuild4d.base.service.exception;
+package com.jbuild4d.base.exception;
 
 public class SessionTimeoutException extends JBuild4DRunTimeException {
 

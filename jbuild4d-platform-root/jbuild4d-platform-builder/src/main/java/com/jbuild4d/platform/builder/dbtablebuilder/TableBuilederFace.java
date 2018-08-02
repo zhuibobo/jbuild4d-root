@@ -1,10 +1,9 @@
 package com.jbuild4d.platform.builder.dbtablebuilder;
 
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.general.DBProp;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.service.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 
 import java.util.List;
