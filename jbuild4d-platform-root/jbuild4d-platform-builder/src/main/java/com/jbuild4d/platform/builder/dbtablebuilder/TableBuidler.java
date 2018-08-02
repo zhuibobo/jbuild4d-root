@@ -2,6 +2,7 @@ package com.jbuild4d.platform.builder.dbtablebuilder;
 
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
+import com.jbuild4d.base.exception.JBuild4DPhysicalTableException;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 
@@ -25,15 +26,17 @@ public abstract class TableBuidler {
         this.sqlBuilderService = sqlBuilderService;
     }
 
-    public BuilderResultMessage newTable(TableEntity tableEntity, List<TableFieldVO> fieldVos){
+    public boolean newTable(TableEntity tableEntity, List<TableFieldVO> fieldVos) throws JBuild4DPhysicalTableException {
         try{
             if(fieldVos==null||fieldVos.size()==0){
-                return BuilderResultMessage.getFieldsCannotBeNullError();
+                throw JBuild4DPhysicalTableException.getFieldsCannotBeNullError();
+                //return BuilderResultMessage.getFieldsCannotBeNullError();
             }
 
             //判断是否已经存在同名的表
             if(isExistTable(tableEntity)){
-                return BuilderResultMessage.getTableIsExistError(tableEntity.getTableName());
+                //return BuilderResultMessage.getTableIsExistError(tableEntity.getTableName());
+                throw JBuild4DPhysicalTableException.getTableIsExistError(tableEntity.getTableName());
             }
 
             //String TEMPFIELDZRB="TEMPFIELDZRB";
@@ -44,15 +47,13 @@ public abstract class TableBuidler {
             }
             catch (Exception ex){
                 ex.printStackTrace();
-                return BuilderResultMessage.getCreateTableError(ex);
+                //return BuilderResultMessage.getCreateTableError(ex);
+                throw JBuild4DPhysicalTableException.getCreateTableError(ex);
             }
 
             //在表中加入表字段
             for (TableFieldEntity fieldEntity : fieldVos) {
-                BuilderResultMessage newFieldResult=newField(tableEntity,fieldEntity);
-                if(!newFieldResult.isSuccess()){
-                    throw new Exception("新增列错误!"+newFieldResult.getMessage());
-                }
+                newField(tableEntity,fieldEntity);
             }
 
             createTableEnd(tableEntity);
@@ -60,40 +61,46 @@ public abstract class TableBuidler {
             //String dropTempFieldSQL="alter table "+tableEntity.getTableName()+" drop column "+TEMPFIELDZRB;
             //sqlBuilderService.execute(dropTempFieldSQL);
 
-            return BuilderResultMessage.getSuccess();
+            return true;
         }
-        catch (Exception ex){
+        catch (JBuild4DPhysicalTableException ex){
             //删除表
             ex.printStackTrace();
             deleteTable(tableEntity);
-            return BuilderResultMessage.getCreateTableError(ex);
+            throw ex;
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            deleteTable(tableEntity);
+            throw JBuild4DPhysicalTableException.getCreateTableError(ex);
         }
     }
 
-    public BuilderResultMessage updateTable(TableEntity tableEntity,List<TableFieldVO> newFields,List<TableFieldVO> updateFields,List<TableFieldVO> deleteFields){
+    public boolean updateTable(TableEntity tableEntity,List<TableFieldVO> newFields,List<TableFieldVO> updateFields,List<TableFieldVO> deleteFields) throws JBuild4DPhysicalTableException {
         try{
             //判断是否存在表
             if(!isExistTable(tableEntity)){
-                return BuilderResultMessage.getTableIsNotExistError(tableEntity.getTableName());
+                //return BuilderResultMessage.getTableIsNotExistError(tableEntity.getTableName());
+                throw JBuild4DPhysicalTableException.getTableIsNotExistError(tableEntity.getTableName());
             }
 
             //新增字段
             if(newFields!=null) {
                 for (TableFieldEntity fieldEntity : newFields) {
-                    BuilderResultMessage newFieldResult = newField(tableEntity, fieldEntity);
-                    if (!newFieldResult.isSuccess()) {
+                    this.newField(tableEntity, fieldEntity);
+                    /*if (!newFieldResult.isSuccess()) {
                         throw new Exception("新增列错误!" + newFieldResult.getMessage());
-                    }
+                    }*/
                 }
             }
 
             //修改字段,暂时只是支持修改类型
             if(updateFields!=null) {
                 for (TableFieldVO updateField : updateFields) {
-                    BuilderResultMessage newFieldResult = this.updateField(tableEntity, updateField);
-                    if (!newFieldResult.isSuccess()) {
+                    this.updateField(tableEntity, updateField);
+                    /*if (!newFieldResult.isSuccess()) {
                         throw new Exception("修改列错误!" + newFieldResult.getMessage());
-                    }
+                    }*/
                 }
             }
 
@@ -103,18 +110,26 @@ public abstract class TableBuidler {
                     deleteField(tableEntity, deleteField);
                 }
             }
+
+            return true;
+        }
+        catch (JBuild4DPhysicalTableException ex){
+            //删除表
+            ex.printStackTrace();
+            throw ex;
         }
         catch (Exception ex){
             ex.printStackTrace();
-            return BuilderResultMessage.getUpdateTableError(ex);
+            deleteTable(tableEntity);
+            throw JBuild4DPhysicalTableException.getCreateTableError(ex);
         }
-        return BuilderResultMessage.getSuccess();
     }
 
-    public BuilderResultMessage deleteTable(TableEntity tableEntity){
+    public boolean deleteTable(TableEntity tableEntity) throws JBuild4DPhysicalTableException {
         //如果表中已经存在数据,提示需要先手工删除数据后,才能删除物理表.
         if(isExistRecord(tableEntity)){
-            return BuilderResultMessage.getTableExistRecordError(tableEntity.getTableName());
+            //return BuilderResultMessage.getTableExistRecordError(tableEntity.getTableName());
+            throw JBuild4DPhysicalTableException.getTableExistRecordError(tableEntity.getTableName());
         }
         String dropSQL=buildDeleteTableSQL(tableEntity);
                 //"drop table "+tableEntity.getTableName();
@@ -123,18 +138,18 @@ public abstract class TableBuidler {
         }
         catch (Exception ex){
             ex.printStackTrace();
-            return BuilderResultMessage.getDeleteTableError(ex);
+            throw JBuild4DPhysicalTableException.getDeleteTableError(ex);
         }
-        return BuilderResultMessage.getSuccess();
+        return true;
     }
 
     protected abstract String buildDeleteTableSQL(TableEntity tableEntity);
 
-    protected abstract BuilderResultMessage deleteField(TableEntity tableEntity, TableFieldVO deleteField);
+    protected abstract boolean deleteField(TableEntity tableEntity, TableFieldVO deleteField);
 
-    protected abstract BuilderResultMessage updateField(TableEntity tableEntity, TableFieldVO updateField);
+    protected abstract boolean updateField(TableEntity tableEntity, TableFieldVO updateField) throws JBuild4DPhysicalTableException;
 
-    protected abstract BuilderResultMessage newField(TableEntity tableEntity, TableFieldEntity fieldEntity);
+    protected abstract boolean newField(TableEntity tableEntity, TableFieldEntity fieldEntity) throws JBuild4DPhysicalTableException;
 
     protected abstract void createTableEnd(TableEntity tableEntity);
 

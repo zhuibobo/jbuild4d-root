@@ -3,6 +3,7 @@ package com.jbuild4d.service;
 import com.jbuild4d.base.dbaccess.dao.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
+import com.jbuild4d.base.exception.JBuild4DPhysicalTableException;
 import com.jbuild4d.base.exception.JBuild4DSQLKeyWordException;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
@@ -50,12 +51,12 @@ public class MSSQLTableBuilderTest extends BaseTest {
     TableFieldMapper tableFieldMapper;
 
     @Test
-    public void testNewTable() throws JBuild4DGenerallyException, JBuild4DSQLKeyWordException {
+    public void testNewTable() throws JBuild4DGenerallyException, JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
         this.newTable(true);
     }
 
     @Test
-    public void testUpdateTable() throws JBuild4DGenerallyException, JBuild4DSQLKeyWordException {
+    public void testUpdateTable() throws JBuild4DGenerallyException, JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
         List<TableFieldVO> fieldVos=this.newTable(false);
 
         //设置新增列
@@ -88,7 +89,7 @@ public class MSSQLTableBuilderTest extends BaseTest {
 
     String newTableName="Table1";
 
-    public List<TableFieldVO> newTable(boolean autoDeleteTable) throws JBuild4DGenerallyException, JBuild4DSQLKeyWordException {
+    public List<TableFieldVO> newTable(boolean autoDeleteTable) throws JBuild4DGenerallyException, JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
         TableBuilederFace tableBuilederFace= TableBuilederFace.getInstance(sqlBuilderService);
         //mssqlTableBuilder.setSqlBuilderService(sqlBuilderService);
         TableEntity tableEntity=new TableEntity();
@@ -130,9 +131,9 @@ public class MSSQLTableBuilderTest extends BaseTest {
         fieldEntities.add(decimalField);
         fieldEntities.add(nvarcharField);
         fieldEntities.add(ntextField);
-        BuilderResultMessage builderResultMessage=tableBuilederFace.newTable(tableEntity,fieldEntities);
+        boolean result=tableBuilederFace.newTable(tableEntity,fieldEntities);
 
-        if(builderResultMessage.isSuccess()) {
+        if(result) {
             String selectSql = "select * from " + newTableName;
             sqlBuilderService.selectList(selectSql);
 
@@ -140,10 +141,6 @@ public class MSSQLTableBuilderTest extends BaseTest {
                 tableBuilederFace.deleteTable(tableEntity);
                 System.out.println("删除表成功!");
             }
-        }
-        else
-        {
-            System.out.println(builderResultMessage.getMessage());
         }
 
         return fieldEntities;

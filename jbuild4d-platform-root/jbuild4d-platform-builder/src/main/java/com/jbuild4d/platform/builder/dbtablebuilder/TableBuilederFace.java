@@ -3,6 +3,7 @@ package com.jbuild4d.platform.builder.dbtablebuilder;
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.general.DBProp;
+import com.jbuild4d.base.exception.JBuild4DPhysicalTableException;
 import com.jbuild4d.base.exception.JBuild4DSQLKeyWordException;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
@@ -60,13 +61,13 @@ public class TableBuilederFace {
         return result;
     }
 
-    public BuilderResultMessage newTable(TableEntity tableEntity, List<TableFieldVO> fieldVos) throws JBuild4DSQLKeyWordException {
+    public boolean newTable(TableEntity tableEntity, List<TableFieldVO> fieldVos) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
         this.validateTableEntity(tableEntity);
         this.validateTableFields(fieldVos);
         return dbBuidler.newTable(tableEntity,fieldVos);
     }
 
-    public BuilderResultMessage updateTable(TableEntity tableEntity,List<TableFieldVO> newFields,List<TableFieldVO> updateFields,List<TableFieldVO> deleteFields) throws JBuild4DSQLKeyWordException {
+    public boolean updateTable(TableEntity tableEntity,List<TableFieldVO> newFields,List<TableFieldVO> updateFields,List<TableFieldVO> deleteFields) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
         this.validateTableEntity(tableEntity);
         this.validateTableFields(newFields);
         this.validateTableFields(updateFields);
@@ -74,7 +75,7 @@ public class TableBuilederFace {
         return dbBuidler.updateTable(tableEntity,newFields,updateFields,deleteFields);
     }
 
-    public BuilderResultMessage deleteTable(TableEntity tableEntity) throws JBuild4DSQLKeyWordException {
+    public boolean deleteTable(TableEntity tableEntity) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
         this.validateTableEntity(tableEntity);
         return dbBuidler.deleteTable(tableEntity);
     }

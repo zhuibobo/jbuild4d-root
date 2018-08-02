@@ -3,6 +3,7 @@ package com.jbuild4d.platform.builder.dbtablebuilder;
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
+import com.jbuild4d.base.exception.JBuild4DPhysicalTableException;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
@@ -46,7 +47,7 @@ public class MSSQLTableBuilder extends TableBuidler {
         return "drop table "+tableEntity.getTableName();
     }
 
-    private boolean appendFieldDataTypeTo(TableFieldEntity fieldEntity, StringBuilder sqlBuilder) {
+    private boolean appendFieldDataTypeTo(TableFieldEntity fieldEntity, StringBuilder sqlBuilder) throws JBuild4DPhysicalTableException {
         if (TableFieldTypeEnum.IntType.getValue().equals(fieldEntity.getFieldDataType())) {
             sqlBuilder.append(" int ");
         } else if (TableFieldTypeEnum.NumberType.getValue().equals(fieldEntity.getFieldDataType())) {
@@ -58,7 +59,7 @@ public class MSSQLTableBuilder extends TableBuidler {
         } else if (TableFieldTypeEnum.TextType.getValue().equals(fieldEntity.getFieldDataType())) {
             sqlBuilder.append(" ntext ");
         } else {
-            return true;
+            throw JBuild4DPhysicalTableException.getFieldTypeNodeSupportError(fieldEntity.getFieldDataType());
         }
 
         if (TrueFalseEnum.True.getDisplayName().equals(fieldEntity.getFieldIsPk())) {
@@ -70,44 +71,43 @@ public class MSSQLTableBuilder extends TableBuidler {
     }
 
     @Override
-    protected BuilderResultMessage newField(TableEntity tableEntity,TableFieldEntity fieldEntity){
+    protected boolean newField(TableEntity tableEntity,TableFieldEntity fieldEntity) throws JBuild4DPhysicalTableException {
         try
         {
             StringBuilder sqlBuilder=new StringBuilder();
             sqlBuilder.append("alter table ");
             sqlBuilder.append(tableEntity.getTableName()+" add "+fieldEntity.getFieldName());
-            if (appendFieldDataTypeTo(fieldEntity, sqlBuilder))
-                return BuilderResultMessage.getFieldTypeNodeSupportError(fieldEntity.getFieldDataType());
+            appendFieldDataTypeTo(fieldEntity, sqlBuilder);
             sqlBuilderService.execute(sqlBuilder.toString());
-            return BuilderResultMessage.getSuccess();
+            return true;
         }
         catch (Exception ex){
             ex.printStackTrace();
-            return BuilderResultMessage.getFieldCreateError(ex);
+            throw JBuild4DPhysicalTableException.getFieldCreateError(ex);
         }
     }
 
-    protected BuilderResultMessage updateField(TableEntity tableEntity,TableFieldVO fieldVO){
+    protected boolean updateField(TableEntity tableEntity,TableFieldVO fieldVO) throws JBuild4DPhysicalTableException {
         try
         {
             StringBuilder sqlBuilder=new StringBuilder();
             sqlBuilder.append("alter table ");
             sqlBuilder.append(tableEntity.getTableName()+" alter column "+fieldVO.getFieldName());
-            if (appendFieldDataTypeTo(fieldVO, sqlBuilder))
-                return BuilderResultMessage.getFieldTypeNodeSupportError(fieldVO.getFieldDataType());
+            appendFieldDataTypeTo(fieldVO, sqlBuilder);
             sqlBuilderService.execute(sqlBuilder.toString());
-            return BuilderResultMessage.getSuccess();
+            return true;
         }
         catch (Exception ex){
             ex.printStackTrace();
-            return BuilderResultMessage.getFieldCreateError(ex);
+            //return BuilderResultMessage.getFieldCreateError(ex);
+            throw JBuild4DPhysicalTableException.getFieldCreateError(ex);
         }
     }
 
     @Override
-    public BuilderResultMessage deleteField(TableEntity tableEntity,TableFieldVO fieldVO){
+    public boolean deleteField(TableEntity tableEntity,TableFieldVO fieldVO){
         String dropTempFieldSQL="alter table "+tableEntity.getTableName()+" drop column "+fieldVO.getFieldName();
         sqlBuilderService.execute(dropTempFieldSQL);
-        return BuilderResultMessage.getSuccess();
+        return true;
     }
 }

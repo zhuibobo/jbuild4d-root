@@ -50,8 +50,8 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                 throw new JBuild4DGenerallyException("已经存在表名为" + tableEntity.getTableName() + "的表!");
             } else {
                 //创建物理表
-                BuilderResultMessage builderResultMessage = tableBuilederFace.newTable(tableEntity, tableFieldVOList);
-                if (builderResultMessage.isSuccess()) {
+                boolean createPhysicalTable = tableBuilederFace.newTable(tableEntity, tableFieldVOList);
+                if (createPhysicalTable) {
 
                     try {
                         //写入逻辑表
@@ -82,9 +82,6 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                         tableFieldMapper.deleteByTableId(tableEntity.getTableId());
                         throw ex;
                     }
-                }
-                else{
-                    throw new JBuild4DGenerallyException(builderResultMessage.getMessage());
                 }
             }
         }

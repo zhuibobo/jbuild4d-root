@@ -8,7 +8,7 @@ package com.jbuild4d.platform.builder.dbtablebuilder;
  */
 public class BuilderResultMessage {
 
-    private static String SuccessCode="100000";
+    /*private static String SuccessCode="100000";
 
     private static String ErrorCode_CreateTableError="200000";
     private static String ErrorCode_TableIsExistError ="200001";
@@ -96,5 +96,5 @@ public class BuilderResultMessage {
 
     public static BuilderResultMessage getUpdateTableError(Exception ex) {
         return new BuilderResultMessage(false,BuilderResultMessage.ErrorCode_UpdateTableError,ex.getMessage());
-    }
+    }*/
 }
