@@ -19,6 +19,7 @@ import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -97,7 +98,9 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Override
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    public void updateTable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException {
+    public List<String> updateTable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException {
+        List<String> resultMessage=new ArrayList<>();
+
         TableEntity oldTableEntity=tableMapper.selectByPrimaryKey(newTableEntity.getTableId());
 
         if(!oldTableEntity.getTableName().equals(newTableEntity.getTableName())){
@@ -113,10 +116,15 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             if(!ListUtility.Exist(newTableFieldVOList, new IListWhereCondition<TableFieldVO>() {
                 @Override
                 public boolean Condition(TableFieldVO item) {
-                    return item.getFieldId().equals(newTableEntity.getTableId());
+                    return item.getFieldId().equals(tableFieldEntity.getFieldId());
                 }
             })){
-                deleteFields.add((TableFieldVO) tableFieldEntity);
+                try {
+                    deleteFields.add(TableFieldVO.parseToVo(tableFieldEntity));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    throw new JBuild4DGenerallyException(ex.getMessage());
+                }
             }
         }
 
@@ -142,9 +150,16 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                     return item.getFieldId().equals(tableFieldEntity.getFieldId());
                 }
             });
-            if(TableFieldVO.isUpdate((TableFieldVO) tableFieldEntity,newVo)){
-                newVo.setOldFieldName(tableFieldEntity.getFieldName());
-                updateFields.add(newVo);
+            try {
+                if(newVo!=null) {
+                    if (TableFieldVO.isUpdate(TableFieldVO.parseToVo(tableFieldEntity), newVo)) {
+                        newVo.setOldFieldName(tableFieldEntity.getFieldName());
+                        updateFields.add(newVo);
+                    }
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                throw new JBuild4DGenerallyException(ex.getMessage());
             }
         }
 
@@ -157,7 +172,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             }
             catch (Exception ex){
                 if(ignorePhysicalError){
-
+                    resultMessage.add("修改物理表失败!");
                 }
                 else{
                     throw ex;
@@ -181,17 +196,20 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                 tableFieldMapper.insertSelective(newfieldEntity);
             }
             //修改字段
-            for (TableFieldVO updateField : updateFields) {
+            for (TableFieldEntity updateField : updateFields) {
                 updateField.setFieldUpdater(jb4DSession.getUserName());
                 updateField.setFieldUpdateTime(new Date());
+                tableFieldMapper.updateByPrimaryKeySelective(updateField);
             }
             //删除字段
             for (TableFieldEntity fieldEntity : deleteFields) {
                 tableFieldMapper.deleteByPrimaryKey(fieldEntity.getFieldId());
             }
+            return resultMessage;
         }
         catch (Exception ex){
-
+            ex.printStackTrace();
+            throw new JBuild4DGenerallyException(ex.getMessage());
         }
     }
 

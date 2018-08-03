@@ -54,9 +54,14 @@ public class TableFieldVO extends TableFieldEntity {
         return result;
     }
 
-    public static TableFieldVO parse(TableFieldEntity entity){
-        TableFieldVO vo=new TableFieldVO();
-        vo.setF(entity.getFieldUpdateTime());
+    public static TableFieldVO parseToVo(TableFieldEntity entity) throws IOException {
+        String jsonStr=JsonUtility.toObjectString(entity);
+        return JsonUtility.toObject(jsonStr,TableFieldVO.class);
+    }
+
+    public static TableFieldEntity parseToEntity(TableFieldVO vo) throws IOException {
+        String jsonStr=JsonUtility.toObjectString(vo);
+        return JsonUtility.toObject(jsonStr,TableFieldEntity.class);
     }
 
     public static boolean isUpdate(TableFieldVO oldVo,TableFieldVO newVo) throws JBuild4DGenerallyException {
@@ -67,10 +72,10 @@ public class TableFieldVO extends TableFieldEntity {
             else if(!newVo.getFieldDataType().equals(oldVo.getFieldDataType())){
                 return true;
             }
-            else if(newVo.getFieldDataLength()!=oldVo.getFieldDataLength()){
+            else if(newVo.getFieldDataLength().intValue()!=oldVo.getFieldDataLength().intValue()){
                 return true;
             }
-            else if(newVo.getFieldDecimalLength()!=newVo.getFieldDecimalLength()){
+            else if(newVo.getFieldDecimalLength().intValue()!=newVo.getFieldDecimalLength().intValue()){
                 return true;
             }
             else if(!newVo.getFieldAllowNull().equals(oldVo.getFieldAllowNull())){

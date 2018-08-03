@@ -60,6 +60,30 @@ public class TableServiceTest extends BaseTest  {
 
         tableEntity.setTableCaption("我叫新表");
 
+        //tableService.updateTable(jb4DSession,tableEntity,tableFieldVoList,false);
+
+        //加入新列
+        TableFieldVO nvarcharField = newFiled(jb4DSession, "Tempalte", "F_NVARCHAR_1", "F_NVARCHAR_1",
+                TrueFalseEnum.False, TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType, 200, 0,
+                "", "", "", "");
+
+        TableFieldVO ntextField = newFiled(jb4DSession, "Tempalte", "F_NTEXT_1", "F_NTEXT_1",
+                TrueFalseEnum.False, TrueFalseEnum.True,
+                TableFieldTypeEnum.TextType, 0, 0,
+                "", "", "", "");
+
+        tableFieldVoList.add(nvarcharField);
+        tableFieldVoList.add(ntextField);
+
+        //移除列
+        tableFieldVoList.remove(2);
+        tableFieldVoList.remove(3);
+
+        //修改列
+        TableFieldVO updateVo1=tableFieldVoList.get(4);
+        updateVo1.setFieldName(updateVo1.getFieldName()+"_UPDATE");
+
         tableService.updateTable(jb4DSession,tableEntity,tableFieldVoList,false);
     }
 
