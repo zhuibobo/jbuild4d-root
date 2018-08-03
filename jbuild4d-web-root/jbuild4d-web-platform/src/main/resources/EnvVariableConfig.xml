@@ -6,9 +6,16 @@
         </EnvVariable>
     </Group>
     <Group Name="时间日期">
-
+        <EnvVariable Name="" Value="" Class="" Para=""></EnvVariable>
     </Group>
-    <Group Name="时间日期">
+    <Group Name="环境变量">
+        <Group Name="系统变量">
 
+        </Group>
+    </Group>
+    <Group Name="编码器">
+        <Group Name="时间日期">
+
+        </Group>
     </Group>
 </Config>
