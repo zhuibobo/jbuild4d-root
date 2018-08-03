@@ -2,6 +2,7 @@ package com.jbuild4d.base.dbaccess.dao;
 
 import com.jbuild4d.base.dbaccess.dbentities.SettingEntity;
 import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public interface TableGroupMapper extends BaseMapper<TableGroupEntity> {
     List<TableGroupEntity> selectChilds(String id);
 
-    TableGroupEntity selectLessThanRecord(String id, String tableGroupParentId);
+    TableGroupEntity selectLessThanRecord(@Param("id") String id,@Param("parentId") String tableGroupParentId);
 
-    TableGroupEntity selectGreaterThanRecord(String id, String tableGroupParentId);
+    TableGroupEntity selectGreaterThanRecord(@Param("id")String id,@Param("parentId") String tableGroupParentId);
 }
