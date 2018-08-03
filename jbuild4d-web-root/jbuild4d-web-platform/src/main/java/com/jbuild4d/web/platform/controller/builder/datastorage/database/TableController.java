@@ -1,13 +1,13 @@
 package com.jbuild4d.web.platform.controller.builder.datastorage.database;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableService;
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class TableController {
             }
             templateFieldMap.put(templateName,templateFields);
         }
-        if(op=="add"){
+        if(op.equals("add")){
             recordId= UUIDUtility.getUUID();
             TableEntity tableEntity=new TableEntity();
             tableEntity.setTableId(recordId);
@@ -106,5 +107,14 @@ public class TableController {
 
         }
         return JBuild4DResponseVo.opSuccess();
+    }
+
+    @RequestMapping(value = "GetListData", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
+        JB4DSession jb4DSession= JB4DSessionUtility.getSession();
+        Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
+        PageInfo<TableEntity> proOrganPageInfo=tableService.getPage(jb4DSession,pageNum,pageSize,searchMap);
+        return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
     }
 }

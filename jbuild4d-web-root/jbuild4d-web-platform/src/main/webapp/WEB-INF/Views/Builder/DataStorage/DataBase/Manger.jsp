@@ -41,28 +41,16 @@
                     <col style="">
                     <col style="width: 80px">
                     <col style="">
-                    <col style="width: 100px">
-                    <col style="">
-                    <col style="width: 80px">
-                    <col style="">
                     <col style="width: 80px">
                 </colgroup>
                 <tr class="ls-table-row">
-                    <td>ddtlName：</td>
+                    <td>表名：</td>
                     <td>
-                        <i-input v-model="searchCondition.ddtlName.value" placeholder=""></i-input>
+                        <i-input v-model="searchCondition.tableName.value" placeholder=""></i-input>
                     </td>
-                    <td>ddtlValue：</td>
+                    <td>标题：</td>
                     <td>
-                        <i-input v-model="searchCondition.ddtlValue.value" placeholder=""></i-input>
-                    </td>
-                    <td>ddtlCreatetime（从）：</td>
-                    <td>
-                        <date-picker v-model="searchCondition.ddtlCreatetime_s.value" type="date" placeholder="" style="width: 100%"></date-picker>
-                    </td>
-                    <td>（到）：</td>
-                    <td>
-                        <date-picker v-model="searchCondition.ddtlCreatetime_e.value" type="date" placeholder="" style="width: 100%"></date-picker>
+                        <i-input v-model="searchCondition.tableCaption.value" placeholder=""></i-input>
                     </td>
                     <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
                 </tr>
@@ -131,25 +119,17 @@
             <!--List-->
             idFieldName:"tableId",
             searchCondition:{
-                groupId:{
+                tableGroupId:{
                     value:"",
                     type:SearchUtility.SearchFieldType.StringType
                 },
-                ddtlName:{
+                tableCaption:{
                     value:"",
                     type:SearchUtility.SearchFieldType.LikeStringType
                 },
-                ddtlValue:{
+                tableName:{
                     value:"",
                     type:SearchUtility.SearchFieldType.LikeStringType
-                },
-                ddtlCreatetime_s:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.DataStringType
-                },
-                ddtlCreatetime_e:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.DataStringType
                 }
             },
             columnsConfig: [
@@ -210,7 +190,7 @@
                 this.selectionRows=null;
                 this.pageNum=1;
                 this.clearSearchCondition();
-                this.searchCondition.groupId.value=this.treeSelectedNode[this.treeIdFieldName];
+                this.searchCondition.tableGroupId.value=this.treeSelectedNode[this.treeIdFieldName];
                 this.reloadData();
                 //appList.reloadTreeTableData();
                 //}
@@ -299,8 +279,7 @@
                 this.selectionRows = selection;
             },
             reloadData: function () {
-                var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/GetListData.do';
-                //debugger;
+                var url = '/PlatForm/Builder/DataStorage/DataBase/Table/GetListData.do';
                 ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                 //this.selectionRows=null;
             },
