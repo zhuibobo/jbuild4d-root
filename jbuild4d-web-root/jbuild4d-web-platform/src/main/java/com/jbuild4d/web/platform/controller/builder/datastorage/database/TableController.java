@@ -61,9 +61,12 @@ public class TableController {
             tableEntity.setTableId(recordId);
             tableEntity.setTableGroupId(groupId);
             modelAndView.addObject("tableEntity",tableEntity);
+            modelAndView.addObject("tableFieldsData","[]");
         }
         else {
             modelAndView.addObject("tableEntity",tableService.getByPrimaryKey(JB4DSessionUtility.getSession(),recordId));
+            List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(recordId);
+            modelAndView.addObject("tableFieldsData",JsonUtility.toObjectString(tableFieldVOList));
         }
         modelAndView.addObject("templateFieldGroup",JsonUtility.toObjectString(templateFieldMap));
 
@@ -94,19 +97,23 @@ public class TableController {
 
     @RequestMapping(value = "/SaveTableEdit")
     @ResponseBody
-    public JBuild4DResponseVo saveTableEdit(String op, String tableEntityJson,String fieldVoListJson) throws IOException, JBuild4DGenerallyException {
-        if(op.equals("add")){
-            tableEntityJson= URLDecoder.decode(tableEntityJson,"utf-8");
-            fieldVoListJson=URLDecoder.decode(fieldVoListJson,"utf-8");
-            TableEntity tableEntity=JsonUtility.toObject(tableEntityJson,TableEntity.class);
-            List<TableFieldVO> tableFieldVOList=JsonUtility.toObjectList(fieldVoListJson,TableFieldVO.class);
-
-            tableService.newTable(JB4DSessionUtility.getSession(),tableEntity,tableFieldVOList);
+    public JBuild4DResponseVo saveTableEdit(String op, String tableEntityJson,String fieldVoListJson,boolean ignorePhysicalError) throws IOException, JBuild4DGenerallyException {
+        try {
+            tableEntityJson = URLDecoder.decode(tableEntityJson, "utf-8");
+            fieldVoListJson = URLDecoder.decode(fieldVoListJson, "utf-8");
+            TableEntity tableEntity = JsonUtility.toObject(tableEntityJson, TableEntity.class);
+            List<TableFieldVO> tableFieldVOList = JsonUtility.toObjectList(fieldVoListJson, TableFieldVO.class);
+            if (op.equals("add")) {
+                tableService.newTable(JB4DSessionUtility.getSession(), tableEntity, tableFieldVOList);
+            } else if (op.equals("update")) {
+                tableService.updateTable(JB4DSessionUtility.getSession(), tableEntity, tableFieldVOList, ignorePhysicalError);
+            }
+            return JBuild4DResponseVo.opSuccess();
         }
-        else if(op.equals("update")){
-
+        catch (Exception ex){
+            ex.printStackTrace();
+            return JBuild4DResponseVo.error(ex.getMessage());
         }
-        return JBuild4DResponseVo.opSuccess();
     }
 
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)

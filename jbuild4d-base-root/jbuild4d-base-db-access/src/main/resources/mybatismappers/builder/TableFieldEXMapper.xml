@@ -32,7 +32,7 @@
         delete from TB4D_TABLE_FIELD where FIELD_TEMPLATE_NAME=#{templateName}
     </select>
     <select id="selectByTableId" resultMap="BaseResultMap">
-        select<include refid="Base_Column_List"/> from TB4D_TABLE_FIELD WHERE FIELD_TABLE_ID=#{tableId}
+        select<include refid="Base_Column_List"/> from TB4D_TABLE_FIELD WHERE FIELD_TABLE_ID=#{tableId} order by FIELD_ORDER_NUM asc
     </select>
     <select id="nextOrderNumInTable" resultType="int">
         select case when max(FIELD_ORDER_NUM) is null then 1 else max(FIELD_ORDER_NUM)+1 end ORDERNUM from TB4D_TABLE_FIELD where FIELD_TABLE_ID=#{tableId}

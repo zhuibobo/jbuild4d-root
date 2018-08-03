@@ -293,19 +293,19 @@
                 }
             },
             edit: function (recordId) {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=update&recordId=" + recordId);
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
+                var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=update&recordId=" + recordId);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 0);
             },
             view:function (recordId) {
-                var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=view&recordId=" + recordId);
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
+                var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=view&recordId=" + recordId);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 2);
             },
             del: function (recordId) {
-                var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Delete.do';
+                var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Delete.do';
                 ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
             },
             move:function (type) {
-                var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Move.do';
+                var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Move.do';
                 ListPageUtility.IViewMoveFace(url,this.selectionRows,appList.idFieldName,type,appList);
             },
             changePage: function (pageNum) {

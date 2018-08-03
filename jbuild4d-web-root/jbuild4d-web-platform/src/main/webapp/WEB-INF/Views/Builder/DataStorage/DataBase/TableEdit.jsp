@@ -17,7 +17,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
-    <div id="appForm">
+    <div id="appForm" v-cloak>
         <div class="list-2column">
             <div class="left-outer-wrap-c" style="bottom: 50px;width: 335px;">
                 <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px">表信息</divider>
@@ -54,12 +54,15 @@
                 <divider orientation="left" :dashed="true" style="font-size: 12px">表字段</divider>
                 <div style="width: 100%">
                     <div style="float: right;margin-bottom: 8px">
+                        忽略物理表修改错误: <i-switch size="small" v-model="ignorePhysicalError"></i-switch>
                         <i-select v-model="useTemplateName" size="small" style="width:200px">
                             <i-option v-for="(item,key) in templateFieldGroup" :value="key" :key="key">使用模版:{{key}}</i-option>
                         </i-select>
                         <button-group>
-                            <i-button size="small" type="primary" icon="md-add" @click="addField"></i-button>
+                            <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
                             <i-button size="small" type="primary" icon="md-close"></i-button>
+                            <i-button size="small" type="primary" icon="ios-arrow-up"></i-button>
+                            <i-button size="small" type="primary" icon="ios-arrow-down"></i-button>
                         </button-group>
                     </div>
                     <div style="clear: bottom"></div>
@@ -79,6 +82,7 @@
                 useTemplateName:"GeneralTemplate",
                 currUserEntity:${currUserEntity},
                 templateFieldGroup:${templateFieldGroup},
+                ignorePhysicalError:false,
                 tableEntity:{
                     tableId:'${tableEntity.tableId}',
                     tableCaption:'${tableEntity.tableCaption}',
@@ -176,6 +180,7 @@
                             Title:"是否主键",
                             BindName:"fieldIsPk",
                             Renderer:"EditTable_CheckBox",
+                            IsCNValue:true,
                             DefaultValue:{
                                 Type:"Const",
                                 Value:"否"
@@ -190,6 +195,7 @@
                             BindName:"fieldAllowNull",
                             Renderer:"EditTable_CheckBox",
                             Hidden:false,
+                            IsCNValue:true,
                             DefaultValue:{
                                 Type:"Const",
                                 Value:"是"
@@ -213,7 +219,7 @@
                     TableId:"TableFields",
                     TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
                 },
-                tableFieldsData:[],
+                tableFieldsData:${tableFieldsData},
                 status: '${op}'
             },
             mounted:function () {
@@ -247,21 +253,19 @@
                         console.log(this.editTableObj.GetSerializeJson());
                         var sendData = {
                             op: this.status,
+                            ignorePhysicalError:this.ignorePhysicalError,
                             tableEntityJson: encodeURIComponent(JSON.stringify(this.tableEntity)),
                             fieldVoListJson: encodeURIComponent(JSON.stringify(this.editTableObj.GetSerializeJson()))
                         };
                         //return;
                         var url = '/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do';
                         AjaxUtility.Post(url, sendData, function (result) {
+                            //debugger;
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 if (result.success) {
-                                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                        //debugger;
-                                        window.OpenerWindowObj.appList.reloadData();
-                                        DialogUtility.Frame_CloseDialog(window);
-                                    });
+                                    window.OpenerWindowObj.appList.reloadData();
+                                    DialogUtility.Frame_CloseDialog(window);
                                 }
-                                DialogUtility.Frame_CloseDialog(window);
                             });
                         }, "json");
                     }

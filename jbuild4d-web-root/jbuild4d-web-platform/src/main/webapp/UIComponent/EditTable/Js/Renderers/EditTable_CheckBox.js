@@ -37,10 +37,19 @@ var EditTable_CheckBox={
     Get_CompletedStatus_HtmlElem:function(_config,template,hostCell,hostRow,hostTable,editStausHtmlElem) {
         var val = editStausHtmlElem.val();
         var $elem ="";
-        if(editStausHtmlElem.attr("checked") =="checked"){
-            $elem = $("<label value='1' >是</label>");
-        }else{
-            $elem = $("<label value='0'>否</label>");
+        if(template.IsCNValue){
+            if (editStausHtmlElem.attr("checked") == "checked") {
+                $elem = $("<label IsSerialize='true' BindName='" + template.BindName + "' value='是'>是</label>");
+            } else {
+                $elem = $("<label IsSerialize='true' BindName='" + template.BindName + "' value='否'>否</label>");
+            }
+        }
+        else {
+            if (editStausHtmlElem.attr("checked") == "checked") {
+                $elem = $("<label IsSerialize='true' BindName='" + template.BindName + "' value='1'>是</label>");
+            } else {
+                $elem = $("<label IsSerialize='true' BindName='" + template.BindName + "' value='0'>否</label>");
+            }
         }
         return $elem;
     },
