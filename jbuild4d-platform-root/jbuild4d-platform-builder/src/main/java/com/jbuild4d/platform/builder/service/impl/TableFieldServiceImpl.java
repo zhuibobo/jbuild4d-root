@@ -1,5 +1,6 @@
 package com.jbuild4d.platform.builder.service.impl;
 
+import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dao.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
@@ -99,5 +100,33 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
         fieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNum());
         fieldEntity.setFieldTemplateName(templateName);
         return fieldEntity;
+    }
+
+    public TableFieldServiceImpl(BaseMapper<TableFieldEntity> _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) {
+        super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
+    }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        TableFieldEntity selfEntity=tableFieldMapper.selectByPrimaryKey(id);
+        TableFieldEntity ltEntity=tableFieldMapper.selectLessThanRecord(id,selfEntity.getFieldTableId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        TableFieldEntity selfEntity=tableFieldMapper.selectByPrimaryKey(id);
+        TableFieldEntity ltEntity=tableFieldMapper.selectGreaterThanRecord(id,selfEntity.getFieldTableId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    private void switchOrder(TableFieldEntity toEntity,TableFieldEntity selfEntity) {
+        if(toEntity !=null){
+            int newNum= toEntity.getFieldOrderNum();
+            toEntity.setFieldOrderNum(selfEntity.getFieldOrderNum());
+            selfEntity.setFieldOrderNum(newNum);
+            tableFieldMapper.updateByPrimaryKeySelective(toEntity);
+            tableFieldMapper.updateByPrimaryKeySelective(selfEntity);
+        }
     }
 }

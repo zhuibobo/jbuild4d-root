@@ -24,7 +24,7 @@ var EditTable_TextBox={
             val=viewStausHtmlElem.html();
         }
 
-        var $elem=$("<input type='text' style='width: 98%' />")
+        var $elem=$("<input type='text' IsSerialize='true' style='width: 98%' />")
         $elem.val(val);
         return $elem;
     },

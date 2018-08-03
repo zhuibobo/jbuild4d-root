@@ -422,7 +422,12 @@ var EditTable= {
             var _rowId = $tr.attr("id");
             if(rowId == _rowId) {
                 $tr.find("[IsSerialize='true']").each(function () {
-                    rowData[$(this).attr("BindName")]= $(this).attr("Value");
+                    if($(this).attr("Value")!=undefined) {
+                        rowData[$(this).attr("BindName")] = $(this).attr("Value");
+                    }
+                    else {
+                        rowData[$(this).attr("BindName")] = $(this).val();
+                    }
                 });
             }
         });

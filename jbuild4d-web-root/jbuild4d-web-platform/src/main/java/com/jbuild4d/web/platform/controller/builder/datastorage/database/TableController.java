@@ -1,5 +1,6 @@
 package com.jbuild4d.web.platform.controller.builder.datastorage.database;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.text.ParseException;
@@ -123,5 +125,18 @@ public class TableController {
         Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
         PageInfo<TableEntity> proOrganPageInfo=tableService.getPage(jb4DSession,pageNum,pageSize,searchMap);
         return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
+    }
+
+    @RequestMapping(value = "Move", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo move(String recordId,String type ,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
+        JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+        if(type.equals("up")) {
+            tableFieldService.moveUp(jb4DSession, recordId);
+        }
+        else {
+            tableFieldService.moveDown(jb4DSession,recordId);
+        }
+        return JBuild4DResponseVo.opSuccess();
     }
 }

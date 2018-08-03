@@ -23,7 +23,7 @@
         select
             *
         from TB4D_DEV_DEMO_TL_TREE
-        where DDTT_ORDER_NUM = (select max(DDTT_ORDER_NUM) from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ORDER_NUM<(select DDTT_ORDER_NUM from TB4D_DEV_DEMO_TL_TREE where DDTT_ID=#{id,jdbcType=NVARCHAR} and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR})) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        where DDTT_ORDER_NUM = (select max(DDTT_ORDER_NUM) from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ORDER_NUM<(select DDTT_ORDER_NUM from TB4D_DEV_DEMO_TL_TREE where DDTT_ID=#{id,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
         ]]>
   </select>
   <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -31,7 +31,7 @@
         select
             *
         from TB4D_DEV_DEMO_TL_TREE
-        where DDTT_ORDER_NUM = (select min(DDTT_ORDER_NUM) from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ORDER_NUM>(select DDTT_ORDER_NUM from TB4D_DEV_DEMO_TL_TREE where DDTT_ID=#{id,jdbcType=NVARCHAR} and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR})) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        where DDTT_ORDER_NUM = (select min(DDTT_ORDER_NUM) from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ORDER_NUM>(select DDTT_ORDER_NUM from TB4D_DEV_DEMO_TL_TREE where DDTT_ID=#{id,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
         ]]>
   </select>
 </mapper>

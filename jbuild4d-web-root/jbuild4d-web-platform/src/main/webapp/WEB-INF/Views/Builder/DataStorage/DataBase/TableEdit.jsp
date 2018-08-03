@@ -60,9 +60,9 @@
                         </i-select>
                         <button-group>
                             <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
-                            <i-button size="small" type="primary" icon="md-close"></i-button>
-                            <i-button size="small" type="primary" icon="ios-arrow-up"></i-button>
-                            <i-button size="small" type="primary" icon="ios-arrow-down"></i-button>
+                            <i-button size="small" type="primary" icon="md-close" @click="removeField"></i-button>
+                            <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveField('up')"></i-button>
+                            <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveField('down')"></i-button>
                         </button-group>
                     </div>
                     <div style="clear: bottom"></div>
@@ -238,6 +238,31 @@
             methods:{
                 addField:function(){
                     this.editTableObj.AddEditingRowByTemplate();
+                },
+                removeField:function () {
+                    this.editTableObj.RemoveRow();
+                },
+                moveField:function (type) {
+                    var editRow=this.editTableObj.GetEditRow();
+                    if(editRow!=null){
+                        var rowId=editRow.attr("id");
+                        var fieldId=this.editTableObj.GetSelectRowDataByRowId(rowId).fieldId;
+                        var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Move.do';
+                        AjaxUtility.Post(url, {recordId: fieldId,type:type}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    if(type=="down") {
+
+                                    }else{
+
+                                    }
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
+                            }
+                        }, "json");
+                    }
                 },
                 saveEditTable:function () {
                     if(this.tableEntity.tableCaption.replace(/(^\s*)|(\s*$)/g, "")==""){

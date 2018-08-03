@@ -22,4 +22,8 @@ public interface TableFieldMapper extends BaseMapper<TableFieldEntity> {
     List<TableFieldEntity> selectByTableId(String tableId);
 
     int nextOrderNumInTable(String tableId);
+
+    TableFieldEntity selectLessThanRecord(String id, String fieldTableId);
+
+    TableFieldEntity selectGreaterThanRecord(String id, String fieldTableId);
 }
