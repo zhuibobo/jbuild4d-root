@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
-    <Group Name="默认值">
+    <Tab Name="默认值" Value="">
         <EnvVariable Name="" Value="" Class="">
-            <Config></Config>
         </EnvVariable>
-    </Group>
-    <Group Name="时间日期">
+    </Tab>
+    <Tab Name="时间日期" Value="">
         <EnvVariable Name="" Value="" Class="" Para=""></EnvVariable>
-    </Group>
-    <Group Name="环境变量">
+    </Tab>
+    <Tab Name="环境变量" Value="">
         <Group Name="系统变量">
 
         </Group>
-    </Group>
-    <Group Name="编码器">
+    </Tab>
+    <Tab Name="编码器" Value="">
         <Group Name="时间日期">
 
         </Group>
-    </Group>
+    </Tab>
 </Config>
