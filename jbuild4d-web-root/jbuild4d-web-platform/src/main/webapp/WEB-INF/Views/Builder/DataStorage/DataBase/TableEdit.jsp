@@ -90,7 +90,7 @@
                     tableType:'',
                     tableIssystem:'${tableEntity.tableIssystem}' == '' ? '否' : '${tableEntity.tableIssystem}',
                     tableDesc: '${tableEntity.tableDesc}',
-                    tableGroupId:'${tableEntity.tableGroupId}' == '' ? StringUtility.QueryString("groupId") : '${tableEntity.tableGroupId}'
+                    tableGroupId:'${tableEntity.tableGroupId}'
                 },
                 editTableObj:null,
                 editTableConfig:{
@@ -100,7 +100,7 @@
                     Templates:[
                         {
                             Title:"字段ID",
-                            BindName:"fieldFieldId",
+                            BindName:"fieldId",
                             Renderer:"EditTable_Lable",
                             TitleCellClassName:"TitleCell",
                             DefaultValue:{
@@ -234,8 +234,6 @@
                     this.editTableObj.AddEditingRowByTemplate();
                 },
                 saveEditTable:function () {
-                    console.log(this.editTableObj.GetSerializeJson());
-
                     if(this.tableEntity.tableCaption.replace(/(^\s*)|(\s*$)/g, "")==""){
                         DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "表标题不能为空！",null);
                         return false;
@@ -246,14 +244,15 @@
                     }
 
                     if (this.editTableObj.CompletedEditingRow()) {
+                        console.log(this.editTableObj.GetSerializeJson());
                         var sendData = {
-                            status: this.status,
-                            tableEntity: encodeURIComponent(JSON.stringify(this.formValidate)),
-                            tableFields: encodeURIComponent(this.editTableObj.GetSerializeJson())
+                            op: this.status,
+                            tableEntityJson: encodeURIComponent(JSON.stringify(this.tableEntity)),
+                            fieldVoListJson: encodeURIComponent(JSON.stringify(this.editTableObj.GetSerializeJson()))
                         };
-                        return;
-                        var url = '/PlatForm/Builder/DataStorage/DataBase/TableGroup/SaveEdit.do';
-                        AjaxUtility.PostRequestBody(url, sendData, function (result) {
+                        //return;
+                        var url = '/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do';
+                        AjaxUtility.Post(url, sendData, function (result) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 if (result.success) {
                                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
