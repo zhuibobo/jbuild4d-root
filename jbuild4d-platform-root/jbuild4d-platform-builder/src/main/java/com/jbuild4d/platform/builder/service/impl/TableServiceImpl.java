@@ -166,8 +166,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         try
         {
             //修改物理表结构
-            try
-            {
+            try {
                 tableBuilederFace.updateTable(newTableEntity,newFields,updateFields,deleteFields);
             }
             catch (Exception ex){
