@@ -91,5 +91,29 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
             throw new JBuild4DGenerallyException("找不到要删除的记录!");
         }
     }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        TableGroupEntity selfEntity=tableGroupMapper.selectByPrimaryKey(id);
+        TableGroupEntity ltEntity=tableGroupMapper.selectLessThanRecord(id,selfEntity.getTableGroupParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        TableGroupEntity selfEntity=tableGroupMapper.selectByPrimaryKey(id);
+        TableGroupEntity ltEntity=tableGroupMapper.selectGreaterThanRecord(id,selfEntity.getTableGroupParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    private void switchOrder(TableGroupEntity toEntity,TableGroupEntity selfEntity) {
+        if(toEntity !=null){
+            int newNum= toEntity.getTableGroupOrderNum();
+            toEntity.setTableGroupOrderNum(selfEntity.getTableGroupOrderNum());
+            selfEntity.setTableGroupOrderNum(newNum);
+            tableGroupMapper.updateByPrimaryKeySelective(toEntity);
+            tableGroupMapper.updateByPrimaryKeySelective(selfEntity);
+        }
+    }
 }
 

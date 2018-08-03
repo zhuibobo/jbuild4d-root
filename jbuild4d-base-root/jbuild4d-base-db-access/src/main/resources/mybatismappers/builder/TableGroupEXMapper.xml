@@ -14,11 +14,23 @@
         <if test="tableGroupDelEnable !=null and tableGroupDelEnable !=''"> and TABLE_GROUP_DEL_ENABLE like #{tableGroupDelEnable} </if>
         <if test="tableGroupEnpItem !=null and tableGroupEnpItem !=''"> and TABLE_GROUP_ENP_ITEM like #{tableGroupEnpItem} </if>
     </where>ORDER by TABLE_GROUP_ORDER_NUM ASC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_GROUP
- where TABLE_GROUP_ORDER_NUM = (select max(TABLE_GROUP_ORDER_NUM) from TB4D_TABLE_GROUP where TABLE_GROUP_ORDER_NUM<(select TABLE_GROUP_ORDER_NUM from TB4D_TABLE_GROUP where TABLE_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_GROUP
- where TABLE_GROUP_ORDER_NUM = (select min(TABLE_GROUP_ORDER_NUM) from TB4D_TABLE_GROUP where TABLE_GROUP_ORDER_NUM>(select TABLE_GROUP_ORDER_NUM from TB4D_TABLE_GROUP where TABLE_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectChilds" resultType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
         select<include refid="Base_Column_List"/> from TB4D_TABLE_GROUP where TABLE_GROUP_PARENT_ID=#{parentId} ORDER by TABLE_GROUP_ORDER_NUM ASC
+    </select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select
+            *
+        from TB4D_TABLE_GROUP
+        where TABLE_GROUP_ORDER_NUM = (select max(TABLE_GROUP_ORDER_NUM) from TB4D_TABLE_GROUP where TABLE_GROUP_ORDER_NUM<(select TABLE_GROUP_ORDER_NUM from TB4D_TABLE_GROUP where TABLE_GROUP_ID=#{id,jdbcType=NVARCHAR}) and TABLE_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and TABLE_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select
+            *
+        from TB4D_TABLE_GROUP
+        where TABLE_GROUP_ORDER_NUM = (select min(TABLE_GROUP_ORDER_NUM) from TB4D_TABLE_GROUP where TABLE_GROUP_ORDER_NUM>(select TABLE_GROUP_ORDER_NUM from TB4D_TABLE_GROUP where TABLE_GROUP_ID=#{id,jdbcType=NVARCHAR}) and TABLE_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and TABLE_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        ]]>
     </select>
 </mapper>
