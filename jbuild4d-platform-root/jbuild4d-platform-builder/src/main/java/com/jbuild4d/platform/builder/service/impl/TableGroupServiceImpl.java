@@ -12,6 +12,7 @@ import com.jbuild4d.platform.builder.service.ITableGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -67,6 +68,28 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         treeTableEntity.setTableGroupValue("表分组");
         this.save(jb4DSession,treeTableEntity.getTableGroupId(),treeTableEntity);
         return treeTableEntity;
+    }
+
+    @Override
+    public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        TableGroupEntity tableGroupEntity=tableGroupMapper.selectByPrimaryKey(id);
+        if(tableGroupEntity!=null){
+            if(tableGroupEntity.getTableGroupIssystem().equals(TrueFalseEnum.True.getDisplayName())){
+                throw JBuild4DGenerallyException.getSystemRecordDelException();
+            }
+            if(tableGroupEntity.getTableGroupDelEnable().equals(TrueFalseEnum.False.getDisplayName())){
+                throw JBuild4DGenerallyException.getDBFieldSettingDelException();
+            }
+            List<TableGroupEntity> childEntityList=tableGroupMapper.selectChilds(id);
+            if(childEntityList!=null&&childEntityList.size()>0){
+                throw JBuild4DGenerallyException.getHadChildDelException();
+            }
+            return super.deleteByKey(jb4DSession, id);
+        }
+        else
+        {
+            throw new JBuild4DGenerallyException("找不到要删除的记录!");
+        }
     }
 }
 
