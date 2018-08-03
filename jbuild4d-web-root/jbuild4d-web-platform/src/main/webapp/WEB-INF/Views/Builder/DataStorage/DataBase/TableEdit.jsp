@@ -232,6 +232,7 @@
                 }
                 else {
                     this.editTableObj.LoadJsonData(this.tableFieldsData);
+                    this.tableEntity.tableUpdater=this.currUserEntity.userName;
                 }
                 $("#divEditTable").height($(".right-outer-wrap-c").height()-85);
             },
@@ -245,6 +246,7 @@
                 moveField:function (type) {
                     var editRow=this.editTableObj.GetEditRow();
                     if(editRow!=null){
+                        var _self=this;
                         var rowId=editRow.attr("id");
                         var fieldId=this.editTableObj.GetSelectRowDataByRowId(rowId).fieldId;
                         var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Move.do';
@@ -252,9 +254,9 @@
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     if(type=="down") {
-
+                                        _self.editTableObj.MoveDown();
                                     }else{
-
+                                        _self.editTableObj.MoveUp();
                                     }
                                 });
                             }
