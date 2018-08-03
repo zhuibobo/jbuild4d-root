@@ -1,6 +1,7 @@
 package com.jbuild4d.base.dbaccess.dao;
 
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface TableFieldMapper extends BaseMapper<TableFieldEntity> {
 
     int nextOrderNumInTable(String tableId);
 
-    TableFieldEntity selectLessThanRecord(String id, String fieldTableId);
+    TableFieldEntity selectLessThanRecord(@Param("fieldId") String id,@Param("fieldTableId") String fieldTableId);
 
-    TableFieldEntity selectGreaterThanRecord(String id, String fieldTableId);
+    TableFieldEntity selectGreaterThanRecord(@Param("fieldId") String id,@Param("fieldTableId") String fieldTableId);
 }
