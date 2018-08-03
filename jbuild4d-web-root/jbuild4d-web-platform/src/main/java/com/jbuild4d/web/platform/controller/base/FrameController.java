@@ -23,8 +23,9 @@ public class FrameController {
         ModelAndView modelAndView=new ModelAndView("Frame");
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
         modelAndView.addObject("menuJson",JsonUtility.toObjectString(menuService.getALL(jb4DSession)));
-        JB4DSession session= JB4DSessionUtility.getSession();
-        modelAndView.addObject("currUserEntity", JsonUtility.toObjectString(session));
+        //JB4DSession session= JB4DSessionUtility.getSession();
+        //modelAndView.addObject("currUserEntity", JsonUtility.toObjectString(session));
+        JB4DSessionUtility.setUserInfoToMV(modelAndView);
         return modelAndView;
     }
 

@@ -593,7 +593,11 @@ var EditTableDefauleValue={
                 switch (defaultValueType){
                     case "Const":{
                         return defaultValueConfig.Value;
-                    }break;
+                    }
+                    case "GUID":{
+                        return StringUtility.Guid();
+                    }
+                    break;
                 }
             }
         }

@@ -1,8 +1,11 @@
 package com.jbuild4d.base.service.general;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.base.exception.SessionTimeoutException;
+import com.jbuild4d.base.tools.common.JsonUtility;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -60,5 +63,10 @@ public class JB4DSessionUtility {
     public static void clearMySession() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         request.getSession().removeAttribute(UserLoginSessionKey);
+    }
+
+    public static void setUserInfoToMV(ModelAndView modelAndView) throws JsonProcessingException {
+        JB4DSession jb4DSession=getSession();
+        modelAndView.addObject("currUserEntity", JsonUtility.toObjectString(jb4DSession));
     }
 }

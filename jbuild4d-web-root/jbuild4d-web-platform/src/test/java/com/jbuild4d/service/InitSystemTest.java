@@ -251,7 +251,7 @@ public class InitSystemTest extends BaseTest {
         organService.deleteByKey(jb4DSession,"0");
         organService.createRootOrgan(jb4DSession);
 
-        tableGroupService.deleteByKey(jb4DSession,"0");
+        tableGroupService.deleteByKeyNotValidate(jb4DSession,"0");
         TableGroupEntity tableGroupEntity=tableGroupService.createRootNode(jb4DSession);
 
         tableFieldService.createGeneralTemplate(jb4DSession);

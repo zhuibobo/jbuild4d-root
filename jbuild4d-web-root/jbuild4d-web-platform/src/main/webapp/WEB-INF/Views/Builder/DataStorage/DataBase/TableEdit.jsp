@@ -68,7 +68,7 @@
             </div>
         </div>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
-            <i-button type="primary"> 保 存</i-button>
+            <i-button type="primary" @click="saveEditTable()"> 保 存</i-button>
             <i-button style="margin-left: 8px">关 闭</i-button>
         </div>
     </div>
@@ -77,6 +77,7 @@
             el:"#appForm",
             data:{
                 useTemplateName:"GeneralTemplate",
+                currUserEntity:${currUserEntity},
                 templateFieldGroup:${templateFieldGroup},
                 tableEntity:{
                     tableId:'${tableEntity.tableId}',
@@ -85,8 +86,8 @@
                     tableCreateTime:'<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />' == '' ? DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />',
                     tableCreater:'${tableEntity.tableCreater}',
                     tableUpdateTime:'<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />' == '' ? DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />',
-                    tableUpdater:'${tableEntity.tableUpdater}',
-                    tableType:"",
+                    tableUpdater:'',
+                    tableType:'',
                     tableIssystem:'${tableEntity.tableIssystem}' == '' ? '否' : '${tableEntity.tableIssystem}',
                     tableDesc: '${tableEntity.tableDesc}',
                     tableGroupId:'${tableEntity.tableGroupId}' == '' ? StringUtility.QueryString("groupId") : '${tableEntity.tableGroupId}'
@@ -103,8 +104,8 @@
                             Renderer:"EditTable_Lable",
                             TitleCellClassName:"TitleCell",
                             DefaultValue:{
-                                Type:"Const",
-                                Value:0//默认值0
+                                Type:"GUID",
+                                Value:0
                             },
                             Hidden:true
                         },
@@ -218,11 +219,10 @@
             mounted:function () {
                 this.editTableObj=Object.create(EditTable);
                 this.editTableObj.Initialization(this.editTableConfig);
-                /*for(var i=0;i<100;i++){
-                    this.tableFieldsData.push({fieldCaption:"你",fieldName:"d"});
-                }*/
                 if(this.status=="add"){
                     this.editTableObj.LoadJsonData(this.templateFieldGroup[this.useTemplateName]);
+                    this.tableEntity.tableCreater=this.currUserEntity.userName;
+                    this.tableEntity.tableUpdater=this.currUserEntity.userName;
                 }
                 else {
                     this.editTableObj.LoadJsonData(this.tableFieldsData);
@@ -232,6 +232,40 @@
             methods:{
                 addField:function(){
                     this.editTableObj.AddEditingRowByTemplate();
+                },
+                saveEditTable:function () {
+                    console.log(this.editTableObj.GetSerializeJson());
+
+                    if(this.tableEntity.tableCaption.replace(/(^\s*)|(\s*$)/g, "")==""){
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "表标题不能为空！",null);
+                        return false;
+                    }
+                    if(/^[a-zA-Z][a-zA-Z0-9_]{0,}$/.test(this.tableEntity.tableName) == false){
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "表名称不能为空且只能是字母、下划线、数字并以字母开头！",null);
+                        return false;
+                    }
+
+                    if (this.editTableObj.CompletedEditingRow()) {
+                        var sendData = {
+                            status: this.status,
+                            tableEntity: encodeURIComponent(JSON.stringify(this.formValidate)),
+                            tableFields: encodeURIComponent(this.editTableObj.GetSerializeJson())
+                        };
+                        return;
+                        var url = '/PlatForm/Builder/DataStorage/DataBase/TableGroup/SaveEdit.do';
+                        AjaxUtility.PostRequestBody(url, sendData, function (result) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                if (result.success) {
+                                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                        //debugger;
+                                        window.OpenerWindowObj.appList.reloadData();
+                                        DialogUtility.Frame_CloseDialog(window);
+                                    });
+                                }
+                                DialogUtility.Frame_CloseDialog(window);
+                            });
+                        }, "json");
+                    }
                 }
             }
         });

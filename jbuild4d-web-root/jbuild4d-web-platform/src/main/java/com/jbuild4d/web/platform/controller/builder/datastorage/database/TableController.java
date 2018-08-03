@@ -3,6 +3,7 @@ package com.jbuild4d.web.platform.controller.builder.datastorage.database;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
@@ -43,6 +44,7 @@ public class TableController {
             templateFieldMap.put(templateName,fields);
         }
         modelAndView.addObject("templateFieldGroup",JsonUtility.toObjectString(templateFieldMap));
+        JB4DSessionUtility.setUserInfoToMV(modelAndView);
         modelAndView.addObject("op",op);
         return modelAndView;
     }
