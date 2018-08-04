@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Date: 2018/8/3
  * To change this template use File | Settings | File Templates.
  */
-@Controller
-@RequestMapping(value = "/PlatForm/SelectView/")
+
 public class SelectViewController {
+
+
+
 }
