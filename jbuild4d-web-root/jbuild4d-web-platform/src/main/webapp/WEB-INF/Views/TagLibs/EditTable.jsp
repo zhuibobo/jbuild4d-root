@@ -7,7 +7,7 @@
 <script src="${ctxpath}/UIComponent/EditTable/Js/EditTable.js" type="text/javascript"></script>
 
 <script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/EditTable_CheckBox.js" type="text/javascript"></script>
-<script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/EditTable_Lable.js" type="text/javascript"></script>
+<script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/EditTable_Label.js" type="text/javascript"></script>
 <script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/EditTable_Radio.js" type="text/javascript"></script>
 <script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/EditTable_Select.js" type="text/javascript"></script>
 <script src="${ctxpath}/UIComponent/EditTable/Js/Renderers/EditTable_SelectRowCheckBox.js" type="text/javascript"></script>

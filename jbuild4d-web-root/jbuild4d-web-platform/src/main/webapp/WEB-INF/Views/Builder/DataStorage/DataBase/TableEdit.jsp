@@ -105,7 +105,7 @@
                         {
                             Title:"字段ID",
                             BindName:"fieldId",
-                            Renderer:"EditTable_Lable",
+                            Renderer:"EditTable_Label",
                             TitleCellClassName:"TitleCell",
                             DefaultValue:{
                                 Type:"GUID",
