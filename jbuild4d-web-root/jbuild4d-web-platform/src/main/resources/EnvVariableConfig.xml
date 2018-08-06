@@ -21,5 +21,11 @@
         </Group>
     </Type>
     <Type Text="序号编码" Value="NumberCode">
+
+    </Type>
+    <Type Text="主键生成" Value="IdCoder">
+        <Group Text="主键生成">
+            <EnvVariable Text="年年年年-月月-日日" Value="yyyy-mm-dd" ClassName="com.jbuild4d.platform.system.apivariable.impl.DateTimeVariableCreater" Para="yyyy-mm-dd" Desc=""></EnvVariable>
+        </Group>
     </Type>
 </Config>

@@ -6,5 +6,5 @@ package com.jbuild4d.platform.system.apivariable.impl;
  * Date: 2018/8/6
  * To change this template use File | Settings | File Templates.
  */
-public class IdVariableCreater {
+public class UUIDVariableCreater {
 }
