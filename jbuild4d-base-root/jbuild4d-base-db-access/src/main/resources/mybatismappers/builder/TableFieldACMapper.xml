@@ -21,13 +21,14 @@
             <arg column="FIELD_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="FIELD_TEMPLATE_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="FIELD_DEFAULT_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         FIELD_ID, FIELD_TABLE_ID, FIELD_NAME, FIELD_CAPTION, FIELD_IS_PK, FIELD_ALLOW_NULL,
         FIELD_DATA_TYPE, FIELD_DATA_LENGTH, FIELD_DECIMAL_LENGTH, FIELD_DEFAULT_VALUE, FIELD_DEFAULT_TEXT,
         FIELD_CREATE_TIME, FIELD_CREATER, FIELD_UPDATE_TIME, FIELD_UPDATER, FIELD_DESC, FIELD_ORDER_NUM,
-        FIELD_TEMPLATE_NAME
+        FIELD_TEMPLATE_NAME, FIELD_DEFAULT_TYPE
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -46,14 +47,14 @@
         FIELD_DEFAULT_VALUE, FIELD_DEFAULT_TEXT,
         FIELD_CREATE_TIME, FIELD_CREATER, FIELD_UPDATE_TIME,
         FIELD_UPDATER, FIELD_DESC, FIELD_ORDER_NUM,
-        FIELD_TEMPLATE_NAME)
+        FIELD_TEMPLATE_NAME, FIELD_DEFAULT_TYPE)
         values (#{fieldId,jdbcType=NVARCHAR}, #{fieldTableId,jdbcType=NVARCHAR}, #{fieldName,jdbcType=NVARCHAR},
         #{fieldCaption,jdbcType=NVARCHAR}, #{fieldIsPk,jdbcType=NVARCHAR}, #{fieldAllowNull,jdbcType=NVARCHAR},
         #{fieldDataType,jdbcType=NVARCHAR}, #{fieldDataLength,jdbcType=INTEGER}, #{fieldDecimalLength,jdbcType=INTEGER},
         #{fieldDefaultValue,jdbcType=NVARCHAR}, #{fieldDefaultText,jdbcType=NVARCHAR},
         #{fieldCreateTime,jdbcType=TIMESTAMP}, #{fieldCreater,jdbcType=NVARCHAR}, #{fieldUpdateTime,jdbcType=TIMESTAMP},
         #{fieldUpdater,jdbcType=NVARCHAR}, #{fieldDesc,jdbcType=NVARCHAR}, #{fieldOrderNum,jdbcType=INTEGER},
-        #{fieldTemplateName,jdbcType=NVARCHAR})
+        #{fieldTemplateName,jdbcType=NVARCHAR}, #{fieldDefaultType,jdbcType=NVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
         insert into TB4D_TABLE_FIELD
@@ -112,6 +113,9 @@
             <if test="fieldTemplateName != null">
                 FIELD_TEMPLATE_NAME,
             </if>
+            <if test="fieldDefaultType != null">
+                FIELD_DEFAULT_TYPE,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="fieldId != null">
@@ -167,6 +171,9 @@
             </if>
             <if test="fieldTemplateName != null">
                 #{fieldTemplateName,jdbcType=NVARCHAR},
+            </if>
+            <if test="fieldDefaultType != null">
+                #{fieldDefaultType,jdbcType=NVARCHAR},
             </if>
         </trim>
     </insert>
@@ -224,6 +231,9 @@
             <if test="fieldTemplateName != null">
                 FIELD_TEMPLATE_NAME = #{fieldTemplateName,jdbcType=NVARCHAR},
             </if>
+            <if test="fieldDefaultType != null">
+                FIELD_DEFAULT_TYPE = #{fieldDefaultType,jdbcType=NVARCHAR},
+            </if>
         </set>
         where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </update>
@@ -245,7 +255,8 @@
             FIELD_UPDATER = #{fieldUpdater,jdbcType=NVARCHAR},
             FIELD_DESC = #{fieldDesc,jdbcType=NVARCHAR},
             FIELD_ORDER_NUM = #{fieldOrderNum,jdbcType=INTEGER},
-            FIELD_TEMPLATE_NAME = #{fieldTemplateName,jdbcType=NVARCHAR}
+            FIELD_TEMPLATE_NAME = #{fieldTemplateName,jdbcType=NVARCHAR},
+            FIELD_DEFAULT_TYPE = #{fieldDefaultType,jdbcType=NVARCHAR}
         where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </update>
 </mapper>

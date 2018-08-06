@@ -34,6 +34,9 @@
             <tab-pane label="序号编码" name="NumberCode">
                 <ul id="numberCodeZTreeUL" class="ztree"></ul>
             </tab-pane>
+            <tab-pane label="主键生成" name="IdCoder">
+                <ul id="numberCodeZTreeUL1" class="ztree"></ul>
+            </tab-pane>
         </tabs>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
             <i-button type="primary" @click="selectEnvVar()"> 确 认 </i-button>

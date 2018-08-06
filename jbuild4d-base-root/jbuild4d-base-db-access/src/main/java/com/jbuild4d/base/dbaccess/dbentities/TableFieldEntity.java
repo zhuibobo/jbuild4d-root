@@ -66,7 +66,10 @@ public class TableFieldEntity {
     //FIELD_TEMPLATE_NAME
     private String fieldTemplateName;
 
-    public TableFieldEntity(String fieldId, String fieldTableId, String fieldName, String fieldCaption, String fieldIsPk, String fieldAllowNull, String fieldDataType, Integer fieldDataLength, Integer fieldDecimalLength, String fieldDefaultValue, String fieldDefaultText, Date fieldCreateTime, String fieldCreater, Date fieldUpdateTime, String fieldUpdater, String fieldDesc, Integer fieldOrderNum, String fieldTemplateName) {
+    //FIELD_DEFAULT_TYPE
+    private String fieldDefaultType;
+
+    public TableFieldEntity(String fieldId, String fieldTableId, String fieldName, String fieldCaption, String fieldIsPk, String fieldAllowNull, String fieldDataType, Integer fieldDataLength, Integer fieldDecimalLength, String fieldDefaultValue, String fieldDefaultText, Date fieldCreateTime, String fieldCreater, Date fieldUpdateTime, String fieldUpdater, String fieldDesc, Integer fieldOrderNum, String fieldTemplateName, String fieldDefaultType) {
         this.fieldId = fieldId;
         this.fieldTableId = fieldTableId;
         this.fieldName = fieldName;
@@ -85,6 +88,7 @@ public class TableFieldEntity {
         this.fieldDesc = fieldDesc;
         this.fieldOrderNum = fieldOrderNum;
         this.fieldTemplateName = fieldTemplateName;
+        this.fieldDefaultType = fieldDefaultType;
     }
 
     public TableFieldEntity() {
@@ -233,5 +237,13 @@ public class TableFieldEntity {
 
     public void setFieldTemplateName(String fieldTemplateName) {
         this.fieldTemplateName = fieldTemplateName == null ? null : fieldTemplateName.trim();
+    }
+
+    public String getFieldDefaultType() {
+        return fieldDefaultType;
+    }
+
+    public void setFieldDefaultType(String fieldDefaultType) {
+        this.fieldDefaultType = fieldDefaultType == null ? null : fieldDefaultType.trim();
     }
 }

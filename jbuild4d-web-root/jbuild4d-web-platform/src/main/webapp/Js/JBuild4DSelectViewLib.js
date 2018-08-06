@@ -5,6 +5,7 @@ var SelectEnvVariable={
         DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "选择变量",modal:true}, 2);
     },
     formatText:function (type,text) {
+        //debugger;
         if(type=="Const"){
             return "静态值:【"+text+"】";
         }
@@ -16,6 +17,9 @@ var SelectEnvVariable={
         }
         else if(type=="NumberCode"){
             return "序号编码:【"+text+"】";
+        }
+        else if(type==""){
+            return "【无】";
         }
         return "未知类型"+text;
     }
