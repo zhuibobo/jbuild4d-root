@@ -58,14 +58,23 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
     public void createGeneralTemplate(JB4DSession jb4DSession) {
         String generalTemplateName="GeneralTemplate";
         tableFieldMapper.deleteTemplate(generalTemplateName);
+
         TableFieldEntity idField=newFiled(jb4DSession,"Template","ID","ID",
                 TrueFalseEnum.True,TrueFalseEnum.False,
                 TableFieldTypeEnum.NVarCharType,50,0,
-                "","","表主键",generalTemplateName);
-        TableFieldEntity createTimeField=newFiled(jb4DSession,"Tempalte","F_CREATE_TIEE","记录时间",
+                "IdCoder","UUID","通用唯一识别码",
+                "表主键",generalTemplateName);
+        TableFieldEntity createTimeField=newFiled(jb4DSession,"Template","F_CREATE_TIME","记录时间",
                 TrueFalseEnum.False,TrueFalseEnum.True,
                 TableFieldTypeEnum.DataTimeType,20,0,
-                "","","",generalTemplateName);
+                "DateTime","yyyy-MM-dd HH:mm:ss","年年年年-月月-日日 时:分:秒",
+                "",generalTemplateName);
+        TableFieldEntity organField=newFiled(jb4DSession,"Template","F_ORGAN_ID","组织ID",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.DataTimeType,20,0,
+                "ApiVar","ApiVarCurrentUserOrganId","当前用户组织ID",
+                "",generalTemplateName);
+是
         tableFieldMapper.insert(idField);
         tableFieldMapper.insert(createTimeField);
     }
@@ -78,7 +87,7 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
     private TableFieldEntity newFiled(JB4DSession jb4DSession, String tableId, String fieldName, String fieldCaption,
                                       TrueFalseEnum pk, TrueFalseEnum allowNull,
                                       TableFieldTypeEnum fieldDataType,int dataLength,int decimalLength,
-                                      String fieldDefaultValue,String fieldDefaultText,String fieldDesc,String templateName
+                                      String fieldDefaultType,String fieldDefaultValue,String fieldDefaultText,String fieldDesc,String templateName
     ){
         TableFieldEntity fieldEntity=new TableFieldEntity();
         fieldEntity.setFieldId(UUIDUtility.getUUID());
@@ -90,6 +99,7 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
         fieldEntity.setFieldDataType(fieldDataType.getValue());
         fieldEntity.setFieldDataLength(dataLength);
         fieldEntity.setFieldDecimalLength(decimalLength);
+        fieldEntity.setFieldDefaultType(fieldDefaultType);
         fieldEntity.setFieldDefaultValue(fieldDefaultValue);
         fieldEntity.setFieldDefaultText(fieldDefaultText);
         fieldEntity.setFieldCreateTime(new Date());
