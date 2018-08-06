@@ -13,6 +13,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/IViewLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
+    <%@ include file="/WEB-INF/Views/TagLibs/ZTreeLib.jsp" %>
 </head>
 <body>
     <div id="appSelectView">
@@ -25,13 +26,13 @@
                 </i-form>
             </tab-pane>
             <tab-pane label="日期时间" name="DateTime">
-
+                <ul id="datetimeZTreeUL" class="ztree"></ul>
             </tab-pane>
             <tab-pane label="环境变量" name="EnvVar">
-
+                <ul id="envVarZTreeUL" class="ztree"></ul>
             </tab-pane>
             <tab-pane label="序号编码" name="NumberCode">
-
+                <ul id="numberCodeZTreeUL" class="ztree"></ul>
             </tab-pane>
         </tabs>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
@@ -45,7 +46,15 @@
             data:{
                 selectType:"",
                 selectValue:"",
-                selectText:""
+                selectText:"",
+                tree:{
+                    datetimeTreeSetting:{},
+                    datetimeTreeData:{},
+                    envVarTreeSetting:{},
+                    envVarTreeData:{},
+                    numberCodeTreeSetting:{},
+                    numberCodeTreeData:{}
+                }
             },
             mounted:function (){
 
