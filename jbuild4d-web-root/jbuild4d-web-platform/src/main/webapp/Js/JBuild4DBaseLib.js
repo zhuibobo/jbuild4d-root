@@ -1030,7 +1030,7 @@ var DialogUtility={
     },
     CloseOpenIframeWindow:function(openerwindow,dialogId){
         //alert(dialogId);
-        openerwindow.OpenerWindowObj.Dialog.CloseDialog(dialogId)
+        openerwindow.OpenerWindowObj.DialogUtility.CloseDialog(dialogId)
     },
     CloseDialog:function(dialogId){
         //debugger;

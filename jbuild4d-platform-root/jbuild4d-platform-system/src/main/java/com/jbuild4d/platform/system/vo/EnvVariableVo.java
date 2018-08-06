@@ -92,19 +92,21 @@ public class EnvVariableVo {
         isGroup = group;
     }
 
-    public static EnvVariableVo parseEnvVarNode(Node node,String parentId) {
+    public static EnvVariableVo parseEnvVarNode(Node node,String parentId,String type) {
         EnvVariableVo vo=new EnvVariableVo();
         vo.setText(XMLUtility.getAttribute(node,"Text"));
         vo.setValue(XMLUtility.getAttribute(node,"Value"));
         vo.setClassName(XMLUtility.getAttribute(node,"ClassName"));
         vo.setPara(XMLUtility.getAttribute(node,"Para"));
         vo.setDesc(XMLUtility.getAttribute(node,"Desc"));
+        vo.setId(XMLUtility.getAttribute(node,"Value"));
         vo.setParentId(parentId);
+        vo.setType(type);
         vo.setGroup(false);
         return vo;
     }
 
-    public static EnvVariableVo parseGroupNode(Node groupNode,String parentId) {
+    public static EnvVariableVo parseGroupNode(Node groupNode,String parentId,String type) {
         EnvVariableVo vo=new EnvVariableVo();
         vo.setId(UUIDUtility.getUUID());
         vo.setParentId(parentId);
@@ -112,6 +114,7 @@ public class EnvVariableVo {
         vo.setValue(XMLUtility.getAttribute(groupNode,"Text"));
         vo.setDesc(XMLUtility.getAttribute(groupNode,"Desc"));
         vo.setGroup(true);
+        vo.setType(type);
         return vo;
     }
 }

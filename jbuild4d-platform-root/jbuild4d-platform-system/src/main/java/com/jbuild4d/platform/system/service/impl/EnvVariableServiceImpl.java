@@ -42,9 +42,9 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
         //List<Node> nodes=XMLUtility.parseForNodeList(xmlDocuemnt,"//Config/Tab[@Value='DateTime']/EnvVariable");
         List<EnvVariableVo> result=new ArrayList<>();
         Node groupRootNode=XMLUtility.parseForNode(xmlDocuemnt,"/Config/Type[@Value='DateTime']/Group");
-        EnvVariableVo groupRootVo=EnvVariableVo.parseGroupNode(groupRootNode,"-1");
+        EnvVariableVo groupRootVo=EnvVariableVo.parseGroupNode(groupRootNode,"-1","DateTime");
         result.add(groupRootVo);
-        loopLoadGroup(result,groupRootNode,groupRootVo);
+        loopLoadGroup(result,groupRootNode,groupRootVo,"DateTime");
         return result;
     }
 
@@ -52,22 +52,22 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
     public List<EnvVariableVo> getAPIVars() throws XPathExpressionException {
         Node groupRootNode=XMLUtility.parseForNode(xmlDocuemnt,"/Config/Type[@Value='ApiVar']/Group");
         List<EnvVariableVo> result=new ArrayList<>();
-        EnvVariableVo groupRootVo=EnvVariableVo.parseGroupNode(groupRootNode,"-1");
+        EnvVariableVo groupRootVo=EnvVariableVo.parseGroupNode(groupRootNode,"-1","ApiVar");
         result.add(groupRootVo);
-        loopLoadGroup(result,groupRootNode,groupRootVo);
+        loopLoadGroup(result,groupRootNode,groupRootVo, "ApiVar");
         return result;
     }
 
-    private void loopLoadGroup(List<EnvVariableVo> result,Node parentGroupNode,EnvVariableVo parentGroupVo){
+    private void loopLoadGroup(List<EnvVariableVo> result,Node parentGroupNode,EnvVariableVo parentGroupVo,String type){
         NodeList childNodes = parentGroupNode.getChildNodes();
         for(int i=0;i<childNodes.getLength();i++){
             if(childNodes.item(i).getNodeName().equals("Group")){
-                EnvVariableVo groupVo=EnvVariableVo.parseGroupNode(childNodes.item(i),parentGroupVo.getId());
+                EnvVariableVo groupVo=EnvVariableVo.parseGroupNode(childNodes.item(i),parentGroupVo.getId(), type);
                 result.add(groupVo);
-                loopLoadGroup(result,childNodes.item(i),groupVo);
+                loopLoadGroup(result,childNodes.item(i),groupVo, type);
             }
             else if(childNodes.item(i).getNodeName().equals("EnvVariable")){
-                EnvVariableVo groupVo=EnvVariableVo.parseEnvVarNode(childNodes.item(i),parentGroupVo.getId());
+                EnvVariableVo groupVo=EnvVariableVo.parseEnvVarNode(childNodes.item(i),parentGroupVo.getId(), type);
                 result.add(groupVo);
             }
         }
@@ -77,7 +77,7 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
         List<Node> nodes=XMLUtility.parseForNodeList(xmlDocuemnt,"//EnvVariable");
         List<EnvVariableVo> voList=new ArrayList<>();
         for (Node node : nodes) {
-            EnvVariableVo vo=EnvVariableVo.parseEnvVarNode(node,"-1");
+            EnvVariableVo vo=EnvVariableVo.parseEnvVarNode(node,"-1","");
             if(vo.getValue().equals("")){
                 throw new JBuild4DGenerallyException("存在Value为空的EnvVariable节点!");
             }

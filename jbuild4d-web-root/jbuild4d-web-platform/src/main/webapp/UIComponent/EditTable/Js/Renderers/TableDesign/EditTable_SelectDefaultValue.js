@@ -56,35 +56,7 @@ var EditTable_SelectDefaultValue={
         //将inputtext对象附加到window上,提供给后续的设置值的方法.
         window.$Temp$Inputtxt=$inputtxt;
         $inputbtn.click(function(){
-            SelectEnvVariable.beginSelect("SelectEnvVariable");
-            //获取到
-            /*var select = $(hostCell).prev().prev().prev().prev().prev().find("select")
-            var selectval = select.val();
-            var category = [];
-            if(selectval == 1){//整数 : 常量 , 无
-                category = ['const', "none"];
-            }else if(selectval == 2){//小数 : 常量 , 无
-                category = ['const', "none"];
-            }else if(selectval == 3){//日期时间 : 常量 , 无
-                category = ['const', "none"];
-            }else if( selectval ==4){//字符串 : 常量 ,系统时间,编辑器,环境变量,无
-                category = ['const', 'sysTime', 'envVar',"none"];
-            }else if(selectval == 5){//布尔值 : 常量 , 无
-                category = ['const', "none"];
-            }else if(selectval == 6){//意见型 : 常量 ,系统时间,编辑器,环境变量,无
-                category = ['const', 'sysTime', 'envVar',"none"];
-            }else if(selectval == 7){//日期 : 常量 , 无
-                category = ['const', "none"];
-            }else{
-                category = ['const', 'sysTime', 'envVar',"none"];
-            }
-
-            Variable.SelectVariableForHtmlDialog({
-                category: category,
-                selected: {category: defaultType, value: defaultValue}
-            },window,{
-                title:"设置默认值"
-            },"EditTable_SelectDefaultValue.GetterDefaultValueFunc","EditTable_SelectDefaultValue.SetterDefaultValueFunc");*/
+            SelectEnvVariable.beginSelect("EditTable_SelectDefaultValue");
         });
         return $elem;
     },
@@ -111,15 +83,13 @@ var EditTable_SelectDefaultValue={
         var val = editStausHtmlElem.val();
         return EditTableValidate.Validate(val,template);
     },
-    GetterDefaultValueFunc:function () {
-
-    },
-    SetterDefaultValueFunc:function (defaultData) {
+    SetSelectResultValue:function (defaultData) {
         var $inputtxt=window.$Temp$Inputtxt;
         if(null != defaultData){
-            $inputtxt.val(defaultData.categoryText + ":"+defaultData.text)
-            $inputtxt.attr("defaulttype",defaultData.category);
-            $inputtxt.attr("defaultval",defaultData.value);
+            $inputtxt.attr("selectType",defaultData.Type);
+            $inputtxt.attr("selectValue",defaultData.Value);
+            $inputtxt.attr("selectText",defaultData.Text);
+            $inputtxt.val(SelectEnvVariable.formatText(defaultData.Type,defaultData.Text));
         }
         //console.log(value);
     }
