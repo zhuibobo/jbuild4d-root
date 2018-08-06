@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/1/18.
  */
-var EditTable_Lable={
+var EditTable_Label={
     /*
      _config:配置对象
      template:当前模版

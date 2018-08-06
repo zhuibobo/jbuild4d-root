@@ -56,8 +56,9 @@ var EditTable_SelectDefaultValue={
         //将inputtext对象附加到window上,提供给后续的设置值的方法.
         window.$Temp$Inputtxt=$inputtxt;
         $inputbtn.click(function(){
+            SelectEnvVariable.beginSelect("SelectEnvVariable");
             //获取到
-            var select = $(hostCell).prev().prev().prev().prev().prev().find("select")
+            /*var select = $(hostCell).prev().prev().prev().prev().prev().find("select")
             var selectval = select.val();
             var category = [];
             if(selectval == 1){//整数 : 常量 , 无
@@ -83,18 +84,7 @@ var EditTable_SelectDefaultValue={
                 selected: {category: defaultType, value: defaultValue}
             },window,{
                 title:"设置默认值"
-            },"EditTable_SelectDefaultValue.GetterDefaultValueFunc","EditTable_SelectDefaultValue.SetterDefaultValueFunc");
-
-            /*var defaultData = Variable.SelectVariable(
-                {
-                category: category,
-                selected: {category: defaultType, value: defaultValue}
-                });
-            if(null != defaultData){
-                $inputtxt.val(defaultData.categoryText + ":"+defaultData.text)
-                $inputtxt.attr("defaulttype",defaultData.category);
-                $inputtxt.attr("defaultval",defaultData.value);
-            }*/
+            },"EditTable_SelectDefaultValue.GetterDefaultValueFunc","EditTable_SelectDefaultValue.SetterDefaultValueFunc");*/
         });
         return $elem;
     },

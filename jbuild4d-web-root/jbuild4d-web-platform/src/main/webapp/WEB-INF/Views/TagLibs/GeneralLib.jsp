@@ -11,4 +11,5 @@
 
 <script type="text/javascript" src="${ctxpath}/Js/JQuery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="${ctxpath}/Js/JBuild4DBaseLib.js?urlts=${urlts}"></script>
+<script type="text/javascript" src="${ctxpath}/Js/JBuild4DSelectViewLib.js?urlts=${urlts}"></script>
 <script src="${ctxpath}/Js/VUE-2.5.16/vue.js"></script>
