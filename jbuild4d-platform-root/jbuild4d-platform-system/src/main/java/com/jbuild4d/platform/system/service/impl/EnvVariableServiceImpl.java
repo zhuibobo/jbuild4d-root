@@ -1,9 +1,13 @@
 package com.jbuild4d.platform.system.service.impl;
 
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.tools.common.ClassUtility;
+import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.XMLUtility;
 import com.jbuild4d.base.tools.common.list.IListWhereCondition;
 import com.jbuild4d.base.tools.common.list.ListUtility;
+import com.jbuild4d.platform.system.apivariable.IAPIVariableCreater;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
 import org.w3c.dom.Document;
@@ -26,8 +30,9 @@ import java.util.List;
  */
 public class EnvVariableServiceImpl implements IEnvVariableService {
 
-    public String configResouce="EnvVariableConfig.xml";
-    Document xmlDocuemnt=null;
+    static String configResouce="EnvVariableConfig.xml";
+    static Document xmlDocuemnt=null;
+    static List<EnvVariableVo> allEnvVariableVoList=null;
 
     public EnvVariableServiceImpl() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, JBuild4DGenerallyException {
         if(xmlDocuemnt==null) {
@@ -56,6 +61,53 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
         result.add(groupRootVo);
         loopLoadGroup(result,groupRootNode,groupRootVo, "ApiVar");
         return result;
+    }
+
+    @Override
+    public String execEnvVarResult(JB4DSession jb4DSession, String value) throws XPathExpressionException, JBuild4DGenerallyException {
+        List<EnvVariableVo> envVariableVoList=loadDocuemntToVoList();
+        EnvVariableVo envVariableVo=ListUtility.WhereSingle(envVariableVoList, new IListWhereCondition<EnvVariableVo>() {
+            @Override
+            public boolean Condition(EnvVariableVo item) {
+                return item.getValue().equals(value);
+            }
+        });
+        if(envVariableVo==null){
+            throw new JBuild4DGenerallyException("找不到Value为"+value+"的变量节点!");
+        }
+        String className=envVariableVo.getClassName();
+        if(StringUtility.isEmpty(className)){
+            throw new JBuild4DGenerallyException("Value为"+value+"的变量节点中未设置对应的ClassName!");
+        }
+        IAPIVariableCreater varCreater=null;
+        try {
+            varCreater=(IAPIVariableCreater)ClassUtility.loadClass(className).newInstance();
+        } catch (InstantiationException ex) {
+            ex.printStackTrace();
+            throw new JBuild4DGenerallyException(ex.getMessage());
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+            throw new JBuild4DGenerallyException(ex.getMessage());
+        }
+
+        try {
+            return varCreater.createVar(jb4DSession,envVariableVo);
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            throw new JBuild4DGenerallyException(ex.getMessage());
+        }
+    }
+
+    private List<EnvVariableVo> loadDocuemntToVoList() throws XPathExpressionException {
+        if(allEnvVariableVoList==null){
+            allEnvVariableVoList=new ArrayList<>();
+            List<Node> nodes=XMLUtility.parseForNodeList(xmlDocuemnt,"//EnvVariable");
+            for (Node node : nodes) {
+                allEnvVariableVoList.add(EnvVariableVo.parseEnvVarNode(node,"",""));
+            }
+        }
+        return allEnvVariableVoList;
     }
 
     private void loopLoadGroup(List<EnvVariableVo> result,Node parentGroupNode,EnvVariableVo parentGroupVo,String type){

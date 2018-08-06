@@ -4,8 +4,8 @@
     </Type>
     <Type Text="时间日期" Value="DateTime">
         <Group Text="时间日期">
-            <EnvVariable Text="年年年年-月月-日日" Value="yyyy-mm-dd" ClassName="" Para="" Desc=""></EnvVariable>
-            <EnvVariable Text="年年年年/月月/日日" Value="yyyy/mm/dd" ClassName="" Para="" Desc=""></EnvVariable>
+            <EnvVariable Text="年年年年-月月-日日" Value="yyyy-mm-dd" ClassName="com.jbuild4d.platform.system.apivariable.impl.DateTimeVariableCreater" Para="yyyy-mm-dd" Desc=""></EnvVariable>
+            <EnvVariable Text="年年年年/月月/日日" Value="yyyy/mm/dd" ClassName="com.jbuild4d.platform.system.apivariable.impl.DateTimeVariableCreater" Para="yyyy/mm/dd" Desc=""></EnvVariable>
         </Group>
     </Type>
     <Type Text="API变量" Value="ApiVar">

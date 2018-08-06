@@ -1,5 +1,7 @@
 package com.jbuild4d.platform.system.service;
 
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
 
 import javax.xml.xpath.XPathExpressionException;
@@ -15,4 +17,6 @@ public interface IEnvVariableService {
     List<EnvVariableVo> getDateTimeVars() throws XPathExpressionException;
 
     List<EnvVariableVo> getAPIVars() throws XPathExpressionException;
+
+    String execEnvVarResult(JB4DSession jb4DSession, String value) throws XPathExpressionException, JBuild4DGenerallyException;
 }

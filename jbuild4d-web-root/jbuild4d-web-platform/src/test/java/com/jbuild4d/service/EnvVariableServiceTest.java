@@ -1,5 +1,6 @@
 package com.jbuild4d.service;
 
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
@@ -30,7 +31,7 @@ import java.util.List;
         OrganBeansConfig.class,
         BuildBeansConfig.class
 })
-public class EnvVariableServiceTest {
+public class EnvVariableServiceTest  extends BaseTest  {
 
     @Autowired
     IEnvVariableService envVariableService;
@@ -42,5 +43,11 @@ public class EnvVariableServiceTest {
             System.out.println(envVariableVo.getText());
             System.out.println(envVariableVo.getParentId());
         }
+    }
+
+    @Test
+    public void getDateTimeValueTest() throws XPathExpressionException, JBuild4DGenerallyException {
+        System.out.println(envVariableService.execEnvVarResult(jb4DSession,"yyyy-mm-dd"));
+        System.out.println(envVariableService.execEnvVarResult(jb4DSession,"yyyy/mm/dd"));
     }
 }
