@@ -19,12 +19,22 @@ import java.util.List;
 public class TableFieldVO extends TableFieldEntity {
     public String oldFieldName;
 
+    public boolean isUpdateLogicOnly;
+
     public String getOldFieldName() {
         return oldFieldName;
     }
 
     public void setOldFieldName(String oldFieldName) {
         this.oldFieldName = oldFieldName;
+    }
+
+    public boolean isUpdateLogicOnly() {
+        return isUpdateLogicOnly;
+    }
+
+    public void setUpdateLogicOnly(boolean updateLogicOnly) {
+        isUpdateLogicOnly = updateLogicOnly;
     }
 
     @Override
@@ -79,6 +89,19 @@ public class TableFieldVO extends TableFieldEntity {
                 return true;
             }
             else if(!newVo.getFieldAllowNull().equals(oldVo.getFieldAllowNull())){
+                return true;
+            }
+            return false;
+        }
+        else
+        {
+            throw new JBuild4DGenerallyException("比较的字段Id不一致!");
+        }
+    }
+
+    public static boolean isUpdateLogicOnly(TableFieldVO oldVo,TableFieldVO newVo) throws JBuild4DGenerallyException {
+        if(oldVo.getFieldId().equals(newVo.getFieldId())){
+            if(!newVo.getFieldDefaultValue().equals(oldVo.getFieldDefaultValue())){
                 return true;
             }
             return false;

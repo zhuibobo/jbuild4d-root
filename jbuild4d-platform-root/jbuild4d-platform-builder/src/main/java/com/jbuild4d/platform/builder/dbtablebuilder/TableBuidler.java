@@ -97,7 +97,9 @@ public abstract class TableBuidler {
             //修改字段,暂时只是支持修改类型
             if(updateFields!=null) {
                 for (TableFieldVO updateField : updateFields) {
-                    this.updateField(tableEntity, updateField);
+                    if(!updateField.isUpdateLogicOnly) {
+                        this.updateField(tableEntity, updateField);
+                    }
                     /*if (!newFieldResult.isSuccess()) {
                         throw new Exception("修改列错误!" + newFieldResult.getMessage());
                     }*/

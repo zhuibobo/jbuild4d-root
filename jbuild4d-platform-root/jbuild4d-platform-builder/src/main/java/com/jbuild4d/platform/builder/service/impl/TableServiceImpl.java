@@ -156,6 +156,11 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                         newVo.setOldFieldName(tableFieldEntity.getFieldName());
                         updateFields.add(newVo);
                     }
+                    else if (TableFieldVO.isUpdateLogicOnly(TableFieldVO.parseToVo(tableFieldEntity), newVo)) {
+                        newVo.setOldFieldName(tableFieldEntity.getFieldName());
+                        newVo.setUpdateLogicOnly(true);
+                        updateFields.add(newVo);
+                    }
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
