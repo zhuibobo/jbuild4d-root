@@ -4,6 +4,7 @@ import com.jbuild4d.base.dbaccess.dao.*;
 import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.dbaccess.dynamic.ISQLBuilderMapper;
 import com.jbuild4d.base.dbaccess.dynamic.SQLBuilderMapper;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.impl.GeneralServiceImpl;
@@ -14,6 +15,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
 
 @Configuration
 @EnableTransactionManagement
@@ -71,6 +77,12 @@ public class SystemBeansConfig {
     @Bean
     public ICodeGenerateService codeGenerateService(ISQLBuilderService _sqlBuilderService){
         ICodeGenerateService bean=new CodeGenerateServiceImpl(_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
+    public IEnvVariableService envVariableService() throws IOException, SAXException, ParserConfigurationException, XPathExpressionException, JBuild4DGenerallyException {
+        IEnvVariableService bean=new EnvVariableServiceImpl();
         return bean;
     }
 }

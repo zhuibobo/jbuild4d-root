@@ -2,13 +2,11 @@ package com.jbuild4d.web.platform.controller.devdemo;
 
 import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.platform.system.service.IDevDemoGenListService;
+import com.jbuild4d.platform.system.devdemo.IDevDemoGenListService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;

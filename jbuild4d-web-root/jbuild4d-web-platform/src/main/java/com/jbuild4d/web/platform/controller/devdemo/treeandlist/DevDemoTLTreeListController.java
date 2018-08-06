@@ -2,8 +2,7 @@ package com.jbuild4d.web.platform.controller.devdemo.treeandlist;
 
 import com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeListEntity;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.platform.system.service.IDevDemoTLTreeListService;
+import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeListService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

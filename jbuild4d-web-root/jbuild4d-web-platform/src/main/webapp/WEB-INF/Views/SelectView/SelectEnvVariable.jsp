@@ -28,7 +28,7 @@
             <tab-pane label="日期时间" name="DateTime">
                 <ul id="datetimeZTreeUL" class="ztree"></ul>
             </tab-pane>
-            <tab-pane label="环境变量" name="EnvVar">
+            <tab-pane label="API变量" name="ApiVar">
                 <ul id="envVarZTreeUL" class="ztree"></ul>
             </tab-pane>
             <tab-pane label="序号编码" name="NumberCode">

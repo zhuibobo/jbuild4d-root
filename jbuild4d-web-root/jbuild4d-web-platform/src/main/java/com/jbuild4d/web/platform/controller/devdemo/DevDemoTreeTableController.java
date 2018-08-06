@@ -2,7 +2,7 @@ package com.jbuild4d.web.platform.controller.devdemo;
 
 import com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.platform.system.service.IDevDemoTreeTableService;
+import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

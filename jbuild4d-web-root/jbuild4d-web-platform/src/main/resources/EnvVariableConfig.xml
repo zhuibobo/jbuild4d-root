@@ -1,39 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
-    <Tab Text="默认值" Value="Const">
-    </Tab>
-    <Tab Text="时间日期" Value="DateTime">
-        <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-        <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-        <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-        <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-        <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-        <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-    </Tab>
-    <Tab Text="环境变量" Value="EnvVar">
-        <Group Text="环境变量">
+    <Type Text="默认值" Value="Const">
+    </Type>
+    <Type Text="时间日期" Value="DateTime">
+        <Group Text="时间日期">
+            <EnvVariable Text="年年年年-月月-日日" Value="yyyy-mm-dd" ClassName="" Para="" Desc=""></EnvVariable>
+            <EnvVariable Text="年年年年/月月/日日" Value="yyyy/mm/dd" ClassName="" Para="" Desc=""></EnvVariable>
+        </Group>
+    </Type>
+    <Type Text="API变量" Value="ApiVar">
+        <Group Text="API变量">
             <Group Text="默认变量">
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
             </Group>
             <Group Text="扩展1">
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
             </Group>
             <Group Text="扩展2">
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
             </Group>
             <Group Text="扩展3">
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="" Value="" Class="" Para="" Desc=""></EnvVariable>
             </Group>
         </Group>
-    </Tab>
-    <Tab Text="序号编码" Value="NumberCode">
-    </Tab>
+    </Type>
+    <Type Text="序号编码" Value="NumberCode">
+    </Type>
 </Config>
