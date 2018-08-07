@@ -61,6 +61,7 @@
                 <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
                 <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移 </i-button>
                 <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
+                <i-button type="primary" v-if="listButton.showExportDocument" @click="exportDBDocument()"><Icon type="arrow-down-b"></Icon> 导出表结构文档 </i-button>
             </div>
             <div style="clear: both"></div>
         </div>
@@ -176,7 +177,10 @@
             pageTotal: 0,
             pageSize: 12,
             pageNum: 1,
-            listHeight: 300
+            listHeight: 300,
+            listButton:{
+                showExportDocument:false
+            }
         },
         methods:{
             <!--Tree-->
@@ -191,8 +195,10 @@
                 this.pageNum=1;
                 this.clearSearchCondition();
                 this.searchCondition.tableGroupId.value=this.treeSelectedNode[this.treeIdFieldName];
+                this.listButton.showExportDocument=false;
                 if(treeNode.tableGroupId==0){
                     this.searchCondition.tableGroupId.value="";
+                    this.listButton.showExportDocument=true;
                 }
                 this.reloadData();
                 //appList.reloadTreeTableData();
@@ -330,6 +336,9 @@
             search:function () {
                 this.pageNum=1;
                 this.reloadData();
+            },
+            exportDBDocument:function () {
+                DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现！",null);
             }
         }
     });
