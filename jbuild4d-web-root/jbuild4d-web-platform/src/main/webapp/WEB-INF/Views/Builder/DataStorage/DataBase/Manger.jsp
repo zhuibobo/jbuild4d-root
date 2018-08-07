@@ -44,13 +44,13 @@
                     <col style="width: 80px">
                 </colgroup>
                 <tr class="ls-table-row">
-                    <td>表名：</td>
-                    <td>
-                        <i-input v-model="searchCondition.tableName.value" placeholder=""></i-input>
-                    </td>
                     <td>标题：</td>
                     <td>
                         <i-input v-model="searchCondition.tableCaption.value" placeholder=""></i-input>
+                    </td>
+                    <td>表名：</td>
+                    <td>
+                        <i-input v-model="searchCondition.tableName.value" placeholder=""></i-input>
                     </td>
                     <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
                 </tr>
@@ -191,6 +191,9 @@
                 this.pageNum=1;
                 this.clearSearchCondition();
                 this.searchCondition.tableGroupId.value=this.treeSelectedNode[this.treeIdFieldName];
+                if(treeNode.tableGroupId==0){
+                    this.searchCondition.tableGroupId.value="";
+                }
                 this.reloadData();
                 //appList.reloadTreeTableData();
                 //}
