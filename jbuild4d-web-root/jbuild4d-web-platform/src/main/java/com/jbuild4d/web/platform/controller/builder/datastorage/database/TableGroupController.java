@@ -33,7 +33,7 @@ public class TableGroupController extends GeneralCRUDImplController<TableGroupEn
 
     @Override
     public String getListViewName() {
-        return "Builder/DataStorage/DataBase/Manger";
+        return "Builder/DataStorage/DataBase/Manager";
     }
 
     @Override
