@@ -307,7 +307,7 @@
             },
             view:function (recordId) {
                 var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=view&recordId=" + recordId);
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 2);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 0);
             },
             del: function (recordId) {
                 var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Delete.do';
