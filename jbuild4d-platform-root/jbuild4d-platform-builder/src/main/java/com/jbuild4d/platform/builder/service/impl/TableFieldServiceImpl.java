@@ -64,19 +64,49 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
                 TableFieldTypeEnum.NVarCharType,50,0,
                 "IdCoder","UUID","通用唯一识别码",
                 "表主键",generalTemplateName);
+        tableFieldMapper.insert(idField);
+
         TableFieldEntity createTimeField=newFiled(jb4DSession,"Template","F_CREATE_TIME","记录时间",
                 TrueFalseEnum.False,TrueFalseEnum.True,
                 TableFieldTypeEnum.DataTimeType,20,0,
                 "DateTime","yyyy-MM-dd HH:mm:ss","年年年年-月月-日日 时:分:秒",
                 "",generalTemplateName);
-        TableFieldEntity organField=newFiled(jb4DSession,"Template","F_ORGAN_ID","组织ID",
-                TrueFalseEnum.False,TrueFalseEnum.True,
-                TableFieldTypeEnum.DataTimeType,20,0,
-                "ApiVar","ApiVarCurrentUserOrganId","当前用户组织ID",
-                "",generalTemplateName);
-是
-        tableFieldMapper.insert(idField);
         tableFieldMapper.insert(createTimeField);
+
+        TableFieldEntity orderNumField=newFiled(jb4DSession,"Template","F_ORDER_NUM","排序号",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.IntType,20,0,
+                "","","",
+                "",generalTemplateName);
+        tableFieldMapper.insert(orderNumField);
+
+        TableFieldEntity organIdField=newFiled(jb4DSession,"Template","F_ORGAN_ID","组织ID",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "ApiVar","ApiVarCurrentUserOrganId","当前用户所在组织ID",
+                "",generalTemplateName);
+        tableFieldMapper.insert(organIdField);
+
+        TableFieldEntity organNameField=newFiled(jb4DSession,"Template","F_ORGAN_NAME","组织名称",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,100,0,
+                "ApiVar","ApiVarCurrentUserOrganName","当前用户所在组织名称",
+                "",generalTemplateName);
+        tableFieldMapper.insert(organNameField);
+
+        TableFieldEntity userIdField=newFiled(jb4DSession,"Template","F_USER_ID","用户ID",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "ApiVar","ApiVarCurrentUserId","当前用户ID",
+                "",generalTemplateName);
+        tableFieldMapper.insert(userIdField);
+
+        TableFieldEntity userNameField=newFiled(jb4DSession,"Template","F_USER_NAME","用户名称",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "ApiVar","ApiVarCurrentUserName","当前用户名称",
+                "",generalTemplateName);
+        tableFieldMapper.insert(userNameField);
     }
 
     @Override

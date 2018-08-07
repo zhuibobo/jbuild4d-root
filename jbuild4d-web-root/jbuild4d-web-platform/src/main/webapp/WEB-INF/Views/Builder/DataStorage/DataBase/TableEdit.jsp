@@ -72,7 +72,7 @@
         </div>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
             <i-button type="primary" @click="saveEditTable()"> 保 存</i-button>
-            <i-button style="margin-left: 8px">关 闭</i-button>
+            <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
         </div>
     </div>
     <script>
@@ -296,6 +296,9 @@
                             });
                         }, "json");
                     }
+                },
+                handleClose: function () {
+                    DialogUtility.Frame_CloseDialog(window);
                 }
             }
         });
