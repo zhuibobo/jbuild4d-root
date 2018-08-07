@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+    <TableConfig>
+        <Default>
+            <TablePrefix Value="TDEV_"></TablePrefix>
+        </Default>
+    </TableConfig>
+    <DataSetConfig></DataSetConfig>
+    <ModuleConfig></ModuleConfig>
+</Config>

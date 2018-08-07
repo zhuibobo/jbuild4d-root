@@ -86,7 +86,7 @@
                 tableEntity:{
                     tableId:'${tableEntity.tableId}',
                     tableCaption:'${tableEntity.tableCaption}',
-                    tableName:'${tableEntity.tableName}',
+                    tableName:'${tableEntity.tableName}'==''?'${tablePrefix}':'${tableEntity.tableName}',
                     tableCreateTime:'<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />' == '' ? DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />',
                     tableCreater:'${tableEntity.tableCreater}',
                     tableUpdateTime:'<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />' == '' ? DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />',

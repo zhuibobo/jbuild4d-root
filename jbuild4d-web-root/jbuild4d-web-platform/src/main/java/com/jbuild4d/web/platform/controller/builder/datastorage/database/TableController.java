@@ -10,6 +10,7 @@ import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
+import com.jbuild4d.platform.builder.service.IBuilderConfigService;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.text.ParseException;
@@ -45,8 +47,11 @@ public class TableController {
     @Autowired
     ITableService tableService;
 
+    @Autowired
+    IBuilderConfigService builderConfigService;
+
     @RequestMapping(value = "EditTable", method = RequestMethod.GET)
-    public ModelAndView editTable(String recordId, String op,String groupId) throws IllegalAccessException, InstantiationException, IOException {
+    public ModelAndView editTable(String recordId, String op,String groupId) throws IllegalAccessException, InstantiationException, IOException, XPathExpressionException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataStorage/DataBase/TableEdit");
         List<String> templateNames=tableFieldService.getFieldTemplateName();
         Map<String,List<TableFieldVO>> templateFieldMap=new HashMap<>();
@@ -71,6 +76,7 @@ public class TableController {
             modelAndView.addObject("tableFieldsData",JsonUtility.toObjectString(tableFieldVOList));
         }
         modelAndView.addObject("templateFieldGroup",JsonUtility.toObjectString(templateFieldMap));
+        modelAndView.addObject("tablePrefix",builderConfigService.getTablePrefix());
 
         JB4DSessionUtility.setUserInfoToMV(modelAndView);
         modelAndView.addObject("op",op);

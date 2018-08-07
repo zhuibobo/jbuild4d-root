@@ -36,7 +36,7 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
 
     public EnvVariableServiceImpl() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, JBuild4DGenerallyException {
         if(xmlDocuemnt==null) {
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("EnvVariableConfig.xml");
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResouce);
             xmlDocuemnt = XMLUtility.parseForDoc(inputStream);
             validateDocumentEnable();
         }

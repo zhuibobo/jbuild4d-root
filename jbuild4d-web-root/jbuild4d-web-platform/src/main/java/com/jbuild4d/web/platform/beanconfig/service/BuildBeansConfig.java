@@ -6,18 +6,16 @@ import com.jbuild4d.base.dbaccess.dao.TableGroupMapper;
 import com.jbuild4d.base.dbaccess.dao.TableMapper;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.platform.builder.service.IDatabaseServiceLinkService;
-import com.jbuild4d.platform.builder.service.ITableFieldService;
-import com.jbuild4d.platform.builder.service.ITableGroupService;
-import com.jbuild4d.platform.builder.service.ITableService;
-import com.jbuild4d.platform.builder.service.impl.DatabaseServiceLinkServiceImpl;
-import com.jbuild4d.platform.builder.service.impl.TableFieldServiceImpl;
-import com.jbuild4d.platform.builder.service.impl.TableGroupServiceImpl;
-import com.jbuild4d.platform.builder.service.impl.TableServiceImpl;
+import com.jbuild4d.platform.builder.service.*;
+import com.jbuild4d.platform.builder.service.impl.*;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -51,5 +49,11 @@ public class BuildBeansConfig {
     public ITableFieldService tableFieldService(ISQLBuilderService _sqlBuilderService, TableFieldMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
         ITableFieldService bean=new TableFieldServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
+    }
+
+    @Bean
+    public IBuilderConfigService builderConfigService() throws IOException, SAXException, ParserConfigurationException {
+        IBuilderConfigService builderConfigService=new BuilderConfigServiceImpl();
+        return builderConfigService;
     }
 }
