@@ -325,7 +325,24 @@ CREATE TABLE TB4D_DATASET_GROUP (
   [DS_GROUP_CHILD_COUNT] [INT]            NULL
 )
 ------------------------------------------数据集------------------------------------------
-
-
+CREATE TABLE TB4D_DATASET (
+  [DS_ID]          [NVARCHAR](100)  NOT NULL PRIMARY KEY,
+  [DS_CAPTION]     [NVARCHAR](200)  NOT NULL,
+  [DS_NAME]        [NVARCHAR](200)  NOT NULL,
+  [DS_ORGAN_ID]    [INT]            NULL,
+  [DS_CREATE_TIME] [DATETIME]       NULL,
+  [DS_CREATER]     [NVARCHAR](100)  NULL,
+  [DS_UPDATE_TIME] [DATETIME]       NULL,
+  [DS_UPDATER]     [NVARCHAR](100)  NULL,
+  [DS_TYPE]        [NVARCHAR](100)  NULL,
+  [DS_ISSYSTEM]    [NVARCHAR](10)   NULL,
+  [DS_ORDER_NUM]   [INT]            NULL,
+  [DS_DESC]        [NVARCHAR](2000) NULL,
+  [DS_GROUP_ID]    [NVARCHAR](100)  NOT NULL,
+  [DS_STATUS]      [NVARCHAR](10)   NULL,
+  [DS_SQL_SELECT]  [NTEXT]          NULL,
+  [DS_SQL_WHERE]   [NTEXT]          NULL,
+  [DS_SQL_ORDER]   [NTEXT]          NULL
+)
 
 -----------------------------------------应用设计相关表--结束-----------------------------------------
