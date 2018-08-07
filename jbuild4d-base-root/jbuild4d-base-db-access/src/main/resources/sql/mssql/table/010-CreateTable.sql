@@ -343,7 +343,7 @@ CREATE TABLE TB4D_DATASET (
   [DS_SQL_SELECT]  [NVARCHAR](4000) NULL,
   [DS_SQL_WHERE]   [NVARCHAR](1000) NULL,
   [DS_SQL_ORDER]   [NVARCHAR](1000) NULL,
-  [DS_CLASS_NAME]  [NVARCHAR](1000) NULL
+  [DS_CLASS_NAME]  [NVARCHAR](300) NULL
 )
 
 -----------------------------------------应用设计相关表--结束-----------------------------------------
