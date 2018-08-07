@@ -19,21 +19,21 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class BuilderConfigServiceImpl implements IBuilderConfigService {
-    static String configResouce="BuilderConfig.xml";
-    static Document xmlDocuemnt=null;
+    static String configResource="BuilderConfig.xml";
+    static Document xmlDocument=null;
     static String _tablePrefix=null;
 
     public BuilderConfigServiceImpl() throws ParserConfigurationException, SAXException, IOException {
-        if(xmlDocuemnt==null) {
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResouce);
-            xmlDocuemnt = XMLUtility.parseForDoc(inputStream);
+        if(xmlDocument==null) {
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
+            xmlDocument = XMLUtility.parseForDoc(inputStream);
         }
     }
 
     @Override
     public String getTablePrefix() throws XPathExpressionException {
         if(_tablePrefix==null){
-            Node tablePrefixNode=XMLUtility.parseForNode(xmlDocuemnt,"/Config/TableConfig/Default/TablePrefix");
+            Node tablePrefixNode=XMLUtility.parseForNode(xmlDocument,"/Config/TableConfig/Default/TablePrefix");
             _tablePrefix=XMLUtility.getAttribute(tablePrefixNode,"Value");
         }
         return _tablePrefix;
