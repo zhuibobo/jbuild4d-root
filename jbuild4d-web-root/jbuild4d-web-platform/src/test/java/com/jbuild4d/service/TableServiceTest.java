@@ -101,6 +101,7 @@ public class TableServiceTest extends BaseTest  {
                 TrueFalseEnum.True, TrueFalseEnum.False,
                 TableFieldTypeEnum.NVarCharType, 50, 0,
                 "", "", "表主键", "");
+
         TableFieldVO createTimeField = newFiled(jb4DSession, "Tempalte", "F_CREATE_TIEE", "记录时间",
                 TrueFalseEnum.False, TrueFalseEnum.True,
                 TableFieldTypeEnum.DataTimeType, 20, 0,

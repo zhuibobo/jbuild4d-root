@@ -18,6 +18,9 @@ var SelectEnvVariable={
         else if(type=="NumberCode"){
             return "序号编码:【"+text+"】";
         }
+        else if(type=="IdCoder"){
+            return "主键生成:【"+text+"】";
+        }
         else if(type==""){
             return "【无】";
         }
