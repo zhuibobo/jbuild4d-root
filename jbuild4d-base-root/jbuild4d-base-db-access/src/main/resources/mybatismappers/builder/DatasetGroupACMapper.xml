@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.DatasetGroupMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DatasetGroupEntity">
+        <constructor>
+            <idArg column="DS_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_GROUP_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_GROUP_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_GROUP_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="DS_GROUP_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="DS_GROUP_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_GROUP_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_GROUP_PARENT_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_GROUP_ISSYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_GROUP_DEL_ENABLE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_GROUP_PID_LIST" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_GROUP_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        DS_GROUP_ID, DS_GROUP_VALUE, DS_GROUP_TEXT, DS_GROUP_ORDER_NUM, DS_GROUP_CREATE_TIME,
+        DS_GROUP_DESC, DS_GROUP_STATUS, DS_GROUP_PARENT_ID, DS_GROUP_ISSYSTEM, DS_GROUP_DEL_ENABLE,
+        DS_GROUP_PID_LIST, DS_GROUP_CHILD_COUNT
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_DATASET_GROUP
+        where DS_GROUP_ID = #{dsGroupId,jdbcType=NVARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_DATASET_GROUP
+        where DS_GROUP_ID = #{dsGroupId,jdbcType=NVARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetGroupEntity">
+        insert into TB4D_DATASET_GROUP (DS_GROUP_ID, DS_GROUP_VALUE, DS_GROUP_TEXT,
+        DS_GROUP_ORDER_NUM, DS_GROUP_CREATE_TIME, DS_GROUP_DESC,
+        DS_GROUP_STATUS, DS_GROUP_PARENT_ID, DS_GROUP_ISSYSTEM,
+        DS_GROUP_DEL_ENABLE, DS_GROUP_PID_LIST, DS_GROUP_CHILD_COUNT
+        )
+        values (#{dsGroupId,jdbcType=NVARCHAR}, #{dsGroupValue,jdbcType=NVARCHAR}, #{dsGroupText,jdbcType=NVARCHAR},
+        #{dsGroupOrderNum,jdbcType=INTEGER}, #{dsGroupCreateTime,jdbcType=TIMESTAMP}, #{dsGroupDesc,jdbcType=NVARCHAR},
+        #{dsGroupStatus,jdbcType=NVARCHAR}, #{dsGroupParentId,jdbcType=NVARCHAR}, #{dsGroupIssystem,jdbcType=NVARCHAR},
+        #{dsGroupDelEnable,jdbcType=NVARCHAR}, #{dsGroupPidList,jdbcType=NVARCHAR}, #{dsGroupChildCount,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetGroupEntity">
+        insert into TB4D_DATASET_GROUP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dsGroupId != null">
+                DS_GROUP_ID,
+            </if>
+            <if test="dsGroupValue != null">
+                DS_GROUP_VALUE,
+            </if>
+            <if test="dsGroupText != null">
+                DS_GROUP_TEXT,
+            </if>
+            <if test="dsGroupOrderNum != null">
+                DS_GROUP_ORDER_NUM,
+            </if>
+            <if test="dsGroupCreateTime != null">
+                DS_GROUP_CREATE_TIME,
+            </if>
+            <if test="dsGroupDesc != null">
+                DS_GROUP_DESC,
+            </if>
+            <if test="dsGroupStatus != null">
+                DS_GROUP_STATUS,
+            </if>
+            <if test="dsGroupParentId != null">
+                DS_GROUP_PARENT_ID,
+            </if>
+            <if test="dsGroupIssystem != null">
+                DS_GROUP_ISSYSTEM,
+            </if>
+            <if test="dsGroupDelEnable != null">
+                DS_GROUP_DEL_ENABLE,
+            </if>
+            <if test="dsGroupPidList != null">
+                DS_GROUP_PID_LIST,
+            </if>
+            <if test="dsGroupChildCount != null">
+                DS_GROUP_CHILD_COUNT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dsGroupId != null">
+                #{dsGroupId,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupValue != null">
+                #{dsGroupValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupText != null">
+                #{dsGroupText,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupOrderNum != null">
+                #{dsGroupOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="dsGroupCreateTime != null">
+                #{dsGroupCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dsGroupDesc != null">
+                #{dsGroupDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupStatus != null">
+                #{dsGroupStatus,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupParentId != null">
+                #{dsGroupParentId,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupIssystem != null">
+                #{dsGroupIssystem,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupDelEnable != null">
+                #{dsGroupDelEnable,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupPidList != null">
+                #{dsGroupPidList,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupChildCount != null">
+                #{dsGroupChildCount,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetGroupEntity">
+        update TB4D_DATASET_GROUP
+        <set>
+            <if test="dsGroupValue != null">
+                DS_GROUP_VALUE = #{dsGroupValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupText != null">
+                DS_GROUP_TEXT = #{dsGroupText,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupOrderNum != null">
+                DS_GROUP_ORDER_NUM = #{dsGroupOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="dsGroupCreateTime != null">
+                DS_GROUP_CREATE_TIME = #{dsGroupCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dsGroupDesc != null">
+                DS_GROUP_DESC = #{dsGroupDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupStatus != null">
+                DS_GROUP_STATUS = #{dsGroupStatus,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupParentId != null">
+                DS_GROUP_PARENT_ID = #{dsGroupParentId,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupIssystem != null">
+                DS_GROUP_ISSYSTEM = #{dsGroupIssystem,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupDelEnable != null">
+                DS_GROUP_DEL_ENABLE = #{dsGroupDelEnable,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupPidList != null">
+                DS_GROUP_PID_LIST = #{dsGroupPidList,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsGroupChildCount != null">
+                DS_GROUP_CHILD_COUNT = #{dsGroupChildCount,jdbcType=INTEGER},
+            </if>
+        </set>
+        where DS_GROUP_ID = #{dsGroupId,jdbcType=NVARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetGroupEntity">
+        update TB4D_DATASET_GROUP
+        set DS_GROUP_VALUE = #{dsGroupValue,jdbcType=NVARCHAR},
+        DS_GROUP_TEXT = #{dsGroupText,jdbcType=NVARCHAR},
+        DS_GROUP_ORDER_NUM = #{dsGroupOrderNum,jdbcType=INTEGER},
+        DS_GROUP_CREATE_TIME = #{dsGroupCreateTime,jdbcType=TIMESTAMP},
+        DS_GROUP_DESC = #{dsGroupDesc,jdbcType=NVARCHAR},
+        DS_GROUP_STATUS = #{dsGroupStatus,jdbcType=NVARCHAR},
+        DS_GROUP_PARENT_ID = #{dsGroupParentId,jdbcType=NVARCHAR},
+        DS_GROUP_ISSYSTEM = #{dsGroupIssystem,jdbcType=NVARCHAR},
+        DS_GROUP_DEL_ENABLE = #{dsGroupDelEnable,jdbcType=NVARCHAR},
+        DS_GROUP_PID_LIST = #{dsGroupPidList,jdbcType=NVARCHAR},
+        DS_GROUP_CHILD_COUNT = #{dsGroupChildCount,jdbcType=INTEGER}
+        where DS_GROUP_ID = #{dsGroupId,jdbcType=NVARCHAR}
+    </update>
+</mapper>

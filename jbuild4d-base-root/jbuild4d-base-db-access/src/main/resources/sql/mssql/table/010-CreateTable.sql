@@ -337,12 +337,12 @@ CREATE TABLE TB4D_DATASET (
   [DS_TYPE]        [NVARCHAR](100)  NULL,
   [DS_ISSYSTEM]    [NVARCHAR](10)   NULL,
   [DS_ORDER_NUM]   [INT]            NULL,
-  [DS_DESC]        [NVARCHAR](2000) NULL,
+  [DS_DESC]        [NVARCHAR](1000) NULL,
   [DS_GROUP_ID]    [NVARCHAR](100)  NOT NULL,
   [DS_STATUS]      [NVARCHAR](10)   NULL,
-  [DS_SQL_SELECT]  [NTEXT]          NULL,
-  [DS_SQL_WHERE]   [NTEXT]          NULL,
-  [DS_SQL_ORDER]   [NTEXT]          NULL
+  [DS_SQL_SELECT]  [NVARCHAR](4000) NULL,
+  [DS_SQL_WHERE]   [NVARCHAR](1000) NULL,
+  [DS_SQL_ORDER]   [NVARCHAR](1000) NULL
 )
 
 -----------------------------------------应用设计相关表--结束-----------------------------------------

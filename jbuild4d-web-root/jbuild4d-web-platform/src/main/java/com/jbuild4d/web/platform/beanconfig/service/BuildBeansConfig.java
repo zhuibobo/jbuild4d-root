@@ -1,9 +1,6 @@
 package com.jbuild4d.web.platform.beanconfig.service;
 
-import com.jbuild4d.base.dbaccess.dao.DatabaseServiceLinkMapper;
-import com.jbuild4d.base.dbaccess.dao.TableFieldMapper;
-import com.jbuild4d.base.dbaccess.dao.TableGroupMapper;
-import com.jbuild4d.base.dbaccess.dao.TableMapper;
+import com.jbuild4d.base.dbaccess.dao.*;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.builder.service.*;
@@ -48,6 +45,18 @@ public class BuildBeansConfig {
     @Bean
     public ITableFieldService tableFieldService(ISQLBuilderService _sqlBuilderService, TableFieldMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
         ITableFieldService bean=new TableFieldServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
+    public IDatasetGroupService datasetGroupService(ISQLBuilderService _sqlBuilderService, DatasetGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        IDatasetGroupService bean=new DatasetGroupServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
+    public IDatasetService datasetService(ISQLBuilderService _sqlBuilderService, DatasetMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        IDatasetService bean=new DatasetServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
 
