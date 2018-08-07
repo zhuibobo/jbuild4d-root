@@ -27,6 +27,13 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
     private String rootId="0";
     private String rootParentId="-1";
 
+    private String TableGroupJBuild4DSystem="TableGroupJBuild4DSystem";
+    private String TableGroupJBuild4DSystemSetting="TableGroupJBuild4DSystemSetting";
+    private String TableGroupJBuild4DSystemOrganRelevance="TableGroupJBuild4DSystemOrganRelevance";
+    private String TableGroupJBuild4DSystemAuth="TableGroupJBuild4DSystemAuth";
+    private String TableGroupJBuild4DSystemBuilder="TableGroupJBuild4DSystemBuilder";
+    private String TableGroupJBuild4DSystemDevDemo="TableGroupJBuild4DSystemDevDemo";
+
     public TableGroupServiceImpl(TableGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         tableGroupMapper=_defaultBaseMapper;
@@ -68,6 +75,71 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         treeTableEntity.setTableGroupValue("表分组");
         this.save(jb4DSession,treeTableEntity.getTableGroupId(),treeTableEntity);
         return treeTableEntity;
+    }
+
+    @Override
+    public TableGroupEntity createSystemTableGroupNode(JB4DSession jb4DSession,TableGroupEntity parentGroup) throws JBuild4DGenerallyException {
+        //系统基础
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystem);
+        TableGroupEntity jBuild4DSystemBase=new TableGroupEntity();
+        jBuild4DSystemBase.setTableGroupId(TableGroupJBuild4DSystem);
+        jBuild4DSystemBase.setTableGroupParentId(parentGroup.getTableGroupId());
+        jBuild4DSystemBase.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
+        jBuild4DSystemBase.setTableGroupText("基础系统");
+        jBuild4DSystemBase.setTableGroupValue("基础系统");
+        this.save(jb4DSession,TableGroupJBuild4DSystem,jBuild4DSystemBase);
+
+        //系统设置相关表
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemSetting);
+        TableGroupEntity jBuild4DSystemSetting=new TableGroupEntity();
+        jBuild4DSystemSetting.setTableGroupId(TableGroupJBuild4DSystemSetting);
+        jBuild4DSystemSetting.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
+        jBuild4DSystemSetting.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
+        jBuild4DSystemSetting.setTableGroupText("系统设置相关表");
+        jBuild4DSystemSetting.setTableGroupValue("系统设置相关表");
+        this.save(jb4DSession,TableGroupJBuild4DSystemSetting,jBuild4DSystemSetting);
+
+        //组织用户相关表
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemOrganRelevance);
+        TableGroupEntity jBuild4DSystemOrganRelevance=new TableGroupEntity();
+        jBuild4DSystemOrganRelevance.setTableGroupId(TableGroupJBuild4DSystemOrganRelevance);
+        jBuild4DSystemOrganRelevance.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
+        jBuild4DSystemOrganRelevance.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
+        jBuild4DSystemOrganRelevance.setTableGroupText("组织用户相关表");
+        jBuild4DSystemOrganRelevance.setTableGroupValue("组织用户相关表");
+        this.save(jb4DSession,TableGroupJBuild4DSystemOrganRelevance,jBuild4DSystemOrganRelevance);
+
+        //权限相关表
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemAuth);
+        TableGroupEntity jBuild4DSystemAuth=new TableGroupEntity();
+        jBuild4DSystemAuth.setTableGroupId(TableGroupJBuild4DSystemAuth);
+        jBuild4DSystemAuth.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
+        jBuild4DSystemAuth.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
+        jBuild4DSystemAuth.setTableGroupText("权限相关表");
+        jBuild4DSystemAuth.setTableGroupValue("权限相关表");
+        this.save(jb4DSession,TableGroupJBuild4DSystemAuth,jBuild4DSystemAuth);
+
+        //应用设计相关表
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemBuilder);
+        TableGroupEntity jBuild4DSystemBuilder=new TableGroupEntity();
+        jBuild4DSystemBuilder.setTableGroupId(TableGroupJBuild4DSystemBuilder);
+        jBuild4DSystemBuilder.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
+        jBuild4DSystemBuilder.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
+        jBuild4DSystemBuilder.setTableGroupText("应用设计相关表");
+        jBuild4DSystemBuilder.setTableGroupValue("应用设计相关表");
+        this.save(jb4DSession,TableGroupJBuild4DSystemBuilder,jBuild4DSystemBuilder);
+
+        //开发示例相关表
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemDevDemo);
+        TableGroupEntity jBuild4DSystemDevDemo=new TableGroupEntity();
+        jBuild4DSystemDevDemo.setTableGroupId(TableGroupJBuild4DSystemDevDemo);
+        jBuild4DSystemDevDemo.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
+        jBuild4DSystemDevDemo.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
+        jBuild4DSystemDevDemo.setTableGroupText("开发示例相关表");
+        jBuild4DSystemDevDemo.setTableGroupValue("开发示例相关表");
+        this.save(jb4DSession,TableGroupJBuild4DSystemDevDemo,jBuild4DSystemDevDemo);
+
+        return jBuild4DSystemBase;
     }
 
     @Override
