@@ -24,7 +24,7 @@ public interface ITableService extends IBaseService<TableEntity> {
 
     boolean existTableName(String tableName);
 
-    void deleteTable(TableEntity tableEntity);
+    //void deleteTable(TableEntity tableEntity);
 
     TableEntity getByTableName(String newTableName);
 }

@@ -305,7 +305,18 @@
             },
             del: function (recordId) {
                 var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Delete.do';
-                ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
+                DialogUtility.Comfirm(window, "确认要删除当前记录吗？删除表时将只是删除表的描述。", function () {
+                    AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                        if (result.success) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                appList.reloadData();
+                            });
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
+                    }, "json");
+                });
             },
             move:function (type) {
                 var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Move.do';

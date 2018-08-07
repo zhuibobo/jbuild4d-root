@@ -145,4 +145,16 @@ public class TableController {
         }
         return JBuild4DResponseVo.opSuccess();
     }
+
+    @RequestMapping(value = "Delete", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo delete(String recordId) throws JBuild4DGenerallyException {
+        try {
+            tableService.deleteByKey(JB4DSessionUtility.getSession(), recordId);
+            return JBuild4DResponseVo.opSuccess();
+        }
+        catch (Exception ex){
+            throw new JBuild4DGenerallyException(ex.getMessage());
+        }
+    }
 }

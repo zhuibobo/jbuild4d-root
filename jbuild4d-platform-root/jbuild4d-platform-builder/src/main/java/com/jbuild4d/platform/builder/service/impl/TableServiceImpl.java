@@ -222,10 +222,10 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         return tableMapper.selectByTableName(tableName)!=null;
     }
 
-    @Override
+    /*@Override
     public void deleteTable(TableEntity tableEntity) {
 
-    }
+    }*/
 
     @Override
     public TableEntity getByTableName(String newTableName) {
