@@ -162,7 +162,7 @@ public class InitSystemTest extends BaseTest {
         //根菜单->应用管理->数据集设计
         String appBuilderDataSetId="JB4DSystemAppBuilderDataSetBuilder";
         MenuEntity appBuilderDataSetMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderDataSetId,"数据集设计","数据集设计","数据集设计",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","/PlatForm/Builder/DataSet/DataSetGroup/List.do","frame-top-menu-data");
         menuService.deleteByKey(jb4DSession,appBuilderDataSetMenu.getMenuId());
         menuService.save(jb4DSession,appBuilderDataSetMenu.getMenuId(),appBuilderDataSetMenu);
 
