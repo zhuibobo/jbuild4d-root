@@ -309,4 +309,23 @@ CREATE TABLE TB4D_TABLE_FIELD (
   [FIELD_TEMPLATE_NAME]  [NVARCHAR](100)  NULL
 )
 
+-----------------------------------------数据集分组-----------------------------------------
+CREATE TABLE TB4D_DATASET_GROUP (
+  [DS_GROUP_ID]          [NVARCHAR](100)  NOT NULL PRIMARY KEY,
+  [DS_GROUP_VALUE]       [NVARCHAR](200)  NOT NULL,
+  [DS_GROUP_TEXT]        [NVARCHAR](200)  NOT NULL,
+  [DS_GROUP_ORDER_NUM]   [INT]            NULL,
+  [DS_GROUP_CREATE_TIME] [DATETIME]       NULL,
+  [DS_GROUP_DESC]        [NVARCHAR](500)  NULL,
+  [DS_GROUP_STATUS]      [NVARCHAR](10)   NULL,
+  [DS_GROUP_PARENT_ID]   [NVARCHAR](100)  NULL,
+  [DS_GROUP_ISSYSTEM]    [NVARCHAR](10)   NULL,
+  [DS_GROUP_DEL_ENABLE]  [NVARCHAR](10)   NULL,
+  [DS_GROUP_PID_LIST]    [NVARCHAR](1200) NOT NULL,
+  [DS_GROUP_CHILD_COUNT] [INT]            NULL
+)
+------------------------------------------数据集------------------------------------------
+
+
+
 -----------------------------------------应用设计相关表--结束-----------------------------------------
