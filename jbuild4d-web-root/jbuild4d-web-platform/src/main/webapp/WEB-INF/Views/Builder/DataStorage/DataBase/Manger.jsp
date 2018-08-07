@@ -305,7 +305,7 @@
             },
             del: function (recordId) {
                 var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Delete.do';
-                DialogUtility.Comfirm(window, "确认要删除当前记录吗？删除表时将只是删除表的描述。", function () {
+                DialogUtility.Comfirm(window, "确认要删除当前表吗？删除表时将只是删除表的描述,物理表和字段描述将保存，如果需要删除，请手工删除。", function () {
                     AjaxUtility.Post(url, {recordId: recordId}, function (result) {
                         if (result.success) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
