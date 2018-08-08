@@ -51,8 +51,9 @@
             </i-form>
         </div>
         <div class="right-outer-wrap-c" style="bottom: 50px;left: 350px;padding: 10px">
-            <tabs :value="selectType">
+            <tabs value="Const">
                 <tab-pane label="SQL数据集" name="Const" >
+                    <textarea name="txtAreaSQLDesign" id="txtAreaSQLDesign" rows="6" style="width: 100%"></textarea>
                 </tab-pane>
                 <tab-pane label="API数据集" name="DateTime">
                 </tab-pane>
@@ -61,6 +62,18 @@
                 <tab-pane label="自定义数据集" name="Cust">
                 </tab-pane>
             </tabs>
+            <div style="width: 100%">
+                <div style="float: right;margin-bottom: 8px">
+                    <button-group>
+                        <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
+                        <i-button size="small" type="primary" icon="md-close" @click="removeField"></i-button>
+                        <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveField('up')"></i-button>
+                        <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveField('down')"></i-button>
+                    </button-group>
+                </div>
+                <div style="clear: bottom"></div>
+            </div>
+            <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 100%"></div>
         </div>
     </div>
     <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
@@ -223,7 +236,7 @@
                 //this.editTableObj.LoadJsonData(this.tableFieldsData);
                 this.tableEntity.tableUpdater=this.currUserEntity.userName;
             }
-            $("#divEditTable").height($(".right-outer-wrap-c").height()-85);
+            $("#divEditTable").height($(".right-outer-wrap-c").height()-185);
         },
         methods:{
             addField:function(){
