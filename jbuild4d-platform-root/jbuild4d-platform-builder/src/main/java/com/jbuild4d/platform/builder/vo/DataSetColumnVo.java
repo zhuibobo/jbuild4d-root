@@ -7,4 +7,6 @@ package com.jbuild4d.platform.builder.vo;
  * To change this template use File | Settings | File Templates.
  */
 public class DataSetColumnVo {
+    String columnName;
+    String caption;
 }

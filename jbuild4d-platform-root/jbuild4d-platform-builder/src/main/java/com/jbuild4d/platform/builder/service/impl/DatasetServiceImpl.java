@@ -14,6 +14,7 @@ import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.jdbc.core.JdbcOperations;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,16 +25,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implements IDatasetService
 {
     DatasetMapper datasetMapper;
-    public DatasetServiceImpl(DatasetMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
+    JdbcOperations jdbcOperations;
+
+    public DatasetServiceImpl(DatasetMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService,JdbcOperations _jdbcOperations){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         datasetMapper=_defaultBaseMapper;
-        //_sqlSessionTemplate.getConfiguration().
-        /*_sqlSessionTemplate.select("select * from ",null,new RowBounds(), new ResultHandler() {
-            @Override
-            public void handleResult(ResultContext resultContext) {
-                resultContext.
-            }
-        });*/
+        jdbcOperations=_jdbcOperations;
     }
 
     @Override
@@ -50,6 +47,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     @Override
     public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession,String sql){
         SQLDataSetBuilder sqlDataSetBuilder=new SQLDataSetBuilder();
+        sqlDataSetBuilder.setJdbcOperations(jdbcOperations);
         return sqlDataSetBuilder.resolveSQLToDataSet(jb4DSession,sql);
     }
 }

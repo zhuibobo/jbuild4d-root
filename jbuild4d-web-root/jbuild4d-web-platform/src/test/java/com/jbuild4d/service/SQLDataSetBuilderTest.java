@@ -2,6 +2,7 @@ package com.jbuild4d.service;
 
 import com.jbuild4d.platform.builder.service.IDatasetService;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
+import com.jbuild4d.web.platform.beanconfig.jdbctemplate.JdbcTemplateBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.BuilderBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
@@ -22,6 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes= {
         MybatisBeansConfig.class,
+        JdbcTemplateBeansConfig.class,
         SystemBeansConfig.class,
         DevDemoBeansConfig.class,
         OrganBeansConfig.class,

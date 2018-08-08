@@ -8,6 +8,7 @@ import com.jbuild4d.platform.builder.service.impl.*;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.xml.sax.SAXException;
 
@@ -55,8 +56,8 @@ public class BuilderBeansConfig {
     }
 
     @Bean
-    public IDatasetService datasetService(ISQLBuilderService _sqlBuilderService, DatasetMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
-        IDatasetService bean=new DatasetServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+    public IDatasetService datasetService(ISQLBuilderService _sqlBuilderService, DatasetMapper mapper, SqlSessionTemplate sqlSessionTemplate,JdbcOperations jdbcOperations) {
+        IDatasetService bean=new DatasetServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,jdbcOperations);
         return bean;
     }
 
