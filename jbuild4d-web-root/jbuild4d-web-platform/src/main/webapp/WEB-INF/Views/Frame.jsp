@@ -9,7 +9,7 @@
 <%@ include file="/WEB-INF/Views/TagLibs/TagLib.jsp" %>
 <html>
 <head>
-    <title>MYWebApp</title>
+    <title>JBuild4D</title>
     <%@ include file="/WEB-INF/Views/TagLibs/GeneralLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/IViewLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
