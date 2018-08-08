@@ -10,6 +10,9 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.builder.datasetbuilder.SQLDataSetBuilder;
 import com.jbuild4d.platform.builder.service.IDatasetService;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
+import org.apache.ibatis.session.ResultContext;
+import org.apache.ibatis.session.ResultHandler;
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 
 /**
@@ -24,6 +27,13 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     public DatasetServiceImpl(DatasetMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         datasetMapper=_defaultBaseMapper;
+        //_sqlSessionTemplate.getConfiguration().
+        /*_sqlSessionTemplate.select("select * from ",null,new RowBounds(), new ResultHandler() {
+            @Override
+            public void handleResult(ResultContext resultContext) {
+                resultContext.
+            }
+        });*/
     }
 
     @Override
