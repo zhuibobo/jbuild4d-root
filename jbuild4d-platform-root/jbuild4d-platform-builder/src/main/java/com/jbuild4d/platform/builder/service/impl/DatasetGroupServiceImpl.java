@@ -67,4 +67,28 @@ public class DatasetGroupServiceImpl extends BaseServiceImpl<DatasetGroupEntity>
         this.save(jb4DSession,rootEntity.getDsGroupId(),rootEntity);
         return rootEntity;
     }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DatasetGroupEntity selfEntity=datasetGroupMapper.selectByPrimaryKey(id);
+        DatasetGroupEntity ltEntity=datasetGroupMapper.selectLessThanRecord(id,selfEntity.getDsGroupParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        DatasetGroupEntity selfEntity=datasetGroupMapper.selectByPrimaryKey(id);
+        DatasetGroupEntity ltEntity=datasetGroupMapper.selectGreaterThanRecord(id,selfEntity.getDsGroupParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    private void switchOrder(DatasetGroupEntity toEntity,DatasetGroupEntity selfEntity) {
+        if(toEntity !=null){
+            int newNum= toEntity.getDsGroupOrderNum();
+            toEntity.setDsGroupOrderNum(selfEntity.getDsGroupOrderNum());
+            selfEntity.setDsGroupOrderNum(newNum);
+            datasetGroupMapper.updateByPrimaryKeySelective(toEntity);
+            datasetGroupMapper.updateByPrimaryKeySelective(selfEntity);
+        }
+    }
 }
