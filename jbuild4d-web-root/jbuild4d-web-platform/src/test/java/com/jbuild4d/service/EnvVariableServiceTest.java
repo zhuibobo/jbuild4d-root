@@ -4,7 +4,7 @@ import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
-import com.jbuild4d.web.platform.beanconfig.service.BuildBeansConfig;
+import com.jbuild4d.web.platform.beanconfig.service.BuilderBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.OrganBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
@@ -29,7 +29,7 @@ import java.util.List;
         SystemBeansConfig.class,
         DevDemoBeansConfig.class,
         OrganBeansConfig.class,
-        BuildBeansConfig.class
+        BuilderBeansConfig.class
 })
 public class EnvVariableServiceTest  extends BaseTest  {
 

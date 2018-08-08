@@ -9,12 +9,11 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.UUIDUtility;
-import com.jbuild4d.platform.builder.dbtablebuilder.BuilderResultMessage;
 import com.jbuild4d.platform.builder.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
-import com.jbuild4d.web.platform.beanconfig.service.BuildBeansConfig;
+import com.jbuild4d.web.platform.beanconfig.service.BuilderBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.OrganBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
@@ -40,7 +39,7 @@ import java.util.List;
         SystemBeansConfig.class,
         DevDemoBeansConfig.class,
         OrganBeansConfig.class,
-        BuildBeansConfig.class
+        BuilderBeansConfig.class
 })
 public class MSSQLTableBuilderTest extends BaseTest {
 

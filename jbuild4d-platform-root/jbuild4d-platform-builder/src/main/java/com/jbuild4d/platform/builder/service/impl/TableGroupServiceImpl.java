@@ -68,7 +68,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
     @Override
     public TableGroupEntity createRootNode(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
         TableGroupEntity treeTableEntity=new TableGroupEntity();
-        treeTableEntity.setTableGroupId("0");
+        treeTableEntity.setTableGroupId(rootId);
         treeTableEntity.setTableGroupParentId(rootParentId);
         treeTableEntity.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         treeTableEntity.setTableGroupText("表分组");

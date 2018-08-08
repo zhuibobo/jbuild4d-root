@@ -4,6 +4,7 @@ import com.jbuild4d.base.dbaccess.dbentities.*;
 import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.platform.builder.service.IDatasetGroupService;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.organ.service.IOrganService;
@@ -12,7 +13,7 @@ import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
 import com.jbuild4d.platform.system.service.*;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
-import com.jbuild4d.web.platform.beanconfig.service.BuildBeansConfig;
+import com.jbuild4d.web.platform.beanconfig.service.BuilderBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.OrganBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
@@ -34,7 +35,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
         SystemBeansConfig.class,
         DevDemoBeansConfig.class,
         OrganBeansConfig.class,
-        BuildBeansConfig.class
+        BuilderBeansConfig.class
 })
 public class InitSystemTest extends BaseTest {
     @Autowired
@@ -63,6 +64,9 @@ public class InitSystemTest extends BaseTest {
 
     @Autowired
     private ITableFieldService tableFieldService;
+
+    @Autowired
+    private IDatasetGroupService datasetGroupService;
 
     @Test
     public void initSystem() throws JBuild4DGenerallyException {
@@ -261,6 +265,8 @@ public class InitSystemTest extends BaseTest {
         tableGroupService.createSystemTableGroupNode(jb4DSession,rootTableGroupEntity);
 
         tableFieldService.createGeneralTemplate(jb4DSession);
+
+        DatasetGroupEntity rootDatasetGroupEntity=datasetGroupService.createRootNode(jb4DSession);
     }
 
     public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){

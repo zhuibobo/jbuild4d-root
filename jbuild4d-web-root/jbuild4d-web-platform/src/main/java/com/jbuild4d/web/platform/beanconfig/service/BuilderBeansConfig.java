@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 @Configuration
 @EnableTransactionManagement
-public class BuildBeansConfig {
+public class BuilderBeansConfig {
 
     @Bean
     public IDatabaseServiceLinkService databaseServiceLinkService(ISQLBuilderService _sqlBuilderService, DatabaseServiceLinkMapper mapper, SqlSessionTemplate sqlSessionTemplate) {

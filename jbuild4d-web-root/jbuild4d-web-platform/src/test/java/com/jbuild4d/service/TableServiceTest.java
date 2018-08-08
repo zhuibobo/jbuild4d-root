@@ -1,7 +1,6 @@
 package com.jbuild4d.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
@@ -12,7 +11,7 @@ import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
-import com.jbuild4d.web.platform.beanconfig.service.BuildBeansConfig;
+import com.jbuild4d.web.platform.beanconfig.service.BuilderBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.OrganBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.SystemBeansConfig;
@@ -39,7 +38,7 @@ import java.util.List;
         SystemBeansConfig.class,
         DevDemoBeansConfig.class,
         OrganBeansConfig.class,
-        BuildBeansConfig.class
+        BuilderBeansConfig.class
 })
 public class TableServiceTest extends BaseTest  {
 
