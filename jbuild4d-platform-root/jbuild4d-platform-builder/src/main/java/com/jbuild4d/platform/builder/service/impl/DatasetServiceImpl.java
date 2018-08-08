@@ -7,7 +7,9 @@ import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.platform.builder.datasetbuilder.SQLDataSetBuilder;
 import com.jbuild4d.platform.builder.service.IDatasetService;
+import com.jbuild4d.platform.builder.vo.DataSetVo;
 import org.mybatis.spring.SqlSessionTemplate;
 
 /**
@@ -33,6 +35,12 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
                 return sourceEntity;
             }
         });
+    }
+
+    @Override
+    public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession,String sql){
+        SQLDataSetBuilder sqlDataSetBuilder=new SQLDataSetBuilder();
+        return sqlDataSetBuilder.resolveSQLToDataSet(jb4DSession,sql);
     }
 }
 
