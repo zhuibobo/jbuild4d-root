@@ -1,6 +1,10 @@
 package com.jbuild4d.platform.builder.service;
 
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,4 +14,6 @@ import javax.xml.xpath.XPathExpressionException;
  */
 public interface IBuilderConfigService {
     String getTablePrefix() throws XPathExpressionException;
+
+    boolean getResolveSQLEnable() throws IOException, SAXException, ParserConfigurationException, XPathExpressionException;
 }

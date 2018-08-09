@@ -56,8 +56,8 @@ public class BuilderBeansConfig {
     }
 
     @Bean
-    public IDatasetService datasetService(ISQLBuilderService _sqlBuilderService, DatasetMapper mapper, SqlSessionTemplate sqlSessionTemplate,JdbcOperations jdbcOperations) {
-        IDatasetService bean=new DatasetServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,jdbcOperations);
+    public IDatasetService datasetService(ISQLBuilderService _sqlBuilderService, DatasetMapper mapper, SqlSessionTemplate sqlSessionTemplate,JdbcOperations jdbcOperations,IBuilderConfigService _builderConfigService) {
+        IDatasetService bean=new DatasetServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,jdbcOperations,_builderConfigService);
         return bean;
     }
 

@@ -25,9 +25,15 @@ public class BuilderConfigServiceImpl implements IBuilderConfigService {
 
     public BuilderConfigServiceImpl() throws ParserConfigurationException, SAXException, IOException {
         if(xmlDocument==null) {
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
-            xmlDocument = XMLUtility.parseForDoc(inputStream);
+            //InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
+            //xmlDocument = XMLUtility.parseForDoc(inputStream);
+            loadDocument();
         }
+    }
+
+    private void loadDocument() throws ParserConfigurationException, SAXException, IOException {
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
+        xmlDocument = XMLUtility.parseForDoc(inputStream);
     }
 
     @Override
@@ -37,5 +43,16 @@ public class BuilderConfigServiceImpl implements IBuilderConfigService {
             _tablePrefix=XMLUtility.getAttribute(tablePrefixNode,"Value");
         }
         return _tablePrefix;
+    }
+
+    @Override
+    public boolean getResolveSQLEnable() throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
+        //重新加载配置文件
+        loadDocument();
+        Node resolveSQLEnableNode=XMLUtility.parseForNode(xmlDocument,"/Config/DataSetConfig/ResolveSQLEnable");
+        if(XMLUtility.getAttribute(resolveSQLEnableNode,"Value").toLowerCase().equals("true")){
+            return true;
+        }
+        return false;
     }
 }

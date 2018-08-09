@@ -5,6 +5,8 @@
             <TablePrefix Value="TDEV_"></TablePrefix>
         </Default>
     </TableConfig>
-    <DataSetConfig></DataSetConfig>
+    <DataSetConfig>
+        <ResolveSQLEnable Value="True"></ResolveSQLEnable>
+    </DataSetConfig>
     <ModuleConfig></ModuleConfig>
 </Config>

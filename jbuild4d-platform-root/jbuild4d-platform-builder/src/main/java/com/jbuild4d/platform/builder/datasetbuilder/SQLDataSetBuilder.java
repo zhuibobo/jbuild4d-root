@@ -2,6 +2,7 @@ package com.jbuild4d.platform.builder.datasetbuilder;
 
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
+import com.jbuild4d.platform.builder.vo.DataSetRelatedTableVo;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.expression.BinaryExpression;
@@ -48,19 +49,7 @@ public class SQLDataSetBuilder {
     public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession, String sql){
         DataSetVo dataSetVo=new DataSetVo();
         List<DataSetColumnVo> dataSetColumnVoList=new ArrayList<>();
-        jdbcOperations.execute(sql, new PreparedStatementCallback<Object>() {
-            @Override
-            public Object doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {
-                ResultSetMetaData resultSetMetaData=ps.getMetaData();
-                //resultSetMetaData.
-                for(int i=1;i<=resultSetMetaData.getColumnCount();i++){
-                    System.out.println(resultSetMetaData.getColumnName(i));
-                    //System.out.println(resultSetMetaData.getTableName(i));
-                }
-                return null;
-            }
-        });
-        dataSetVo.setColumnVoList(dataSetColumnVoList);
+        List<DataSetRelatedTableVo> dataSetRelatedTableVoList=new ArrayList<>();
 
         CCJSqlParserManager pm = new CCJSqlParserManager();
         Statement statement = null;
@@ -71,14 +60,41 @@ public class SQLDataSetBuilder {
         }
 
         if (statement instanceof Select) {
-            //获得Update对象
+
+            //解析相关的表
+            //获得Select对象
             Select selectStatement = (Select) statement;
             TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
             List tableList = tablesNamesFinder.getTableList(selectStatement);
-            for (Iterator iter = tableList.iterator(); iter.hasNext();) {
-                String tableName=iter.next().toString();
-                System.out.println(tableName);
+            for (Object o : tableList) {
+                DataSetRelatedTableVo dataSetRelatedTableVo=new DataSetRelatedTableVo();
+                dataSetRelatedTableVo.setRtTableName(o.toString());
+                dataSetRelatedTableVoList.add(dataSetRelatedTableVo);
             }
+
+            /*for (Iterator iter = tableList.iterator(); iter.hasNext();) {
+                String tableName=iter.next().toString();
+                //System.out.println(tableName);
+            }*/
+
+            //解析相关的字段
+            jdbcOperations.execute(sql, new PreparedStatementCallback<Object>() {
+                @Override
+                public Object doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {
+                    ResultSetMetaData resultSetMetaData=ps.getMetaData();
+                    for(int i=1;i<=resultSetMetaData.getColumnCount();i++){
+                        DataSetColumnVo columnVo=new DataSetColumnVo();
+                        columnVo.setColumnName(resultSetMetaData.getColumnName(i));
+                        dataSetColumnVoList.add(columnVo);
+                        //System.out.println(resultSetMetaData.getColumnName(i));
+                        //System.out.println(resultSetMetaData.getTableName(i));
+                    }
+                    return null;
+                }
+            });
+
+            dataSetVo.setRelatedTableVoList(dataSetRelatedTableVoList);
+            dataSetVo.setColumnVoList(dataSetColumnVoList);
         }
 
         return dataSetVo;
