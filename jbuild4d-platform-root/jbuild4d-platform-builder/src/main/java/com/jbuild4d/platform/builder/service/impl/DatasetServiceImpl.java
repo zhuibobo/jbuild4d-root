@@ -2,6 +2,7 @@ package com.jbuild4d.platform.builder.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.DatasetMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DatasetEntity;
+import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
@@ -106,7 +107,13 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
                     }
 
                     //尝试补充表的标题
-
+                    List<DataSetRelatedTableVo> dataSetRelatedTableVoList=resultVo.getRelatedTableVoList();
+                    for (DataSetRelatedTableVo dataSetRelatedTableVo : dataSetRelatedTableVoList) {
+                        TableEntity tableEntity=tableService.getByTableName(dataSetRelatedTableVo.getRtTableName());
+                        if(tableEntity!=null){
+                            dataSetRelatedTableVo.setRtTableCaption(tableEntity.getTableCaption());
+                        }
+                    }
 
                     return resultVo;
                 } else {

@@ -50,7 +50,7 @@ public class SQLDataSetBuilderTest extends BaseTest {
         }
         System.out.println("--------------------相关表----------------------");
         for (DataSetRelatedTableVo dataSetRelatedTableVo : dataSetVo.getRelatedTableVoList()) {
-            System.out.println(dataSetRelatedTableVo.getRtTableName());
+            System.out.println(dataSetRelatedTableVo.getRtTableName()+":"+dataSetRelatedTableVo.getRtTableCaption());
         }
         System.out.println("--------------------------------------------------------------------------------------");
     }
