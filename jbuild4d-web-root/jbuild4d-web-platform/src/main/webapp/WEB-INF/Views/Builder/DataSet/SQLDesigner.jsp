@@ -25,7 +25,8 @@
 <body>
 <div id="sqlDesignerForm" v-cloak>
     <div class="list-2column">
-        <div style="height: 100px">
+        <div style="height: 120px">
+            请输入SQL语句
             <textarea style="width: 100%;height: 100px" id="TextAreaJsEidtor"></textarea>
         </div>
         <div>
