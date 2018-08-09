@@ -11,7 +11,6 @@ import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.list.IListWhereCondition;
 import com.jbuild4d.base.tools.common.list.ListUtility;
-import com.jbuild4d.platform.builder.dbtablebuilder.BuilderResultMessage;
 import com.jbuild4d.platform.builder.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableTypeEnum;
 import com.jbuild4d.platform.builder.service.ITableService;
