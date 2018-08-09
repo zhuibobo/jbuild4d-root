@@ -76,4 +76,38 @@ public class SQLDataSetBuilderTest extends BaseTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void singleTable2Select() throws SAXException, ParserConfigurationException, XPathExpressionException, IOException {
+        DataSetVo dataSetVo= null;
+        try {
+            //提示错误
+            datasetService.resolveSQLToDataSet(jb4DSession,"select * from TDEV_TEST_1;select * from TDEV_TEST_1");
+        } catch (JBuild4DGenerallyException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void singleTableDelete() throws SAXException, ParserConfigurationException, XPathExpressionException, IOException {
+        DataSetVo dataSetVo= null;
+        try {
+            //提示错误
+            datasetService.resolveSQLToDataSet(jb4DSession,"delete from TDEV_TEST_1");
+        } catch (JBuild4DGenerallyException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void join2TableSelectTestSuc() throws SAXException, ParserConfigurationException, XPathExpressionException, IOException {
+        //存在重复字段，提示错误
+        DataSetVo dataSetVo= null;
+        try {
+            dataSetVo = datasetService.resolveSQLToDataSet(jb4DSession,"select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID");
+        } catch (JBuild4DGenerallyException e) {
+            e.printStackTrace();
+        }
+        PrintDataSetInfo(dataSetVo);
+    }
 }

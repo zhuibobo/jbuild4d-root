@@ -72,11 +72,6 @@ public class SQLDataSetBuilder {
                 dataSetRelatedTableVoList.add(dataSetRelatedTableVo);
             }
 
-            /*for (Iterator iter = tableList.iterator(); iter.hasNext();) {
-                String tableName=iter.next().toString();
-                //System.out.println(tableName);
-            }*/
-
             //解析相关的字段
             jdbcOperations.execute(sql, new PreparedStatementCallback<Object>() {
                 @Override

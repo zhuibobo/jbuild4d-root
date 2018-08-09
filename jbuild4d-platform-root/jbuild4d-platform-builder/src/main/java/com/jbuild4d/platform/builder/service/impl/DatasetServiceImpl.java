@@ -12,6 +12,8 @@ import com.jbuild4d.base.tools.common.list.ListUtility;
 import com.jbuild4d.platform.builder.datasetbuilder.SQLDataSetBuilder;
 import com.jbuild4d.platform.builder.service.IBuilderConfigService;
 import com.jbuild4d.platform.builder.service.IDatasetService;
+import com.jbuild4d.platform.builder.service.ITableFieldService;
+import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
 import org.apache.ibatis.session.ResultContext;
@@ -24,6 +26,8 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,12 +41,18 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     DatasetMapper datasetMapper;
     JdbcOperations jdbcOperations;
     IBuilderConfigService builderConfigService;
+    ITableService tableService;
+    ITableFieldService tableFieldService;
 
-    public DatasetServiceImpl(DatasetMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService,JdbcOperations _jdbcOperations,IBuilderConfigService _builderConfigService){
+    public DatasetServiceImpl(DatasetMapper _defaultBaseMapper,
+                              SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService,JdbcOperations _jdbcOperations,
+                              IBuilderConfigService _builderConfigService,ITableService _tableService,ITableFieldService _tableFieldService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         datasetMapper=_defaultBaseMapper;
         jdbcOperations=_jdbcOperations;
         builderConfigService=_builderConfigService;
+        tableService=_tableService;
+        tableFieldService=_tableFieldService;
     }
 
     @Override
@@ -59,14 +69,25 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     @Override
     public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession,String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException {
         if(builderConfigService.getResolveSQLEnable()) {
-            SQLDataSetBuilder sqlDataSetBuilder = new SQLDataSetBuilder();
-            sqlDataSetBuilder.setJdbcOperations(jdbcOperations);
-            DataSetVo resultVo = sqlDataSetBuilder.resolveSQLToDataSet(jb4DSession, sql);
-            //进行返回前的结果验证
-            if (validateResolveResult(resultVo)) {
-                return resultVo;
-            } else {
-                throw new JBuild4DGenerallyException("结果校验失败！");
+
+            if(validateResolveSql(sql)) {
+                SQLDataSetBuilder sqlDataSetBuilder = new SQLDataSetBuilder();
+                sqlDataSetBuilder.setJdbcOperations(jdbcOperations);
+                DataSetVo resultVo = sqlDataSetBuilder.resolveSQLToDataSet(jb4DSession, sql);
+                //进行返回前的结果验证
+                if (validateResolveResult(resultVo)) {
+                    //尝试补充上字段标题
+                    //从dbo.TB4D_TABLE和dbo.TB4D_TABLE_FIELD中尝试查找
+
+
+                    //从配置文件中尝试查找
+                    return resultVo;
+                } else {
+                    throw new JBuild4DGenerallyException("结果校验失败！");
+                }
+            }
+            else{
+                throw new JBuild4DGenerallyException("SQL验证失败！");
             }
         }
         else
@@ -75,10 +96,38 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
         }
     }
 
+    private boolean validateResolveSql(String sql) throws JBuild4DGenerallyException {
+        if(sql.indexOf(";")>0){
+            throw new JBuild4DGenerallyException("SQL语句【"+sql+"】中不能存在符号【;】");
+        }
+
+        List<String> singleKeyWord=new ArrayList<>();
+        singleKeyWord.add("delete");
+        singleKeyWord.add("drop");
+        singleKeyWord.add("alter");
+        singleKeyWord.add("truncate");
+        singleKeyWord.add("insert");
+        singleKeyWord.add("update");
+        singleKeyWord.add("exec");
+
+        List<String> sqlSingleWord= Arrays.asList(sql.split(" "));
+        for (String s : sqlSingleWord) {
+            if(ListUtility.Where(singleKeyWord, new IListWhereCondition<String>() {
+                @Override
+                public boolean Condition(String item) {
+                    return item.toLowerCase().equals(s);
+                }
+            }).size()>0){
+                throw new JBuild4DGenerallyException("SQL语句【"+sql+"】中不能存在符号【"+s+"】");
+            }
+        }
+        return true;
+    }
+
     private boolean validateResolveResult(DataSetVo resultVo) throws JBuild4DGenerallyException {
         //列中不能存在多个同名列
         List<DataSetColumnVo> dataSetColumnVoList=resultVo.getColumnVoList();
-        if(dataSetColumnVoList.size()==0){
+        if(dataSetColumnVoList==null||dataSetColumnVoList.size()==0){
             throw new JBuild4DGenerallyException("解析结果中不存在列！");
         }
         for (DataSetColumnVo columnVo : dataSetColumnVoList) {
