@@ -152,6 +152,16 @@ public class MybatisBeansConfig {
     public DatasetMapper datasetMapper(SqlSessionTemplate sqlSessionTemplate) {
         return sqlSessionTemplate.getMapper(DatasetMapper.class);
     }
+
+    @Bean
+    public DatasetRelatedTableMapper datasetRelatedTableMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(DatasetRelatedTableMapper.class);
+    }
+
+    @Bean
+    public DatasetColumnMapper datasetColumnMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(DatasetColumnMapper.class);
+    }
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);

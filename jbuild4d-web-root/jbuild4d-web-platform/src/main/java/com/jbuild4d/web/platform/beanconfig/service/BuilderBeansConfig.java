@@ -62,6 +62,18 @@ public class BuilderBeansConfig {
     }
 
     @Bean
+    public IDatasetRelatedTableService datasetRelatedTableService(ISQLBuilderService _sqlBuilderService, DatasetRelatedTableMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        IDatasetRelatedTableService bean=new DatasetRelatedTableServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
+    public IDatasetColumnService datasetColumnService(ISQLBuilderService _sqlBuilderService, DatasetColumnMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        IDatasetColumnService bean=new DatasetColumnServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
     public IBuilderConfigService builderConfigService() throws IOException, SAXException, ParserConfigurationException {
         IBuilderConfigService builderConfigService=new BuilderConfigServiceImpl();
         return builderConfigService;
