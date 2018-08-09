@@ -24,4 +24,11 @@ public class DataSetController {
         modelAndView.addObject("op",op);
         return modelAndView;
     }
+
+    @RequestMapping(value = "SQLDesigner", method = RequestMethod.GET)
+    public ModelAndView sqlDesigner() throws JsonProcessingException {
+        ModelAndView modelAndView=new ModelAndView("Builder/DataSet/SQLDesigner");
+        JB4DSessionUtility.setUserInfoToMV(modelAndView);
+        return modelAndView;
+    }
 }

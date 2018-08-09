@@ -53,7 +53,17 @@
         <div class="right-outer-wrap-c" style="bottom: 50px;left: 350px;padding: 10px">
             <tabs value="Const">
                 <tab-pane label="SQL数据集" name="Const" >
-                    <textarea name="txtAreaSQLDesign" id="txtAreaSQLDesign" rows="6" style="width: 100%"></textarea>
+                    <div style="width: 100%;height: 60px">
+                        <div style="float:left;width: 85%;border: red 1px solid;border-radius: 4px;height: 50px">
+                            SQL语句
+                        </div>
+                        <div @click="designSQL" style="float: left;width: 6%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
+                            编辑
+                        </div>
+                        <div style="float: left;width: 6%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
+                            解析
+                        </div>
+                    </div>
                 </tab-pane>
                 <tab-pane label="API数据集" name="DateTime">
                 </tab-pane>
@@ -117,7 +127,7 @@
                         Hidden:true
                     },
                     {
-                        Title:"字段标题",
+                        Title:"名称",
                         BindName:"fieldCaption",
                         Renderer:"EditTable_TextBox",
                         TitleCellClassName:"TitleCell",
@@ -130,7 +140,7 @@
                             width:150
                         }
                     },{
-                        Title:"字段名称",
+                        Title:"标题",
                         BindName:"fieldName",
                         Renderer:"EditTable_FieldName",
                         Validate:{
@@ -145,56 +155,7 @@
                         },
                         Hidden:false
                     },{
-                        Title:"字段类型",
-                        BindName:"fieldDataType",
-                        Renderer:"EditTable_SelectFieldType",
-                        Hidden:false,
-                        Style:{
-                            width:100,
-                            textAlign:"center"
-                        }
-                    },{
-                        Title:"字段长度",
-                        BindName:"fieldDataLength",
-                        Renderer:"EditTable_TextBox",
-                        DefaultValue:{
-                            Type:"Const",
-                            Value:"50"
-                        },
-                        Style:{
-                            width:80,
-                            textAlign:"center"
-                        },
-                        Hidden:false
-                    },{
-                        Title:"小数位数",
-                        BindName:"fieldDecimalLength",
-                        Renderer:"EditTable_TextBox",
-                        DefaultValue:{
-                            Type:"Const",
-                            Value:"0"
-                        },
-                        Style:{
-                            width:80,
-                            textAlign:"center"
-                        },
-                        Hidden:false
-                    },{
-                        Title:"是否主键",
-                        BindName:"fieldIsPk",
-                        Renderer:"EditTable_CheckBox",
-                        IsCNValue:true,
-                        DefaultValue:{
-                            Type:"Const",
-                            Value:"否"
-                        },
-                        Style:{
-                            width:80,
-                            textAlign:"center"
-                        },
-                        Hidden:false
-                    },{
-                        Title:"允许为空",
+                        Title:"备注",
                         BindName:"fieldAllowNull",
                         Renderer:"EditTable_CheckBox",
                         Hidden:false,
@@ -301,6 +262,10 @@
             },
             handleClose: function () {
                 DialogUtility.Frame_CloseDialog(window);
+            },
+            designSQL:function () {
+                var url=BaseUtility.BuildUrl("/PlatForm/Builder/DataSet/DataSetDesign/SQLDesigner.do");
+                DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑SQL语句",modal:true}, 2);
             }
         }
     });
