@@ -151,8 +151,7 @@
             columnsConfig: [
                 {
                     title: '表名',
-                    key: 'TableName',
-                    align: "center"
+                    key: 'TableName'
                 },{
                     title: '操作',
                     key: 'TableName',
