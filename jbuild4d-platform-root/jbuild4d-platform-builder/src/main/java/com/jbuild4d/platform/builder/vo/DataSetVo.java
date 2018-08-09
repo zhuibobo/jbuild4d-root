@@ -14,11 +14,21 @@ public class DataSetVo extends DatasetEntity {
 
     List<DataSetColumnVo> columnVoList;
 
+    List<DataSetRelatedTableVo> relatedTableVoList;
+
     public List<DataSetColumnVo> getColumnVoList() {
         return columnVoList;
     }
 
     public void setColumnVoList(List<DataSetColumnVo> columnVoList) {
         this.columnVoList = columnVoList;
+    }
+
+    public List<DataSetRelatedTableVo> getRelatedTableVoList() {
+        return relatedTableVoList;
+    }
+
+    public void setRelatedTableVoList(List<DataSetRelatedTableVo> relatedTableVoList) {
+        this.relatedTableVoList = relatedTableVoList;
     }
 }
