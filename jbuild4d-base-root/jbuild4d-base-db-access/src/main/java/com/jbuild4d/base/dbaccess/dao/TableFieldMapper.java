@@ -27,4 +27,6 @@ public interface TableFieldMapper extends BaseMapper<TableFieldEntity> {
     TableFieldEntity selectLessThanRecord(@Param("fieldId") String id,@Param("fieldTableId") String fieldTableId);
 
     TableFieldEntity selectGreaterThanRecord(@Param("fieldId") String id,@Param("fieldTableId") String fieldTableId);
+
+    List<TableFieldEntity> selectByTableName(String rtTableName);
 }

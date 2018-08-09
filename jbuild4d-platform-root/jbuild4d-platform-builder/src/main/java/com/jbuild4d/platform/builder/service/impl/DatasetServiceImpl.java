@@ -2,20 +2,21 @@ package com.jbuild4d.platform.builder.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.DatasetMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DatasetEntity;
+import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.list.IListWhereCondition;
 import com.jbuild4d.base.tools.common.list.ListUtility;
 import com.jbuild4d.platform.builder.datasetbuilder.SQLDataSetBuilder;
-import com.jbuild4d.platform.builder.service.IBuilderConfigService;
-import com.jbuild4d.platform.builder.service.IDatasetService;
-import com.jbuild4d.platform.builder.service.ITableFieldService;
-import com.jbuild4d.platform.builder.service.ITableService;
+import com.jbuild4d.platform.builder.service.*;
 import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
+import com.jbuild4d.platform.builder.vo.DataSetRelatedTableVo;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
+import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
@@ -77,10 +78,36 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
                 //进行返回前的结果验证
                 if (validateResolveResult(resultVo)) {
                     //尝试补充上字段标题
+                    List<DataSetColumnVo> dataSetColumnVoList=resultVo.getColumnVoList();
                     //从dbo.TB4D_TABLE和dbo.TB4D_TABLE_FIELD中尝试查找
-
+                    for (DataSetRelatedTableVo dataSetRelatedTableVo : resultVo.getRelatedTableVoList()) {
+                        List<TableFieldVO> tableFieldEntityList=tableFieldService.getTableFieldsByTableName(dataSetRelatedTableVo.getRtTableName());
+                        if(tableFieldEntityList!=null&&tableFieldEntityList.size()>0){
+                            for (DataSetColumnVo columnVo : dataSetColumnVoList) {
+                                TableFieldVO fieldVO=ListUtility.WhereSingle(tableFieldEntityList, new IListWhereCondition<TableFieldVO>() {
+                                    @Override
+                                    public boolean Condition(TableFieldVO item) {
+                                        return item.getFieldName().toLowerCase().equals(columnVo.getColumnName().toLowerCase());
+                                    }
+                                });
+                                if(fieldVO!=null){
+                                    columnVo.setColumnCaption(fieldVO.getFieldCaption());
+                                }
+                            }
+                        }
+                    }
 
                     //从配置文件中尝试查找
+                    IBuilderDataSetColumnCaptionConfigService builderDataSetColumnCaptionConfigService=new BuilderDataSetColumnCaptionConfigServiceImpl();
+                    for (DataSetColumnVo columnVo : dataSetColumnVoList) {
+                        if(StringUtility.isEmpty(columnVo.getColumnCaption())){
+                            columnVo.setColumnCaption(builderDataSetColumnCaptionConfigService.getCaption(columnVo.getColumnName()));
+                        }
+                    }
+
+                    //尝试补充表的标题
+
+
                     return resultVo;
                 } else {
                     throw new JBuild4DGenerallyException("结果校验失败！");

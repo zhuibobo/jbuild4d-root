@@ -46,7 +46,7 @@ public class SQLDataSetBuilderTest extends BaseTest {
         System.out.println("--------------------------------------------------------------------------------------");
         System.out.println("--------------------相关字段----------------------");
         for (DataSetColumnVo columnVo : dataSetVo.getColumnVoList()) {
-            System.out.println(columnVo.getColumnName());
+            System.out.println(columnVo.getColumnName()+":"+columnVo.getColumnCaption());
         }
         System.out.println("--------------------相关表----------------------");
         for (DataSetRelatedTableVo dataSetRelatedTableVo : dataSetVo.getRelatedTableVoList()) {
@@ -104,7 +104,7 @@ public class SQLDataSetBuilderTest extends BaseTest {
         //存在重复字段，提示错误
         DataSetVo dataSetVo= null;
         try {
-            dataSetVo = datasetService.resolveSQLToDataSet(jb4DSession,"select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID");
+            dataSetVo = datasetService.resolveSQLToDataSet(jb4DSession,"select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'address' address,'sex' sex from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID");
         } catch (JBuild4DGenerallyException e) {
             e.printStackTrace();
         }

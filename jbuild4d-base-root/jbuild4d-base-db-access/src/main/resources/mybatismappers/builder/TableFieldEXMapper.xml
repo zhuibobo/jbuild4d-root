@@ -53,4 +53,7 @@
               and FIELD_TABLE_ID=#{fieldTableId,jdbcType=NVARCHAR}
         ]]>
     </select>
+    <select id="selectByTableName"  resultMap="BaseResultMap">
+        select<include refid="Base_Column_List"/> from TB4D_TABLE_FIELD WHERE FIELD_TABLE_ID=(select TABLE_ID from TB4D_TABLE where TABLE_NAME= #{tableName}) order by FIELD_ORDER_NUM asc
+    </select>
 </mapper>
