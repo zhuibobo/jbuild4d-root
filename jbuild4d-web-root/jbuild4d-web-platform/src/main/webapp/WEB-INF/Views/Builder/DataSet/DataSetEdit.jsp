@@ -265,7 +265,7 @@
             },
             designSQL:function () {
                 var url=BaseUtility.BuildUrl("/PlatForm/Builder/DataSet/DataSetDesign/SQLDesigner.do");
-                DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑SQL语句",modal:true}, 2);
+                DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑SQL语句",modal:true}, 1);
             }
         }
     });

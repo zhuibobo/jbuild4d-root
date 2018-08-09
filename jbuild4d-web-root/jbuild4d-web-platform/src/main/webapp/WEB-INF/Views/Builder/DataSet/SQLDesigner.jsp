@@ -14,13 +14,19 @@
     <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/ZTreeLib.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/EditTable.jsp" %>
+    <%@ include file="/WEB-INF/Views/TagLibs/CodeMirrorSQL.jsp" %>
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
+    <style>
+        .CodeMirror{
+            height: 100px;
+        }
+    </style>
 </head>
 <body>
 <div id="sqlDesignerForm" v-cloak>
     <div class="list-2column">
-        <div>
-            <textarea style="width: 100%;height: 150px"></textarea>
+        <div style="height: 100px">
+            <textarea style="width: 100%;height: 100px" id="TextAreaJsEidtor"></textarea>
         </div>
         <div>
             <tabs value="DateTime">
@@ -28,6 +34,9 @@
                     <ul id="datetimeZTreeUL" class="ztree"></ul>
                 </tab-pane>
                 <tab-pane label="API变量" name="ApiVar">
+                    <ul id="envVarZTreeUL" class="ztree"></ul>
+                </tab-pane>
+                <tab-pane label="表" name="ApiVar">
                     <ul id="envVarZTreeUL" class="ztree"></ul>
                 </tab-pane>
             </tabs>
@@ -39,8 +48,21 @@
     </div>
 </div>
 <script>
-    var appForm = new Vue({
+    var sqlDesignerForm = new Vue({
         el:"#sqlDesignerForm",
+        data:{},
+        mounted:function () {
+            var myCodeMirror = CodeMirror.fromTextArea($("#TextAreaJsEidtor")[0], {
+                mode: "text/x-sql",
+                lineNumbers: true,
+                lineWrapping: true,
+                foldGutter: true,
+                theme: "monokai"
+            });
+        },
+        methods:{
+
+        }
     });
 </script>
 </body>
