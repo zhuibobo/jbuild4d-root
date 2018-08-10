@@ -19,8 +19,30 @@
     <script src="${ctxpath}/UIComponent/ZTree-V3/js/jquery.ztree.exhide.js" type="text/javascript"></script>
     <script src="${ctxpath}/UIComponent/ZTree-V3/js/fuzzysearch.js" type="text/javascript"></script>
     <style>
-        .CodeMirror{
+        .CodeMirror {
             height: 100px;
+        }
+
+        #TextAreaJsEditor {
+            width: 100%;
+            height: 100px;
+        }
+
+        .tableTreeWrap {
+            float: left;height: 400px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px;padding: 6px
+        }
+
+        .tableFieldWrap{
+            float: left;height: 400px;width: 57%;border: #01a0e4 1px solid;border-radius: 4px;margin-left: 10px;padding: 10px
+        }
+
+        .tableName{
+            color: #3b97ed;
+            cursor: pointer;
+        }
+
+        .tableName:hover{
+            color: red;
         }
     </style>
 </head>
@@ -29,18 +51,18 @@
     <div class="list-2column">
         <div style="height: 120px">
             请输入SQL语句
-            <textarea style="width: 100%;height: 100px" id="TextAreaJsEidtor"></textarea>
+            <textarea id="TextAreaJsEditor"></textarea>
         </div>
         <div>
             <tabs value="Tables">
                 <tab-pane label="表" name="Tables">
                     <div>
-                        <div style="float: left;height: 400px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px;padding: 6px">
+                        <div class="tableTreeWrap">
                             <input type="text" id="txtSearchTableTree" style="width: 100%" />
                             <ul id="tableZTreeUL" class="ztree"></ul>
                         </div>
-                        <div style="float: left;height: 400px;width: 57%;border: #01a0e4 1px solid;border-radius: 4px;margin-left: 10px;padding: 10px">
-                            表：【】、标题:【】
+                        <div class="tableFieldWrap">
+                            表：【<span class="tableName" @click="insertTableNameToCodeMirror">{{tree.selectedTableName}}</span>】
                             <i-table size="small" height="350" stripe border :columns="tableField.columnsConfig" :data="tableField.fieldData"
                                      class="iv-list-table" :highlight-row="true"></i-table>
                         </div>
@@ -156,6 +178,7 @@
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
                             sqlDesignerForm.getTableFields(treeNode);
+                            sqlDesignerForm.tree.selectedTableName=treeNode.value;
                         },
                         onDblClick: function (event, treeId, treeNode) {
 
@@ -166,7 +189,8 @@
                         }
                     }
                 },
-                tableTreeData:${tableTreeData}
+                tableTreeData:${tableTreeData},
+                selectedTableName:"无"
             },
             tableField:{
                 fieldData:[],
@@ -190,7 +214,7 @@
                                     class: "list-row-button list-row-button-listmanager",
                                     on: {
                                         click: function () {
-                                            //appList.selectedTable(params.row.TableName);
+                                            sqlDesignerForm.insertTableFieldToCodeMirror(params.row);
                                         }
                                     }
                                 })
@@ -198,10 +222,11 @@
                         }
                     }
                 ]
-            }
+            },
+            myCodeMirror:null
         },
         mounted:function () {
-            var myCodeMirror = CodeMirror.fromTextArea($("#TextAreaJsEidtor")[0], {
+            this.myCodeMirror = CodeMirror.fromTextArea($("#TextAreaJsEditor")[0], {
                 mode: "text/x-sql",
                 lineNumbers: true,
                 lineWrapping: true,
@@ -218,6 +243,17 @@
             fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
         },
         methods:{
+            insertCodeAtCursor:function(code){
+                var doc = this.myCodeMirror.getDoc();
+                var cursor = doc.getCursor();
+                doc.replaceRange(code, cursor);
+            },
+            insertTableNameToCodeMirror:function () {
+                this.insertCodeAtCursor(this.tree.selectedTableName);
+            },
+            insertTableFieldToCodeMirror:function (fieldJson) {
+                this.insertCodeAtCursor(this.tree.selectedTableName+"."+fieldJson.fieldName);
+            },
             getTableFields:function (treeNode) {
                 //debugger;
                 var tableId=treeNode.id;

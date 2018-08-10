@@ -87,7 +87,7 @@ var BaseUtility = {
     },
     RedirectToLogin:function () {
         var url=BaseUtility.GetRootPath()+"/Login.do";
-        window.parent.location.href=url;
+        window.parent.parent.location.href=url;
     }
 };
 
