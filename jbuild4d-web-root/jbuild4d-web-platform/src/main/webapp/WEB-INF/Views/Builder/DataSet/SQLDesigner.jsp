@@ -33,16 +33,19 @@
             <tabs value="Tables">
                 <tab-pane label="表" name="Tables">
                     <div>
-                        <div style="float: left;height: 400px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px"></div>
+                        <div style="float: left;height: 400px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px">
+                            <ul id="tableZTreeUL" class="ztree"></ul>
+                        </div>
                         <div style="float: left;height: 400px;width: 57%;border: #01a0e4 1px solid;border-radius: 4px;margin-left: 10px"></div>
                     </div>
-                    <ul id="tableZTreeUL" class="ztree"></ul>
                 </tab-pane>
                 <tab-pane label="API变量" name="ApiVar">
                     <ul id="envVarZTreeUL" class="ztree"></ul>
                 </tab-pane>
                 <tab-pane label="日期时间" name="DateTime">
                     <ul id="datetimeZTreeUL" class="ztree"></ul>
+                </tab-pane>
+                <tab-pane label="参考SQL" name="EgSQL">
                 </tab-pane>
             </tabs>
         </div>
@@ -123,7 +126,40 @@
                         }
                     }
                 },
-                envVarTreeData:${envVarTreeData}
+                envVarTreeData:${envVarTreeData},
+                tableTreeObj:null,
+                tableTreeSetting:{
+                    view: {
+                        dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                        showLine: true,//是否显示节点之间的连线
+                        fontCss: {'color': 'black', 'font-weight': 'normal'}
+                    },
+                    data: {
+                        key: {
+                            name: "text",
+                        },
+                        simpleData: {//简单数据模式
+                            enable: true,
+                            idKey: "id",
+                            pIdKey: "parentId",
+                            rootPId: "-1"// 1
+                        }
+                    },
+                    callback: {
+                        //点击树节点事件
+                        onClick: function (event, treeId, treeNode) {
+
+                        },
+                        onDblClick: function (event, treeId, treeNode) {
+
+                        },
+                        //成功的回调函数
+                        onAsyncSuccess: function (event, treeId, treeNode, msg) {
+
+                        }
+                    }
+                },
+                tableTreeData:${tableTreeData}
             }
         },
         mounted:function () {
@@ -138,6 +174,8 @@
             this.tree.datetimeTreeObj.expandAll(true);
             this.tree.envVarTreeObj=$.fn.zTree.init($("#envVarZTreeUL"), this.tree.envVarTreeSetting,this.tree.envVarTreeData);
             this.tree.envVarTreeObj.expandAll(true);
+            this.tree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), this.tree.tableTreeSetting,this.tree.tableTreeData);
+            this.tree.tableTreeObj.expandAll(true);
         },
         methods:{
             handleClose: function () {
