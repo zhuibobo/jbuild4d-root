@@ -85,7 +85,37 @@
                     },
                     datetimeTreeData:${datetimeTreeData},
                     envVarTreeObj:null,
-                    envVarTreeSetting:{},
+                    envVarTreeSetting:{
+                        view: {
+                            dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                            showLine: true,//是否显示节点之间的连线
+                            fontCss: {'color': 'black', 'font-weight': 'normal'}
+                        },
+                        data: {
+                            key: {
+                                name: "text",
+                            },
+                            simpleData: {//简单数据模式
+                                enable: true,
+                                idKey: "id",
+                                pIdKey: "parentId",
+                                rootPId: "-1"// 1
+                            }
+                        },
+                        callback: {
+                            //点击树节点事件
+                            onClick: function (event, treeId, treeNode) {
+
+                            },
+                            onDblClick: function (event, treeId, treeNode) {
+
+                            },
+                            //成功的回调函数
+                            onAsyncSuccess: function (event, treeId, treeNode, msg) {
+
+                            }
+                        }
+                    },
                     envVarTreeData:${envVarTreeData},
                     numberCodeTreeObj:null,
                     numberCodeTreeSetting:{},
@@ -95,6 +125,8 @@
             mounted:function (){
                 this.tree.datetimeTreeObj=$.fn.zTree.init($("#datetimeZTreeUL"), this.tree.datetimeTreeSetting,this.tree.datetimeTreeData);
                 this.tree.datetimeTreeObj.expandAll(true);
+                this.tree.envVarTreeObj=$.fn.zTree.init($("#envVarZTreeUL"), this.tree.envVarTreeSetting,this.tree.envVarTreeData);
+                this.tree.envVarTreeObj.expandAll(true);
             },
             methods:{
                 getSelectInstanceName:function () {
@@ -110,7 +142,7 @@
                     else if(this.selectType=="DateTime"){
                         var selectNodes=this.tree.datetimeTreeObj.getSelectedNodes();
                         if(selectNodes.length==0){
-                            DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择一种时间类型",null);
+                            DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择一种时间类型！",null);
                         }
                         else {
                             result.Type = "DateTime";
@@ -119,7 +151,22 @@
                         }
                     }
                     else if(this.selectType=="ApiVar"){
-                        result.Type = "ApiVar";
+                        //result.Type = "ApiVar";
+                        var selectNodes=this.tree.envVarTreeObj.getSelectedNodes();
+                        if(selectNodes.length==0){
+                            DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择一种API类型！",null);
+                        }
+                        else {
+                            if(selectNodes[0].group==true){
+                                DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"不能选择分组！",null);
+                                return
+                            }
+                            else {
+                                result.Type = "ApiVar";
+                                result.Value = selectNodes[0].value;
+                                result.Text = selectNodes[0].text;
+                            }
+                        }
                     }
                     else if(this.selectType=="NumberCode"){
                         result.Type = "NumberCode";

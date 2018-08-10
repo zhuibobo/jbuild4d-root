@@ -30,15 +30,15 @@
             <textarea style="width: 100%;height: 100px" id="TextAreaJsEidtor"></textarea>
         </div>
         <div>
-            <tabs value="DateTime">
-                <tab-pane label="日期时间" name="DateTime">
-                    <ul id="datetimeZTreeUL" class="ztree"></ul>
+            <tabs value="Tables">
+                <tab-pane label="表" name="Tables">
+                    <ul id="tableZTreeUL" class="ztree"></ul>
                 </tab-pane>
                 <tab-pane label="API变量" name="ApiVar">
                     <ul id="envVarZTreeUL" class="ztree"></ul>
                 </tab-pane>
-                <tab-pane label="表" name="ApiVar">
-                    <ul id="envVarZTreeUL" class="ztree"></ul>
+                <tab-pane label="日期时间" name="DateTime">
+                    <ul id="datetimeZTreeUL" class="ztree"></ul>
                 </tab-pane>
             </tabs>
         </div>
@@ -51,7 +51,46 @@
 <script>
     var sqlDesignerForm = new Vue({
         el:"#sqlDesignerForm",
-        data:{},
+        data:{
+            tree:{
+                datetimeTreeObj:null,
+                datetimeTreeSetting:{
+                    view: {
+                        dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                        showLine: true,//是否显示节点之间的连线
+                        fontCss: {'color': 'black', 'font-weight': 'normal'}
+                    },
+                    data: {
+                        key: {
+                            name: "text",
+                        },
+                        simpleData: {//简单数据模式
+                            enable: true,
+                            idKey: "id",
+                            pIdKey: "parentId",
+                            rootPId: "-1"// 1
+                        }
+                    },
+                    callback: {
+                        //点击树节点事件
+                        onClick: function (event, treeId, treeNode) {
+
+                        },
+                        onDblClick: function (event, treeId, treeNode) {
+
+                        },
+                        //成功的回调函数
+                        onAsyncSuccess: function (event, treeId, treeNode, msg) {
+
+                        }
+                    }
+                },
+                datetimeTreeData:${datetimeTreeData},
+                envVarTreeObj:null,
+                envVarTreeSetting:{},
+                envVarTreeData:${envVarTreeData}
+            }
+        },
         mounted:function () {
             var myCodeMirror = CodeMirror.fromTextArea($("#TextAreaJsEidtor")[0], {
                 mode: "text/x-sql",
