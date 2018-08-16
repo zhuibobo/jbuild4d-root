@@ -139,7 +139,15 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
                     return item.getValue().equals(vo.getValue());
                 }
             })){
-                throw new JBuild4DGenerallyException("存在Value="+vo.getValue()+"的EnvVariable节点!");
+                throw new JBuild4DGenerallyException("存在Value="+vo.getValue()+"的重复EnvVariable节点!");
+            }
+            if(ListUtility.Exist(voList, new IListWhereCondition<EnvVariableVo>() {
+                @Override
+                public boolean Condition(EnvVariableVo item) {
+                    return item.getText().equals(vo.getText());
+                }
+            })){
+                throw new JBuild4DGenerallyException("存在Text="+vo.getText()+"的重复EnvVariable节点!");
             }
             voList.add(vo);
         }

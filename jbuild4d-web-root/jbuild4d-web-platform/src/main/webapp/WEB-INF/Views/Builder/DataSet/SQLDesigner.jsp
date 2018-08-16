@@ -80,8 +80,8 @@
         </div>
     </div>
     <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
-        <i-button type="primary" @click="saveEditTable()"> 校验并保存</i-button>
-        <i-button type="primary" @click="saveEditTable()"> 校验</i-button>
+        <i-button type="primary" @click="saveEditTable()"> 校验并保存 </i-button>
+        <i-button type="primary" @click="validateSQLEnable()"> 校验 </i-button>
         <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
     </div>
 </div>
@@ -270,6 +270,9 @@
             },
             handleClose: function () {
                 DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
+            },
+            validateSQLEnable:function () {
+
             }
         }
     });
