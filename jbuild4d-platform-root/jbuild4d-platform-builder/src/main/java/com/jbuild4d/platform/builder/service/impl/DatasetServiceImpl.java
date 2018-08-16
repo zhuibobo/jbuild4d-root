@@ -168,7 +168,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
             for (Map.Entry<String, String> stringStringEntry : aboutValueParas.entrySet()) {
                 System.out.println(stringStringEntry.getKey()+":"+stringStringEntry.getValue());
             }
-
+            将sqlText装换为sqlValue;
             //进行正则匹配，获取变量相关的变量值并尝试进行SQL的运行，获取数据集合。
             //aboutParas
         }
