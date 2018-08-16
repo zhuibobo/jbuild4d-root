@@ -65,7 +65,7 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
 
     @Override
     public String execEnvVarResult(JB4DSession jb4DSession, String value) throws XPathExpressionException, JBuild4DGenerallyException {
-        List<EnvVariableVo> envVariableVoList=loadDocuemntToVoList();
+        List<EnvVariableVo> envVariableVoList=loadDocumentToVoList();
         EnvVariableVo envVariableVo=ListUtility.WhereSingle(envVariableVoList, new IListWhereCondition<EnvVariableVo>() {
             @Override
             public boolean Condition(EnvVariableVo item) {
@@ -99,7 +99,22 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
         }
     }
 
-    private List<EnvVariableVo> loadDocuemntToVoList() throws XPathExpressionException {
+    @Override
+    public String getValueByName(String name) throws XPathExpressionException {
+        List<EnvVariableVo> _allEnvVariableVoList=loadDocumentToVoList();
+        EnvVariableVo vo=ListUtility.WhereSingle(_allEnvVariableVoList, new IListWhereCondition<EnvVariableVo>() {
+            @Override
+            public boolean Condition(EnvVariableVo item) {
+                return item.getText().equals(name);
+            }
+        });
+        if(vo==null){
+            return "";
+        }
+        return vo.getValue();
+    }
+
+    private List<EnvVariableVo> loadDocumentToVoList() throws XPathExpressionException {
         if(allEnvVariableVoList==null){
             allEnvVariableVoList=new ArrayList<>();
             List<Node> nodes=XMLUtility.parseForNodeList(xmlDocument,"//EnvVariable");

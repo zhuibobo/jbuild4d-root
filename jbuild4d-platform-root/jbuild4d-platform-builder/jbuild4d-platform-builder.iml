@@ -16,6 +16,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="jbuild4d-platform-system" />
     <orderEntry type="module" module-name="jbuild4d-base-exception" />
     <orderEntry type="module" module-name="jbuild4d-base-tools" />
     <orderEntry type="module" module-name="jbuild4d-base-service" />

@@ -6,15 +6,18 @@ import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.platform.builder.service.IDatasetService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
+import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import com.jbuild4d.web.platform.model.ZTreeNodeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.xpath.XPathExpressionException;
@@ -38,6 +41,9 @@ public class DataSetSQLDesignerController {
     @Autowired
     ITableService tableService;
 
+    @Autowired
+    IDatasetService datasetService;
+
     @RequestMapping(value = "SQLDesigner", method = RequestMethod.GET)
     public ModelAndView sqlDesigner() throws JsonProcessingException, XPathExpressionException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataSet/SQLDesigner");
@@ -56,5 +62,17 @@ public class DataSetSQLDesignerController {
         return modelAndView;
     }
 
-
+    @RequestMapping(value = "ValidateSQLEnable", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo validateSQLEnable(String sqlText) {
+        try {
+            JB4DSession jb4DSession = JB4DSessionUtility.getSession();
+            String sqlValue=datasetService.validateDataSetSQLEnable(jb4DSession,sqlText);
+            //List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(tableId);
+            return JBuild4DResponseVo.success("校验成功！");
+        }
+        catch (Exception ex){
+            return JBuild4DResponseVo.error(ex.getMessage());
+        }
+    }
 }

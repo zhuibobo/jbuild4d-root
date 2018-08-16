@@ -5,6 +5,7 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.builder.service.*;
 import com.jbuild4d.platform.builder.service.impl.*;
+import com.jbuild4d.platform.system.service.IEnvVariableService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,8 +58,8 @@ public class BuilderBeansConfig {
 
     @Bean
     public IDatasetService datasetService(ISQLBuilderService _sqlBuilderService, DatasetMapper mapper, SqlSessionTemplate sqlSessionTemplate,
-                                          JdbcOperations jdbcOperations,IBuilderConfigService _builderConfigService,ITableService tableService,ITableFieldService tableFieldService) {
-        IDatasetService bean=new DatasetServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,jdbcOperations,_builderConfigService,tableService,tableFieldService);
+                                          JdbcOperations jdbcOperations, IBuilderConfigService _builderConfigService, ITableService tableService, ITableFieldService tableFieldService, IEnvVariableService envVariableService) {
+        IDatasetService bean=new DatasetServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,jdbcOperations,_builderConfigService,tableService,tableFieldService,envVariableService);
         return bean;
     }
 

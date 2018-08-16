@@ -19,4 +19,6 @@ public interface IEnvVariableService {
     List<EnvVariableVo> getAPIVars() throws XPathExpressionException;
 
     String execEnvVarResult(JB4DSession jb4DSession, String value) throws XPathExpressionException, JBuild4DGenerallyException;
+
+    String getValueByName(String name) throws XPathExpressionException;
 }

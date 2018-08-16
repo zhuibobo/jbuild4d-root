@@ -19,4 +19,6 @@ import java.io.IOException;
  */
 public interface IDatasetService extends IBaseService<DatasetEntity> {
     DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession, String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException;
+
+    String validateDataSetSQLEnable(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException;
 }

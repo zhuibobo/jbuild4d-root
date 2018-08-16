@@ -109,4 +109,14 @@ public class SQLDataSetBuilderTest extends BaseTest {
         }
         PrintDataSetInfo(dataSetVo);
     }
+
+    @Test
+    public void validateDataSetSQLEnable() throws SAXException, ParserConfigurationException, XPathExpressionException, IOException {
+        try {
+            datasetService.validateDataSetSQLEnable(jb4DSession,"select * from f where a='#{ApiVar.当前用户所在组织ID}' or a='#{ApiVar.当前用户所在组织ID}'\n" +
+                    "and b='#{DateTime.年年年年-月月-日日}' and b='#{DateTime.年年年年/月月/日日}' and c='#{ApiVar.当前用户名称}'");
+        } catch (JBuild4DGenerallyException e) {
+            e.printStackTrace();
+        }
+    }
 }

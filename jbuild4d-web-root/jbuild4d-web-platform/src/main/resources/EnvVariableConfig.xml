@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
+    <Desc>
+        <![CDATA[
+            Text:必须全局唯一！
+            Value：必须全局唯一，并且使用后不可修改！
+        ]]>
+    </Desc>
     <Type Text="默认值" Value="Const">
     </Type>
     <Type Text="时间日期" Value="DateTime">

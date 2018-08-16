@@ -81,7 +81,7 @@
     </div>
     <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
         <i-button type="primary" @click="saveEditTable()"> 校验并保存 </i-button>
-        <i-button type="primary" @click="validateSQLEnable()"> 校验 </i-button>
+        <i-button type="primary" @click="validateSQLEnable(null)"> 校验 </i-button>
         <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
     </div>
 </div>
@@ -223,10 +223,10 @@
                     }
                 ]
             },
-            myCodeMirror:null
+            sqlCodeMirror:null
         },
         mounted:function () {
-            this.myCodeMirror = CodeMirror.fromTextArea($("#TextAreaJsEditor")[0], {
+            this.sqlCodeMirror = CodeMirror.fromTextArea($("#TextAreaJsEditor")[0], {
                 mode: "text/x-sql",
                 lineNumbers: true,
                 lineWrapping: true,
@@ -244,7 +244,7 @@
         },
         methods:{
             insertCodeAtCursor:function(code){
-                var doc = this.myCodeMirror.getDoc();
+                var doc = this.sqlCodeMirror.getDoc();
                 var cursor = doc.getCursor();
                 doc.replaceRange(code, cursor);
             },
@@ -253,6 +253,9 @@
             },
             insertTableFieldToCodeMirror:function (fieldJson) {
                 this.insertCodeAtCursor(this.tree.selectedTableName+"."+fieldJson.fieldName);
+            },
+            getEditSQL:function () {
+                return this.sqlCodeMirror.getValue();
             },
             getTableFields:function (treeNode) {
                 //debugger;
@@ -271,8 +274,19 @@
             handleClose: function () {
                 DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
             },
-            validateSQLEnable:function () {
-
+            validateSQLEnable:function (func) {
+                var sql=this.getEditSQL();
+                var url = '/PlatForm/Builder/DataSet/DataSetDesign/ValidateSQLEnable.do';
+                AjaxUtility.Post(url, {sqlText:encodeURIComponent(sql)}, function (result) {
+                    if(result.success){
+                        if(typeof(func)=="function"){
+                            func(result);
+                        }
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                    }
+                }, "json");
             }
         }
     });

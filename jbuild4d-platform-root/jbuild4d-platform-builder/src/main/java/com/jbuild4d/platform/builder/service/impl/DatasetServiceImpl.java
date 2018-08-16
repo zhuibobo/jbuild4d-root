@@ -3,7 +3,6 @@ package com.jbuild4d.platform.builder.service.impl;
 import com.jbuild4d.base.dbaccess.dao.DatasetMapper;
 import com.jbuild4d.base.dbaccess.dbentities.DatasetEntity;
 import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
@@ -18,19 +17,18 @@ import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
 import com.jbuild4d.platform.builder.vo.DataSetRelatedTableVo;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
-import org.apache.ibatis.session.ResultContext;
-import org.apache.ibatis.session.ResultHandler;
-import org.apache.ibatis.session.RowBounds;
+import com.jbuild4d.platform.system.service.IEnvVariableService;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.omg.CORBA.MARSHAL;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -45,16 +43,19 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     IBuilderConfigService builderConfigService;
     ITableService tableService;
     ITableFieldService tableFieldService;
+    IEnvVariableService envVariableService;
 
     public DatasetServiceImpl(DatasetMapper _defaultBaseMapper,
                               SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService,JdbcOperations _jdbcOperations,
-                              IBuilderConfigService _builderConfigService,ITableService _tableService,ITableFieldService _tableFieldService){
+                              IBuilderConfigService _builderConfigService,ITableService _tableService,ITableFieldService _tableFieldService,
+                              IEnvVariableService _envVariableService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         datasetMapper=_defaultBaseMapper;
         jdbcOperations=_jdbcOperations;
         builderConfigService=_builderConfigService;
         tableService=_tableService;
         tableFieldService=_tableFieldService;
+        envVariableService=_envVariableService;
     }
 
     @Override
@@ -72,7 +73,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession,String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException {
         if(builderConfigService.getResolveSQLEnable()) {
 
-            if(validateResolveSql(sql)) {
+            if(validateResolveSqlWithKeyWord(sql)) {
                 SQLDataSetBuilder sqlDataSetBuilder = new SQLDataSetBuilder();
                 sqlDataSetBuilder.setJdbcOperations(jdbcOperations);
                 DataSetVo resultVo = sqlDataSetBuilder.resolveSQLToDataSet(jb4DSession, sql);
@@ -130,7 +131,51 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
         }
     }
 
-    private boolean validateResolveSql(String sql) throws JBuild4DGenerallyException {
+    @Override
+    public String validateDataSetSQLEnable(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException {
+        String sqlValue="";
+        //进行关键字校验
+        if(validateResolveSqlWithKeyWord(sqlText)){
+            Map<String,String> aboutTextParas=new HashMap<>();
+            Map<String,String> aboutValueParas=new HashMap<>();
+            //进行正则匹配，替换为Value。
+            Pattern p=Pattern.compile("#\\{ApiVar.*?}|#\\{DateTime.*?}|#\\{NumberCode.*?}");
+            Matcher m =p.matcher(sqlText);
+            while (m.find()){
+                System.out.println("Found value: " + m.group());
+                //将变量的Text转换为Value
+                aboutTextParas.put(m.group(),"");
+            }
+            //将变量的Text转换为Value
+            for (Map.Entry<String, String> stringStringEntry : aboutTextParas.entrySet()) {
+                String fullValue=stringStringEntry.getKey().split("\\.")[0];
+                String name=stringStringEntry.getKey().split("\\.")[1].replace("}","");
+                String realValue=envVariableService.getValueByName(name);
+                if(realValue.equals("")){
+                    throw new JBuild4DGenerallyException("将变量从"+realValue+"装换为Value时，找不到对应的数据！");
+                }
+
+                fullValue=fullValue+"."+realValue+"}";
+                try {
+                    aboutValueParas.put(fullValue,envVariableService.execEnvVarResult(jb4DSession,realValue));
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                    throw new JBuild4DGenerallyException("获取变量："+realValue+"的运行时值失败！"+ex.getMessage());
+                }
+            }
+
+            for (Map.Entry<String, String> stringStringEntry : aboutValueParas.entrySet()) {
+                System.out.println(stringStringEntry.getKey()+":"+stringStringEntry.getValue());
+            }
+
+            //进行正则匹配，获取变量相关的变量值并尝试进行SQL的运行，获取数据集合。
+            //aboutParas
+        }
+        return sqlValue;
+    }
+
+    private boolean validateResolveSqlWithKeyWord(String sql) throws JBuild4DGenerallyException {
         if(sql.indexOf(";")>0){
             throw new JBuild4DGenerallyException("SQL语句【"+sql+"】中不能存在符号【;】");
         }
