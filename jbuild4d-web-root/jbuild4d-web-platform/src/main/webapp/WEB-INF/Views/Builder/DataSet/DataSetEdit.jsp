@@ -61,9 +61,6 @@
                             编辑
                         </div>
                         <div style="float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
-                            解析
-                        </div>
-                        <div style="float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
                             预览
                         </div>
                     </div>
