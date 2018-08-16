@@ -67,7 +67,7 @@ public class DataSetSQLDesignerController {
     public JBuild4DResponseVo validateSQLEnable(String sqlText) {
         try {
             JB4DSession jb4DSession = JB4DSessionUtility.getSession();
-            String sqlValue=datasetService.validateDataSetSQLEnable(jb4DSession,sqlText);
+            String sqlValue=datasetService.sqlTextReplaceEnvText(jb4DSession,sqlText);
             //List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(tableId);
             return JBuild4DResponseVo.success("校验成功！");
         }

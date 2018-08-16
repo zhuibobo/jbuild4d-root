@@ -132,8 +132,8 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     }
 
     @Override
-    public String validateDataSetSQLEnable(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException {
-        String sqlValue="";
+    public String sqlTextReplaceEnvText(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException {
+        String sqlValue=sqlText;
         //进行关键字校验
         if(validateResolveSqlWithKeyWord(sqlText)){
             Map<String,String> aboutTextParas=new HashMap<>();
@@ -147,9 +147,9 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
                 aboutTextParas.put(m.group(),"");
             }
             //将变量的Text转换为Value
-            for (Map.Entry<String, String> stringStringEntry : aboutTextParas.entrySet()) {
-                String fullValue=stringStringEntry.getKey().split("\\.")[0];
-                String name=stringStringEntry.getKey().split("\\.")[1].replace("}","");
+            for (Map.Entry<String, String> textPara : aboutTextParas.entrySet()) {
+                String fullValue=textPara.getKey().split("\\.")[0];
+                String name=textPara.getKey().split("\\.")[1].replace("}","");
                 String realValue=envVariableService.getValueByName(name);
                 if(realValue.equals("")){
                     throw new JBuild4DGenerallyException("将变量从"+realValue+"装换为Value时，找不到对应的数据！");
@@ -158,21 +158,62 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
                 fullValue=fullValue+"."+realValue+"}";
                 try {
                     aboutValueParas.put(fullValue,envVariableService.execEnvVarResult(jb4DSession,realValue));
+                    textPara.setValue(fullValue);
                 }
                 catch (Exception ex){
                     ex.printStackTrace();
                     throw new JBuild4DGenerallyException("获取变量："+realValue+"的运行时值失败！"+ex.getMessage());
                 }
-            }
 
-            for (Map.Entry<String, String> stringStringEntry : aboutValueParas.entrySet()) {
+                String t1=textPara.getKey().replace("{","\\{");
+                sqlValue=sqlValue.replaceAll(t1,fullValue);
+            }
+            /*for (Map.Entry<String, String> stringStringEntry : aboutValueParas.entrySet()) {
                 System.out.println(stringStringEntry.getKey()+":"+stringStringEntry.getValue());
             }
-            将sqlText装换为sqlValue;
-            //进行正则匹配，获取变量相关的变量值并尝试进行SQL的运行，获取数据集合。
-            //aboutParas
+            System.out.println(sqlRunText.replaceAll("\n"," "));
+            //尝试执行SQL的运行，获取数据集合。
+            try {
+                System.out.println(sqlRunText);
+                sqlBuilderService.selectList(sqlRunText);
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+                throw new JBuild4DGenerallyException("尝试执行SQL时发生错误："+ex.getMessage());
+            }*/
         }
-        return sqlValue;
+        return sqlValue.replaceAll("\n"," ");
+    }
+
+    @Override
+    public String resolveSQLEnvValueToRunValue(JB4DSession jb4DSession, String sqlValue) throws JBuild4DGenerallyException {
+        String sqlRunValue=sqlValue;
+        if(validateResolveSqlWithKeyWord(sqlValue)) {
+            //Map<String,String> aboutValueParas=new HashMap<>();
+            //进行正则匹配，替换为Value。
+            Pattern p=Pattern.compile("#\\{ApiVar.*?}|#\\{DateTime.*?}|#\\{NumberCode.*?}");
+            Matcher m =p.matcher(sqlValue);
+            while (m.find()){
+                System.out.println("Found value: " + m.group());
+                //将变量的Value转换为运行时的值
+                String envValue = m.group().split("\\.")[1].replace("}","");
+                try {
+                    String runValue=envVariableService.execEnvVarResult(jb4DSession,envValue);
+                    String t1=m.group().replace("{","\\{");
+                    sqlRunValue=sqlRunValue.replaceAll(t1,runValue);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    throw new JBuild4DGenerallyException("获取变量：" + envValue + "的运行时值失败！" + ex.getMessage());
+                }
+            }
+
+        }
+        return sqlRunValue;
+    }
+
+    @Override
+    public String resolveSQLToEmptyData(JB4DSession jb4DSession, String sqlRunValue) {
+        return sqlRunValue.replaceAll("(?i)where","where 1=2 and");
     }
 
     private boolean validateResolveSqlWithKeyWord(String sql) throws JBuild4DGenerallyException {
