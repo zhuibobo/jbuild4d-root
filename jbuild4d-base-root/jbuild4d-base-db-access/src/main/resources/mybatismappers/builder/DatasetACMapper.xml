@@ -17,15 +17,16 @@
             <arg column="DS_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
-            <arg column="DS_SQL_SELECT" javaType="java.lang.String" jdbcType="NVARCHAR" />
-            <arg column="DS_SQL_WHERE" javaType="java.lang.String" jdbcType="NVARCHAR" />
-            <arg column="DS_SQL_ORDER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_SQL_SELECT_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_SQL_SELECT_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_REST_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         DS_ID, DS_CAPTION, DS_NAME, DS_ORGAN_ID, DS_CREATE_TIME, DS_CREATER, DS_UPDATE_TIME,
         DS_UPDATER, DS_TYPE, DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC, DS_GROUP_ID, DS_STATUS,
-        DS_SQL_SELECT, DS_SQL_WHERE, DS_SQL_ORDER
+        DS_SQL_SELECT_TEXT, DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_URL
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -42,14 +43,16 @@
         DS_ORGAN_ID, DS_CREATE_TIME, DS_CREATER,
         DS_UPDATE_TIME, DS_UPDATER, DS_TYPE,
         DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC,
-        DS_GROUP_ID, DS_STATUS, DS_SQL_SELECT,
-        DS_SQL_WHERE, DS_SQL_ORDER)
+        DS_GROUP_ID, DS_STATUS, DS_SQL_SELECT_TEXT,
+        DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_URL
+        )
         values (#{dsId,jdbcType=NVARCHAR}, #{dsCaption,jdbcType=NVARCHAR}, #{dsName,jdbcType=NVARCHAR},
         #{dsOrganId,jdbcType=INTEGER}, #{dsCreateTime,jdbcType=TIMESTAMP}, #{dsCreater,jdbcType=NVARCHAR},
         #{dsUpdateTime,jdbcType=TIMESTAMP}, #{dsUpdater,jdbcType=NVARCHAR}, #{dsType,jdbcType=NVARCHAR},
         #{dsIssystem,jdbcType=NVARCHAR}, #{dsOrderNum,jdbcType=INTEGER}, #{dsDesc,jdbcType=NVARCHAR},
-        #{dsGroupId,jdbcType=NVARCHAR}, #{dsStatus,jdbcType=NVARCHAR}, #{dsSqlSelect,jdbcType=NVARCHAR},
-        #{dsSqlWhere,jdbcType=NVARCHAR}, #{dsSqlOrder,jdbcType=NVARCHAR})
+        #{dsGroupId,jdbcType=NVARCHAR}, #{dsStatus,jdbcType=NVARCHAR}, #{dsSqlSelectText,jdbcType=NVARCHAR},
+        #{dsSqlSelectValue,jdbcType=NVARCHAR}, #{dsClassName,jdbcType=NVARCHAR}, #{dsRestUrl,jdbcType=NVARCHAR}
+        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetEntity">
         insert into TB4D_DATASET
@@ -96,14 +99,17 @@
             <if test="dsStatus != null">
                 DS_STATUS,
             </if>
-            <if test="dsSqlSelect != null">
-                DS_SQL_SELECT,
+            <if test="dsSqlSelectText != null">
+                DS_SQL_SELECT_TEXT,
             </if>
-            <if test="dsSqlWhere != null">
-                DS_SQL_WHERE,
+            <if test="dsSqlSelectValue != null">
+                DS_SQL_SELECT_VALUE,
             </if>
-            <if test="dsSqlOrder != null">
-                DS_SQL_ORDER,
+            <if test="dsClassName != null">
+                DS_CLASS_NAME,
+            </if>
+            <if test="dsRestUrl != null">
+                DS_REST_URL,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -149,14 +155,17 @@
             <if test="dsStatus != null">
                 #{dsStatus,jdbcType=NVARCHAR},
             </if>
-            <if test="dsSqlSelect != null">
-                #{dsSqlSelect,jdbcType=NVARCHAR},
+            <if test="dsSqlSelectText != null">
+                #{dsSqlSelectText,jdbcType=NVARCHAR},
             </if>
-            <if test="dsSqlWhere != null">
-                #{dsSqlWhere,jdbcType=NVARCHAR},
+            <if test="dsSqlSelectValue != null">
+                #{dsSqlSelectValue,jdbcType=NVARCHAR},
             </if>
-            <if test="dsSqlOrder != null">
-                #{dsSqlOrder,jdbcType=NVARCHAR},
+            <if test="dsClassName != null">
+                #{dsClassName,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsRestUrl != null">
+                #{dsRestUrl,jdbcType=NVARCHAR},
             </if>
         </trim>
     </insert>
@@ -202,14 +211,17 @@
             <if test="dsStatus != null">
                 DS_STATUS = #{dsStatus,jdbcType=NVARCHAR},
             </if>
-            <if test="dsSqlSelect != null">
-                DS_SQL_SELECT = #{dsSqlSelect,jdbcType=NVARCHAR},
+            <if test="dsSqlSelectText != null">
+                DS_SQL_SELECT_TEXT = #{dsSqlSelectText,jdbcType=NVARCHAR},
             </if>
-            <if test="dsSqlWhere != null">
-                DS_SQL_WHERE = #{dsSqlWhere,jdbcType=NVARCHAR},
+            <if test="dsSqlSelectValue != null">
+                DS_SQL_SELECT_VALUE = #{dsSqlSelectValue,jdbcType=NVARCHAR},
             </if>
-            <if test="dsSqlOrder != null">
-                DS_SQL_ORDER = #{dsSqlOrder,jdbcType=NVARCHAR},
+            <if test="dsClassName != null">
+                DS_CLASS_NAME = #{dsClassName,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsRestUrl != null">
+                DS_REST_URL = #{dsRestUrl,jdbcType=NVARCHAR},
             </if>
         </set>
         where DS_ID = #{dsId,jdbcType=NVARCHAR}
@@ -229,9 +241,10 @@
             DS_DESC = #{dsDesc,jdbcType=NVARCHAR},
             DS_GROUP_ID = #{dsGroupId,jdbcType=NVARCHAR},
             DS_STATUS = #{dsStatus,jdbcType=NVARCHAR},
-            DS_SQL_SELECT = #{dsSqlSelect,jdbcType=NVARCHAR},
-            DS_SQL_WHERE = #{dsSqlWhere,jdbcType=NVARCHAR},
-            DS_SQL_ORDER = #{dsSqlOrder,jdbcType=NVARCHAR}
+            DS_SQL_SELECT_TEXT = #{dsSqlSelectText,jdbcType=NVARCHAR},
+            DS_SQL_SELECT_VALUE = #{dsSqlSelectValue,jdbcType=NVARCHAR},
+            DS_CLASS_NAME = #{dsClassName,jdbcType=NVARCHAR},
+            DS_REST_URL = #{dsRestUrl,jdbcType=NVARCHAR}
         where DS_ID = #{dsId,jdbcType=NVARCHAR}
     </update>
 </mapper>

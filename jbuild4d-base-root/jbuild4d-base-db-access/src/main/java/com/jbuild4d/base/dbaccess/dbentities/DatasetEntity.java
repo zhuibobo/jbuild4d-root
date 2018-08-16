@@ -54,16 +54,19 @@ public class DatasetEntity {
     //DS_STATUS
     private String dsStatus;
 
-    //DS_SQL_SELECT
-    private String dsSqlSelect;
+    //DS_SQL_SELECT_TEXT
+    private String dsSqlSelectText;
 
-    //DS_SQL_WHERE
-    private String dsSqlWhere;
+    //DS_SQL_SELECT_VALUE
+    private String dsSqlSelectValue;
 
-    //DS_SQL_ORDER
-    private String dsSqlOrder;
+    //DS_CLASS_NAME
+    private String dsClassName;
 
-    public DatasetEntity(String dsId, String dsCaption, String dsName, Integer dsOrganId, Date dsCreateTime, String dsCreater, Date dsUpdateTime, String dsUpdater, String dsType, String dsIssystem, Integer dsOrderNum, String dsDesc, String dsGroupId, String dsStatus, String dsSqlSelect, String dsSqlWhere, String dsSqlOrder) {
+    //DS_REST_URL
+    private String dsRestUrl;
+
+    public DatasetEntity(String dsId, String dsCaption, String dsName, Integer dsOrganId, Date dsCreateTime, String dsCreater, Date dsUpdateTime, String dsUpdater, String dsType, String dsIssystem, Integer dsOrderNum, String dsDesc, String dsGroupId, String dsStatus, String dsSqlSelectText, String dsSqlSelectValue, String dsClassName, String dsRestUrl) {
         this.dsId = dsId;
         this.dsCaption = dsCaption;
         this.dsName = dsName;
@@ -78,9 +81,10 @@ public class DatasetEntity {
         this.dsDesc = dsDesc;
         this.dsGroupId = dsGroupId;
         this.dsStatus = dsStatus;
-        this.dsSqlSelect = dsSqlSelect;
-        this.dsSqlWhere = dsSqlWhere;
-        this.dsSqlOrder = dsSqlOrder;
+        this.dsSqlSelectText = dsSqlSelectText;
+        this.dsSqlSelectValue = dsSqlSelectValue;
+        this.dsClassName = dsClassName;
+        this.dsRestUrl = dsRestUrl;
     }
 
     public DatasetEntity() {
@@ -199,27 +203,35 @@ public class DatasetEntity {
         this.dsStatus = dsStatus == null ? null : dsStatus.trim();
     }
 
-    public String getDsSqlSelect() {
-        return dsSqlSelect;
+    public String getDsSqlSelectText() {
+        return dsSqlSelectText;
     }
 
-    public void setDsSqlSelect(String dsSqlSelect) {
-        this.dsSqlSelect = dsSqlSelect == null ? null : dsSqlSelect.trim();
+    public void setDsSqlSelectText(String dsSqlSelectText) {
+        this.dsSqlSelectText = dsSqlSelectText == null ? null : dsSqlSelectText.trim();
     }
 
-    public String getDsSqlWhere() {
-        return dsSqlWhere;
+    public String getDsSqlSelectValue() {
+        return dsSqlSelectValue;
     }
 
-    public void setDsSqlWhere(String dsSqlWhere) {
-        this.dsSqlWhere = dsSqlWhere == null ? null : dsSqlWhere.trim();
+    public void setDsSqlSelectValue(String dsSqlSelectValue) {
+        this.dsSqlSelectValue = dsSqlSelectValue == null ? null : dsSqlSelectValue.trim();
     }
 
-    public String getDsSqlOrder() {
-        return dsSqlOrder;
+    public String getDsClassName() {
+        return dsClassName;
     }
 
-    public void setDsSqlOrder(String dsSqlOrder) {
-        this.dsSqlOrder = dsSqlOrder == null ? null : dsSqlOrder.trim();
+    public void setDsClassName(String dsClassName) {
+        this.dsClassName = dsClassName == null ? null : dsClassName.trim();
+    }
+
+    public String getDsRestUrl() {
+        return dsRestUrl;
+    }
+
+    public void setDsRestUrl(String dsRestUrl) {
+        this.dsRestUrl = dsRestUrl == null ? null : dsRestUrl.trim();
     }
 }
