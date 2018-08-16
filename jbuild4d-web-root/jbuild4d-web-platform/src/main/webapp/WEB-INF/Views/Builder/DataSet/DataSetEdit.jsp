@@ -54,7 +54,7 @@
             <tabs value="Const">
                 <tab-pane label="SQL数据集" name="Const" >
                     <div style="width: 100%;height: 60px">
-                        <div style="float:left;width: 80%;border: red 1px solid;border-radius: 4px;height: 50px">
+                        <div style="float:left;width: 88%;border: red 1px solid;border-radius: 4px;height: 50px">
                             SQL语句
                         </div>
                         <div @click="designSQL" style="float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
@@ -66,24 +66,32 @@
                     </div>
                 </tab-pane>
                 <tab-pane label="API数据集" name="DateTime">
+                    <div style="width: 100%;height: 30px">
+                    </div>
                 </tab-pane>
                 <tab-pane label="REST数据集" name="ApiVar">
                 </tab-pane>
                 <tab-pane label="自定义数据集" name="Cust">
                 </tab-pane>
             </tabs>
-            <div style="width: 100%">
-                <div style="float: right;margin-bottom: 8px">
-                    <button-group>
-                        <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
-                        <i-button size="small" type="primary" icon="md-close" @click="removeField"></i-button>
-                        <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveField('up')"></i-button>
-                        <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveField('down')"></i-button>
-                    </button-group>
+            <div style="width: 70%;float: left">
+                <div style="width: 100%">
+                    <div style="float: right;margin-bottom: 8px">
+                        编辑列
+                        <button-group>
+                            <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
+                            <i-button size="small" type="primary" icon="md-close" @click="removeField"></i-button>
+                            <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveField('up')"></i-button>
+                            <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveField('down')"></i-button>
+                        </button-group>
+                    </div>
+                    <div style="clear: bottom"></div>
                 </div>
-                <div style="clear: bottom"></div>
+                <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 100%"></div>
             </div>
-            <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 100%"></div>
+            <div style="width: 29%;float: left">
+                相关表
+            </div>
         </div>
     </div>
     <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
