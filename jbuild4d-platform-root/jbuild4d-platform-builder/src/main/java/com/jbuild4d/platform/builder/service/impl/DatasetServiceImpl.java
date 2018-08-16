@@ -213,7 +213,12 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
 
     @Override
     public String resolveSQLToEmptyData(JB4DSession jb4DSession, String sqlRunValue) {
-        return sqlRunValue.replaceAll("(?i)where","where 1=2 and");
+        if (sqlRunValue.indexOf("where") > 0) {
+            return sqlRunValue.replaceAll("(?i)where", "where 1=2 and");
+        } else {
+            sqlRunValue = sqlRunValue + " where 1=2";
+            return sqlRunValue;
+        }
     }
 
     private boolean validateResolveSqlWithKeyWord(String sql) throws JBuild4DGenerallyException {

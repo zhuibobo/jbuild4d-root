@@ -113,8 +113,8 @@ public class SQLDataSetBuilderTest extends BaseTest {
     @Test
     public void validateDataSetSQLEnable() throws SAXException, ParserConfigurationException, XPathExpressionException, IOException {
         try {
-            String sqlValue = datasetService.sqlTextReplaceEnvText(jb4DSession,"select * from f Where a='#{ApiVar.当前用户所在组织ID}' or a='#{ApiVar.当前用户所在组织ID}'\n" +
-                    "and b='#{DateTime.年年年年-月月-日日}' and b='#{DateTime.年年年年/月月/日日}' and c='#{ApiVar.当前用户名称}'");
+            String sqlValue = datasetService.sqlTextReplaceEnvText(jb4DSession,"select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'address' address,'sex' sex from TDEV_TEST_1 " +
+                    "join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID where TDEV_TEST_1.ID='#{ApiVar.当前用户所在组织ID}'");
             System.out.println(sqlValue);
             String sqlRunValue=datasetService.resolveSQLEnvValueToRunValue(jb4DSession,sqlValue);
             System.out.println(sqlRunValue);
