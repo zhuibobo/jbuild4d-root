@@ -18,10 +18,10 @@
     <Type Text="API变量" Value="ApiVar">
         <Group Text="API变量">
             <Group Text="默认变量">
-                <EnvVariable Text="当前用户所在组织ID" Value="ApiVarCurrentUserOrganId" ClassName="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="当前用户所在组织名称" Value="ApiVarCurrentUserOrganName" ClassName="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="当前用户ID" Value="ApiVarCurrentUserId" ClassName="" Para="" Desc=""></EnvVariable>
-                <EnvVariable Text="当前用户名称" Value="ApiVarCurrentUserName" ClassName="" Para="" Desc=""></EnvVariable>
+                <EnvVariable Text="当前用户所在组织ID" Value="ApiVarCurrentUserOrganId" ClassName="com.jbuild4d.platform.system.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserOrganId" Desc=""></EnvVariable>
+                <EnvVariable Text="当前用户所在组织名称" Value="ApiVarCurrentUserOrganName" ClassName="com.jbuild4d.platform.system.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserOrganName" Desc=""></EnvVariable>
+                <EnvVariable Text="当前用户ID" Value="ApiVarCurrentUserId" ClassName="com.jbuild4d.platform.system.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserId"  Desc=""></EnvVariable>
+                <EnvVariable Text="当前用户名称" Value="ApiVarCurrentUserName" ClassName="com.jbuild4d.platform.system.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserName" Desc=""></EnvVariable>
             </Group>
             <Group Text="扩展1">
             </Group>
