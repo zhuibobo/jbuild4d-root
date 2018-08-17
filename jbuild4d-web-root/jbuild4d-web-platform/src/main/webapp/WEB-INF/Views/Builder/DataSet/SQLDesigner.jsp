@@ -50,7 +50,7 @@
 <div id="sqlDesignerForm" v-cloak>
     <div class="list-2column">
         <div style="height: 120px">
-            请输入SQL语句
+            请编辑SQL语句
             <textarea id="TextAreaJsEditor"></textarea>
         </div>
         <div>
@@ -69,7 +69,7 @@
                     </div>
                 </tab-pane>
                 <tab-pane label="API变量" name="ApiVar">
-                    <ul id="envVarZTreeUL" class="ztree"></ul>
+                    <ul id="apiVarZTreeUL" class="ztree"></ul>
                 </tab-pane>
                 <tab-pane label="日期时间" name="DateTime">
                     <ul id="datetimeZTreeUL" class="ztree"></ul>
@@ -111,7 +111,13 @@
                     callback: {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
-
+                            if(treeNode.group==true){
+                                DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"不能选择分组！",null);
+                                return
+                            }
+                            else {
+                                sqlDesignerForm.insertCodeAtCursor("#\{"+treeNode.type + "." + treeNode.text+"}");
+                            }
                         },
                         onDblClick: function (event, treeId, treeNode) {
 
@@ -123,8 +129,8 @@
                     }
                 },
                 datetimeTreeData:${datetimeTreeData},
-                envVarTreeObj:null,
-                envVarTreeSetting:{
+                apiVarTreeObj:null,
+                apiVarTreeSetting:{
                     view: {
                         dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
                         showLine: true,//是否显示节点之间的连线
@@ -144,7 +150,14 @@
                     callback: {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
-
+                            //alert(treeNode.text);
+                            if(treeNode.group==true){
+                                DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"不能选择分组！",null);
+                                return
+                            }
+                            else {
+                                sqlDesignerForm.insertCodeAtCursor("#\{"+treeNode.type + "." + treeNode.text+"}");
+                            }
                         },
                         onDblClick: function (event, treeId, treeNode) {
 
@@ -155,7 +168,7 @@
                         }
                     }
                 },
-                envVarTreeData:${envVarTreeData},
+                apiVarTreeData:${apiVarTreeData},
                 tableTreeObj:null,
                 tableTreeSetting:{
                     view: {
@@ -235,8 +248,8 @@
             });
             this.tree.datetimeTreeObj=$.fn.zTree.init($("#datetimeZTreeUL"), this.tree.datetimeTreeSetting,this.tree.datetimeTreeData);
             this.tree.datetimeTreeObj.expandAll(true);
-            this.tree.envVarTreeObj=$.fn.zTree.init($("#envVarZTreeUL"), this.tree.envVarTreeSetting,this.tree.envVarTreeData);
-            this.tree.envVarTreeObj.expandAll(true);
+            this.tree.apiVarTreeObj=$.fn.zTree.init($("#apiVarZTreeUL"), this.tree.apiVarTreeSetting,this.tree.apiVarTreeData);
+            this.tree.apiVarTreeObj.expandAll(true);
             this.tree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), this.tree.tableTreeSetting,this.tree.tableTreeData);
             this.tree.tableTreeObj.expandAll(true);
 

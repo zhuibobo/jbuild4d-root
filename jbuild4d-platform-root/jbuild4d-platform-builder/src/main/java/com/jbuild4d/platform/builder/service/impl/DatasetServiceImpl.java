@@ -149,7 +149,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
             //将变量的Text转换为Value
             for (Map.Entry<String, String> textPara : aboutTextParas.entrySet()) {
                 String fullValue=textPara.getKey().split("\\.")[0];
-                String name=textPara.getKey().split("\\.")[1].replace("}","");
+                String name=textPara.getKey().substring(textPara.getKey().indexOf(".")+1).replace("}","");
                 String realValue=envVariableService.getValueByName(name);
                 if(realValue.equals("")){
                     throw new JBuild4DGenerallyException("将变量从"+realValue+"装换为Value时，找不到对应的数据！");
@@ -196,7 +196,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
             while (m.find()){
                 System.out.println("Found value: " + m.group());
                 //将变量的Value转换为运行时的值
-                String envValue = m.group().split("\\.")[1].replace("}","");
+                String envValue = m.group().substring(m.group().indexOf(".")+1).replace("}","");
                 try {
                     String runValue=envVariableService.execEnvVarResult(jb4DSession,envValue);
                     String t1=m.group().replace("{","\\{");

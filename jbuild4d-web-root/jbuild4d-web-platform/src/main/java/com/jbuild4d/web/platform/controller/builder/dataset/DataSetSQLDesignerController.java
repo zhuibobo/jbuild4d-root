@@ -56,7 +56,7 @@ public class DataSetSQLDesignerController {
         List<TableEntity> tableEntityList=tableService.getALL(jb4DSession);
 
         modelAndView.addObject("datetimeTreeData", JsonUtility.toObjectString(dateTimeVoList));
-        modelAndView.addObject("envVarTreeData",JsonUtility.toObjectString(apiVarVoList));
+        modelAndView.addObject("apiVarTreeData",JsonUtility.toObjectString(apiVarVoList));
         modelAndView.addObject("tableTreeData", JsonUtility.toObjectString(ZTreeNodeVo.parseTableToZTreeNodeList(tableGroupEntityList,tableEntityList)));
         JB4DSessionUtility.setUserInfoToMV(modelAndView);
         return modelAndView;

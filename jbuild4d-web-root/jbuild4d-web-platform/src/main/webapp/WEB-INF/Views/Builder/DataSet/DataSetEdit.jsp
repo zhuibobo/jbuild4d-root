@@ -74,10 +74,10 @@
                 <tab-pane label="自定义数据集" name="Cust">
                 </tab-pane>
             </tabs>
-            <div style="width: 70%;float: left">
+            <div style="width: 70%;float: left;margin-right: 10px">
                 <div style="width: 100%">
                     <div style="float: right;margin-bottom: 8px">
-                        编辑列
+                        编辑列 &nbsp;
                         <button-group>
                             <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
                             <i-button size="small" type="primary" icon="md-close" @click="removeField"></i-button>
@@ -90,7 +90,13 @@
                 <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 100%"></div>
             </div>
             <div style="width: 29%;float: left">
-                相关表
+                <div style="height: 22px;margin-bottom: 8px;line-height: 22px;padding-right: 10px">
+                    <div style="float: right">
+                        相关表
+                    </div>
+                </div>
+                <i-table size="small" stripe border :columns="relatedTable.config" :data="relatedTable.data"
+                         class="iv-list-table" :highlight-row="true"></i-table>
             </div>
         </div>
     </div>
@@ -191,7 +197,21 @@
                 TableId:"TableFields",
                 TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
             },
-            status: '${op}'
+            status: '${op}',
+            relatedTable: {
+                config: [
+                    {
+                        title: '表名',
+                        key: 'fieldName',
+                        align: "center"
+                    }, {
+                        title: '标题',
+                        key: 'fieldCaption',
+                        align: "center"
+                    }
+                ],
+                data: []
+            }
         },
         mounted:function () {
             this.editTableObj=Object.create(EditTable);
