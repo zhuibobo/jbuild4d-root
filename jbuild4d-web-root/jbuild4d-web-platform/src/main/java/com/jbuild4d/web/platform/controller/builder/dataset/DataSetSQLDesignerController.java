@@ -9,6 +9,7 @@ import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.builder.service.IDatasetService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.builder.service.ITableService;
+import com.jbuild4d.platform.builder.vo.SQLResolveToDataSetVo;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.xpath.XPathExpressionException;
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -67,9 +69,12 @@ public class DataSetSQLDesignerController {
     public JBuild4DResponseVo validateSQLEnable(String sqlText) {
         try {
             JB4DSession jb4DSession = JB4DSessionUtility.getSession();
-            String sqlValue=datasetService.sqlTextReplaceEnvText(jb4DSession,sqlText);
+            //String sqlValue=datasetService.sqlReplaceEnvTextToEnvValue(jb4DSession,sqlText);
+            //String sqlWithEnvText=sqlText;
+            sqlText= URLDecoder.decode(sqlText,"utf-8");
+            SQLResolveToDataSetVo sqlResolveToDataSetVo=datasetService.sqlResolveToDataSetVo(jb4DSession,sqlText);
             //List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(tableId);
-            return JBuild4DResponseVo.success("校验成功！");
+            return JBuild4DResponseVo.success("校验成功！",sqlResolveToDataSetVo);
         }
         catch (Exception ex){
             return JBuild4DResponseVo.error(ex.getMessage());

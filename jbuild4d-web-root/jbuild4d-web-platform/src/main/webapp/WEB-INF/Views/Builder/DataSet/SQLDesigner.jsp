@@ -310,17 +310,17 @@
                 DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
             },
             validateSQLEnable:function (func) {
-                DialogUtility.DialogElem($("#validateSQLEnableWarp"), {
-                    modal: true,
-                    title:"校验结果",
-                    width:900,
-                    height:550
-                });
-                return
                 var sql=this.getEditSQL();
                 var url = '/PlatForm/Builder/DataSet/DataSetDesign/ValidateSQLEnable.do';
                 AjaxUtility.Post(url, {sqlText:encodeURIComponent(sql)}, function (result) {
                     if(result.success){
+                        debugger;
+                        DialogUtility.DialogElem($("#validateSQLEnableWarp"), {
+                            modal: true,
+                            title:"校验结果",
+                            width:900,
+                            height:550
+                        });
                         if(typeof(func)=="function"){
                             func(result);
                         }

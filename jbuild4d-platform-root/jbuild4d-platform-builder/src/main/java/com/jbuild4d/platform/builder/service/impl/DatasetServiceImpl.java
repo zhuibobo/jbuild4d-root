@@ -13,10 +13,7 @@ import com.jbuild4d.base.tools.common.list.IListWhereCondition;
 import com.jbuild4d.base.tools.common.list.ListUtility;
 import com.jbuild4d.platform.builder.datasetbuilder.SQLDataSetBuilder;
 import com.jbuild4d.platform.builder.service.*;
-import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
-import com.jbuild4d.platform.builder.vo.DataSetRelatedTableVo;
-import com.jbuild4d.platform.builder.vo.DataSetVo;
-import com.jbuild4d.platform.builder.vo.TableFieldVO;
+import com.jbuild4d.platform.builder.vo.*;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.omg.CORBA.MARSHAL;
@@ -132,7 +129,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     }
 
     @Override
-    public String sqlTextReplaceEnvText(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException {
+    public String sqlReplaceEnvTextToEnvValue(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException {
         String sqlValue=sqlText;
         //进行关键字校验
         if(validateResolveSqlWithKeyWord(sqlText)){
@@ -149,44 +146,31 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
             //将变量的Text转换为Value
             for (Map.Entry<String, String> textPara : aboutTextParas.entrySet()) {
                 String fullValue=textPara.getKey().split("\\.")[0];
-                String name=textPara.getKey().substring(textPara.getKey().indexOf(".")+1).replace("}","");
-                String realValue=envVariableService.getValueByName(name);
-                if(realValue.equals("")){
-                    throw new JBuild4DGenerallyException("将变量从"+realValue+"装换为Value时，找不到对应的数据！");
+                String envName=textPara.getKey().substring(textPara.getKey().indexOf(".")+1).replace("}","");
+                String envValue=envVariableService.getValueByName(envName);
+                if(envValue.equals("")){
+                    throw new JBuild4DGenerallyException("将变量从"+envValue+"装换为Value时，找不到对应的数据！");
                 }
 
-                fullValue=fullValue+"."+realValue+"}";
+                fullValue=fullValue+"."+envValue+"}";
                 try {
-                    aboutValueParas.put(fullValue,envVariableService.execEnvVarResult(jb4DSession,realValue));
+                    aboutValueParas.put(fullValue,envVariableService.execEnvVarResult(jb4DSession,envValue));
                     textPara.setValue(fullValue);
                 }
                 catch (Exception ex){
                     ex.printStackTrace();
-                    throw new JBuild4DGenerallyException("获取变量："+realValue+"的运行时值失败！"+ex.getMessage());
+                    throw new JBuild4DGenerallyException("获取变量："+envValue+"的运行时值失败！"+ex.getMessage());
                 }
 
                 String t1=textPara.getKey().replace("{","\\{");
                 sqlValue=sqlValue.replaceAll(t1,fullValue);
             }
-            /*for (Map.Entry<String, String> stringStringEntry : aboutValueParas.entrySet()) {
-                System.out.println(stringStringEntry.getKey()+":"+stringStringEntry.getValue());
-            }
-            System.out.println(sqlRunText.replaceAll("\n"," "));
-            //尝试执行SQL的运行，获取数据集合。
-            try {
-                System.out.println(sqlRunText);
-                sqlBuilderService.selectList(sqlRunText);
-            }
-            catch (Exception ex){
-                ex.printStackTrace();
-                throw new JBuild4DGenerallyException("尝试执行SQL时发生错误："+ex.getMessage());
-            }*/
         }
         return sqlValue.replaceAll("\n"," ");
     }
 
     @Override
-    public String resolveSQLEnvValueToRunValue(JB4DSession jb4DSession, String sqlValue) throws JBuild4DGenerallyException {
+    public String sqlReplaceEnvValueToRunningValue(JB4DSession jb4DSession, String sqlValue) throws JBuild4DGenerallyException {
         String sqlRunValue=sqlValue;
         if(validateResolveSqlWithKeyWord(sqlValue)) {
             //Map<String,String> aboutValueParas=new HashMap<>();
@@ -212,13 +196,28 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     }
 
     @Override
-    public String resolveSQLToEmptyData(JB4DSession jb4DSession, String sqlRunValue) {
+    public String sqlReplaceRunningValueToEmptyFilter(JB4DSession jb4DSession, String sqlRunValue) {
         if (sqlRunValue.indexOf("where") > 0) {
             return sqlRunValue.replaceAll("(?i)where", "where 1=2 and");
         } else {
             sqlRunValue = sqlRunValue + " where 1=2";
             return sqlRunValue;
         }
+    }
+
+    @Override
+    public SQLResolveToDataSetVo sqlResolveToDataSetVo(JB4DSession jb4DSession, String sqlWithEnvText) throws XPathExpressionException, JBuild4DGenerallyException, IOException, SAXException, ParserConfigurationException {
+        SQLResolveToDataSetVo resolveToDataSetVo=new SQLResolveToDataSetVo();
+        resolveToDataSetVo.setSqlWithEnvText(sqlWithEnvText);
+        String sqlReplaceEnvTextToEnvValue=sqlReplaceEnvTextToEnvValue(jb4DSession,sqlWithEnvText);
+        resolveToDataSetVo.setSqlWithEnvValue(sqlReplaceEnvTextToEnvValue);
+        String setSqlWithEnvRunningValue=sqlReplaceEnvValueToRunningValue(jb4DSession,sqlReplaceEnvTextToEnvValue);
+        resolveToDataSetVo.setSqlWithEnvRunningValue(setSqlWithEnvRunningValue);
+        String sqlReplaceRunningValueToEmptyFilter=sqlReplaceRunningValueToEmptyFilter(jb4DSession,setSqlWithEnvRunningValue);
+        resolveToDataSetVo.setSqlWithEmptyData(sqlReplaceRunningValueToEmptyFilter);
+        DataSetVo dataSetVo=resolveSQLToDataSet(jb4DSession,sqlReplaceRunningValueToEmptyFilter);
+        resolveToDataSetVo.setDataSetVo(dataSetVo);
+        return resolveToDataSetVo;
     }
 
     private boolean validateResolveSqlWithKeyWord(String sql) throws JBuild4DGenerallyException {

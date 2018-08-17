@@ -10,6 +10,7 @@ public class SQLResolveToDataSetVo {
     String sqlWithEnvText;
     String sqlWithEnvValue;
     String sqlWithEnvRunningValue;
+    String sqlWithEmptyData;
     DataSetVo dataSetVo;
 
     public String getSqlWithEnvText() {
@@ -42,5 +43,13 @@ public class SQLResolveToDataSetVo {
 
     public void setDataSetVo(DataSetVo dataSetVo) {
         this.dataSetVo = dataSetVo;
+    }
+
+    public String getSqlWithEmptyData() {
+        return sqlWithEmptyData;
+    }
+
+    public void setSqlWithEmptyData(String sqlWithEmptyData) {
+        this.sqlWithEmptyData = sqlWithEmptyData;
     }
 }
