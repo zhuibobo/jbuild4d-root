@@ -91,8 +91,8 @@
         </div>
     </div>
     <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
-        <i-button type="primary" @click="saveEditTable()"> 校验并解析 </i-button>
-        <i-button type="primary" @click="validateSQLEnable(null)"> 校验 </i-button>
+        <i-button type="success" @click="saveSQLDesign"> 确认 </i-button>
+        <i-button type="primary" @click="validateSQLEnable(null)"> 校验解析 </i-button>
         <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
     </div>
     <div id="validateSQLEnableWarp" style="display: none" class="validate-sql-enable-warp">
@@ -320,33 +320,42 @@
             handleClose: function () {
                 DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
             },
+            saveSQLDesign:function () {
+                this.validateSQLEnable(function (result) {
+                    window.parent.dataSetEditForm.completedSQLDesign(result);
+                    sqlDesignerForm.handleClose();
+                });
+            },
             validateSQLEnable:function (func) {
                 var sql=this.getEditSQL();
                 var url = '/PlatForm/Builder/DataSet/DataSetSQLDesigner/ValidateSQLEnable.do';
                 AjaxUtility.Post(url, {sqlText:encodeURIComponent(sql)}, function (result) {
                     if(result.success){
                         //debugger;
-                        $("#sqlWithEnvValue").html(result.data.sqlWithEnvValue);
-                        $("#sqlWithEnvRunningValue").html(result.data.sqlWithEnvRunningValue);
-                        $("#sqlWithEmptyData").html(result.data.sqlWithEmptyData);
-                        var relatedTables=new Array();
-                        for(var i=0;i<result.data.dataSetVo.relatedTableVoList.length;i++){
-                            relatedTables.push(result.data.dataSetVo.relatedTableVoList[i].rtTableName+":"+result.data.dataSetVo.relatedTableVoList[i].rtTableCaption);
-                        }
-                        var aboutColumns=new Array();
-                        for(var i=0;i<result.data.dataSetVo.columnVoList.length;i++){
-                            aboutColumns.push(result.data.dataSetVo.columnVoList[i].columnName+":"+result.data.dataSetVo.columnVoList[i].columnCaption);
-                        }
-                        $("#relatedTables").html(relatedTables.join("<br />"));
-                        $("#aboutColumns").html(aboutColumns.join("<br />"));
-                        DialogUtility.DialogElem($("#validateSQLEnableWarp"), {
-                            modal: true,
-                            title:"校验结果",
-                            width:900,
-                            height:550
-                        });
+                        result.data.sqlWithEnvText=sql;
                         if(typeof(func)=="function"){
                             func(result);
+                        }
+                        else {
+                            $("#sqlWithEnvValue").html(result.data.sqlWithEnvValue);
+                            $("#sqlWithEnvRunningValue").html(result.data.sqlWithEnvRunningValue);
+                            $("#sqlWithEmptyData").html(result.data.sqlWithEmptyData);
+                            var relatedTables = new Array();
+                            for (var i = 0; i < result.data.dataSetVo.relatedTableVoList.length; i++) {
+                                relatedTables.push(result.data.dataSetVo.relatedTableVoList[i].rtTableName + ":" + result.data.dataSetVo.relatedTableVoList[i].rtTableCaption);
+                            }
+                            var aboutColumns = new Array();
+                            for (var i = 0; i < result.data.dataSetVo.columnVoList.length; i++) {
+                                aboutColumns.push(result.data.dataSetVo.columnVoList[i].columnName + ":" + result.data.dataSetVo.columnVoList[i].columnCaption);
+                            }
+                            $("#relatedTables").html(relatedTables.join("<br />"));
+                            $("#aboutColumns").html(aboutColumns.join("<br />"));
+                            DialogUtility.DialogElem($("#validateSQLEnableWarp"), {
+                                modal: true,
+                                title: "校验结果",
+                                width: 900,
+                                height: 550
+                            });
                         }
                     }
                     else {

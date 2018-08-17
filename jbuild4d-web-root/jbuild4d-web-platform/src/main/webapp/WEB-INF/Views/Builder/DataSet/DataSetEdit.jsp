@@ -17,7 +17,7 @@
     <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
 </head>
 <body>
-<div id="appForm" v-cloak>
+<div id="dataSetEditForm" v-cloak>
     <div class="list-2column">
         <div class="left-outer-wrap-c" style="bottom: 50px;width: 335px;">
             <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px">表信息</divider>
@@ -54,8 +54,8 @@
             <tabs value="Const">
                 <tab-pane label="SQL数据集" name="Const" >
                     <div style="width: 100%;height: 60px">
-                        <div style="float:left;width: 88%;border: red 1px solid;border-radius: 4px;height: 50px">
-                            SQL语句
+                        <div style="float:left;width: 88%;border: red 1px solid;border-radius: 4px;height: 50px;padding: 4px">
+                            {{sqlWithEnvText}}
                         </div>
                         <div @click="designSQL" style="float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
                             编辑
@@ -106,8 +106,8 @@
     </div>
 </div>
 <script>
-    var appForm = new Vue({
-        el:"#appForm",
+    var dataSetEditForm = new Vue({
+        el:"#dataSetEditForm",
         data:{
             currUserEntity:${currUserEntity},
             tableEntity:{
@@ -202,16 +202,17 @@
                 config: [
                     {
                         title: '表名',
-                        key: 'fieldName',
+                        key: 'rtTableName',
                         align: "center"
                     }, {
                         title: '标题',
-                        key: 'fieldCaption',
+                        key: 'rtTableCaption',
                         align: "center"
                     }
                 ],
                 data: []
-            }
+            },
+            sqlWithEnvText:"请编辑SQL"
         },
         mounted:function () {
             this.editTableObj=Object.create(EditTable);
@@ -294,6 +295,11 @@
             designSQL:function () {
                 var url=BaseUtility.BuildUrl("/PlatForm/Builder/DataSet/DataSetSQLDesigner/SQLDesigner.do");
                 DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑SQL语句",modal:true}, 1);
+            },
+            completedSQLDesign:function (result) {
+                this.sqlWithEnvText=result.data.sqlWithEnvText;
+                this.relatedTable.data=result.data.dataSetVo.relatedTableVoList;
+
             }
         }
     });
