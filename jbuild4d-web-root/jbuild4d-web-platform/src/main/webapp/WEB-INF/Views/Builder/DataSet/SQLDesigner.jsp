@@ -50,9 +50,10 @@
         }
 
         .validate-sql-enable-warp .result-item{
-            height: 50px;
             border: #c8dcfe 1px solid;
             border-radius: 4px;
+            padding: 4px;
+            margin-bottom: 4px;
         }
     </style>
 </head>
@@ -96,15 +97,25 @@
     </div>
     <div id="validateSQLEnableWarp" style="display: none" class="validate-sql-enable-warp">
         <div>解析为SQL</div>
-        <div class="result-item"></div>
+        <div class="result-item" id="sqlWithEnvValue">
+
+        </div>
         <div>变量替换SQL</div>
-        <div class="result-item"></div>
+        <div class="result-item" id="sqlWithEnvRunningValue">
+
+        </div>
         <div>获取结构SQL</div>
-        <div class="result-item"></div>
+        <div class="result-item" id="sqlWithEmptyData">
+
+        </div>
         <div>包含表</div>
-        <div class="result-item"></div>
+        <div class="result-item" id="relatedTables">
+
+        </div>
         <div>包含字段</div>
-        <div class="result-item"></div>
+        <div class="result-item" id="aboutColumns">
+
+        </div>
     </div>
 </div>
 <script>
@@ -314,7 +325,20 @@
                 var url = '/PlatForm/Builder/DataSet/DataSetSQLDesigner/ValidateSQLEnable.do';
                 AjaxUtility.Post(url, {sqlText:encodeURIComponent(sql)}, function (result) {
                     if(result.success){
-                        debugger;
+                        //debugger;
+                        $("#sqlWithEnvValue").html(result.data.sqlWithEnvValue);
+                        $("#sqlWithEnvRunningValue").html(result.data.sqlWithEnvRunningValue);
+                        $("#sqlWithEmptyData").html(result.data.sqlWithEmptyData);
+                        var relatedTables=new Array();
+                        for(var i=0;i<result.data.dataSetVo.relatedTableVoList.length;i++){
+                            relatedTables.push(result.data.dataSetVo.relatedTableVoList[i].rtTableName+":"+result.data.dataSetVo.relatedTableVoList[i].rtTableCaption);
+                        }
+                        var aboutColumns=new Array();
+                        for(var i=0;i<result.data.dataSetVo.columnVoList.length;i++){
+                            aboutColumns.push(result.data.dataSetVo.columnVoList[i].columnName+":"+result.data.dataSetVo.columnVoList[i].columnCaption);
+                        }
+                        $("#relatedTables").html(relatedTables.join("<br />"));
+                        $("#aboutColumns").html(aboutColumns.join("<br />"));
                         DialogUtility.DialogElem($("#validateSQLEnableWarp"), {
                             modal: true,
                             title:"校验结果",
