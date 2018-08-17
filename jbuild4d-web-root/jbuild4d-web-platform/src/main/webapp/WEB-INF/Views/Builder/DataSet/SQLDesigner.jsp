@@ -44,6 +44,16 @@
         .tableName:hover{
             color: red;
         }
+
+        .validate-sql-enable-warp{
+
+        }
+
+        .validate-sql-enable-warp .result-item{
+            height: 50px;
+            border: #c8dcfe 1px solid;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -83,6 +93,18 @@
         <i-button type="primary" @click="saveEditTable()"> 校验并解析 </i-button>
         <i-button type="primary" @click="validateSQLEnable(null)"> 校验 </i-button>
         <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
+    </div>
+    <div id="validateSQLEnableWarp" style="display: none" class="validate-sql-enable-warp">
+        <div>解析为SQL</div>
+        <div class="result-item"></div>
+        <div>变量替换SQL</div>
+        <div class="result-item"></div>
+        <div>获取结构SQL</div>
+        <div class="result-item"></div>
+        <div>包含表</div>
+        <div class="result-item"></div>
+        <div>包含字段</div>
+        <div class="result-item"></div>
     </div>
 </div>
 <script>
@@ -288,6 +310,13 @@
                 DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
             },
             validateSQLEnable:function (func) {
+                DialogUtility.DialogElem($("#validateSQLEnableWarp"), {
+                    modal: true,
+                    title:"校验结果",
+                    width:900,
+                    height:550
+                });
+                return
                 var sql=this.getEditSQL();
                 var url = '/PlatForm/Builder/DataSet/DataSetDesign/ValidateSQLEnable.do';
                 AjaxUtility.Post(url, {sqlText:encodeURIComponent(sql)}, function (result) {
