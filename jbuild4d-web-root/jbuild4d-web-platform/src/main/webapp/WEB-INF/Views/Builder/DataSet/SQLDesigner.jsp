@@ -61,7 +61,7 @@
     <div class="list-2column">
         <div style="height: 120px">
             请编辑SQL语句
-            <textarea id="TextAreaJsEditor"></textarea>
+            <textarea id="TextAreaJsEditor">select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'address' address,'sex' sex from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID where TDEV_TEST_1.ID='\#{ApiVar.当前用户所在组织ID}'</textarea>
         </div>
         <div>
             <tabs value="Tables">
@@ -311,7 +311,7 @@
             },
             validateSQLEnable:function (func) {
                 var sql=this.getEditSQL();
-                var url = '/PlatForm/Builder/DataSet/DataSetDesign/ValidateSQLEnable.do';
+                var url = '/PlatForm/Builder/DataSet/DataSetSQLDesigner/ValidateSQLEnable.do';
                 AjaxUtility.Post(url, {sqlText:encodeURIComponent(sql)}, function (result) {
                     if(result.success){
                         debugger;

@@ -964,7 +964,7 @@ var DialogUtility={
                 $(this).dialog('close')
                 $(this).dialog("destroy");
                 $("#" + autodialogid).remove();
-                if (BrowserInfo.IsIE8DocumentMode()) {
+                if (BrowserInfoUtility.IsIE8DocumentMode()) {
                     CollectGarbage();
                 }
                 if(typeof(options.close_after_event)=="function"){
@@ -1010,7 +1010,7 @@ var DialogUtility={
         var $iframeobj = $(dialogEle).find("iframe");
         $iframeobj[0].contentWindow.WorkaroundWindowId = autodialogid;
         $iframeobj[0].contentWindow.OpenerWindowObj = openerwindow;
-        $iframeobj.load(function () {
+        /*$iframeobj.load(function () {
             try {
                 var elem = $(this).contents().find("input:text:first");
                 if (elem.attr("readonly") != "readonly"&& elem.attr("disabled") != "disabled") {
@@ -1029,7 +1029,7 @@ var DialogUtility={
             }
             catch (e) {
             }
-        });
+        });*/
     },
     CloseOpenIframeWindow:function(openerwindow,dialogId){
         //alert(dialogId);
