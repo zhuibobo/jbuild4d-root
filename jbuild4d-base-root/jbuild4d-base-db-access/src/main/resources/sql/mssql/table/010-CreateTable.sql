@@ -371,7 +371,8 @@ CREATE TABLE TB4D_DATASET_COLUMN (
   [COLUMN_DEFAULT_VALUE] [NVARCHAR](1000) NULL,
   [COLUMN_DEFAULT_TEXT]  [NVARCHAR](400)  NULL,
   [COLUMN_ORDER_NUM]     [INT]            NULL,
-  [COLUMN_TABLE_NAME]    [NVARCHAR](50)   NULL
+  [COLUMN_TABLE_NAME]    [NVARCHAR](50)   NULL,
+  [COLUMN_IS_CUSTOM]     [NVARCHAR](10)   NULL
 )
 
 -----------------------------------------应用设计相关表--结束-----------------------------------------

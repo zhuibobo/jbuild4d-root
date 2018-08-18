@@ -54,7 +54,10 @@ public class DatasetColumnEntity {
     //COLUMN_TABLE_NAME
     private String columnTableName;
 
-    public DatasetColumnEntity(String columnId, String columnDsId, String columnCaption, String columnName, Date columnCreateTime, String columnCreater, Date columnUpdateTime, String columnUpdater, String columnDesc, String columnDefaultType, String columnDefaultValue, String columnDefaultText, Integer columnOrderNum, String columnTableName) {
+    //COLUMN_IS_CUSTOM
+    private String columnIsCustom;
+
+    public DatasetColumnEntity(String columnId, String columnDsId, String columnCaption, String columnName, Date columnCreateTime, String columnCreater, Date columnUpdateTime, String columnUpdater, String columnDesc, String columnDefaultType, String columnDefaultValue, String columnDefaultText, Integer columnOrderNum, String columnTableName, String columnIsCustom) {
         this.columnId = columnId;
         this.columnDsId = columnDsId;
         this.columnCaption = columnCaption;
@@ -69,6 +72,7 @@ public class DatasetColumnEntity {
         this.columnDefaultText = columnDefaultText;
         this.columnOrderNum = columnOrderNum;
         this.columnTableName = columnTableName;
+        this.columnIsCustom = columnIsCustom;
     }
 
     public DatasetColumnEntity() {
@@ -185,5 +189,13 @@ public class DatasetColumnEntity {
 
     public void setColumnTableName(String columnTableName) {
         this.columnTableName = columnTableName == null ? null : columnTableName.trim();
+    }
+
+    public String getColumnIsCustom() {
+        return columnIsCustom;
+    }
+
+    public void setColumnIsCustom(String columnIsCustom) {
+        this.columnIsCustom = columnIsCustom == null ? null : columnIsCustom.trim();
     }
 }

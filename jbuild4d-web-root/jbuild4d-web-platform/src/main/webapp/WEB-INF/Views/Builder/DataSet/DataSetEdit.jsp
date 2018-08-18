@@ -294,7 +294,7 @@
             completedSQLDesign:function (result) {
                 this.sqlWithEnvText=result.data.sqlWithEnvText;
                 this.relatedTable.data=result.data.dataSetVo.relatedTableVoList;
-
+                this.editTableObj.LoadJsonData(result.data.dataSetVo.columnVoList);
             }
         }
     });

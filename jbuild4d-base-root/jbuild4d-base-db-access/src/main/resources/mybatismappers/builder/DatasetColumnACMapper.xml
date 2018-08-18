@@ -17,12 +17,13 @@
             <arg column="COLUMN_DEFAULT_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="COLUMN_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="COLUMN_TABLE_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="COLUMN_IS_CUSTOM" javaType="java.lang.String" jdbcType="NVARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         COLUMN_ID, COLUMN_DS_ID, COLUMN_CAPTION, COLUMN_NAME, COLUMN_CREATE_TIME, COLUMN_CREATER,
         COLUMN_UPDATE_TIME, COLUMN_UPDATER, COLUMN_DESC, COLUMN_DEFAULT_TYPE, COLUMN_DEFAULT_VALUE,
-        COLUMN_DEFAULT_TEXT, COLUMN_ORDER_NUM, COLUMN_TABLE_NAME
+        COLUMN_DEFAULT_TEXT, COLUMN_ORDER_NUM, COLUMN_TABLE_NAME, COLUMN_IS_CUSTOM
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -39,14 +40,14 @@
         COLUMN_NAME, COLUMN_CREATE_TIME, COLUMN_CREATER,
         COLUMN_UPDATE_TIME, COLUMN_UPDATER, COLUMN_DESC,
         COLUMN_DEFAULT_TYPE, COLUMN_DEFAULT_VALUE,
-        COLUMN_DEFAULT_TEXT, COLUMN_ORDER_NUM, COLUMN_TABLE_NAME
-        )
+        COLUMN_DEFAULT_TEXT, COLUMN_ORDER_NUM, COLUMN_TABLE_NAME,
+        COLUMN_IS_CUSTOM)
         values (#{columnId,jdbcType=NVARCHAR}, #{columnDsId,jdbcType=NVARCHAR}, #{columnCaption,jdbcType=NVARCHAR},
         #{columnName,jdbcType=NVARCHAR}, #{columnCreateTime,jdbcType=TIMESTAMP}, #{columnCreater,jdbcType=NVARCHAR},
         #{columnUpdateTime,jdbcType=TIMESTAMP}, #{columnUpdater,jdbcType=NVARCHAR}, #{columnDesc,jdbcType=NVARCHAR},
         #{columnDefaultType,jdbcType=NVARCHAR}, #{columnDefaultValue,jdbcType=NVARCHAR},
-        #{columnDefaultText,jdbcType=NVARCHAR}, #{columnOrderNum,jdbcType=INTEGER}, #{columnTableName,jdbcType=NVARCHAR}
-        )
+        #{columnDefaultText,jdbcType=NVARCHAR}, #{columnOrderNum,jdbcType=INTEGER}, #{columnTableName,jdbcType=NVARCHAR},
+        #{columnIsCustom,jdbcType=NVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetColumnEntity">
         insert into TB4D_DATASET_COLUMN
@@ -93,6 +94,9 @@
             <if test="columnTableName != null">
                 COLUMN_TABLE_NAME,
             </if>
+            <if test="columnIsCustom != null">
+                COLUMN_IS_CUSTOM,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="columnId != null">
@@ -136,6 +140,9 @@
             </if>
             <if test="columnTableName != null">
                 #{columnTableName,jdbcType=NVARCHAR},
+            </if>
+            <if test="columnIsCustom != null">
+                #{columnIsCustom,jdbcType=NVARCHAR},
             </if>
         </trim>
     </insert>
@@ -181,24 +188,28 @@
             <if test="columnTableName != null">
                 COLUMN_TABLE_NAME = #{columnTableName,jdbcType=NVARCHAR},
             </if>
+            <if test="columnIsCustom != null">
+                COLUMN_IS_CUSTOM = #{columnIsCustom,jdbcType=NVARCHAR},
+            </if>
         </set>
         where COLUMN_ID = #{columnId,jdbcType=NVARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetColumnEntity">
         update TB4D_DATASET_COLUMN
         set COLUMN_DS_ID = #{columnDsId,jdbcType=NVARCHAR},
-        COLUMN_CAPTION = #{columnCaption,jdbcType=NVARCHAR},
-        COLUMN_NAME = #{columnName,jdbcType=NVARCHAR},
-        COLUMN_CREATE_TIME = #{columnCreateTime,jdbcType=TIMESTAMP},
-        COLUMN_CREATER = #{columnCreater,jdbcType=NVARCHAR},
-        COLUMN_UPDATE_TIME = #{columnUpdateTime,jdbcType=TIMESTAMP},
-        COLUMN_UPDATER = #{columnUpdater,jdbcType=NVARCHAR},
-        COLUMN_DESC = #{columnDesc,jdbcType=NVARCHAR},
-        COLUMN_DEFAULT_TYPE = #{columnDefaultType,jdbcType=NVARCHAR},
-        COLUMN_DEFAULT_VALUE = #{columnDefaultValue,jdbcType=NVARCHAR},
-        COLUMN_DEFAULT_TEXT = #{columnDefaultText,jdbcType=NVARCHAR},
-        COLUMN_ORDER_NUM = #{columnOrderNum,jdbcType=INTEGER},
-        COLUMN_TABLE_NAME = #{columnTableName,jdbcType=NVARCHAR}
+            COLUMN_CAPTION = #{columnCaption,jdbcType=NVARCHAR},
+            COLUMN_NAME = #{columnName,jdbcType=NVARCHAR},
+            COLUMN_CREATE_TIME = #{columnCreateTime,jdbcType=TIMESTAMP},
+            COLUMN_CREATER = #{columnCreater,jdbcType=NVARCHAR},
+            COLUMN_UPDATE_TIME = #{columnUpdateTime,jdbcType=TIMESTAMP},
+            COLUMN_UPDATER = #{columnUpdater,jdbcType=NVARCHAR},
+            COLUMN_DESC = #{columnDesc,jdbcType=NVARCHAR},
+            COLUMN_DEFAULT_TYPE = #{columnDefaultType,jdbcType=NVARCHAR},
+            COLUMN_DEFAULT_VALUE = #{columnDefaultValue,jdbcType=NVARCHAR},
+            COLUMN_DEFAULT_TEXT = #{columnDefaultText,jdbcType=NVARCHAR},
+            COLUMN_ORDER_NUM = #{columnOrderNum,jdbcType=INTEGER},
+            COLUMN_TABLE_NAME = #{columnTableName,jdbcType=NVARCHAR},
+            COLUMN_IS_CUSTOM = #{columnIsCustom,jdbcType=NVARCHAR}
         where COLUMN_ID = #{columnId,jdbcType=NVARCHAR}
     </update>
 </mapper>
