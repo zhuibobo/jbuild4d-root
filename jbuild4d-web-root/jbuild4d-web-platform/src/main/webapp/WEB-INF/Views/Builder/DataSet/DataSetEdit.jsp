@@ -131,7 +131,7 @@
                 Templates:[
                     {
                         Title:"字段ID",
-                        BindName:"fieldId",
+                        BindName:"columnId",
                         Renderer:"EditTable_Label",
                         TitleCellClassName:"TitleCell",
                         DefaultValue:{
@@ -141,8 +141,8 @@
                         Hidden:true
                     },
                     {
-                        Title:"名称",
-                        BindName:"fieldCaption",
+                        Title:"标题",
+                        BindName:"columnCaption",
                         Renderer:"EditTable_TextBox",
                         TitleCellClassName:"TitleCell",
                         Validate:{
@@ -154,8 +154,8 @@
                             width:150
                         }
                     },{
-                        Title:"标题",
-                        BindName:"fieldName",
+                        Title:"名称",
+                        BindName:"columnName",
                         Renderer:"EditTable_FieldName",
                         Validate:{
                             Type:"SQLKeyWord"
@@ -170,22 +170,17 @@
                         Hidden:false
                     },{
                         Title:"备注",
-                        BindName:"fieldAllowNull",
-                        Renderer:"EditTable_CheckBox",
+                        BindName:"columnDesc",
+                        Renderer:"EditTable_TextBox",
                         Hidden:false,
-                        IsCNValue:true,
-                        DefaultValue:{
-                            Type:"Const",
-                            Value:"是"
-                        },
                         Style:{
                             width:80,
                             textAlign:"center"
                         }
                     },{
                         Title:"默认值",
-                        BindName:"fieldDefaultEntity.fieldDefaultValue",
-                        Renderer:"EditTable_SelectDefaultValue",
+                        BindName:"columnDefaultValue",
+                        Renderer:"EditTable_Label",
                         Hidden:false
                     }
                 ],

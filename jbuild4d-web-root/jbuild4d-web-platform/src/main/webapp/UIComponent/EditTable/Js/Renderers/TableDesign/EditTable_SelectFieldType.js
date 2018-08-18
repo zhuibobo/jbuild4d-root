@@ -1,7 +1,6 @@
 /**
  * Created by zhuangrb on 2018/7/31.
  */
-
 var EditTable_SelectFieldTypeDataLoader={
     _fieldDataTypeArray:null,
     GetFieldDataTypeArray:function() {

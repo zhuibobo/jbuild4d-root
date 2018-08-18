@@ -1,3 +1,6 @@
+/**
+ * Created by zhuangrb on 2018/8/18.
+ */
 if (!Object.create) {
     Object.create = (function(){
         function F(){}

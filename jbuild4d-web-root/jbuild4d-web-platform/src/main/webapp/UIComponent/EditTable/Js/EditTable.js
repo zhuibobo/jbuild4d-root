@@ -1,5 +1,6 @@
-
-
+/**
+ * Created by zhuangrb on 2018/8/18.
+ */
 var EditTable= {
     _$Prop_TableElem: null,
     _$Prop_RendererToElem: null,
