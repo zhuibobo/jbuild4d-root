@@ -169,12 +169,21 @@
                         },
                         Hidden:false
                     },{
+                        Title:"自定义",
+                        BindName:"columnIsCustom",
+                        Renderer:"EditTable_Label",
+                        Style:{
+                            width:80,
+                            textAlign:"center"
+                        },
+                        Hidden:false
+                    },{
                         Title:"备注",
                         BindName:"columnDesc",
                         Renderer:"EditTable_TextBox",
                         Hidden:false,
                         Style:{
-                            width:80,
+                            width:280,
                             textAlign:"center"
                         }
                     },{
@@ -294,7 +303,16 @@
             completedSQLDesign:function (result) {
                 this.sqlWithEnvText=result.data.sqlWithEnvText;
                 this.relatedTable.data=result.data.dataSetVo.relatedTableVoList;
-                this.editTableObj.LoadJsonData(result.data.dataSetVo.columnVoList);
+                //获取现有的列定义
+                var oldColumnData=this.editTableObj.GetSerializeJson();
+                if(oldColumnData.length==0) {
+                    this.editTableObj.LoadJsonData(result.data.dataSetVo.columnVoList);
+                }
+                else {
+                    for(var i=0;i<oldColumnData.length;i++){
+                        //var columnName=oldColumnData.columnName;
+                    }
+                }
             }
         }
     });

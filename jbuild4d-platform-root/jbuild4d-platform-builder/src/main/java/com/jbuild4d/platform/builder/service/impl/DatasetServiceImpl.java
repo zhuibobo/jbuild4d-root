@@ -92,6 +92,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
                                 if(fieldVO!=null){
                                     columnVo.setColumnCaption(fieldVO.getFieldCaption());
                                 }
+                                columnVo.setColumnIsCustom("否");
                             }
                         }
                     }
