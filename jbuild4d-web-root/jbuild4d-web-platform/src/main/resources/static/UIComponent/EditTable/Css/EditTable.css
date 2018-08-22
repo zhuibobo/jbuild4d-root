@@ -1,0 +1,35 @@
+.EditTable {
+    width: 100%;
+    border-collapse:collapse;
+}
+
+.TitleCellClassName {
+
+}
+
+.EditTable::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+
+.EditTable tr th{
+    border:1px solid #c5dbec;
+    padding:8px 6px;
+    color:#4c4c4c;
+    background-color: #e2edfa;
+    font-size: 12px;
+}
+
+.EditTable tr td{
+    padding: 5px;
+    border:1px solid #c5dbec;
+    font-size: 12px;
+}
+
+.EditTable tr td input[type=checkbox]{
+    margin-top: 4px;
+}
+
+.EditTableAtWRPage{
+   top: 30px;bottom: 2px;left: 4px;right: 4px;overflow: auto
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../Css/EditTable.css" rel="stylesheet" />
+    <script src="../../Js/jquery-1.7.2.js"></script>
+    <script src="../../Js/SSSBaseLib.js"></script>
+    <script src="../../Js/EditTable.js"></script>
+    <script src="../../Js/Config.js"></script>
+    <script src="../../Js/Renderers/EditTable_TextBox.js"></script>
+    <script src="../../Js/Renderers/EditTable_Select.js"></script>
+    <script>
+        var editTable1=null;
+        $(function(){
+            editTable1=Object.create(EditTable);
+            //editTable1.Config(EditTableConfig);
+            editTable1.Initialization(EditTableConfig,EditTableData);
+        });
+
+        function addrow() {
+            editTable1.AddEditingRowByTemplate();
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="addrow" onclick="addrow()">
+    <div id="divEditTable"></div>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+<label></label>
+<input type="hidden">
+</body>
+</html>

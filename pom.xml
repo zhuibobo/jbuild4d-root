@@ -2,38 +2,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <platform.version>1.0-SNAPSHOT</platform.version>
+    </properties>
 
+    <modelVersion>4.0.0</modelVersion>
     <groupId>jbuild4d</groupId>
     <artifactId>jbuild4d-root</artifactId>
-    <version>${platform.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <modules>
         <module>jbuild4d-base-root</module>
         <module>jbuild4d-platform-root</module>
         <module>jbuild4d-web-root</module>
     </modules>
-
     <packaging>pom</packaging>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <platform.version>1.0-SNAPSHOT</platform.version>
-    </properties>
+
     <dependencies>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -44,12 +49,8 @@
             <artifactId>c3p0</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <groupId>com.mchange</groupId>
+            <artifactId>mchange-commons-java</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -83,10 +84,10 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
@@ -168,24 +169,27 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>4.3.14.RELEASE</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.0.4.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
-            <dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+            <!--<dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-aop</artifactId>
-                <version>4.3.14.RELEASE</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
-            <dependency>
+                <artifactId>spring-jdbc</artifactId>
+                <version>5.0.8.RELEASE</version>
+            </dependency>-->
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+            <!--<dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>4.3.14.RELEASE</version>
-            </dependency>
+                <artifactId>spring-test</artifactId>
+                <version>5.0.8.RELEASE</version>
+                <scope>test</scope>
+            </dependency>-->
             <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
             <dependency>
                 <groupId>org.aspectj</groupId>
@@ -291,18 +295,11 @@
                 <artifactId>c3p0</artifactId>
                 <version>0.9.5.2</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+            <!-- https://mvnrepository.com/artifact/com.mchange/mchange-commons-java -->
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jdbc</artifactId>
-                <version>4.3.14.RELEASE</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>4.3.14.RELEASE</version>
-                <scope>test</scope>
+                <groupId>com.mchange</groupId>
+                <artifactId>mchange-commons-java</artifactId>
+                <version>0.2.11</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
             <dependency>
@@ -323,12 +320,11 @@
                 <version>1.7.25</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-            <dependency>
+            <!--<dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>1.7.25</version>
-                <!--<scope>test</scope>-->
-            </dependency>
+            </dependency>-->
             <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
@@ -340,12 +336,6 @@
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
                 <version>1.3.3</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.6</version>
             </dependency>
             <!-- test support -->
             <dependency>
@@ -437,6 +427,7 @@
                 <artifactId>jsoup</artifactId>
                 <version>1.11.3</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>
@@ -444,7 +435,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
                 <configuration>
+                    <skip>true</skip>
                     <forkMode>once</forkMode>
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
@@ -452,7 +445,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

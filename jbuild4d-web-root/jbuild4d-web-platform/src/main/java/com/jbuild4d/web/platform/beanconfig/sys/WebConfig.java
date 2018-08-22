@@ -13,10 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -32,9 +29,9 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.jbuild4d.web")
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class WebConfig implements WebMvcConfigurer {
 
-    @Bean
+    /*@Bean
     public ViewResolver viewResolver(){
         InternalResourceViewResolver resolver=new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/Views/");
@@ -43,7 +40,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         //可以在JSP页面中通过${}访问beans
         resolver.setExposeContextBeansAsAttributes(true);
         return resolver;
-    }
+    }*/
 
     @Bean
     public PathUtility pathUtility(WebApplicationContext context){
@@ -59,7 +56,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        super.configureMessageConverters(converters);
+        //super.configureMessageConverters(converters);
         converters.add(extendConverter());
     }
 
@@ -70,12 +67,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        super.addFormatters(registry);
-        //registry.addConverter(new PersonConverter());
-
-        /*AddressFormatter addressFormatter = new AddressFormatter();
-        addressFormatter.setStyle(AddressFormatter.Style.FULL);
-        registry.addFormatter(addressFormatter);*/
+        //super.addFormatters(registry);
     }
 
     @Bean
@@ -84,13 +76,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         multipartResolver.setMaxUploadSize(100000000);
         return multipartResolver;
     }
-
-    /*@Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("messages");
-        return messageSource;
-    }*/
 
     @Bean
     MappingJackson2HttpMessageConverter extendConverter() {

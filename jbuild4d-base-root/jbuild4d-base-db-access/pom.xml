@@ -11,6 +11,6 @@
 
     <groupId>jbuild4d</groupId>
     <artifactId>jbuild4d-base-db-access</artifactId>
-
+    <version>1.0-SNAPSHOT</version>
 
 </project>

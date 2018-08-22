@@ -1,0 +1,57 @@
+.TreeTable{
+    width: 99.9%;
+    border-collapse:collapse;
+}
+
+.TreeTable tr{
+    cursor: default;
+}
+
+.TreeTable .tr-hover{
+    background-color: #d9e9fb;
+}
+
+.TreeTable .tr-selected{
+    background-color: #aed3fd !important;
+}
+
+.TreeTable tr th{
+    border:1px solid #c5dbec;
+    padding: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color:#2e6e9e;
+    background-color: #f0f4fa;
+    font-size: 14px;
+}
+
+.TreeTable tr td{
+    padding: 5px;
+    border:1px solid #c5dbec;
+    font-size: 14px;
+    cursor: default;
+}
+
+.TreeTable tr td span{
+    cursor: default;
+}
+
+.TreeTable .img-switch-open{
+    width: 12px;
+    height: 12px;
+    background-image: url("Images/open.gif");
+    display: inline-block;
+    margin-left: 4px;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.TreeTable .img-switch-close{
+    width: 12px;
+    height: 12px;
+    background-image: url("Images/close.gif");
+    display: inline-block;
+    margin-left: 4px;
+    margin-right: 4px;
+    cursor: pointer;
+}

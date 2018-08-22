@@ -33,8 +33,6 @@ public class LoginController {
     @RequestMapping(value = "/Login", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request) {
 
-        //DBAnnoUtility.getIDValue(null);
-
         System.out.println("Home Controller Call");
         ModelAndView modelAndView=new ModelAndView("Login");
 

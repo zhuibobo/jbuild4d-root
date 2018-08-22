@@ -1,0 +1,107 @@
+.iv-list-page-wrap{
+
+}
+.iv-list-page-wrap .ivu-checkbox-wrapper{
+    margin-right: 0px;
+}
+
+.iv-list-table{
+    margin-top:10px;
+    margin-bottom:10px
+}
+
+.list-simple-search-wrap {
+    margin-bottom: 8px;
+    border: #d7d7d8 solid 1px;
+    border-radius: 4px;
+    min-height: 42px;
+}
+
+.list-simple-search-wrap .ls-table {
+    width: 100%;
+}
+
+.list-simple-search-wrap .ls-table .ls-table-row {
+    height: 40px;
+}
+
+.list-simple-search-wrap .ls-table td{
+    text-align: center;
+}
+
+.list-simple-search-wrap .ls-table td{
+    text-align: center;
+}
+
+.list-button-wrap{
+
+}
+
+.list-button-outer-wrap{
+    width: 100%;
+}
+
+.list-button-outer-wrap .list-button-inner-wrap{
+    float: right;
+}
+
+.list-row-button{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.list-row-button:hover{
+    background-color: #c8dcfe;
+    border-radius: 4px;
+}
+
+.list-row-button-wrap div:first-child{
+    margin-left: 0px;
+}
+
+.list-row-button-view{
+    background: url("Images/ListButton/kdvi.png");
+}
+
+.list-row-button-edit{
+    background: url("Images/ListButton/kedit.png");
+}
+
+.list-row-button-del{
+    background: url("Images/ListButton/del.png");
+}
+
+.list-row-button-selected{
+    background: url("Images/ListButton/selected.png");
+}
+
+.list-row-button-listmanager{
+    background: url("Images/ListButton/List manager.png");
+}
+
+.list-2column{
+
+}
+
+.list-2column .left-outer-wrap-c {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 235px;
+    bottom: 0px;
+    border: #0B61A4 1px solid;
+    border-radius: 4px;
+}
+
+.list-2column .right-outer-wrap-c {
+    position: absolute;
+    left: 250px;
+    top: 0px;
+    right: 10px;
+    bottom: 0px;
+    border: #0B61A4 1px solid;
+    border-radius: 4px;
+}
