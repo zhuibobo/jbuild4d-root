@@ -15,9 +15,10 @@
  */
 package org.mybatis.generatorex.logging.log4j;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import ch.qos.logback.classic.Level;
 import org.mybatis.generatorex.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Eduardo Macarron
@@ -29,7 +30,7 @@ public class Log4jImpl implements Log {
     private Logger log;
 
     public Log4jImpl(Class<?> clazz) {
-        log = Logger.getLogger(clazz);
+        log = LoggerFactory.getLogger(clazz);
     }
 
     @Override
@@ -39,22 +40,23 @@ public class Log4jImpl implements Log {
 
     @Override
     public void error(String s, Throwable e) {
-        log.log(FQCN, Level.ERROR, s, e);
+        log.info(FQCN, Level.ERROR, s, e);
+        //log.info
     }
 
     @Override
     public void error(String s) {
-        log.log(FQCN, Level.ERROR, s, null);
+        log.error(FQCN, Level.ERROR, s, null);
     }
 
     @Override
     public void debug(String s) {
-        log.log(FQCN, Level.DEBUG, s, null);
+        log.debug(FQCN, Level.DEBUG, s, null);
     }
 
     @Override
     public void warn(String s) {
-        log.log(FQCN, Level.WARN, s, null);
+        log.warn(FQCN, Level.WARN, s, null);
     }
 
 }

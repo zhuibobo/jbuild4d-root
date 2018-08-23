@@ -15,7 +15,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 public class HttpClientUtility {
 
-    private static Logger log = Logger.getLogger(HttpClientUtility.class);
+    private static Logger log = LoggerFactory.getLogger(HttpClientUtility.class);
 
     public static Map<String, String> valueUrlDecode(Map<String, String> source) throws UnsupportedEncodingException {
         for (Map.Entry<String, String> entry : source.entrySet()) {

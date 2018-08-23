@@ -1,6 +1,7 @@
 package com.jbuild4d.base.tools.common;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -14,7 +15,7 @@ import java.util.jar.JarFile;
 
 public final class ClassUtility {
 
-    private static final Logger LOGGER = Logger.getLogger(ClassUtility.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtility.class);
 
     /**
      * 获取类加载器
