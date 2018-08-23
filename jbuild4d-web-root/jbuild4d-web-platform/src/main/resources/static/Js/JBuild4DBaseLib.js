@@ -85,6 +85,10 @@ var BaseUtility = {
         var _url=this.GetRootPath()+url;
         return StringUtility.GetTimeStampUrl(_url);
     },
+    BuildAction:function (action) {
+        var _url=this.GetRootPath()+action+".do";
+        return StringUtility.GetTimeStampUrl(_url);
+    },
     RedirectToLogin:function () {
         var url=BaseUtility.GetRootPath()+"/Login.do";
         window.parent.parent.location.href=url;

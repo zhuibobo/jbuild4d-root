@@ -58,32 +58,33 @@
         </layout>
     </div>
 </div>
-<script type="text/javascript" th:inline="javascript">
+<script type="text/javascript">
     var IsTopWorkaroundPage = true;
     var menuJsonSource=[];
-    menuJsonSource=[[${menuJson}]];
+    //alert("1")
+    //menuJsonSource=[[${menuJson}]];
     //增加selected属性，用于选中状态控制。
-    for(var i=0;i<menuJsonSource.length;i++) {
+    /*for(var i=0;i<menuJsonSource.length;i++) {
         menuJsonSource[i].selected = false;
     }
     var menuJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
         KeyField: "menuId",
         RelationField: "menuParentId",
         ChildFieldName: "items"
-    },menuJsonSource,"0");
+    },menuJsonSource,"0");*/
     var app=new Vue({
-        data:{
-            menuJson:menuJson,
-            menuJsonSource:menuJsonSource,
-            topMenuArrayJson:menuJson.items,
-            leftMenuArrayJson:menuJson.items[0].items,
-            breadcrumbArrayJson:[{text:"JBuild4D"}],
+        data: {
+            menuJson: null,
+            menuJsonSource: null,
+            topMenuArrayJson: null,
+            leftMenuArrayJson: null,
+            breadcrumbArrayJson: [{text: "JBuild4D"}],
             frameHeight: 0,
-            contentIframeUrl:BaseUtility.BuildUrl("/PlatForm/Base/RightContent.do"),
-            leftIframeUrl:BaseUtility.BuildUrl("/PlatForm/Base/LeftMenu.do"),
-            defaultLeftIframeUrl:BaseUtility.BuildUrl("/PlatForm/Base/LeftMenu.do"),
-            defaultContentIframeUrl:BaseUtility.BuildUrl("/PlatForm/Base/RightContent.do"),
-            userInfo:{}//[[${currUserEntity}]]
+            contentIframeUrl: BaseUtility.BuildUrl("/PlatForm/Base/RightContent.do"),
+            leftIframeUrl: BaseUtility.BuildUrl("/PlatForm/Base/LeftMenu.do"),
+            defaultLeftIframeUrl: BaseUtility.BuildUrl("/PlatForm/Base/LeftMenu.do"),
+            defaultContentIframeUrl: BaseUtility.BuildUrl("/PlatForm/Base/RightContent.do"),
+            userInfo: {}//[[${currUserEntity}]]
         },
         mounted:function(){
             this.setFrameHeight();
@@ -92,10 +93,27 @@
                 $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
                 $("#leftMenuIframe")[0].contentWindow.app.PageReady();
             });*/
+            axios.post(BaseUtility.BuildAction("/PlatForm/Menu/GetMyMenu")).then(function (response) {
+                    //debugger;
+                    menuJsonSource=response.data.data;
+                    for(var i=0;i<menuJsonSource.length;i++) {
+                        menuJsonSource[i].selected = false;
+                    }
+                    app.menuJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
+                        KeyField: "menuId",
+                        RelationField: "menuParentId",
+                        ChildFieldName: "items"
+                    },menuJsonSource,"0");
+                    app.menuJsonSource=menuJsonSource;
+                    app.topMenuArrayJson=app.menuJson.items;
+                    app.leftMenuArrayJson=app.menuJson.items[0].items;
+                    app.topMenuClick(app.topMenuArrayJson[0],false);
+                }).catch(function (error) {
+                    console.log(error);
+                });
         },
         created:function () {
             //this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(menuArrayJson.items[0].items[0].url);
-            this.topMenuClick(this.topMenuArrayJson[0],false);
         },
         methods:{
             topMenuItemClass:function (item) {

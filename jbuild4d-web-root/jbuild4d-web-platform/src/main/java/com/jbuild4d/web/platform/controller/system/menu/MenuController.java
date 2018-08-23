@@ -1,6 +1,5 @@
 package com.jbuild4d.web.platform.controller.system.menu;
 
-import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
 import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
