@@ -27,7 +27,7 @@ import java.util.List;
  * @Version 1.0.0
  */
 @Configuration
-@EnableWebMvc
+/*@EnableWebMvc*/
 @ComponentScan("com.jbuild4d.web")
 public class WebConfig implements WebMvcConfigurer {
 
@@ -42,6 +42,16 @@ public class WebConfig implements WebMvcConfigurer {
         return resolver;
     }*/
 
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        configurer.setUseRegisteredSuffixPatternMatch(true);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+    }
+
     @Bean
     public PathUtility pathUtility(WebApplicationContext context){
         PathUtility pathUtility=new PathUtility();
@@ -49,10 +59,10 @@ public class WebConfig implements WebMvcConfigurer {
         return pathUtility;
     }
 
-    @Override
+    /*@Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable(); //配置静态文件处理
-    }
+    }*/
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {

@@ -80,11 +80,11 @@
             leftMenuArrayJson:menuJson.items[0].items,
             breadcrumbArrayJson:[{text:"JBuild4D"}],
             frameHeight: 0,
-            contentIframeUrl:"${ctxpath}/PlatForm/Base/RightContent.do",
-            leftIframeUrl:"${ctxpath}/PlatForm/Base/LeftMenu.do",
-            defaultLeftIframeUrl:"${ctxpath}/PlatForm/Base/LeftMenu.do",
-            defaultContentIframeUrl:"${ctxpath}/PlatForm/Base/RightContent.do",
-            userInfo:[[${currUserEntity}]]
+            contentIframeUrl:BaseUtility.BuildUrl("/PlatForm/Base/RightContent.do"),
+            leftIframeUrl:BaseUtility.BuildUrl("/PlatForm/Base/LeftMenu.do"),
+            defaultLeftIframeUrl:BaseUtility.BuildUrl("/PlatForm/Base/LeftMenu.do"),
+            defaultContentIframeUrl:BaseUtility.BuildUrl("/PlatForm/Base/RightContent.do"),
+            userInfo:{}//[[${currUserEntity}]]
         },
         mounted:function(){
             this.setFrameHeight();
