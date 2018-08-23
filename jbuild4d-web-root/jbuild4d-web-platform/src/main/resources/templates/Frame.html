@@ -89,31 +89,24 @@
         mounted:function(){
             this.setFrameHeight();
             this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(this.contentIframeUrl);
-            /*$("#leftMenuIframe").on("load",function() {
-                $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
-                $("#leftMenuIframe")[0].contentWindow.app.PageReady();
-            });*/
-            axios.post(BaseUtility.BuildAction("/PlatForm/Menu/GetMyMenu")).then(function (response) {
-                    //debugger;
-                    menuJsonSource=response.data.data;
-                    for(var i=0;i<menuJsonSource.length;i++) {
-                        menuJsonSource[i].selected = false;
-                    }
-                    app.menuJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
-                        KeyField: "menuId",
-                        RelationField: "menuParentId",
-                        ChildFieldName: "items"
-                    },menuJsonSource,"0");
-                    app.menuJsonSource=menuJsonSource;
-                    app.topMenuArrayJson=app.menuJson.items;
-                    app.leftMenuArrayJson=app.menuJson.items[0].items;
-                    app.topMenuClick(app.topMenuArrayJson[0],false);
-                }).catch(function (error) {
-                    console.log(error);
-                });
+            AjaxUtility.Post("/PlatForm/Menu/GetMyMenu",{},function (result) {
+                menuJsonSource=result.data;
+                for(var i=0;i<menuJsonSource.length;i++) {
+                    menuJsonSource[i].selected = false;
+                }
+                app.menuJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
+                    KeyField: "menuId",
+                    RelationField: "menuParentId",
+                    ChildFieldName: "items"
+                },menuJsonSource,"0");
+                app.menuJsonSource=menuJsonSource;
+                app.topMenuArrayJson=app.menuJson.items;
+                app.leftMenuArrayJson=app.menuJson.items[0].items;
+                app.topMenuClick(app.topMenuArrayJson[0],false);
+            },"json");
+            app.userInfo=CacheDataUtility.GetCurrentUserInfo();
         },
         created:function () {
-            //this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(menuArrayJson.items[0].items[0].url);
         },
         methods:{
             topMenuItemClass:function (item) {

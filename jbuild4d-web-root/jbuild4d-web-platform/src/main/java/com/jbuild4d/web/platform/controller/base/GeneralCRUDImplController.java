@@ -114,8 +114,6 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         return JsonUtility.toObjectString(dictionarysMap);
     }
 
-
-
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
