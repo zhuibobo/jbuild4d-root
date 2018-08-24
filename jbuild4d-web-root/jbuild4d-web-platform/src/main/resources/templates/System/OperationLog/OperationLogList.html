@@ -149,8 +149,9 @@
                     //this.selectionRows=null;
                 },
                 view:function (recordId) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/System/OperationLog/Detail.do?op=view&recordId=" + recordId);
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+                    //var url = BaseUtility.BuildUrl("/PlatForm/System/OperationLog/Detail.do?op=view&recordId=" + recordId);
+                    //DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现",null);
                 },
                 changePage: function (pageNum) {
                     this.pageNum = pageNum;
