@@ -78,7 +78,8 @@
         },
         mounted:function(){
             this.setFrameHeight();
-            this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(this.contentIframeUrl);
+            //this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(this.contentIframeUrl);
+            this.contentIframeUrl=this.contentIframeUrl;
             AjaxUtility.Post("/PlatForm/Menu/GetMyMenu",{},function (result) {
                 menuJsonSource=result.data;
                 //增加selected属性，用于选中状态控制。

@@ -52,6 +52,7 @@ var BaseUtility = {
         return (localhostPaht + projectName);
     },
     ReplaceUrlVariable:function (sourceUrl) {
+        alert("ReplaceUrlVariable迁移到BuildAction");
         return sourceUrl.replace("${ctxpath}", this.GetRootPath());
     },
     GetTopWindow: function () {
@@ -82,12 +83,20 @@ var BaseUtility = {
         }
     },
     BuildUrl:function (url) {
-        alert("迁移到BuildAction");
+        alert("BuildUrl迁移到BuildAction");
         var _url=this.GetRootPath()+url;
         return StringUtility.GetTimeStampUrl(_url);
     },
-    BuildAction:function (action) {
-        var _url=this.GetRootPath()+action+".do";
+    BuildAction:function (action,para) {
+        var urlPara = "";
+        if (para) {
+            urlPara = $.param(para);
+        }
+        var _url = this.GetRootPath() + action + ".do";
+        if (urlPara != "") {
+            _url += urlPara;
+        }
+        //alert(_url);
         return StringUtility.GetTimeStampUrl(_url);
     },
     RedirectToLogin:function () {
