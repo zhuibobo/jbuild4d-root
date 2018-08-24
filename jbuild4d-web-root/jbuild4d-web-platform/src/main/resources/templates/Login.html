@@ -41,19 +41,18 @@
         },
         methods:{
             handleSubmit: function (name) {
-                var url='/ValidateAccount.do';
+                var url='/ValidateAccount';
                 var _self=this;
                 //debugger;
                 var senddata={
                     account:_self.formItem.account,
                     password:_self.formItem.password
-                }
+                };
                 AjaxUtility.Post(url, senddata , function (result) {
                     if (result.success) {
                         window.location.href=BaseUtility.GetRootPath()+"/PlatForm/Base/Frame.do"
                     }
-                    else
-                    {
+                    else {
                         DialogUtility.Alert(window,"LoginAlert",{},"帐号密码错误")
                     }
                 },"json");
