@@ -204,7 +204,7 @@
                 },
                 <!--Dictionary-->
                 reloadTreeTableData:function () {
-                    var url='/PlatForm/System/Dictionary/GetListDataByGroupId.do';
+                    var url='/PlatForm/System/Dictionary/GetListDataByGroupId';
                     var _self=this;
                     var senddata={groupId:this.treeSelectedNode.dictGroupId,groupName:this.treeSelectedNode.dictGroupText};
                     AjaxUtility.Post(url, senddata , function (result) {
@@ -258,34 +258,25 @@
                     }
                 },
                 add:function(){
-                    if(this.treeTableObject!=null){
-                        var nodeData=this.treeTableObject.GetSelectedRowData();
-                        if(nodeData == null) {
-                            DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择上级字典!",null);
+                    if(this.treeTableObject!=null) {
+                        var nodeData = this.treeTableObject.GetSelectedRowData();
+                        if (nodeData == null) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择上级字典!", null);
                             return false;
                         }
-                        var url=BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?dictParentId="+nodeData.dictId+"&op=add&dictGroupId="+this.treeSelectedNode.dictGroupId);
-                        DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"字典管理"},2);
+                        var url = BaseUtility.BuildAction("/PlatForm/System/Dictionary/DetailView", {
+                            "dictParentId": nodeData.dictId,
+                            "op": "add",
+                            "dictGroupId": this.treeSelectedNode.dictGroupId
+                        });
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                     }
                 },
                 edit:function(){
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=update&recordId=" + nodeData.dictId);
+                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/DetailView.do?op=update&recordId=" + nodeData.dictId);
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                     })
-                    /*if(this.treeTableObject!=null) {
-                        var nodeData = this.treeTableObject.GetSelectedRowData();
-                        if (nodeData == null) {
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要编辑的字典!", null);
-                            return false;
-                        }
-                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能编辑根节点!", null);
-                            return;
-                        }
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=update&recordId=" + nodeData.dictId);
-                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
-                    }*/
                 },
                 del:function(){
                     var _self=this;
@@ -306,52 +297,12 @@
                             }, "json");
                         });
                     })
-                    /*if(this.treeTableObject!=null) {
-                        var nodeData = this.treeTableObject.GetSelectedRowData();
-                        if (nodeData == null) {
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要删除的字典!", null);
-                            return false;
-                        }
-                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能删除根节点!", null);
-                            return;
-                        }
-                        var url="/PlatForm/System/Dictionary/Delete.do";
-                        var recordId=nodeData.dictId;
-                        var _self=this;
-                        DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
-                            AjaxUtility.Post(url, {recordId: recordId}, function (result) {
-                                if (result.success) {
-                                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                        _self.treeTableObject.DeleteRow(recordId);
-
-                                    });
-                                }
-                                else {
-                                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
-                                }
-                            }, "json");
-                        });
-                    }*/
                 },
                 view:function(){
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=view&recordId=" + nodeData.dictId);
+                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/DetailView.do?op=view&recordId=" + nodeData.dictId);
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                     });
-                    /*if(this.treeTableObject!=null) {
-                        var nodeData = this.treeTableObject.GetSelectedRowData();
-                        if (nodeData == null) {
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择需要查看的字典!", null);
-                            return false;
-                        }
-                        if(nodeData.dictId==this.treeSelectedNode.dictGroupId){
-                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "不能查看根节点!", null);
-                            return;
-                        }
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/Detail.do?op=view&recordId=" + nodeData.dictId);
-                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
-                    }*/
                 },
                 statusEnable:function (statusName) {
                     var _self=this;
