@@ -17,6 +17,12 @@
 <th:block th:fragment="JQueryUILib" th:with="urlts=${'V1'}" >
     <script type="text/javascript" th:src="@{/UIComponent/JQuery-UI-1.12.1/jquery-ui.js}"></script>
 </th:block>
+<th:block th:fragment="ZTreeLib" th:with="urlts=${'V1'}" >
+    <script type="text/javascript" th:src="@{/UIComponent/ZTree-V3/js/jquery.ztree.all.js}"></script>
+</th:block>
+<th:block th:fragment="TreeTableLib" th:with="urlts=${'V1'}" >
+    <script type="text/javascript" th:src="@{/UIComponent/TreeTable/Js/TreeTable.js}"></script>
+</th:block>
 <th:block th:fragment="ThemesLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/FrameStyle.css(theme=${theme},urlts=${urlts})}" />
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/ListPageStyle.css(theme=${theme},urlts=${urlts})}" />
