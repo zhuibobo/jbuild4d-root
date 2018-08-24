@@ -135,7 +135,7 @@
                         { required: true, message: '【字典-字】不能空！', trigger: 'blur' }
                     ]
                 },
-                status:'${op}'
+                status:StringUtility.QueryString("op")
             },
             mounted:function () {
                 //获取数据并赋值
