@@ -51,13 +51,22 @@
                 this.initTree();
             },
             data:{
+                acInterface:{
+                    <!--Group-->
+                    getGroupTreeData:"/PlatForm/System/DictionaryGroup/GetTreeData",
+                    groupEditView:"/PlatForm/System/DictionaryGroup/DetailView",
+                    deleteGroup:"/PlatForm/System/DictionaryGroup/Delete",
+                    <!--Dictionary-->
+                    dictEditView:"/PlatForm/System/Dictionary/DetailView",
+                    getDictData:"/PlatForm/System/Dictionary/GetListDataByGroupId"
+                },
                 treeObj:null,
                 treeSelectedNode:null,
                 treeSetting:{
                     async : {
                         enable : true,
                         // Ajax 获取数据的 URL 地址
-                        url : BaseUtility.BuildAction("/PlatForm/System/DictionaryGroup/GetTreeData",{})
+                        url :""
                     },
                     // 必须使用data
                     data:{
@@ -142,11 +151,12 @@
             methods:{
                 <!--Group-->
                 initTree:function () {
-                    this.treeObj=$.fn.zTree.init($("#ztreeUL"), this.treeSetting);
+                    this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});
+                    this.treeObj = $.fn.zTree.init($("#ztreeUL"), this.treeSetting);
                 },
                 addGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildAction("/PlatForm/System/DictionaryGroup/DetailView", {
+                        var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
                             "op": "add",
                             "parentId": this.treeSelectedNode.dictGroupId
                         });
@@ -158,7 +168,7 @@
                 },
                 editGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildAction("/PlatForm/System/DictionaryGroup/DetailView", {
+                        var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
                             "op": "update",
                             "recordId": this.treeSelectedNode.dictGroupId
                         });
@@ -169,17 +179,17 @@
                     }
                 },
                 viewGroup:function () {
-                    var url = BaseUtility.BuildAction("/PlatForm/System/DictionaryGroup/DetailView", {
+                    var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
                         "op": "view",
                         "recordId": this.treeSelectedNode.dictGroupId
                     });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 2);
                 },
                 delGroup:function () {
-                    var url="/PlatForm/System/DictionaryGroup/Delete";
                     var recordId=this.treeSelectedNode.dictGroupId;
+                    var _self=this;
                     DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
-                        AjaxUtility.Post(url, {"recordId": recordId}, function (result) {
+                        AjaxUtility.Post(_self.acInterface.deleteGroup, {"recordId": recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     appList.treeObj.removeNode(appList.treeSelectedNode);
@@ -204,10 +214,9 @@
                 },
                 <!--Dictionary-->
                 reloadTreeTableData:function () {
-                    var url='/PlatForm/System/Dictionary/GetListDataByGroupId';
                     var _self=this;
                     var senddata={groupId:this.treeSelectedNode.dictGroupId,groupName:this.treeSelectedNode.dictGroupText};
-                    AjaxUtility.Post(url, senddata , function (result) {
+                    AjaxUtility.Post(this.acInterface.getDictData, senddata , function (result) {
                         if (result.success) {
                             //debugger;
                             if(result.data==null){
@@ -264,7 +273,7 @@
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择上级字典!", null);
                             return false;
                         }
-                        var url = BaseUtility.BuildAction("/PlatForm/System/Dictionary/DetailView", {
+                        var url = BaseUtility.BuildAction(this.dictEditView, {
                             "dictParentId": nodeData.dictId,
                             "op": "add",
                             "dictGroupId": this.treeSelectedNode.dictGroupId
@@ -274,7 +283,7 @@
                 },
                 edit:function() {
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildAction("/PlatForm/System/Dictionary/DetailView", {
+                        var url = BaseUtility.BuildAction(this.dictEditView, {
                             "op": "update",
                             "recordId": nodeData.dictId
                         });
@@ -303,7 +312,7 @@
                 },
                 view:function() {
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildAction("/PlatForm/System/Dictionary/DetailView", {
+                        var url = BaseUtility.BuildAction(this.dictEditView, {
                             "op": "view",
                             "recordId": nodeData.dictId
                         });
