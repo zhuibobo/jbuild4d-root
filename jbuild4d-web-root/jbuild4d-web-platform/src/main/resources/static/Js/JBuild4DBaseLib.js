@@ -641,7 +641,9 @@ var DateUtility={
         var myDate = new Date();
         return this.Format(myDate,formatString);
     },
-
+    GetCurrentData:function () {
+        return new Date();
+    }
 };
 
 //Json操作工具类
