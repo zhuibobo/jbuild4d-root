@@ -111,19 +111,21 @@
         var appForm = new Vue({
             el:"#appForm",
             data: {
+                getDataUrl:"/PlatForm/System/Dictionary/GetDetailData",
+                saveDataUrl:"/PlatForm/System/Dictionary/SaveEdit",
                 formValidate: {
-                    dictId: '${recordId}',
-                    dictParentId:'${entity.dictParentId}' == '' ? StringUtility.QueryString("dictParentId") : '${entity.dictParentId}',
-                    dictGroupId:'${entity.dictGroupId}' == '' ? StringUtility.QueryString("dictGroupId") : '${entity.dictGroupId}',
-                    dictKey: '${entity.dictKey}',
-                    dictValue: '${entity.dictValue}',
-                    dictText: '${entity.dictText}',
-                    dictDesc: '${entity.dictDesc}',
-                    dictStatus: '${entity.dictStatus}'==''?'启用':'${entity.dictStatus}',
-                    dictIsSelected:'${entity.dictIsSelected}'==''?'否':'${entity.dictIsSelected}',
-                    dictCreateTime:'<fmt:formatDate value="${entity.dictCreateTime}" pattern="yyyy-MM-dd" />'==''?DateUtility.GetCurrentDataString("-"): '<fmt:formatDate value="${entity.dictCreateTime}" pattern="yyyy-MM-dd" />',
-                    dictIssystem: '${entity.dictIssystem}' == '' ? '否' : '${entity.dictIssystem}',
-                    dictDelEnable: '${entity.dictDelEnable}' == '' ? '是' : '${entity.dictDelEnable}'
+                    dictId: "",
+                    dictParentId:StringUtility.QueryString("dictParentId"),
+                    dictGroupId:StringUtility.QueryString("dictGroupId"),
+                    dictKey: "",
+                    dictValue: "",
+                    dictText: "",
+                    dictDesc: "",
+                    dictStatus: "启用",
+                    dictIsSelected:"否",
+                    dictCreateTime:DateUtility.GetCurrentDataString("-"),
+                    dictIssystem: "否",
+                    dictDelEnable: "是"
                 },
                 ruleValidate: {
                     dictValue: [
@@ -136,6 +138,15 @@
                 status:'${op}'
             },
             mounted:function () {
+                //获取数据并赋值
+                AjaxUtility.Post(this.getDataUrl,{recordId:StringUtility.QueryString("recordId"),op:StringUtility.QueryString("op")},function (result) {
+                    if(result.success) {
+                        DetailPageUtility.OverrideObjectValue(appForm.formValidate, result.data);
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
+                },"json");
                 if(this.status=="view") {
                     DetailPageUtility.IViewPageToViewStatus();
                 }
@@ -146,9 +157,7 @@
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
                             var sendData=JSON.stringify(_self.formValidate);
-                            //debugger;
-                            var url='/PlatForm/System/Dictionary/SaveEdit.do';
-                            AjaxUtility.PostRequestBody(url,sendData,function (result) {
+                            AjaxUtility.PostRequestBody(_self.saveDataUrl,sendData,function (result) {
                                 DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},result.message,function () {
                                     //debugger;
                                     if (appForm.status=="add") {

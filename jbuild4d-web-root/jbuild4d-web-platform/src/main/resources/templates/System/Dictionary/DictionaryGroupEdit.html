@@ -68,7 +68,7 @@
             el:"#appForm",
             data: {
                 getDataUrl:"/PlatForm/System/DictionaryGroup/GetDetailData",
-                saveDataUrl:"",
+                saveDataUrl:"/PlatForm/System/DictionaryGroup/SaveEdit",
                 formValidate: {
                     dictGroupId: '',
                     dictGroupValue: '',
@@ -95,7 +95,6 @@
                 AjaxUtility.Post(this.getDataUrl,{recordId:StringUtility.QueryString("recordId"),op:StringUtility.QueryString("op")},function (result) {
                     if(result.success) {
                         DetailPageUtility.OverrideObjectValue(appForm.formValidate, result.data);
-                        //alert(appForm.formValidate.dictGroupId);
                     }
                     else {
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
@@ -111,8 +110,7 @@
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
                             var sendData = JSON.stringify(_self.formValidate);
-                            var url = '/PlatForm/System/DictionaryGroup/SaveEdit.do';
-                            AjaxUtility.PostRequestBody(url, sendData, function (result) {
+                            AjaxUtility.PostRequestBody(_self.saveDataUrl, sendData, function (result) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     if(result.success) {
                                         if (appForm.status == "add") {
