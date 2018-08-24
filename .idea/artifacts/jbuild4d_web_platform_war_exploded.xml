@@ -94,6 +94,13 @@
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.4.10" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.11.3" />
+          <element id="artifact" artifact-name="jbuild4d-base-db-access:jar" />
+          <element id="artifact" artifact-name="jbuild4d-base-exception:jar" />
+          <element id="artifact" artifact-name="jbuild4d-base-service:jar" />
+          <element id="artifact" artifact-name="jbuild4d-base-tools:jar" />
+          <element id="artifact" artifact-name="jbuild4d-platform-builder:jar" />
+          <element id="artifact" artifact-name="jbuild4d-platform-organ:jar" />
+          <element id="artifact" artifact-name="jbuild4d-platform-system:jar" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="jbuild4d-web-platform/web/Web" />

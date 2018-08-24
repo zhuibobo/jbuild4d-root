@@ -12,6 +12,7 @@ import com.jbuild4d.platform.system.devdemo.IDevDemoGenListService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
 import com.jbuild4d.platform.system.service.*;
+import com.jbuild4d.web.platform.beanconfig.jdbctemplate.JdbcTemplateBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.mybatis.MybatisBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.BuilderBeansConfig;
 import com.jbuild4d.web.platform.beanconfig.service.DevDemoBeansConfig;
@@ -35,7 +36,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
         SystemBeansConfig.class,
         DevDemoBeansConfig.class,
         OrganBeansConfig.class,
-        BuilderBeansConfig.class
+        BuilderBeansConfig.class,
+        JdbcTemplateBeansConfig.class
 })
 public class InitSystemTest extends BaseTest {
     @Autowired
@@ -94,14 +96,14 @@ public class InitSystemTest extends BaseTest {
         //根菜单->系统设置分组->操作日志
         String systemSettingOperationLogId="JB4DSystemSettingOperationLog";
         MenuEntity systemSettingOperationLogMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOperationLogId,"操作日志","操作日志","操作日志",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/OperationLog/List.do","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/OperationLog/ListView.do","");
         menuService.deleteByKey(jb4DSession,systemSettingOperationLogMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingOperationLogMenu.getMenuId(),systemSettingOperationLogMenu);
 
         //根菜单->系统设置分组->参数设置
         String systemSettingParasSettingId="JB4DSystemSettingParasSetting";
         MenuEntity systemSettingParasSettingMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingParasSettingId,"参数设置","参数设置","参数设置",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/List.do","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/ListView.do","");
         menuService.deleteByKey(jb4DSession,systemSettingParasSettingMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingParasSettingMenu.getMenuId(),systemSettingParasSettingMenu);
 
@@ -115,7 +117,7 @@ public class InitSystemTest extends BaseTest {
         //根菜单->系统设置分组->组织管理
         String systemSettingOrganManageId="JB4DSystemSettingOrganManage";
         MenuEntity systemSettingOrganManageMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOrganManageId,"组织管理","组织管理","组织管理",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/OrganRelevance/Organ/List.do","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/OrganRelevance/Organ/ListView.do","");
         menuService.deleteByKey(jb4DSession,systemSettingOrganManageMenu.getMenuId());
         menuService.save(jb4DSession,systemSettingOrganManageMenu.getMenuId(),systemSettingOrganManageMenu);
 
@@ -145,14 +147,14 @@ public class InitSystemTest extends BaseTest {
         //根菜单->应用管理->存储设计->服务链接
         String appBuilderDataLinkId="JB4DSystemAppBuilderDataLink";
         MenuEntity appBuilderDataLinkMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appBuilderDataLinkId,"服务链接","服务链接","服务链接",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/DataStorage/DataLink/List.do","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/DataStorage/DataLink/ListView.do","frame-top-menu-data");
         menuService.deleteByKey(jb4DSession,appBuilderDataLinkMenu.getMenuId());
         //menuService.save(jb4DSession,appBuilderDataLinkMenu.getMenuId(),appBuilderDataLinkMenu);
 
         //根菜单->应用管理->存储设计->数据库管理
         String appBuilderDataBaseId="JB4DSystemAppBuilderDataBase";
         MenuEntity appBuilderDataBaseMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appBuilderDataBaseId,"数据库管理","数据库管理","数据库管理",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/DataStorage/DataBase/TableGroup/List.do","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/DataStorage/DataBase/TableGroup/ListView.do","frame-top-menu-data");
         menuService.deleteByKey(jb4DSession,appBuilderDataBaseMenu.getMenuId());
         menuService.save(jb4DSession,appBuilderDataBaseMenu.getMenuId(),appBuilderDataBaseMenu);
 
@@ -166,7 +168,7 @@ public class InitSystemTest extends BaseTest {
         //根菜单->应用管理->数据集设计
         String appBuilderDataSetId="JB4DSystemAppBuilderDataSetBuilder";
         MenuEntity appBuilderDataSetMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderDataSetId,"数据集设计","数据集设计","数据集设计",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","/PlatForm/Builder/DataSet/DataSetGroup/List.do","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"LeftMenu.do","/PlatForm/Builder/DataSet/DataSetGroup/ListView.do","frame-top-menu-data");
         menuService.deleteByKey(jb4DSession,appBuilderDataSetMenu.getMenuId());
         menuService.save(jb4DSession,appBuilderDataSetMenu.getMenuId(),appBuilderDataSetMenu);
 
