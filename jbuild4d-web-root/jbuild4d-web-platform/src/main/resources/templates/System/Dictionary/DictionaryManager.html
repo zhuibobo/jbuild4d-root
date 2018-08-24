@@ -146,7 +146,11 @@
                 },
                 addGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=add&parentId="+this.treeSelectedNode.dictGroupId);
+                        //var url = BaseUtility.BuildUrl("?op=add&parentId="+);
+                        var url = BaseUtility.BuildAction("/PlatForm/System/DictionaryGroup/Detail", {
+                            "op": "add",
+                            "parentId": this.treeSelectedNode.dictGroupId
+                        });
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 2);
                     }
                     else {

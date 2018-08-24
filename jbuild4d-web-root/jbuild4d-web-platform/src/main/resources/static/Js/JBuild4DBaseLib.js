@@ -94,7 +94,7 @@ var BaseUtility = {
         }
         var _url = this.GetRootPath() + action + ".do";
         if (urlPara != "") {
-            _url += urlPara;
+            _url += "?" + urlPara;
         }
         //alert(_url);
         return StringUtility.GetTimeStampUrl(_url);
