@@ -272,16 +272,19 @@
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                     }
                 },
-                edit:function(){
+                edit:function() {
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/DetailView.do?op=update&recordId=" + nodeData.dictId);
+                        var url = BaseUtility.BuildAction("/PlatForm/System/Dictionary/DetailView", {
+                            "op": "update",
+                            "recordId": nodeData.dictId
+                        });
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                     })
                 },
                 del:function(){
                     var _self=this;
                     this.mareSureSelectedTreeTableRow("删除").then(function (nodeData) {
-                        var url="/PlatForm/System/Dictionary/Delete.do";
+                        var url="/PlatForm/System/Dictionary/Delete";
                         var recordId=nodeData.dictId;
                         DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
                             AjaxUtility.Post(url, {recordId: recordId}, function (result) {
@@ -298,26 +301,29 @@
                         });
                     })
                 },
-                view:function(){
+                view:function() {
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/Dictionary/DetailView.do?op=view&recordId=" + nodeData.dictId);
+                        var url = BaseUtility.BuildAction("/PlatForm/System/Dictionary/DetailView", {
+                            "op": "view",
+                            "recordId": nodeData.dictId
+                        });
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典管理"}, 2);
                     });
                 },
                 statusEnable:function (statusName) {
-                    var _self=this;
+                    var _self = this;
                     this.mareSureSelectedTreeTableRow("启用").then(function (nodeData) {
-                        var url = "/PlatForm/System/Dictionary/StatusChange.do";
+                        var url = "/PlatForm/System/Dictionary/StatusChange";
                         var recordId = nodeData.dictId;
-                        AjaxUtility.Post(url, {ids: recordId,statusName:statusName}, function (result) {
+                        AjaxUtility.Post(url, {"ids": recordId, "status": statusName}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                    nodeData.dictStatus=statusName;
-                                    _self.treeTableObject.UpdateToRow(nodeData.dictId,nodeData);
+                                    nodeData.dictStatus = statusName;
+                                    _self.treeTableObject.UpdateToRow(nodeData.dictId, nodeData);
                                 });
                             }
                             else {
-                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                             }
                         }, "json");
                     });
@@ -325,9 +331,9 @@
                 setSelected:function () {
                     var _self=this;
                     this.mareSureSelectedTreeTableRow("选中").then(function (nodeData) {
-                        var url = "/PlatForm/System/Dictionary/SetSelected.do";
+                        var url = "/PlatForm/System/Dictionary/SetSelected";
                         var recordId = nodeData.dictId;
-                        AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                        AjaxUtility.Post(url, {"recordId": recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     //debugger;
@@ -349,7 +355,7 @@
                 move:function(type){
                     var _self=this;
                     this.mareSureSelectedTreeTableRow("选中").then(function (nodeData) {
-                        var url = '/PlatForm/System/Dictionary/Move.do';
+                        var url = '/PlatForm/System/Dictionary/Move';
                         var recordId = nodeData.dictId;
                         AjaxUtility.Post(url, {recordId: recordId,type:type}, function (result) {
                             if (result.success) {
