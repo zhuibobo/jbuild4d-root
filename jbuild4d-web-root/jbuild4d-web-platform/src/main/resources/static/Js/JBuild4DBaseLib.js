@@ -6,6 +6,25 @@ var console = console || {
     error:function () {
     }
 };
+
+//重写Date方法，解决T16:00:00.000Z问题
+function DateExtend_DateFormat(date, fmt) {
+    if (null == date || undefined == date) return '';
+    var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "S": date.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
+Date.prototype.toJSON = function () { return DateExtend_DateFormat(this,'yyyy-MM-dd mm:hh:ss')}
+
 //扩展js对象功能
 if (!Object.create) {
     Object.create = (function () {
@@ -621,7 +640,8 @@ var DateUtility={
     FormatCurrentData:function (formatString) {
         var myDate = new Date();
         return this.Format(myDate,formatString);
-    }
+    },
+
 };
 
 //Json操作工具类
@@ -1275,11 +1295,13 @@ var AjaxUtility={
                 //debugger;
             },
             error: function (msg) {
-                debugger;
+                //debugger;
                 try{
                     if(msg.responseText.indexOf("请重新登陆系统")>=0){
                         BaseUtility.RedirectToLogin();
                     }
+                    console.log(msg);
+                    DialogUtility.Alert(window,"AjaxUtility.Post.Error",{},"Ajax请求发生错误！"+"status:"+msg.status+",responseText:"+msg.responseText,null);
                 }catch (e){
 
                 }
@@ -1629,6 +1651,14 @@ var DetailPageUtility={
                 $(this).after($("<label />").text(val));
             });
         },100)
+    },
+    OverrideObjectValue:function (sourceObject, dataObject) {
+        //console.log(dataObject);
+        for(var key in sourceObject){
+            if(dataObject[key]!=undefined&&dataObject[key]!=null&&dataObject[key]!=""){
+                sourceObject[key]=dataObject[key];
+            }
+        }
     }
 }
 

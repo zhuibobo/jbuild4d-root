@@ -71,7 +71,6 @@
         </form-item>
     </i-form>
 </div>
-
 <script>
     var appForm = new Vue({
         el:"#appForm",

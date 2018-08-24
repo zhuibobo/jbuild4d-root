@@ -89,8 +89,8 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         operationLogService.writeOperationLog(JB4DSessionUtility.getSession(),getSubSystemName(),getModuleName(),actionName,getLogTypeName(),text,data,this.getClass(),request);
     }
 
-    @RequestMapping(value = "List", method = RequestMethod.GET)
-    public ModelAndView list() throws JsonProcessingException {
+    @RequestMapping(value = "ListView", method = RequestMethod.GET)
+    public ModelAndView listView() throws JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView(getListViewName());
         List<String> dictionaryGroupValueList=bindDictionaryToPage();
         String dictionaryJsonString=getDictionaryJsonString(dictionaryGroupValueList);
@@ -123,41 +123,48 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
     }
 
-    @RequestMapping(value = "Detail", method = RequestMethod.GET)
-    public ModelAndView detail(String recordId,String op) throws IllegalAccessException, InstantiationException, JsonProcessingException {
+    @RequestMapping(value = "DetailView", method = RequestMethod.GET)
+    public ModelAndView detailView(){
         ModelAndView modelAndView=new ModelAndView(getDetailViewName());
+        return modelAndView;
+    }
 
-        T entity=null;
+    @RequestMapping(value = "GetDetailData", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo getDetailData(String recordId,String op) throws IllegalAccessException, InstantiationException, JsonProcessingException, JBuild4DGenerallyException {
+        T entity;
+        JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
         if(StringUtility.isEmpty(recordId)) {
             entity=(T)ClassUtility.newTclass(getMyClass());
-            modelAndView.addObject("recordId", UUIDUtility.getUUID());
+            recordId=UUIDUtility.getUUID();
+            responseVo.addExKVData("recordId",recordId);
+            DBAnnoUtility.setIdValue(entity,recordId);
         }
         else {
             JB4DSession jb4DSession=JB4DSessionUtility.getSession();
             entity=getBaseService().getByPrimaryKey(jb4DSession,recordId);
-            modelAndView.addObject("recordId", recordId);
+            responseVo.addExKVData("recordId",recordId);
         }
 
         List<String> dictionaryGroupValueList=bindDictionaryToPage();
         String dictionaryJsonString=getDictionaryJsonString(dictionaryGroupValueList);
-        modelAndView.addObject("dictionaryJson", dictionaryJsonString);
+        responseVo.addExKVData("dictionaryJson",dictionaryJsonString);
 
-        modelAndView.addObject("entity",entity);
-        modelAndView.addObject("op",op);
+        responseVo.setData(entity);
+        responseVo.addExKVData("op",op);
 
         Map<String,Object> bindObjectsToMVData=this.bindObjectsToMV();
         if(bindObjectsToMVData!=null){
-            modelAndView.addObject("exObjectsJson", JsonUtility.toObjectString(bindObjectsToMVData));
+            responseVo.addExKVData("exObjectsJson", JsonUtility.toObjectString(bindObjectsToMVData));
         }
-
-        return modelAndView;
+        return responseVo;
     }
 
     @RequestMapping(value = "SaveEdit", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo saveEdit(@RequestBody T entity,HttpServletRequest request) throws JBuild4DGenerallyException {
         try {
-            String recordID=DBAnnoUtility.getIDValue(entity);
+            String recordID=DBAnnoUtility.getIdValue(entity);
             JB4DSession jb4DSession=JB4DSessionUtility.getSession();
             if(getBaseService()==null){
                 throw new JBuild4DGenerallyException(this.getClass().getSimpleName()+".getBaseService()返回的对象为Null");

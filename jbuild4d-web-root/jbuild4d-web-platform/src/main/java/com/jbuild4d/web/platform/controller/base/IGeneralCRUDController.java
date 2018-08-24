@@ -18,17 +18,17 @@ import java.text.ParseException;
  */
 public interface IGeneralCRUDController<T> {
 
-    public abstract ModelAndView list() throws JsonProcessingException;
+    ModelAndView listView() throws JsonProcessingException;
 
-    public abstract JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String search_condition) throws IOException, ParseException;
+    ModelAndView detailView();
 
-    public abstract ModelAndView detail(String recordId,String op) throws IllegalAccessException, InstantiationException, JsonProcessingException;
+    JBuild4DResponseVo getListData(Integer pageSize, Integer pageNum, String search_condition) throws IOException, ParseException;
 
-    public abstract JBuild4DResponseVo saveEdit(@RequestBody T entity,HttpServletRequest request) throws Exception;
+    JBuild4DResponseVo saveEdit(@RequestBody T entity, HttpServletRequest request) throws Exception;
 
-    public abstract JBuild4DResponseVo statusChange(String ids,String status,HttpServletRequest request) throws JsonProcessingException;
+    JBuild4DResponseVo statusChange(String ids, String status, HttpServletRequest request) throws JsonProcessingException;
 
-    public abstract JBuild4DResponseVo delete(String recordId,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException;
+    JBuild4DResponseVo delete(String recordId, HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException;
 
-    public abstract JBuild4DResponseVo move(String recordId,String type,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException;
+    JBuild4DResponseVo move(String recordId, String type, HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException;
 }

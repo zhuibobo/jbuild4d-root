@@ -146,8 +146,7 @@
                 },
                 addGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        //var url = BaseUtility.BuildUrl("?op=add&parentId="+);
-                        var url = BaseUtility.BuildAction("/PlatForm/System/DictionaryGroup/Detail", {
+                        var url = BaseUtility.BuildAction("/PlatForm/System/DictionaryGroup/DetailView", {
                             "op": "add",
                             "parentId": this.treeSelectedNode.dictGroupId
                         });
@@ -159,7 +158,10 @@
                 },
                 editGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=update&recordId="+this.treeSelectedNode.dictGroupId);
+                        var url = BaseUtility.BuildAction("/PlatForm/System/DictionaryGroup/DetailView", {
+                            "op": "update",
+                            "recordId": this.treeSelectedNode.dictGroupId
+                        });
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 2);
                     }
                     else {
@@ -167,14 +169,17 @@
                     }
                 },
                 viewGroup:function () {
-                    var url = BaseUtility.BuildUrl("/PlatForm/System/DictionaryGroup/Detail.do?op=view&recordId=" + this.treeSelectedNode.dictGroupId);
+                    var url = BaseUtility.BuildAction("/PlatForm/System/DictionaryGroup/DetailView", {
+                        "op": "view",
+                        "recordId": this.treeSelectedNode.dictGroupId
+                    });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "字典分组"}, 2);
                 },
                 delGroup:function () {
-                    var url="/PlatForm/System/DictionaryGroup/Delete.do";
+                    var url="/PlatForm/System/DictionaryGroup/Delete";
                     var recordId=this.treeSelectedNode.dictGroupId;
                     DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
-                        AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                        AjaxUtility.Post(url, {"recordId": recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     appList.treeObj.removeNode(appList.treeSelectedNode);

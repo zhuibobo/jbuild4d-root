@@ -24,8 +24,12 @@ public class JBuild4DResponseVo {
      */
     private Object data;
 
+    private Map<String,Object> ExKVData=new HashMap<>();
 
-    private JBuild4DResponseVo(boolean success, String message, Object data, Integer errorCode) {
+    public JBuild4DResponseVo() {
+    }
+
+    public JBuild4DResponseVo(boolean success, String message, Object data, Integer errorCode) {
         this.success = success;
         this.message = message;
         this.data = data;
@@ -125,6 +129,7 @@ public class JBuild4DResponseVo {
     public static JBuild4DResponseVo opError(String msg){
         return error(msg);
     }
+
     /**
      * 返回SSSResponse实例 用于APP普通列表（分页列表还是用success方法）
      *
@@ -169,13 +174,7 @@ public class JBuild4DResponseVo {
         return new JBuild4DResponseVo(false, sssBaseException.getMessage(), null, sssBaseException.getErrorCode());
     }
 
-    /**
-     * 返回SSSResponse实例
-     *
-     * @param sssRunTimeException 异常
-     * @return
-     *//*
-    public static Build4DResponseVo error(SSSRunTimeException sssRunTimeException) {
-        return new Build4DResponseVo(false, sssRunTimeException.getMessage(), null, sssRunTimeException.getErrorCode());
-    }*/
+    public void addExKVData(String key,Object value){
+        ExKVData.put(key,value);
+    }
 }
