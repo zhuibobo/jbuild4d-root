@@ -50,7 +50,7 @@
                 };
                 AjaxUtility.Post(url, senddata , function (result) {
                     if (result.success) {
-                        window.location.href=BaseUtility.GetRootPath()+"/PlatForm/Base/Frame.do"
+                        window.location.href=BaseUtility.BuildAction("/PlatForm/Base/Frame")
                     }
                     else {
                         DialogUtility.Alert(window,"LoginAlert",{},"帐号密码错误")

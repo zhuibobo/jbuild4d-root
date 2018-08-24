@@ -82,6 +82,7 @@ var BaseUtility = {
         }
     },
     BuildUrl:function (url) {
+        alert("迁移到BuildAction");
         var _url=this.GetRootPath()+url;
         return StringUtility.GetTimeStampUrl(_url);
     },

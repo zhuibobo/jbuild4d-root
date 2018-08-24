@@ -37,7 +37,7 @@
                                 <div style="line-height: 24px;overflow-x: hidden;width: 130px;white-space: nowrap;text-overflow:  ellipsis;">部&nbsp;&nbsp;&nbsp;&nbsp;门：{{userInfo.organName}}</div>
                             </div>
                         </div>
-                        <div class="logout" onclick="window.location.href='${ctxpath}/Login.do'"></div>
+                        <div class="logout" @click="logout()"></div>
                     </div>
                 </div>
                 <div class="layout-header-shadow-line" style="height: 4px;width: 100%"></div>
@@ -61,17 +61,6 @@
 <script type="text/javascript">
     var IsTopWorkaroundPage = true;
     var menuJsonSource=[];
-    //alert("1")
-    //menuJsonSource=[[${menuJson}]];
-    //增加selected属性，用于选中状态控制。
-    /*for(var i=0;i<menuJsonSource.length;i++) {
-        menuJsonSource[i].selected = false;
-    }
-    var menuJson=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
-        KeyField: "menuId",
-        RelationField: "menuParentId",
-        ChildFieldName: "items"
-    },menuJsonSource,"0");*/
     var app=new Vue({
         data: {
             menuJson: null,
@@ -80,17 +69,19 @@
             leftMenuArrayJson: null,
             breadcrumbArrayJson: [{text: "JBuild4D"}],
             frameHeight: 0,
-            contentIframeUrl: BaseUtility.BuildUrl("/PlatForm/Base/RightContent.do"),
-            leftIframeUrl: BaseUtility.BuildUrl("/PlatForm/Base/LeftMenu.do"),
-            defaultLeftIframeUrl: BaseUtility.BuildUrl("/PlatForm/Base/LeftMenu.do"),
-            defaultContentIframeUrl: BaseUtility.BuildUrl("/PlatForm/Base/RightContent.do"),
-            userInfo: {}//[[${currUserEntity}]]
+            contentIframeUrl: BaseUtility.BuildAction("/PlatForm/Base/RightContent"),
+            leftIframeUrl: BaseUtility.BuildAction("/PlatForm/Base/LeftMenu"),
+            defaultLeftIframeUrl: BaseUtility.BuildAction("/PlatForm/Base/LeftMenu"),
+            defaultContentIframeUrl: BaseUtility.BuildAction("/PlatForm/Base/RightContent"),
+            logoutUrl:BaseUtility.BuildAction("/Login"),
+            userInfo: {}
         },
         mounted:function(){
             this.setFrameHeight();
             this.contentIframeUrl=BaseUtility.ReplaceUrlVariable(this.contentIframeUrl);
             AjaxUtility.Post("/PlatForm/Menu/GetMyMenu",{},function (result) {
                 menuJsonSource=result.data;
+                //增加selected属性，用于选中状态控制。
                 for(var i=0;i<menuJsonSource.length;i++) {
                     menuJsonSource[i].selected = false;
                 }
@@ -240,6 +231,9 @@
             },
             setContentIframeUrl:function (url) {
                 this.contentIframeUrl=BaseUtility.GetRootPath()+url;
+            },
+            logout:function () {
+                window.location.href=this.logoutUrl;
             }
         },
         computed:{
