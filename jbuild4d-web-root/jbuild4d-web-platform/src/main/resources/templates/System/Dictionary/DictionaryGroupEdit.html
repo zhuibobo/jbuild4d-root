@@ -88,7 +88,7 @@
                         {required: true, message: '【分组名称】不能空！', trigger: 'blur'}
                     ]
                 },
-                status: '${op}'
+                status: StringUtility.QueryString("op")
             },
             mounted:function () {
                 //获取数据并赋值
@@ -110,10 +110,7 @@
                     var _self = this;
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
-                            //console.log(_self.formValidate);
                             var sendData = JSON.stringify(_self.formValidate);
-                            //console.log(sendData);
-                            //debugger;
                             var url = '/PlatForm/System/DictionaryGroup/SaveEdit.do';
                             AjaxUtility.PostRequestBody(url, sendData, function (result) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
