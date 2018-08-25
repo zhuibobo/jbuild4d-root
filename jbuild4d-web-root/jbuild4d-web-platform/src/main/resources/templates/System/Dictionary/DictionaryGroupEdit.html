@@ -67,8 +67,10 @@
         var appForm = new Vue({
             el:"#appForm",
             data: {
-                getDataUrl:"/PlatForm/System/DictionaryGroup/GetDetailData",
-                saveDataUrl:"/PlatForm/System/DictionaryGroup/SaveEdit",
+                acInterface:{
+                    getDataUrl:"/PlatForm/System/DictionaryGroup/GetDetailData",
+                    saveDataUrl:"/PlatForm/System/DictionaryGroup/SaveEdit",
+                },
                 formValidate: {
                     dictGroupId: '',
                     dictGroupValue: '',
@@ -92,7 +94,7 @@
             },
             mounted:function () {
                 //获取数据并赋值
-                AjaxUtility.Post(this.getDataUrl,{recordId:StringUtility.QueryString("recordId"),op:StringUtility.QueryString("op")},function (result) {
+                AjaxUtility.Post(this.acInterface.getDataUrl,{recordId:StringUtility.QueryString("recordId"),op:StringUtility.QueryString("op")},function (result) {
                     if(result.success) {
                         DetailPageUtility.OverrideObjectValue(appForm.formValidate, result.data);
                     }
@@ -110,7 +112,7 @@
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
                             var sendData = JSON.stringify(_self.formValidate);
-                            AjaxUtility.PostRequestBody(_self.saveDataUrl, sendData, function (result) {
+                            AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     if(result.success) {
                                         if (appForm.status == "add") {
