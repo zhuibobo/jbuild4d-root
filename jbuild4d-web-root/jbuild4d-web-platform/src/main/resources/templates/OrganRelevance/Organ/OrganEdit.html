@@ -184,10 +184,6 @@
                     DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status,function (result) {
                         appForm.exObjectsJson.OrganType=result.exKVData.exObjectsJson.OrganType;
                         appForm.formValidate.organTypeValue=appForm.exObjectsJson.OrganType[0].organTypeValue;
-                        //debugger;
-                        //for(var i=0;i<result.exKVData.exObjectsJson.OrganType.length;i++){
-                            //appForm.exObjectsJson.OrganType.push(result.exKVData.exObjectsJson.OrganType[i]);
-                        //}
                     });
                 },
                 handleSubmit: function (name) {
