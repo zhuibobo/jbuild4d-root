@@ -126,7 +126,7 @@
             </form-item>
             <form-item class="general-edit-page-bottom-wrap">
                 <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保  存 </i-button>
-                <i-button type="ghost" v-if="status!='view'" @click="handleReset('formValidate')" style="margin-left: 8px"> 关  闭 </i-button>
+                <i-button v-if="status!='view'" @click="handleReset('formValidate')" style="margin-left: 8px"> 关  闭 </i-button>
             </form-item>
         </i-form>
     </div>
@@ -134,25 +134,30 @@
         var appForm = new Vue({
             el:"#appForm",
             data: {
-                exObjectsJson:${exObjectsJson},
+                acInterface:{
+                    getDataUrl:"/PlatForm/OrganRelevance/Organ/GetDetailData",
+                    saveDataUrl:"/PlatForm/OrganRelevance/Organ/SaveEdit",
+                },
+                recordId:StringUtility.QueryString("recordId"),
+                exObjectsJson:{OrganType:[]},
                 formValidate: {
-                    organId: '${recordId}',
-                    organParentId:'${entity.organParentId}' == '' ? StringUtility.QueryString("parentId") : '${entity.organParentId}',
-                    organName: '${entity.organName}',
-                    organNo: '${entity.organNo}',
-                    organCode: '${entity.organCode}',
-                    organPhone: '${entity.organPhone}',
-                    organPost: '${entity.organPost}',
-                    organAddress: '${entity.organAddress}',
-                    organContactor: '${entity.organContactor}',
-                    organContactorMobile: '${entity.organContactorMobile}',
-                    organDomain: '${entity.organDomain}',
-                    organFax: '${entity.organFax}',
-                    organIsVirtual: '${entity.organIsVirtual}' == '' ? '否' : '${entity.organIsVirtual}',
-                    organShortName: '${entity.organShortName}',
-                    organStatus: '${entity.organStatus}'==''?'启用':'${entity.organStatus}',
-                    organCreateTime:'<fmt:formatDate value="${entity.organCreateTime}" pattern="yyyy-MM-dd" />'==''?DateUtility.GetCurrentDataString("-"): '<fmt:formatDate value="${entity.organCreateTime}" pattern="yyyy-MM-dd" />',
-                    organTypeValue:'${entity.organTypeValue}'
+                    organId: '',
+                    organParentId: StringUtility.QueryString("parentId"),
+                    organName: '',
+                    organNo: '',
+                    organCode: '',
+                    organPhone: '',
+                    organPost: '',
+                    organAddress: '',
+                    organContactor: '',
+                    organContactorMobile: '',
+                    organDomain: '',
+                    organFax: '',
+                    organIsVirtual: '否',
+                    organShortName: '',
+                    organStatus:'启用',
+                    organCreateTime:DateUtility.GetCurrentDataString("-"),
+                    organTypeValue:''
                 },
                 ruleValidate: {
                     organName: [
@@ -162,25 +167,36 @@
                         { required: true, message: '【组织简称】不能空！', trigger: 'blur' }
                     ]
                 },
-                status:'${op}'
+                status:StringUtility.QueryString("op")
             },
             mounted:function () {
-                if(this.status=="view") {
+                /*if(this.status=="view") {
                     DetailPageUtility.IViewPageToViewStatus();
                 }
                 if(this.status=="add"){
-                    this.formValidate.organTypeValue=this.exObjectsJson.OrganType[0].organTypeValue;
-                }
+
+                }*/
+                this.bindFormData();
             },
             methods: {
+                bindFormData:function(){
+                    //获取数据并赋值
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status,function (result) {
+                        appForm.exObjectsJson.OrganType=result.exKVData.exObjectsJson.OrganType;
+                        appForm.formValidate.organTypeValue=appForm.exObjectsJson.OrganType[0].organTypeValue;
+                        //debugger;
+                        //for(var i=0;i<result.exKVData.exObjectsJson.OrganType.length;i++){
+                            //appForm.exObjectsJson.OrganType.push(result.exKVData.exObjectsJson.OrganType[i]);
+                        //}
+                    });
+                },
                 handleSubmit: function (name) {
                     var _self=this;
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
                             var sendData=JSON.stringify(_self.formValidate);
                             //debugger;
-                            var url='/PlatForm/OrganRelevance/Organ/SaveEdit.do';
-                            AjaxUtility.PostRequestBody(url,sendData,function (result) {
+                            AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl,sendData,function (result) {
                                 DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},result.message,function () {
                                     if(result.success) {
                                         if (appForm.status == "add") {

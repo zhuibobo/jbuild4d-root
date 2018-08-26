@@ -155,7 +155,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
 
         Map<String,Object> bindObjectsToMVData=this.bindObjectsToMV();
         if(bindObjectsToMVData!=null){
-            responseVo.addExKVData("exObjectsJson", JsonUtility.toObjectString(bindObjectsToMVData));
+            responseVo.addExKVData("exObjectsJson", bindObjectsToMVData);
         }
         return responseVo;
     }

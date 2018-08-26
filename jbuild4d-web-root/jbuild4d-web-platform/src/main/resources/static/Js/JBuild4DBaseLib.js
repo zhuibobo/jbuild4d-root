@@ -1620,11 +1620,20 @@ var DetailPageUtility={
             }
         }
     },
-    BindFormData:function(interfaceUrl,vueFormData,recordId,op){
+    BindFormData:function(interfaceUrl,vueFormData,recordId,op,func){
         //获取数据并赋值
         AjaxUtility.Post(interfaceUrl,{recordId:recordId,op:op},function (result) {
             if(result.success) {
                 DetailPageUtility.OverrideObjectValue(vueFormData, result.data);
+                //debugger;
+                /*if(result.exKVData.exObjectsJson!=undefined&&result.exKVData.exObjectsJson!=null) {
+                    debugger;
+                    Vue.set(vueObject, exObjectsJsonAttrName, result.exKVData.exObjectsJson);
+                    console.log(result.exKVData.exObjectsJson);
+                }*/
+                if(typeof(func)=="function"){
+                    func(result);
+                }
                 if(op=="view") {
                     DetailPageUtility.IViewPageToViewStatus();
                 }

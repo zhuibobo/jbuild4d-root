@@ -24,7 +24,7 @@ public class JBuild4DResponseVo {
      */
     private Object data;
 
-    private Map<String,Object> ExKVData=new HashMap<>();
+    private Map<String,Object> exKVData=new HashMap<>();
 
     public JBuild4DResponseVo() {
     }
@@ -175,6 +175,14 @@ public class JBuild4DResponseVo {
     }
 
     public void addExKVData(String key,Object value){
-        ExKVData.put(key,value);
+        exKVData.put(key,value);
+    }
+
+    public void setExKVData(Map<String, Object> _exKVData) {
+        exKVData = _exKVData;
+    }
+
+    public Map<String,Object> getExKVData() {
+        return exKVData;
     }
 }
