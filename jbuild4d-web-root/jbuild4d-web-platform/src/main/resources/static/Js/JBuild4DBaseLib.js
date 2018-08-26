@@ -1661,7 +1661,21 @@ var DetailPageUtility={
                 sourceObject[key]=dataObject[key];
             }
         }
-    }
+    },
+    BindFormData:function(interfaceUrl,vueFormData,recordId,op){
+        //获取数据并赋值
+        AjaxUtility.Post(interfaceUrl,{recordId:recordId,op:op},function (result) {
+            if(result.success) {
+                DetailPageUtility.OverrideObjectValue(vueFormData, result.data);
+                if(op=="view") {
+                    DetailPageUtility.IViewPageToViewStatus();
+                }
+            }
+            else {
+                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+            }
+        },"json");
+    },
 }
 
 var DictionaryUtility={

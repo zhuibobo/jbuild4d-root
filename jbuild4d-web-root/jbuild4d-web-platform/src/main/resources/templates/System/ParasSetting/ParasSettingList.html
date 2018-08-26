@@ -45,7 +45,12 @@
                 },500);
             },
             data: {
-                editView:"/PlatForm/System/ParasSetting/DetailView",
+                acInterface:{
+                    editView:"/PlatForm/System/ParasSetting/DetailView",
+                    reloadData:'/PlatForm/System/ParasSetting/GetListData',
+                    delete:'/PlatForm/System/ParasSetting/Delete.do',
+                    statusEnable:'/PlatForm/System/ParasSetting/StatusChange.do'
+                },
                 idFieldName:"settingId",
                 columnsConfig: [
                     {
@@ -70,7 +75,7 @@
                         width: 200
                     }, {
                         title: '状态',
-                        width: 50,
+                        width: 70,
                         align: "center",
                         key: 'settingStatus'
                     }, {
@@ -111,34 +116,31 @@
                     this.selectionRows = selection;
                 },
                 reloadData: function () {
-                    var url = '/PlatForm/System/ParasSetting/GetListData';
-                    ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
+                    ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                 },
                 add: function () {
-                    var url = BaseUtility.BuildAction(this.editView, {"op": "add"});
+                    var url = BaseUtility.BuildAction(this.acInterface.editView, {"op": "add"});
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "参数设置"}, 2);
                 },
                 edit: function (recordId) {
-                    var url = BaseUtility.BuildUrl(this.editView, {
+                    var url = BaseUtility.BuildUrl(this.acInterface.editView, {
                         "op": "update",
                         "recordId": recordId
                     });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "参数设置"}, 2);
                 },
                 view:function (recordId) {
-                    var url = BaseUtility.BuildUrl(this.editView, {
+                    var url = BaseUtility.BuildUrl(this.acInterface.editView, {
                         "op": "view",
                         "recordId": recordId
                     });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "参数设置"}, 2);
                 },
                 del: function (recordId) {
-                    var url = '/PlatForm/System/ParasSetting/Delete.do';
-                    ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
+                    ListPageUtility.IViewTableDeleteRow(this.acInterface.delete,recordId,appList);
                 },
                 statusEnable: function (statusName) {
-                    var url = '/PlatForm/System/ParasSetting/StatusChange.do';
-                    ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,appList.idFieldName,statusName,appList);
+                    ListPageUtility.IViewChangeServerStatusFace(this.acInterface.statusChange,this.selectionRows,appList.idFieldName,statusName,appList);
                 },
                 changePage: function (pageNum) {
                     this.pageNum = pageNum;

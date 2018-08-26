@@ -71,6 +71,7 @@
                     getDataUrl:"/PlatForm/System/DictionaryGroup/GetDetailData",
                     saveDataUrl:"/PlatForm/System/DictionaryGroup/SaveEdit",
                 },
+                recordId:StringUtility.QueryString("recordId"),
                 formValidate: {
                     dictGroupId: '',
                     dictGroupValue: '',
@@ -93,20 +94,25 @@
                 status: StringUtility.QueryString("op")
             },
             mounted:function () {
-                //获取数据并赋值
-                AjaxUtility.Post(this.acInterface.getDataUrl,{recordId:StringUtility.QueryString("recordId"),op:StringUtility.QueryString("op")},function (result) {
-                    if(result.success) {
-                        DetailPageUtility.OverrideObjectValue(appForm.formValidate, result.data);
-                    }
-                    else {
-                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
-                    }
-                },"json");
-                if(this.status=="view") {
-                    DetailPageUtility.IViewPageToViewStatus();
-                }
+                this.bindFormData();
             },
             methods: {
+                bindFormData:function() {
+                    //获取数据并赋值
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status);
+                    /*var _self=this;
+                    AjaxUtility.Post(this.acInterface.getDataUrl,{recordId:StringUtility.QueryString("recordId"),op:StringUtility.QueryString("op")},function (result) {
+                        if(result.success) {
+                            DetailPageUtility.OverrideObjectValue(appForm.formValidate, result.data);
+                            if(_self.status=="view") {
+                                DetailPageUtility.IViewPageToViewStatus();
+                            }
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                        }
+                    },"json");*/
+                },
                 handleSubmit: function (name) {
                     var _self = this;
                     this.$refs[name].validate(function (valid) {

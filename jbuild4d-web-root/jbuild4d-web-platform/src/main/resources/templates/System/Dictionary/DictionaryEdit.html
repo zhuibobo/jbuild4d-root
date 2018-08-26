@@ -115,6 +115,7 @@
                     getDataUrl:"/PlatForm/System/Dictionary/GetDetailData",
                     saveDataUrl:"/PlatForm/System/Dictionary/SaveEdit",
                 },
+                recordId:StringUtility.QueryString("recordId"),
                 formValidate: {
                     dictId: "",
                     dictParentId:StringUtility.QueryString("dictParentId"),
@@ -140,20 +141,13 @@
                 status:StringUtility.QueryString("op")
             },
             mounted:function () {
-                //获取数据并赋值
-                AjaxUtility.Post(this.acInterface.getDataUrl,{recordId:StringUtility.QueryString("recordId"),op:StringUtility.QueryString("op")},function (result) {
-                    if(result.success) {
-                        DetailPageUtility.OverrideObjectValue(appForm.formValidate, result.data);
-                    }
-                    else {
-                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
-                    }
-                },"json");
-                if(this.status=="view") {
-                    DetailPageUtility.IViewPageToViewStatus();
-                }
+                this.bindFormData();
             },
             methods: {
+                bindFormData:function(){
+                    //获取数据并赋值
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status);
+                },
                 handleSubmit: function (name) {
                     var _self=this;
                     this.$refs[name].validate(function (valid) {

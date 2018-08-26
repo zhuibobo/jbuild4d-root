@@ -70,7 +70,7 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
             if(dictionaryGroupEntity.getDictGroupIssystem().equals(TrueFalseEnum.True.getDisplayName())){
                 throw JBuild4DGenerallyException.getSystemRecordDelException();
             }
-            if(dictionaryGroupEntity.getDictGroupDelEnable().equals(TrueFalseEnum.True.getDisplayName())){
+            if(dictionaryGroupEntity.getDictGroupDelEnable().equals(TrueFalseEnum.False.getDisplayName())){
                 throw JBuild4DGenerallyException.getDBFieldSettingDelException();
             }
             List<DictionaryGroupEntity> childEntityList=dictionaryGroupMapper.selectChilds(id);
