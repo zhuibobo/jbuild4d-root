@@ -45,7 +45,8 @@
                     editView:"/PlatForm/OrganRelevance/Organ/DetailView",
                     reloadData:'/PlatForm/OrganRelevance/Organ/GetListData.do',
                     delete:'/PlatForm/OrganRelevance/Organ/Delete',
-                    statusChange:'/PlatForm/OrganRelevance/Organ/StatusChange'
+                    statusChange:'/PlatForm/OrganRelevance/Organ/StatusChange',
+                    move:'/PlatForm/OrganRelevance/Organ/Move.do'
                 },
                 treeTableObject:null,
                 treeTableConfig:{
@@ -224,9 +225,8 @@
                 move:function(type){
                     var _self=this;
                     this.mareSureSelectedTreeTableRow("选中").then(function (nodeData) {
-                        var url = '/PlatForm/OrganRelevance/Organ/Move.do';
                         var recordId = nodeData[appList.treeTableConfig.IdField];
-                        AjaxUtility.Post(url, {recordId: recordId,type:type}, function (result) {
+                        AjaxUtility.Post(this.acInterface.move, {recordId: recordId,type:type}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     if(type=="down") {
