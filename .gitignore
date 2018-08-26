@@ -4,6 +4,7 @@
 target
 out
 libs
+log
 GenerateCodeFiles/
 !GenerateCodeFiles/GenerateCodeFiles.txt
 
