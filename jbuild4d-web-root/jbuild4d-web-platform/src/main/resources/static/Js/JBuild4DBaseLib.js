@@ -517,50 +517,6 @@ var StringUtility = {
             return "女性";
         }
     },
-    GetAgeByIdCard: function (str) {
-        var year, month, day;
-        if (str.length != 15 && str.length != 18) {
-            return "";
-        }
-        if (str.length == 15) {
-            year = str.substring(6, 8);
-            month = str.substring(8, 10);
-            day = str.substring(10, 12);
-        }
-        else if (str.length == 18) {
-            year = str.substring(6, 10);
-            month = str.substring(10, 12);
-            day = str.substring(12, 14);
-        }
-        if (year.length == 2) year = "19" + year;
-        //张洋龙
-        //精确判断年龄
-        var myDate = new Date();
-        var datehelper = new DateHepler();
-        var currentYear = myDate.getFullYear();
-        var currentMonth = myDate.getMonth() + 1;
-        var currentDay = myDate.getDate();
-
-        var birYear = parseInt(currentYear) - parseInt(year);
-        var birMonth = parseInt(currentMonth, 10) - parseInt(month, 10);
-        var birDay = parseInt(currentDay, 10) - parseInt(day, 10);
-        if (birMonth >= 0) {
-            if (birMonth == 0) {
-                if (birDay < 0) {
-                    return birYear - 1;
-                }
-                else {
-                    return birYear;
-                }
-            }
-            else {
-                return birYear;
-            }
-        }
-        else {
-            return birYear - 1;
-        }
-    },
     IsNullOrEmpty: function (obj) {
         return obj == undefined || obj == "" || obj == null || obj == "undefined" || obj == "null"
     },
