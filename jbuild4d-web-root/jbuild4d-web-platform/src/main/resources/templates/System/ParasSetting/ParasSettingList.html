@@ -48,8 +48,8 @@
                 acInterface:{
                     editView:"/PlatForm/System/ParasSetting/DetailView",
                     reloadData:'/PlatForm/System/ParasSetting/GetListData',
-                    delete:'/PlatForm/System/ParasSetting/Delete.do',
-                    statusEnable:'/PlatForm/System/ParasSetting/StatusChange.do'
+                    delete:'/PlatForm/System/ParasSetting/Delete',
+                    statusChange:'/PlatForm/System/ParasSetting/StatusChange'
                 },
                 idFieldName:"settingId",
                 columnsConfig: [
@@ -123,14 +123,14 @@
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "参数设置"}, 2);
                 },
                 edit: function (recordId) {
-                    var url = BaseUtility.BuildUrl(this.acInterface.editView, {
+                    var url = BaseUtility.BuildAction(this.acInterface.editView, {
                         "op": "update",
                         "recordId": recordId
                     });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "参数设置"}, 2);
                 },
                 view:function (recordId) {
-                    var url = BaseUtility.BuildUrl(this.acInterface.editView, {
+                    var url = BaseUtility.BuildAction(this.acInterface.editView, {
                         "op": "view",
                         "recordId": recordId
                     });

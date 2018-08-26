@@ -1483,6 +1483,8 @@ var ListPageUtility={
             },
             function (result) {
                 if (result.success) {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                    });
                     pageAppObj.reloadData();
                 }
                 else{
