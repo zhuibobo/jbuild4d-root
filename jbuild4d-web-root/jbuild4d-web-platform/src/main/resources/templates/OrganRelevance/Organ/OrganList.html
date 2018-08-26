@@ -41,6 +41,12 @@
                 this.reloadTreeTableData();
             },
             data:{
+                acInterface:{
+                    editView:"/PlatForm/OrganRelevance/Organ/DetailView",
+                    reloadData:'/PlatForm/OrganRelevance/Organ/GetListData.do',
+                    delete:'/PlatForm/OrganRelevance/Organ/Delete',
+                    statusChange:'/PlatForm/OrganRelevance/Organ/StatusChange'
+                },
                 treeTableObject:null,
                 treeTableConfig:{
                     CanDeleteWhenHasChild:false,
@@ -97,16 +103,15 @@
             methods:{
                 <!--Dictionary-->
                 reloadTreeTableData:function () {
-                    var url='/PlatForm/OrganRelevance/Organ/GetListData.do';
                     var _self=this;
-                    var senddata={pageSize:2000,pageNum:1};
-                    AjaxUtility.Post(url, senddata , function (result) {
+                    var sendData={pageSize:2000,pageNum:1};
+                    AjaxUtility.Post(this.acInterface.reloadData, sendData , function (result) {
                         if (result.success) {
                             //debugger;
                             if(result.data==null){
                                 result.data=new Array();
                             }
-                            var treedata=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
+                            var treeData=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
                                 KeyField: "organId",
                                 RelationField:"organParentId",
                                 ChildFieldName:"Nodes"
@@ -114,7 +119,7 @@
                             $("#divTreeTable").html("");
                             _self.treeTableObject=Object.create(TreeTable);
                             _self.treeTableObject.Initialization(_self.treeTableConfig);
-                            _self.treeTableObject.LoadJsonData(treedata);
+                            _self.treeTableObject.LoadJsonData(treeData);
                         }
                         else{
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
@@ -139,7 +144,7 @@
                     }
                     return {
                         then: function (func) {
-                            func(nodeData);
+                            func.call(appList,nodeData);
                         }
                     }
                     return {
@@ -148,29 +153,34 @@
                     }
                 },
                 add:function(){
-                    if(this.treeTableObject!=null){
-                        var nodeData=this.treeTableObject.GetSelectedRowData();
-                        if(nodeData == null) {
-                            DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择上级组织!",null);
+                    if(this.treeTableObject!=null) {
+                        var nodeData = this.treeTableObject.GetSelectedRowData();
+                        if (nodeData == null) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择上级组织!", null);
                             return false;
                         }
-                        var url=BaseUtility.BuildUrl("/PlatForm/OrganRelevance/Organ/Detail.do?parentId="+nodeData[appList.treeTableConfig.IdField]+"&op=add");
-                        DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,url,{title:"组织管理"},1);
+                        var url = BaseUtility.BuildAction(this.acInterface.editView, {
+                            "parentId": nodeData[this.treeTableConfig.IdField],
+                            "op": "add"
+                        });
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "组织管理"}, 1);
                     }
                 },
-                edit:function(){
+                edit:function() {
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/OrganRelevance/Organ/Detail.do?op=update&recordId=" + nodeData[appList.treeTableConfig.IdField]);
+                        var url = BaseUtility.BuildAction(this.acInterface.editView, {
+                            "op": "update",
+                            "recordId": nodeData[this.treeTableConfig.IdField]
+                        });
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "组织管理"}, 1);
                     })
                 },
                 del:function(){
-                    var _self=this;
                     this.mareSureSelectedTreeTableRow("删除").then(function (nodeData) {
-                        var url="/PlatForm/OrganRelevance/Organ/Delete.do";
-                        var recordId=nodeData[appList.treeTableConfig.IdField];
+                        var recordId=nodeData[this.treeTableConfig.IdField];
+                        var _self=this;
                         DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
-                            AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                            AjaxUtility.Post(_self.acInterface.delete, {recordId: recordId}, function (result) {
                                 if (result.success) {
                                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                         _self.treeTableObject.DeleteRow(recordId);
@@ -186,17 +196,19 @@
                 },
                 view:function(){
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/OrganRelevance/Organ/Detail.do?op=view&recordId=" + nodeData[appList.treeTableConfig.IdField]);
+                        var url = BaseUtility.BuildAction(this.acInterface.editView, {
+                            "op": "view",
+                            "recordId": nodeData[this.treeTableConfig.IdField]
+                        });
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "组织管理"}, 1);
                     });
                 },
                 statusEnable:function (statusName) {
                     var _self=this;
                     this.mareSureSelectedTreeTableRow("启用").then(function (nodeData) {
-                        var url = "/PlatForm/OrganRelevance/Organ/StatusChange.do";
                         var recordId = nodeData[appList.treeTableConfig.IdField];
                         //debugger;
-                        AjaxUtility.Post(url, {ids: recordId,status:statusName}, function (result) {
+                        AjaxUtility.Post(this.acInterface.statusChange, {ids: recordId,status:statusName}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     nodeData.organStatus=statusName;
