@@ -191,7 +191,6 @@
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
                             var sendData=JSON.stringify(_self.formValidate);
-                            //debugger;
                             AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl,sendData,function (result) {
                                 DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},result.message,function () {
                                     if(result.success) {
