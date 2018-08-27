@@ -91,6 +91,19 @@
                 },500);
             },
             data:{
+                acInterface:{
+                    <!--Tree -->
+                    getGroupTreeData:"/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/GetTreeData",
+                    groupEditView:"/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/DetailView",
+                    deleteGroup:"/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Delete",
+                    moveGroup:"/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Move",
+                    <!--List -->
+                    listEditView:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/DetailView",
+                    reloadListData:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/GetListData",
+                    deleteListRecord:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Delete",
+                    listStatusChange:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/StatusChange",
+                    listMove:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Move"
+                },
                 <!--Tree-->
                 treeIdFieldName:"ddttId",
                 treeObj:null,
@@ -99,7 +112,7 @@
                     async : {
                         enable : true,
                         // Ajax 获取数据的 URL 地址
-                        url : BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/GetTreeData.do")
+                        url :""
                     },
                     // 必须使用data
                     data:{
@@ -202,6 +215,7 @@
             methods:{
                 <!--Tree-->
                 initTree:function () {
+                    this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});
                     this.treeObj=$.fn.zTree.init($("#ztreeUL"), this.treeSetting);
                 },
                 treeNodeSelected:function (event, treeId, treeNode) {
@@ -217,17 +231,23 @@
                     //}
                 },
                 addGroup:function () {
-                    if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Detail.do?op=add&parentId="+this.treeSelectedNode[appList.treeIdFieldName]);
+                    if (this.treeSelectedNode != null) {
+                        var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                            "op": "add",
+                            "parentId": this.treeSelectedNode[appList.treeIdFieldName]
+                        });
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
                     }
                     else {
-                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择父节点!",null);
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择父节点!", null);
                     }
                 },
                 editGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Detail.do?op=update&recordId="+this.treeSelectedNode[appList.treeIdFieldName]);
+                        var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                            "op": "update",
+                            "recordId": this.treeSelectedNode[appList.treeIdFieldName]
+                        });
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
                     }
                     else {
@@ -235,14 +255,18 @@
                     }
                 },
                 viewGroup:function () {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Detail.do?op=view&recordId=" + this.treeSelectedNode[appList.treeIdFieldName]);
+                    var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                        "op": "view",
+                        "recordId": this.treeSelectedNode[appList.treeIdFieldName]
+                    });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
                 },
                 delGroup:function () {
-                    var url="/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Delete.do";
+                    //var url="/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Delete.do";
+                    var _self=this;
                     var recordId=this.treeSelectedNode[appList.treeIdFieldName];
                     DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
-                        AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                        AjaxUtility.Post(_self.acInterface.deleteGroup, {recordId: recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     appList.treeObj.removeNode(appList.treeSelectedNode);
@@ -257,9 +281,8 @@
                 },
                 moveGroup:function (type) {
                     if(this.treeSelectedNode!=null) {
-                        var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/Move.do';
                         var recordId = this.treeSelectedNode[appList.treeIdFieldName];
-                        AjaxUtility.Post(url, {recordId: recordId,type:type}, function (result) {
+                        AjaxUtility.Post(this.acInterface.moveGroup, {recordId: recordId,type:type}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     if(type=="down") {
@@ -300,14 +323,15 @@
                     this.selectionRows = selection;
                 },
                 reloadData: function () {
-                    var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/GetListData.do';
-                    //debugger;
-                    ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
+                    ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadListData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null,false);
                     //this.selectionRows=null;
                 },
                 add: function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=add&groupId=" + this.treeSelectedNode[appList.treeIdFieldName]);
+                        var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
+                            "op": "add",
+                            "groupId": this.treeSelectedNode[appList.treeIdFieldName]
+                        });
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
                     }
                     else {
@@ -315,24 +339,27 @@
                     }
                 },
                 edit: function (recordId) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=update&recordId=" + recordId);
+                    var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
+                        "op": "update",
+                        "recordId": recordId
+                    });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
                 },
                 view:function (recordId) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Detail.do?op=view&recordId=" + recordId);
+                    var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
+                        "op": "view",
+                        "recordId": recordId
+                    });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
                 },
                 del: function (recordId) {
-                    var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Delete.do';
-                    ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
+                    ListPageUtility.IViewTableDeleteRow(this.acInterface.deleteListRecord,recordId,appList);
                 },
                 statusEnable: function (statusName) {
-                    var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/StatusChange.do';
-                    ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,appList.idFieldName,statusName,appList);
+                    ListPageUtility.IViewChangeServerStatusFace(this.acInterface.listStatusChange,this.selectionRows,appList.idFieldName,statusName,appList);
                 },
                 move:function (type) {
-                    var url = '/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Move.do';
-                    ListPageUtility.IViewMoveFace(url,this.selectionRows,appList.idFieldName,type,appList);
+                    ListPageUtility.IViewMoveFace(this.acInterface.listMove,this.selectionRows,appList.idFieldName,type,appList);
                 },
                 changePage: function (pageNum) {
                     this.pageNum = pageNum;
