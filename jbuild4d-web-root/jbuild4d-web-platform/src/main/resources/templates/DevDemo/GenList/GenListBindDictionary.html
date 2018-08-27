@@ -221,7 +221,7 @@
                     var url = '/PlatForm/DevDemo/DevDemoGenListBindDictionary/GetListData.do';
                     ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,function (result,appVue) {
                         //设置数据字典相关的数据
-                        debugger;
+                        //debugger;
                         if(result.exKVData.dictionaryJson!=undefined&&result.exKVData.dictionaryJson!=null) {
                             appVue.dictionaryJson.DevDemoDictionaryGroupBindSelect = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindSelect;
                             appVue.dictionaryJson.DevDemoDictionaryGroupBindRadio = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindRadio;
