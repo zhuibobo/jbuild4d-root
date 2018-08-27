@@ -10,40 +10,6 @@
 </head>
 <body>
     <div id="appList" class="iv-list-page-wrap">
-        <div class="list-simple-search-wrap" id="list-simple-search-wrap">
-            <table class="ls-table">
-                <colgroup>
-                    <col style="width: 80px">
-                    <col style="">
-                    <col style="width: 80px">
-                    <col style="">
-                    <col style="width: 100px">
-                    <col style="">
-                    <col style="width: 80px">
-                    <col style="">
-                    <col style="width: 80px">
-                </colgroup>
-                <tr class="ls-table-row">
-                    <td>ddglKey：</td>
-                    <td>
-                        <i-input v-model="searchCondition.ddglKey.value" placeholder=""></i-input>
-                    </td>
-                    <td>ddglName：</td>
-                    <td>
-                        <i-input v-model="searchCondition.ddglName.value" placeholder=""></i-input>
-                    </td>
-                    <td>ddglCreatetime（从）：</td>
-                    <td>
-                        <date-picker v-model="searchCondition.ddglCreatetime_s.value" type="date" placeholder="" style="width: 100%"></date-picker>
-                    </td>
-                    <td>（到）：</td>
-                    <td>
-                        <date-picker v-model="searchCondition.ddglCreatetime_e.value" type="date" placeholder="" style="width: 100%"></date-picker>
-                    </td>
-                    <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
-                </tr>
-            </table>
-        </div>
         <div id="list-button-wrap" class="list-button-outer-wrap">
             <div class="list-button-inner-wrap">
                 <i-button type="success" @click="add()">
@@ -87,13 +53,6 @@
                 },500);
             },
             data: {
-                acInterface:{
-                    editView:"/PlatForm/DevDemo/DevDemoGenList/DetailView",
-                    reloadData:"/PlatForm/DevDemo/DevDemoGenList/GetListData",
-                    delete:"/PlatForm/DevDemo/DevDemoGenList/Delete",
-                    statusChange:"/PlatForm/DevDemo/DevDemoGenList/StatusChange",
-                    move:"/PlatForm/DevDemo/DevDemoGenList/Move"
-                },
                 idFieldName:"ddglId",
                 searchCondition:{
                     ddglKey:{
@@ -169,34 +128,33 @@
                     this.selectionRows = selection;
                 },
                 reloadData: function () {
-                    ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
+                    var url = '/PlatForm/DevDemo/DevDemoGenList/GetListData.do';
+                    ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
+                    //this.selectionRows=null;
                 },
                 add: function () {
-                    var url = BaseUtility.BuildAction(this.acInterface.editView, {"op": "add"});
+                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=add");
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
                 },
                 edit: function (recordId) {
-                    var url = BaseUtility.BuildAction(this.acInterface.editView, {
-                        "op": "update",
-                        "recordId": recordId
-                    });
+                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=update&recordId=" + recordId);
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
                 },
                 view:function (recordId) {
-                    var url = BaseUtility.BuildAction(this.acInterface.editView, {
-                        "op": "view",
-                        "recordId": recordId
-                    });
+                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=view&recordId=" + recordId);
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
                 },
                 del: function (recordId) {
-                    ListPageUtility.IViewTableDeleteRow(this.acInterface.delete,recordId,appList);
+                    var url = '/PlatForm/DevDemo/DevDemoGenList/Delete.do';
+                    ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
                 },
                 statusEnable: function (statusName) {
-                    ListPageUtility.IViewChangeServerStatusFace(this.acInterface.statusChange,this.selectionRows,appList.idFieldName,statusName,appList);
+                    var url = '/PlatForm/DevDemo/DevDemoGenList/StatusChange.do';
+                    ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,appList.idFieldName,statusName,appList);
                 },
                 move:function (type) {
-                    ListPageUtility.IViewMoveFace(this.acInterface.move,this.selectionRows,appList.idFieldName,type,appList);
+                    var url = '/PlatForm/DevDemo/DevDemoGenList/Move.do';
+                    ListPageUtility.IViewMoveFace(url,this.selectionRows,appList.idFieldName,type,appList);
                 },
                 changePage: function (pageNum) {
                     this.pageNum = pageNum;
