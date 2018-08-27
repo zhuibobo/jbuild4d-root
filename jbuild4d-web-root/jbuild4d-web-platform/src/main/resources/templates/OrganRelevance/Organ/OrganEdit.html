@@ -183,7 +183,9 @@
                     //获取数据并赋值
                     DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status,function (result) {
                         appForm.exObjectsJson.OrganType=result.exKVData.exObjectsJson.OrganType;
-                        appForm.formValidate.organTypeValue=appForm.exObjectsJson.OrganType[0].organTypeValue;
+                        if(appForm.status=="add") {
+                            appForm.formValidate.organTypeValue = appForm.exObjectsJson.OrganType[0].organTypeValue;
+                        }
                     });
                 },
                 handleSubmit: function (name) {
