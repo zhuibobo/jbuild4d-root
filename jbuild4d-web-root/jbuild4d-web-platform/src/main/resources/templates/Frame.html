@@ -209,8 +209,7 @@
                 //debugger;
                 if (this.leftIframeUrl.indexOf("/PlatForm/Base/LeftMenu.do") >= 0 && reSetLeftMenu) {
                     $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
-                }
-                ;
+                };
                 //debugger;
                 this.buildBreadcrumbByMenuId(item.menuId);
                 //debugger;
@@ -220,8 +219,8 @@
                     this.contentIframeUrl = this.defaultContentIframeUrl;
                 }
                 //debugger;
-                if (item.menuLeftUrl != "" && item.menuLeftUrl != null && item.menuLeftUrl != "LeftMenu.do") {
-                    this.leftIframeUrl = BaseUtility.BuildUrl(item.menuLeftUrl);
+                if (item.menuLeftUrl != "" && item.menuLeftUrl != null && item.menuLeftUrl != "/LeftMenu") {
+                    this.leftIframeUrl = BaseUtility.BuildAction(item.menuLeftUrl);
                     return;
                 }
                 else {

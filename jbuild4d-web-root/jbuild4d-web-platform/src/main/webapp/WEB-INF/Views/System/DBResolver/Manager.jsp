@@ -182,7 +182,7 @@
             beginGenerateCode:function () {
                 var _self=this;
                 _self.codeIsGenerateing=true;
-                var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode.do';
+                var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode';
                 AjaxUtility.Post(url, this.formValidate, function (result) {
                     _self.generateCode.EntityContent=result.data.EntityContent;
                     _self.generateCode.DaoContent=result.data.DaoContent;
