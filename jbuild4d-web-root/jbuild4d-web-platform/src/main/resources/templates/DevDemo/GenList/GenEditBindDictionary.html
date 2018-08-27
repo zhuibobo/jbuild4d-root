@@ -122,16 +122,11 @@
             methods: {
                 bindFormData:function(){
                     //获取数据并赋值
-                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status,function (result) {
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status,null,function (result) {
                         appForm.dictionaryJson.DevDemoDictionaryGroupBindSelect = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindSelect;
                         appForm.dictionaryJson.DevDemoDictionaryGroupBindRadio = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindRadio;
                         appForm.dictionaryJson.DevDemoDictionaryGroupBindCheckbox = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindCheckbox;
-                        if(appForm.status=="add") {
-                            //appForm.formValidate.organTypeValue = appForm.exObjectsJson.OrganType[0].organTypeValue;
-                        }
-                        /*if('${entity.ddglBindDicMucheckbox}'!=""){
-                            this.formValidate.ddglBindDicMucheckbox='${entity.ddglBindDicMucheckbox}'.split(";");
-                        }*/
+                        appForm.formValidate.ddglBindDicMucheckbox=result.data.ddglBindDicMucheckbox.split(";");
                     });
                 },
                 handleSubmit: function (name) {

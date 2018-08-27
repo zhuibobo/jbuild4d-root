@@ -175,7 +175,7 @@
             methods: {
                 bindFormData:function(){
                     //获取数据并赋值
-                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status,function (result) {
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status,null,function (result) {
                         appForm.exObjectsJson.OrganType=result.exKVData.exObjectsJson.OrganType;
                         if(appForm.status=="add") {
                             appForm.formValidate.organTypeValue = appForm.exObjectsJson.OrganType[0].organTypeValue;
