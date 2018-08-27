@@ -1,5 +1,6 @@
 package com.jbuild4d.base.dbaccess.dbentities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
 
 import java.util.Date;
@@ -19,6 +20,7 @@ public class DevDemoTreeTableEntity {
 
     private String ddttDesc;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date ddttCreatetime;
 
     private Integer ddttOrderNum;

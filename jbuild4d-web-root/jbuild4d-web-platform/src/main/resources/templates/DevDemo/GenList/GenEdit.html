@@ -1,18 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: zhuangrb
-  Date: 2018/7/15
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="/WEB-INF/Views/TagLibs/TagLib.jsp" %>
-<html>
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Title</title>
-    <%@ include file="/WEB-INF/Views/TagLibs/GeneralLib.jsp" %>
-    <%@ include file="/WEB-INF/Views/TagLibs/IViewLib.jsp" %>
-    <%@ include file="/WEB-INF/Views/TagLibs/JQueryUILib.jsp" %>
-    <%@ include file="/WEB-INF/Views/TagLibs/ThemesLib.jsp" %>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
 </head>
 <body>
     <div id="appForm" class="general-edit-page-wrap" v-cloak>
@@ -34,7 +28,7 @@
             </form-item>
             <form-item class="general-edit-page-bottom-wrap">
                 <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保 存</i-button>
-                <i-button type="ghost" @click="handleClose('formValidate')" style="margin-left: 8px"> 关 闭</i-button>
+                <i-button @click="handleClose()" style="margin-left: 8px"> 关 闭</i-button>
             </form-item>
         </i-form>
     </div>
@@ -42,18 +36,21 @@
         var appForm =new Vue({
             el: "#appForm",
             mounted:function () {
-               if(this.status=="view") {
-                   DetailPageUtility.IViewPageToViewStatus();
-               }
+                this.bindFormData();
             },
             data: {
+                acInterface:{
+                    getDataUrl:"/PlatForm/DevDemo/DevDemoGenList/GetDetailData",
+                    saveDataUrl:"/PlatForm/DevDemo/DevDemoGenList/SaveEdit",
+                },
+                recordId:StringUtility.QueryString("recordId"),
                 formValidate: {
-                    ddglId: '${recordId}',
-                    ddglKey: '${entity.ddglKey}',
-                    ddglValue: '${entity.ddglValue}',
-                    ddglName: '${entity.ddglName}',
-                    ddglCreatetime: '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />' == '' ? DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${entity.ddglCreatetime}" pattern="yyyy-MM-dd" />',
-                    ddglDesc: '${entity.ddglDesc}'
+                    ddglId: "",
+                    ddglKey: "",
+                    ddglValue: "",
+                    ddglName: "",
+                    ddglCreatetime:DateUtility.GetCurrentData(),
+                    ddglDesc: ""
                 },
                 ruleValidate: {
                     ddglValue: [
@@ -66,17 +63,20 @@
                         {required: true, message: '【ddglKey】不能空！', trigger: 'blur'}
                     ]
                 },
-                status: '${op}'
+                status: StringUtility.QueryString("op")
             },
             methods: {
+                bindFormData:function(){
+                    //获取数据并赋值
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status);
+                },
                 handleSubmit: function (name) {
                     var _self = this;
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
                             var sendData = JSON.stringify(_self.formValidate);
                             //debugger;
-                            var url = '/PlatForm/DevDemo/DevDemoGenList/SaveEdit.do';
-                            AjaxUtility.PostRequestBody(url, sendData, function (result) {
+                            AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     //debugger;
                                     window.OpenerWindowObj.appList.reloadData();
@@ -88,7 +88,7 @@
                         }
                     })
                 },
-                handleClose: function (name) {
+                handleClose: function () {
                     DialogUtility.Frame_CloseDialog(window);
                 }
             }
