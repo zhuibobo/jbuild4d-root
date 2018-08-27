@@ -16,7 +16,7 @@
             callback:{
                 onClick: function zTreeOnClick(event, treeId, treeNode) {
                     //alert(treeNode.tId + ", " + treeNode.name);
-                    if(treeNode.name=="弹出列表"){
+                    if(treeNode.name=="通用列表(弹出列表)"){
                         DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId05,treeNode.contentUrl,{},1);
                         return;
                     }
@@ -38,7 +38,7 @@
                 name: "通用列表(绑定数据字典)",
                 contentUrl: BaseUtility.BuildAction("/PlatForm/DevDemo/DevDemoGenListBindDictionary/ListView")
             }, {
-                name: "弹出列表",
+                name: "通用列表(弹出列表)",
                 contentUrl: BaseUtility.BuildAction("/PlatForm/DevDemo/DevDemoGenList/ListView")
             }, {
                 name: "树形表格",
