@@ -22,7 +22,7 @@ public interface IGeneralCRUDController<T> {
 
     ModelAndView detailView();
 
-    JBuild4DResponseVo getListData(Integer pageSize, Integer pageNum, String search_condition) throws IOException, ParseException;
+    JBuild4DResponseVo getListData(Integer pageSize, Integer pageNum, String search_condition,boolean loadDict) throws IOException, ParseException;
 
     JBuild4DResponseVo saveEdit(@RequestBody T entity, HttpServletRequest request) throws Exception;
 

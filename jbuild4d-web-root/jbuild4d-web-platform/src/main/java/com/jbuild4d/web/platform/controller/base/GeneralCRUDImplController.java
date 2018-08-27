@@ -92,13 +92,13 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     @RequestMapping(value = "ListView", method = RequestMethod.GET)
     public ModelAndView listView() throws JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView(getListViewName());
-        List<String> dictionaryGroupValueList=bindDictionaryToPage();
-        String dictionaryJsonString=getDictionaryJsonString(dictionaryGroupValueList);
-        modelAndView.addObject("dictionaryJson", dictionaryJsonString);
+        //List<String> dictionaryGroupValueList=bindDictionaryToPage();
+        //String dictionaryJsonString=getDictionaryJsonString(dictionaryGroupValueList);
+        //modelAndView.addObject("dictionaryJson", dictionaryJsonString);
         return modelAndView;
     }
 
-    protected String getDictionaryJsonString(List<String> groupValueList) throws JsonProcessingException {
+    protected Map<String,List<DictionaryEntity>> getDictionaryJson(List<String> groupValueList) throws JsonProcessingException {
         Map<String,List<DictionaryEntity>> dictionarysMap=new HashMap<>();
 
         if(groupValueList!=null&&groupValueList.size()>0){
@@ -110,17 +110,30 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
                 dictionarysMap.put(groupValue,dictionaryEntityList);
             }
         }
-
-        return JsonUtility.toObjectString(dictionarysMap);
+        return dictionarysMap;
+        //return JsonUtility.toObjectString(dictionarysMap);
     }
 
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
+    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition,boolean loadDict) throws IOException, ParseException {
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
         Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
         PageInfo<T> proOrganPageInfo=getBaseService().getPage(jb4DSession,pageNum,pageSize,searchMap);
-        return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
+        JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
+        responseVo.setData(proOrganPageInfo);
+        responseVo.setMessage("获取成功");
+        responseVo.setSuccess(true);
+
+        if(loadDict==true) {
+            List<String> dictionaryGroupValueList = bindDictionaryToPage();
+            if (dictionaryGroupValueList != null && dictionaryGroupValueList.size() > 0) {
+                responseVo.addExKVData("dictionaryJson", getDictionaryJson(dictionaryGroupValueList));
+            }
+        }
+
+        return responseVo;
+        //return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
     }
 
     @RequestMapping(value = "DetailView", method = RequestMethod.GET)
@@ -147,8 +160,9 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         }
 
         List<String> dictionaryGroupValueList=bindDictionaryToPage();
-        String dictionaryJsonString=getDictionaryJsonString(dictionaryGroupValueList);
-        responseVo.addExKVData("dictionaryJson",dictionaryJsonString);
+        //String dictionaryJsonString=getDictionaryJsonString(dictionaryGroupValueList);
+        Map<String,List<DictionaryEntity>> dictionaryJson=getDictionaryJson(dictionaryGroupValueList);
+        responseVo.addExKVData("dictionaryJson",dictionaryJson);
 
         responseVo.setData(entity);
         responseVo.addExKVData("op",op);

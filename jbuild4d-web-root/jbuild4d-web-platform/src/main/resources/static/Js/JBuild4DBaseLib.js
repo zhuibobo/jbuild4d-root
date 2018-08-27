@@ -1490,16 +1490,27 @@ var ListPageUtility={
         });
     },
 
-    IViewTableLoadDataSearch:function (url,pageNum,pageSize,searchCondition,pageAppObj,idField,autoSelectedOldRows,successFunc) {
+    IViewTableLoadDataSearch:function (url,pageNum,pageSize,searchCondition,pageAppObj,idField,autoSelectedOldRows,successFunc,loadDict) {
+        //var loadDict=false;
+        //if(pageNum===1) {
+        //    loadDict = true;
+        //}
+        if(loadDict==undefined||loadDict==null){
+            loadDict=false;
+        }
         //debugger;
         AjaxUtility.Post(url,
             {
-                pageNum: pageNum,
-                pageSize: pageSize,
-                searchCondition:SearchUtility.SerializationSearchCondition(searchCondition)
+                "pageNum": pageNum,
+                "pageSize": pageSize,
+                "searchCondition":SearchUtility.SerializationSearchCondition(searchCondition),
+                "loadDict":loadDict
             },
             function (result) {
                 if (result.success) {
+                    if(typeof (successFunc)=="function") {
+                        successFunc(result,pageAppObj);
+                    }
                     pageAppObj.tableData = new Array();
                     pageAppObj.tableData = result.data.list;
                     pageAppObj.pageTotal = result.data.total;
@@ -1513,9 +1524,6 @@ var ListPageUtility={
                                 }
                             }
                         }
-                    }
-                    if(typeof (successFunc)=="function") {
-                        successFunc(result,pageAppObj);
                     }
                 }
                 else
