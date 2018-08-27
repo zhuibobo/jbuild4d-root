@@ -222,6 +222,10 @@ public class JavaBeansUtil {
                 field.addAnnotation("@DBKeyField");
             }
         }
+        if(fqjt.toString().equals("java.util.Date")){
+            field.addAnnotation("@JsonFormat(pattern=\"yyyy-MM-dd HH:mm:ss\",timezone = \"GMT+8\")");
+        }
+        //if(field.getType())
         context.getCommentGenerator().addFieldComment(field,
                 introspectedTable, introspectedColumn);
 
