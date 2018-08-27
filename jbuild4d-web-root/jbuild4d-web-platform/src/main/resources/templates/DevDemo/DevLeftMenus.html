@@ -17,7 +17,7 @@
                 onClick: function zTreeOnClick(event, treeId, treeNode) {
                     //alert(treeNode.tId + ", " + treeNode.name);
                     if(treeNode.name=="弹出列表"){
-                        DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,treeNode.contentUrl,{},1);
+                        DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId05,treeNode.contentUrl,{},1);
                         return;
                     }
                     window.parent.app.contentIframeUrl=treeNode.contentUrl;
