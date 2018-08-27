@@ -125,7 +125,7 @@
             },500);
         },
         data:{
-            codeisgenerateing:false,
+            codeIsGenerateing:false,
             formValidate: {
                 tableName: "",
                 packageType: "JBuild4D-PlatForm",
@@ -181,7 +181,7 @@
         methods:{
             beginGenerateCode:function () {
                 var _self=this;
-                _self.codeisgenerateing=true;
+                _self.codeIsGenerateing=true;
                 var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode.do';
                 AjaxUtility.Post(url, this.formValidate, function (result) {
                     _self.generateCode.EntityContent=result.data.EntityContent;
@@ -190,7 +190,7 @@
                     _self.generateCode.MapperEXContent=result.data.MapperEXContent;
                     _self.generateCode.IServiceContent=result.data.IServiceContent;
                     _self.generateCode.ServiceImplContent=result.data.ServiceImplContent;
-                    _self.codeisgenerateing=false;
+                    _self.codeIsGenerateing=false;
                 }, "json");
             },
             <!--List-->
