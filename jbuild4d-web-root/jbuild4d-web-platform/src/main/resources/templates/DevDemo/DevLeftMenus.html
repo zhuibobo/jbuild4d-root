@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::TreeTableLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <script>
+        var zTreeObj;
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+        var setting = {
+            callback:{
+                onClick: function zTreeOnClick(event, treeId, treeNode) {
+                    //alert(treeNode.tId + ", " + treeNode.name);
+                    window.parent.app.contentIframeUrl=treeNode.contentUrl;
+                }
+            }
+        };
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes = [{
+            name: "开发示例",
+            open: true,
+            children: [{
+                name: "通用列表(带查询)",
+                contentUrl:BaseUtility.BuildAction("/PlatForm/DevDemo/DevDemoGenList/ListView")
+            }, {
+                name: "通用列表(不带查询)",
+                contentUrl:BaseUtility.BuildAction("/PlatForm/DevDemo/DevDemoGenList/ListNotSearch")
+            }, {
+                name: "通用列表(绑定数据字典)",
+                contentUrl: BaseUtility.BuildAction("/PlatForm/DevDemo/DevDemoGenListBindDictionary/List")
+            }, {
+                name: "树形表格",
+                contentUrl: BaseUtility.BuildAction("/PlatForm/DevDemo/DevDemoTreeTable/List")
+            }, {
+                name: "树与列表",
+                contentUrl: BaseUtility.BuildAction("/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/List")
+            }]
+        }];
+        $(document).ready(function () {
+            zTreeObj = $.fn.zTree.init($("#ztreeUL"), setting, zNodes);
+        });
+    </script>
+</head>
+<body>
+<div>
+    <div class="left-page-c">
+        <div class="tool-bar-c">
+            <div alt="新增分类组" title="新增分类组" class="add" onclick=""></div>
+            <div alt="修改分类组" title="修改分类组" class="edit" onclick=""></div>
+            <div alt="删除分类组" title="删除分类组" class="del" onclick=""></div>
+            <div alt="浏览分类组" title="浏览分类组" class="view" onclick=""></div>
+            <div alt="上移" title="上移" class="order-up" onclick=""></div>
+            <div alt="下移" title="下移" class="order-down last" onclick=""></div>
+        </div>
+        <div class="zTreeDemoBackground left">
+            <ul id="ztreeUL" class="ztree"></ul>
+        </div>
+    </div>
+</div>
+<style>
+</style>
+</body>
+</html>
