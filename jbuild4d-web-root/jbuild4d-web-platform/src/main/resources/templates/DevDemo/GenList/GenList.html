@@ -84,9 +84,16 @@
                 this.reloadData();
                 window.setTimeout(function () {
                     appList.listHeight=ListPageUtility.GetGeneralPageHeight(0);
-                },500);
+                },100);
             },
             data: {
+                acInterface:{
+                    editView:"/PlatForm/DevDemo/DevDemoGenList/DetailView",
+                    reloadData:"/PlatForm/DevDemo/DevDemoGenList/GetListData",
+                    delete:"/PlatForm/DevDemo/DevDemoGenList/Delete",
+                    statusChange:"/PlatForm/DevDemo/DevDemoGenList/StatusChange",
+                    move:"/PlatForm/DevDemo/DevDemoGenList/Move"
+                },
                 idFieldName:"ddglId",
                 searchCondition:{
                     ddglKey:{
@@ -162,34 +169,34 @@
                     this.selectionRows = selection;
                 },
                 reloadData: function () {
-                    var url = '/PlatForm/DevDemo/DevDemoGenList/GetListData.do';
-                    ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
-                    //this.selectionRows=null;
+                    ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                 },
                 add: function () {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=add");
+                    var url = BaseUtility.BuildAction(this.acInterface.editView, {"op": "add"});
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
                 },
                 edit: function (recordId) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=update&recordId=" + recordId);
+                    var url = BaseUtility.BuildAction(this.acInterface.editView, {
+                        "op": "update",
+                        "recordId": recordId
+                    });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
                 },
                 view:function (recordId) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/DevDemo/DevDemoGenList/Detail.do?op=view&recordId=" + recordId);
+                    var url = BaseUtility.BuildAction(this.acInterface.editView, {
+                        "op": "view",
+                        "recordId": recordId
+                    });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
                 },
                 del: function (recordId) {
-                    //debugger;
-                    var url = '/PlatForm/DevDemo/DevDemoGenList/Delete.do';
-                    ListPageUtility.IViewTableDeleteRow(url,recordId,appList);
+                    ListPageUtility.IViewTableDeleteRow(this.acInterface.delete,recordId,appList);
                 },
                 statusEnable: function (statusName) {
-                    var url = '/PlatForm/DevDemo/DevDemoGenList/StatusChange.do';
-                    ListPageUtility.IViewChangeServerStatusFace(url,this.selectionRows,appList.idFieldName,statusName,appList);
+                    ListPageUtility.IViewChangeServerStatusFace(this.acInterface.statusChange,this.selectionRows,appList.idFieldName,statusName,appList);
                 },
                 move:function (type) {
-                    var url = '/PlatForm/DevDemo/DevDemoGenList/Move.do';
-                    ListPageUtility.IViewMoveFace(url,this.selectionRows,appList.idFieldName,type,appList);
+                    ListPageUtility.IViewMoveFace(this.acInterface.move,this.selectionRows,appList.idFieldName,type,appList);
                 },
                 changePage: function (pageNum) {
                     this.pageNum = pageNum;
