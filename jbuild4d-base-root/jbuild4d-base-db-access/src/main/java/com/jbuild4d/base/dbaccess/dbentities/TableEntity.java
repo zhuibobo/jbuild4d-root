@@ -1,5 +1,6 @@
 package com.jbuild4d.base.dbaccess.dbentities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
 import java.util.Date;
 
@@ -28,12 +29,14 @@ public class TableEntity {
     private Integer tableOrganId;
 
     //TABLE_CREATE_TIME
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date tableCreateTime;
 
     //TABLE_CREATER
     private String tableCreater;
 
     //TABLE_UPDATE_TIME
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date tableUpdateTime;
 
     //TABLE_UPDATER

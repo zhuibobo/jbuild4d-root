@@ -23,7 +23,7 @@
                     <div alt="下移" title="下移" class="order-down last" @click="moveGroup('down')"></div>
                 </div>
                 <div>
-                    <ul id="ztreeUL" class="ztree"></ul>
+                    <ul id="zTreeUL" class="ztree"></ul>
                 </div>
             </div>
         </div>
@@ -216,7 +216,7 @@
                 <!--Tree-->
                 initTree:function () {
                     this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});
-                    this.treeObj=$.fn.zTree.init($("#ztreeUL"), this.treeSetting);
+                    this.treeObj=$.fn.zTree.init($("#zTreeUL"), this.treeSetting);
                 },
                 treeNodeSelected:function (event, treeId, treeNode) {
                     // 根节点不触发任何事件
