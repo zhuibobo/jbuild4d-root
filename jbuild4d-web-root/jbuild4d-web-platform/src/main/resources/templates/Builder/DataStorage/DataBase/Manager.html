@@ -85,11 +85,10 @@
                     deleteGroup:"/PlatForm/Builder/DataStorage/DataBase/TableGroup/Delete",
                     moveGroup:"/PlatForm/Builder/DataStorage/DataBase/TableGroup/Move",
                     <!--List -->
-                    listEditView:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/DetailView",
-                    reloadListData:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/GetListData",
-                    deleteListRecord:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Delete",
-                    listStatusChange:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/StatusChange",
-                    listMove:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/Move"
+                    editTableView:"/PlatForm/Builder/DataStorage/DataBase/Table/EditTableView",
+                    reloadTableListData:"/PlatForm/Builder/DataStorage/DataBase/Table/GetListData",
+                    deleteTable:"/PlatForm/Builder/DataStorage/DataBase/Table/Delete",
+                    tableMove:"/PlatForm/Builder/DataStorage/DataBase/Table/Move"
                 },
                 <!--Tree-->
                 treeIdFieldName:"tableGroupId",
@@ -305,13 +304,15 @@
                     this.selectionRows = selection;
                 },
                 reloadData: function () {
-                    var url = '/PlatForm/Builder/DataStorage/DataBase/Table/GetListData.do';
-                    ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
+                    ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadTableListData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                     //this.selectionRows=null;
                 },
                 add: function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=add&groupId=" + this.treeSelectedNode[appList.treeIdFieldName]);
+                        var url = BaseUtility.BuildAction(this.acInterface.editTableView, {
+                            "op": "add",
+                            "groupId": this.treeSelectedNode[appList.treeIdFieldName]
+                        });
                         DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 0);
                     }
                     else {
@@ -319,17 +320,24 @@
                     }
                 },
                 edit: function (recordId) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=update&recordId=" + recordId);
+                    var url = BaseUtility.BuildAction(this.acInterface.editTableView, {
+                        "op": "update",
+                        "recordId": recordId
+                    });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 0);
                 },
                 view:function (recordId) {
-                    var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=view&recordId=" + recordId);
+                    //var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=view&recordId=" + recordId);
+                    var url = BaseUtility.BuildAction(this.acInterface.editTableView, {
+                        "op": "view",
+                        "recordId": recordId
+                    });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 0);
                 },
                 del: function (recordId) {
-                    var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Delete.do';
-                    DialogUtility.Comfirm(window, "确认要删除当前表吗？删除表时将只是删除表的描述,物理表和字段描述将保存，如果需要删除，请手工删除。", function () {
-                        AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                    var _self = this;
+                    DialogUtility.Comfirm(window, "确认要删除当前表吗？删除表时将只是删除表的描述,物理表和字段描述将保留，如果需要删除，请手工删除。", function () {
+                        AjaxUtility.Post(_self.acInterface.deleteTable, {recordId: recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     appList.reloadData();
@@ -342,8 +350,7 @@
                     });
                 },
                 move:function (type) {
-                    var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Move.do';
-                    ListPageUtility.IViewMoveFace(url,this.selectionRows,appList.idFieldName,type,appList);
+                    ListPageUtility.IViewMoveFace(this.acInterface.tableMove,this.selectionRows,appList.idFieldName,type,appList);
                 },
                 changePage: function (pageNum) {
                     this.pageNum = pageNum;

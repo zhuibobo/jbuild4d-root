@@ -50,8 +50,8 @@ public class TableController {
     @Autowired
     IBuilderConfigService builderConfigService;
 
-    @RequestMapping(value = "EditTable", method = RequestMethod.GET)
-    public ModelAndView editTable(String recordId, String op,String groupId) throws IllegalAccessException, InstantiationException, IOException, XPathExpressionException {
+    @RequestMapping(value = "EditTableView", method = RequestMethod.GET)
+    public ModelAndView editTableView(String recordId, String op,String groupId) throws IllegalAccessException, InstantiationException, IOException, XPathExpressionException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataStorage/DataBase/TableEdit");
         List<String> templateNames=tableFieldService.getFieldTemplateName();
         Map<String,List<TableFieldVO>> templateFieldMap=new HashMap<>();
