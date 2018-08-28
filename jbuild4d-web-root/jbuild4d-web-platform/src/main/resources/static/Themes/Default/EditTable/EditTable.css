@@ -18,16 +18,16 @@
 }
 
 .edit-table tr th{
-    border:1px solid #c5dbec;
+    border:1px solid #e8eaec;
     padding:8px 6px;
     color:#4c4c4c;
-    background-color: #f1fafa;
+    background-color: #f8f8f9;
     font-size: 12px;
 }
 
 .edit-table tr td{
     padding: 5px;
-    border:1px solid #c5dbec;
+    border:1px solid #e8eaec;
     font-size: 12px;
 }
 
