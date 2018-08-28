@@ -5,3 +5,27 @@
 .general-edit-page-bottom-wrap div{
     margin-left: 0px !important;
 }
+
+.general-edit-page-scroll{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 40px;
+    overflow-x: hidden;
+    overflow-y:scroll;
+}
+
+.general-edit-page-scroll::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+
+.general-edit-page-scroll::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #3b97ed;
+}
+
+.general-edit-page-scroll-button-warp{
+    position: absolute;bottom: 0px;width: 100%;text-align: center
+}

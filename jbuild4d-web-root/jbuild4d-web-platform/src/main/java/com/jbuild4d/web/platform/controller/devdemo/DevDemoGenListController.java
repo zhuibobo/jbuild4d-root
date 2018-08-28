@@ -44,6 +44,12 @@ public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoG
         return modelAndView;
     }
 
+    @RequestMapping(value = "DetailScrollView", method = RequestMethod.GET)
+    public ModelAndView detailScrollView(){
+        ModelAndView modelAndView=new ModelAndView("/DevDemo/GenList/GenEditScroll");
+        return modelAndView;
+    }
+
     @Override
     public String getSubSystemName() {
         return this.subSystemName;
