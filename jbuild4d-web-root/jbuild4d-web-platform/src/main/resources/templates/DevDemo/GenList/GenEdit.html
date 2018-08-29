@@ -24,7 +24,7 @@
                 <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.ddglCreatetime" disabled readonly></date-picker>
             </form-item>
             <form-item label="dictGroupDesc：">
-                <i-input v-model="formValidate.dictGroupDesc" type="textarea" :autosize="{minRows: 3,maxRows: 3}"></i-input>
+                <i-input v-model="formValidate.ddglDesc" type="textarea" :autosize="{minRows: 3,maxRows: 3}"></i-input>
             </form-item>
             <form-item class="general-edit-page-bottom-wrap">
                 <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保 存</i-button>
@@ -50,7 +50,7 @@
                     ddglValue: "",
                     ddglName: "",
                     ddglCreatetime:DateUtility.GetCurrentData(),
-                    ddglDesc: ""
+                    ddglDesc:""
                 },
                 ruleValidate: {
                     ddglValue: [
