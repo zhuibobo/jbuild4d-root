@@ -14,6 +14,7 @@
     <style>
         .CodeMirror {
             height: 100px;
+            width: 100%;
         }
 
         #TextAreaJsEditor {
@@ -22,11 +23,11 @@
         }
 
         .tableTreeWrap {
-            float: left;height: 400px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px;padding: 6px
+            float: left;height: 380px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px;padding: 6px
         }
 
         .tableFieldWrap{
-            float: left;height: 400px;width: 57%;border: #01a0e4 1px solid;border-radius: 4px;margin-left: 10px;padding: 10px
+            float: left;height: 380px;width: 57%;border: #01a0e4 1px solid;border-radius: 4px;margin-left: 10px;padding: 10px
         }
 
         .tableName{
@@ -52,9 +53,27 @@
 </head>
 <body>
     <div id="sqlDesignerForm" v-cloak>
-        <div class="list-2column">
-            <div style="height: 120px">
-                请编辑SQL语句
+        <div>
+            <div style="width: 100%">请编辑SQL语句
+                <div style="float: right;margin-bottom: 8px">
+                    <!--<button-group>-->
+                        <Tooltip content="校验SQL" placement="left">
+                            <i-button size="small" type="success" icon="md-checkmark" @click="validateSQLEnable(null)"></i-button>
+                        </Tooltip>
+                        <Tooltip content="历史版本" placement="left">
+                            <i-button size="small" type="primary" icon="md-timer" ></i-button>
+                        </Tooltip>
+                        <Tooltip content="预览数据" placement="left">
+                            <i-button size="small" type="primary" icon="md-search" ></i-button>
+                        </Tooltip>
+                        <Tooltip content="格式化" placement="left">
+                            <i-button size="small" type="primary" icon="md-code" ></i-button>
+                        </Tooltip>
+                    <!--</button-group>-->
+                </div>
+                <div style="clear: bottom"></div>
+            </div>
+            <div style="height: 120px;width: 100%">
                 <textarea id="TextAreaJsEditor">select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'address' address,'sex' sex from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID where TDEV_TEST_1.ID='#{ApiVar.当前用户所在组织ID}'</textarea>
             </div>
             <div>
@@ -67,7 +86,7 @@
                             </div>
                             <div class="tableFieldWrap">
                                 表：【<span class="tableName" @click="insertTableNameToCodeMirror">{{tree.selectedTableName}}</span>】
-                                <i-table size="small" height="350" stripe border :columns="tableField.columnsConfig" :data="tableField.fieldData"
+                                <i-table size="small" height="335" stripe border :columns="tableField.columnsConfig" :data="tableField.fieldData"
                                          class="iv-list-table" :highlight-row="true"></i-table>
                             </div>
                         </div>
@@ -85,7 +104,6 @@
         </div>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
             <i-button type="success" @click="saveSQLDesign"> 确 认 </i-button>
-            <i-button type="primary" @click="validateSQLEnable(null)"> 校验解析 </i-button>
             <i-button style="margin-left: 8px" @click="handleClose()"> 关 闭 </i-button>
         </div>
         <div id="validateSQLEnableWarp" style="display: none" class="validate-sql-enable-warp">
