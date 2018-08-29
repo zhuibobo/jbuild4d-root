@@ -304,8 +304,8 @@
                             fieldVoListJson: encodeURIComponent(JSON.stringify(this.editTableObj.GetSerializeJson()))
                         };
                         //return;
-                        var url = '/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do';
-                        AjaxUtility.Post(url, sendData, function (result) {
+                        //var url = '/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do';
+                        AjaxUtility.Post(this.acInterface.saveDataUrl, sendData, function (result) {
                             //debugger;
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 if (result.success) {
