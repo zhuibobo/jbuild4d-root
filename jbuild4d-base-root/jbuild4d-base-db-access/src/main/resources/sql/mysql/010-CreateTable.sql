@@ -24,8 +24,27 @@ CREATE TABLE `TB4D_DEV_DEMO_GEN_LIST` (
   PRIMARY KEY (`DDGL_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='一般通用列表Demo表';
 
+DROP TABLE IF EXISTS `TB4D_DEV_DEMO_TREE_TABLE`;
+CREATE TABLE `TB4D_DEV_DEMO_TREE_TABLE` (
+  `DDTT_ID`                       NVARCHAR(128)  NOT NULL,
+  `DDTT_KEY`                      NVARCHAR(128)  NULL,
+  `DDTT_NAME`                     NVARCHAR(128)  NULL,
+  `DDTT_VALUE`                    NVARCHAR(500)  NULL,
+  `DDTT_STATUS`                   NVARCHAR(10)   NULL,
+  `DDTT_DESC`                     NVARCHAR(2000) NULL,
+  `DDTT_CREATETIME`               DATETIME       NULL,
+  `DDTT_ORDER_NUM`                INT            NULL,
+  `DDTT_BIND_DIC_SELECTED`        NVARCHAR(100)  NULL,
+  `DDTT_BIND_DIC_RADIO`           NVARCHAR(100)  NULL,
+  `DDTT_DDTT_BIND_DIC_MUCHECKBOX` NVARCHAR(1000) NULL,
+  `DDTT_PARENT_ID`                NVARCHAR(100)  NULL,
+  `DDTT_PARENT_IDLIST`            NVARCHAR(1200) NULL,
+  `DDTT_CHILD_COUNT`              INT            NULL,
+  PRIMARY KEY(`DDTT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='一般通用树形表格Demo表';
 
 /*-----------------------------------------菜单表-----------------------------------------*/
+DROP TABLE IF EXISTS `TB4D_MENU`;
 CREATE TABLE `TB4D_MENU` (
   `MENU_ID`                  NVARCHAR(100)  NOT NULL,
   `MENU_NAME`                NVARCHAR(100)  NULL,
@@ -63,8 +82,8 @@ CREATE TABLE `TB4D_MENU` (
   PRIMARY KEY (`MENU_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='平台菜单表';
 
-
 /*-----------------------------------------操作日志表-----------------------------------------*/
+DROP TABLE IF EXISTS `TB4D_OPERATION_LOG`;
 CREATE TABLE TB4D_OPERATION_LOG (
   `LOG_ID`          NVARCHAR(100)  NOT NULL,
   `LOG_TEXT`        NVARCHAR(2000) NOT NULL,
@@ -84,3 +103,5 @@ CREATE TABLE TB4D_OPERATION_LOG (
   `LOG_STATUS`      NVARCHAR(50)  NULL,
   PRIMARY KEY (`LOG_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='平台操作日志表';
+
+
