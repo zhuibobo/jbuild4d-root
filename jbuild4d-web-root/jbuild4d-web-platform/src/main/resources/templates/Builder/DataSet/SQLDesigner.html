@@ -7,6 +7,8 @@
     <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::EditTableLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::CodeMirrorSQL"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
     <style>
@@ -113,6 +115,9 @@
         var sqlDesignerForm = new Vue({
             el:"#sqlDesignerForm",
             data:{
+                acInterface:{
+                    getDataUrl:"/PlatForm/Builder/DataSet/DataSetSQLDesigner/GetSqlDesignerViewData"
+                },
                 tree:{
                     datetimeTreeObj:null,
                     datetimeTreeSetting:{
@@ -270,16 +275,29 @@
                     foldGutter: true,
                     theme: "monokai"
                 });
-                this.tree.datetimeTreeObj=$.fn.zTree.init($("#datetimeZTreeUL"), this.tree.datetimeTreeSetting,this.tree.datetimeTreeData);
-                this.tree.datetimeTreeObj.expandAll(true);
-                this.tree.apiVarTreeObj=$.fn.zTree.init($("#apiVarZTreeUL"), this.tree.apiVarTreeSetting,this.tree.apiVarTreeData);
-                this.tree.apiVarTreeObj.expandAll(true);
-                this.tree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), this.tree.tableTreeSetting,this.tree.tableTreeData);
-                this.tree.tableTreeObj.expandAll(true);
-
-                fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
+                AjaxUtility.Post(this.acInterface.getDataUrl,{},function (result) {
+                    if(result.success) {
+                        sqlDesignerForm.bindData(result);
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
+                },"json");
             },
             methods:{
+                bindData:function(result){
+                    this.tree.datetimeTreeData=result.exKVData.datetimeTreeData;
+                    this.tree.datetimeTreeObj=$.fn.zTree.init($("#datetimeZTreeUL"), this.tree.datetimeTreeSetting,this.tree.datetimeTreeData);
+                    this.tree.datetimeTreeObj.expandAll(true);
+                    this.tree.apiVarTreeData=result.exKVData.apiVarTreeData;
+                    this.tree.apiVarTreeObj=$.fn.zTree.init($("#apiVarZTreeUL"), this.tree.apiVarTreeSetting,this.tree.apiVarTreeData);
+                    this.tree.apiVarTreeObj.expandAll(true);
+                    this.tree.tableTreeData=result.exKVData.tableTreeData;
+                    this.tree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), this.tree.tableTreeSetting,this.tree.tableTreeData);
+                    this.tree.tableTreeObj.expandAll(true);
+
+                    fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
+                },
                 insertCodeAtCursor:function(code){
                     var doc = this.sqlCodeMirror.getDoc();
                     var cursor = doc.getCursor();

@@ -49,19 +49,40 @@ public class DataSetSQLDesignerController {
     @RequestMapping(value = "SQLDesigner", method = RequestMethod.GET)
     public ModelAndView sqlDesigner() throws JsonProcessingException, XPathExpressionException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataSet/SQLDesigner");
-        List<EnvVariableVo> dateTimeVoList=envVariableService.getDateTimeVars();
-        List<EnvVariableVo> apiVarVoList=envVariableService.getAPIVars();
 
-        JB4DSession jb4DSession= JB4DSessionUtility.getSession();
-
-        List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALL(jb4DSession);
-        List<TableEntity> tableEntityList=tableService.getALL(jb4DSession);
-
-        modelAndView.addObject("datetimeTreeData", JsonUtility.toObjectString(dateTimeVoList));
-        modelAndView.addObject("apiVarTreeData",JsonUtility.toObjectString(apiVarVoList));
-        modelAndView.addObject("tableTreeData", JsonUtility.toObjectString(ZTreeNodeVo.parseTableToZTreeNodeList(tableGroupEntityList,tableEntityList)));
         JB4DSessionUtility.setUserInfoToMV(modelAndView);
         return modelAndView;
+    }
+
+    @RequestMapping(value = "GetSqlDesignerViewData", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo getSqlDesignerViewData() {
+        try {
+            JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
+            responseVo.setSuccess(true);
+            responseVo.setMessage("获取数据成功！");
+
+            List<EnvVariableVo> dateTimeVoList=envVariableService.getDateTimeVars();
+            List<EnvVariableVo> apiVarVoList=envVariableService.getAPIVars();
+
+            JB4DSession jb4DSession= JB4DSessionUtility.getSession();
+
+            List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALL(jb4DSession);
+            List<TableEntity> tableEntityList=tableService.getALL(jb4DSession);
+
+            //modelAndView.addObject("datetimeTreeData", JsonUtility.toObjectString(dateTimeVoList));
+            //modelAndView.addObject("apiVarTreeData",JsonUtility.toObjectString(apiVarVoList));
+            //modelAndView.addObject("tableTreeData", JsonUtility.toObjectString(ZTreeNodeVo.parseTableToZTreeNodeList(tableGroupEntityList,tableEntityList)));
+
+            responseVo.addExKVData("datetimeTreeData",dateTimeVoList);
+            responseVo.addExKVData("apiVarTreeData",apiVarVoList);
+            responseVo.addExKVData("tableTreeData",ZTreeNodeVo.parseTableToZTreeNodeList(tableGroupEntityList,tableEntityList));
+
+            return responseVo;
+        }
+        catch (Exception ex){
+            return JBuild4DResponseVo.error(ex.getMessage());
+        }
     }
 
     @RequestMapping(value = "ValidateSQLEnable", method = RequestMethod.POST)
