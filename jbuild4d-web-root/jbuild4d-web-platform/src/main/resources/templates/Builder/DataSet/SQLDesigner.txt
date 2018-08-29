@@ -1,0 +1,9 @@
+///*SQLEG:#{API.XXXX},#{DATE.XXXX},#{CODE.XXXX}*/
+
+///*SQLEG:#{API.当前用户所在组织ID},#{DATE.年年年年-月月-日日},#{API.当前用户名称}*/
+
+
+/// select * from f where a='#{API.当前用户所在组织ID}' or a='#{API.当前用户所在组织ID}'
+and b='#{DATE.年年年年-月月-日日}' and b='#{DATE.年年年年/月月/日日}' and c='#{API.当前用户名称}'
+
+///#{API.*?}|#{DATE.*?}

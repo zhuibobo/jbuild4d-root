@@ -1,5 +1,6 @@
 package com.jbuild4d.base.dbaccess.dbentities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
 import java.util.Date;
 
@@ -25,12 +26,14 @@ public class DatasetColumnEntity {
     private String columnName;
 
     //COLUMN_CREATE_TIME
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date columnCreateTime;
 
     //COLUMN_CREATER
     private String columnCreater;
 
     //COLUMN_UPDATE_TIME
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date columnUpdateTime;
 
     //COLUMN_UPDATER

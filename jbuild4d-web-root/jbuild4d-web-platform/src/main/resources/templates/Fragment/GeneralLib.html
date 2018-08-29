@@ -36,6 +36,12 @@
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_FieldName.js}"></script>
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_SelectFieldType.js}"></script>
 </th:block>
+<th:block th:fragment="CodeMirrorSQL" th:with="urlts=${'V1'}" >
+    <link rel="stylesheet" th:href="@{/UIComponent/CodeMirror-5.39.2/lib/codemirror.css}" />
+    <link rel="stylesheet" th:href="@{/UIComponent/CodeMirror-5.39.2/theme/monokai.css}" />
+    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/lib/codemirror.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/mode/sql/sql.js}"></script>
+</th:block>
 <th:block th:fragment="ThemesLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/FrameStyle.css(theme=${theme},urlts=${urlts})}" />
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/ListPageStyle.css(theme=${theme},urlts=${urlts})}" />
