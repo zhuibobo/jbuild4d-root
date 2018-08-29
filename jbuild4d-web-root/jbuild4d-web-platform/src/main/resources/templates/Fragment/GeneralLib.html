@@ -23,6 +23,19 @@
 <th:block th:fragment="TreeTableLib" th:with="urlts=${'V1'}" >
     <script type="text/javascript" th:src="@{/UIComponent/TreeTable/Js/TreeTable.js}"></script>
 </th:block>
+<th:block th:fragment="EditTableLib" th:with="urlts=${'V1'}" >
+    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/EditTable.js}"></script>
+
+    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_CheckBox.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_Label.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_Radio.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_Select.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_SelectRowCheckBox.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_TextBox.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_SelectDefaultValue.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_FieldName.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_SelectFieldType.js}"></script>
+</th:block>
 <th:block th:fragment="ThemesLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/FrameStyle.css(theme=${theme},urlts=${urlts})}" />
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/ListPageStyle.css(theme=${theme},urlts=${urlts})}" />

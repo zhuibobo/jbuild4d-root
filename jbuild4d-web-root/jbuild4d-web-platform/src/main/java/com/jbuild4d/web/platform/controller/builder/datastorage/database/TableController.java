@@ -25,8 +25,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URLDecoder;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,10 +52,10 @@ public class TableController {
     @Autowired
     IBuilderConfigService builderConfigService;
 
-    @RequestMapping(value = "EditTableView", method = RequestMethod.GET)
+    @RequestMapping(value = "/EditTableView", method = RequestMethod.GET)
     public ModelAndView editTableView(String recordId, String op,String groupId) throws IllegalAccessException, InstantiationException, IOException, XPathExpressionException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataStorage/DataBase/TableEdit");
-        List<String> templateNames=tableFieldService.getFieldTemplateName();
+        /*List<String> templateNames=tableFieldService.getFieldTemplateName();
         Map<String,List<TableFieldVO>> templateFieldMap=new HashMap<>();
         for (String templateName : templateNames) {
             List<TableFieldVO> templateFields=tableFieldService.getTemplateFieldsByName(templateName);
@@ -79,8 +81,47 @@ public class TableController {
         modelAndView.addObject("tablePrefix",builderConfigService.getTablePrefix());
 
         JB4DSessionUtility.setUserInfoToMV(modelAndView);
-        modelAndView.addObject("op",op);
+        modelAndView.addObject("op",op);*/
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/GetEditTableData")
+    @ResponseBody
+    public JBuild4DResponseVo GetEditTableData(String recordId, String op,String groupId) throws IOException, XPathExpressionException {
+        JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
+        responseVo.setSuccess(true);
+        responseVo.setMessage("获取数据成功！");
+        List<String> templateNames=tableFieldService.getFieldTemplateName();
+        Map<String,List<TableFieldVO>> templateFieldMap=new HashMap<>();
+        for (String templateName : templateNames) {
+            List<TableFieldVO> templateFields=tableFieldService.getTemplateFieldsByName(templateName);
+            for (TableFieldVO templateField : templateFields) { //修改模版的字段ID,避免重复
+                templateField.setFieldId(UUIDUtility.getUUID());
+            }
+            templateFieldMap.put(templateName,templateFields);
+        }
+        if(op.equals("add")){
+            recordId= UUIDUtility.getUUID();
+            TableEntity tableEntity=new TableEntity();
+            tableEntity.setTableId(recordId);
+            tableEntity.setTableGroupId(groupId);
+            //modelAndView.addObject("tableEntity",tableEntity);
+            //modelAndView.addObject("tableFieldsData","[]");
+            responseVo.setData(tableEntity);
+            responseVo.addExKVData("tableFieldsData",new ArrayList<>());
+        }
+        else {
+            //modelAndView.addObject("tableEntity",tableService.getByPrimaryKey(JB4DSessionUtility.getSession(),recordId));
+            responseVo.setData(tableService.getByPrimaryKey(JB4DSessionUtility.getSession(),recordId));
+            List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(recordId);
+            //modelAndView.addObject("tableFieldsData",JsonUtility.toObjectString(tableFieldVOList));
+            responseVo.addExKVData("tableFieldsData",tableFieldVOList);
+        }
+        //modelAndView.addObject("templateFieldGroup",JsonUtility.toObjectString(templateFieldMap));
+        //modelAndView.addObject("tablePrefix",builderConfigService.getTablePrefix());
+        responseVo.addExKVData("templateFieldGroup",templateFieldMap);
+        responseVo.addExKVData("tablePrefix",builderConfigService.getTablePrefix());
+        return responseVo;
     }
 
     @RequestMapping(value = "/GetTableFieldType")

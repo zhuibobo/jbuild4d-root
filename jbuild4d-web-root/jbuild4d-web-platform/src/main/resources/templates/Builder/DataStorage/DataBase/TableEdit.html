@@ -6,6 +6,7 @@
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::EditTableLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
 </head>
 <body>
@@ -71,22 +72,28 @@
         var appForm = new Vue({
             el:"#appForm",
             data:{
+                acInterface:{
+                    getDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetEditTableData",
+                    saveDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit"
+                },
+                recordId:StringUtility.QueryString("recordId"),
                 useTemplateName:"GeneralTemplate",
-                currUserEntity:${currUserEntity},
-                templateFieldGroup:${templateFieldGroup},
+                currUserEntity:null,
+                templateFieldGroup:null,
                 ignorePhysicalError:false,
+                tablePrefix:"",
                 tableEntity:{
                     tableId:"",
-                    tableCaption:'${tableEntity.tableCaption}',
-                    tableName:'${tableEntity.tableName}'==''?'${tablePrefix}':'${tableEntity.tableName}',
-                    tableCreateTime:'<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />' == '' ? DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />',
-                    tableCreater:'${tableEntity.tableCreater}',
-                    tableUpdateTime:'<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />' == '' ? DateUtility.GetCurrentDataString("-") : '<fmt:formatDate value="${tableEntity.tableCreateTime}" pattern="yyyy-MM-dd" />',
-                    tableUpdater:'',
-                    tableType:'',
-                    tableIssystem:'${tableEntity.tableIssystem}' == '' ? '否' : '${tableEntity.tableIssystem}',
-                    tableDesc: '${tableEntity.tableDesc}',
-                    tableGroupId:'${tableEntity.tableGroupId}'
+                    tableCaption:"",
+                    tableName:"",
+                    tableCreateTime:DateUtility.GetCurrentData(),
+                    tableCreater:"",
+                    tableUpdateTime:DateUtility.GetCurrentData(),
+                    tableUpdater:"",
+                    tableType:"",
+                    tableIssystem:"否",
+                    tableDesc: "",
+                    tableGroupId:""
                 },
                 editTableObj:null,
                 editTableConfig:{
@@ -211,24 +218,43 @@
                     TableId:"TableFields",
                     TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
                 },
-                tableFieldsData:${tableFieldsData},
-                status: '${op}'
+                tableFieldsData:null,
+                status: StringUtility.QueryString("op"),
+                groupId:StringUtility.QueryString("groupId")
             },
             mounted:function () {
-                this.editTableObj=Object.create(EditTable);
-                this.editTableObj.Initialization(this.editTableConfig);
-                if(this.status=="add"){
-                    this.editTableObj.LoadJsonData(this.templateFieldGroup[this.useTemplateName]);
-                    this.tableEntity.tableCreater=this.currUserEntity.userName;
-                    this.tableEntity.tableUpdater=this.currUserEntity.userName;
-                }
-                else {
-                    this.editTableObj.LoadJsonData(this.tableFieldsData);
-                    this.tableEntity.tableUpdater=this.currUserEntity.userName;
-                }
+                this.getDataFromServerAndBind();
                 $("#divEditTable").height($(".right-outer-wrap-c").height()-85);
             },
             methods:{
+                bindData:function(result){
+                    this.editTableObj=Object.create(EditTable);
+                    this.editTableObj.Initialization(this.editTableConfig);
+                    this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
+                    DetailPageUtility.OverrideObjectValue(appForm.tableEntity, result.data);
+                    if(this.status=="add"){
+                        this.tableEntity.tableCreater=this.currUserEntity.userName;
+                        this.tableEntity.tableUpdater=this.currUserEntity.userName;
+                        this.tableEntity.tableName=result.exKVData.tablePrefix;
+                        this.editTableObj.LoadJsonData(result.exKVData.templateFieldGroup[this.useTemplateName]);
+                    }
+                    else {
+                        this.editTableObj.LoadJsonData(result.exKVData.tableFieldsData);
+                        this.tableEntity.tableUpdater=this.currUserEntity.userName;
+                    }
+                },
+                getDataFromServerAndBind:function(){
+                    //获取数据并赋值
+                    var _self=this;
+                    AjaxUtility.Post(this.acInterface.getDataUrl,{recordId:this.recordId,op:this.status,groupId:this.groupId},function (result) {
+                        if(result.success) {
+                            _self.bindData(result);
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                        }
+                    },"json");
+                },
                 addField:function(){
                     this.editTableObj.AddEditingRowByTemplate();
                 },
