@@ -1,7 +1,9 @@
 package com.jbuild4d.platform.system.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
+import com.jbuild4d.base.service.general.JB4DSession;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,5 +13,5 @@ import com.jbuild4d.base.service.IBaseService;
  */
 public interface IDictionaryGroupService extends IBaseService<DictionaryGroupEntity> {
 
-
+    void initSystemData(JB4DSession jb4DSession, IDictionaryService dictionaryService) throws JBuild4DGenerallyException;
 }

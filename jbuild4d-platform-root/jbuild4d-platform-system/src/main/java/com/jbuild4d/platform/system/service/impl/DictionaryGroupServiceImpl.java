@@ -1,6 +1,7 @@
 package com.jbuild4d.platform.system.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.DictionaryGroupMapper;
+import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
 import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
@@ -11,6 +12,7 @@ import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
+import com.jbuild4d.platform.system.service.IDictionaryService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.Date;
@@ -83,5 +85,79 @@ public class DictionaryGroupServiceImpl extends BaseServiceImpl<DictionaryGroupE
         {
             throw new JBuild4DGenerallyException("找不到要删除的记录!");
         }
+    }
+
+    @Override
+    public void initSystemData(JB4DSession jb4DSession, IDictionaryService dictionaryService) throws JBuild4DGenerallyException {
+        //根字典分组
+        String rootDictionaryId="0";
+        DictionaryGroupEntity rootDictionaryGroupEntity=getDictionaryGroup(rootDictionaryId,"数据字典分组","数据字典分组","","-1",TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
+        deleteByKeyNotValidate(jb4DSession,rootDictionaryGroupEntity.getDictGroupId());
+        save(jb4DSession,rootDictionaryGroupEntity.getDictGroupId(),rootDictionaryGroupEntity);
+
+        String DevDemoDictionaryGroupRootId="DevDemoDictionaryGroupRoot";
+        DictionaryGroupEntity devDemoDictionaryGroupEntity=getDictionaryGroup(DevDemoDictionaryGroupRootId,"开发示例","开发示例","",rootDictionaryGroupEntity.getDictGroupId(),TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
+        deleteByKeyNotValidate(jb4DSession,devDemoDictionaryGroupEntity.getDictGroupId());
+        save(jb4DSession,devDemoDictionaryGroupEntity.getDictGroupId(),devDemoDictionaryGroupEntity);
+
+        String DevDemoDictionaryGroupBindSelect="DevDemoDictionaryGroupBindSelect";
+        DictionaryGroupEntity DevDemoDictionaryGroupBindSelectEntity=getDictionaryGroup(DevDemoDictionaryGroupBindSelect,"DevDemoDictionaryGroupBindSelect","绑定下拉列表","",devDemoDictionaryGroupEntity.getDictGroupId(),TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
+        deleteByKeyNotValidate(jb4DSession,DevDemoDictionaryGroupBindSelectEntity.getDictGroupId());
+        save(jb4DSession,DevDemoDictionaryGroupBindSelectEntity.getDictGroupId(),DevDemoDictionaryGroupBindSelectEntity);
+
+        String DevDemoDictionaryGroupBindRadio="DevDemoDictionaryGroupBindRadio";
+        DictionaryGroupEntity DevDemoDictionaryGroupBindRadioEntity=getDictionaryGroup(DevDemoDictionaryGroupBindRadio,"DevDemoDictionaryGroupBindRadio","绑定单选项","",devDemoDictionaryGroupEntity.getDictGroupId(),TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
+        deleteByKeyNotValidate(jb4DSession,DevDemoDictionaryGroupBindRadioEntity.getDictGroupId());
+        save(jb4DSession,DevDemoDictionaryGroupBindRadioEntity.getDictGroupId(),DevDemoDictionaryGroupBindRadioEntity);
+
+        String DevDemoDictionaryGroupBindCheckbox="DevDemoDictionaryGroupBindCheckbox";
+        DictionaryGroupEntity DevDemoDictionaryGroupBindCheckboxEntity=getDictionaryGroup(DevDemoDictionaryGroupBindCheckbox,"DevDemoDictionaryGroupBindCheckbox","绑定复选项","",devDemoDictionaryGroupEntity.getDictGroupId(),TrueFalseEnum.True.getDisplayName(),TrueFalseEnum.True.getDisplayName());
+        deleteByKeyNotValidate(jb4DSession,DevDemoDictionaryGroupBindCheckboxEntity.getDictGroupId());
+        save(jb4DSession,DevDemoDictionaryGroupBindCheckboxEntity.getDictGroupId(),DevDemoDictionaryGroupBindCheckboxEntity);
+
+        for(int i=0;i<10;i++){
+            String select_dic_id=DevDemoDictionaryGroupBindSelect+String.valueOf(i);
+            DictionaryEntity selectDictionaryEntity=getDictionary(DevDemoDictionaryGroupBindSelect,select_dic_id,DevDemoDictionaryGroupBindSelect,"Select-Key-"+i,"Select-Value-"+i,"Select-Text-"+i);
+            dictionaryService.deleteByKeyNotValidate(jb4DSession,select_dic_id);
+            dictionaryService.save(jb4DSession,select_dic_id,selectDictionaryEntity);
+
+            String radio_dic_id=DevDemoDictionaryGroupBindRadio+String.valueOf(i);
+            DictionaryEntity radioDictionaryEntity=getDictionary(DevDemoDictionaryGroupBindRadio,radio_dic_id,DevDemoDictionaryGroupBindRadio,"Radio-Key-"+i,"Radio-Value-"+i,"Radio-Text-"+i);
+            dictionaryService.deleteByKeyNotValidate(jb4DSession,radio_dic_id);
+            dictionaryService.save(jb4DSession,radio_dic_id,radioDictionaryEntity);
+
+            String checkbox_dic_id=DevDemoDictionaryGroupBindCheckbox+String.valueOf(i);
+            DictionaryEntity checkboxDictionaryEntity=getDictionary(DevDemoDictionaryGroupBindCheckbox,checkbox_dic_id,DevDemoDictionaryGroupBindCheckbox,"Checkbox-Key-"+i,"Checkbox-Value-"+i,"Checkbox-Text-"+i);
+            dictionaryService.deleteByKeyNotValidate(jb4DSession,checkbox_dic_id);
+            dictionaryService.save(jb4DSession,checkbox_dic_id,checkboxDictionaryEntity);
+        }
+    }
+
+    public DictionaryGroupEntity getDictionaryGroup(String id,String value,String text,String desc,String parendId,String isSystem,String delEnable){
+        DictionaryGroupEntity dictionaryGroupEntity=new DictionaryGroupEntity();
+        dictionaryGroupEntity.setDictGroupId(id);
+        dictionaryGroupEntity.setDictGroupValue(value);
+        dictionaryGroupEntity.setDictGroupText(text);
+        dictionaryGroupEntity.setDictGroupDesc(desc);
+        dictionaryGroupEntity.setDictGroupParentId(parendId);
+        dictionaryGroupEntity.setDictGroupIssystem(isSystem);
+        dictionaryGroupEntity.setDictGroupDelEnable(delEnable);
+        dictionaryGroupEntity.setDictGroupEnpItem(TrueFalseEnum.True.getDisplayName());
+        return dictionaryGroupEntity;
+    }
+
+    public DictionaryEntity getDictionary(String parentId, String id, String groupId, String key, String value, String text){
+        DictionaryEntity dictionaryEntity=new DictionaryEntity();
+        dictionaryEntity.setDictId(id);
+        dictionaryEntity.setDictIsSelected("否");
+        dictionaryEntity.setDictStatus("启用");
+        dictionaryEntity.setDictParentId(parentId);
+        dictionaryEntity.setDictDelEnable("是");
+        dictionaryEntity.setDictIssystem("是");
+        dictionaryEntity.setDictGroupId(groupId);
+        dictionaryEntity.setDictKey(key);
+        dictionaryEntity.setDictText(text);
+        dictionaryEntity.setDictValue(value);
+        return dictionaryEntity;
     }
 }
