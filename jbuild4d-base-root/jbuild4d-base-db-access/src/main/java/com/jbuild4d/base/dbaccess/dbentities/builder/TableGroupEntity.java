@@ -50,7 +50,10 @@ public class TableGroupEntity {
     //TABLE_GROUP_CHILD_COUNT
     private Integer tableGroupChildCount;
 
-    public TableGroupEntity(String tableGroupId, String tableGroupValue, String tableGroupText, Integer tableGroupOrderNum, Date tableGroupCreateTime, String tableGroupDesc, String tableGroupStatus, String tableGroupParentId, String tableGroupIssystem, String tableGroupDelEnable, String tableGroupPidList, Integer tableGroupChildCount) {
+    //TABLE_GROUP_LINK_ID
+    private String tableGroupLinkId;
+
+    public TableGroupEntity(String tableGroupId, String tableGroupValue, String tableGroupText, Integer tableGroupOrderNum, Date tableGroupCreateTime, String tableGroupDesc, String tableGroupStatus, String tableGroupParentId, String tableGroupIssystem, String tableGroupDelEnable, String tableGroupPidList, Integer tableGroupChildCount, String tableGroupLinkId) {
         this.tableGroupId = tableGroupId;
         this.tableGroupValue = tableGroupValue;
         this.tableGroupText = tableGroupText;
@@ -63,6 +66,7 @@ public class TableGroupEntity {
         this.tableGroupDelEnable = tableGroupDelEnable;
         this.tableGroupPidList = tableGroupPidList;
         this.tableGroupChildCount = tableGroupChildCount;
+        this.tableGroupLinkId = tableGroupLinkId;
     }
 
     public TableGroupEntity() {
@@ -163,5 +167,13 @@ public class TableGroupEntity {
 
     public void setTableGroupChildCount(Integer tableGroupChildCount) {
         this.tableGroupChildCount = tableGroupChildCount;
+    }
+
+    public String getTableGroupLinkId() {
+        return tableGroupLinkId;
+    }
+
+    public void setTableGroupLinkId(String tableGroupLinkId) {
+        this.tableGroupLinkId = tableGroupLinkId == null ? null : tableGroupLinkId.trim();
     }
 }
