@@ -1,5 +1,6 @@
-package com.jbuild4d.base.dbaccess.dao;
+package com.jbuild4d.base.dbaccess.dao.organrelevance;
 
+import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganTypeEntity;
 
 /**

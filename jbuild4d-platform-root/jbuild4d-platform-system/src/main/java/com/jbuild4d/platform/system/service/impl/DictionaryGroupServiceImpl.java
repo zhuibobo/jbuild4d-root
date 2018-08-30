@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.system.service.impl;
 
-import com.jbuild4d.base.dbaccess.dao.DictionaryGroupMapper;
+import com.jbuild4d.base.dbaccess.dao.system.DictionaryGroupMapper;
 import com.jbuild4d.base.dbaccess.dbentities.system.DictionaryEntity;
 import com.jbuild4d.base.dbaccess.dbentities.system.DictionaryGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;

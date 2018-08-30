@@ -1,6 +1,6 @@
 package com.jbuild4d.web.platform.beanconfig.service;
 
-import com.jbuild4d.base.dbaccess.dao.*;
+import com.jbuild4d.base.dbaccess.dao.system.*;
 import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.dbaccess.dynamic.ISQLBuilderMapper;
 import com.jbuild4d.base.dbaccess.dynamic.SQLBuilderMapper;
@@ -44,14 +44,14 @@ public class SystemBeansConfig {
     }
 
     @Bean
-    public IDictionaryGroupService dictionaryGroupService(ISQLBuilderService _sqlBuilderService, DictionaryGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate,IGeneralService generalService) {
+    public IDictionaryGroupService dictionaryGroupService(ISQLBuilderService _sqlBuilderService, DictionaryGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate, IGeneralService generalService) {
         IDictionaryGroupService bean=new DictionaryGroupServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         bean.setGeneralService(generalService);
         return bean;
     }
 
     @Bean
-    public IMenuService menuService(ISQLBuilderService _sqlBuilderService,MenuMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+    public IMenuService menuService(ISQLBuilderService _sqlBuilderService, MenuMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
         IMenuService bean=new MenuServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }

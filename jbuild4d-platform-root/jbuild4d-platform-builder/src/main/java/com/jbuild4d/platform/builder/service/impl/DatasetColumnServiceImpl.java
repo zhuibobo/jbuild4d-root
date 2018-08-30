@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.service.impl;
 
-import com.jbuild4d.base.dbaccess.dao.DatasetColumnMapper;
+import com.jbuild4d.base.dbaccess.dao.builder.DatasetColumnMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;

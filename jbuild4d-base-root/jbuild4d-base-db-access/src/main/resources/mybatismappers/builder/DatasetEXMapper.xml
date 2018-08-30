@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jbuild4d.base.dbaccess.dao.DatasetMapper">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.DatasetMapper">
     <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_DATASET ORDER by DS_SQL_ORDER DESC</select>
     <delete id="deleteAll">delete from TB4D_DATASET</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(DS_SQL_ORDER) is null then 1 else max(DS_SQL_ORDER)+1 end ORDERNUM from TB4D_DATASET</select>

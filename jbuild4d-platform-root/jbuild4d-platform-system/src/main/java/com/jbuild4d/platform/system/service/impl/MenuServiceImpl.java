@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.system.service.impl;
 
-import com.jbuild4d.base.dbaccess.dao.MenuMapper;
+import com.jbuild4d.base.dbaccess.dao.system.MenuMapper;
 import com.jbuild4d.base.dbaccess.dbentities.system.MenuEntity;
 import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;

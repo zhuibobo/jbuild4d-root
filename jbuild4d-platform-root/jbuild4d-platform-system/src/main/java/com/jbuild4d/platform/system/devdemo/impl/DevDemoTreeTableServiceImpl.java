@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.system.devdemo.impl;
 
-import com.jbuild4d.base.dbaccess.dao.DevDemoTreeTableMapper;
+import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTreeTableMapper;
 import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTreeTableEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;

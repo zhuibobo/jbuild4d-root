@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.system.devdemo.impl;
 
-import com.jbuild4d.base.dbaccess.dao.DevDemoGenListMapper;
+import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoGenListMapper;
 import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;

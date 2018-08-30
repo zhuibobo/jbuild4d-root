@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.organ.service.impl;
 
-import com.jbuild4d.base.dbaccess.dao.OrganTypeMapper;
+import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganTypeMapper;
 import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganTypeEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;

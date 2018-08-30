@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.service.impl;
 
-import com.jbuild4d.base.dbaccess.dao.DatabaseServiceLinkMapper;
+import com.jbuild4d.base.dbaccess.dao.builder.DatabaseServiceLinkMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatabaseServiceLinkEntity;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;

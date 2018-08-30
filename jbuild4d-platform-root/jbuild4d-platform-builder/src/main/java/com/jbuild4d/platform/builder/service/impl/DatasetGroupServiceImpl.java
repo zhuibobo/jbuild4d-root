@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.service.impl;
 
-import com.jbuild4d.base.dbaccess.dao.DatasetGroupMapper;
+import com.jbuild4d.base.dbaccess.dao.builder.DatasetGroupMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;

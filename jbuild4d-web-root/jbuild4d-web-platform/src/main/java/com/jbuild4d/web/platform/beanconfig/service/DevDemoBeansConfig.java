@@ -1,9 +1,9 @@
 package com.jbuild4d.web.platform.beanconfig.service;
 
-import com.jbuild4d.base.dbaccess.dao.DevDemoGenListMapper;
-import com.jbuild4d.base.dbaccess.dao.DevDemoTLTreeListMapper;
-import com.jbuild4d.base.dbaccess.dao.DevDemoTLTreeMapper;
-import com.jbuild4d.base.dbaccess.dao.DevDemoTreeTableMapper;
+import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoGenListMapper;
+import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTLTreeListMapper;
+import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTLTreeMapper;
+import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTreeTableMapper;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoGenListService;

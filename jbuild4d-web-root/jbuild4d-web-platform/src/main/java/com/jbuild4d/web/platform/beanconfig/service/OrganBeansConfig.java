@@ -1,7 +1,7 @@
 package com.jbuild4d.web.platform.beanconfig.service;
 
-import com.jbuild4d.base.dbaccess.dao.OrganMapper;
-import com.jbuild4d.base.dbaccess.dao.OrganTypeMapper;
+import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganMapper;
+import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganTypeMapper;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.platform.organ.service.IOrganService;
 import com.jbuild4d.platform.organ.service.IOrganTypeService;

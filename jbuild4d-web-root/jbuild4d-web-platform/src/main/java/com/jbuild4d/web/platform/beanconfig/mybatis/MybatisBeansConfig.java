@@ -1,7 +1,14 @@
 package com.jbuild4d.web.platform.beanconfig.mybatis;
 
 import com.github.pagehelper.PageInterceptor;
-import com.jbuild4d.base.dbaccess.dao.*;
+import com.jbuild4d.base.dbaccess.dao.builder.*;
+import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoGenListMapper;
+import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTLTreeListMapper;
+import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTLTreeMapper;
+import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTreeTableMapper;
+import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganMapper;
+import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganTypeMapper;
+import com.jbuild4d.base.dbaccess.dao.system.*;
 import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.UniversalIntEnumHandler;
