@@ -20,7 +20,7 @@ import java.util.Map; /**
 public interface ICodeGenerateService {
     PageInfo<List<Map<String, Object>>> getTables(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, Map<String, Object> searchMap) throws JBuild4DGenerallyException;
 
-    List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession, String tableName);
+    List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession, String tableName) throws JBuild4DGenerallyException;
 
     Map<String,String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String orderFieldName,String statusFieldName, String packageType) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException;
 }

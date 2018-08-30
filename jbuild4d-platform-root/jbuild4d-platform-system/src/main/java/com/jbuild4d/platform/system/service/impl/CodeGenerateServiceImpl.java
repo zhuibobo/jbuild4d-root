@@ -64,7 +64,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
             sql="select upper(table_name) TableName from information_schema.tables where table_schema='"+DBProp.getDatabaseName()+"' and table_type='base table'";
         }
         else if(DBProp.isOracle()){
-            throw new JBuild4DGenerallyException("暂不支持Oracle！");
+            throw JBuild4DGenerallyException.getNotSupportOracleException();
         }
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.
@@ -74,19 +74,25 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
     }
 
     @Override
-    public List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession, String tableName){
+    public List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession, String tableName) throws JBuild4DGenerallyException {
         String sql="";
         List<SimpleTableFieldVo> result=new ArrayList<>();
         if(DBProp.isSqlServer()){
             sql="SELECT * FROM INFORMATION_SCHEMA.columns WHERE TABLE_NAME=#{tableName}";
-            List<Map<String, Object>> fieldList=sqlBuilderService.selectList(sql,tableName);
-            for (Map<String, Object> map : fieldList) {
-                SimpleTableFieldVo simpleTableFieldVo=new SimpleTableFieldVo();
-                simpleTableFieldVo.setTableName(map.get("TABLE_NAME").toString());
-                simpleTableFieldVo.setFieldName(map.get("COLUMN_NAME").toString());
-                simpleTableFieldVo.setFieldType(map.get("DATA_TYPE").toString());
-                result.add(simpleTableFieldVo);
-            }
+        }
+        else if(DBProp.isMySql()){
+            sql="select * from information_schema.columns where table_schema='"+DBProp.getDatabaseName()+"' and table_name=#{tableName}";
+        }
+        else if(DBProp.isOracle()){
+            throw JBuild4DGenerallyException.getNotSupportOracleException();
+        }
+        List<Map<String, Object>> fieldList=sqlBuilderService.selectList(sql,tableName);
+        for (Map<String, Object> map : fieldList) {
+            SimpleTableFieldVo simpleTableFieldVo=new SimpleTableFieldVo();
+            simpleTableFieldVo.setTableName(map.get("TABLE_NAME").toString());
+            simpleTableFieldVo.setFieldName(map.get("COLUMN_NAME").toString());
+            simpleTableFieldVo.setFieldType(map.get("DATA_TYPE").toString());
+            result.add(simpleTableFieldVo);
         }
         return result;
     }
@@ -233,6 +239,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
             System.out.println(introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
         }
         System.out.println("---------------------------打印表信息---------------------------");
+
         //生成MapperEX
         generateCodeMap.put("MapperEXContent", CGMapperEX.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent")));
         //生成IService

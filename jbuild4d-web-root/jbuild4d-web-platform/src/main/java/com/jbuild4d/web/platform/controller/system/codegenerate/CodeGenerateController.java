@@ -61,7 +61,7 @@ public class CodeGenerateController {
 
     @RequestMapping(value = "GetTableFields", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo getTableFields(String tableName) throws IOException, ParseException {
+    public JBuild4DResponseVo getTableFields(String tableName) throws IOException, ParseException, JBuild4DGenerallyException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
         List<SimpleTableFieldVo> result=codeGenerateService.getTableFields(jb4DSession,tableName);
         return JBuild4DResponseVo.success("获取成功",result);
