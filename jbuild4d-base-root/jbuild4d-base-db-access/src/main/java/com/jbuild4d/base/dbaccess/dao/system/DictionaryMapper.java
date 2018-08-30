@@ -1,7 +1,7 @@
 package com.jbuild4d.base.dbaccess.dao.system;
 
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
-import com.jbuild4d.base.dbaccess.dbentities.system.DictionaryEntity;
+import com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

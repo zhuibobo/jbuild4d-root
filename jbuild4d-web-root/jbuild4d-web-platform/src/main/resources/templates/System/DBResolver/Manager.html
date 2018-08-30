@@ -15,6 +15,11 @@
     <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::TreeTableLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <style>
+        .right-outer-wrap-c div{
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
     <div id="appList" class="list-2column">
@@ -67,19 +72,11 @@
                                         <span>JBuild4D-Project</span>
                                     </radio>
                                 </radio-group>
-                                <radio-group v-model="formValidate.packageType" vertical>
-                                    <radio label="JBuild4D-PlatForm">
-                                        <span>JBuild4D-PlatForm</span>
-                                    </radio>
-                                    <radio label="JBuild4D-Project">
-                                        <span>JBuild4D-Project</span>
-                                    </radio>
-                                </radio-group>
                             </i-col>
                         </row>
                         <row>
                             <i-col span="2" style="text-align: center;">二级包名：</i-col>
-                            <i-col span="22" style="margin-bottom: 10px">
+                            <i-col span="22" style="margin-bottom: 14px">
                                 <radio-group v-model="formValidate.packageLevel2Name">
                                     <radio label="builder">
                                         <span>builder</span>
@@ -156,6 +153,7 @@
                 formValidate: {
                     tableName: "",
                     packageType: "JBuild4D-PlatForm",
+                    packageLevel2Name:"builder",
                     orderFieldName:"",
                     statusFieldName:""
                 },

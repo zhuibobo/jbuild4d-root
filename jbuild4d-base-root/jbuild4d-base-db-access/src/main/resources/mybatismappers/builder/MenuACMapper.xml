@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.system.MenuMapper">
-  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.system.MenuEntity">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.systemsetting.MenuEntity">
     <constructor>
       <idArg column="MENU_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="MENU_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -57,7 +57,7 @@
     delete from TB4D_MENU
     where MENU_ID = #{menuId,jdbcType=NVARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.MenuEntity">
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.MenuEntity">
     insert into TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT, 
       MENU_VALUE, MENU_TYPE, MENU_USER_ID, 
       MENU_USER_NAME, MENU_ORGAN_ID, MENU_ORGAN_NAME, 
@@ -85,7 +85,7 @@
       #{menuMenuDescription,jdbcType=NVARCHAR}, #{menuJsExpression,jdbcType=NVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.MenuEntity">
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.MenuEntity">
     insert into TB4D_MENU
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="menuId != null">
@@ -290,7 +290,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.MenuEntity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.MenuEntity">
     update TB4D_MENU
     <set>
       <if test="menuName != null">
@@ -392,7 +392,7 @@
     </set>
     where MENU_ID = #{menuId,jdbcType=NVARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.MenuEntity">
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.MenuEntity">
     update TB4D_MENU
     set MENU_NAME = #{menuName,jdbcType=NVARCHAR},
       MENU_TEXT = #{menuText,jdbcType=NVARCHAR},

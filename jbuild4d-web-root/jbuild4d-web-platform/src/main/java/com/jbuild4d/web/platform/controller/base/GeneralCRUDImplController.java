@@ -5,7 +5,7 @@ package com.jbuild4d.web.platform.controller.base;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
-import com.jbuild4d.base.dbaccess.dbentities.system.DictionaryEntity;
+import com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;

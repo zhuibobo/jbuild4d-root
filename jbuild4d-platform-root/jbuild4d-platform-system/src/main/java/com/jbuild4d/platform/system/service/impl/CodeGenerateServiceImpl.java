@@ -134,7 +134,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
     }
 
     @Override
-    public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String orderFieldName,String statusFieldName,String packageType) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
+    public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String orderFieldName,String statusFieldName,String packageType,String packageLevel2Name) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
         //根据单表生成代码
         Map<String, String> generateCodeMap = new HashMap<>();
         List<String> warnings = new ArrayList<String>();

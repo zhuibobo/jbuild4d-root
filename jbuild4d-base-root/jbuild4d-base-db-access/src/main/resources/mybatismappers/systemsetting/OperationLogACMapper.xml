@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.system.OperationLogMapper">
-  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.system.OperationLogEntity">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity">
     <constructor>
       <idArg column="LOG_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="LOG_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -36,7 +36,7 @@
     delete from TB4D_OPERATION_LOG
     where LOG_ID = #{logId,jdbcType=NVARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.OperationLogEntity">
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity">
     insert into TB4D_OPERATION_LOG (LOG_ID, LOG_TEXT, LOG_ORDER_NUM, 
       LOG_CREATE_TIME, LOG_SYSTEM_NAME, LOG_MODULE_NAME, 
       LOG_ACTION_NAME, LOG_DATA, LOG_USER_ID, 
@@ -50,7 +50,7 @@
       #{logIp,jdbcType=NVARCHAR}, #{logType,jdbcType=NVARCHAR}, #{logClassName,jdbcType=NVARCHAR}, 
       #{logStatus,jdbcType=NVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.OperationLogEntity">
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity">
     insert into TB4D_OPERATION_LOG
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logId != null">
@@ -153,7 +153,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.OperationLogEntity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity">
     update TB4D_OPERATION_LOG
     <set>
       <if test="logText != null">
@@ -204,7 +204,7 @@
     </set>
     where LOG_ID = #{logId,jdbcType=NVARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.OperationLogEntity">
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity">
     update TB4D_OPERATION_LOG
     set LOG_TEXT = #{logText,jdbcType=NVARCHAR},
       LOG_ORDER_NUM = #{logOrderNum,jdbcType=INTEGER},

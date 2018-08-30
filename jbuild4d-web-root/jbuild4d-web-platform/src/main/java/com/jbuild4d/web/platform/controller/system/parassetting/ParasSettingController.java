@@ -1,6 +1,6 @@
 package com.jbuild4d.web.platform.controller.system.parassetting;
 
-import com.jbuild4d.base.dbaccess.dbentities.system.SettingEntity;
+import com.jbuild4d.base.dbaccess.dbentities.systemsetting.SettingEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.platform.system.service.ISettingService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;

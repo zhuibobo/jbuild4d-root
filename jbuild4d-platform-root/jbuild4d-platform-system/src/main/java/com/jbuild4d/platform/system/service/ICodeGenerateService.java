@@ -22,5 +22,5 @@ public interface ICodeGenerateService {
 
     List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession, String tableName) throws JBuild4DGenerallyException;
 
-    Map<String,String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String orderFieldName,String statusFieldName, String packageType) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException;
+    Map<String,String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String orderFieldName,String statusFieldName, String packageType,String packageLevel2Name) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException;
 }

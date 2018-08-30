@@ -1,6 +1,6 @@
 package com.jbuild4d.web.platform.controller.system.dictionary;
 
-import com.jbuild4d.base.dbaccess.dbentities.system.DictionaryEntity;
+import com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.system.service.IDictionaryService;
