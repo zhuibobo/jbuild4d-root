@@ -2,7 +2,7 @@ package com.jbuild4d.web.platform.controller.builder.datastorage.database;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
-import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
@@ -25,7 +25,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.util.ArrayList;

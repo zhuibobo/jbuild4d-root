@@ -1,4 +1,4 @@
-package com.jbuild4d.base.dbaccess.dbentities;
+package com.jbuild4d.base.dbaccess.dbentities.builder;
 
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
 import java.util.Date;

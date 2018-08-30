@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.DatabaseServiceLinkMapper">
-    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DatabaseServiceLinkEntity">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.DatabaseServiceLinkEntity">
         <constructor>
             <idArg column="DBLINK_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DBLINK_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -33,7 +33,7 @@
         delete from TB4D_DATABASE_SERVICE_LINK
         where DBLINK_ID = #{dblinkId,jdbcType=NVARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatabaseServiceLinkEntity">
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatabaseServiceLinkEntity">
         insert into TB4D_DATABASE_SERVICE_LINK (DBLINK_ID, DBLINK_VALUE, DBLINK_NAME,
         DBLINK_TYPE, DBLINK_DRIVERNAME, DBLINK_URL,
         DBLINK_USER, DBLINK_PASSWORD, DBLINK_CREATE_TIME,
@@ -45,7 +45,7 @@
         #{dblinkOrderNum,jdbcType=INTEGER}, #{dblinkDesc,jdbcType=NVARCHAR}, #{dblinkIsLocation,jdbcType=NVARCHAR},
         #{dblinkStatus,jdbcType=NVARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatabaseServiceLinkEntity">
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatabaseServiceLinkEntity">
         insert into TB4D_DATABASE_SERVICE_LINK
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="dblinkId != null">
@@ -130,7 +130,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatabaseServiceLinkEntity">
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatabaseServiceLinkEntity">
         update TB4D_DATABASE_SERVICE_LINK
         <set>
             <if test="dblinkValue != null">
@@ -172,7 +172,7 @@
         </set>
         where DBLINK_ID = #{dblinkId,jdbcType=NVARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatabaseServiceLinkEntity">
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatabaseServiceLinkEntity">
         update TB4D_DATABASE_SERVICE_LINK
         set DBLINK_VALUE = #{dblinkValue,jdbcType=NVARCHAR},
         DBLINK_NAME = #{dblinkName,jdbcType=NVARCHAR},

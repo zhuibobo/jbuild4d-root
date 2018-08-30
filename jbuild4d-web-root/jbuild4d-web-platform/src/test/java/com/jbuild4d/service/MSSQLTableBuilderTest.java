@@ -1,7 +1,7 @@
 package com.jbuild4d.service;
 
 import com.jbuild4d.base.dbaccess.dao.TableFieldMapper;
-import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DPhysicalTableException;
 import com.jbuild4d.base.exception.JBuild4DSQLKeyWordException;

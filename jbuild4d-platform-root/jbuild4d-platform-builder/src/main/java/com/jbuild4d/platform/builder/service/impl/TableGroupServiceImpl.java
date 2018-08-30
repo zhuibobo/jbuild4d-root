@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.builder.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.TableGroupMapper;
-import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;

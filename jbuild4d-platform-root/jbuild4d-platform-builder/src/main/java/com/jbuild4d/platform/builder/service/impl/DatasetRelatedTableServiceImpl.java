@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.builder.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.DatasetRelatedTableMapper;
-import com.jbuild4d.base.dbaccess.dbentities.DatasetRelatedTableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;

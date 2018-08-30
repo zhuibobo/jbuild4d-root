@@ -1,8 +1,7 @@
 package com.jbuild4d.web.platform.controller.organrelevance.organ;
 
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.OrganEntity;
-import com.jbuild4d.base.dbaccess.dbentities.OrganTypeEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.OrganEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.OrganTypeEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.organ.service.IOrganService;

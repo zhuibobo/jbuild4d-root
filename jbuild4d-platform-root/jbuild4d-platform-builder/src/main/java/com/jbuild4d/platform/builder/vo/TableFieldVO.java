@@ -1,8 +1,6 @@
 package com.jbuild4d.platform.builder.vo;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.JsonUtility;
 

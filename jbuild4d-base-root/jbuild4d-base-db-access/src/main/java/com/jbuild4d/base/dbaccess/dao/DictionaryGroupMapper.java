@@ -1,6 +1,6 @@
 package com.jbuild4d.base.dbaccess.dao;
 
-import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.DictionaryGroupEntity;
 
 import java.util.List;
 

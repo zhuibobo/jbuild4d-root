@@ -1,6 +1,6 @@
 package com.jbuild4d.web.platform.controller.devdemo.treeandlist;
 
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity;
+import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
@@ -33,12 +33,12 @@ public class DevDemoTLTreeController  extends GeneralCRUDImplController<DevDemoT
 
     @Override
     public String getListViewName() {
-        return "DevDemo/TreeAndList/Manager";
+        return "devdemo/TreeAndList/Manager";
     }
 
     @Override
     public String getDetailViewName() {
-        return "DevDemo/TreeAndList/TreeEdit";
+        return "devdemo/TreeAndList/TreeEdit";
     }
 
     @Override

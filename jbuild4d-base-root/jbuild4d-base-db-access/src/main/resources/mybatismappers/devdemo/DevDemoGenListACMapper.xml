@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.DevDemoGenListMapper">
-  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity">
     <constructor>
       <idArg column="DDGL_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDGL_KEY" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -41,7 +41,7 @@
     delete from TB4D_DEV_DEMO_GEN_LIST
     where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity">
     insert into TB4D_DEV_DEMO_GEN_LIST (DDGL_ID, DDGL_KEY, DDGL_NAME, 
       DDGL_VALUE, DDGL_STATUS, DDGL_DESC, 
       DDGL_CREATETIME, DDGL_USER_ID, DDGL_USER_NAME, 
@@ -59,7 +59,7 @@
       #{ddglBindDicCheckbox2,jdbcType=NVARCHAR}, #{ddglBindDicCheckbox3,jdbcType=NVARCHAR}, 
       #{ddglBindDicMucheckbox,jdbcType=NVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity">
     insert into TB4D_DEV_DEMO_GEN_LIST
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="ddglId != null">
@@ -186,7 +186,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity">
     update TB4D_DEV_DEMO_GEN_LIST
     <set>
       <if test="ddglKey != null">
@@ -249,7 +249,7 @@
     </set>
     where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity">
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity">
     update TB4D_DEV_DEMO_GEN_LIST
     set DDGL_KEY = #{ddglKey,jdbcType=NVARCHAR},
       DDGL_NAME = #{ddglName,jdbcType=NVARCHAR},

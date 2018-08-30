@@ -1,6 +1,6 @@
 package com.jbuild4d.base.dbaccess.dao;
 
-import com.jbuild4d.base.dbaccess.dbentities.DatabaseServiceLinkEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatabaseServiceLinkEntity;
 
 /**
  * Created with IntelliJ IDEA.

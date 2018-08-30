@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.TableFieldMapper">
-    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity">
         <constructor>
             <idArg column="FIELD_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="FIELD_TABLE_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -40,7 +40,7 @@
         delete from TB4D_TABLE_FIELD
         where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity">
         insert into TB4D_TABLE_FIELD (FIELD_ID, FIELD_TABLE_ID, FIELD_NAME,
         FIELD_CAPTION, FIELD_IS_PK, FIELD_ALLOW_NULL,
         FIELD_DATA_TYPE, FIELD_DATA_LENGTH, FIELD_DECIMAL_LENGTH,
@@ -56,7 +56,7 @@
         #{fieldUpdater,jdbcType=NVARCHAR}, #{fieldDesc,jdbcType=NVARCHAR}, #{fieldOrderNum,jdbcType=INTEGER},
         #{fieldTemplateName,jdbcType=NVARCHAR}, #{fieldDefaultType,jdbcType=NVARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity">
         insert into TB4D_TABLE_FIELD
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="fieldId != null">
@@ -177,7 +177,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity">
         update TB4D_TABLE_FIELD
         <set>
             <if test="fieldTableId != null">
@@ -237,7 +237,7 @@
         </set>
         where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity">
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity">
         update TB4D_TABLE_FIELD
         set FIELD_TABLE_ID = #{fieldTableId,jdbcType=NVARCHAR},
             FIELD_NAME = #{fieldName,jdbcType=NVARCHAR},

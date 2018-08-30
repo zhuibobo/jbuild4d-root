@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.TableGroupMapper">
-    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
         <constructor>
             <idArg column="TABLE_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="TABLE_GROUP_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -32,7 +32,7 @@
         delete from TB4D_TABLE_GROUP
         where TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
         insert into TB4D_TABLE_GROUP (TABLE_GROUP_ID, TABLE_GROUP_VALUE,
         TABLE_GROUP_TEXT, TABLE_GROUP_ORDER_NUM, TABLE_GROUP_CREATE_TIME,
         TABLE_GROUP_DESC, TABLE_GROUP_STATUS, TABLE_GROUP_PARENT_ID,
@@ -46,7 +46,7 @@
         #{tableGroupPidList,jdbcType=NVARCHAR}, #{tableGroupChildCount,jdbcType=INTEGER}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
         insert into TB4D_TABLE_GROUP
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="tableGroupId != null">
@@ -125,7 +125,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
         update TB4D_TABLE_GROUP
         <set>
             <if test="tableGroupValue != null">
@@ -164,7 +164,7 @@
         </set>
         where TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity">
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
         update TB4D_TABLE_GROUP
         set TABLE_GROUP_VALUE = #{tableGroupValue,jdbcType=NVARCHAR},
             TABLE_GROUP_TEXT = #{tableGroupText,jdbcType=NVARCHAR},

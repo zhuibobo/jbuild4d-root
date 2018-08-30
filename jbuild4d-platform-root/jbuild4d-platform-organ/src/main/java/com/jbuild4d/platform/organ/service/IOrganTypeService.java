@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.organ.service;
 
-import com.jbuild4d.base.dbaccess.dbentities.OrganTypeEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.OrganTypeEntity;
 import com.jbuild4d.base.service.IBaseService;
 
 /**

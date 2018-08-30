@@ -1,6 +1,6 @@
 package com.jbuild4d.web.mybatis;
 
-import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.MenuEntity;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.system.service.IMenuService;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 

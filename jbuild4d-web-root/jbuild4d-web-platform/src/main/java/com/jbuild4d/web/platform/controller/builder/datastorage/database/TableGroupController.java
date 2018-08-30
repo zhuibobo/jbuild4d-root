@@ -1,7 +1,6 @@
 package com.jbuild4d.web.platform.controller.builder.datastorage.database;
 
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.builder.service.ITableGroupService;

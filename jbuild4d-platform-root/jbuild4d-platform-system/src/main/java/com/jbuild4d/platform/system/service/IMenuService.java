@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.system.service;
 
-import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.MenuEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSession;

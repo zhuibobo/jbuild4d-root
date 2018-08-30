@@ -1,6 +1,6 @@
 package com.jbuild4d.service;
 
-import com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.DictionaryGroupEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;

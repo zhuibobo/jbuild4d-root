@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.system.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.SettingMapper;
-import com.jbuild4d.base.dbaccess.dbentities.SettingEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.SettingEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;

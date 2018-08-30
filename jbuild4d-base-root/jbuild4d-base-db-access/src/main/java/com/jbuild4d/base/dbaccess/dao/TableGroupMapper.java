@@ -1,7 +1,6 @@
 package com.jbuild4d.base.dbaccess.dao;
 
-import com.jbuild4d.base.dbaccess.dbentities.SettingEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.DevDemoTLTreeListMapper">
-  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeListEntity">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeListEntity">
     <constructor>
       <idArg column="DDTL_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DDTL_KEY" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -32,7 +32,7 @@
     delete from TB4D_DEV_DEMO_TL_TREE_LIST
     where DDTL_ID = #{ddtlId,jdbcType=NVARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeListEntity">
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeListEntity">
     insert into TB4D_DEV_DEMO_TL_TREE_LIST (DDTL_ID, DDTL_KEY, DDTL_NAME, 
       DDTL_VALUE, DDTL_STATUS, DDTL_DESC, 
       DDTL_CREATETIME, DDTL_ORDER_NUM, DDTL_BIND_DIC_SELECTED, 
@@ -44,7 +44,7 @@
       #{ddtlBindDicRadio,jdbcType=NVARCHAR}, #{ddtlDdttBindDicMucheckbox,jdbcType=NVARCHAR}, 
       #{ddtlGroupId,jdbcType=NVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeListEntity">
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeListEntity">
     insert into TB4D_DEV_DEMO_TL_TREE_LIST
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="ddtlId != null">
@@ -123,7 +123,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeListEntity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeListEntity">
     update TB4D_DEV_DEMO_TL_TREE_LIST
     <set>
       <if test="ddtlKey != null">
@@ -162,7 +162,7 @@
     </set>
     where DDTL_ID = #{ddtlId,jdbcType=NVARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeListEntity">
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeListEntity">
     update TB4D_DEV_DEMO_TL_TREE_LIST
     set DDTL_KEY = #{ddtlKey,jdbcType=NVARCHAR},
       DDTL_NAME = #{ddtlName,jdbcType=NVARCHAR},

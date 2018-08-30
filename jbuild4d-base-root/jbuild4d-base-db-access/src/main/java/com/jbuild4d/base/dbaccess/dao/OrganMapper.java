@@ -1,6 +1,6 @@
 package com.jbuild4d.base.dbaccess.dao;
 
-import com.jbuild4d.base.dbaccess.dbentities.OrganEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.OrganEntity;
 import org.apache.ibatis.annotations.Param;
 
 /**

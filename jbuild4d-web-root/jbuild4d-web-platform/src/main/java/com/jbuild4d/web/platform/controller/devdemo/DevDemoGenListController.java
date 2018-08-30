@@ -1,6 +1,6 @@
 package com.jbuild4d.web.platform.controller.devdemo;
 
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
+import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoGenListService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
@@ -30,23 +30,23 @@ public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoG
 
     @Override
     public String getListViewName() {
-        return "/DevDemo/GenList/GenList";
+        return "/devdemo/GenList/GenList";
     }
 
     @Override
     public String getDetailViewName() {
-        return "/DevDemo/GenList/GenEdit";
+        return "/devdemo/GenList/GenEdit";
     }
 
     @RequestMapping(value = "ListNotSearch", method = RequestMethod.GET)
     public ModelAndView listNotSearch() {
-        ModelAndView modelAndView=new ModelAndView("/DevDemo/GenList/GenListNotSearch");
+        ModelAndView modelAndView=new ModelAndView("/devdemo/GenList/GenListNotSearch");
         return modelAndView;
     }
 
     @RequestMapping(value = "DetailScrollView", method = RequestMethod.GET)
     public ModelAndView detailScrollView(){
-        ModelAndView modelAndView=new ModelAndView("/DevDemo/GenList/GenEditScroll");
+        ModelAndView modelAndView=new ModelAndView("/devdemo/GenList/GenEditScroll");
         return modelAndView;
     }
 

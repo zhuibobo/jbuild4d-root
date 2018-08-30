@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.DatasetColumnMapper">
-    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DatasetColumnEntity">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity">
         <constructor>
             <idArg column="COLUMN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="COLUMN_DS_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -35,7 +35,7 @@
         delete from TB4D_DATASET_COLUMN
         where COLUMN_ID = #{columnId,jdbcType=NVARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetColumnEntity">
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity">
         insert into TB4D_DATASET_COLUMN (COLUMN_ID, COLUMN_DS_ID, COLUMN_CAPTION,
         COLUMN_NAME, COLUMN_CREATE_TIME, COLUMN_CREATER,
         COLUMN_UPDATE_TIME, COLUMN_UPDATER, COLUMN_DESC,
@@ -49,7 +49,7 @@
         #{columnDefaultText,jdbcType=NVARCHAR}, #{columnOrderNum,jdbcType=INTEGER}, #{columnTableName,jdbcType=NVARCHAR},
         #{columnIsCustom,jdbcType=NVARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetColumnEntity">
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity">
         insert into TB4D_DATASET_COLUMN
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="columnId != null">
@@ -146,7 +146,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetColumnEntity">
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity">
         update TB4D_DATASET_COLUMN
         <set>
             <if test="columnDsId != null">
@@ -194,7 +194,7 @@
         </set>
         where COLUMN_ID = #{columnId,jdbcType=NVARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetColumnEntity">
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity">
         update TB4D_DATASET_COLUMN
         set COLUMN_DS_ID = #{columnDsId,jdbcType=NVARCHAR},
             COLUMN_CAPTION = #{columnCaption,jdbcType=NVARCHAR},

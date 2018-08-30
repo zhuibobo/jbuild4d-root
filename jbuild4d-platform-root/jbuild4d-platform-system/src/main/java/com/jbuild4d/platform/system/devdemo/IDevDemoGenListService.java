@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.system.devdemo;
 
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
+import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity;
 import com.jbuild4d.base.service.IBaseService;
 
 /**

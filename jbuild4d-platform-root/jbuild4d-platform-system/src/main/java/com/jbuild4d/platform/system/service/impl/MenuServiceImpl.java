@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.system.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.MenuMapper;
-import com.jbuild4d.base.dbaccess.dbentities.MenuEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.MenuEntity;
 import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.IAddBefore;
@@ -117,7 +117,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         //根菜单->开发示例
         String devDemoRootId="JB4DDevDemoRoot";
         MenuEntity devDemoRootMenu=getMenu(rootMenu.getMenuId(),devDemoRootId,"开发示例","开发示例","开发示例",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/PlatForm/DevDemo/Menus","","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/PlatForm/devdemo/Menus","","frame-top-menu-data");
         deleteByKey(jb4DSession,devDemoRootId);
         save(jb4DSession,devDemoRootMenu.getMenuId(),devDemoRootMenu);
 

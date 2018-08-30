@@ -1,8 +1,7 @@
-package com.jbuild4d.base.dbaccess.dbentities;
+package com.jbuild4d.base.dbaccess.dbentities.devdemo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.Date;

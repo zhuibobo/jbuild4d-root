@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.system.devdemo;
 
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTreeTableEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;

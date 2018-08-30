@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.vo;
 
-import com.jbuild4d.base.dbaccess.dbentities.DatasetEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
 
 import java.util.List;
 

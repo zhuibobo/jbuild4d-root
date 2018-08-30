@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.DictionaryGroupMapper">
-  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
+  <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.system.DictionaryGroupEntity">
     <constructor>
       <idArg column="DICT_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
       <arg column="DICT_GROUP_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -31,7 +31,7 @@
     delete from TB4D_DICTIONARY_GROUP
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
+  <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.DictionaryGroupEntity">
     insert into TB4D_DICTIONARY_GROUP (DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, 
       DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME, 
       DICT_GROUP_DESC, DICT_GROUP_STATUS, DICT_GROUP_PARENT_ID, 
@@ -43,7 +43,7 @@
       #{dictGroupIssystem,jdbcType=NVARCHAR}, #{dictGroupDelEnable,jdbcType=NVARCHAR}, 
       #{dictGroupEnpItem,jdbcType=NVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
+  <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.DictionaryGroupEntity">
     insert into TB4D_DICTIONARY_GROUP
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="dictGroupId != null">
@@ -116,7 +116,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.DictionaryGroupEntity">
     update TB4D_DICTIONARY_GROUP
     <set>
       <if test="dictGroupValue != null">
@@ -152,7 +152,7 @@
     </set>
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DictionaryGroupEntity">
+  <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.DictionaryGroupEntity">
     update TB4D_DICTIONARY_GROUP
     set DICT_GROUP_VALUE = #{dictGroupValue,jdbcType=NVARCHAR},
       DICT_GROUP_TEXT = #{dictGroupText,jdbcType=NVARCHAR},

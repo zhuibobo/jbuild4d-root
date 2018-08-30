@@ -1,6 +1,6 @@
 package com.jbuild4d.base.dbaccess.dao;
 
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoTLTreeEntity;
+import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeEntity;
 import org.apache.ibatis.annotations.Param;
 
 public interface DevDemoTLTreeMapper extends BaseMapper<DevDemoTLTreeEntity> {

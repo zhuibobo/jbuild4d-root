@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.DatasetMapper">
-    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.DatasetEntity">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         <constructor>
             <idArg column="DS_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_CAPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -38,7 +38,7 @@
         delete from TB4D_DATASET
         where DS_ID = #{dsId,jdbcType=NVARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetEntity">
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         insert into TB4D_DATASET (DS_ID, DS_CAPTION, DS_NAME,
         DS_ORGAN_ID, DS_CREATE_TIME, DS_CREATER,
         DS_UPDATE_TIME, DS_UPDATER, DS_TYPE,
@@ -54,7 +54,7 @@
         #{dsSqlSelectValue,jdbcType=NVARCHAR}, #{dsClassName,jdbcType=NVARCHAR}, #{dsRestUrl,jdbcType=NVARCHAR}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetEntity">
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         insert into TB4D_DATASET
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="dsId != null">
@@ -169,7 +169,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetEntity">
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         update TB4D_DATASET
         <set>
             <if test="dsCaption != null">
@@ -226,7 +226,7 @@
         </set>
         where DS_ID = #{dsId,jdbcType=NVARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.DatasetEntity">
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         update TB4D_DATASET
         set DS_CAPTION = #{dsCaption,jdbcType=NVARCHAR},
             DS_NAME = #{dsName,jdbcType=NVARCHAR},

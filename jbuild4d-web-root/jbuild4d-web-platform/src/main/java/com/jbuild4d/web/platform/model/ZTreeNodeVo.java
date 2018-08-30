@@ -1,7 +1,7 @@
 package com.jbuild4d.web.platform.model;
 
-import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 
 import java.util.ArrayList;
 import java.util.List;

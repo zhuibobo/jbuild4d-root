@@ -1,11 +1,10 @@
 package com.jbuild4d.web.platform.controller.builder.dataset;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
-import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.builder.service.IDatasetService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.builder.service.ITableService;

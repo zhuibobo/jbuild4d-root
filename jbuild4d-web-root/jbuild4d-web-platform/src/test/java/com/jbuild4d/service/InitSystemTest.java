@@ -1,15 +1,9 @@
 package com.jbuild4d.service;
 
-import com.jbuild4d.base.dbaccess.dbentities.*;
-import com.jbuild4d.base.dbaccess.exenum.MenuTypeEnum;
+import com.jbuild4d.base.dbaccess.dbentities.system.MenuEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.platform.builder.service.IDatasetGroupService;
-import com.jbuild4d.platform.builder.service.ITableFieldService;
-import com.jbuild4d.platform.builder.service.ITableGroupService;
-import com.jbuild4d.platform.organ.service.IOrganService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoGenListService;
-import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
 import com.jbuild4d.platform.system.service.*;
 import com.jbuild4d.web.platform.beanconfig.jdbctemplate.JdbcTemplateBeansConfig;
@@ -118,7 +112,7 @@ public class InitSystemTest extends BaseTest {
         //根菜单->开发示例
         String devDemoRootId="JB4DDevDemoRoot";
         MenuEntity devDemoRootMenu=getMenu(rootMenu.getMenuId(),devDemoRootId,"开发示例","开发示例","开发示例",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/PlatForm/DevDemo/Menus","","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/PlatForm/devdemo/Menus","","frame-top-menu-data");
         menuService.deleteByKey(jb4DSession,devDemoRootId);
         menuService.save(jb4DSession,devDemoRootMenu.getMenuId(),devDemoRootMenu);
 

@@ -1,6 +1,6 @@
 package com.jbuild4d.web.platform.controller.devdemo;
 
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
+import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoGenListService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
@@ -31,12 +31,12 @@ public class DevDemoGenListBindDictionaryController  extends GeneralCRUDImplCont
 
     @Override
     public String getListViewName() {
-        return "/DevDemo/GenList/GenListBindDictionary";
+        return "/devdemo/GenList/GenListBindDictionary";
     }
 
     @Override
     public String getDetailViewName() {
-        return "/DevDemo/GenList/GenEditBindDictionary";
+        return "/devdemo/GenList/GenEditBindDictionary";
     }
 
     @Override

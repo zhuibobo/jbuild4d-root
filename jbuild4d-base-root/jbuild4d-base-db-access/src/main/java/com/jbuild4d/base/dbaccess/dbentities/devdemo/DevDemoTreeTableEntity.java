@@ -1,11 +1,11 @@
-package com.jbuild4d.base.dbaccess.dbentities;
+package com.jbuild4d.base.dbaccess.dbentities.devdemo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
 
 import java.util.Date;
 
-public class DevDemoTLTreeEntity {
+public class DevDemoTreeTableEntity {
 
     @DBKeyField
     private String ddttId;
@@ -25,13 +25,19 @@ public class DevDemoTLTreeEntity {
 
     private Integer ddttOrderNum;
 
+    private String ddttBindDicSelected;
+
+    private String ddttBindDicRadio;
+
+    private String ddttDdttBindDicMucheckbox;
+
     private String ddttParentId;
 
     private String ddttParentIdlist;
 
     private Integer ddttChildCount;
 
-    public DevDemoTLTreeEntity(String ddttId, String ddttKey, String ddttName, String ddttValue, String ddttStatus, String ddttDesc, Date ddttCreatetime, Integer ddttOrderNum, String ddttParentId, String ddttParentIdlist, Integer ddttChildCount) {
+    public DevDemoTreeTableEntity(String ddttId, String ddttKey, String ddttName, String ddttValue, String ddttStatus, String ddttDesc, Date ddttCreatetime, Integer ddttOrderNum, String ddttBindDicSelected, String ddttBindDicRadio, String ddttDdttBindDicMucheckbox, String ddttParentId, String ddttParentIdlist, Integer ddttChildCount) {
         this.ddttId = ddttId;
         this.ddttKey = ddttKey;
         this.ddttName = ddttName;
@@ -40,12 +46,15 @@ public class DevDemoTLTreeEntity {
         this.ddttDesc = ddttDesc;
         this.ddttCreatetime = ddttCreatetime;
         this.ddttOrderNum = ddttOrderNum;
+        this.ddttBindDicSelected = ddttBindDicSelected;
+        this.ddttBindDicRadio = ddttBindDicRadio;
+        this.ddttDdttBindDicMucheckbox = ddttDdttBindDicMucheckbox;
         this.ddttParentId = ddttParentId;
         this.ddttParentIdlist = ddttParentIdlist;
         this.ddttChildCount = ddttChildCount;
     }
 
-    public DevDemoTLTreeEntity() {
+    public DevDemoTreeTableEntity() {
         super();
     }
 
@@ -111,6 +120,30 @@ public class DevDemoTLTreeEntity {
 
     public void setDdttOrderNum(Integer ddttOrderNum) {
         this.ddttOrderNum = ddttOrderNum;
+    }
+
+    public String getDdttBindDicSelected() {
+        return ddttBindDicSelected;
+    }
+
+    public void setDdttBindDicSelected(String ddttBindDicSelected) {
+        this.ddttBindDicSelected = ddttBindDicSelected == null ? null : ddttBindDicSelected.trim();
+    }
+
+    public String getDdttBindDicRadio() {
+        return ddttBindDicRadio;
+    }
+
+    public void setDdttBindDicRadio(String ddttBindDicRadio) {
+        this.ddttBindDicRadio = ddttBindDicRadio == null ? null : ddttBindDicRadio.trim();
+    }
+
+    public String getDdttDdttBindDicMucheckbox() {
+        return ddttDdttBindDicMucheckbox;
+    }
+
+    public void setDdttDdttBindDicMucheckbox(String ddttDdttBindDicMucheckbox) {
+        this.ddttDdttBindDicMucheckbox = ddttDdttBindDicMucheckbox == null ? null : ddttDdttBindDicMucheckbox.trim();
     }
 
     public String getDdttParentId() {

@@ -1,4 +1,4 @@
-package com.jbuild4d.base.dbaccess.dbentities;
+package com.jbuild4d.base.dbaccess.dbentities.system;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;

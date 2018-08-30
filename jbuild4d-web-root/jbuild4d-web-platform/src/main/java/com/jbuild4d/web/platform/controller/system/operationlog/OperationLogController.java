@@ -1,7 +1,6 @@
 package com.jbuild4d.web.platform.controller.system.operationlog;
 
-import com.jbuild4d.base.dbaccess.dbentities.DictionaryEntity;
-import com.jbuild4d.base.dbaccess.dbentities.OperationLogEntity;
+import com.jbuild4d.base.dbaccess.dbentities.system.OperationLogEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.platform.system.service.IOperationLogService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;

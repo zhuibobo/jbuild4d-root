@@ -1,8 +1,8 @@
 package com.jbuild4d.platform.builder.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.DatasetMapper;
-import com.jbuild4d.base.dbaccess.dbentities.DatasetEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
@@ -16,7 +16,6 @@ import com.jbuild4d.platform.builder.service.*;
 import com.jbuild4d.platform.builder.vo.*;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.omg.CORBA.MARSHAL;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.xml.sax.SAXException;
 

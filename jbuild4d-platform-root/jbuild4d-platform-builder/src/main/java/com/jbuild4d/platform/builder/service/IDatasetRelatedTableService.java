@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.service;
 
-import com.jbuild4d.base.dbaccess.dbentities.DatasetRelatedTableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity;
 import com.jbuild4d.base.service.IBaseService;
 
 /**

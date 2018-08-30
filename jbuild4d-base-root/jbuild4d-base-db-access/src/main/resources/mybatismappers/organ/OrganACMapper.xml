@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.OrganMapper">
-    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.system.OrganEntity">
         <constructor>
             <idArg column="ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -45,7 +45,7 @@
         delete from TB4D_ORGAN
         where ORGAN_ID = #{organId,jdbcType=NVARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.OrganEntity">
         insert into TB4D_ORGAN (ORGAN_ID, ORGAN_NAME, ORGAN_NO,
         ORGAN_CODE, ORGAN_CREATE_TIME, ORGAN_PHONE,
         ORGAN_POST, ORGAN_TYPE_VALUE, ORGAN_ADDRESS,
@@ -65,7 +65,7 @@
         #{organCreatreOrgId,jdbcType=NVARCHAR}, #{organOuterId,jdbcType=NVARCHAR}, #{organOuterType,jdbcType=NVARCHAR}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.OrganEntity">
         insert into TB4D_ORGAN
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="organId != null">
@@ -210,7 +210,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.OrganEntity">
         update TB4D_ORGAN
         <set>
             <if test="organName != null">
@@ -282,7 +282,7 @@
         </set>
         where ORGAN_ID = #{organId,jdbcType=NVARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.OrganEntity">
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.system.OrganEntity">
         update TB4D_ORGAN
         set ORGAN_NAME = #{organName,jdbcType=NVARCHAR},
             ORGAN_NO = #{organNo,jdbcType=NVARCHAR},

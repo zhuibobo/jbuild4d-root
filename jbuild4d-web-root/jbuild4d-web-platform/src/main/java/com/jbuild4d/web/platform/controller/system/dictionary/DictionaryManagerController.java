@@ -1,7 +1,5 @@
 package com.jbuild4d.web.platform.controller.system.dictionary;
 
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoGenListEntity;
-import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

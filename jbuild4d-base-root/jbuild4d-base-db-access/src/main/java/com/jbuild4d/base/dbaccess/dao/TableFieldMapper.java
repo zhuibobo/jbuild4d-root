@@ -1,6 +1,6 @@
 package com.jbuild4d.base.dbaccess.dao;
 
-import com.jbuild4d.base.dbaccess.dbentities.TableFieldEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

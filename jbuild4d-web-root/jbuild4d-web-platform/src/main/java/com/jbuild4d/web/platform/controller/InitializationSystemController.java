@@ -1,8 +1,8 @@
 package com.jbuild4d.web.platform.controller;
 
-import com.jbuild4d.base.dbaccess.dbentities.DatasetGroupEntity;
-import com.jbuild4d.base.dbaccess.dbentities.DevDemoTreeTableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTreeTableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
@@ -21,10 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.text.ParseException;
 
 @Controller
 @RequestMapping(value = "/PlatForm/InitializationSystem")

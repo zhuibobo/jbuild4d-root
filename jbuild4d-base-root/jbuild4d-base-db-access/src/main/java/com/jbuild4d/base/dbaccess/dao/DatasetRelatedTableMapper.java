@@ -1,7 +1,6 @@
 package com.jbuild4d.base.dbaccess.dao;
 
-import com.jbuild4d.base.dbaccess.dbentities.DatasetEntity;
-import com.jbuild4d.base.dbaccess.dbentities.DatasetRelatedTableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity;
 
 /**
  * Created with IntelliJ IDEA.
