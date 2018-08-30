@@ -1,4 +1,4 @@
-package com.jbuild4d.web.controller;
+package com.jbuild4d.web.platform.controller;
 
 import com.jbuild4d.base.service.general.JB4DSession;
 

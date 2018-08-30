@@ -1,4 +1,4 @@
-package com.jbuild4d.web.controller;
+package com.jbuild4d.web.platform.controller;
 
 import com.jbuild4d.web.platform.beanconfig.sys.RootConfig;
 import com.jbuild4d.web.platform.beanconfig.sys.WebConfig;
@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @ContextHierarchy({
         @ContextConfiguration(name = "parent", classes = RootConfig.class),
         @ContextConfiguration(name = "child", classes = WebConfig.class)})
-public class Test000100InitializationSystemController extends ControllerTestBase {
+public class InitializationSystemControllerTest extends ControllerTestBase {
     MockMvc mockMvc;
 
     @Autowired
