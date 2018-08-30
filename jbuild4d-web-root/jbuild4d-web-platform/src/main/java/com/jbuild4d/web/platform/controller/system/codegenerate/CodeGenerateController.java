@@ -1,6 +1,7 @@
 package com.jbuild4d.web.platform.controller.system.codegenerate;
 
 import com.github.pagehelper.PageInfo;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
@@ -43,7 +44,7 @@ public class CodeGenerateController {
 
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo getListData(Integer pageSize, Integer pageNum, String searchCondition) throws IOException, ParseException {
+    public JBuild4DResponseVo getListData(Integer pageSize, Integer pageNum, String searchCondition) throws IOException, ParseException, JBuild4DGenerallyException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
         Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
         PageInfo<List<Map<String, Object>>> proOrganPageInfo=codeGenerateService.getTables(jb4DSession,pageNum,pageSize,searchMap);

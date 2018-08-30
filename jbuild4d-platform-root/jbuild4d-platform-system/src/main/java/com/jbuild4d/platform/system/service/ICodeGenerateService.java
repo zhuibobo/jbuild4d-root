@@ -1,6 +1,7 @@
 package com.jbuild4d.platform.system.service;
 
 import com.github.pagehelper.PageInfo;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.platform.system.vo.SimpleTableFieldVo;
 import org.xml.sax.SAXException;
@@ -17,7 +18,7 @@ import java.util.Map; /**
  * To change this template use File | Settings | File Templates.
  */
 public interface ICodeGenerateService {
-    PageInfo<List<Map<String, Object>>> getTables(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, Map<String, Object> searchMap);
+    PageInfo<List<Map<String, Object>>> getTables(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, Map<String, Object> searchMap) throws JBuild4DGenerallyException;
 
     List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession, String tableName);
 

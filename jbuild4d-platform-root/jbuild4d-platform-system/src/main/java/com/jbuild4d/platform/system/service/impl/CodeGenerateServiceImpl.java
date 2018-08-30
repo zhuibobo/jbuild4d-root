@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.exenum.DBTypeEnum;
 import com.jbuild4d.base.dbaccess.general.DBProp;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.DateUtility;
@@ -54,10 +55,16 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
     }
 
     @Override
-    public PageInfo<List<Map<String, Object>>> getTables(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, Map<String, Object> searchMap) {
+    public PageInfo<List<Map<String, Object>>> getTables(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, Map<String, Object> searchMap) throws JBuild4DGenerallyException {
         String sql="";
         if(DBProp.isSqlServer()){
             sql="Select Name as TableName FROM SysObjects Where XType='U' orDER BY Name";
+        }
+        else if(DBProp.isMySql()){
+            sql="select upper(table_name) TableName from information_schema.tables where table_schema='"+DBProp.getDatabaseName()+"' and table_type='base table'";
+        }
+        else if(DBProp.isOracle()){
+            throw new JBuild4DGenerallyException("暂不支持Oracle！");
         }
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.

@@ -33,10 +33,12 @@ public class TableBuilederFace {
             instance.dbBuidler.setSqlBuilderService(sqlBuilderService);
         }
         else if(DBProp.isMySql()){
-            throw new JBuild4DGenerallyException("暂不支持MYSQL");
+            instance.dbBuidler=new MYSQLTableBuilder();
+            instance.dbBuidler.setSqlBuilderService(sqlBuilderService);
+            //throw new JBuild4DGenerallyException("暂不支持MYSQL");
         }
         else if(DBProp.isOracle()){
-            //throw new JBuild4DGenerallyException("暂不支持Oracle");
+            throw new JBuild4DGenerallyException("暂不支持Oracle");
         }
         return instance;
     }

@@ -50,16 +50,20 @@ public class DBProp {
             return DBTypeEnum.sqlserver;
         }
         else if(getValue("DBType").toLowerCase().equals("oracle")){
-            return DBTypeEnum.mysql;
+            return DBTypeEnum.oracle;
         }
         else if(getValue("DBType").toLowerCase().equals("mysql")){
-            return DBTypeEnum.oracle;
+            return DBTypeEnum.mysql;
         }
         return DBTypeEnum.sqlserver;
     }
 
     public static String getDriverName(){
         return getValue("DriverName");
+    }
+
+    public static String getDatabaseName(){
+        return getValue("DatabaseName");
     }
 
     public static String getUrl(){
