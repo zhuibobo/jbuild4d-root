@@ -57,18 +57,23 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
     @Override
     public PageInfo<List<Map<String, Object>>> getTables(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, Map<String, Object> searchMap) throws JBuild4DGenerallyException {
         String sql="";
+
+        String searchTableName="%%";
+        if(searchMap.size()>0){
+            searchTableName="%"+searchMap.get("tableName").toString()+"%";
+        }
         if(DBProp.isSqlServer()){
-            sql="Select Name as TableName FROM SysObjects Where XType='U' orDER BY Name";
+            sql="Select Name as TableName FROM SysObjects Where XType='U' and Name like #{searchTableName} orDER BY Name";
         }
         else if(DBProp.isMySql()){
-            sql="select upper(table_name) TableName from information_schema.tables where table_schema='"+DBProp.getDatabaseName()+"' and table_type='base table'";
+            sql="select upper(table_name) TableName from information_schema.tables where table_schema='"+DBProp.getDatabaseName()+"' and table_name like #{searchTableName} and table_type='base table'";
         }
         else if(DBProp.isOracle()){
             throw JBuild4DGenerallyException.getNotSupportOracleException();
         }
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.
-        List<Map<String, Object>> list=sqlBuilderService.selectList(sql);
+        List<Map<String, Object>> list=sqlBuilderService.selectList(sql,searchTableName);
         PageInfo<List<Map<String, Object>>> pageInfo = new PageInfo(list);
         return pageInfo;
     }

@@ -28,7 +28,7 @@
                         </colgroup>
                         <tr class="ls-table-row">
                             <td>
-                                <i-input v-model="searchCondition.tableName.value" placeholder=""></i-input>
+                                <i-input v-model="searchCondition.tableName.value" placeholder="" @on-change="searchTable"></i-input>
                             </td>
                             <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
                         </tr>
@@ -257,6 +257,10 @@
                     this.selectionRows=null;
                 },
                 search:function () {
+                    this.pageNum=1;
+                    this.reloadData();
+                },
+                searchTable:function () {
                     this.pageNum=1;
                     this.reloadData();
                 }

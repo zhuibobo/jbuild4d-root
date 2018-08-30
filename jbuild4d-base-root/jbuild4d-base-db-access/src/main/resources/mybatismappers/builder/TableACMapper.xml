@@ -37,7 +37,7 @@
         delete from tb4d_table
         where TABLE_ID = #{tableId,jdbcType=VARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
         insert into tb4d_table (TABLE_ID, TABLE_CAPTION, TABLE_NAME,
                                 TABLE_DBNAME, TABLE_ORGAN_ID, TABLE_CREATE_TIME,
                                 TABLE_CREATER, TABLE_UPDATE_TIME, TABLE_UPDATER,
@@ -51,7 +51,7 @@
                 #{tableOrderNum,jdbcType=INTEGER}, #{tableDesc,jdbcType=VARCHAR}, #{tableGroupId,jdbcType=VARCHAR},
                 #{tableStatus,jdbcType=VARCHAR}, #{tableLinkId,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
         insert into tb4d_table
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="tableId != null">
@@ -160,7 +160,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
         update tb4d_table
         <set>
             <if test="tableCaption != null">
@@ -214,7 +214,7 @@
         </set>
         where TABLE_ID = #{tableId,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.TableEntity">
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
         update tb4d_table
         set TABLE_CAPTION = #{tableCaption,jdbcType=VARCHAR},
             TABLE_NAME = #{tableName,jdbcType=VARCHAR},

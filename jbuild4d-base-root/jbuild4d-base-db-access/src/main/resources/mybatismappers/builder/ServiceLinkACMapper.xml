@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.ServiceLinkMapper">
-    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.ServiceLinkEntity">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
         <constructor>
             <idArg column="LINK_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LINK_VALUE" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -32,7 +32,7 @@
         delete from tb4d_service_link
         where LINK_ID = #{linkId,jdbcType=VARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.ServiceLinkEntity">
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
         insert into tb4d_service_link (LINK_ID, LINK_VALUE, LINK_NAME,
                                        LINK_TYPE, LINK_URL, LINK_PARAS,
                                        LINK_USER, LINK_PASSWORD, LINK_CREATE_TIME,
@@ -44,7 +44,7 @@
                 #{linkOrderNum,jdbcType=INTEGER}, #{linkDesc,jdbcType=VARCHAR}, #{linkIsLocation,jdbcType=VARCHAR},
                 #{linkStatus,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.ServiceLinkEntity">
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
         insert into tb4d_service_link
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="linkId != null">
@@ -129,7 +129,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.ServiceLinkEntity">
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
         update tb4d_service_link
         <set>
             <if test="linkValue != null">
@@ -171,7 +171,7 @@
         </set>
         where LINK_ID = #{linkId,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.ServiceLinkEntity">
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
         update tb4d_service_link
         set LINK_VALUE = #{linkValue,jdbcType=VARCHAR},
             LINK_NAME = #{linkName,jdbcType=VARCHAR},
