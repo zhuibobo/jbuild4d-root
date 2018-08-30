@@ -73,6 +73,8 @@ public class InitSystemTest extends BaseTest {
     @Test
     public void initSystem() throws JBuild4DGenerallyException {
 
+
+
         //根菜单
         String rootMenuId="0";
         MenuEntity rootMenu=getMenu("-1",rootMenuId,"Root","Root","Root",MenuTypeEnum.Root.getDisplayName(),"","","");
