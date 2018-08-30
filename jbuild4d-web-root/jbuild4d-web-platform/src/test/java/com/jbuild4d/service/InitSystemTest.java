@@ -52,23 +52,14 @@ public class InitSystemTest extends BaseTest {
     @Autowired
     private IDevDemoTreeTableService devDemoTreeTableService;
 
-    @Autowired
-    private IDevDemoTLTreeService devDemoTLTreeService;
+
 
     @Autowired
     private IDictionaryService dictionaryService;
 
-    @Autowired
-    private IOrganService organService;
 
-    @Autowired
-    private ITableGroupService tableGroupService;
 
-    @Autowired
-    private ITableFieldService tableFieldService;
 
-    @Autowired
-    private IDatasetGroupService datasetGroupService;
 
     @Test
     public void initSystem() throws JBuild4DGenerallyException {
@@ -214,24 +205,9 @@ public class InitSystemTest extends BaseTest {
         }*/
 
         //DevDemoTreeTable根节点
-        devDemoTreeTableService.deleteByKey(jb4DSession,"0");
-        DevDemoTreeTableEntity treeTableRootEntity=devDemoTreeTableService.createRootNode(jb4DSession);
 
-        devDemoTLTreeService.deleteByKey(jb4DSession,"0");
-        devDemoTLTreeService.createRootNode(jb4DSession);
 
-        organService.deleteByKey(jb4DSession,"0");
-        organService.createRootOrgan(jb4DSession);
 
-        tableGroupService.deleteByKeyNotValidate(jb4DSession,"0");
-        TableGroupEntity rootTableGroupEntity=tableGroupService.createRootNode(jb4DSession);
-
-        tableGroupService.deleteByKeyNotValidate(jb4DSession,"TableGroupJBuild4DSystem");
-        tableGroupService.createSystemTableGroupNode(jb4DSession,rootTableGroupEntity);
-
-        tableFieldService.createGeneralTemplate(jb4DSession);
-
-        DatasetGroupEntity rootDatasetGroupEntity=datasetGroupService.createRootNode(jb4DSession);
     }
 
 
