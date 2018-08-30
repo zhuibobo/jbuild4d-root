@@ -346,4 +346,62 @@ CREATE TABLE `TB4D_DATASET_GROUP` (
   PRIMARY KEY (`DS_GROUP_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-数据集分组';
 
+/*------------------------------------------数据集------------------------------------------*/
+DROP TABLE IF EXISTS `TB4D_DATASET`;
+CREATE TABLE `TB4D_DATASET` (
+  `DS_ID`               NVARCHAR(100)  NOT NULL,
+  `DS_CAPTION`          NVARCHAR(200)  NOT NULL,
+  `DS_NAME`             NVARCHAR(200)  NOT NULL,
+  `DS_ORGAN_ID`         INT            NULL,
+  `DS_CREATE_TIME`      DATETIME       NULL,
+  `DS_CREATER`          NVARCHAR(100)  NULL,
+  `DS_UPDATE_TIME`      DATETIME       NULL,
+  `DS_UPDATER`          NVARCHAR(100)  NULL,
+  `DS_TYPE`             NVARCHAR(100)  NULL,
+  `DS_ISSYSTEM`         NVARCHAR(10)   NULL,
+  `DS_ORDER_NUM`        INT            NULL,
+  `DS_DESC`             NVARCHAR(1000) NULL,
+  `DS_GROUP_ID`         NVARCHAR(100)  NOT NULL,
+  `DS_STATUS`           NVARCHAR(10)   NULL,
+  `DS_SQL_SELECT_TEXT`  NVARCHAR(4000) NULL,
+  `DS_SQL_SELECT_VALUE` NVARCHAR(4000) NULL,
+  `DS_CLASS_NAME`       NVARCHAR(300)  NULL,
+  `DS_REST_URL`         NVARCHAR(500)  NULL,
+  PRIMARY KEY (`DS_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-数据集';
+
+/*------------------------------------------SQL数据集相关表------------------------------------------*/
+DROP TABLE IF EXISTS `TB4D_DATASET_RELATED_TABLE`;
+CREATE TABLE `TB4D_DATASET_RELATED_TABLE` (
+  `RT_ID`            NVARCHAR(100)  NOT NULL,
+  `RT_DS_ID`         NVARCHAR(100)  NULL,
+  `RT_TABLE_NAME`    NVARCHAR(200)  NULL,
+  `RT_TABLE_CAPTION` NVARCHAR(200)  NULL,
+  `RT_TABLE_ID`      NVARCHAR(200)  NULL,
+  `RT_TABLE_TYPE`    NVARCHAR(200)  NULL,
+  `RT_DESC`          NVARCHAR(1000) NULL,
+  `RT_ORDER_NUM`     INT           NULL,
+  PRIMARY KEY (`RT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-SQL数据集相关表';
+
+/*------------------------------------------数据集相关列------------------------------------------*/
+DROP TABLE IF EXISTS `TB4D_DATASET_COLUMN`;
+CREATE TABLE `TB4D_DATASET_COLUMN` (
+  `COLUMN_ID`            NVARCHAR(100)  NOT NULL,
+  `COLUMN_DS_ID`         NVARCHAR(100)  NULL,
+  `COLUMN_CAPTION`       NVARCHAR(200)  NULL,
+  `COLUMN_NAME`          NVARCHAR(200)  NULL,
+  `COLUMN_CREATE_TIME`   DATETIME       NULL,
+  `COLUMN_CREATER`       NVARCHAR(100)  NULL,
+  `COLUMN_UPDATE_TIME`   DATETIME       NULL,
+  `COLUMN_UPDATER`       NVARCHAR(100)  NULL,
+  `COLUMN_DESC`          NVARCHAR(1000) NULL,
+  `COLUMN_DEFAULT_TYPE`  NVARCHAR(50)   NULL,
+  `COLUMN_DEFAULT_VALUE` NVARCHAR(1000) NULL,
+  `COLUMN_DEFAULT_TEXT`  NVARCHAR(400)  NULL,
+  `COLUMN_ORDER_NUM`     INT            NULL,
+  `COLUMN_TABLE_NAME`    NVARCHAR(50)   NULL,
+  `COLUMN_IS_CUSTOM`     NVARCHAR(10)   NULL,
+  PRIMARY KEY (`COLUMN_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-数据集相关列';
 /*-----------------------------------------应用设计相关表--结束-----------------------------------------*/
