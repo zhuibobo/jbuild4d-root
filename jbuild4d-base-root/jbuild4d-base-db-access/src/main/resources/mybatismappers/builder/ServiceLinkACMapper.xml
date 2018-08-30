@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.ServiceLinkMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.ServiceLinkEntity">
+        <constructor>
+            <idArg column="LINK_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_VALUE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_PARAS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_USER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="LINK_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="LINK_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_IS_LOCATION" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        LINK_ID, LINK_VALUE, LINK_NAME, LINK_TYPE, LINK_URL, LINK_PARAS, LINK_USER, LINK_PASSWORD,
+        LINK_CREATE_TIME, LINK_ORDER_NUM, LINK_DESC, LINK_IS_LOCATION, LINK_STATUS
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb4d_service_link
+        where LINK_ID = #{linkId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from tb4d_service_link
+        where LINK_ID = #{linkId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.ServiceLinkEntity">
+        insert into tb4d_service_link (LINK_ID, LINK_VALUE, LINK_NAME,
+                                       LINK_TYPE, LINK_URL, LINK_PARAS,
+                                       LINK_USER, LINK_PASSWORD, LINK_CREATE_TIME,
+                                       LINK_ORDER_NUM, LINK_DESC, LINK_IS_LOCATION,
+                                       LINK_STATUS)
+        values (#{linkId,jdbcType=VARCHAR}, #{linkValue,jdbcType=VARCHAR}, #{linkName,jdbcType=VARCHAR},
+                #{linkType,jdbcType=VARCHAR}, #{linkUrl,jdbcType=VARCHAR}, #{linkParas,jdbcType=VARCHAR},
+                #{linkUser,jdbcType=VARCHAR}, #{linkPassword,jdbcType=VARCHAR}, #{linkCreateTime,jdbcType=TIMESTAMP},
+                #{linkOrderNum,jdbcType=INTEGER}, #{linkDesc,jdbcType=VARCHAR}, #{linkIsLocation,jdbcType=VARCHAR},
+                #{linkStatus,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.ServiceLinkEntity">
+        insert into tb4d_service_link
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="linkId != null">
+                LINK_ID,
+            </if>
+            <if test="linkValue != null">
+                LINK_VALUE,
+            </if>
+            <if test="linkName != null">
+                LINK_NAME,
+            </if>
+            <if test="linkType != null">
+                LINK_TYPE,
+            </if>
+            <if test="linkUrl != null">
+                LINK_URL,
+            </if>
+            <if test="linkParas != null">
+                LINK_PARAS,
+            </if>
+            <if test="linkUser != null">
+                LINK_USER,
+            </if>
+            <if test="linkPassword != null">
+                LINK_PASSWORD,
+            </if>
+            <if test="linkCreateTime != null">
+                LINK_CREATE_TIME,
+            </if>
+            <if test="linkOrderNum != null">
+                LINK_ORDER_NUM,
+            </if>
+            <if test="linkDesc != null">
+                LINK_DESC,
+            </if>
+            <if test="linkIsLocation != null">
+                LINK_IS_LOCATION,
+            </if>
+            <if test="linkStatus != null">
+                LINK_STATUS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="linkId != null">
+                #{linkId,jdbcType=VARCHAR},
+            </if>
+            <if test="linkValue != null">
+                #{linkValue,jdbcType=VARCHAR},
+            </if>
+            <if test="linkName != null">
+                #{linkName,jdbcType=VARCHAR},
+            </if>
+            <if test="linkType != null">
+                #{linkType,jdbcType=VARCHAR},
+            </if>
+            <if test="linkUrl != null">
+                #{linkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="linkParas != null">
+                #{linkParas,jdbcType=VARCHAR},
+            </if>
+            <if test="linkUser != null">
+                #{linkUser,jdbcType=VARCHAR},
+            </if>
+            <if test="linkPassword != null">
+                #{linkPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="linkCreateTime != null">
+                #{linkCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="linkOrderNum != null">
+                #{linkOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="linkDesc != null">
+                #{linkDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="linkIsLocation != null">
+                #{linkIsLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="linkStatus != null">
+                #{linkStatus,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.ServiceLinkEntity">
+        update tb4d_service_link
+        <set>
+            <if test="linkValue != null">
+                LINK_VALUE = #{linkValue,jdbcType=VARCHAR},
+            </if>
+            <if test="linkName != null">
+                LINK_NAME = #{linkName,jdbcType=VARCHAR},
+            </if>
+            <if test="linkType != null">
+                LINK_TYPE = #{linkType,jdbcType=VARCHAR},
+            </if>
+            <if test="linkUrl != null">
+                LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="linkParas != null">
+                LINK_PARAS = #{linkParas,jdbcType=VARCHAR},
+            </if>
+            <if test="linkUser != null">
+                LINK_USER = #{linkUser,jdbcType=VARCHAR},
+            </if>
+            <if test="linkPassword != null">
+                LINK_PASSWORD = #{linkPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="linkCreateTime != null">
+                LINK_CREATE_TIME = #{linkCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="linkOrderNum != null">
+                LINK_ORDER_NUM = #{linkOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="linkDesc != null">
+                LINK_DESC = #{linkDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="linkIsLocation != null">
+                LINK_IS_LOCATION = #{linkIsLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="linkStatus != null">
+                LINK_STATUS = #{linkStatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where LINK_ID = #{linkId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.ServiceLinkEntity">
+        update tb4d_service_link
+        set LINK_VALUE = #{linkValue,jdbcType=VARCHAR},
+            LINK_NAME = #{linkName,jdbcType=VARCHAR},
+            LINK_TYPE = #{linkType,jdbcType=VARCHAR},
+            LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+            LINK_PARAS = #{linkParas,jdbcType=VARCHAR},
+            LINK_USER = #{linkUser,jdbcType=VARCHAR},
+            LINK_PASSWORD = #{linkPassword,jdbcType=VARCHAR},
+            LINK_CREATE_TIME = #{linkCreateTime,jdbcType=TIMESTAMP},
+            LINK_ORDER_NUM = #{linkOrderNum,jdbcType=INTEGER},
+            LINK_DESC = #{linkDesc,jdbcType=VARCHAR},
+            LINK_IS_LOCATION = #{linkIsLocation,jdbcType=VARCHAR},
+            LINK_STATUS = #{linkStatus,jdbcType=VARCHAR}
+        where LINK_ID = #{linkId,jdbcType=VARCHAR}
+    </update>
+</mapper>

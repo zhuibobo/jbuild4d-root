@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.ServiceLinkMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SERVICE_LINK ORDER by LINK_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_SERVICE_LINK</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(LINK_ORDER_NUM) is null then 1 else max(LINK_ORDER_NUM)+1 end ORDERNUM from TB4D_SERVICE_LINK</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_SERVICE_LINK<where>
+        <if test="linkValue !=null and linkValue !=''"> and LINK_VALUE like #{linkValue} </if>
+        <if test="linkName !=null and linkName !=''"> and LINK_NAME like #{linkName} </if>
+        <if test="linkType !=null and linkType !=''"> and LINK_TYPE like #{linkType} </if>
+        <if test="linkUrl !=null and linkUrl !=''"> and LINK_URL like #{linkUrl} </if>
+        <if test="linkParas !=null and linkParas !=''"> and LINK_PARAS like #{linkParas} </if>
+        <if test="linkUser !=null and linkUser !=''"> and LINK_USER like #{linkUser} </if>
+        <if test="linkPassword !=null and linkPassword !=''"> and LINK_PASSWORD like #{linkPassword} </if>
+        <if test="linkDesc !=null and linkDesc !=''"> and LINK_DESC like #{linkDesc} </if>
+        <if test="linkIsLocation !=null and linkIsLocation !=''"> and LINK_IS_LOCATION like #{linkIsLocation} </if>
+        <if test="linkStatus !=null and linkStatus !=''"> and LINK_STATUS like #{linkStatus} </if>
+    </where>ORDER by LINK_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[select * from TB4D_SERVICE_LINK where LINK_ORDER_NUM = (select max(LINK_ORDER_NUM) from TB4D_SERVICE_LINK where LINK_ORDER_NUM<(select LINK_ORDER_NUM from TB4D_SERVICE_LINK where LINK_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_SERVICE_LINK
+                                                                                                             where LINK_ORDER_NUM = (select min(LINK_ORDER_NUM) from TB4D_SERVICE_LINK where LINK_ORDER_NUM>(select LINK_ORDER_NUM from TB4D_SERVICE_LINK where LINK_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>
