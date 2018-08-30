@@ -243,8 +243,8 @@ CREATE TABLE TB4D_OPERATION_LOG (
 /*-----------------------------------------应用设计相关表--开始-----------------------------------------*/
 
 /*-----------------------------------------服务连接表-----------------------------------------*/
-DROP TABLE IF EXISTS `TB4D_DATABASE_SERVICE_LINK`;
-CREATE TABLE `TB4D_DATABASE_SERVICE_LINK` (
+DROP TABLE IF EXISTS `TB4D_SERVICE_LINK`;
+CREATE TABLE `TB4D_SERVICE_LINK` (
   `LINK_ID`          NVARCHAR(100)  NOT NULL,
   `LINK_VALUE`       NVARCHAR(200)  NULL,
   `LINK_NAME`        NVARCHAR(200)  NULL,
