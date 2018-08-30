@@ -1,6 +1,6 @@
 package com.jbuild4d.base.dbaccess.dao;
 
-import com.jbuild4d.base.dbaccess.dbentities.system.OrganTypeEntity;
+import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganTypeEntity;
 
 /**
  * Created with IntelliJ IDEA.
