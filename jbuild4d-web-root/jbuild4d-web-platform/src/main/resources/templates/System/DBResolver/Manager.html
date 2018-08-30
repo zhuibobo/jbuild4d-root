@@ -67,6 +67,33 @@
                                         <span>JBuild4D-Project</span>
                                     </radio>
                                 </radio-group>
+                                <radio-group v-model="formValidate.packageType" vertical>
+                                    <radio label="JBuild4D-PlatForm">
+                                        <span>JBuild4D-PlatForm</span>
+                                    </radio>
+                                    <radio label="JBuild4D-Project">
+                                        <span>JBuild4D-Project</span>
+                                    </radio>
+                                </radio-group>
+                            </i-col>
+                        </row>
+                        <row>
+                            <i-col span="2" style="text-align: center;padding-top: 6px">二级包名：</i-col>
+                            <i-col span="22">
+                                <radio-group v-model="formValidate.packageLevel2Name">
+                                    <radio label="builder">
+                                        <span>builder</span>
+                                    </radio>
+                                    <radio label="devdemo">
+                                        <span>devdemo</span>
+                                    </radio>
+                                    <radio label="organrelevance">
+                                        <span>organrelevance</span>
+                                    </radio>
+                                    <radio label="systemsetting">
+                                        <span>systemsetting</span>
+                                    </radio>
+                                </radio-group>
                             </i-col>
                         </row>
                         <row>
