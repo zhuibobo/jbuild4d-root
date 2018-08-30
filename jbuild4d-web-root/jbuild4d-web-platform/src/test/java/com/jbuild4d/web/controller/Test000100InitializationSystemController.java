@@ -1,6 +1,5 @@
-package com.jbuild4d.back.controller;
+package com.jbuild4d.web.controller;
 
-import com.jbuild4d.web.controller.ControllerTestBase;
 import com.jbuild4d.web.platform.beanconfig.sys.RootConfig;
 import com.jbuild4d.web.platform.beanconfig.sys.WebConfig;
 import org.junit.Before;
@@ -25,13 +24,12 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  * Date: 2018/8/30
  * To change this template use File | Settings | File Templates.
  */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration(value = "src/main/webapp")
 @ContextHierarchy({
         @ContextConfiguration(name = "parent", classes = RootConfig.class),
         @ContextConfiguration(name = "child", classes = WebConfig.class)})
-public class InitializationSystemControllerTest extends ControllerTestBase {
+public class Test000100InitializationSystemController extends ControllerTestBase {
     MockMvc mockMvc;
 
     @Autowired
@@ -49,11 +47,11 @@ public class InitializationSystemControllerTest extends ControllerTestBase {
     @Test
     public void initializationSystem() throws Exception {
         //context.getServletContext().
-        /*MockHttpServletRequestBuilder requestBuilder =post("/PlatForm/InitializationSystem/Running.do");
+        MockHttpServletRequestBuilder requestBuilder =post("/PlatForm/InitializationSystem/Running.do");
 
         requestBuilder.sessionAttr("JB4DSession",getSession());
         MvcResult result=mockMvc.perform(requestBuilder).andReturn();
         String json=result.getResponse().getContentAsString();
-        System.out.println(json);*/
+        System.out.println(json);
     }
 }
