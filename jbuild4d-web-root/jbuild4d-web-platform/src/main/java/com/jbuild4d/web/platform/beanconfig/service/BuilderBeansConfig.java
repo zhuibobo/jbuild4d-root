@@ -26,11 +26,6 @@ import java.io.IOException;
 @EnableTransactionManagement
 public class BuilderBeansConfig {
 
-    @Bean
-    public IDatabaseServiceLinkService databaseServiceLinkService(ISQLBuilderService _sqlBuilderService, DatabaseServiceLinkMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
-        IDatabaseServiceLinkService bean=new DatabaseServiceLinkServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
-        return bean;
-    }
 
     @Bean
     public ITableGroupService tableGroupService(ISQLBuilderService _sqlBuilderService, TableGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate) {

@@ -131,11 +131,6 @@ public class MybatisBeansConfig {
     }
 
     @Bean
-    public DatabaseServiceLinkMapper databaseServiceLinkMapper(SqlSessionTemplate sqlSessionTemplate) {
-        return sqlSessionTemplate.getMapper(DatabaseServiceLinkMapper.class);
-    }
-
-    @Bean
     public TableGroupMapper tableGroupMapper(SqlSessionTemplate sqlSessionTemplate) {
         return sqlSessionTemplate.getMapper(TableGroupMapper.class);
     }
