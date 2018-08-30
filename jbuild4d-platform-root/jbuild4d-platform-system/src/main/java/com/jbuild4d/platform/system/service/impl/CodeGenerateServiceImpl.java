@@ -167,21 +167,24 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         jdbcConnectionConfiguration.setPassword(DBProp.getPassword());
         context.setJdbcConnectionConfiguration(jdbcConnectionConfiguration);
 
-        //设置modelde的相关信息
+        //设置model的相关信息
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration=context.getJavaModelGeneratorConfiguration();
-        javaModelGeneratorConfiguration.setTargetPackage(codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).packageName+"."+packageLevel2Name);
+        String modelPackageName=codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).packageName+"."+packageLevel2Name;
+        javaModelGeneratorConfiguration.setTargetPackage(modelPackageName);
         javaModelGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).getFullSavePath());
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
         //设置dao的相关的信息
         JavaClientGeneratorConfiguration javaClientGeneratorConfiguration=context.getJavaClientGeneratorConfiguration();
-        javaClientGeneratorConfiguration.setTargetPackage(codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).packageName+"."+packageLevel2Name);
+        String daoPackageName=codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).packageName+"."+packageLevel2Name;
+        javaClientGeneratorConfiguration.setTargetPackage(daoPackageName);
         javaClientGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).getFullSavePath());
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
         //设置mapper的相关信息
         SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration=context.getSqlMapGeneratorConfiguration();
-        sqlMapGeneratorConfiguration.setTargetPackage(codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).packageName+"."+packageLevel2Name);
+        String mapperPackageName=codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).packageName+"."+packageLevel2Name;
+        sqlMapGeneratorConfiguration.setTargetPackage(mapperPackageName);
         sqlMapGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).getFullSavePath());
         context.setSqlMapGeneratorConfiguration(sqlMapGeneratorConfiguration);
 
@@ -229,13 +232,13 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
 
         //读取文件作为结果返回
         //Entity文件
-        String tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).fullSavePath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).packageName.replaceAll("\\.","/");
+        String tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).fullSavePath+"/"+modelPackageName.replaceAll("\\.","/");
         generateCodeMap.put("EntityContent",readFolderSingleFileToString(tempPath));
 
-        tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).fullSavePath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).packageName.replaceAll("\\.","/");
+        tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).fullSavePath+"/"+daoPackageName.replaceAll("\\.","/");
         generateCodeMap.put("DaoContent",readFolderSingleFileToString(tempPath));
 
-        tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).fullSavePath+"/"+codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).packageName.replaceAll("\\.","/");
+        tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).fullSavePath+"/"+mapperPackageName.replaceAll("\\.","/");
         generateCodeMap.put("MapperACContent",readFolderSingleFileToString(tempPath));
 
         System.out.println("---------------------------打印表信息---------------------------");

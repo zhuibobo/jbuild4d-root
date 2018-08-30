@@ -8,7 +8,7 @@ import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTLTreeMapper;
 import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTreeTableMapper;
 import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganMapper;
 import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganTypeMapper;
-import com.jbuild4d.base.dbaccess.dao.system.*;
+import com.jbuild4d.base.dbaccess.dao.systemsetting.*;
 import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.UniversalIntEnumHandler;

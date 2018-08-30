@@ -1,6 +1,7 @@
 package com.jbuild4d.web.platform.beanconfig.service;
 
-import com.jbuild4d.base.dbaccess.dao.system.*;
+import com.jbuild4d.base.dbaccess.dao.builder.MenuMapper;
+import com.jbuild4d.base.dbaccess.dao.systemsetting.*;
 import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.dbaccess.dynamic.ISQLBuilderMapper;
 import com.jbuild4d.base.dbaccess.dynamic.SQLBuilderMapper;

@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.system.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jbuild4d.base.dbaccess.dao.system.OperationLogMapper;
+import com.jbuild4d.base.dbaccess.dao.systemsetting.OperationLogMapper;
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;

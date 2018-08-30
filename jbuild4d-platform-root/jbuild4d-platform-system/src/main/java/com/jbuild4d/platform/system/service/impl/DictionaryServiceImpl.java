@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.system.service.impl;
 
-import com.jbuild4d.base.dbaccess.dao.system.DictionaryMapper;
+import com.jbuild4d.base.dbaccess.dao.systemsetting.DictionaryMapper;
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.IAddBefore;

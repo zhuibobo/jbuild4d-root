@@ -1,4 +1,4 @@
-package com.jbuild4d.base.dbaccess.dbentities.systemsetting;
+package com.jbuild4d.base.dbaccess.dbentities.builder;
 
 import javax.persistence.Id;
 import java.util.Date;
