@@ -1,4 +1,4 @@
-package com.jbuild4d.service;
+package com.jbuild4d.back.service;
 
 import com.jbuild4d.base.service.general.JB4DSession;
 import org.junit.Before;

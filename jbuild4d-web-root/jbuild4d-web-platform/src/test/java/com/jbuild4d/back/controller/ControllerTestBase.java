@@ -1,4 +1,4 @@
-package com.jbuild4d.controller;
+package com.jbuild4d.back.controller;
 
 import com.jbuild4d.base.service.general.JB4DSession;
 

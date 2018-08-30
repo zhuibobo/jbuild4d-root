@@ -1,4 +1,4 @@
-package com.jbuild4d.service;
+package com.jbuild4d.back.service;
 
 import org.junit.Test;
 import org.mybatis.generatorex.api.MyBatisGenerator;

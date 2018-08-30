@@ -1,4 +1,4 @@
-package com.jbuild4d.service;
+package com.jbuild4d.back.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryGroupEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;

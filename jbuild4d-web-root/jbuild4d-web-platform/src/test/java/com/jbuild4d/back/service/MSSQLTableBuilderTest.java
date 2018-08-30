@@ -1,4 +1,4 @@
-package com.jbuild4d.service;
+package com.jbuild4d.back.service;
 
 import com.jbuild4d.base.dbaccess.dao.builder.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;

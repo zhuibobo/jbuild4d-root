@@ -1,4 +1,4 @@
-package com.jbuild4d.web.mybatis;
+package com.jbuild4d.back.mybatis;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.MenuEntity;
 import com.jbuild4d.base.service.general.JB4DSession;

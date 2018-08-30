@@ -1,4 +1,4 @@
-package com.jbuild4d.controller;
+package com.jbuild4d.back.controller;
 
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.JsonUtility;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
- * Date: 2018/8/30
+ * Date: 2018/7/26
  * To change this template use File | Settings | File Templates.
  */
 
@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @ContextHierarchy({
         @ContextConfiguration(name = "parent", classes = RootConfig.class),
         @ContextConfiguration(name = "child", classes = WebConfig.class)})
-public class InitializationSystemControllerTest extends ControllerTestBase {
+public class CodeGenerateControllerTest {
     MockMvc mockMvc;
 
     @Autowired
@@ -43,20 +43,29 @@ public class InitializationSystemControllerTest extends ControllerTestBase {
     @Before
     public void setupMock() throws Exception {
         mockMvc = webAppContextSetup(context).build();
-        /*MockHttpServletRequestBuilder requestBuilder =post("/ValidateAccount.do");
+        MockHttpServletRequestBuilder requestBuilder =post("/ValidateAccount.do");
         requestBuilder.param("account","1");
         requestBuilder.param("password","1");
-        mockMvc.perform(requestBuilder);*/
+        mockMvc.perform(requestBuilder);
     }
 
     @Test
-    public void initializationSystem() throws Exception {
+    public void demo() throws Exception {
         //context.getServletContext().
-        MockHttpServletRequestBuilder requestBuilder =post("/PlatForm/InitializationSystem/Running.do");
+        MockHttpServletRequestBuilder requestBuilder =post("/PlatForm/System/CodeGenerate/GetTableGenerateCode.do");
+        requestBuilder.param("tableName","TB4D_SETTING");
+        requestBuilder.param("packageType","JBuild4D-PlatForm");
 
-        requestBuilder.sessionAttr("JB4DSession",getSession());
+        JB4DSession b4DSession = new JB4DSession();
+        b4DSession.setOrganName("4D");
+        b4DSession.setOrganId("OrganId");
+        b4DSession.setUserName("Alex");
+        b4DSession.setUserId("UserId");
+        requestBuilder.sessionAttr("JB4DSession",b4DSession);
         MvcResult result=mockMvc.perform(requestBuilder).andReturn();
         String json=result.getResponse().getContentAsString();
-        System.out.println(json);
+        //JBuild4DResponseVo jBuild4DResponseVo= JsonUtility.toObject(json,JBuild4DResponseVo<Map<String,String>>.class);
+        Map<String,Object> resultMap=JsonUtility.toObject(json,Map.class);
+        System.out.println(((Map)resultMap.get("data")).get("DaoContent"));
     }
 }
