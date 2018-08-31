@@ -32,5 +32,5 @@ public interface ITableService extends IBaseService<TableEntity> {
 
     boolean deletePhysicsTable(JB4DSession jb4DSession, String tableName) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException;
 
-    TableEntity getByTableName(JB4DSession jb4DSession, String newTableName);
+    TableEntity getByTableName(JB4DSession jb4DSession, String tableName);
 }

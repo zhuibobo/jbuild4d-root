@@ -6,6 +6,8 @@ import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.base.tools.common.list.IListWhereCondition;
+import com.jbuild4d.base.tools.common.list.ListUtility;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
@@ -25,6 +27,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 /**
@@ -119,14 +122,7 @@ public class TableControllerTest  extends ControllerTestBase {
     }
 
     private List<TableFieldVO> getFieldVoListGeneralTemplate() throws Exception {
-        MockHttpServletRequestBuilder requestBuilder =post("/PlatForm/Builder/DataStorage/DataBase/Table/GetEditTableData.do");
-        requestBuilder.sessionAttr("JB4DSession",getSession());
-        requestBuilder.param("op","add");
-        requestBuilder.param("groupId","DevGroup");
-        requestBuilder.param("recordId","xxx");
-        MvcResult result=mockMvc.perform(requestBuilder).andReturn();
-        String json=result.getResponse().getContentAsString();
-        JBuild4DResponseVo responseVo=JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        JBuild4DResponseVo responseVo = getEditTableData("add","Empty");
         System.out.println(responseVo);
         //JBuild4DResponseVo responseVo= tableController.GetEditTableData("xxx","add","DevGroup");
 
@@ -139,14 +135,65 @@ public class TableControllerTest  extends ControllerTestBase {
         return tableFieldVOList;
     }
 
+    private JBuild4DResponseVo getEditTableData(String op,String recordId) throws Exception {
+        MockHttpServletRequestBuilder requestBuilder =post("/PlatForm/Builder/DataStorage/DataBase/Table/GetEditTableData.do");
+        requestBuilder.sessionAttr("JB4DSession",getSession());
+        requestBuilder.param("op",op);
+        requestBuilder.param("groupId","DevGroup");
+        requestBuilder.param("recordId",recordId);
+        MvcResult result=mockMvc.perform(requestBuilder).andReturn();
+        String json=result.getResponse().getContentAsString();
+        return JsonUtility.toObject(json, JBuild4DResponseVo.class);
+    }
+
     @Test
     public void saveTableEdit() throws Exception {
         saveTableEdit_Add();
         saveTableEdit_Update();
     }
 
-    private void saveTableEdit_Update() {
+    private void saveTableEdit_Update() throws Exception {
+        TableEntity tableEntity=tableService.getByTableName(getSession(),"T_DEV_TABLE_1");
+        JBuild4DResponseVo responseVo=getEditTableData("update",tableEntity.getTableId());
+        List<TableFieldVO> tableFieldVOList=new ArrayList<>();
+        List<Map> mapList=(List<Map>)responseVo.getExKVData().get("tableFieldsData");
+        for (Map mapVo : mapList) {
+            String recordString=JsonUtility.toObjectString(mapVo);
+            tableFieldVOList.add(JsonUtility.toObject(recordString,TableFieldVO.class));
+        }
 
+        //新增列
+        TableFieldVO ntextField = newFiled(getSession(), tableEntity.getTableId(), "F_NTEXT_1", "F_NTEXT_1",
+                TrueFalseEnum.False, TrueFalseEnum.True,
+                TableFieldTypeEnum.TextType, 0, 0,
+                "", "", "", "");
+        tableFieldVOList.add(ntextField);
+
+        //删除列
+        tableFieldVOList.remove(ListUtility.WhereSingle(tableFieldVOList, new IListWhereCondition<TableFieldVO>() {
+            @Override
+            public boolean Condition(TableFieldVO item) {
+                return item.getFieldName().equals("F_NTEXT");
+            }
+        }));
+
+        //修改列,修改时，自动对记录数量小于10W的表进行备份，记录大于10W的，禁止进行字段的修改！
+
+
+        MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
+        requestBuilder.sessionAttr("JB4DSession", getSession());
+        String tableEntityJson = URLEncoder.encode(JsonUtility.toObjectString(tableEntity), "utf-8");
+        String fieldVoListJson = URLEncoder.encode(JsonUtility.toObjectString(tableFieldVOList), "utf-8");
+        requestBuilder.param("op", "update");
+        requestBuilder.param("tableEntityJson", tableEntityJson);
+        requestBuilder.param("fieldVoListJson", fieldVoListJson);
+        requestBuilder.param("ignorePhysicalError", "false");
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String json = result.getResponse().getContentAsString();
+        responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        System.out.println(json);
+        Assert.assertTrue(responseVo.isSuccess());
     }
 
 
@@ -173,7 +220,7 @@ public class TableControllerTest  extends ControllerTestBase {
 
         //调用接口，获取通用模版
         List<TableFieldVO> templateFieldVoList = getFieldVoListGeneralTemplate();
-        TableFieldVO ntextField = newFiled(getSession(), "Tempalte", "F_NTEXT", "F_NTEXT",
+        TableFieldVO ntextField = newFiled(getSession(), newTable.getTableId(), "F_NTEXT", "F_NTEXT",
                 TrueFalseEnum.False, TrueFalseEnum.True,
                 TableFieldTypeEnum.TextType, 0, 0,
                 "", "", "", "");
