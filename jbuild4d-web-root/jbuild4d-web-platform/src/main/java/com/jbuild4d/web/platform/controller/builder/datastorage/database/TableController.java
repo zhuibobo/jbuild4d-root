@@ -51,6 +51,22 @@ public class TableController {
     @Autowired
     IBuilderConfigService builderConfigService;
 
+    @RequestMapping(value = "/ValidateTableIsNoExist")
+    @ResponseBody
+    public JBuild4DResponseVo validateTableIsExist(String tableName){
+        //TableEntity tableEntity=tableService.getByTableName(tableName);
+        JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+        if(tableService.existLogicTableName(jb4DSession,tableName)){
+            return JBuild4DResponseVo.error("已经存在名称为"+tableName+"的逻辑表！");
+        }
+        else{
+            if(tableService.existLogicTableName(jb4DSession,tableName)){
+                return JBuild4DResponseVo.error("已经存在名称为"+tableName+"的物理表！");
+            }
+        }
+        return JBuild4DResponseVo.success("不存在同名的表！");
+    }
+
     @RequestMapping(value = "/EditTableView", method = RequestMethod.GET)
     public ModelAndView editTableView(String recordId, String op,String groupId) throws IllegalAccessException, InstantiationException, IOException, XPathExpressionException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataStorage/DataBase/TableEdit");
@@ -96,6 +112,7 @@ public class TableController {
             List<TableFieldVO> templateFields=tableFieldService.getTemplateFieldsByName(templateName);
             for (TableFieldVO templateField : templateFields) { //修改模版的字段ID,避免重复
                 templateField.setFieldId(UUIDUtility.getUUID());
+                templateField.setFieldTemplateName("FromTemplate:"+templateField.getFieldTemplateName());
             }
             templateFieldMap.put(templateName,templateFields);
         }

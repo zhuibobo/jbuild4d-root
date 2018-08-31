@@ -24,6 +24,11 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
 {
     TableGroupMapper tableGroupMapper;
 
+    @Override
+    public String getRootId() {
+        return rootId;
+    }
+
     private String rootId="0";
     private String rootParentId="-1";
 
@@ -143,8 +148,8 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
     }
 
     @Override
-    public TableGroupEntity getByGroupName(JB4DSession jb4DSession, String groupName) {
-        return tableGroupMapper.selectByGroupName(groupName);
+    public TableGroupEntity getByGroupText(JB4DSession jb4DSession, String groupText) {
+        return tableGroupMapper.selectByGroupText(groupText);
     }
 
     @Override

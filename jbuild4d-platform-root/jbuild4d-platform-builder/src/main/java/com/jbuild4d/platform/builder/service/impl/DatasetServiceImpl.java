@@ -107,7 +107,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
                     //尝试补充表的标题
                     List<DataSetRelatedTableVo> dataSetRelatedTableVoList=resultVo.getRelatedTableVoList();
                     for (DataSetRelatedTableVo dataSetRelatedTableVo : dataSetRelatedTableVoList) {
-                        TableEntity tableEntity=tableService.getByTableName(dataSetRelatedTableVo.getRtTableName());
+                        TableEntity tableEntity=tableService.getByTableName(jb4DSession,dataSetRelatedTableVo.getRtTableName());
                         if(tableEntity!=null){
                             dataSetRelatedTableVo.setRtTableCaption(tableEntity.getTableCaption());
                         }

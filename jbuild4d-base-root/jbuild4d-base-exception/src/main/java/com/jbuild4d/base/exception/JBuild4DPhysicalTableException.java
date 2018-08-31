@@ -52,7 +52,7 @@ public class JBuild4DPhysicalTableException extends Exception {
     }
 
     public static JBuild4DPhysicalTableException getTableIsExistError(String tableName){
-        return new JBuild4DPhysicalTableException(JBuild4DPhysicalTableException.ErrorCode_TableIsExistError,"已经存在名称为"+tableName+"的表!");
+        return new JBuild4DPhysicalTableException(JBuild4DPhysicalTableException.ErrorCode_TableIsExistError,"已经存在名称为"+tableName+"的物理表!");
     }
 
 
@@ -70,6 +70,10 @@ public class JBuild4DPhysicalTableException extends Exception {
 
     public static JBuild4DPhysicalTableException getFieldTypeNodeSupportError(String typeName) {
         return new JBuild4DPhysicalTableException(JBuild4DPhysicalTableException.ErrorCode_FieldTypeNodeSupportError,"不支持字段类型"+typeName+"!");
+    }
+
+    public static JBuild4DPhysicalTableException getFieldCreateError() {
+        return new JBuild4DPhysicalTableException(JBuild4DPhysicalTableException.ErrorCode_CreateFieldError,"创建物理表字段失败!");
     }
 
     public static JBuild4DPhysicalTableException getFieldCreateError(Exception ex) {

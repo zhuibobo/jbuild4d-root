@@ -24,11 +24,11 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  * Date: 2018/8/30
  * To change this template use File | Settings | File Templates.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+/*@RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration(value = "src/main/webapp")
 @ContextHierarchy({
         @ContextConfiguration(name = "parent", classes = RootConfig.class),
-        @ContextConfiguration(name = "child", classes = WebConfig.class)})
+        @ContextConfiguration(name = "child", classes = WebConfig.class)})*/
 public class InitializationSystemControllerTest extends ControllerTestBase {
     MockMvc mockMvc;
 

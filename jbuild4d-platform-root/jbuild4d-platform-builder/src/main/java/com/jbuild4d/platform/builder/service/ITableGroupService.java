@@ -12,9 +12,11 @@ import com.jbuild4d.base.service.general.JB4DSession;
  * To change this template use File | Settings | File Templates.
  */
 public interface ITableGroupService  extends IBaseService<TableGroupEntity> {
+    String getRootId();
+
     TableGroupEntity createRootNode(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
 
     TableGroupEntity createSystemTableGroupNode(JB4DSession jb4DSession, TableGroupEntity parentGroup) throws JBuild4DGenerallyException;
 
-    TableGroupEntity getByGroupName(JB4DSession jb4DSession,String groupName);
+    TableGroupEntity getByGroupText(JB4DSession jb4DSession,String groupText);
 }

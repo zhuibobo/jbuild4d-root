@@ -4,6 +4,8 @@ import com.jbuild4d.base.dbaccess.dao.builder.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dao.builder.TableMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
+import com.jbuild4d.base.exception.JBuild4DPhysicalTableException;
+import com.jbuild4d.base.exception.JBuild4DSQLKeyWordException;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
@@ -49,8 +51,8 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
     public void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException {
         try {
-            if (this.existTableName(tableEntity.getTableName())) {
-                throw new JBuild4DGenerallyException("已经存在表名为" + tableEntity.getTableName() + "的表!");
+            if (this.existLogicTableName(jb4DSession,tableEntity.getTableName())) {
+                throw new JBuild4DGenerallyException("TB4D_TABLE中已经存在表名为" + tableEntity.getTableName() + "的逻辑表!");
             } else {
                 //创建物理表
                 boolean createPhysicalTable = tableBuilederFace.newTable(tableEntity, tableFieldVOList);
@@ -216,17 +218,22 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     }
 
     @Override
-    public boolean existTableName(String tableName) {
+    public boolean existLogicTableName(JB4DSession jb4DSession,String tableName) {
         return tableMapper.selectByTableName(tableName)!=null;
     }
 
-    /*@Override
-    public void deleteTable(TableEntity tableEntity) {
-
-    }*/
+    @Override
+    public boolean existPhysicsTableName(JB4DSession jb4DSession,String tableName) {
+        return tableBuilederFace.isExistTable(tableName);
+    }
 
     @Override
-    public TableEntity getByTableName(String newTableName) {
+    public boolean deletePhysicsTable(JB4DSession jb4DSession, String tableName) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
+        return tableBuilederFace.deleteTable(tableName);
+    }
+
+    @Override
+    public TableEntity getByTableName(JB4DSession jb4DSession,String newTableName) {
         return tableMapper.selectByTableName(newTableName);
     }
 }

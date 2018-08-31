@@ -119,6 +119,11 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
         return TableFieldVO.EntityListToVoList(tableFieldMapper.selectByTableName(rtTableName));
     }
 
+    @Override
+    public void deleteByTableId(JB4DSession session, String tableId) {
+        tableFieldMapper.deleteByTableId(tableId);
+    }
+
     private TableFieldEntity newFiled(JB4DSession jb4DSession, String tableId, String fieldName, String fieldCaption,
                                       TrueFalseEnum pk, TrueFalseEnum allowNull,
                                       TableFieldTypeEnum fieldDataType,int dataLength,int decimalLength,

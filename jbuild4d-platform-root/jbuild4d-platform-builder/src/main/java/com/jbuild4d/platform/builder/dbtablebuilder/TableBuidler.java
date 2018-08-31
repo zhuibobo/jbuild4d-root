@@ -53,7 +53,10 @@ public abstract class TableBuidler {
 
             //在表中加入表字段
             for (TableFieldEntity fieldEntity : fieldVos) {
-                newField(tableEntity,fieldEntity);
+                boolean newField=newField(tableEntity,fieldEntity);
+                if(!newField){
+                    throw JBuild4DPhysicalTableException.getFieldCreateError();
+                }
             }
 
             createTableEnd(tableEntity);

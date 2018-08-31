@@ -68,12 +68,24 @@ public class TableBuilederFace {
         return dbBuidler.newTable(tableEntity,fieldVos);
     }
 
+    public boolean isExistTable(String tableName){
+        TableEntity tableEntity=new TableEntity();
+        tableEntity.setTableName(tableName);
+        return dbBuidler.isExistTable(tableEntity);
+    }
+
     public boolean updateTable(TableEntity tableEntity,List<TableFieldVO> newFields,List<TableFieldVO> updateFields,List<TableFieldVO> deleteFields) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
         this.validateTableEntity(tableEntity);
         this.validateTableFields(newFields);
         this.validateTableFields(updateFields);
         this.validateTableFields(deleteFields);
         return dbBuidler.updateTable(tableEntity,newFields,updateFields,deleteFields);
+    }
+
+    public boolean deleteTable(String tableName) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
+        TableEntity tableEntity=new TableEntity();
+        tableEntity.setTableName(tableName);
+        return dbBuidler.deleteTable(tableEntity);
     }
 
     public boolean deleteTable(TableEntity tableEntity) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {

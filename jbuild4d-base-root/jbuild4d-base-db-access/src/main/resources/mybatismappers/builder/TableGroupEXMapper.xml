@@ -11,11 +11,11 @@
                                                               when max(TABLE_GROUP_ORDER_NUM) is null then 1
                                                               else max(TABLE_GROUP_ORDER_NUM) + 1 end ORDERNUM
                                                    from TB4D_TABLE_GROUP</select>
-    <select id="selectByGroupName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByGroupText" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from tb4d_table_group
-        where TABLE_GROUP_ID = #{tableGroupId,jdbcType=VARCHAR}
+        where TABLE_GROUP_TEXT = #{groupText,jdbcType=VARCHAR}
     </select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_TABLE_GROUP
         <where>
