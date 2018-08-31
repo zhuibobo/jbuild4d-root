@@ -3,8 +3,11 @@ package com.jbuild4d.web.platform.controlleradvice;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.exception.SessionTimeoutException;
 import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.web.platform.controller.LoginController;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.apache.ibatis.binding.BindingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -24,14 +27,17 @@ import java.io.IOException;
 @ControllerAdvice
 public class ExceptionControllerAdvice {
 
+    Logger logger = LoggerFactory.getLogger(LoginController.class);
+
     @ExceptionHandler(JBuild4DGenerallyException.class)
-    public void processGenerallyException(HttpServletResponse response,NativeWebRequest request, JBuild4DGenerallyException e) {
-        e.printStackTrace();
+    public void processGenerallyException(HttpServletResponse response,HttpServletRequest request, JBuild4DGenerallyException e) {
+        //e.printStackTrace();
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json;charset=UTF-8");
         try {
             response.getWriter().print(JsonUtility.toObjectString(JBuild4DResponseVo.error(e.getMessage())));
         } catch (IOException e1) {
+            logger.error(request.getRequestURI()+":"+e1.getMessage(),e1);
             e1.printStackTrace();
         }
         //return JBuild4DResponseVo.error(e.getMessage());
