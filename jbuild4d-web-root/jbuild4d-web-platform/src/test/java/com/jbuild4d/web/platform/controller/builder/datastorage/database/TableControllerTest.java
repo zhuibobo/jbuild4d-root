@@ -163,7 +163,7 @@ public class TableControllerTest  extends ControllerTestBase {
         }
 
         //新增列
-        TableFieldVO ntextField = newFiled(getSession(), tableEntity.getTableId(), "F_NTEXT_1", "F_NTEXT_1",
+        TableFieldVO ntextField = newFiled(getSession(), tableEntity.getTableId(), "F_NTEXT_N_1", "F_NTEXT_N_1",
                 TrueFalseEnum.False, TrueFalseEnum.True,
                 TableFieldTypeEnum.TextType, 0, 0,
                 "", "", "", "");
@@ -173,12 +173,19 @@ public class TableControllerTest  extends ControllerTestBase {
         tableFieldVOList.remove(ListUtility.WhereSingle(tableFieldVOList, new IListWhereCondition<TableFieldVO>() {
             @Override
             public boolean Condition(TableFieldVO item) {
-                return item.getFieldName().equals("F_NTEXT");
+                return item.getFieldName().equals("F_NTEXT_1");
             }
         }));
 
         //修改列,修改时，记录大于1W的，禁止进行字段的修改！
-
+        TableFieldVO ntextField2=ListUtility.WhereSingle(tableFieldVOList, new IListWhereCondition<TableFieldVO>() {
+            @Override
+            public boolean Condition(TableFieldVO item) {
+                return item.getFieldName().equals("F_NTEXT_2");
+            }
+        });
+        ntextField2.setFieldDataType(TableFieldTypeEnum.NVarCharType.getValue());
+        ntextField2.setFieldDataLength(200);
 
         MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
         requestBuilder.sessionAttr("JB4DSession", getSession());
@@ -220,11 +227,23 @@ public class TableControllerTest  extends ControllerTestBase {
 
         //调用接口，获取通用模版
         List<TableFieldVO> templateFieldVoList = getFieldVoListGeneralTemplate();
-        TableFieldVO ntextField = newFiled(getSession(), newTable.getTableId(), "F_NTEXT", "F_NTEXT",
+        TableFieldVO ntextField1 = newFiled(getSession(), newTable.getTableId(), "F_NTEXT_1", "F_NTEXT_1",
                 TrueFalseEnum.False, TrueFalseEnum.True,
                 TableFieldTypeEnum.TextType, 0, 0,
                 "", "", "", "");
-        templateFieldVoList.add(ntextField);
+        templateFieldVoList.add(ntextField1);
+
+        TableFieldVO ntextField2 = newFiled(getSession(), newTable.getTableId(), "F_NTEXT_2", "F_NTEXT_2",
+                TrueFalseEnum.False, TrueFalseEnum.True,
+                TableFieldTypeEnum.TextType, 0, 0,
+                "", "", "", "");
+        templateFieldVoList.add(ntextField2);
+
+        TableFieldVO ntextField3 = newFiled(getSession(), newTable.getTableId(), "F_NTEXT_3", "F_NTEXT_3",
+                TrueFalseEnum.False, TrueFalseEnum.True,
+                TableFieldTypeEnum.TextType, 0, 0,
+                "", "", "", "");
+        templateFieldVoList.add(ntextField3);
 
         String fieldVoListJson = URLEncoder.encode(JsonUtility.toObjectString(templateFieldVoList), "utf-8");
         requestBuilder.param("op", "add");
