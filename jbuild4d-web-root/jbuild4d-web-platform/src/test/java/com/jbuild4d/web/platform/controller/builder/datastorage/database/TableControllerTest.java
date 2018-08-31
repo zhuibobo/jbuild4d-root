@@ -140,8 +140,17 @@ public class TableControllerTest  extends ControllerTestBase {
     }
 
     @Test
-    public void saveTableEdit_Add() throws Exception {
+    public void saveTableEdit() throws Exception {
+        saveTableEdit_Add();
+        saveTableEdit_Update();
+    }
 
+    private void saveTableEdit_Update() {
+
+    }
+
+
+    public void saveTableEdit_Add() throws Exception {
         TableEntity newTable = getTableEntity(getSession(), "T_DEV_TABLE_1", "开发测试表1", "T_DEV_TABLE_1");
 
         //验证是否存在同名的表，存在则删除表
@@ -159,7 +168,6 @@ public class TableControllerTest  extends ControllerTestBase {
         }
         requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
         requestBuilder.sessionAttr("JB4DSession", getSession());
-
 
         String tableEntityJson = URLEncoder.encode(JsonUtility.toObjectString(newTable), "utf-8");
 
@@ -183,4 +191,6 @@ public class TableControllerTest  extends ControllerTestBase {
         Assert.assertTrue(responseVo.isSuccess());
         System.out.println(json);
     }
+
+
 }
