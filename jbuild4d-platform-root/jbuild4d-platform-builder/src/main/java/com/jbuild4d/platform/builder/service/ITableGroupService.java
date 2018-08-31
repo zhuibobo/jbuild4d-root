@@ -15,4 +15,6 @@ public interface ITableGroupService  extends IBaseService<TableGroupEntity> {
     TableGroupEntity createRootNode(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
 
     TableGroupEntity createSystemTableGroupNode(JB4DSession jb4DSession, TableGroupEntity parentGroup) throws JBuild4DGenerallyException;
+
+    TableGroupEntity getByGroupName(JB4DSession jb4DSession,String groupName);
 }

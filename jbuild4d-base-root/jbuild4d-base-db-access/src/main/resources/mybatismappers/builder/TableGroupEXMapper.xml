@@ -1,36 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableGroupMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE_GROUP ORDER by TABLE_GROUP_ORDER_NUM ASC</select>
-    <delete id="deleteAll">delete from TB4D_TABLE_GROUP</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(TABLE_GROUP_ORDER_NUM) is null then 1 else max(TABLE_GROUP_ORDER_NUM)+1 end ORDERNUM from TB4D_TABLE_GROUP</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_TABLE_GROUP<where>
-        <if test="tableGroupValue !=null and tableGroupValue !=''"> and TABLE_GROUP_VALUE like #{tableGroupValue} </if>
-        <if test="tableGroupText !=null and tableGroupText !=''"> and TABLE_GROUP_TEXT like #{tableGroupText} </if>
-        <if test="tableGroupDesc !=null and tableGroupDesc !=''"> and TABLE_GROUP_DESC like #{tableGroupDesc} </if>
-        <if test="tableGroupStatus !=null and tableGroupStatus !=''"> and TABLE_GROUP_STATUS like #{tableGroupStatus} </if>
-        <if test="tableGroupParentId !=null and tableGroupParentId !=''"> and TABLE_GROUP_PARENT_ID like #{tableGroupParentId} </if>
-        <if test="tableGroupIssystem !=null and tableGroupIssystem !=''"> and TABLE_GROUP_ISSYSTEM like #{tableGroupIssystem} </if>
-        <if test="tableGroupDelEnable !=null and tableGroupDelEnable !=''"> and TABLE_GROUP_DEL_ENABLE like #{tableGroupDelEnable} </if>
-        <if test="tableGroupEnpItem !=null and tableGroupEnpItem !=''"> and TABLE_GROUP_ENP_ITEM like #{tableGroupEnpItem} </if>
-    </where>ORDER by TABLE_GROUP_ORDER_NUM ASC</select>
+    <select id="selectAll" resultMap="BaseResultMap">select
+        <include refid="Base_Column_List"/>
+        from TB4D_TABLE_GROUP ORDER by TABLE_GROUP_ORDER_NUM ASC
+    </select>
+    <delete id="deleteAll">delete
+                           from TB4D_TABLE_GROUP</delete>
+    <select id="nextOrderNum" resultType="integer">select case
+                                                              when max(TABLE_GROUP_ORDER_NUM) is null then 1
+                                                              else max(TABLE_GROUP_ORDER_NUM) + 1 end ORDERNUM
+                                                   from TB4D_TABLE_GROUP</select>
+    <select id="selectByGroupName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb4d_table_group
+        where TABLE_GROUP_ID = #{tableGroupId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_TABLE_GROUP
+        <where>
+            <if test="tableGroupValue !=null and tableGroupValue !=''">and TABLE_GROUP_VALUE like #{tableGroupValue}</if>
+            <if test="tableGroupText !=null and tableGroupText !=''">and TABLE_GROUP_TEXT like #{tableGroupText}</if>
+            <if test="tableGroupDesc !=null and tableGroupDesc !=''">and TABLE_GROUP_DESC like #{tableGroupDesc}</if>
+            <if test="tableGroupStatus !=null and tableGroupStatus !=''">and TABLE_GROUP_STATUS like #{tableGroupStatus}</if>
+            <if test="tableGroupParentId !=null and tableGroupParentId !=''">and TABLE_GROUP_PARENT_ID like #{tableGroupParentId}</if>
+            <if test="tableGroupIssystem !=null and tableGroupIssystem !=''">and TABLE_GROUP_ISSYSTEM like #{tableGroupIssystem}</if>
+            <if test="tableGroupDelEnable !=null and tableGroupDelEnable !=''">and TABLE_GROUP_DEL_ENABLE like #{tableGroupDelEnable}</if>
+            <if test="tableGroupEnpItem !=null and tableGroupEnpItem !=''">and TABLE_GROUP_ENP_ITEM like #{tableGroupEnpItem}</if>
+        </where>
+        ORDER by TABLE_GROUP_ORDER_NUM ASC
+    </select>
     <select id="selectChilds" resultType="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
-        select<include refid="Base_Column_List"/> from TB4D_TABLE_GROUP where TABLE_GROUP_PARENT_ID=#{parentId} ORDER by TABLE_GROUP_ORDER_NUM ASC
+        select
+        <include refid="Base_Column_List"/>
+        from TB4D_TABLE_GROUP where TABLE_GROUP_PARENT_ID=#{parentId} ORDER by TABLE_GROUP_ORDER_NUM ASC
     </select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select
-            *
+        select *
         from TB4D_TABLE_GROUP
-        where TABLE_GROUP_ORDER_NUM = (select max(TABLE_GROUP_ORDER_NUM) from TB4D_TABLE_GROUP where TABLE_GROUP_ORDER_NUM<(select TABLE_GROUP_ORDER_NUM from TB4D_TABLE_GROUP where TABLE_GROUP_ID=#{id,jdbcType=NVARCHAR}) and TABLE_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and TABLE_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        where TABLE_GROUP_ORDER_NUM = (select max(TABLE_GROUP_ORDER_NUM)
+                                       from TB4D_TABLE_GROUP
+                                       where TABLE_GROUP_ORDER_NUM <
+                                             (select TABLE_GROUP_ORDER_NUM from TB4D_TABLE_GROUP where TABLE_GROUP_ID = #{id,jdbcType=NVARCHAR})
+                                         and TABLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR})
+          and TABLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR}
         ]]>
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select
-            *
+        select *
         from TB4D_TABLE_GROUP
-        where TABLE_GROUP_ORDER_NUM = (select min(TABLE_GROUP_ORDER_NUM) from TB4D_TABLE_GROUP where TABLE_GROUP_ORDER_NUM>(select TABLE_GROUP_ORDER_NUM from TB4D_TABLE_GROUP where TABLE_GROUP_ID=#{id,jdbcType=NVARCHAR}) and TABLE_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and TABLE_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        where TABLE_GROUP_ORDER_NUM = (select min(TABLE_GROUP_ORDER_NUM)
+                                       from TB4D_TABLE_GROUP
+                                       where TABLE_GROUP_ORDER_NUM >
+                                             (select TABLE_GROUP_ORDER_NUM from TB4D_TABLE_GROUP where TABLE_GROUP_ID = #{id,jdbcType=NVARCHAR})
+                                         and TABLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR})
+          and TABLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR}
         ]]>
     </select>
 </mapper>

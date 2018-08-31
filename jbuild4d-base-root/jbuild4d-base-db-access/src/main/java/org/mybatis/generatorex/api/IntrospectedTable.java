@@ -968,13 +968,15 @@ public abstract class IntrospectedTable {
     }
 
     public String getFullyQualifiedTableNameAtRuntime() {
-        return internalAttributes
-                .get(InternalAttribute.ATTR_FULLY_QUALIFIED_TABLE_NAME_AT_RUNTIME);
+        //Edit By zhuangrb
+        //return internalAttributes.get(InternalAttribute.ATTR_FULLY_QUALIFIED_TABLE_NAME_AT_RUNTIME);
+        return this.getTableConfiguration().getTableName();
     }
 
     public String getAliasedFullyQualifiedTableNameAtRuntime() {
-        return internalAttributes
-                .get(InternalAttribute.ATTR_ALIASED_FULLY_QUALIFIED_TABLE_NAME_AT_RUNTIME);
+        //Edit By zhuangrb
+        //return internalAttributes.get(InternalAttribute.ATTR_ALIASED_FULLY_QUALIFIED_TABLE_NAME_AT_RUNTIME);
+        return this.getTableConfiguration().getTableName();
     }
 
     /**

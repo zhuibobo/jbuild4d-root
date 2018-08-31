@@ -217,6 +217,8 @@ public class JavaBeansUtil {
         field.setType(fqjt);
         field.setName(property);
         field.addJavaDocLine("//"+introspectedColumn.getActualColumnName());
+
+        //Edit By zhuangrb
         if(introspectedTable.getPrimaryKeyColumns()!=null&&introspectedTable.getPrimaryKeyColumns().size()==1){
             if(introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName().equals(introspectedColumn.getActualColumnName())){
                 field.addAnnotation("@DBKeyField");

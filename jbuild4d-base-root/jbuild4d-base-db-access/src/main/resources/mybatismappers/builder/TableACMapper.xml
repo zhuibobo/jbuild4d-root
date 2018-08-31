@@ -7,7 +7,7 @@
             <arg column="TABLE_CAPTION" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_DBNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_ORGAN_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="TABLE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="TABLE_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -30,29 +30,29 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from tb4d_table
+        from TB4D_TABLE
         where TABLE_ID = #{tableId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from tb4d_table
+        delete from TB4D_TABLE
         where TABLE_ID = #{tableId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
-        insert into tb4d_table (TABLE_ID, TABLE_CAPTION, TABLE_NAME,
+        insert into TB4D_TABLE (TABLE_ID, TABLE_CAPTION, TABLE_NAME,
                                 TABLE_DBNAME, TABLE_ORGAN_ID, TABLE_CREATE_TIME,
                                 TABLE_CREATER, TABLE_UPDATE_TIME, TABLE_UPDATER,
                                 TABLE_SERVICE_VALUE, TABLE_TYPE, TABLE_ISSYSTEM,
                                 TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID,
                                 TABLE_STATUS, TABLE_LINK_ID)
         values (#{tableId,jdbcType=VARCHAR}, #{tableCaption,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR},
-                #{tableDbname,jdbcType=VARCHAR}, #{tableOrganId,jdbcType=INTEGER}, #{tableCreateTime,jdbcType=TIMESTAMP},
+                #{tableDbname,jdbcType=VARCHAR}, #{tableOrganId,jdbcType=VARCHAR}, #{tableCreateTime,jdbcType=TIMESTAMP},
                 #{tableCreater,jdbcType=VARCHAR}, #{tableUpdateTime,jdbcType=TIMESTAMP}, #{tableUpdater,jdbcType=VARCHAR},
                 #{tableServiceValue,jdbcType=VARCHAR}, #{tableType,jdbcType=VARCHAR}, #{tableIssystem,jdbcType=VARCHAR},
                 #{tableOrderNum,jdbcType=INTEGER}, #{tableDesc,jdbcType=VARCHAR}, #{tableGroupId,jdbcType=VARCHAR},
                 #{tableStatus,jdbcType=VARCHAR}, #{tableLinkId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
-        insert into tb4d_table
+        insert into TB4D_TABLE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="tableId != null">
                 TABLE_ID,
@@ -120,7 +120,7 @@
                 #{tableDbname,jdbcType=VARCHAR},
             </if>
             <if test="tableOrganId != null">
-                #{tableOrganId,jdbcType=INTEGER},
+                #{tableOrganId,jdbcType=VARCHAR},
             </if>
             <if test="tableCreateTime != null">
                 #{tableCreateTime,jdbcType=TIMESTAMP},
@@ -161,7 +161,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
-        update tb4d_table
+        update TB4D_TABLE
         <set>
             <if test="tableCaption != null">
                 TABLE_CAPTION = #{tableCaption,jdbcType=VARCHAR},
@@ -173,7 +173,7 @@
                 TABLE_DBNAME = #{tableDbname,jdbcType=VARCHAR},
             </if>
             <if test="tableOrganId != null">
-                TABLE_ORGAN_ID = #{tableOrganId,jdbcType=INTEGER},
+                TABLE_ORGAN_ID = #{tableOrganId,jdbcType=VARCHAR},
             </if>
             <if test="tableCreateTime != null">
                 TABLE_CREATE_TIME = #{tableCreateTime,jdbcType=TIMESTAMP},
@@ -215,11 +215,11 @@
         where TABLE_ID = #{tableId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
-        update tb4d_table
+        update TB4D_TABLE
         set TABLE_CAPTION = #{tableCaption,jdbcType=VARCHAR},
             TABLE_NAME = #{tableName,jdbcType=VARCHAR},
             TABLE_DBNAME = #{tableDbname,jdbcType=VARCHAR},
-            TABLE_ORGAN_ID = #{tableOrganId,jdbcType=INTEGER},
+            TABLE_ORGAN_ID = #{tableOrganId,jdbcType=VARCHAR},
             TABLE_CREATE_TIME = #{tableCreateTime,jdbcType=TIMESTAMP},
             TABLE_CREATER = #{tableCreater,jdbcType=VARCHAR},
             TABLE_UPDATE_TIME = #{tableUpdateTime,jdbcType=TIMESTAMP},

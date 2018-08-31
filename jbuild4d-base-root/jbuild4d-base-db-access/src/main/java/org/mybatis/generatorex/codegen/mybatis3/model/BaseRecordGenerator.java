@@ -69,6 +69,8 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
             topLevelClass.addImportedType(superClass);
 
         }
+
+        //Edit By zhuangrb
         topLevelClass.addImportedType("com.jbuild4d.base.dbaccess.anno.DBKeyField");
         topLevelClass.addImportedType("com.fasterxml.jackson.annotation.JsonFormat");
         commentGenerator.addModelClassComment(topLevelClass, introspectedTable);

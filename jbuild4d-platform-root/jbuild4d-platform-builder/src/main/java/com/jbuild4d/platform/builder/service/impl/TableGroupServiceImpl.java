@@ -143,6 +143,11 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
     }
 
     @Override
+    public TableGroupEntity getByGroupName(JB4DSession jb4DSession, String groupName) {
+        return tableGroupMapper.selectByGroupName(groupName);
+    }
+
+    @Override
     public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
         TableGroupEntity tableGroupEntity=tableGroupMapper.selectByPrimaryKey(id);
         if(tableGroupEntity!=null){

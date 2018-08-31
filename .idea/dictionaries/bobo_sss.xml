@@ -2,6 +2,8 @@
   <dictionary name="bobo-sss">
     <words>
       <w>datas</w>
+      <w>dbaccess</w>
+      <w>dbentities</w>
       <w>issystem</w>
     </words>
   </dictionary>

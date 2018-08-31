@@ -26,7 +26,7 @@ public class TableEntity {
     private String tableDbname;
 
     //TABLE_ORGAN_ID
-    private Integer tableOrganId;
+    private String tableOrganId;
 
     //TABLE_CREATE_TIME
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -66,7 +66,7 @@ public class TableEntity {
     //TABLE_LINK_ID
     private String tableLinkId;
 
-    public TableEntity(String tableId, String tableCaption, String tableName, String tableDbname, Integer tableOrganId, Date tableCreateTime, String tableCreater, Date tableUpdateTime, String tableUpdater, String tableServiceValue, String tableType, String tableIssystem, Integer tableOrderNum, String tableDesc, String tableGroupId, String tableStatus, String tableLinkId) {
+    public TableEntity(String tableId, String tableCaption, String tableName, String tableDbname, String tableOrganId, Date tableCreateTime, String tableCreater, Date tableUpdateTime, String tableUpdater, String tableServiceValue, String tableType, String tableIssystem, Integer tableOrderNum, String tableDesc, String tableGroupId, String tableStatus, String tableLinkId) {
         this.tableId = tableId;
         this.tableCaption = tableCaption;
         this.tableName = tableName;
@@ -122,12 +122,12 @@ public class TableEntity {
         this.tableDbname = tableDbname == null ? null : tableDbname.trim();
     }
 
-    public Integer getTableOrganId() {
+    public String getTableOrganId() {
         return tableOrganId;
     }
 
-    public void setTableOrganId(Integer tableOrganId) {
-        this.tableOrganId = tableOrganId;
+    public void setTableOrganId(String tableOrganId) {
+        this.tableOrganId = tableOrganId == null ? null : tableOrganId.trim();
     }
 
     public Date getTableCreateTime() {
