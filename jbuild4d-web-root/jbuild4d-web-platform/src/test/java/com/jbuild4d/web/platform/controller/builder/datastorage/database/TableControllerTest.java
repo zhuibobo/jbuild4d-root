@@ -177,7 +177,7 @@ public class TableControllerTest  extends ControllerTestBase {
             }
         }));
 
-        //修改列,修改时，自动对记录数量小于10W的表进行备份，记录大于10W的，禁止进行字段的修改！
+        //修改列,修改时，记录大于1W的，禁止进行字段的修改！
 
 
         MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
