@@ -16,8 +16,10 @@ public class JBuild4DPhysicalTableException extends Exception {
     private static int ErrorCode_UpdateTableError=1200005;
 
     private static int ErrorCode_CreateFieldError=1300000;
+    private static int ErrorCode_UpdateFieldError=1300003;
     private static int ErrorCode_FieldsCannotBeNullError =1300001;
     private static int ErrorCode_FieldTypeNodeSupportError =1300002;
+    private static int ErrorCode_UpdateFieldNoAllowOverCountError =1300003;
 
     private int code;
     private String message;
@@ -26,6 +28,8 @@ public class JBuild4DPhysicalTableException extends Exception {
         this.code=_code;
         this.message=_message;
     }
+
+
 
     public int getCode() {
         return code;
@@ -76,12 +80,20 @@ public class JBuild4DPhysicalTableException extends Exception {
         return new JBuild4DPhysicalTableException(JBuild4DPhysicalTableException.ErrorCode_CreateFieldError,"创建物理表字段失败!");
     }
 
+    public static JBuild4DPhysicalTableException getFieldUpdateError() {
+        return new JBuild4DPhysicalTableException(JBuild4DPhysicalTableException.ErrorCode_UpdateFieldError,"修改物理表字段失败!");
+    }
+
     public static JBuild4DPhysicalTableException getFieldCreateError(Exception ex) {
         return new JBuild4DPhysicalTableException(JBuild4DPhysicalTableException.ErrorCode_CreateFieldError,ex.getMessage());
     }
 
     public static JBuild4DPhysicalTableException getUpdateTableError(Exception ex) {
         return new JBuild4DPhysicalTableException(JBuild4DPhysicalTableException.ErrorCode_UpdateTableError,ex.getMessage());
+    }
+
+    public static JBuild4DPhysicalTableException getUpdateFieldNoAllowOverCount(int i) {
+        return new JBuild4DPhysicalTableException(JBuild4DPhysicalTableException.ErrorCode_UpdateFieldNoAllowOverCountError,"不允许修改记录超过"+i+"的表字段.请手工进行修改!");
     }
 
 }

@@ -16,6 +16,8 @@ import com.jbuild4d.platform.builder.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableTypeEnum;
 import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
+import com.jbuild4d.platform.builder.vo.TableVo;
+import com.jbuild4d.platform.builder.vo.UpdateTableResolveVo;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -94,6 +97,16 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             ex.printStackTrace();
             throw new JBuild4DGenerallyException(ex.getMessage());
         }
+    }
+
+    public UpdateTableResolveVo updateTableResolve(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList){
+        UpdateTableResolveVo resolveVo=new UpdateTableResolveVo();
+
+        return resolveVo;
+    }
+
+    public void validateUpdateTableEnable(UpdateTableResolveVo resolveVo){
+
     }
 
     @Override
@@ -170,6 +183,8 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
         try
         {
+            //判断能否进行表的修改
+            this.validateUpdateTableEnable(null);
             //修改物理表结构
             try {
                 tableBuilederFace.updateTable(newTableEntity,newFields,updateFields,deleteFields);

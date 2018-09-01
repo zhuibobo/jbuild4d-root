@@ -61,6 +61,111 @@ public class TableControllerTest  extends ControllerTestBase {
         saveTableEdit_Update();
     }
 
+    private void saveTableEdit_Add() throws Exception {
+        TableEntity newTable = getTableEntity(getSession(), "T_DEV_TABLE_1", "开发测试表1", "T_DEV_TABLE_1");
+
+        //验证是否存在同名的表，存在则删除表
+        MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/ValidateTableIsNoExist.do");
+        requestBuilder.sessionAttr("JB4DSession", getSession());
+        requestBuilder.param("tableName", newTable.getTableName());
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String json = result.getResponse().getContentAsString();
+        JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        if (!responseVo.isSuccess()) {
+            TableEntity tempTableEntity=tableService.getByTableName(getSession(),newTable.getTableName());
+            tableService.deleteByKeyNotValidate(getSession(),tempTableEntity.getTableId());
+            tableFieldService.deleteByTableId(getSession(),tempTableEntity.getTableId());
+            tableService.deletePhysicsTable(getSession(),newTable.getTableName());
+        }
+        requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
+        requestBuilder.sessionAttr("JB4DSession", getSession());
+
+        String tableEntityJson = URLEncoder.encode(JsonUtility.toObjectString(newTable), "utf-8");
+
+        //调用接口，获取通用模版
+        List<TableFieldVO> templateFieldVoList = getFieldVoListGeneralTemplate();
+        TableFieldVO ntextField1 = newFiled(getSession(), newTable.getTableId(), "F_NTEXT_1", "F_NTEXT_1",
+                TrueFalseEnum.False, TrueFalseEnum.True,
+                TableFieldTypeEnum.TextType, 0, 0,
+                "", "", "", "");
+        templateFieldVoList.add(ntextField1);
+
+        TableFieldVO ntextField2 = newFiled(getSession(), newTable.getTableId(), "F_NTEXT_2", "F_NTEXT_2",
+                TrueFalseEnum.False, TrueFalseEnum.True,
+                TableFieldTypeEnum.TextType, 0, 0,
+                "", "", "", "");
+        templateFieldVoList.add(ntextField2);
+
+        TableFieldVO ntextField3 = newFiled(getSession(), newTable.getTableId(), "F_NTEXT_3", "F_NTEXT_3",
+                TrueFalseEnum.False, TrueFalseEnum.True,
+                TableFieldTypeEnum.TextType, 0, 0,
+                "", "", "", "");
+        templateFieldVoList.add(ntextField3);
+
+        String fieldVoListJson = URLEncoder.encode(JsonUtility.toObjectString(templateFieldVoList), "utf-8");
+        requestBuilder.param("op", "add");
+        requestBuilder.param("tableEntityJson", tableEntityJson);
+        requestBuilder.param("fieldVoListJson", fieldVoListJson);
+        requestBuilder.param("ignorePhysicalError", "false");
+
+        result = mockMvc.perform(requestBuilder).andReturn();
+        json = result.getResponse().getContentAsString();
+        responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        Assert.assertTrue(responseVo.isSuccess());
+        System.out.println(json);
+    }
+
+    private void saveTableEdit_Update() throws Exception {
+        TableEntity tableEntity=tableService.getByTableName(getSession(),"T_DEV_TABLE_1");
+        JBuild4DResponseVo responseVo=getEditTableData("update",tableEntity.getTableId());
+        List<TableFieldVO> tableFieldVOList=new ArrayList<>();
+        List<Map> mapList=(List<Map>)responseVo.getExKVData().get("tableFieldsData");
+        for (Map mapVo : mapList) {
+            String recordString=JsonUtility.toObjectString(mapVo);
+            tableFieldVOList.add(JsonUtility.toObject(recordString,TableFieldVO.class));
+        }
+
+        //新增列
+        TableFieldVO ntextField = newFiled(getSession(), tableEntity.getTableId(), "F_NTEXT_N_1", "F_NTEXT_N_1",
+                TrueFalseEnum.False, TrueFalseEnum.True,
+                TableFieldTypeEnum.TextType, 0, 0,
+                "", "", "", "");
+        tableFieldVOList.add(ntextField);
+
+        //删除列
+        tableFieldVOList.remove(ListUtility.WhereSingle(tableFieldVOList, new IListWhereCondition<TableFieldVO>() {
+            @Override
+            public boolean Condition(TableFieldVO item) {
+                return item.getFieldName().equals("F_NTEXT_1");
+            }
+        }));
+
+        //修改列,修改时，记录大于1W的，禁止进行字段的修改！
+        TableFieldVO ntextField2=ListUtility.WhereSingle(tableFieldVOList, new IListWhereCondition<TableFieldVO>() {
+            @Override
+            public boolean Condition(TableFieldVO item) {
+                return item.getFieldName().equals("F_NTEXT_2");
+            }
+        });
+        ntextField2.setFieldDataType(TableFieldTypeEnum.NVarCharType.getValue());
+        ntextField2.setFieldDataLength(200);
+
+        MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
+        requestBuilder.sessionAttr("JB4DSession", getSession());
+        String tableEntityJson = URLEncoder.encode(JsonUtility.toObjectString(tableEntity), "utf-8");
+        String fieldVoListJson = URLEncoder.encode(JsonUtility.toObjectString(tableFieldVOList), "utf-8");
+        requestBuilder.param("op", "update");
+        requestBuilder.param("tableEntityJson", tableEntityJson);
+        requestBuilder.param("fieldVoListJson", fieldVoListJson);
+        requestBuilder.param("ignorePhysicalError", "false");
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String json = result.getResponse().getContentAsString();
+        responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        System.out.println(json);
+        Assert.assertTrue(responseVo.isSuccess());
+    }
+
     private TableEntity getTableEntity(JB4DSession jb4DSession, String tableId, String tableCaption, String tableName) throws JBuild4DGenerallyException {
         TableEntity tableEntity=new TableEntity();
         tableEntity.setTableId(tableId);
@@ -151,112 +256,5 @@ public class TableControllerTest  extends ControllerTestBase {
         String json=result.getResponse().getContentAsString();
         return JsonUtility.toObject(json, JBuild4DResponseVo.class);
     }
-
-    private void saveTableEdit_Update() throws Exception {
-        TableEntity tableEntity=tableService.getByTableName(getSession(),"T_DEV_TABLE_1");
-        JBuild4DResponseVo responseVo=getEditTableData("update",tableEntity.getTableId());
-        List<TableFieldVO> tableFieldVOList=new ArrayList<>();
-        List<Map> mapList=(List<Map>)responseVo.getExKVData().get("tableFieldsData");
-        for (Map mapVo : mapList) {
-            String recordString=JsonUtility.toObjectString(mapVo);
-            tableFieldVOList.add(JsonUtility.toObject(recordString,TableFieldVO.class));
-        }
-
-        //新增列
-        TableFieldVO ntextField = newFiled(getSession(), tableEntity.getTableId(), "F_NTEXT_N_1", "F_NTEXT_N_1",
-                TrueFalseEnum.False, TrueFalseEnum.True,
-                TableFieldTypeEnum.TextType, 0, 0,
-                "", "", "", "");
-        tableFieldVOList.add(ntextField);
-
-        //删除列
-        tableFieldVOList.remove(ListUtility.WhereSingle(tableFieldVOList, new IListWhereCondition<TableFieldVO>() {
-            @Override
-            public boolean Condition(TableFieldVO item) {
-                return item.getFieldName().equals("F_NTEXT_1");
-            }
-        }));
-
-        //修改列,修改时，记录大于1W的，禁止进行字段的修改！
-        TableFieldVO ntextField2=ListUtility.WhereSingle(tableFieldVOList, new IListWhereCondition<TableFieldVO>() {
-            @Override
-            public boolean Condition(TableFieldVO item) {
-                return item.getFieldName().equals("F_NTEXT_2");
-            }
-        });
-        ntextField2.setFieldDataType(TableFieldTypeEnum.NVarCharType.getValue());
-        ntextField2.setFieldDataLength(200);
-
-        MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
-        requestBuilder.sessionAttr("JB4DSession", getSession());
-        String tableEntityJson = URLEncoder.encode(JsonUtility.toObjectString(tableEntity), "utf-8");
-        String fieldVoListJson = URLEncoder.encode(JsonUtility.toObjectString(tableFieldVOList), "utf-8");
-        requestBuilder.param("op", "update");
-        requestBuilder.param("tableEntityJson", tableEntityJson);
-        requestBuilder.param("fieldVoListJson", fieldVoListJson);
-        requestBuilder.param("ignorePhysicalError", "false");
-
-        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String json = result.getResponse().getContentAsString();
-        responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
-        System.out.println(json);
-        Assert.assertTrue(responseVo.isSuccess());
-    }
-
-
-    public void saveTableEdit_Add() throws Exception {
-        TableEntity newTable = getTableEntity(getSession(), "T_DEV_TABLE_1", "开发测试表1", "T_DEV_TABLE_1");
-
-        //验证是否存在同名的表，存在则删除表
-        MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/ValidateTableIsNoExist.do");
-        requestBuilder.sessionAttr("JB4DSession", getSession());
-        requestBuilder.param("tableName", newTable.getTableName());
-        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String json = result.getResponse().getContentAsString();
-        JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
-        if (!responseVo.isSuccess()) {
-            TableEntity tempTableEntity=tableService.getByTableName(getSession(),newTable.getTableName());
-            tableService.deleteByKeyNotValidate(getSession(),tempTableEntity.getTableId());
-            tableFieldService.deleteByTableId(getSession(),tempTableEntity.getTableId());
-            tableService.deletePhysicsTable(getSession(),newTable.getTableName());
-        }
-        requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
-        requestBuilder.sessionAttr("JB4DSession", getSession());
-
-        String tableEntityJson = URLEncoder.encode(JsonUtility.toObjectString(newTable), "utf-8");
-
-        //调用接口，获取通用模版
-        List<TableFieldVO> templateFieldVoList = getFieldVoListGeneralTemplate();
-        TableFieldVO ntextField1 = newFiled(getSession(), newTable.getTableId(), "F_NTEXT_1", "F_NTEXT_1",
-                TrueFalseEnum.False, TrueFalseEnum.True,
-                TableFieldTypeEnum.TextType, 0, 0,
-                "", "", "", "");
-        templateFieldVoList.add(ntextField1);
-
-        TableFieldVO ntextField2 = newFiled(getSession(), newTable.getTableId(), "F_NTEXT_2", "F_NTEXT_2",
-                TrueFalseEnum.False, TrueFalseEnum.True,
-                TableFieldTypeEnum.TextType, 0, 0,
-                "", "", "", "");
-        templateFieldVoList.add(ntextField2);
-
-        TableFieldVO ntextField3 = newFiled(getSession(), newTable.getTableId(), "F_NTEXT_3", "F_NTEXT_3",
-                TrueFalseEnum.False, TrueFalseEnum.True,
-                TableFieldTypeEnum.TextType, 0, 0,
-                "", "", "", "");
-        templateFieldVoList.add(ntextField3);
-
-        String fieldVoListJson = URLEncoder.encode(JsonUtility.toObjectString(templateFieldVoList), "utf-8");
-        requestBuilder.param("op", "add");
-        requestBuilder.param("tableEntityJson", tableEntityJson);
-        requestBuilder.param("fieldVoListJson", fieldVoListJson);
-        requestBuilder.param("ignorePhysicalError", "false");
-
-        result = mockMvc.perform(requestBuilder).andReturn();
-        json = result.getResponse().getContentAsString();
-        responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
-        Assert.assertTrue(responseVo.isSuccess());
-        System.out.println(json);
-    }
-
 
 }

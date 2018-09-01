@@ -83,7 +83,6 @@ public abstract class TableBuidler {
         try{
             //判断是否存在表
             if(!isExistTable(tableEntity)){
-                //return BuilderResultMessage.getTableIsNotExistError(tableEntity.getTableName());
                 throw JBuild4DPhysicalTableException.getTableIsNotExistError(tableEntity.getTableName());
             }
 
@@ -91,21 +90,18 @@ public abstract class TableBuidler {
             if(newFields!=null) {
                 for (TableFieldEntity fieldEntity : newFields) {
                     this.newField(tableEntity, fieldEntity);
-                    /*if (!newFieldResult.isSuccess()) {
-                        throw new Exception("新增列错误!" + newFieldResult.getMessage());
-                    }*/
                 }
             }
 
-            //修改字段,暂时只是支持修改类型
+            //修改字段,暂时只是支持修改类型和名称
             if(updateFields!=null) {
                 for (TableFieldVO updateField : updateFields) {
                     if(!updateField.isUpdateLogicOnly) {
+                        /*if(this.recordCount(tableEntity)>10000){
+                            throw JBuild4DPhysicalTableException.getUpdateFieldNoAllowOverCount(10000);
+                        }*/
                         this.updateField(tableEntity, updateField);
                     }
-                    /*if (!newFieldResult.isSuccess()) {
-                        throw new Exception("修改列错误!" + newFieldResult.getMessage());
-                    }*/
                 }
             }
 
@@ -119,13 +115,11 @@ public abstract class TableBuidler {
             return true;
         }
         catch (JBuild4DPhysicalTableException ex){
-            //删除表
             ex.printStackTrace();
             throw ex;
         }
         catch (Exception ex){
             ex.printStackTrace();
-            deleteTable(tableEntity);
             throw JBuild4DPhysicalTableException.getCreateTableError(ex);
         }
     }
@@ -167,6 +161,12 @@ public abstract class TableBuidler {
             return false;
         }
         return true;
+    }
+
+    protected int recordCount(TableEntity tableEntity){
+        String sql="select count(*) COUNT from "+tableEntity.getTableName();
+        Map result=sqlBuilderService.selectOne(sql,tableEntity.getTableName());
+        return Integer.parseInt(result.get("COUNT").toString());
     }
 
     protected abstract String buildCreateTableSQL(TableEntity tableEntity);

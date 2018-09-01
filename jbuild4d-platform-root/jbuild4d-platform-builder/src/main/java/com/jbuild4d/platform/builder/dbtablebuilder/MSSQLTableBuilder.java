@@ -88,12 +88,13 @@ public class MSSQLTableBuilder extends TableBuidler {
     protected boolean updateField(TableEntity tableEntity,TableFieldVO fieldVO) throws JBuild4DPhysicalTableException {
         try
         {
-            StringBuilder sqlBuilder=new StringBuilder();
+            throw JBuild4DPhysicalTableException.getFieldUpdateError();
+            /*StringBuilder sqlBuilder=new StringBuilder();
             sqlBuilder.append("alter table ");
             sqlBuilder.append(tableEntity.getTableName()+" alter column "+fieldVO.getFieldName());
             appendFieldDataTypeTo(fieldVO, sqlBuilder);
             sqlBuilderService.execute(sqlBuilder.toString());
-            return true;
+            return true;*/
         }
         catch (Exception ex){
             ex.printStackTrace();
