@@ -7,8 +7,11 @@ import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
+import com.jbuild4d.platform.builder.vo.UpdateTableResolveVo;
+import com.jbuild4d.platform.builder.vo.ValidateTableUpdateResultVo;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -21,8 +24,12 @@ public interface ITableService extends IBaseService<TableEntity> {
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
     void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException;
 
+    UpdateTableResolveVo updateTableResolve(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList) throws IOException, JBuild4DGenerallyException;
+
+    ValidateTableUpdateResultVo validateTableUpdateEnable(UpdateTableResolveVo resolveVo) throws JBuild4DGenerallyException;
+
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    List<String> updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException;
+    List<String> updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException, IOException;
 
     boolean existLogicTableName(JB4DSession jb4DSession,String tableName);
 

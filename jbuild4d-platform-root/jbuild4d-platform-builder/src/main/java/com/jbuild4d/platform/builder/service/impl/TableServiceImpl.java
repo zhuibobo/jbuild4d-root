@@ -16,8 +16,8 @@ import com.jbuild4d.platform.builder.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableTypeEnum;
 import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
-import com.jbuild4d.platform.builder.vo.TableVo;
 import com.jbuild4d.platform.builder.vo.UpdateTableResolveVo;
+import com.jbuild4d.platform.builder.vo.ValidateTableUpdateResultVo;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -99,26 +98,11 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         }
     }
 
-    public UpdateTableResolveVo updateTableResolve(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList){
+    @Override
+    public UpdateTableResolveVo updateTableResolve(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList) throws IOException, JBuild4DGenerallyException {
         UpdateTableResolveVo resolveVo=new UpdateTableResolveVo();
 
-        return resolveVo;
-    }
-
-    public void validateUpdateTableEnable(UpdateTableResolveVo resolveVo){
-
-    }
-
-    @Override
-    @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    public List<String> updateTable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException {
-        List<String> resultMessage=new ArrayList<>();
-
         TableEntity oldTableEntity=tableMapper.selectByPrimaryKey(newTableEntity.getTableId());
-
-        if(!oldTableEntity.getTableName().equals(newTableEntity.getTableName())){
-            throw new JBuild4DGenerallyException("表名不能修改!");
-        }
 
         //计算出新增列,修改列,删除列的列表
         List<TableFieldEntity> oldTableFieldEntityList=tableFieldMapper.selectByTableId(newTableEntity.getTableId());
@@ -181,13 +165,63 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             }
         }
 
+        resolveVo.setNewTableEntity(newTableEntity);
+        resolveVo.setOldTableEntity(oldTableEntity);
+        resolveVo.setNewFields(newFields);
+        resolveVo.setUpdateFields(updateFields);
+        resolveVo.setDeleteFields(deleteFields);
+        resolveVo.setNewTableFieldVOList(newTableFieldVOList);
+        resolveVo.setOldTableFieldVOList(TableFieldVO.EntityListToVoList(oldTableFieldEntityList));
+
+        return resolveVo;
+    }
+
+    @Override
+    public ValidateTableUpdateResultVo validateTableUpdateEnable(UpdateTableResolveVo resolveVo) throws JBuild4DGenerallyException {
+        ValidateTableUpdateResultVo validateTableUpdateResultVo=new ValidateTableUpdateResultVo();
+
+        if(!resolveVo.getOldTableEntity().getTableName().equals(resolveVo.getNewTableEntity().getTableName())){
+            validateTableUpdateResultVo.setEnable(false);
+            validateTableUpdateResultVo.setMessage("表名不能修改!");
+            return validateTableUpdateResultVo;
+        }
+        int limitNum=1000;
+        if(tableBuilederFace.recordCount(resolveVo.getOldTableEntity())>limitNum){
+            if(resolveVo.getUpdateFields().size()>0){
+                validateTableUpdateResultVo.setEnable(false);
+                validateTableUpdateResultVo.setMessage("表"+resolveVo.getOldTableEntity().getTableName()+"的记录条数>"+limitNum+",不允许进行字段的修改,如需修改,请手动修改!");
+                return validateTableUpdateResultVo;
+            }
+            else if(resolveVo.getDeleteFields().size()>0){
+                validateTableUpdateResultVo.setEnable(false);
+                validateTableUpdateResultVo.setMessage("表"+resolveVo.getOldTableEntity().getTableName()+"的记录条数>"+limitNum+",不允许进行字段的删除,如需修改,请手动修改!");
+                return validateTableUpdateResultVo;
+            }
+        }
+
+        validateTableUpdateResultVo.setEnable(true);
+        validateTableUpdateResultVo.setMessage("");
+        return validateTableUpdateResultVo;
+    }
+
+    @Override
+    @Transactional(rollbackFor=JBuild4DGenerallyException.class)
+    public List<String> updateTable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException, IOException {
+        List<String> resultMessage=new ArrayList<>();
+
+        UpdateTableResolveVo updateTableResolveVo=updateTableResolve(jb4DSession,newTableEntity,newTableFieldVOList);
+
+        //判断能否进行表的修改
+        ValidateTableUpdateResultVo validateTableUpdateResultVo=this.validateTableUpdateEnable(updateTableResolveVo);
+        if(!validateTableUpdateResultVo.isEnable()){
+            throw new JBuild4DGenerallyException(validateTableUpdateResultVo.getMessage());
+        }
+
         try
         {
-            //判断能否进行表的修改
-            this.validateUpdateTableEnable(null);
             //修改物理表结构
             try {
-                tableBuilederFace.updateTable(newTableEntity,newFields,updateFields,deleteFields);
+                tableBuilederFace.updateTable(newTableEntity,updateTableResolveVo.getNewFields(),updateTableResolveVo.getUpdateFields(),updateTableResolveVo.getDeleteFields());
             }
             catch (Exception ex){
                 if(ignorePhysicalError){
@@ -204,7 +238,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             newTableEntity.setTableUpdateTime(new Date());
             tableMapper.updateByPrimaryKeySelective(newTableEntity);
             //新增字段
-            for (TableFieldEntity newfieldEntity : newFields) {
+            for (TableFieldEntity newfieldEntity : updateTableResolveVo.getNewFields()) {
                 newfieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNumInTable(newTableEntity.getTableId()));
                 newfieldEntity.setFieldTableId(newTableEntity.getTableId());
                 newfieldEntity.setFieldCreater(jb4DSession.getUserName());
@@ -215,13 +249,13 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                 tableFieldMapper.insertSelective(newfieldEntity);
             }
             //修改字段
-            for (TableFieldEntity updateField : updateFields) {
+            for (TableFieldEntity updateField : updateTableResolveVo.getUpdateFields()) {
                 updateField.setFieldUpdater(jb4DSession.getUserName());
                 updateField.setFieldUpdateTime(new Date());
                 tableFieldMapper.updateByPrimaryKeySelective(updateField);
             }
             //删除字段
-            for (TableFieldEntity fieldEntity : deleteFields) {
+            for (TableFieldEntity fieldEntity : updateTableResolveVo.getDeleteFields()) {
                 tableFieldMapper.deleteByPrimaryKey(fieldEntity.getFieldId());
             }
             return resultMessage;

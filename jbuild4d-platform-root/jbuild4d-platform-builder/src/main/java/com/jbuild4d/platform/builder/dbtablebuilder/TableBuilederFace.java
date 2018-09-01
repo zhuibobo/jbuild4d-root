@@ -92,4 +92,8 @@ public class TableBuilederFace {
         this.validateTableEntity(tableEntity);
         return dbBuidler.deleteTable(tableEntity);
     }
+
+    public int recordCount(TableEntity oldTableEntity) {
+        return dbBuidler.recordCount(oldTableEntity);
+    }
 }
