@@ -1,6 +1,7 @@
 package com.jbuild4d.base.dbaccess.general;
 
 import com.jbuild4d.base.dbaccess.exenum.DBTypeEnum;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -76,5 +77,29 @@ public class DBProp {
 
     public static String getPassword(){
         return getValue("Password");
+    }
+
+    public static void validateConfig() throws JBuild4DGenerallyException {
+        if(getDBType().equals("")){
+            throw new JBuild4DGenerallyException("DB.properties中的DBType不能为空!");
+        }
+        if(getDriverName().equals("")){
+            throw new JBuild4DGenerallyException("DB.properties中的DriverName不能为空!");
+        }
+        if(getDatabaseName().equals("")){
+            throw new JBuild4DGenerallyException("DB.properties中的DatabaseName不能为空!");
+        }
+        if(getUrl().equals("")){
+            throw new JBuild4DGenerallyException("DB.properties中的Url不能为空!");
+        }
+        if(getUser().equals("")){
+            throw new JBuild4DGenerallyException("DB.properties中的User不能为空!");
+        }
+        if(getPassword().equals("")){
+            throw new JBuild4DGenerallyException("DB.properties中的Password不能为空!");
+        }
+        if (getUrl().toLowerCase().indexOf(getDatabaseName().toLowerCase())<0){
+            throw new JBuild4DGenerallyException("请检查DB.properties中的DatabaseName与Url中配置的是否相同!");
+        }
     }
 }

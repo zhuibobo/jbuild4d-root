@@ -55,6 +55,12 @@ public class TableControllerTest  extends ControllerTestBase {
     @Autowired
     private TableController tableController;
 
+    @Test
+    public void saveTableEdit() throws Exception {
+        saveTableEdit_Add();
+        saveTableEdit_Update();
+    }
+
     private TableEntity getTableEntity(JB4DSession jb4DSession, String tableId, String tableCaption, String tableName) throws JBuild4DGenerallyException {
         TableEntity tableEntity=new TableEntity();
         tableEntity.setTableId(tableId);
@@ -144,12 +150,6 @@ public class TableControllerTest  extends ControllerTestBase {
         MvcResult result=mockMvc.perform(requestBuilder).andReturn();
         String json=result.getResponse().getContentAsString();
         return JsonUtility.toObject(json, JBuild4DResponseVo.class);
-    }
-
-    @Test
-    public void saveTableEdit() throws Exception {
-        saveTableEdit_Add();
-        saveTableEdit_Update();
     }
 
     private void saveTableEdit_Update() throws Exception {
