@@ -140,7 +140,7 @@ public class TableControllerTest  extends ControllerTestBase {
             }
         }));
 
-        //修改列,修改时，记录大于1W的，禁止进行字段的修改！
+        //修改列
         TableFieldVO ntextField2=ListUtility.WhereSingle(tableFieldVOList, new IListWhereCondition<TableFieldVO>() {
             @Override
             public boolean Condition(TableFieldVO item) {
@@ -149,6 +149,8 @@ public class TableControllerTest  extends ControllerTestBase {
         });
         ntextField2.setFieldDataType(TableFieldTypeEnum.NVarCharType.getValue());
         ntextField2.setFieldDataLength(200);
+
+        //调用方法
 
         MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
         requestBuilder.sessionAttr("JB4DSession", getSession());

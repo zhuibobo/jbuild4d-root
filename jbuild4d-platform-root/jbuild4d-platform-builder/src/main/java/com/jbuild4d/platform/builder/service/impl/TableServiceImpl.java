@@ -177,6 +177,12 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     }
 
     @Override
+    public ValidateTableUpdateResultVo validateTableUpdateEnable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList) throws JBuild4DGenerallyException, IOException {
+        UpdateTableResolveVo updateTableResolveVo=updateTableResolve(jb4DSession,newTableEntity,newTableFieldVOList);
+        return validateTableUpdateEnable(updateTableResolveVo);
+    }
+
+    @Override
     public ValidateTableUpdateResultVo validateTableUpdateEnable(UpdateTableResolveVo resolveVo) throws JBuild4DGenerallyException {
         ValidateTableUpdateResultVo validateTableUpdateResultVo=new ValidateTableUpdateResultVo();
 
