@@ -57,12 +57,21 @@ public class TableControllerTest  extends ControllerTestBase {
 
     @Test
     public void saveTableEdit() throws Exception {
-        saveTableEdit_Add();
+        saveTableEdit_Add("TDEV_TEST_1",null);
+
+        List<TableFieldVO> appendTableFieldVO=new ArrayList<>();
+        TableFieldVO ntextField1 = newFiled(getSession(), "TDEV_TEST_2", "F_TABLE1_ID", "F_TABLE1_ID",
+                TrueFalseEnum.False, TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType, 50, 0,
+                "", "", "", "");
+        appendTableFieldVO.add(ntextField1);
+        saveTableEdit_Add("TDEV_TEST_2",appendTableFieldVO);
+
         saveTableEdit_Update();
     }
 
-    private void saveTableEdit_Add() throws Exception {
-        TableEntity newTable = getTableEntity(getSession(), "T_DEV_TABLE_1", "开发测试表1", "T_DEV_TABLE_1");
+    private void saveTableEdit_Add(String tableName,List<TableFieldVO> appendTableFieldVO) throws Exception {
+        TableEntity newTable = getTableEntity(getSession(), tableName, "开发测试表1", tableName);
 
         //验证是否存在同名的表，存在则删除表
         MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/ValidateTableIsNoExist.do");
@@ -102,6 +111,10 @@ public class TableControllerTest  extends ControllerTestBase {
                 "", "", "", "");
         templateFieldVoList.add(ntextField3);
 
+        if(appendTableFieldVO!=null) {
+            templateFieldVoList.containsAll(appendTableFieldVO);
+        }
+
         String fieldVoListJson = URLEncoder.encode(JsonUtility.toObjectString(templateFieldVoList), "utf-8");
         requestBuilder.param("op", "add");
         requestBuilder.param("tableEntityJson", tableEntityJson);
@@ -116,7 +129,7 @@ public class TableControllerTest  extends ControllerTestBase {
     }
 
     private void saveTableEdit_Update() throws Exception {
-        TableEntity tableEntity=tableService.getByTableName(getSession(),"T_DEV_TABLE_1");
+        TableEntity tableEntity=tableService.getByTableName(getSession(),"TDEV_TEST_1");
         JBuild4DResponseVo responseVo=getEditTableData("update",tableEntity.getTableId());
         List<TableFieldVO> tableFieldVOList=new ArrayList<>();
         List<Map> mapList=(List<Map>)responseVo.getExKVData().get("tableFieldsData");
