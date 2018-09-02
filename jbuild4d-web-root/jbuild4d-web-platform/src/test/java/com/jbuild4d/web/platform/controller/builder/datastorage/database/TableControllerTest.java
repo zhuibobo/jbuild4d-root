@@ -112,7 +112,7 @@ public class TableControllerTest  extends ControllerTestBase {
         templateFieldVoList.add(ntextField3);
 
         if(appendTableFieldVO!=null) {
-            templateFieldVoList.containsAll(appendTableFieldVO);
+            templateFieldVoList.addAll(appendTableFieldVO);
         }
 
         String fieldVoListJson = URLEncoder.encode(JsonUtility.toObjectString(templateFieldVoList), "utf-8");
