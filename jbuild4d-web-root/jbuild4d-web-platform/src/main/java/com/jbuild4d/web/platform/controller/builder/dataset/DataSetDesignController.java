@@ -45,5 +45,15 @@ public class DataSetDesignController {
         return modelAndView;
     }
 
-
+    @RequestMapping(value = "/SaveDataSetEdit")
+    @ResponseBody
+    public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetType,String dataSetRecordJson ,String sqlText,String sqlValue,String columnsJson,String relatedTablesJson) {
+        try {
+            return JBuild4DResponseVo.opSuccess();
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return JBuild4DResponseVo.error(ex.getMessage());
+        }
+    }
 }

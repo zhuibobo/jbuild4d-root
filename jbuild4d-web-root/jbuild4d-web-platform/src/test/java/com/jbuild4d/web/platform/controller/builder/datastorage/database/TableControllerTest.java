@@ -89,7 +89,7 @@ public class TableControllerTest  extends ControllerTestBase {
         requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
         requestBuilder.sessionAttr("JB4DSession", getSession());
 
-        String tableEntityJson = URLEncoder.encode(JsonUtility.toObjectString(newTable), "utf-8");
+        String tableEntityJson = URLEncoder.encode(URLEncoder.encode(JsonUtility.toObjectString(newTable), "utf-8"), "utf-8");
 
         //调用接口，获取通用模版
         List<TableFieldVO> templateFieldVoList = getFieldVoListGeneralTemplate();
@@ -115,7 +115,7 @@ public class TableControllerTest  extends ControllerTestBase {
             templateFieldVoList.addAll(appendTableFieldVO);
         }
 
-        String fieldVoListJson = URLEncoder.encode(JsonUtility.toObjectString(templateFieldVoList), "utf-8");
+        String fieldVoListJson = URLEncoder.encode(URLEncoder.encode(JsonUtility.toObjectString(templateFieldVoList), "utf-8"), "utf-8");
         requestBuilder.param("op", "add");
         requestBuilder.param("tableEntityJson", tableEntityJson);
         requestBuilder.param("fieldVoListJson", fieldVoListJson);
@@ -167,8 +167,8 @@ public class TableControllerTest  extends ControllerTestBase {
 
         MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
         requestBuilder.sessionAttr("JB4DSession", getSession());
-        String tableEntityJson = URLEncoder.encode(JsonUtility.toObjectString(tableEntity), "utf-8");
-        String fieldVoListJson = URLEncoder.encode(JsonUtility.toObjectString(tableFieldVOList), "utf-8");
+        String tableEntityJson = URLEncoder.encode(URLEncoder.encode(JsonUtility.toObjectString(tableEntity), "utf-8"), "utf-8");
+        String fieldVoListJson =  URLEncoder.encode(URLEncoder.encode(JsonUtility.toObjectString(tableFieldVOList), "utf-8"), "utf-8");
         requestBuilder.param("op", "update");
         requestBuilder.param("tableEntityJson", tableEntityJson);
         requestBuilder.param("fieldVoListJson", fieldVoListJson);

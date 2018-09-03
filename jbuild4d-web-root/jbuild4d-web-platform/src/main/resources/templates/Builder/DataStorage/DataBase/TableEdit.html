@@ -300,8 +300,8 @@
                         var sendData = {
                             op: this.status,
                             ignorePhysicalError:this.ignorePhysicalError,
-                            tableEntityJson: encodeURIComponent(JSON.stringify(this.tableEntity)),
-                            fieldVoListJson: encodeURIComponent(JSON.stringify(this.editTableObj.GetSerializeJson()))
+                            tableEntityJson: encodeURIComponent(encodeURIComponent(JSON.stringify(this.tableEntity))),
+                            fieldVoListJson: encodeURIComponent(encodeURIComponent(JSON.stringify(this.editTableObj.GetSerializeJson())))
                         };
                         //return;
                         //var url = '/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do';

@@ -70,33 +70,6 @@ public class TableController {
     @RequestMapping(value = "/EditTableView", method = RequestMethod.GET)
     public ModelAndView editTableView(String recordId, String op,String groupId) throws IllegalAccessException, InstantiationException, IOException, XPathExpressionException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataStorage/DataBase/TableEdit");
-        /*List<String> templateNames=tableFieldService.getFieldTemplateName();
-        Map<String,List<TableFieldVO>> templateFieldMap=new HashMap<>();
-        for (String templateName : templateNames) {
-            List<TableFieldVO> templateFields=tableFieldService.getTemplateFieldsByName(templateName);
-            for (TableFieldVO templateField : templateFields) { //修改模版的字段ID,避免重复
-                templateField.setFieldId(UUIDUtility.getUUID());
-            }
-            templateFieldMap.put(templateName,templateFields);
-        }
-        if(op.equals("add")){
-            recordId= UUIDUtility.getUUID();
-            TableEntity tableEntity=new TableEntity();
-            tableEntity.setTableId(recordId);
-            tableEntity.setTableGroupId(groupId);
-            modelAndView.addObject("tableEntity",tableEntity);
-            modelAndView.addObject("tableFieldsData","[]");
-        }
-        else {
-            modelAndView.addObject("tableEntity",tableService.getByPrimaryKey(JB4DSessionUtility.getSession(),recordId));
-            List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(recordId);
-            modelAndView.addObject("tableFieldsData",JsonUtility.toObjectString(tableFieldVOList));
-        }
-        modelAndView.addObject("templateFieldGroup",JsonUtility.toObjectString(templateFieldMap));
-        modelAndView.addObject("tablePrefix",builderConfigService.getTablePrefix());
-
-        JB4DSessionUtility.setUserInfoToMV(modelAndView);
-        modelAndView.addObject("op",op);*/
         return modelAndView;
     }
 
@@ -164,8 +137,8 @@ public class TableController {
     @ResponseBody
     public JBuild4DResponseVo saveTableEdit(String op, String tableEntityJson,String fieldVoListJson,boolean ignorePhysicalError) throws IOException, JBuild4DGenerallyException {
         try {
-            tableEntityJson = URLDecoder.decode(tableEntityJson, "utf-8");
-            fieldVoListJson = URLDecoder.decode(fieldVoListJson, "utf-8");
+            tableEntityJson = URLDecoder.decode(URLDecoder.decode(tableEntityJson, "utf-8"),"utf-8");
+            fieldVoListJson = URLDecoder.decode(URLDecoder.decode(fieldVoListJson, "utf-8"),"utf-8");
             TableEntity tableEntity = JsonUtility.toObject(tableEntityJson, TableEntity.class);
             List<TableFieldVO> tableFieldVOList = JsonUtility.toObjectList(fieldVoListJson, TableFieldVO.class);
             if (op.equals("add")) {
