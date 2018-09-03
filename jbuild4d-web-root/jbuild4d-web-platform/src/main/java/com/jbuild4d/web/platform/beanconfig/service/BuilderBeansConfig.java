@@ -55,8 +55,8 @@ public class BuilderBeansConfig {
     public IDatasetService datasetService(
             ISQLBuilderService _sqlBuilderService, DatasetMapper mapper, SqlSessionTemplate sqlSessionTemplate,
             JdbcOperations jdbcOperations, IBuilderConfigService _builderConfigService, ITableService tableService,
-            ITableFieldService tableFieldService, IEnvVariableService envVariableService) {
-        IDatasetService bean=new DatasetServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,jdbcOperations,_builderConfigService,tableService,tableFieldService,envVariableService);
+            ITableFieldService tableFieldService, IEnvVariableService envVariableService,IDatasetRelatedTableService datasetRelatedTableService,IDatasetColumnService datasetColumnService) {
+        IDatasetService bean=new DatasetServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,jdbcOperations,_builderConfigService,tableService,tableFieldService,envVariableService,datasetRelatedTableService,datasetColumnService);
         return bean;
     }
 

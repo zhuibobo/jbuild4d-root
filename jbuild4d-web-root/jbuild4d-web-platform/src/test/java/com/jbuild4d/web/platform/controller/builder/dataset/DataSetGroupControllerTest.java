@@ -32,7 +32,7 @@ public class DataSetGroupControllerTest  extends ControllerTestBase {
     @Autowired
     IDatasetGroupService datasetGroupService;
 
-    String devGroupId="DevGroupId";
+    public static String devGroupId="DevGroupId";
 
     @Test
     public void addDevTestGroup() throws Exception {

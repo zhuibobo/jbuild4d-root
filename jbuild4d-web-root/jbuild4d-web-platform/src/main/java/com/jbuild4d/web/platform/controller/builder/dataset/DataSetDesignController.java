@@ -6,6 +6,7 @@ import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.builder.service.ITableService;
+import com.jbuild4d.platform.builder.vo.DataSetVo;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
@@ -47,12 +48,12 @@ public class DataSetDesignController {
 
     @RequestMapping(value = "/SaveDataSetEdit")
     @ResponseBody
-    public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetType,String dataSetRecordJson ,String sqlText,String sqlValue,String columnsJson,String relatedTablesJson) {
+    public JBuild4DResponseVo saveDataSetEdit(String op, String dataSetVoJson) {
         try {
-            return JBuild4DResponseVo.opSuccess();
+            return JBuild4DResponseVo.error("");
         }
         catch (Exception ex){
-            ex.printStackTrace();
+            //ex.printStackTrace();
             return JBuild4DResponseVo.error(ex.getMessage());
         }
     }

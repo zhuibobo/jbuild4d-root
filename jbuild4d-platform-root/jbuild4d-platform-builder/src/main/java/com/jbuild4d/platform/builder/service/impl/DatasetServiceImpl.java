@@ -35,6 +35,8 @@ import java.util.regex.Pattern;
 public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implements IDatasetService
 {
     DatasetMapper datasetMapper;
+    IDatasetRelatedTableService datasetRelatedTableService;
+    IDatasetColumnService datasetColumnService;
     JdbcOperations jdbcOperations;
     IBuilderConfigService builderConfigService;
     ITableService tableService;
@@ -44,7 +46,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     public DatasetServiceImpl(DatasetMapper _defaultBaseMapper,
                               SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService,JdbcOperations _jdbcOperations,
                               IBuilderConfigService _builderConfigService,ITableService _tableService,ITableFieldService _tableFieldService,
-                              IEnvVariableService _envVariableService){
+                              IEnvVariableService _envVariableService,IDatasetRelatedTableService _datasetRelatedTableService,IDatasetColumnService _datasetColumnService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         datasetMapper=_defaultBaseMapper;
         jdbcOperations=_jdbcOperations;
@@ -52,6 +54,8 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
         tableService=_tableService;
         tableFieldService=_tableFieldService;
         envVariableService=_envVariableService;
+        datasetRelatedTableService=_datasetRelatedTableService;
+        datasetColumnService=_datasetColumnService;
     }
 
     @Override
@@ -64,6 +68,8 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
             }
         });
     }
+
+
 
     @Override
     public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession,String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException {
@@ -265,6 +271,20 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
             }
         }
         return true;
+    }
+
+    @Override
+    public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        return super.deleteByKeyNotValidate(jb4DSession, id);
+    }
+
+    @Override
+    public int deleteByKeyNotValidate(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        datasetMapper.deleteByPrimaryKey(id);
+        datasetRelatedTableService.deleteByDataSetId(jb4DSession,id);
+        datasetColumnService.deleteByDataSetId(jb4DSession,id);
+        return 0;
+        //return super.deleteByKeyNotValidate(jb4DSession, id);
     }
 }
 
