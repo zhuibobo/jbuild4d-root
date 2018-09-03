@@ -2,6 +2,7 @@ package com.jbuild4d.web.platform.controller;
 
 import com.jbuild4d.web.platform.beanconfig.sys.RootConfig;
 import com.jbuild4d.web.platform.beanconfig.sys.WebConfig;
+import com.jbuild4d.web.platform.controller.builder.dataset.DataSetGroupControllerTest;
 import com.jbuild4d.web.platform.controller.builder.dataset.DataSetSQLDesignerControllerTest;
 import com.jbuild4d.web.platform.controller.builder.datastorage.database.TableControllerTest;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import org.springframework.test.context.ContextHierarchy;
 @Suite.SuiteClasses({
         InitializationSystemControllerTest.class,
         TableControllerTest.class,
+        DataSetGroupControllerTest.class,
         DataSetSQLDesignerControllerTest.class
 })
 public class TestRunner {

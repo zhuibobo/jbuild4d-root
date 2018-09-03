@@ -334,7 +334,7 @@
                     //debugger;
                     var tableId=treeNode.id;
                     var _self=this;
-                    var url = '/PlatForm/Builder/DataSet/DataSetDesign/GetTableField.do';
+                    var url = '/PlatForm/Builder/DataSet/DataSetSQLDesigner/GetTableField.do';
                     AjaxUtility.Post(url, {tableId:tableId}, function (result) {
                         if(result.success){
                             _self.tableField.fieldData=result.data;

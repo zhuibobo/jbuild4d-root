@@ -13,4 +13,6 @@ import com.jbuild4d.base.service.general.JB4DSession;
  */
 public interface IDatasetGroupService extends IBaseService<DatasetGroupEntity> {
     DatasetGroupEntity createRootNode(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
+
+    String getRootId();
 }

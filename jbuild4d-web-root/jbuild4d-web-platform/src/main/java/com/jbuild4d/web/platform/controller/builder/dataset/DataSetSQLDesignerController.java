@@ -6,9 +6,11 @@ import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.builder.service.IDatasetService;
+import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.builder.vo.SQLResolveToDataSetVo;
+import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
@@ -44,6 +46,9 @@ public class DataSetSQLDesignerController {
 
     @Autowired
     IDatasetService datasetService;
+
+    @Autowired
+    ITableFieldService tableFieldService;
 
     @RequestMapping(value = "SQLDesigner", method = RequestMethod.GET)
     public ModelAndView sqlDesigner() throws JsonProcessingException, XPathExpressionException {
@@ -95,6 +100,19 @@ public class DataSetSQLDesignerController {
             SQLResolveToDataSetVo sqlResolveToDataSetVo=datasetService.sqlResolveToDataSetVo(jb4DSession,sqlText);
             //List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(tableId);
             return JBuild4DResponseVo.success("校验成功！",sqlResolveToDataSetVo);
+        }
+        catch (Exception ex){
+            return JBuild4DResponseVo.error(ex.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "GetTableField", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo getTableField(String tableId) {
+        try {
+            JB4DSession jb4DSession = JB4DSessionUtility.getSession();
+            List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(tableId);
+            return JBuild4DResponseVo.success("获取成功", tableFieldVOList);
         }
         catch (Exception ex){
             return JBuild4DResponseVo.error(ex.getMessage());

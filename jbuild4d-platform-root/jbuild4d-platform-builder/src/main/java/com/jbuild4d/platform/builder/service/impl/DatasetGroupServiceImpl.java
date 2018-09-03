@@ -69,6 +69,11 @@ public class DatasetGroupServiceImpl extends BaseServiceImpl<DatasetGroupEntity>
     }
 
     @Override
+    public String getRootId() {
+        return rootId;
+    }
+
+    @Override
     public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
         DatasetGroupEntity selfEntity=datasetGroupMapper.selectByPrimaryKey(id);
         DatasetGroupEntity ltEntity=datasetGroupMapper.selectLessThanRecord(id,selfEntity.getDsGroupParentId());

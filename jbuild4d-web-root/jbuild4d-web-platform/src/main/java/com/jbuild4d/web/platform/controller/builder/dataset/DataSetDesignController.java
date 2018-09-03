@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/PlatForm/Builder/DataSet/DataSetDesign")
-public class DataSetController {
+public class DataSetDesignController {
 
     @Autowired
     IEnvVariableService envVariableService;
@@ -37,9 +37,6 @@ public class DataSetController {
     @Autowired
     ITableService tableService;
 
-    @Autowired
-    ITableFieldService tableFieldService;
-
     @RequestMapping(value = "EditDataSet", method = RequestMethod.GET)
     public ModelAndView editDataSet(String recordId, String op, String groupId) throws JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataSet/DataSetEdit");
@@ -48,16 +45,5 @@ public class DataSetController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "GetTableField", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo getTableField(String tableId) {
-        try {
-            JB4DSession jb4DSession = JB4DSessionUtility.getSession();
-            List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(tableId);
-            return JBuild4DResponseVo.success("获取成功", tableFieldVOList);
-        }
-        catch (Exception ex){
-            return JBuild4DResponseVo.error(ex.getMessage());
-        }
-    }
+
 }
