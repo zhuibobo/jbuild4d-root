@@ -34,4 +34,9 @@ public class DatasetColumnServiceImpl extends BaseServiceImpl<DatasetColumnEntit
             }
         });
     }
+
+    @Override
+    public void deleteByDataSetId(JB4DSession jb4DSession, String dataSetId) {
+        datasetColumnMapper.deleteByDataSetId(dataSetId);
+    }
 }

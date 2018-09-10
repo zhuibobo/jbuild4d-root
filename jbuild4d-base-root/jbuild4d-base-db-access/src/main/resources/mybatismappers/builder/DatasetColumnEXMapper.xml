@@ -3,6 +3,10 @@
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.DatasetColumnMapper">
     <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_DATASET_COLUMN ORDER by COLUMN_ORDER_NUM DESC</select>
     <delete id="deleteAll">delete from TB4D_DATASET_COLUMN</delete>
+    <delete id="deleteByDataSetId" parameterType="java.lang.String">
+        delete from TB4D_DATASET_COLUMN
+        where COLUMN_DS_ID = #{dataSetId,jdbcType=NVARCHAR}
+    </delete>
     <select id="nextOrderNum" resultType="integer">select case when max(COLUMN_ORDER_NUM) is null then 1 else max(COLUMN_ORDER_NUM)+1 end ORDERNUM from TB4D_DATASET_COLUMN</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DATASET_COLUMN<where>
         <if test="columnDsId !=null and columnDsId !=''"> and COLUMN_DS_ID like #{columnDsId} </if>

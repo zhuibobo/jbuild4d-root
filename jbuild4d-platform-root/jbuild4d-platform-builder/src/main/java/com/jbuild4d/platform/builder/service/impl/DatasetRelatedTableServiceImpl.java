@@ -34,5 +34,10 @@ public class DatasetRelatedTableServiceImpl extends BaseServiceImpl<DatasetRelat
             }
         });
     }
+
+    @Override
+    public void deleteByDataSetId(JB4DSession jb4DSession, String dataSetId) {
+        datasetRelatedTableMapper.deleteByDataSetId(dataSetId);
+    }
 }
 

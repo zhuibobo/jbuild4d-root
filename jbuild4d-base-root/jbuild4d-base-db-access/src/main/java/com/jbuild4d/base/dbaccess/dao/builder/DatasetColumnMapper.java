@@ -10,4 +10,5 @@ import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity;
  * To change this template use File | Settings | File Templates.
  */
 public interface DatasetColumnMapper extends BaseMapper<DatasetColumnEntity> {
+    void deleteByDataSetId(String dataSetId);
 }
