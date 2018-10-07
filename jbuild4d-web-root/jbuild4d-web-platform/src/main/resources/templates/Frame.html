@@ -15,7 +15,7 @@
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
 </head>
 <body style="height: 100%;overflow: hidden">
-<div id="app" v-cloak>
+<div id="app">
     <div class="frame-layout">
         <layout :style="{minHeight: '100vh'}">
             <i-header style="padding: 0 10px" class="frame-layout-header-wrap">
@@ -106,6 +106,9 @@
                 app.topMenuArrayJson = app.menuJson.items;
                 app.leftMenuArrayJson = app.menuJson.items[0].items;
                 app.topMenuClick(app.topMenuArrayJson[0], false);
+                /*window.setTimeout(function () {
+
+                },200);*/
             }, "json");
             app.userInfo = CacheDataUtility.GetCurrentUserInfo();
         },
@@ -220,16 +223,20 @@
                 }
                 //debugger;
                 if (item.menuLeftUrl != "" && item.menuLeftUrl != null && item.menuLeftUrl != "/LeftMenu") {
+                    //alert("1");
                     this.leftIframeUrl = BaseUtility.BuildAction(item.menuLeftUrl);
                     return;
                 }
                 else {
-                    this.leftIframeUrl = this.defaultLeftIframeUrl;
+                    //alert("2");
                     $("#leftMenuIframe").on("load", function () {
+                        //alert("menus");
                         $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
                         $("#leftMenuIframe").unbind("load");
                         //$("#leftMenuIframe")[0].contentWindow.app.PageReady();
                     });
+                    this.leftIframeUrl = this.defaultLeftIframeUrl;
+                    //alert(this.leftIframeUrl);
                 }
             },
             setFrameHeight: function () {
