@@ -17,6 +17,7 @@ import com.jbuild4d.platform.builder.vo.*;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.transaction.annotation.Transactional;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -60,6 +61,13 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
 
     @Override
     public int save(JB4DSession jb4DSession, String id, DatasetEntity record) throws JBuild4DGenerallyException {
+        throw new JBuild4DGenerallyException("请调用方法saveDataSetVo");
+    }
+
+    @Override
+    @Transactional(rollbackFor=JBuild4DGenerallyException.class)
+    public int saveDataSetVo(JB4DSession jb4DSession, String id, DataSetVo record) throws JBuild4DGenerallyException {
+        做到这里
         return super.save(jb4DSession,id, record, new IAddBefore<DatasetEntity>() {
             @Override
             public DatasetEntity run(JB4DSession jb4DSession,DatasetEntity sourceEntity) throws JBuild4DGenerallyException {

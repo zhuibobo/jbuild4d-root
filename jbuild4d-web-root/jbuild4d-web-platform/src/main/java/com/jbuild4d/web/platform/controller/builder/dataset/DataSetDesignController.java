@@ -3,6 +3,8 @@ package com.jbuild4d.web.platform.controller.builder.dataset;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.platform.builder.service.IDatasetService;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.builder.service.ITableService;
@@ -30,13 +32,7 @@ import java.util.List;
 public class DataSetDesignController {
 
     @Autowired
-    IEnvVariableService envVariableService;
-
-    @Autowired
-    ITableGroupService tableGroupService;
-
-    @Autowired
-    ITableService tableService;
+    IDatasetService datasetService;
 
     @RequestMapping(value = "EditDataSet", method = RequestMethod.GET)
     public ModelAndView editDataSet(String recordId, String op, String groupId) throws JsonProcessingException {
@@ -48,8 +44,10 @@ public class DataSetDesignController {
 
     @RequestMapping(value = "/SaveDataSetEdit")
     @ResponseBody
-    public JBuild4DResponseVo saveDataSetEdit(String op, String dataSetVoJson) {
+    public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetId, String dataSetVoJson) {
         try {
+            DataSetVo dataSetVo= JsonUtility.toObject(dataSetVoJson,DataSetVo.class);
+            datasetService.saveDataSetVo(JB4DSessionUtility.getSession(),dataSetId,dataSetVo);
             return JBuild4DResponseVo.error("");
         }
         catch (Exception ex){

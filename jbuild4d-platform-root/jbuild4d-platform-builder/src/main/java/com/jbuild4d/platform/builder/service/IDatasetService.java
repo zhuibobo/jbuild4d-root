@@ -19,6 +19,8 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public interface IDatasetService extends IBaseService<DatasetEntity> {
+    int saveDataSetVo(JB4DSession jb4DSession, String id, DataSetVo record) throws JBuild4DGenerallyException;
+
     DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession, String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException;
 
     String sqlReplaceEnvTextToEnvValue(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException;
