@@ -20,6 +20,7 @@
         <if test="columnDefaultText !=null and columnDefaultText !=''"> and COLUMN_DEFAULT_TEXT like #{columnDefaultText} </if>
         <if test="columnTableName !=null and columnTableName !=''"> and COLUMN_TABLE_NAME like #{columnTableName} </if>
     </where>ORDER by COLUMN_ORDER_NUM DESC</select>
+    <select id="selectByDataSetId" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DATASET_COLUMN where COLUMN_DS_ID=#{dataSetId} ORDER by COLUMN_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DATASET_COLUMN
  where COLUMN_ORDER_NUM = (select max(COLUMN_ORDER_NUM) from TB4D_DATASET_COLUMN where COLUMN_ORDER_NUM<(select COLUMN_ORDER_NUM from TB4D_DATASET_COLUMN where COLUMN_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DATASET_COLUMN

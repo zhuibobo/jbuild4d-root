@@ -1,6 +1,7 @@
 package com.jbuild4d.web.platform.controller.builder.dataset;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.JsonUtility;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -44,15 +46,9 @@ public class DataSetDesignController {
 
     @RequestMapping(value = "/SaveDataSetEdit")
     @ResponseBody
-    public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetId, String dataSetVoJson) {
-        try {
-            DataSetVo dataSetVo= JsonUtility.toObject(dataSetVoJson,DataSetVo.class);
-            datasetService.saveDataSetVo(JB4DSessionUtility.getSession(),dataSetId,dataSetVo);
-            return JBuild4DResponseVo.error("");
-        }
-        catch (Exception ex){
-            //ex.printStackTrace();
-            return JBuild4DResponseVo.error(ex.getMessage());
-        }
+    public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetId, String dataSetVoJson) throws JBuild4DGenerallyException, IOException {
+        DataSetVo dataSetVo = JsonUtility.toObject(dataSetVoJson, DataSetVo.class);
+        datasetService.saveDataSetVo(JB4DSessionUtility.getSession(), dataSetId, dataSetVo);
+        return JBuild4DResponseVo.success("");
     }
 }

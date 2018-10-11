@@ -1,7 +1,9 @@
 package com.jbuild4d.platform.builder.vo;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
+import com.jbuild4d.base.tools.common.JsonUtility;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -30,5 +32,10 @@ public class DataSetVo extends DatasetEntity {
 
     public void setRelatedTableVoList(List<DataSetRelatedTableVo> relatedTableVoList) {
         this.relatedTableVoList = relatedTableVoList;
+    }
+
+    public static DataSetVo parseToVo(DatasetEntity entity) throws IOException {
+        String jsonStr= JsonUtility.toObjectString(entity);
+        return JsonUtility.toObject(jsonStr,DataSetVo.class);
     }
 }

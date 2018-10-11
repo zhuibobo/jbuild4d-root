@@ -43,7 +43,7 @@ public class DevDemoGenListServiceImpl extends BaseServiceImpl<DevDemoGenListEnt
     }
 
     @Override
-    public void statusChange(JB4DSession jb4DSession,String ids,String status) {
+    public void statusChange(JB4DSession jb4DSession,String ids,String status) throws JBuild4DGenerallyException {
         if(StringUtility.isNotEmpty(ids)) {
             String[] idArray = ids.split(";");
             for (int i = 0; i < idArray.length; i++) {

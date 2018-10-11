@@ -33,7 +33,7 @@ public interface IBaseService<T> {
 
     int addSelective(JB4DSession jb4DSession,T entity);
 
-    T getByPrimaryKey(JB4DSession jb4DSession,String id);
+    T getByPrimaryKey(JB4DSession jb4DSession,String id) throws JBuild4DGenerallyException;
 
     int updateByKeySelective(JB4DSession jb4DSession,T entity);
 

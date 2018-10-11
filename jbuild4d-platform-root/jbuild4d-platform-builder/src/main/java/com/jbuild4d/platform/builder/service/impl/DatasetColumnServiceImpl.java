@@ -8,7 +8,11 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.builder.service.IDatasetColumnService;
+import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
 import org.mybatis.spring.SqlSessionTemplate;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,5 +42,11 @@ public class DatasetColumnServiceImpl extends BaseServiceImpl<DatasetColumnEntit
     @Override
     public void deleteByDataSetId(JB4DSession jb4DSession, String dataSetId) {
         datasetColumnMapper.deleteByDataSetId(dataSetId);
+    }
+
+    @Override
+    public List<DataSetColumnVo> getByDataSetId(JB4DSession jb4DSession, String dataSetId) throws IOException {
+        List<DatasetColumnEntity> datasetColumnEntities=datasetColumnMapper.selectByDataSetId(dataSetId);
+        return DataSetColumnVo.EntityListToVoList(datasetColumnEntities);
     }
 }

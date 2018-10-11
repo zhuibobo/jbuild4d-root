@@ -29,19 +29,28 @@ public class ExceptionControllerAdvice {
 
     Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @ExceptionHandler(JBuild4DGenerallyException.class)
-    public void processGenerallyException(HttpServletResponse response,HttpServletRequest request, JBuild4DGenerallyException e) {
-        //e.printStackTrace();
+    @ExceptionHandler(IOException.class)
+    public void processIOException(HttpServletResponse response,HttpServletRequest request, IOException e) {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json;charset=UTF-8");
+        handlerGenerallyException(response, request, e);
+    }
+
+    @ExceptionHandler(JBuild4DGenerallyException.class)
+    public void processGenerallyException(HttpServletResponse response,HttpServletRequest request, JBuild4DGenerallyException e) {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json;charset=UTF-8");
+        handlerGenerallyException(response, request, e);
+    }
+
+    private void handlerGenerallyException(HttpServletResponse response, HttpServletRequest request, Exception e) {
         try {
-            response.getWriter().print(JsonUtility.toObjectString(JBuild4DResponseVo.error(e.getMessage())));
+            String error=org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(e);
+            response.getWriter().print(JsonUtility.toObjectString(JBuild4DResponseVo.error(error)));
         } catch (IOException e1) {
             logger.error(request.getRequestURI()+":"+e1.getMessage(),e1);
             e1.printStackTrace();
         }
-        //return JBuild4DResponseVo.error(e.getMessage());
-        //return "UnauthenticatedExceptionView"; //返回一个逻辑视图名
     }
 
     @ExceptionHandler(SessionTimeoutException.class)

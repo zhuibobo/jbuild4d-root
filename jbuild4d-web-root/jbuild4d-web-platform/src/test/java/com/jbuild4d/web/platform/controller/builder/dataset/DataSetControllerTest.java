@@ -64,6 +64,9 @@ public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
             dataSetVo.setDsClassName("");
             dataSetVo.setDsRestUrl("");
 
+            dataSetVo.setColumnVoList(resolveToDataSetVo.getDataSetVo().getColumnVoList());
+            dataSetVo.setRelatedTableVoList(resolveToDataSetVo.getDataSetVo().getRelatedTableVoList());
+
             MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataSet/DataSetDesign/SaveDataSetEdit.do");
             requestBuilder.sessionAttr("JB4DSession", getSession());
             requestBuilder.param("op","add");

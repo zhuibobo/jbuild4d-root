@@ -8,7 +8,11 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.builder.service.IDatasetRelatedTableService;
+import com.jbuild4d.platform.builder.vo.DataSetRelatedTableVo;
 import org.mybatis.spring.SqlSessionTemplate;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,6 +42,12 @@ public class DatasetRelatedTableServiceImpl extends BaseServiceImpl<DatasetRelat
     @Override
     public void deleteByDataSetId(JB4DSession jb4DSession, String dataSetId) {
         datasetRelatedTableMapper.deleteByDataSetId(dataSetId);
+    }
+
+    @Override
+    public List<DataSetRelatedTableVo> getByDataSetId(JB4DSession jb4DSession, String dataSetId) throws IOException {
+        List<DatasetRelatedTableEntity> datasetRelatedTableEntities=datasetRelatedTableMapper.selectByDataSetId(dataSetId);
+        return DataSetRelatedTableVo.EntityListToVoList(datasetRelatedTableEntities);
     }
 }
 

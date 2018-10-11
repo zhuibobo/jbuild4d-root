@@ -1,6 +1,7 @@
 package com.jbuild4d.web.platform.controller.system.dictionary;
 
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryEntity;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.system.service.IDictionaryService;
@@ -51,7 +52,7 @@ public class DictionaryController extends GeneralCRUDImplController<DictionaryEn
 
     @RequestMapping(value = "SetSelected", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo setSelected(String recordId) {
+    public JBuild4DResponseVo setSelected(String recordId) throws JBuild4DGenerallyException {
         dictionaryService.setSelected(JB4DSessionUtility.getSession(),recordId);
         return JBuild4DResponseVo.opSuccess();
     }

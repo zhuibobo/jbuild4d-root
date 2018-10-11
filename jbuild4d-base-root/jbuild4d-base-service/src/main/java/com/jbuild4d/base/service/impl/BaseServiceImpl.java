@@ -74,7 +74,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public T getByPrimaryKey(JB4DSession jb4DSession,String id) {
+    public T getByPrimaryKey(JB4DSession jb4DSession,String id) throws JBuild4DGenerallyException {
         return defaultBaseMapper.selectByPrimaryKey(id);
     }
 

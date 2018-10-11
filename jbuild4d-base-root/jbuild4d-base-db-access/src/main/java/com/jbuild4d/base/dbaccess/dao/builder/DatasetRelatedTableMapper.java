@@ -3,6 +3,8 @@ package com.jbuild4d.base.dbaccess.dao.builder;
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -11,4 +13,6 @@ import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity;
  */
 public interface DatasetRelatedTableMapper extends BaseMapper<DatasetRelatedTableEntity> {
     void deleteByDataSetId(String dataSetId);
+
+    List<DatasetRelatedTableEntity> selectByDataSetId(String dataSetId);
 }

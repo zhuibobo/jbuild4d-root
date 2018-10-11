@@ -1,11 +1,14 @@
 package com.jbuild4d.platform.builder.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.DatasetMapper;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
+import com.jbuild4d.base.service.IUpdateBefore;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.StringUtility;
@@ -65,9 +68,81 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     }
 
     @Override
+    public int save(JB4DSession jb4DSession, String id, DatasetEntity entity, IAddBefore<DatasetEntity> addBefore) throws JBuild4DGenerallyException {
+        throw new JBuild4DGenerallyException("请调用方法saveDataSetVo");
+    }
+
+    @Override
+    public int save(JB4DSession jb4DSession, String id, DatasetEntity entity, IAddBefore<DatasetEntity> addBefore, IUpdateBefore<DatasetEntity> updateBefore) throws JBuild4DGenerallyException {
+        throw new JBuild4DGenerallyException("请调用方法saveDataSetVo");
+    }
+
+    @Override
+    public DatasetEntity getByPrimaryKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        throw new JBuild4DGenerallyException("请调用方法getVoByPrimaryKey");
+    }
+
+    @Override
+    public DataSetVo getVoByPrimaryKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException, IOException {
+
+        DatasetEntity datasetEntity=super.getByPrimaryKey(jb4DSession, id);
+        DataSetVo dataSetVo=DataSetVo.parseToVo(datasetEntity);
+        List<DataSetColumnVo> dataSetColumnVos=datasetColumnService.getByDataSetId(jb4DSession,id);
+        List<DataSetRelatedTableVo> dataSetRelatedTableVos=datasetRelatedTableService.getByDataSetId(jb4DSession,id);
+
+        dataSetVo.setColumnVoList(dataSetColumnVos);
+        dataSetVo.setRelatedTableVoList(dataSetRelatedTableVos);
+
+        return dataSetVo;
+    }
+
+    @Override
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    public int saveDataSetVo(JB4DSession jb4DSession, String id, DataSetVo record) throws JBuild4DGenerallyException {
-        做到这里
+    public int saveDataSetVo(JB4DSession jb4DSession, String id, DataSetVo record) throws JBuild4DGenerallyException, IOException {
+        //保存数据集的列
+        if(record.getColumnVoList()!=null) {
+            DataSetVo oldDataSetVo=getVoByPrimaryKey(jb4DSession,id);
+            //新增或者修改的列
+            做到这里
+            //删除的列
+            List<DataSetColumnVo> columnVoList = record.getColumnVoList();
+            for (int i = 0; i < columnVoList.size(); i++) {
+                DataSetColumnVo dataSetColumnVo = columnVoList.get(i);
+                dataSetColumnVo.setColumnOrderNum(i + 1);
+                if (StringUtility.isEmpty(dataSetColumnVo.getColumnId())) {
+                    throw new JBuild4DGenerallyException("请在客户端设置DataSetColumnVo的Id");
+                }
+                datasetColumnService.save(jb4DSession, dataSetColumnVo.getColumnId(), dataSetColumnVo, (jb4DSession1, sourceEntity) -> {
+                    sourceEntity.setColumnCreater(jb4DSession1.getUserName());
+                    sourceEntity.setColumnCreateTime(new Date());
+                    sourceEntity.setColumnDsId(record.getDsId());
+                    sourceEntity.setColumnUpdater(jb4DSession1.getUserName());
+                    sourceEntity.setColumnUpdateTime(new Date());
+                    return sourceEntity;
+                }, (jb4DSession12, sourceEntity) -> {
+                    sourceEntity.setColumnDsId(record.getDsId());
+                    sourceEntity.setColumnUpdater(jb4DSession12.getUserName());
+                    sourceEntity.setColumnUpdateTime(new Date());
+                    return sourceEntity;
+                });
+            }
+        }
+
+        //保存数据集的关联表
+        List<DataSetRelatedTableVo> relatedTableVoList = record.getRelatedTableVoList();
+        for (int i = 0; i < relatedTableVoList.size(); i++) {
+            DataSetRelatedTableVo dataSetRelatedTableVo = relatedTableVoList.get(i);
+            dataSetRelatedTableVo.setRtOrderNum(i+1);
+            if(StringUtility.isEmpty(dataSetRelatedTableVo.getRtId())){
+                throw new JBuild4DGenerallyException("请在客户端设置DataSetColumnVo的Id");
+            }
+            datasetRelatedTableService.save(jb4DSession, dataSetRelatedTableVo.getRtId(), dataSetRelatedTableVo, (jb4DSession13, sourceEntity) -> {
+                sourceEntity.setRtDsId(record.getDsId());
+                return sourceEntity;
+            });
+        }
+
+        //保存数据集的基本信息
         return super.save(jb4DSession,id, record, new IAddBefore<DatasetEntity>() {
             @Override
             public DatasetEntity run(JB4DSession jb4DSession,DatasetEntity sourceEntity) throws JBuild4DGenerallyException {
@@ -76,8 +151,6 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
             }
         });
     }
-
-
 
     @Override
     public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession,String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException {

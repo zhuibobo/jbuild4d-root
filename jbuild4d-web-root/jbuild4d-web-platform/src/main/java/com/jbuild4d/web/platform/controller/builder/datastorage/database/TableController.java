@@ -75,7 +75,7 @@ public class TableController {
 
     @RequestMapping(value = "/GetEditTableData")
     @ResponseBody
-    public JBuild4DResponseVo getEditTableData(String recordId, String op,String groupId) throws IOException, XPathExpressionException {
+    public JBuild4DResponseVo getEditTableData(String recordId, String op,String groupId) throws IOException, XPathExpressionException, JBuild4DGenerallyException {
         JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
         responseVo.setSuccess(true);
         responseVo.setMessage("获取数据成功！");

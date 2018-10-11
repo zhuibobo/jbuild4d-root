@@ -65,7 +65,7 @@ public class DictionaryServiceImpl extends BaseServiceImpl<DictionaryEntity> imp
     }
 
     @Override
-    public void setSelected(JB4DSession jb4DSession, String recordId) {
+    public void setSelected(JB4DSession jb4DSession, String recordId) throws JBuild4DGenerallyException {
         DictionaryEntity entity=getByPrimaryKey(jb4DSession,recordId);
 
         String parentId=entity.getDictParentId();
