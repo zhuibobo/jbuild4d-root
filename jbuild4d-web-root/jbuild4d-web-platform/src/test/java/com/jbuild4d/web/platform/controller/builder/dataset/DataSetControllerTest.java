@@ -82,12 +82,25 @@ public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
             requestBuilder.sessionAttr("JB4DSession", getSession());
             requestBuilder.param("op","add");
             requestBuilder.param("dataSetVoJson", JsonUtility.toObjectString(dataSetVo));
+            requestBuilder.param("dataSetId",dataSetId);
             MvcResult result = mockMvc.perform(requestBuilder).andReturn();
             String json = result.getResponse().getContentAsString();
             System.out.printf(json);
             JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
             Assert.assertTrue(responseVo.getMessage(),responseVo.isSuccess());
-            //做到这里
         }
+    }
+
+    @Test
+    public void deleteSQLDataSet() throws Exception{
+        addSQLDataSet();
+        MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataSet/DataSetDesign/DeleteDataSet.do");
+        requestBuilder.sessionAttr("JB4DSession", getSession());
+        requestBuilder.param("dataSetId",dataSetId);
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String json = result.getResponse().getContentAsString();
+        System.out.printf(json);
+        JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        Assert.assertTrue(responseVo.getMessage(),responseVo.isSuccess());
     }
 }
