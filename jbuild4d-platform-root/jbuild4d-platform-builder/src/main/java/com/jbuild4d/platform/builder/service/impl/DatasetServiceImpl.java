@@ -359,7 +359,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
 
     @Override
     public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
-        return super.deleteByKeyNotValidate(jb4DSession, id);
+        return deleteByKeyNotValidate(jb4DSession, id);
     }
 
     @Override

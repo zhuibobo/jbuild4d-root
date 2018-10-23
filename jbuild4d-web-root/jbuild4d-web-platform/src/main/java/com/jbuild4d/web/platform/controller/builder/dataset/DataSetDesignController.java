@@ -51,4 +51,11 @@ public class DataSetDesignController {
         datasetService.saveDataSetVo(JB4DSessionUtility.getSession(), dataSetId, dataSetVo);
         return JBuild4DResponseVo.success("");
     }
+
+    @RequestMapping(value = "/DeleteDataSet")
+    @ResponseBody
+    public JBuild4DResponseVo deleteDataSet(String dataSetId) throws JBuild4DGenerallyException, IOException {
+        datasetService.deleteByKey(JB4DSessionUtility.getSession(), dataSetId);
+        return JBuild4DResponseVo.success("");
+    }
 }
