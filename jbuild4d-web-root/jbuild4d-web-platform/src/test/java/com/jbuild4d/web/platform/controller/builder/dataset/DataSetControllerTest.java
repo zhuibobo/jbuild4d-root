@@ -4,8 +4,11 @@ import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.builder.exenum.DataSetTypeEnum;
 import com.jbuild4d.platform.builder.service.IDatasetService;
+import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
+import com.jbuild4d.platform.builder.vo.DataSetRelatedTableVo;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
 import com.jbuild4d.platform.builder.vo.SQLResolveToDataSetVo;
 import com.jbuild4d.web.platform.controller.ControllerTestBase;
@@ -37,7 +40,7 @@ public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
     @Test
     public void addSQLDataSet() throws Exception {
 
-        DatasetEntity existDataSet=datasetService.getByPrimaryKey(getSession(),dataSetId);
+        DatasetEntity existDataSet=datasetService.getVoByPrimaryKey(getSession(),dataSetId);
         if(existDataSet!=null){
             datasetService.deleteByKeyNotValidate(getSession(),dataSetId);
         }
@@ -64,6 +67,14 @@ public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
             dataSetVo.setDsClassName("");
             dataSetVo.setDsRestUrl("");
 
+            for (DataSetColumnVo dataSetColumnVo : resolveToDataSetVo.getDataSetVo().getColumnVoList()) {
+                dataSetColumnVo.setColumnId(UUIDUtility.getUUID());
+            }
+
+            for (DataSetRelatedTableVo dataSetRelatedTableVo : resolveToDataSetVo.getDataSetVo().getRelatedTableVoList()) {
+                dataSetRelatedTableVo.setRtId(UUIDUtility.getUUID());
+            }
+
             dataSetVo.setColumnVoList(resolveToDataSetVo.getDataSetVo().getColumnVoList());
             dataSetVo.setRelatedTableVoList(resolveToDataSetVo.getDataSetVo().getRelatedTableVoList());
 
@@ -75,7 +86,7 @@ public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
             String json = result.getResponse().getContentAsString();
             System.out.printf(json);
             JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
-            Assert.assertTrue(responseVo.isSuccess());
+            Assert.assertTrue(responseVo.getMessage(),responseVo.isSuccess());
             //做到这里
         }
     }

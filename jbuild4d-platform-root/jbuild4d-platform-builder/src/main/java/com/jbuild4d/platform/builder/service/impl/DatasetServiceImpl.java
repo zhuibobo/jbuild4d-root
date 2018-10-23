@@ -86,6 +86,8 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     public DataSetVo getVoByPrimaryKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException, IOException {
 
         DatasetEntity datasetEntity=super.getByPrimaryKey(jb4DSession, id);
+        if(datasetEntity==null)
+            return null;
         DataSetVo dataSetVo=DataSetVo.parseToVo(datasetEntity);
         List<DataSetColumnVo> dataSetColumnVos=datasetColumnService.getByDataSetId(jb4DSession,id);
         List<DataSetRelatedTableVo> dataSetRelatedTableVos=datasetRelatedTableService.getByDataSetId(jb4DSession,id);
@@ -101,16 +103,17 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     public int saveDataSetVo(JB4DSession jb4DSession, String id, DataSetVo record) throws JBuild4DGenerallyException, IOException {
         //保存数据集的列
         if(record.getColumnVoList()!=null) {
-            DataSetVo oldDataSetVo=getVoByPrimaryKey(jb4DSession,id);
-            //新增或者修改的列
-            做到这里
-            //删除的列
+            //DataSetVo oldDataSetVo=getVoByPrimaryKey(jb4DSession,id);
+
+            //删除旧的列设置
+            datasetColumnService.deleteByDataSetId(jb4DSession,id);
+
             List<DataSetColumnVo> columnVoList = record.getColumnVoList();
             for (int i = 0; i < columnVoList.size(); i++) {
                 DataSetColumnVo dataSetColumnVo = columnVoList.get(i);
                 dataSetColumnVo.setColumnOrderNum(i + 1);
                 if (StringUtility.isEmpty(dataSetColumnVo.getColumnId())) {
-                    throw new JBuild4DGenerallyException("请在客户端设置DataSetColumnVo的Id");
+                    throw new JBuild4DGenerallyException("DataSetColumnVo:请在客户端设置DataSetColumnVo的ColumnId");
                 }
                 datasetColumnService.save(jb4DSession, dataSetColumnVo.getColumnId(), dataSetColumnVo, (jb4DSession1, sourceEntity) -> {
                     sourceEntity.setColumnCreater(jb4DSession1.getUserName());
@@ -134,7 +137,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
             DataSetRelatedTableVo dataSetRelatedTableVo = relatedTableVoList.get(i);
             dataSetRelatedTableVo.setRtOrderNum(i+1);
             if(StringUtility.isEmpty(dataSetRelatedTableVo.getRtId())){
-                throw new JBuild4DGenerallyException("请在客户端设置DataSetColumnVo的Id");
+                throw new JBuild4DGenerallyException("DataSetRelatedTableVo:请在客户端设置DataSetRelatedTableVo的RTId");
             }
             datasetRelatedTableService.save(jb4DSession, dataSetRelatedTableVo.getRtId(), dataSetRelatedTableVo, (jb4DSession13, sourceEntity) -> {
                 sourceEntity.setRtDsId(record.getDsId());
@@ -143,13 +146,13 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
         }
 
         //保存数据集的基本信息
-        return super.save(jb4DSession,id, record, new IAddBefore<DatasetEntity>() {
-            @Override
-            public DatasetEntity run(JB4DSession jb4DSession,DatasetEntity sourceEntity) throws JBuild4DGenerallyException {
-                //设置排序,以及其他参数--nextOrderNum()
-                return sourceEntity;
-            }
-        });
+        DatasetEntity datasetEntity=datasetMapper.selectByPrimaryKey(id);
+        if(datasetEntity==null){
+            return datasetMapper.insertSelective(record);
+        }
+        else {
+            return datasetMapper.updateByPrimaryKeySelective(record);
+        }
     }
 
     @Override
