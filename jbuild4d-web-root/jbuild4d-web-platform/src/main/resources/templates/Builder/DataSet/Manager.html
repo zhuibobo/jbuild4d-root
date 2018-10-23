@@ -86,7 +86,7 @@
                     moveGroup:"/PlatForm/Builder/DataSet/DataSetGroup/Move",
                     <!--List -->
                     editDataSetView:"/PlatForm/Builder/DataSet/DataSetDesign/EditDataSet",
-                    reloadTableListData:"",
+                    reloadListData:"/PlatForm/Builder/DataSet/DataSetDesign/GetListData",
                     deleteTable:"",
                     tableMove:""
                 },
@@ -309,7 +309,7 @@
                 },
                 reloadData: function () {
                     //var url = '/PlatForm/Builder/DataStorage/DataBase/Table/GetListData.do';
-                    ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
+                    ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadListData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                     //this.selectionRows=null;
                 },
                 add: function () {

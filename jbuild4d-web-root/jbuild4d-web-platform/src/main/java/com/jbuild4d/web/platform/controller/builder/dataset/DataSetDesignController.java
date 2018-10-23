@@ -1,10 +1,13 @@
 package com.jbuild4d.web.platform.controller.builder.dataset;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.pagehelper.PageInfo;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
 import com.jbuild4d.platform.builder.service.IDatasetService;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
@@ -12,6 +15,7 @@ import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
+import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -57,5 +63,26 @@ public class DataSetDesignController {
     public JBuild4DResponseVo deleteDataSet(String dataSetId) throws JBuild4DGenerallyException, IOException {
         datasetService.deleteByKey(JB4DSessionUtility.getSession(), dataSetId);
         return JBuild4DResponseVo.success("");
+    }
+
+    @RequestMapping(value = "GetListData", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition,boolean loadDict) throws IOException, ParseException {
+        JB4DSession jb4DSession= JB4DSessionUtility.getSession();
+        Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
+        PageInfo<DatasetEntity> proOrganPageInfo=getBaseService().getPage(jb4DSession,pageNum,pageSize,searchMap);
+        JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
+        responseVo.setData(proOrganPageInfo);
+        responseVo.setMessage("获取成功");
+        responseVo.setSuccess(true);
+
+        if(loadDict==true) {
+            List<String> dictionaryGroupValueList = bindDictionaryToPage();
+            if (dictionaryGroupValueList != null && dictionaryGroupValueList.size() > 0) {
+                responseVo.addExKVData("dictionaryJson", getDictionaryJson(dictionaryGroupValueList));
+            }
+        }
+
+        return responseVo;
     }
 }
