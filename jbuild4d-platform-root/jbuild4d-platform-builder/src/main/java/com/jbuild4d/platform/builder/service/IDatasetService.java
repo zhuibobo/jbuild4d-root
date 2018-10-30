@@ -1,5 +1,6 @@
 package com.jbuild4d.platform.builder.service;
 
+import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
@@ -32,4 +33,6 @@ public interface IDatasetService extends IBaseService<DatasetEntity> {
     String sqlReplaceRunningValueToEmptyFilter(JB4DSession jb4DSession, String sqlRunValue);
 
     SQLResolveToDataSetVo sqlResolveToDataSetVo(JB4DSession jb4DSession, String sqlWithEnvText) throws XPathExpressionException, JBuild4DGenerallyException, IOException, SAXException, ParserConfigurationException;
+
+    PageInfo<DatasetEntity> getPageByGroupId(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, String groupId);
 }

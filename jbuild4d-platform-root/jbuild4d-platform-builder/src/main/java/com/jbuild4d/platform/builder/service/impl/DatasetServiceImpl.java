@@ -1,5 +1,7 @@
 package com.jbuild4d.platform.builder.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dao.builder.DatasetMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
@@ -308,6 +310,16 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
         DataSetVo dataSetVo=resolveSQLToDataSet(jb4DSession,sqlReplaceRunningValueToEmptyFilter);
         resolveToDataSetVo.setDataSetVo(dataSetVo);
         return resolveToDataSetVo;
+    }
+
+    @Override
+    public PageInfo<DatasetEntity> getPageByGroupId(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, String groupId) {
+        //return null;
+        PageHelper.startPage(pageNum, pageSize);
+        //PageHelper.
+        List<DatasetEntity> list=datasetMapper.selectByGroupId(groupId);
+        PageInfo<DatasetEntity> pageInfo = new PageInfo<DatasetEntity>(list);
+        return pageInfo;
     }
 
     private boolean validateResolveSqlWithKeyWord(String sql) throws JBuild4DGenerallyException {
