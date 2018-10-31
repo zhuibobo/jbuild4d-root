@@ -67,8 +67,18 @@ public class DataSetDesignController {
 
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String groupId) throws IOException, ParseException {
+    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
+
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
+        Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
+        PageInfo<DatasetEntity> proOrganPageInfo=datasetService.getPage(jb4DSession,pageNum,pageSize,searchMap);
+        JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
+        responseVo.setData(proOrganPageInfo);
+        responseVo.setMessage("获取成功");
+        responseVo.setSuccess(true);
+        return responseVo;
+
+        /*JB4DSession jb4DSession= JB4DSessionUtility.getSession();
         //Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
         PageInfo<DatasetEntity> proOrganPageInfo=datasetService.getPageByGroupId(jb4DSession,pageNum,pageSize,groupId);
         JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
@@ -76,6 +86,6 @@ public class DataSetDesignController {
         responseVo.setMessage("获取成功");
         responseVo.setSuccess(true);
 
-        return responseVo;
+        return responseVo;*/
     }
 }

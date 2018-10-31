@@ -40,11 +40,11 @@
                     <tr class="ls-table-row">
                         <td>标题：</td>
                         <td>
-                            <i-input v-model="searchCondition.tableCaption.value" placeholder=""></i-input>
+                            <i-input v-model="searchCondition.dsCaption.value" placeholder=""></i-input>
                         </td>
                         <td>表名：</td>
                         <td>
-                            <i-input v-model="searchCondition.tableName.value" placeholder=""></i-input>
+                            <i-input v-model="searchCondition.dsName.value" placeholder=""></i-input>
                         </td>
                         <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
                     </tr>
@@ -126,15 +126,15 @@
                 <!--List-->
                 idFieldName:"tableId",
                 searchCondition:{
-                    tableGroupId:{
+                    dsGroupId:{
                         value:"",
                         type:SearchUtility.SearchFieldType.StringType
                     },
-                    tableCaption:{
+                    dsCaption:{
                         value:"",
                         type:SearchUtility.SearchFieldType.LikeStringType
                     },
-                    tableName:{
+                    dsName:{
                         value:"",
                         type:SearchUtility.SearchFieldType.LikeStringType
                     }
@@ -147,22 +147,22 @@
                     },
                     {
                         title: '标题',
-                        key: 'tableCaption',
+                        key: 'dsCaption',
                         align: "center"
                     }, {
                         title: '名称',
-                        key: 'tableName',
+                        key: 'dsName',
                         align: "center"
                     }, {
                         title: '备注',
-                        key: 'tableDesc'
+                        key: 'dsDesc'
                     }, {
                         title: '更新时间',
-                        key: 'tableUpdateTime',
+                        key: 'dsUpdateTime',
                         width: 100,
                         align: "center",
                         render: function (h, params) {
-                            return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.tableUpdateTime);
+                            return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.dsUpdateTime);
                         }
                     }, {
                         title: '操作',
@@ -201,10 +201,10 @@
                     this.selectionRows=null;
                     this.pageNum=1;
                     this.clearSearchCondition();
-                    this.searchCondition.tableGroupId.value=this.treeSelectedNode[this.treeIdFieldName];
+                    this.searchCondition.dsGroupId.value=this.treeSelectedNode[this.treeIdFieldName];
                     this.listButton.showExportDocument=false;
-                    if(treeNode.tableGroupId==0){
-                        this.searchCondition.tableGroupId.value="";
+                    if(treeNode.dsGroupId==0){
+                        this.searchCondition.dsGroupId.value="";
                         this.listButton.showExportDocument=true;
                     }
                     this.reloadData();

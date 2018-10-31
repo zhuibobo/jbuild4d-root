@@ -17,10 +17,10 @@
         <if test="dsSqlSelect !=null and dsSqlSelect !=''"> and DS_SQL_SELECT like #{dsSqlSelect} </if>
         <if test="dsSqlWhere !=null and dsSqlWhere !=''"> and DS_SQL_WHERE like #{dsSqlWhere} </if>
         <if test="dsSqlOrder !=null and dsSqlOrder !=''"> and DS_SQL_ORDER like #{dsSqlOrder} </if>
-    </where>ORDER by DS_SQL_ORDER DESC</select>
+    </where>ORDER by DS_ORDER_NUM DESC</select>
     <select id="selectByGroupId" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DATASET
         where DS_GROUP_ID=#{groupId}
-        ORDER by DS_SQL_ORDER DESC</select>
+        ORDER by DS_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DATASET
  where DS_SQL_ORDER = (select max(DS_SQL_ORDER) from TB4D_DATASET where DS_SQL_ORDER<(select DS_SQL_ORDER from TB4D_DATASET where DS_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DATASET
