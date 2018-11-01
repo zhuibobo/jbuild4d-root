@@ -14,6 +14,7 @@ var EditTable_Label={
     Get_EditStatus_HtmlElem:function(_config,template,hostCell,hostRow,hostTable,viewStausHtmlElem,jsonDatas,jsonDataSingle){
         var val="";
         var bindname=template.BindName;
+        //debugger;
         if(template.DefaultValue!=undefined&&template.DefaultValue!=null) {
             val = EditTableDefauleValue.GetValue(template);
         }

@@ -14,32 +14,32 @@
         <div class="list-2column">
             <div class="left-outer-wrap-c" style="bottom: 50px;width: 335px;">
                 <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px">表信息</divider>
-                <i-form :model="tableEntity" :label-width="90" style="margin-right: 10px">
+                <i-form :model="datasetEntity" :label-width="90" style="margin-right: 10px">
                     <form-item label="标题：" prop="">
-                        <i-input v-model="tableEntity.tableCaption"></i-input>
+                        <i-input v-model="datasetEntity.dsCaption"></i-input>
                     </form-item>
-                    <form-item label="表名：" prop="">
-                        <i-input v-model="tableEntity.tableName"></i-input>
+                    <form-item label="名称：" prop="">
+                        <i-input v-model="datasetEntity.dsName"></i-input>
                     </form-item>
                     <form-item label="创建时间：">
-                        <date-picker type="date" placeholder="选择创建时间" v-model="tableEntity.tableCreateTime" disabled
+                        <date-picker type="date" placeholder="选择创建时间" v-model="datasetEntity.dsCreateTime" disabled
                                      readonly style="width: 100%"></date-picker>
                     </form-item>
                     <form-item label="创建人：">
-                        <i-input v-model="tableEntity.tableCreater"></i-input>
+                        <i-input v-model="datasetEntity.dsCreater"></i-input>
                     </form-item>
                     <form-item label="修改时间：">
-                        <date-picker type="date" placeholder="选择创建时间" v-model="tableEntity.tableUpdateTime" disabled
+                        <date-picker type="date" placeholder="选择创建时间" v-model="datasetEntity.dsUpdateTime" disabled
                                      readonly style="width: 100%"></date-picker>
                     </form-item>
                     <form-item label="修改人：">
-                        <i-input v-model="tableEntity.tableUpdater"></i-input>
+                        <i-input v-model="datasetEntity.dsUpdater"></i-input>
                     </form-item>
                     <form-item label="系统表：">
-                        <i-input v-model="tableEntity.tableIssystem" readonly></i-input>
+                        <i-input v-model="datasetEntity.dsIssystem" readonly></i-input>
                     </form-item>
                     <form-item label="备注：">
-                        <i-input v-model="tableEntity.tableDesc" type="textarea" :autosize="{minRows: 10,maxRows: 10}"></i-input>
+                        <i-input v-model="datasetEntity.dsDesc" type="textarea" :autosize="{minRows: 10,maxRows: 10}"></i-input>
                     </form-item>
                 </i-form>
             </div>
@@ -103,18 +103,23 @@
             el:"#dataSetEditForm",
             data:{
                 currUserEntity:null,
-                tableEntity:{
-                    tableId:"",
-                    tableCaption:"",
-                    tableName:"",
-                    tableCreateTime:DateUtility.GetCurrentData(),
-                    tableCreater:"",
-                    tableUpdateTime:DateUtility.GetCurrentData(),
-                    tableUpdater:"",
-                    tableType:"",
-                    tableIssystem:"否",
-                    tableDesc: "",
-                    tableGroupId:""
+                datasetEntity:{
+                    dsId:"",
+                    dsCaption:"",
+                    dsName:"",
+                    dsCreateTime:DateUtility.GetCurrentData(),
+                    dsCreater:"",
+                    dsUpdateTime:DateUtility.GetCurrentData(),
+                    dsUpdater:"",
+                    dsType:"",
+                    dsIssystem:"否",
+                    dsDesc: "",
+                    dsGroupId:"",
+                    dsStatus:"启用",
+                    dsSqlSelectText:"",
+                    dsSqlSelectValue:"",
+                    dsClassName:"",
+                    dsRestUrl:""
                 },
                 editTableObj:null,
                 editTableConfig:{
@@ -169,6 +174,10 @@
                                 width:80,
                                 textAlign:"center"
                             },
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"是"
+                            },
                             Hidden:false
                         },{
                             Title:"备注",
@@ -191,7 +200,7 @@
                     },
                     TableClass:"edit-table",
                     RendererTo:"divEditTable",//div elem
-                    TableId:"TableFields",
+                    TableId:"dsColumns",
                     TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
                 },
                 status: '${op}',
@@ -214,14 +223,15 @@
             mounted:function () {
                 this.editTableObj=Object.create(EditTable);
                 this.editTableObj.Initialization(this.editTableConfig);
+                this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
                 if(this.status=="add"){
                     //this.editTableObj.LoadJsonData(this.templateFieldGroup[this.useTemplateName]);
-                    this.tableEntity.tableCreater=this.currUserEntity.userName;
-                    this.tableEntity.tableUpdater=this.currUserEntity.userName;
+                    this.datasetEntity.dsCreater=this.currUserEntity.userName;
+                    this.datasetEntity.dsUpdater=this.currUserEntity.userName;
                 }
                 else {
                     //this.editTableObj.LoadJsonData(this.tableFieldsData);
-                    this.tableEntity.tableUpdater=this.currUserEntity.userName;
+                    this.datasetEntity.dsUpdater=this.currUserEntity.userName;
                 }
                 $("#divEditTable").height($(".right-outer-wrap-c").height()-185);
             },
