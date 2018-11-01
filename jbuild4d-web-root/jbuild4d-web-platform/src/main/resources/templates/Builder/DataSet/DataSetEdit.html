@@ -94,7 +94,7 @@
             </div>
         </div>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
-            <i-button type="primary" @click="saveEditTable()"> 保 存</i-button>
+            <i-button type="primary" @click="saveEditDataSet()"> 保 存</i-button>
             <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
         </div>
     </div>
@@ -265,16 +265,16 @@
                         }, "json");
                     }
                 },
-                saveEditTable:function () {
-                    if(this.tableEntity.tableCaption.replace(/(^\s*)|(\s*$)/g, "")==""){
-                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "表标题不能为空！",null);
+                saveEditDataSet:function () {
+                    if(this.datasetEntity.dsCaption.replace(/(^\s*)|(\s*$)/g, "")==""){
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "数据集标题不能为空！",null);
                         return false;
                     }
-                    if(/^[a-zA-Z][a-zA-Z0-9_]{0,}$/.test(this.tableEntity.tableName) == false){
-                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "表名称不能为空且只能是字母、下划线、数字并以字母开头！",null);
+                    if(/^[a-zA-Z][a-zA-Z0-9_]{0,}$/.test(this.datasetEntity.dsName) == false){
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "数据集名称不能为空且只能是字母、下划线、数字并以字母开头！",null);
                         return false;
                     }
-
+                    alert("做到这里");
                     if (this.editTableObj.CompletedEditingRow()) {
                         console.log(this.editTableObj.GetSerializeJson());
                         var sendData = {
