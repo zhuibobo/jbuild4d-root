@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.DatasetMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_DATASET ORDER by DS_SQL_ORDER DESC</select>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_DATASET ORDER by DS_ORDER_NUM DESC</select>
     <delete id="deleteAll">delete from TB4D_DATASET</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(DS_SQL_ORDER) is null then 1 else max(DS_SQL_ORDER)+1 end ORDERNUM from TB4D_DATASET</select>
+    <select id="nextOrderNum" resultType="integer">select case when max(DS_ORDER_NUM) is null then 1 else max(DS_ORDER_NUM)+1 end ORDERNUM from TB4D_DATASET</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DATASET<where>
         <if test="dsCaption !=null and dsCaption !=''"> and DS_CAPTION like #{dsCaption} </if>
         <if test="dsName !=null and dsName !=''"> and DS_NAME like #{dsName} </if>
@@ -16,13 +16,13 @@
         <if test="dsStatus !=null and dsStatus !=''"> and DS_STATUS like #{dsStatus} </if>
         <if test="dsSqlSelect !=null and dsSqlSelect !=''"> and DS_SQL_SELECT like #{dsSqlSelect} </if>
         <if test="dsSqlWhere !=null and dsSqlWhere !=''"> and DS_SQL_WHERE like #{dsSqlWhere} </if>
-        <if test="dsSqlOrder !=null and dsSqlOrder !=''"> and DS_SQL_ORDER like #{dsSqlOrder} </if>
+        <if test="dsSqlOrder !=null and dsSqlOrder !=''"> and DS_ORDER_NUM like #{dsSqlOrder} </if>
     </where>ORDER by DS_ORDER_NUM DESC</select>
     <select id="selectByGroupId" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DATASET
         where DS_GROUP_ID=#{groupId}
         ORDER by DS_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DATASET
- where DS_SQL_ORDER = (select max(DS_SQL_ORDER) from TB4D_DATASET where DS_SQL_ORDER<(select DS_SQL_ORDER from TB4D_DATASET where DS_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+ where DS_ORDER_NUM = (select max(DS_ORDER_NUM) from TB4D_DATASET where DS_ORDER_NUM<(select DS_ORDER_NUM from TB4D_DATASET where DS_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DATASET
- where DS_SQL_ORDER = (select min(DS_SQL_ORDER) from TB4D_DATASET where DS_SQL_ORDER>(select DS_SQL_ORDER from TB4D_DATASET where DS_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+ where DS_ORDER_NUM = (select min(DS_ORDER_NUM) from TB4D_DATASET where DS_ORDER_NUM>(select DS_ORDER_NUM from TB4D_DATASET where DS_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
 </mapper>
