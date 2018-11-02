@@ -55,7 +55,7 @@ public class DataSetDesignController {
     public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetId, String dataSetVoJson) throws JBuild4DGenerallyException, IOException {
         DataSetVo dataSetVo = JsonUtility.toObjectIgnoreProp(dataSetVoJson, DataSetVo.class);
         datasetService.saveDataSetVo(JB4DSessionUtility.getSession(), dataSetId, dataSetVo);
-        return JBuild4DResponseVo.success("");
+        return JBuild4DResponseVo.opSuccess();
     }
 
     @RequestMapping(value = "/DeleteDataSet")

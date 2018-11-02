@@ -334,6 +334,7 @@
                 },
                 completedSQLDesign:function (result) {
                     this.datasetEntity.dsSqlSelectText=result.data.sqlWithEnvText;
+                    this.datasetEntity.dsSqlSelectValue=result.data.sqlWithEnvValue;
                     this.relatedTable.data=result.data.dataSetVo.relatedTableVoList;
                     //获取现有的列定义
                     var oldColumnData=this.editTableObj.GetSerializeJson();
