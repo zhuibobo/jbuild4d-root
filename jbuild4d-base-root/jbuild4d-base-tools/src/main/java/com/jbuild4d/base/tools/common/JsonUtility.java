@@ -20,7 +20,13 @@ public class JsonUtility {
         return objectMapper.readValue(str,_class);
     }
 
-    public static <T> List<T> toObjectList(String str,Class<T> _class) throws IOException {
+    public static <T> T toObjectIgnoreProp(String str,Class<T> _class) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        return objectMapper.readValue(str,_class);
+    }
+
+    public static <T> List<T> toObjectListIgnoreProp(String str, Class<T> _class) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         List<T> objList = null;
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
@@ -31,6 +37,16 @@ public class JsonUtility {
         return objList;
         /*List<_class> listT = mapper.readValue(str,new TypeReference<List<_class>>() { });
         return listT;*/
+    }
+
+    public static <T> List<T> toObjectList(String str, Class<T> _class) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        List<T> objList = null;
+        JavaType t = mapper.getTypeFactory().constructParametricType(
+                List.class, _class);
+        objList = mapper.readValue(str, t);
+
+        return objList;
     }
     /*public static <T> Map<String,T> toMapT(String jsonString,T obj) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();

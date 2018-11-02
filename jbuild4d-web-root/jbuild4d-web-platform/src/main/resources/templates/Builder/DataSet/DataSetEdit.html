@@ -44,11 +44,11 @@
                 </i-form>
             </div>
             <div class="right-outer-wrap-c" style="bottom: 50px;left: 350px;padding: 10px">
-                <tabs value="Const">
-                    <tab-pane label="SQL数据集" name="Const" >
+                <tabs v-model="datasetEntity.dsType">
+                    <tab-pane label="SQL数据集" name="SQLDataSet" >
                         <div style="width: 100%;height: 60px">
                             <div style="float:left;width: 88%;border: red 1px solid;border-radius: 4px;height: 50px;padding: 4px">
-                                {{sqlWithEnvText}}
+                                {{datasetEntity.dsSqlSelectText}}
                             </div>
                             <div @click="designSQL" style="float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
                                 编辑
@@ -58,13 +58,13 @@
                             </div>
                         </div>
                     </tab-pane>
-                    <tab-pane label="API数据集" name="DateTime">
+                    <tab-pane label="API数据集" name="APIDataSet">
                         <div style="width: 100%;height: 30px">
                         </div>
                     </tab-pane>
-                    <tab-pane label="REST数据集" name="ApiVar">
+                    <tab-pane label="REST数据集" name="RESTDataSet">
                     </tab-pane>
-                    <tab-pane label="自定义数据集" name="Cust">
+                    <tab-pane label="自定义数据集" name="CUSTOMDataSet">
                     </tab-pane>
                 </tabs>
                 <div style="width: 70%;float: left;margin-right: 10px">
@@ -105,8 +105,8 @@
                 currUserEntity:null,
                 datasetEntity:{
                     dsId:"",
-                    dsCaption:"",
-                    dsName:"",
+                    dsCaption:"数据集1",
+                    dsName:"DS1",
                     dsCreateTime:DateUtility.GetCurrentData(),
                     dsCreater:"",
                     dsUpdateTime:DateUtility.GetCurrentData(),
@@ -119,7 +119,9 @@
                     dsSqlSelectText:"",
                     dsSqlSelectValue:"",
                     dsClassName:"",
-                    dsRestUrl:""
+                    dsRestUrl:"",
+                    columnVoList:null,
+                    relatedTableVoList:null
                 },
                 editTableObj:null,
                 editTableConfig:{
@@ -203,7 +205,7 @@
                     TableId:"dsColumns",
                     TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
                 },
-                status: '${op}',
+                status: StringUtility.QueryString("op"),
                 relatedTable: {
                     config: [
                         {
@@ -217,8 +219,8 @@
                         }
                     ],
                     data: []
-                },
-                sqlWithEnvText:"请编辑SQL"
+                }
+                /*,sqlWithEnvText:"请编辑SQL"*/
             },
             mounted:function () {
                 this.editTableObj=Object.create(EditTable);
@@ -228,6 +230,10 @@
                     //this.editTableObj.LoadJsonData(this.templateFieldGroup[this.useTemplateName]);
                     this.datasetEntity.dsCreater=this.currUserEntity.userName;
                     this.datasetEntity.dsUpdater=this.currUserEntity.userName;
+                    this.datasetEntity.dsId=StringUtility.Guid();
+                    this.datasetEntity.dsGroupId=StringUtility.QueryString("groupId");
+                    this.datasetEntity.dsType="SQLDataSet";
+                    this.datasetEntity.dsSqlSelectText="请编辑SQL1";
                 }
                 else {
                     //this.editTableObj.LoadJsonData(this.tableFieldsData);
@@ -274,17 +280,40 @@
                         DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "数据集名称不能为空且只能是字母、下划线、数字并以字母开头！",null);
                         return false;
                     }
-                    alert("做到这里");
+                    //alert("做到这里");
                     if (this.editTableObj.CompletedEditingRow()) {
                         console.log(this.editTableObj.GetSerializeJson());
+
+                        //补完数据
+                        this.datasetEntity.columnVoList=this.editTableObj.GetSerializeJson();
+                        this.datasetEntity.relatedTableVoList=this.relatedTable.data;
+                        //设置ID;
+
+                        if(this.datasetEntity.columnVoList) {
+                            for (var i = 0; i < this.datasetEntity.columnVoList.length; i++) {
+                                if (this.datasetEntity.columnVoList[i].columnId == ""||this.datasetEntity.columnVoList[i].columnId==null) {
+                                    this.datasetEntity.columnVoList[i].columnId = StringUtility.Guid();
+                                }
+                                //this.datasetEntity.columnVoList[i].columnDsId=
+                            }
+                        }
+                        //debugger;
+                        if(this.datasetEntity.relatedTableVoList) {
+                            for (var i = 0; i < this.datasetEntity.relatedTableVoList.length; i++) {
+                                if (this.datasetEntity.relatedTableVoList[i].rtId == ""||this.datasetEntity.relatedTableVoList[i].rtId == null) {
+                                    this.datasetEntity.relatedTableVoList[i].rtId = StringUtility.Guid();
+                                }
+                            }
+                        }
+
                         var sendData = {
                             op: this.status,
-                            ignorePhysicalError:this.ignorePhysicalError,
-                            tableEntityJson: encodeURIComponent(JSON.stringify(this.tableEntity)),
-                            fieldVoListJson: encodeURIComponent(JSON.stringify(this.editTableObj.GetSerializeJson()))
+                            dataSetId:this.datasetEntity.dsId,
+                            dataSetVoJson: JSON.stringify(this.datasetEntity)
                         };
+
                         //return;
-                        var url = '/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do';
+                        var url = '/PlatForm/Builder/DataSet/DataSetDesign/SaveDataSetEdit.do';
                         AjaxUtility.Post(url, sendData, function (result) {
                             //debugger;
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
@@ -304,7 +333,7 @@
                     DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑SQL语句",modal:true}, 1);
                 },
                 completedSQLDesign:function (result) {
-                    this.sqlWithEnvText=result.data.sqlWithEnvText;
+                    this.datasetEntity.dsSqlSelectText=result.data.sqlWithEnvText;
                     this.relatedTable.data=result.data.dataSetVo.relatedTableVoList;
                     //获取现有的列定义
                     var oldColumnData=this.editTableObj.GetSerializeJson();

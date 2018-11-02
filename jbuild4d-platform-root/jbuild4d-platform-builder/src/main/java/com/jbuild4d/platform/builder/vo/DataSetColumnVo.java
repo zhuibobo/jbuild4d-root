@@ -22,7 +22,7 @@ public class DataSetColumnVo extends DatasetColumnEntity {
             return new ArrayList<>();
         }
         String json= JsonUtility.toObjectString(source);
-        List<DataSetColumnVo> result=JsonUtility.toObjectList(json,DataSetColumnVo.class);
+        List<DataSetColumnVo> result=JsonUtility.toObjectListIgnoreProp(json,DataSetColumnVo.class);
         return result;
     }
 }

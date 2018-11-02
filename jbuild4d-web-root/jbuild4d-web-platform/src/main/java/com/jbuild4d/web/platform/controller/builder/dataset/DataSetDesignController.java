@@ -53,7 +53,7 @@ public class DataSetDesignController {
     @RequestMapping(value = "/SaveDataSetEdit")
     @ResponseBody
     public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetId, String dataSetVoJson) throws JBuild4DGenerallyException, IOException {
-        DataSetVo dataSetVo = JsonUtility.toObject(dataSetVoJson, DataSetVo.class);
+        DataSetVo dataSetVo = JsonUtility.toObjectIgnoreProp(dataSetVoJson, DataSetVo.class);
         datasetService.saveDataSetVo(JB4DSessionUtility.getSession(), dataSetId, dataSetVo);
         return JBuild4DResponseVo.success("");
     }

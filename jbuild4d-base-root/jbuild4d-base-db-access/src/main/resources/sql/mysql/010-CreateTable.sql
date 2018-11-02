@@ -352,7 +352,7 @@ CREATE TABLE `TB4D_DATASET` (
   `DS_ID`               NVARCHAR(100)  NOT NULL,
   `DS_CAPTION`          NVARCHAR(200)  NOT NULL,
   `DS_NAME`             NVARCHAR(200)  NOT NULL,
-  `DS_ORGAN_ID`         INT            NULL,
+  `DS_ORGAN_ID`         NVARCHAR(100)  NULL,
   `DS_CREATE_TIME`      DATETIME       NULL,
   `DS_CREATER`          NVARCHAR(100)  NULL,
   `DS_UPDATE_TIME`      DATETIME       NULL,

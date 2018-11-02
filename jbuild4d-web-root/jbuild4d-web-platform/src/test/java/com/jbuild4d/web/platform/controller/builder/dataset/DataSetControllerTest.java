@@ -53,7 +53,7 @@ public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
             dataSetVo.setDsId(dataSetId);
             dataSetVo.setDsCaption("单元测试数据集");
             dataSetVo.setDsName("单元测试数据集");
-            dataSetVo.setDsOrganId(0);
+            dataSetVo.setDsOrganId("0");
             dataSetVo.setDsCreateTime(new Date());
             dataSetVo.setDsCreater(jb4DSession.getUserName());
             dataSetVo.setDsUpdateTime(new Date());

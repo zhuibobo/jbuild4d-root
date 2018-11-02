@@ -1,6 +1,5 @@
 package com.jbuild4d.platform.builder.vo;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity;
 import com.jbuild4d.base.tools.common.JsonUtility;
 
@@ -22,7 +21,7 @@ public class DataSetRelatedTableVo extends DatasetRelatedTableEntity {
             return new ArrayList<>();
         }
         String json= JsonUtility.toObjectString(source);
-        List<DataSetRelatedTableVo> result=JsonUtility.toObjectList(json,DataSetRelatedTableVo.class);
+        List<DataSetRelatedTableVo> result=JsonUtility.toObjectListIgnoreProp(json,DataSetRelatedTableVo.class);
         return result;
     }
 }

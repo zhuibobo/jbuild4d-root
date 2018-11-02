@@ -150,6 +150,8 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
         //保存数据集的基本信息
         DatasetEntity datasetEntity=datasetMapper.selectByPrimaryKey(id);
         if(datasetEntity==null){
+            record.setDsOrganId(jb4DSession.getOrganId());
+            record.setDsOrderNum(datasetMapper.nextOrderNum());
             return datasetMapper.insertSelective(record);
         }
         else {

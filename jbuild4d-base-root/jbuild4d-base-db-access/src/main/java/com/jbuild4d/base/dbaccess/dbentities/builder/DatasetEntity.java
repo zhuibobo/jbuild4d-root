@@ -23,7 +23,7 @@ public class DatasetEntity {
     private String dsName;
 
     //DS_ORGAN_ID
-    private Integer dsOrganId;
+    private String dsOrganId;
 
     //DS_CREATE_TIME
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -69,7 +69,7 @@ public class DatasetEntity {
     //DS_REST_URL
     private String dsRestUrl;
 
-    public DatasetEntity(String dsId, String dsCaption, String dsName, Integer dsOrganId, Date dsCreateTime, String dsCreater, Date dsUpdateTime, String dsUpdater, String dsType, String dsIssystem, Integer dsOrderNum, String dsDesc, String dsGroupId, String dsStatus, String dsSqlSelectText, String dsSqlSelectValue, String dsClassName, String dsRestUrl) {
+    public DatasetEntity(String dsId, String dsCaption, String dsName, String dsOrganId, Date dsCreateTime, String dsCreater, Date dsUpdateTime, String dsUpdater, String dsType, String dsIssystem, Integer dsOrderNum, String dsDesc, String dsGroupId, String dsStatus, String dsSqlSelectText, String dsSqlSelectValue, String dsClassName, String dsRestUrl) {
         this.dsId = dsId;
         this.dsCaption = dsCaption;
         this.dsName = dsName;
@@ -118,12 +118,12 @@ public class DatasetEntity {
         this.dsName = dsName == null ? null : dsName.trim();
     }
 
-    public Integer getDsOrganId() {
+    public String getDsOrganId() {
         return dsOrganId;
     }
 
-    public void setDsOrganId(Integer dsOrganId) {
-        this.dsOrganId = dsOrganId;
+    public void setDsOrganId(String dsOrganId) {
+        this.dsOrganId = dsOrganId == null ? null : dsOrganId.trim();
     }
 
     public Date getDsCreateTime() {

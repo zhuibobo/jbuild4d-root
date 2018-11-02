@@ -47,7 +47,7 @@ public class TableFieldVO extends TableFieldEntity {
             return new ArrayList<>();
         }
         String json= JsonUtility.toObjectString(tableFieldVOList);
-        List<TableFieldEntity> entityList=JsonUtility.toObjectList(json,TableFieldEntity.class);
+        List<TableFieldEntity> entityList=JsonUtility.toObjectListIgnoreProp(json,TableFieldEntity.class);
         return entityList;
     }
 
@@ -58,7 +58,7 @@ public class TableFieldVO extends TableFieldEntity {
             return new ArrayList<>();
         }
         String json= JsonUtility.toObjectString(source);
-        List<TableFieldVO> result=JsonUtility.toObjectList(json,TableFieldVO.class);
+        List<TableFieldVO> result=JsonUtility.toObjectListIgnoreProp(json,TableFieldVO.class);
         return result;
     }
 

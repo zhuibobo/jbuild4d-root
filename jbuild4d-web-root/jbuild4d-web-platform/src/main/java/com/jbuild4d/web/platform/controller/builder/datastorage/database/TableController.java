@@ -140,7 +140,7 @@ public class TableController {
             tableEntityJson = URLDecoder.decode(URLDecoder.decode(tableEntityJson, "utf-8"),"utf-8");
             fieldVoListJson = URLDecoder.decode(URLDecoder.decode(fieldVoListJson, "utf-8"),"utf-8");
             TableEntity tableEntity = JsonUtility.toObject(tableEntityJson, TableEntity.class);
-            List<TableFieldVO> tableFieldVOList = JsonUtility.toObjectList(fieldVoListJson, TableFieldVO.class);
+            List<TableFieldVO> tableFieldVOList = JsonUtility.toObjectListIgnoreProp(fieldVoListJson, TableFieldVO.class);
             if (op.equals("add")) {
                 tableService.newTable(JB4DSessionUtility.getSession(), tableEntity, tableFieldVOList);
             } else if (op.equals("update")) {
