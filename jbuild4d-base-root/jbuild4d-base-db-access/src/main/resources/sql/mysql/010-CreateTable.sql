@@ -402,6 +402,7 @@ CREATE TABLE `TB4D_DATASET_COLUMN` (
   `COLUMN_ORDER_NUM`     INT            NULL,
   `COLUMN_TABLE_NAME`    NVARCHAR(50)   NULL,
   `COLUMN_IS_CUSTOM`     NVARCHAR(10)   NULL,
+  `COLUMN_FORMATTER`     NVARCHAR(200)  NULL,
   PRIMARY KEY (`COLUMN_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-数据集相关列';
 /*-----------------------------------------应用设计相关表--结束-----------------------------------------*/
