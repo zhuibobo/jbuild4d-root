@@ -45,7 +45,7 @@ var Column_SelectDefaultValue={
         }
 
         var $elem=$("<div></div>");
-        var $inputTxt = $("<input type='text' style='width: 95%' readonly />");
+        var $inputTxt = $("<input type='text' style='width: 90%' readonly />");
         $inputTxt.attr("columnDefaultType",defaultType);
         $inputTxt.attr("columnDefaultValue",defaultValue);
         $inputTxt.attr("columnDefaultText",defaultText);

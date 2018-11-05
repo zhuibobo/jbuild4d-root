@@ -1,17 +1,22 @@
 package com.jbuild4d.web.platform.controller.selectview;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
+import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.xpath.XPathExpressionException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,5 +42,16 @@ public class SelectEnvVariableController {
         modelAndView.addObject("envVarTreeData",JsonUtility.toObjectString(apiVarVoList));
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "GetSelectData",method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo getSelectData() throws XPathExpressionException {
+        Map<String,List<EnvVariableVo>> resultData=new HashMap<>();
+        List<EnvVariableVo> dateTimeVoList=envVariableService.getDateTimeVars();
+        List<EnvVariableVo> apiVarVoList=envVariableService.getAPIVars();
+        resultData.put("datetimeTreeData",dateTimeVoList);
+        resultData.put("envVarTreeData",apiVarVoList);
+        return JBuild4DResponseVo.success("获取成功!",resultData);
     }
 }

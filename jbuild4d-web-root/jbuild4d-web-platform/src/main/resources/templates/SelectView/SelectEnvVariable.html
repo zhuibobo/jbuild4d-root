@@ -8,6 +8,7 @@
     <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::EditTableLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
 </head>
 <body>
 <div id="appSelectView">
@@ -41,6 +42,9 @@
     var appSelectView=new Vue({
         el:"#appSelectView",
         data:{
+            acInterface:{
+                getSelectData:"/PlatForm/SelectView/SelectEnvVariable/GetSelectData"
+            },
             selectType:"Const",
             selectValue:"",
             selectText:"",
@@ -77,7 +81,7 @@
                         }
                     }
                 },
-                datetimeTreeData:${datetimeTreeData},
+                datetimeTreeData:null,
                 envVarTreeObj:null,
                 envVarTreeSetting:{
                     view: {
@@ -110,19 +114,27 @@
                         }
                     }
                 },
-                envVarTreeData:${envVarTreeData},
+                envVarTreeData:null,
                 numberCodeTreeObj:null,
                 numberCodeTreeSetting:{},
                 numberCodeTreeData:{}
             }
         },
         mounted:function (){
-            this.tree.datetimeTreeObj=$.fn.zTree.init($("#datetimeZTreeUL"), this.tree.datetimeTreeSetting,this.tree.datetimeTreeData);
-            this.tree.datetimeTreeObj.expandAll(true);
-            this.tree.envVarTreeObj=$.fn.zTree.init($("#envVarZTreeUL"), this.tree.envVarTreeSetting,this.tree.envVarTreeData);
-            this.tree.envVarTreeObj.expandAll(true);
+            this.loadData();
         },
         methods:{
+            loadData:function(){
+                var _self=this;
+                AjaxUtility.Post(this.acInterface.getSelectData,{},function (result) {
+                    _self.tree.datetimeTreeData=result.data.datetimeTreeData;
+                    _self.tree.envVarTreeData=result.data.envVarTreeData;
+                    _self.tree.datetimeTreeObj=$.fn.zTree.init($("#datetimeZTreeUL"), _self.tree.datetimeTreeSetting,_self.tree.datetimeTreeData);
+                    _self.tree.datetimeTreeObj.expandAll(true);
+                    _self.tree.envVarTreeObj=$.fn.zTree.init($("#envVarZTreeUL"), _self.tree.envVarTreeSetting,_self.tree.envVarTreeData);
+                    _self.tree.envVarTreeObj.expandAll(true);
+                },"json");
+            },
             getSelectInstanceName:function () {
                 return StringUtility.QueryString("instanceName");
             },
