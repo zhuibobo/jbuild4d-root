@@ -310,6 +310,19 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
         String sqlReplaceRunningValueToEmptyFilter=sqlReplaceRunningValueToEmptyFilter(jb4DSession,setSqlWithEnvRunningValue);
         resolveToDataSetVo.setSqlWithEmptyData(sqlReplaceRunningValueToEmptyFilter);
         DataSetVo dataSetVo=resolveSQLToDataSet(jb4DSession,sqlReplaceRunningValueToEmptyFilter);
+
+        //验证字段中是否都是大写
+        for (DataSetColumnVo dataSetColumnVo : dataSetVo.getColumnVoList()) {
+            String columnName=dataSetColumnVo.getColumnName();
+            Pattern p=Pattern.compile("[a-z]*");
+            Matcher m=p.matcher(columnName);
+            while (m.find()) {
+                if(!m.group().equals("")){
+                    throw new JBuild4DGenerallyException(0,"请使用大写的字段名:"+columnName+"!");
+                }
+            }
+        }
+
         resolveToDataSetVo.setDataSetVo(dataSetVo);
         return resolveToDataSetVo;
     }

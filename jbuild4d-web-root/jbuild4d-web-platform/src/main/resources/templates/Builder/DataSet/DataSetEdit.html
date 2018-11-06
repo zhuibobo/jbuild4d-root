@@ -345,13 +345,33 @@
                     this.datasetEntity.dsSqlSelectValue=result.data.sqlWithEnvValue;
                     this.relatedTable.data=result.data.dataSetVo.relatedTableVoList;
                     //获取现有的列定义
-                    var oldColumnData=this.editTableObj.GetSerializeJson();
-                    if(oldColumnData.length==0) {
-                        this.editTableObj.LoadJsonData(result.data.dataSetVo.columnVoList);
-                    }
-                    else {
-                        for(var i=0;i<oldColumnData.length;i++){
-                            //var columnName=oldColumnData.columnName;
+                    if (this.editTableObj.CompletedEditingRow()) {
+                        var oldColumnData = this.editTableObj.GetSerializeJson();
+                        if (oldColumnData.length == 0) {
+                            this.editTableObj.LoadJsonData(result.data.dataSetVo.columnVoList);
+                        }
+                        else {
+                            var newColumnData = this.editTableObj.GetSerializeJson();
+                            //debugger;
+                            for (var j = 0; j < result.data.dataSetVo.columnVoList.length; j++) {
+                                var tempColumnName = result.data.dataSetVo.columnVoList[j].columnName;
+
+                                var canAdd=true;
+                                for (var i = 0; i < oldColumnData.length; i++) {
+                                    var columnName = oldColumnData[i].columnName;
+                                    if (columnName == tempColumnName) {
+                                        canAdd=false;
+                                        break;
+                                    }
+                                }
+                                if(canAdd) {
+                                    newColumnData.push(result.data.dataSetVo.columnVoList[j]);
+                                }
+                            }
+                            //debugger;
+                            //清空旧的列设置并进覆盖
+                            this.editTableObj.RemoveAllRow();
+                            this.editTableObj.LoadJsonData(newColumnData);
                         }
                     }
                 }

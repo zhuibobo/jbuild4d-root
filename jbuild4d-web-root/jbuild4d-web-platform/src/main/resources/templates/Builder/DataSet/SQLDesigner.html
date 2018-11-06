@@ -54,7 +54,7 @@
 <body>
     <div id="sqlDesignerForm" v-cloak>
         <div>
-            <div style="width: 100%">请编辑SQL语句
+            <div style="width: 100%">请编辑SQL语句[字段请统一使用大写]
                 <div style="float: right;margin-bottom: 8px">
                     <!--<button-group>-->
                         <Tooltip content="校验SQL" placement="left">
@@ -74,7 +74,7 @@
                 <div style="clear: bottom"></div>
             </div>
             <div style="height: 120px;width: 100%">
-                <textarea id="TextAreaJsEditor">select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'address' address,'sex' sex from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID where TDEV_TEST_1.ID='#{ApiVar.当前用户所在组织ID}'</textarea>
+                <textarea id="TextAreaJsEditor">select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'address' ADDRESS,'sex' sex from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID where TDEV_TEST_1.ID='#{ApiVar.当前用户所在组织ID}'</textarea>
             </div>
             <div>
                 <tabs value="Tables">
