@@ -124,7 +124,7 @@
                     }
                 },
                 <!--List-->
-                idFieldName:"tableId",
+                idFieldName:"dsId",
                 searchCondition:{
                     dsGroupId:{
                         value:"",
@@ -325,6 +325,7 @@
                     }
                 },
                 edit: function (recordId) {
+                    //alert(recordId);
                     var url = BaseUtility.BuildAction(this.acInterface.editDataSetView, {
                         "op": "update",
                         "groupId": this.treeSelectedNode[appList.treeIdFieldName],
