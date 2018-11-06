@@ -50,6 +50,13 @@ public class DataSetDesignController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/GetDataSetData")
+    @ResponseBody
+    public JBuild4DResponseVo getDataSetData(String op,String recordId) throws JBuild4DGenerallyException, IOException {
+        DataSetVo dataSetVo = datasetService.getVoByPrimaryKey(JB4DSessionUtility.getSession(),recordId);
+        return JBuild4DResponseVo.success("获取数据成功!",dataSetVo);
+    }
+
     @RequestMapping(value = "/SaveDataSetEdit")
     @ResponseBody
     public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetId, String dataSetVoJson) throws JBuild4DGenerallyException, IOException {

@@ -103,7 +103,8 @@
             el:"#dataSetEditForm",
             data:{
                 acInterface:{
-
+                    getDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/GetDataSetData.do",
+                    saveDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/SaveDataSetEdit.do"
                 },
                 currUserEntity:null,
                 datasetEntity:{
@@ -248,22 +249,22 @@
                 }
                 else {
                     //this.editTableObj.LoadJsonData(this.tableFieldsData);
+                    this.datasetEntity.dsId=StringUtility.QueryString("recordId");
                     this.datasetEntity.dsUpdater=this.currUserEntity.userName;
+                    this.loadData(this.datasetEntity.dsId,this.status);
                 }
                 $("#divEditTable").height($(".right-outer-wrap-c").height()-185);
             },
             methods:{
-                loadData:function(){
+                loadData:function(recordId,op){
+                    var _self=this;
                     //获取数据并赋值
-                    AjaxUtility.Post(interfaceUrl,{recordId:recordId,op:op},function (result) {
+                    AjaxUtility.Post(this.acInterface.getDataUrl,{recordId:recordId,op:op},function (result) {
                         if(result.success) {
-                            if(typeof(befFunc)=="function"){
-                                befFunc(result);
-                            }
-                            DetailPageUtility.OverrideObjectValue(vueFormData, result.data);
-                            if(typeof(afFunc)=="function"){
-                                afFunc(result);
-                            }
+                            console.log(result);
+                            _self.datasetEntity=result.data;
+                            _self.editTableObj.LoadJsonData(_self.datasetEntity.columnVoList);
+                            _self.relatedTable.data=_self.datasetEntity.relatedTableVoList;
                             if(op=="view") {
                                 DetailPageUtility.IViewPageToViewStatus();
                             }
@@ -344,8 +345,8 @@
                         };
 
                         //return;
-                        var url = '/PlatForm/Builder/DataSet/DataSetDesign/SaveDataSetEdit.do';
-                        AjaxUtility.Post(url, sendData, function (result) {
+                        var url = '';
+                        AjaxUtility.Post(this.acInterface.saveDataUrl, sendData, function (result) {
                             //debugger;
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 if (result.success) {
