@@ -60,6 +60,9 @@
                     </tab-pane>
                     <tab-pane label="API数据集" name="APIDataSet">
                         <div style="width: 100%;height: 30px">
+                            <i-input v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiClassColumn">
+                                <span slot="prepend">类全称：</span>
+                            </i-input>
                         </div>
                     </tab-pane>
                     <tab-pane label="REST数据集" name="RESTDataSet">
@@ -105,7 +108,8 @@
             data:{
                 acInterface:{
                     getDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/GetDataSetData.do",
-                    saveDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/SaveDataSetEdit.do"
+                    saveDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/SaveDataSetEdit.do",
+                    loadApiDataUrl:""
                 },
                 currUserEntity:null,
                 datasetEntity:{
@@ -294,9 +298,9 @@
                         AjaxUtility.Post(url, {recordId: fieldId,type:type}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                    if(type=="down") {
+                                    if (type == "down") {
                                         _self.editTableObj.MoveDown();
-                                    }else{
+                                    } else {
                                         _self.editTableObj.MoveUp();
                                     }
                                 });
@@ -349,7 +353,6 @@
                         };
 
                         //return;
-                        var url = '';
                         AjaxUtility.Post(this.acInterface.saveDataUrl, sendData, function (result) {
                             //debugger;
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
@@ -402,6 +405,23 @@
                             this.editTableObj.LoadJsonData(newColumnData);
                         }
                     }
+                },
+                loadApiClassColumn:function () {
+                    var _self=this;
+                    //获取数据并赋值
+                    var recordId=this.datasetEntity.dsId;
+                    var op=this.status;
+                    AjaxUtility.Post(this.acInterface.loadApiDataUrl,{recordId:recordId,op:op},function (result) {
+                        if(result.success) {
+                            console.log(result);
+                            _self.datasetEntity=result.data;
+                            _self.editTableObj.LoadJsonData(_self.datasetEntity.columnVoList);
+                            _self.relatedTable.data=_self.datasetEntity.relatedTableVoList;
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                        }
+                    },"json");
                 }
             }
         });

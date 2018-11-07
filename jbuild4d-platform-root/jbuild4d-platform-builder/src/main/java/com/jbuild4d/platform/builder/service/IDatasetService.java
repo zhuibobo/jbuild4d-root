@@ -35,4 +35,6 @@ public interface IDatasetService extends IBaseService<DatasetEntity> {
     SQLResolveToDataSetVo sqlResolveToDataSetVo(JB4DSession jb4DSession, String sqlWithEnvText) throws XPathExpressionException, JBuild4DGenerallyException, IOException, SAXException, ParserConfigurationException;
 
     PageInfo<DatasetEntity> getPageByGroupId(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, String groupId);
+
+    DataSetVo getApiDataSetVoStructure(JB4DSession session, String recordId, String op, String groupId, String fullClassName) throws IllegalAccessException, InstantiationException;
 }

@@ -57,6 +57,13 @@ public class DataSetDesignController {
         return JBuild4DResponseVo.success("获取数据成功!",dataSetVo);
     }
 
+    @RequestMapping()
+    @ResponseBody
+    public JBuild4DResponseVo getApiDataSetVoStructure(String op,String recordId,String groupId,String fullClassName) throws InstantiationException, IllegalAccessException {
+        DataSetVo dataSetVo = datasetService.getApiDataSetVoStructure(JB4DSessionUtility.getSession(),recordId,op,groupId,fullClassName);
+        return JBuild4DResponseVo.success("获取数据成功!",dataSetVo);
+    }
+
     @RequestMapping(value = "/SaveDataSetEdit")
     @ResponseBody
     public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetId, String dataSetVoJson) throws JBuild4DGenerallyException, IOException {

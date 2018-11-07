@@ -13,10 +13,12 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.IUpdateBefore;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.ClassUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.list.IListWhereCondition;
 import com.jbuild4d.base.tools.common.list.ListUtility;
 import com.jbuild4d.platform.builder.datasetbuilder.SQLDataSetBuilder;
+import com.jbuild4d.platform.builder.extend.IDataSetAPI;
 import com.jbuild4d.platform.builder.service.*;
 import com.jbuild4d.platform.builder.vo.*;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
@@ -335,6 +337,12 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
         List<DatasetEntity> list=datasetMapper.selectByGroupId(groupId);
         PageInfo<DatasetEntity> pageInfo = new PageInfo<DatasetEntity>(list);
         return pageInfo;
+    }
+
+    @Override
+    public DataSetVo getApiDataSetVoStructure(JB4DSession session, String recordId, String op, String groupId, String fullClassName) throws IllegalAccessException, InstantiationException {
+        IDataSetAPI dataSetAPI=(IDataSetAPI)ClassUtility.loadClass(fullClassName).newInstance();
+        return dataSetAPI.getDataSetStructure(session,recordId,op,groupId,"");
     }
 
     private boolean validateResolveSqlWithKeyWord(String sql) throws JBuild4DGenerallyException {
