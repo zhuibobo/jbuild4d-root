@@ -60,17 +60,17 @@
                     </tab-pane>
                     <tab-pane label="API数据集" name="APIDataSet">
                         <div style="width: 100%;height: 30px">
-                            <i-input v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiClassColumn">
+                            <i-input v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiDataSetVo">
                                 <span slot="prepend">类全称：</span>
                             </i-input>
                         </div>
                     </tab-pane>
                     <tab-pane label="REST数据集" name="RESTDataSet">
                         <div style="width: 100%;height: 60px">
-                            <i-input size="small" v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiClassColumn">
+                            <i-input size="small" v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadRestDataSetVo">
                                 <span slot="prepend">获取结构URL：</span>
                             </i-input>
-                            <i-input style="margin-top: 4px" size="small" v-model="datasetEntity.dsClassName" search enter-button="测试" @on-search="loadApiClassColumn">
+                            <i-input style="margin-top: 4px" size="small" v-model="datasetEntity.dsClassName" search enter-button="测试" @on-search="testRestDataSetVo">
                                 <span slot="prepend">数据提供URL：</span>
                             </i-input>
                         </div>
@@ -415,7 +415,7 @@
                         }
                     }
                 },
-                loadApiClassColumn:function () {
+                loadApiDataSetVo:function () {
                     var _self=this;
                     //获取数据并赋值
                     var recordId=this.datasetEntity.dsId;
@@ -425,7 +425,8 @@
                     AjaxUtility.Post(this.acInterface.loadApiDataUrl,{recordId:recordId,op:op,groupId:groupId,fullClassName:fullClassName},function (result) {
                         if(result.success) {
                             _self.clearColumn();
-                            _self.datasetEntity=result.data;
+                            _self.datasetEntity.dsCaption=result.data.dsCaption;
+                            _self.datasetEntity.dsName=result.data.dsName;
                             _self.editTableObj.LoadJsonData(_self.datasetEntity.columnVoList);
                             _self.relatedTable.data=_self.datasetEntity.relatedTableVoList;
                         }
@@ -433,6 +434,12 @@
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                         }
                     },"json");
+                },
+                loadRestDataSetVo:function () {
+
+                },
+                testRestDataSetVo:function () {
+
                 }
             }
         });
