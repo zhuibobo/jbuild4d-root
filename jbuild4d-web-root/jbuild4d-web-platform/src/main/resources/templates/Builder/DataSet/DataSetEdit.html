@@ -66,6 +66,14 @@
                         </div>
                     </tab-pane>
                     <tab-pane label="REST数据集" name="RESTDataSet">
+                        <div style="width: 100%;height: 60px">
+                            <i-input size="small" v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiClassColumn">
+                                <span slot="prepend">获取结构URL：</span>
+                            </i-input>
+                            <i-input style="margin-top: 4px" size="small" v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiClassColumn">
+                                <span slot="prepend">数据提供URL：</span>
+                            </i-input>
+                        </div>
                     </tab-pane>
                     <tab-pane label="自定义数据集" name="CUSTOMDataSet">
                     </tab-pane>
@@ -415,7 +423,7 @@
                     var fullClassName=this.datasetEntity.dsClassName;
                     AjaxUtility.Post(this.acInterface.loadApiDataUrl,{recordId:recordId,op:op,groupId:groupId,fullClassName:fullClassName},function (result) {
                         if(result.success) {
-                            console.log(result);
+                            _self.clearColumn();
                             _self.datasetEntity=result.data;
                             _self.editTableObj.LoadJsonData(_self.datasetEntity.columnVoList);
                             _self.relatedTable.data=_self.datasetEntity.relatedTableVoList;

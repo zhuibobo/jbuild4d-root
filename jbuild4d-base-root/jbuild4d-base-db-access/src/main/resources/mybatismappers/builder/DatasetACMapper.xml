@@ -20,13 +20,14 @@
             <arg column="DS_SQL_SELECT_TEXT" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DS_SQL_SELECT_VALUE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DS_CLASS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_REST_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DS_REST_STRUCTURE_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DS_REST_DATA_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         DS_ID, DS_CAPTION, DS_NAME, DS_ORGAN_ID, DS_CREATE_TIME, DS_CREATER, DS_UPDATE_TIME,
         DS_UPDATER, DS_TYPE, DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC, DS_GROUP_ID, DS_STATUS,
-        DS_SQL_SELECT_TEXT, DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_URL
+        DS_SQL_SELECT_TEXT, DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_STRUCTURE_URL, DS_REST_DATA_URL
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -44,15 +45,15 @@
                                   DS_UPDATE_TIME, DS_UPDATER, DS_TYPE,
                                   DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC,
                                   DS_GROUP_ID, DS_STATUS, DS_SQL_SELECT_TEXT,
-                                  DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_URL
-                )
+                                  DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_STRUCTURE_URL,
+                                  DS_REST_DATA_URL)
         values (#{dsId,jdbcType=VARCHAR}, #{dsCaption,jdbcType=VARCHAR}, #{dsName,jdbcType=VARCHAR},
                 #{dsOrganId,jdbcType=VARCHAR}, #{dsCreateTime,jdbcType=TIMESTAMP}, #{dsCreater,jdbcType=VARCHAR},
                 #{dsUpdateTime,jdbcType=TIMESTAMP}, #{dsUpdater,jdbcType=VARCHAR}, #{dsType,jdbcType=VARCHAR},
                 #{dsIssystem,jdbcType=VARCHAR}, #{dsOrderNum,jdbcType=INTEGER}, #{dsDesc,jdbcType=VARCHAR},
                 #{dsGroupId,jdbcType=VARCHAR}, #{dsStatus,jdbcType=VARCHAR}, #{dsSqlSelectText,jdbcType=VARCHAR},
-                #{dsSqlSelectValue,jdbcType=VARCHAR}, #{dsClassName,jdbcType=VARCHAR}, #{dsRestUrl,jdbcType=VARCHAR}
-                       )
+                #{dsSqlSelectValue,jdbcType=VARCHAR}, #{dsClassName,jdbcType=VARCHAR}, #{dsRestStructureUrl,jdbcType=VARCHAR},
+                #{dsRestDataUrl,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         insert into TB4D_DATASET
@@ -108,8 +109,11 @@
             <if test="dsClassName != null">
                 DS_CLASS_NAME,
             </if>
-            <if test="dsRestUrl != null">
-                DS_REST_URL,
+            <if test="dsRestStructureUrl != null">
+                DS_REST_STRUCTURE_URL,
+            </if>
+            <if test="dsRestDataUrl != null">
+                DS_REST_DATA_URL,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -164,8 +168,11 @@
             <if test="dsClassName != null">
                 #{dsClassName,jdbcType=VARCHAR},
             </if>
-            <if test="dsRestUrl != null">
-                #{dsRestUrl,jdbcType=VARCHAR},
+            <if test="dsRestStructureUrl != null">
+                #{dsRestStructureUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="dsRestDataUrl != null">
+                #{dsRestDataUrl,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -220,8 +227,11 @@
             <if test="dsClassName != null">
                 DS_CLASS_NAME = #{dsClassName,jdbcType=VARCHAR},
             </if>
-            <if test="dsRestUrl != null">
-                DS_REST_URL = #{dsRestUrl,jdbcType=VARCHAR},
+            <if test="dsRestStructureUrl != null">
+                DS_REST_STRUCTURE_URL = #{dsRestStructureUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="dsRestDataUrl != null">
+                DS_REST_DATA_URL = #{dsRestDataUrl,jdbcType=VARCHAR},
             </if>
         </set>
         where DS_ID = #{dsId,jdbcType=VARCHAR}
@@ -244,7 +254,8 @@
             DS_SQL_SELECT_TEXT = #{dsSqlSelectText,jdbcType=VARCHAR},
             DS_SQL_SELECT_VALUE = #{dsSqlSelectValue,jdbcType=VARCHAR},
             DS_CLASS_NAME = #{dsClassName,jdbcType=VARCHAR},
-            DS_REST_URL = #{dsRestUrl,jdbcType=VARCHAR}
+            DS_REST_STRUCTURE_URL = #{dsRestStructureUrl,jdbcType=VARCHAR},
+            DS_REST_DATA_URL = #{dsRestDataUrl,jdbcType=VARCHAR}
         where DS_ID = #{dsId,jdbcType=VARCHAR}
     </update>
 </mapper>

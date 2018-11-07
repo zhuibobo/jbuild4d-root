@@ -65,7 +65,8 @@ public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
             dataSetVo.setDsSqlSelectText(resolveToDataSetVo.getSqlWithEnvText());
             dataSetVo.setDsSqlSelectValue(resolveToDataSetVo.getSqlWithEnvValue());
             dataSetVo.setDsClassName("");
-            dataSetVo.setDsRestUrl("");
+            dataSetVo.setDsRestStructureUrl("");
+            dataSetVo.setDsRestDataUrl("");
 
             for (DataSetColumnVo dataSetColumnVo : resolveToDataSetVo.getDataSetVo().getColumnVoList()) {
                 dataSetColumnVo.setColumnId(UUIDUtility.getUUID());

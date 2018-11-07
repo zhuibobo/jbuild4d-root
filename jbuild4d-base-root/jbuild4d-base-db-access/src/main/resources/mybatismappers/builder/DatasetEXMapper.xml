@@ -7,6 +7,7 @@
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DATASET<where>
         <if test="dsCaption !=null and dsCaption !=''"> and DS_CAPTION like #{dsCaption} </if>
         <if test="dsName !=null and dsName !=''"> and DS_NAME like #{dsName} </if>
+        <if test="dsOrganId !=null and dsOrganId !=''"> and DS_ORGAN_ID like #{dsOrganId} </if>
         <if test="dsCreater !=null and dsCreater !=''"> and DS_CREATER like #{dsCreater} </if>
         <if test="dsUpdater !=null and dsUpdater !=''"> and DS_UPDATER like #{dsUpdater} </if>
         <if test="dsType !=null and dsType !=''"> and DS_TYPE like #{dsType} </if>
@@ -14,9 +15,11 @@
         <if test="dsDesc !=null and dsDesc !=''"> and DS_DESC like #{dsDesc} </if>
         <if test="dsGroupId !=null and dsGroupId !=''"> and DS_GROUP_ID like #{dsGroupId} </if>
         <if test="dsStatus !=null and dsStatus !=''"> and DS_STATUS like #{dsStatus} </if>
-        <if test="dsSqlSelect !=null and dsSqlSelect !=''"> and DS_SQL_SELECT like #{dsSqlSelect} </if>
-        <if test="dsSqlWhere !=null and dsSqlWhere !=''"> and DS_SQL_WHERE like #{dsSqlWhere} </if>
-        <if test="dsSqlOrder !=null and dsSqlOrder !=''"> and DS_ORDER_NUM like #{dsSqlOrder} </if>
+        <if test="dsSqlSelectText !=null and dsSqlSelectText !=''"> and DS_SQL_SELECT_TEXT like #{dsSqlSelectText} </if>
+        <if test="dsSqlSelectValue !=null and dsSqlSelectValue !=''"> and DS_SQL_SELECT_VALUE like #{dsSqlSelectValue} </if>
+        <if test="dsClassName !=null and dsClassName !=''"> and DS_CLASS_NAME like #{dsClassName} </if>
+        <if test="dsRestStructureUrl !=null and dsRestStructureUrl !=''"> and DS_REST_STRUCTURE_URL like #{dsRestStructureUrl} </if>
+        <if test="dsRestDataUrl !=null and dsRestDataUrl !=''"> and DS_REST_DATA_URL like #{dsRestDataUrl} </if>
     </where>ORDER by DS_ORDER_NUM DESC</select>
     <select id="selectByGroupId" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DATASET
         where DS_GROUP_ID=#{groupId}

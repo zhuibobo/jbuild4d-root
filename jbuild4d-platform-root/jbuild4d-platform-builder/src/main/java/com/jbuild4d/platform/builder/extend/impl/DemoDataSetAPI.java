@@ -40,7 +40,8 @@ public class DemoDataSetAPI implements IDataSetAPI {
         dataSetVo.setDsSqlSelectText("");
         dataSetVo.setDsSqlSelectValue("");
         dataSetVo.setDsClassName("com.jbuild4d.platform.builder.extend.impl.DemoDataSetAPI");
-        dataSetVo.setDsRestUrl("");
+        dataSetVo.setDsRestStructureUrl("");
+        dataSetVo.setDsRestDataUrl("");
 
         List<DataSetColumnVo> dataSetColumnVoList=new ArrayList<>();
 
