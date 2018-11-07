@@ -59,7 +59,7 @@
                         </div>
                     </tab-pane>
                     <tab-pane label="API数据集" name="APIDataSet">
-                        <div style="width: 100%;height: 30px">
+                        <div style="width: 100%;height: 30px" name="APIDataSetInnerWraper">
                             <i-input v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiDataSetVo">
                                 <span slot="prepend">类全称：</span>
                             </i-input>
@@ -83,11 +83,11 @@
                         <div style="float: right;margin-bottom: 8px">
                             编辑列 &nbsp;
                             <button-group>
-                                <i-button size="small" type="success" icon="md-add" @click="addColumn">新增</i-button>
-                                <i-button size="small" type="primary" icon="md-close" @click="removeColumn">删除</i-button>
-                                <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveColumn('up')">上移</i-button>
-                                <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveColumn('down')">下移</i-button>
-                                <i-button size="small" type="primary" icon="md-trash" @click="clearColumn()">清空</i-button>
+                                <i-button size="small" type="success" icon="md-add" @click="addColumn"></i-button>
+                                <i-button size="small" type="primary" icon="md-close" @click="removeColumn"></i-button>
+                                <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveColumn('up')"></i-button>
+                                <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveColumn('down')"></i-button>
+                                <i-button size="small" type="primary" icon="md-trash" @click="clearColumn()"></i-button>
                             </button-group>
                         </div>
                         <div style="clear: bottom"></div>
@@ -248,7 +248,7 @@
                 }
                 /*,sqlWithEnvText:"请编辑SQL"*/
             },
-            mounted:function () {
+            mounted:function(){
                 this.editTableObj=Object.create(EditTable);
                 this.editTableObj.Initialization(this.editTableConfig);
                 this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
@@ -269,6 +269,9 @@
                 }
                 $("#divEditTable").height($(".right-outer-wrap-c").height()-185);
             },
+            created:function () {
+
+            },
             methods:{
                 loadData:function(recordId,op){
                     var _self=this;
@@ -277,10 +280,19 @@
                         if(result.success) {
                             console.log(result);
                             _self.datasetEntity=result.data;
+                            //alert(_self.datasetEntity.dsType);
                             _self.editTableObj.LoadJsonData(_self.datasetEntity.columnVoList);
                             _self.relatedTable.data=_self.datasetEntity.relatedTableVoList;
                             if(op=="view") {
                                 DetailPageUtility.IViewPageToViewStatus();
+                            }
+
+                            //不明所以...没有切换可见的状态...
+                            if(_self.datasetEntity.dsType=="APIDataSet"){
+                                window.setTimeout(function () {
+                                    $("[name='APIDataSetInnerWraper']").css("visibility","visible");
+                                },500);
+                                //alert(_self.datasetEntity.dsType);
                             }
                         }
                         else {
@@ -427,8 +439,8 @@
                             _self.clearColumn();
                             _self.datasetEntity.dsCaption=result.data.dsCaption;
                             _self.datasetEntity.dsName=result.data.dsName;
-                            _self.editTableObj.LoadJsonData(_self.datasetEntity.columnVoList);
-                            _self.relatedTable.data=_self.datasetEntity.relatedTableVoList;
+                            _self.editTableObj.LoadJsonData(result.data.columnVoList);
+                            _self.relatedTable.data=result.data.relatedTableVoList;
                         }
                         else {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
