@@ -57,7 +57,7 @@ public class DataSetDesignController {
         return JBuild4DResponseVo.success("获取数据成功!",dataSetVo);
     }
 
-    @RequestMapping()
+    @RequestMapping(value = "/GetApiDataSetVoStructure")
     @ResponseBody
     public JBuild4DResponseVo getApiDataSetVoStructure(String op,String recordId,String groupId,String fullClassName) throws InstantiationException, IllegalAccessException {
         DataSetVo dataSetVo = datasetService.getApiDataSetVoStructure(JB4DSessionUtility.getSession(),recordId,op,groupId,fullClassName);

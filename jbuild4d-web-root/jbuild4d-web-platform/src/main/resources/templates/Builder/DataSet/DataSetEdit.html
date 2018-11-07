@@ -107,9 +107,9 @@
             el:"#dataSetEditForm",
             data:{
                 acInterface:{
-                    getDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/GetDataSetData.do",
-                    saveDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/SaveDataSetEdit.do",
-                    loadApiDataUrl:""
+                    getDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/GetDataSetData",
+                    saveDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/SaveDataSetEdit",
+                    loadApiDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/GetApiDataSetVoStructure"
                 },
                 currUserEntity:null,
                 datasetEntity:{
@@ -127,7 +127,7 @@
                     dsStatus:"启用",
                     dsSqlSelectText:"",
                     dsSqlSelectValue:"",
-                    dsClassName:"",
+                    dsClassName:"com.jbuild4d.platform.builder.extend.impl.DemoDataSetAPI",
                     dsRestUrl:"",
                     columnVoList:null,
                     relatedTableVoList:null
@@ -411,7 +411,9 @@
                     //获取数据并赋值
                     var recordId=this.datasetEntity.dsId;
                     var op=this.status;
-                    AjaxUtility.Post(this.acInterface.loadApiDataUrl,{recordId:recordId,op:op},function (result) {
+                    var groupId=this.datasetEntity.dsGroupId;
+                    var fullClassName=this.datasetEntity.dsClassName;
+                    AjaxUtility.Post(this.acInterface.loadApiDataUrl,{recordId:recordId,op:op,groupId:groupId,fullClassName:fullClassName},function (result) {
                         if(result.success) {
                             console.log(result);
                             _self.datasetEntity=result.data;
