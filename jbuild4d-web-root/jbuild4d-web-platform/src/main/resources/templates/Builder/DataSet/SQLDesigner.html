@@ -103,7 +103,8 @@
             </div>
         </div>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
-            <i-button type="success" @click="saveSQLDesign"> 确 认 </i-button>
+            <i-button type="success" @click="coverSQLDesign"> 覆 盖 </i-button>
+            <i-button style="margin-left: 8px" @click="appendSQLDesign"> 追 加 </i-button>
             <i-button style="margin-left: 8px" @click="handleClose()"> 关 闭 </i-button>
         </div>
         <div id="validateSQLEnableWarp" style="display: none" class="validate-sql-enable-warp">
@@ -347,7 +348,14 @@
                 handleClose: function () {
                     DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
                 },
-                saveSQLDesign:function () {
+                coverSQLDesign:function(){
+                    this.validateSQLEnable(function (result) {
+                        window.parent.dataSetEditForm.clearColumn();
+                        window.parent.dataSetEditForm.completedSQLDesign(result);
+                        sqlDesignerForm.handleClose();
+                    });
+                },
+                appendSQLDesign:function () {
                     this.validateSQLEnable(function (result) {
                         window.parent.dataSetEditForm.completedSQLDesign(result);
                         sqlDesignerForm.handleClose();

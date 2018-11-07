@@ -72,11 +72,11 @@
                         <div style="float: right;margin-bottom: 8px">
                             编辑列 &nbsp;
                             <button-group>
-                                <i-button size="small" type="success" icon="md-add" @click="addField">新增</i-button>
-                                <i-button size="small" type="primary" icon="md-close" @click="removeField">删除</i-button>
-                                <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveField('up')">上移</i-button>
-                                <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveField('down')">下移</i-button>
-                                <i-button size="small" type="primary" icon="md-trash" @click="clearField()">清空</i-button>
+                                <i-button size="small" type="success" icon="md-add" @click="addColumn">新增</i-button>
+                                <i-button size="small" type="primary" icon="md-close" @click="removeColumn">删除</i-button>
+                                <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveColumn('up')">上移</i-button>
+                                <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveColumn('down')">下移</i-button>
+                                <i-button size="small" type="primary" icon="md-trash" @click="clearColumn()">清空</i-button>
                             </button-group>
                         </div>
                         <div style="clear: bottom"></div>
@@ -275,16 +275,16 @@
                         }
                     },"json");
                 },
-                addField:function(){
+                addColumn:function(){
                     this.editTableObj.AddEditingRowByTemplate();
                 },
-                removeField:function () {
+                removeColumn:function () {
                     this.editTableObj.RemoveRow();
                 },
-                clearField:function(){
+                clearColumn:function(){
                     this.editTableObj.RemoveAllRow();
                 },
-                moveField:function (type) {
+                moveColumn:function (type) {
                     var editRow=this.editTableObj.GetEditRow();
                     if(editRow!=null){
                         var _self=this;
