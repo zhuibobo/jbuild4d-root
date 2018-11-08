@@ -87,7 +87,7 @@
                     <!--List -->
                     editDataSetView:"/PlatForm/Builder/DataSet/DataSetDesign/EditDataSet",
                     reloadListData:"/PlatForm/Builder/DataSet/DataSetDesign/GetListData",
-                    deleteTable:"",
+                    deleteDataSet:"/PlatForm/Builder/DataSet/DataSetDesign/DeleteDataSet",
                     tableMove:""
                 },
                 <!--Tree-->
@@ -334,23 +334,27 @@
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "数据集设计"}, 0);
                 },
                 view:function (recordId) {
-                    /*var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=view&recordId=" + recordId);
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 0);*/
+                    var url = BaseUtility.BuildAction(this.acInterface.editDataSetView, {
+                        "op": "view",
+                        "groupId": this.treeSelectedNode[appList.treeIdFieldName],
+                        "recordId":recordId
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "数据集设计"}, 0);
                 },
                 del: function (recordId) {
-                    /*var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Delete.do';
-                    DialogUtility.Comfirm(window, "确认要删除当前表吗？删除表时将只是删除表的描述,物理表和字段描述将保存，如果需要删除，请手工删除。", function () {
-                        AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+                    var _self=this;
+                    DialogUtility.Comfirm(window, "确认要删除当前数据集？", function () {
+                        AjaxUtility.Post(_self.acInterface.deleteDataSet, {dataSetId: recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                    appList.reloadData();
+                                    _self.reloadData();
                                 });
                             }
                             else {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
                             }
                         }, "json");
-                    });*/
+                    });
                 },
                 move:function (type) {
                     /*var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Move.do';

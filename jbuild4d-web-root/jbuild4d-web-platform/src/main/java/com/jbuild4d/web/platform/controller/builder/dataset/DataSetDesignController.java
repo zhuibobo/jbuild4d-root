@@ -76,7 +76,7 @@ public class DataSetDesignController {
     @ResponseBody
     public JBuild4DResponseVo deleteDataSet(String dataSetId) throws JBuild4DGenerallyException, IOException {
         datasetService.deleteByKey(JB4DSessionUtility.getSession(), dataSetId);
-        return JBuild4DResponseVo.success("");
+        return JBuild4DResponseVo.success("删除数据集成功!");
     }
 
     @RequestMapping(value = "GetListData", method = RequestMethod.POST)

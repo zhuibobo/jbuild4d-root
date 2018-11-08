@@ -50,7 +50,7 @@
                             <div style="float:left;width: 88%;border: red 1px solid;border-radius: 4px;height: 50px;padding: 4px">
                                 {{datasetEntity.dsSqlSelectText}}
                             </div>
-                            <div @click="designSQL" style="float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
+                            <div @click="designSQL" style="color: #FFFFFF;background-color: #47cb89;float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
                                 编辑
                             </div>
                             <div style="float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
@@ -61,16 +61,16 @@
                     <tab-pane label="API数据集" name="APIDataSet">
                         <div style="width: 100%;height: 30px" name="APIDataSetInnerWraper">
                             <i-input v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiDataSetVo">
-                                <span slot="prepend">类全称：</span>
+                                <span slot="prepend">类全称[继承com.jbuild4d.platform.builder.extend.IDataSetAPI]：</span>
                             </i-input>
                         </div>
                     </tab-pane>
                     <tab-pane label="REST数据集" name="RESTDataSet">
                         <div style="width: 100%;height: 60px">
-                            <i-input size="small" v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadRestDataSetVo">
+                            <i-input size="small" v-model="datasetEntity.dsRestStructureUrl" search enter-button="加载" @on-search="loadRestDataSetVo">
                                 <span slot="prepend">获取结构URL：</span>
                             </i-input>
-                            <i-input style="margin-top: 4px" size="small" v-model="datasetEntity.dsClassName" search enter-button="测试" @on-search="testRestDataSetVo">
+                            <i-input style="margin-top: 4px" size="small" v-model="datasetEntity.dsRestDataUrl" search enter-button="测试" @on-search="testRestDataSetVo">
                                 <span slot="prepend">数据提供URL：</span>
                             </i-input>
                         </div>
@@ -205,7 +205,7 @@
                             Renderer:"EditTable_TextBox",
                             Hidden:false,
                             Style:{
-                                width:80,
+                                width:180,
                                 textAlign:"center"
                             }
                         },{
@@ -259,7 +259,7 @@
                     this.datasetEntity.dsId=StringUtility.Guid();
                     this.datasetEntity.dsGroupId=StringUtility.QueryString("groupId");
                     this.datasetEntity.dsType="SQLDataSet";
-                    this.datasetEntity.dsSqlSelectText="请编辑SQL1";
+                    this.datasetEntity.dsSqlSelectText="请编辑SQL";
                 }
                 else {
                     //this.editTableObj.LoadJsonData(this.tableFieldsData);
@@ -310,26 +310,11 @@
                     this.editTableObj.RemoveAllRow();
                 },
                 moveColumn:function (type) {
-                    var editRow=this.editTableObj.GetEditRow();
-                    if(editRow!=null){
-                        var _self=this;
-                        var rowId=editRow.attr("id");
-                        var fieldId=this.editTableObj.GetSelectRowDataByRowId(rowId).fieldId;
-                        var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Move.do';
-                        AjaxUtility.Post(url, {recordId: fieldId,type:type}, function (result) {
-                            if (result.success) {
-                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
-                                    if (type == "down") {
-                                        _self.editTableObj.MoveDown();
-                                    } else {
-                                        _self.editTableObj.MoveUp();
-                                    }
-                                });
-                            }
-                            else {
-                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
-                            }
-                        }, "json");
+                    if(type=="up"){
+                        this.editTableObj.MoveUp();
+                    }
+                    else {
+                        this.editTableObj.MoveDown();
                     }
                 },
                 saveEditDataSet:function () {
