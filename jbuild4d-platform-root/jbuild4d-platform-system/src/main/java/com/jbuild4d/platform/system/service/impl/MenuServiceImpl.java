@@ -177,6 +177,20 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenu","","frame-top-menu-data");
         deleteByKey(jb4DSession,appBuilderMenuBuilderMenu.getMenuId());
         save(jb4DSession,appBuilderMenuBuilderMenu.getMenuId(),appBuilderMenuBuilderMenu);
+
+        //根菜单->应用管理->流程设计
+        String appBuilderFlowBuilderId="JB4DSystemAppBuilderFlowBuilder";
+        MenuEntity appBuilderFlowBuilderMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderFlowBuilderId,"流程设计","流程设计","流程设计",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenu","","frame-top-menu-data");
+        deleteByKey(jb4DSession,appBuilderFlowBuilderMenu.getMenuId());
+        save(jb4DSession,appBuilderFlowBuilderMenu.getMenuId(),appBuilderFlowBuilderMenu);
+
+        //根菜单->应用管理->桌面设计
+        String appBuilderDesktopBuilderId="JB4DSystemAppBuilderDesktopBuilder";
+        MenuEntity appBuilderDesktopBuilderMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderDesktopBuilderId,"桌面设计","桌面设计","桌面设计",
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenu","","frame-top-menu-data");
+        deleteByKey(jb4DSession,appBuilderDesktopBuilderMenu.getMenuId());
+        save(jb4DSession,appBuilderDesktopBuilderMenu.getMenuId(),appBuilderDesktopBuilderMenu);
     }
 
     public MenuEntity getMenu(String parentId,String id,String name,String text,String value,String type,String leftUrl,String rightUrl,String iconClassName){

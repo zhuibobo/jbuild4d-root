@@ -58,24 +58,31 @@ public class InitializationSystemController {
     public JBuild4DResponseVo running() throws JBuild4DGenerallyException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
 
+        //初始化菜单
         menuService.initSystemData(jb4DSession);
+
+        //初始化字典
         dictionaryGroupService.initSystemData(jb4DSession,dictionaryService);
 
+        //初始化测试树数据
         devDemoTreeTableService.deleteByKey(jb4DSession,"0");
         DevDemoTreeTableEntity treeTableRootEntity=devDemoTreeTableService.createRootNode(jb4DSession);
 
         devDemoTLTreeService.deleteByKey(jb4DSession,"0");
         devDemoTLTreeService.createRootNode(jb4DSession);
 
+        //初始化根组织
         organService.deleteByKey(jb4DSession,"0");
         organService.createRootOrgan(jb4DSession);
 
+        //初始化根表分组
         tableGroupService.deleteByKeyNotValidate(jb4DSession,"0");
         TableGroupEntity rootTableGroupEntity=tableGroupService.createRootNode(jb4DSession);
 
         tableGroupService.deleteByKeyNotValidate(jb4DSession,"TableGroupJBuild4DSystem");
         tableGroupService.createSystemTableGroupNode(jb4DSession,rootTableGroupEntity);
 
+        //初始化表模版
         tableFieldService.createGeneralTemplate(jb4DSession);
 
         DatasetGroupEntity rootDatasetGroupEntity=datasetGroupService.createRootNode(jb4DSession);
