@@ -16,12 +16,15 @@
             <arg column="TABLE_GROUP_PID_LIST" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_GROUP_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="TABLE_GROUP_LINK_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TABLE_GROUP_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TABLE_GROUP_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         TABLE_GROUP_ID, TABLE_GROUP_VALUE, TABLE_GROUP_TEXT, TABLE_GROUP_ORDER_NUM, TABLE_GROUP_CREATE_TIME,
         TABLE_GROUP_DESC, TABLE_GROUP_STATUS, TABLE_GROUP_PARENT_ID, TABLE_GROUP_ISSYSTEM,
-        TABLE_GROUP_DEL_ENABLE, TABLE_GROUP_PID_LIST, TABLE_GROUP_CHILD_COUNT, TABLE_GROUP_LINK_ID
+        TABLE_GROUP_DEL_ENABLE, TABLE_GROUP_PID_LIST, TABLE_GROUP_CHILD_COUNT, TABLE_GROUP_LINK_ID,
+        TABLE_GROUP_ORGAN_ID, TABLE_GROUP_ORGAN_NAME
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -39,13 +42,15 @@
                                       TABLE_GROUP_DESC, TABLE_GROUP_STATUS, TABLE_GROUP_PARENT_ID,
                                       TABLE_GROUP_ISSYSTEM, TABLE_GROUP_DEL_ENABLE,
                                       TABLE_GROUP_PID_LIST, TABLE_GROUP_CHILD_COUNT,
-                                      TABLE_GROUP_LINK_ID)
+                                      TABLE_GROUP_LINK_ID, TABLE_GROUP_ORGAN_ID, TABLE_GROUP_ORGAN_NAME
+                )
         values (#{tableGroupId,jdbcType=VARCHAR}, #{tableGroupValue,jdbcType=VARCHAR}, #{tableGroupText,jdbcType=VARCHAR},
                 #{tableGroupOrderNum,jdbcType=INTEGER}, #{tableGroupCreateTime,jdbcType=TIMESTAMP},
                 #{tableGroupDesc,jdbcType=VARCHAR}, #{tableGroupStatus,jdbcType=VARCHAR}, #{tableGroupParentId,jdbcType=VARCHAR},
                 #{tableGroupIssystem,jdbcType=VARCHAR}, #{tableGroupDelEnable,jdbcType=VARCHAR},
                 #{tableGroupPidList,jdbcType=VARCHAR}, #{tableGroupChildCount,jdbcType=INTEGER},
-                #{tableGroupLinkId,jdbcType=VARCHAR})
+                #{tableGroupLinkId,jdbcType=VARCHAR}, #{tableGroupOrganId,jdbcType=VARCHAR}, #{tableGroupOrganName,jdbcType=VARCHAR}
+                       )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
         insert into TB4D_TABLE_GROUP
@@ -89,6 +94,12 @@
             <if test="tableGroupLinkId != null">
                 TABLE_GROUP_LINK_ID,
             </if>
+            <if test="tableGroupOrganId != null">
+                TABLE_GROUP_ORGAN_ID,
+            </if>
+            <if test="tableGroupOrganName != null">
+                TABLE_GROUP_ORGAN_NAME,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="tableGroupId != null">
@@ -129,6 +140,12 @@
             </if>
             <if test="tableGroupLinkId != null">
                 #{tableGroupLinkId,jdbcType=VARCHAR},
+            </if>
+            <if test="tableGroupOrganId != null">
+                #{tableGroupOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="tableGroupOrganName != null">
+                #{tableGroupOrganName,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -171,6 +188,12 @@
             <if test="tableGroupLinkId != null">
                 TABLE_GROUP_LINK_ID = #{tableGroupLinkId,jdbcType=VARCHAR},
             </if>
+            <if test="tableGroupOrganId != null">
+                TABLE_GROUP_ORGAN_ID = #{tableGroupOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="tableGroupOrganName != null">
+                TABLE_GROUP_ORGAN_NAME = #{tableGroupOrganName,jdbcType=VARCHAR},
+            </if>
         </set>
         where TABLE_GROUP_ID = #{tableGroupId,jdbcType=VARCHAR}
     </update>
@@ -187,7 +210,9 @@
             TABLE_GROUP_DEL_ENABLE = #{tableGroupDelEnable,jdbcType=VARCHAR},
             TABLE_GROUP_PID_LIST = #{tableGroupPidList,jdbcType=VARCHAR},
             TABLE_GROUP_CHILD_COUNT = #{tableGroupChildCount,jdbcType=INTEGER},
-            TABLE_GROUP_LINK_ID = #{tableGroupLinkId,jdbcType=VARCHAR}
+            TABLE_GROUP_LINK_ID = #{tableGroupLinkId,jdbcType=VARCHAR},
+            TABLE_GROUP_ORGAN_ID = #{tableGroupOrganId,jdbcType=VARCHAR},
+            TABLE_GROUP_ORGAN_NAME = #{tableGroupOrganName,jdbcType=VARCHAR}
         where TABLE_GROUP_ID = #{tableGroupId,jdbcType=VARCHAR}
     </update>
 </mapper>

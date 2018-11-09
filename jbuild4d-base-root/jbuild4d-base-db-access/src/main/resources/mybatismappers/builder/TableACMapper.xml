@@ -7,7 +7,6 @@
             <arg column="TABLE_CAPTION" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_DBNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="TABLE_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -20,12 +19,15 @@
             <arg column="TABLE_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TABLE_LINK_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TABLE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TABLE_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        TABLE_ID, TABLE_CAPTION, TABLE_NAME, TABLE_DBNAME, TABLE_ORGAN_ID, TABLE_CREATE_TIME,
-        TABLE_CREATER, TABLE_UPDATE_TIME, TABLE_UPDATER, TABLE_SERVICE_VALUE, TABLE_TYPE,
-        TABLE_ISSYSTEM, TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID, TABLE_STATUS, TABLE_LINK_ID
+        TABLE_ID, TABLE_CAPTION, TABLE_NAME, TABLE_DBNAME, TABLE_CREATE_TIME, TABLE_CREATER,
+        TABLE_UPDATE_TIME, TABLE_UPDATER, TABLE_SERVICE_VALUE, TABLE_TYPE, TABLE_ISSYSTEM,
+        TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID, TABLE_STATUS, TABLE_LINK_ID, TABLE_ORGAN_ID,
+        TABLE_ORGAN_NAME
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -39,17 +41,19 @@
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
         insert into TB4D_TABLE (TABLE_ID, TABLE_CAPTION, TABLE_NAME,
-                                TABLE_DBNAME, TABLE_ORGAN_ID, TABLE_CREATE_TIME,
-                                TABLE_CREATER, TABLE_UPDATE_TIME, TABLE_UPDATER,
-                                TABLE_SERVICE_VALUE, TABLE_TYPE, TABLE_ISSYSTEM,
-                                TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID,
-                                TABLE_STATUS, TABLE_LINK_ID)
+                                TABLE_DBNAME, TABLE_CREATE_TIME, TABLE_CREATER,
+                                TABLE_UPDATE_TIME, TABLE_UPDATER, TABLE_SERVICE_VALUE,
+                                TABLE_TYPE, TABLE_ISSYSTEM, TABLE_ORDER_NUM,
+                                TABLE_DESC, TABLE_GROUP_ID, TABLE_STATUS,
+                                TABLE_LINK_ID, TABLE_ORGAN_ID, TABLE_ORGAN_NAME
+                )
         values (#{tableId,jdbcType=VARCHAR}, #{tableCaption,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR},
-                #{tableDbname,jdbcType=VARCHAR}, #{tableOrganId,jdbcType=VARCHAR}, #{tableCreateTime,jdbcType=TIMESTAMP},
-                #{tableCreater,jdbcType=VARCHAR}, #{tableUpdateTime,jdbcType=TIMESTAMP}, #{tableUpdater,jdbcType=VARCHAR},
-                #{tableServiceValue,jdbcType=VARCHAR}, #{tableType,jdbcType=VARCHAR}, #{tableIssystem,jdbcType=VARCHAR},
-                #{tableOrderNum,jdbcType=INTEGER}, #{tableDesc,jdbcType=VARCHAR}, #{tableGroupId,jdbcType=VARCHAR},
-                #{tableStatus,jdbcType=VARCHAR}, #{tableLinkId,jdbcType=VARCHAR})
+                #{tableDbname,jdbcType=VARCHAR}, #{tableCreateTime,jdbcType=TIMESTAMP}, #{tableCreater,jdbcType=VARCHAR},
+                #{tableUpdateTime,jdbcType=TIMESTAMP}, #{tableUpdater,jdbcType=VARCHAR}, #{tableServiceValue,jdbcType=VARCHAR},
+                #{tableType,jdbcType=VARCHAR}, #{tableIssystem,jdbcType=VARCHAR}, #{tableOrderNum,jdbcType=INTEGER},
+                #{tableDesc,jdbcType=VARCHAR}, #{tableGroupId,jdbcType=VARCHAR}, #{tableStatus,jdbcType=VARCHAR},
+                #{tableLinkId,jdbcType=VARCHAR}, #{tableOrganId,jdbcType=VARCHAR}, #{tableOrganName,jdbcType=VARCHAR}
+                       )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
         insert into TB4D_TABLE
@@ -65,9 +69,6 @@
             </if>
             <if test="tableDbname != null">
                 TABLE_DBNAME,
-            </if>
-            <if test="tableOrganId != null">
-                TABLE_ORGAN_ID,
             </if>
             <if test="tableCreateTime != null">
                 TABLE_CREATE_TIME,
@@ -105,6 +106,12 @@
             <if test="tableLinkId != null">
                 TABLE_LINK_ID,
             </if>
+            <if test="tableOrganId != null">
+                TABLE_ORGAN_ID,
+            </if>
+            <if test="tableOrganName != null">
+                TABLE_ORGAN_NAME,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="tableId != null">
@@ -118,9 +125,6 @@
             </if>
             <if test="tableDbname != null">
                 #{tableDbname,jdbcType=VARCHAR},
-            </if>
-            <if test="tableOrganId != null">
-                #{tableOrganId,jdbcType=VARCHAR},
             </if>
             <if test="tableCreateTime != null">
                 #{tableCreateTime,jdbcType=TIMESTAMP},
@@ -158,6 +162,12 @@
             <if test="tableLinkId != null">
                 #{tableLinkId,jdbcType=VARCHAR},
             </if>
+            <if test="tableOrganId != null">
+                #{tableOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="tableOrganName != null">
+                #{tableOrganName,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
@@ -171,9 +181,6 @@
             </if>
             <if test="tableDbname != null">
                 TABLE_DBNAME = #{tableDbname,jdbcType=VARCHAR},
-            </if>
-            <if test="tableOrganId != null">
-                TABLE_ORGAN_ID = #{tableOrganId,jdbcType=VARCHAR},
             </if>
             <if test="tableCreateTime != null">
                 TABLE_CREATE_TIME = #{tableCreateTime,jdbcType=TIMESTAMP},
@@ -211,6 +218,12 @@
             <if test="tableLinkId != null">
                 TABLE_LINK_ID = #{tableLinkId,jdbcType=VARCHAR},
             </if>
+            <if test="tableOrganId != null">
+                TABLE_ORGAN_ID = #{tableOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="tableOrganName != null">
+                TABLE_ORGAN_NAME = #{tableOrganName,jdbcType=VARCHAR},
+            </if>
         </set>
         where TABLE_ID = #{tableId,jdbcType=VARCHAR}
     </update>
@@ -219,7 +232,6 @@
         set TABLE_CAPTION = #{tableCaption,jdbcType=VARCHAR},
             TABLE_NAME = #{tableName,jdbcType=VARCHAR},
             TABLE_DBNAME = #{tableDbname,jdbcType=VARCHAR},
-            TABLE_ORGAN_ID = #{tableOrganId,jdbcType=VARCHAR},
             TABLE_CREATE_TIME = #{tableCreateTime,jdbcType=TIMESTAMP},
             TABLE_CREATER = #{tableCreater,jdbcType=VARCHAR},
             TABLE_UPDATE_TIME = #{tableUpdateTime,jdbcType=TIMESTAMP},
@@ -231,7 +243,9 @@
             TABLE_DESC = #{tableDesc,jdbcType=VARCHAR},
             TABLE_GROUP_ID = #{tableGroupId,jdbcType=VARCHAR},
             TABLE_STATUS = #{tableStatus,jdbcType=VARCHAR},
-            TABLE_LINK_ID = #{tableLinkId,jdbcType=VARCHAR}
+            TABLE_LINK_ID = #{tableLinkId,jdbcType=VARCHAR},
+            TABLE_ORGAN_ID = #{tableOrganId,jdbcType=VARCHAR},
+            TABLE_ORGAN_NAME = #{tableOrganName,jdbcType=VARCHAR}
         where TABLE_ID = #{tableId,jdbcType=VARCHAR}
     </update>
 </mapper>

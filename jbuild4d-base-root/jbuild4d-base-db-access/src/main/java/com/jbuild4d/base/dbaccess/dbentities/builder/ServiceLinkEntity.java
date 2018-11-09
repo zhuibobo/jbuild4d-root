@@ -53,7 +53,13 @@ public class ServiceLinkEntity {
     //LINK_STATUS
     private String linkStatus;
 
-    public ServiceLinkEntity(String linkId, String linkValue, String linkName, String linkType, String linkUrl, String linkParas, String linkUser, String linkPassword, Date linkCreateTime, Integer linkOrderNum, String linkDesc, String linkIsLocation, String linkStatus) {
+    //LINK_ORGAN_ID
+    private String linkOrganId;
+
+    //LINK_ORGAN_NAME
+    private String linkOrganName;
+
+    public ServiceLinkEntity(String linkId, String linkValue, String linkName, String linkType, String linkUrl, String linkParas, String linkUser, String linkPassword, Date linkCreateTime, Integer linkOrderNum, String linkDesc, String linkIsLocation, String linkStatus, String linkOrganId, String linkOrganName) {
         this.linkId = linkId;
         this.linkValue = linkValue;
         this.linkName = linkName;
@@ -67,6 +73,8 @@ public class ServiceLinkEntity {
         this.linkDesc = linkDesc;
         this.linkIsLocation = linkIsLocation;
         this.linkStatus = linkStatus;
+        this.linkOrganId = linkOrganId;
+        this.linkOrganName = linkOrganName;
     }
 
     public ServiceLinkEntity() {
@@ -175,5 +183,21 @@ public class ServiceLinkEntity {
 
     public void setLinkStatus(String linkStatus) {
         this.linkStatus = linkStatus == null ? null : linkStatus.trim();
+    }
+
+    public String getLinkOrganId() {
+        return linkOrganId;
+    }
+
+    public void setLinkOrganId(String linkOrganId) {
+        this.linkOrganId = linkOrganId == null ? null : linkOrganId.trim();
+    }
+
+    public String getLinkOrganName() {
+        return linkOrganName;
+    }
+
+    public void setLinkOrganName(String linkOrganName) {
+        this.linkOrganName = linkOrganName == null ? null : linkOrganName.trim();
     }
 }

@@ -25,9 +25,6 @@ public class TableEntity {
     //TABLE_DBNAME
     private String tableDbname;
 
-    //TABLE_ORGAN_ID
-    private String tableOrganId;
-
     //TABLE_CREATE_TIME
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date tableCreateTime;
@@ -66,12 +63,17 @@ public class TableEntity {
     //TABLE_LINK_ID
     private String tableLinkId;
 
-    public TableEntity(String tableId, String tableCaption, String tableName, String tableDbname, String tableOrganId, Date tableCreateTime, String tableCreater, Date tableUpdateTime, String tableUpdater, String tableServiceValue, String tableType, String tableIssystem, Integer tableOrderNum, String tableDesc, String tableGroupId, String tableStatus, String tableLinkId) {
+    //TABLE_ORGAN_ID
+    private String tableOrganId;
+
+    //TABLE_ORGAN_NAME
+    private String tableOrganName;
+
+    public TableEntity(String tableId, String tableCaption, String tableName, String tableDbname, Date tableCreateTime, String tableCreater, Date tableUpdateTime, String tableUpdater, String tableServiceValue, String tableType, String tableIssystem, Integer tableOrderNum, String tableDesc, String tableGroupId, String tableStatus, String tableLinkId, String tableOrganId, String tableOrganName) {
         this.tableId = tableId;
         this.tableCaption = tableCaption;
         this.tableName = tableName;
         this.tableDbname = tableDbname;
-        this.tableOrganId = tableOrganId;
         this.tableCreateTime = tableCreateTime;
         this.tableCreater = tableCreater;
         this.tableUpdateTime = tableUpdateTime;
@@ -84,6 +86,8 @@ public class TableEntity {
         this.tableGroupId = tableGroupId;
         this.tableStatus = tableStatus;
         this.tableLinkId = tableLinkId;
+        this.tableOrganId = tableOrganId;
+        this.tableOrganName = tableOrganName;
     }
 
     public TableEntity() {
@@ -120,14 +124,6 @@ public class TableEntity {
 
     public void setTableDbname(String tableDbname) {
         this.tableDbname = tableDbname == null ? null : tableDbname.trim();
-    }
-
-    public String getTableOrganId() {
-        return tableOrganId;
-    }
-
-    public void setTableOrganId(String tableOrganId) {
-        this.tableOrganId = tableOrganId == null ? null : tableOrganId.trim();
     }
 
     public Date getTableCreateTime() {
@@ -224,5 +220,21 @@ public class TableEntity {
 
     public void setTableLinkId(String tableLinkId) {
         this.tableLinkId = tableLinkId == null ? null : tableLinkId.trim();
+    }
+
+    public String getTableOrganId() {
+        return tableOrganId;
+    }
+
+    public void setTableOrganId(String tableOrganId) {
+        this.tableOrganId = tableOrganId == null ? null : tableOrganId.trim();
+    }
+
+    public String getTableOrganName() {
+        return tableOrganName;
+    }
+
+    public void setTableOrganName(String tableOrganName) {
+        this.tableOrganName = tableOrganName == null ? null : tableOrganName.trim();
     }
 }

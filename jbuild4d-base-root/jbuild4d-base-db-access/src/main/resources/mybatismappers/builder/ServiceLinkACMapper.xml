@@ -16,36 +16,41 @@
             <arg column="LINK_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LINK_IS_LOCATION" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LINK_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LINK_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         LINK_ID, LINK_VALUE, LINK_NAME, LINK_TYPE, LINK_URL, LINK_PARAS, LINK_USER, LINK_PASSWORD,
-        LINK_CREATE_TIME, LINK_ORDER_NUM, LINK_DESC, LINK_IS_LOCATION, LINK_STATUS
+        LINK_CREATE_TIME, LINK_ORDER_NUM, LINK_DESC, LINK_IS_LOCATION, LINK_STATUS, LINK_ORGAN_ID,
+        LINK_ORGAN_NAME
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from tb4d_service_link
+        from TB4D_SERVICE_LINK
         where LINK_ID = #{linkId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from tb4d_service_link
+        delete from TB4D_SERVICE_LINK
         where LINK_ID = #{linkId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
-        insert into tb4d_service_link (LINK_ID, LINK_VALUE, LINK_NAME,
+        insert into TB4D_SERVICE_LINK (LINK_ID, LINK_VALUE, LINK_NAME,
                                        LINK_TYPE, LINK_URL, LINK_PARAS,
                                        LINK_USER, LINK_PASSWORD, LINK_CREATE_TIME,
                                        LINK_ORDER_NUM, LINK_DESC, LINK_IS_LOCATION,
-                                       LINK_STATUS)
+                                       LINK_STATUS, LINK_ORGAN_ID, LINK_ORGAN_NAME
+                )
         values (#{linkId,jdbcType=VARCHAR}, #{linkValue,jdbcType=VARCHAR}, #{linkName,jdbcType=VARCHAR},
                 #{linkType,jdbcType=VARCHAR}, #{linkUrl,jdbcType=VARCHAR}, #{linkParas,jdbcType=VARCHAR},
                 #{linkUser,jdbcType=VARCHAR}, #{linkPassword,jdbcType=VARCHAR}, #{linkCreateTime,jdbcType=TIMESTAMP},
                 #{linkOrderNum,jdbcType=INTEGER}, #{linkDesc,jdbcType=VARCHAR}, #{linkIsLocation,jdbcType=VARCHAR},
-                #{linkStatus,jdbcType=VARCHAR})
+                #{linkStatus,jdbcType=VARCHAR}, #{linkOrganId,jdbcType=VARCHAR}, #{linkOrganName,jdbcType=VARCHAR}
+                       )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
-        insert into tb4d_service_link
+        insert into TB4D_SERVICE_LINK
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="linkId != null">
                 LINK_ID,
@@ -85,6 +90,12 @@
             </if>
             <if test="linkStatus != null">
                 LINK_STATUS,
+            </if>
+            <if test="linkOrganId != null">
+                LINK_ORGAN_ID,
+            </if>
+            <if test="linkOrganName != null">
+                LINK_ORGAN_NAME,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -127,10 +138,16 @@
             <if test="linkStatus != null">
                 #{linkStatus,jdbcType=VARCHAR},
             </if>
+            <if test="linkOrganId != null">
+                #{linkOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="linkOrganName != null">
+                #{linkOrganName,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
-        update tb4d_service_link
+        update TB4D_SERVICE_LINK
         <set>
             <if test="linkValue != null">
                 LINK_VALUE = #{linkValue,jdbcType=VARCHAR},
@@ -168,11 +185,17 @@
             <if test="linkStatus != null">
                 LINK_STATUS = #{linkStatus,jdbcType=VARCHAR},
             </if>
+            <if test="linkOrganId != null">
+                LINK_ORGAN_ID = #{linkOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="linkOrganName != null">
+                LINK_ORGAN_NAME = #{linkOrganName,jdbcType=VARCHAR},
+            </if>
         </set>
         where LINK_ID = #{linkId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
-        update tb4d_service_link
+        update TB4D_SERVICE_LINK
         set LINK_VALUE = #{linkValue,jdbcType=VARCHAR},
             LINK_NAME = #{linkName,jdbcType=VARCHAR},
             LINK_TYPE = #{linkType,jdbcType=VARCHAR},
@@ -184,7 +207,9 @@
             LINK_ORDER_NUM = #{linkOrderNum,jdbcType=INTEGER},
             LINK_DESC = #{linkDesc,jdbcType=VARCHAR},
             LINK_IS_LOCATION = #{linkIsLocation,jdbcType=VARCHAR},
-            LINK_STATUS = #{linkStatus,jdbcType=VARCHAR}
+            LINK_STATUS = #{linkStatus,jdbcType=VARCHAR},
+            LINK_ORGAN_ID = #{linkOrganId,jdbcType=VARCHAR},
+            LINK_ORGAN_NAME = #{linkOrganName,jdbcType=VARCHAR}
         where LINK_ID = #{linkId,jdbcType=VARCHAR}
     </update>
 </mapper>

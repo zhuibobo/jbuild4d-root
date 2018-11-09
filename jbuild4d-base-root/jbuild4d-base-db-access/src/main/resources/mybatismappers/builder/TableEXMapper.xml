@@ -15,6 +15,10 @@
         <if test="tableIssystem !=null and tableIssystem !=''"> and TABLE_ISSYSTEM like #{tableIssystem} </if>
         <if test="tableDesc !=null and tableDesc !=''"> and TABLE_DESC like #{tableDesc} </if>
         <if test="tableGroupId !=null and tableGroupId !=''"> and TABLE_GROUP_ID like #{tableGroupId} </if>
+        <if test="tableStatus !=null and tableStatus !=''"> and TABLE_STATUS like #{tableStatus} </if>
+        <if test="tableLinkId !=null and tableLinkId !=''"> and TABLE_LINK_ID like #{tableLinkId} </if>
+        <if test="tableOrganId !=null and tableOrganId !=''"> and TABLE_ORGAN_ID like #{tableOrganId} </if>
+        <if test="tableOrganName !=null and tableOrganName !=''"> and TABLE_ORGAN_NAME like #{tableOrganName} </if>
     </where>ORDER by TABLE_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE
  where TABLE_ORDER_NUM = (select max(TABLE_ORDER_NUM) from TB4D_TABLE where TABLE_ORDER_NUM<(select TABLE_ORDER_NUM from TB4D_TABLE where TABLE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>

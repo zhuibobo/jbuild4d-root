@@ -15,6 +15,8 @@
         <if test="linkDesc !=null and linkDesc !=''"> and LINK_DESC like #{linkDesc} </if>
         <if test="linkIsLocation !=null and linkIsLocation !=''"> and LINK_IS_LOCATION like #{linkIsLocation} </if>
         <if test="linkStatus !=null and linkStatus !=''"> and LINK_STATUS like #{linkStatus} </if>
+        <if test="linkOrganId !=null and linkOrganId !=''"> and LINK_ORGAN_ID like #{linkOrganId} </if>
+        <if test="linkOrganName !=null and linkOrganName !=''"> and LINK_ORGAN_NAME like #{linkOrganName} </if>
     </where>ORDER by LINK_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[select * from TB4D_SERVICE_LINK where LINK_ORDER_NUM = (select max(LINK_ORDER_NUM) from TB4D_SERVICE_LINK where LINK_ORDER_NUM<(select LINK_ORDER_NUM from TB4D_SERVICE_LINK where LINK_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
