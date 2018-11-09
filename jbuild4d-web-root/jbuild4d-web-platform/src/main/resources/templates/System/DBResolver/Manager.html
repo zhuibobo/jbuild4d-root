@@ -207,12 +207,17 @@
                     _self.codeIsGenerateing=true;
                     var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode';
                     AjaxUtility.Post(url, this.formValidate, function (result) {
-                        _self.generateCode.EntityContent=result.data.EntityContent;
-                        _self.generateCode.DaoContent=result.data.DaoContent;
-                        _self.generateCode.MapperACContent=result.data.MapperACContent;
-                        _self.generateCode.MapperEXContent=result.data.MapperEXContent;
-                        _self.generateCode.IServiceContent=result.data.IServiceContent;
-                        _self.generateCode.ServiceImplContent=result.data.ServiceImplContent;
+                        if (result.success) {
+                            _self.generateCode.EntityContent = result.data.EntityContent;
+                            _self.generateCode.DaoContent = result.data.DaoContent;
+                            _self.generateCode.MapperACContent = result.data.MapperACContent;
+                            _self.generateCode.MapperEXContent = result.data.MapperEXContent;
+                            _self.generateCode.IServiceContent = result.data.IServiceContent;
+                            _self.generateCode.ServiceImplContent = result.data.ServiceImplContent;
+                        }
+                        else{
+                            DialogUtility.AlertError(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
                         _self.codeIsGenerateing=false;
                     }, "json");
                 },

@@ -6,7 +6,6 @@
             <idArg column="DS_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DS_CAPTION" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DS_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="DS_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DS_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -22,12 +21,15 @@
             <arg column="DS_CLASS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DS_REST_STRUCTURE_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DS_REST_DATA_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DS_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DS_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        DS_ID, DS_CAPTION, DS_NAME, DS_ORGAN_ID, DS_CREATE_TIME, DS_CREATER, DS_UPDATE_TIME,
-        DS_UPDATER, DS_TYPE, DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC, DS_GROUP_ID, DS_STATUS,
-        DS_SQL_SELECT_TEXT, DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_STRUCTURE_URL, DS_REST_DATA_URL
+        DS_ID, DS_CAPTION, DS_NAME, DS_CREATE_TIME, DS_CREATER, DS_UPDATE_TIME, DS_UPDATER,
+        DS_TYPE, DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC, DS_GROUP_ID, DS_STATUS, DS_SQL_SELECT_TEXT,
+        DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_STRUCTURE_URL, DS_REST_DATA_URL, DS_ORGAN_ID,
+        DS_ORGAN_NAME
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -41,19 +43,19 @@
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         insert into TB4D_DATASET (DS_ID, DS_CAPTION, DS_NAME,
-                                  DS_ORGAN_ID, DS_CREATE_TIME, DS_CREATER,
-                                  DS_UPDATE_TIME, DS_UPDATER, DS_TYPE,
-                                  DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC,
-                                  DS_GROUP_ID, DS_STATUS, DS_SQL_SELECT_TEXT,
-                                  DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_STRUCTURE_URL,
-                                  DS_REST_DATA_URL)
+                                  DS_CREATE_TIME, DS_CREATER, DS_UPDATE_TIME,
+                                  DS_UPDATER, DS_TYPE, DS_ISSYSTEM,
+                                  DS_ORDER_NUM, DS_DESC, DS_GROUP_ID,
+                                  DS_STATUS, DS_SQL_SELECT_TEXT, DS_SQL_SELECT_VALUE,
+                                  DS_CLASS_NAME, DS_REST_STRUCTURE_URL, DS_REST_DATA_URL,
+                                  DS_ORGAN_ID, DS_ORGAN_NAME)
         values (#{dsId,jdbcType=VARCHAR}, #{dsCaption,jdbcType=VARCHAR}, #{dsName,jdbcType=VARCHAR},
-                #{dsOrganId,jdbcType=VARCHAR}, #{dsCreateTime,jdbcType=TIMESTAMP}, #{dsCreater,jdbcType=VARCHAR},
-                #{dsUpdateTime,jdbcType=TIMESTAMP}, #{dsUpdater,jdbcType=VARCHAR}, #{dsType,jdbcType=VARCHAR},
-                #{dsIssystem,jdbcType=VARCHAR}, #{dsOrderNum,jdbcType=INTEGER}, #{dsDesc,jdbcType=VARCHAR},
-                #{dsGroupId,jdbcType=VARCHAR}, #{dsStatus,jdbcType=VARCHAR}, #{dsSqlSelectText,jdbcType=VARCHAR},
-                #{dsSqlSelectValue,jdbcType=VARCHAR}, #{dsClassName,jdbcType=VARCHAR}, #{dsRestStructureUrl,jdbcType=VARCHAR},
-                #{dsRestDataUrl,jdbcType=VARCHAR})
+                #{dsCreateTime,jdbcType=TIMESTAMP}, #{dsCreater,jdbcType=VARCHAR}, #{dsUpdateTime,jdbcType=TIMESTAMP},
+                #{dsUpdater,jdbcType=VARCHAR}, #{dsType,jdbcType=VARCHAR}, #{dsIssystem,jdbcType=VARCHAR},
+                #{dsOrderNum,jdbcType=INTEGER}, #{dsDesc,jdbcType=VARCHAR}, #{dsGroupId,jdbcType=VARCHAR},
+                #{dsStatus,jdbcType=VARCHAR}, #{dsSqlSelectText,jdbcType=VARCHAR}, #{dsSqlSelectValue,jdbcType=VARCHAR},
+                #{dsClassName,jdbcType=VARCHAR}, #{dsRestStructureUrl,jdbcType=VARCHAR}, #{dsRestDataUrl,jdbcType=VARCHAR},
+                #{dsOrganId,jdbcType=VARCHAR}, #{dsOrganName,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         insert into TB4D_DATASET
@@ -66,9 +68,6 @@
             </if>
             <if test="dsName != null">
                 DS_NAME,
-            </if>
-            <if test="dsOrganId != null">
-                DS_ORGAN_ID,
             </if>
             <if test="dsCreateTime != null">
                 DS_CREATE_TIME,
@@ -115,6 +114,12 @@
             <if test="dsRestDataUrl != null">
                 DS_REST_DATA_URL,
             </if>
+            <if test="dsOrganId != null">
+                DS_ORGAN_ID,
+            </if>
+            <if test="dsOrganName != null">
+                DS_ORGAN_NAME,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="dsId != null">
@@ -125,9 +130,6 @@
             </if>
             <if test="dsName != null">
                 #{dsName,jdbcType=VARCHAR},
-            </if>
-            <if test="dsOrganId != null">
-                #{dsOrganId,jdbcType=VARCHAR},
             </if>
             <if test="dsCreateTime != null">
                 #{dsCreateTime,jdbcType=TIMESTAMP},
@@ -174,6 +176,12 @@
             <if test="dsRestDataUrl != null">
                 #{dsRestDataUrl,jdbcType=VARCHAR},
             </if>
+            <if test="dsOrganId != null">
+                #{dsOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="dsOrganName != null">
+                #{dsOrganName,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
@@ -184,9 +192,6 @@
             </if>
             <if test="dsName != null">
                 DS_NAME = #{dsName,jdbcType=VARCHAR},
-            </if>
-            <if test="dsOrganId != null">
-                DS_ORGAN_ID = #{dsOrganId,jdbcType=VARCHAR},
             </if>
             <if test="dsCreateTime != null">
                 DS_CREATE_TIME = #{dsCreateTime,jdbcType=TIMESTAMP},
@@ -233,6 +238,12 @@
             <if test="dsRestDataUrl != null">
                 DS_REST_DATA_URL = #{dsRestDataUrl,jdbcType=VARCHAR},
             </if>
+            <if test="dsOrganId != null">
+                DS_ORGAN_ID = #{dsOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="dsOrganName != null">
+                DS_ORGAN_NAME = #{dsOrganName,jdbcType=VARCHAR},
+            </if>
         </set>
         where DS_ID = #{dsId,jdbcType=VARCHAR}
     </update>
@@ -240,7 +251,6 @@
         update TB4D_DATASET
         set DS_CAPTION = #{dsCaption,jdbcType=VARCHAR},
             DS_NAME = #{dsName,jdbcType=VARCHAR},
-            DS_ORGAN_ID = #{dsOrganId,jdbcType=VARCHAR},
             DS_CREATE_TIME = #{dsCreateTime,jdbcType=TIMESTAMP},
             DS_CREATER = #{dsCreater,jdbcType=VARCHAR},
             DS_UPDATE_TIME = #{dsUpdateTime,jdbcType=TIMESTAMP},
@@ -255,7 +265,9 @@
             DS_SQL_SELECT_VALUE = #{dsSqlSelectValue,jdbcType=VARCHAR},
             DS_CLASS_NAME = #{dsClassName,jdbcType=VARCHAR},
             DS_REST_STRUCTURE_URL = #{dsRestStructureUrl,jdbcType=VARCHAR},
-            DS_REST_DATA_URL = #{dsRestDataUrl,jdbcType=VARCHAR}
+            DS_REST_DATA_URL = #{dsRestDataUrl,jdbcType=VARCHAR},
+            DS_ORGAN_ID = #{dsOrganId,jdbcType=VARCHAR},
+            DS_ORGAN_NAME = #{dsOrganName,jdbcType=VARCHAR}
         where DS_ID = #{dsId,jdbcType=VARCHAR}
     </update>
 </mapper>
