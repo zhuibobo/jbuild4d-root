@@ -13,6 +13,8 @@
         <if test="dsGroupIssystem !=null and dsGroupIssystem !=''"> and DS_GROUP_ISSYSTEM like #{dsGroupIssystem} </if>
         <if test="dsGroupDelEnable !=null and dsGroupDelEnable !=''"> and DS_GROUP_DEL_ENABLE like #{dsGroupDelEnable} </if>
         <if test="dsGroupPidList !=null and dsGroupPidList !=''"> and DS_GROUP_PID_LIST like #{dsGroupPidList} </if>
+        <if test="dsGroupOrganId !=null and dsGroupOrganId !=''"> and DS_GROUP_ORGAN_ID like #{dsGroupOrganId} </if>
+        <if test="dsGroupOrganName !=null and dsGroupOrganName !=''"> and DS_GROUP_ORGAN_NAME like #{dsGroupOrganName} </if>
     </where>ORDER by DS_GROUP_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
