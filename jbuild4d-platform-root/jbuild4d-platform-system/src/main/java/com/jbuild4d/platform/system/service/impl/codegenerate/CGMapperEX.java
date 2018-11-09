@@ -22,11 +22,11 @@ import java.util.Map;
  */
 public class CGMapperEX {
 
-    public static String generate(List<IntrospectedTable> introspectedTableList, String tableName,String orderFieldName,String statusFieldName,
+    public static String generate(String idFieldName,IntrospectedTable introspectedTable, String tableName,String orderFieldName,String statusFieldName,
                                   Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap,String xmlMapperACStr) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
         StringBuilder builder=new StringBuilder();
 
-        String idFieldName=introspectedTableList.get(0).getPrimaryKeyColumns().get(0).getActualColumnName();
+        //String idFieldName=introspectedTableList.get(0).getPrimaryKeyColumns().get(0).getActualColumnName();
 
         Document document=XMLUtility.parseForDoc(xmlMapperACStr,"utf-8");
         Node mapperNode=XMLUtility.parseForNode(document.getDocumentElement(),"//mapper");
@@ -75,7 +75,7 @@ public class CGMapperEX {
         selectBySearchElem.appendChild(includeElem.cloneNode(true));
         selectBySearchElem.appendChild(document.createTextNode("from "+tableName));
         Element whereElem=document.createElement("where");
-        IntrospectedTable introspectedTable=introspectedTableList.get(0);
+        //IntrospectedTable introspectedTable=introspectedTableList.get(0);
         for (IntrospectedColumn introspectedColumn : introspectedTable.getNonPrimaryKeyColumns()) {
            if(introspectedColumn.getFullyQualifiedJavaType().getShortName().toLowerCase().equals("string")) {
                Element ifElem=document.createElement("if");

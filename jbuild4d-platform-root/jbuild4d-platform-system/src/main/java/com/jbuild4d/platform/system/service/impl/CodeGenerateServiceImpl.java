@@ -223,10 +223,13 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         try {
             myBatisGenerator.generate(null);
         } catch (SQLException e) {
+            System.out.println("---------------------------MyBatisGenerator Error---------------------------");
             e.printStackTrace();
         } catch (IOException e) {
+            System.out.println("---------------------------MyBatisGenerator Error---------------------------");
             e.printStackTrace();
         } catch (InterruptedException e) {
+            System.out.println("---------------------------MyBatisGenerator Error---------------------------");
             e.printStackTrace();
         }
 
@@ -249,10 +252,18 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         System.out.println("---------------------------打印表信息---------------------------");
 
         //生成MapperEX
-        generateCodeMap.put("MapperEXContent", CGMapperEX.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent")));
+        System.out.println("---------------------------生成MapperEX---------------------------");
+        String keyFieldName=introspectedTableList.get(0).getPrimaryKeyColumns().get(0).getActualColumnName();
+        System.out.println("---------------------------生成MapperEX:主键为"+keyFieldName+"---------------------------");
+        IntrospectedTable introspectedTable=introspectedTableList.get(0);
+        System.out.println("---------------------------生成MapperEX:生成列数为"+introspectedTable.getNonPrimaryKeyColumns().size()+"---------------------------");
+
+        generateCodeMap.put("MapperEXContent", CGMapperEX.generate(keyFieldName,introspectedTable,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent")));
         //生成IService
+        System.out.println("---------------------------生成IService---------------------------");
         generateCodeMap.put("IServiceContent", CGIService.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent")));
         //生成ServiceImpl
+        System.out.println("---------------------------生成ServiceImpl---------------------------");
         generateCodeMap.put("ServiceImplContent", CGServiceImpl.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent"),daoMapperName));
         //生成Bean
         //生成Controller
