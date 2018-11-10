@@ -69,6 +69,8 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                         tableEntity.setTableUpdateTime(new Date());
                         tableEntity.setTableType(TableTypeEnum.Builder.getText());
                         tableEntity.setTableDbname("JBuild4D");
+                        tableEntity.setTableOrganId(jb4DSession.getOrganId());
+                        tableEntity.setTableOrganName(jb4DSession.getOrganName());
                         tableMapper.insertSelective(tableEntity);
                         //写入字段
                         List<TableFieldEntity> tableFieldEntityList = TableFieldVO.VoListToEntityList(tableFieldVOList);

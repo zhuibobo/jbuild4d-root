@@ -38,6 +38,8 @@ public class DatasetGroupServiceImpl extends BaseServiceImpl<DatasetGroupEntity>
                 sourceEntity.setDsGroupOrderNum(datasetGroupMapper.nextOrderNum());
                 sourceEntity.setDsGroupChildCount(0);
                 sourceEntity.setDsGroupCreateTime(new Date());
+                sourceEntity.setDsGroupOrganId(jb4DSession.getOrganId());
+                sourceEntity.setDsGroupOrganName(jb4DSession.getOrganName());
                 String parentIdList;
                 if(sourceEntity.getDsGroupId().equals(rootId)){
                     parentIdList=rootParentId;

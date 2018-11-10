@@ -52,6 +52,8 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
                 sourceEntity.setTableGroupOrderNum(tableGroupMapper.nextOrderNum());
                 sourceEntity.setTableGroupChildCount(0);
                 sourceEntity.setTableGroupCreateTime(new Date());
+                sourceEntity.setTableGroupOrganId(jb4DSession.getOrganId());
+                sourceEntity.setTableGroupOrganName(jb4DSession.getOrganName());
                 String parentIdList;
                 if(sourceEntity.getTableGroupId().equals(rootId)){
                     parentIdList=rootParentId;
