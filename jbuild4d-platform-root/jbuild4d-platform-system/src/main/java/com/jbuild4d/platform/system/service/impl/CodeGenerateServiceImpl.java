@@ -236,12 +236,24 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         //读取文件作为结果返回
         //Entity文件
         String tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).fullSavePath+"/"+modelPackageName.replaceAll("\\.","/");
+        System.out.println("Entity生成路径:"+tempPath);
         generateCodeMap.put("EntityContent",readFolderSingleFileToString(tempPath));
 
+        //判断是否生成了二进制的继承实体文件;
+        if(existBLOBEntity(tempPath)){
+            generateCodeMap.put("EntityWithBLOBContent",readWithBLOBsFileToString(tempPath));
+        }
+        else {
+            generateCodeMap.put("EntityWithBLOBContent","不存在二进制字段!");
+        }
+
+
         tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).fullSavePath+"/"+daoPackageName.replaceAll("\\.","/");
+        System.out.println("DAO生成路径:"+tempPath);
         generateCodeMap.put("DaoContent",readFolderSingleFileToString(tempPath));
 
         tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).fullSavePath+"/"+mapperPackageName.replaceAll("\\.","/");
+        System.out.println("MAPPER生成路径:"+tempPath);
         generateCodeMap.put("MapperACContent",readFolderSingleFileToString(tempPath));
 
         System.out.println("---------------------------打印表信息---------------------------");
@@ -273,29 +285,64 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         return generateCodeMap;
     }
 
+    private boolean existBLOBEntity(String folder){
+        File file=new File(folder);
+        if(file.exists()){
+            File[] files=file.listFiles();
+            if(files.length>0){
+                for (File file1 : files) {
+                    if(file1.getName().indexOf("WithBLOBs")>0){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private String readWithBLOBsFileToString(String folder){
+        File file=new File(folder);
+        String result="";
+        if(file.exists()){
+            File[] files=file.listFiles();
+            if(files.length>0){
+                for (File file1 : files) {
+                    if(file1.getName().indexOf("WithBLOBs")>0){
+                        return getFileToString(file1);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    private String getFileToString(File file) {
+        Long filelength = file.length();
+        byte[] filecontent = new byte[filelength.intValue()];
+        try {
+            FileInputStream in = new FileInputStream(file);
+            in.read(filecontent);
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            return new String(filecontent, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private String readFolderSingleFileToString(String folder){
         File file=new File(folder);
         if(file.exists()){
             File[] files=file.listFiles();
             if(files.length>0){
                 File singleFile=files[0];
-                Long filelength = singleFile.length();
-                byte[] filecontent = new byte[filelength.intValue()];
-                try {
-                    FileInputStream in = new FileInputStream(singleFile);
-                    in.read(filecontent);
-                    in.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    return new String(filecontent, "utf-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                    return null;
-                }
+                return getFileToString(singleFile);
             }
         }
         return "";

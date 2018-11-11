@@ -112,6 +112,9 @@
                 <tab-pane label="Entity">
                     <textarea name="txtAreaCode" id="txtAreaEntity" style="width: 100%;">{{generateCode.EntityContent}}</textarea>
                 </tab-pane>
+                <tab-pane label="EntityWithBLOB">
+                    <textarea name="txtAreaCode" id="txtAreaEntityWithBLOB" style="width: 100%;">{{generateCode.EntityWithBLOBContent}}</textarea>
+                </tab-pane>
                 <tab-pane label="Dao">
                     <textarea name="txtAreaCode" id="txtAreaDao" style="width: 100%;">{{generateCode.DaoContent}}</textarea>
                 </tab-pane>
@@ -161,7 +164,8 @@
                     MapperACContent:"",
                     MapperEXContent:"",
                     IServiceContent:"",
-                    ServiceImplContent:""
+                    ServiceImplContent:"",
+                    EntityWithBLOBContent:""
                 },
                 <!--List-->
                 idFieldName:"TableName",
@@ -214,6 +218,7 @@
                             _self.generateCode.MapperEXContent = result.data.MapperEXContent;
                             _self.generateCode.IServiceContent = result.data.IServiceContent;
                             _self.generateCode.ServiceImplContent = result.data.ServiceImplContent;
+                            _self.generateCode.EntityWithBLOBContent = result.data.EntityWithBLOBContent;
                         }
                         else{
                             DialogUtility.AlertError(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
