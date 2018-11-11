@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TemplateResourceMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TEMPLATE_RESOURCE ORDER by TEMPLATE_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_TEMPLATE_RESOURCE</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(TEMPLATE_ORDER_NUM) is null then 1 else max(TEMPLATE_ORDER_NUM)+1 end ORDERNUM from TB4D_TEMPLATE_RESOURCE</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_TEMPLATE_RESOURCE<where>
+        <if test="templateName !=null and templateName !=''"> and TEMPLATE_NAME like #{templateName} </if>
+        <if test="templateCreater !=null and templateCreater !=''"> and TEMPLATE_CREATER like #{templateCreater} </if>
+        <if test="templateUpdater !=null and templateUpdater !=''"> and TEMPLATE_UPDATER like #{templateUpdater} </if>
+        <if test="templateType !=null and templateType !=''"> and TEMPLATE_TYPE like #{templateType} </if>
+        <if test="templateIssystem !=null and templateIssystem !=''"> and TEMPLATE_ISSYSTEM like #{templateIssystem} </if>
+        <if test="templateDesc !=null and templateDesc !=''"> and TEMPLATE_DESC like #{templateDesc} </if>
+        <if test="templateModuleId !=null and templateModuleId !=''"> and TEMPLATE_MODULE_ID like #{templateModuleId} </if>
+        <if test="templateStatus !=null and templateStatus !=''"> and TEMPLATE_STATUS like #{templateStatus} </if>
+        <if test="templateOrganId !=null and templateOrganId !=''"> and TEMPLATE_ORGAN_ID like #{templateOrganId} </if>
+        <if test="templateOrganName !=null and templateOrganName !=''"> and TEMPLATE_ORGAN_NAME like #{templateOrganName} </if>
+        <if test="templateIsTemplate !=null and templateIsTemplate !=''"> and TEMPLATE_IS_TEMPLATE like #{templateIsTemplate} </if>
+        <if test="templateContentUrl !=null and templateContentUrl !=''"> and TEMPLATE_CONTENT_URL like #{templateContentUrl} </if>
+        <if test="templateHtmlContent !=null and templateHtmlContent !=''"> and TEMPLATE_HTML_CONTENT like #{templateHtmlContent} </if>
+        <if test="templateJsContent !=null and templateJsContent !=''"> and TEMPLATE_JS_CONTENT like #{templateJsContent} </if>
+        <if test="templateCssContent !=null and templateCssContent !=''"> and TEMPLATE_CSS_CONTENT like #{templateCssContent} </if>
+        <if test="templateConfigContent !=null and templateConfigContent !=''"> and TEMPLATE_CONFIG_CONTENT like #{templateConfigContent} </if>
+    </where>ORDER by TEMPLATE_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TEMPLATE_RESOURCE
+                                                                                                          where TEMPLATE_ORDER_NUM = (select max(TEMPLATE_ORDER_NUM) from TB4D_TEMPLATE_RESOURCE where TEMPLATE_ORDER_NUM<(select TEMPLATE_ORDER_NUM from TB4D_TEMPLATE_RESOURCE where TEMPLATE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TEMPLATE_RESOURCE
+                                                                                                             where TEMPLATE_ORDER_NUM = (select min(TEMPLATE_ORDER_NUM) from TB4D_TEMPLATE_RESOURCE where TEMPLATE_ORDER_NUM>(select TEMPLATE_ORDER_NUM from TB4D_TEMPLATE_RESOURCE where TEMPLATE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TemplateResourceMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.TemplateResourceEntity">
+        <constructor>
+            <idArg column="TEMPLATE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="TEMPLATE_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="TEMPLATE_UPDATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_ISSYSTEM" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="TEMPLATE_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_MODULE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_IS_TEMPLATE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_CONTENT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.builder.TemplateResourceEntityWithBLOBs">
+        <constructor>
+            <idArg column="TEMPLATE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="TEMPLATE_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="TEMPLATE_UPDATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_ISSYSTEM" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="TEMPLATE_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_MODULE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_IS_TEMPLATE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_CONTENT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TEMPLATE_HTML_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="TEMPLATE_JS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="TEMPLATE_CSS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="TEMPLATE_CONFIG_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        TEMPLATE_ID, TEMPLATE_NAME, TEMPLATE_CREATE_TIME, TEMPLATE_CREATER, TEMPLATE_UPDATE_TIME,
+        TEMPLATE_UPDATER, TEMPLATE_TYPE, TEMPLATE_ISSYSTEM, TEMPLATE_ORDER_NUM, TEMPLATE_DESC,
+        TEMPLATE_MODULE_ID, TEMPLATE_STATUS, TEMPLATE_ORGAN_ID, TEMPLATE_ORGAN_NAME, TEMPLATE_IS_TEMPLATE,
+        TEMPLATE_CONTENT_URL
+    </sql>
+    <sql id="Blob_Column_List">
+        TEMPLATE_HTML_CONTENT, TEMPLATE_JS_CONTENT, TEMPLATE_CSS_CONTENT, TEMPLATE_CONFIG_CONTENT
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from TB4D_TEMPLATE_RESOURCE
+        where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_TEMPLATE_RESOURCE
+        where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TemplateResourceEntityWithBLOBs">
+        insert into TB4D_TEMPLATE_RESOURCE (TEMPLATE_ID, TEMPLATE_NAME, TEMPLATE_CREATE_TIME,
+                                            TEMPLATE_CREATER, TEMPLATE_UPDATE_TIME,
+                                            TEMPLATE_UPDATER, TEMPLATE_TYPE, TEMPLATE_ISSYSTEM,
+                                            TEMPLATE_ORDER_NUM, TEMPLATE_DESC, TEMPLATE_MODULE_ID,
+                                            TEMPLATE_STATUS, TEMPLATE_ORGAN_ID, TEMPLATE_ORGAN_NAME,
+                                            TEMPLATE_IS_TEMPLATE, TEMPLATE_CONTENT_URL,
+                                            TEMPLATE_HTML_CONTENT, TEMPLATE_JS_CONTENT,
+                                            TEMPLATE_CSS_CONTENT, TEMPLATE_CONFIG_CONTENT
+                )
+        values (#{templateId,jdbcType=VARCHAR}, #{templateName,jdbcType=VARCHAR}, #{templateCreateTime,jdbcType=TIMESTAMP},
+                #{templateCreater,jdbcType=VARCHAR}, #{templateUpdateTime,jdbcType=TIMESTAMP},
+                #{templateUpdater,jdbcType=VARCHAR}, #{templateType,jdbcType=VARCHAR}, #{templateIssystem,jdbcType=VARCHAR},
+                #{templateOrderNum,jdbcType=INTEGER}, #{templateDesc,jdbcType=VARCHAR}, #{templateModuleId,jdbcType=VARCHAR},
+                #{templateStatus,jdbcType=VARCHAR}, #{templateOrganId,jdbcType=VARCHAR}, #{templateOrganName,jdbcType=VARCHAR},
+                #{templateIsTemplate,jdbcType=VARCHAR}, #{templateContentUrl,jdbcType=VARCHAR},
+                #{templateHtmlContent,jdbcType=LONGVARCHAR}, #{templateJsContent,jdbcType=LONGVARCHAR},
+                #{templateCssContent,jdbcType=LONGVARCHAR}, #{templateConfigContent,jdbcType=LONGVARCHAR}
+                       )
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TemplateResourceEntityWithBLOBs">
+        insert into TB4D_TEMPLATE_RESOURCE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="templateId != null">
+                TEMPLATE_ID,
+            </if>
+            <if test="templateName != null">
+                TEMPLATE_NAME,
+            </if>
+            <if test="templateCreateTime != null">
+                TEMPLATE_CREATE_TIME,
+            </if>
+            <if test="templateCreater != null">
+                TEMPLATE_CREATER,
+            </if>
+            <if test="templateUpdateTime != null">
+                TEMPLATE_UPDATE_TIME,
+            </if>
+            <if test="templateUpdater != null">
+                TEMPLATE_UPDATER,
+            </if>
+            <if test="templateType != null">
+                TEMPLATE_TYPE,
+            </if>
+            <if test="templateIssystem != null">
+                TEMPLATE_ISSYSTEM,
+            </if>
+            <if test="templateOrderNum != null">
+                TEMPLATE_ORDER_NUM,
+            </if>
+            <if test="templateDesc != null">
+                TEMPLATE_DESC,
+            </if>
+            <if test="templateModuleId != null">
+                TEMPLATE_MODULE_ID,
+            </if>
+            <if test="templateStatus != null">
+                TEMPLATE_STATUS,
+            </if>
+            <if test="templateOrganId != null">
+                TEMPLATE_ORGAN_ID,
+            </if>
+            <if test="templateOrganName != null">
+                TEMPLATE_ORGAN_NAME,
+            </if>
+            <if test="templateIsTemplate != null">
+                TEMPLATE_IS_TEMPLATE,
+            </if>
+            <if test="templateContentUrl != null">
+                TEMPLATE_CONTENT_URL,
+            </if>
+            <if test="templateHtmlContent != null">
+                TEMPLATE_HTML_CONTENT,
+            </if>
+            <if test="templateJsContent != null">
+                TEMPLATE_JS_CONTENT,
+            </if>
+            <if test="templateCssContent != null">
+                TEMPLATE_CSS_CONTENT,
+            </if>
+            <if test="templateConfigContent != null">
+                TEMPLATE_CONFIG_CONTENT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="templateId != null">
+                #{templateId,jdbcType=VARCHAR},
+            </if>
+            <if test="templateName != null">
+                #{templateName,jdbcType=VARCHAR},
+            </if>
+            <if test="templateCreateTime != null">
+                #{templateCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="templateCreater != null">
+                #{templateCreater,jdbcType=VARCHAR},
+            </if>
+            <if test="templateUpdateTime != null">
+                #{templateUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="templateUpdater != null">
+                #{templateUpdater,jdbcType=VARCHAR},
+            </if>
+            <if test="templateType != null">
+                #{templateType,jdbcType=VARCHAR},
+            </if>
+            <if test="templateIssystem != null">
+                #{templateIssystem,jdbcType=VARCHAR},
+            </if>
+            <if test="templateOrderNum != null">
+                #{templateOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="templateDesc != null">
+                #{templateDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="templateModuleId != null">
+                #{templateModuleId,jdbcType=VARCHAR},
+            </if>
+            <if test="templateStatus != null">
+                #{templateStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="templateOrganId != null">
+                #{templateOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="templateOrganName != null">
+                #{templateOrganName,jdbcType=VARCHAR},
+            </if>
+            <if test="templateIsTemplate != null">
+                #{templateIsTemplate,jdbcType=VARCHAR},
+            </if>
+            <if test="templateContentUrl != null">
+                #{templateContentUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="templateHtmlContent != null">
+                #{templateHtmlContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="templateJsContent != null">
+                #{templateJsContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="templateCssContent != null">
+                #{templateCssContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="templateConfigContent != null">
+                #{templateConfigContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TemplateResourceEntityWithBLOBs">
+        update TB4D_TEMPLATE_RESOURCE
+        <set>
+            <if test="templateName != null">
+                TEMPLATE_NAME = #{templateName,jdbcType=VARCHAR},
+            </if>
+            <if test="templateCreateTime != null">
+                TEMPLATE_CREATE_TIME = #{templateCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="templateCreater != null">
+                TEMPLATE_CREATER = #{templateCreater,jdbcType=VARCHAR},
+            </if>
+            <if test="templateUpdateTime != null">
+                TEMPLATE_UPDATE_TIME = #{templateUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="templateUpdater != null">
+                TEMPLATE_UPDATER = #{templateUpdater,jdbcType=VARCHAR},
+            </if>
+            <if test="templateType != null">
+                TEMPLATE_TYPE = #{templateType,jdbcType=VARCHAR},
+            </if>
+            <if test="templateIssystem != null">
+                TEMPLATE_ISSYSTEM = #{templateIssystem,jdbcType=VARCHAR},
+            </if>
+            <if test="templateOrderNum != null">
+                TEMPLATE_ORDER_NUM = #{templateOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="templateDesc != null">
+                TEMPLATE_DESC = #{templateDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="templateModuleId != null">
+                TEMPLATE_MODULE_ID = #{templateModuleId,jdbcType=VARCHAR},
+            </if>
+            <if test="templateStatus != null">
+                TEMPLATE_STATUS = #{templateStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="templateOrganId != null">
+                TEMPLATE_ORGAN_ID = #{templateOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="templateOrganName != null">
+                TEMPLATE_ORGAN_NAME = #{templateOrganName,jdbcType=VARCHAR},
+            </if>
+            <if test="templateIsTemplate != null">
+                TEMPLATE_IS_TEMPLATE = #{templateIsTemplate,jdbcType=VARCHAR},
+            </if>
+            <if test="templateContentUrl != null">
+                TEMPLATE_CONTENT_URL = #{templateContentUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="templateHtmlContent != null">
+                TEMPLATE_HTML_CONTENT = #{templateHtmlContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="templateJsContent != null">
+                TEMPLATE_JS_CONTENT = #{templateJsContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="templateCssContent != null">
+                TEMPLATE_CSS_CONTENT = #{templateCssContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="templateConfigContent != null">
+                TEMPLATE_CONFIG_CONTENT = #{templateConfigContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TemplateResourceEntityWithBLOBs">
+        update TB4D_TEMPLATE_RESOURCE
+        set TEMPLATE_NAME = #{templateName,jdbcType=VARCHAR},
+            TEMPLATE_CREATE_TIME = #{templateCreateTime,jdbcType=TIMESTAMP},
+            TEMPLATE_CREATER = #{templateCreater,jdbcType=VARCHAR},
+            TEMPLATE_UPDATE_TIME = #{templateUpdateTime,jdbcType=TIMESTAMP},
+            TEMPLATE_UPDATER = #{templateUpdater,jdbcType=VARCHAR},
+            TEMPLATE_TYPE = #{templateType,jdbcType=VARCHAR},
+            TEMPLATE_ISSYSTEM = #{templateIssystem,jdbcType=VARCHAR},
+            TEMPLATE_ORDER_NUM = #{templateOrderNum,jdbcType=INTEGER},
+            TEMPLATE_DESC = #{templateDesc,jdbcType=VARCHAR},
+            TEMPLATE_MODULE_ID = #{templateModuleId,jdbcType=VARCHAR},
+            TEMPLATE_STATUS = #{templateStatus,jdbcType=VARCHAR},
+            TEMPLATE_ORGAN_ID = #{templateOrganId,jdbcType=VARCHAR},
+            TEMPLATE_ORGAN_NAME = #{templateOrganName,jdbcType=VARCHAR},
+            TEMPLATE_IS_TEMPLATE = #{templateIsTemplate,jdbcType=VARCHAR},
+            TEMPLATE_CONTENT_URL = #{templateContentUrl,jdbcType=VARCHAR},
+            TEMPLATE_HTML_CONTENT = #{templateHtmlContent,jdbcType=LONGVARCHAR},
+            TEMPLATE_JS_CONTENT = #{templateJsContent,jdbcType=LONGVARCHAR},
+            TEMPLATE_CSS_CONTENT = #{templateCssContent,jdbcType=LONGVARCHAR},
+            TEMPLATE_CONFIG_CONTENT = #{templateConfigContent,jdbcType=LONGVARCHAR}
+        where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TemplateResourceEntity">
+        update TB4D_TEMPLATE_RESOURCE
+        set TEMPLATE_NAME = #{templateName,jdbcType=VARCHAR},
+            TEMPLATE_CREATE_TIME = #{templateCreateTime,jdbcType=TIMESTAMP},
+            TEMPLATE_CREATER = #{templateCreater,jdbcType=VARCHAR},
+            TEMPLATE_UPDATE_TIME = #{templateUpdateTime,jdbcType=TIMESTAMP},
+            TEMPLATE_UPDATER = #{templateUpdater,jdbcType=VARCHAR},
+            TEMPLATE_TYPE = #{templateType,jdbcType=VARCHAR},
+            TEMPLATE_ISSYSTEM = #{templateIssystem,jdbcType=VARCHAR},
+            TEMPLATE_ORDER_NUM = #{templateOrderNum,jdbcType=INTEGER},
+            TEMPLATE_DESC = #{templateDesc,jdbcType=VARCHAR},
+            TEMPLATE_MODULE_ID = #{templateModuleId,jdbcType=VARCHAR},
+            TEMPLATE_STATUS = #{templateStatus,jdbcType=VARCHAR},
+            TEMPLATE_ORGAN_ID = #{templateOrganId,jdbcType=VARCHAR},
+            TEMPLATE_ORGAN_NAME = #{templateOrganName,jdbcType=VARCHAR},
+            TEMPLATE_IS_TEMPLATE = #{templateIsTemplate,jdbcType=VARCHAR},
+            TEMPLATE_CONTENT_URL = #{templateContentUrl,jdbcType=VARCHAR}
+        where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+    </update>
+</mapper>
