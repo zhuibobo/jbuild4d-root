@@ -26,6 +26,11 @@ import java.io.IOException;
 @EnableTransactionManagement
 public class BuilderBeansConfig {
 
+    @Bean
+    public IBuilderConfigService builderConfigService() throws IOException, SAXException, ParserConfigurationException {
+        IBuilderConfigService builderConfigService=new BuilderConfigServiceImpl();
+        return builderConfigService;
+    }
 
     @Bean
     public ITableGroupService tableGroupService(ISQLBuilderService _sqlBuilderService, TableGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
@@ -73,8 +78,8 @@ public class BuilderBeansConfig {
     }
 
     @Bean
-    public IBuilderConfigService builderConfigService() throws IOException, SAXException, ParserConfigurationException {
-        IBuilderConfigService builderConfigService=new BuilderConfigServiceImpl();
-        return builderConfigService;
+    public IModuleService moduleService(ISQLBuilderService _sqlBuilderService, ModuleMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        IModuleService bean=new ModuleServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
     }
 }
