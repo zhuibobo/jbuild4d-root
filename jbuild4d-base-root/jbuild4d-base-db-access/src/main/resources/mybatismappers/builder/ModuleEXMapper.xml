@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.ModuleMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_MODULE ORDER by MODULE_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_MODULE</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(MODULE_ORDER_NUM) is null then 1 else max(MODULE_ORDER_NUM)+1 end ORDERNUM from TB4D_MODULE</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_MODULE<where>
+        <if test="moduleValue !=null and moduleValue !=''"> and MODULE_VALUE like #{moduleValue} </if>
+        <if test="moduleText !=null and moduleText !=''"> and MODULE_TEXT like #{moduleText} </if>
+        <if test="moduleDesc !=null and moduleDesc !=''"> and MODULE_DESC like #{moduleDesc} </if>
+        <if test="moduleStatus !=null and moduleStatus !=''"> and MODULE_STATUS like #{moduleStatus} </if>
+        <if test="moduleParentId !=null and moduleParentId !=''"> and MODULE_PARENT_ID like #{moduleParentId} </if>
+        <if test="moduleIssystem !=null and moduleIssystem !=''"> and MODULE_ISSYSTEM like #{moduleIssystem} </if>
+        <if test="moduleDelEnable !=null and moduleDelEnable !=''"> and MODULE_DEL_ENABLE like #{moduleDelEnable} </if>
+        <if test="modulePidList !=null and modulePidList !=''"> and MODULE_PID_LIST like #{modulePidList} </if>
+        <if test="moduleOrganId !=null and moduleOrganId !=''"> and MODULE_ORGAN_ID like #{moduleOrganId} </if>
+        <if test="moduleOrganName !=null and moduleOrganName !=''"> and MODULE_ORGAN_NAME like #{moduleOrganName} </if>
+    </where>ORDER by MODULE_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_MODULE
+                                                                                                          where MODULE_ORDER_NUM = (select max(MODULE_ORDER_NUM) from TB4D_MODULE where MODULE_ORDER_NUM<(select MODULE_ORDER_NUM from TB4D_MODULE where MODULE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_MODULE
+                                                                                                             where MODULE_ORDER_NUM = (select min(MODULE_ORDER_NUM) from TB4D_MODULE where MODULE_ORDER_NUM>(select MODULE_ORDER_NUM from TB4D_MODULE where MODULE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

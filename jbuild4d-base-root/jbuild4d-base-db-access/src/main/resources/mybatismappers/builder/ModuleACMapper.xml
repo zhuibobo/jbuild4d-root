@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.ModuleMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity">
+        <constructor>
+            <idArg column="MODULE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODULE_VALUE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODULE_TEXT" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODULE_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="MODULE_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="MODULE_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODULE_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODULE_PARENT_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODULE_ISSYSTEM" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODULE_DEL_ENABLE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODULE_PID_LIST" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODULE_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="MODULE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODULE_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        MODULE_ID, MODULE_VALUE, MODULE_TEXT, MODULE_ORDER_NUM, MODULE_CREATE_TIME, MODULE_DESC,
+        MODULE_STATUS, MODULE_PARENT_ID, MODULE_ISSYSTEM, MODULE_DEL_ENABLE, MODULE_PID_LIST,
+        MODULE_CHILD_COUNT, MODULE_ORGAN_ID, MODULE_ORGAN_NAME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_MODULE
+        where MODULE_ID = #{moduleId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_MODULE
+        where MODULE_ID = #{moduleId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity">
+        insert into TB4D_MODULE (MODULE_ID, MODULE_VALUE, MODULE_TEXT,
+                                 MODULE_ORDER_NUM, MODULE_CREATE_TIME, MODULE_DESC,
+                                 MODULE_STATUS, MODULE_PARENT_ID, MODULE_ISSYSTEM,
+                                 MODULE_DEL_ENABLE, MODULE_PID_LIST, MODULE_CHILD_COUNT,
+                                 MODULE_ORGAN_ID, MODULE_ORGAN_NAME)
+        values (#{moduleId,jdbcType=VARCHAR}, #{moduleValue,jdbcType=VARCHAR}, #{moduleText,jdbcType=VARCHAR},
+                #{moduleOrderNum,jdbcType=INTEGER}, #{moduleCreateTime,jdbcType=TIMESTAMP}, #{moduleDesc,jdbcType=VARCHAR},
+                #{moduleStatus,jdbcType=VARCHAR}, #{moduleParentId,jdbcType=VARCHAR}, #{moduleIssystem,jdbcType=VARCHAR},
+                #{moduleDelEnable,jdbcType=VARCHAR}, #{modulePidList,jdbcType=VARCHAR}, #{moduleChildCount,jdbcType=INTEGER},
+                #{moduleOrganId,jdbcType=VARCHAR}, #{moduleOrganName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity">
+        insert into TB4D_MODULE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="moduleId != null">
+                MODULE_ID,
+            </if>
+            <if test="moduleValue != null">
+                MODULE_VALUE,
+            </if>
+            <if test="moduleText != null">
+                MODULE_TEXT,
+            </if>
+            <if test="moduleOrderNum != null">
+                MODULE_ORDER_NUM,
+            </if>
+            <if test="moduleCreateTime != null">
+                MODULE_CREATE_TIME,
+            </if>
+            <if test="moduleDesc != null">
+                MODULE_DESC,
+            </if>
+            <if test="moduleStatus != null">
+                MODULE_STATUS,
+            </if>
+            <if test="moduleParentId != null">
+                MODULE_PARENT_ID,
+            </if>
+            <if test="moduleIssystem != null">
+                MODULE_ISSYSTEM,
+            </if>
+            <if test="moduleDelEnable != null">
+                MODULE_DEL_ENABLE,
+            </if>
+            <if test="modulePidList != null">
+                MODULE_PID_LIST,
+            </if>
+            <if test="moduleChildCount != null">
+                MODULE_CHILD_COUNT,
+            </if>
+            <if test="moduleOrganId != null">
+                MODULE_ORGAN_ID,
+            </if>
+            <if test="moduleOrganName != null">
+                MODULE_ORGAN_NAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="moduleId != null">
+                #{moduleId,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleValue != null">
+                #{moduleValue,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleText != null">
+                #{moduleText,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleOrderNum != null">
+                #{moduleOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="moduleCreateTime != null">
+                #{moduleCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="moduleDesc != null">
+                #{moduleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleStatus != null">
+                #{moduleStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleParentId != null">
+                #{moduleParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleIssystem != null">
+                #{moduleIssystem,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleDelEnable != null">
+                #{moduleDelEnable,jdbcType=VARCHAR},
+            </if>
+            <if test="modulePidList != null">
+                #{modulePidList,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleChildCount != null">
+                #{moduleChildCount,jdbcType=INTEGER},
+            </if>
+            <if test="moduleOrganId != null">
+                #{moduleOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleOrganName != null">
+                #{moduleOrganName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity">
+        update TB4D_MODULE
+        <set>
+            <if test="moduleValue != null">
+                MODULE_VALUE = #{moduleValue,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleText != null">
+                MODULE_TEXT = #{moduleText,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleOrderNum != null">
+                MODULE_ORDER_NUM = #{moduleOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="moduleCreateTime != null">
+                MODULE_CREATE_TIME = #{moduleCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="moduleDesc != null">
+                MODULE_DESC = #{moduleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleStatus != null">
+                MODULE_STATUS = #{moduleStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleParentId != null">
+                MODULE_PARENT_ID = #{moduleParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleIssystem != null">
+                MODULE_ISSYSTEM = #{moduleIssystem,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleDelEnable != null">
+                MODULE_DEL_ENABLE = #{moduleDelEnable,jdbcType=VARCHAR},
+            </if>
+            <if test="modulePidList != null">
+                MODULE_PID_LIST = #{modulePidList,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleChildCount != null">
+                MODULE_CHILD_COUNT = #{moduleChildCount,jdbcType=INTEGER},
+            </if>
+            <if test="moduleOrganId != null">
+                MODULE_ORGAN_ID = #{moduleOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleOrganName != null">
+                MODULE_ORGAN_NAME = #{moduleOrganName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where MODULE_ID = #{moduleId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity">
+        update TB4D_MODULE
+        set MODULE_VALUE = #{moduleValue,jdbcType=VARCHAR},
+            MODULE_TEXT = #{moduleText,jdbcType=VARCHAR},
+            MODULE_ORDER_NUM = #{moduleOrderNum,jdbcType=INTEGER},
+            MODULE_CREATE_TIME = #{moduleCreateTime,jdbcType=TIMESTAMP},
+            MODULE_DESC = #{moduleDesc,jdbcType=VARCHAR},
+            MODULE_STATUS = #{moduleStatus,jdbcType=VARCHAR},
+            MODULE_PARENT_ID = #{moduleParentId,jdbcType=VARCHAR},
+            MODULE_ISSYSTEM = #{moduleIssystem,jdbcType=VARCHAR},
+            MODULE_DEL_ENABLE = #{moduleDelEnable,jdbcType=VARCHAR},
+            MODULE_PID_LIST = #{modulePidList,jdbcType=VARCHAR},
+            MODULE_CHILD_COUNT = #{moduleChildCount,jdbcType=INTEGER},
+            MODULE_ORGAN_ID = #{moduleOrganId,jdbcType=VARCHAR},
+            MODULE_ORGAN_NAME = #{moduleOrganName,jdbcType=VARCHAR}
+        where MODULE_ID = #{moduleId,jdbcType=VARCHAR}
+    </update>
+</mapper>
