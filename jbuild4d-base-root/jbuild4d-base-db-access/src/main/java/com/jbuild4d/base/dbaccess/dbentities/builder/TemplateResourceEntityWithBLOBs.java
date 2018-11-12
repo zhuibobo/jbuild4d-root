@@ -10,8 +10,14 @@ import java.util.Date;
  * @mbg.generated do_not_delete_during_merge
  */
 public class TemplateResourceEntityWithBLOBs extends TemplateResourceEntity {
-    //TEMPLATE_HTML_CONTENT
-    private String templateHtmlContent;
+    //TEMPLATE_IS_RESOLVE
+    private String templateIsResolve;
+
+    //TEMPLATE_HTML_SOURCE
+    private String templateHtmlSource;
+
+    //TEMPLATE_HTML_RESOLVE
+    private String templateHtmlResolve;
 
     //TEMPLATE_JS_CONTENT
     private String templateJsContent;
@@ -22,9 +28,11 @@ public class TemplateResourceEntityWithBLOBs extends TemplateResourceEntity {
     //TEMPLATE_CONFIG_CONTENT
     private String templateConfigContent;
 
-    public TemplateResourceEntityWithBLOBs(String templateId, String templateName, Date templateCreateTime, String templateCreater, Date templateUpdateTime, String templateUpdater, String templateType, String templateIssystem, Integer templateOrderNum, String templateDesc, String templateModuleId, String templateStatus, String templateOrganId, String templateOrganName, String templateIsTemplate, String templateContentUrl, String templateHtmlContent, String templateJsContent, String templateCssContent, String templateConfigContent) {
+    public TemplateResourceEntityWithBLOBs(String templateId, String templateName, Date templateCreateTime, String templateCreater, Date templateUpdateTime, String templateUpdater, String templateType, String templateIssystem, Integer templateOrderNum, String templateDesc, String templateModuleId, String templateStatus, String templateOrganId, String templateOrganName, String templateIsTemplate, String templateContentUrl, String templateIsResolve, String templateHtmlSource, String templateHtmlResolve, String templateJsContent, String templateCssContent, String templateConfigContent) {
         super(templateId, templateName, templateCreateTime, templateCreater, templateUpdateTime, templateUpdater, templateType, templateIssystem, templateOrderNum, templateDesc, templateModuleId, templateStatus, templateOrganId, templateOrganName, templateIsTemplate, templateContentUrl);
-        this.templateHtmlContent = templateHtmlContent;
+        this.templateIsResolve = templateIsResolve;
+        this.templateHtmlSource = templateHtmlSource;
+        this.templateHtmlResolve = templateHtmlResolve;
         this.templateJsContent = templateJsContent;
         this.templateCssContent = templateCssContent;
         this.templateConfigContent = templateConfigContent;
@@ -34,12 +42,28 @@ public class TemplateResourceEntityWithBLOBs extends TemplateResourceEntity {
         super();
     }
 
-    public String getTemplateHtmlContent() {
-        return templateHtmlContent;
+    public String getTemplateIsResolve() {
+        return templateIsResolve;
     }
 
-    public void setTemplateHtmlContent(String templateHtmlContent) {
-        this.templateHtmlContent = templateHtmlContent == null ? null : templateHtmlContent.trim();
+    public void setTemplateIsResolve(String templateIsResolve) {
+        this.templateIsResolve = templateIsResolve == null ? null : templateIsResolve.trim();
+    }
+
+    public String getTemplateHtmlSource() {
+        return templateHtmlSource;
+    }
+
+    public void setTemplateHtmlSource(String templateHtmlSource) {
+        this.templateHtmlSource = templateHtmlSource == null ? null : templateHtmlSource.trim();
+    }
+
+    public String getTemplateHtmlResolve() {
+        return templateHtmlResolve;
+    }
+
+    public void setTemplateHtmlResolve(String templateHtmlResolve) {
+        this.templateHtmlResolve = templateHtmlResolve == null ? null : templateHtmlResolve.trim();
     }
 
     public String getTemplateJsContent() {

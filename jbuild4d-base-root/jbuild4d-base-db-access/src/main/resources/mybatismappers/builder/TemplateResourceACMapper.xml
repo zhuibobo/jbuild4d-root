@@ -39,7 +39,9 @@
             <arg column="TEMPLATE_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TEMPLATE_IS_TEMPLATE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="TEMPLATE_CONTENT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TEMPLATE_HTML_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="TEMPLATE_IS_RESOLVE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="TEMPLATE_HTML_SOURCE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="TEMPLATE_HTML_RESOLVE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="TEMPLATE_JS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="TEMPLATE_CSS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="TEMPLATE_CONFIG_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
@@ -52,7 +54,8 @@
         TEMPLATE_CONTENT_URL
     </sql>
     <sql id="Blob_Column_List">
-        TEMPLATE_HTML_CONTENT, TEMPLATE_JS_CONTENT, TEMPLATE_CSS_CONTENT, TEMPLATE_CONFIG_CONTENT
+        TEMPLATE_IS_RESOLVE, TEMPLATE_HTML_SOURCE, TEMPLATE_HTML_RESOLVE, TEMPLATE_JS_CONTENT,
+        TEMPLATE_CSS_CONTENT, TEMPLATE_CONFIG_CONTENT
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
         select
@@ -73,7 +76,8 @@
                                             TEMPLATE_ORDER_NUM, TEMPLATE_DESC, TEMPLATE_MODULE_ID,
                                             TEMPLATE_STATUS, TEMPLATE_ORGAN_ID, TEMPLATE_ORGAN_NAME,
                                             TEMPLATE_IS_TEMPLATE, TEMPLATE_CONTENT_URL,
-                                            TEMPLATE_HTML_CONTENT, TEMPLATE_JS_CONTENT,
+                                            TEMPLATE_IS_RESOLVE, TEMPLATE_HTML_SOURCE,
+                                            TEMPLATE_HTML_RESOLVE, TEMPLATE_JS_CONTENT,
                                             TEMPLATE_CSS_CONTENT, TEMPLATE_CONFIG_CONTENT
                 )
         values (#{templateId,jdbcType=VARCHAR}, #{templateName,jdbcType=VARCHAR}, #{templateCreateTime,jdbcType=TIMESTAMP},
@@ -82,7 +86,8 @@
                 #{templateOrderNum,jdbcType=INTEGER}, #{templateDesc,jdbcType=VARCHAR}, #{templateModuleId,jdbcType=VARCHAR},
                 #{templateStatus,jdbcType=VARCHAR}, #{templateOrganId,jdbcType=VARCHAR}, #{templateOrganName,jdbcType=VARCHAR},
                 #{templateIsTemplate,jdbcType=VARCHAR}, #{templateContentUrl,jdbcType=VARCHAR},
-                #{templateHtmlContent,jdbcType=LONGVARCHAR}, #{templateJsContent,jdbcType=LONGVARCHAR},
+                #{templateIsResolve,jdbcType=LONGVARCHAR}, #{templateHtmlSource,jdbcType=LONGVARCHAR},
+                #{templateHtmlResolve,jdbcType=LONGVARCHAR}, #{templateJsContent,jdbcType=LONGVARCHAR},
                 #{templateCssContent,jdbcType=LONGVARCHAR}, #{templateConfigContent,jdbcType=LONGVARCHAR}
                        )
     </insert>
@@ -137,8 +142,14 @@
             <if test="templateContentUrl != null">
                 TEMPLATE_CONTENT_URL,
             </if>
-            <if test="templateHtmlContent != null">
-                TEMPLATE_HTML_CONTENT,
+            <if test="templateIsResolve != null">
+                TEMPLATE_IS_RESOLVE,
+            </if>
+            <if test="templateHtmlSource != null">
+                TEMPLATE_HTML_SOURCE,
+            </if>
+            <if test="templateHtmlResolve != null">
+                TEMPLATE_HTML_RESOLVE,
             </if>
             <if test="templateJsContent != null">
                 TEMPLATE_JS_CONTENT,
@@ -199,8 +210,14 @@
             <if test="templateContentUrl != null">
                 #{templateContentUrl,jdbcType=VARCHAR},
             </if>
-            <if test="templateHtmlContent != null">
-                #{templateHtmlContent,jdbcType=LONGVARCHAR},
+            <if test="templateIsResolve != null">
+                #{templateIsResolve,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="templateHtmlSource != null">
+                #{templateHtmlSource,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="templateHtmlResolve != null">
+                #{templateHtmlResolve,jdbcType=LONGVARCHAR},
             </if>
             <if test="templateJsContent != null">
                 #{templateJsContent,jdbcType=LONGVARCHAR},
@@ -261,8 +278,14 @@
             <if test="templateContentUrl != null">
                 TEMPLATE_CONTENT_URL = #{templateContentUrl,jdbcType=VARCHAR},
             </if>
-            <if test="templateHtmlContent != null">
-                TEMPLATE_HTML_CONTENT = #{templateHtmlContent,jdbcType=LONGVARCHAR},
+            <if test="templateIsResolve != null">
+                TEMPLATE_IS_RESOLVE = #{templateIsResolve,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="templateHtmlSource != null">
+                TEMPLATE_HTML_SOURCE = #{templateHtmlSource,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="templateHtmlResolve != null">
+                TEMPLATE_HTML_RESOLVE = #{templateHtmlResolve,jdbcType=LONGVARCHAR},
             </if>
             <if test="templateJsContent != null">
                 TEMPLATE_JS_CONTENT = #{templateJsContent,jdbcType=LONGVARCHAR},
@@ -293,7 +316,9 @@
             TEMPLATE_ORGAN_NAME = #{templateOrganName,jdbcType=VARCHAR},
             TEMPLATE_IS_TEMPLATE = #{templateIsTemplate,jdbcType=VARCHAR},
             TEMPLATE_CONTENT_URL = #{templateContentUrl,jdbcType=VARCHAR},
-            TEMPLATE_HTML_CONTENT = #{templateHtmlContent,jdbcType=LONGVARCHAR},
+            TEMPLATE_IS_RESOLVE = #{templateIsResolve,jdbcType=LONGVARCHAR},
+            TEMPLATE_HTML_SOURCE = #{templateHtmlSource,jdbcType=LONGVARCHAR},
+            TEMPLATE_HTML_RESOLVE = #{templateHtmlResolve,jdbcType=LONGVARCHAR},
             TEMPLATE_JS_CONTENT = #{templateJsContent,jdbcType=LONGVARCHAR},
             TEMPLATE_CSS_CONTENT = #{templateCssContent,jdbcType=LONGVARCHAR},
             TEMPLATE_CONFIG_CONTENT = #{templateConfigContent,jdbcType=LONGVARCHAR}

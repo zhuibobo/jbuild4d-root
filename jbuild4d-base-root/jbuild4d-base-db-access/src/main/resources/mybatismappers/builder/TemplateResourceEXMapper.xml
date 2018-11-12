@@ -17,7 +17,9 @@
         <if test="templateOrganName !=null and templateOrganName !=''"> and TEMPLATE_ORGAN_NAME like #{templateOrganName} </if>
         <if test="templateIsTemplate !=null and templateIsTemplate !=''"> and TEMPLATE_IS_TEMPLATE like #{templateIsTemplate} </if>
         <if test="templateContentUrl !=null and templateContentUrl !=''"> and TEMPLATE_CONTENT_URL like #{templateContentUrl} </if>
-        <if test="templateHtmlContent !=null and templateHtmlContent !=''"> and TEMPLATE_HTML_CONTENT like #{templateHtmlContent} </if>
+        <if test="templateIsResolve !=null and templateIsResolve !=''"> and TEMPLATE_IS_RESOLVE like #{templateIsResolve} </if>
+        <if test="templateHtmlSource !=null and templateHtmlSource !=''"> and TEMPLATE_HTML_SOURCE like #{templateHtmlSource} </if>
+        <if test="templateHtmlResolve !=null and templateHtmlResolve !=''"> and TEMPLATE_HTML_RESOLVE like #{templateHtmlResolve} </if>
         <if test="templateJsContent !=null and templateJsContent !=''"> and TEMPLATE_JS_CONTENT like #{templateJsContent} </if>
         <if test="templateCssContent !=null and templateCssContent !=''"> and TEMPLATE_CSS_CONTENT like #{templateCssContent} </if>
         <if test="templateConfigContent !=null and templateConfigContent !=''"> and TEMPLATE_CONFIG_CONTENT like #{templateConfigContent} </if>
