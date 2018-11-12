@@ -15,7 +15,7 @@
     <div class="left-outer-wrap-c">
         <div class="left-page-c">
             <div class="tool-bar-c">
-                <div alt="新增分类组" title="新增分类组" class="add" @click="addGroup()"></div>
+                <div alt="新增分类组" title="新增分类组" class="add" @click="addModule()"></div>
                 <div alt="修改分类组" title="修改分类组" class="edit" @click="editGroup"></div>
                 <div alt="删除分类组" title="删除分类组" class="del" @click="delGroup"></div>
                 <div alt="浏览分类组" title="浏览分类组" class="view" @click="viewGroup"></div>
@@ -108,7 +108,7 @@
             acInterface:{
                 <!--Module -->
                 getModuleData:"/PlatForm/Builder/Module/GetTreeData",
-                ModuleEditView:"/PlatForm/Builder/Module/DetailView",
+                moduleEditView:"/PlatForm/Builder/Module/DetailView",
                 deleteModule:"/PlatForm/Builder/Module/Delete",
                 moveModule:"/PlatForm/Builder/Module/Move"
                 <!--Template-->
@@ -231,23 +231,20 @@
             },
             treeNodeSelected:function (event, treeId, treeNode) {
                 // 根节点不触发任何事件
-                //if(treeNode.level != 0) {
                 this.treeSelectedNode=treeNode;
-                this.selectionRows=null;
+                /*this.selectionRows=null;
                 this.pageNum=1;
                 this.clearSearchCondition();
                 this.searchCondition.groupId.value=this.treeSelectedNode[this.treeIdFieldName];
-                this.reloadData();
-                //appList.reloadTreeTableData();
-                //}
+                this.reloadData();*/
             },
-            addGroup:function () {
+            addModule:function () {
                 if (this.treeSelectedNode != null) {
-                    var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                    var url = BaseUtility.BuildAction(this.acInterface.moduleEditView, {
                         "op": "add",
                         "parentId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "模块分组"}, 2);
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择父节点!", null);
