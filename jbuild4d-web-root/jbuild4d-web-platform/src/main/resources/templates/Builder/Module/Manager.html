@@ -33,9 +33,13 @@
                 <div style="width: 100%;">
                     <div id="list-button-wrap" class="list-button-outer-wrap">
                         <div class="list-button-inner-wrap">
-                            <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
-                            <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
-                            <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
+                            <i-button type="success" @click="template_add()"><Icon type="plus"></Icon> 新增 </i-button>
+                            <i-button type="success" @click="template_add()"><Icon type="plus"></Icon> 引入URL </i-button>
+                            <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 复制 </i-button>
+                            <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 复制到 </i-button>
+                            <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 预览 </i-button>
+                            <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 历史版本 </i-button>
+                            <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 复制ID </i-button>
                             <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移 </i-button>
                             <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
                         </div>
@@ -116,28 +120,6 @@
             },
             <!--List-->
             idFieldName:"ddtlId",
-            searchCondition:{
-                groupId:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.StringType
-                },
-                ddtlName:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.LikeStringType
-                },
-                ddtlValue:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.LikeStringType
-                },
-                ddtlCreatetime_s:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.DataStringType
-                },
-                ddtlCreatetime_e:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.DataStringType
-                }
-            },
             columnsConfig: [
                 {
                     type: 'selection',
@@ -190,7 +172,7 @@
             listHeight: 300
         },
         methods:{
-            <!--Tree-->
+            <!--Module-->
             initTree:function () {
                 this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getModuleData, {});
                 this.treeObj=$.fn.zTree.init($("#zTreeUL"), this.treeSetting);
@@ -286,7 +268,19 @@
                 this.treeSelectedNode=$.extend(true,this.treeSelectedNode, newNodeData);
                 appList.treeObj.updateNode(this.treeSelectedNode);
             },
-            <!--List-->
+            <!--Template-->
+            template_add:function () {
+                if(this.treeSelectedNode!=null) {
+                    var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
+                        "op": "add",
+                        "moduleId": this.treeSelectedNode[appList.treeIdFieldName]
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
+                }
+                else {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择分组!", null);
+                }
+            },
             clearSearchCondition:function () {
                 for(var key in this.searchCondition){
                     this.searchCondition[key].value="";
@@ -299,18 +293,7 @@
                 ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadListData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null,false);
                 //this.selectionRows=null;
             },
-            add: function () {
-                if(this.treeSelectedNode!=null) {
-                    var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
-                        "op": "add",
-                        "groupId": this.treeSelectedNode[appList.treeIdFieldName]
-                    });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
-                }
-                else {
-                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择分组!",null);
-                }
-            },
+
             edit: function (recordId) {
                 var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
                     "op": "update",

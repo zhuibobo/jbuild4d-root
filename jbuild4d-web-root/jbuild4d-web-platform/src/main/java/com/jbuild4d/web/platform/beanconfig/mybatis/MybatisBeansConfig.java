@@ -35,7 +35,7 @@ public class MybatisBeansConfig {
     /*@Bean(destroyMethod="close")*/
     @Bean
     public ComboPooledDataSource dataSourceBean() throws PropertyVetoException {
-        String driverName="com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        String driverName=DBProp.getDriverName();
         ComboPooledDataSource comboPooledDataSource=new ComboPooledDataSource();
         comboPooledDataSource.setDriverClass(driverName);
         comboPooledDataSource.setJdbcUrl(DBProp.getValue("Url"));
