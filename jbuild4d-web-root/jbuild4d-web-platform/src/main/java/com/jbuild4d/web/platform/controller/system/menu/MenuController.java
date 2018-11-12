@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping(value = "/PlatForm/Menu")
+@RequestMapping(value = "/PlatForm/System/Menu")
 public class MenuController {
     @Autowired
     IMenuService menuService;
