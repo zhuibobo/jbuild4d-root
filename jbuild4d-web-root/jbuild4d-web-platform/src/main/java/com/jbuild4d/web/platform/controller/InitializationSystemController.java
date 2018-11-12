@@ -7,6 +7,7 @@ import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.builder.service.IDatasetGroupService;
+import com.jbuild4d.platform.builder.service.IModuleService;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
 import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.organ.service.IOrganService;
@@ -53,6 +54,9 @@ public class InitializationSystemController {
     @Autowired
     private IDatasetGroupService datasetGroupService;
 
+    @Autowired
+    private IModuleService moduleService;
+
     @RequestMapping(value = "/Running", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo running() throws JBuild4DGenerallyException {
@@ -66,7 +70,7 @@ public class InitializationSystemController {
 
         //初始化测试树数据
         devDemoTreeTableService.deleteByKey(jb4DSession,"0");
-        DevDemoTreeTableEntity treeTableRootEntity=devDemoTreeTableService.createRootNode(jb4DSession);
+        devDemoTreeTableService.createRootNode(jb4DSession);
 
         devDemoTLTreeService.deleteByKey(jb4DSession,"0");
         devDemoTLTreeService.createRootNode(jb4DSession);
@@ -85,7 +89,11 @@ public class InitializationSystemController {
         //初始化表模版
         tableFieldService.createGeneralTemplate(jb4DSession);
 
-        DatasetGroupEntity rootDatasetGroupEntity=datasetGroupService.createRootNode(jb4DSession);
+        //初始化数据集分组
+        datasetGroupService.createRootNode(jb4DSession);
+
+        //初始化模块分组
+        moduleService.createRootNode(jb4DSession);
 
         return JBuild4DResponseVo.success("系统数据初始化成功！");
     }

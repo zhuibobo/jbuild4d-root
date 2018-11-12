@@ -1,7 +1,9 @@
 package com.jbuild4d.platform.builder.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.ModuleMapper;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity;
+import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
@@ -10,8 +12,13 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.builder.service.IModuleService;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.Date;
+
 public class ModuleServiceImpl extends BaseServiceImpl<ModuleEntity> implements IModuleService
 {
+    private String rootId="0";
+    private String rootParentId="-1";
+
     ModuleMapper moduleMapper;
     public ModuleServiceImpl(ModuleMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
@@ -19,11 +26,40 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleEntity> implements 
     }
 
     @Override
+    public ModuleEntity createRootNode(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+        ModuleEntity rootEntity=new ModuleEntity();
+        rootEntity.setModuleId(rootId);
+        rootEntity.setModuleParentId(rootParentId);
+        rootEntity.setModuleIssystem(TrueFalseEnum.True.getDisplayName());
+        rootEntity.setModuleText("模块分组");
+        rootEntity.setModuleValue("模块分组");
+        this.save(jb4DSession,rootEntity.getModuleId(),rootEntity);
+        return rootEntity;
+    }
+
+    @Override
     public int save(JB4DSession jb4DSession, String id, ModuleEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<ModuleEntity>() {
             @Override
             public ModuleEntity run(JB4DSession jb4DSession,ModuleEntity sourceEntity) throws JBuild4DGenerallyException {
-                //设置排序,以及其他参数--nextOrderNum()
+                sourceEntity.setModuleOrderNum(moduleMapper.nextOrderNum());
+                sourceEntity.setModuleChildCount(0);
+                sourceEntity.setModuleCreateTime(new Date());
+                sourceEntity.setModuleOrganId(jb4DSession.getOrganId());
+                sourceEntity.setModuleOrganName(jb4DSession.getOrganName());
+                String parentIdList;
+                if(sourceEntity.getModuleId().equals(rootId)){
+                    parentIdList=rootParentId;
+                    sourceEntity.setModuleParentId(rootParentId);
+                }
+                else
+                {
+                    ModuleEntity parentEntity=moduleMapper.selectByPrimaryKey(sourceEntity.getModuleParentId());
+                    parentIdList=parentEntity.getModulePidList();
+                    parentEntity.setModuleChildCount(parentEntity.getModuleChildCount()+1);
+                    moduleMapper.updateByPrimaryKeySelective(parentEntity);
+                }
+                sourceEntity.setModulePidList(parentIdList+"*"+sourceEntity.getModuleId());
                 return sourceEntity;
             }
         });
