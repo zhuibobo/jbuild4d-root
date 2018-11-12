@@ -128,7 +128,7 @@
                 // 必须使用data
                 data:{
                     key:{
-                        name:"ddttName"
+                        name:"moduleText"
                     },
                     simpleData : {
                         enable : true,
@@ -226,7 +226,7 @@
         methods:{
             <!--Tree-->
             initTree:function () {
-                this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});
+                this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getModuleData, {});
                 this.treeObj=$.fn.zTree.init($("#zTreeUL"), this.treeSetting);
             },
             treeNodeSelected:function (event, treeId, treeNode) {
