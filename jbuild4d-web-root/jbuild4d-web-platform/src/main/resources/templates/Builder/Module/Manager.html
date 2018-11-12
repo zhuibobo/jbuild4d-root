@@ -16,11 +16,11 @@
         <div class="left-page-c">
             <div class="tool-bar-c">
                 <div alt="新增分类组" title="新增分类组" class="add" @click="addModule()"></div>
-                <div alt="修改分类组" title="修改分类组" class="edit" @click="editGroup"></div>
-                <div alt="删除分类组" title="删除分类组" class="del" @click="delGroup"></div>
-                <div alt="浏览分类组" title="浏览分类组" class="view" @click="viewGroup"></div>
-                <div alt="上移" title="上移" class="order-up" @click="moveGroup('up')"></div>
-                <div alt="下移" title="下移" class="order-down last" @click="moveGroup('down')"></div>
+                <div alt="修改分类组" title="修改分类组" class="edit" @click="editModule()"></div>
+                <div alt="删除分类组" title="删除分类组" class="del" @click="delModule()"></div>
+                <div alt="浏览分类组" title="浏览分类组" class="view" @click="viewModule()"></div>
+                <div alt="上移" title="上移" class="order-up" @click="moveModule('up')"></div>
+                <div alt="下移" title="下移" class="order-down last" @click="moveModule('down')"></div>
             </div>
             <div>
                 <ul id="zTreeUL" class="ztree"></ul>
@@ -31,40 +31,6 @@
         <tabs>
             <tab-pane label="模版设计">
                 <div style="width: 100%;">
-                    <div class="list-simple-search-wrap" id="list-simple-search-wrap">
-                        <table class="ls-table">
-                            <colgroup>
-                                <col style="width: 80px">
-                                <col style="">
-                                <col style="width: 80px">
-                                <col style="">
-                                <col style="width: 100px">
-                                <col style="">
-                                <col style="width: 80px">
-                                <col style="">
-                                <col style="width: 80px">
-                            </colgroup>
-                            <tr class="ls-table-row">
-                                <td>ddtlName：</td>
-                                <td>
-                                    <i-input v-model="searchCondition.ddtlName.value" placeholder=""></i-input>
-                                </td>
-                                <td>ddtlValue：</td>
-                                <td>
-                                    <i-input v-model="searchCondition.ddtlValue.value" placeholder=""></i-input>
-                                </td>
-                                <td>ddtlCreatetime（从）：</td>
-                                <td>
-                                    <date-picker v-model="searchCondition.ddtlCreatetime_s.value" type="date" placeholder="" style="width: 100%"></date-picker>
-                                </td>
-                                <td>（到）：</td>
-                                <td>
-                                    <date-picker v-model="searchCondition.ddtlCreatetime_e.value" type="date" placeholder="" style="width: 100%"></date-picker>
-                                </td>
-                                <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
-                            </tr>
-                        </table>
-                    </div>
                     <div id="list-button-wrap" class="list-button-outer-wrap">
                         <div class="list-button-inner-wrap">
                             <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
@@ -250,31 +216,30 @@
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择父节点!", null);
                 }
             },
-            editGroup:function () {
+            editModule:function () {
                 if(this.treeSelectedNode!=null) {
-                    var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                    var url = BaseUtility.BuildAction(this.acInterface.moduleEditView, {
                         "op": "update",
                         "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "模块分组"}, 2);
                 }
                 else {
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
                 }
             },
-            viewGroup:function () {
-                var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+            viewModule:function () {
+                var url = BaseUtility.BuildAction(this.acInterface.moduleEditView, {
                     "op": "view",
                     "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                 });
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "模块分组"}, 2);
             },
-            delGroup:function () {
-                //var url="/PlatForm/devdemo/TreeAndList/DevDemoTLTree/Delete.do";
+            delModule:function () {
                 var _self=this;
                 var recordId=this.treeSelectedNode[appList.treeIdFieldName];
                 DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
-                    AjaxUtility.Post(_self.acInterface.deleteGroup, {recordId: recordId}, function (result) {
+                    AjaxUtility.Post(_self.acInterface.deleteModule, {recordId: recordId}, function (result) {
                         if (result.success) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 appList.treeObj.removeNode(appList.treeSelectedNode);
@@ -287,10 +252,10 @@
                     }, "json");
                 });
             },
-            moveGroup:function (type) {
+            moveModule:function (type) {
                 if(this.treeSelectedNode!=null) {
                     var recordId = this.treeSelectedNode[appList.treeIdFieldName];
-                    AjaxUtility.Post(this.acInterface.moveGroup, {recordId: recordId,type:type}, function (result) {
+                    AjaxUtility.Post(this.acInterface.moveModule, {recordId: recordId,type:type}, function (result) {
                         if (result.success) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 if(type=="down") {

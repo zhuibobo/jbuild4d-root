@@ -64,5 +64,29 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleEntity> implements 
             }
         });
     }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        ModuleEntity selfEntity=moduleMapper.selectByPrimaryKey(id);
+        ModuleEntity ltEntity=moduleMapper.selectLessThanRecord(id,selfEntity.getModuleParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        ModuleEntity selfEntity=moduleMapper.selectByPrimaryKey(id);
+        ModuleEntity ltEntity=moduleMapper.selectGreaterThanRecord(id,selfEntity.getModuleParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    private void switchOrder(ModuleEntity toEntity,ModuleEntity selfEntity) {
+        if(toEntity !=null){
+            int newNum= toEntity.getModuleOrderNum();
+            toEntity.setModuleOrderNum(selfEntity.getModuleOrderNum());
+            selfEntity.setModuleOrderNum(newNum);
+            moduleMapper.updateByPrimaryKeySelective(toEntity);
+            moduleMapper.updateByPrimaryKeySelective(selfEntity);
+        }
+    }
 }
 
