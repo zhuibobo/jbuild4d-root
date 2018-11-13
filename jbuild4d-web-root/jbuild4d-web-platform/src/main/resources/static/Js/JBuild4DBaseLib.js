@@ -689,8 +689,11 @@ var PageStyleUtility = {
         //alert($(window.document).height());
         return jQuery(window.document).width();
     },
-    GetWindowHeigth:function () {
+    GetWindowHeight:function () {
         return $(window).height();
+    },
+    GetWindowWidth:function () {
+        return $(window).width();
     },
     GetListButtonOuterHeight: function () {
         return jQuery(".list-button-outer-c").outerHeight();
@@ -1044,11 +1047,12 @@ var DialogUtility={
     OpenNewWindow: function (openerwindow, dialogId, url, options, whtype) {
         //openerwindow, dialogId, url, options, whtype
         if(options.width==0) {
-            options.width = PageStyleUtil.GetPageWidth()-20;
+            options.width = PageStyleUtility.GetWindowWidth()-20;
         }
         if(options.height==0) {
-            options.height = PageStyleUtil.GetPageHeight()-10;
+            options.height = PageStyleUtility.GetWindowHeight()-10;
         }
+        debugger;
         var width=options.width;
         var height=options.height;
         var left = parseInt((screen.availWidth - width) / 2).toString();
@@ -1059,7 +1063,7 @@ var DialogUtility={
             left = "0";
             top = "0";
         }
-        var winHandle = window.open(url, name, "scrollbars=no,toolbar=no,menubar=no,resizable=yes,center=yes,help=no, status=yes,top= " + top + "px,left=" + left + "px,width=" + width + "px,height=" + height + "px");
+        var winHandle = window.open(url, "", "scrollbars=no,toolbar=no,menubar=no,resizable=yes,center=yes,help=no, status=yes,top= " + top + "px,left=" + left + "px,width=" + width + "px,height=" + height + "px");
         if (winHandle == null) {
             alert("请解除浏览器对本系统弹出窗口的阻止设置！");
         }

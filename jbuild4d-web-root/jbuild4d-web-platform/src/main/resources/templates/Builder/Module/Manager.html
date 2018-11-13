@@ -83,7 +83,7 @@
                 moveModule:"/PlatForm/Builder/Module/Move",
                 <!--Template-->
                 form:{
-                    designView:"/PlatForm/Builder/"
+                    designView:"/PlatForm/Builder/Form/DetailView"
                 }
                 <!--List-->
                 <!--AboutConfig-->
@@ -278,6 +278,7 @@
                         "op": "add",
                         "moduleId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
+                    //alert(url);
                     DialogUtility.OpenNewWindow(window, DialogUtility.DialogId, url, {width: 0, height: 0}, 2);
                 }
                 else {
