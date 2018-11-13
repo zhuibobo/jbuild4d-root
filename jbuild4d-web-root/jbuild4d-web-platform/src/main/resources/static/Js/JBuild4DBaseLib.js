@@ -1041,7 +1041,16 @@ var DialogUtility={
 
         }
     },
-    OpenNewWindow: function (url, name, width, height) {
+    OpenNewWindow: function (openerwindow, dialogId, url, options, whtype) {
+        //openerwindow, dialogId, url, options, whtype
+        if(options.width==0) {
+            options.width = PageStyleUtil.GetPageWidth()-20;
+        }
+        if(options.height==0) {
+            options.height = PageStyleUtil.GetPageHeight()-10;
+        }
+        var width=options.width;
+        var height=options.height;
         var left = parseInt((screen.availWidth - width) / 2).toString();
         var top = parseInt((screen.availHeight - height) / 2).toString();
         if (width.toString() == "0" && height.toString() == "0") {

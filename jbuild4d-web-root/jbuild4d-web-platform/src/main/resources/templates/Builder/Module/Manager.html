@@ -82,8 +82,8 @@
                 deleteModule:"/PlatForm/Builder/Module/Delete",
                 moveModule:"/PlatForm/Builder/Module/Move",
                 <!--Template-->
-                template:{
-                    designView:""
+                form:{
+                    designView:"/PlatForm/Builder/"
                 }
                 <!--List-->
                 <!--AboutConfig-->
@@ -274,11 +274,11 @@
             <!--Template-->
             form_add:function () {
                 if(this.treeSelectedNode!=null) {
-                    var url = BaseUtility.BuildAction(this.acInterface.template.designView, {
+                    var url = BaseUtility.BuildAction(this.acInterface.form.designView, {
                         "op": "add",
                         "moduleId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表单设计"}, 2);
+                    DialogUtility.OpenNewWindow(window, DialogUtility.DialogId, url, {width: 0, height: 0}, 2);
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择模块!", null);
