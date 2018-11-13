@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.FormResourceMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_FORM_RESOURCE ORDER by FORM_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_FORM_RESOURCE</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(FORM_ORDER_NUM) is null then 1 else max(FORM_ORDER_NUM)+1 end ORDERNUM from TB4D_FORM_RESOURCE</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_FORM_RESOURCE<where>
+        <if test="formName !=null and formName !=''"> and FORM_NAME like #{formName} </if>
+        <if test="formCreater !=null and formCreater !=''"> and FORM_CREATER like #{formCreater} </if>
+        <if test="formUpdater !=null and formUpdater !=''"> and FORM_UPDATER like #{formUpdater} </if>
+        <if test="formType !=null and formType !=''"> and FORM_TYPE like #{formType} </if>
+        <if test="formIssystem !=null and formIssystem !=''"> and FORM_ISSYSTEM like #{formIssystem} </if>
+        <if test="formDesc !=null and formDesc !=''"> and FORM_DESC like #{formDesc} </if>
+        <if test="formModuleId !=null and formModuleId !=''"> and FORM_MODULE_ID like #{formModuleId} </if>
+        <if test="formStatus !=null and formStatus !=''"> and FORM_STATUS like #{formStatus} </if>
+        <if test="formOrganId !=null and formOrganId !=''"> and FORM_ORGAN_ID like #{formOrganId} </if>
+        <if test="formOrganName !=null and formOrganName !=''"> and FORM_ORGAN_NAME like #{formOrganName} </if>
+        <if test="formIsTemplate !=null and formIsTemplate !=''"> and FORM_IS_TEMPLATE like #{formIsTemplate} </if>
+        <if test="formContentUrl !=null and formContentUrl !=''"> and FORM_CONTENT_URL like #{formContentUrl} </if>
+        <if test="formIsResolve !=null and formIsResolve !=''"> and FORM_IS_RESOLVE like #{formIsResolve} </if>
+        <if test="formHtmlSource !=null and formHtmlSource !=''"> and FORM_HTML_SOURCE like #{formHtmlSource} </if>
+        <if test="formHtmlResolve !=null and formHtmlResolve !=''"> and FORM_HTML_RESOLVE like #{formHtmlResolve} </if>
+        <if test="formJsContent !=null and formJsContent !=''"> and FORM_JS_CONTENT like #{formJsContent} </if>
+        <if test="formCssContent !=null and formCssContent !=''"> and FORM_CSS_CONTENT like #{formCssContent} </if>
+        <if test="formConfigContent !=null and formConfigContent !=''"> and FORM_CONFIG_CONTENT like #{formConfigContent} </if>
+    </where>ORDER by FORM_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_FORM_RESOURCE
+                                                                                                          where FORM_ORDER_NUM = (select max(FORM_ORDER_NUM) from TB4D_FORM_RESOURCE where FORM_ORDER_NUM<(select FORM_ORDER_NUM from TB4D_FORM_RESOURCE where FORM_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_FORM_RESOURCE
+                                                                                                             where FORM_ORDER_NUM = (select min(FORM_ORDER_NUM) from TB4D_FORM_RESOURCE where FORM_ORDER_NUM>(select FORM_ORDER_NUM from TB4D_FORM_RESOURCE where FORM_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

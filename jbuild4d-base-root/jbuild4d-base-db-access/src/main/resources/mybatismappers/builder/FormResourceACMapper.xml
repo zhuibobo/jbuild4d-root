@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.FormResourceMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity">
+        <constructor>
+            <idArg column="FORM_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="FORM_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="FORM_UPDATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_ISSYSTEM" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="FORM_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_MODULE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_IS_TEMPLATE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_CONTENT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
+        <constructor>
+            <idArg column="FORM_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="FORM_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="FORM_UPDATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_ISSYSTEM" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="FORM_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_MODULE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_IS_TEMPLATE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_CONTENT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_IS_RESOLVE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="FORM_HTML_SOURCE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="FORM_HTML_RESOLVE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="FORM_JS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="FORM_CSS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="FORM_CONFIG_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        FORM_ID, FORM_NAME, FORM_CREATE_TIME, FORM_CREATER, FORM_UPDATE_TIME, FORM_UPDATER,
+        FORM_TYPE, FORM_ISSYSTEM, FORM_ORDER_NUM, FORM_DESC, FORM_MODULE_ID, FORM_STATUS,
+        FORM_ORGAN_ID, FORM_ORGAN_NAME, FORM_IS_TEMPLATE, FORM_CONTENT_URL
+    </sql>
+    <sql id="Blob_Column_List">
+        FORM_IS_RESOLVE, FORM_HTML_SOURCE, FORM_HTML_RESOLVE, FORM_JS_CONTENT, FORM_CSS_CONTENT,
+        FORM_CONFIG_CONTENT
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from TB4D_FORM_RESOURCE
+        where FORM_ID = #{formId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_FORM_RESOURCE
+        where FORM_ID = #{formId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
+        insert into TB4D_FORM_RESOURCE (FORM_ID, FORM_NAME, FORM_CREATE_TIME,
+                                        FORM_CREATER, FORM_UPDATE_TIME, FORM_UPDATER,
+                                        FORM_TYPE, FORM_ISSYSTEM, FORM_ORDER_NUM,
+                                        FORM_DESC, FORM_MODULE_ID, FORM_STATUS,
+                                        FORM_ORGAN_ID, FORM_ORGAN_NAME, FORM_IS_TEMPLATE,
+                                        FORM_CONTENT_URL, FORM_IS_RESOLVE, FORM_HTML_SOURCE,
+                                        FORM_HTML_RESOLVE, FORM_JS_CONTENT,
+                                        FORM_CSS_CONTENT, FORM_CONFIG_CONTENT
+                )
+        values (#{formId,jdbcType=VARCHAR}, #{formName,jdbcType=VARCHAR}, #{formCreateTime,jdbcType=TIMESTAMP},
+                #{formCreater,jdbcType=VARCHAR}, #{formUpdateTime,jdbcType=TIMESTAMP}, #{formUpdater,jdbcType=VARCHAR},
+                #{formType,jdbcType=VARCHAR}, #{formIssystem,jdbcType=VARCHAR}, #{formOrderNum,jdbcType=INTEGER},
+                #{formDesc,jdbcType=VARCHAR}, #{formModuleId,jdbcType=VARCHAR}, #{formStatus,jdbcType=VARCHAR},
+                #{formOrganId,jdbcType=VARCHAR}, #{formOrganName,jdbcType=VARCHAR}, #{formIsTemplate,jdbcType=VARCHAR},
+                #{formContentUrl,jdbcType=VARCHAR}, #{formIsResolve,jdbcType=LONGVARCHAR}, #{formHtmlSource,jdbcType=LONGVARCHAR},
+                #{formHtmlResolve,jdbcType=LONGVARCHAR}, #{formJsContent,jdbcType=LONGVARCHAR},
+                #{formCssContent,jdbcType=LONGVARCHAR}, #{formConfigContent,jdbcType=LONGVARCHAR}
+                       )
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
+        insert into TB4D_FORM_RESOURCE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="formId != null">
+                FORM_ID,
+            </if>
+            <if test="formName != null">
+                FORM_NAME,
+            </if>
+            <if test="formCreateTime != null">
+                FORM_CREATE_TIME,
+            </if>
+            <if test="formCreater != null">
+                FORM_CREATER,
+            </if>
+            <if test="formUpdateTime != null">
+                FORM_UPDATE_TIME,
+            </if>
+            <if test="formUpdater != null">
+                FORM_UPDATER,
+            </if>
+            <if test="formType != null">
+                FORM_TYPE,
+            </if>
+            <if test="formIssystem != null">
+                FORM_ISSYSTEM,
+            </if>
+            <if test="formOrderNum != null">
+                FORM_ORDER_NUM,
+            </if>
+            <if test="formDesc != null">
+                FORM_DESC,
+            </if>
+            <if test="formModuleId != null">
+                FORM_MODULE_ID,
+            </if>
+            <if test="formStatus != null">
+                FORM_STATUS,
+            </if>
+            <if test="formOrganId != null">
+                FORM_ORGAN_ID,
+            </if>
+            <if test="formOrganName != null">
+                FORM_ORGAN_NAME,
+            </if>
+            <if test="formIsTemplate != null">
+                FORM_IS_TEMPLATE,
+            </if>
+            <if test="formContentUrl != null">
+                FORM_CONTENT_URL,
+            </if>
+            <if test="formIsResolve != null">
+                FORM_IS_RESOLVE,
+            </if>
+            <if test="formHtmlSource != null">
+                FORM_HTML_SOURCE,
+            </if>
+            <if test="formHtmlResolve != null">
+                FORM_HTML_RESOLVE,
+            </if>
+            <if test="formJsContent != null">
+                FORM_JS_CONTENT,
+            </if>
+            <if test="formCssContent != null">
+                FORM_CSS_CONTENT,
+            </if>
+            <if test="formConfigContent != null">
+                FORM_CONFIG_CONTENT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="formId != null">
+                #{formId,jdbcType=VARCHAR},
+            </if>
+            <if test="formName != null">
+                #{formName,jdbcType=VARCHAR},
+            </if>
+            <if test="formCreateTime != null">
+                #{formCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="formCreater != null">
+                #{formCreater,jdbcType=VARCHAR},
+            </if>
+            <if test="formUpdateTime != null">
+                #{formUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="formUpdater != null">
+                #{formUpdater,jdbcType=VARCHAR},
+            </if>
+            <if test="formType != null">
+                #{formType,jdbcType=VARCHAR},
+            </if>
+            <if test="formIssystem != null">
+                #{formIssystem,jdbcType=VARCHAR},
+            </if>
+            <if test="formOrderNum != null">
+                #{formOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="formDesc != null">
+                #{formDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="formModuleId != null">
+                #{formModuleId,jdbcType=VARCHAR},
+            </if>
+            <if test="formStatus != null">
+                #{formStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="formOrganId != null">
+                #{formOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="formOrganName != null">
+                #{formOrganName,jdbcType=VARCHAR},
+            </if>
+            <if test="formIsTemplate != null">
+                #{formIsTemplate,jdbcType=VARCHAR},
+            </if>
+            <if test="formContentUrl != null">
+                #{formContentUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="formIsResolve != null">
+                #{formIsResolve,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="formHtmlSource != null">
+                #{formHtmlSource,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="formHtmlResolve != null">
+                #{formHtmlResolve,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="formJsContent != null">
+                #{formJsContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="formCssContent != null">
+                #{formCssContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="formConfigContent != null">
+                #{formConfigContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
+        update TB4D_FORM_RESOURCE
+        <set>
+            <if test="formName != null">
+                FORM_NAME = #{formName,jdbcType=VARCHAR},
+            </if>
+            <if test="formCreateTime != null">
+                FORM_CREATE_TIME = #{formCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="formCreater != null">
+                FORM_CREATER = #{formCreater,jdbcType=VARCHAR},
+            </if>
+            <if test="formUpdateTime != null">
+                FORM_UPDATE_TIME = #{formUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="formUpdater != null">
+                FORM_UPDATER = #{formUpdater,jdbcType=VARCHAR},
+            </if>
+            <if test="formType != null">
+                FORM_TYPE = #{formType,jdbcType=VARCHAR},
+            </if>
+            <if test="formIssystem != null">
+                FORM_ISSYSTEM = #{formIssystem,jdbcType=VARCHAR},
+            </if>
+            <if test="formOrderNum != null">
+                FORM_ORDER_NUM = #{formOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="formDesc != null">
+                FORM_DESC = #{formDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="formModuleId != null">
+                FORM_MODULE_ID = #{formModuleId,jdbcType=VARCHAR},
+            </if>
+            <if test="formStatus != null">
+                FORM_STATUS = #{formStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="formOrganId != null">
+                FORM_ORGAN_ID = #{formOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="formOrganName != null">
+                FORM_ORGAN_NAME = #{formOrganName,jdbcType=VARCHAR},
+            </if>
+            <if test="formIsTemplate != null">
+                FORM_IS_TEMPLATE = #{formIsTemplate,jdbcType=VARCHAR},
+            </if>
+            <if test="formContentUrl != null">
+                FORM_CONTENT_URL = #{formContentUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="formIsResolve != null">
+                FORM_IS_RESOLVE = #{formIsResolve,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="formHtmlSource != null">
+                FORM_HTML_SOURCE = #{formHtmlSource,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="formHtmlResolve != null">
+                FORM_HTML_RESOLVE = #{formHtmlResolve,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="formJsContent != null">
+                FORM_JS_CONTENT = #{formJsContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="formCssContent != null">
+                FORM_CSS_CONTENT = #{formCssContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="formConfigContent != null">
+                FORM_CONFIG_CONTENT = #{formConfigContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where FORM_ID = #{formId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
+        update TB4D_FORM_RESOURCE
+        set FORM_NAME = #{formName,jdbcType=VARCHAR},
+            FORM_CREATE_TIME = #{formCreateTime,jdbcType=TIMESTAMP},
+            FORM_CREATER = #{formCreater,jdbcType=VARCHAR},
+            FORM_UPDATE_TIME = #{formUpdateTime,jdbcType=TIMESTAMP},
+            FORM_UPDATER = #{formUpdater,jdbcType=VARCHAR},
+            FORM_TYPE = #{formType,jdbcType=VARCHAR},
+            FORM_ISSYSTEM = #{formIssystem,jdbcType=VARCHAR},
+            FORM_ORDER_NUM = #{formOrderNum,jdbcType=INTEGER},
+            FORM_DESC = #{formDesc,jdbcType=VARCHAR},
+            FORM_MODULE_ID = #{formModuleId,jdbcType=VARCHAR},
+            FORM_STATUS = #{formStatus,jdbcType=VARCHAR},
+            FORM_ORGAN_ID = #{formOrganId,jdbcType=VARCHAR},
+            FORM_ORGAN_NAME = #{formOrganName,jdbcType=VARCHAR},
+            FORM_IS_TEMPLATE = #{formIsTemplate,jdbcType=VARCHAR},
+            FORM_CONTENT_URL = #{formContentUrl,jdbcType=VARCHAR},
+            FORM_IS_RESOLVE = #{formIsResolve,jdbcType=LONGVARCHAR},
+            FORM_HTML_SOURCE = #{formHtmlSource,jdbcType=LONGVARCHAR},
+            FORM_HTML_RESOLVE = #{formHtmlResolve,jdbcType=LONGVARCHAR},
+            FORM_JS_CONTENT = #{formJsContent,jdbcType=LONGVARCHAR},
+            FORM_CSS_CONTENT = #{formCssContent,jdbcType=LONGVARCHAR},
+            FORM_CONFIG_CONTENT = #{formConfigContent,jdbcType=LONGVARCHAR}
+        where FORM_ID = #{formId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity">
+        update TB4D_FORM_RESOURCE
+        set FORM_NAME = #{formName,jdbcType=VARCHAR},
+            FORM_CREATE_TIME = #{formCreateTime,jdbcType=TIMESTAMP},
+            FORM_CREATER = #{formCreater,jdbcType=VARCHAR},
+            FORM_UPDATE_TIME = #{formUpdateTime,jdbcType=TIMESTAMP},
+            FORM_UPDATER = #{formUpdater,jdbcType=VARCHAR},
+            FORM_TYPE = #{formType,jdbcType=VARCHAR},
+            FORM_ISSYSTEM = #{formIssystem,jdbcType=VARCHAR},
+            FORM_ORDER_NUM = #{formOrderNum,jdbcType=INTEGER},
+            FORM_DESC = #{formDesc,jdbcType=VARCHAR},
+            FORM_MODULE_ID = #{formModuleId,jdbcType=VARCHAR},
+            FORM_STATUS = #{formStatus,jdbcType=VARCHAR},
+            FORM_ORGAN_ID = #{formOrganId,jdbcType=VARCHAR},
+            FORM_ORGAN_NAME = #{formOrganName,jdbcType=VARCHAR},
+            FORM_IS_TEMPLATE = #{formIsTemplate,jdbcType=VARCHAR},
+            FORM_CONTENT_URL = #{formContentUrl,jdbcType=VARCHAR}
+        where FORM_ID = #{formId,jdbcType=VARCHAR}
+    </update>
+</mapper>

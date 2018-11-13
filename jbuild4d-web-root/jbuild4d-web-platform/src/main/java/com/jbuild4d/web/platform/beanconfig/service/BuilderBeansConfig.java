@@ -82,4 +82,10 @@ public class BuilderBeansConfig {
         IModuleService bean=new ModuleServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
+
+    @Bean
+    public IFormResourceService formResourceService(ISQLBuilderService _sqlBuilderService, FormResourceMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        IFormResourceService bean=new FormResourceServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
 }

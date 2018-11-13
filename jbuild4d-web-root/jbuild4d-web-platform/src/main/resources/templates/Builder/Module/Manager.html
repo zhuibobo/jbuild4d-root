@@ -29,12 +29,12 @@
     </div>
     <div class="right-outer-wrap-c" style="padding: 10px">
         <tabs>
-            <tab-pane label="模版设计">
+            <tab-pane label="表单设计">
                 <div style="width: 100%;">
                     <div id="list-button-wrap" class="list-button-outer-wrap">
                         <div class="list-button-inner-wrap">
-                            <i-button type="success" @click="template_add()"><Icon type="plus"></Icon> 新增 </i-button>
-                            <i-button type="success" @click="template_add()"><Icon type="plus"></Icon> 引入URL </i-button>
+                            <i-button type="success" @click="form_add()"><Icon type="plus"></Icon> 新增 </i-button>
+                            <i-button type="success" @click="form_add()"><Icon type="plus"></Icon> 引入URL </i-button>
                             <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 复制 </i-button>
                             <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 复制到 </i-button>
                             <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 预览 </i-button>
@@ -272,13 +272,13 @@
                 appList.treeObj.updateNode(this.treeSelectedNode);
             },
             <!--Template-->
-            template_add:function () {
+            form_add:function () {
                 if(this.treeSelectedNode!=null) {
                     var url = BaseUtility.BuildAction(this.acInterface.template.designView, {
                         "op": "add",
                         "moduleId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "模版设计"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表单设计"}, 2);
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择模块!", null);
