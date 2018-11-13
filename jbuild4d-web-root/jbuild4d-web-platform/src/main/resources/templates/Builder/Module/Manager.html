@@ -80,8 +80,11 @@
                 getModuleData:"/PlatForm/Builder/Module/GetTreeData",
                 moduleEditView:"/PlatForm/Builder/Module/DetailView",
                 deleteModule:"/PlatForm/Builder/Module/Delete",
-                moveModule:"/PlatForm/Builder/Module/Move"
+                moveModule:"/PlatForm/Builder/Module/Move",
                 <!--Template-->
+                template:{
+                    designView:""
+                }
                 <!--List-->
                 <!--AboutConfig-->
             },
@@ -271,16 +274,17 @@
             <!--Template-->
             template_add:function () {
                 if(this.treeSelectedNode!=null) {
-                    var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
+                    var url = BaseUtility.BuildAction(this.acInterface.template.designView, {
                         "op": "add",
                         "moduleId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "模版设计"}, 2);
                 }
                 else {
-                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择分组!", null);
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择模块!", null);
                 }
             },
+
             clearSearchCondition:function () {
                 for(var key in this.searchCondition){
                     this.searchCondition[key].value="";
@@ -293,7 +297,6 @@
                 ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadListData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null,false);
                 //this.selectionRows=null;
             },
-
             edit: function (recordId) {
                 var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
                     "op": "update",

@@ -172,11 +172,6 @@ public class MybatisBeansConfig {
         return sqlSessionTemplate.getMapper(ModuleMapper.class);
     }
 
-    @Bean
-    public TemplateResourceMapper templateResourceMapper(SqlSessionTemplate sqlSessionTemplate){
-        return sqlSessionTemplate.getMapper(TemplateResourceMapper.class);
-    }
-
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);
