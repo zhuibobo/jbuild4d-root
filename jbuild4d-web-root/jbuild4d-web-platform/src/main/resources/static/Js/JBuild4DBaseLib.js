@@ -1052,7 +1052,7 @@ var DialogUtility={
         if(options.height==0) {
             options.height = PageStyleUtility.GetWindowHeight()-10;
         }
-        debugger;
+        //debugger;
         var width=options.width;
         var height=options.height;
         var left = parseInt((screen.availWidth - width) / 2).toString();
