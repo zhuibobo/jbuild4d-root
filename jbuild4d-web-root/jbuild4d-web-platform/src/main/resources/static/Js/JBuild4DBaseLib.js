@@ -1046,20 +1046,25 @@ var DialogUtility={
     },
     OpenNewWindow: function (openerwindow, dialogId, url, options, whtype) {
         //openerwindow, dialogId, url, options, whtype
-        if(options.width==0) {
-            options.width = PageStyleUtility.GetWindowWidth()-20;
-        }
-        if(options.height==0) {
-            options.height = PageStyleUtility.GetWindowHeight()-10;
-        }
+        //if(options.width==0) {
+            //width =
+            //height = window.screen.availHeight - 30;
+            //options.width = PageStyleUtility.GetWindowWidth()-20;
+        //    options.width=window.screen.availWidth-20;
+        //}
+        //if(options.height==0) {
+            //options.height = PageStyleUtility.GetWindowHeight()-10;
+            //options.height = PageStyleUtility.GetWindowHeight()-10;
+        //    options.height = window.screen.availHeight - 40;
+        //}
         //debugger;
         var width=options.width;
         var height=options.height;
         var left = parseInt((screen.availWidth - width) / 2).toString();
         var top = parseInt((screen.availHeight - height) / 2).toString();
         if (width.toString() == "0" && height.toString() == "0") {
-            width = window.screen.availWidth;
-            height = window.screen.availHeight - 30;
+            width = window.screen.availWidth-30;
+            height = window.screen.availHeight - 60;
             left = "0";
             top = "0";
         }

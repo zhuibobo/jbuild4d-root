@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>表单设计</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+</head>
+<body>
+<div id="appForm" class="general-edit-page-wrap" v-cloak>
+    <tabs>
+        <tab-pane label="表单信息">
+
+        </tab-pane>
+        <tab-pane label="表单设计">
+
+        </tab-pane>
+        <tab-pane label="HTML">
+
+        </tab-pane>
+        <tab-pane label="JS">
+
+        </tab-pane>
+    </tabs>
+</div>
+<script>
+    var appForm = new Vue({
+        el:"#appForm",
+        data: {
+        },
+        mounted:function () {
+        },
+        methods: {
+        }
+    });
+</script>
+</body>
+</html>

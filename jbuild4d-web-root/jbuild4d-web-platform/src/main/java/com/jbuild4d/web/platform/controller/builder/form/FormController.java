@@ -28,7 +28,7 @@ public class FormController extends GeneralCRUDImplController<ModuleEntity> {
 
     @Override
     public String getDetailViewName() {
-        return null;
+        return "Builder/Form/FormDesign.html";
     }
 
     @Override
