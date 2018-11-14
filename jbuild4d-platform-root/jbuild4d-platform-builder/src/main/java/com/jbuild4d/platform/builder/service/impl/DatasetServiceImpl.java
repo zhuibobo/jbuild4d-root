@@ -23,6 +23,8 @@ import com.jbuild4d.platform.builder.service.*;
 import com.jbuild4d.platform.builder.vo.*;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.transaction.annotation.Transactional;
 import org.xml.sax.SAXException;
@@ -50,6 +52,8 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     ITableService tableService;
     ITableFieldService tableFieldService;
     IEnvVariableService envVariableService;
+
+    Logger logger = LoggerFactory.getLogger(DatasetServiceImpl.class);
 
     public DatasetServiceImpl(DatasetMapper _defaultBaseMapper,
                               SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService,JdbcOperations _jdbcOperations,
@@ -198,6 +202,14 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
                     for (DataSetColumnVo columnVo : dataSetColumnVoList) {
                         if(StringUtility.isEmpty(columnVo.getColumnCaption())){
                             columnVo.setColumnCaption(builderDataSetColumnCaptionConfigService.getCaption(columnVo.getColumnName()));
+                        }
+                    }
+
+                    //无法确认列名,设置为未知,并输入日志
+                    for (DataSetColumnVo columnVo : dataSetColumnVoList) {
+                        if(StringUtility.isEmpty(columnVo.getColumnCaption())){
+                            columnVo.setColumnCaption("无法解析出列的标题");
+                            logger.warn("["+columnVo.getColumnName()+"]:无法解析出列的标题");
                         }
                     }
 
