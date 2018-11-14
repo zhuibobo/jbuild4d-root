@@ -7,21 +7,40 @@
     <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::FormDesignLib"></th:block>
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
     <tabs>
         <tab-pane label="表单信息">
-
+            <div style="width: 800px;margin: auto">
+                <i-form :label-width="100">
+                    <form-item label="表单名称：">
+                        <i-input></i-input>
+                    </form-item>
+                </i-form>
+            </div>
         </tab-pane>
         <tab-pane label="表单设计">
-
+            <div class="form-design-wraper">
+                <div class="left-wraper">
+                    <textarea name="html_design" id="html_design">
+                    </textarea>
+                </div>
+                <div class="right-wraper"></div>
+            </div>
         </tab-pane>
         <tab-pane label="HTML">
-
+            <div class="html-design-wraper">
+                <div></div>
+                <div></div>
+            </div>
         </tab-pane>
         <tab-pane label="JS">
-
+            <div class="js-design-wraper">
+                <div></div>
+                <div></div>
+            </div>
         </tab-pane>
     </tabs>
 </div>
@@ -31,6 +50,10 @@
         data: {
         },
         mounted:function () {
+            $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
+            FormDesignUtility.InitializeCKEditor(function () {
+
+            });
         },
         methods: {
         }
