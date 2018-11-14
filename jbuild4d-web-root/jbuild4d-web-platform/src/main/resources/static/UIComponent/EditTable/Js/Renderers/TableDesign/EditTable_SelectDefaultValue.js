@@ -45,7 +45,7 @@ var EditTable_SelectDefaultValue={
         }
 
         var $elem=$("<div></div>");
-        var $inputTxt = $("<input type='text' style='width: 95%' readonly />");
+        var $inputTxt = $("<input type='text' style='width: 90%' readonly />");
         $inputTxt.attr("fieldDefaultType",fieldDefaultType);
         $inputTxt.attr("fieldDefaultValue",fieldDefaultValue);
         $inputTxt.attr("fieldDefaultText",fieldDefaultText);
