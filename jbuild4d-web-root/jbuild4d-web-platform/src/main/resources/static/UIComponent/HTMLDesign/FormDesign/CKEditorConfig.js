@@ -11,7 +11,8 @@ CKEDITOR.editorConfig = function(config) {
         'justify,menubutton,language,link,list,liststyle,magicline,maximize,newpage,pagebreak,pastetext,' +
         'pastefromword,preview,print,removeformat,save,selectall,showblocks,showborders,sourcearea,' +
         'specialchar,scayt,stylescombo,tab,table,tabletools,undo,wsc';
-    config.skin = 'moono-lisa';
+    config.skin = 'moono-dark';
+    config.uiColor = '#F7B42C';
     config.toolbarGroups = [
         { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
@@ -31,11 +32,6 @@ CKEDITOR.editorConfig = function(config) {
         '/',
         { name: 'Form_Simple', groups: [] }
     ];
-    // '/', 配置控件换行。
-    //config.height=755;
-    //config.height=PageStyleUtil.GetPageHeight()-$("#toolbar_c").outerHeight()-110;
-    //config.height="100%";
-    alert(jQuery(".form-design-wraper").height());
     config.height=jQuery(".form-design-wraper").height()-112;
     config.fillEmptyBlocks = false;
     //去掉回车添加p标签,使用br
@@ -46,10 +42,7 @@ CKEDITOR.editorConfig = function(config) {
     config.allowedContent = true;
     config.stylesSet = false;
     //config.autoParagraph = false;
-    //config.protectedSource.push(/"Form_TextBox"/gi );
-    //config.contentsCss = ['Css/EditorViewDefaultStyle.css','Css/EditorDesignStyle.css'];
     //config.contentsCss = ['../../themes/cssloader/EditorViewDefaultStyle.resource','../../themes/cssloader/EditorViewDefaultStyle.resource','../../themes/cssloader/EditorDesignStyle.resource'];
-    //this.PropCKEditorInst.addContentsCss('Css/EditorViewDefaultStyle.css' );
     config.removeButtons = 'Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,' +
         'Replace,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Bold,Italic,' +
         'Underline,Strike,Subscript,Superscript,RemoveFormat,NumberedList,BulletedList,Indent,Outdent,Blockquote,CreateDiv,' +
