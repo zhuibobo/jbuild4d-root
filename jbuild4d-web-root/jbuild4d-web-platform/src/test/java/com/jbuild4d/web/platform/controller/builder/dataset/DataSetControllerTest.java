@@ -46,7 +46,7 @@ public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
         }
         if(existDataSet==null) {
             //DataSetSQLDesignerControllerTest dataSetSQLDesignerControllerTest = new DataSetSQLDesignerControllerTest();
-            JBuild4DResponseVo jBuild4DResponseVo = this.validateSQLEnable("select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'address' address,'sex' sex from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID where TDEV_TEST_1.ID='#{ApiVar.当前用户所在组织ID}'");
+            JBuild4DResponseVo jBuild4DResponseVo = this.validateSQLEnable("select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'ADDRESS' ADDRESS,'SEX' SEX from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID where TDEV_TEST_1.ID='#{ApiVar.当前用户所在组织ID}'");
             SQLResolveToDataSetVo resolveToDataSetVo = (SQLResolveToDataSetVo) jBuild4DResponseVo.getData();
             JB4DSession jb4DSession=getSession();
             DataSetVo dataSetVo = new DataSetVo();
