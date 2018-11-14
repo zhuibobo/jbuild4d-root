@@ -8,6 +8,8 @@
     <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::FormDesignLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::CodeMirror"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::CodeMirrorHTML"></th:block>
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
@@ -32,14 +34,40 @@
         </tab-pane>
         <tab-pane label="HTML">
             <div class="html-design-wraper">
-                <div></div>
-                <div></div>
+                <div class="left-wraper">
+                    <textarea id="TextAreaHTMLEditor" style="height: 99%"><html style="color: green">
+  <!-- this is a comment -->
+  <head>
+    <title>Mixed HTML Example</title>
+    <style>
+      h1 {font-family: comic sans; color: #f0f;}
+      div {background: yellow !important;}
+      body {
+          max-width: 50em;
+          margin: 1em 2em 1em 5em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mixed HTML Example</h1>
+    <script>
+      function jsFunc(arg1, arg2) {
+          if (arg1 && arg2) document.body.innerHTML = "achoo";
+      }
+    </script>
+  </body>
+</html>
+                    </textarea>
+                </div>
+                <div class="right-wraper"></div>
             </div>
         </tab-pane>
         <tab-pane label="JS">
             <div class="js-design-wraper">
-                <div></div>
-                <div></div>
+                <div class="left-wraper">
+                    <textarea id="TextAreaJsEidtor"></textarea>
+                </div>
+                <div class="right-wraper"></div>
             </div>
         </tab-pane>
     </tabs>
@@ -53,6 +81,33 @@
             $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
             FormDesignUtility.InitializeCKEditor(function () {
 
+            });
+            var mixedMode = {
+                name: "htmlmixed",
+                scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
+                    mode: null},
+                    {matches: /(text|application)\/(x-)?vb(a|script)/i,
+                        mode: "vbscript"}]
+            };
+            var editor = CodeMirror.fromTextArea(document.getElementById("TextAreaHTMLEditor"), {
+                mode: mixedMode,
+                selectionPointer: true,
+                theme: "monokai"
+            });
+            $(".CodeMirror").height(PageStyleUtility.GetWindowHeight()-60);
+
+            CodeMirror.fromTextArea($("#TextAreaJsEidtor")[0], {
+                mode: "javascript",
+                lineNumbers: true,
+                lineWrapping: true,
+                extraKeys: {
+                    "Ctrl-Q": function (cm) {
+                        cm.foldCode(cm.getCursor());
+                    }
+                },
+                foldGutter: true,
+                theme: "monokai",
+                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
             });
         },
         methods: {
