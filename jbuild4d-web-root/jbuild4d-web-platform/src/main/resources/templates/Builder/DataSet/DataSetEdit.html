@@ -12,8 +12,71 @@
 <body>
     <div id="dataSetEditForm" v-cloak>
         <div class="list-2column">
-            <div class="left-outer-wrap-c" style="bottom: 50px;width: 335px;">
-                <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px">表信息</divider>
+            <div class="left-outer-wrap-c" style="bottom: 50px;right: 350px;">
+                <div style="width: 98%;margin: auto">
+                    <tabs v-model="datasetEntity.dsType">
+                        <tab-pane label="SQL数据集" name="SQLDataSet" >
+                            <div style="width: 100%;height: 60px">
+                                <div style="float:left;width: 86%;border: red 1px solid;border-radius: 4px;height: 50px;padding: 4px">
+                                    {{datasetEntity.dsSqlSelectText}}
+                                </div>
+                                <div @click="designSQL" style="color: #FFFFFF;background-color: #47cb89;float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
+                                    编辑
+                                </div>
+                                <div style="float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
+                                    预览
+                                </div>
+                            </div>
+                        </tab-pane>
+                        <tab-pane label="API数据集" name="APIDataSet">
+                            <div style="width: 100%;height: 30px" name="APIDataSetInnerWraper">
+                                <i-input v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiDataSetVo">
+                                    <span slot="prepend">类全称[继承com.jbuild4d.platform.builder.extend.IDataSetAPI]：</span>
+                                </i-input>
+                            </div>
+                        </tab-pane>
+                        <tab-pane label="REST数据集" name="RESTDataSet">
+                            <div style="width: 100%;height: 60px">
+                                <i-input size="small" v-model="datasetEntity.dsRestStructureUrl" search enter-button="加载" @on-search="loadRestDataSetVo">
+                                    <span slot="prepend">获取结构URL：</span>
+                                </i-input>
+                                <i-input style="margin-top: 4px" size="small" v-model="datasetEntity.dsRestDataUrl" search enter-button="测试" @on-search="testRestDataSetVo">
+                                    <span slot="prepend">数据提供URL：</span>
+                                </i-input>
+                            </div>
+                        </tab-pane>
+                        <tab-pane label="自定义数据集" name="CUSTOMDataSet">
+                        </tab-pane>
+                    </tabs>
+                    <div style="width: 70%;float: left;margin-right: 10px">
+                        <div style="width: 100%">
+                            <div style="float: right;margin-bottom: 8px">
+                                编辑列 &nbsp;
+                                <button-group>
+                                    <i-button size="small" type="success" icon="md-add" @click="addColumn"></i-button>
+                                    <i-button size="small" type="primary" icon="md-close" @click="removeColumn"></i-button>
+                                    <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveColumn('up')"></i-button>
+                                    <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveColumn('down')"></i-button>
+                                    <i-button size="small" type="primary" icon="md-trash" @click="clearColumn()"></i-button>
+                                </button-group>
+                            </div>
+                            <div style="clear: bottom"></div>
+                        </div>
+                        <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 100%"></div>
+                    </div>
+                    <div style="width: 28%;float: left">
+                        <div style="height: 22px;margin-bottom: 8px;line-height: 22px;padding-right: 10px">
+                            <div style="float: right">
+                                相关表
+                            </div>
+                        </div>
+                        <i-table size="small" stripe border :columns="relatedTable.config" :data="relatedTable.data"
+                                 class="iv-list-table" :highlight-row="true"></i-table>
+                    </div>
+                </div>
+            </div>
+            <div class="right-outer-wrap-c" style="bottom: 50px;width: 340px;padding: 10px">
+                <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px">数据集信息</divider>
                 <i-form :model="datasetEntity" :label-width="90" style="margin-right: 10px">
                     <form-item label="标题：" prop="">
                         <i-input v-model="datasetEntity.dsCaption"></i-input>
@@ -21,88 +84,41 @@
                     <form-item label="名称：" prop="">
                         <i-input v-model="datasetEntity.dsName"></i-input>
                     </form-item>
-                    <form-item label="创建时间：">
-                        <date-picker type="date" placeholder="选择创建时间" v-model="datasetEntity.dsCreateTime" disabled
-                                     readonly style="width: 100%"></date-picker>
-                    </form-item>
                     <form-item label="创建人：">
-                        <i-input v-model="datasetEntity.dsCreater"></i-input>
-                    </form-item>
-                    <form-item label="修改时间：">
-                        <date-picker type="date" placeholder="选择创建时间" v-model="datasetEntity.dsUpdateTime" disabled
-                                     readonly style="width: 100%"></date-picker>
+                        <row>
+                            <i-col span="6">
+                                <i-input v-model="datasetEntity.dsCreater"></i-input>
+                            </i-col>
+                            <i-col span="8" style="text-align: center">创建时间：</i-col>
+                            <i-col span="10">
+                                <form-item>
+                                    <date-picker type="date" placeholder="选择创建时间" v-model="datasetEntity.dsCreateTime" disabled
+                                                 readonly style="width: 100%"></date-picker>
+                                </form-item>
+                            </i-col>
+                        </row>
                     </form-item>
                     <form-item label="修改人：">
-                        <i-input v-model="datasetEntity.dsUpdater"></i-input>
+                        <row>
+                            <i-col span="6">
+                                <i-input v-model="datasetEntity.dsUpdater"></i-input>
+                            </i-col>
+                            <i-col span="8" style="text-align: center">修改时间：</i-col>
+                            <i-col span="10">
+                                <form-item>
+                                    <date-picker type="date" placeholder="选择创建时间" v-model="datasetEntity.dsUpdateTime" disabled
+                                                 readonly style="width: 100%"></date-picker>
+                                </form-item>
+                            </i-col>
+                        </row>
                     </form-item>
                     <form-item label="系统表：">
                         <i-input v-model="datasetEntity.dsIssystem" readonly></i-input>
                     </form-item>
                     <form-item label="备注：">
-                        <i-input v-model="datasetEntity.dsDesc" type="textarea" :autosize="{minRows: 10,maxRows: 10}"></i-input>
+                        <i-input v-model="datasetEntity.dsDesc" type="textarea" :autosize="{minRows: 5,maxRows: 5}"></i-input>
                     </form-item>
                 </i-form>
-            </div>
-            <div class="right-outer-wrap-c" style="bottom: 50px;left: 350px;padding: 10px">
-                <tabs v-model="datasetEntity.dsType">
-                    <tab-pane label="SQL数据集" name="SQLDataSet" >
-                        <div style="width: 100%;height: 60px">
-                            <div style="float:left;width: 88%;border: red 1px solid;border-radius: 4px;height: 50px;padding: 4px">
-                                {{datasetEntity.dsSqlSelectText}}
-                            </div>
-                            <div @click="designSQL" style="color: #FFFFFF;background-color: #47cb89;float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
-                                编辑
-                            </div>
-                            <div style="float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
-                                预览
-                            </div>
-                        </div>
-                    </tab-pane>
-                    <tab-pane label="API数据集" name="APIDataSet">
-                        <div style="width: 100%;height: 30px" name="APIDataSetInnerWraper">
-                            <i-input v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiDataSetVo">
-                                <span slot="prepend">类全称[继承com.jbuild4d.platform.builder.extend.IDataSetAPI]：</span>
-                            </i-input>
-                        </div>
-                    </tab-pane>
-                    <tab-pane label="REST数据集" name="RESTDataSet">
-                        <div style="width: 100%;height: 60px">
-                            <i-input size="small" v-model="datasetEntity.dsRestStructureUrl" search enter-button="加载" @on-search="loadRestDataSetVo">
-                                <span slot="prepend">获取结构URL：</span>
-                            </i-input>
-                            <i-input style="margin-top: 4px" size="small" v-model="datasetEntity.dsRestDataUrl" search enter-button="测试" @on-search="testRestDataSetVo">
-                                <span slot="prepend">数据提供URL：</span>
-                            </i-input>
-                        </div>
-                    </tab-pane>
-                    <tab-pane label="自定义数据集" name="CUSTOMDataSet">
-                    </tab-pane>
-                </tabs>
-                <div style="width: 70%;float: left;margin-right: 10px">
-                    <div style="width: 100%">
-                        <div style="float: right;margin-bottom: 8px">
-                            编辑列 &nbsp;
-                            <button-group>
-                                <i-button size="small" type="success" icon="md-add" @click="addColumn"></i-button>
-                                <i-button size="small" type="primary" icon="md-close" @click="removeColumn"></i-button>
-                                <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveColumn('up')"></i-button>
-                                <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveColumn('down')"></i-button>
-                                <i-button size="small" type="primary" icon="md-trash" @click="clearColumn()"></i-button>
-                            </button-group>
-                        </div>
-                        <div style="clear: bottom"></div>
-                    </div>
-                    <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 100%"></div>
-                </div>
-                <div style="width: 29%;float: left">
-                    <div style="height: 22px;margin-bottom: 8px;line-height: 22px;padding-right: 10px">
-                        <div style="float: right">
-                            相关表
-                        </div>
-                    </div>
-                    <i-table size="small" stripe border :columns="relatedTable.config" :data="relatedTable.data"
-                             class="iv-list-table" :highlight-row="true"></i-table>
-                </div>
             </div>
         </div>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
