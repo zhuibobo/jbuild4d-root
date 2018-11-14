@@ -43,7 +43,7 @@ CKEDITOR.editorConfig = function(config) {
     config.stylesSet = false;
     //config.autoParagraph = false;
     //config.contentsCss = ['../../themes/cssloader/EditorViewDefaultStyle.resource','../../themes/cssloader/EditorViewDefaultStyle.resource','../../themes/cssloader/EditorDesignStyle.resource'];
-    config.removeButtons = 'Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,' +
+    config.removeButtons = 'Source,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,' +
         'Replace,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Bold,Italic,' +
         'Underline,Strike,Subscript,Superscript,RemoveFormat,NumberedList,BulletedList,Indent,Outdent,Blockquote,CreateDiv,' +
         'JustifyBlock,BidiLtr,BidiRtl,Language,Link,Unlink,Anchor,Image,Flash,HorizontalRule,Smiley,SpecialChar,' +
