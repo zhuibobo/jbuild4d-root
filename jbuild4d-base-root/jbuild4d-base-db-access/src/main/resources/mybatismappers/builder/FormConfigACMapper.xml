@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.FormConfigMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.FormConfigEntity">
+        <constructor>
+            <idArg column="FCONFIG_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FCONFIG_FORM_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FCONFIG_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FCONFIG_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FCONFIG_VALUE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FCONFIG_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FCONFIG_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="FCONFIG_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FCONFIG_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        FCONFIG_ID, FCONFIG_FORM_ID, FCONFIG_TYPE, FCONFIG_NAME, FCONFIG_VALUE, FCONFIG_DESC,
+        FCONFIG_CREATE_TIME, FCONFIG_CREATER, FCONFIG_ORDER_NUM
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_FORM_CONFIG
+        where FCONFIG_ID = #{fconfigId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_FORM_CONFIG
+        where FCONFIG_ID = #{fconfigId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormConfigEntity">
+        insert into TB4D_FORM_CONFIG (FCONFIG_ID, FCONFIG_FORM_ID, FCONFIG_TYPE,
+                                      FCONFIG_NAME, FCONFIG_VALUE, FCONFIG_DESC,
+                                      FCONFIG_CREATE_TIME, FCONFIG_CREATER, FCONFIG_ORDER_NUM
+                )
+        values (#{fconfigId,jdbcType=VARCHAR}, #{fconfigFormId,jdbcType=VARCHAR}, #{fconfigType,jdbcType=VARCHAR},
+                #{fconfigName,jdbcType=VARCHAR}, #{fconfigValue,jdbcType=VARCHAR}, #{fconfigDesc,jdbcType=VARCHAR},
+                #{fconfigCreateTime,jdbcType=TIMESTAMP}, #{fconfigCreater,jdbcType=VARCHAR}, #{fconfigOrderNum,jdbcType=INTEGER}
+                       )
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormConfigEntity">
+        insert into TB4D_FORM_CONFIG
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fconfigId != null">
+                FCONFIG_ID,
+            </if>
+            <if test="fconfigFormId != null">
+                FCONFIG_FORM_ID,
+            </if>
+            <if test="fconfigType != null">
+                FCONFIG_TYPE,
+            </if>
+            <if test="fconfigName != null">
+                FCONFIG_NAME,
+            </if>
+            <if test="fconfigValue != null">
+                FCONFIG_VALUE,
+            </if>
+            <if test="fconfigDesc != null">
+                FCONFIG_DESC,
+            </if>
+            <if test="fconfigCreateTime != null">
+                FCONFIG_CREATE_TIME,
+            </if>
+            <if test="fconfigCreater != null">
+                FCONFIG_CREATER,
+            </if>
+            <if test="fconfigOrderNum != null">
+                FCONFIG_ORDER_NUM,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fconfigId != null">
+                #{fconfigId,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigFormId != null">
+                #{fconfigFormId,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigType != null">
+                #{fconfigType,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigName != null">
+                #{fconfigName,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigValue != null">
+                #{fconfigValue,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigDesc != null">
+                #{fconfigDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigCreateTime != null">
+                #{fconfigCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fconfigCreater != null">
+                #{fconfigCreater,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigOrderNum != null">
+                #{fconfigOrderNum,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormConfigEntity">
+        update TB4D_FORM_CONFIG
+        <set>
+            <if test="fconfigFormId != null">
+                FCONFIG_FORM_ID = #{fconfigFormId,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigType != null">
+                FCONFIG_TYPE = #{fconfigType,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigName != null">
+                FCONFIG_NAME = #{fconfigName,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigValue != null">
+                FCONFIG_VALUE = #{fconfigValue,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigDesc != null">
+                FCONFIG_DESC = #{fconfigDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigCreateTime != null">
+                FCONFIG_CREATE_TIME = #{fconfigCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fconfigCreater != null">
+                FCONFIG_CREATER = #{fconfigCreater,jdbcType=VARCHAR},
+            </if>
+            <if test="fconfigOrderNum != null">
+                FCONFIG_ORDER_NUM = #{fconfigOrderNum,jdbcType=INTEGER},
+            </if>
+        </set>
+        where FCONFIG_ID = #{fconfigId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormConfigEntity">
+        update TB4D_FORM_CONFIG
+        set FCONFIG_FORM_ID = #{fconfigFormId,jdbcType=VARCHAR},
+            FCONFIG_TYPE = #{fconfigType,jdbcType=VARCHAR},
+            FCONFIG_NAME = #{fconfigName,jdbcType=VARCHAR},
+            FCONFIG_VALUE = #{fconfigValue,jdbcType=VARCHAR},
+            FCONFIG_DESC = #{fconfigDesc,jdbcType=VARCHAR},
+            FCONFIG_CREATE_TIME = #{fconfigCreateTime,jdbcType=TIMESTAMP},
+            FCONFIG_CREATER = #{fconfigCreater,jdbcType=VARCHAR},
+            FCONFIG_ORDER_NUM = #{fconfigOrderNum,jdbcType=INTEGER}
+        where FCONFIG_ID = #{fconfigId,jdbcType=VARCHAR}
+    </update>
+</mapper>

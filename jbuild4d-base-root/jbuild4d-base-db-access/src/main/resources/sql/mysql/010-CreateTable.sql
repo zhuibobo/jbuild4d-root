@@ -472,7 +472,8 @@ CREATE TABLE `TB4D_FORM_CONFIG` (
   `FCONFIG_DESC`        NVARCHAR(1000) NOT NULL,
   `FCONFIG_CREATE_TIME` DATETIME       NULL,
   `FCONFIG_CREATER`     NVARCHAR(100)  NULL,
-  `FCONFIG_ORDER_NUM`   INT            NULL
+  `FCONFIG_ORDER_NUM`   INT            NULL,
+  PRIMARY KEY (`FCONFIG_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-表单参数配置';
 
 /*-----------------------------------------应用设计相关表--结束-----------------------------------------*/
