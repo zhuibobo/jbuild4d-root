@@ -90,7 +90,7 @@ public class BuilderBeansConfig {
     }
 
     @Bean
-    public IFormConfigService formResourceService(ISQLBuilderService _sqlBuilderService, FormConfigMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+    public IFormConfigService formConfigService(ISQLBuilderService _sqlBuilderService, FormConfigMapper mapper, SqlSessionTemplate sqlSessionTemplate){
         IFormConfigService bean=new FormConfigServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
