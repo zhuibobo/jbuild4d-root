@@ -10,13 +10,19 @@
     <th:block th:replace="Fragment/GeneralLib::FormDesignLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::CodeMirror"></th:block>
     <th:block th:replace="Fragment/GeneralLib::CodeMirrorHTML"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
+    <div style="position: absolute;right: 10px;top: 10px;background-color: #00B83F">
+        按钮
+    </div>
     <tabs>
         <tab-pane label="表单信息">
             <div style="width: 1024px;margin: auto">
-                <div style="float: left;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px">
+                <div style="float: left;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
+                    <divider orientation="left" :dashed="true" style="font-size: 12px">表单信息</divider>
                     <i-form :label-width="100">
                         <form-item label="表单名称：">
                             <i-input></i-input>
@@ -24,7 +30,8 @@
                     </i-form>
                 </div>
                 <div style="float: right;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px">
-                    <divider orientation="left" :dashed="true" style="font-size: 12px">选择表单主表</divider>
+                    <divider orientation="left" :dashed="true" style="font-size: 12px">绑定主表</divider>
+                    <ul id="tableZTreeUL" class="ztree"></ul>
                 </div>
             </div>
         </tab-pane>
@@ -81,41 +88,77 @@
     var appForm = new Vue({
         el:"#appForm",
         data: {
+            acInterface:{
+                getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList.do"
+            },
+            tree:{
+                tableTreeObj:null,
+                tableTreeSetting:{
+                    view: {
+                        dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                        showLine: true,//是否显示节点之间的连线
+                        fontCss: {'color': 'black', 'font-weight': 'normal'}
+                    },
+                    check: {
+                        enable: true,
+                        nocheckInherit: false,
+                        chkStyle: "radio",
+                        radioType: "all"
+                    },
+                    data: {
+                        key: {
+                            name: "text"
+                        },
+                        simpleData: {//简单数据模式
+                            enable: true,
+                            idKey: "id",
+                            pIdKey: "parentId",
+                            rootPId: "-1"// 1
+                        }
+                    },
+                    callback: {
+                        //点击树节点事件
+                        onClick: function (event, treeId, treeNode) {
+                            //sqlDesignerForm.getTableFields(treeNode);
+                            //sqlDesignerForm.tree.selectedTableName=treeNode.value;
+                        },
+                        onDblClick: function (event, treeId, treeNode) {
+
+                        },
+                        //成功的回调函数
+                        onAsyncSuccess: function (event, treeId, treeNode, msg) {
+
+                        }
+                    }
+                },
+                tableTreeData:null,//${tableTreeData},
+                selectedTableName:"无"
+            }
         },
         mounted:function () {
             $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
             FormDesignUtility.InitializeCKEditor(function () {
 
             });
-            var mixedMode = {
-                name: "htmlmixed",
-                scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
-                    mode: null},
-                    {matches: /(text|application)\/(x-)?vb(a|script)/i,
-                        mode: "vbscript"}]
-            };
-            var editor = CodeMirror.fromTextArea(document.getElementById("TextAreaHTMLEditor"), {
-                mode: mixedMode,
-                selectionPointer: true,
-                theme: "monokai"
-            });
-            $(".CodeMirror").height(PageStyleUtility.GetWindowHeight()-60);
-
-            CodeMirror.fromTextArea($("#TextAreaJsEidtor")[0], {
-                mode: "javascript",
-                lineNumbers: true,
-                lineWrapping: true,
-                extraKeys: {
-                    "Ctrl-Q": function (cm) {
-                        cm.foldCode(cm.getCursor());
-                    }
-                },
-                foldGutter: true,
-                theme: "monokai",
-                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-            });
+            FormDesignUtility.InitializeCodeDesign();
+            this.bindTableTree();
         },
         methods: {
+            bindTableTree:function () {
+                var _self=this;
+                AjaxUtility.Post(this.acInterface.getTablesDataUrl,{},function (result) {
+                    if(result.success) {
+                        _self.tree.tableTreeData=result.data;
+                        console.log(_self.tree.tableTreeData);
+                        _self.tree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), _self.tree.tableTreeSetting,_self.tree.tableTreeData);
+                        _self.tree.tableTreeObj.expandAll(true);
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
+                },"json");
+                //fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
+            }
         }
     });
 </script>

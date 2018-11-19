@@ -3,6 +3,7 @@ package com.jbuild4d.web.platform.controller.builder.datastorage.database;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
@@ -12,9 +13,11 @@ import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.service.IBuilderConfigService;
 import com.jbuild4d.platform.builder.service.ITableFieldService;
+import com.jbuild4d.platform.builder.service.ITableGroupService;
 import com.jbuild4d.platform.builder.service.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import com.jbuild4d.web.platform.model.ZTreeNodeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +53,9 @@ public class TableController {
 
     @Autowired
     IBuilderConfigService builderConfigService;
+
+    @Autowired
+    ITableGroupService tableGroupService;
 
     @RequestMapping(value = "/ValidateTableIsNoExist")
     @ResponseBody
@@ -185,6 +191,28 @@ public class TableController {
         }
         catch (Exception ex){
             throw new JBuild4DGenerallyException(ex.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "GetTablesForZTreeNodeList", method = RequestMethod.POST)
+    @ResponseBody
+    public JBuild4DResponseVo getTablesForZTreeNodeList(){
+        try {
+            JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
+            responseVo.setSuccess(true);
+            responseVo.setMessage("获取数据成功！");
+
+            JB4DSession jb4DSession= JB4DSessionUtility.getSession();
+
+            List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALL(jb4DSession);
+            List<TableEntity> tableEntityList=tableService.getALL(jb4DSession);
+
+            responseVo.setData(ZTreeNodeVo.parseTableToZTreeNodeList(tableGroupEntityList,tableEntityList));
+
+            return responseVo;
+        }
+        catch (Exception ex){
+            return JBuild4DResponseVo.error(ex.getMessage());
         }
     }
 }

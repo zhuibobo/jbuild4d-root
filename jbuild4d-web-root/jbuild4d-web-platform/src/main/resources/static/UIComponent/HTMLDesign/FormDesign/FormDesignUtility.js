@@ -44,6 +44,32 @@ var FormDesignUtility={
         });
     },
     InitializeCodeDesign:function () {
+        var mixedMode = {
+            name: "htmlmixed",
+            scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
+                mode: null},
+                {matches: /(text|application)\/(x-)?vb(a|script)/i,
+                    mode: "vbscript"}]
+        };
+        var editor = CodeMirror.fromTextArea(document.getElementById("TextAreaHTMLEditor"), {
+            mode: mixedMode,
+            selectionPointer: true,
+            theme: "monokai"
+        });
+        $(".CodeMirror").height(PageStyleUtility.GetWindowHeight()-60);
 
+        CodeMirror.fromTextArea($("#TextAreaJsEidtor")[0], {
+            mode: "javascript",
+            lineNumbers: true,
+            lineWrapping: true,
+            extraKeys: {
+                "Ctrl-Q": function (cm) {
+                    cm.foldCode(cm.getCursor());
+                }
+            },
+            foldGutter: true,
+            theme: "monokai",
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+        });
     }
 };
