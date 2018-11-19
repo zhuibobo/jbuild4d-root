@@ -31,6 +31,7 @@
                 </div>
                 <div style="float: right;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">绑定主表</divider>
+                    <input type="text" id="txtSearchTableTree" style="width: 100%;height: 32px;margin-top: 2px" />
                     <ul id="tableZTreeUL" class="ztree"></ul>
                 </div>
             </div>
@@ -156,15 +157,15 @@
                 AjaxUtility.Post(this.acInterface.getTablesDataUrl,{},function (result) {
                     if(result.success) {
                         _self.tree.tableTreeData=result.data;
-                        console.log(_self.tree.tableTreeData);
+                        //console.log(_self.tree.tableTreeData);
                         _self.tree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), _self.tree.tableTreeSetting,_self.tree.tableTreeData);
                         _self.tree.tableTreeObj.expandAll(true);
+                        fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
                     }
                     else {
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                     }
                 },"json");
-                //fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
             }
         }
     });
