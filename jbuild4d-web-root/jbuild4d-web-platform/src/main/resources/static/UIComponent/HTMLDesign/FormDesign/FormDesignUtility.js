@@ -42,5 +42,8 @@ var FormDesignUtility={
                 loadComplatedFunc();
             }
         });
+    },
+    InitializeCodeDesign:function () {
+
     }
 };

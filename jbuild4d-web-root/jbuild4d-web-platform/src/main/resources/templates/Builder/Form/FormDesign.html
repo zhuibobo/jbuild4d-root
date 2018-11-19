@@ -15,14 +15,17 @@
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
     <tabs>
         <tab-pane label="表单信息">
-            <div style="width: 800px;margin: auto">
-                <i-form :label-width="100">
-                    <form-item label="表单名称：">
-                        <i-input></i-input>
-                    </form-item>
-                </i-form>
-                <divider orientation="left" :dashed="true" style="font-size: 12px">选择表单主表</divider>
-
+            <div style="width: 1024px;margin: auto">
+                <div style="float: left;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px">
+                    <i-form :label-width="100">
+                        <form-item label="表单名称：">
+                            <i-input></i-input>
+                        </form-item>
+                    </i-form>
+                </div>
+                <div style="float: right;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px">
+                    <divider orientation="left" :dashed="true" style="font-size: 12px">选择表单主表</divider>
+                </div>
             </div>
         </tab-pane>
         <tab-pane label="表单设计">
