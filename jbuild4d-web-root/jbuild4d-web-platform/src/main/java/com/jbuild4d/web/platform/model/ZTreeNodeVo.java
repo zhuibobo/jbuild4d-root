@@ -21,6 +21,7 @@ public class ZTreeNodeVo {
     String attr2;
     String attr3;
     String attr4;
+    String nodeTypeName;
     boolean nocheck;
 
     public boolean isNocheck() {
@@ -29,6 +30,14 @@ public class ZTreeNodeVo {
 
     public void setNocheck(boolean nocheck) {
         this.nocheck = nocheck;
+    }
+
+    public String getNodeTypeName() {
+        return nodeTypeName;
+    }
+
+    public void setNodeTypeName(String nodeTypeName) {
+        this.nodeTypeName = nodeTypeName;
     }
 
     public String getValue() {
@@ -104,6 +113,7 @@ public class ZTreeNodeVo {
             nodeVo.setText(tableGroupEntity.getTableGroupText());
             nodeVo.setParentId(tableGroupEntity.getTableGroupParentId());
             nodeVo.setNocheck(true);
+            nodeVo.setNodeTypeName("TableGroup");
             result.add(nodeVo);
         }
 
@@ -113,6 +123,7 @@ public class ZTreeNodeVo {
             nodeVo.setValue(tableEntity.getTableName());
             nodeVo.setText(tableEntity.getTableCaption()+"【"+tableEntity.getTableName()+"】");
             nodeVo.setParentId(tableEntity.getTableGroupId());
+            nodeVo.setNodeTypeName("Table");
             nodeVo.setNocheck(false);
             result.add(nodeVo);
         }

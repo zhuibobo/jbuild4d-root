@@ -119,6 +119,13 @@
                     callback: {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
+                            //treeNode.checked=true;
+                            if(treeNode.nodeTypeName=="Table") {
+                                appForm.tree.tableTreeObj.checkNode(treeNode, true, true);
+                            }
+                            else{
+                                alert("选中分组");
+                            }
                             //sqlDesignerForm.getTableFields(treeNode);
                             //sqlDesignerForm.tree.selectedTableName=treeNode.value;
                         },
