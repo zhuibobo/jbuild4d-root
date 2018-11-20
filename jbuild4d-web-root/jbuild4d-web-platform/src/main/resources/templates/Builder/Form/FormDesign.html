@@ -82,7 +82,16 @@
                     <textarea name="html_design" id="html_design">
                     </textarea>
                 </div>
-                <div class="right-wraper"></div>
+                <div class="right-wraper">
+                    <tabs>
+                        <tab-pane label="Config">
+                            <div>Config</div>
+                        </tab-pane>
+                        <tab-pane label="Element">
+                            <div>Element</div>
+                        </tab-pane>
+                    </tabs>
+                </div>
             </div>
         </tab-pane>
         <tab-pane label="HTML">
@@ -90,7 +99,16 @@
                 <div class="left-wraper">
                     <textarea id="TextAreaHTMLEditor" style="height: 99%"></textarea>
                 </div>
-                <div class="right-wraper"></div>
+                <div class="right-wraper">
+                    <tabs>
+                        <tab-pane label="CodeFragment">
+                            <div>Config</div>
+                        </tab-pane>
+                        <tab-pane label="Element">
+                            <div>Element</div>
+                        </tab-pane>
+                    </tabs>
+                </div>
             </div>
         </tab-pane>
         <tab-pane label="JS">
@@ -98,7 +116,16 @@
                 <div class="left-wraper">
                     <textarea id="TextAreaJsEidtor"></textarea>
                 </div>
-                <div class="right-wraper"></div>
+                <div class="right-wraper">
+                    <tabs>
+                        <tab-pane label="CodeFragment">
+                            <div>Config</div>
+                        </tab-pane>
+                        <tab-pane label="Element">
+                            <div>Element</div>
+                        </tab-pane>
+                    </tabs>
+                </div>
             </div>
         </tab-pane>
         <tab-pane label="Be Referred"></tab-pane>
@@ -213,7 +240,7 @@
         methods: {
             initPageUI:function(){
                 $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
-                FormDesignUtility.InitializeCKEditor(function () {
+                FormDesignUtility.InitializeCKEditor('html_design',function () {
 
                 });
                 FormDesignUtility.InitializeCodeDesign();

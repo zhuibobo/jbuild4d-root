@@ -1,12 +1,12 @@
 var FormDesignUtility={
     PropCKEditorInst:null,
     $PropSelectElem:null,
-    InitializeCKEditor:function(loadComplatedFunc) {
+    InitializeCKEditor:function(textAreaElemId,loadComplatedFunc) {
         //加载默认配置文件
         var editorConfigUrl = StringUtility.GetTimeStampUrl('../../HTMLDesign/FormDesign/CKEditorConfig.js');
 
         //把扩展组件加入工具条
-        CKEDITOR.replace('html_design', {
+        CKEDITOR.replace(textAreaElemId, {
             customConfig: editorConfigUrl,
             extraPlugins: ""
         });
