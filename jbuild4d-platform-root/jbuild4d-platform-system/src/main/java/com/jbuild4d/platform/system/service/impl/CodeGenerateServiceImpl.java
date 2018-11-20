@@ -12,6 +12,7 @@ import com.jbuild4d.base.tools.common.PathUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
 import com.jbuild4d.platform.system.service.ICodeGenerateService;
+import com.jbuild4d.platform.system.service.impl.codegenerate.CGCodeFragment;
 import com.jbuild4d.platform.system.service.impl.codegenerate.CGIService;
 import com.jbuild4d.platform.system.service.impl.codegenerate.CGMapperEX;
 import com.jbuild4d.platform.system.service.impl.codegenerate.CGServiceImpl;
@@ -247,7 +248,6 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
             generateCodeMap.put("EntityWithBLOBContent","不存在二进制字段!");
         }
 
-
         tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).fullSavePath+"/"+daoPackageName.replaceAll("\\.","/");
         System.out.println("DAO生成路径:"+tempPath);
         generateCodeMap.put("DaoContent",readFolderSingleFileToString(tempPath));
@@ -278,7 +278,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         System.out.println("---------------------------生成ServiceImpl---------------------------");
         generateCodeMap.put("ServiceImplContent", CGServiceImpl.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent"),daoMapperName));
         //生成Js实体片段
-        //String codeFragment
+        generateCodeMap.put("CodeFragment", CGCodeFragment.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent"),daoMapperName));
         //生成Controller
         //生成ListJsp
         //生成DetailJsp

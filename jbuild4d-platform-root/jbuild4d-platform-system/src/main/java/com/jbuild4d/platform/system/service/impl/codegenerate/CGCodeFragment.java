@@ -19,6 +19,13 @@ public class CGCodeFragment {
     public static String generate(List<IntrospectedTable> introspectedTableList, String tableName, String orderFieldName, String statusFieldName,
                                   Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap, String xmlMapperACStr, String daoMapperName){
         StringBuilder builder=new StringBuilder();
+        builder.append(generateJsBean(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,xmlMapperACStr,daoMapperName));
+        return builder.toString();
+    }
+
+    private static String generateJsBean(List<IntrospectedTable> introspectedTableList, String tableName, String orderFieldName, String statusFieldName,
+                                         Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap, String xmlMapperACStr, String daoMapperName){
+        StringBuilder builder=new StringBuilder();
 
         IntrospectedTable introspectedTable=introspectedTableList.get(0);
 
