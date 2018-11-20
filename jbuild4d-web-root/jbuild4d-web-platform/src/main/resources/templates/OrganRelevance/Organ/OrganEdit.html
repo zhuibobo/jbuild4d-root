@@ -16,24 +16,24 @@
 </head>
 <body>
     <div id="appForm" class="general-edit-page-wrap" v-cloak>
-        <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
+        <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
             <form-item label="组织名称：" prop="organName">
-                <i-input v-model="formValidate.organName"></i-input>
+                <i-input v-model="formEntity.organName"></i-input>
             </form-item>
             <form-item label="组织简称：" prop="organShortName">
-                <i-input v-model="formValidate.organShortName"></i-input>
+                <i-input v-model="formEntity.organShortName"></i-input>
             </form-item>
             <form-item label="组织编号：">
                 <row>
                     <i-col span="10">
                         <form-item>
-                            <i-input v-model="formValidate.organNo"></i-input>
+                            <i-input v-model="formEntity.organNo"></i-input>
                         </form-item>
                     </i-col>
                     <i-col span="4" style="text-align: center">组织机构代码：</i-col>
                     <i-col span="10">
                         <form-item>
-                            <i-input v-model="formValidate.organCode"></i-input>
+                            <i-input v-model="formEntity.organCode"></i-input>
                         </form-item>
                     </i-col>
                 </row>
@@ -42,13 +42,13 @@
                 <row>
                     <i-col span="10">
                         <form-item prop="">
-                            <date-picker type="date" placeholder="" v-model="formValidate.organCreateTime"></date-picker>
+                            <date-picker type="date" placeholder="" v-model="formEntity.organCreateTime"></date-picker>
                         </form-item>
                     </i-col>
                     <i-col span="4" style="text-align: center">状态：</i-col>
                     <i-col span="10">
                         <form-item>
-                            <radio-group v-model="formValidate.organStatus">
+                            <radio-group v-model="formEntity.organStatus">
                                 <radio label="启用">启用</radio>
                                 <radio label="禁用">禁用</radio>
                             </radio-group>
@@ -60,31 +60,31 @@
                 <row>
                     <i-col span="10">
                         <form-item>
-                            <i-input v-model="formValidate.organPhone"></i-input>
+                            <i-input v-model="formEntity.organPhone"></i-input>
                         </form-item>
                     </i-col>
                     <i-col span="4" style="text-align: center">邮政编码：</i-col>
                     <i-col span="10">
                         <form-item>
-                            <i-input v-model="formValidate.organPost"></i-input>
+                            <i-input v-model="formEntity.organPost"></i-input>
                         </form-item>
                     </i-col>
                 </row>
             </form-item>
             <form-item label="地址：">
-                <i-input v-model="formValidate.organAddress"></i-input>
+                <i-input v-model="formEntity.organAddress"></i-input>
             </form-item>
             <form-item label="联系人：">
                 <row>
                     <i-col span="10">
                         <form-item>
-                            <i-input v-model="formValidate.organContactor"></i-input>
+                            <i-input v-model="formEntity.organContactor"></i-input>
                         </form-item>
                     </i-col>
                     <i-col span="4" style="text-align: center">联系人手机：</i-col>
                     <i-col span="10">
                         <form-item>
-                            <i-input v-model="formValidate.organContactorMobile"></i-input>
+                            <i-input v-model="formEntity.organContactorMobile"></i-input>
                         </form-item>
                     </i-col>
                 </row>
@@ -93,13 +93,13 @@
                 <row>
                     <i-col span="10">
                         <form-item>
-                            <i-input v-model="formValidate.organDomain"></i-input>
+                            <i-input v-model="formEntity.organDomain"></i-input>
                         </form-item>
                     </i-col>
                     <i-col span="4" style="text-align: center">传真：</i-col>
                     <i-col span="10">
                         <form-item>
-                            <i-input v-model="formValidate.organFax"></i-input>
+                            <i-input v-model="formEntity.organFax"></i-input>
                         </form-item>
                     </i-col>
                 </row>
@@ -108,7 +108,7 @@
                 <row>
                     <i-col span="10">
                         <form-item>
-                            <radio-group v-model="formValidate.organIsVirtual">
+                            <radio-group v-model="formEntity.organIsVirtual">
                                 <radio label="是">是</radio>
                                 <radio label="否">否</radio>
                             </radio-group>
@@ -117,7 +117,7 @@
                     <i-col span="4" style="text-align: center">组织类型：</i-col>
                     <i-col span="10">
                         <form-item>
-                            <radio-group v-model="formValidate.organTypeValue" style="width: 100%">
+                            <radio-group v-model="formEntity.organTypeValue" style="width: 100%">
                                 <radio v-for="item in exObjectsJson.OrganType" :label="item.organTypeValue">{{item.organTypeName}}</radio>
                             </radio-group>
                         </form-item>
@@ -125,8 +125,8 @@
                 </row>
             </form-item>
             <form-item class="general-edit-page-bottom-wrap">
-                <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保  存 </i-button>
-                <i-button v-if="status!='view'" @click="handleReset('formValidate')" style="margin-left: 8px"> 关  闭 </i-button>
+                <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')"> 保  存 </i-button>
+                <i-button v-if="status!='view'" @click="handleReset('formEntity')" style="margin-left: 8px"> 关  闭 </i-button>
             </form-item>
         </i-form>
     </div>
@@ -140,7 +140,7 @@
                 },
                 recordId:StringUtility.QueryString("recordId"),
                 exObjectsJson:{OrganType:[]},
-                formValidate: {
+                formEntity: {
                     organId: '',
                     organParentId: StringUtility.QueryString("parentId"),
                     organName: '',
@@ -175,10 +175,10 @@
             methods: {
                 bindFormData:function(){
                     //获取数据并赋值
-                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status,null,function (result) {
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,function (result) {
                         appForm.exObjectsJson.OrganType=result.exKVData.exObjectsJson.OrganType;
                         if(appForm.status=="add") {
-                            appForm.formValidate.organTypeValue = appForm.exObjectsJson.OrganType[0].organTypeValue;
+                            appForm.formEntity.organTypeValue = appForm.exObjectsJson.OrganType[0].organTypeValue;
                         }
                     });
                 },
@@ -186,15 +186,15 @@
                     var _self=this;
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
-                            var sendData=JSON.stringify(_self.formValidate);
+                            var sendData=JSON.stringify(_self.formEntity);
                             AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl,sendData,function (result) {
                                 DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},result.message,function () {
                                     if(result.success) {
                                         if (appForm.status == "add") {
-                                            window.OpenerWindowObj.appList.newTreeTableNode(_self.formValidate);
+                                            window.OpenerWindowObj.appList.newTreeTableNode(_self.formEntity);
                                         }
                                         else if (appForm.status == "update") {
-                                            window.OpenerWindowObj.appList.updateTreeTableNode(_self.formValidate);
+                                            window.OpenerWindowObj.appList.updateTreeTableNode(_self.formEntity);
                                         }
                                     }
                                     DialogUtility.Frame_CloseDialog(window);

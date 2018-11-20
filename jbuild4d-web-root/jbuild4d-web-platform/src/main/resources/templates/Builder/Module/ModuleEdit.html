@@ -10,23 +10,23 @@
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
-    <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
+    <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
         <form-item label="模 块 值：" prop="moduleValue">
-            <i-input v-model="formValidate.moduleValue"></i-input>
+            <i-input v-model="formEntity.moduleValue"></i-input>
         </form-item>
         <form-item label="模块名称：" prop="moduleText">
-            <i-input v-model="formValidate.moduleText"></i-input>
+            <i-input v-model="formEntity.moduleText"></i-input>
         </form-item>
         <form-item label="创建时间：">
             <row>
                 <i-col span="10">
-                    <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.moduleCreateTime" disabled
+                    <date-picker type="date" placeholder="选择创建时间" v-model="formEntity.moduleCreateTime" disabled
                                  readonly></date-picker>
                 </i-col>
                 <i-col span="4" style="text-align: center">状态：</i-col>
                 <i-col span="10">
                     <form-item>
-                        <radio-group v-model="formValidate.moduleStatus">
+                        <radio-group v-model="formEntity.moduleStatus">
                             <radio label="启用">启用</radio>
                             <radio label="禁用">禁用</radio>
                         </radio-group>
@@ -38,7 +38,7 @@
             <row>
                 <i-col span="10">
                     <form-item>
-                        <radio-group v-model="formValidate.moduleIssystem">
+                        <radio-group v-model="formEntity.moduleIssystem">
                             <radio label="是">是</radio>
                             <radio label="否">否</radio>
                         </radio-group>
@@ -47,7 +47,7 @@
                 <i-col span="4" style="text-align: center">能否删除：</i-col>
                 <i-col span="10">
                     <form-item>
-                        <radio-group v-model="formValidate.moduleDelEnable">
+                        <radio-group v-model="formEntity.moduleDelEnable">
                             <radio label="是">是</radio>
                             <radio label="否">否</radio>
                         </radio-group>
@@ -56,10 +56,10 @@
             </row>
         </form-item>
         <form-item label="备注：">
-            <i-input v-model="formValidate.moduleDesc" type="textarea" :autosize="{minRows: 10,maxRows: 10}"></i-input>
+            <i-input v-model="formEntity.moduleDesc" type="textarea" :autosize="{minRows: 10,maxRows: 10}"></i-input>
         </form-item>
         <form-item class="general-edit-page-bottom-wrap">
-            <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保 存</i-button>
+            <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')"> 保 存</i-button>
             <i-button @click="handleClose()" style="margin-left: 8px">
                 关 闭
             </i-button>
@@ -75,7 +75,7 @@
                 saveDataUrl:"/PlatForm/Builder/Module/SaveEdit"
             },
             recordId:StringUtility.QueryString("recordId"),
-            formValidate: {
+            formEntity: {
                 moduleId: "",
                 moduleValue: "",
                 moduleText: "",
@@ -102,22 +102,22 @@
         methods: {
             bindFormData:function(){
                 //获取数据并赋值
-                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status,null,null);
+                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,null);
             },
             handleSubmit: function (name) {
                 var _self = this;
                 this.$refs[name].validate(function (valid) {
                     if (valid) {
-                        var sendData = JSON.stringify(_self.formValidate);
+                        var sendData = JSON.stringify(_self.formEntity);
                         //debugger;
                         AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 if(result.success) {
                                     if (appForm.status == "add") {
-                                        window.OpenerWindowObj.appList.newTreeNode(_self.formValidate);
+                                        window.OpenerWindowObj.appList.newTreeNode(_self.formEntity);
                                     }
                                     else if (appForm.status == "update") {
-                                        window.OpenerWindowObj.appList.updateNode(_self.formValidate);
+                                        window.OpenerWindowObj.appList.updateNode(_self.formEntity);
                                     }
                                 }
                                 DialogUtility.Frame_CloseDialog(window);
