@@ -43,6 +43,9 @@ public class MybatisBeansConfig {
         comboPooledDataSource.setPassword(DBProp.getValue("Password"));
         //ComboPooledDataSource validationquery
         comboPooledDataSource.setPreferredTestQuery("SELECT 1");
+        comboPooledDataSource.setAutomaticTestTable("TestConn");
+        comboPooledDataSource.setIdleConnectionTestPeriod(60);
+        //comboPooledDataSource.sett
         return comboPooledDataSource;
     }
 

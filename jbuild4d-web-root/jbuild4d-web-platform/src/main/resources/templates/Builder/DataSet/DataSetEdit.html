@@ -77,11 +77,11 @@
             </div>
             <div class="right-outer-wrap-c" style="bottom: 50px;width: 340px;padding: 10px">
                 <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px">数据集信息</divider>
-                <i-form :model="datasetEntity" :label-width="90" style="margin-right: 10px">
-                    <form-item label="标题：" prop="">
+                <i-form :model="datasetEntity" :rules="ruleValidate" :label-width="90" style="margin-right: 10px">
+                    <form-item label="标题：" prop="dsCaption">
                         <i-input v-model="datasetEntity.dsCaption"></i-input>
                     </form-item>
-                    <form-item label="名称：" prop="">
+                    <form-item label="名称：" prop="dsName">
                         <i-input v-model="datasetEntity.dsName"></i-input>
                     </form-item>
                     <form-item label="创建人：">
@@ -136,6 +136,14 @@
                     loadApiDataUrl:"/PlatForm/Builder/DataSet/DataSetDesign/GetApiDataSetVoStructure"
                 },
                 currUserEntity:null,
+                ruleValidate: {
+                    dsCaption: [
+                        {required: true, message: '【标题】不能空！', trigger: 'blur'}
+                    ],
+                    dsName: [
+                        {required: true, message: '【名称】不能空！', trigger: 'blur'}
+                    ]
+                },
                 datasetEntity:{
                     dsId:"",
                     dsCaption:"数据集1",

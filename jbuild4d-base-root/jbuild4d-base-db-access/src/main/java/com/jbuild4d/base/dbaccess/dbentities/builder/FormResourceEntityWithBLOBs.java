@@ -28,8 +28,8 @@ public class FormResourceEntityWithBLOBs extends FormResourceEntity {
     //FORM_CONFIG_CONTENT
     private String formConfigContent;
 
-    public FormResourceEntityWithBLOBs(String formId, String formName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formIsTemplate, String formContentUrl, String formIsResolve, String formHtmlSource, String formHtmlResolve, String formJsContent, String formCssContent, String formConfigContent) {
-        super(formId, formName, formCreateTime, formCreater, formUpdateTime, formUpdater, formType, formIssystem, formOrderNum, formDesc, formModuleId, formStatus, formOrganId, formOrganName, formIsTemplate, formContentUrl);
+    public FormResourceEntityWithBLOBs(String formId, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formIsTemplate, String formContentUrl, String formIsResolve, String formHtmlSource, String formHtmlResolve, String formJsContent, String formCssContent, String formConfigContent) {
+        super(formId, formName, formSingleName, formCreateTime, formCreater, formUpdateTime, formUpdater, formType, formIssystem, formOrderNum, formDesc, formModuleId, formStatus, formOrganId, formOrganName, formMainTableName, formMainTableCaption, formIsTemplate, formContentUrl);
         this.formIsResolve = formIsResolve;
         this.formHtmlSource = formHtmlSource;
         this.formHtmlResolve = formHtmlResolve;

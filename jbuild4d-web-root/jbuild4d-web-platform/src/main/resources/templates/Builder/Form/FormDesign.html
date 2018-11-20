@@ -64,6 +64,9 @@
                                 </i-col>
                             </row>
                         </form-item>
+                        <form-item label="备注：">
+                            <i-input v-model="formResourceEntity.formDesc" type="textarea" :autosize="{minRows: 5,maxRows: 5}"></i-input>
+                        </form-item>
                     </i-form>
                 </div>
                 <div style="float: right;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px">
@@ -85,29 +88,7 @@
         <tab-pane label="HTML">
             <div class="html-design-wraper">
                 <div class="left-wraper">
-                    <textarea id="TextAreaHTMLEditor" style="height: 99%"><html style="color: green">
-  <!-- this is a comment -->
-  <head>
-    <title>Mixed HTML Example</title>
-    <style>
-      h1 {font-family: comic sans; color: #f0f;}
-      div {background: yellow !important;}
-      body {
-          max-width: 50em;
-          margin: 1em 2em 1em 5em;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Mixed HTML Example</h1>
-    <script>
-      function jsFunc(arg1, arg2) {
-          if (arg1 && arg2) document.body.innerHTML = "achoo";
-      }
-    </script>
-  </body>
-</html>
-                    </textarea>
+                    <textarea id="TextAreaHTMLEditor" style="height: 99%"></textarea>
                 </div>
                 <div class="right-wraper"></div>
             </div>
@@ -133,6 +114,7 @@
             formResourceEntity:{
                 formId:"",
                 formName:"",
+                formSingleName:"",
                 formCreateTime:DateUtility.GetCurrentData(),
                 formCreater:"",
                 formUpdateTime:DateUtility.GetCurrentData(),
@@ -145,6 +127,8 @@
                 formStatus:"启用",
                 formOrganId:"",
                 formOrganName:"",
+                formMainTableName:"",
+                formMainTableCaption:"",
                 formIsTemplate:"",
                 formContentUrl:"",
                 formIsResolve:"",

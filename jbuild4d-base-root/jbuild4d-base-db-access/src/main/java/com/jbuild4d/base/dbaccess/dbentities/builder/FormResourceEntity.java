@@ -19,6 +19,9 @@ public class FormResourceEntity {
     //FORM_NAME
     private String formName;
 
+    //FORM_SINGLE_NAME
+    private String formSingleName;
+
     //FORM_CREATE_TIME
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date formCreateTime;
@@ -57,15 +60,22 @@ public class FormResourceEntity {
     //FORM_ORGAN_NAME
     private String formOrganName;
 
+    //FORM_MAIN_TABLE_NAME
+    private String formMainTableName;
+
+    //FORM_MAIN_TABLE_CAPTION
+    private String formMainTableCaption;
+
     //FORM_IS_TEMPLATE
     private String formIsTemplate;
 
     //FORM_CONTENT_URL
     private String formContentUrl;
 
-    public FormResourceEntity(String formId, String formName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formIsTemplate, String formContentUrl) {
+    public FormResourceEntity(String formId, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formIsTemplate, String formContentUrl) {
         this.formId = formId;
         this.formName = formName;
+        this.formSingleName = formSingleName;
         this.formCreateTime = formCreateTime;
         this.formCreater = formCreater;
         this.formUpdateTime = formUpdateTime;
@@ -78,6 +88,8 @@ public class FormResourceEntity {
         this.formStatus = formStatus;
         this.formOrganId = formOrganId;
         this.formOrganName = formOrganName;
+        this.formMainTableName = formMainTableName;
+        this.formMainTableCaption = formMainTableCaption;
         this.formIsTemplate = formIsTemplate;
         this.formContentUrl = formContentUrl;
     }
@@ -100,6 +112,14 @@ public class FormResourceEntity {
 
     public void setFormName(String formName) {
         this.formName = formName == null ? null : formName.trim();
+    }
+
+    public String getFormSingleName() {
+        return formSingleName;
+    }
+
+    public void setFormSingleName(String formSingleName) {
+        this.formSingleName = formSingleName == null ? null : formSingleName.trim();
     }
 
     public Date getFormCreateTime() {
@@ -196,6 +216,22 @@ public class FormResourceEntity {
 
     public void setFormOrganName(String formOrganName) {
         this.formOrganName = formOrganName == null ? null : formOrganName.trim();
+    }
+
+    public String getFormMainTableName() {
+        return formMainTableName;
+    }
+
+    public void setFormMainTableName(String formMainTableName) {
+        this.formMainTableName = formMainTableName == null ? null : formMainTableName.trim();
+    }
+
+    public String getFormMainTableCaption() {
+        return formMainTableCaption;
+    }
+
+    public void setFormMainTableCaption(String formMainTableCaption) {
+        this.formMainTableCaption = formMainTableCaption == null ? null : formMainTableCaption.trim();
     }
 
     public String getFormIsTemplate() {
