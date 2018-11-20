@@ -1,14 +1,26 @@
+var JBuild4D={
+    FromDesign:{
+        Plugins:{
+
+        }
+    }
+}
+
 var FormDesignUtility={
     PropCKEditorInst:null,
     $PropSelectElem:null,
     InitializeCKEditor:function(textAreaElemId,loadComplatedFunc) {
+        //注册扩展组件：div容器组件
+        CKEDITOR.plugins.addExternal('FormDesign_DEF_Container_Div', '../../HTMLDesign/FormDesign/Plugins/FD_Div_Wraper/',
+            "FD_Div_WraperPlugin.js");
+
         //加载默认配置文件
         var editorConfigUrl = StringUtility.GetTimeStampUrl('../../HTMLDesign/FormDesign/CKEditorConfig.js');
 
         //把扩展组件加入工具条
         CKEDITOR.replace(textAreaElemId, {
             customConfig: editorConfigUrl,
-            extraPlugins: ""
+            extraPlugins: "FormDesign_DEF_Container_Div"
         });
 
         //注册在编辑器中粘贴的处理事件

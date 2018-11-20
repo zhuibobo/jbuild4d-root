@@ -12,6 +12,11 @@
     <th:block th:replace="Fragment/GeneralLib::CodeMirrorHTML"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
+    <style>
+        .cke_button_label {
+            display:inline !important;
+        }
+    </style>
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
@@ -21,7 +26,7 @@
     <tabs>
         <tab-pane label="表单信息">
             <div style="width: 1024px;margin: auto">
-                <div style="float: left;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
+                <div style="float: left;width: 500px;height: 600px;border: #2d8cf0 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">表单信息</divider>
                     <i-form  :model="formResourceEntity" :rules="ruleValidate" :label-width="110">
                         <form-item label="表单名称：" prop="formName">
@@ -69,7 +74,7 @@
                         </form-item>
                     </i-form>
                 </div>
-                <div style="float: right;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px">
+                <div style="float: right;width: 500px;height: 600px;border: #2d8cf0 1px solid;border-radius: 4px;padding: 10px">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">绑定主表</divider>
                     <input type="text" id="txtSearchTableTree" style="width: 100%;height: 32px;margin-top: 2px" />
                     <ul id="tableZTreeUL" class="ztree"></ul>
