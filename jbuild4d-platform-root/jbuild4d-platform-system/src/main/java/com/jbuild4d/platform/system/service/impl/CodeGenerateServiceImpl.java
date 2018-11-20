@@ -27,6 +27,8 @@ import org.mybatis.generatorex.config.xml.ConfigurationParser;
 import org.mybatis.generatorex.exception.InvalidConfigurationException;
 import org.mybatis.generatorex.exception.XMLParserException;
 import org.mybatis.generatorex.internal.DefaultShellCallback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,6 +47,8 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class CodeGenerateServiceImpl implements ICodeGenerateService {
+
+    Logger logger= LoggerFactory.getLogger(CodeGenerateServiceImpl.class);
 
     ISQLBuilderService sqlBuilderService;
     public CodeGenerateServiceImpl(ISQLBuilderService _sqlBuilderService) {
@@ -224,20 +228,20 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         try {
             myBatisGenerator.generate(null);
         } catch (SQLException e) {
-            System.out.println("---------------------------MyBatisGenerator Error---------------------------");
+            logger.error("---------------------------MyBatisGenerator Error---------------------------");
             e.printStackTrace();
         } catch (IOException e) {
-            System.out.println("---------------------------MyBatisGenerator Error---------------------------");
+            logger.error("---------------------------MyBatisGenerator Error---------------------------");
             e.printStackTrace();
         } catch (InterruptedException e) {
-            System.out.println("---------------------------MyBatisGenerator Error---------------------------");
+            logger.error("---------------------------MyBatisGenerator Error---------------------------");
             e.printStackTrace();
         }
 
         //读取文件作为结果返回
         //Entity文件
         String tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).fullSavePath+"/"+modelPackageName.replaceAll("\\.","/");
-        System.out.println("Entity生成路径:"+tempPath);
+        logger.info("Entity生成路径:"+tempPath);
         generateCodeMap.put("EntityContent",readFolderSingleFileToString(tempPath));
 
         //判断是否生成了二进制的继承实体文件;
@@ -249,33 +253,33 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         }
 
         tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).fullSavePath+"/"+daoPackageName.replaceAll("\\.","/");
-        System.out.println("DAO生成路径:"+tempPath);
+        logger.info("DAO生成路径:"+tempPath);
         generateCodeMap.put("DaoContent",readFolderSingleFileToString(tempPath));
 
         tempPath=codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).fullSavePath+"/"+mapperPackageName.replaceAll("\\.","/");
-        System.out.println("MAPPER生成路径:"+tempPath);
+        logger.info("MAPPER生成路径:"+tempPath);
         generateCodeMap.put("MapperACContent",readFolderSingleFileToString(tempPath));
 
-        System.out.println("---------------------------打印表信息---------------------------");
+        logger.info("---------------------------打印表信息---------------------------");
         List<IntrospectedTable> introspectedTableList=context.getIntrospectedTables();
         for (IntrospectedTable introspectedTable : introspectedTableList) {
-            System.out.println(introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
+            logger.info(introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
         }
-        System.out.println("---------------------------打印表信息---------------------------");
+        logger.info("---------------------------打印表信息---------------------------");
 
         //生成MapperEX
-        System.out.println("---------------------------生成MapperEX---------------------------");
+        logger.info("---------------------------生成MapperEX---------------------------");
         String keyFieldName=introspectedTableList.get(0).getPrimaryKeyColumns().get(0).getActualColumnName();
-        System.out.println("---------------------------生成MapperEX:主键为"+keyFieldName+"---------------------------");
+        logger.info("---------------------------生成MapperEX:主键为"+keyFieldName+"---------------------------");
         IntrospectedTable introspectedTable=introspectedTableList.get(0);
-        System.out.println("---------------------------生成MapperEX:生成列数为"+introspectedTable.getNonPrimaryKeyColumns().size()+"---------------------------");
+        logger.info("---------------------------生成MapperEX:生成列数为"+introspectedTable.getNonPrimaryKeyColumns().size()+"---------------------------");
 
         generateCodeMap.put("MapperEXContent", CGMapperEX.generate(keyFieldName,introspectedTable,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent")));
         //生成IService
-        System.out.println("---------------------------生成IService---------------------------");
+        logger.info("---------------------------生成IService---------------------------");
         generateCodeMap.put("IServiceContent", CGIService.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent")));
         //生成ServiceImpl
-        System.out.println("---------------------------生成ServiceImpl---------------------------");
+        logger.info("---------------------------生成ServiceImpl---------------------------");
         generateCodeMap.put("ServiceImplContent", CGServiceImpl.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent"),daoMapperName));
         //生成Js实体片段
         generateCodeMap.put("CodeFragmentContent", CGCodeFragment.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent"),daoMapperName));
