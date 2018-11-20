@@ -131,7 +131,7 @@
                     <textarea name="txtAreaCode" id="txtAreaServiceImpl" style="width: 100%;">{{generateCode.ServiceImplContent}}</textarea>
                 </tab-pane>
                 <tab-pane label="代码段">
-                    <textarea name="txtAreaCode" id="txtAreaListJsp" style="width: 100%;">参考开发示例</textarea>
+                    <textarea name="txtAreaCode" id="txtAreaListJsp" style="width: 100%;">{{generateCode.CodeFragmentContent}}</textarea>
                 </tab-pane>
                 <tab-pane label="DetailJsp">
                     <textarea name="txtAreaCode" id="txtAreaDetailJsp" style="width: 100%;">参考开发示例</textarea>
@@ -165,7 +165,8 @@
                     MapperEXContent:"",
                     IServiceContent:"",
                     ServiceImplContent:"",
-                    EntityWithBLOBContent:""
+                    EntityWithBLOBContent:"",
+                    CodeFragmentContent:""
                 },
                 <!--List-->
                 idFieldName:"TableName",
@@ -219,6 +220,7 @@
                             _self.generateCode.IServiceContent = result.data.IServiceContent;
                             _self.generateCode.ServiceImplContent = result.data.ServiceImplContent;
                             _self.generateCode.EntityWithBLOBContent = result.data.EntityWithBLOBContent;
+                            _self.generateCode.CodeFragmentContent = result.data.CodeFragmentContent;
                         }
                         else{
                             DialogUtility.AlertError(window, DialogUtility.DialogAlertId, {}, result.message, function () {});

@@ -34,14 +34,26 @@ public class CGCodeFragment {
         builder.append(CGTool.newLineChar());
         builder.append(domainObjectName+":{");
         builder.append(CGTool.newLineChar());
-        /*for (IntrospectedColumn primaryKeyColumn : introspectedTable.getPrimaryKeyColumns()) {
-
-        }*/
-        for (IntrospectedColumn allColumn : introspectedTable.getAllColumns()) {
-            builder.append(allColumn.getJavaProperty()+":"+"\"\",");
+        for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
+            builder.append(introspectedColumn.getJavaProperty()+":");
+            //System.out.println(introspectedColumn.getFullyQualifiedJavaType().getFullyQualifiedName());
+            if(introspectedColumn.getFullyQualifiedJavaType().getFullyQualifiedName().equals("java.util.Date")){
+                builder.append("DateUtility.GetCurrentData(),");
+            }
+            else {
+                if(introspectedColumn.getJavaProperty().toLowerCase().indexOf("issystem")>0){
+                    builder.append("\"否\",");
+                }
+                else if(introspectedColumn.getJavaProperty().toLowerCase().indexOf("status")>0){
+                    builder.append("\"启用\",");
+                }
+                else {
+                    builder.append("\"\",");
+                }
+            }
             builder.append(CGTool.newLineChar());
         }
-        builder.deleteCharAt(builder.length()-1);
+        builder=builder.deleteCharAt(builder.length()-2);
         builder.append("}");
         builder.append(CGTool.newLineChar());
         return builder.toString();
