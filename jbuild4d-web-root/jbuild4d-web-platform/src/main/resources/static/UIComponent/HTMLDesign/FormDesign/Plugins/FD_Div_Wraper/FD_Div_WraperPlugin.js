@@ -2,7 +2,7 @@
  * Created by zhuangrb on 2016/01/20.
  */
 
-JBuild4D.FromDesign.Plugins.FD_Div_WraperPlugin={
+JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin={
     Setting:{
         Name:'FormDesign_DEF_Container_Div',                                          //插件名称
         GroupName:'Form_Container,1',                                                 //所在工具栏分组
@@ -12,11 +12,11 @@ JBuild4D.FromDesign.Plugins.FD_Div_WraperPlugin={
         DialogName:'',                                                              //设置对话框名称
         DialogWidth:580,                                                            //对话框的宽度
         DialogHeight:350,                                                           //对话框的高度
-        DialogSettingPageUrl:StringUtility.GetTimeStampUrl('dialogs/htmldialog.html'),   //设置的页面地址
+        DialogSettingPageUrl:StringUtility.GetTimeStampUrl('Dialog.html'),   //设置的页面地址
         DialogSettingTitle:"DIV",
 
         ToolbarCommand:'',                                                        //工具栏触发命令的名称,需要保持唯一
-        ToolbarIcon:'',                                                           //工具栏图标
+        ToolbarIcon:'Icon.png',                                                           //工具栏图标
         ToolbarLabel:"DIV",                                                   //工具栏提示
 
         IFrameWindow:null,
@@ -26,20 +26,20 @@ JBuild4D.FromDesign.Plugins.FD_Div_WraperPlugin={
 
         Init:function () {
             this.DialogName=this.Name;
-            this.DialogSettingPageUrl=StringUtility.GetTimeStampUrl("dialogs/"+this.Name+"_Dialog.jsp");
-            this.ToolbarCommand="COM.FromDesign.CKEditorPlugins."+this.Name;
-            this.ToolbarIcon="Icon.png";
+            //this.DialogSettingPageUrl=StringUtility.GetTimeStampUrl("dialogs/"+this.Name+"_Dialog.jsp");
+            this.ToolbarCommand="JBuild4D.FormDesign.Plugins."+this.Name;
+            //this.ToolbarIcon="Icon.png";
             this.DialogSettingTitle=this.ToolbarLabel+"控件";
         }
     }
 }
 
-JBuild4D.FromDesign.Plugins.FD_Div_WraperPlugin.Setting.Init();
+JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin.Setting.Init();
 
-CKEDITOR.plugins.add(JBuild4D.FromDesign.Plugins.FD_Div_WraperPlugin.Setting.Name, {
+CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin.Setting.Name, {
 
     init: function( editor ) {
-        var exsetting=JBuild4D.FromDesign.Plugins.FD_Div_WraperPlugin.Setting;
+        var exsetting=JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin.Setting;
 
         if(exsetting.DesignModalInputCss!=undefined&&exsetting.DesignModalInputCss!=null&&exsetting.DesignModalInputCss!="") {
             var cssPath = this.path + exsetting.DesignModalInputCss;

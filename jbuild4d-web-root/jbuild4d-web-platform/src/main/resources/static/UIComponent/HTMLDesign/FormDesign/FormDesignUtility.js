@@ -1,5 +1,5 @@
 var JBuild4D={
-    FromDesign:{
+    FormDesign:{
         Plugins:{
 
         }
