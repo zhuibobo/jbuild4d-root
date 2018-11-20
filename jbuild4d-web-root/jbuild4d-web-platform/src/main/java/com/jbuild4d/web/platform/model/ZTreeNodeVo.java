@@ -111,6 +111,7 @@ public class ZTreeNodeVo {
             nodeVo.setId(tableGroupEntity.getTableGroupId());
             nodeVo.setValue(tableGroupEntity.getTableGroupValue());
             nodeVo.setText(tableGroupEntity.getTableGroupText());
+            nodeVo.setAttr1(tableGroupEntity.getTableGroupText());
             nodeVo.setParentId(tableGroupEntity.getTableGroupParentId());
             nodeVo.setNocheck(true);
             nodeVo.setNodeTypeName("TableGroup");
@@ -122,6 +123,7 @@ public class ZTreeNodeVo {
             nodeVo.setId(tableEntity.getTableId());
             nodeVo.setValue(tableEntity.getTableName());
             nodeVo.setText(tableEntity.getTableCaption()+"【"+tableEntity.getTableName()+"】");
+            nodeVo.setAttr1(tableEntity.getTableCaption());
             nodeVo.setParentId(tableEntity.getTableGroupId());
             nodeVo.setNodeTypeName("Table");
             nodeVo.setNocheck(false);

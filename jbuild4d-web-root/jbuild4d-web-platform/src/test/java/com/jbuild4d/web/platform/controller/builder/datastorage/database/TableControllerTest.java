@@ -57,7 +57,7 @@ public class TableControllerTest  extends ControllerTestBase {
 
     @Test
     public void saveTableEdit() throws Exception {
-        saveTableEdit_Add("TDEV_TEST_1",null);
+        saveTableEdit_Add("TDEV_TEST_1","开发测试表1",null);
 
         List<TableFieldVO> appendTableFieldVO=new ArrayList<>();
         TableFieldVO ntextField1 = newFiled(getSession(), "TDEV_TEST_2", "F_TABLE1_ID", "F_TABLE1_ID",
@@ -65,13 +65,13 @@ public class TableControllerTest  extends ControllerTestBase {
                 TableFieldTypeEnum.NVarCharType, 50, 0,
                 "", "", "", "");
         appendTableFieldVO.add(ntextField1);
-        saveTableEdit_Add("TDEV_TEST_2",appendTableFieldVO);
+        saveTableEdit_Add("TDEV_TEST_2","开发测试表1",appendTableFieldVO);
 
         saveTableEdit_Update();
     }
 
-    private void saveTableEdit_Add(String tableName,List<TableFieldVO> appendTableFieldVO) throws Exception {
-        TableEntity newTable = getTableEntity(getSession(), tableName, "开发测试表1", tableName);
+    private void saveTableEdit_Add(String tableName,String tableCaption,List<TableFieldVO> appendTableFieldVO) throws Exception {
+        TableEntity newTable = getTableEntity(getSession(), tableName, tableCaption, tableName);
 
         //验证是否存在同名的表，存在则删除表
         MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/ValidateTableIsNoExist.do");

@@ -23,18 +23,18 @@
             <div style="width: 1024px;margin: auto">
                 <div style="float: left;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">表单信息</divider>
-                    <i-form :label-width="100">
-                        <form-item label="表单名称：">
-                            <i-input></i-input>
+                    <i-form  :model="formResourceEntity" :rules="ruleValidate" :label-width="110">
+                        <form-item label="表单名称：" prop="formName">
+                            <i-input v-model="formResourceEntity.formName"></i-input>
                         </form-item>
                         <form-item label="唯一名称：">
-                            <i-input></i-input>
+                            <i-input v-model="formResourceEntity.formSingleName"></i-input>
                         </form-item>
-                        <form-item label="绑定主表标题：">
-                            <i-input></i-input>
+                        <form-item label="绑定主表标题：" prop="formMainTableCaption">
+                            <i-input v-model="formResourceEntity.formMainTableCaption" readonly></i-input>
                         </form-item>
-                        <form-item label="绑定主表名称：">
-                            <i-input></i-input>
+                        <form-item label="绑定主表名称：" prop="formMainTableName">
+                            <i-input v-model="formResourceEntity.formMainTableName" readonly></i-input>
                         </form-item>
                         <form-item label="创建人：">
                             <row>
@@ -65,7 +65,7 @@
                             </row>
                         </form-item>
                         <form-item label="备注：">
-                            <i-input v-model="formResourceEntity.formDesc" type="textarea" :autosize="{minRows: 5,maxRows: 5}"></i-input>
+                            <i-input v-model="formResourceEntity.formDesc" type="textarea" :autosize="{minRows: 7,maxRows: 7}"></i-input>
                         </form-item>
                     </i-form>
                 </div>
@@ -101,6 +101,7 @@
                 <div class="right-wraper"></div>
             </div>
         </tab-pane>
+        <tab-pane label="Be Referred"></tab-pane>
     </tabs>
 </div>
 <script>
@@ -109,6 +110,18 @@
         data: {
             acInterface:{
                 getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList.do"
+            },
+            currUserEntity:null,
+            ruleValidate: {
+                formName: [
+                    {required: true, message: '【名称】不能空！', trigger: 'blur'}
+                ],
+                formMainTableName: [
+                    {required: true, message: '【绑定主表名称】不能空！', trigger: 'blur'}
+                ],
+                formMainTableCaption:[
+                    {required: true, message: '【绑定主表标题】不能空！', trigger: 'blur'}
+                ]
             },
             /*Js Bean*/
             formResourceEntity:{
@@ -138,7 +151,7 @@
                 formCssContent:"",
                 formConfigContent:""
             },
-            tree:{
+            tableTree:{
                 tableTreeObj:null,
                 tableTreeSetting:{
                     view: {
@@ -168,7 +181,9 @@
                         onClick: function (event, treeId, treeNode) {
                             //treeNode.checked=true;
                             if(treeNode.nodeTypeName=="Table") {
-                                appForm.tree.tableTreeObj.checkNode(treeNode, true, true);
+                                appForm.tableTree.tableTreeObj.checkNode(treeNode, true, true);
+                                appForm.formResourceEntity.formMainTableCaption=treeNode.attr1;
+                                appForm.formResourceEntity.formMainTableName=treeNode.value;
                             }
                             else{
                                 alert("选中分组");
@@ -187,31 +202,50 @@
                 },
                 tableTreeData:null,//${tableTreeData},
                 selectedTableName:"无"
-            }
+            },
+            status: StringUtility.QueryString("op")
         },
         mounted:function () {
-            $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
-            FormDesignUtility.InitializeCKEditor(function () {
-
-            });
-            FormDesignUtility.InitializeCodeDesign();
+            this.initPageUI();
             this.bindTableTree();
+            this.bindStatusData();
         },
         methods: {
+            initPageUI:function(){
+                $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
+                FormDesignUtility.InitializeCKEditor(function () {
+
+                });
+                FormDesignUtility.InitializeCodeDesign();
+
+            },
             bindTableTree:function () {
                 var _self=this;
                 AjaxUtility.Post(this.acInterface.getTablesDataUrl,{},function (result) {
                     if(result.success) {
-                        _self.tree.tableTreeData=result.data;
+                        _self.tableTree.tableTreeData=result.data;
                         //console.log(_self.tree.tableTreeData);
-                        _self.tree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), _self.tree.tableTreeSetting,_self.tree.tableTreeData);
-                        _self.tree.tableTreeObj.expandAll(true);
+                        _self.tableTree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), _self.tableTree.tableTreeSetting,_self.tableTree.tableTreeData);
+                        _self.tableTree.tableTreeObj.expandAll(true);
                         fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
                     }
                     else {
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                     }
                 },"json");
+            },
+            bindStatusData:function () {
+                this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
+                if(this.status=="add"){
+                    this.formResourceEntity.formCreater=this.currUserEntity.userName;
+                    this.formResourceEntity.formUpdater=this.currUserEntity.userName;
+                }
+                else {
+                    //this.editTableObj.LoadJsonData(this.tableFieldsData);
+                    this.formResourceEntity.formId=StringUtility.QueryString("recordId");
+                    this.formResourceEntity.formUpdater=this.currUserEntity.userName;
+                    //this.loadData(this.datasetEntity.dsId,this.status);
+                }
             }
         }
     });
