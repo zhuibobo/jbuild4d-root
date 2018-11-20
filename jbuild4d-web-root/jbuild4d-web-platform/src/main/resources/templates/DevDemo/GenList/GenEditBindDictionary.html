@@ -10,27 +10,27 @@
 </head>
 <body>
     <div id="appForm" class="general-edit-page-wrap" v-cloak>
-        <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
+        <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
             <form-item label="ddglKey：" prop="ddglKey">
-                <i-input v-model="formValidate.ddglKey"></i-input>
+                <i-input v-model="formEntity.ddglKey"></i-input>
             </form-item>
             <form-item label="ddglValue：" prop="ddglValue">
-                <i-input v-model="formValidate.ddglValue"></i-input>
+                <i-input v-model="formEntity.ddglValue"></i-input>
             </form-item>
             <form-item label="ddglName：" prop="ddglName">
-                <i-input v-model="formValidate.ddglName"></i-input>
+                <i-input v-model="formEntity.ddglName"></i-input>
             </form-item>
             <form-item label="number：" prop="ddglInputnumber">
                 <row>
                     <i-col span="10">
                         <form-item>
-                            <input-number :max="10" :min="0" v-model="formValidate.ddglInputnumber" style="width: 100%"></input-number>
+                            <input-number :max="10" :min="0" v-model="formEntity.ddglInputnumber" style="width: 100%"></input-number>
                         </form-item>
                     </i-col>
                     <i-col span="4" style="text-align: center">radio：</i-col>
                     <i-col span="10">
                         <form-item>
-                            <radio-group v-model="formValidate.ddglBindDicRadio" style="width: 100%">
+                            <radio-group v-model="formEntity.ddglBindDicRadio" style="width: 100%">
                                 <radio v-for="item in dictionaryJson.DevDemoDictionaryGroupBindRadio" :label="item.dictValue">{{item.dictText}}</radio>
                             </radio-group>
                         </form-item>
@@ -38,7 +38,7 @@
                 </row>
             </form-item>
             <form-item label="Mucheckbox：">
-                <checkbox-group v-model="formValidate.ddglBindDicMucheckbox">
+                <checkbox-group v-model="formEntity.ddglBindDicMucheckbox">
                     <checkbox  v-for="item in dictionaryJson.DevDemoDictionaryGroupBindCheckbox" :label="item.dictValue">{{item.dictText}}</checkbox>
                 </checkbox-group>
             </form-item>
@@ -46,7 +46,7 @@
                 <row>
                     <i-col span="10">
                         <form-item>
-                            <date-picker type="date" placeholder="选择创建时间" v-model="formValidate.ddglCreatetime" disabled readonly></date-picker>
+                            <date-picker type="date" placeholder="选择创建时间" v-model="formEntity.ddglCreatetime" disabled readonly></date-picker>
                         </form-item>
                     </i-col>
                     <i-col span="4" style="text-align: center">
@@ -54,7 +54,7 @@
                     </i-col>
                     <i-col span="10">
                         <form-item prop="ddglBindDicSelected">
-                            <i-select clearable v-model="formValidate.ddglBindDicSelected" style="width:100%">
+                            <i-select clearable v-model="formEntity.ddglBindDicSelected" style="width:100%">
                                 <i-option v-for="item in dictionaryJson.DevDemoDictionaryGroupBindSelect" :value="item.dictValue" :key="item.dictValue">{{ item.dictText }}</i-option>
                             </i-select>
                         </form-item>
@@ -62,10 +62,10 @@
                 </row>
             </form-item>
             <form-item label="dictGroupDesc：">
-                <i-input v-model="formValidate.dictGroupDesc" type="textarea" :autosize="{minRows: 3,maxRows: 3}"></i-input>
+                <i-input v-model="formEntity.dictGroupDesc" type="textarea" :autosize="{minRows: 3,maxRows: 3}"></i-input>
             </form-item>
             <form-item class="general-edit-page-bottom-wrap">
-                <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formValidate')"> 保 存</i-button>
+                <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')"> 保 存</i-button>
                 <i-button @click="handleClose()" style="margin-left: 8px"> 关 闭</i-button>
             </form-item>
         </i-form>
@@ -88,7 +88,7 @@
                     DevDemoDictionaryGroupBindRadio:null,
                     DevDemoDictionaryGroupBindCheckbox:null
                 },
-                formValidate: {
+                formEntity: {
                     ddglId: "",
                     ddglKey: "",
                     ddglValue: "",
@@ -122,18 +122,18 @@
             methods: {
                 bindFormData:function(){
                     //获取数据并赋值
-                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formValidate, this.recordId, this.status,null,function (result) {
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,function (result) {
                         appForm.dictionaryJson.DevDemoDictionaryGroupBindSelect = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindSelect;
                         appForm.dictionaryJson.DevDemoDictionaryGroupBindRadio = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindRadio;
                         appForm.dictionaryJson.DevDemoDictionaryGroupBindCheckbox = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindCheckbox;
-                        appForm.formValidate.ddglBindDicMucheckbox=result.data.ddglBindDicMucheckbox.split(";");
+                        appForm.formEntity.ddglBindDicMucheckbox=result.data.ddglBindDicMucheckbox.split(";");
                     });
                 },
                 handleSubmit: function (name) {
                     var _self = this;
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
-                            var sendData=JsonUtility.CloneSimple(_self.formValidate);
+                            var sendData=JsonUtility.CloneSimple(_self.formEntity);
                             sendData.ddglBindDicMucheckbox=sendData.ddglBindDicMucheckbox.join(";");
                             var sendData = JSON.stringify(sendData);
                             //debugger;
