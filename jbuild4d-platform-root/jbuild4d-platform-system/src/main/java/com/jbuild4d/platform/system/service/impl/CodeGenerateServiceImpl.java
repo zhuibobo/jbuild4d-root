@@ -277,7 +277,8 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         //生成ServiceImpl
         System.out.println("---------------------------生成ServiceImpl---------------------------");
         generateCodeMap.put("ServiceImplContent", CGServiceImpl.generate(introspectedTableList,tableName,orderFieldName,statusFieldName,codeGenerateVoMap,generateCodeMap.get("MapperACContent"),daoMapperName));
-        //生成Bean
+        //生成Js实体片段
+        //String codeFragment
         //生成Controller
         //生成ListJsp
         //生成DetailJsp

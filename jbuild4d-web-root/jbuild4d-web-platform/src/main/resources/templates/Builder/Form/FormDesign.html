@@ -27,6 +27,43 @@
                         <form-item label="表单名称：">
                             <i-input></i-input>
                         </form-item>
+                        <form-item label="唯一名称：">
+                            <i-input></i-input>
+                        </form-item>
+                        <form-item label="绑定主表标题：">
+                            <i-input></i-input>
+                        </form-item>
+                        <form-item label="绑定主表名称：">
+                            <i-input></i-input>
+                        </form-item>
+                        <form-item label="创建人：">
+                            <row>
+                                <i-col span="6">
+                                    <i-input v-model="datasetEntity.dsCreater"></i-input>
+                                </i-col>
+                                <i-col span="8" style="text-align: center">创建时间：</i-col>
+                                <i-col span="10">
+                                    <form-item>
+                                        <date-picker type="date" placeholder="选择创建时间" v-model="datasetEntity.dsCreateTime" disabled
+                                                     readonly style="width: 100%"></date-picker>
+                                    </form-item>
+                                </i-col>
+                            </row>
+                        </form-item>
+                        <form-item label="修改人：">
+                            <row>
+                                <i-col span="6">
+                                    <i-input v-model="datasetEntity.dsUpdater"></i-input>
+                                </i-col>
+                                <i-col span="8" style="text-align: center">修改时间：</i-col>
+                                <i-col span="10">
+                                    <form-item>
+                                        <date-picker type="date" placeholder="选择创建时间" v-model="datasetEntity.dsUpdateTime" disabled
+                                                     readonly style="width: 100%"></date-picker>
+                                    </form-item>
+                                </i-col>
+                            </row>
+                        </form-item>
                     </i-form>
                 </div>
                 <div style="float: right;width: 500px;height: 600px;border: #0B61A4 1px solid;border-radius: 4px;padding: 10px">
