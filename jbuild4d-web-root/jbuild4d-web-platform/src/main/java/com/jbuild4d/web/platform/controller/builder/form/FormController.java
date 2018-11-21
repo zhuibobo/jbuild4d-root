@@ -32,7 +32,7 @@ public class FormController extends GeneralCRUDImplController<ModuleEntity> {
     }
 
     @Override
-    public String getSubSystemName() {
+    public String getjBuild4DSystemName() {
         return null;
     }
 

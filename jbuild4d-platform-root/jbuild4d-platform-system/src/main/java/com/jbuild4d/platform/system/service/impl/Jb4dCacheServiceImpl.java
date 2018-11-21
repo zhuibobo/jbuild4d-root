@@ -2,11 +2,14 @@ package com.jbuild4d.platform.system.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.systemsetting.Jb4dCacheMapper;
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.Jb4dCacheEntity;
+import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
+import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -30,8 +33,42 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
             @Override
             public Jb4dCacheEntity run(JB4DSession jb4DSession,Jb4dCacheEntity sourceEntity) throws JBuild4DGenerallyException {
                 //设置排序,以及其他参数--nextOrderNum()
+                sourceEntity.setCacheOrderNum(jb4dCacheMapper.nextOrderNum());
                 return sourceEntity;
             }
         });
+    }
+
+    String sysRunStatusId="SysRunStatus";
+
+    @Override
+    public Jb4dCacheEntity getSysRunStatus(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+        Jb4dCacheEntity jb4dCacheEntity=jb4dCacheMapper.selectByPrimaryKey(sysRunStatusId);
+        if(jb4dCacheEntity==null){
+            addSysRunStatusCacheKey(jb4DSession);
+        }
+        return jb4dCacheEntity;
+    }
+
+    private void addSysRunStatusCacheKey(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+        this.deleteByKey(jb4DSession,sysRunStatusId);
+        Jb4dCacheEntity record=new Jb4dCacheEntity();
+        record.setCacheId(sysRunStatusId);
+        record.setCacheName("系统运行状态");
+        record.setCacheDesc("开发状态为Debug,生产状态为Release,主要用于控制各类的XML配置文件是否使用缓存处理.");
+        record.setCacheOrderNum(0);
+        record.setCacheStatus(EnableTypeEnum.enable.getDisplayName());
+        record.setCacheIsGlobal(TrueFalseEnum.True.getDisplayName());
+        record.setCacheUserId("0");
+        record.setCacheMode("Debug");
+        record.setCacheVersion(1);
+
+        this.save(jb4DSession,record.getCacheId(),record);
+    }
+
+    @Override
+    public void initSystemData(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+        //系统运行状态
+        addSysRunStatusCacheKey(jb4DSession);
     }
 }

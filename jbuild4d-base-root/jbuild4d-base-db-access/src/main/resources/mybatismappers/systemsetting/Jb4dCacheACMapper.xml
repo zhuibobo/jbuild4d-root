@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.systemsetting.Jb4dCacheEntity">
         <constructor>
             <idArg column="CACHE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="CACHE_KEY" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="CACHE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="CACHE_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="CACHE_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -15,7 +16,7 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        CACHE_ID, CACHE_NAME, CACHE_DESC, CACHE_ORDER_NUM, CACHE_STATUS, CACHE_IS_GLOBAL,
+        CACHE_ID, CACHE_KEY, CACHE_NAME, CACHE_DESC, CACHE_ORDER_NUM, CACHE_STATUS, CACHE_IS_GLOBAL,
         CACHE_USER_ID, CACHE_MODE, CACHE_VERSION
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -29,20 +30,23 @@
         where CACHE_ID = #{cacheId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.Jb4dCacheEntity">
-        insert into TB4D_JB4D_CACHE (CACHE_ID, CACHE_NAME, CACHE_DESC,
-                                     CACHE_ORDER_NUM, CACHE_STATUS, CACHE_IS_GLOBAL,
-                                     CACHE_USER_ID, CACHE_MODE, CACHE_VERSION
-                )
-        values (#{cacheId,jdbcType=VARCHAR}, #{cacheName,jdbcType=VARCHAR}, #{cacheDesc,jdbcType=VARCHAR},
-                #{cacheOrderNum,jdbcType=INTEGER}, #{cacheStatus,jdbcType=VARCHAR}, #{cacheIsGlobal,jdbcType=VARCHAR},
-                #{cacheUserId,jdbcType=VARCHAR}, #{cacheMode,jdbcType=VARCHAR}, #{cacheVersion,jdbcType=INTEGER}
-                       )
+        insert into TB4D_JB4D_CACHE (CACHE_ID, CACHE_KEY, CACHE_NAME,
+                                     CACHE_DESC, CACHE_ORDER_NUM, CACHE_STATUS,
+                                     CACHE_IS_GLOBAL, CACHE_USER_ID, CACHE_MODE,
+                                     CACHE_VERSION)
+        values (#{cacheId,jdbcType=VARCHAR}, #{cacheKey,jdbcType=VARCHAR}, #{cacheName,jdbcType=VARCHAR},
+                #{cacheDesc,jdbcType=VARCHAR}, #{cacheOrderNum,jdbcType=INTEGER}, #{cacheStatus,jdbcType=VARCHAR},
+                #{cacheIsGlobal,jdbcType=VARCHAR}, #{cacheUserId,jdbcType=VARCHAR}, #{cacheMode,jdbcType=VARCHAR},
+                #{cacheVersion,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.Jb4dCacheEntity">
         insert into TB4D_JB4D_CACHE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="cacheId != null">
                 CACHE_ID,
+            </if>
+            <if test="cacheKey != null">
+                CACHE_KEY,
             </if>
             <if test="cacheName != null">
                 CACHE_NAME,
@@ -73,6 +77,9 @@
             <if test="cacheId != null">
                 #{cacheId,jdbcType=VARCHAR},
             </if>
+            <if test="cacheKey != null">
+                #{cacheKey,jdbcType=VARCHAR},
+            </if>
             <if test="cacheName != null">
                 #{cacheName,jdbcType=VARCHAR},
             </if>
@@ -102,6 +109,9 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.Jb4dCacheEntity">
         update TB4D_JB4D_CACHE
         <set>
+            <if test="cacheKey != null">
+                CACHE_KEY = #{cacheKey,jdbcType=VARCHAR},
+            </if>
             <if test="cacheName != null">
                 CACHE_NAME = #{cacheName,jdbcType=VARCHAR},
             </if>
@@ -131,7 +141,8 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.Jb4dCacheEntity">
         update TB4D_JB4D_CACHE
-        set CACHE_NAME = #{cacheName,jdbcType=VARCHAR},
+        set CACHE_KEY = #{cacheKey,jdbcType=VARCHAR},
+            CACHE_NAME = #{cacheName,jdbcType=VARCHAR},
             CACHE_DESC = #{cacheDesc,jdbcType=VARCHAR},
             CACHE_ORDER_NUM = #{cacheOrderNum,jdbcType=INTEGER},
             CACHE_STATUS = #{cacheStatus,jdbcType=VARCHAR},

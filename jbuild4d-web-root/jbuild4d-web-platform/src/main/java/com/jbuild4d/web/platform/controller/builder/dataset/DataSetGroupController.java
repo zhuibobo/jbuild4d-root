@@ -41,8 +41,8 @@ public class DataSetGroupController extends GeneralCRUDImplController<DatasetGro
     }
 
     @Override
-    public String getSubSystemName() {
-        return this.subSystemName;
+    public String getjBuild4DSystemName() {
+        return this.jBuild4DSystemName;
     }
 
     @Override

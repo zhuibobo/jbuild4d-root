@@ -5,6 +5,7 @@
     <delete id="deleteAll">delete from TB4D_JB4D_CACHE</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(CACHE_ORDER_NUM) is null then 1 else max(CACHE_ORDER_NUM)+1 end ORDERNUM from TB4D_JB4D_CACHE</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_JB4D_CACHE<where>
+        <if test="cacheKey !=null and cacheKey !=''"> and CACHE_KEY like #{cacheKey} </if>
         <if test="cacheName !=null and cacheName !=''"> and CACHE_NAME like #{cacheName} </if>
         <if test="cacheDesc !=null and cacheDesc !=''"> and CACHE_DESC like #{cacheDesc} </if>
         <if test="cacheStatus !=null and cacheStatus !=''"> and CACHE_STATUS like #{cacheStatus} </if>

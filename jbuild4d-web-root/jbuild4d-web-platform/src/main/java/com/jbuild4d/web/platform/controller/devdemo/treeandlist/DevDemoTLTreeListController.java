@@ -38,8 +38,8 @@ public class DevDemoTLTreeListController extends GeneralCRUDImplController<DevDe
     }
 
     @Override
-    public String getSubSystemName() {
-        return this.subSystemName;
+    public String getjBuild4DSystemName() {
+        return this.jBuild4DSystemName;
     }
 
     @Override

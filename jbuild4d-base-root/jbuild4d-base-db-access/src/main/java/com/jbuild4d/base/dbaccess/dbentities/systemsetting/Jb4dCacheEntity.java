@@ -15,6 +15,9 @@ public class Jb4dCacheEntity {
     @DBKeyField
     private String cacheId;
 
+    //CACHE_KEY
+    private String cacheKey;
+
     //CACHE_NAME
     private String cacheName;
 
@@ -39,8 +42,9 @@ public class Jb4dCacheEntity {
     //CACHE_VERSION
     private Integer cacheVersion;
 
-    public Jb4dCacheEntity(String cacheId, String cacheName, String cacheDesc, Integer cacheOrderNum, String cacheStatus, String cacheIsGlobal, String cacheUserId, String cacheMode, Integer cacheVersion) {
+    public Jb4dCacheEntity(String cacheId, String cacheKey, String cacheName, String cacheDesc, Integer cacheOrderNum, String cacheStatus, String cacheIsGlobal, String cacheUserId, String cacheMode, Integer cacheVersion) {
         this.cacheId = cacheId;
+        this.cacheKey = cacheKey;
         this.cacheName = cacheName;
         this.cacheDesc = cacheDesc;
         this.cacheOrderNum = cacheOrderNum;
@@ -61,6 +65,14 @@ public class Jb4dCacheEntity {
 
     public void setCacheId(String cacheId) {
         this.cacheId = cacheId == null ? null : cacheId.trim();
+    }
+
+    public String getCacheKey() {
+        return cacheKey;
+    }
+
+    public void setCacheKey(String cacheKey) {
+        this.cacheKey = cacheKey == null ? null : cacheKey.trim();
     }
 
     public String getCacheName() {

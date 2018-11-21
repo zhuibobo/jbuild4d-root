@@ -15,6 +15,7 @@ import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
 import com.jbuild4d.platform.system.service.IDictionaryService;
+import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,9 @@ public class InitializationSystemController {
     @Autowired
     private IModuleService moduleService;
 
+    @Autowired
+    private IJb4dCacheService jb4dCacheService;
+
     @RequestMapping(value = "/Running", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo running() throws JBuild4DGenerallyException {
@@ -94,6 +98,9 @@ public class InitializationSystemController {
 
         //初始化模块分组
         moduleService.createRootNode(jb4DSession);
+
+        //初始化缓存Key
+        jb4dCacheService.initSystemData(jb4DSession);
 
         return JBuild4DResponseVo.success("系统数据初始化成功！");
     }

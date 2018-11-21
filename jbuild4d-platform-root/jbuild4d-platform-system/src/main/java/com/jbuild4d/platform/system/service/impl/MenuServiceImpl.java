@@ -113,6 +113,13 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         deleteByKey(jb4DSession,systemSettingOrganManageMenu.getMenuId());
         save(jb4DSession,systemSettingOrganManageMenu.getMenuId(),systemSettingOrganManageMenu);
 
+        //根菜单->系统设置分组->缓存管理
+        String systemSettingCacheManageId="JB4DSystemSettingCacheManage";
+        MenuEntity systemSettingCacheManageMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingCacheManageId,"缓存管理","缓存管理","缓存管理",
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/Cache/ListView","");
+        deleteByKey(jb4DSession,systemSettingCacheManageMenu.getMenuId());
+        save(jb4DSession,systemSettingCacheManageMenu.getMenuId(),systemSettingCacheManageMenu);
+
 
         //根菜单->开发示例
         String devDemoRootId="JB4DDevDemoRoot";
