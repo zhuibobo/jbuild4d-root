@@ -33,10 +33,13 @@ public class CacheEntity {
     //CACHE_USER_ID
     private String cacheUserId;
 
+    //CACHE_MODE
+    private String cacheMode;
+
     //CACHE_VERSION
     private Integer cacheVersion;
 
-    public CacheEntity(String cacheId, String cacheName, String cacheDesc, Integer cacheOrderNum, String cacheStatus, String cacheIsGlobal, String cacheUserId, Integer cacheVersion) {
+    public CacheEntity(String cacheId, String cacheName, String cacheDesc, Integer cacheOrderNum, String cacheStatus, String cacheIsGlobal, String cacheUserId, String cacheMode, Integer cacheVersion) {
         this.cacheId = cacheId;
         this.cacheName = cacheName;
         this.cacheDesc = cacheDesc;
@@ -44,6 +47,7 @@ public class CacheEntity {
         this.cacheStatus = cacheStatus;
         this.cacheIsGlobal = cacheIsGlobal;
         this.cacheUserId = cacheUserId;
+        this.cacheMode = cacheMode;
         this.cacheVersion = cacheVersion;
     }
 
@@ -105,6 +109,14 @@ public class CacheEntity {
 
     public void setCacheUserId(String cacheUserId) {
         this.cacheUserId = cacheUserId == null ? null : cacheUserId.trim();
+    }
+
+    public String getCacheMode() {
+        return cacheMode;
+    }
+
+    public void setCacheMode(String cacheMode) {
+        this.cacheMode = cacheMode == null ? null : cacheMode.trim();
     }
 
     public Integer getCacheVersion() {

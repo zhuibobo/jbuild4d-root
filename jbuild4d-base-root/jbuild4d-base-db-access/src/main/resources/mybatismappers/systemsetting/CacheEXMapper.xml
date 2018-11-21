@@ -10,6 +10,7 @@
         <if test="cacheStatus !=null and cacheStatus !=''"> and CACHE_STATUS like #{cacheStatus} </if>
         <if test="cacheIsGlobal !=null and cacheIsGlobal !=''"> and CACHE_IS_GLOBAL like #{cacheIsGlobal} </if>
         <if test="cacheUserId !=null and cacheUserId !=''"> and CACHE_USER_ID like #{cacheUserId} </if>
+        <if test="cacheMode !=null and cacheMode !=''"> and CACHE_MODE like #{cacheMode} </if>
     </where>ORDER by CACHE_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_CACHE
                                                                                                           where CACHE_ORDER_NUM = (select max(CACHE_ORDER_NUM) from TB4D_CACHE where CACHE_ORDER_NUM<(select CACHE_ORDER_NUM from TB4D_CACHE where CACHE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>

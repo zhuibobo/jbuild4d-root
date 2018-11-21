@@ -10,12 +10,13 @@
             <arg column="CACHE_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="CACHE_IS_GLOBAL" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="CACHE_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="CACHE_MODE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="CACHE_VERSION" javaType="java.lang.Integer" jdbcType="INTEGER" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         CACHE_ID, CACHE_NAME, CACHE_DESC, CACHE_ORDER_NUM, CACHE_STATUS, CACHE_IS_GLOBAL,
-        CACHE_USER_ID, CACHE_VERSION
+        CACHE_USER_ID, CACHE_MODE, CACHE_VERSION
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -30,10 +31,12 @@
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.CacheEntity">
         insert into TB4D_CACHE (CACHE_ID, CACHE_NAME, CACHE_DESC,
                                 CACHE_ORDER_NUM, CACHE_STATUS, CACHE_IS_GLOBAL,
-                                CACHE_USER_ID, CACHE_VERSION)
+                                CACHE_USER_ID, CACHE_MODE, CACHE_VERSION
+                )
         values (#{cacheId,jdbcType=VARCHAR}, #{cacheName,jdbcType=VARCHAR}, #{cacheDesc,jdbcType=VARCHAR},
                 #{cacheOrderNum,jdbcType=INTEGER}, #{cacheStatus,jdbcType=VARCHAR}, #{cacheIsGlobal,jdbcType=VARCHAR},
-                #{cacheUserId,jdbcType=VARCHAR}, #{cacheVersion,jdbcType=INTEGER})
+                #{cacheUserId,jdbcType=VARCHAR}, #{cacheMode,jdbcType=VARCHAR}, #{cacheVersion,jdbcType=INTEGER}
+                       )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.CacheEntity">
         insert into TB4D_CACHE
@@ -58,6 +61,9 @@
             </if>
             <if test="cacheUserId != null">
                 CACHE_USER_ID,
+            </if>
+            <if test="cacheMode != null">
+                CACHE_MODE,
             </if>
             <if test="cacheVersion != null">
                 CACHE_VERSION,
@@ -85,6 +91,9 @@
             <if test="cacheUserId != null">
                 #{cacheUserId,jdbcType=VARCHAR},
             </if>
+            <if test="cacheMode != null">
+                #{cacheMode,jdbcType=VARCHAR},
+            </if>
             <if test="cacheVersion != null">
                 #{cacheVersion,jdbcType=INTEGER},
             </if>
@@ -111,6 +120,9 @@
             <if test="cacheUserId != null">
                 CACHE_USER_ID = #{cacheUserId,jdbcType=VARCHAR},
             </if>
+            <if test="cacheMode != null">
+                CACHE_MODE = #{cacheMode,jdbcType=VARCHAR},
+            </if>
             <if test="cacheVersion != null">
                 CACHE_VERSION = #{cacheVersion,jdbcType=INTEGER},
             </if>
@@ -125,6 +137,7 @@
             CACHE_STATUS = #{cacheStatus,jdbcType=VARCHAR},
             CACHE_IS_GLOBAL = #{cacheIsGlobal,jdbcType=VARCHAR},
             CACHE_USER_ID = #{cacheUserId,jdbcType=VARCHAR},
+            CACHE_MODE = #{cacheMode,jdbcType=VARCHAR},
             CACHE_VERSION = #{cacheVersion,jdbcType=INTEGER}
         where CACHE_ID = #{cacheId,jdbcType=VARCHAR}
     </update>
