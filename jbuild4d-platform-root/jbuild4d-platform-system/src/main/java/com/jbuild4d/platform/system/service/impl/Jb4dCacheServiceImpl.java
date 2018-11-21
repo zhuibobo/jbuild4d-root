@@ -9,9 +9,13 @@ import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.InetAddressUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.platform.system.general.JBuild4DProp;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
+
+import java.net.UnknownHostException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,7 +47,15 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
 
     @Override
     public boolean sysRunStatusIsDebug() throws JBuild4DGenerallyException {
-        //return true;
+        try {
+            if(JBuild4DProp.hostOperationSystemIsWindow()) {
+                if (InetAddressUtility.getThisPCHostName().equals("DESKTOP-KRH91TA")) {
+                    return true;
+                }
+            }
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         return getSysRunStatus().getCacheMode().toLowerCase().equals("debug");
     }
 
