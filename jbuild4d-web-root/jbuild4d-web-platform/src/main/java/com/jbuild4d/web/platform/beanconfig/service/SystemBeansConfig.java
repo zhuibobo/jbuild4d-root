@@ -82,8 +82,8 @@ public class SystemBeansConfig {
     }
 
     @Bean
-    public IEnvVariableService envVariableService() throws IOException, SAXException, ParserConfigurationException, XPathExpressionException, JBuild4DGenerallyException {
-        IEnvVariableService bean=new EnvVariableServiceImpl();
+    public IEnvVariableService envVariableService(IJb4dCacheService jb4dCacheService) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException, JBuild4DGenerallyException {
+        IEnvVariableService bean=new EnvVariableServiceImpl(jb4dCacheService);
         return bean;
     }
 

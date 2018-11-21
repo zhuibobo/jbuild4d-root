@@ -1,6 +1,7 @@
 package com.jbuild4d.web.platform.controller.selectview;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,21 +36,21 @@ public class SelectEnvVariableController {
     IEnvVariableService envVariableService;
 
     @RequestMapping(value = "Select", method = RequestMethod.GET)
-    public ModelAndView select() throws XPathExpressionException, JsonProcessingException {
+    public ModelAndView select() {
         ModelAndView modelAndView=new ModelAndView("SelectView/SelectEnvVariable");
 
-        List<EnvVariableVo> dateTimeVoList=envVariableService.getDateTimeVars();
-        List<EnvVariableVo> apiVarVoList=envVariableService.getAPIVars();
+        //List<EnvVariableVo> dateTimeVoList=envVariableService.getDateTimeVars();
+        //List<EnvVariableVo> apiVarVoList=envVariableService.getAPIVars();
 
-        modelAndView.addObject("datetimeTreeData", JsonUtility.toObjectString(dateTimeVoList));
-        modelAndView.addObject("envVarTreeData",JsonUtility.toObjectString(apiVarVoList));
+        //modelAndView.addObject("datetimeTreeData", JsonUtility.toObjectString(dateTimeVoList));
+        //modelAndView.addObject("envVarTreeData",JsonUtility.toObjectString(apiVarVoList));
 
         return modelAndView;
     }
 
     @RequestMapping(value = "GetSelectData",method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo getSelectData() throws XPathExpressionException {
+    public JBuild4DResponseVo getSelectData() throws XPathExpressionException, ParserConfigurationException, JBuild4DGenerallyException, SAXException, IOException {
         Map<String,List<EnvVariableVo>> resultData=new HashMap<>();
         List<EnvVariableVo> dateTimeVoList=envVariableService.getDateTimeVars();
         List<EnvVariableVo> apiVarVoList=envVariableService.getAPIVars();

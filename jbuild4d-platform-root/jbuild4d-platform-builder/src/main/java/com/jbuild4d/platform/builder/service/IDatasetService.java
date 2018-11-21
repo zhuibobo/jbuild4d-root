@@ -26,7 +26,7 @@ public interface IDatasetService extends IBaseService<DatasetEntity> {
 
     DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession, String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException;
 
-    String sqlReplaceEnvTextToEnvValue(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException;
+    String sqlReplaceEnvTextToEnvValue(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException, IOException, SAXException, ParserConfigurationException;
 
     String sqlReplaceEnvValueToRunningValue(JB4DSession jb4DSession, String sqlValue) throws JBuild4DGenerallyException;
 

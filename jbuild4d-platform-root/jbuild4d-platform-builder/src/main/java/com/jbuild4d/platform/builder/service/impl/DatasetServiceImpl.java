@@ -238,7 +238,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     }
 
     @Override
-    public String sqlReplaceEnvTextToEnvValue(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException {
+    public String sqlReplaceEnvTextToEnvValue(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException, IOException, SAXException, ParserConfigurationException {
         String sqlValue=sqlText;
         //进行关键字校验
         if(validateResolveSqlWithKeyWord(sqlText)){

@@ -12,14 +12,24 @@ import org.springframework.web.context.ContextLoader;
  */
 public class JB4DCacheManager {
 
+    public static String jb4dPlatformBuilderCacheName="jb4dPlatformBuilder";
+
     private static CacheManager cacheManager = BeanUtility.getBean(CacheManager.class);
 
     public static void put(String cacheName,String key,String value){
         cacheManager.getCache(cacheName,String.class,String.class).put(key,value);
     }
 
-    public static <T> T get(String cacheName,String key){
+    public static void put(String cacheName,String key,Object value){
+        cacheManager.getCache(cacheName,String.class,Object.class).put(key,value);
+    }
+
+    public static <T> T getString(String cacheName,String key){
         return (T) cacheManager.getCache(cacheName,String.class,String.class).get(key);
+    }
+
+    public static <T> T getObject(String cacheName,String key){
+        return (T) cacheManager.getCache(cacheName,String.class,Object.class).get(key);
     }
     /*public static <T> T get(String key){
 

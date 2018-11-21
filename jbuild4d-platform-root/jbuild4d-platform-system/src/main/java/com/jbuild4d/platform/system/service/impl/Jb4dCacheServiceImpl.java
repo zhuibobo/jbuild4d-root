@@ -43,6 +43,7 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
 
     @Override
     public boolean sysRunStatusIsDebug() throws JBuild4DGenerallyException {
+        //return true;
         return getSysRunStatus().getCacheMode().toLowerCase().equals("debug");
     }
 
@@ -51,6 +52,7 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
         Jb4dCacheEntity jb4dCacheEntity=jb4dCacheMapper.selectByPrimaryKey(sysRunStatusId);
         if(jb4dCacheEntity==null){
             addSysRunStatusCacheKey();
+            jb4dCacheEntity=jb4dCacheMapper.selectByPrimaryKey(sysRunStatusId);
         }
         return jb4dCacheEntity;
     }

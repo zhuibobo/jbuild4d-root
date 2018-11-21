@@ -17,6 +17,6 @@ public class JB4DCacheManagerTest extends ControllerTestBase {
     public void putToCache(){
         //CacheManager cacheManager = context.getBean(CacheManager.class);
         JB4DCacheManager.put("forUnitTest","1","hello word");
-        Assert.assertEquals("获取缓存中的数据","hello word",JB4DCacheManager.get("forUnitTest","1"));
+        Assert.assertEquals("获取缓存中的数据","hello word",JB4DCacheManager.getString("forUnitTest","1"));
     }
 }
