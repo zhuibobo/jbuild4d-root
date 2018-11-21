@@ -13,6 +13,8 @@ import com.jbuild4d.base.service.general.JB4DSession;
  */
 public interface IJb4dCacheService extends IBaseService<Jb4dCacheEntity> {
 
+    boolean sysRunStatusIsDebug(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
+
     Jb4dCacheEntity getSysRunStatus(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
 
     void initSystemData(JB4DSession jb4DSession) throws JBuild4DGenerallyException;

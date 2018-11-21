@@ -42,6 +42,11 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
     String sysRunStatusId="SysRunStatus";
 
     @Override
+    public boolean sysRunStatusIsDebug(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+        return getSysRunStatus(jb4DSession).getCacheMode().toLowerCase().equals("debug");
+    }
+
+    @Override
     public Jb4dCacheEntity getSysRunStatus(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
         Jb4dCacheEntity jb4dCacheEntity=jb4dCacheMapper.selectByPrimaryKey(sysRunStatusId);
         if(jb4dCacheEntity==null){
@@ -54,13 +59,14 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
         this.deleteByKey(jb4DSession,sysRunStatusId);
         Jb4dCacheEntity record=new Jb4dCacheEntity();
         record.setCacheId(sysRunStatusId);
+        record.setCacheKey(sysRunStatusId);
         record.setCacheName("系统运行状态");
         record.setCacheDesc("开发状态为Debug,生产状态为Release,主要用于控制各类的XML配置文件是否使用缓存处理.");
         record.setCacheOrderNum(0);
         record.setCacheStatus(EnableTypeEnum.enable.getDisplayName());
         record.setCacheIsGlobal(TrueFalseEnum.True.getDisplayName());
         record.setCacheUserId("0");
-        record.setCacheMode("Debug");
+        record.setCacheMode("Release");
         record.setCacheVersion(1);
 
         this.save(jb4DSession,record.getCacheId(),record);
