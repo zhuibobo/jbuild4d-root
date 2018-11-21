@@ -42,12 +42,6 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
 
     @Override
     public List<EnvVariableVo> getDateTimeVars() throws XPathExpressionException, ParserConfigurationException, IOException, SAXException, JBuild4DGenerallyException {
-        /*List<EnvVariableVo> result=new ArrayList<>();
-        Node groupRootNode=XMLUtility.parseForNode(xmlDocument,"/Config/Type[@Value='DateTime']/Group");
-        EnvVariableVo groupRootVo=EnvVariableVo.parseGroupNode(groupRootNode,"-1","DateTime");
-        result.add(groupRootVo);
-        loopLoadGroup(result,groupRootNode,groupRootVo,"DateTime");
-        return result;*/
         return ListUtility.Where(getVoListFromCache(), new IListWhereCondition<EnvVariableVo>() {
             @Override
             public boolean Condition(EnvVariableVo item) {
@@ -58,12 +52,6 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
 
     @Override
     public List<EnvVariableVo> getAPIVars() throws XPathExpressionException, ParserConfigurationException, IOException, SAXException, JBuild4DGenerallyException {
-        /*Node groupRootNode=XMLUtility.parseForNode(xmlDocument,"/Config/Type[@Value='ApiVar']/Group");
-        List<EnvVariableVo> result=new ArrayList<>();
-        EnvVariableVo groupRootVo=EnvVariableVo.parseGroupNode(groupRootNode,"-1","ApiVar");
-        result.add(groupRootVo);
-        loopLoadGroup(result,groupRootNode,groupRootVo, "ApiVar");
-        return result;*/
         return ListUtility.Where(getVoListFromCache(), new IListWhereCondition<EnvVariableVo>() {
             @Override
             public boolean Condition(EnvVariableVo item) {
@@ -158,7 +146,6 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
         loopLoadGroup(allEnvVariableVoList,groupRootNode,groupRootVo,"DateTime");
 
         groupRootNode=XMLUtility.parseForNode(xmlDocument,"/Config/Type[@Value='ApiVar']/Group");
-        //List<EnvVariableVo> result=new ArrayList<>();
         groupRootVo=EnvVariableVo.parseGroupNode(groupRootNode,"-1","ApiVar");
         allEnvVariableVoList.add(groupRootVo);
         loopLoadGroup(allEnvVariableVoList,groupRootNode,groupRootVo, "ApiVar");
