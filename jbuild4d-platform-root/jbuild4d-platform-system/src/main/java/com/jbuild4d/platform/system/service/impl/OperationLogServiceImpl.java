@@ -8,6 +8,7 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.InetAddressUtility;
 import com.jbuild4d.base.tools.common.IpAddressUtility;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
@@ -66,7 +67,7 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogEntity>
         logEntity.setLogText("用户["+jb4DSession.getUserName()+"]登录了系统!");
         logEntity.setLogData(JsonUtility.toObjectString(jb4DSession));
         logEntity.setLogType("登录日志");
-        logEntity.setLogIp(IpAddressUtility.getIpAdrress(request));
+        logEntity.setLogIp(InetAddressUtility.getClientIpAdrress(request));
         this.save(jb4DSession, logEntity.getLogId(), logEntity, new IAddBefore<OperationLogEntity>() {
             @Override
             public OperationLogEntity run(JB4DSession jb4DSession, OperationLogEntity sourceEntity) throws JBuild4DGenerallyException {
@@ -93,7 +94,7 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogEntity>
         logEntity.setLogText("用户["+jb4DSession.getUserName()+"]退出了系统!");
         logEntity.setLogData(JsonUtility.toObjectString(jb4DSession));
         logEntity.setLogType("登录日志");
-        logEntity.setLogIp(IpAddressUtility.getIpAdrress(request));
+        logEntity.setLogIp(InetAddressUtility.getClientIpAdrress(request));
         this.save(jb4DSession, logEntity.getLogId(), logEntity, new IAddBefore<OperationLogEntity>() {
             @Override
             public OperationLogEntity run(JB4DSession jb4DSession, OperationLogEntity sourceEntity) throws JBuild4DGenerallyException {
@@ -114,7 +115,7 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogEntity>
         logEntity.setLogClassName(targetClass.getName());
         logEntity.setLogId(UUIDUtility.getUUID());
         logEntity.setLogStatus("正常");
-        logEntity.setLogIp(IpAddressUtility.getIpAdrress(request));
+        logEntity.setLogIp(InetAddressUtility.getClientIpAdrress(request));
         this.save(jb4DSession, logEntity.getLogId(), logEntity);
     }
 }
