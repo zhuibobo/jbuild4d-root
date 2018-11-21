@@ -86,4 +86,10 @@ public class SystemBeansConfig {
         IEnvVariableService bean=new EnvVariableServiceImpl();
         return bean;
     }
+
+    @Bean
+    public IJb4dCacheService jb4dCacheService(ISQLBuilderService _sqlBuilderService, Jb4dCacheMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        IJb4dCacheService bean=new Jb4dCacheServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
 }

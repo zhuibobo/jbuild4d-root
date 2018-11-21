@@ -185,6 +185,11 @@ public class MybatisBeansConfig {
         return sqlSessionTemplate.getMapper(FormConfigMapper.class);
     }
 
+    @Bean
+    public Jb4dCacheMapper jb4dCacheMapper(SqlSessionTemplate sqlSessionTemplate){
+        return sqlSessionTemplate.getMapper(Jb4dCacheMapper.class);
+    }
+
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);
