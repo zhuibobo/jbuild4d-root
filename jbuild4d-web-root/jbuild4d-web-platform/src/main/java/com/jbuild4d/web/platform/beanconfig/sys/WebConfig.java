@@ -1,5 +1,6 @@
 package com.jbuild4d.web.platform.beanconfig.sys;
 
+import com.jbuild4d.base.tools.common.BeanUtility;
 import com.jbuild4d.base.tools.common.PathUtility;
 import com.jbuild4d.web.platform.interceptor.LoginedInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -57,6 +58,13 @@ public class WebConfig implements WebMvcConfigurer {
         PathUtility pathUtility=new PathUtility();
         pathUtility.setContext(context);
         return pathUtility;
+    }
+
+    @Bean
+    public BeanUtility beanUtility(WebApplicationContext context){
+        BeanUtility beanUtility=new BeanUtility();
+        beanUtility.setContext(context);
+        return beanUtility;
     }
 
     /*@Override

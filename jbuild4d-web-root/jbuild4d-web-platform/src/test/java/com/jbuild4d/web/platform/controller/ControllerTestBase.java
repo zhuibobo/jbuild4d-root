@@ -31,7 +31,7 @@ public class ControllerTestBase {
     public MockMvc mockMvc;
 
     @Autowired
-    private WebApplicationContext context;
+    public WebApplicationContext context;
 
     @Before
     public void setupMock() throws Exception {

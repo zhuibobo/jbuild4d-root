@@ -2,16 +2,16 @@
         xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
         xmlns='http://www.ehcache.org/v3'
         xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core.xsd">
-    <!-- 1、声明一个名为foo的Cache-->
-    <cache alias="foo">
+    <!-- 1、声明一个名为forUnitTest的Cache-->
+    <cache alias="forUnitTest">
         <!--2、foo的键值对被声明为字符串类型，如果没有指明，默认是Object类型。-->
         <key-type>java.lang.String</key-type>
         <value-type>java.lang.String</value-type>
         <resources>
-            <!--3、foo被声明在堆上保存多达2,000个条目。-->
+            <!--3、forUnitTest被声明在堆上保存多达2,000个条目。-->
             <heap unit="entries">2000</heap>
-            <!--4、在它开始被驱逐之前，还有多达500 MB的外堆内存-->
-            <offheap unit="MB">500</offheap>
+            <!--4、在它开始被驱逐之前，还有多达1MB的外堆内存-->
+            <offheap unit="MB">1</offheap>
         </resources>
     </cache>
     <!--5、<cache-template>可以让你创建一个抽象的<cache>配置文件，该配置文件可以进一步的被扩展。-->

@@ -1,7 +1,7 @@
 package com.jbuild4d.base.tools.cache;
 
+import com.jbuild4d.base.tools.common.BeanUtility;
 import org.ehcache.CacheManager;
-import org.ehcache.config.Configuration;
 import org.springframework.web.context.ContextLoader;
 
 /**
@@ -12,12 +12,15 @@ import org.springframework.web.context.ContextLoader;
  */
 public class JB4DCacheManager {
 
-    private static CacheManager cacheManager = ((CacheManager) ContextLoader.getCurrentWebApplicationContext().getBean("cacheManager"));
+    private static CacheManager cacheManager = BeanUtility.getBean(CacheManager.class);
 
-    public void put(String key,Object obj){
-        //cacheManager.get
+    public static void put(String cacheName,String key,String value){
+        cacheManager.getCache(cacheName,String.class,String.class).put(key,value);
     }
 
+    public static <T> T get(String cacheName,String key){
+        return (T) cacheManager.getCache(cacheName,String.class,String.class).get(key);
+    }
     /*public static <T> T get(String key){
 
     }*/
