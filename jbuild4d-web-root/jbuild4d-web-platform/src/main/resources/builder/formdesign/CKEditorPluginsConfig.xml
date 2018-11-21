@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
-    <ControlPlugin Name="FDCT_DEF_Div_Wraper" ToolbarLocation="Form_Container,1" ServerResolve="" ClientResolve="" Js=""></ControlPlugin>
+    <WebControl>
+        <WebFormControl SingleName="FDCT_DEF_Div_Wraper" Text="" ToolbarLocation="Form_Container,1" ServerResolve="" ClientResolve="" Js="">
+            <Desc></Desc>
+        </WebFormControl>
+    </WebControl>
+    <AppControl>
+
+    </AppControl>
 </Config>
