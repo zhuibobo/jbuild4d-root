@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class BuilderConfigServiceImpl implements IBuilderConfigService {
-    static String configResource="BuilderConfig.xml";
+    static String configResource="builder"+ File.separator +"BuilderConfig.xml";
     static Document xmlDocument=null;
     static String _tablePrefix=null;
 
