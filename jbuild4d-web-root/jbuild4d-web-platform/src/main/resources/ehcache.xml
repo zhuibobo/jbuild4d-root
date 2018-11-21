@@ -8,22 +8,18 @@
         <key-type>java.lang.String</key-type>
         <value-type>java.lang.String</value-type>
         <resources>
-            <!--3、forUnitTest被声明在堆上保存多达2,000个条目。-->
-            <heap unit="entries">2000</heap>
+            <!--3、forUnitTest被声明在堆上保存多达2,00个条目。-->
+            <heap unit="entries">200</heap>
             <!--4、在它开始被驱逐之前，还有多达1MB的外堆内存-->
             <offheap unit="MB">1</offheap>
         </resources>
     </cache>
     <!--5、<cache-template>可以让你创建一个抽象的<cache>配置文件，该配置文件可以进一步的被扩展。-->
-    <cache-template name="myDefaults">
-        <key-type>java.lang.Long</key-type>
-        <value-type>java.lang.String</value-type>
+    <cache-template name="jb4dCacheDefault">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.lang.Object</value-type>
         <heap unit="entries">200</heap>
     </cache-template>
-    <!--6、bar是这样的cache，它使用名为myDefaults的<cache-template>，并将其主键覆盖到更广泛的类型-->
-    <cache alias="bar" uses-template="myDefaults">
-        <key-type>java.lang.Number</key-type>
+    <cache alias="jb4dPlatformBuilder" uses-template="jb4dCacheDefault">
     </cache>
-    <!--7、simpleCache是另一个cache，它使用myDefaults配置文件作为其唯一的CacheConfiguration-->
-    <cache alias="simpleCache" uses-template="myDefaults" />
 </config>

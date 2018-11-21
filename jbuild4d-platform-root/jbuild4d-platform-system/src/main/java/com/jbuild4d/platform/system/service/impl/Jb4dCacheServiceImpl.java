@@ -42,21 +42,21 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
     String sysRunStatusId="SysRunStatus";
 
     @Override
-    public boolean sysRunStatusIsDebug(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
-        return getSysRunStatus(jb4DSession).getCacheMode().toLowerCase().equals("debug");
+    public boolean sysRunStatusIsDebug() throws JBuild4DGenerallyException {
+        return getSysRunStatus().getCacheMode().toLowerCase().equals("debug");
     }
 
     @Override
-    public Jb4dCacheEntity getSysRunStatus(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+    public Jb4dCacheEntity getSysRunStatus() throws JBuild4DGenerallyException {
         Jb4dCacheEntity jb4dCacheEntity=jb4dCacheMapper.selectByPrimaryKey(sysRunStatusId);
         if(jb4dCacheEntity==null){
-            addSysRunStatusCacheKey(jb4DSession);
+            addSysRunStatusCacheKey();
         }
         return jb4dCacheEntity;
     }
 
-    private void addSysRunStatusCacheKey(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
-        this.deleteByKey(jb4DSession,sysRunStatusId);
+    private void addSysRunStatusCacheKey() throws JBuild4DGenerallyException {
+        this.deleteByKey(null,sysRunStatusId);
         Jb4dCacheEntity record=new Jb4dCacheEntity();
         record.setCacheId(sysRunStatusId);
         record.setCacheKey(sysRunStatusId);
@@ -69,12 +69,12 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
         record.setCacheMode("Release");
         record.setCacheVersion(1);
 
-        this.save(jb4DSession,record.getCacheId(),record);
+        this.save(null,record.getCacheId(),record);
     }
 
     @Override
     public void initSystemData(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
         //系统运行状态
-        addSysRunStatusCacheKey(jb4DSession);
+        addSysRunStatusCacheKey();
     }
 }
