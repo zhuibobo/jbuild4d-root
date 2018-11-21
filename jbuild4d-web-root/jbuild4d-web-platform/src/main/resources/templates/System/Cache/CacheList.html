@@ -35,7 +35,7 @@
                 reloadData:"/PlatForm/System/Cache/GetListData",
                 delete:"/PlatForm/System/Cache/Delete"
             },
-            idFieldName:"ddglId",
+            idFieldName:"cacheId",
             searchCondition:{
                 ddglKey:{
                     value:"",
@@ -61,29 +61,21 @@
                     align: 'center'
                 },
                 {
-                    title: 'ddglKey',
-                    key: 'ddglKey',
+                    title: 'CacheName',
+                    key: 'cacheName',
                     align: "center"
                 }, {
-                    title: 'ddglName',
-                    key: 'ddglName',
+                    title: 'CacheIsGlobal',
+                    key: 'cacheIsGlobal',
                     align: "center"
                 }, {
-                    title: 'ddglDesc',
-                    key: 'ddglDesc'
+                    title: 'CacheMode',
+                    key: 'cacheMode'
                 }, {
-                    title: 'ddglStatus',
-                    width: 100,
+                    title: 'CacheVersion',
+                    width: 140,
                     align: "center",
-                    key: 'ddglStatus'
-                }, {
-                    title: 'CT',
-                    key: 'ddglCreatetime',
-                    width: 100,
-                    align: "center",
-                    render: function (h, params) {
-                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddglCreatetime);
-                    }
+                    key: 'cacheVersion'
                 }, {
                     title: '操作',
                     key: 'dictGroupId',
