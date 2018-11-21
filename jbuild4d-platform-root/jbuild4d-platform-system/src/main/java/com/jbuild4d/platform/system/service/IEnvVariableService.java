@@ -17,7 +17,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface IEnvVariableService {
-    List<EnvVariableVo> getDateTimeVars() throws XPathExpressionException, ParserConfigurationException, IOException, SAXException, JBuild4DGenerallyException;
+    List<EnvVariableVo> getDateTimeVars() throws JBuild4DGenerallyException;
 
     List<EnvVariableVo> getAPIVars() throws XPathExpressionException, ParserConfigurationException, IOException, SAXException, JBuild4DGenerallyException;
 

@@ -2,6 +2,7 @@ package com.jbuild4d.platform.system.service.impl;
 
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.tools.cache.IBuildGeneralObj;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
 import com.jbuild4d.base.tools.common.ClassUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
@@ -41,7 +42,7 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
     }
 
     @Override
-    public List<EnvVariableVo> getDateTimeVars() throws XPathExpressionException, ParserConfigurationException, IOException, SAXException, JBuild4DGenerallyException {
+    public List<EnvVariableVo> getDateTimeVars() throws JBuild4DGenerallyException {
         return ListUtility.Where(getVoListFromCache(), new IListWhereCondition<EnvVariableVo>() {
             @Override
             public boolean Condition(EnvVariableVo item) {
@@ -51,7 +52,7 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
     }
 
     @Override
-    public List<EnvVariableVo> getAPIVars() throws XPathExpressionException, ParserConfigurationException, IOException, SAXException, JBuild4DGenerallyException {
+    public List<EnvVariableVo> getAPIVars() throws JBuild4DGenerallyException {
         return ListUtility.Where(getVoListFromCache(), new IListWhereCondition<EnvVariableVo>() {
             @Override
             public boolean Condition(EnvVariableVo item) {
@@ -111,10 +112,9 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
         return vo.getValue();
     }
 
-    private List<EnvVariableVo> getVoListFromCache() throws JBuild4DGenerallyException, ParserConfigurationException, SAXException, XPathExpressionException, IOException {
-        List<EnvVariableVo> allEnvVariableVoList=null;
+    private List<EnvVariableVo> getVoListFromCache() throws JBuild4DGenerallyException {
+        /*List<EnvVariableVo> allEnvVariableVoList=null;
         if(jb4dCacheService.sysRunStatusIsDebug()){
-            //allEnvVariableVoList=JB4DCacheManager.getObject(JB4DCacheManager.jb4dPlatformBuilderCacheName,"EnvVariableVoList");
             allEnvVariableVoList=loadDocumentToVoList();
             return allEnvVariableVoList;
         }
@@ -126,31 +126,43 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
                 return allEnvVariableVoList;
             }
             return allEnvVariableVoList;
-        }
+        }*/
+        return JB4DCacheManager.autoGetFromCache(JB4DCacheManager.jb4dPlatformBuilderCacheName, jb4dCacheService.sysRunStatusIsDebug(), "EnvVariableVoList", new IBuildGeneralObj<List<EnvVariableVo>>() {
+            @Override
+            public List<EnvVariableVo> BuildObj() throws JBuild4DGenerallyException {
+                return loadDocumentToVoList();
+            }
+        });
     }
 
-    private List<EnvVariableVo> loadDocumentToVoList() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException, JBuild4DGenerallyException {
-        Document xmlDocument = null;
-        List<EnvVariableVo> allEnvVariableVoList = null;
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
-        xmlDocument = XMLUtility.parseForDoc(inputStream);
-        validateDocumentEnable(xmlDocument);
-        allEnvVariableVoList = new ArrayList<>();
-        /*List<Node> nodes = XMLUtility.parseForNodeList(xmlDocument, "//EnvVariable");
-        for (Node node : nodes) {
-            allEnvVariableVoList.add(EnvVariableVo.parseEnvVarNode(node, "", ""));
-        }*/
-        Node groupRootNode=XMLUtility.parseForNode(xmlDocument,"/Config/Type[@Value='DateTime']/Group");
-        EnvVariableVo groupRootVo=EnvVariableVo.parseGroupNode(groupRootNode,"-1","DateTime");
-        allEnvVariableVoList.add(groupRootVo);
-        loopLoadGroup(allEnvVariableVoList,groupRootNode,groupRootVo,"DateTime");
+    private List<EnvVariableVo> loadDocumentToVoList() throws JBuild4DGenerallyException {
+        try {
+            Document xmlDocument = null;
+            List<EnvVariableVo> allEnvVariableVoList = null;
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
+            xmlDocument = XMLUtility.parseForDoc(inputStream);
+            validateDocumentEnable(xmlDocument);
+            allEnvVariableVoList = new ArrayList<>();
+            /*List<Node> nodes = XMLUtility.parseForNodeList(xmlDocument, "//EnvVariable");
+            for (Node node : nodes) {
+                allEnvVariableVoList.add(EnvVariableVo.parseEnvVarNode(node, "", ""));
+            }*/
+            Node groupRootNode = XMLUtility.parseForNode(xmlDocument, "/Config/Type[@Value='DateTime']/Group");
+            EnvVariableVo groupRootVo = EnvVariableVo.parseGroupNode(groupRootNode, "-1", "DateTime");
+            allEnvVariableVoList.add(groupRootVo);
+            loopLoadGroup(allEnvVariableVoList, groupRootNode, groupRootVo, "DateTime");
 
-        groupRootNode=XMLUtility.parseForNode(xmlDocument,"/Config/Type[@Value='ApiVar']/Group");
-        groupRootVo=EnvVariableVo.parseGroupNode(groupRootNode,"-1","ApiVar");
-        allEnvVariableVoList.add(groupRootVo);
-        loopLoadGroup(allEnvVariableVoList,groupRootNode,groupRootVo, "ApiVar");
+            groupRootNode = XMLUtility.parseForNode(xmlDocument, "/Config/Type[@Value='ApiVar']/Group");
+            groupRootVo = EnvVariableVo.parseGroupNode(groupRootNode, "-1", "ApiVar");
+            allEnvVariableVoList.add(groupRootVo);
+            loopLoadGroup(allEnvVariableVoList, groupRootNode, groupRootVo, "ApiVar");
 
-        return allEnvVariableVoList;
+            return allEnvVariableVoList;
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            throw new JBuild4DGenerallyException(ex.getMessage());
+        }
     }
 
     private void loopLoadGroup(List<EnvVariableVo> result,Node parentGroupNode,EnvVariableVo parentGroupVo,String type){

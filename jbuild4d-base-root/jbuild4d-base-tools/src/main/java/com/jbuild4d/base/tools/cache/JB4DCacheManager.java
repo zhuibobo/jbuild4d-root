@@ -1,5 +1,6 @@
 package com.jbuild4d.base.tools.cache;
 
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.BeanUtility;
 import org.ehcache.CacheManager;
 import org.springframework.web.context.ContextLoader;
@@ -31,7 +32,21 @@ public class JB4DCacheManager {
     public static <T> T getObject(String cacheName,String key){
         return (T) cacheManager.getCache(cacheName,String.class,Object.class).get(key);
     }
-    /*public static <T> T get(String key){
 
-    }*/
+    public static <T> T autoGetFromCache(String cacheName,boolean cancelCache,String key,IBuildGeneralObj<T> builder) throws JBuild4DGenerallyException {
+        T result=null;
+        if(cancelCache){
+            result=builder.BuildObj();
+            return result;
+        }
+        else{
+            result=JB4DCacheManager.getObject(cacheName,key);
+            if(result==null){
+                result=builder.BuildObj();
+                JB4DCacheManager.put(cacheName,key,result);
+                return result;
+            }
+            return result;
+        }
+    }
 }

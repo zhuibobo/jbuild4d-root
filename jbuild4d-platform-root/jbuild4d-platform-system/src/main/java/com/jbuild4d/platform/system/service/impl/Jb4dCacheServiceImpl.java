@@ -52,6 +52,9 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
                 if (InetAddressUtility.getThisPCHostName().equals("DESKTOP-KRH91TA")) {
                     return true;
                 }
+                else if(InetAddressUtility.getThisPCHostName().equals("DESKTOP-KUAEU1Q")){
+                    return true;
+                }
             }
         } catch (UnknownHostException e) {
             e.printStackTrace();
