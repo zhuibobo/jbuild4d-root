@@ -2,8 +2,7 @@ package com.jbuild4d.platform.builder.service.impl;
 
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.XMLUtility;
-import com.jbuild4d.platform.builder.service.IBuilderDataSetColumnCaptionConfigService;
-import com.jbuild4d.platform.system.service.IJb4dCacheService;
+import com.jbuild4d.platform.builder.service.IDataSetColumnCaptionConfigService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -21,12 +20,12 @@ import java.util.List;
  * Date: 2018/8/9
  * To change this template use File | Settings | File Templates.
  */
-public class BuilderDataSetColumnCaptionConfigServiceImpl implements IBuilderDataSetColumnCaptionConfigService {
+public class DataSetColumnCaptionConfigServiceImpl implements IDataSetColumnCaptionConfigService {
 
     String configResource= "builder"+File.separator+"dataset"+File.separator +"BuilderDataSetColumnCaptionConfig.xml";
     Document xmlDocument=null;
 
-    public BuilderDataSetColumnCaptionConfigServiceImpl() throws IOException, SAXException, ParserConfigurationException {
+    public DataSetColumnCaptionConfigServiceImpl() throws IOException, SAXException, ParserConfigurationException {
         loadDocument();
     }
 

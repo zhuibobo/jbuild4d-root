@@ -10,6 +10,6 @@ import javax.xml.xpath.XPathExpressionException;
  * Date: 2018/8/9
  * To change this template use File | Settings | File Templates.
  */
-public interface IBuilderDataSetColumnCaptionConfigService {
+public interface IDataSetColumnCaptionConfigService {
     String getCaption(String columnName) throws XPathExpressionException, JBuild4DGenerallyException;
 }

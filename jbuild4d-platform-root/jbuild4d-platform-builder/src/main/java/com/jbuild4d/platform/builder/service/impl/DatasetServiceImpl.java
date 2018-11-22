@@ -3,9 +3,7 @@ package com.jbuild4d.platform.builder.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dao.builder.DatasetMapper;
-import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
-import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
@@ -198,7 +196,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
                     }
 
                     //从配置文件中尝试查找
-                    IBuilderDataSetColumnCaptionConfigService builderDataSetColumnCaptionConfigService=new BuilderDataSetColumnCaptionConfigServiceImpl();
+                    IDataSetColumnCaptionConfigService builderDataSetColumnCaptionConfigService=new DataSetColumnCaptionConfigServiceImpl();
                     for (DataSetColumnVo columnVo : dataSetColumnVoList) {
                         if(StringUtility.isEmpty(columnVo.getColumnCaption())){
                             columnVo.setColumnCaption(builderDataSetColumnCaptionConfigService.getCaption(columnVo.getColumnName()));

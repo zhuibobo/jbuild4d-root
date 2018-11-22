@@ -94,4 +94,9 @@ public class BuilderBeansConfig {
         IFormConfigService bean=new FormConfigServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
+
+    /*@Bean
+    public IFDCKEditorPluginsService  ckEditorPluginsService(){
+
+    }*/
 }
