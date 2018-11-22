@@ -141,7 +141,8 @@
         el:"#appForm",
         data: {
             acInterface:{
-                getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList.do"
+                getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
+                getPluginsConfig:"/PlatForm/Builder/WebFormDesign/GetPluginsConfig"
             },
             currUserEntity:null,
             ruleValidate: {
@@ -246,12 +247,14 @@
             initPageUI:function(){
                 $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
 
+                AjaxUtility.Post(this.acInterface.getPluginsConfig,{},function (result) {
+                    console.log(result.data);
 
-                FormDesignUtility.InitializeCKEditor('html_design',function () {
+                    FormDesignUtility.InitializeCKEditor('html_design',result.data,function () {
 
-                });
-                FormDesignUtility.InitializeCodeDesign();
-
+                    });
+                    FormDesignUtility.InitializeCodeDesign();
+                },"json");
             },
             bindTableTree:function () {
                 var _self=this;

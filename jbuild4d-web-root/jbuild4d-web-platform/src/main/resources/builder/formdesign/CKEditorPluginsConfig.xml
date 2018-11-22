@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
     <WebControl>
+        <!--
+        1:Plugin存放于resources\static\UIComponent\HTMLDesign\WebFormDesign\Plugins文件夹下
+        2:Plugin Js文件定义以SingleNamePlugin.js命名
+        -->
         <WebFormControl SingleName="FDCT_DEF_Div_Wraper" Text="DivElem" ToolbarLocation="FDCT_Container,1" ServerResolve="" ClientResolve="" ClientResolveJs="">
             <Config></Config>
             <Desc></Desc>

@@ -9,13 +9,22 @@ var JBuild4D={
 var FormDesignUtility={
     PropCKEditorInst:null,
     $PropSelectElem:null,
-    InitializeCKEditor:function(textAreaElemId,loadComplatedFunc) {
+    InitializeCKEditor:function(textAreaElemId,pluginsConfig,loadCompletedFunc) {
         //注册扩展组件：div容器组件
-        CKEDITOR.plugins.addExternal('FormDesign_DEF_Container_Div', '../../HTMLDesign/FormDesign/Plugins/FD_Div_Wraper/',
+        CKEDITOR.plugins.addExternal('FormDesign_DEF_Container_Div', '../../HTMLDesign/WebFormDesign/Plugins/FD_Div_Wraper/',
             "FD_Div_WraperPlugin.js");
 
+        for(var i=0;i<pluginsConfig.length;i++) {
+            var singlePluginConfig = pluginsConfig[i];
+            var singleName = singlePluginConfig.SingleName;
+            var pluginFileName = singleName + "Plugin.js";
+            var pluginFolderName = "../../HTMLDesign/WebFormDesign/Plugins/" + singleName + "/";
+            //注册扩展组件
+            CKEDITOR.plugins.addExternal(singleName, pluginFolderName, pluginFileName);
+        }
+
         //加载默认配置文件
-        var editorConfigUrl = StringUtility.GetTimeStampUrl('../../HTMLDesign/FormDesign/CKEditorConfig.js');
+        var editorConfigUrl = StringUtility.GetTimeStampUrl('../../HTMLDesign/WebFormDesign/CKEditorConfig.js');
 
         //把扩展组件加入工具条
         CKEDITOR.replace(textAreaElemId, {
@@ -50,8 +59,8 @@ var FormDesignUtility={
 
         CKEDITOR.on('instanceReady', function (e) {
             //alert(e.editor.name + '加载完毕！')
-            if(typeof(loadComplatedFunc)=="function"){
-                loadComplatedFunc();
+            if(typeof(loadCompletedFunc)=="function"){
+                loadCompletedFunc();
             }
         });
     },
