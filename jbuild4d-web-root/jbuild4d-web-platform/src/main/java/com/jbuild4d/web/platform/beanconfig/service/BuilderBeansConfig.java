@@ -19,11 +19,14 @@ import com.jbuild4d.platform.builder.datastorage.impl.TableGroupServiceImpl;
 import com.jbuild4d.platform.builder.datastorage.impl.TableServiceImpl;
 import com.jbuild4d.platform.builder.service.*;
 import com.jbuild4d.platform.builder.service.impl.*;
+import com.jbuild4d.platform.builder.webformdesign.IFDCKEditorPluginsService;
 import com.jbuild4d.platform.builder.webformdesign.IFormConfigService;
 import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
+import com.jbuild4d.platform.builder.webformdesign.impl.FDCKEditorPluginsService;
 import com.jbuild4d.platform.builder.webformdesign.impl.FormConfigServiceImpl;
 import com.jbuild4d.platform.builder.webformdesign.impl.FormResourceServiceImpl;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
+import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -113,8 +116,9 @@ public class BuilderBeansConfig {
         return bean;
     }
 
-    /*@Bean
-    public IFDCKEditorPluginsService  ckEditorPluginsService(){
-
-    }*/
+    @Bean
+    public IFDCKEditorPluginsService ckEditorPluginsService(IJb4dCacheService jb4dCacheService){
+        IFDCKEditorPluginsService ifdckEditorPluginsService=new FDCKEditorPluginsService(jb4dCacheService);
+        return ifdckEditorPluginsService;
+    }
 }
