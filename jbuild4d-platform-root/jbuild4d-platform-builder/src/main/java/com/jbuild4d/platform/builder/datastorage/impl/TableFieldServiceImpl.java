@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.service.impl;
+package com.jbuild4d.platform.builder.datastorage.impl;
 
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dao.builder.TableFieldMapper;
@@ -11,7 +11,7 @@ import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
-import com.jbuild4d.platform.builder.service.ITableFieldService;
+import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import org.mybatis.spring.SqlSessionTemplate;
 

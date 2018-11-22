@@ -3,7 +3,7 @@ package com.jbuild4d.web.platform.controller.builder.datastorage.database;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
-import com.jbuild4d.platform.builder.service.ITableGroupService;
+import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,12 +1,11 @@
 package com.jbuild4d.web.platform.controller.builder.dataset;
 import java.util.Date;
 
-import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.tools.common.JsonUtility;
-import com.jbuild4d.platform.builder.service.IDatasetGroupService;
+import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.web.platform.controller.ControllerTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.junit.Assert;

@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.service.impl;
+package com.jbuild4d.platform.builder.datastorage.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.TableGroupMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
@@ -8,7 +8,7 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.platform.builder.service.ITableGroupService;
+import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.Date;

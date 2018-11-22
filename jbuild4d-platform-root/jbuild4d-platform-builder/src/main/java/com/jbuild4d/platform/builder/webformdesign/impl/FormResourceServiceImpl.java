@@ -1,14 +1,13 @@
-package com.jbuild4d.platform.builder.service.impl;
+package com.jbuild4d.platform.builder.webformdesign.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.FormResourceMapper;
-import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.platform.builder.service.IFormResourceService;
+import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 /**

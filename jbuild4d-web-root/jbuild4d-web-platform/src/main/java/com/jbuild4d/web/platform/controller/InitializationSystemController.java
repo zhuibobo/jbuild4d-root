@@ -1,15 +1,13 @@
 package com.jbuild4d.web.platform.controller;
 
-import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
-import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTreeTableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
-import com.jbuild4d.platform.builder.service.IDatasetGroupService;
+import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.platform.builder.service.IModuleService;
-import com.jbuild4d.platform.builder.service.ITableFieldService;
-import com.jbuild4d.platform.builder.service.ITableGroupService;
+import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
+import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.organ.service.IOrganService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;

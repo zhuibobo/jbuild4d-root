@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.service;
+package com.jbuild4d.platform.builder.datastorage;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.exception.JBuild4DPhysicalTableException;

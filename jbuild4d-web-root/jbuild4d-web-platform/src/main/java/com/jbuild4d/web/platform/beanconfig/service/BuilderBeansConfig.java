@@ -3,8 +3,26 @@ package com.jbuild4d.web.platform.beanconfig.service;
 import com.jbuild4d.base.dbaccess.dao.builder.*;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.platform.builder.dataset.IDatasetColumnService;
+import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
+import com.jbuild4d.platform.builder.dataset.IDatasetRelatedTableService;
+import com.jbuild4d.platform.builder.dataset.IDatasetService;
+import com.jbuild4d.platform.builder.dataset.impl.DatasetColumnServiceImpl;
+import com.jbuild4d.platform.builder.dataset.impl.DatasetGroupServiceImpl;
+import com.jbuild4d.platform.builder.dataset.impl.DatasetRelatedTableServiceImpl;
+import com.jbuild4d.platform.builder.dataset.impl.DatasetServiceImpl;
+import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
+import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
+import com.jbuild4d.platform.builder.datastorage.ITableService;
+import com.jbuild4d.platform.builder.datastorage.impl.TableFieldServiceImpl;
+import com.jbuild4d.platform.builder.datastorage.impl.TableGroupServiceImpl;
+import com.jbuild4d.platform.builder.datastorage.impl.TableServiceImpl;
 import com.jbuild4d.platform.builder.service.*;
 import com.jbuild4d.platform.builder.service.impl.*;
+import com.jbuild4d.platform.builder.webformdesign.IFormConfigService;
+import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
+import com.jbuild4d.platform.builder.webformdesign.impl.FormConfigServiceImpl;
+import com.jbuild4d.platform.builder.webformdesign.impl.FormResourceServiceImpl;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
@@ -60,7 +78,7 @@ public class BuilderBeansConfig {
     public IDatasetService datasetService(
             ISQLBuilderService _sqlBuilderService, DatasetMapper mapper, SqlSessionTemplate sqlSessionTemplate,
             JdbcOperations jdbcOperations, IBuilderConfigService _builderConfigService, ITableService tableService,
-            ITableFieldService tableFieldService, IEnvVariableService envVariableService,IDatasetRelatedTableService datasetRelatedTableService,IDatasetColumnService datasetColumnService) {
+            ITableFieldService tableFieldService, IEnvVariableService envVariableService, IDatasetRelatedTableService datasetRelatedTableService, IDatasetColumnService datasetColumnService) {
         IDatasetService bean=new DatasetServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,jdbcOperations,_builderConfigService,tableService,tableFieldService,envVariableService,datasetRelatedTableService,datasetColumnService);
         return bean;
     }

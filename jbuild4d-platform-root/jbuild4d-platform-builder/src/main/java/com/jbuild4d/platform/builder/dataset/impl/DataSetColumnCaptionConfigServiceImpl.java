@@ -1,8 +1,8 @@
-package com.jbuild4d.platform.builder.service.impl;
+package com.jbuild4d.platform.builder.dataset.impl;
 
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.common.XMLUtility;
-import com.jbuild4d.platform.builder.service.IDataSetColumnCaptionConfigService;
+import com.jbuild4d.platform.builder.dataset.IDataSetColumnCaptionConfigService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;

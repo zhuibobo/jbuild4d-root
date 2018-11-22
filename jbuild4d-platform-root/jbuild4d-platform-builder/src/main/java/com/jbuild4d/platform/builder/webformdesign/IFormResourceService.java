@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.service;
+package com.jbuild4d.platform.builder.webformdesign;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs;
 import com.jbuild4d.base.service.IBaseService;

@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.dbtablebuilder;
+package com.jbuild4d.platform.builder.datastorage.dbtablebuilder;
 
 /**
  * Created with IntelliJ IDEA.

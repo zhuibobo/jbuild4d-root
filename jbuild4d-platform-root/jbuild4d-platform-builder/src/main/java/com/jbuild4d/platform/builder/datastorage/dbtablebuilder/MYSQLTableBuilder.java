@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.dbtablebuilder;
+package com.jbuild4d.platform.builder.datastorage.dbtablebuilder;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;

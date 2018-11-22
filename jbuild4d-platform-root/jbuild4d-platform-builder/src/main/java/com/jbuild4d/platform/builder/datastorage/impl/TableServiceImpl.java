@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.service.impl;
+package com.jbuild4d.platform.builder.datastorage.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dao.builder.TableMapper;
@@ -12,9 +12,9 @@ import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.list.IListWhereCondition;
 import com.jbuild4d.base.tools.common.list.ListUtility;
-import com.jbuild4d.platform.builder.dbtablebuilder.TableBuilederFace;
+import com.jbuild4d.platform.builder.datastorage.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableTypeEnum;
-import com.jbuild4d.platform.builder.service.ITableService;
+import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.platform.builder.vo.UpdateTableResolveVo;
 import com.jbuild4d.platform.builder.vo.ValidateTableUpdateResultVo;

@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.service.impl;
+package com.jbuild4d.platform.builder.dataset.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -15,7 +15,13 @@ import com.jbuild4d.base.tools.common.ClassUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.list.IListWhereCondition;
 import com.jbuild4d.base.tools.common.list.ListUtility;
+import com.jbuild4d.platform.builder.dataset.IDataSetColumnCaptionConfigService;
+import com.jbuild4d.platform.builder.dataset.IDatasetColumnService;
+import com.jbuild4d.platform.builder.dataset.IDatasetRelatedTableService;
+import com.jbuild4d.platform.builder.dataset.IDatasetService;
 import com.jbuild4d.platform.builder.datasetbuilder.SQLDataSetBuilder;
+import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
+import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.extend.IDataSetAPI;
 import com.jbuild4d.platform.builder.service.*;
 import com.jbuild4d.platform.builder.vo.*;

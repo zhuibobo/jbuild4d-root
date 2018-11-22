@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.service.impl;
+package com.jbuild4d.platform.builder.dataset.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.DatasetRelatedTableMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity;
@@ -7,7 +7,7 @@ import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.platform.builder.service.IDatasetRelatedTableService;
+import com.jbuild4d.platform.builder.dataset.IDatasetRelatedTableService;
 import com.jbuild4d.platform.builder.vo.DataSetRelatedTableVo;
 import org.mybatis.spring.SqlSessionTemplate;
 
