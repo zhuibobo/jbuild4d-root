@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.datasetbuilder;
+package com.jbuild4d.platform.builder.dataset.builder;
 
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
