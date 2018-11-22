@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
     <WebControl>
-        <WebFormControl SingleName="FDCT_DEF_Div_Wraper" Text="" ToolbarLocation="Form_Container,1" ServerResolve="" ClientResolve="" Js="">
+        <WebFormControl SingleName="FDCT_DEF_Div_Wraper" Text="DivElem" ToolbarLocation="FDCT_Container,1" ServerResolve="" ClientResolve="" ClientResolveJs="">
+            <Config></Config>
+            <Desc></Desc>
+        </WebFormControl>
+        <WebFormControl SingleName="FDCT_DEF_TextBox" Text="文本输入框" ToolbarLocation="FDCT_Single,1" ServerResolve="" ClientResolve="" ClientResolveJs="">
+            <Config></Config>
             <Desc></Desc>
         </WebFormControl>
     </WebControl>
