@@ -11,16 +11,18 @@ var FormDesignUtility={
     $PropSelectElem:null,
     InitializeCKEditor:function(textAreaElemId,pluginsConfig,loadCompletedFunc) {
         //注册扩展组件：div容器组件
-        CKEDITOR.plugins.addExternal('FormDesign_DEF_Container_Div', '../../HTMLDesign/WebFormDesign/Plugins/FD_Div_Wraper/',
-            "FD_Div_WraperPlugin.js");
-
+        /*CKEDITOR.plugins.addExternal('FormDesign_DEF_Container_Div', '../../HTMLDesign/WebFormDesign/Plugins/FD_Div_Wraper/',
+            "FD_Div_WraperPlugin.js");*/
+        debugger;
+        var extraPlugins=new Array();
         for(var i=0;i<pluginsConfig.length;i++) {
             var singlePluginConfig = pluginsConfig[i];
-            var singleName = singlePluginConfig.SingleName;
+            var singleName = singlePluginConfig.singleName;
             var pluginFileName = singleName + "Plugin.js";
             var pluginFolderName = "../../HTMLDesign/WebFormDesign/Plugins/" + singleName + "/";
             //注册扩展组件
             CKEDITOR.plugins.addExternal(singleName, pluginFolderName, pluginFileName);
+            extraPlugins.push(singleName);
         }
 
         //加载默认配置文件
@@ -29,7 +31,7 @@ var FormDesignUtility={
         //把扩展组件加入工具条
         CKEDITOR.replace(textAreaElemId, {
             customConfig: editorConfigUrl,
-            extraPlugins: "FormDesign_DEF_Container_Div"
+            extraPlugins: extraPlugins.join(",")
         });
 
         //注册在编辑器中粘贴的处理事件

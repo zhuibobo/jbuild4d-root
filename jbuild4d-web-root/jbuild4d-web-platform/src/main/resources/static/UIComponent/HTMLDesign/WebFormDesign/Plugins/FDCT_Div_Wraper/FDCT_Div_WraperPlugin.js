@@ -4,7 +4,7 @@
 
 JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin={
     Setting:{
-        Name:'FormDesign_DEF_Container_Div',                                          //插件名称
+        Name:'FDCT_Div_Wraper',                                          //插件名称
         GroupName:'Form_Container,1',                                                 //所在工具栏分组
 
         RendererType:'Form_Container_Div',
