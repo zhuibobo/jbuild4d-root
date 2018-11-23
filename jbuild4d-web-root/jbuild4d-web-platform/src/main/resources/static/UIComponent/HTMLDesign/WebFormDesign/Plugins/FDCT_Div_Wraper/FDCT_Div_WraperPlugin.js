@@ -43,14 +43,7 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_Div_Wraper.Setting.Name, {
     init: function(editor) {
         var ControlSetting=JBuild4D.FormDesign.Plugins.FDCT_Div_Wraper.Setting;
 
-        if(ControlSetting.DesignModalInputCss!=undefined&&ControlSetting.DesignModalInputCss!=null&&ControlSetting.DesignModalInputCss!="") {
-            var cssPath = this.path + ControlSetting.DesignModalInputCss;
-            editor.on('mode', function () {
-                if (editor.mode == 'wysiwyg') {
-                    this.document.appendStyleSheet(cssPath);
-                }
-            });
-        }
+        JBuild4D.FormDesign.ImportCssToWysiwyg(this,ControlSetting,editor);
 
         CKEDITOR.dialog.addIframe(
             ControlSetting.DialogName,

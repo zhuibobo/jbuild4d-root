@@ -12,6 +12,16 @@ var JBuild4D={
                 }
             }
         },
+        ImportCssToWysiwyg:function(sender,controlSetting,editor){
+            if(controlSetting.DesignModalInputCss!=undefined&&controlSetting.DesignModalInputCss!=null&&controlSetting.DesignModalInputCss!="") {
+                var cssPath = sender.path + controlSetting.DesignModalInputCss;
+                editor.on('mode', function () {
+                    if (editor.mode == 'wysiwyg') {
+                        this.document.appendStyleSheet(cssPath);
+                    }
+                });
+            }
+        },
         Plugins:{
 
         },
@@ -28,7 +38,7 @@ var FormDesignUtility={
         //注册扩展组件
         /*CKEDITOR.plugins.addExternal('FDCT_Div_Wraper', '../../HTMLDesign/WebFormDesign/Plugins//FDCT_Div_Wraper/',
             "FDCT_Div_WraperPlugin.js");*/
-        debugger;
+        //debugger;
         var extraPlugins=new Array();
         for(var i=0;i<pluginsConfig.length;i++) {
             var singlePluginConfig = pluginsConfig[i];
