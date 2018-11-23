@@ -1,6 +1,21 @@
 var JBuild4D={
     FormDesign:{
+        CoverEmptyPluginProp:function(obj){
+            var coverObj=JBuild4D.FormDesign.PluginsDefConfig[obj.Name];
+            for(var prop in obj){
+                if(typeof(obj[prop])!="function"){
+                    if(obj[prop]==""||obj[prop]==null){
+                        if(coverObj[prop]){
+                            obj[prop]=coverObj[prop];
+                        }
+                    }
+                }
+            }
+        },
         Plugins:{
+
+        },
+        PluginsDefConfig:{
 
         }
     }
@@ -10,19 +25,34 @@ var FormDesignUtility={
     PropCKEditorInst:null,
     $PropSelectElem:null,
     InitializeCKEditor:function(textAreaElemId,pluginsConfig,loadCompletedFunc) {
-        //注册扩展组件：div容器组件
-        /*CKEDITOR.plugins.addExternal('FormDesign_DEF_Container_Div', '../../HTMLDesign/WebFormDesign/Plugins/FD_Div_Wraper/',
-            "FD_Div_WraperPlugin.js");*/
+        //注册扩展组件
+        /*CKEDITOR.plugins.addExternal('FDCT_Div_Wraper', '../../HTMLDesign/WebFormDesign/Plugins//FDCT_Div_Wraper/',
+            "FDCT_Div_WraperPlugin.js");*/
         debugger;
         var extraPlugins=new Array();
         for(var i=0;i<pluginsConfig.length;i++) {
             var singlePluginConfig = pluginsConfig[i];
             var singleName = singlePluginConfig.singleName;
+            var toolbarLocation=singlePluginConfig.toolbarLocation;
+            var text=singlePluginConfig.text;
+            var serverResolve=singlePluginConfig.serverResolve;
+            var clientResolve=singlePluginConfig.clientResolve;
+            var clientResolveJs=singlePluginConfig.clientResolveJs;
             var pluginFileName = singleName + "Plugin.js";
             var pluginFolderName = "../../HTMLDesign/WebFormDesign/Plugins/" + singleName + "/";
             //注册扩展组件
             CKEDITOR.plugins.addExternal(singleName, pluginFolderName, pluginFileName);
             extraPlugins.push(singleName);
+
+            //设置默认值
+            JBuild4D.FormDesign.PluginsDefConfig[singleName]={
+                Name:singleName,
+                ToolbarLocation:toolbarLocation,
+                ToolbarLabel:text,
+                ClientResolve:clientResolve,
+                ServerResolve:serverResolve,
+                ClientResolveJs:clientResolveJs
+            }
         }
 
         //加载默认配置文件

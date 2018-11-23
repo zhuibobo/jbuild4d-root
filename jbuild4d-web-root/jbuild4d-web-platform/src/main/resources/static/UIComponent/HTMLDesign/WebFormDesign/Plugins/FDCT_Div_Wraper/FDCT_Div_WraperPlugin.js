@@ -1,48 +1,50 @@
 /**
- * Created by zhuangrb on 2016/01/20.
+ * Created by zhuangrb on 2018/11/23.
  */
-
-JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin={
+(JBuild4D.FormDesign.Plugins.FDCT_Div_Wraper={
     Setting:{
-        Name:'FDCT_Div_Wraper',                                          //插件名称
-        GroupName:'Form_Container,1',                                                 //所在工具栏分组
+        //插件名称
+        Name:'FDCT_Div_Wraper',
 
-        RendererType:'Form_Container_Div',
+        //设置对话框相关设置
+        DialogName:'',
+        DialogWidth:580,
+        DialogHeight:350,
+        DialogPageUrl:StringUtility.GetTimeStampUrl('Dialog.html'),
+        DialogTitle:"DIV",
 
-        DialogName:'',                                                              //设置对话框名称
-        DialogWidth:580,                                                            //对话框的宽度
-        DialogHeight:350,                                                           //对话框的高度
-        DialogSettingPageUrl:StringUtility.GetTimeStampUrl('Dialog.html'),   //设置的页面地址
-        DialogSettingTitle:"DIV",
-
-        ToolbarCommand:'',                                                        //工具栏触发命令的名称,需要保持唯一
-        ToolbarIcon:'Icon.png',                                                           //工具栏图标
-        ToolbarLabel:"DIV",                                                   //工具栏提示
+        //设计器工具栏相关设置
+        ToolbarCommand:'',
+        //工具栏触发命令的名称,需要保持唯一
+        ToolbarIcon:'Icon.png',
+        ToolbarLabel:"",
+        ToolbarLocation:'',
 
         IFrameWindow:null,
         IRCommandName:"Insert",
         DesignModalInputCss:"Css.css",
-        ServerResolve:"com.sevenstar.platform.categoryfrom.controls.impl.ContainerDivImpl",//服务端的解析类
+
+        //客户端与服务端解析类
+        ClientResolve:"",
+        ServerResolve:"",
 
         Init:function () {
+            //使用默认值覆盖定义的空值
+            JBuild4D.FormDesign.CoverEmptyPluginProp(this);
+            //alert(this.ToolbarLocation);
             this.DialogName=this.Name;
-            //this.DialogSettingPageUrl=StringUtility.GetTimeStampUrl("dialogs/"+this.Name+"_Dialog.jsp");
             this.ToolbarCommand="JBuild4D.FormDesign.Plugins."+this.Name;
-            //this.ToolbarIcon="Icon.png";
             this.DialogSettingTitle=this.ToolbarLabel+"控件";
         }
     }
-}
+}).Setting.Init();
 
-JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin.Setting.Init();
+CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_Div_Wraper.Setting.Name, {
+    init: function(editor) {
+        var ControlSetting=JBuild4D.FormDesign.Plugins.FDCT_Div_Wraper.Setting;
 
-CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin.Setting.Name, {
-
-    init: function( editor ) {
-        var exsetting=JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin.Setting;
-
-        if(exsetting.DesignModalInputCss!=undefined&&exsetting.DesignModalInputCss!=null&&exsetting.DesignModalInputCss!="") {
-            var cssPath = this.path + exsetting.DesignModalInputCss;
+        if(ControlSetting.DesignModalInputCss!=undefined&&ControlSetting.DesignModalInputCss!=null&&ControlSetting.DesignModalInputCss!="") {
+            var cssPath = this.path + ControlSetting.DesignModalInputCss;
             editor.on('mode', function () {
                 if (editor.mode == 'wysiwyg') {
                     this.document.appendStyleSheet(cssPath);
@@ -51,16 +53,16 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin.Setting.Nam
         }
 
         CKEDITOR.dialog.addIframe(
-            exsetting.DialogName,
-            exsetting.DialogSettingTitle,
-            this.path +exsetting.DialogSettingPageUrl, exsetting.DialogWidth, exsetting.DialogHeight,
+            ControlSetting.DialogName,
+            ControlSetting.DialogSettingTitle,
+            this.path +ControlSetting.DialogSettingPageUrl, ControlSetting.DialogWidth, ControlSetting.DialogHeight,
             function () {
                 var iframe = document.getElementById(this._.frameId);
-                exsetting.IFrameWindow = iframe;
+                ControlSetting.IFrameWindow = iframe;
                 SimpleControlUtil.SetElemPropsInEditDialog(exsetting.IFrameWindow, exsetting.IRCommandName);
             }, {
                 onOk: function () {
-                    var propsJson = exsetting.IFrameWindow.contentWindow.PageFunc.GetProps();
+                    var propsJson = ControlSetting.IFrameWindow.contentWindow.PageFunc.GetProps();
                     var $html=$("<div><div is_container='true' server_resolve='"+exsetting.ServerResolve+"' class='Form_Container_DivPlugin_Design_Modal' renderer_type="+exsetting.RendererType+" /></div>");
                     if(propsJson.ishide=="true"){
                         $html.find("div").addClass("Form_Container_DivPlugin_Design_Modal_Hidden");
@@ -79,17 +81,17 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FD_Div_WraperPlugin.Setting.Nam
             }
         );
 
-        editor.addCommand(exsetting.ToolbarCommand,new CKEDITOR.dialogCommand(exsetting.DialogName));
+        editor.addCommand(ControlSetting.ToolbarCommand,new CKEDITOR.dialogCommand(ControlSetting.DialogName));
 
-        editor.ui.addButton(exsetting.Name, {
-            label: exsetting.ToolbarLabel,
-            icon: this.path + exsetting.ToolbarIcon,
-            command: exsetting.ToolbarCommand,
-            toolbar: exsetting.GroupName
+        editor.ui.addButton(ControlSetting.Name, {
+            label: ControlSetting.ToolbarLabel,
+            icon: this.path + ControlSetting.ToolbarIcon,
+            command: ControlSetting.ToolbarCommand,
+            toolbar: ControlSetting.ToolbarLocation
         });
 
         editor.on('doubleclick', function( evt ) {
-            SimpleControlUtil.CKEditorElemDBClickEvent(evt,exsetting);
+            SimpleControlUtil.CKEditorElemDBClickEvent(evt,ControlSetting);
         })
     }
 });
