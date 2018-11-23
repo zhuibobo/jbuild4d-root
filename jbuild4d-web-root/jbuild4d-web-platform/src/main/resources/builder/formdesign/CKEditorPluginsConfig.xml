@@ -9,10 +9,10 @@
             <Config></Config>
             <Desc></Desc>
         </WebFormControl>
-        <!--<WebFormControl SingleName="FDCT_TextBox" Text="文本输入框" ToolbarLocation="FDCT_Single,1" ServerResolve="" ClientResolve="" ClientResolveJs="">
+        <WebFormControl SingleName="FDCT_TextBox" Text="单行输入框" ToolbarLocation="FDCT_Simple,1" ServerResolve="" ClientResolve="" ClientResolveJs="">
             <Config></Config>
             <Desc></Desc>
-        </WebFormControl>-->
+        </WebFormControl>
     </WebControl>
     <AppControl>
 
