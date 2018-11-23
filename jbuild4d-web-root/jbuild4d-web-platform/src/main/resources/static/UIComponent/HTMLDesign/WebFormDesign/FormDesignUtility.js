@@ -1,5 +1,7 @@
 var JBuild4D={
     FormDesign:{
+        IFrameExecuteInsertActionName:"Insert",
+        IFrameExecuteEditActionName:"Edit",
         CoverEmptyPluginProp:function(obj){
             var coverObj=JBuild4D.FormDesign.PluginsDefConfig[obj.Name];
             for(var prop in obj){
@@ -55,6 +57,8 @@ var FormDesignUtility={
             var serverResolve=singlePluginConfig.serverResolve;
             var clientResolve=singlePluginConfig.clientResolve;
             var clientResolveJs=singlePluginConfig.clientResolveJs;
+            var dialogWidth=singlePluginConfig.dialogWidth;
+            var dialogHeight=singlePluginConfig.dialogHeight;
             var pluginFileName = singleName + "Plugin.js";
             var pluginFolderName = "../../HTMLDesign/WebFormDesign/Plugins/" + singleName + "/";
             //注册扩展组件
@@ -68,7 +72,9 @@ var FormDesignUtility={
                 ToolbarLabel:text,
                 ClientResolve:clientResolve,
                 ServerResolve:serverResolve,
-                ClientResolveJs:clientResolveJs
+                ClientResolveJs:clientResolveJs,
+                DialogWidth:dialogWidth,
+                DialogHeight:dialogHeight
             }
         }
 

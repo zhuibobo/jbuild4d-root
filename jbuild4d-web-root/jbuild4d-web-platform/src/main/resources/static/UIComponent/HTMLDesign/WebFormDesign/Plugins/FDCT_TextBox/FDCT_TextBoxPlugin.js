@@ -8,8 +8,8 @@
 
         //设置对话框相关设置
         DialogName:'',
-        DialogWidth:580,
-        DialogHeight:350,
+        DialogWidth:null,
+        DialogHeight:null,
         DialogPageUrl:StringUtility.GetTimeStampUrl('Dialog.html'),
         DialogTitle:"DIV",
 
@@ -23,7 +23,7 @@
         //设计控件相关的对话框
         IFrameWindow:null,
         //设计控件对话框将执行的工作
-        IFrameExecuteAction:"Insert",
+        IFrameExecuteActionName:"Insert",
         //需要引入到设计器的样式文件
         DesignModalInputCss:"Css.css",
 
@@ -41,6 +41,7 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.Name, {
     init: function(editor) {
         var ControlSetting=JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting;
 
+
         CKEDITOR.dialog.addIframe(
             ControlSetting.DialogName,
             ControlSetting.DialogSettingTitle,
@@ -48,24 +49,20 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.Name, {
             function () {
                 var iframe = document.getElementById(this._.frameId);
                 ControlSetting.IFrameWindow = iframe;
-                SimpleControlUtil.SetElemPropsInEditDialog(exsetting.IFrameWindow, exsetting.IRCommandName);
-            }, {
+                //SimpleControlUtil.SetElemPropsInEditDialog(ControlSetting.IFrameWindow, ControlSetting.IRCommandName);
+            },
+            {
+                //对话框确认按钮触发的事件
                 onOk: function () {
-                    var propsJson = ControlSetting.IFrameWindow.contentWindow.PageFunc.GetProps();
-                    var $html=$("<div><div is_container='true' server_resolve='"+exsetting.ServerResolve+"' class='Form_Container_DivPlugin_Design_Modal' renderer_type="+exsetting.RendererType+" /></div>");
-                    if(propsJson.ishide=="true"){
-                        $html.find("div").addClass("Form_Container_DivPlugin_Design_Modal_Hidden");
+                    if(ControlSetting.IFrameWindow.contentWindow.PageFunc.GetProps()==false) {
+                        return false;
                     }
-                    if(propsJson.createinnertable=="true"){
-                        $html.find("div").html("<table style='width: 80%;margin:auto' border='1'>" +
-                            "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>" +
-                            "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>" +
-                            "</table>")
-                    }
-                    SimpleControlUtil.PluginDialogOkEvent(exsetting,$html.html());
+                    var html="<input type='text' renderer_type='"+ControlSetting.RendererType+"' server_resolve='"+ControlSetting.ServerResolve+"' client_resolve='"+ControlSetting.ClientResolve+"' />";
+                    //SimpleControlUtil.PluginDialogOkEvent(ControlSetting,html);
                 },
+                //取消按钮对话框
                 onCancel:function(){
-                    //SimpleControlUtil.PluginDialogCancelEvent(exsetting);
+                    //SimpleControlUtil.PluginDialogCancelEvent(ControlSetting);
                 }
             }
         );
@@ -80,7 +77,7 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.Name, {
         });
 
         editor.on('doubleclick', function( evt ) {
-            SimpleControlUtil.CKEditorElemDBClickEvent(evt,ControlSetting);
-        })
+            //SimpleControlUtil.CKEditorElemDBClickEvent(evt,ControlSetting);
+        });
     }
 });

@@ -5,11 +5,11 @@
         1:Plugin存放于resources\static\UIComponent\HTMLDesign\WebFormDesign\Plugins文件夹下
         2:Plugin Js文件定义以SingleNamePlugin.js命名
         -->
-        <WebFormControl SingleName="FDCT_Div_Wraper" Text="DivElem" ToolbarLocation="FDCT_Container,1" ServerResolve="" ClientResolve="" ClientResolveJs="">
+        <WebFormControl SingleName="FDCT_Div_Wraper" Text="DivElem" ToolbarLocation="FDCT_Container,1" ServerResolve="" ClientResolve="" ClientResolveJs="" DialogWidth="780" DialogHeight="550">
             <Config></Config>
             <Desc></Desc>
         </WebFormControl>
-        <WebFormControl SingleName="FDCT_TextBox" Text="单行输入框" ToolbarLocation="FDCT_Simple,1" ServerResolve="" ClientResolve="" ClientResolveJs="">
+        <WebFormControl SingleName="FDCT_TextBox" Text="单行输入框" ToolbarLocation="FDCT_Simple,1" ServerResolve="" ClientResolve="" ClientResolveJs="" DialogWidth="780" DialogHeight="550">
             <Config></Config>
             <Desc></Desc>
         </WebFormControl>

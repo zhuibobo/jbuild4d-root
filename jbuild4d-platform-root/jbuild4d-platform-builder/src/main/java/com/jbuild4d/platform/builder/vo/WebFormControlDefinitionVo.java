@@ -14,6 +14,8 @@ public class WebFormControlDefinitionVo {
     private String clientResolveJs;
     private String desc;
     private String config;
+    private int dialogWidth;
+    private int dialogHeight;
 
     public String getSingleName() {
         return singleName;
@@ -79,6 +81,22 @@ public class WebFormControlDefinitionVo {
         this.config = config;
     }
 
+    public int getDialogWidth() {
+        return dialogWidth;
+    }
+
+    public void setDialogWidth(int dialogWidth) {
+        this.dialogWidth = dialogWidth;
+    }
+
+    public int getDialogHeight() {
+        return dialogHeight;
+    }
+
+    public void setDialogHeight(int dialogHeight) {
+        this.dialogHeight = dialogHeight;
+    }
+
     public static WebFormControlDefinitionVo parseWebFormControlNode(Node node) throws XPathExpressionException {
         WebFormControlDefinitionVo vo=new WebFormControlDefinitionVo();
         vo.setSingleName(XMLUtility.getAttribute(node,"SingleName"));
@@ -87,6 +105,8 @@ public class WebFormControlDefinitionVo {
         vo.setServerResolve(XMLUtility.getAttribute(node,"ServerResolve"));
         vo.setClientResolve(XMLUtility.getAttribute(node,"ClientResolve"));
         vo.setClientResolveJs(XMLUtility.getAttribute(node,"ClientResolveJs"));
+        vo.setDialogWidth(Integer.parseInt(XMLUtility.getAttribute(node,"DialogWidth")));
+        vo.setDialogHeight(Integer.parseInt(XMLUtility.getAttribute(node,"DialogHeight")));
         vo.setDesc(XMLUtility.parseForString(node,"Desc"));
         vo.setConfig(XMLUtility.parseForString(node,"Config"));
         return vo;
