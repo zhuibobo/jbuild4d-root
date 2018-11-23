@@ -12,6 +12,13 @@ var JBuild4D={
                 }
             }
         },
+        InitControlSetting:function(setting){
+            //使用默认值覆盖定义的空值
+            JBuild4D.FormDesign.CoverEmptyPluginProp(setting);
+            setting.DialogName=setting.Name;
+            setting.ToolbarCommand="JBuild4D.FormDesign.Plugins."+setting.Name;
+            setting.DialogSettingTitle=setting.ToolbarLabel+"Web控件";
+        },
         ImportCssToWysiwyg:function(sender,controlSetting,editor){
             if(controlSetting.DesignModalInputCss!=undefined&&controlSetting.DesignModalInputCss!=null&&controlSetting.DesignModalInputCss!="") {
                 var cssPath = sender.path + controlSetting.DesignModalInputCss;

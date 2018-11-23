@@ -20,8 +20,10 @@
         ToolbarLabel:"",
         ToolbarLocation:'',
 
+        //设计控件相关的对话框
         IFrameWindow:null,
-        IRCommandName:"Insert",
+        //设计控件对话框将执行的工作
+        IFrameExecuteAction:"Insert",
         DesignModalInputCss:"Css.css",
 
         //客户端与服务端解析类
@@ -29,12 +31,7 @@
         ServerResolve:"",
 
         Init:function () {
-            //使用默认值覆盖定义的空值
-            JBuild4D.FormDesign.CoverEmptyPluginProp(this);
-            //alert(this.ToolbarLocation);
-            this.DialogName=this.Name;
-            this.ToolbarCommand="JBuild4D.FormDesign.Plugins."+this.Name;
-            this.DialogSettingTitle=this.ToolbarLabel+"控件";
+            JBuild4D.FormDesign.InitControlSetting(this);
         }
     }
 }).Setting.Init();
@@ -48,7 +45,7 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_Div_Wraper.Setting.Name, {
         CKEDITOR.dialog.addIframe(
             ControlSetting.DialogName,
             ControlSetting.DialogSettingTitle,
-            this.path +ControlSetting.DialogSettingPageUrl, ControlSetting.DialogWidth, ControlSetting.DialogHeight,
+            this.path +ControlSetting.DialogPageUrl, ControlSetting.DialogWidth, ControlSetting.DialogHeight,
             function () {
                 var iframe = document.getElementById(this._.frameId);
                 ControlSetting.IFrameWindow = iframe;
