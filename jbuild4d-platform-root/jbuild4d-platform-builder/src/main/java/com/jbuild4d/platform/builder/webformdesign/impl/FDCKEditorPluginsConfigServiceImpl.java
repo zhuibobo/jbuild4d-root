@@ -21,14 +21,14 @@ import java.util.List;
  * Date: 2018/11/22
  * To change this template use File | Settings | File Templates.
  */
-public class FDCKEditorPluginsConfigService implements IFDCKEditorPluginsConfigService {
+public class FDCKEditorPluginsConfigServiceImpl implements IFDCKEditorPluginsConfigService {
 
     String configResource= "builder"+ File.separator+"formdesign"+File.separator +"CKEditorPluginsConfig.xml";
     Document xmlDocument=null;
     IJb4dCacheService jb4dCacheService;
 
 
-    public FDCKEditorPluginsConfigService(IJb4dCacheService jb4dCacheService) {
+    public FDCKEditorPluginsConfigServiceImpl(IJb4dCacheService jb4dCacheService) {
         this.jb4dCacheService = jb4dCacheService;
     }
 

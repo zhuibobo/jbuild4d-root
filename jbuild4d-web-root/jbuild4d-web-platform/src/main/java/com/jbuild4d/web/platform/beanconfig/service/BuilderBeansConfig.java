@@ -22,7 +22,7 @@ import com.jbuild4d.platform.builder.service.impl.*;
 import com.jbuild4d.platform.builder.webformdesign.IFDCKEditorPluginsService;
 import com.jbuild4d.platform.builder.webformdesign.IFormConfigService;
 import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
-import com.jbuild4d.platform.builder.webformdesign.impl.FDCKEditorPluginsService;
+import com.jbuild4d.platform.builder.webformdesign.impl.FDCKEditorPluginsServiceImpl;
 import com.jbuild4d.platform.builder.webformdesign.impl.FormConfigServiceImpl;
 import com.jbuild4d.platform.builder.webformdesign.impl.FormResourceServiceImpl;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
@@ -118,7 +118,7 @@ public class BuilderBeansConfig {
 
     @Bean
     public IFDCKEditorPluginsService ckEditorPluginsService(IJb4dCacheService jb4dCacheService){
-        IFDCKEditorPluginsService ifdckEditorPluginsService=new FDCKEditorPluginsService(jb4dCacheService);
+        IFDCKEditorPluginsService ifdckEditorPluginsService=new FDCKEditorPluginsServiceImpl(jb4dCacheService);
         return ifdckEditorPluginsService;
     }
 }
