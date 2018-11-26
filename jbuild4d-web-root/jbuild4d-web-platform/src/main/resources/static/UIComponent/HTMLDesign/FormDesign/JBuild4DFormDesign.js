@@ -1,7 +1,17 @@
 var JBuild4D={
     FormDesign:{
-        IFrameExecuteInsertActionName:"Insert",
-        IFrameExecuteEditActionName:"Edit",
+        Dialog:{
+            DialogExecuteEditActionName:"Edit",
+            DialogExecuteInsertActionName:"Insert",
+            SetDialogProp:function (iframeObj,actionName) {
+                iframeObj.contentWindow.PageFunc.Load(actionName);
+                if(actionName==this.DialogExecuteEditActionName) {
+                    //iframeObj.contentWindow.DialogApp.SetProps(DesignUtil.GetSelectedElem().outerHTML());
+                }
+            }
+        },
+        //IFrameExecuteInsertActionName:"Insert",
+        //DialogExecuteEditActionName:"Edit",
         PropCKEditorInst:null,
         $PropSelectElem:null,
         CoverEmptyPluginProp:function(obj){
