@@ -41,7 +41,6 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.Name, {
     init: function(editor) {
         var ControlSetting=JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting;
 
-
         CKEDITOR.dialog.addIframe(
             ControlSetting.DialogName,
             ControlSetting.DialogSettingTitle,
