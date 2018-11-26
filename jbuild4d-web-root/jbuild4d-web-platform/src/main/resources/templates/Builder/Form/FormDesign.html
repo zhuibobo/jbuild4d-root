@@ -250,10 +250,10 @@
                 AjaxUtility.Post(this.acInterface.getPluginsConfig,{},function (result) {
                     console.log(result.data);
 
-                    FormDesignUtility.InitializeCKEditor('html_design',result.data,function () {
+                    JBuild4D.FormDesign.InitializeCKEditor('html_design',result.data,function () {
 
                     });
-                    FormDesignUtility.InitializeCodeDesign();
+                    JBuild4D.FormDesign.InitializeCodeDesign();
                 },"json");
             },
             bindTableTree:function () {

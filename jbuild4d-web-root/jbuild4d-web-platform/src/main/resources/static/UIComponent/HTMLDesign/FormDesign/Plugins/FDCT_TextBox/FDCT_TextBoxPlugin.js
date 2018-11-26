@@ -25,7 +25,7 @@
         //设计控件对话框将执行的工作
         IFrameExecuteActionName:"Insert",
         //需要引入到设计器的样式文件
-        DesignModalInputCss:"Css.css",
+        DesignModalInputCss:"",
 
         //客户端与服务端解析类
         ClientResolve:"",
