@@ -10,13 +10,20 @@
     <link rel="stylesheet" type="text/css" href="../../../../../Themes/Default/FormDesign/Dialog.css" />
 </head>
 <body>
-    <div class="dialog-wraper">
+    <div class="dialog-wraper" id="dialogApp">
         d
     </div>
     <script>
-        var DialogApp={
-
-        }
+        var DialogApp=new Vue({
+            el:"#dialogApp",
+            data: {
+                allProps: null
+            },
+            mounted:function () {
+                alert("1");
+            },
+            methods: {}
+        });
     </script>
 </body>
 </html>
