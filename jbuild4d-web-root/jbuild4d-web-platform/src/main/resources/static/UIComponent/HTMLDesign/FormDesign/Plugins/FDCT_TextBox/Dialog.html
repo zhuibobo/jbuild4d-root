@@ -12,65 +12,111 @@
     <link rel="stylesheet" type="text/css" href="../../../../../Themes/Default/FormDesign/Dialog.css" />
 </head>
 <body>
-    <div class="dialog-wraper" id="dialogApp">
-        <table class="dialog-table-wraper" cellpadding="0" cellspacing="0" border="0">
-            <colgroup>
-                <col style="width: 100px" />
-                <col style="width: 280px" />
-                <col style="width: 100px" />
-                <col style="width: 100px" />
-                <col style="width: 100px" />
-                <col />
-            </colgroup>
-            <tr>
-                <td>ID：</td>
-                <td>
-                    <input type="text" />
-                </td>
-                <td>Serialize：</td>
-                <td colspan="3"><i-switch v-model="switch1" /></td>
-            </tr>
-            <tr>
-                <td>Name：</td>
-                <td><input type="text" /></td>
-                <td>ClassName：</td>
-                <td colspan="3"><input type="text" /></td>
-            </tr>
-            <tr>
-                <td>placeholder</td>
-                <td><input type="text" /></td>
-                <td>Readonly：</td>
-                <td><i-switch v-model="switch1" /></td>
-                <td>Disabled：</td>
-                <td><i-switch v-model="switch1" /></td>
-            </tr>
-            <tr>
-                <td>绑定字段：</td>
-                <td colspan="5"></td>
-            </tr>
-            <tr>
-                <td>校验规则：</td>
-                <td colspan="5"></td>
-            </tr>
-            <tr>
-                <td>默认值：</td>
-                <td colspan="5">
-                    <input type="text" />
-                </td>
-            </tr>
-            <tr>
-                <td>样式：</td>
-                <td colspan="5">
-                    <textarea rows="2"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>备注：</td>
-                <td colspan="5">
-                    <textarea rows="2"></textarea>
-                </td>
-            </tr>
-        </table>
+    <div class="dialog-wraper" id="dialogApp" v-cloak>
+        <tabs size="small">
+            <tab-pane label="绑定信息">
+                <table cellpadding="0" cellspacing="0" border="0" class="dialog-table-wraper">
+                    <colgroup>
+                        <col style="width: 100px" />
+                        <col style="width: 280px" />
+                        <col style="width: 100px" />
+                        <col />
+                    </colgroup>
+                    <tr>
+                        <td colspan="4">
+                            绑定到表<button class="btn-select fright">...</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>表名：</td>
+                        <td></td>
+                        <td>表标题：</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>字段名：</td>
+                        <td></td>
+                        <td>表标题：</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>类型：</td>
+                        <td></td>
+                        <td>长度：</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            校验规则<button class="btn-select fright">...</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="background-color: #ffffff">
+                            <table class="dialog-table-wraper">
+                                <colgroup>
+                                    <col style="width: 100px" />
+                                    <col />
+                                </colgroup>
+                                <tr>
+                                    <td>类型：</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>设置：</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </tab-pane>
+            <tab-pane label="基础信息">
+                <table class="dialog-table-wraper" cellpadding="0" cellspacing="0" border="0">
+                    <colgroup>
+                        <col style="width: 100px" />
+                        <col style="width: 280px" />
+                        <col style="width: 100px" />
+                        <col style="width: 100px" />
+                        <col style="width: 100px" />
+                        <col />
+                    </colgroup>
+                    <tr>
+                        <td>ID：</td>
+                        <td>
+                            <input type="text" />
+                        </td>
+                        <td>Serialize：</td>
+                        <td colspan="3"><i-switch v-model="switch1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Name：</td>
+                        <td><input type="text" /></td>
+                        <td>ClassName：</td>
+                        <td colspan="3"><input type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td>placeholder</td>
+                        <td><input type="text" /></td>
+                        <td>Readonly：</td>
+                        <td><i-switch v-model="switch1" /></td>
+                        <td>Disabled：</td>
+                        <td><i-switch v-model="switch1" /></td>
+                    </tr>
+                    <tr>
+                        <td>样式：</td>
+                        <td colspan="5">
+                            <textarea rows="7"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注：</td>
+                        <td colspan="5">
+                            <textarea rows="9"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </tab-pane>
+        </tabs>
     </div>
     <script>
         var DialogApp=new Vue({

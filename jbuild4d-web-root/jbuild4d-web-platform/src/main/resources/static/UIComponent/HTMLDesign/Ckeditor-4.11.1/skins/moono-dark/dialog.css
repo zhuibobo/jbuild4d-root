@@ -121,8 +121,8 @@ Comments in this file will give more details about each of the above blocks.
 .cke_dialog_contents_body
 {
 	overflow: auto;
-	padding: 17px 10px 5px 10px;
-	margin-top: 22px;
+	padding: 4px 10px 5px 10px;
+	/*margin-top: 22px;*/
 }
 
 /* The dialog footer, which usually contains the "Ok" and "Cancel" buttons as
