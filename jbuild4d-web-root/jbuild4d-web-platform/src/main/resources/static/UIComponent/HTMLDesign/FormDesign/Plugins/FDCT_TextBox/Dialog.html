@@ -7,11 +7,70 @@
     <script type="text/javascript" src="../../../../../Js/JBuild4DBaseLib.js"></script>
     <script type="text/javascript" src="../../../../../Js/JBuild4DSelectViewLib.js"></script>
     <script type="text/javascript" src="../../../../../Js/VUE-2.5.16/vue.js"></script>
+    <script type="text/javascript" src="../../../../../UIComponent/IView-3.X/dist/iview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../../Themes/Default/IView-3.X/iview.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../Themes/Default/FormDesign/Dialog.css" />
 </head>
 <body>
     <div class="dialog-wraper" id="dialogApp">
-        d
+        <table class="dialog-table-wraper" cellpadding="0" cellspacing="0" border="0">
+            <colgroup>
+                <col style="width: 100px" />
+                <col style="width: 280px" />
+                <col style="width: 100px" />
+                <col style="width: 100px" />
+                <col style="width: 100px" />
+                <col />
+            </colgroup>
+            <tr>
+                <td>ID：</td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>Serialize：</td>
+                <td colspan="3"><i-switch v-model="switch1" /></td>
+            </tr>
+            <tr>
+                <td>Name：</td>
+                <td><input type="text" /></td>
+                <td>ClassName：</td>
+                <td colspan="3"><input type="text" /></td>
+            </tr>
+            <tr>
+                <td>placeholder</td>
+                <td><input type="text" /></td>
+                <td>Readonly：</td>
+                <td><i-switch v-model="switch1" /></td>
+                <td>Disabled：</td>
+                <td><i-switch v-model="switch1" /></td>
+            </tr>
+            <tr>
+                <td>绑定字段：</td>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td>校验规则：</td>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td>默认值：</td>
+                <td colspan="5">
+                    <input type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>样式：</td>
+                <td colspan="5">
+                    <textarea rows="2"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>备注：</td>
+                <td colspan="5">
+                    <textarea rows="2"></textarea>
+                </td>
+            </tr>
+        </table>
     </div>
     <script>
         var DialogApp=new Vue({
@@ -20,7 +79,7 @@
                 allProps: null
             },
             mounted:function () {
-                alert("1");
+                //alert("1");
             },
             methods: {}
         });

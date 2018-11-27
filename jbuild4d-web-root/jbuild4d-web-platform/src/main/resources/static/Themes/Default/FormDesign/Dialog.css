@@ -1,4 +1,40 @@
 .dialog-wraper{
-    background-color: #cdc4b1;
+    /*background-color: #cdc4b1;*/
     width: 100%;
+}
+
+.dialog-table-wraper{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dialog-table-wraper td{
+    padding: 8px;
+    border: rgba(32, 27, 17, 0.61) solid 1px;
+}
+
+.dialog-table-wraper tr td:nth-child(1),td:nth-child(3),td:nth-child(5){
+    background: #e8eaec;
+    color: #000000;
+}
+
+.dialog-table-wraper td textarea,input[type=text]:hover {
+    border-color: #57a3f3;
+}
+.dialog-table-wraper td textarea,input[type=text]{
+    display: inline-block;
+    width: 100%;
+    padding: 4px 7px;
+    font-size: 12px;
+    border: 1px solid #dcdee2;
+    border-radius: 4px;
+    color: #515a6e;
+    background-color: #fff;
+    background-image: none;
+    position: relative;
+    cursor: text;
+    -webkit-transition: border .2s ease-in-out,background .2s ease-in-out,-webkit-box-shadow .2s ease-in-out;
+    transition: border .2s ease-in-out,background .2s ease-in-out,-webkit-box-shadow .2s ease-in-out;
+    transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
+    transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out,-webkit-box-shadow .2s ease-in-out;
 }
