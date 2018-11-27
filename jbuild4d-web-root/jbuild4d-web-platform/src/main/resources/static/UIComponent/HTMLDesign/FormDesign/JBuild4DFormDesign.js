@@ -9,8 +9,9 @@ var JBuild4D={
                     //iframeObj.contentWindow.DialogApp.SetProps(DesignUtil.GetSelectedElem().outerHTML());
                 }
             },
-            ShowIframeDialogInDesignPage:function (url,option) {
-                var dialogObj=DialogUtility.OpenIframeWindow(window,"11",url,option,1);
+            ShowIframeDialogInDesignPage:function (opener,url,option) {
+                //var dialogObj=DialogUtility.OpenIframeWindow(opener,"11",url,option,1);
+                DialogUtility.Frame_OpenIframeWindow(opener,"11",url,option,1);
                 $(".ui-widget-overlay").css("zIndex",10100);
                 $(".ui-dialog").css("zIndex",10101);
             }

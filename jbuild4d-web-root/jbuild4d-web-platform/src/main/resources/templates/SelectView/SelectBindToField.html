@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::EditTableLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
 </head>
 <body>
-    选择绑定字段
+    <div id="appSelectView">
+        <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
+            绑定字段
+            <i-button type="primary" @click="selectComplete()"> 确 认 </i-button>
+            <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
+        </div>
+    </div>
+    <script>
+        var appSelectView=new Vue({
+            el:"#appSelectView",
+            data:{
+            },
+            mounted:function (){
+
+            },
+            methods:{
+                getSelectInstanceName:function () {
+                    return StringUtility.QueryString("instanceName");
+                },
+                selectComplete:function () {
+                    var result="我选择了字段";
+                    alert(this.getSelectInstanceName());
+                    debugger;
+                    window.OpenerWindowObj[this.getSelectInstanceName()].setSelectFieldResultValue(result);
+                    this.handleClose();
+                },
+                handleClose: function () {
+                    DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
+                }
+            }
+        })
+    </script>
 </body>
 </html>

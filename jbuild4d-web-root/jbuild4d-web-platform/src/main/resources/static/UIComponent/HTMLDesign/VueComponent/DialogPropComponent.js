@@ -16,8 +16,17 @@ Vue.component("fd-control-bind-to", {
             this.bindTo.tableName="我改变了表名";
         },
         selectBindField:function () {
-            var url=BaseUtility.BuildAction("/PlatForm/SelectView/SelectBindToTableField/Select",{});
-            window.parent.JBuild4D.FormDesign.Dialog.ShowIframeDialogInDesignPage(url,{modal:true,title:"选择绑定字段"});
+            var url = BaseUtility.BuildAction("/PlatForm/SelectView/SelectBindToTableField/Select", {instanceName: "_SelectBindFieldObj"});
+            //debugger;
+            window.parent.JBuild4D.FormDesign.Dialog.ShowIframeDialogInDesignPage(window, url, {
+                modal: true,
+                title: "选择绑定字段"
+            });
+            //将当前对象附着到window上,提供给子窗体使用
+            window._SelectBindFieldObj = this;
+        },
+        setSelectResultValue:function (result) {
+            alert(result);
         }
     },
     template: '<table cellpadding="0" cellspacing="0" border="0" class="dialog-table-wraper">' +
