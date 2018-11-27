@@ -38,13 +38,6 @@ public class SelectEnvVariableController {
     @RequestMapping(value = "Select", method = RequestMethod.GET)
     public ModelAndView select() {
         ModelAndView modelAndView=new ModelAndView("SelectView/SelectEnvVariable");
-
-        //List<EnvVariableVo> dateTimeVoList=envVariableService.getDateTimeVars();
-        //List<EnvVariableVo> apiVarVoList=envVariableService.getAPIVars();
-
-        //modelAndView.addObject("datetimeTreeData", JsonUtility.toObjectString(dateTimeVoList));
-        //modelAndView.addObject("envVarTreeData",JsonUtility.toObjectString(apiVarVoList));
-
         return modelAndView;
     }
 

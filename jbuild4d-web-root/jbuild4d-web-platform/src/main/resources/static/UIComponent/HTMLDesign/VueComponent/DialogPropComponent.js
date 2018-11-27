@@ -1,7 +1,22 @@
 Vue.component("fd-control-bind-to", {
-    data: function () {
+    props:["bindTo"],
+    /*data: function () {
         return {
-            count: 0
+            bindToTableName: "",
+            bindToTableCaption: "",
+            bindToFieldName: "",
+            bindToFieldCaption: "",
+            bindToFieldDataType: "",
+            bindToFieldDataLength: ""
+        }
+    },*/
+    methods:{
+        a:function () {
+            alert(this.bindTo.tableName);
+            this.bindTo.tableName="我改变了表名";
+        },
+        selectBindField:function () {
+            window.parent.JBuild4D.FormDesign.Dialog.ShowIframeDialogInDesignPage("http://www.baidu.com");
         }
     },
     template: '<table cellpadding="0" cellspacing="0" border="0" class="dialog-table-wraper">' +
@@ -13,14 +28,14 @@ Vue.component("fd-control-bind-to", {
                     '</colgroup>' +
                     '<tr>' +
                         '<td colspan="4">' +
-                        '    绑定到表<button class="btn-select fright" onclick="JBuild4D.FormDesign.InnerDialog.SelectBindTableFieldTo()">...</button>' +
+                        '    绑定到表<button class="btn-select fright" v-on:click="selectBindField">...</button>' +
                         '</td>' +
                     '</tr>' +
                     '<tr>' +
                         '<td>表名：</td>' +
-                        '<td></td>' +
+                        '<td>{{bindTo.tableName}}</td>' +
                         '<td>表标题：</td>' +
-                        '<td></td>' +
+                        '<td>{{bindTo.tableCaption}}</td>' +
                     '</tr>' +
                     '<tr>' +
                         '<td>字段名：</td>' +
@@ -58,4 +73,4 @@ Vue.component("fd-control-bind-to", {
                         '</td>' +
                     '</tr>' +
                 '</table>'
-})
+});

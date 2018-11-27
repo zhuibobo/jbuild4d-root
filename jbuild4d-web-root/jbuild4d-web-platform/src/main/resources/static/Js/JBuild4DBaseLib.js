@@ -1001,10 +1001,11 @@ var DialogUtility={
         var autodialogid = dialogId;
         var dialogEle = this._CreateIfrmaeDialogElement(openerwindow.document, autodialogid, url);
 
-        $(dialogEle).dialog(defaultoptions);
+        var dialogObj=$(dialogEle).dialog(defaultoptions);
         var $iframeobj = $(dialogEle).find("iframe");
         $iframeobj[0].contentWindow.WorkaroundWindowId = autodialogid;
         $iframeobj[0].contentWindow.OpenerWindowObj = openerwindow;
+        return dialogObj;
         /*$iframeobj.load(function () {
             try {
                 var elem = $(this).contents().find("input:text:first");

@@ -53,10 +53,11 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.Name, {
             {
                 //对话框确认按钮触发的事件
                 onOk: function () {
-                    if(ControlSetting.IFrameWindow.contentWindow.PageFunc.GetProps()==false) {
-                        return false;
-                    }
-                    var html="<input type='text' renderer_type='"+ControlSetting.RendererType+"' server_resolve='"+ControlSetting.ServerResolve+"' client_resolve='"+ControlSetting.ClientResolve+"' />";
+                    ControlSetting.IFrameWindow.contentWindow.DialogApp.GetProps();
+                    //if(ControlSetting.IFrameWindow.contentWindow.PageFunc.GetProps()==false) {
+                    //     return false;
+                    //}
+                    //var html="<input type='text' renderer_type='"+ControlSetting.RendererType+"' server_resolve='"+ControlSetting.ServerResolve+"' client_resolve='"+ControlSetting.ClientResolve+"' />";
                     //SimpleControlUtil.PluginDialogOkEvent(ControlSetting,html);
                 },
                 //取消按钮对话框

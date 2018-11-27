@@ -9,15 +9,20 @@ var JBuild4D={
                     //iframeObj.contentWindow.DialogApp.SetProps(DesignUtil.GetSelectedElem().outerHTML());
                 }
             },
+            ShowIframeDialogInDesignPage:function (url) {
+                var dialogObj=DialogUtility.OpenIframeWindow(window,"11",url,{modal:true},2);
+                $(".ui-widget-overlay").css("zIndex",10100);
+                $(".ui-dialog").css("zIndex",10101);
+            }
         },
-        InnerDialog:{
+        /*InnerDialog:{
             SelectBindTableFieldTo:function () {
                 alert("1");
             },
             SelectValidateTo:function () {
 
             }
-        },
+        },*/
         //IFrameExecuteInsertActionName:"Insert",
         //DialogExecuteEditActionName:"Edit",
         PropCKEditorInst:null,

@@ -16,8 +16,8 @@
 <body>
     <div class="dialog-wraper" id="dialogApp" v-cloak>
         <tabs size="small">
-            <tab-pane label="绑定信息">
-                <fd-control-bind-to>
+            <tab-pane label="绑定信息1">
+                <fd-control-bind-to :bind-to="allProps.bindTo">
 
                 </fd-control-bind-to>
             </tab-pane>
@@ -37,7 +37,7 @@
                             <input type="text" />
                         </td>
                         <td>Serialize：</td>
-                        <td colspan="3"><i-switch v-model="switch1" /></td>
+                        <td colspan="3"><!--<i-switch v-model="switch1" />--></td>
                     </tr>
                     <tr>
                         <td>Name：</td>
@@ -49,9 +49,9 @@
                         <td>placeholder</td>
                         <td><input type="text" /></td>
                         <td>Readonly：</td>
-                        <td><i-switch v-model="switch1" /></td>
+                        <td><!--<i-switch v-model="switch1" />--></td>
                         <td>Disabled：</td>
-                        <td><i-switch v-model="switch1" /></td>
+                        <td><!--<i-switch v-model="switch1" />--></td>
                     </tr>
                     <tr>
                         <td>样式：</td>
@@ -73,12 +73,21 @@
         var DialogApp=new Vue({
             el:"#dialogApp",
             data: {
-                allProps: null
+                allProps: {
+                    bindTo: {
+                        tableName: "表名",
+                        tableCaption: "表标题"
+                    }
+                }
             },
             mounted:function () {
                 //alert("1");
             },
-            methods: {}
+            methods: {
+                GetProps:function () {
+                    alert(this.allProps.bindTo.tableName);
+                }
+            }
         });
     </script>
 </body>
