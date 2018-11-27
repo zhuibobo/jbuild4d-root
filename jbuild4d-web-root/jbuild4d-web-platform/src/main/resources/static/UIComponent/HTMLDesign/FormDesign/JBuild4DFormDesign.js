@@ -8,6 +8,14 @@ var JBuild4D={
                 if(actionName==this.DialogExecuteEditActionName) {
                     //iframeObj.contentWindow.DialogApp.SetProps(DesignUtil.GetSelectedElem().outerHTML());
                 }
+            },
+        },
+        InnerDialog:{
+            SelectBindTableFieldTo:function () {
+                alert("1");
+            },
+            SelectValidateTo:function () {
+
             }
         },
         //IFrameExecuteInsertActionName:"Insert",
