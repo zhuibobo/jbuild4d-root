@@ -16,7 +16,8 @@ Vue.component("fd-control-bind-to", {
             this.bindTo.tableName="我改变了表名";
         },
         selectBindField:function () {
-            window.parent.JBuild4D.FormDesign.Dialog.ShowIframeDialogInDesignPage("http://www.baidu.com");
+            var url=BaseUtility.BuildAction("/PlatForm/SelectView/SelectBindToTableField/Select",{});
+            window.parent.JBuild4D.FormDesign.Dialog.ShowIframeDialogInDesignPage(url,{modal:true,title:"选择绑定字段"});
         }
     },
     template: '<table cellpadding="0" cellspacing="0" border="0" class="dialog-table-wraper">' +
