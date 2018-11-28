@@ -17,7 +17,7 @@
     <div class="dialog-wraper" id="dialogApp" v-cloak>
         <tabs size="small">
             <tab-pane label="绑定信息">
-                <fd-control-bind-to :bind-to="allProps.bindTo">
+                <fd-control-bind-to :bind-to-prop="allProps.bindTo" @on-select-field-completed="selectFieldCompleted">
 
                 </fd-control-bind-to>
             </tab-pane>
@@ -84,8 +84,12 @@
                 //alert("1");
             },
             methods: {
-                GetProps:function () {
-                    alert(this.allProps.bindTo.tableName);
+                selectFieldCompleted:function(bindTo){
+                    //alert("selectFieldCompleted called");
+                    this.allProps.bindTo=bindTo;
+                },
+                getProps:function () {
+                    alert(this.allProps.bindTo.fieldName);
                 }
             }
         });

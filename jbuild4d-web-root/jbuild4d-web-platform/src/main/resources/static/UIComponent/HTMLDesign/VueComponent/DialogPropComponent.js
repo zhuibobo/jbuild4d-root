@@ -1,5 +1,5 @@
 Vue.component("fd-control-bind-to", {
-    //props:["bindTo"],
+    props:["bindToProp"],
     data: function () {
         return {
             bindTo:{
@@ -13,8 +13,17 @@ Vue.component("fd-control-bind-to", {
             }
         }
     },
+    //新增result的watch，监听变更同步到openStatus
+    //监听父组件对props属性result的修改，并同步到组件内的data属性
+    watch: {
+        bindToProp (val) {
+            //alert("1");
+            console.log(val);
+            //this.bindTo.tableName = val.tableName;
+        }
+    },
     mounted:function(){
-
+        this.bindTo=this.bindToProp;
     },
     methods:{
         selectBindField:function () {
@@ -29,14 +38,15 @@ Vue.component("fd-control-bind-to", {
         },
         setSelectFieldResultValue:function (result) {
             //debugger;
-            //this.bindTo={};
+            this.bindTo={};
+            this.bindTo.fieldName=result.fieldName;
             this.bindTo.tableId=result.tableId;
             this.bindTo.tableName=result.tableName;
             this.bindTo.tableCaption=result.tableCaption;
-            this.bindTo.fieldName=result.fieldName;
             this.bindTo.fieldCaption=result.fieldCaption;
             this.bindTo.fieldDataType=result.fieldDataType;
             this.bindTo.fieldLength=result.fieldLength;
+            this.$emit('on-select-field-completed', this.bindTo)
             //alert(result);
         },
         getSelectFieldResultValue:function () {
