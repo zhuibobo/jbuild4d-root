@@ -861,7 +861,7 @@ var DialogUtility={
         var defaultConfig = {
             okfunc:function(paras){
                 if(okFn != undefined){
-                   return okFn();
+                    return okFn();
                 } else {
                     opererWindow.close();
                 }
@@ -1003,7 +1003,7 @@ var DialogUtility={
 
         var dialogObj=$(dialogEle).dialog(defaultoptions);
         var $iframeobj = $(dialogEle).find("iframe");
-        $iframeobj[0].contentWindow.WorkaroundWindowId = autodialogid;
+        $iframeobj[0].contentWindow.FrameWindowId = autodialogid;
         $iframeobj[0].contentWindow.OpenerWindowObj = openerwindow;
         return dialogObj;
         /*$iframeobj.load(function () {
@@ -1048,14 +1048,14 @@ var DialogUtility={
     OpenNewWindow: function (openerwindow, dialogId, url, options, whtype) {
         //openerwindow, dialogId, url, options, whtype
         //if(options.width==0) {
-            //width =
-            //height = window.screen.availHeight - 30;
-            //options.width = PageStyleUtility.GetWindowWidth()-20;
+        //width =
+        //height = window.screen.availHeight - 30;
+        //options.width = PageStyleUtility.GetWindowWidth()-20;
         //    options.width=window.screen.availWidth-20;
         //}
         //if(options.height==0) {
-            //options.height = PageStyleUtility.GetWindowHeight()-10;
-            //options.height = PageStyleUtility.GetWindowHeight()-10;
+        //options.height = PageStyleUtility.GetWindowHeight()-10;
+        //options.height = PageStyleUtility.GetWindowHeight()-10;
         //    options.height = window.screen.availHeight - 40;
         //}
         //debugger;
@@ -1080,35 +1080,35 @@ var DialogUtility={
         }
         return null;
     },
-    _Frame_TryGetWorkaroundWindowObj: function (win, tryfindtime, currenttryfindtime) {
+    _Frame_TryGetFrameWindowObj: function (win, tryfindtime, currenttryfindtime) {
         if (tryfindtime > currenttryfindtime) {
             //var document = win;
-            var istopworkaroundpage = false;
+            var istopFramepage = false;
             currenttryfindtime++;
             try {
-                istopworkaroundpage = win.IsTopWorkaroundPage;
-                if (istopworkaroundpage) {
+                istopFramepage = win.IsTopFramePage;
+                if (istopFramepage) {
                     return win;
                 }
                 else {
-                    return this._Frame_TryGetWorkaroundWindowObj(this._TryGetParentWindow(win), tryfindtime, currenttryfindtime)
+                    return this._Frame_TryGetFrameWindowObj(this._TryGetParentWindow(win), tryfindtime, currenttryfindtime)
                 }
             } catch (e) {
-                return this._Frame_TryGetWorkaroundWindowObj(this._TryGetParentWindow(win), tryfindtime, currenttryfindtime)
+                return this._Frame_TryGetFrameWindowObj(this._TryGetParentWindow(win), tryfindtime, currenttryfindtime)
             }
         }
         return null;
     },
-    _OpenWindowInWorkaroundPage: function (openerwindow, dialogId, url, options, whtype) {
+    _OpenWindowInFramePage: function (openerwindow, dialogId, url, options, whtype) {
         if (StringUtility.IsNullOrEmpty(dialogId)) {
             alert("dialogId不能为空");
             return;
         }
         url = StringUtility.GetTimeStampUrl(url);
-        var autodialogid = "workaroundDialogEle" + dialogId;
+        var autodialogid = "FrameDialogEle" + dialogId;
 
-        if ($(this.WorkaroundPageRef.document).find("#" + autodialogid).length == 0) {
-            var dialogEle = this._CreateIfrmaeDialogElement(this.WorkaroundPageRef.document, autodialogid, url);
+        if ($(this.FramePageRef.document).find("#" + autodialogid).length == 0) {
+            var dialogEle = this._CreateIfrmaeDialogElement(this.FramePageRef.document, autodialogid, url);
             var defaultoptions = {
                 height: 400,
                 width: 600,
@@ -1158,8 +1158,9 @@ var DialogUtility={
             $(".ui-widget-overlay").css("zIndex","1000");
             $(".ui-dialog").css("zIndex","1001");
             var $iframeobj = $(dialogEle).find("iframe");
-            $iframeobj[0].contentWindow.WorkaroundWindowId = autodialogid;
+            $iframeobj[0].contentWindow.FrameWindowId = autodialogid;
             $iframeobj[0].contentWindow.OpenerWindowObj = openerwindow;
+            $iframeobj[0].contentWindow.IsOpenForFrame=true;
             /*$iframeobj.load(function () {
                 //alert($(this).contents().find("input").length);
                 try {
@@ -1189,13 +1190,13 @@ var DialogUtility={
             $("#" + autodialogid).dialog("moveToTop");
         }
     },
-    _Frame_WorkaroundPageCloseDialog: function (dialogid) {
+    _Frame_FramePageCloseDialog: function (dialogid) {
         $("#" + dialogid).dialog("close");
     },
-    Frame_TryGetWorkaroundWindowObj: function () {
+    Frame_TryGetFrameWindowObj: function () {
         var tryfindtime = 5;
         var currenttryfindtime = 1;
-        return this._Frame_TryGetWorkaroundWindowObj(window, tryfindtime, currenttryfindtime);
+        return this._Frame_TryGetFrameWindowObj(window, tryfindtime, currenttryfindtime);
     },
     Frame_Alert:function () {
 
@@ -1204,22 +1205,22 @@ var DialogUtility={
 
     },
     Frame_OpenIframeWindow:function (openerwindow, dialogId, url, options, whtype) {
-        var wrwin = this.Frame_TryGetWorkaroundWindowObj();
-        this.WorkaroundPageRef = wrwin;
+        var wrwin = this.Frame_TryGetFrameWindowObj();
+        this.FramePageRef = wrwin;
         if (wrwin != null) {
             //alert("show");
-            this.WorkaroundPageRef.DialogUtility.WorkaroundPageRef = wrwin;
-            this.WorkaroundPageRef.DialogUtility._OpenWindowInWorkaroundPage(openerwindow, dialogId, url, options, whtype);
+            this.FramePageRef.DialogUtility.FramePageRef = wrwin;
+            this.FramePageRef.DialogUtility._OpenWindowInFramePage(openerwindow, dialogId, url, options, whtype);
         }
         else {
-            alert("找不到WorkaroundPage!!");
+            alert("找不到FramePage!!");
         }
     },
     Frame_CloseDialog:function (opererWindow) {
-        var wrwin = this.Frame_TryGetWorkaroundWindowObj();
+        var wrwin = this.Frame_TryGetFrameWindowObj();
         var openerwin = opererWindow.OpenerWindowObj;
-        var autodialogid = opererWindow.WorkaroundWindowId;
-        wrwin.DialogUtility._Frame_WorkaroundPageCloseDialog(autodialogid);
+        var autodialogid = opererWindow.FrameWindowId;
+        wrwin.DialogUtility._Frame_FramePageCloseDialog(autodialogid);
     }
 }
 

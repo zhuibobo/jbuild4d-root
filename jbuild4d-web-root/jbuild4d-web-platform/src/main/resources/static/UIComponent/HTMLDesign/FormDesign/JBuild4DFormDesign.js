@@ -11,7 +11,7 @@ var JBuild4D={
             },
             ShowIframeDialogInDesignPage:function (opener,url,option) {
                 //var dialogObj=DialogUtility.OpenIframeWindow(opener,"11",url,option,1);
-                DialogUtility.Frame_OpenIframeWindow(opener,"11",url,option,1);
+                DialogUtility.Frame_OpenIframeWindow(opener,DialogUtility.DialogId,url,option,1);
                 $(".ui-widget-overlay").css("zIndex",10100);
                 $(".ui-dialog").css("zIndex",10101);
             }

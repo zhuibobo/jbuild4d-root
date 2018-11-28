@@ -4,9 +4,13 @@
       <w>datas</w>
       <w>dbaccess</w>
       <w>dbentities</w>
+      <w>dialogid</w>
+      <w>docobj</w>
       <w>envvariable</w>
       <w>formdesign</w>
+      <w>htmlmsg</w>
       <w>issystem</w>
+      <w>operer</w>
     </words>
   </dictionary>
 </component>

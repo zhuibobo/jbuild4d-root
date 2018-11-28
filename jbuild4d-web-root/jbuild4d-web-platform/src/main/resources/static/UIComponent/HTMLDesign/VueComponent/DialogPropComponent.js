@@ -11,14 +11,9 @@ Vue.component("fd-control-bind-to", {
         }
     },*/
     mounted:function(){
-        //将当前对象附着到window上,提供给子窗体使用
-        window._SelectBindFieldObj = this;
+
     },
     methods:{
-        a:function () {
-            alert(this.bindTo.tableName);
-            this.bindTo.tableName="我改变了表名";
-        },
         selectBindField:function () {
             var url = BaseUtility.BuildAction("/PlatForm/SelectView/SelectBindToTableField/Select", {instanceName: "_SelectBindFieldObj"});
             //debugger;
@@ -26,9 +21,12 @@ Vue.component("fd-control-bind-to", {
                 modal: true,
                 title: "选择绑定字段"
             });
+            //将当前对象附着到window上,提供给子窗体使用
+            window._SelectBindFieldObj = this;
         },
         setSelectFieldResultValue:function (result) {
             this.bindTo.tableName=result;
+
             alert(result);
         }
     },
