@@ -27,11 +27,12 @@ Vue.component("fd-control-bind-to", {
     },
     methods:{
         selectBindFieldView:function () {
-            var url = BaseUtility.BuildAction("/PlatForm/SelectView/SelectBindToTableField/Select", {instanceName: "_SelectBindObj"});
+            /*var url = BaseUtility.BuildAction("/PlatForm/SelectView/SelectBindToTableField/Select", {instanceName: "_SelectBindObj"});
             window.parent.JBuild4D.FormDesign.Dialog.ShowIframeDialogInDesignPage(window, url, {
                 modal: true,
                 title: "选择绑定字段"
-            });
+            });*/
+            JBuild4DSelectView.SelectBindToField.beginSelectInFrame(window,"_SelectBindObj",{});
             //将当前对象附着到window上,提供给子窗体使用
             window._SelectBindObj = this;
         },
