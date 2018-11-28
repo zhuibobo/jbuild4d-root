@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::EditTableLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
 </head>
 <body>
+    <div id="appSelectView">
+        <divider orientation="left" :dashed="true" style="font-size: 12px">设置验证规则</divider>
+        <radio-group type="button" style="margin: auto">
+            <radio label="不能为空"></radio>
+            <radio label="数字/整数"></radio>
+            <radio label="手机号码"></radio>
+            <radio label="日期"></radio>
+            <radio label="时间"></radio>
+            <radio label="日期时间"></radio>
+            <radio label="邮件"></radio>
+            <radio label="身份证"></radio>
+            <radio label="URL"></radio>
+            <radio label="特殊字符"></radio>
+            <radio label="正则表达式"></radio>
+            <radio label="自定义JS方法"></radio>
+        </radio-group>
+    </div>
+    <script>
+        var appSelectView=new Vue({
+            el:"#appSelectView",
+            data:{
 
+            },
+            mounted:function (){
+
+            },
+            methods:{
+
+            }
+        })
+    </script>
 </body>
 </html>

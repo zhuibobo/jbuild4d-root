@@ -1,9 +1,20 @@
 var JBuild4DSelectView={
     SelectEnvVariable:{
-        URL:BaseUtility.GetRootPath()+"/PlatForm/SelectView/SelectEnvVariable/Select.do",
+        URL:"/PlatForm/SelectView/SelectEnvVariable/Select",
         beginSelect:function (instanceName) {
             var url=this.URL+"?instanceName="+instanceName;
             DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "选择变量",modal:true}, 2);
+        },
+        beginSelectInFrame:function(opener,instanceName,option){
+            var url=BaseUtility.BuildAction(this.URL, {"instanceName": instanceName});
+            var option = $.extend(true, {}, {
+                modal: true,
+                title: "选择变量"
+            },option);
+            DialogUtility.Frame_OpenIframeWindow(opener,DialogUtility.DialogId05,url,option,1);
+            //alert("1");
+            $(window.parent.document).find(".ui-widget-overlay").css("zIndex",10100);
+            $(window.parent.document).find(".ui-dialog").css("zIndex",10101);
         },
         formatText:function (type,text) {
             //debugger;
@@ -47,7 +58,22 @@ var JBuild4DSelectView={
         }
     },
     SelectValidateRule:{
-
+        URL:"/PlatForm/SelectView/SelectValidateRule/Select",
+        beginSelect:function (instanceName) {
+            var url=this.URL+"?instanceName="+instanceName;
+            DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "验证规则",modal:true}, 2);
+        },
+        beginSelectInFrame:function (opener,instanceName,option) {
+            var url=BaseUtility.BuildAction(this.URL, {"instanceName": instanceName});
+            var option = $.extend(true, {}, {
+                modal: true,
+                title: "验证规则"
+            },option);
+            DialogUtility.Frame_OpenIframeWindow(opener,DialogUtility.DialogId05,url,option,1);
+            //alert("1");
+            $(window.parent.document).find(".ui-widget-overlay").css("zIndex",10100);
+            $(window.parent.document).find(".ui-dialog").css("zIndex",10101);
+        }
     }
 }
 

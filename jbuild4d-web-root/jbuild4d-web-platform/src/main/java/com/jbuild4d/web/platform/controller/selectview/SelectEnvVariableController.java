@@ -1,9 +1,6 @@
 package com.jbuild4d.web.platform.controller.selectview;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.general.JB4DSession;
-import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
