@@ -82,6 +82,7 @@
             },
             mounted:function () {
                 //alert("1");
+                this.setProps();
             },
             methods: {
                 selectFieldCompleted:function(bindTo){
@@ -90,6 +91,9 @@
                 },
                 getProps:function () {
                     alert(this.allProps.bindTo.fieldName);
+                },
+                setProps:function (props) {
+                    this.allProps.bindTo.tableName="hello word";
                 }
             }
         });
