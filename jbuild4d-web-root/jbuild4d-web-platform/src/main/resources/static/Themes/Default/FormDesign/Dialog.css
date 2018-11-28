@@ -79,3 +79,9 @@
     background-color: #47cb89;
     border-color: #47cb89;
 }
+
+.btn-select:hover{
+    color: #2d7fff;
+    background-color: #8eeeb7;
+    border-color: #58e0a0;
+}

@@ -60,6 +60,14 @@ Vue.component("fd-control-bind-to", {
                         '<td>长度：</td>' +
                         '<td></td>' +
                     '</tr>' +
+                    '<tr>'+
+                        '<td colspan="4">默认值</td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td colspan="4" style="background-color: #ffffff">' +
+                            '<button class="btn-select fright" v-on:click="selectBindField">...</button>'+
+                        '</td>'+
+                    '</tr>'+
                     '<tr>' +
                         '<td colspan="4">' +
                         '    校验规则<button class="btn-select fright">...</button>' +

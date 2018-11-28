@@ -9,11 +9,44 @@
     <th:block th:replace="Fragment/GeneralLib::EditTableLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
+    <style>
+        .select-table-wraper{
+            border: #2d8cf0 1px solid;
+            border-radius: 4px;
+            padding: 10px;
+            position: absolute;
+            left: 0px;
+            right: 51%;
+            bottom: 50px;
+            top: 10px;
+        }
+        .select-field-wraper{
+            border: #2d8cf0 1px solid;
+            border-radius: 4px;
+            padding: 10px;
+            position: absolute;
+            left: 51%;
+            right: 0px;
+            bottom: 50px;
+            top: 10px;
+        }
+    </style>
 </head>
 <body>
     <div id="appSelectView">
+        <div class="select-table-wraper">
+            <divider orientation="left" :dashed="true" style="font-size: 12px">选择表</divider>
+            <input type="text" id="txtSearchTableTree" style="width: 100%;height: 32px;margin-top: 2px" />
+            <ul id="tableZTreeUL" class="ztree"></ul>
+        </div>
+        <div class="select-field-wraper">
+            <divider orientation="left" :dashed="true" style="font-size: 12px">选择字段</divider>
+            <i-table stripe border :columns="fieldTable.columnsConfig" :data="fieldTable.fieldData"
+                     class="iv-list-table" :highlight-row="true"
+                     @on-selection-change="selectionFieldChange"></i-table>
+        </div>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
-            绑定字段
             <i-button type="primary" @click="selectComplete()"> 确 认 </i-button>
             <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
         </div>
@@ -22,13 +55,117 @@
         var appSelectView=new Vue({
             el:"#appSelectView",
             data:{
+                acInterface:{
+                    getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList"
+                },
+                selectedData: {
+                    tableId:"",
+                    tableName: "",
+                    tableCaption: "",
+                    fieldName: "",
+                    fieldCaption: "",
+                    fieldDataType: "",
+                    fieldLength: ""
+                },
+                tableTree:{
+                    tableTreeObj:null,
+                    tableTreeSetting:{
+                        view: {
+                            dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                            showLine: true,//是否显示节点之间的连线
+                            fontCss: {'color': 'black', 'font-weight': 'normal'}
+                        },
+                        check: {
+                            enable: true,
+                            nocheckInherit: false,
+                            chkStyle: "radio",
+                            radioType: "all"
+                        },
+                        data: {
+                            key: {
+                                name: "text"
+                            },
+                            simpleData: {//简单数据模式
+                                enable: true,
+                                idKey: "id",
+                                pIdKey: "parentId",
+                                rootPId: "-1"// 1
+                            }
+                        },
+                        callback: {
+                            //点击树节点事件
+                            onClick: function (event, treeId, treeNode) {
+                                //treeNode.checked=true;
+                                if(treeNode.nodeTypeName=="Table") {
+                                    appForm.tableTree.tableTreeObj.checkNode(treeNode, true, true);
+                                    appSelectView.selectedData.tableId=treeNode.id;
+                                    appSelectView.selectedData.tableName=treeNode.value;
+                                    appSelectView.selectedData.tableCaption=treeNode.attr1;
+                                    appSelectView.bindFieldTable();
+                                }
+                                else{
+                                    alert("选中分组");
+                                }
+                            },
+                            onDblClick: function (event, treeId, treeNode) {
+
+                            },
+                            //成功的回调函数
+                            onAsyncSuccess: function (event, treeId, treeNode, msg) {
+
+                            }
+                        }
+                    },
+                    tableTreeData:null,//${tableTreeData},
+                    selectedTableName:"无"
+                },
+                fieldTable:{
+                    fieldData:[],
+                    columnsConfig: [
+                        {
+                            type: 'selection',
+                            width: 60,
+                            align: 'center'
+                        },
+                        {
+                            title: '字段',
+                            key: 'ddglKey',
+                            align: "center"
+                        }
+                    ]
+                }
             },
             mounted:function (){
-
+                this.bindTableTree();
             },
             methods:{
+                bindTableTree:function () {
+                    var _self=this;
+                    AjaxUtility.Post(this.acInterface.getTablesDataUrl,{},function (result) {
+                        if(result.success) {
+                            _self.tableTree.tableTreeData=result.data;
+                            _self.tableTree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), _self.tableTree.tableTreeSetting,_self.tableTree.tableTreeData);
+                            _self.tableTree.tableTreeObj.expandAll(true);
+                            fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                        }
+                    },"json");
+                },
+                bindFieldTable:function(){
+                    if(!StringUtility.IsNullOrEmpty(this.selectedData.tableId)){
+
+                    }
+                    else{
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请先选择表!", null);
+                    }
+                },
                 getSelectInstanceName:function () {
                     return StringUtility.QueryString("instanceName");
+                },
+                selectionFieldChange:function(){
+
                 },
                 selectComplete:function () {
                     var result="我选择了字段";
