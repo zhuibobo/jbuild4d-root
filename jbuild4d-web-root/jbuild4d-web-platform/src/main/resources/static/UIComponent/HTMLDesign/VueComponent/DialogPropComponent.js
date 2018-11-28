@@ -26,15 +26,14 @@ Vue.component("fd-control-bind-to", {
         this.bindTo=this.bindToProp;
     },
     methods:{
-        selectBindField:function () {
-            var url = BaseUtility.BuildAction("/PlatForm/SelectView/SelectBindToTableField/Select", {instanceName: "_SelectBindFieldObj"});
-            //debugger;
+        selectBindFieldView:function () {
+            var url = BaseUtility.BuildAction("/PlatForm/SelectView/SelectBindToTableField/Select", {instanceName: "_SelectBindObj"});
             window.parent.JBuild4D.FormDesign.Dialog.ShowIframeDialogInDesignPage(window, url, {
                 modal: true,
                 title: "选择绑定字段"
             });
             //将当前对象附着到window上,提供给子窗体使用
-            window._SelectBindFieldObj = this;
+            window._SelectBindObj = this;
         },
         setSelectFieldResultValue:function (result) {
             //debugger;
@@ -52,6 +51,15 @@ Vue.component("fd-control-bind-to", {
         getSelectFieldResultValue:function () {
             return JsonUtility.CloneSimple(this.bindTo);
             //return this.bindTo;
+        },
+        selectDefaultValueView:function () {
+            var url = BaseUtility.BuildAction("/PlatForm/SelectView/SelectEnvVariable/Select", {instanceName: "_SelectBindObj"});
+            window.parent.JBuild4D.FormDesign.Dialog.ShowIframeDialogInDesignPage(window, url, {
+                modal: true,
+                title: "选择默认值"
+            });
+            //将当前对象附着到window上,提供给子窗体使用
+            window._SelectBindObj = this;
         }
     },
     template: '<table cellpadding="0" cellspacing="0" border="0" class="dialog-table-wraper">' +
@@ -63,7 +71,7 @@ Vue.component("fd-control-bind-to", {
                     '</colgroup>' +
                     '<tr>' +
                         '<td colspan="4">' +
-                        '    绑定到表<button class="btn-select fright" v-on:click="selectBindField">...</button>' +
+                        '    绑定到表<button class="btn-select fright" v-on:click="selectBindFieldView">...</button>' +
                         '</td>' +
                     '</tr>' +
                     '<tr>'+
@@ -93,7 +101,7 @@ Vue.component("fd-control-bind-to", {
                     '</tr>'+
                     '<tr>'+
                         '<td colspan="4" style="background-color: #ffffff">' +
-                            '<button class="btn-select fright" v-on:click="selectBindField">...</button>'+
+                            '<button class="btn-select fright" v-on:click="selectDefaultValueView">...</button>'+
                         '</td>'+
                     '</tr>'+
                     '<tr>' +
