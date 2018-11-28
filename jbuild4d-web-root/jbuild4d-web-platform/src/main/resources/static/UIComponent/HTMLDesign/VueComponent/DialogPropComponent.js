@@ -56,6 +56,10 @@ Vue.component("fd-control-bind-to", {
                         '    绑定到表<button class="btn-select fright" v-on:click="selectBindField">...</button>' +
                         '</td>' +
                     '</tr>' +
+                    '<tr>'+
+                        '<td>表编号：</td>' +
+                        '<td colspan="3">{{bindTo.tableId}}</td>' +
+                    '</tr>'+
                     '<tr>' +
                         '<td>表名：</td>' +
                         '<td>{{bindTo.tableName}}</td>' +
@@ -65,7 +69,7 @@ Vue.component("fd-control-bind-to", {
                     '<tr>' +
                         '<td>字段名：</td>' +
                         '<td>{{bindTo.fieldName}}</td>' +
-                        '<td>表标题：</td>' +
+                        '<td>字段标题：</td>' +
                         '<td>{{bindTo.fieldCaption}}</td>' +
                     '</tr>' +
                     '<tr>' +
