@@ -151,6 +151,7 @@
             },
             mounted:function (){
                 this.bindOldSelectedValue();
+                this.bindHistorySelectedValue();
                 this.bindTableTree();
             },
             methods:{
@@ -214,7 +215,22 @@
                     }
                 },
                 bindHistorySelectedValue:function(){
-
+                    //debugger;
+                    if(StringUtility.IsNullOrEmpty(this.selectedData.tableId)){
+                        var SBTF_TableId=CookieUtility.GetCookie("SBTF_TableId");
+                        if(!StringUtility.IsNullOrEmpty(SBTF_TableId)){
+                            var SBTF_TableName=CookieUtility.GetCookie("SBTF_TableName");
+                            var SBTF_TableCaption=CookieUtility.GetCookie("SBTF_TableCaption");
+                            this.selectedData.tableId =SBTF_TableId;
+                            this.selectedData.tableName = SBTF_TableName;
+                            this.selectedData.tableCaption = SBTF_TableCaption;
+                        }
+                    }
+                },
+                setHistorySelectedTableDataToCookie:function(tableId,tableName,tableCaption){
+                    CookieUtility.SetCookie1Month("SBTF_TableId",tableId);
+                    CookieUtility.SetCookie1Month("SBTF_TableName",tableName);
+                    CookieUtility.SetCookie1Month("SBTF_TableCaption",tableCaption);
                 },
                 getSelectInstanceName:function () {
                     return StringUtility.QueryString("instanceName");
@@ -230,6 +246,7 @@
                     var result=this.selectedData;
                     if(!StringUtility.IsNullOrEmpty(result.tableId)&&!StringUtility.IsNullOrEmpty(result.fieldName)) {
                         window.OpenerWindowObj[this.getSelectInstanceName()].setSelectFieldResultValue(result);
+                        this.setHistorySelectedTableDataToCookie(result.tableId,result.tableName,result.tableCaption);
                         this.handleClose();
                     }
                     else{

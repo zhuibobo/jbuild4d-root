@@ -28,8 +28,8 @@ Vue.component("fd-control-bind-to", {
             window._SelectBindFieldObj = this;
         },
         setSelectFieldResultValue:function (result) {
-            debugger;
-            this.bindTo={};
+            //debugger;
+            //this.bindTo={};
             this.bindTo.tableId=result.tableId;
             this.bindTo.tableName=result.tableName;
             this.bindTo.tableCaption=result.tableCaption;
