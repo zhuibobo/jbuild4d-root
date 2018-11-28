@@ -98,6 +98,10 @@ public class JBuild4DResponseVo {
         return new JBuild4DResponseVo(true, message, data, null);
     }
 
+    public static JBuild4DResponseVo getDataSuccess(Object data){
+        return success("获取数据成功!",data);
+    }
+
     public static JBuild4DResponseVo deleteSuccess(){
         return success("删除成功！");
     }

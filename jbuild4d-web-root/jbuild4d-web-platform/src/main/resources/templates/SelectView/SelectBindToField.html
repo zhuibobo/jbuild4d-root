@@ -31,6 +31,9 @@
             bottom: 50px;
             top: 10px;
         }
+        .select-old-field-tr td{
+            background-color: #fcffdc !important;
+        }
     </style>
 </head>
 <body>
@@ -42,9 +45,9 @@
         </div>
         <div class="select-field-wraper">
             <divider orientation="left" :dashed="true" style="font-size: 12px">选择字段</divider>
-            <i-table stripe border :columns="fieldTable.columnsConfig" :data="fieldTable.fieldData"
+            <i-table border :columns="fieldTable.columnsConfig" :data="fieldTable.fieldData"
                      class="iv-list-table" :highlight-row="true"
-                     @on-selection-change="selectionFieldChange"></i-table>
+                     @on-row-click="selectedField" :height="fieldTable.tableHeight" size="small" no-data-text="请选择表"></i-table>
         </div>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
             <i-button type="primary" @click="selectComplete()"> 确 认 </i-button>
@@ -56,7 +59,8 @@
             el:"#appSelectView",
             data:{
                 acInterface:{
-                    getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList"
+                    getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
+                    getTableFieldsDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTableFieldsByTableId"
                 },
                 selectedData: {
                     tableId:"",
@@ -95,16 +99,26 @@
                         callback: {
                             //点击树节点事件
                             onClick: function (event, treeId, treeNode) {
-                                //treeNode.checked=true;
                                 if(treeNode.nodeTypeName=="Table") {
-                                    appForm.tableTree.tableTreeObj.checkNode(treeNode, true, true);
+                                    appSelectView.tableTree.tableTreeObj.checkNode(treeNode, true, true);
                                     appSelectView.selectedData.tableId=treeNode.id;
                                     appSelectView.selectedData.tableName=treeNode.value;
                                     appSelectView.selectedData.tableCaption=treeNode.attr1;
+                                    appSelectView.selectedData.fieldName="";
+                                    appSelectView.selectedData.fieldCaption="";
+                                    appSelectView.selectedData.fieldDataType="";
+                                    appSelectView.selectedData.fieldLength="";
                                     appSelectView.bindFieldTable();
                                 }
                                 else{
-                                    alert("选中分组");
+                                    appSelectView.selectedData.tableId="";
+                                    appSelectView.selectedData.tableName="";
+                                    appSelectView.selectedData.tableCaption="";
+                                    appSelectView.selectedData.fieldName="";
+                                    appSelectView.selectedData.fieldCaption="";
+                                    appSelectView.selectedData.fieldDataType="";
+                                    appSelectView.selectedData.fieldLength="";
+                                    appSelectView.fieldTable.fieldData=[];
                                 }
                             },
                             onDblClick: function (event, treeId, treeNode) {
@@ -121,24 +135,22 @@
                 },
                 fieldTable:{
                     fieldData:[],
+                    tableHeight:470,
                     columnsConfig: [
                         {
-                            type: 'selection',
-                            width: 60,
-                            align: 'center'
-                        }, {
                             title: '名称',
-                            key: 'ddglKey',
+                            key: 'fieldName',
                             align: "center"
                         }, {
                             title: '标题',
-                            key: 'ddglKey',
+                            key: 'fieldCaption',
                             align: "center"
                         }
                     ]
                 }
             },
             mounted:function (){
+                this.bindOldSelectedValue();
                 this.bindTableTree();
             },
             methods:{
@@ -150,6 +162,11 @@
                             _self.tableTree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), _self.tableTree.tableTreeSetting,_self.tableTree.tableTreeData);
                             _self.tableTree.tableTreeObj.expandAll(true);
                             fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
+                            if(!StringUtility.IsNullOrEmpty(_self.selectedData.tableId)){
+                                var selectedNode=_self.tableTree.tableTreeObj.getNodeByParam("id",_self.selectedData.tableId);
+                                _self.tableTree.tableTreeObj.checkNode(selectedNode, true, true);
+                                _self.bindFieldTable();
+                            }
                         }
                         else {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
@@ -157,25 +174,67 @@
                     },"json");
                 },
                 bindFieldTable:function(){
+                    var _self=this;
                     if(!StringUtility.IsNullOrEmpty(this.selectedData.tableId)){
-
+                        AjaxUtility.Post(this.acInterface.getTableFieldsDataUrl,{"tableId":this.selectedData.tableId},function (result) {
+                            if(result.success) {
+                                _self.fieldTable.fieldData=result.data;
+                                var oldSelectedValue=_self.selectedData;
+                                if(!StringUtility.IsNullOrEmpty(oldSelectedValue.tableId)&&!StringUtility.IsNullOrEmpty(oldSelectedValue.fieldName)) {
+                                    //ivu-table-row-highlight
+                                    window.setTimeout(function() {
+                                        $("span").each(function (j) {
+                                            if ($(this).html() == oldSelectedValue.fieldName) {
+                                                $(this).parent().parent().parent().addClass("select-old-field-tr");
+                                            }
+                                        })
+                                    },300);
+                                }
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                            }
+                        },"json");
                     }
                     else{
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请先选择表!", null);
                     }
                 },
+                bindOldSelectedValue:function(){
+                    var oldSelectedValue= window.OpenerWindowObj[this.getSelectInstanceName()].getSelectFieldResultValue();
+                    //debugger;
+                    if(!StringUtility.IsNullOrEmpty(oldSelectedValue.tableId)) {
+                        this.selectedData.tableId = oldSelectedValue.tableId;
+                        this.selectedData.tableName = oldSelectedValue.tableName;
+                        this.selectedData.tableCaption = oldSelectedValue.tableCaption;
+                        this.selectedData.fieldName = oldSelectedValue.fieldName;
+                        this.selectedData.fieldCaption = oldSelectedValue.fieldCaption;
+                        this.selectedData.fieldDataType = oldSelectedValue.fieldDataType;
+                        this.selectedData.fieldLength = oldSelectedValue.fieldLength;
+                    }
+                },
+                bindHistorySelectedValue:function(){
+
+                },
                 getSelectInstanceName:function () {
                     return StringUtility.QueryString("instanceName");
                 },
-                selectionFieldChange:function(){
-
+                selectedField:function(selection,index){
+                    //alert(selection.fieldName);
+                    this.selectedData.fieldName=selection.fieldName;
+                    this.selectedData.fieldCaption=selection.fieldCaption;
+                    this.selectedData.fieldDataType=selection.fieldDataType;
+                    this.selectedData.fieldLength=selection.fieldDataLength;
                 },
                 selectComplete:function () {
-                    var result="我选择了字段";
-                    alert(this.getSelectInstanceName());
-                    debugger;
-                    window.OpenerWindowObj[this.getSelectInstanceName()].setSelectFieldResultValue(result);
-                    this.handleClose();
+                    var result=this.selectedData;
+                    if(!StringUtility.IsNullOrEmpty(result.tableId)&&!StringUtility.IsNullOrEmpty(result.fieldName)) {
+                        window.OpenerWindowObj[this.getSelectInstanceName()].setSelectFieldResultValue(result);
+                        this.handleClose();
+                    }
+                    else{
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {},"请选择需要绑定的字段!", null);
+                    }
                 },
                 handleClose: function () {
                     if(window.IsOpenForFrame){

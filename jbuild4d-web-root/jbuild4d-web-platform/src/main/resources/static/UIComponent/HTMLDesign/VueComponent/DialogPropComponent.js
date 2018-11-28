@@ -1,15 +1,18 @@
 Vue.component("fd-control-bind-to", {
-    props:["bindTo"],
-    /*data: function () {
+    //props:["bindTo"],
+    data: function () {
         return {
-            bindToTableName: "",
-            bindToTableCaption: "",
-            bindToFieldName: "",
-            bindToFieldCaption: "",
-            bindToFieldDataType: "",
-            bindToFieldDataLength: ""
+            bindTo:{
+                tableId: "",
+                tableName: "",
+                tableCaption: "",
+                fieldName: "",
+                fieldCaption: "",
+                fieldDataType: "",
+                fieldLength:""
+            }
         }
-    },*/
+    },
     mounted:function(){
 
     },
@@ -25,9 +28,20 @@ Vue.component("fd-control-bind-to", {
             window._SelectBindFieldObj = this;
         },
         setSelectFieldResultValue:function (result) {
-            this.bindTo.tableName=result;
-
-            alert(result);
+            debugger;
+            this.bindTo={};
+            this.bindTo.tableId=result.tableId;
+            this.bindTo.tableName=result.tableName;
+            this.bindTo.tableCaption=result.tableCaption;
+            this.bindTo.fieldName=result.fieldName;
+            this.bindTo.fieldCaption=result.fieldCaption;
+            this.bindTo.fieldDataType=result.fieldDataType;
+            this.bindTo.fieldLength=result.fieldLength;
+            //alert(result);
+        },
+        getSelectFieldResultValue:function () {
+            return JsonUtility.CloneSimple(this.bindTo);
+            //return this.bindTo;
         }
     },
     template: '<table cellpadding="0" cellspacing="0" border="0" class="dialog-table-wraper">' +
@@ -50,15 +64,15 @@ Vue.component("fd-control-bind-to", {
                     '</tr>' +
                     '<tr>' +
                         '<td>字段名：</td>' +
-                        '<td></td>' +
+                        '<td>{{bindTo.fieldName}}</td>' +
                         '<td>表标题：</td>' +
-                        '<td></td>' +
+                        '<td>{{bindTo.fieldCaption}}</td>' +
                     '</tr>' +
                     '<tr>' +
                         '<td>类型：</td>' +
-                        '<td></td>' +
+                        '<td>{{bindTo.fieldDataType}}</td>' +
                         '<td>长度：</td>' +
-                        '<td></td>' +
+                        '<td>{{bindTo.fieldLength}}</td>' +
                     '</tr>' +
                     '<tr>'+
                         '<td colspan="4">默认值</td>'+

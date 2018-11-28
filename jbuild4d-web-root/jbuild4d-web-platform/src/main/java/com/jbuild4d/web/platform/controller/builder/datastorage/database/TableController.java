@@ -119,6 +119,12 @@ public class TableController {
         return responseVo;
     }
 
+    @RequestMapping(value = "/GetTableFieldsByTableId")
+    @ResponseBody
+    public JBuild4DResponseVo getTableFieldsByTableId(String tableId) throws IOException {
+        return JBuild4DResponseVo.getDataSuccess(tableFieldService.getTableFieldsByTableId(tableId));
+    }
+
     @RequestMapping(value = "/GetTableFieldType")
     @ResponseBody
     public JBuild4DResponseVo getFieldDataType() throws JBuild4DGenerallyException {
