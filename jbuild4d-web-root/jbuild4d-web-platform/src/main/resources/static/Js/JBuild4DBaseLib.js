@@ -689,6 +689,12 @@ var JsonUtility = {
             }
         }
         return result;*/
+    },
+    JsonToString:function (obj) {
+        return JSON.stringify(obj);
+    },
+    StringToJson: function (str) {
+        return eval("(" + str + ")");
     }
 };
 
