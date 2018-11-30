@@ -160,7 +160,7 @@ public class TableControllerTest  extends ControllerTestBase {
                 return item.getFieldName().equals("F_NTEXT_2");
             }
         });
-        ntextField2.setFieldDataType(TableFieldTypeEnum.NVarCharType.getValue());
+        ntextField2.setFieldDataType(TableFieldTypeEnum.NVarCharType.getText());
         ntextField2.setFieldDataLength(200);
 
         //调用方法
@@ -233,7 +233,7 @@ public class TableControllerTest  extends ControllerTestBase {
         fieldVO.setFieldCaption(fieldCaption);
         fieldVO.setFieldIsPk(pk.getDisplayName());
         fieldVO.setFieldAllowNull(allowNull.getDisplayName());
-        fieldVO.setFieldDataType(fieldDataType.getValue());
+        fieldVO.setFieldDataType(fieldDataType.getText());
         fieldVO.setFieldDataLength(dataLength);
         fieldVO.setFieldDecimalLength(decimalLength);
         fieldVO.setFieldDefaultValue(fieldDefaultValue);

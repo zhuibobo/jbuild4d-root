@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="text/javascript" src="../../../../../Js/JQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../../../../UIComponent/JQuery-UI-1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="../../../../../Js/JBuild4DBaseLib.js"></script>
     <script type="text/javascript" src="../../../../../Js/JBuild4DSelectViewLib.js"></script>
     <script type="text/javascript" src="../../../../../Js/VUE-2.5.16/vue.js"></script>
@@ -11,6 +12,7 @@
     <script type="text/javascript" src="../../../../../UIComponent/HTMLDesign/VueComponent/DialogPropComponent.js"></script>
     <script type="text/javascript" src="../../../../../UIComponent/HTMLDesign/FormDesign/JBuild4DFormDesign.js"></script>
     <link rel="stylesheet" type="text/css" href="../../../../../Themes/Default/IView-3.X/iview.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../Themes/Default/JQueryUI/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../Themes/Default/FormDesign/Dialog.css" />
 </head>
 <body>
@@ -44,18 +46,25 @@
                     this.baseInfo.name=this.baseInfo.id;
                 },
                 setBindCompleted:function(bindToField,defaultValue,validateRules){
-
+                    this.bindToField=bindToField;
+                    this.defaultValue=defaultValue;
+                    this.validateRules=validateRules;
                 },
                 getControlProps:function () {
-                    var result={
-                        baseInfo:this.baseInfo,
-                        bindToField:this.bindToField,
-                        defaultValue:this.defaultValue,
-                        validateRules:this.validateRules
+                    var result = {
+                        success: true,
+                        baseInfo: this.baseInfo,
+                        bindToField: this.bindToField,
+                        defaultValue: this.defaultValue,
+                        validateRules: this.validateRules
                     }
-                    return result;
+                    return JBuild4D.FormDesign.Control.ValidateSerializeControlDialogCompletedEnable(result);
                 },
                 setControlProps:function ($elem,props) {
+                    this.baseInfo=props.baseInfo;
+                    this.bindToField=props.bindToField;
+                    this.defaultValue=props.defaultValue;
+                    this.validateRules=props.validateRules;
                     debugger;
                 }
             }

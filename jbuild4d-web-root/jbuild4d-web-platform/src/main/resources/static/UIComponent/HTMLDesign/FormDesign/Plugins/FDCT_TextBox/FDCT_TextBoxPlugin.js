@@ -54,8 +54,8 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.SingleName
                 //对话框确认按钮触发的事件
                 onOk: function () {
                     var props=ControlSetting.IFrameWindow.contentWindow.DialogApp.getControlProps();
-                    if(props==false) {
-                         return false;
+                    if(props.success==false) {
+                        return false;
                     }
                     JBuild4D.FormDesign.Control.BuildGeneralElemToCKWysiwyg("<input type='text' />",ControlSetting,props,ControlSetting.IFrameWindow.contentWindow);
                 },

@@ -106,32 +106,32 @@ var EditTable_SelectFieldType={
 
         $elem.change(function () {
             var val = $(this).val();
-            if (val == "INT") { //如果是整数   禁用字段长度和小数位 并值都改为0
+            if (val == "整数") { //如果是整数   禁用字段长度和小数位 并值都改为0
                 $(hostCell).next().find("input").attr("disabled", true);
                 $(hostCell).next().find("input").val(0);
 
                 $(hostCell).next().next().find("input").attr("disabled", true);
                 $(hostCell).next().next().find("input").val(0);
-            } else if (val == "NUMBER") {//2小数 启用字段长度和小数位数 并把字段长度改为10 和 2
+            } else if (val == "小数") {//2小数 启用字段长度和小数位数 并把字段长度改为10 和 2
                 $(hostCell).next().find("input").attr("disabled", false);
                 $(hostCell).next().find("input").val(10);
 
                 $(hostCell).next().next().find("input").attr("disabled", false);
                 $(hostCell).next().next().find("input").val(2);
-            } else if (val == "DATETIME") { //3：日期时间 禁用 字段长度和小数位数 并改为20 0
+            } else if (val == "日期时间") { //3：日期时间 禁用 字段长度和小数位数 并改为20 0
                 $(hostCell).next().find("input").attr("disabled", true);
                 $(hostCell).next().find("input").val(20);
 
                 $(hostCell).next().next().find("input").attr("disabled", true);
                 $(hostCell).next().next().find("input").val(0);
-            } else if (val == "NVARCHAR") {//4: 字符串   禁用小数位选择框
+            } else if (val == "字符串") {//4: 字符串   禁用小数位选择框
                 //启用字段长度
                 $(hostCell).next().find("input").attr("disabled", false);
                 $(hostCell).next().find("input").val(50);
 
                 $(hostCell).next().next().find("input").attr("disabled", true);
                 $(hostCell).next().next().find("input").val(0);
-            } else if (val == "TEXT") { //6:意见型： 禁用字段长度和小数 并把值改为0
+            } else if (val == "长字符串") { //6:意见型： 禁用字段长度和小数 并把值改为0
                 $(hostCell).next().find("input").attr("disabled", true);
                 $(hostCell).next().find("input").val(0);
 

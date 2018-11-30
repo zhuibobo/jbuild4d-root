@@ -26,10 +26,17 @@ Vue.component("fd-control-bind-to", {
     //新增result的watch，监听变更同步到openStatus
     //监听父组件对props属性result的修改，并同步到组件内的data属性
     watch: {
-        bindToProp (val) {
-            //alert("1");
-            console.log(val);
-            //this.bindTo.tableName = val.tableName;
+        bindToProp :function(newValue) {
+            console.log(newValue);
+        },
+        bindToFieldProp:function (newValue) {
+            this.bindToField=newValue;
+        },
+        defaultValueProp:function (newValue) {
+            this.defaultValue=newValue;
+        },
+        validateRulesProp:function (newValue) {
+            this.validateRules=newValue;
         }
     },
     mounted:function(){

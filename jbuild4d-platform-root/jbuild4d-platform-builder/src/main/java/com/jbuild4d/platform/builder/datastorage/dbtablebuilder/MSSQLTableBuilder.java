@@ -46,15 +46,15 @@ public class MSSQLTableBuilder extends TableBuidler {
     }
 
     private boolean appendFieldDataTypeTo(TableFieldEntity fieldEntity, StringBuilder sqlBuilder) throws JBuild4DPhysicalTableException {
-        if (TableFieldTypeEnum.IntType.getValue().equals(fieldEntity.getFieldDataType())) {
+        if (TableFieldTypeEnum.IntType.getText().equals(fieldEntity.getFieldDataType())) {
             sqlBuilder.append(" int ");
-        } else if (TableFieldTypeEnum.NumberType.getValue().equals(fieldEntity.getFieldDataType())) {
+        } else if (TableFieldTypeEnum.NumberType.getText().equals(fieldEntity.getFieldDataType())) {
             sqlBuilder.append(" decimal(" + fieldEntity.getFieldDataLength().toString() + "," + fieldEntity.getFieldDecimalLength().toString() + ") ");
-        } else if (TableFieldTypeEnum.DataTimeType.getValue().equals(fieldEntity.getFieldDataType())) {
+        } else if (TableFieldTypeEnum.DataTimeType.getText().equals(fieldEntity.getFieldDataType())) {
             sqlBuilder.append(" datetime ");
-        } else if (TableFieldTypeEnum.NVarCharType.getValue().equals(fieldEntity.getFieldDataType())) {
+        } else if (TableFieldTypeEnum.NVarCharType.getText().equals(fieldEntity.getFieldDataType())) {
             sqlBuilder.append(" nvarchar(" + fieldEntity.getFieldDataLength().toString() + ")");
-        } else if (TableFieldTypeEnum.TextType.getValue().equals(fieldEntity.getFieldDataType())) {
+        } else if (TableFieldTypeEnum.TextType.getText().equals(fieldEntity.getFieldDataType())) {
             sqlBuilder.append(" ntext ");
         } else {
             throw JBuild4DPhysicalTableException.getFieldTypeNodeSupportError(fieldEntity.getFieldDataType());

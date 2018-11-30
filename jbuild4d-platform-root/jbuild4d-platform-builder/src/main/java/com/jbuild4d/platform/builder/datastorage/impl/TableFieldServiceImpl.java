@@ -136,7 +136,7 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
         fieldEntity.setFieldCaption(fieldCaption);
         fieldEntity.setFieldIsPk(pk.getDisplayName());
         fieldEntity.setFieldAllowNull(allowNull.getDisplayName());
-        fieldEntity.setFieldDataType(fieldDataType.getValue());
+        fieldEntity.setFieldDataType(fieldDataType.getText());
         fieldEntity.setFieldDataLength(dataLength);
         fieldEntity.setFieldDecimalLength(decimalLength);
         fieldEntity.setFieldDefaultType(fieldDefaultType);

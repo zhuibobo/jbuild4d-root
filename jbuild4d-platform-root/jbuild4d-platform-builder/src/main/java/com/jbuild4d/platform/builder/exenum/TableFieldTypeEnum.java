@@ -9,33 +9,31 @@ import com.jbuild4d.base.exception.JBuild4DBaseException;
  * To change this template use File | Settings | File Templates.
  */
 public enum TableFieldTypeEnum {
-    IntType("整数","INT"),
-    NumberType("小数","NUMBER"),
-    DataTimeType("日期时间","DATETIME"),
-    NVarCharType("字符串","NVARCHAR"),
-    TextType("长字符串","TEXT");
+    IntType("整数"),
+    NumberType("小数"),
+    DataTimeType("日期时间"),
+    NVarCharType("字符串"),
+    TextType("长字符串");
 
     private String _nText;
-    private String _nValue;
-    TableFieldTypeEnum(String _nText,String _nValue) {
+    TableFieldTypeEnum(String _nText) {
         this._nText = _nText;
-        this._nValue=_nValue;
     }
 
     public String getText(){
         return this._nText;
     }
 
-    public String getValue(){
+    /*public String getValue(){
         return this._nValue;
-    }
+    }*/
 
     public static String getJsonString() {
         TableFieldTypeEnum[] fieldTypes = TableFieldTypeEnum.values();
         String result = "[";
         for (int i = 0; i < fieldTypes.length; i++) {
             TableFieldTypeEnum item = fieldTypes[i];
-            result += "{Name:'" + item.toString() + "',Value:'" + item._nValue + "',Text:'" + item._nText+"'},";
+            result += "{Name:'" + item.toString() + "',Value:'" + item._nText + "',Text:'" + item._nText+"'},";
         }
         result=result.substring(0,result.length()-1);
         result += "]";
@@ -65,7 +63,7 @@ public enum TableFieldTypeEnum {
         throw NotSupportException();
     }
 
-    public static TableFieldTypeEnum parseCode(String _nValue) throws JBuild4DBaseException {
+    /*public static TableFieldTypeEnum parseCode(String _nValue) throws JBuild4DBaseException {
         if(_nValue==TableFieldTypeEnum.IntType._nValue){
             return TableFieldTypeEnum.IntType;
         }
@@ -82,5 +80,5 @@ public enum TableFieldTypeEnum {
             return TableFieldTypeEnum.TextType;
         }
         throw NotSupportException();
-    }
+    }*/
 }

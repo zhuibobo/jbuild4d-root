@@ -133,8 +133,16 @@ var JBuild4D={
                     //exsetting.IRCommandName=SimpleControlUtil.PropInsertCommand;
                 }
             },
-            ValidateBuildEnable(html,controlSetting,controlProps,_iframe){
+            ValidateBuildEnable:function(html,controlSetting,controlProps,_iframe){
                 return true;
+            },
+            ValidateSerializeControlDialogCompletedEnable:function (returnResult) {
+                //debugger;
+                if (returnResult.baseInfo.serialize == "true" && returnResult.bindToField.fieldName == "") {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "序列化的控件必须绑定字段!", null);
+                    return {success: false};
+                }
+                return returnResult;
             }
         },
         CKEditorInst:null,
