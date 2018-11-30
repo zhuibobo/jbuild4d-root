@@ -19,7 +19,8 @@ Vue.component("fd-control-bind-to", {
             defaultValue: {
                 defaultType: "",
                 defaultValue: "",
-                defaultText: ""
+                defaultText: "",
+                text:""
             }
         }
     },
@@ -85,6 +86,13 @@ Vue.component("fd-control-bind-to", {
             //将当前对象附着到window上,提供给子窗体使用
             window._SelectBindObj = this;
         },
+        setSelectEnvVariableResultValue:function(result){
+            this.defaultValue.defaultType=result.Type;
+            this.defaultValue.defaultValue=result.Value;
+            this.defaultValue.defaultText=result.Text;
+            this.defaultValue.text=JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType,this.defaultValue.defaultText);
+            this.setCompleted();
+        },
         /*绑定验证规则*/
         selectValidateRuleView:function () {
             JBuild4DSelectView.SelectValidateRule.beginSelectInFrame(window,"_SelectBindObj",{});
@@ -144,6 +152,7 @@ Vue.component("fd-control-bind-to", {
                     '</tr>'+
                     '<tr>'+
                         '<td colspan="4" style="background-color: #ffffff">' +
+                            '{{defaultValue.text}}'+
                         '</td>'+
                     '</tr>'+
                     '<tr>' +

@@ -177,11 +177,17 @@
                 else if(this.selectType=="NumberCode"){
                     result.Type = "NumberCode";
                 }
-                window.OpenerWindowObj[this.getSelectInstanceName()].setSelectResultValue(result);
+                window.OpenerWindowObj[this.getSelectInstanceName()].setSelectEnvVariableResultValue(result);
                 this.handleClose();
             },
             handleClose: function () {
-                DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
+                //DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
+                if(window.IsOpenForFrame){
+                    DialogUtility.Frame_CloseDialog(window)
+                }
+                else {
+                    DialogUtility.CloseOpenIframeWindow(window, DialogUtility.DialogId);
+                }
             }
         }
     })
