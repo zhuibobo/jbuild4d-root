@@ -6,7 +6,7 @@ var JBuild4D={
             SetElemPropsInEditDialog:function(iframeObj,actionName){
                 iframeObj.contentWindow.DialogApp.ready(actionName);
                 if(actionName==this.DialogExecuteEditActionName) {
-                    var elem=JBuild4D.FormDesign.Control.GetSelectedElem.outerHTML();
+                    var elem=JBuild4D.FormDesign.Control.GetSelectedElem().outerHTML();
                     var props=JBuild4D.FormDesign.Control.DeserializePropsFromElem(elem);
                     iframeObj.contentWindow.DialogApp.setControlProps(elem,props);
                 }
@@ -45,7 +45,7 @@ var JBuild4D={
                 }
             },
             OnCKWysiwygElemDBClickEvent:function(event,controlSetting){
-                debugger;
+                //debugger;
                 var element = event.data.element;
                 if(element.getAttribute("auto_remove")=="true"){
                     element=event.data.element.getParent();
@@ -113,9 +113,9 @@ var JBuild4D={
                     return props;
                 }
 
-                props=attrToProp(props,"baseInfo");
-                props=attrToProp(props,"bindToField");
-                props=attrToProp(props,"defaultValue");
+                props=attrToProp.call(this,props,"baseInfo");
+                props=attrToProp.call(this,props,"bindToField");
+                props=attrToProp.call(this,props,"defaultValue");
 
                 return props;
             },
