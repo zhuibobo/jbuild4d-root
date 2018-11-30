@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="bobo-sss">
     <words>
+      <w>clientresolve</w>
       <w>datas</w>
       <w>dbaccess</w>
       <w>dbentities</w>
@@ -11,6 +12,8 @@
       <w>htmlmsg</w>
       <w>issystem</w>
       <w>operer</w>
+      <w>serverresolve</w>
+      <w>singlename</w>
     </words>
   </dictionary>
 </component>

@@ -64,7 +64,11 @@ var JBuild4D={
                     return this.$CKEditorSelectElem;
                 }
             },
-            SerializePropsToElem:function(elem,props){
+            SerializePropsToElem:function(elem,props,controlSetting){
+                elem.setAttribute("singlename",controlSetting.SingleName);
+                elem.setAttribute("clientresolve",controlSetting.ClientResolve);
+                elem.setAttribute("serverresolve",controlSetting.ServerResolve);
+
                 if(props["baseInfo"]){
                     for (var key in props["baseInfo"]) {
                         elem.setAttribute(key, props["baseInfo"][key]);
@@ -96,7 +100,7 @@ var JBuild4D={
                     if (controlSetting.IFrameExecuteActionName == JBuild4D.FormDesign.Dialog.DialogExecuteInsertActionName) {
                         var elem = CKEDITOR.dom.element.createFromHtml(html);
                         elem.setAttribute("jbuild4d_custom", "true");
-                        this.SerializePropsToElem(elem,controlProps);
+                        this.SerializePropsToElem(elem,controlProps,controlSetting);
                         JBuild4D.FormDesign.CKEditorInst.insertElement(elem);
                         JBuild4D.FormDesign.CKEditorInst.getSelection().selectElement(elem);
                     }
