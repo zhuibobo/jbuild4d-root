@@ -10,18 +10,18 @@
     </Type>
     <Type Text="时间日期" Value="DateTime">
         <Group Text="时间日期">
-            <EnvVariable Text="年年年年-月月-日日" Value="yyyy-MM-dd" ClassName="com.jbuild4d.platform.system.apivariable.impl.DateTimeVariableCreater" Para="yyyy-MM-dd" Desc=""></EnvVariable>
-            <EnvVariable Text="年年年年-月月-日日 时:分:秒" Value="yyyy-MM-dd HH:mm:ss" ClassName="com.jbuild4d.platform.system.apivariable.impl.DateTimeVariableCreater" Para="yyyy-MM-dd HH:mm:ss" Desc=""></EnvVariable>
-            <EnvVariable Text="年年年年/月月/日日" Value="yyyy/MM/dd" ClassName="com.jbuild4d.platform.system.apivariable.impl.DateTimeVariableCreater" Para="yyyy/mm/dd" Desc=""></EnvVariable>
+            <EnvVariable Text="年年年年-月月-日日" Value="yyyy-MM-dd" ClassName="com.jbuild4d.platform.system.extend.apivariable.impl.DateTimeVariableCreater" Para="yyyy-MM-dd" Desc=""></EnvVariable>
+            <EnvVariable Text="年年年年-月月-日日 时:分:秒" Value="yyyy-MM-dd HH:mm:ss" ClassName="com.jbuild4d.platform.system.extend.apivariable.impl.DateTimeVariableCreater" Para="yyyy-MM-dd HH:mm:ss" Desc=""></EnvVariable>
+            <EnvVariable Text="年年年年/月月/日日" Value="yyyy/MM/dd" ClassName="com.jbuild4d.platform.system.extend.apivariable.impl.DateTimeVariableCreater" Para="yyyy/mm/dd" Desc=""></EnvVariable>
         </Group>
     </Type>
     <Type Text="API变量" Value="ApiVar">
         <Group Text="API变量">
             <Group Text="默认变量">
-                <EnvVariable Text="当前用户所在组织ID" Value="ApiVarCurrentUserOrganId" ClassName="com.jbuild4d.platform.system.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserOrganId" Desc=""></EnvVariable>
-                <EnvVariable Text="当前用户所在组织名称" Value="ApiVarCurrentUserOrganName" ClassName="com.jbuild4d.platform.system.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserOrganName" Desc=""></EnvVariable>
-                <EnvVariable Text="当前用户ID" Value="ApiVarCurrentUserId" ClassName="com.jbuild4d.platform.system.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserId"  Desc=""></EnvVariable>
-                <EnvVariable Text="当前用户名称" Value="ApiVarCurrentUserName" ClassName="com.jbuild4d.platform.system.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserName" Desc=""></EnvVariable>
+                <EnvVariable Text="当前用户所在组织ID" Value="ApiVarCurrentUserOrganId" ClassName="com.jbuild4d.platform.system.extend.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserOrganId" Desc=""></EnvVariable>
+                <EnvVariable Text="当前用户所在组织名称" Value="ApiVarCurrentUserOrganName" ClassName="com.jbuild4d.platform.system.extend.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserOrganName" Desc=""></EnvVariable>
+                <EnvVariable Text="当前用户ID" Value="ApiVarCurrentUserId" ClassName="com.jbuild4d.platform.system.extend.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserId" Desc=""></EnvVariable>
+                <EnvVariable Text="当前用户名称" Value="ApiVarCurrentUserName" ClassName="com.jbuild4d.platform.system.extend.apivariable.impl.UserSessionVariableCreater" Para="ApiVarCurrentUserName" Desc=""></EnvVariable>
             </Group>
             <Group Text="扩展1">
             </Group>
@@ -36,7 +36,7 @@
     </Type>
     <Type Text="主键生成" Value="IdCoder">
         <Group Text="主键生成">
-            <EnvVariable Text="通用唯一识别码" Value="UUID" ClassName="com.jbuild4d.platform.system.apivariable.impl.UUIDVariableCreater" Para="" Desc=""></EnvVariable>
+            <EnvVariable Text="通用唯一识别码" Value="UUID" ClassName="com.jbuild4d.platform.system.extend.apivariable.impl.UUIDVariableCreater" Para="" Desc=""></EnvVariable>
         </Group>
     </Type>
 </Config>

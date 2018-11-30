@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.system.apivariable;
+package com.jbuild4d.platform.system.extend.apivariable;
 
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;

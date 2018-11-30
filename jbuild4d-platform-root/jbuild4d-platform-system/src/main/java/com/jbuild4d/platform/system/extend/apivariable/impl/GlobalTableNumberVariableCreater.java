@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.system.apivariable.impl;
+package com.jbuild4d.platform.system.extend.apivariable.impl;
 
 /**
  * Created with IntelliJ IDEA.

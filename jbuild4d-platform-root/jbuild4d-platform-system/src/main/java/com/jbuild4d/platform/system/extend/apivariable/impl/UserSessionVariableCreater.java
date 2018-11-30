@@ -1,8 +1,8 @@
-package com.jbuild4d.platform.system.apivariable.impl;
+package com.jbuild4d.platform.system.extend.apivariable.impl;
 
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
-import com.jbuild4d.platform.system.apivariable.IAPIVariableCreater;
+import com.jbuild4d.platform.system.extend.apivariable.IAPIVariableCreater;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
 
 /**

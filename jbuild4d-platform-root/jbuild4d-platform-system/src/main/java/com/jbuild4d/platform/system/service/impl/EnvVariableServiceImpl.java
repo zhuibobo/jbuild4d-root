@@ -9,7 +9,7 @@ import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.XMLUtility;
 import com.jbuild4d.base.tools.common.list.IListWhereCondition;
 import com.jbuild4d.base.tools.common.list.ListUtility;
-import com.jbuild4d.platform.system.apivariable.IAPIVariableCreater;
+import com.jbuild4d.platform.system.extend.apivariable.IAPIVariableCreater;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;

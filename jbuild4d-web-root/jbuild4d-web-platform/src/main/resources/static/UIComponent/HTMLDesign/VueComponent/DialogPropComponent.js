@@ -171,19 +171,24 @@ Vue.component("fd-control-base-info", {
     data: function () {
         return {
             baseInfo:{
-                id:"33"
+                id:"",
+                serialize:"",
+                name:"",
+                className:"",
+                placeholder:"",
+                readonly:"",
+                disabled:"",
+                style:"",
+                desc:""
             }
         }
     },
     //新增result的watch，监听变更同步到openStatus
     //监听父组件对props属性result的修改，并同步到组件内的data属性
     watch: {
-        baseInfo (newVal) {
+        baseInfo: function (newVal) {
             // 必须是input
             this.$emit('input', newVal)
-            //alert("1");
-            //console.log(val);
-            //this.bindTo.tableName = val.tableName;
         }
     },
     mounted:function(){
@@ -216,7 +221,7 @@ Vue.component("fd-control-base-info", {
                         '<td colspan="3"><input type="text" /></td>' +
                     '</tr>' +
                     '<tr>' +
-                        '<td>placeholder</td>' +
+                        '<td>Placeholder</td>' +
                         '<td><input type="text" /></td>' +
                         '<td>Readonly：</td>' +
                         '<td style="text-align: center"><!--<i-switch v-model="switch1" />--></td>' +
