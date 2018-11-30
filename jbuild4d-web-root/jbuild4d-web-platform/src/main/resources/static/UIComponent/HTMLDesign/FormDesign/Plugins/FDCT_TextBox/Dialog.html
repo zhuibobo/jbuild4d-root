@@ -39,27 +39,33 @@
                     fieldDataType: "",
                     fieldLength:""
                 },
-                validateRules:{
-                    msg:"",
-                    rules:[]
-                },
                 defaultValue: {
                     defaultType: "",
                     defaultValue: "",
                     defaultText: ""
                 },
+                validateRules:{
+                    msg:"",
+                    rules:[]
+                },
                 baseInfo:{
-                    id:"4444"
+                    id:"",
+                    serialize:"",
+                    name:"",
+                    className:"",
+                    placeholder:"",
+                    readonly:"",
+                    disabled:"",
+                    style:"",
+                    desc:""
                 }
             },
             mounted:function () {
-                //alert("1");
-                //this.setProps();
             },
             methods: {
-                setBindCompleted:function(bindTo){
+                setBindCompleted:function(bindToField,defaultValue,validateRules){
                     //alert("selectFieldCompleted called");
-                    this.allProps.bindTo=bindTo;
+                    this.bindToField=bindToField;
                 },
                 getControlProps:function () {
                     alert(this.baseInfo.id);

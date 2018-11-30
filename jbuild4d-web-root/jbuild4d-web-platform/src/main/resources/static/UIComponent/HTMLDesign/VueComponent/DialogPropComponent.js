@@ -89,6 +89,10 @@ Vue.component("fd-control-bind-to", {
                 this.validateRules=result;
                 this.setCompleted();
             }
+            else{
+                this.validateRules.msg="";
+                this.validateRules.rules=[];
+            }
         },
         getSelectValidateRuleResultValue:function () {
             return this.validateRules;
@@ -153,11 +157,11 @@ Vue.component("fd-control-bind-to", {
                                 '</tr>' +
                                 '<tr>' +
                                     '<td style="text-align: center;">验证类型</td>'+
-                                    '<td style="background: #e8eaec;text-align: center;">验证参数</td>'+
+                                    '<td style="background: #e8eaec;text-align: center;">参数</td>'+
                                 '</tr>'+
                                 '<tr v-for="ruleItem in validateRules.rules">' +
-                                    '<td>{{ruleItem.validateType}}</td>'+
-                                    '<td>{{ruleItem.validateParas}}</td>'+
+                                    '<td style="background: #ffffff;text-align: center;color: #ad9361">{{ruleItem.validateType}}</td>'+
+                                    '<td style="background: #ffffff;text-align: center;"><p v-if="ruleItem.validateParas === \'\'">无参数</p><p v-else>{{ruleItem.validateParas}}</p></td>'+
                                 '</tr>'+
                             '</table>' +
                         '</td>' +

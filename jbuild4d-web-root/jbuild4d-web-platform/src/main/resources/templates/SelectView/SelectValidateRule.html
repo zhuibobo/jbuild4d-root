@@ -156,14 +156,14 @@
                 ]
             },
             mounted:function (){
-
+                this.bindOldSelectedValue();
             },
             methods:{
                 bindOldSelectedValue:function(){
-                    var oldSelectedValue= window.OpenerWindowObj[this.getSelectInstanceName()].getSelectFieldResultValue();
+                    var oldSelectedValue= window.OpenerWindowObj[this.getSelectInstanceName()].getSelectValidateRuleResultValue();
                     //debugger;
-                    if(oldSelectedValue.validateRules.length>0) {
-                        this.addedValidateRule=oldSelectedValue.validateRules;
+                    if(oldSelectedValue.rules.length>0) {
+                        this.addedValidateRule=oldSelectedValue.rules;
                         this.msg=oldSelectedValue.msg;
                     }
                 },
@@ -175,7 +175,7 @@
                     if(this.addedValidateRule.length>0) {
                         var result={
                             msg:this.ruleParas.msg,
-                            validateRules:this.addedValidateRule
+                            rules:this.addedValidateRule
                         };
                         window.OpenerWindowObj[this.getSelectInstanceName()].setSelectValidateRuleResultValue(result);
                         this.handleClose();
