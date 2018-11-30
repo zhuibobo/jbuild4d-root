@@ -65,41 +65,63 @@ var JBuild4D={
                 }
             },
             SerializePropsToElem:function(elem,props,controlSetting){
+                elem.setAttribute("jbuild4d_custom", "true");
                 elem.setAttribute("singlename",controlSetting.SingleName);
                 elem.setAttribute("clientresolve",controlSetting.ClientResolve);
                 elem.setAttribute("serverresolve",controlSetting.ServerResolve);
 
                 if(props["baseInfo"]){
                     for (var key in props["baseInfo"]) {
-                        elem.setAttribute(key, props["baseInfo"][key]);
+                        elem.setAttribute(key.toLocaleLowerCase(), props["baseInfo"][key]);
                     }
                 }
 
                 if(props["bindToField"]){
                     for (var key in props["bindToField"]) {
-                        elem.setAttribute(key, props["bindToField"][key]);
+                        elem.setAttribute(key.toLocaleLowerCase(), props["bindToField"][key]);
                     }
                 }
 
                 if(props["defaultValue"]){
                     for (var key in props["defaultValue"]) {
-                        elem.setAttribute(key, props["defaultValue"][key]);
+                        elem.setAttribute(key.toLocaleLowerCase(), props["defaultValue"][key]);
                     }
                 }
 
                 if(props["validateRules"]){
-
+                    if(props["validateRules"].rules) {
+                        if (props["validateRules"].rules.length > 0) {
+                            elem.setAttribute("validaterules", encodeURIComponent(JsonUtility.JsonToString(props["validateRules"])));
+                        }
+                    }
                 }
                 return elem;
             },
             DeserializePropsFromElem:function(elem){
+                var props={};
+                var $elem=$(elem);
 
+                function attrToProp(props,groupName) {
+                    var groupProp={};
+                    for(var key in this.DefaultProps[groupName]){
+                        if($elem.attr(key)){
+                            groupProp[key]=$elem.attr(key);
+                        }
+                    }
+                    props[groupName]=groupProp;
+                    return props;
+                }
+
+                props=attrToProp(props,"baseInfo");
+                props=attrToProp(props,"bindToField");
+                props=attrToProp(props,"defaultValue");
+
+                return props;
             },
             BuildGeneralElemToCKWysiwyg:function (html,controlSetting,controlProps,_iframe) {
                 if(this.ValidateBuildEnable(html,controlSetting,controlProps,_iframe)) {
                     if (controlSetting.IFrameExecuteActionName == JBuild4D.FormDesign.Dialog.DialogExecuteInsertActionName) {
                         var elem = CKEDITOR.dom.element.createFromHtml(html);
-                        elem.setAttribute("jbuild4d_custom", "true");
                         this.SerializePropsToElem(elem,controlProps,controlSetting);
                         JBuild4D.FormDesign.CKEditorInst.insertElement(elem);
                         JBuild4D.FormDesign.CKEditorInst.getSelection().selectElement(elem);

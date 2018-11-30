@@ -48,12 +48,11 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.SingleName
             function () {
                 var iframe = document.getElementById(this._.frameId);
                 ControlSetting.IFrameWindow = iframe;
-                JBuild4D.FormDesign.Dialog.SetElemPropsInEditDialog(ControlSetting.IFrameWindow, ControlSetting.IRCommandName);
+                JBuild4D.FormDesign.Dialog.SetElemPropsInEditDialog(ControlSetting.IFrameWindow, ControlSetting.IFrameExecuteActionName);
             },
             {
                 //对话框确认按钮触发的事件
                 onOk: function () {
-                    //ControlSetting.IFrameWindow.contentWindow.DialogApp.getControlProps();
                     var props=ControlSetting.IFrameWindow.contentWindow.DialogApp.getControlProps();
                     if(props==false) {
                          return false;
