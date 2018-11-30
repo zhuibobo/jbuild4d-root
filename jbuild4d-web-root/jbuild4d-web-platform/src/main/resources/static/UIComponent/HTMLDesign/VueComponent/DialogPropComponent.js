@@ -205,9 +205,9 @@ Vue.component("fd-control-base-info", {
                     '<colgroup>' +
                         '<col style="width: 100px" />' +
                         '<col style="width: 280px" />' +
-                        '<col style="width: 100px" />' +
-                        '<col style="width: 100px" />' +
-                        '<col style="width: 100px" />' +
+                        '<col style="width: 90px" />' +
+                        '<col style="width: 110px" />' +
+                        '<col style="width: 90px" />' +
                         '<col />' +
                     '</colgroup>' +
                     '<tr>' +
@@ -216,32 +216,47 @@ Vue.component("fd-control-base-info", {
                             '<input type="text" v-model="baseInfo.id" />' +
                         '</td>' +
                         '<td>Serialize：</td>' +
-                        '<td colspan="3"><!--<i-switch v-model="switch1" />--></td>' +
+                        '<td colspan="3">' +
+                            '<radio-group type="button" style="margin: auto" v-model="baseInfo.serialize">' +
+                                '<radio label="true">是</radio>' +
+                                '<radio label="false">否</radio>' +
+                            '</radio-group>' +
+                        '</td>' +
                     '</tr>' +
                     '<tr>' +
                         '<td>Name：</td>' +
-                        '<td><input type="text" /></td>' +
+                        '<td><input type="text" v-model="baseInfo.name" /></td>' +
                         '<td>ClassName：</td>' +
-                        '<td colspan="3"><input type="text" /></td>' +
+                        '<td colspan="3"><input type="text" v-model="baseInfo.placeholder" /></td>' +
                     '</tr>' +
                     '<tr>' +
                         '<td>Placeholder</td>' +
-                        '<td><input type="text" /></td>' +
+                        '<td><input type="text" v-model="baseInfo.className" /></td>' +
                         '<td>Readonly：</td>' +
-                        '<td style="text-align: center"><!--<i-switch v-model="switch1" />--></td>' +
+                        '<td style="text-align: center">' +
+                            '<radio-group type="button" style="margin: auto" v-model="baseInfo.readonly">' +
+                                '<radio label="true">是</radio>' +
+                                '<radio label="false">否</radio>' +
+                            '</radio-group>' +
+                        '</td>' +
                         '<td>Disabled：</td>' +
-                        '<td style="text-align: center"><!--<i-switch v-model="switch1" />--></td>' +
+                        '<td style="text-align: center">' +
+                            '<radio-group type="button" style="margin: auto" v-model="baseInfo.disabled">' +
+                                '<radio label="true">是</radio>' +
+                                '<radio label="false">否</radio>' +
+                            '</radio-group>' +
+                        '</td>' +
                     '</tr>' +
                     '<tr>' +
                         '<td>样式：</td>' +
                         '<td colspan="5">' +
-                            '<textarea rows="7"></textarea>' +
+                            '<textarea rows="7" v-model="baseInfo.style"></textarea>' +
                         '</td>' +
                     '</tr>' +
                     '<tr>' +
                         '<td>备注：</td>' +
                         '<td colspan="5">' +
-                            '<textarea rows="9"></textarea>' +
+                            '<textarea rows="8" v-model="baseInfo.desc"></textarea>' +
                         '</td>' +
                     '</tr>' +
         '</table>'

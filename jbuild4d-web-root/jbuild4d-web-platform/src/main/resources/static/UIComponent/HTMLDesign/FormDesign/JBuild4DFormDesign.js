@@ -34,23 +34,24 @@ var JBuild4D={
                 },
                 baseInfo:{
                     id:"",
-                    serialize:"",
+                    serialize:"true",
                     name:"",
                     className:"",
                     placeholder:"",
-                    readonly:"",
-                    disabled:"",
+                    readonly:"false",
+                    disabled:"false",
                     style:"",
                     desc:""
                 }
             },
             OnCKWysiwygElemDBClickEvent:function(event,controlSetting){
+                debugger;
                 var element = event.data.element;
                 if(element.getAttribute("auto_remove")=="true"){
                     element=event.data.element.getParent();
                 }
                 var singleName=element.getAttribute("singleName");
-                if(singleName==controlSetting.singleName) {
+                if(singleName==controlSetting.SingleName) {
                     controlSetting.IFrameExecuteActionName = JBuild4D.FormDesign.Dialog.DialogExecuteEditActionName;
                     this.SetSelectedElem(element.getOuterHtml());
                     event.data.dialog =controlSetting.DialogName;

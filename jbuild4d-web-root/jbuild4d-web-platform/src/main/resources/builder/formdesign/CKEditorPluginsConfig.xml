@@ -12,7 +12,7 @@
             <Desc></Desc>
         </WebFormControl>-->
         <WebFormControl SingleName="FDCT_TextBox" Text="单行输入框" ToolbarLocation="FDCT_Simple,1"
-                        ServerResolve="" ClientResolve="" ClientResolveJs=""
+                        ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
                         DialogWidth="780" DialogHeight="550">
             <Config></Config>
             <Desc></Desc>
