@@ -113,7 +113,7 @@ var JBuild4D={
         CKEditorInst:null,
         $CKEditorSelectElem:null,
         CoverEmptyPluginProp:function(obj){
-            var coverObj=JBuild4D.FormDesign.PluginsDefConfig[obj.Name];
+            var coverObj=JBuild4D.FormDesign.PluginsDefConfig[obj.SingleName];
             for(var prop in obj){
                 if(typeof(obj[prop])!="function"){
                     if(obj[prop]==""||obj[prop]==null){
@@ -127,8 +127,8 @@ var JBuild4D={
         InitControlSetting:function(setting){
             //使用默认值覆盖定义的空值
             JBuild4D.FormDesign.CoverEmptyPluginProp(setting);
-            setting.DialogName=setting.Name;
-            setting.ToolbarCommand="JBuild4D.FormDesign.Plugins."+setting.Name;
+            setting.DialogName=setting.SingleName;
+            setting.ToolbarCommand="JBuild4D.FormDesign.Plugins."+setting.SingleName;
             setting.DialogSettingTitle=setting.ToolbarLabel+"Web控件";
         },
         ImportCssToWysiwyg:function(sender,controlSetting,editor){
