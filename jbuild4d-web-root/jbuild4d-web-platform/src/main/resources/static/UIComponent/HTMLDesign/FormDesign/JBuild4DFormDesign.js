@@ -3,10 +3,10 @@ var JBuild4D={
         Dialog:{
             DialogExecuteEditActionName:"Edit",
             DialogExecuteInsertActionName:"Insert",
-            SetDialogProp:function (iframeObj,actionName) {
-                iframeObj.contentWindow.PageFunc.Load(actionName);
+            SetElemPropsInEditDialog:function(iframeObj,actionName){
+                iframeObj.contentWindow.DialogApp.ready(actionName);
                 if(actionName==this.DialogExecuteEditActionName) {
-                    //iframeObj.contentWindow.DialogApp.SetProps(DesignUtil.GetSelectedElem().outerHTML());
+                    iframeObj.contentWindow.DialogApp.setControlProps(DesignUtil.GetSelectedElem().outerHTML());
                 }
             }
         },

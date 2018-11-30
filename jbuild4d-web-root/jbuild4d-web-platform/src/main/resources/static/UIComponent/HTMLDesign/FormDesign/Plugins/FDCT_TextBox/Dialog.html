@@ -39,6 +39,9 @@
 
             },
             methods: {
+                ready:function(actionName){
+                    this.baseInfo.id="txt_"+StringUtility.RTimestamp();
+                },
                 setBindCompleted:function(bindToField,defaultValue,validateRules){
                     //alert("selectFieldCompleted called");
                     //this.bindToField=bindToField;
@@ -54,7 +57,7 @@
                     //alert(this.baseInfo.id);
                 },
                 setControlProps:function ($elem) {
-                    //this.allProps.bindTo.tableName="hello word";
+
                 }
             }
         });
