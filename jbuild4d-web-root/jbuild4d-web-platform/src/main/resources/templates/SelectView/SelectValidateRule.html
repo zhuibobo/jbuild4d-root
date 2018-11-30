@@ -159,11 +159,39 @@
 
             },
             methods:{
+                bindOldSelectedValue:function(){
+                    var oldSelectedValue= window.OpenerWindowObj[this.getSelectInstanceName()].getSelectFieldResultValue();
+                    //debugger;
+                    if(oldSelectedValue.validateRules.length>0) {
+                        this.addedValidateRule=oldSelectedValue.validateRules;
+                        this.msg=oldSelectedValue.msg;
+                    }
+                },
+                getSelectInstanceName:function () {
+                    return StringUtility.QueryString("instanceName");
+                },
                 selectComplete:function(){
-
+                    var result=this.addedValidateRule;
+                    if(this.addedValidateRule.length>0) {
+                        var result={
+                            msg:this.ruleParas.msg,
+                            validateRules:this.addedValidateRule
+                        };
+                        window.OpenerWindowObj[this.getSelectInstanceName()].setSelectValidateRuleResultValue(result);
+                        this.handleClose();
+                    }
+                    else{
+                        window.OpenerWindowObj[this.getSelectInstanceName()].setSelectValidateRuleResultValue(null);
+                        this.handleClose();
+                    }
                 },
                 handleClose:function(){
-
+                    if(window.IsOpenForFrame){
+                        DialogUtility.Frame_CloseDialog(window)
+                    }
+                    else {
+                        DialogUtility.CloseOpenIframeWindow(window, DialogUtility.DialogId);
+                    }
                 },
                 addValidateRule:function(){
                     var validateParas="";

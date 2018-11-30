@@ -49,13 +49,13 @@ var Column_SelectDefaultValue={
         $inputTxt.attr("columnDefaultType",defaultType);
         $inputTxt.attr("columnDefaultValue",defaultValue);
         $inputTxt.attr("columnDefaultText",defaultText);
-        $inputTxt.val(SelectEnvVariable.formatText(defaultType,defaultText));
+        $inputTxt.val(JBuild4DSelectView.SelectEnvVariable.formatText(defaultType,defaultText));
         var $inputBtn = $("<input class='normalbutton-v1' style='margin-left: 4px;' type='button' value='...'/>")
         $elem.append($inputTxt).append($inputBtn);
         //将inputtext对象附加到window上,提供给后续的设置值的方法.
         window.$Temp$Inputtxt=$inputTxt;
         $inputBtn.click(function(){
-            SelectEnvVariable.beginSelect("Column_SelectDefaultValue");
+            JBuild4DSelectView.SelectEnvVariable.beginSelect("Column_SelectDefaultValue");
         });
         return $elem;
     },
@@ -66,7 +66,7 @@ var Column_SelectDefaultValue={
             var defaultValue = $inputTxt.attr("columnDefaultValue");
             var defaultText = $inputTxt.attr("columnDefaultText");
             var  $elem = $("<div></div>");//一次只能返回一个标签对象
-            $elem.append("<label>" + SelectEnvVariable.formatText(defaultType,defaultText) + "</label>");
+            $elem.append("<label>" + JBuild4DSelectView.SelectEnvVariable.formatText(defaultType,defaultText) + "</label>");
             $elem.append("<label IsSerialize='true' BindName='columnDefaultType' Value='"+defaultType+"' style='display:none'/>");
             $elem.append("<label IsSerialize='true' BindName='columnDefaultText' Value='"+defaultText+"' style='display:none'/>");
             $elem.append("<label IsSerialize='true' BindName='columnDefaultValue' Value='"+defaultValue+"' style='display:none'/>");
@@ -84,7 +84,7 @@ var Column_SelectDefaultValue={
             $inputTxt.attr("columnDefaultType",defaultData.Type);
             $inputTxt.attr("columnDefaultValue",defaultData.Value);
             $inputTxt.attr("columnDefaultText",defaultData.Text);
-            $inputTxt.val(SelectEnvVariable.formatText(defaultData.Type,defaultData.Text));
+            $inputTxt.val(JBuild4DSelectView.SelectEnvVariable.formatText(defaultData.Type,defaultData.Text));
         }
         //console.log(value);
     }

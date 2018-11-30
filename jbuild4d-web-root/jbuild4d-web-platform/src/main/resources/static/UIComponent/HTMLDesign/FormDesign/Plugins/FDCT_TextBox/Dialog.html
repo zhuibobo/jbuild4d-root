@@ -17,55 +17,12 @@
     <div class="dialog-wraper" id="dialogApp" v-cloak>
         <tabs size="small">
             <tab-pane label="绑定信息">
-                <fd-control-bind-to :bind-to-prop="allProps.bindTo" @on-select-field-completed="selectFieldCompleted">
+                <fd-control-bind-to :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" :validate-rules-prop="validateRules" @on-set-completed="setBindCompleted">
 
                 </fd-control-bind-to>
             </tab-pane>
             <tab-pane label="基础信息">
-                <table class="dialog-table-wraper" cellpadding="0" cellspacing="0" border="0">
-                    <colgroup>
-                        <col style="width: 100px" />
-                        <col style="width: 280px" />
-                        <col style="width: 100px" />
-                        <col style="width: 100px" />
-                        <col style="width: 100px" />
-                        <col />
-                    </colgroup>
-                    <tr>
-                        <td>ID：</td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>Serialize：</td>
-                        <td colspan="3"><!--<i-switch v-model="switch1" />--></td>
-                    </tr>
-                    <tr>
-                        <td>Name：</td>
-                        <td><input type="text" /></td>
-                        <td>ClassName：</td>
-                        <td colspan="3"><input type="text" /></td>
-                    </tr>
-                    <tr>
-                        <td>placeholder</td>
-                        <td><input type="text" /></td>
-                        <td>Readonly：</td>
-                        <td><!--<i-switch v-model="switch1" />--></td>
-                        <td>Disabled：</td>
-                        <td><!--<i-switch v-model="switch1" />--></td>
-                    </tr>
-                    <tr>
-                        <td>样式：</td>
-                        <td colspan="5">
-                            <textarea rows="7"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>备注：</td>
-                        <td colspan="5">
-                            <textarea rows="9"></textarea>
-                        </td>
-                    </tr>
-                </table>
+                <fd-control-base-info></fd-control-base-info>
             </tab-pane>
         </tabs>
     </div>
@@ -73,27 +30,39 @@
         var DialogApp=new Vue({
             el:"#dialogApp",
             data: {
-                allProps: {
-                    bindTo: {
-                        tableName: "表名",
-                        tableCaption: "表标题"
-                    }
+                bindToField:{
+                    tableId: "",
+                    tableName: "",
+                    tableCaption: "",
+                    fieldName: "",
+                    fieldCaption: "",
+                    fieldDataType: "",
+                    fieldLength:""
+                },
+                validateRules:{
+                    msg:"",
+                    rules:[]
+                },
+                defaultValue: {
+                    defaultType: "",
+                    defaultValue: "",
+                    defaultText: ""
                 }
             },
             mounted:function () {
                 //alert("1");
-                this.setProps();
+                //this.setProps();
             },
             methods: {
-                selectFieldCompleted:function(bindTo){
+                setBindCompleted:function(bindTo){
                     //alert("selectFieldCompleted called");
                     this.allProps.bindTo=bindTo;
                 },
-                getProps:function () {
-                    alert(this.allProps.bindTo.fieldName);
+                getControlProps:function () {
+                    //alert(this.allProps.bindTo.fieldName);
                 },
-                setProps:function (props) {
-                    this.allProps.bindTo.tableName="hello word";
+                setControlProps:function ($elem) {
+                    //this.allProps.bindTo.tableName="hello word";
                 }
             }
         });
