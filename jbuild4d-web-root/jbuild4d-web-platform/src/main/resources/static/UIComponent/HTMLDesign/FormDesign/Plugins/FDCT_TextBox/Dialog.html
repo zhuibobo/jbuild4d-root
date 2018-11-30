@@ -22,7 +22,7 @@
                 </fd-control-bind-to>
             </tab-pane>
             <tab-pane label="基础信息">
-                <fd-control-base-info></fd-control-base-info>
+                <fd-control-base-info :base-info-prop="baseInfo"></fd-control-base-info>
             </tab-pane>
         </tabs>
     </div>
@@ -47,6 +47,9 @@
                     defaultType: "",
                     defaultValue: "",
                     defaultText: ""
+                },
+                baseInfo:{
+                    id:"4444"
                 }
             },
             mounted:function () {
@@ -59,7 +62,7 @@
                     this.allProps.bindTo=bindTo;
                 },
                 getControlProps:function () {
-                    //alert(this.allProps.bindTo.fieldName);
+                    alert(this.baseInfo.id);
                 },
                 setControlProps:function ($elem) {
                     //this.allProps.bindTo.tableName="hello word";

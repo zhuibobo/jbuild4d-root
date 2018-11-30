@@ -53,7 +53,7 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.Name, {
             {
                 //对话框确认按钮触发的事件
                 onOk: function () {
-                    ControlSetting.IFrameWindow.contentWindow.DialogApp.getProps();
+                    ControlSetting.IFrameWindow.contentWindow.DialogApp.getControlProps();
                     //if(ControlSetting.IFrameWindow.contentWindow.PageFunc.GetProps()==false) {
                     //     return false;
                     //}

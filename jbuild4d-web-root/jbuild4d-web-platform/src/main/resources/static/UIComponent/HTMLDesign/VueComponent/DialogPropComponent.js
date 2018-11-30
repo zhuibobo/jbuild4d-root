@@ -133,7 +133,6 @@ Vue.component("fd-control-bind-to", {
                     '</tr>'+
                     '<tr>'+
                         '<td colspan="4" style="background-color: #ffffff">' +
-                            '{{JBuild4DSelectView.SelectEnvVariable.formatText(defaultValue.defaultType,defaultValue.defaultText)}}}'+
                         '</td>'+
                     '</tr>'+
                     '<tr>' +
@@ -149,12 +148,12 @@ Vue.component("fd-control-bind-to", {
                                     '<col />' +
                                 '</colgroup>' +
                                 '<tr>' +
-                                    '<td>提示消息：</td>' +
+                                    '<td style="text-align: center;">提示消息：</td>' +
                                     '<td>{{validateRules.msg}}</td>' +
                                 '</tr>' +
                                 '<tr>' +
-                                    '<td>验证类型</td>'+
-                                    '<td>验证参数</td>'+
+                                    '<td style="text-align: center;">验证类型</td>'+
+                                    '<td style="background: #e8eaec;text-align: center;">验证参数</td>'+
                                 '</tr>'+
                                 '<tr v-for="ruleItem in validateRules.rules">' +
                                     '<td>{{ruleItem.validateType}}</td>'+
@@ -171,22 +170,24 @@ Vue.component("fd-control-base-info", {
     props:["baseInfoProp"],
     data: function () {
         return {
-            bindToField:{
-                tableId: "",
+            baseInfo:{
+                id:"33"
             }
         }
     },
     //新增result的watch，监听变更同步到openStatus
     //监听父组件对props属性result的修改，并同步到组件内的data属性
     watch: {
-        bindToProp (val) {
+        baseInfo (newVal) {
+            // 必须是input
+            this.$emit('input', newVal)
             //alert("1");
-            console.log(val);
+            //console.log(val);
             //this.bindTo.tableName = val.tableName;
         }
     },
     mounted:function(){
-        //this.bindToField=this.bindToFieldProp;
+        this.baseInfo=this.baseInfoProp;
     },
     methods:{
 
@@ -203,7 +204,7 @@ Vue.component("fd-control-base-info", {
                     '<tr>' +
                         '<td>ID：</td>' +
                         '<td>' +
-                            '<input type="text" />' +
+                            '<input type="text" v-model="baseInfo.id" />' +
                         '</td>' +
                         '<td>Serialize：</td>' +
                         '<td colspan="3"><!--<i-switch v-model="switch1" />--></td>' +
@@ -218,9 +219,9 @@ Vue.component("fd-control-base-info", {
                         '<td>placeholder</td>' +
                         '<td><input type="text" /></td>' +
                         '<td>Readonly：</td>' +
-                        '<td><!--<i-switch v-model="switch1" />--></td>' +
+                        '<td style="text-align: center"><!--<i-switch v-model="switch1" />--></td>' +
                         '<td>Disabled：</td>' +
-                        '<td><!--<i-switch v-model="switch1" />--></td>' +
+                        '<td style="text-align: center"><!--<i-switch v-model="switch1" />--></td>' +
                     '</tr>' +
                     '<tr>' +
                         '<td>样式：</td>' +
