@@ -41,6 +41,7 @@ public class LoginController {
         logger.error("Error");
         ModelAndView modelAndView=new ModelAndView("Login");
 
+
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
         return modelAndView;
     }
