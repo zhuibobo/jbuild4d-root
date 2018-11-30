@@ -43,8 +43,7 @@
                     this.baseInfo.id="txt_"+StringUtility.RTimestamp();
                 },
                 setBindCompleted:function(bindToField,defaultValue,validateRules){
-                    //alert("selectFieldCompleted called");
-                    //this.bindToField=bindToField;
+
                 },
                 getControlProps:function () {
                     var result={
@@ -54,10 +53,9 @@
                         validateRules:this.validateRules
                     }
                     return result;
-                    //alert(this.baseInfo.id);
                 },
                 setControlProps:function ($elem,props) {
-
+                    debugger;
                 }
             }
         });

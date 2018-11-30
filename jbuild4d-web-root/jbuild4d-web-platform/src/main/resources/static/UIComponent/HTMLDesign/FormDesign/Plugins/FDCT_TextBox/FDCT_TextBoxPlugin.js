@@ -57,8 +57,7 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.SingleName
                     if(props==false) {
                          return false;
                     }
-                    var html="<input type='text' />";
-                    JBuild4D.FormDesign.Control.BuildGeneralElemToCKWysiwyg(html,ControlSetting,props,ControlSetting.IFrameWindow.contentWindow);
+                    JBuild4D.FormDesign.Control.BuildGeneralElemToCKWysiwyg("<input type='text' />",ControlSetting,props,ControlSetting.IFrameWindow.contentWindow);
                 },
                 //取消按钮对话框
                 onCancel:function(){
