@@ -30,35 +30,10 @@
         var DialogApp=new Vue({
             el:"#dialogApp",
             data: {
-                bindToField:{
-                    tableId: "",
-                    tableName: "",
-                    tableCaption: "",
-                    fieldName: "",
-                    fieldCaption: "",
-                    fieldDataType: "",
-                    fieldLength:""
-                },
-                defaultValue: {
-                    defaultType: "",
-                    defaultValue: "",
-                    defaultText: ""
-                },
-                validateRules:{
-                    msg:"",
-                    rules:[]
-                },
-                baseInfo:{
-                    id:"",
-                    serialize:"",
-                    name:"",
-                    className:"",
-                    placeholder:"",
-                    readonly:"",
-                    disabled:"",
-                    style:"",
-                    desc:""
-                }
+                bindToField:JBuild4D.FormDesign.ControlProps.DefaultProps.bindToField,
+                defaultValue: JBuild4D.FormDesign.ControlProps.DefaultProps.defaultValue,
+                validateRules:JBuild4D.FormDesign.ControlProps.DefaultProps.validateRules,
+                baseInfo:JBuild4D.FormDesign.ControlProps.DefaultProps.baseInfo,
             },
             mounted:function () {
             },

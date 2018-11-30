@@ -16,6 +16,39 @@ var JBuild4D={
                 $(".ui-dialog").css("zIndex",10101);
             }*/
         },
+        ControlProps:{
+            DefaultProps:{
+                bindToField:{
+                    tableId: "",
+                    tableName: "",
+                    tableCaption: "",
+                    fieldName: "",
+                    fieldCaption: "",
+                    fieldDataType: "",
+                    fieldLength:""
+                },
+                defaultValue:{
+                    defaultType: "",
+                    defaultValue: "",
+                    defaultText: ""
+                },
+                validateRules:{
+                    msg:"",
+                    rules:[]
+                },
+                baseInfo:{
+                    id:"",
+                    serialize:"",
+                    name:"",
+                    className:"",
+                    placeholder:"",
+                    readonly:"",
+                    disabled:"",
+                    style:"",
+                    desc:""
+                }
+            }
+        },
         /*InnerDialog:{
             SelectBindTableFieldTo:function () {
                 alert("1");
