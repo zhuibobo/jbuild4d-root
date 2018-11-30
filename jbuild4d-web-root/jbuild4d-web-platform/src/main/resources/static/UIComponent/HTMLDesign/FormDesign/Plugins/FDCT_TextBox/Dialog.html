@@ -30,20 +30,28 @@
         var DialogApp=new Vue({
             el:"#dialogApp",
             data: {
-                bindToField:JBuild4D.FormDesign.ControlProps.DefaultProps.bindToField,
-                defaultValue: JBuild4D.FormDesign.ControlProps.DefaultProps.defaultValue,
-                validateRules:JBuild4D.FormDesign.ControlProps.DefaultProps.validateRules,
-                baseInfo:JBuild4D.FormDesign.ControlProps.DefaultProps.baseInfo,
+                bindToField:JBuild4D.FormDesign.Control.DefaultProps.bindToField,
+                defaultValue: JBuild4D.FormDesign.Control.DefaultProps.defaultValue,
+                validateRules:JBuild4D.FormDesign.Control.DefaultProps.validateRules,
+                baseInfo:JBuild4D.FormDesign.Control.DefaultProps.baseInfo
             },
             mounted:function () {
+
             },
             methods: {
                 setBindCompleted:function(bindToField,defaultValue,validateRules){
                     //alert("selectFieldCompleted called");
-                    this.bindToField=bindToField;
+                    //this.bindToField=bindToField;
                 },
                 getControlProps:function () {
-                    alert(this.baseInfo.id);
+                    var result={
+                        baseInfo:this.baseInfo,
+                        bindToField:this.bindToField,
+                        defaultValue:this.defaultValue,
+                        validateRules:this.validateRules
+                    }
+                    return result;
+                    //alert(this.baseInfo.id);
                 },
                 setControlProps:function ($elem) {
                     //this.allProps.bindTo.tableName="hello word";

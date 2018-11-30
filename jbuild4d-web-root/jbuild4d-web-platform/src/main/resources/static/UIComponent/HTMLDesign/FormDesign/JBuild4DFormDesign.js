@@ -8,15 +8,9 @@ var JBuild4D={
                 if(actionName==this.DialogExecuteEditActionName) {
                     //iframeObj.contentWindow.DialogApp.SetProps(DesignUtil.GetSelectedElem().outerHTML());
                 }
-            }/*,
-            ShowIframeDialogInDesignPage:function (opener,url,option) {
-                //var dialogObj=DialogUtility.OpenIframeWindow(opener,"11",url,option,1);
-                DialogUtility.Frame_OpenIframeWindow(opener,DialogUtility.DialogId,url,option,1);
-                $(".ui-widget-overlay").css("zIndex",10100);
-                $(".ui-dialog").css("zIndex",10101);
-            }*/
+            }
         },
-        ControlProps:{
+        Control:{
             DefaultProps:{
                 bindToField:{
                     tableId: "",
@@ -47,20 +41,55 @@ var JBuild4D={
                     style:"",
                     desc:""
                 }
+            },
+            SerializePropsToElem:function(elem,props){
+                if(props["baseInfo"]){
+                    for (var key in props["baseInfo"]) {
+                        elem.setAttribute(key, props["baseInfo"][key]);
+                    }
+                }
+
+                if(props["bindToField"]){
+                    for (var key in props["bindToField"]) {
+                        elem.setAttribute(key, props["bindToField"][key]);
+                    }
+                }
+
+                if(props["defaultValue"]){
+                    for (var key in props["defaultValue"]) {
+                        elem.setAttribute(key, props["defaultValue"][key]);
+                    }
+                }
+
+                if(props["validateRules"]){
+
+                }
+                return elem;
+            },
+            DeserializePropsFromElem:function(elem){
+
+            },
+            BuildGeneralElemToCKWysiwyg:function (html,controlSetting,controlProps,_iframe) {
+                if(this.ValidateBuildEnable(html,controlSetting,controlProps,_iframe)) {
+                    if (controlSetting.IFrameExecuteActionName == JBuild4D.FormDesign.Dialog.DialogExecuteInsertActionName) {
+                        var elem = CKEDITOR.dom.element.createFromHtml(html);
+                        elem.setAttribute("jbuild4d_custom", "true");
+                        this.SerializePropsToElem(elem,controlProps);
+                        JBuild4D.FormDesign.CKEditorInst.insertElement(elem);
+                        JBuild4D.FormDesign.CKEditorInst.getSelection().selectElement(elem);
+                    }
+                    else {
+                        //SimpleControlUtil.CommInsertOrReplaceElemInCKEditor(exsetting.IFrameWindow,exsetting.IRCommandName,"");
+                    }
+                    //exsetting.IRCommandName=SimpleControlUtil.PropInsertCommand;
+                }
+            },
+            ValidateBuildEnable(html,controlSetting,controlProps,_iframe){
+                return true;
             }
         },
-        /*InnerDialog:{
-            SelectBindTableFieldTo:function () {
-                alert("1");
-            },
-            SelectValidateTo:function () {
-
-            }
-        },*/
-        //IFrameExecuteInsertActionName:"Insert",
-        //DialogExecuteEditActionName:"Edit",
-        PropCKEditorInst:null,
-        $PropSelectElem:null,
+        CKEditorInst:null,
+        $CKEditorSelectElem:null,
         CoverEmptyPluginProp:function(obj){
             var coverObj=JBuild4D.FormDesign.PluginsDefConfig[obj.Name];
             for(var prop in obj){
@@ -163,7 +192,7 @@ var JBuild4D={
                 }
             });
 
-            this.PropCKEditorInst = CKEDITOR.instances.form_design;
+            this.CKEditorInst = CKEDITOR.instances.html_design;
 
             CKEDITOR.on('instanceReady', function (e) {
                 //alert(e.editor.name + '加载完毕！')
