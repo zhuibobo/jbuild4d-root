@@ -6,7 +6,9 @@ var JBuild4D={
             SetElemPropsInEditDialog:function(iframeObj,actionName){
                 iframeObj.contentWindow.DialogApp.ready(actionName);
                 if(actionName==this.DialogExecuteEditActionName) {
-                    iframeObj.contentWindow.DialogApp.setControlProps(DesignUtil.GetSelectedElem().outerHTML());
+                    var elem=JBuild4D.FormDesign.Control.GetSelectedElem.outerHTML();
+                    var props=JBuild4D.FormDesign.Control.DeserializePropsFromElem(elem);
+                    iframeObj.contentWindow.DialogApp.setControlProps(elem,props);
                 }
             }
         },
@@ -40,6 +42,26 @@ var JBuild4D={
                     disabled:"",
                     style:"",
                     desc:""
+                }
+            },
+            OnCKWysiwygElemDBClickEvent:function(event,controlSetting){
+                var element = event.data.element;
+                if(element.getAttribute("auto_remove")=="true"){
+                    element=event.data.element.getParent();
+                }
+                var singleName=element.getAttribute("singleName");
+                if(singleName==controlSetting.singleName) {
+                    controlSetting.IFrameExecuteActionName = JBuild4D.FormDesign.Dialog.DialogExecuteEditActionName;
+                    this.SetSelectedElem(element.getOuterHtml());
+                    event.data.dialog =controlSetting.DialogName;
+                }
+            },
+            SetSelectedElem:function(elemhtml){
+                this.$CKEditorSelectElem=$(elemhtml);
+            },
+            GetSelectedElem:function(){
+                if(this.$CKEditorSelectElem.length>0) {
+                    return this.$CKEditorSelectElem;
                 }
             },
             SerializePropsToElem:function(elem,props){
@@ -149,7 +171,7 @@ var JBuild4D={
 
                 //设置默认值
                 JBuild4D.FormDesign.PluginsDefConfig[singleName]={
-                    Name:singleName,
+                    SingleName:singleName,
                     ToolbarLocation:toolbarLocation,
                     ToolbarLabel:text,
                     ClientResolve:clientResolve,

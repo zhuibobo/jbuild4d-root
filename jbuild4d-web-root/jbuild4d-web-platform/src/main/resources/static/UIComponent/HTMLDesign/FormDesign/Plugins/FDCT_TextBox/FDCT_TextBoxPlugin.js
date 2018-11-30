@@ -4,7 +4,7 @@
 (JBuild4D.FormDesign.Plugins.FDCT_TextBox={
     Setting:{
         //插件名称
-        Name:'FDCT_TextBox',
+        SingleName:'FDCT_TextBox',
 
         //设置对话框相关设置
         DialogName:'',
@@ -37,7 +37,7 @@
     }
 }).Setting.Init();
 
-CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.Name, {
+CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.SingleName, {
     init: function(editor) {
         var ControlSetting=JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting;
 
@@ -60,26 +60,24 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.Name, {
                     }
                     var html="<input type='text' />";
                     JBuild4D.FormDesign.Control.BuildGeneralElemToCKWysiwyg(html,ControlSetting,props,ControlSetting.IFrameWindow.contentWindow);
-                    //SimpleControlUtil.PluginDialogOkEvent(ControlSetting,html);
                 },
                 //取消按钮对话框
                 onCancel:function(){
-                    //SimpleControlUtil.PluginDialogCancelEvent(ControlSetting);
                 }
             }
         );
 
         editor.addCommand(ControlSetting.ToolbarCommand,new CKEDITOR.dialogCommand(ControlSetting.DialogName));
 
-        editor.ui.addButton(ControlSetting.Name, {
+        editor.ui.addButton(ControlSetting.SingleName, {
             label: ControlSetting.ToolbarLabel,
             icon: this.path + ControlSetting.ToolbarIcon,
             command: ControlSetting.ToolbarCommand,
             toolbar: ControlSetting.ToolbarLocation
         });
 
-        editor.on('doubleclick', function( evt ) {
-            //SimpleControlUtil.CKEditorElemDBClickEvent(evt,ControlSetting);
+        editor.on('doubleclick', function(event) {
+            JBuild4D.FormDesign.Control.OnCKWysiwygElemDBClickEvent(event, ControlSetting)
         });
     }
 });
