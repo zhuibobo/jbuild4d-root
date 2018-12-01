@@ -58,9 +58,11 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.SingleName
                         return false;
                     }
                     JBuild4D.FormDesign.Control.BuildGeneralElemToCKWysiwyg("<input type='text' />",ControlSetting,props,ControlSetting.IFrameWindow.contentWindow);
+                    ControlSetting.IFrameExecuteActionName=JBuild4D.FormDesign.Dialog.DialogExecuteInsertActionName;
                 },
                 //取消按钮对话框
                 onCancel:function(){
+                    ControlSetting.IFrameExecuteActionName=JBuild4D.FormDesign.Dialog.DialogExecuteInsertActionName;
                 }
             }
         );
@@ -75,6 +77,7 @@ CKEDITOR.plugins.add(JBuild4D.FormDesign.Plugins.FDCT_TextBox.Setting.SingleName
         });
 
         editor.on('doubleclick', function(event) {
+            ControlSetting.IFrameExecuteActionName = JBuild4D.FormDesign.Dialog.DialogExecuteEditActionName;
             JBuild4D.FormDesign.Control.OnCKWysiwygElemDBClickEvent(event, ControlSetting)
         });
     }

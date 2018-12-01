@@ -52,7 +52,6 @@ var JBuild4D={
                 }
                 var singleName=element.getAttribute("singleName");
                 if(singleName==controlSetting.SingleName) {
-                    controlSetting.IFrameExecuteActionName = JBuild4D.FormDesign.Dialog.DialogExecuteEditActionName;
                     this.SetSelectedElem(element.getOuterHtml());
                     event.data.dialog =controlSetting.DialogName;
                 }
@@ -83,10 +82,16 @@ var JBuild4D={
                             if(props["baseInfo"][key]=="readonly"){
                                 elem.setAttribute(key.toLocaleLowerCase(), props["baseInfo"][key]);
                             }
+                            else{
+                                elem.removeAttribute("readonly");
+                            }
                         }
                         else if(key=="disabled"){
                             if(props["baseInfo"][key]=="disabled"){
                                 elem.setAttribute(key.toLocaleLowerCase(), props["baseInfo"][key]);
+                            }
+                            else{
+                                elem.removeAttribute("disabled");
                             }
                         }
                         else{
@@ -153,7 +158,7 @@ var JBuild4D={
                         JBuild4D.FormDesign.CKEditorInst.getSelection().selectElement(elem);
                     }
                     else {
-                        debugger;
+                        debugger
                         var selectedElem=this.GetSelectedCKEditorElem();
                         if(selectedElem) {
                             var reFreshElem = new CKEDITOR.dom.element.createFromHtml(selectedElem.getOuterHtml());
@@ -163,6 +168,7 @@ var JBuild4D={
                         }
                         //SimpleControlUtil.CommInsertOrReplaceElemInCKEditor(exsetting.IFrameWindow,exsetting.IRCommandName,"");
                     }
+
                     //exsetting.IRCommandName=SimpleControlUtil.PropInsertCommand;
                 }
             },
