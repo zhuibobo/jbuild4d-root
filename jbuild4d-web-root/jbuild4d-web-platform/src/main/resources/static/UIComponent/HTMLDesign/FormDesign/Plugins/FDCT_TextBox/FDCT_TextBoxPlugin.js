@@ -10,7 +10,7 @@
         DialogName:'',
         DialogWidth:null,
         DialogHeight:null,
-        DialogPageUrl:StringUtility.GetTimeStampUrl('Dialog.html'),
+        DialogPageUrl:BaseUtility.AppendTimeStampUrl('Dialog.html'),
         DialogTitle:"DIV",
 
         //设计器工具栏相关设置

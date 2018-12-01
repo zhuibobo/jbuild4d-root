@@ -237,7 +237,7 @@
                 tableTreeData:null,//${tableTreeData},
                 selectedTableName:"无"
             },
-            status: StringUtility.QueryString("op")
+            status: BaseUtility.GetUrlParaValue("op")
         },
         mounted:function () {
             this.initPageUI();
@@ -280,7 +280,7 @@
                 }
                 else {
                     //this.editTableObj.LoadJsonData(this.tableFieldsData);
-                    this.formResourceEntity.formId=StringUtility.QueryString("recordId");
+                    this.formResourceEntity.formId=BaseUtility.GetUrlParaValue("recordId");
                     this.formResourceEntity.formUpdater=this.currUserEntity.userName;
                     //this.loadData(this.datasetEntity.dsId,this.status);
                 }

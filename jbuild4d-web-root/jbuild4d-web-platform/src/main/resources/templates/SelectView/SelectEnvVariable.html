@@ -137,7 +137,7 @@
                 },"json");
             },
             getSelectInstanceName:function () {
-                return StringUtility.QueryString("instanceName");
+                return BaseUtility.GetUrlParaValue("instanceName");
             },
             selectEnvVar:function () {
                 var result={};

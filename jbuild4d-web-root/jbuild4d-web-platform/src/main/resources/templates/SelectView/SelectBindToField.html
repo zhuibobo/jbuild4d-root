@@ -235,7 +235,7 @@
                     CookieUtility.SetCookie1Month("SBTF_TableCaption",tableCaption);
                 },
                 getSelectInstanceName:function () {
-                    return StringUtility.QueryString("instanceName");
+                    return BaseUtility.GetUrlParaValue("instanceName");
                 },
                 selectedField:function(selection,index){
                     //alert(selection.fieldName);

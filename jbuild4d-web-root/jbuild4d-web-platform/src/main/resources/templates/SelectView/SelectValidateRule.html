@@ -169,7 +169,7 @@
                     }
                 },
                 getSelectInstanceName:function () {
-                    return StringUtility.QueryString("instanceName");
+                    return BaseUtility.GetUrlParaValue("instanceName");
                 },
                 selectComplete:function(){
                     var result=this.addedValidateRule;

@@ -28,6 +28,7 @@ Date.prototype.toJSON = function () { return DateExtend_DateFormat(this,'yyyy-MM
 //扩展js对象功能
 if (!Object.create) {
     Object.create = (function () {
+        alert("Extend Object.create");
         function F() {
         }
         return function (o) {
@@ -52,42 +53,23 @@ $.fn.outerHTML = function () {
     })(this[0]));
 };
 
-//名称空间管理
-var NsManager={
-    Register:function(nsstring) {
-        var arr = nsstring.split(".");
-        var ns = "";
-        for(var i=0;i<arr.length;i++){
-            if(i>0) ns += ".";
-            ns += arr[i];
-            eval("if(typeof(" + ns + ") == 'undefined') " + ns + " = new Object();");
-        }
-    }
-};
-
 //基础工具
 var BaseUtility = {
-    /**
-     * @return {string}
-     */
     GetRootPath: function () {
-        //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
-        var curWwwPath = window.document.location.href;
-        //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+        var fullHref = window.document.location.href;
         var pathName = window.document.location.pathname;
-        var pos = curWwwPath.indexOf(pathName);
-        //获取主机地址，如： http://localhost:8083
-        var localhostPaht = curWwwPath.substring(0, pos);
-        //获取带"/"的项目名，如：/uimcardprj
+        var lac = fullHref.indexOf(pathName);
+        var localhostPath = fullHref.substring(0, lac);
         var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
-        return (localhostPaht + projectName);
+        return (localhostPath + projectName);
     },
     ReplaceUrlVariable:function (sourceUrl) {
         alert("ReplaceUrlVariable迁移到BuildAction");
-        return sourceUrl.replace("${ctxpath}", this.GetRootPath());
+        //return sourceUrl.replace("${ctxpath}", this.GetRootPath());
     },
     GetTopWindow: function () {
-        var windowTop = window;
+        alert("BaseUtility.GetTopWindow 已停用");
+        /*var windowTop = window;
         var windowParent = window.dialogArguments || opener || parent;
         while (windowParent && windowTop != windowParent) {
             windowTop = windowParent;
@@ -96,10 +78,11 @@ var BaseUtility = {
             }
             windowParent = windowParent.dialogArguments || windowParent.opener || windowParent.parent;
         }
-        return windowTop;
+        return windowTop;*/
     },
     TrySetControlFocus:function () {
-        var cts=$("input[type='text']");
+        alert("BaseUtility.TrySetControlFocus 已停用");
+        /*var cts=$("input[type='text']");
         for(var i=0;i<cts.length;i++){
             var ct=$(cts[i]);
             if (ct.attr("readonly") != "readonly"&& ct.attr("disabled") != "disabled") {
@@ -111,12 +94,13 @@ var BaseUtility = {
                 }
                 return;
             }
-        }
+        }*/
     },
     BuildUrl:function (url) {
-        alert("BuildUrl迁移到BuildAction");
-        var _url=this.GetRootPath()+url;
-        return StringUtility.GetTimeStampUrl(_url);
+        alert("BaseUtility.BuildUrl 已停用");
+
+        /*var _url=this.GetRootPath()+url;
+        return StringUtility.GetTimeStampUrl(_url);*/
     },
     BuildAction:function (action,para) {
         var urlPara = "";
@@ -128,11 +112,32 @@ var BaseUtility = {
             _url += "?" + urlPara;
         }
         //alert(_url);
-        return StringUtility.GetTimeStampUrl(_url);
+        return this.AppendTimeStampUrl(_url);
     },
     RedirectToLogin:function () {
         var url=BaseUtility.GetRootPath()+"/Login.do";
         window.parent.parent.location.href=url;
+    },
+    AppendTimeStampUrl:function (url) {
+        if (url.indexOf("timestamp") > "0") {
+            return url;
+        }
+        var getTimestamp = new Date().getTime();
+        if (url.indexOf("?") > -1) {
+            url = url + "&timestamp=" + getTimestamp
+        } else {
+            url = url + "?timestamp=" + getTimestamp
+        }
+        return url;
+    },
+    GetUrlParaValue: function (paraName) {
+        return this.GetUrlParaValueByString(paraName,window.location.search);
+    },
+    GetUrlParaValueByString:function (paraName,urlString) {
+        var reg = new RegExp("(^|&)" + paraName + "=([^&]*)(&|$)");
+        var r = urlString.substr(1).match(reg);
+        if (r != null)return decodeURIComponent(r[2]);
+        return "";
     }
 };
 
@@ -211,45 +216,14 @@ var BrowserInfoUtility = {
     }
 };
 
-//浏览器兼容工具类
-var BrowserUtility = {
-    FixPNG: function (sender) {
-        if ($.browser.msie) {
-            if ($.browser.version === "6.0") {
-                if ($(sender).attr("src").indexOf(".png") > 0) {
-                    var imgID = (sender.id) ? "id='" + sender.id + "' " : "";
-                    var imgClass = (sender.className) ? "class='" + sender.className + "' " : "";
-                    var imgTitle = (sender.title) ?
-                        "title='" + sender.title + "' " : "title='" + sender.alt + "' ";
-                    var imgStyle = "display:inline-block;" + sender.style.cssText;
-                    sender.outerHTML = "<span " + imgID + imgClass + imgTitle
-                        + " style=\"" + "width:" + sender.width
-                        + "px; height:" + sender.height
-                        + "px;" + imgStyle + ";"
-                        + "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader"
-                        + "(src=\'" + sender.src + "\', sizingMethod='scale');\"></span>";
-                }
-            }
-        }
-    }
-};
-
 //字符串操作类
 var StringUtility = {
     GetTimeStampUrl: function (url) {
-        if (url.indexOf("timestamp") > "0") {
-            return url;
-        }
-        var getTimestamp = new Date().getTime();
-        if (url.indexOf("?") > -1) {
-            url = url + "&timestamp=" + getTimestamp
-        } else {
-            url = url + "?timestamp=" + getTimestamp
-        }
-        return url;
+        alert("迁移到BaseUtility.AppendTimeStampUrl");
     },
     GetAllQueryString: function () {
-        var urlString = document.location.search;
+        alert("StringUtility.GetAllQueryString 已停用");
+        /*var urlString = document.location.search;
         var urlStringArray = [];
         if (urlString != null) {
             var itemArray = urlString.split("&");
@@ -258,10 +232,11 @@ var StringUtility = {
                 urlStringArray.push({Name: item.split("=")[0], Value: item.split("=")[1]});
             }
         }
-        return urlStringArray;
+        return urlStringArray;*/
     },
     QueryString: function (fieldName) {
-        var urlString = document.location.search;
+        alert("迁移到BaseUtility.GetUrlParaValue");
+        /*var urlString = document.location.search;
         while (urlString.indexOf("& ") >= 0) {
             urlString = urlString.replace("& ", "&")
         }
@@ -284,10 +259,11 @@ var StringUtility = {
                     return paramsUrl
                 }
             } else return ""
-        } else return "";
+        } else return "";*/
     },
     QueryStringUrlString: function (fieldName, urlString) {
-        while (urlString.indexOf("& ") >= 0) {
+        alert("迁移到BaseUtility.GetUrlParaValueByString");
+        /*while (urlString.indexOf("& ") >= 0) {
             urlString = urlString.replace("& ", "&")
         }
         while (urlString.indexOf("? ") >= 0) {
@@ -309,10 +285,11 @@ var StringUtility = {
                     return paramsUrl
                 }
             } else return ""
-        } else return "";
+        } else return "";*/
     },
     XMLEncode: function (str) {
-        if (str) {
+        alert("StringUtility.XMLEncode 已停用");
+        /*if (str) {
             var re;
             re = new RegExp("&", "g");
             str = str.replace(re, "&amp;");
@@ -325,10 +302,11 @@ var StringUtility = {
             re = new RegExp("\"", "g");
             str = str.replace(re, "&quot;");
         }
-        return str;
+        return str;*/
     },
     XMLDeCode: function (str) {
-        if (str) {
+        alert("StringUtility.XMLDeCode 已停用");
+        /*if (str) {
             var re;
             re = new RegExp("&lt;", "g");
             str = str.replace(re, "<");
@@ -341,67 +319,80 @@ var StringUtility = {
             re = new RegExp("&amp;", "g");
             str = str.replace(re, "&");
         }
-        return str;
+        return str;*/
     },
     HTMLEncode: function (str) {
-        var temp = $("<div />");
+        alert("StringUtility.HTMLEncode 已停用");
+        /*var temp = $("<div />");
         temp.text(str);
-        return temp.html();
+        return temp.html();*/
     },
     HTMLDecode: function (str) {
-        var temp = $("<div />");
+        alert("StringUtility.HTMLDecode 已停用");
+        /*var temp = $("<div />");
         temp.html(str);
-        return temp.text();
+        return temp.text();*/
     },
     Format: function () {
-        if (arguments.length == 0) return null;
+        alert("StringUtility.HTMLDecode 已停用");
+        /*if (arguments.length == 0) return null;
         var str = arguments[0];
         for (var i = 1; i < arguments.length; i++) {
             var re = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
             str = str.replace(re, arguments[i]);
         }
-        return str;
+        return str;*/
     },
     GuidNotSplit: function () {
+        alert("StringUtility.GuidNotSplit 已停用");
+    },
+    GuidSplit: function (split) {
         var guid = "";
         for (var i = 1; i <= 32; i++) {
             guid += Math.floor(Math.random() * 16.0).toString(16);
             if ((i == 8) || (i == 12) || (i == 16) || (i == 20))
-                guid += "";
+                guid += split;
         }
         return guid;
     },
     Guid: function () {
-        var guid = "";
-        for (var i = 1; i <= 32; i++) {
-            guid += Math.floor(Math.random() * 16.0).toString(16);
-            if ((i == 8) || (i == 12) || (i == 16) || (i == 20))
-                guid += "-";
-        }
-        return guid;
+        return this.GuidSplit("-");
     },
     RTimestamp: function () {
-        var getTimestamp = new Date().getTime();
+        alert("迁移到StringUtility.Timestamp");
+        /*var getTimestamp = new Date().getTime();
         //var n = Math.floor(Math.random() * 100.0).toString(5);
-        return getTimestamp.toString().substr(4, 9);
+        return getTimestamp.toString().substr(4, 9);*/
+    },
+    Timestamp: function () {
+        var timestamp = new Date().getTime();
+        return timestamp.toString().substr(4, 10);
     },
     Trim: function (str) {
         return str.replace(/(^[　\s]*)|([　\s]*$)/g, "");
     },
     LTrim: function (str) {
-        return str.replace(/(^[　\s]*)/g, "");
+        alert("StringUtility.LTrim 已停用");
+        //return str.replace(/(^[　\s]*)/g, "");
     },
     RTrim: function (str) {
-        return str.replace(/([　\s]*$)/g, "");
+        alert("StringUtility.RTrim 已停用");
+        //return str.replace(/([　\s]*$)/g, "");
     },
     TrimLastChar: function (str) {
+        alert("迁移到StringUtility.RemoveLastChar");
+        return str.substring(0, str.length - 1)
+    },
+    RemoveLastChar: function (str) {
         return str.substring(0, str.length - 1)
     },
     StringToJson: function (str) {
-        return eval("(" + str + ")");
+        alert("迁移到JsonUtility.StringToJson");
+        //return eval("(" + str + ")");
     },
     Level1JsonToString: function (jsonObj) {
-        var result = [];
+        alert("迁移到JsonUtility.JsonToString");
+        /*var result = [];
         result.push("{");
         for (var key in jsonObj) {
             //alert(key+":\""+jsonObj[key].replace(/"/g,"\\\"")+"\",");
@@ -427,10 +418,11 @@ var StringUtility = {
             result[result.length - 1] = this.TrimLastChar(result[result.length - 1]);
         }
         result.push("}");
-        return result.join("");
+        return result.join("");*/
     },
     Level1JsonToStringKeyString: function (jsonObj) {
-        var result = [];
+        alert("迁移到JsonUtility.JsonToString");
+        /*var result = [];
         result.push("{");
         for (var key in jsonObj) {
             //alert(key+":\""+jsonObj[key].replace(/"/g,"\\\"")+"\",");
@@ -456,10 +448,11 @@ var StringUtility = {
             result[result.length - 1] = this.TrimLastChar(result[result.length - 1]);
         }
         result.push("}");
-        return result.join("");
+        return result.join("");*/
     },
     Level1JsonToStringValueEncode: function (jsonObj) {
-        var result = [];
+        alert("迁移到JsonUtility.JsonToString");
+        /*var result = [];
         result.push("{");
         for (var key in jsonObj) {
             //alert(key+":\""+jsonObj[key].replace(/"/g,"\\\"")+"\",");
@@ -483,10 +476,11 @@ var StringUtility = {
             result[result.length - 1] = this.TrimLastChar(result[result.length - 1]);
         }
         result.push("}");
-        return result.join("");
+        return result.join("");*/
     },
     Level1StringToJsonValueDecode: function (str) {
-        var json = this.StringToJson(str);
+        alert("迁移到JsonUtility.JsonToString");
+        /*var json = this.StringToJson(str);
         for (var key in json) {
             if (jQuery.type(json[key]) == "string") {
                 json[key] = decodeURIComponent(json[key]);
@@ -500,10 +494,11 @@ var StringUtility = {
                 }
             }
         }
-        return json;
+        return json;*/
     },
     GetBrithdayByIdCard: function (str) {
-        var year, month, day;
+        alert("StringUtility.GetBrithdayByIdCard 已停用");
+        /*var year, month, day;
         if (str.length != 15 && str.length != 18) {
             return "";
         }
@@ -520,20 +515,22 @@ var StringUtility = {
         if (year.length == 2) year = "19" + year;
         if (month.indexOf("0") == 0) month = month.substring(1);
         if (day.indexOf("0") == 0) day = day.substring(1);
-        return year + "-" + month + "-" + day;
+        return year + "-" + month + "-" + day;*/
     },
     GetSexByIdCard: function (str) {
-        if (parseInt(str.substr(16, 1)) % 2 == 1) {
+        alert("StringUtility.GetSexByIdCard 已停用");
+        /*if (parseInt(str.substr(16, 1)) % 2 == 1) {
             return "男性";
         } else {
             return "女性";
-        }
+        }*/
     },
     IsNullOrEmpty: function (obj) {
         return obj == undefined || obj == "" || obj == null || obj == "undefined" || obj == "null"
     },
     IsNullOrEmptyObject: function (obj) {
-        return obj == undefined || obj == null
+        alert("StringUtility.IsNullOrEmptyObject 已停用");
+        //return obj == undefined || obj == null
     },
     GetFuntionName: function (func) {
         if (typeof func == "function" || typeof func == "object")
@@ -548,13 +545,14 @@ var StringUtility = {
     toUpperCase: function (str) {
         return str.toUpperCase();
     },
-    Pad: function (num, n) {
-        var len = num.toString().length;
-        while (len < n) {
-            num = "0" + num;
-            len++;
+    Padding: function (num, length) {
+        alert("StringUtility.Padding 已停用");
+        /*var len = (num + "").length;
+        var diff = length - len;
+        if(diff > 0) {
+            return Array(diff).join("0") + num;
         }
-        return num;
+        return num;*/
     }
 };
 
@@ -1122,7 +1120,7 @@ var DialogUtility={
             alert("dialogId不能为空");
             return;
         }
-        url = StringUtility.GetTimeStampUrl(url);
+        url = BaseUtility.AppendTimeStampUrl(url);
         var autodialogid = "FrameDialogEle" + dialogId;
 
         if ($(this.FramePageRef.document).find("#" + autodialogid).length == 0) {
