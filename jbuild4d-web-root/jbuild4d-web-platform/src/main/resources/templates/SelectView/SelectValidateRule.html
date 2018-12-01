@@ -108,6 +108,7 @@
         </card>
         <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
             <i-button type="primary" @click="selectComplete()"> 确 认 </i-button>
+            <i-button style="margin-left: 8px" type="primary" @click="clearComplete()"> 清 空 </i-button>
             <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
         </div>
     </div>
@@ -181,9 +182,12 @@
                         this.handleClose();
                     }
                     else{
-                        window.OpenerWindowObj[this.getSelectInstanceName()].setSelectValidateRuleResultValue(null);
-                        this.handleClose();
+                        this.clearComplete();
                     }
+                },
+                clearComplete:function(){
+                    window.OpenerWindowObj[this.getSelectInstanceName()].setSelectValidateRuleResultValue(null);
+                    this.handleClose();
                 },
                 handleClose:function(){
                     if(window.IsOpenForFrame){

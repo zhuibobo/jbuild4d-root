@@ -66,13 +66,25 @@ Vue.component("fd-control-bind-to", {
         setSelectFieldResultValue:function (result) {
             //debugger;
             this.bindToField={};
-            this.bindToField.fieldName=result.fieldName;
-            this.bindToField.tableId=result.tableId;
-            this.bindToField.tableName=result.tableName;
-            this.bindToField.tableCaption=result.tableCaption;
-            this.bindToField.fieldCaption=result.fieldCaption;
-            this.bindToField.fieldDataType=result.fieldDataType;
-            this.bindToField.fieldLength=result.fieldLength;
+            if(result!=null){
+                this.bindToField.fieldName=result.fieldName;
+                this.bindToField.tableId=result.tableId;
+                this.bindToField.tableName=result.tableName;
+                this.bindToField.tableCaption=result.tableCaption;
+                this.bindToField.fieldCaption=result.fieldCaption;
+                this.bindToField.fieldDataType=result.fieldDataType;
+                this.bindToField.fieldLength=result.fieldLength;
+            }
+            else {
+                this.bindToField.fieldName = "";
+                this.bindToField.tableId = "";
+                this.bindToField.tableName = "";
+                this.bindToField.tableCaption = "";
+                this.bindToField.fieldCaption = "";
+                this.bindToField.fieldDataType = "";
+                this.bindToField.fieldLength = "";
+            }
+
             this.setCompleted();
             //alert(result);
         },
