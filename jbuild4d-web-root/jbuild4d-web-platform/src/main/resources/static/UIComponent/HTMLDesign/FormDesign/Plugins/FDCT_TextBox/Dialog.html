@@ -24,7 +24,7 @@
                 </fd-control-bind-to>
             </tab-pane>
             <tab-pane label="基础信息">
-                <fd-control-base-info :base-info-prop="baseInfo"></fd-control-base-info>
+                <fd-control-base-info v-model="baseInfo"></fd-control-base-info>
             </tab-pane>
         </tabs>
     </div>
@@ -32,10 +32,10 @@
         var DialogApp=new Vue({
             el:"#dialogApp",
             data: {
+                baseInfo:JBuild4D.FormDesign.Control.DefaultProps.baseInfo,
                 bindToField:JBuild4D.FormDesign.Control.DefaultProps.bindToField,
                 defaultValue: JBuild4D.FormDesign.Control.DefaultProps.defaultValue,
-                validateRules:JBuild4D.FormDesign.Control.DefaultProps.validateRules,
-                baseInfo:JBuild4D.FormDesign.Control.DefaultProps.baseInfo
+                validateRules:JBuild4D.FormDesign.Control.DefaultProps.validateRules
             },
             mounted:function () {
 
@@ -61,6 +61,7 @@
                     return JBuild4D.FormDesign.Control.ValidateSerializeControlDialogCompletedEnable(result);
                 },
                 setControlProps:function ($elem,props) {
+                    debugger;
                     this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;
                     this.bindToField = props.bindToField ? props.bindToField : this.bindToField;
                     this.defaultValue = props.defaultValue ? props.defaultValue : this.defaultValue;

@@ -64,6 +64,12 @@ var JBuild4D={
                 if(this.$CKEditorSelectElem.length>0) {
                     return this.$CKEditorSelectElem;
                 }
+                return null;
+            },
+            GetSelectedCKEditorElem:function(){
+                var id=this.GetSelectedElem().attr("id");
+                var element =JBuild4D.FormDesign.CKEditorInst.document.getById(id);
+                return element;
             },
             SerializePropsToElem:function(elem,props,controlSetting){
                 elem.setAttribute("jbuild4d_custom", "true");
@@ -120,6 +126,9 @@ var JBuild4D={
                         if($elem.attr(key)){
                             groupProp[key]=$elem.attr(key);
                         }
+                        else{
+                            groupProp[key]=this.DefaultProps[groupName][key];
+                        }
                     }
                     props[groupName]=groupProp;
                     return props;
@@ -144,6 +153,14 @@ var JBuild4D={
                         JBuild4D.FormDesign.CKEditorInst.getSelection().selectElement(elem);
                     }
                     else {
+                        debugger;
+                        var selectedElem=this.GetSelectedCKEditorElem();
+                        if(selectedElem) {
+                            var reFreshElem = new CKEDITOR.dom.element.createFromHtml(selectedElem.getOuterHtml());
+                            selectedElem.copyAttributes(reFreshElem, {temp: "temp"});
+                            this.SerializePropsToElem(reFreshElem,controlProps,controlSetting);
+                            reFreshElem.replace(selectedElem);
+                        }
                         //SimpleControlUtil.CommInsertOrReplaceElemInCKEditor(exsetting.IFrameWindow,exsetting.IRCommandName,"");
                     }
                     //exsetting.IRCommandName=SimpleControlUtil.PropInsertCommand;

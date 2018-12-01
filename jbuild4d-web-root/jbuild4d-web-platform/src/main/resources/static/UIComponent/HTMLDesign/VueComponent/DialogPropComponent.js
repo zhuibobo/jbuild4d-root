@@ -212,7 +212,7 @@ Vue.component("fd-control-bind-to", {
 
 /*绑定一般信息的Vue组件*/
 Vue.component("fd-control-base-info", {
-    props:["baseInfoProp"],
+    props:["value"],
     data: function () {
         return {
             baseInfo:{
@@ -234,10 +234,14 @@ Vue.component("fd-control-base-info", {
         baseInfo: function (newVal) {
             // 必须是input
             this.$emit('input', newVal)
+        },
+        value:function (newVal) {
+            this.baseInfo=newVal;
         }
     },
     mounted:function(){
-        this.baseInfo=this.baseInfoProp;
+        //debugger;
+        this.baseInfo=this.value;
     },
     methods:{
 
