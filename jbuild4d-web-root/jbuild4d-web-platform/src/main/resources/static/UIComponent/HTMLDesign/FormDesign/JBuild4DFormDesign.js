@@ -129,7 +129,9 @@ var JBuild4D={
                 props=attrToProp.call(this,props,"bindToField");
                 props=attrToProp.call(this,props,"defaultValue");
 
-                //if($)
+                if($elem.attr("validateRules")){
+                    props.validateRules=JsonUtility.StringToJson(decodeURIComponent($elem.attr("validateRules")));
+                }
 
                 return props;
             },

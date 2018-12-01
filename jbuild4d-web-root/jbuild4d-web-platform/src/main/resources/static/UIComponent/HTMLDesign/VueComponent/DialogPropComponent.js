@@ -37,7 +37,9 @@ Vue.component("fd-control-bind-to", {
         },
         defaultValueProp:function (newValue) {
             this.defaultValue=newValue;
-            this.tempData.defaultDisplayText=JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType,this.defaultValue.defaultText);
+            if(!StringUtility.IsNullOrEmpty(this.defaultValue.defaultType)){
+                this.tempData.defaultDisplayText=JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType,this.defaultValue.defaultText);
+            }
         },
         validateRulesProp:function (newValue) {
             this.validateRules=newValue;
@@ -90,10 +92,18 @@ Vue.component("fd-control-bind-to", {
             window._SelectBindObj = this;
         },
         setSelectEnvVariableResultValue:function(result){
-            this.defaultValue.defaultType=result.Type;
-            this.defaultValue.defaultValue=result.Value;
-            this.defaultValue.defaultText=result.Text;
-            this.tempData.defaultDisplayText=JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType,this.defaultValue.defaultText);
+            if(result!=null) {
+                this.defaultValue.defaultType = result.Type;
+                this.defaultValue.defaultValue = result.Value;
+                this.defaultValue.defaultText = result.Text;
+                this.tempData.defaultDisplayText = JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType, this.defaultValue.defaultText);
+            }
+            else {
+                this.defaultValue.defaultType = "";
+                this.defaultValue.defaultValue = "";
+                this.defaultValue.defaultText = "";
+                this.tempData.defaultDisplayText = "";
+            }
             this.setCompleted();
         },
         /*绑定验证规则*/

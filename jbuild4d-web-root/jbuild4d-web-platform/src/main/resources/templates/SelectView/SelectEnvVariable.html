@@ -35,6 +35,7 @@
     </tabs>
     <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
         <i-button type="primary" @click="selectEnvVar()"> 确 认 </i-button>
+        <i-button type="primary" @click="clearEnvVar()"> 清 空 </i-button>
         <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
     </div>
 </div>
@@ -178,6 +179,10 @@
                     result.Type = "NumberCode";
                 }
                 window.OpenerWindowObj[this.getSelectInstanceName()].setSelectEnvVariableResultValue(result);
+                this.handleClose();
+            },
+            clearEnvVar:function(){
+                window.OpenerWindowObj[this.getSelectInstanceName()].setSelectEnvVariableResultValue(null);
                 this.handleClose();
             },
             handleClose: function () {
