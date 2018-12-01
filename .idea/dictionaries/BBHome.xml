@@ -6,6 +6,8 @@
       <w>iframe</w>
       <w>inet</w>
       <w>iview</w>
+      <w>nodisabled</w>
+      <w>noreadonly</w>
       <w>wraper</w>
       <w>ztree</w>
     </words>

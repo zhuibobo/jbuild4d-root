@@ -38,8 +38,8 @@ var JBuild4D={
                     name:"",
                     className:"",
                     placeholder:"",
-                    readonly:"false",
-                    disabled:"false",
+                    readonly:"noreadonly",
+                    disabled:"nodisabled",
                     style:"",
                     desc:""
                 }
@@ -73,7 +73,19 @@ var JBuild4D={
 
                 if(props["baseInfo"]){
                     for (var key in props["baseInfo"]) {
-                        elem.setAttribute(key.toLocaleLowerCase(), props["baseInfo"][key]);
+                        if(key=="readonly"){
+                            if(props["baseInfo"][key]=="readonly"){
+                                elem.setAttribute(key.toLocaleLowerCase(), props["baseInfo"][key]);
+                            }
+                        }
+                        else if(key=="disabled"){
+                            if(props["baseInfo"][key]=="disabled"){
+                                elem.setAttribute(key.toLocaleLowerCase(), props["baseInfo"][key]);
+                            }
+                        }
+                        else{
+                            elem.setAttribute(key.toLocaleLowerCase(), props["baseInfo"][key]);
+                        }
                     }
                 }
 
@@ -116,6 +128,8 @@ var JBuild4D={
                 props=attrToProp.call(this,props,"baseInfo");
                 props=attrToProp.call(this,props,"bindToField");
                 props=attrToProp.call(this,props,"defaultValue");
+
+                //if($)
 
                 return props;
             },

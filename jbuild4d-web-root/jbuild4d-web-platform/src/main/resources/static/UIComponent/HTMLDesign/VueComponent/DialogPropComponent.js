@@ -19,8 +19,10 @@ Vue.component("fd-control-bind-to", {
             defaultValue: {
                 defaultType: "",
                 defaultValue: "",
-                defaultText: "",
-                text:""
+                defaultText: ""
+            },
+            tempData:{
+                defaultDisplayText:""
             }
         }
     },
@@ -35,6 +37,7 @@ Vue.component("fd-control-bind-to", {
         },
         defaultValueProp:function (newValue) {
             this.defaultValue=newValue;
+            this.tempData.defaultDisplayText=JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType,this.defaultValue.defaultText);
         },
         validateRulesProp:function (newValue) {
             this.validateRules=newValue;
@@ -90,7 +93,7 @@ Vue.component("fd-control-bind-to", {
             this.defaultValue.defaultType=result.Type;
             this.defaultValue.defaultValue=result.Value;
             this.defaultValue.defaultText=result.Text;
-            this.defaultValue.text=JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType,this.defaultValue.defaultText);
+            this.tempData.defaultDisplayText=JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType,this.defaultValue.defaultText);
             this.setCompleted();
         },
         /*绑定验证规则*/
@@ -150,9 +153,9 @@ Vue.component("fd-control-bind-to", {
                     '<tr>'+
                         '<td colspan="4">默认值<button class="btn-select fright" v-on:click="selectDefaultValueView">...</button></td>'+
                     '</tr>'+
-                    '<tr>'+
-                        '<td colspan="4" style="background-color: #ffffff">' +
-                            '{{defaultValue.text}}'+
+                    '<tr style="height: 35px">'+
+                        '<td colspan="4" style="background-color: #ffffff;">' +
+                            '{{tempData.defaultDisplayText}}'+
                         '</td>'+
                     '</tr>'+
                     '<tr>' +
@@ -251,15 +254,15 @@ Vue.component("fd-control-base-info", {
                         '<td>Readonly：</td>' +
                         '<td style="text-align: center">' +
                             '<radio-group type="button" style="margin: auto" v-model="baseInfo.readonly">' +
-                                '<radio label="true">是</radio>' +
-                                '<radio label="false">否</radio>' +
+                                '<radio label="readonly">是</radio>' +
+                                '<radio label="noreadonly">否</radio>' +
                             '</radio-group>' +
                         '</td>' +
                         '<td>Disabled：</td>' +
                         '<td style="text-align: center">' +
                             '<radio-group type="button" style="margin: auto" v-model="baseInfo.disabled">' +
-                                '<radio label="true">是</radio>' +
-                                '<radio label="false">否</radio>' +
+                                '<radio label="disabled">是</radio>' +
+                                '<radio label="nodisabled">否</radio>' +
                             '</radio-group>' +
                         '</td>' +
                     '</tr>' +
