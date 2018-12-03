@@ -142,7 +142,7 @@ var BaseUtility = {
 };
 
 //浏览下信息类
-/*var BrowserInfoUtility = {
+var BrowserInfoUtility = {
     BrowserAppName: function () {
         if (navigator.userAgent.indexOf("Firefox") > 0) {
             return "Firefox";
@@ -213,7 +213,7 @@ var BaseUtility = {
         return this.BrowserAppName() == "Chrome";
 
     }
-};*/
+};
 
 //字符串操作类
 var StringUtility = {

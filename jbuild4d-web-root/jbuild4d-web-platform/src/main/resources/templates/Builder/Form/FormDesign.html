@@ -265,7 +265,7 @@
                         //console.log(_self.tree.tableTreeData);
                         _self.tableTree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), _self.tableTree.tableTreeSetting,_self.tableTree.tableTreeData);
                         _self.tableTree.tableTreeObj.expandAll(true);
-                        fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
+                        //fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
                     }
                     else {
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
