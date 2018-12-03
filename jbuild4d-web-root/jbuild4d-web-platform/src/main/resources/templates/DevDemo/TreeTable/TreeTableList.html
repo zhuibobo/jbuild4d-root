@@ -174,7 +174,7 @@
                     this.mareSureSelectedTreeTableRow("删除").then(function (nodeData) {
                         var _self=this;
                         var recordId=nodeData[appList.treeTableConfig.IdField];
-                        DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
+                        DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
                             AjaxUtility.Post(_self.acInterface.delete, {recordId: recordId}, function (result) {
                                 if (result.success) {
                                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {

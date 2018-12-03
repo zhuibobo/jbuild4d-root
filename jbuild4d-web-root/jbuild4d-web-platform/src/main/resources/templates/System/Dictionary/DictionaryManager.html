@@ -191,7 +191,7 @@
                 delGroup:function () {
                     var recordId=this.treeSelectedNode.dictGroupId;
                     var _self=this;
-                    DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
+                    DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
                         AjaxUtility.Post(_self.acInterface.deleteGroup, {"recordId": recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
@@ -300,7 +300,7 @@
                     this.mareSureSelectedTreeTableRow("删除").then(function (nodeData) {
                         var recordId=nodeData.dictId;
                         var _self=this;
-                        DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
+                        DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
                             AjaxUtility.Post(_self.acInterface.deleteDict, {recordId: recordId}, function (result) {
                                 if (result.success) {
                                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {

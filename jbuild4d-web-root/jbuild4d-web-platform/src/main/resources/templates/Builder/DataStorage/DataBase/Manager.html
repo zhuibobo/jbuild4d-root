@@ -246,7 +246,7 @@
                 delGroup:function () {
                     var _self=this;
                     var recordId=this.treeSelectedNode[appList.treeIdFieldName];
-                    DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
+                    DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
                         AjaxUtility.Post(_self.acInterface.deleteGroup, {recordId: recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
@@ -336,7 +336,7 @@
                 },
                 del: function (recordId) {
                     var _self = this;
-                    DialogUtility.Comfirm(window, "确认要删除当前表吗？删除表时将只是删除表的描述,物理表和字段描述将保留，如果需要删除，请手工删除。", function () {
+                    DialogUtility.Confirm(window, "确认要删除当前表吗？删除表时将只是删除表的描述,物理表和字段描述将保留，如果需要删除，请手工删除。", function () {
                         AjaxUtility.Post(_self.acInterface.deleteTable, {recordId: recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {

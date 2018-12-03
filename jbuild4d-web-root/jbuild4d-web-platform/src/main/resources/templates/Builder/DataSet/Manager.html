@@ -249,7 +249,7 @@
                     //var url="/PlatForm/Builder/DataSet/DataSetGroup/Delete.do";
                     var recordId=this.treeSelectedNode[appList.treeIdFieldName];
                     var _self=this;
-                    DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
+                    DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
                         AjaxUtility.Post(_self.acInterface.deleteGroup, {recordId: recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
@@ -343,7 +343,7 @@
                 },
                 del: function (recordId) {
                     var _self=this;
-                    DialogUtility.Comfirm(window, "确认要删除当前数据集？", function () {
+                    DialogUtility.Confirm(window, "确认要删除当前数据集？", function () {
                         AjaxUtility.Post(_self.acInterface.deleteDataSet, {dataSetId: recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {

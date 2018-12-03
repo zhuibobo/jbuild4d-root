@@ -265,7 +265,7 @@
                     //var url="/PlatForm/devdemo/TreeAndList/DevDemoTLTree/Delete.do";
                     var _self=this;
                     var recordId=this.treeSelectedNode[appList.treeIdFieldName];
-                    DialogUtility.Comfirm(window, "确认要删除选定的节点吗？", function () {
+                    DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
                         AjaxUtility.Post(_self.acInterface.deleteGroup, {recordId: recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {

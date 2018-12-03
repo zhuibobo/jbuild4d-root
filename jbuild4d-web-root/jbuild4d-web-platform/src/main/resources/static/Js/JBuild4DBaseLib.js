@@ -616,7 +616,7 @@ var DateUtility={
 
 //Json操作工具类
 var JsonUtility = {
-    ParseArrayJsonToTreeJson:function (config, sourceJson, rootNodeId){
+    ParseArrayJsonToTreeJson:function (config, sourceArray, rootId){
         var _config = {
             KeyField: "",
             RelationField: "",
@@ -624,20 +624,19 @@ var JsonUtility = {
         };
 
         function FindJsonById(keyField, id) {
-            for (var i = 0; i < sourceJson.length; i++) {
-                if (sourceJson[i][keyField] == id) {
-                    return sourceJson[i];
+            for (var i = 0; i < sourceArray.length; i++) {
+                if (sourceArray[i][keyField] == id) {
+                    return sourceArray[i];
                 }
             }
-            //alert(id);
-            alert("在sourceJson中找不到指定Id的记录");
+            alert("ParseArrayJsonToTreeJson.FindJsonById:在sourceArray中找不到指定Id的记录");
         }
 
         function FindChildJson(relationField, pid) {
             var result = [];
-            for (var i = 0; i < sourceJson.length; i++) {
-                if (sourceJson[i][relationField] == pid) {
-                    result.push(sourceJson[i]);
+            for (var i = 0; i < sourceArray.length; i++) {
+                if (sourceArray[i][relationField] == pid) {
+                    result.push(sourceArray[i]);
                 }
             }
             return result;
@@ -660,11 +659,9 @@ var JsonUtility = {
         }
 
         var result = {};
-        //查找根节点
-        var rootJson = FindJsonById(config.KeyField, rootNodeId);
+        var rootJson = FindJsonById(config.KeyField, rootId);
         result = this.SimpleCloneAttr(result, rootJson);
-        //查找子节点
-        FindChildNodeAndParse(rootNodeId, result);
+        FindChildNodeAndParse(rootId, result);
         return result;
     },
     ResolveSimpleArrayJsonToTreeJson: function (config, sourceJson, rootNodeId) {
@@ -694,7 +691,6 @@ var PageStyleUtility = {
         return jQuery(window.document).height();
     },
     GetPageWidth: function () {
-        //alert($(window.document).height());
         return jQuery(window.document).width();
     },
     GetWindowHeight:function () {
@@ -704,13 +700,8 @@ var PageStyleUtility = {
         return $(window).width();
     },
     GetListButtonOuterHeight: function () {
+        alert("PageStyleUtility.GetListButtonOuterHeight 已停用");
         return jQuery(".list-button-outer-c").outerHeight();
-    },
-    /**
-     * @return {number}
-     */
-    GetJGridContainerHeight: function () {
-        return 65;
     }
 };
 
@@ -860,10 +851,10 @@ var DialogUtility={
         $(htmlElem).find(".alertloading-txt").html(htmlmsg);
         $(htmlElem).dialog(defaultConfig);
     },
-    Comfirm : function(opererWindow, htmlmsg, okFn) {
-        this.ComfirmBy(opererWindow, htmlmsg,null,okFn);
+    Confirm : function(opererWindow, htmlmsg, okFn) {
+        this.ConfirmConfig(opererWindow, htmlmsg, null, okFn);
     },
-    ComfirmBy : function(opererWindow, htmlmsg, config,okFn) {
+    ConfirmConfig : function(opererWindow, htmlmsg, config,okFn) {
         var htmlElem = this._CreateDialogElem(opererWindow.document.body, "AlertConfirmMsg");
         var paras= null;
         var defaultConfig = {
@@ -912,7 +903,8 @@ var DialogUtility={
         };
     },
     Prompt:function(opererWindow,config,dialogId,htmlmsg){
-        var htmlElem = this._CreateDialogElem(opererWindow.document.body,dialogId);
+        alert("DialogUtility.Prompt 已停用");
+        /*var htmlElem = this._CreateDialogElem(opererWindow.document.body,dialogId);
         var paras=null;
         var defaultConfig = {
             okfunc:function(paras){
@@ -952,7 +944,7 @@ var DialogUtility={
         $(htmlElem).dialog(defaultConfig);
         paras={
             "ElementObj":htmlElem
-        };
+        };*/
     },
     DialogElem:function (elem,config) {
         $(elem).dialog(config);
@@ -1054,19 +1046,6 @@ var DialogUtility={
         }
     },
     OpenNewWindow: function (openerwindow, dialogId, url, options, whtype) {
-        //openerwindow, dialogId, url, options, whtype
-        //if(options.width==0) {
-        //width =
-        //height = window.screen.availHeight - 30;
-        //options.width = PageStyleUtility.GetWindowWidth()-20;
-        //    options.width=window.screen.availWidth-20;
-        //}
-        //if(options.height==0) {
-        //options.height = PageStyleUtility.GetWindowHeight()-10;
-        //options.height = PageStyleUtility.GetWindowHeight()-10;
-        //    options.height = window.screen.availHeight - 40;
-        //}
-        //debugger;
         var width=options.width;
         var height=options.height;
         var left = parseInt((screen.availWidth - width) / 2).toString();
@@ -1504,7 +1483,7 @@ var ListPageUtility={
         });
     },
     IViewTableDeleteRow:function (url, recordId,pageAppObj) {
-        DialogUtility.Comfirm(window, "确认要删除当前记录吗？", function () {
+        DialogUtility.Confirm(window, "确认要删除当前记录吗？", function () {
             AjaxUtility.Post(url, {recordId: recordId}, function (result) {
                 if (result.success) {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
