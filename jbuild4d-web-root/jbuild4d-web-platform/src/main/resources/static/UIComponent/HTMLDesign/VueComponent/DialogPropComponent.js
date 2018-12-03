@@ -272,11 +272,11 @@ Vue.component("fd-control-base-info", {
                         '<td>Name：</td>' +
                         '<td><input type="text" v-model="baseInfo.name" /></td>' +
                         '<td>ClassName：</td>' +
-                        '<td colspan="3"><input type="text" v-model="baseInfo.placeholder" /></td>' +
+                        '<td colspan="3"><input type="text" v-model="baseInfo.className" /></td>' +
                     '</tr>' +
                     '<tr>' +
                         '<td>Placeholder</td>' +
-                        '<td><input type="text" v-model="baseInfo.className" /></td>' +
+                        '<td><input type="text" v-model="baseInfo.placeholder" /></td>' +
                         '<td>Readonly：</td>' +
                         '<td style="text-align: center">' +
                             '<radio-group type="button" style="margin: auto" v-model="baseInfo.readonly">' +

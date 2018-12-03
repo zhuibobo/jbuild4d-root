@@ -158,7 +158,7 @@ var JBuild4D={
                         JBuild4D.FormDesign.CKEditorInst.getSelection().selectElement(elem);
                     }
                     else {
-                        debugger
+                        //debugger
                         var selectedElem=this.GetSelectedCKEditorElem();
                         if(selectedElem) {
                             var reFreshElem = new CKEDITOR.dom.element.createFromHtml(selectedElem.getOuterHtml());
