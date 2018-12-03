@@ -58,8 +58,8 @@ var JBuild4D={
                     event.data.dialog =controlSetting.DialogName;
                 }
             },
-            SetSelectedElem:function(elemhtml){
-                this._$CKEditorSelectElem=$(elemhtml);
+            SetSelectedElem:function(elemHtml){
+                this._$CKEditorSelectElem=$(elemHtml);
             },
             GetSelectedElem:function(){
                 if(this._$CKEditorSelectElem.length>0) {
@@ -208,13 +208,89 @@ var JBuild4D={
                         }
                     }
                 }
+                return obj;
             },
             InitPluginSetting:function(setting){
-                //使用默认值覆盖定义的空值
-                this._CoverEmptyPluginProp(setting);
-                setting.DialogName=setting.SingleName;
-                setting.ToolbarCommand="JBuild4D.FormDesign.Plugins."+setting.SingleName;
-                setting.DialogSettingTitle=setting.ToolbarLabel+"Web控件";
+                //待移除
+            },
+            CreateGeneralPlugin:function (pluginSingleName,exConfig) {
+                var defaultSetting = {
+                    //插件名称
+                    SingleName: pluginSingleName,
+                    //设置对话框相关设置
+                    DialogName: '',
+                    DialogWidth: null,
+                    DialogHeight: null,
+                    DialogPageUrl: BaseUtility.AppendTimeStampUrl('Dialog.html'),
+                    DialogTitle: "DIV",
+                    //设计器工具栏相关设置
+                    ToolbarCommand: '',
+                    //工具栏触发命令的名称,需要保持唯一
+                    ToolbarIcon: 'Icon.png',
+                    ToolbarLabel: "",
+                    ToolbarLocation: '',
+                    //设计控件相关的对话框
+                    IFrameWindow: null,
+                    //设计控件对话框将执行的工作
+                    IFrameExecuteActionName: "Insert",
+                    //需要引入到设计器的样式文件
+                    DesignModalInputCss: "",
+                    //客户端与服务端解析类
+                    ClientResolve: "",
+                    ServerResolve: ""
+                };
+                //使用方法参数覆盖默认值
+                defaultSetting = $.extend(true, {}, defaultSetting, exConfig);
+                //使用服务端定义覆盖定义的空值;
+                defaultSetting = this._CoverEmptyPluginProp(defaultSetting);
+                defaultSetting.DialogName = defaultSetting.SingleName;
+                defaultSetting.ToolbarCommand = "JBuild4D.FormDesign.Plugins." + defaultSetting.SingleName;
+                defaultSetting.DialogSettingTitle = defaultSetting.ToolbarLabel + "Web控件";
+                return {
+                    Setting: defaultSetting
+                };
+            },
+            RegGeneralPluginToEditor:function (ckEditor,path,pluginSetting, okFunc) {
+                CKEDITOR.dialog.addIframe(
+                    pluginSetting.DialogName,
+                    pluginSetting.DialogSettingTitle,
+                    path + pluginSetting.DialogPageUrl, pluginSetting.DialogWidth, pluginSetting.DialogHeight,
+                    function () {
+                        var iframe = document.getElementById(this._.frameId);
+                        pluginSetting.IFrameWindow = iframe;
+                        JBuild4D.FormDesign.Dialog.SetElemPropsInEditDialog(pluginSetting.IFrameWindow, pluginSetting.IFrameExecuteActionName);
+                    },
+                    {
+                        //对话框确认按钮触发的事件
+                        onOk: function () {
+                            var props=pluginSetting.IFrameWindow.contentWindow.DialogApp.getControlProps();
+                            if(props.success==false) {
+                                return false;
+                            }
+                            //JBuild4D.FormDesign.Control.BuildGeneralElemToCKWysiwyg("<input type='text' />",ControlSetting,props,ControlSetting.IFrameWindow.contentWindow);
+                            okFunc(ckEditor,pluginSetting,props,pluginSetting.IFrameWindow.contentWindow);
+                            pluginSetting.IFrameExecuteActionName=JBuild4D.FormDesign.Dialog.DialogExecuteInsertActionName;
+                        },
+                        //取消按钮对话框
+                        onCancel:function(){
+                            pluginSetting.IFrameExecuteActionName=JBuild4D.FormDesign.Dialog.DialogExecuteInsertActionName;
+                        }
+                    }
+                );
+
+                ckEditor.addCommand(pluginSetting.ToolbarCommand,new CKEDITOR.dialogCommand(pluginSetting.DialogName));
+
+                ckEditor.ui.addButton(pluginSetting.SingleName, {
+                    label: pluginSetting.ToolbarLabel,
+                    icon: path + pluginSetting.ToolbarIcon,
+                    command: pluginSetting.ToolbarCommand,
+                    toolbar: pluginSetting.ToolbarLocation
+                });
+
+                ckEditor.on('doubleclick', function(event) {
+                    pluginSetting.IFrameExecuteActionName = JBuild4D.FormDesign.Dialog.DialogExecuteEditActionName;
+                    JBuild4D.FormDesign.Control.OnCKWysiwygElemDBClickEvent(event, pluginSetting)
+                });
             }
         },
         PluginsDefConfig:{
