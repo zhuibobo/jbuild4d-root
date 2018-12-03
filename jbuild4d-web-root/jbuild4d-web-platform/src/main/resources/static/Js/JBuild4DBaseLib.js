@@ -165,7 +165,6 @@ var BrowserInfoUtility = {
     },
     IsIE7: function () {
         return navigator.userAgent.indexOf("MSIE 7.0") > 0;
-
     },
     IsIE8: function () {
         return navigator.userAgent.indexOf("MSIE 8.0") > 0;
