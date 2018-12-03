@@ -138,11 +138,11 @@
                     getDataUrl:"/PlatForm/OrganRelevance/Organ/GetDetailData",
                     saveDataUrl:"/PlatForm/OrganRelevance/Organ/SaveEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 exObjectsJson:{OrganType:[]},
                 formEntity: {
                     organId: '',
-                    organParentId: StringUtility.QueryString("parentId"),
+                    organParentId: BaseUtility.GetUrlParaValue("parentId"),
                     organName: '',
                     organNo: '',
                     organCode: '',
@@ -167,7 +167,7 @@
                         { required: true, message: '【组织简称】不能空！', trigger: 'blur' }
                     ]
                 },
-                status:StringUtility.QueryString("op")
+                status:BaseUtility.GetUrlParaValue("op")
             },
             mounted:function () {
                 this.bindFormData();

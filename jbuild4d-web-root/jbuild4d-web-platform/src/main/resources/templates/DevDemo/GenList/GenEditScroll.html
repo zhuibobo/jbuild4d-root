@@ -45,7 +45,7 @@
                     getDataUrl:"/PlatForm/DevDemo/DevDemoGenList/GetDetailData",
                     saveDataUrl:"/PlatForm/DevDemo/DevDemoGenList/SaveEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 formEntity: {
                     ddglId: "",
                     ddglKey: "",
@@ -65,7 +65,7 @@
                         {required: true, message: '【ddglKey】不能空！', trigger: 'blur'}
                     ]
                 },
-                status: StringUtility.QueryString("op")
+                status: BaseUtility.GetUrlParaValue("op")
             },
             methods: {
                 bindFormData:function(){

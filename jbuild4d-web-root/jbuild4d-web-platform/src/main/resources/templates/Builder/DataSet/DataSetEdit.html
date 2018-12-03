@@ -255,7 +255,7 @@
                     TableId:"dsColumns",
                     TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
                 },
-                status: StringUtility.QueryString("op"),
+                status: BaseUtility.GetUrlParaValue("op"),
                 relatedTable: {
                     config: [
                         {
@@ -281,13 +281,13 @@
                     this.datasetEntity.dsCreater=this.currUserEntity.userName;
                     this.datasetEntity.dsUpdater=this.currUserEntity.userName;
                     this.datasetEntity.dsId=StringUtility.Guid();
-                    this.datasetEntity.dsGroupId=StringUtility.QueryString("groupId");
+                    this.datasetEntity.dsGroupId=BaseUtility.GetUrlParaValue("groupId");
                     this.datasetEntity.dsType="SQLDataSet";
                     this.datasetEntity.dsSqlSelectText="请编辑SQL";
                 }
                 else {
                     //this.editTableObj.LoadJsonData(this.tableFieldsData);
-                    this.datasetEntity.dsId=StringUtility.QueryString("recordId");
+                    this.datasetEntity.dsId=BaseUtility.GetUrlParaValue("recordId");
                     this.datasetEntity.dsUpdater=this.currUserEntity.userName;
                     this.loadData(this.datasetEntity.dsId,this.status);
                 }

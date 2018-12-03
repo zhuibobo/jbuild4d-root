@@ -11,7 +11,7 @@ var EditTable_SelectFieldTypeDataLoader={
             AjaxUtility.PostSync("/PlatForm/Builder/DataStorage/DataBase/Table/GetTableFieldType.do",{},function(data){
                 //debugger;
                 if (data.success == true) {
-                    var list = StringUtility.StringToJson(data.data);
+                    var list = JsonUtility.StringToJson(data.data);
                     if (list != null && list != undefined) {
                         _self._fieldDataTypeArray = list;
                     }

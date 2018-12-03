@@ -112,7 +112,7 @@
                             if(result.data==null){
                                 result.data=new Array();
                             }
-                            var treeData=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
+                            var treeData=JsonUtility.ParseArrayJsonToTreeJson({
                                 KeyField: "organId",
                                 RelationField:"organParentId",
                                 ChildFieldName:"Nodes"

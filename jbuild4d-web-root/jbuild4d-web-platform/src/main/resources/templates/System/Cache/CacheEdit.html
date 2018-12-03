@@ -43,7 +43,7 @@
                 getDataUrl:"/PlatForm/System/Cache/GetDetailData",
                 saveDataUrl:"/PlatForm/System/Cache/SaveEdit"
             },
-            recordId:StringUtility.QueryString("recordId"),
+            recordId:BaseUtility.GetUrlParaValue("recordId"),
             jb4dCacheEntity:{
                 cacheId:"",
                 cacheKey:"",
@@ -56,7 +56,7 @@
                 cacheMode:"",
                 cacheVersion:""
             },
-            status: StringUtility.QueryString("op")
+            status: BaseUtility.GetUrlParaValue("op")
         },
         methods: {
             bindFormData:function(){

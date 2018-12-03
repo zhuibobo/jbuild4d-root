@@ -74,14 +74,14 @@
                 getDataUrl:"/PlatForm/Builder/Module/GetDetailData",
                 saveDataUrl:"/PlatForm/Builder/Module/SaveEdit"
             },
-            recordId:StringUtility.QueryString("recordId"),
+            recordId:BaseUtility.GetUrlParaValue("recordId"),
             formEntity: {
                 moduleId: "",
                 moduleValue: "",
                 moduleText: "",
                 moduleCreateTime: DateUtility.GetCurrentData(),
                 moduleDesc: "",
-                moduleParentId: StringUtility.QueryString("parentId"),
+                moduleParentId: BaseUtility.GetUrlParaValue("parentId"),
                 moduleStatus: "启用",
                 moduleIssystem: "否",
                 moduleDelEnable: "是"
@@ -94,7 +94,7 @@
                     {required: true, message: '【名称】不能空！', trigger: 'blur'}
                 ]
             },
-            status: StringUtility.QueryString("op")
+            status: BaseUtility.GetUrlParaValue("op")
         },
         mounted:function () {
             this.bindFormData();

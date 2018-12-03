@@ -73,7 +73,7 @@
                     getDataUrl:"/PlatForm/System/ParasSetting/GetDetailData",
                     saveDataUrl:"/PlatForm/System/ParasSetting/SaveEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 formEntity: {
                     settingId: '',
                     settingKey: '',
@@ -96,7 +96,7 @@
                         {required: true, message: '【settingValue】不能空！', trigger: 'blur'}
                     ]
                 },
-                status: StringUtility.QueryString("op")
+                status: BaseUtility.GetUrlParaValue("op")
             },
             methods: {
                 bindFormData:function(){

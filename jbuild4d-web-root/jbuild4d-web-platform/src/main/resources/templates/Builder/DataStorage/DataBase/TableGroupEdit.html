@@ -74,14 +74,14 @@
                     getDataUrl:"/PlatForm/Builder/DataStorage/DataBase/TableGroup/GetDetailData",
                     saveDataUrl:"/PlatForm/Builder/DataStorage/DataBase/TableGroup/SaveEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 formEntity: {
                     tableGroupId: "",
                     tableGroupValue: "",
                     tableGroupText: "",
                     tableGroupCreateTime: DateUtility.GetCurrentData(),
                     tableGroupDesc: "",
-                    tableGroupParentId: StringUtility.QueryString("parentId"),
+                    tableGroupParentId: BaseUtility.GetUrlParaValue("parentId"),
                     tableGroupStatus:"启用",
                     tableGroupIssystem: "否",
                     tableGroupDelEnable: "是"
@@ -94,7 +94,7 @@
                         {required: true, message: '【名称】不能空！', trigger: 'blur'}
                     ]
                 },
-                status: StringUtility.QueryString("op")
+                status: BaseUtility.GetUrlParaValue("op")
             },
             mounted:function () {
                 this.bindFormData();

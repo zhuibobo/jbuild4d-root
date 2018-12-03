@@ -82,7 +82,7 @@
                     getDataUrl:"/PlatForm/DevDemo/DevDemoGenListBindDictionary/GetDetailData",
                     saveDataUrl:"/PlatForm/DevDemo/DevDemoGenListBindDictionary/SaveEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 dictionaryJson:{
                     DevDemoDictionaryGroupBindSelect:null,
                     DevDemoDictionaryGroupBindRadio:null,
@@ -117,7 +117,7 @@
                         {required: true, message: '【ddglBindDicSelected】不能空！', trigger: 'blur'}
                     ]
                 },
-                status: StringUtility.QueryString("op")
+                status: BaseUtility.GetUrlParaValue("op")
             },
             methods: {
                 bindFormData:function(){

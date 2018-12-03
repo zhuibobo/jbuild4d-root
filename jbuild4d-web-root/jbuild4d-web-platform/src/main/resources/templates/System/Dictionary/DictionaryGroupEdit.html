@@ -77,14 +77,14 @@
                     getDataUrl:"/PlatForm/System/DictionaryGroup/GetDetailData",
                     saveDataUrl:"/PlatForm/System/DictionaryGroup/SaveEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 formEntity: {
                     dictGroupId: '',
                     dictGroupValue: '',
                     dictGroupText: '',
                     dictGroupCreateTime: DateUtility.GetCurrentData("-"),
                     dictGroupDesc: '',
-                    dictGroupParentId: StringUtility.QueryString("parentId"),
+                    dictGroupParentId: BaseUtility.GetUrlParaValue("parentId"),
                     dictGroupIssystem: '否',
                     dictGroupDelEnable:'是',
                     dictGroupEnpItem: '是'
@@ -97,7 +97,7 @@
                         {required: true, message: '【分组名称】不能空！', trigger: 'blur'}
                     ]
                 },
-                status: StringUtility.QueryString("op")
+                status: BaseUtility.GetUrlParaValue("op")
             },
             mounted:function () {
                 this.bindFormData();
@@ -107,7 +107,7 @@
                     //获取数据并赋值
                     DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status);
                     /*var _self=this;
-                    AjaxUtility.Post(this.acInterface.getDataUrl,{recordId:StringUtility.QueryString("recordId"),op:StringUtility.QueryString("op")},function (result) {
+                    AjaxUtility.Post(this.acInterface.getDataUrl,{recordId:BaseUtility.GetUrlParaValue("recordId"),op:BaseUtility.GetUrlParaValue("op")},function (result) {
                         if(result.success) {
                             DetailPageUtility.OverrideObjectValue(appForm.formEntity, result.data);
                             if(_self.status=="view") {

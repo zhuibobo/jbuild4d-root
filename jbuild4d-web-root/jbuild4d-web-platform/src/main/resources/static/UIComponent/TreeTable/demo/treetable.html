@@ -17,7 +17,7 @@
             //treeTableObj.Initialization(TreeTableConfig);
             //treeTableObj.LoadJsonData(TreeTableJsonData);
 
-            var treedata=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
+            var treedata=JsonUtility.ParseArrayJsonToTreeJson({
                 KeyField: "Organ_Id",
                 RelationField:"Parent_Id",
                 ChildFieldName:"Nodes"

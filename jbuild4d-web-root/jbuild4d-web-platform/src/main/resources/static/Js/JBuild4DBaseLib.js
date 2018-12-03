@@ -559,8 +559,9 @@ var StringUtility = {
 //日期时间工具类
 var DateUtility={
     GetCurrentDataString:function (split) {
+        alert("DateUtility.GetCurrentDataString 已停用");
         /*this.SetSplit(split);*/
-        var myDate = new Date();
+        /*var myDate = new Date();
         var year = myDate.getFullYear();
         var month = myDate.getMonth() + 1;
         if (month < 10) {
@@ -570,11 +571,12 @@ var DateUtility={
         if (day < 10) {
             day = "0" + day;
         }
-        return year + split + month + split + day;
+        return year + split + month + split + day;*/
     },
     DateFormat:function (myDate,split) {
+        alert("DateUtility.GetCurrentDataString 已停用");
         /*this.SetSplit(split);*/
-        var year = myDate.getFullYear();
+        /*var year = myDate.getFullYear();
         var month = myDate.getMonth() + 1;
         if (month < 10) {
             month = "0" + month;
@@ -583,7 +585,7 @@ var DateUtility={
         if (day < 10) {
             day = "0" + day;
         }
-        return year + split + month + split + day;
+        return year + split + month + split + day;*/
     },
     Format:function (myDate,formatString) {
         var o = {
@@ -614,8 +616,7 @@ var DateUtility={
 
 //Json操作工具类
 var JsonUtility = {
-    RSAJ_To_TJ: this.ResolveSimpleArrayJsonToTreeJson,
-    ResolveSimpleArrayJsonToTreeJson: function (config, sourceJson, rootNodeId) {
+    ParseArrayJsonToTreeJson:function (config, sourceJson, rootNodeId){
         var _config = {
             KeyField: "",
             RelationField: "",
@@ -642,7 +643,7 @@ var JsonUtility = {
             return result;
         }
 
-        function FindChildNodeAndResolve(pid, result) {
+        function FindChildNodeAndParse(pid, result) {
             var childjsons = FindChildJson(config.RelationField, pid);
             if (childjsons.length > 0) {
                 if (result[config.ChildFieldName] == undefined) {
@@ -653,7 +654,7 @@ var JsonUtility = {
                     toObj = JsonUtility.SimpleCloneAttr(toObj, childjsons[i]);
                     result[config.ChildFieldName].push(toObj);
                     var id = toObj[config.KeyField];
-                    FindChildNodeAndResolve(id, toObj);
+                    FindChildNodeAndParse(id, toObj);
                 }
             }
         }
@@ -663,8 +664,11 @@ var JsonUtility = {
         var rootJson = FindJsonById(config.KeyField, rootNodeId);
         result = this.SimpleCloneAttr(result, rootJson);
         //查找子节点
-        FindChildNodeAndResolve(rootNodeId, result);
+        FindChildNodeAndParse(rootNodeId, result);
         return result;
+    },
+    ResolveSimpleArrayJsonToTreeJson: function (config, sourceJson, rootNodeId) {
+        alert("JsonUtility.ResolveSimpleArrayJsonToTreeJson 已停用");
     },
     SimpleCloneAttr: function (toObj, fromObj) {
         for (var attr in fromObj) {
@@ -675,18 +679,6 @@ var JsonUtility = {
     CloneSimple:function (source) {
         var newJson = jQuery.extend(true,{}, source);
         return newJson;
-        /*debugger;
-        var result={}
-        for(var key in source){
-            result[key]=source[key];
-            if(typeof(source[key])=="object"){
-                for(var keyl2 in source[key]){
-                    if()
-                    result[key][keyl2]=source[key][keyl2];
-                }
-            }
-        }
-        return result;*/
     },
     JsonToString:function (obj) {
         return JSON.stringify(obj);

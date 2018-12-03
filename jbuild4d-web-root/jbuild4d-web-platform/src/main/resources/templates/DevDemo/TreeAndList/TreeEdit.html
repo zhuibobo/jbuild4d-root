@@ -56,14 +56,14 @@
                     getDataUrl:"/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/GetDetailData",
                     saveDataUrl:"/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/SaveEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 formEntity: {
                     ddttId: "",
                     ddttValue: "",
                     ddttName: "",
                     ddttCreatetime: DateUtility.GetCurrentData(),
                     ddttDesc: "",
-                    ddttParentId: StringUtility.QueryString("parentId"),
+                    ddttParentId: BaseUtility.GetUrlParaValue("parentId"),
                     ddttStatus: "启用"
                 },
                 ruleValidate: {
@@ -74,7 +74,7 @@
                         {required: true, message: '【名称】不能空！', trigger: 'blur'}
                     ]
                 },
-                status: StringUtility.QueryString("op")
+                status: BaseUtility.GetUrlParaValue("op")
             },
             mounted:function () {
                 this.bindFormData();

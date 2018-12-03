@@ -226,7 +226,7 @@
                                 result.data=new Array();
                             }
                             result.data.push({dictId:sendData.groupId,dictKey:sendData.groupId,dictValue:sendData.groupName,dictText:sendData.groupName,dictStatus:"",dictIsSelected:"",dictCreateTime:""});
-                            var treeData=JsonUtility.ResolveSimpleArrayJsonToTreeJson({
+                            var treeData=JsonUtility.ParseArrayJsonToTreeJson({
                                 KeyField: "dictId",
                                 RelationField:"dictParentId",
                                 ChildFieldName:"Nodes"

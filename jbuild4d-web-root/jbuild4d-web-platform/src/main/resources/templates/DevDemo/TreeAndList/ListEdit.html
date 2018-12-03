@@ -65,7 +65,7 @@
                     getDataUrl:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/GetDetailData",
                     saveDataUrl:"/PlatForm/DevDemo/TreeAndList/DevDemoTLList/SaveEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 formEntity: {
                     ddtlId: "",
                     ddtlKey: "",
@@ -74,7 +74,7 @@
                     ddtlStatus:"启用",
                     ddtlCreatetime: DateUtility.GetCurrentData(),
                     ddtlDesc: "",
-                    ddtlGroupId:StringUtility.QueryString("groupId")
+                    ddtlGroupId:BaseUtility.GetUrlParaValue("groupId")
                 },
                 ruleValidate: {
                     ddtlValue: [
@@ -87,7 +87,7 @@
                         {required: true, message: '【ddtlKey】不能空！', trigger: 'blur'}
                     ]
                 },
-                status: StringUtility.QueryString("op")
+                status: BaseUtility.GetUrlParaValue("op")
             },
             methods: {
                 bindFormData:function(){

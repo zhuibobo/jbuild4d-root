@@ -90,7 +90,7 @@
                     getDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetEditTableData",
                     saveDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 useTemplateName:"GeneralTemplate",
                 currUserEntity:null,
                 templateFieldGroup:null,
@@ -233,8 +233,8 @@
                     TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
                 },
                 tableFieldsData:null,
-                status: StringUtility.QueryString("op"),
-                groupId:StringUtility.QueryString("groupId")
+                status: BaseUtility.GetUrlParaValue("op"),
+                groupId:BaseUtility.GetUrlParaValue("groupId")
             },
             mounted:function () {
                 this.getDataFromServerAndBind();

@@ -97,7 +97,7 @@
                 for (var i = 0; i < menuJsonSource.length; i++) {
                     menuJsonSource[i].selected = false;
                 }
-                app.menuJson = JsonUtility.ResolveSimpleArrayJsonToTreeJson({
+                app.menuJson = JsonUtility.ParseArrayJsonToTreeJson({
                     KeyField: "menuId",
                     RelationField: "menuParentId",
                     ChildFieldName: "items"

@@ -67,10 +67,10 @@
                     getDataUrl:"/PlatForm/DevDemo/DevDemoTreeTable/GetDetailData",
                     saveDataUrl:"/PlatForm/DevDemo/DevDemoTreeTable/SaveEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 formEntity: {
                     ddttId: '',
-                    ddttParentId:StringUtility.QueryString("parentId") ,
+                    ddttParentId:BaseUtility.GetUrlParaValue("parentId") ,
                     ddttKey: "",
                     ddttValue: "",
                     ddttName: "",
@@ -86,7 +86,7 @@
                         { required: true, message: '【字】不能空！', trigger: 'blur' }
                     ]
                 },
-                status: StringUtility.QueryString("op")
+                status: BaseUtility.GetUrlParaValue("op")
             },
             mounted:function () {
                 this.bindFormData();

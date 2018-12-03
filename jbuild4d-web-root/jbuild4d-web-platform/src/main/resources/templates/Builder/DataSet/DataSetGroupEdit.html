@@ -74,14 +74,14 @@
                     getDataUrl:"/PlatForm/Builder/DataSet/DataSetGroup/GetDetailData",
                     saveDataUrl:"/PlatForm/Builder/DataSet/DataSetGroup/SaveEdit"
                 },
-                recordId:StringUtility.QueryString("recordId"),
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
                 dataSetGroupEntity: {
                     dsGroupId: "",
                     dsGroupValue: "",
                     dsGroupText: "",
                     dsGroupCreateTime: DateUtility.GetCurrentData(),
                     dsGroupDesc: "",
-                    dsGroupParentId: StringUtility.QueryString("parentId"),
+                    dsGroupParentId: BaseUtility.GetUrlParaValue("parentId"),
                     dsGroupStatus: "启用",
                     dsGroupIssystem: "否",
                     dsGroupDelEnable: "是"
@@ -94,7 +94,7 @@
                         {required: true, message: '【名称】不能空！', trigger: 'blur'}
                     ]
                 },
-                status: StringUtility.QueryString("op")
+                status: BaseUtility.GetUrlParaValue("op")
             },
             mounted:function () {
                 this.bindFormData();
