@@ -32,7 +32,7 @@
         ServerResolve:"",
 
         Init:function () {
-            JBuild4D.FormDesign.InitControlSetting(this);
+            JBuild4D.FormDesign.Plugins.InitPluginSetting(this);
         }
     }
 }).Setting.Init();

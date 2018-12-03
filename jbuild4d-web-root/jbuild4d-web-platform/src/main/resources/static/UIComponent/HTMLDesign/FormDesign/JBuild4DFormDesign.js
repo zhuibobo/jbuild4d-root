@@ -1,5 +1,6 @@
 var JBuild4D={
     FormDesign:{
+        _CKEditorInst:null,
         Dialog:{
             DialogExecuteEditActionName:"Edit",
             DialogExecuteInsertActionName:"Insert",
@@ -13,6 +14,7 @@ var JBuild4D={
             }
         },
         Control:{
+            _$CKEditorSelectElem:null,
             DefaultProps:{
                 bindToField:{
                     tableId: "",
@@ -57,17 +59,17 @@ var JBuild4D={
                 }
             },
             SetSelectedElem:function(elemhtml){
-                this.$CKEditorSelectElem=$(elemhtml);
+                this._$CKEditorSelectElem=$(elemhtml);
             },
             GetSelectedElem:function(){
-                if(this.$CKEditorSelectElem.length>0) {
-                    return this.$CKEditorSelectElem;
+                if(this._$CKEditorSelectElem.length>0) {
+                    return this._$CKEditorSelectElem;
                 }
                 return null;
             },
             GetSelectedCKEditorElem:function(){
                 var id=this.GetSelectedElem().attr("id");
-                var element =JBuild4D.FormDesign.CKEditorInst.document.getById(id);
+                var element =JBuild4D.FormDesign.GetCKEditorInst().document.getById(id);
                 return element;
             },
             SerializePropsToElem:function(elem,props,controlSetting){
@@ -154,8 +156,8 @@ var JBuild4D={
                     if (controlSetting.IFrameExecuteActionName == JBuild4D.FormDesign.Dialog.DialogExecuteInsertActionName) {
                         var elem = CKEDITOR.dom.element.createFromHtml(html);
                         this.SerializePropsToElem(elem,controlProps,controlSetting);
-                        JBuild4D.FormDesign.CKEditorInst.insertElement(elem);
-                        JBuild4D.FormDesign.CKEditorInst.getSelection().selectElement(elem);
+                        JBuild4D.FormDesign.GetCKEditorInst().insertElement(elem);
+                        JBuild4D.FormDesign.GetCKEditorInst().getSelection().selectElement(elem);
                     }
                     else {
                         //debugger
@@ -184,27 +186,6 @@ var JBuild4D={
                 return returnResult;
             }
         },
-        CKEditorInst:null,
-        $CKEditorSelectElem:null,
-        CoverEmptyPluginProp:function(obj){
-            var coverObj=JBuild4D.FormDesign.PluginsDefConfig[obj.SingleName];
-            for(var prop in obj){
-                if(typeof(obj[prop])!="function"){
-                    if(obj[prop]==""||obj[prop]==null){
-                        if(coverObj[prop]){
-                            obj[prop]=coverObj[prop];
-                        }
-                    }
-                }
-            }
-        },
-        InitControlSetting:function(setting){
-            //使用默认值覆盖定义的空值
-            JBuild4D.FormDesign.CoverEmptyPluginProp(setting);
-            setting.DialogName=setting.SingleName;
-            setting.ToolbarCommand="JBuild4D.FormDesign.Plugins."+setting.SingleName;
-            setting.DialogSettingTitle=setting.ToolbarLabel+"Web控件";
-        },
         ImportCssToWysiwyg:function(sender,controlSetting,editor){
             if(controlSetting.DesignModalInputCss!=undefined&&controlSetting.DesignModalInputCss!=null&&controlSetting.DesignModalInputCss!="") {
                 var cssPath = sender.path + controlSetting.DesignModalInputCss;
@@ -216,16 +197,33 @@ var JBuild4D={
             }
         },
         Plugins:{
-
+            _CoverEmptyPluginProp: function(obj) {
+                var coverObj = JBuild4D.FormDesign.PluginsDefConfig[obj.SingleName];
+                for (var prop in obj) {
+                    if (typeof(obj[prop]) != "function") {
+                        if (obj[prop] == "" || obj[prop] == null) {
+                            if (coverObj[prop]) {
+                                obj[prop] = coverObj[prop];
+                            }
+                        }
+                    }
+                }
+            },
+            InitPluginSetting:function(setting){
+                //使用默认值覆盖定义的空值
+                this._CoverEmptyPluginProp(setting);
+                setting.DialogName=setting.SingleName;
+                setting.ToolbarCommand="JBuild4D.FormDesign.Plugins."+setting.SingleName;
+                setting.DialogSettingTitle=setting.ToolbarLabel+"Web控件";
+            }
         },
         PluginsDefConfig:{
 
         },
+        GetCKEditorInst:function(){
+            return this._CKEditorInst;
+        },
         InitializeCKEditor:function(textAreaElemId,pluginsConfig,loadCompletedFunc) {
-            //注册扩展组件
-            /*CKEDITOR.plugins.addExternal('FDCT_Div_Wraper', '../../HTMLDesign/FormDesign/Plugins//FDCT_Div_Wraper/',
-                "FDCT_Div_WraperPlugin.js");*/
-            //debugger;
             var extraPlugins=new Array();
             for(var i=0;i<pluginsConfig.length;i++) {
                 var singlePluginConfig = pluginsConfig[i];
@@ -267,31 +265,28 @@ var JBuild4D={
 
             //注册在编辑器中粘贴的处理事件
             CKEDITOR.instances.html_design.on("paste", function (event) {
-                //event.data.dataValue="1";
-                //尝试重新设置粘贴内容的id值
                 try {
-                    //LogUtil.WriteLog(event.data.dataValue);
-                    var copytext = event.data.dataValue;
+                    alert("暂时不支持!");
+                    var copyData = event.data.dataValue;
 
-                    var $Content = $(copytext);
-                    $Content.attr("id", "ct_copy_"+StringLib.RTimestamp());
-                    $Content.find("input").each(function () {
-                        $(this).attr("id", "ct_copy_"+StringLib.RTimestamp());
+                    var $copyData = $(copyData);
+                    $copyData.attr("id", "ct_copy_"+StringUtility.Timestamp());
+                    $copyData.find("input").each(function () {
+                        $(this).attr("id", "ct_copy_"+StringUtility.Timestamp());
                     });
-                    var newhtml = $Content.outerHTML();
-                    if (typeof(newhtml) == "string") { //修复bug，在拷贝的是文本时，newhtml会被转换为jquery对象
-                        event.data.dataValue = newhtml;
+                    var newHtml = $copyData.outerHTML();
+                    if (typeof(newHtml) == "string") { //修复bug，在拷贝的是文本时，newhtml会被转换为jquery对象
+                        event.data.dataValue = newHtml;
                     }
                 }
                 catch (e) {
-                    //如果设置失败,则输出操作消息
+                    alert("粘贴操作失败!")
                 }
             });
 
-            this.CKEditorInst = CKEDITOR.instances.html_design;
+            this._CKEditorInst = CKEDITOR.instances.html_design;
 
             CKEDITOR.on('instanceReady', function (e) {
-                //alert(e.editor.name + '加载完毕！')
                 if(typeof(loadCompletedFunc)=="function"){
                     loadCompletedFunc();
                 }
