@@ -78,13 +78,19 @@ var EditTable_SelectDefaultValue={
         var val = editStausHtmlElem.val();
         return EditTableValidate.Validate(val,template);
     },
-    SetSelectResultValue:function (defaultData) {
+    setSelectEnvVariableResultValue:function (defaultData) {
         var $inputTxt=window.$Temp$Inputtxt;
         if(null != defaultData){
             $inputTxt.attr("fieldDefaultType",defaultData.Type);
             $inputTxt.attr("fieldDefaultValue",defaultData.Value);
             $inputTxt.attr("fieldDefaultText",defaultData.Text);
             $inputTxt.val(JBuild4DSelectView.SelectEnvVariable.formatText(defaultData.Type,defaultData.Text));
+        }
+        else{
+            $inputTxt.attr("fieldDefaultType","");
+            $inputTxt.attr("fieldDefaultValue","");
+            $inputTxt.attr("fieldDefaultText","");
+            $inputTxt.val("");
         }
         //console.log(value);
     }

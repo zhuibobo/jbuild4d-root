@@ -2,7 +2,7 @@ var JBuild4DSelectView={
     SelectEnvVariable:{
         URL:"/PlatForm/SelectView/SelectEnvVariable/Select",
         beginSelect:function (instanceName) {
-            var url=this.URL+"?instanceName="+instanceName;
+            var url=BaseUtility.BuildAction(this.URL, {"instanceName": instanceName});
             DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "选择变量",modal:true}, 2);
         },
         beginSelectInFrame:function(opener,instanceName,option){
