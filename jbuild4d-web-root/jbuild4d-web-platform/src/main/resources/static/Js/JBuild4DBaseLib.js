@@ -1357,8 +1357,18 @@ var ListPageUtility={
     },
     IViewTableRenderer:{
         ToDateYYYY_MM_DD:function (h,datetime) {
+            //debugger;
             var date=new Date(datetime);
             var dateStr=DateUtility.Format(date,'yyyy-MM-dd');
+            //var dateStr=datetime.split(" ")[0];
+            return h('div',dateStr);
+        },
+        StringToDateYYYY_MM_DD:function (h,datetime) {
+            //debugger;
+            //debugger;
+            //var date=new Date(datetime);
+            //var dateStr=DateUtility.Format(date,'yyyy-MM-dd');
+            var dateStr=datetime.split(" ")[0];
             return h('div',dateStr);
         },
         ToStatusEnable:function (h,status) {
