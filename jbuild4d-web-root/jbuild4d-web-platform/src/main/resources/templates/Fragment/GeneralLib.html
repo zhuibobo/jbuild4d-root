@@ -9,7 +9,7 @@
     <script type="text/javascript" th:src="@{/Js/JBuild4DBaseLib.js(urlts=${urlts})}"></script>
     <script type="text/javascript" th:src="@{/Js/JBuild4DSelectViewLib.js(urlts=${urlts})}"></script>
     <script type="text/javascript" th:src="@{/Js/VUE-2.5.16/vue.js}"></script>
-    <script src="//cdn.polyfill.io/v1/polyfill.min.js"></script>
+    <!--<script src="//cdn.polyfill.io/v1/polyfill.min.js"></script>-->
     <!--<script type="text/javascript" th:src="@{/Js/axios.js}"></script>-->
 </th:block>
 <th:block th:fragment="IViewLib" th:with="urlts=${'V3'}" >
@@ -32,7 +32,6 @@
 </th:block>
 <th:block th:fragment="EditTableLib" th:with="urlts=${'V1'}" >
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/EditTable.js}"></script>
-
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_CheckBox.js}"></script>
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_Label.js}"></script>
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_Radio.js}"></script>
