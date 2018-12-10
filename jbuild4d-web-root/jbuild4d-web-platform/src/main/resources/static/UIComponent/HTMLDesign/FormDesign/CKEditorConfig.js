@@ -27,8 +27,8 @@ CKEDITOR.editorConfig = function(config) {
         { name: 'tools', groups: [ 'tools' ] },
         { name: 'others', groups: [ 'others' ] },
         { name: 'about', groups: [ 'about' ] },
-        { name: 'FDCT_Container', groups: [] },
         { name: 'FDCT_Template', groups: [] },
+        { name: 'FDCT_Container', groups: [] },
         '/',
         { name: 'FDCT_Simple', groups: [] }
     ];

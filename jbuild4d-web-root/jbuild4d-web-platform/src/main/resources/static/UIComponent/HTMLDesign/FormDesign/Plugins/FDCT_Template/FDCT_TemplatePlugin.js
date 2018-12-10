@@ -15,5 +15,4 @@
             JBuild4D.FormDesign.Plugins.RegGeneralPluginToEditor(editor, this.path, JBuild4D.FormDesign.Plugins[pluginName].Setting,addToEditor);
         }
     });
-})("FDCT_TextBox");
-
+})("FDCT_Template");
