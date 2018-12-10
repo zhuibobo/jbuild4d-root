@@ -23,8 +23,8 @@
     <div style="position: absolute;right: 10px;top: 10px;background-color: #00B83F">
         按钮
     </div>
-    <tabs>
-        <tab-pane label="Info">
+    <tabs @on-click="tabChange">
+        <tab-pane name="Info" label="Info">
             <div style="width: 1024px;margin: auto">
                 <div style="float: left;width: 500px;height: 600px;border: #2d8cf0 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">表单信息</divider>
@@ -81,7 +81,7 @@
                 </div>
             </div>
         </tab-pane>
-        <tab-pane label="Design">
+        <tab-pane name="Design" label="Design">
             <div class="form-design-wraper">
                 <div class="left-wraper">
                     <textarea name="html_design" id="html_design">
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </tab-pane>
-        <tab-pane label="HTML">
+        <tab-pane name="HTML" label="HTML">
             <div class="html-design-wraper">
                 <div class="left-wraper">
                     <textarea id="TextAreaHTMLEditor" style="height: 99%"></textarea>
@@ -116,7 +116,7 @@
                 </div>
             </div>
         </tab-pane>
-        <tab-pane label="JS">
+        <tab-pane name="JS" label="JS">
             <div class="js-design-wraper">
                 <div class="left-wraper">
                     <textarea id="TextAreaJsEidtor"></textarea>
@@ -133,7 +133,7 @@
                 </div>
             </div>
         </tab-pane>
-        <tab-pane label="Be Referred"></tab-pane>
+        <tab-pane name="Be Referred" label="Be Referred"></tab-pane>
     </tabs>
 </div>
 <script>
@@ -254,7 +254,7 @@
                     JBuild4D.FormDesign.InitializeCKEditor('html_design',result.data,function () {
 
                     });
-                    JBuild4D.FormDesign.InitializeCodeDesign();
+                    JBuild4D.FormDesign.InitializeHTMLCodeDesign();
                 },"json");
             },
             bindTableTree:function () {
@@ -283,6 +283,15 @@
                     this.formResourceEntity.formId=BaseUtility.GetUrlParaValue("recordId");
                     this.formResourceEntity.formUpdater=this.currUserEntity.userName;
                     //this.loadData(this.datasetEntity.dsId,this.status);
+                }
+            },
+            tabChange:function (name) {
+                if(name=="HTML"){
+                    var html=JBuild4D.FormDesign.GetCKEditorHTML();
+                    JBuild4D.FormDesign.SetHTMLEditorHTML(html)
+                }
+                else if(name=="Design"){
+
                 }
             }
         }

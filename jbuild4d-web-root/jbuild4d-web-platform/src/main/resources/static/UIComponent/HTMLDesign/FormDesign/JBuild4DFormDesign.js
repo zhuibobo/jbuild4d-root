@@ -1,6 +1,5 @@
 var JBuild4D={
     FormDesign:{
-        _CKEditorInst:null,
         Dialog:{
             DialogExecuteEditActionName:"Edit",
             DialogExecuteInsertActionName:"Insert",
@@ -296,8 +295,14 @@ var JBuild4D={
         PluginsDefConfig:{
 
         },
+
+        //CKEditor
+        _CKEditorInst:null,
         GetCKEditorInst:function(){
             return this._CKEditorInst;
+        },
+        GetCKEditorHTML:function(){
+            return this._CKEditorInst.getData();
         },
         InitializeCKEditor:function(textAreaElemId,pluginsConfig,loadCompletedFunc) {
             var extraPlugins=new Array();
@@ -368,7 +373,21 @@ var JBuild4D={
                 }
             });
         },
-        InitializeCodeDesign:function () {
+        //HTML
+        _HTMLEditorInst:null,
+        GetHTMLEditorInst:function(){
+            return this._HTMLEditorInst;
+        },
+        SetHTMLEditorHTML:function(html){
+            debugger;
+            if(!StringUtility.IsNullOrEmpty(html)) {
+                this.GetHTMLEditorInst().setValue(html);
+            }
+        },
+        GetHtmlEditorHTML:function(){
+            this.GetHTMLEditorInst().getValue();
+        },
+        InitializeHTMLCodeDesign:function () {
             var mixedMode = {
                 name: "htmlmixed",
                 scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
@@ -376,14 +395,14 @@ var JBuild4D={
                     {matches: /(text|application)\/(x-)?vb(a|script)/i,
                         mode: "vbscript"}]
             };
-            var editor = CodeMirror.fromTextArea(document.getElementById("TextAreaHTMLEditor"), {
+            this._HTMLEditorInst = CodeMirror.fromTextArea(document.getElementById("TextAreaHTMLEditor"), {
                 mode: mixedMode,
                 selectionPointer: true,
                 theme: "monokai"
             });
             $(".CodeMirror").height(PageStyleUtility.GetWindowHeight()-60);
 
-            CodeMirror.fromTextArea($("#TextAreaJsEidtor")[0], {
+            /*this._HTMLEditorInst=CodeMirror.fromTextArea($("#TextAreaJsEidtor")[0], {
                 mode: "javascript",
                 lineNumbers: true,
                 lineWrapping: true,
@@ -395,7 +414,8 @@ var JBuild4D={
                 foldGutter: true,
                 theme: "monokai",
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-            });
+            });*/
         }
+        //Js
     }
 }
