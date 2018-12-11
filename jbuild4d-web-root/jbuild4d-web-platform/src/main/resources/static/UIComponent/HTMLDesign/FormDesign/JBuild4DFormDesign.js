@@ -402,7 +402,11 @@ var JBuild4D={
             this._HTMLEditorInst = CodeMirror.fromTextArea(document.getElementById("TextAreaHTMLEditor"), {
                 mode: mixedMode,
                 selectionPointer: true,
-                theme: "monokai"
+                theme: "monokai",
+                foldGutter: true,
+                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+                lineNumbers: true,
+                lineWrapping: true
             });
             $(".CodeMirror").height(PageStyleUtility.GetWindowHeight()-60);
 

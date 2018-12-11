@@ -68,6 +68,7 @@
     <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/markdown-fold.js}"></script>
     <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/comment-fold.js}"></script>
     <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/util/formatting.js}"></script>
+    <link rel="stylesheet" th:href="@{/UIComponent/CodeMirror-5.39.2/addon/fold/foldgutter.css}" />
 </th:block>
 <th:block th:fragment="ThemesLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/FrameStyle.css(theme=${theme},urlts=${urlts})}" />
