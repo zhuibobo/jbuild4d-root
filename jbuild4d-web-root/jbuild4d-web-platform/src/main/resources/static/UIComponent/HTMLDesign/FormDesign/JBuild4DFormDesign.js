@@ -379,9 +379,13 @@ var JBuild4D={
             return this._HTMLEditorInst;
         },
         SetHTMLEditorHTML:function(html){
-            debugger;
+            //debugger;
             if(!StringUtility.IsNullOrEmpty(html)) {
                 this.GetHTMLEditorInst().setValue(html);
+                //this.GetHTMLEditorInst().commands["selectAll"](myCodeMirror);
+                CodeMirror.commands["selectAll"](this.GetHTMLEditorInst());
+                var range = { from: this.GetHTMLEditorInst().getCursor(true), to: this.GetHTMLEditorInst().getCursor(false) };;
+                this.GetHTMLEditorInst().autoFormatRange(range.from, range.to);
             }
         },
         GetHtmlEditorHTML:function(){

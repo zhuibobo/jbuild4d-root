@@ -58,7 +58,16 @@
     <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/mode/htmlmixed/htmlmixed.js}"></script>
 </th:block>
 <th:block th:fragment="CodeMirrorJS" th:with="urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/mode/javascript/javascript.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/javascript/javascript.js}"></script>
+</th:block>
+<th:block th:fragment="CodeMirrorFold" th:with="urlts=${'V1'}" >
+    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/foldcode.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/foldgutter.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/brace-fold.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/xml-fold.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/markdown-fold.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/comment-fold.js}"></script>
+    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/util/formatting.js}"></script>
 </th:block>
 <th:block th:fragment="ThemesLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/FrameStyle.css(theme=${theme},urlts=${urlts})}" />

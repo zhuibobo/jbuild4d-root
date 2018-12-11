@@ -10,6 +10,7 @@
     <th:block th:replace="Fragment/GeneralLib::FormDesignLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::CodeMirror"></th:block>
     <th:block th:replace="Fragment/GeneralLib::CodeMirrorHTML"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::CodeMirrorFold"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
     <style>
@@ -288,7 +289,7 @@
             tabChange:function (name) {
                 if(name=="HTML"){
                     var html=JBuild4D.FormDesign.GetCKEditorHTML();
-                    JBuild4D.FormDesign.SetHTMLEditorHTML(html)
+                    JBuild4D.FormDesign.SetHTMLEditorHTML("<div><div><div><div>ssssssssss</div></div></div></div>");
                 }
                 else if(name=="Design"){
 
