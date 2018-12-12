@@ -27,56 +27,27 @@
     <tabs @on-click="tabChange">
         <tab-pane name="Info" label="Info">
             <div style="width: 1024px;margin: auto">
-                <div style="float: left;width: 500px;height: 600px;border: #2d8cf0 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
+                <div style="width: 1024px;height: 560px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">表单信息</divider>
                     <i-form  :model="formResourceEntity" :rules="ruleValidate" :label-width="110">
                         <form-item label="表单名称：" prop="formName">
-                            <i-input v-model="formResourceEntity.formName"></i-input>
-                        </form-item>
-                        <form-item label="唯一名称：">
-                            <i-input v-model="formResourceEntity.formSingleName"></i-input>
-                        </form-item>
-                        <form-item label="绑定主表标题：" prop="formMainTableCaption">
-                            <i-input v-model="formResourceEntity.formMainTableCaption" readonly></i-input>
-                        </form-item>
-                        <form-item label="绑定主表名称：" prop="formMainTableName">
-                            <i-input v-model="formResourceEntity.formMainTableName" readonly></i-input>
-                        </form-item>
-                        <form-item label="创建人：">
                             <row>
-                                <i-col span="6">
-                                    <i-input v-model="formResourceEntity.formCreater"></i-input>
+                                <i-col span="9">
+                                    <i-input v-model="formResourceEntity.formName"></i-input>
                                 </i-col>
-                                <i-col span="8" style="text-align: center">创建时间：</i-col>
-                                <i-col span="10">
-                                    <form-item>
-                                        <date-picker type="date" placeholder="选择创建时间" v-model="formResourceEntity.formCreateTime" disabled
-                                                     readonly style="width: 100%"></date-picker>
-                                    </form-item>
+                                <i-col span="6" style="text-align: center">唯一名称：</i-col>
+                                <i-col span="9">
+                                    <i-input v-model="formResourceEntity.formSingleName"></i-input>
                                 </i-col>
                             </row>
                         </form-item>
-                        <form-item label="修改人：">
-                            <row>
-                                <i-col span="6">
-                                    <i-input v-model="formResourceEntity.formUpdater"></i-input>
-                                </i-col>
-                                <i-col span="8" style="text-align: center">修改时间：</i-col>
-                                <i-col span="10">
-                                    <form-item>
-                                        <date-picker type="date" placeholder="选择创建时间" v-model="formResourceEntity.formUpdateTime" disabled
-                                                     readonly style="width: 100%"></date-picker>
-                                    </form-item>
-                                </i-col>
-                            </row>
-                        </form-item>
-                        <form-item label="备注：">
-                            <i-input v-model="formResourceEntity.formDesc" type="textarea" :autosize="{minRows: 7,maxRows: 7}"></i-input>
+                        <form-item label="备注：" style="margin-bottom: 12px">
+                            <i-input v-model="formResourceEntity.formDesc" type="textarea" :autosize="{minRows: 2,maxRows: 2}"></i-input>
                         </form-item>
                     </i-form>
+                    <divider orientation="left" :dashed="true" style="font-size: 12px">数据关系关联设置</divider>
                 </div>
                 <div style="float: right;width: 500px;height: 600px;border: #2d8cf0 1px solid;border-radius: 4px;padding: 10px">
-                    <divider orientation="left" :dashed="true" style="font-size: 12px">数据关系关联设置</divider>
                     <input type="text" id="txtSearchTableTree" style="width: 100%;height: 32px;margin-top: 2px" />
                     <ul id="tableZTreeUL" class="ztree"></ul>
                 </div>
