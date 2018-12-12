@@ -42,7 +42,7 @@ public class FormResourceEntity {
     //FORM_ISSYSTEM
     private String formIssystem;
 
-    //FORM_ORDER_NUM,"开发测试表1"
+    //FORM_ORDER_NUM
     private Integer formOrderNum;
 
     //FORM_DESC
@@ -66,13 +66,16 @@ public class FormResourceEntity {
     //FORM_MAIN_TABLE_CAPTION
     private String formMainTableCaption;
 
+    //FORM_DATA_RELATION
+    private String formDataRelation;
+
     //FORM_IS_TEMPLATE
     private String formIsTemplate;
 
     //FORM_CONTENT_URL
     private String formContentUrl;
 
-    public FormResourceEntity(String formId, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formIsTemplate, String formContentUrl) {
+    public FormResourceEntity(String formId, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formDataRelation, String formIsTemplate, String formContentUrl) {
         this.formId = formId;
         this.formName = formName;
         this.formSingleName = formSingleName;
@@ -90,6 +93,7 @@ public class FormResourceEntity {
         this.formOrganName = formOrganName;
         this.formMainTableName = formMainTableName;
         this.formMainTableCaption = formMainTableCaption;
+        this.formDataRelation = formDataRelation;
         this.formIsTemplate = formIsTemplate;
         this.formContentUrl = formContentUrl;
     }
@@ -232,6 +236,14 @@ public class FormResourceEntity {
 
     public void setFormMainTableCaption(String formMainTableCaption) {
         this.formMainTableCaption = formMainTableCaption == null ? null : formMainTableCaption.trim();
+    }
+
+    public String getFormDataRelation() {
+        return formDataRelation;
+    }
+
+    public void setFormDataRelation(String formDataRelation) {
+        this.formDataRelation = formDataRelation == null ? null : formDataRelation.trim();
     }
 
     public String getFormIsTemplate() {

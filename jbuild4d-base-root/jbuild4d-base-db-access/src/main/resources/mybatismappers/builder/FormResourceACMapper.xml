@@ -20,6 +20,7 @@
             <arg column="FORM_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_MAIN_TABLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_MAIN_TABLE_CAPTION" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_DATA_RELATION" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_IS_TEMPLATE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_CONTENT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
@@ -43,6 +44,7 @@
             <arg column="FORM_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_MAIN_TABLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_MAIN_TABLE_CAPTION" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_DATA_RELATION" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_IS_TEMPLATE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_CONTENT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_IS_RESOLVE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
@@ -57,7 +59,7 @@
         FORM_ID, FORM_NAME, FORM_SINGLE_NAME, FORM_CREATE_TIME, FORM_CREATER, FORM_UPDATE_TIME,
         FORM_UPDATER, FORM_TYPE, FORM_ISSYSTEM, FORM_ORDER_NUM, FORM_DESC, FORM_MODULE_ID,
         FORM_STATUS, FORM_ORGAN_ID, FORM_ORGAN_NAME, FORM_MAIN_TABLE_NAME, FORM_MAIN_TABLE_CAPTION,
-        FORM_IS_TEMPLATE, FORM_CONTENT_URL
+        FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_CONTENT_URL
     </sql>
     <sql id="Blob_Column_List">
         FORM_IS_RESOLVE, FORM_HTML_SOURCE, FORM_HTML_RESOLVE, FORM_JS_CONTENT, FORM_CSS_CONTENT,
@@ -82,20 +84,22 @@
                                         FORM_ORDER_NUM, FORM_DESC, FORM_MODULE_ID,
                                         FORM_STATUS, FORM_ORGAN_ID, FORM_ORGAN_NAME,
                                         FORM_MAIN_TABLE_NAME, FORM_MAIN_TABLE_CAPTION,
-                                        FORM_IS_TEMPLATE, FORM_CONTENT_URL, FORM_IS_RESOLVE,
-                                        FORM_HTML_SOURCE, FORM_HTML_RESOLVE,
-                                        FORM_JS_CONTENT, FORM_CSS_CONTENT,
-                                        FORM_CONFIG_CONTENT)
+                                        FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_CONTENT_URL,
+                                        FORM_IS_RESOLVE, FORM_HTML_SOURCE,
+                                        FORM_HTML_RESOLVE, FORM_JS_CONTENT,
+                                        FORM_CSS_CONTENT, FORM_CONFIG_CONTENT
+                )
         values (#{formId,jdbcType=VARCHAR}, #{formName,jdbcType=VARCHAR}, #{formSingleName,jdbcType=VARCHAR},
                 #{formCreateTime,jdbcType=TIMESTAMP}, #{formCreater,jdbcType=VARCHAR}, #{formUpdateTime,jdbcType=TIMESTAMP},
                 #{formUpdater,jdbcType=VARCHAR}, #{formType,jdbcType=VARCHAR}, #{formIssystem,jdbcType=VARCHAR},
                 #{formOrderNum,jdbcType=INTEGER}, #{formDesc,jdbcType=VARCHAR}, #{formModuleId,jdbcType=VARCHAR},
                 #{formStatus,jdbcType=VARCHAR}, #{formOrganId,jdbcType=VARCHAR}, #{formOrganName,jdbcType=VARCHAR},
                 #{formMainTableName,jdbcType=VARCHAR}, #{formMainTableCaption,jdbcType=VARCHAR},
-                #{formIsTemplate,jdbcType=VARCHAR}, #{formContentUrl,jdbcType=VARCHAR}, #{formIsResolve,jdbcType=LONGVARCHAR},
-                #{formHtmlSource,jdbcType=LONGVARCHAR}, #{formHtmlResolve,jdbcType=LONGVARCHAR},
-                #{formJsContent,jdbcType=LONGVARCHAR}, #{formCssContent,jdbcType=LONGVARCHAR},
-                #{formConfigContent,jdbcType=LONGVARCHAR})
+                #{formDataRelation,jdbcType=VARCHAR}, #{formIsTemplate,jdbcType=VARCHAR}, #{formContentUrl,jdbcType=VARCHAR},
+                #{formIsResolve,jdbcType=LONGVARCHAR}, #{formHtmlSource,jdbcType=LONGVARCHAR},
+                #{formHtmlResolve,jdbcType=LONGVARCHAR}, #{formJsContent,jdbcType=LONGVARCHAR},
+                #{formCssContent,jdbcType=LONGVARCHAR}, #{formConfigContent,jdbcType=LONGVARCHAR}
+                       )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
         insert into TB4D_FORM_RESOURCE
@@ -150,6 +154,9 @@
             </if>
             <if test="formMainTableCaption != null">
                 FORM_MAIN_TABLE_CAPTION,
+            </if>
+            <if test="formDataRelation != null">
+                FORM_DATA_RELATION,
             </if>
             <if test="formIsTemplate != null">
                 FORM_IS_TEMPLATE,
@@ -228,6 +235,9 @@
             <if test="formMainTableCaption != null">
                 #{formMainTableCaption,jdbcType=VARCHAR},
             </if>
+            <if test="formDataRelation != null">
+                #{formDataRelation,jdbcType=VARCHAR},
+            </if>
             <if test="formIsTemplate != null">
                 #{formIsTemplate,jdbcType=VARCHAR},
             </if>
@@ -305,6 +315,9 @@
             <if test="formMainTableCaption != null">
                 FORM_MAIN_TABLE_CAPTION = #{formMainTableCaption,jdbcType=VARCHAR},
             </if>
+            <if test="formDataRelation != null">
+                FORM_DATA_RELATION = #{formDataRelation,jdbcType=VARCHAR},
+            </if>
             <if test="formIsTemplate != null">
                 FORM_IS_TEMPLATE = #{formIsTemplate,jdbcType=VARCHAR},
             </if>
@@ -350,6 +363,7 @@
             FORM_ORGAN_NAME = #{formOrganName,jdbcType=VARCHAR},
             FORM_MAIN_TABLE_NAME = #{formMainTableName,jdbcType=VARCHAR},
             FORM_MAIN_TABLE_CAPTION = #{formMainTableCaption,jdbcType=VARCHAR},
+            FORM_DATA_RELATION = #{formDataRelation,jdbcType=VARCHAR},
             FORM_IS_TEMPLATE = #{formIsTemplate,jdbcType=VARCHAR},
             FORM_CONTENT_URL = #{formContentUrl,jdbcType=VARCHAR},
             FORM_IS_RESOLVE = #{formIsResolve,jdbcType=LONGVARCHAR},
@@ -378,6 +392,7 @@
             FORM_ORGAN_NAME = #{formOrganName,jdbcType=VARCHAR},
             FORM_MAIN_TABLE_NAME = #{formMainTableName,jdbcType=VARCHAR},
             FORM_MAIN_TABLE_CAPTION = #{formMainTableCaption,jdbcType=VARCHAR},
+            FORM_DATA_RELATION = #{formDataRelation,jdbcType=VARCHAR},
             FORM_IS_TEMPLATE = #{formIsTemplate,jdbcType=VARCHAR},
             FORM_CONTENT_URL = #{formContentUrl,jdbcType=VARCHAR}
         where FORM_ID = #{formId,jdbcType=VARCHAR}
