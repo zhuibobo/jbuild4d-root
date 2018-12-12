@@ -32,11 +32,11 @@
                     <i-form  :model="formResourceEntity" :rules="ruleValidate" :label-width="110">
                         <form-item label="表单名称：" prop="formName">
                             <row>
-                                <i-col span="9">
+                                <i-col span="10">
                                     <i-input v-model="formResourceEntity.formName"></i-input>
                                 </i-col>
-                                <i-col span="6" style="text-align: center">唯一名称：</i-col>
-                                <i-col span="9">
+                                <i-col span="4" style="text-align: center">唯一名称：</i-col>
+                                <i-col span="10">
                                     <i-input v-model="formResourceEntity.formSingleName"></i-input>
                                 </i-col>
                             </row>
@@ -46,10 +46,18 @@
                         </form-item>
                     </i-form>
                     <divider orientation="left" :dashed="true" style="font-size: 12px">数据关系关联设置</divider>
-                </div>
-                <div style="float: right;width: 500px;height: 600px;border: #2d8cf0 1px solid;border-radius: 4px;padding: 10px">
-                    <input type="text" id="txtSearchTableTree" style="width: 100%;height: 32px;margin-top: 2px" />
-                    <ul id="tableZTreeUL" class="ztree"></ul>
+                    <div style="float: left;width: 300px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">
+                        <button-group shape="circle" style="margin: auto">
+                            <i-button type="success">&nbsp;&nbsp;添加&nbsp;&nbsp;</i-button>
+                            <i-button>&nbsp;删除&nbsp;</i-button>
+                            <i-button>序列化</i-button>
+                            <i-button>反序列化</i-button>
+                        </button-group>
+                        <ul id="tableZTreeUL" class="ztree"></ul>
+                    </div>
+                    <div style="float: right;width: 680px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">
+
+                    </div>
                 </div>
             </div>
         </tab-pane>
