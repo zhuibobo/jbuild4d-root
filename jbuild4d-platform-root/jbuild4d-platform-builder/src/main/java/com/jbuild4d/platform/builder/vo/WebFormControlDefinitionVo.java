@@ -14,6 +14,16 @@ public class WebFormControlDefinitionVo {
     private String clientResolveJs;
     private String desc;
     private String config;
+    private String isJBuild4DData;
+
+    public String getIsJBuild4DData() {
+        return isJBuild4DData;
+    }
+
+    public void setIsJBuild4DData(String isJBuild4DData) {
+        this.isJBuild4DData = isJBuild4DData;
+    }
+
     private int dialogWidth;
     private int dialogHeight;
 
@@ -109,6 +119,7 @@ public class WebFormControlDefinitionVo {
         vo.setDialogHeight(Integer.parseInt(XMLUtility.getAttribute(node,"DialogHeight")));
         vo.setDesc(XMLUtility.parseForString(node,"Desc"));
         vo.setConfig(XMLUtility.parseForString(node,"Config"));
+        vo.setIsJBuild4DData(XMLUtility.getAttribute(node,"IsJBuild4DData"));
         return vo;
     }
 }

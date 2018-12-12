@@ -10,7 +10,18 @@
     </script>
     <style>
         .table-width-wraper-1024{
-            width: 740px;
+            width: 720px;
+        }
+        .templateWraper{
+            padding: 10px;
+            cursor: pointer;
+            border: #ffffff 1px solid;
+        }
+        .templateWraper:hover{
+            border: #1DC116 1px solid;
+        }
+        .templateWraper-selected{
+            border: #1DC116 1px solid;
         }
     </style>
 </head>
@@ -22,7 +33,7 @@
                     <panel name="1">
                         页宽:1024,6列
                         <div slot="content">
-                            <div name="template">
+                            <div name="template" class="templateWraper" @click="selectTemplate($event)">
                                 <div class="table-width-wraper-1024">
                                     <table class="wathet-blue-table" cellpadding="0" cellspacing="0" border="0">
                                         <colgroup>
@@ -35,12 +46,33 @@
                                         </colgroup>
                                         <tbody>
                                             <tr>
-                                                <td class="label">1</td>
-                                                <td>2</td>
-                                                <td class="label">3</td>
-                                                <td>4</td>
-                                                <td class="label">5</td>
-                                                <td>6</td>
+                                                <td height="60" colspan="6">
+                                                    <h3 class="title">请输入表单名称</h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -51,20 +83,55 @@
                     <panel name="2">
                         页宽:640,4列
                         <div slot="content">
-                            <div>
-                                <table class="wathet-blue-table">
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </table>
+                            <div name="template" class="templateWraper">
+                                <div class="table-width-wraper-640">
+                                    <table class="wathet-blue-table" cellpadding="0" cellspacing="0" border="0">
+                                        <colgroup>
+                                            <col style="width: 10%" />
+                                            <col style="width: 23%" />
+                                            <col style="width: 10%" />
+                                            <col style="width: 23%" />
+                                            <col style="width: 10%" />
+                                            <col style="width: 24%" />
+                                        </colgroup>
+                                        <tbody>
+                                        <tr>
+                                            <td height="60" colspan="6">
+                                                <h3 class="title">请输入表单名称</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </panel>
                     <panel name="3">
-
+                        页宽:1024,6列,头像上传
                     </panel>
                 </collapse>
             </tab-pane>
@@ -82,15 +149,25 @@
         var DialogApp=new Vue({
             el:"#dialogApp",
             data: {
+                resultHtml:""
             },
             mounted:function () {
 
             },
             methods: {
+                selectTemplate:function(event){
+                    var $sender=$(event.currentTarget);
+                    $sender.addClass("templateWraper-selected");
+                    this.resultHtml=$sender.html();
+                },
                 ready:function(actionName){
                 },
                 getControlProps:function () {
                     var result = {
+                        resultHtml:this.resultHtml,
+                        baseInfo:{
+                            serialize:"false"
+                        }
                     }
                     return JBuild4D.FormDesign.Control.ValidateSerializeControlDialogCompletedEnable(result);
                 },

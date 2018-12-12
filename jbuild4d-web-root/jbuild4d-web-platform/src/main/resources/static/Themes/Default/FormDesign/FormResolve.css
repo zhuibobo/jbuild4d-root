@@ -1,44 +1,33 @@
+
+
 .table-width-wraper-1024{
     width: 1024px;
+    margin: auto;
 }
 
 .table-width-wraper-640{
     width: 640px;
+    margin: auto;
 }
 
 .wathet-blue-table {
     margin: 5px 0;
     border-collapse: collapse;
     font-size: 12px;
-    /*table-layout: fixed;*/
     width: 100%;
 }
+
+.wathet-blue-table .title{
+    color:#2e6e9e;
+    text-align: center;
+    font-size: 16px;
+}
+
 .wathet-blue-table tr {
-    /* border-bottom: 1px solid #c5d9fb;*/
 }
 .wathet-blue-table tr td, .wathet-blue-table tr th{
     padding: 6px;
     border: 1px solid #c5dbee;
-}
-
-.wathet-blue-table>tbody>tr:first-child>td:first-child
-{
-    border-top-left-radius: 6px;
-}
-
-.wathet-blue-table>tbody>tr:first-child>td:last-child
-{
-    border-top-right-radius: 6px;
-}
-
-.wathet-blue-table>tbody>tr:last-child>td:first-child
-{
-    border-bottom-left-radius: 6px;
-}
-
-.wathet-blue-table>tbody>tr:last-child>td:last-child
-{
-    border-bottom-right-radius: 6px;
 }
 
 .wathet-blue-table tr th{

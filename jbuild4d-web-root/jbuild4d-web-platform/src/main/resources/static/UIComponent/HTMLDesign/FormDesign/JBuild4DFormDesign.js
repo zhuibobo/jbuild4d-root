@@ -76,6 +76,7 @@ var JBuild4D={
                 elem.setAttribute("singlename",controlSetting.SingleName);
                 elem.setAttribute("clientresolve",controlSetting.ClientResolve);
                 elem.setAttribute("serverresolve",controlSetting.ServerResolve);
+                elem.setAttribute("is_jbuild4d_data",controlSetting.IsJBuild4DData);
 
                 if(props["baseInfo"]){
                     for (var key in props["baseInfo"]) {
@@ -197,7 +198,8 @@ var JBuild4D={
         },
         Plugins:{
             _CoverEmptyPluginProp: function(obj) {
-                var coverObj = JBuild4D.FormDesign.PluginsDefConfig[obj.SingleName];
+                var coverObj = JBuild4D.FormDesign.PluginsServerConfig[obj.SingleName];
+                //debugger;
                 for (var prop in obj) {
                     if (typeof(obj[prop]) != "function") {
                         if (obj[prop] == "" || obj[prop] == null) {
@@ -213,6 +215,7 @@ var JBuild4D={
                 //待移除
             },
             CreateGeneralPlugin:function (pluginSingleName,exConfig) {
+                //设置为""时才会使用服务端的配置进行覆盖
                 var defaultSetting = {
                     //插件名称
                     SingleName: pluginSingleName,
@@ -236,7 +239,9 @@ var JBuild4D={
                     DesignModalInputCss: "",
                     //客户端与服务端解析类
                     ClientResolve: "",
-                    ServerResolve: ""
+                    ServerResolve: "",
+                    //是否是数据控件
+                    IsJBuild4DData:""
                 };
                 //使用方法参数覆盖默认值
                 defaultSetting = $.extend(true, {}, defaultSetting, exConfig);
@@ -245,6 +250,7 @@ var JBuild4D={
                 defaultSetting.DialogName = defaultSetting.SingleName;
                 defaultSetting.ToolbarCommand = "JBuild4D.FormDesign.Plugins." + defaultSetting.SingleName;
                 defaultSetting.DialogSettingTitle = defaultSetting.ToolbarLabel + "Web控件";
+                //debugger;
                 return {
                     Setting: defaultSetting
                 };
@@ -292,7 +298,7 @@ var JBuild4D={
                 });
             }
         },
-        PluginsDefConfig:{
+        PluginsServerConfig:{
 
         },
 
@@ -316,6 +322,8 @@ var JBuild4D={
                 var clientResolveJs=singlePluginConfig.clientResolveJs;
                 var dialogWidth=singlePluginConfig.dialogWidth;
                 var dialogHeight=singlePluginConfig.dialogHeight;
+                var isJBuild4DData=singlePluginConfig.isJBuild4DData;
+                //debugger;
                 var pluginFileName = singleName + "Plugin.js";
                 var pluginFolderName = "../../HTMLDesign/FormDesign/Plugins/" + singleName + "/";
                 //注册扩展组件
@@ -323,7 +331,7 @@ var JBuild4D={
                 extraPlugins.push(singleName);
 
                 //设置默认值
-                JBuild4D.FormDesign.PluginsDefConfig[singleName]={
+                JBuild4D.FormDesign.PluginsServerConfig[singleName]={
                     SingleName:singleName,
                     ToolbarLocation:toolbarLocation,
                     ToolbarLabel:text,
@@ -331,7 +339,8 @@ var JBuild4D={
                     ServerResolve:serverResolve,
                     ClientResolveJs:clientResolveJs,
                     DialogWidth:dialogWidth,
-                    DialogHeight:dialogHeight
+                    DialogHeight:dialogHeight,
+                    IsJBuild4DData:isJBuild4DData
                 }
             }
 
