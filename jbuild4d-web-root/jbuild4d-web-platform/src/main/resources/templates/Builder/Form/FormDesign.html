@@ -48,7 +48,7 @@
                     <divider orientation="left" :dashed="true" style="font-size: 12px">数据关系关联设置</divider>
                     <div style="float: left;width: 300px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">
                         <button-group shape="circle" style="margin: auto">
-                            <i-button type="success">&nbsp;&nbsp;添加&nbsp;&nbsp;</i-button>
+                            <i-button type="success" @click="addRelationTable">&nbsp;&nbsp;添加&nbsp;&nbsp;</i-button>
                             <i-button>&nbsp;删除&nbsp;</i-button>
                             <i-button>序列化</i-button>
                             <i-button>反序列化</i-button>
@@ -115,6 +115,9 @@
         </tab-pane>
         <tab-pane name="Be Referred" label="Be Referred"></tab-pane>
     </tabs>
+</div>
+<div id="divSelectTable" title="请选择表" style="display: none">
+    <ul id="selectTableZTreeUL" class="ztree"></ul>
 </div>
 <script>
     var IsTopFramePage=true;
@@ -201,19 +204,53 @@
                 },
                 tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点"}
             },
-            /*tableTree:{
+            selectTableTree:{
                 tableTreeObj:null,
                 tableTreeSetting:{
-
+                    view: {
+                        dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                        showLine: true,//是否显示节点之间的连线
+                        fontCss: {'color': 'black', 'font-weight': 'normal'}
+                    },
+                    check: {
+                        enable: true,
+                        nocheckInherit: false,
+                        chkStyle: "radio",
+                        radioType: "all"
+                    },
+                    data: {
+                        key: {
+                            name: "text"
+                        },
+                        simpleData: {//简单数据模式
+                            enable: true,
+                            idKey: "id",
+                            pIdKey: "parentId",
+                            rootPId: "-1"// 1
+                        }
+                    },
+                    callback: {
+                        //点击树节点事件
+                        onClick: function (event, treeId, treeNode) {
+                            if(treeNode.nodeTypeName=="Table") {
+                                appForm.tableTree.tableTreeObj.checkNode(treeNode, true, true);
+                                appForm.formResourceEntity.formMainTableCaption=treeNode.attr1;
+                                appForm.formResourceEntity.formMainTableName=treeNode.value;
+                            }
+                            else{
+                                alert("选中分组");
+                            }
+                        }
+                    }
                 },
                 tableTreeData:null,//${tableTreeData},
                 selectedTableName:"无"
-            },*/
+            },
             status: BaseUtility.GetUrlParaValue("op")
         },
         mounted:function () {
             this.initPageUI();
-            //this.bindTableTree();
+            this.bindSelectTableTree();
             this.bindStatusData();
         },
         methods: {
@@ -233,21 +270,28 @@
                 this.relationTableTree.treeObj=$.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,this.relationTableTree.tableTreeData);
                 this.relationTableTree.treeObj.expandAll(true);
             },
-            /*bindTableTree:function () {
+            addRelationTable:function(){
+                $("#divSelectTable").dialog({
+                    modal:true,
+                    height:600,
+                    width:500
+                });
+            },
+            bindSelectTableTree:function () {
                 var _self=this;
                 AjaxUtility.Post(this.acInterface.getTablesDataUrl,{},function (result) {
                     if(result.success) {
-                        _self.tableTree.tableTreeData=result.data;
+                        _self.selectTableTree.tableTreeData=result.data;
                         //console.log(_self.tree.tableTreeData);
-                        _self.tableTree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), _self.tableTree.tableTreeSetting,_self.tableTree.tableTreeData);
-                        _self.tableTree.tableTreeObj.expandAll(true);
+                        _self.selectTableTree.tableTreeObj=$.fn.zTree.init($("#selectTableZTreeUL"), _self.selectTableTree.tableTreeSetting,_self.selectTableTree.tableTreeData);
+                        _self.selectTableTree.tableTreeObj.expandAll(true);
                         //fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
                     }
                     else {
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                     }
                 },"json");
-            },*/
+            },
             bindStatusData:function () {
                 this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
                 if(this.status=="add"){
