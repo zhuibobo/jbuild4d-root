@@ -306,3 +306,8 @@ Vue.component("fd-control-base-info", {
                     '</tr>' +
         '</table>'
 });
+
+/*用于设定表关联的Vue封装组件*/
+Vue.component("db-table-relation-comp", {
+
+});
