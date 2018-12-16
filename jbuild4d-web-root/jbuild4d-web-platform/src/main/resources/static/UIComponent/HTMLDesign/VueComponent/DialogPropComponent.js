@@ -336,18 +336,13 @@ Vue.component("db-table-relation-comp", {
                     callback: {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
-                            if(treeNode.nodeTypeName=="Table") {
-                                appForm.tableTree.tableTreeObj.checkNode(treeNode, true, true);
-                                appForm.formResourceEntity.formMainTableCaption=treeNode.attr1;
-                                appForm.formResourceEntity.formMainTableName=treeNode.value;
-                            }
-                            else{
-                                alert("选中分组");
-                            }
+                            var _self=window._dbtablerelationcomp;
+                            _self.selectedRelationTable(treeNode);
                         }
                     }
                 },
-                tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点"}
+                tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点"},
+                currentSelectedNode:null
             },
             selectTableTree:{
                 tableTreeObj:null,
@@ -378,12 +373,12 @@ Vue.component("db-table-relation-comp", {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
                             if(treeNode.nodeTypeName=="Table") {
-                                appForm.tableTree.tableTreeObj.checkNode(treeNode, true, true);
-                                appForm.formResourceEntity.formMainTableCaption=treeNode.attr1;
-                                appForm.formResourceEntity.formMainTableName=treeNode.value;
-                            }
-                            else{
-                                alert("选中分组");
+                                //appForm.tableTree.tableTreeObj.checkNode(treeNode, true, true);
+                                //appForm.formResourceEntity.formMainTableCaption=treeNode.attr1;
+                                //appForm.formResourceEntity.formMainTableName=treeNode.value;
+                                var _self=window._dbtablerelationcomp;
+                                _self.addTableToRelationTable(treeNode);
+                                $("#divSelectTable").dialog("close");
                             }
                         }
                     }
@@ -398,6 +393,9 @@ Vue.component("db-table-relation-comp", {
         //初始化根节点
         this.relationTableTree.treeObj=$.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,this.relationTableTree.tableTreeData);
         this.relationTableTree.treeObj.expandAll(true);
+        this.relationTableTree.currentSelectedNode=this.relationTableTree.treeObj.getNodeByParam("id","-1");
+        //将对象附加到window上,提供给后边进行操作
+        window._dbtablerelationcomp=this;
     },
     methods:{
         bindSelectTableTree:function () {
@@ -415,19 +413,30 @@ Vue.component("db-table-relation-comp", {
                 }
             },"json");
         },
-        addRelationTable:function(){
-            $("#divSelectTable").dialog({
-                modal:true,
-                height:600,
-                width:500
-            });
+        beginSelectTableToRelationTable:function(){
+            if(this.relationTableTree.currentSelectedNode){
+                $("#divSelectTable").dialog({
+                    modal:true,
+                    height:600,
+                    width:500
+                });
+            }
+            else{
+                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "选择一个父节点!", null);
+            }
+        },
+        addTableToRelationTable:function (newNode) {
+            this.relationTableTree.treeObj.addNodes(this.relationTableTree.currentSelectedNode,-1,newNode,false);
+        },
+        selectedRelationTable:function (node) {
+            this.relationTableTree.currentSelectedNode=node;
         }
     },
-    template:'<div>\
+    template:'<div class="db-table-relation-comp">\
                 <divider orientation="left" :dashed="true" style="font-size: 12px">数据关系关联设置</divider>\
                 <div style="float: left;width: 300px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
                     <button-group shape="circle" style="margin: auto">\
-                        <i-button type="success" @click="addRelationTable">&nbsp;&nbsp;添加&nbsp;&nbsp;</i-button>\
+                        <i-button type="success" @click="beginSelectTableToRelationTable">&nbsp;&nbsp;添加&nbsp;&nbsp;</i-button>\
                         <i-button>&nbsp;删除&nbsp;</i-button>\
                         <i-button>序列化</i-button>\
                         <i-button>反序列化</i-button>\
@@ -435,6 +444,22 @@ Vue.component("db-table-relation-comp", {
                     <ul id="dataRelationZTreeUL" class="ztree"></ul>\
                 </div>\
                 <div style="float: right;width: 680px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
+                    <table>\
+                        <colgroup>\
+                            <col />\
+                            <col />\
+                            <col />\
+                            <col />\
+                        </colgroup>\
+                        <tbody>\
+                            <tr>\
+                                <td>数据关系</td>\
+                                <td></td>\
+                                <td>是否保存</td>\
+                                <td></td>\
+                            </tr>\
+                        </tbody>\
+                    </table>\
                 </div>\
                 <div id="divSelectTable" title="请选择表" style="display: none">\
                     <ul id="selectTableZTreeUL" class="ztree"></ul>\
