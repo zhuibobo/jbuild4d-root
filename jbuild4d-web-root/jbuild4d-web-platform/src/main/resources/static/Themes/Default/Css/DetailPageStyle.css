@@ -47,7 +47,7 @@
 }
 .light-gray-table tr td, .light-gray-table tr th{
     padding: 6px;
-    border: 1px solid #c5dbee;
+    border: 1px solid #f0f0f0;
 }
 
 .light-gray-table tr th{
@@ -55,7 +55,7 @@
     background-color: #f0f4fa;
 }
 .light-gray-table .label {
-    background-color: #f0f4fa;
+    background-color: #f7f7f7;
     text-align: right;
 }
 

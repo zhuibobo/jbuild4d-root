@@ -444,19 +444,45 @@ Vue.component("db-table-relation-comp", {
                     <ul id="dataRelationZTreeUL" class="ztree"></ul>\
                 </div>\
                 <div style="float: right;width: 680px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
-                    <table>\
+                    <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0">\
                         <colgroup>\
-                            <col />\
-                            <col />\
-                            <col />\
-                            <col />\
+                            <col style="width: 15%" />\
+                            <col style="width: 35%" />\
+                            <col style="width: 15%" />\
+                            <col style="width: 35%" />\
                         </colgroup>\
                         <tbody>\
                             <tr>\
-                                <td>数据关系</td>\
-                                <td></td>\
-                                <td>是否保存</td>\
-                                <td></td>\
+                                <td class="label">数据关系：</td>\
+                                <td>\
+                                    <radio-group v-model="button1" type="button">\
+                                        <radio label="1:1"></radio>\
+                                        <radio label="1:N"></radio>\
+                                    </radio-group>\
+                                </td>\
+                                <td class="label">是否保存：</td>\
+                                <td>\
+                                    <radio-group v-model="button1" type="button">\
+                                        <radio label="1:1"></radio>\
+                                        <radio label="1:N"></radio>\
+                                    </radio-group>\
+                                </td>\
+                            </tr>\
+                            <tr>\
+                                <td class="label">本身关联字段：</td>\
+                                <td>\
+                                    <radio-group v-model="button1" type="button">\
+                                        <radio label="1:1"></radio>\
+                                        <radio label="1:N"></radio>\
+                                    </radio-group>\
+                                </td>\
+                                <td class="label">外联字段：</td>\
+                                <td>\
+                                    <radio-group v-model="button1" type="button">\
+                                        <radio label="1:1"></radio>\
+                                        <radio label="1:N"></radio>\
+                                    </radio-group>\
+                                </td>\
                             </tr>\
                         </tbody>\
                     </table>\
