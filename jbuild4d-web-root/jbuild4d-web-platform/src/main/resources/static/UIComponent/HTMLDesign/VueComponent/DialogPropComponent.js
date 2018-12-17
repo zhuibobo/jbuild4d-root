@@ -307,6 +307,40 @@ Vue.component("fd-control-base-info", {
         '</table>'
 });
 
+/*SQL编辑控件*/
+Vue.component("sql-general-design-comp", {
+    props:["sqlDesignerHeight"],
+    data:function(){
+        return {}
+    },
+    mounted:function(){
+        this.sqlCodeMirror = CodeMirror.fromTextArea($("#TextAreaSQLEditor")[0], {
+            mode: "text/x-sql",
+            lineNumbers: true,
+            lineWrapping: true,
+            foldGutter: true,
+            theme: "monokai"
+        });
+        this.sqlCodeMirror.setSize("100%", this.sqlDesignerHeight);
+    },
+    methods:{
+    },
+    template:'<div>\
+                <textarea id="TextAreaSQLEditor"></textarea>\
+                <div style="text-align: right;margin-top: 8px">\
+                    <radio-group type="button" size="small">\
+                        <radio label="组织Id"></radio>\
+                        <radio label="组织名称"></radio>\
+                        <radio label="用户Id"></radio>\
+                        <radio label="用户名称"></radio>\
+                        <radio label="yyyy-MM-dd"></radio>\
+                        <radio label="表字段"></radio>\
+                        <radio label="示例"></radio>\
+                    </radio-group>\
+                </div>\
+              </div>'
+});
+
 /*用于设定表关联的Vue封装组件*/
 Vue.component("db-table-relation-comp", {
     data:function(){
@@ -341,7 +375,7 @@ Vue.component("db-table-relation-comp", {
                         }
                     }
                 },
-                tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点"},
+                tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点",icon:"../../../UIComponent/ZTree-V3/css/zTreeStyle/img/diy/2.png"},
                 currentSelectedNode:null
             },
             selectTableTree:{
@@ -426,6 +460,7 @@ Vue.component("db-table-relation-comp", {
             }
         },
         addTableToRelationTable:function (newNode) {
+            newNode.icon="../../../UIComponent/ZTree-V3/css/zTreeStyle/img/diy/2.png";
             this.relationTableTree.treeObj.addNodes(this.relationTableTree.currentSelectedNode,-1,newNode,false);
         },
         selectedRelationTable:function (node) {
@@ -453,35 +488,49 @@ Vue.component("db-table-relation-comp", {
                         </colgroup>\
                         <tbody>\
                             <tr>\
+                                <td class="label">SingleName：</td>\
+                                <td>\
+                                    <i-input v-model="value3" size="small" placeholder="small size" />\
+                                </td>\
+                                <td class="label">Desc：</td>\
+                                <td>\
+                                    <i-input v-model="value3" size="small" placeholder="small size" />\
+                                </td>\
+                            </tr>\
+                            <tr>\
                                 <td class="label">数据关系：</td>\
                                 <td>\
-                                    <radio-group v-model="button1" type="button">\
+                                    <radio-group v-model="button1" type="button" size="small">\
                                         <radio label="1:1"></radio>\
                                         <radio label="1:N"></radio>\
                                     </radio-group>\
                                 </td>\
                                 <td class="label">是否保存：</td>\
                                 <td>\
-                                    <radio-group v-model="button1" type="button">\
-                                        <radio label="1:1"></radio>\
-                                        <radio label="1:N"></radio>\
+                                    <radio-group v-model="button1" type="button" size="small">\
+                                        <radio label="是"></radio>\
+                                        <radio label="否"></radio>\
                                     </radio-group>\
                                 </td>\
                             </tr>\
                             <tr>\
                                 <td class="label">本身关联字段：</td>\
                                 <td>\
-                                    <radio-group v-model="button1" type="button">\
-                                        <radio label="1:1"></radio>\
-                                        <radio label="1:N"></radio>\
-                                    </radio-group>\
+                                    <i-select v-model="model2" size="small" >\
+                                        <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>\
+                                    </i-select>\
                                 </td>\
                                 <td class="label">外联字段：</td>\
                                 <td>\
-                                    <radio-group v-model="button1" type="button">\
-                                        <radio label="1:1"></radio>\
-                                        <radio label="1:N"></radio>\
-                                    </radio-group>\
+                                    <i-select v-model="model2" size="small" >\
+                                        <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>\
+                                    </i-select>\
+                                </td>\
+                            </tr>\
+                            <tr>\
+                                <td class="label">加载条件</td>\
+                                <td colspan="3">\
+                                    <sql-general-design-comp :sqlDesignerHeight="150"></sql-general-design-comp>\
                                 </td>\
                             </tr>\
                         </tbody>\

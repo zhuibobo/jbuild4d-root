@@ -417,7 +417,8 @@ var JBuild4D={
                 lineNumbers: true,
                 lineWrapping: true
             });
-            $(".CodeMirror").height(PageStyleUtility.GetWindowHeight()-60);
+            this._HTMLEditorInst.setSize("100%",PageStyleUtility.GetWindowHeight()-60);
+            //$(".CodeMirror").height(PageStyleUtility.GetWindowHeight()-60);
 
             /*this._HTMLEditorInst=CodeMirror.fromTextArea($("#TextAreaJsEidtor")[0], {
                 mode: "javascript",
