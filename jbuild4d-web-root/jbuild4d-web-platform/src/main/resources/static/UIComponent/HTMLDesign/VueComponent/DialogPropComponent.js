@@ -528,7 +528,7 @@ Vue.component("db-table-relation-comp", {
                                 </td>\
                             </tr>\
                             <tr>\
-                                <td class="label">加载条件</td>\
+                                <td class="label">加载条件<br />[不对保存操作起效]</td>\
                                 <td colspan="3">\
                                     <sql-general-design-comp :sqlDesignerHeight="150"></sql-general-design-comp>\
                                 </td>\
