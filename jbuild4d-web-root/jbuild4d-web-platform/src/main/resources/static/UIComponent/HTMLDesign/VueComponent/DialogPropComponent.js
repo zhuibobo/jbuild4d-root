@@ -382,7 +382,10 @@ Vue.component("db-table-relation-comp", {
             relationTableEditor:{
                 isShowTableEditDetail:false,
                 isSubEditTr:false,
-                isMainEditTr:false
+                isMainEditTr:false,
+                selPKData:[],
+                selSelfKeyData:[],
+                selForeignKeyData:[]
             },
             selectTableTree:{
                 tableTreeObj:null,
@@ -501,7 +504,8 @@ Vue.component("db-table-relation-comp", {
             this.relationTableEditor.isShowTableEditDetail=!this.isSelectedRootRelationTableNode();
             this.relationTableEditor.isMainEditTr=this.isSelectedMainRelationTableNode();
             this.relationTableEditor.isSubEditTr=!this.isSelectedMainRelationTableNode();
-        }
+        },
+
     },
     template:'<div class="db-table-relation-comp">\
                 <divider orientation="left" :dashed="true" style="font-size: 12px">数据关系关联设置</divider>\
