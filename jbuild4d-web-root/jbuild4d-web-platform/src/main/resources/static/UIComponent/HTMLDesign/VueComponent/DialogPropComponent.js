@@ -376,7 +376,10 @@ Vue.component("db-table-relation-comp", {
                     }
                 },
                 tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点",icon:"../../../Themes/Png16X16/coins_add.png",_nodeExType:"root"},
-                currentSelectedNode:null
+                currentSelectedNode:null,
+                isShowTableEditDetail:false,
+                isSubEditTr:false,
+                isMainEditTr:false
             },
             selectTableTree:{
                 tableTreeObj:null,
@@ -431,54 +434,70 @@ Vue.component("db-table-relation-comp", {
         //将对象附加到window上,提供给后边进行操作
         window._dbtablerelationcomp=this;
     },
-    methods:{
-        bindSelectTableTree:function () {
-            var _self=this;
-            AjaxUtility.Post(this.acInterface.getTablesDataUrl,{},function (result) {
-                if(result.success) {
-                    _self.selectTableTree.tableTreeData=result.data;
+    methods: {
+        bindSelectTableTree: function () {
+            var _self = this;
+            AjaxUtility.Post(this.acInterface.getTablesDataUrl, {}, function (result) {
+                if (result.success) {
+                    _self.selectTableTree.tableTreeData = result.data;
                     //console.log(_self.tree.tableTreeData);
-                    _self.selectTableTree.tableTreeObj=$.fn.zTree.init($("#selectTableZTreeUL"), _self.selectTableTree.tableTreeSetting,_self.selectTableTree.tableTreeData);
+                    _self.selectTableTree.tableTreeObj = $.fn.zTree.init($("#selectTableZTreeUL"), _self.selectTableTree.tableTreeSetting, _self.selectTableTree.tableTreeData);
                     _self.selectTableTree.tableTreeObj.expandAll(true);
                     //fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                 }
-            },"json");
+            }, "json");
         },
-        beginSelectTableToRelationTable:function(){
-            if(this.relationTableTree.currentSelectedNode){
+        beginSelectTableToRelationTable: function () {
+            if (this.relationTableTree.currentSelectedNode) {
                 $("#divSelectTable").dialog({
-                    modal:true,
-                    height:600,
-                    width:500
+                    modal: true,
+                    height: 600,
+                    width: 500
                 });
             }
-            else{
+            else {
                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "选择一个父节点!", null);
             }
         },
-        addTableToRelationTable:function (newNode) {
-            if(this.relationTableTree.currentSelectedNode._nodeExType=="root") {
-                newNode._nodeExType = "MainNode";
-                newNode.icon="../../../Themes/Png16X16/page_key.png";
+        buildRelationTableNode:function(sourceNode){
+            if (this.relationTableTree.currentSelectedNode._nodeExType == "root") {
+                sourceNode._nodeExType = "MainNode";
+                sourceNode.icon = "../../../Themes/Png16X16/page_key.png";
             }
             else {
-                newNode._nodeExType = "SubNode";
-                newNode.icon="../../../Themes/Png16X16/page_refresh.png";
+                sourceNode._nodeExType = "SubNode";
+                sourceNode.icon = "../../../Themes/Png16X16/page_refresh.png";
             }
-            var tempNode=this.relationTableTree.treeObj.getNodeByParam("_nodeExType","MainNode");
-            if(tempNode!=null){
-                if(this.relationTableTree.currentSelectedNode.id=="-1"){
-                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"只允许存在一个主记录!",null);
+            return sourceNode;
+        },
+        getMainRelationTableNode:function(){
+            return this.relationTableTree.treeObj.getNodeByParam("_nodeExType", "MainNode");
+        },
+        isSelectedRootRelationTableNode:function(){
+            return this.relationTableTree.currentSelectedNode.id == "-1";
+        },
+        isSelectedMainRelationTableNode:function(){
+            return this.relationTableTree.currentSelectedNode._nodeExType=="MainNode";
+        },
+        addTableToRelationTable: function (newNode) {
+            newNode=this.buildRelationTableNode(newNode);
+            var tempNode = this.getMainRelationTableNode();
+            if (tempNode != null) {
+                if (this.isSelectedRootRelationTableNode()) {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "只允许存在一个主记录!", null);
                     return;
                 }
             }
-            this.relationTableTree.treeObj.addNodes(this.relationTableTree.currentSelectedNode,-1,newNode,false);
+            this.relationTableTree.treeObj.addNodes(this.relationTableTree.currentSelectedNode, -1, newNode, false);
         },
-        selectedRelationTable:function (node) {
-            this.relationTableTree.currentSelectedNode=node;
+        selectedRelationTable: function (node) {
+            this.relationTableTree.currentSelectedNode = node;
+            this.relationTableTree.isShowTableEditDetail=!this.isSelectedRootRelationTableNode();
+            this.relationTableTree.isMainEditTr=this.isSelectedMainRelationTableNode();
+            this.relationTableTree.isSubEditTr=!this.isSelectedMainRelationTableNode();
         }
     },
     template:'<div class="db-table-relation-comp">\
@@ -494,7 +513,7 @@ Vue.component("db-table-relation-comp", {
                     <ul id="dataRelationZTreeUL" class="ztree"></ul>\
                 </div>\
                 <div style="float: right;width: 630px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
-                    <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0">\
+                    <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0" v-if="relationTableTree.isShowTableEditDetail">\
                         <colgroup>\
                             <col style="width: 17%" />\
                             <col style="width: 33%" />\
@@ -502,7 +521,19 @@ Vue.component("db-table-relation-comp", {
                             <col style="width: 35%" />\
                         </colgroup>\
                         <tbody>\
-                            <tr>\
+                            <tr v-if="relationTableTree.isMainEditTr">\
+                                <td class="label">SingleName：</td>\
+                                <td>\
+                                    <i-input v-model="value3" size="small" placeholder="small size" />\
+                                </td>\
+                                <td class="label">PKKey：</td>\
+                                <td>\
+                                    <i-select v-model="model2" size="small" >\
+                                        <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>\
+                                    </i-select>\
+                                </td>\
+                            </tr>\
+                            <tr v-if="relationTableTree.isSubEditTr">\
                                 <td class="label">SingleName：</td>\
                                 <td>\
                                     <i-input v-model="value3" size="small" placeholder="small size" />\
@@ -512,7 +543,7 @@ Vue.component("db-table-relation-comp", {
                                     <i-input v-model="value3" size="small" placeholder="small size" />\
                                 </td>\
                             </tr>\
-                            <tr>\
+                            <tr v-if="relationTableTree.isSubEditTr">\
                                 <td class="label">数据关系：</td>\
                                 <td>\
                                     <radio-group v-model="button1" type="button" size="small">\
@@ -528,7 +559,7 @@ Vue.component("db-table-relation-comp", {
                                     </radio-group>\
                                 </td>\
                             </tr>\
-                            <tr>\
+                            <tr v-if="relationTableTree.isSubEditTr">\
                                 <td class="label">本身关联字段：</td>\
                                 <td>\
                                     <i-select v-model="model2" size="small" >\
