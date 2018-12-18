@@ -377,7 +377,6 @@ Vue.component("db-table-relation-comp", {
                 },
                 tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点",icon:"../../../Themes/Png16X16/coins_add.png",_nodeExType:"root"},
                 currentSelectedNode:null
-
             },
             relationTableEditor:{
                 isShowTableEditDetail:false,
@@ -428,7 +427,8 @@ Vue.component("db-table-relation-comp", {
                 },
                 tableTreeData:null,//${tableTreeData},
                 selectedTableName:"无"
-            }
+            },
+            tempDataStore:{}
         }
     },
     mounted:function(){
