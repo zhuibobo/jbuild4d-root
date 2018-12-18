@@ -376,7 +376,10 @@ Vue.component("db-table-relation-comp", {
                     }
                 },
                 tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点",icon:"../../../Themes/Png16X16/coins_add.png",_nodeExType:"root"},
-                currentSelectedNode:null,
+                currentSelectedNode:null
+
+            },
+            relationTableEditor:{
                 isShowTableEditDetail:false,
                 isSubEditTr:false,
                 isMainEditTr:false
@@ -495,9 +498,9 @@ Vue.component("db-table-relation-comp", {
         },
         selectedRelationTable: function (node) {
             this.relationTableTree.currentSelectedNode = node;
-            this.relationTableTree.isShowTableEditDetail=!this.isSelectedRootRelationTableNode();
-            this.relationTableTree.isMainEditTr=this.isSelectedMainRelationTableNode();
-            this.relationTableTree.isSubEditTr=!this.isSelectedMainRelationTableNode();
+            this.relationTableEditor.isShowTableEditDetail=!this.isSelectedRootRelationTableNode();
+            this.relationTableEditor.isMainEditTr=this.isSelectedMainRelationTableNode();
+            this.relationTableEditor.isSubEditTr=!this.isSelectedMainRelationTableNode();
         }
     },
     template:'<div class="db-table-relation-comp">\
@@ -513,7 +516,7 @@ Vue.component("db-table-relation-comp", {
                     <ul id="dataRelationZTreeUL" class="ztree"></ul>\
                 </div>\
                 <div style="float: right;width: 630px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
-                    <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0" v-if="relationTableTree.isShowTableEditDetail">\
+                    <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0" v-if="relationTableEditor.isShowTableEditDetail">\
                         <colgroup>\
                             <col style="width: 17%" />\
                             <col style="width: 33%" />\
@@ -521,7 +524,7 @@ Vue.component("db-table-relation-comp", {
                             <col style="width: 35%" />\
                         </colgroup>\
                         <tbody>\
-                            <tr v-if="relationTableTree.isMainEditTr">\
+                            <tr v-if="relationTableEditor.isMainEditTr">\
                                 <td class="label">SingleName：</td>\
                                 <td>\
                                     <i-input v-model="value3" size="small" placeholder="small size" />\
@@ -533,7 +536,7 @@ Vue.component("db-table-relation-comp", {
                                     </i-select>\
                                 </td>\
                             </tr>\
-                            <tr v-if="relationTableTree.isSubEditTr">\
+                            <tr v-if="relationTableEditor.isSubEditTr">\
                                 <td class="label">SingleName：</td>\
                                 <td>\
                                     <i-input v-model="value3" size="small" placeholder="small size" />\
@@ -543,7 +546,7 @@ Vue.component("db-table-relation-comp", {
                                     <i-input v-model="value3" size="small" placeholder="small size" />\
                                 </td>\
                             </tr>\
-                            <tr v-if="relationTableTree.isSubEditTr">\
+                            <tr v-if="relationTableEditor.isSubEditTr">\
                                 <td class="label">数据关系：</td>\
                                 <td>\
                                     <radio-group v-model="button1" type="button" size="small">\
@@ -559,7 +562,7 @@ Vue.component("db-table-relation-comp", {
                                     </radio-group>\
                                 </td>\
                             </tr>\
-                            <tr v-if="relationTableTree.isSubEditTr">\
+                            <tr v-if="relationTableEditor.isSubEditTr">\
                                 <td class="label">本身关联字段：</td>\
                                 <td>\
                                     <i-select v-model="model2" size="small" >\
