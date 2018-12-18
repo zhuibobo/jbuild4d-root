@@ -335,7 +335,7 @@ Vue.component("sql-general-design-comp", {
                         <radio label="用户名称"></radio>\
                         <radio label="yyyy-MM-dd"></radio>\
                         <radio label="表字段"></radio>\
-                        <radio label="示例"></radio>\
+                        <radio label="说明"></radio>\
                     </radio-group>\
                 </div>\
               </div>'
@@ -375,7 +375,7 @@ Vue.component("db-table-relation-comp", {
                         }
                     }
                 },
-                tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点",icon:"../../../UIComponent/ZTree-V3/css/zTreeStyle/img/diy/2.png"},
+                tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点",icon:"../../../Themes/Png16X16/coins_add.png",_nodeExType:"root"},
                 currentSelectedNode:null
             },
             selectTableTree:{
@@ -460,7 +460,21 @@ Vue.component("db-table-relation-comp", {
             }
         },
         addTableToRelationTable:function (newNode) {
-            newNode.icon="../../../UIComponent/ZTree-V3/css/zTreeStyle/img/diy/2.png";
+            if(this.relationTableTree.currentSelectedNode._nodeExType=="root") {
+                newNode._nodeExType = "MainNode";
+                newNode.icon="../../../Themes/Png16X16/page_key.png";
+            }
+            else {
+                newNode._nodeExType = "SubNode";
+                newNode.icon="../../../Themes/Png16X16/page_refresh.png";
+            }
+            var tempNode=this.relationTableTree.treeObj.getNodeByParam("_nodeExType","MainNode");
+            if(tempNode!=null){
+                if(this.relationTableTree.currentSelectedNode.id=="-1"){
+                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"只允许存在一个主记录!",null);
+                    return;
+                }
+            }
             this.relationTableTree.treeObj.addNodes(this.relationTableTree.currentSelectedNode,-1,newNode,false);
         },
         selectedRelationTable:function (node) {
@@ -469,20 +483,21 @@ Vue.component("db-table-relation-comp", {
     },
     template:'<div class="db-table-relation-comp">\
                 <divider orientation="left" :dashed="true" style="font-size: 12px">数据关系关联设置</divider>\
-                <div style="float: left;width: 300px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
+                <div style="float: left;width: 350px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
                     <button-group shape="circle" style="margin: auto">\
-                        <i-button type="success" @click="beginSelectTableToRelationTable">&nbsp;&nbsp;添加&nbsp;&nbsp;</i-button>\
+                        <i-button type="success" @click="beginSelectTableToRelationTable">&nbsp;添加&nbsp;</i-button>\
                         <i-button>&nbsp;删除&nbsp;</i-button>\
                         <i-button>序列化</i-button>\
                         <i-button>反序列化</i-button>\
+                        <i-button>说明</i-button>\
                     </button-group>\
                     <ul id="dataRelationZTreeUL" class="ztree"></ul>\
                 </div>\
-                <div style="float: right;width: 680px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
+                <div style="float: right;width: 630px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
                     <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0">\
                         <colgroup>\
-                            <col style="width: 15%" />\
-                            <col style="width: 35%" />\
+                            <col style="width: 17%" />\
+                            <col style="width: 33%" />\
                             <col style="width: 15%" />\
                             <col style="width: 35%" />\
                         </colgroup>\
@@ -528,7 +543,7 @@ Vue.component("db-table-relation-comp", {
                                 </td>\
                             </tr>\
                             <tr>\
-                                <td class="label">加载条件<br />[不对保存操作起效]</td>\
+                                <td class="label">加载条件：<br />[对加载数据起效]</td>\
                                 <td colspan="3">\
                                     <sql-general-design-comp :sqlDesignerHeight="150"></sql-general-design-comp>\
                                 </td>\
