@@ -901,21 +901,11 @@ var DialogUtility={
             "ElementObj":htmlElem
         };
     },
-    Prompt:function(opererWindow,config,dialogId,htmlmsg){
+    Prompt:function(opererWindow,config,dialogId,title,htmlmsg,okFunc){
         alert("DialogUtility.Prompt 已停用");
-        /*var htmlElem = this._CreateDialogElem(opererWindow.document.body,dialogId);
+        var htmlElem = this._CreateDialogElem(opererWindow.document.body,dialogId);
         var paras=null;
         var defaultConfig = {
-            okfunc:function(paras){
-
-            },
-            cancelfunc:function(paras){
-
-            },
-            validatefunc:function(paras){
-                return true;
-            },
-            closeafterfunc:true,
             height: 200,
             width: 300,
             title:"",
@@ -943,7 +933,7 @@ var DialogUtility={
         $(htmlElem).dialog(defaultConfig);
         paras={
             "ElementObj":htmlElem
-        };*/
+        };
     },
     DialogElem:function (elem,config) {
         $(elem).dialog(config);

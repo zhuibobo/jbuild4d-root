@@ -345,13 +345,13 @@ Vue.component("sql-general-design-comp", {
 Vue.component("db-table-relation-comp", {
     data:function(){
         return {
-            acInterface:{
-                getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
-                getTableFieldsUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTableFieldsByTableId"
+            acInterface: {
+                getTablesDataUrl: "/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
+                getTableFieldsUrl: "/PlatForm/Builder/DataStorage/DataBase/Table/GetTableFieldsByTableId"
             },
-            relationTableTree:{
-                treeObj:null,
-                tableTreeSetting:{
+            relationTableTree: {
+                treeObj: null,
+                tableTreeSetting: {
                     view: {
                         dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
                         showLine: true,//是否显示节点之间的连线
@@ -371,25 +371,44 @@ Vue.component("db-table-relation-comp", {
                     callback: {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
-                            var _self=window._dbtablerelationcomp;
+                            var _self = window._dbtablerelationcomp;
                             _self.selectedRelationTable(treeNode);
                         }
                     }
                 },
-                tableTreeData:{id:"-1",text:"数据关联",parentId:"",nodeTypeName:"根节点",icon:"../../../Themes/Png16X16/coins_add.png",_nodeExType:"root"},
-                currentSelectedNode:null
+                tableTreeData: {
+                    id: "-1",
+                    text: "数据关联",
+                    parentId: "",
+                    nodeTypeName: "根节点",
+                    icon: "../../../Themes/Png16X16/coins_add.png",
+                    _nodeExType: "root",
+                    tableId: "-1"
+                },
+                currentSelectedNode: null
             },
-            relationTableEditor:{
-                isShowTableEditDetail:false,
-                isSubEditTr:false,
-                isMainEditTr:false,
-                selPKData:[],
-                selSelfKeyData:[],
-                selForeignKeyData:[]
+            relationTableEditorView: {
+                isShowTableEditDetail: false,
+                isSubEditTr: false,
+                isMainEditTr: false,
+                selPKData: [],
+                selSelfKeyData: [],
+                selForeignKeyData: []
             },
-            selectTableTree:{
-                tableTreeObj:null,
-                tableTreeSetting:{
+            currentEditorData: {
+                id: "",
+                parentId: "",
+                singleName: "",
+                pkFieldName: "",
+                desc: "",
+                selfKeyFieldName: "",
+                outerKeyFieldName: "",
+                relationType: "1ToN",
+                isSave: "true"
+            },
+            selectTableTree: {
+                tableTreeObj: null,
+                tableTreeSetting: {
                     view: {
                         dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
                         showLine: true,//是否显示节点之间的连线
@@ -415,21 +434,22 @@ Vue.component("db-table-relation-comp", {
                     callback: {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
-                            if(treeNode.nodeTypeName=="Table") {
+                            if (treeNode.nodeTypeName == "Table") {
                                 //appForm.tableTree.tableTreeObj.checkNode(treeNode, true, true);
                                 //appForm.formResourceEntity.formMainTableCaption=treeNode.attr1;
                                 //appForm.formResourceEntity.formMainTableName=treeNode.value;
-                                var _self=window._dbtablerelationcomp;
+                                var _self = window._dbtablerelationcomp;
                                 _self.addTableToRelationTable(treeNode);
                                 $("#divSelectTable").dialog("close");
                             }
                         }
                     }
                 },
-                tableTreeData:null,//${tableTreeData},
-                selectedTableName:"无"
+                tableTreeData: null,//${tableTreeData},
+                selectedTableName: "无"
             },
-            tempDataStore:{}
+            tempDataStore: {},
+            resultData: []
         }
     },
     mounted:function(){
@@ -441,7 +461,62 @@ Vue.component("db-table-relation-comp", {
         //将对象附加到window上,提供给后边进行操作
         window._dbtablerelationcomp=this;
     },
+    watch: {
+        currentEditorData: { //深度监听，可监听到对象、数组的变化
+            handler(val, oldVal){
+                //console.log(val.id);
+                //使用设置值覆盖掉结果集中的值.
+                for(var i=0;i<this.resultData.length;i++) {
+                    if (this.resultData[i].id == val.id) {
+                        this.resultData[i].singleName=val.singleName;
+                        this.resultData[i].pkFieldName=val.pkFieldName;
+                        this.resultData[i].desc=val.desc;
+                        this.resultData[i].selfKeyFieldName=val.selfKeyFieldName;
+                        this.resultData[i].outerKeyFieldName=val.outerKeyFieldName;
+                        this.resultData[i].relationType=val.relationType;
+                        this.resultData[i].isSave=val.isSave;
+                    }
+                }
+            },
+            deep:true
+        }
+    },
     methods: {
+        getTableFieldsByTableId:function (tableId) {
+            if(this.tempDataStore["tableField_"+tableId]){
+                return this.tempDataStore["tableField_"+tableId];
+            }
+            else{
+                var _self=this;
+                AjaxUtility.PostSync(this.acInterface.getTableFieldsUrl,{tableId:tableId},function (result) {
+                    if(result.success){
+                        _self.tempDataStore["tableField_"+tableId]=result.data;
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
+                },"json");
+            }
+            if(this.tempDataStore["tableField_"+tableId]){
+                return this.tempDataStore["tableField_"+tableId];
+            }
+            else{
+                return null;
+            }
+        },
+        getResultItem:function(){
+            return {
+                id: "",
+                parentId: "",
+                singleName: "",
+                pkFieldName: "",
+                desc: "",
+                selfKeyFieldName: "",
+                outerKeyFieldName: "",
+                relationType: "1ToN",
+                isSave: "true"
+            }
+        },
         bindSelectTableTree: function () {
             var _self = this;
             AjaxUtility.Post(this.acInterface.getTablesDataUrl, {}, function (result) {
@@ -478,6 +553,8 @@ Vue.component("db-table-relation-comp", {
                 sourceNode._nodeExType = "SubNode";
                 sourceNode.icon = "../../../Themes/Png16X16/page_refresh.png";
             }
+            sourceNode.tableId=sourceNode.id;
+            sourceNode.id=StringUtility.Guid();
             return sourceNode;
         },
         getMainRelationTableNode:function(){
@@ -490,7 +567,7 @@ Vue.component("db-table-relation-comp", {
             return this.relationTableTree.currentSelectedNode._nodeExType=="MainNode";
         },
         addTableToRelationTable: function (newNode) {
-            newNode=this.buildRelationTableNode(newNode);
+            newNode = this.buildRelationTableNode(newNode);
             var tempNode = this.getMainRelationTableNode();
             if (tempNode != null) {
                 if (this.isSelectedRootRelationTableNode()) {
@@ -499,42 +576,44 @@ Vue.component("db-table-relation-comp", {
                 }
             }
             this.relationTableTree.treeObj.addNodes(this.relationTableTree.currentSelectedNode, -1, newNode, false);
+            //将当前的节点加入结果集合
+            var newResultItem = this.getResultItem();
+            newResultItem.id = newNode.id;
+            newResultItem.parentId = this.relationTableTree.currentSelectedNode.id;
+            this.resultData.push(newResultItem);
         },
         selectedRelationTable: function (node) {
+            //debugger;
             this.relationTableTree.currentSelectedNode = node;
-            this.relationTableEditor.isShowTableEditDetail=!this.isSelectedRootRelationTableNode();
-            this.relationTableEditor.isMainEditTr=this.isSelectedMainRelationTableNode();
-            this.relationTableEditor.isSubEditTr=!this.isSelectedMainRelationTableNode();
+            this.relationTableEditorView.isShowTableEditDetail=!this.isSelectedRootRelationTableNode();
+            this.relationTableEditorView.isMainEditTr=this.isSelectedMainRelationTableNode();
+            this.relationTableEditorView.isSubEditTr=!this.isSelectedMainRelationTableNode();
+            if(this.isSelectedRootRelationTableNode()){
+                return
+            }
             //绑定主键的下拉列表
             //alert(node.id);
-            this.selPKData=this.getTableFieldsByTableId(node.id)!=null?this.getTableFieldsByTableId(node.id):[];
-            this.selSelfKeyData=this.getTableFieldsByTableId(node.id)!=null?this.getTableFieldsByTableId(node.id):[];
-            var parentNode=node.getParentNode();
-            this.selForeignKeyData=this.getTableFieldsByTableId(parentNode.id)!=null?this.getTableFieldsByTableId(parentNode.id):[];
+            this.relationTableEditorView.selPKData=this.getTableFieldsByTableId(node.tableId)!=null?this.getTableFieldsByTableId(node.tableId):[];
+            //console.log(this.relationTableEditorView.selPKData);
             //绑定本身关联字段的下拉列表
+            this.relationTableEditorView.selSelfKeyData=this.getTableFieldsByTableId(node.tableId)!=null?this.getTableFieldsByTableId(node.tableId):[];
             //绑定外联字段的下拉列表
+            var parentNode=node.getParentNode();
+            this.relationTableEditorView.selForeignKeyData=this.getTableFieldsByTableId(parentNode.tableId)!=null?this.getTableFieldsByTableId(parentNode.tableId):[];
+            this.currentEditorData.id=this.relationTableTree.currentSelectedNode.id;
+            this.currentEditorData.parentId=parentNode.id;
         },
-        getTableFieldsByTableId:function (tableId) {
-            if(this.tempDataStore["tableField_"+tableId]){
-                return this.tempDataStore["tableField_"+tableId];
-            }
-            else{
-                var _self=this;
-                AjaxUtility.PostSync(this.acInterface.getTableFieldsUrl,{tableId:tableId},function (result) {
-                    if(result.success){
-                        _self.tempDataStore["tableField_"+tableId]=result.data;
-                    }
-                    else {
-                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
-                    }
-                },"json");
-            }
-            if(this.tempDataStore["tableField_"+tableId]){
-                return this.tempDataStore["tableField_"+tableId];
-            }
-            else{
-                return null;
-            }
+        serializeRelation:function(){
+            return JsonUtility.JsonToString(this.resultData);
+        },
+        deserializeRelation:function(){
+
+        },
+        alertSerializeRelation:function(){
+            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {width:900,height:600},"<div><textarea style='width: 100%;height:480px'>"+this.serializeRelation()+"</textarea></div>", null);
+        },
+        inputDeserializeRelation:function(){
+
         }
     },
     template:'<div class="db-table-relation-comp">\
@@ -543,14 +622,14 @@ Vue.component("db-table-relation-comp", {
                     <button-group shape="circle" style="margin: auto">\
                         <i-button type="success" @click="beginSelectTableToRelationTable">&nbsp;添加&nbsp;</i-button>\
                         <i-button>&nbsp;删除&nbsp;</i-button>\
-                        <i-button>序列化</i-button>\
-                        <i-button>反序列化</i-button>\
+                        <i-button @click="alertSerializeRelation">序列化</i-button>\
+                        <i-button @click="inputDeserializeRelation">反序列化</i-button>\
                         <i-button>说明</i-button>\
                     </button-group>\
                     <ul id="dataRelationZTreeUL" class="ztree"></ul>\
                 </div>\
                 <div style="float: right;width: 630px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
-                    <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0" v-if="relationTableEditor.isShowTableEditDetail">\
+                    <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0" v-if="relationTableEditorView.isShowTableEditDetail">\
                         <colgroup>\
                             <col style="width: 17%" />\
                             <col style="width: 33%" />\
@@ -561,48 +640,48 @@ Vue.component("db-table-relation-comp", {
                             <tr>\
                                 <td class="label">SingleName：</td>\
                                 <td>\
-                                    <i-input v-model="value3" size="small" placeholder="small size" />\
+                                    <i-input v-model="currentEditorData.singleName" size="small" placeholder="本关联中的唯一名称,可以为空" />\
                                 </td>\
                                 <td class="label">PKKey：</td>\
                                 <td>\
-                                    <i-select v-model="model2" size="small" >\
-                                        <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>\
+                                    <i-select placeholder="默认使用Id字段" v-model="currentEditorData.pkFieldName" size="small" style="width:199px">\
+                                        <i-option v-for="item in relationTableEditorView.selPKData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
                                     </i-select>\
                                 </td>\
                             </tr>\
                             <tr>\
                                 <td class="label">Desc：</td>\
                                 <td colspan="3">\
-                                    <i-input v-model="value3" size="small" placeholder="small size" />\
+                                    <i-input v-model="currentEditorData.desc" size="small" placeholder="说明" />\
                                 </td>\
                             </tr>\
-                            <tr v-if="relationTableEditor.isSubEditTr">\
+                            <tr v-if="relationTableEditorView.isSubEditTr">\
                                 <td class="label">数据关系：</td>\
                                 <td>\
-                                    <radio-group v-model="button1" type="button" size="small">\
-                                        <radio label="1:1"></radio>\
-                                        <radio label="1:N"></radio>\
+                                    <radio-group v-model="currentEditorData.relationType" type="button" size="small">\
+                                        <radio label="1To1">1:1</radio>\
+                                        <radio label="1ToN">1:N</radio>\
                                     </radio-group>\
                                 </td>\
                                 <td class="label">是否保存：</td>\
                                 <td>\
-                                    <radio-group v-model="button1" type="button" size="small">\
-                                        <radio label="是"></radio>\
-                                        <radio label="否"></radio>\
+                                    <radio-group v-model="currentEditorData.isSave" type="button" size="small">\
+                                        <radio label="true">是</radio>\
+                                        <radio label="false">否</radio>\
                                     </radio-group>\
                                 </td>\
                             </tr>\
-                            <tr v-if="relationTableEditor.isSubEditTr">\
+                            <tr v-if="relationTableEditorView.isSubEditTr">\
                                 <td class="label">本身关联字段：</td>\
                                 <td>\
-                                    <i-select v-model="model2" size="small" >\
-                                        <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>\
+                                     <i-select placeholder="默认使用Id字段" v-model="currentEditorData.selfKeyFieldName" size="small" style="width:199px">\
+                                        <i-option v-for="item in relationTableEditorView.selSelfKeyData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
                                     </i-select>\
                                 </td>\
                                 <td class="label">外联字段：</td>\
                                 <td>\
-                                    <i-select v-model="model2" size="small" >\
-                                        <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>\
+                                     <i-select placeholder="默认使用Id字段" v-model="currentEditorData.outerKeyFieldName" size="small" style="width:199px">\
+                                        <i-option v-for="item in relationTableEditorView.selPKData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
                                     </i-select>\
                                 </td>\
                             </tr>\
