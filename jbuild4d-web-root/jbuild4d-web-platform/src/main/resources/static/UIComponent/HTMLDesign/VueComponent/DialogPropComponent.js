@@ -346,7 +346,8 @@ Vue.component("db-table-relation-comp", {
     data:function(){
         return {
             acInterface:{
-                getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList"
+                getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
+                getTableFieldsUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTableFieldsByTableId"
             },
             relationTableTree:{
                 treeObj:null,
@@ -504,8 +505,37 @@ Vue.component("db-table-relation-comp", {
             this.relationTableEditor.isShowTableEditDetail=!this.isSelectedRootRelationTableNode();
             this.relationTableEditor.isMainEditTr=this.isSelectedMainRelationTableNode();
             this.relationTableEditor.isSubEditTr=!this.isSelectedMainRelationTableNode();
+            //绑定主键的下拉列表
+            //alert(node.id);
+            this.selPKData=this.getTableFieldsByTableId(node.id)!=null?this.getTableFieldsByTableId(node.id):[];
+            this.selSelfKeyData=this.getTableFieldsByTableId(node.id)!=null?this.getTableFieldsByTableId(node.id):[];
+            var parentNode=node.getParentNode();
+            this.selForeignKeyData=this.getTableFieldsByTableId(parentNode.id)!=null?this.getTableFieldsByTableId(parentNode.id):[];
+            //绑定本身关联字段的下拉列表
+            //绑定外联字段的下拉列表
         },
-
+        getTableFieldsByTableId:function (tableId) {
+            if(this.tempDataStore["tableField_"+tableId]){
+                return this.tempDataStore["tableField_"+tableId];
+            }
+            else{
+                var _self=this;
+                AjaxUtility.PostSync(this.acInterface.getTableFieldsUrl,{tableId:tableId},function (result) {
+                    if(result.success){
+                        _self.tempDataStore["tableField_"+tableId]=result.data;
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
+                },"json");
+            }
+            if(this.tempDataStore["tableField_"+tableId]){
+                return this.tempDataStore["tableField_"+tableId];
+            }
+            else{
+                return null;
+            }
+        }
     },
     template:'<div class="db-table-relation-comp">\
                 <divider orientation="left" :dashed="true" style="font-size: 12px">数据关系关联设置</divider>\
@@ -528,7 +558,7 @@ Vue.component("db-table-relation-comp", {
                             <col style="width: 35%" />\
                         </colgroup>\
                         <tbody>\
-                            <tr v-if="relationTableEditor.isMainEditTr">\
+                            <tr>\
                                 <td class="label">SingleName：</td>\
                                 <td>\
                                     <i-input v-model="value3" size="small" placeholder="small size" />\
@@ -540,13 +570,9 @@ Vue.component("db-table-relation-comp", {
                                     </i-select>\
                                 </td>\
                             </tr>\
-                            <tr v-if="relationTableEditor.isSubEditTr">\
-                                <td class="label">SingleName：</td>\
-                                <td>\
-                                    <i-input v-model="value3" size="small" placeholder="small size" />\
-                                </td>\
+                            <tr>\
                                 <td class="label">Desc：</td>\
-                                <td>\
+                                <td colspan="3">\
                                     <i-input v-model="value3" size="small" placeholder="small size" />\
                                 </td>\
                             </tr>\
@@ -583,7 +609,7 @@ Vue.component("db-table-relation-comp", {
                             <tr>\
                                 <td class="label">加载条件：<br />[对加载数据起效]</td>\
                                 <td colspan="3">\
-                                    <sql-general-design-comp :sqlDesignerHeight="150"></sql-general-design-comp>\
+                                    <sql-general-design-comp :sqlDesignerHeight="110"></sql-general-design-comp>\
                                 </td>\
                             </tr>\
                         </tbody>\
