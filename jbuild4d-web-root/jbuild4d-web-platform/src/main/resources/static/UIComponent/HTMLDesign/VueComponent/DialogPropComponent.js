@@ -665,14 +665,18 @@ Vue.component("db-table-relation-comp", {
                 alert("通过getExistResultItem获取不到数据!");
             }
         },
-        serializeRelation:function(){
+        serializeRelation:function(isFormat){
+            if(isFormat){
+                return JsonUtility.JsonToStringFormat(this.resultData);
+            }
             return JsonUtility.JsonToString(this.resultData);
         },
         deserializeRelation:function(){
 
         },
         alertSerializeRelation:function(){
-            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {width:900,height:600},"<div><textarea style='width: 100%;height:480px'>"+this.serializeRelation()+"</textarea></div>", null);
+            //DialogUtility.Alert(window, DialogUtility.DialogAlertId, {width:900,height:600},"<div>"+this.serializeRelation(true)+"</div>", null);
+            DialogUtility.AlertJsonCode(this.resultData);
         },
         inputDeserializeRelation:function(){
 

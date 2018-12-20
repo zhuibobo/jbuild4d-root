@@ -679,6 +679,9 @@ var JsonUtility = {
     JsonToString:function (obj) {
         return JSON.stringify(obj);
     },
+    JsonToStringFormat:function (obj) {
+        return JSON.stringify(obj, null, 2);
+    },
     StringToJson: function (str) {
         return eval("(" + str + ")");
     }
@@ -813,6 +816,26 @@ var DialogUtility={
         $(htmlElem).html(htmlmsg);
         //alert();
         $(htmlElem).dialog(defaultConfig);
+    },
+    AlertJsonCode:function(json){
+        json=JsonUtility.JsonToStringFormat(json);
+        json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+        json = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+            var cls = 'json-number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'json-key';
+                } else {
+                    cls = 'json-string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'json-boolean';
+            } else if (/null/.test(match)) {
+                cls = 'json-null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+        this.Alert(window, DialogUtility.DialogAlertId, {width:900,height:600},"<pre class='json-pre'>"+json+"</pre>", null);
     },
     ShowHTML:function (opererWindow,dialogId,config,htmlmsg,close_after_event,params) {
         var htmlElem = this._CreateDialogElem(opererWindow.document.body,dialogId);
