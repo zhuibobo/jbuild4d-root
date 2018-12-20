@@ -500,7 +500,7 @@ Vue.component("db-table-relation-comp", {
     },
     watch: {
         currentEditorData: { //深度监听，可监听到对象、数组的变化
-            handler(val, oldVal){
+            handler:function(val, oldVal){
                 //console.log(val.id);
                 //使用设置值覆盖掉结果集中的值.
                 for(var i=0;i<this.resultData.length;i++) {
