@@ -309,9 +309,21 @@ Vue.component("fd-control-base-info", {
 
 /*SQL编辑控件*/
 Vue.component("sql-general-design-comp", {
-    props:["sqlDesignerHeight"],
+    props:["sqlDesignerHeight","value"],
     data:function(){
-        return {}
+        return {
+            sqlText:""
+        }
+    },
+    watch: {
+        sqlText: function (newVal) {
+            // 必须是input
+            this.$emit('input', newVal)
+        },
+        value:function (newVal) {
+            this.sqlText=newVal;
+            //this.setValue(newVal);
+        }
     },
     mounted:function(){
         this.sqlCodeMirror = CodeMirror.fromTextArea($("#TextAreaSQLEditor")[0], {
@@ -322,8 +334,20 @@ Vue.component("sql-general-design-comp", {
             theme: "monokai"
         });
         this.sqlCodeMirror.setSize("100%", this.sqlDesignerHeight);
+        var _self=this;
+        this.sqlCodeMirror.on("change",function (cMirror) {
+            console.log(cMirror.getValue());
+            _self.sqlText=cMirror.getValue();
+        });
+        //this.sqlCodeMirror.setValue("123123");
     },
     methods:{
+        getValue:function () {
+            this.sqlCodeMirror.getValue();
+        },
+        setValue:function (value) {
+            this.sqlCodeMirror.setValue(value);
+        }
     },
     template:'<div>\
                 <textarea id="TextAreaSQLEditor"></textarea>\
@@ -372,7 +396,7 @@ Vue.component("db-table-relation-comp", {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
                             var _self = window._dbtablerelationcomp;
-                            _self.selectedRelationTable(treeNode);
+                            _self.selectedRelationTableNode(treeNode);
                         }
                     }
                 },
@@ -395,6 +419,18 @@ Vue.component("db-table-relation-comp", {
                 selSelfKeyData: [],
                 selForeignKeyData: []
             },
+            emptyEditorData:{
+                id: "",
+                parentId: "",
+                singleName: "",
+                pkFieldName: "",
+                desc: "",
+                selfKeyFieldName: "",
+                outerKeyFieldName: "",
+                relationType: "1ToN",
+                isSave: "true",
+                condition:""
+            },
             currentEditorData: {
                 id: "",
                 parentId: "",
@@ -404,7 +440,8 @@ Vue.component("db-table-relation-comp", {
                 selfKeyFieldName: "",
                 outerKeyFieldName: "",
                 relationType: "1ToN",
-                isSave: "true"
+                isSave: "true",
+                condition:""
             },
             selectTableTree: {
                 tableTreeObj: null,
@@ -439,7 +476,7 @@ Vue.component("db-table-relation-comp", {
                                 //appForm.formResourceEntity.formMainTableCaption=treeNode.attr1;
                                 //appForm.formResourceEntity.formMainTableName=treeNode.value;
                                 var _self = window._dbtablerelationcomp;
-                                _self.addTableToRelationTable(treeNode);
+                                _self.addTableToRelationTableTree(treeNode);
                                 $("#divSelectTable").dialog("close");
                             }
                         }
@@ -468,13 +505,15 @@ Vue.component("db-table-relation-comp", {
                 //使用设置值覆盖掉结果集中的值.
                 for(var i=0;i<this.resultData.length;i++) {
                     if (this.resultData[i].id == val.id) {
-                        this.resultData[i].singleName=val.singleName;
+                        /*this.resultData[i].singleName=val.singleName;
                         this.resultData[i].pkFieldName=val.pkFieldName;
                         this.resultData[i].desc=val.desc;
                         this.resultData[i].selfKeyFieldName=val.selfKeyFieldName;
                         this.resultData[i].outerKeyFieldName=val.outerKeyFieldName;
                         this.resultData[i].relationType=val.relationType;
                         this.resultData[i].isSave=val.isSave;
+                        this.resultData[i].condition=val.condition;*/
+                        this.resultItemCopyValue(this.resultData[i],val);
                     }
                 }
             },
@@ -482,6 +521,16 @@ Vue.component("db-table-relation-comp", {
         }
     },
     methods: {
+        resultItemCopyValue:function(toObj,fromObj){
+            toObj.singleName=fromObj.singleName;
+            toObj.pkFieldName=fromObj.pkFieldName;
+            toObj.desc=fromObj.desc;
+            toObj.selfKeyFieldName=fromObj.selfKeyFieldName;
+            toObj.outerKeyFieldName=fromObj.outerKeyFieldName;
+            toObj.relationType=fromObj.relationType;
+            toObj.isSave=fromObj.isSave;
+            toObj.condition=fromObj.condition;
+        },
         getTableFieldsByTableId:function (tableId) {
             if(this.tempDataStore["tableField_"+tableId]){
                 return this.tempDataStore["tableField_"+tableId];
@@ -504,18 +553,16 @@ Vue.component("db-table-relation-comp", {
                 return null;
             }
         },
-        getResultItem:function(){
-            return {
-                id: "",
-                parentId: "",
-                singleName: "",
-                pkFieldName: "",
-                desc: "",
-                selfKeyFieldName: "",
-                outerKeyFieldName: "",
-                relationType: "1ToN",
-                isSave: "true"
+        getEmptyResultItem:function(){
+            return JsonUtility.CloneSimple(this.emptyEditorData);
+        },
+        getExistResultItem:function(id){
+            for(var i=0;i<this.resultData.length;i++){
+                if(this.resultData[i].id==id){
+                    return this.resultData[i];
+                }
             }
+            return null;
         },
         bindSelectTableTree: function () {
             var _self = this;
@@ -566,7 +613,7 @@ Vue.component("db-table-relation-comp", {
         isSelectedMainRelationTableNode:function(){
             return this.relationTableTree.currentSelectedNode._nodeExType=="MainNode";
         },
-        addTableToRelationTable: function (newNode) {
+        addTableToRelationTableTree: function (newNode) {
             newNode = this.buildRelationTableNode(newNode);
             var tempNode = this.getMainRelationTableNode();
             if (tempNode != null) {
@@ -577,12 +624,12 @@ Vue.component("db-table-relation-comp", {
             }
             this.relationTableTree.treeObj.addNodes(this.relationTableTree.currentSelectedNode, -1, newNode, false);
             //将当前的节点加入结果集合
-            var newResultItem = this.getResultItem();
+            var newResultItem = this.getEmptyResultItem();
             newResultItem.id = newNode.id;
             newResultItem.parentId = this.relationTableTree.currentSelectedNode.id;
             this.resultData.push(newResultItem);
         },
-        selectedRelationTable: function (node) {
+        selectedRelationTableNode: function (node) {
             //debugger;
             this.relationTableTree.currentSelectedNode = node;
             this.relationTableEditorView.isShowTableEditDetail=!this.isSelectedRootRelationTableNode();
@@ -602,6 +649,21 @@ Vue.component("db-table-relation-comp", {
             this.relationTableEditorView.selForeignKeyData=this.getTableFieldsByTableId(parentNode.tableId)!=null?this.getTableFieldsByTableId(parentNode.tableId):[];
             this.currentEditorData.id=this.relationTableTree.currentSelectedNode.id;
             this.currentEditorData.parentId=parentNode.id;
+
+            //从关联的结果数据中,查找出当前节点的数据,绑定到编辑窗口
+            var existResultItem=this.getExistResultItem(node.id);
+            if(existResultItem!=null){
+                this.resultItemCopyValue(this.currentEditorData,existResultItem);
+                //调用sql编辑的组件,进行赋值
+                var _self=this;
+                window.setTimeout(function () {
+                    _self.$refs.sqlGeneralDesignComp.setValue(_self.currentEditorData.condition);
+                },300);
+                //debugger;
+            }
+            else{
+                alert("通过getExistResultItem获取不到数据!");
+            }
         },
         serializeRelation:function(){
             return JsonUtility.JsonToString(this.resultData);
@@ -688,7 +750,7 @@ Vue.component("db-table-relation-comp", {
                             <tr>\
                                 <td class="label">加载条件：<br />[对加载数据起效]</td>\
                                 <td colspan="3">\
-                                    <sql-general-design-comp :sqlDesignerHeight="110"></sql-general-design-comp>\
+                                    <sql-general-design-comp ref="sqlGeneralDesignComp" :sqlDesignerHeight="110" v-model="currentEditorData.condition"></sql-general-design-comp>\
                                 </td>\
                             </tr>\
                         </tbody>\
