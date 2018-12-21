@@ -671,8 +671,9 @@ Vue.component("db-table-relation-comp", {
             }
             return JsonUtility.JsonToString(this.resultData);
         },
-        deserializeRelation:function(){
-
+        deserializeRelation:function(jsonString){
+            var tempdata=JsonUtility.StringToJson(jsonString);
+            //构造树形式的展现
         },
         alertSerializeRelation:function(){
             DialogUtility.AlertJsonCode(this.resultData);
@@ -683,7 +684,7 @@ Vue.component("db-table-relation-comp", {
                 height: 600
             },DialogUtility.DialogPromptId,"请贴入数据关联Json设置字符串",function (jsonString) {
                 try{
-
+                    window._dbtablerelationcomp.deserializeRelation(jsonString);
                 }
                 catch (e) {
                     alert("反序列化失败:"+e);
