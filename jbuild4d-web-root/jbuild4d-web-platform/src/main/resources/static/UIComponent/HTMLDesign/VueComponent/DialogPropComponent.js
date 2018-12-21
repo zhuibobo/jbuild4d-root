@@ -675,11 +675,20 @@ Vue.component("db-table-relation-comp", {
 
         },
         alertSerializeRelation:function(){
-            //DialogUtility.Alert(window, DialogUtility.DialogAlertId, {width:900,height:600},"<div>"+this.serializeRelation(true)+"</div>", null);
             DialogUtility.AlertJsonCode(this.resultData);
         },
         inputDeserializeRelation:function(){
+            DialogUtility.Prompt(window,{
+                width: 900,
+                height: 600
+            },DialogUtility.DialogPromptId,"请贴入数据关联Json设置字符串",function (jsonString) {
+                try{
 
+                }
+                catch (e) {
+                    alert("反序列化失败:"+e);
+                }
+            });
         }
     },
     template:'<div class="db-table-relation-comp">\
@@ -752,7 +761,7 @@ Vue.component("db-table-relation-comp", {
                                 </td>\
                             </tr>\
                             <tr>\
-                                <td class="label">加载条件：<br />[对加载数据起效]</td>\
+                                <td class="label">加载条件：</td>\
                                 <td colspan="3">\
                                     <sql-general-design-comp ref="sqlGeneralDesignComp" :sqlDesignerHeight="110" v-model="currentEditorData.condition"></sql-general-design-comp>\
                                 </td>\

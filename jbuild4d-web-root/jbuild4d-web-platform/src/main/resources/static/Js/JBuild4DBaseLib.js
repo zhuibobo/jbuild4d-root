@@ -715,6 +715,7 @@ var XMLUtility={
 //对话框工具类
 var DialogUtility={
     DialogAlertId:"DefaultDialogAlertUtility01",
+    DialogPromptId:"DefaultDialogPromptUtility01",
     DialogId:"DefaultDialogUtility01",
     DialogId02:"DefaultDialogUtility02",
     DialogId03:"DefaultDialogUtility03",
@@ -772,6 +773,9 @@ var DialogUtility={
         defaultConfig = $.extend(true, {}, defaultConfig, config);
         this.Alert(opererWindow,dialogId,defaultConfig,htmlmsg,sFunc);
     },
+    AlertText:function(text){
+        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {},text, null);
+    },
     Alert:function(opererWindow,dialogId,config,htmlmsg,sFunc) {
         //debugger;
         var htmlElem = this._CreateDialogElem(opererWindow.document.body,dialogId);
@@ -784,29 +788,11 @@ var DialogUtility={
             buttons:{
                 "关闭": function () {
                     $(htmlElem).dialog("close");
-                    $("#bgDailogIframe").hide();
                 }
             },
             open:function () {
-                if($("object[classid='clsid:FF1FE7A0-0578-4FEE-A34E-FB21B277D561']").length>0) {
-                    //alert(111);
-                    var bgiframe = $("#bgDailogIframe");
-                    if (bgiframe.length == 0) {
-                        $(opererWindow.document.body).append("<iframe id='bgDailogIframe' frameborder='0' style='position:absolute;z-index: 100;' src='" + BaseUtil.GetRootPath() + "/UIComponent/Dialog/BGTransparent.html'></iframe>");
-                        bgiframe = $("#bgDailogIframe");
-                    }
-                    var dialogHeight = $(this).closest('.ui-dialog').height();
-                    var dialogWidth = $(this).closest('.ui-dialog').width();
-                    var position = $(this).closest('.ui-dialog').position();
-                    bgiframe.css('height', dialogHeight + 8);
-                    bgiframe.css('width', dialogWidth + 8);
-                    bgiframe.css('top', position.top);
-                    bgiframe.css('left', position.left);
-                    bgiframe.show();
-                }
             },
             close:function () {
-                $("#bgDailogIframe").hide();
                 if(sFunc){
                     sFunc();
                 }
@@ -814,7 +800,6 @@ var DialogUtility={
         };
         var defaultConfig = $.extend(true, {}, defaultConfig, config);
         $(htmlElem).html(htmlmsg);
-        //alert();
         $(htmlElem).dialog(defaultConfig);
     },
     AlertJsonCode:function(json){
@@ -924,39 +909,37 @@ var DialogUtility={
             "ElementObj":htmlElem
         };
     },
-    Prompt:function(opererWindow,config,dialogId,title,htmlmsg,okFunc){
-        alert("DialogUtility.Prompt 已停用");
-        var htmlElem = this._CreateDialogElem(opererWindow.document.body,dialogId);
-        var paras=null;
+    Prompt:function(opererWindow,config,dialogId,labelMsg,okFunc) {
+        var htmlElem = this._CreateDialogElem(opererWindow.document.body, dialogId);
+        var paras = null;
+        var textArea=$("<textarea />");
         var defaultConfig = {
             height: 200,
             width: 300,
-            title:"",
-            show:true,
-            modal:true,
-            buttons:{
+            title: "",
+            show: true,
+            modal: true,
+            buttons: {
                 "确认": function () {
-                    if(defaultConfig.validatefunc(paras)) {
-                        defaultConfig.okfunc(paras);
-                        if(defaultConfig.closeafterfunc) {
-                            $(htmlElem).dialog("close");
-                        }
+                    //debugger;
+                    if(typeof(okFunc)=="function") {
+                        var inputText = textArea.val();
+                        okFunc(inputText);
                     }
+                    $(htmlElem).dialog("close");
                 },
-                "取消":function() {
-                    defaultConfig.cancelfunc(paras);
-                    if(defaultConfig.closeafterfunc) {
-                        $(htmlElem).dialog("close");
-                    }
+                "取消": function () {
+                    $(htmlElem).dialog("close");
                 }
             }
         };
         var defaultConfig = $.extend(true, {}, defaultConfig, config);
-        $(htmlElem).html(htmlmsg);
+        $(textArea).css("height",defaultConfig.height - 130);
+
+        var htmlContent = $("<div>" + labelMsg + "：</div>").append(textArea);
+        $(htmlElem).html(htmlContent);
         $(htmlElem).dialog(defaultConfig);
-        paras={
-            "ElementObj":htmlElem
-        };
+        //dialog.textAreaObj=textArea;
     },
     DialogElem:function (elem,config) {
         $(elem).dialog(config);
