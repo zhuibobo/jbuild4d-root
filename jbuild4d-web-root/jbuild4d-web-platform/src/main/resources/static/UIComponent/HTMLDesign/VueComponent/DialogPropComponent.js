@@ -429,7 +429,10 @@ Vue.component("db-table-relation-comp", {
                 outerKeyFieldName: "",
                 relationType: "1ToN",
                 isSave: "true",
-                condition:""
+                condition:"",
+                tableId:"",
+                tableName:"",
+                tableCaption:""
             },
             currentEditorData: {
                 id: "",
@@ -441,7 +444,10 @@ Vue.component("db-table-relation-comp", {
                 outerKeyFieldName: "",
                 relationType: "1ToN",
                 isSave: "true",
-                condition:""
+                condition:"",
+                tableId:"",
+                tableName:"",
+                tableCaption:""
             },
             selectTableTree: {
                 tableTreeObj: null,
