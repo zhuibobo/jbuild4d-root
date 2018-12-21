@@ -400,7 +400,7 @@ Vue.component("db-table-relation-comp", {
                         }
                     }
                 },
-                tableTreeData: {
+                tableTreeRootData: {
                     id: "-1",
                     text: "数据关联",
                     parentId: "",
@@ -492,7 +492,7 @@ Vue.component("db-table-relation-comp", {
     mounted:function(){
         this.bindSelectTableTree();
         //初始化根节点
-        this.relationTableTree.treeObj=$.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,this.relationTableTree.tableTreeData);
+        this.relationTableTree.treeObj=$.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,this.relationTableTree.tableTreeRootData);
         this.relationTableTree.treeObj.expandAll(true);
         this.relationTableTree.currentSelectedNode=this.relationTableTree.treeObj.getNodeByParam("id","-1");
         //将对象附加到window上,提供给后边进行操作
@@ -674,6 +674,10 @@ Vue.component("db-table-relation-comp", {
         deserializeRelation:function(jsonString){
             var tempdata=JsonUtility.StringToJson(jsonString);
             //构造树形式的展现
+            //this.relationTableTree.treeObj.removeChildNodes(this.relationTableTree.tableTreeRootData);
+            tempdata.push(this.relationTableTree.tableTreeRootData);
+            this.relationTableTree.treeObj = $.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,tempdata);
+            this.relationTableTree.treeObj.expandAll(true);
         },
         alertSerializeRelation:function(){
             DialogUtility.AlertJsonCode(this.resultData);
