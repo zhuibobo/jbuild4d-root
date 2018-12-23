@@ -519,7 +519,7 @@ Vue.component("db-table-relation-comp", {
                         this.resultData[i].relationType=val.relationType;
                         this.resultData[i].isSave=val.isSave;
                         this.resultData[i].condition=val.condition;*/
-                        this.resultItemCopyValue(this.resultData[i],val);
+                        this.resultItemCopyEditEnableValue(this.resultData[i],val);
                     }
                 }
             },
@@ -527,7 +527,7 @@ Vue.component("db-table-relation-comp", {
         }
     },
     methods: {
-        resultItemCopyValue:function(toObj,fromObj){
+        resultItemCopyEditEnableValue:function(toObj,fromObj){
             toObj.singleName=fromObj.singleName;
             toObj.pkFieldName=fromObj.pkFieldName;
             toObj.desc=fromObj.desc;
@@ -633,6 +633,9 @@ Vue.component("db-table-relation-comp", {
             var newResultItem = this.getEmptyResultItem();
             newResultItem.id = newNode.id;
             newResultItem.parentId = this.relationTableTree.currentSelectedNode.id;
+            newResultItem.tableId=newNode.tableId;
+            newResultItem.tableName=newNode.value;
+            newResultItem.tableCaption=newNode.attr1;
             this.resultData.push(newResultItem);
         },
         selectedRelationTableNode: function (node) {
@@ -659,7 +662,7 @@ Vue.component("db-table-relation-comp", {
             //从关联的结果数据中,查找出当前节点的数据,绑定到编辑窗口
             var existResultItem=this.getExistResultItem(node.id);
             if(existResultItem!=null){
-                this.resultItemCopyValue(this.currentEditorData,existResultItem);
+                this.resultItemCopyEditEnableValue(this.currentEditorData,existResultItem);
                 //调用sql编辑的组件,进行赋值
                 var _self=this;
                 window.setTimeout(function () {
@@ -678,8 +681,15 @@ Vue.component("db-table-relation-comp", {
             return JsonUtility.JsonToString(this.resultData);
         },
         deserializeRelation:function(jsonString){
-            var tempdata=JsonUtility.StringToJson(jsonString);
+            var tempData=JsonUtility.StringToJson(jsonString);
+            this.resultData=tempData;
             //构造树形式的展现
+            //转换数据为树格式的数据
+            for(var i=0;i<tempData.length;i++){
+                tempData[i].value=tempData[i].tableName;
+                tempData[i].attr1=tempData[i].tableCaption;
+                tempData[i].text=tempData[i].tableCaption+"【"+tempData[i].tableName+"】";
+            }
             //this.relationTableTree.treeObj.removeChildNodes(this.relationTableTree.tableTreeRootData);
             tempdata.push(this.relationTableTree.tableTreeRootData);
             this.relationTableTree.treeObj = $.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,tempdata);
