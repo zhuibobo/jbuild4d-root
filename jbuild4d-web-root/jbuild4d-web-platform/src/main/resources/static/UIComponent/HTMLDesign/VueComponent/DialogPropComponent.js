@@ -312,7 +312,8 @@ Vue.component("sql-general-design-comp", {
     props:["sqlDesignerHeight","value"],
     data:function(){
         return {
-            sqlText:""
+            sqlText:"",
+            selectedItemValue:"说明"
         }
     },
     watch: {
@@ -347,20 +348,28 @@ Vue.component("sql-general-design-comp", {
         },
         setValue:function (value) {
             this.sqlCodeMirror.setValue(value);
+        },
+        insertEnvToEditor:function (code) {
+            this.insertCodeAtCursor(code);
+        },
+        insertCodeAtCursor:function(code){
+            var doc = this.sqlCodeMirror.getDoc();
+            var cursor = doc.getCursor();
+            doc.replaceRange(code, cursor);
         }
     },
     template:'<div>\
                 <textarea id="TextAreaSQLEditor"></textarea>\
                 <div style="text-align: right;margin-top: 8px">\
-                    <radio-group type="button" size="small">\
-                        <radio label="组织Id"></radio>\
-                        <radio label="组织名称"></radio>\
-                        <radio label="用户Id"></radio>\
-                        <radio label="用户名称"></radio>\
-                        <radio label="yyyy-MM-dd"></radio>\
-                        <radio label="表字段"></radio>\
-                        <radio label="说明"></radio>\
-                    </radio-group>\
+                    <ButtonGroup size="small">\
+                        <Button @click="insertEnvToEditor(\'#{ApiVar.当前用户所在组织ID}\')">组织Id</Button>\
+                        <Button>组织名称</Button>\
+                        <Button>用户Id</Button>\
+                        <Button>用户名称</Button>\
+                        <Button>yyyy-MM-dd</Button>\
+                        <Button>表字段</Button>\
+                        <Button>说明</Button>\
+                    </ButtonGroup>\
                 </div>\
               </div>'
 });
