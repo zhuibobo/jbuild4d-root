@@ -482,8 +482,8 @@ Vue.component("db-table-relation-comp", {
                                 //appForm.formResourceEntity.formMainTableCaption=treeNode.attr1;
                                 //appForm.formResourceEntity.formMainTableName=treeNode.value;
                                 var _self = window._dbtablerelationcomp;
-                                _self.addTableToRelationTableTree(treeNode);
                                 $("#divSelectTable").dialog("close");
+                                _self.addTableToRelationTableTree(treeNode);
                             }
                         }
                     }
@@ -672,6 +672,7 @@ Vue.component("db-table-relation-comp", {
             this.resultData.push(newResultItem);
         },
         selectedRelationTableNode: function (node) {
+            //return;
             //debugger;
             this.relationTableTree.currentSelectedNode = node;
             this.relationTableEditorView.isShowTableEditDetail=!this.isSelectedRootRelationTableNode();
