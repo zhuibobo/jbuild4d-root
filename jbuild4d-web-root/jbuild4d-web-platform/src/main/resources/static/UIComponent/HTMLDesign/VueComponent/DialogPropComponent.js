@@ -585,6 +585,39 @@ Vue.component("db-table-relation-comp", {
                 }
             }, "json");
         },
+        deleteSelectedRelationTreeNode:function(){
+            if(this.relationTableTree.currentSelectedNode){
+                if(!this.isSelectedRootRelationTableNode()){
+                    if(!this.relationTableTree.currentSelectedNode.isParent){
+                        for(var i=0;i<this.resultData.length;i++){
+                            if(this.resultData[i].id==this.relationTableTree.currentSelectedNode.id){
+                                this.resultData.splice(i,1);
+                                break;
+                            }
+                        }
+                        this.resultItemCopyEditEnableValue(this.currentEditorData,this.emptyEditorData);
+                        this.currentEditorData.id="";
+                        this.currentEditorData.parentId="";
+                        this.$refs.sqlGeneralDesignComp.setValue("");
+                        this.relationTableEditorView.selPKData=[];
+                        this.relationTableEditorView.selSelfKeyData=[];
+                        this.relationTableEditorView.selForeignKeyData=[];
+                        this.relationTableEditorView.isShowTableEditDetail=false;
+                        this.relationTableTree.treeObj.removeNode(this.relationTableTree.currentSelectedNode,false);
+                        this.relationTableTree.currentSelectedNode=null;
+                    }
+                    else{
+                        DialogUtility.AlertText("不能删除父节点!");
+                    }
+                }
+                else{
+                    DialogUtility.AlertText("不能删除根节点!");
+                }
+            }
+            else{
+                DialogUtility.AlertText("请选择要删除的节点!");
+            }
+        },
         beginSelectTableToRelationTable: function () {
             if (this.relationTableTree.currentSelectedNode) {
                 $("#divSelectTable").dialog({
@@ -717,7 +750,7 @@ Vue.component("db-table-relation-comp", {
                 <div style="float: left;width: 350px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
                     <button-group shape="circle" style="margin: auto">\
                         <i-button type="success" @click="beginSelectTableToRelationTable">&nbsp;添加&nbsp;</i-button>\
-                        <i-button>&nbsp;删除&nbsp;</i-button>\
+                        <i-button @click="deleteSelectedRelationTreeNode">&nbsp;删除&nbsp;</i-button>\
                         <i-button @click="alertSerializeRelation">序列化</i-button>\
                         <i-button @click="inputDeserializeRelation">反序列化</i-button>\
                         <i-button>说明</i-button>\
@@ -743,12 +776,6 @@ Vue.component("db-table-relation-comp", {
                                     <i-select placeholder="默认使用Id字段" v-model="currentEditorData.pkFieldName" size="small" style="width:199px">\
                                         <i-option v-for="item in relationTableEditorView.selPKData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
                                     </i-select>\
-                                </td>\
-                            </tr>\
-                            <tr>\
-                                <td class="label">Desc：</td>\
-                                <td colspan="3">\
-                                    <i-input v-model="currentEditorData.desc" size="small" placeholder="说明" />\
                                 </td>\
                             </tr>\
                             <tr v-if="relationTableEditorView.isSubEditTr">\
@@ -779,6 +806,12 @@ Vue.component("db-table-relation-comp", {
                                      <i-select placeholder="默认使用Id字段" v-model="currentEditorData.outerKeyFieldName" size="small" style="width:199px">\
                                         <i-option v-for="item in relationTableEditorView.selPKData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
                                     </i-select>\
+                                </td>\
+                            </tr>\
+                            <tr>\
+                                <td class="label">Desc：</td>\
+                                <td colspan="3">\
+                                    <i-input v-model="currentEditorData.desc" size="small" placeholder="说明" />\
                                 </td>\
                             </tr>\
                             <tr>\
