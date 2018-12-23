@@ -370,6 +370,8 @@ Vue.component("sql-general-design-comp", {
                         <Button>表字段</Button>\
                         <Button>说明</Button>\
                     </ButtonGroup>\
+                    顶顶顶顶<i-select placeholder="默认使用Id字段" size="small" style="width:199px">\
+                                    </i-select>\
                 </div>\
               </div>'
 });
