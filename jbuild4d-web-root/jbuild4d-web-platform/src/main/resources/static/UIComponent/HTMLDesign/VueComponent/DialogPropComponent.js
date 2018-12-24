@@ -313,7 +313,9 @@ Vue.component("sql-general-design-comp", {
     data:function(){
         return {
             sqlText:"",
-            selectedItemValue:"说明"
+            selectedItemValue:"说明",
+            selfTableFields:[],
+            parentTableFields:[]
         }
     },
     watch: {
@@ -349,6 +351,10 @@ Vue.component("sql-general-design-comp", {
         setValue:function (value) {
             this.sqlCodeMirror.setValue(value);
         },
+        setAboutTableFields:function(selfTableFields,parentTableFields){
+            this.selfTableFields=selfTableFields;
+            this.parentTableFields=parentTableFields;
+        },
         insertEnvToEditor:function (code) {
             this.insertCodeAtCursor(code);
         },
@@ -370,8 +376,20 @@ Vue.component("sql-general-design-comp", {
                         <Button>表字段</Button>\
                         <Button>说明</Button>\
                     </ButtonGroup>\
-                    顶顶顶顶<i-select placeholder="默认使用Id字段" size="small" style="width:199px">\
-                                    </i-select>\
+                </div>\
+                <div style="margin-top: 8px">\
+                    <div style="float: left;margin: 4px 10px">本表字段</div>\
+                    <div style="float: left">\
+                        <i-select placeholder="默认使用Id字段" size="small" style="width:175px">\
+                            <i-option v-for="item in selfTableFields" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
+                        </i-select>\
+                    </div>\
+                    <div style="float: left;margin: 4px 10px">父表字段</div>\
+                    <div style="float: left">\
+                        <i-select placeholder="默认使用Id字段" size="small" style="width:177px">\
+                            <i-option v-for="item in parentTableFields" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
+                        </i-select>\
+                    </div>\
                 </div>\
               </div>'
 });
@@ -704,6 +722,7 @@ Vue.component("db-table-relation-comp", {
             this.currentEditorData.id=this.relationTableTree.currentSelectedNode.id;
             this.currentEditorData.parentId=parentNode.id;
 
+
             //从关联的结果数据中,查找出当前节点的数据,绑定到编辑窗口
             var existResultItem=this.getExistResultItem(node.id);
             if(existResultItem!=null){
@@ -712,6 +731,8 @@ Vue.component("db-table-relation-comp", {
                 var _self=this;
                 window.setTimeout(function () {
                     _self.$refs.sqlGeneralDesignComp.setValue(_self.currentEditorData.condition);
+                    //_self.$refs.sqlGeneralDesignComp.selfTableFields=_self.relationTableEditorView.selSelfKeyData;
+                    _self.$refs.sqlGeneralDesignComp.setAboutTableFields(_self.relationTableEditorView.selSelfKeyData,_self.relationTableEditorView.selForeignKeyData);
                 },300);
                 //debugger;
             }
@@ -829,7 +850,7 @@ Vue.component("db-table-relation-comp", {
                             <tr>\
                                 <td class="label">加载条件：</td>\
                                 <td colspan="3">\
-                                    <sql-general-design-comp ref="sqlGeneralDesignComp" :sqlDesignerHeight="110" v-model="currentEditorData.condition"></sql-general-design-comp>\
+                                    <sql-general-design-comp ref="sqlGeneralDesignComp" :sqlDesignerHeight="74" v-model="currentEditorData.condition"></sql-general-design-comp>\
                                 </td>\
                             </tr>\
                         </tbody>\
