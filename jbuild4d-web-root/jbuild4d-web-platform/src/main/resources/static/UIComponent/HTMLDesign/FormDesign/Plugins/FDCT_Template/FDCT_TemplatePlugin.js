@@ -9,6 +9,7 @@
         init: function(editor) {
             //点击确认时候指定的操作
             function addToEditor(ckEditor, pluginSetting, props, contentWindow){
+                //debugger;
                 var html=props.resultHtml;
                 props={
                     baseInfo:{

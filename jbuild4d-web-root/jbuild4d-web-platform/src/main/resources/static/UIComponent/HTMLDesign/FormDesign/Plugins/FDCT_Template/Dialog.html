@@ -156,6 +156,7 @@
             },
             methods: {
                 selectTemplate:function(event){
+                    //alert("1");
                     var $sender=$(event.currentTarget);
                     $sender.addClass("templateWraper-selected");
                     this.resultHtml=$sender.html();
