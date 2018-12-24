@@ -369,18 +369,17 @@ Vue.component("sql-general-design-comp", {
                 <div style="text-align: right;margin-top: 8px">\
                     <ButtonGroup size="small">\
                         <Button @click="insertEnvToEditor(\'#{ApiVar.当前用户所在组织ID}\')">组织Id</Button>\
-                        <Button>组织名称</Button>\
-                        <Button>用户Id</Button>\
-                        <Button>用户名称</Button>\
-                        <Button>yyyy-MM-dd</Button>\
-                        <Button>表字段</Button>\
+                        <Button @click="insertEnvToEditor(\'#{ApiVar.当前用户所在组织名称}\')">组织名称</Button>\
+                        <Button @click="insertEnvToEditor(\'#{ApiVar.当前用户ID}\')">用户Id</Button>\
+                        <Button @click="insertEnvToEditor(\'#{ApiVar.当前用户名称}\')">用户名称</Button>\
+                        <Button @click="insertEnvToEditor(\'#{DateTime.年年年年-月月-日日}\')">yyyy-MM-dd</Button>\
                         <Button>说明</Button>\
                     </ButtonGroup>\
                 </div>\
                 <div style="margin-top: 8px">\
                     <div style="float: left;margin: 4px 10px">本表字段</div>\
                     <div style="float: left">\
-                        <i-select placeholder="默认使用Id字段" size="small" style="width:175px">\
+                        <i-select placeholder="默认使用Id字段" size="small" style="width:175px" on-change="">\
                             <i-option v-for="item in selfTableFields" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
                         </i-select>\
                     </div>\
