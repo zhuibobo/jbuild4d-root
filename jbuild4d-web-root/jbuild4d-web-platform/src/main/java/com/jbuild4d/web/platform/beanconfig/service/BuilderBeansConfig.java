@@ -66,8 +66,8 @@ public class BuilderBeansConfig {
     }
 
     @Bean
-    public ITableFieldService tableFieldService(ISQLBuilderService _sqlBuilderService, TableFieldMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
-        ITableFieldService bean=new TableFieldServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+    public ITableFieldService tableFieldService(ISQLBuilderService _sqlBuilderService, TableFieldMapper mapper,TableMapper tableMapper, SqlSessionTemplate sqlSessionTemplate) {
+        ITableFieldService bean=new TableFieldServiceImpl(mapper,tableMapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
 

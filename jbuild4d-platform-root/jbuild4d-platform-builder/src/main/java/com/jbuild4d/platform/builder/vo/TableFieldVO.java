@@ -19,6 +19,8 @@ public class TableFieldVO extends TableFieldEntity {
 
     public boolean isUpdateLogicOnly;
 
+    public String tableName;
+
     public String getOldFieldName() {
         return oldFieldName;
     }
@@ -33,6 +35,14 @@ public class TableFieldVO extends TableFieldEntity {
 
     public void setUpdateLogicOnly(boolean updateLogicOnly) {
         isUpdateLogicOnly = updateLogicOnly;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 
     @Override
@@ -51,7 +61,7 @@ public class TableFieldVO extends TableFieldEntity {
         return entityList;
     }
 
-    public static List<TableFieldVO> EntityListToVoList(List<TableFieldEntity> source) throws IOException {
+    public static List<TableFieldVO> EntityListToVoList(String tableName,List<TableFieldEntity> source) throws IOException {
         if(source==null)
             return null;
         else if(source.size()==0){
@@ -59,6 +69,10 @@ public class TableFieldVO extends TableFieldEntity {
         }
         String json= JsonUtility.toObjectString(source);
         List<TableFieldVO> result=JsonUtility.toObjectListIgnoreProp(json,TableFieldVO.class);
+        for (TableFieldVO tableFieldVO : result) {
+            tableFieldVO.setTableName(tableName);
+        }
+
         return result;
     }
 

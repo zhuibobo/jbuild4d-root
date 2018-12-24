@@ -358,6 +358,20 @@ Vue.component("sql-general-design-comp", {
         insertEnvToEditor:function (code) {
             this.insertCodeAtCursor(code);
         },
+        insertFieldToEditor:function(sourceType,event){
+            var sourceFields=null;
+            if(sourceType=="selfTableFields"){
+                sourceFields=this.selfTableFields;
+            }
+            else{
+                sourceFields=this.parentTableFields;
+            }
+            for(var i=0;i<sourceFields.length;i++){
+                if(sourceFields[i].fieldName==event){
+                    this.insertCodeAtCursor(sourceFields[i].tableName+"."+sourceFields[i].fieldName);
+                }
+            }
+        },
         insertCodeAtCursor:function(code){
             var doc = this.sqlCodeMirror.getDoc();
             var cursor = doc.getCursor();
@@ -379,13 +393,13 @@ Vue.component("sql-general-design-comp", {
                 <div style="margin-top: 8px">\
                     <div style="float: left;margin: 4px 10px">本表字段</div>\
                     <div style="float: left">\
-                        <i-select placeholder="默认使用Id字段" size="small" style="width:175px" on-change="">\
+                        <i-select placeholder="默认使用Id字段" size="small" style="width:175px" @on-change="insertFieldToEditor(\'selfTableFields\',$event)">\
                             <i-option v-for="item in selfTableFields" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
                         </i-select>\
                     </div>\
                     <div style="float: left;margin: 4px 10px">父表字段</div>\
                     <div style="float: left">\
-                        <i-select placeholder="默认使用Id字段" size="small" style="width:177px">\
+                        <i-select placeholder="默认使用Id字段" size="small" style="width:177px" @on-change="insertFieldToEditor(\'parentTableFields\',$event)">\
                             <i-option v-for="item in parentTableFields" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
                         </i-select>\
                     </div>\
@@ -566,6 +580,9 @@ Vue.component("db-table-relation-comp", {
             toObj.condition=fromObj.condition;
         },
         getTableFieldsByTableId:function (tableId) {
+            if(tableId=="-1"){
+                return null;
+            }
             if(this.tempDataStore["tableField_"+tableId]){
                 return this.tempDataStore["tableField_"+tableId];
             }

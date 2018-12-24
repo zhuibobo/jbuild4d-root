@@ -173,7 +173,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         resolveVo.setUpdateFields(updateFields);
         resolveVo.setDeleteFields(deleteFields);
         resolveVo.setNewTableFieldVOList(newTableFieldVOList);
-        resolveVo.setOldTableFieldVOList(TableFieldVO.EntityListToVoList(oldTableFieldEntityList));
+        resolveVo.setOldTableFieldVOList(TableFieldVO.EntityListToVoList(newTableEntity.getTableName(),oldTableFieldEntityList));
 
         return resolveVo;
     }
