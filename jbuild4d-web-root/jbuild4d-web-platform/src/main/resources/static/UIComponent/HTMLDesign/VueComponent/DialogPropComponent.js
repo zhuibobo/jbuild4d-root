@@ -692,13 +692,13 @@ Vue.component("db-table-relation-comp", {
             return this.relationTableTree.treeObj.getNodeByParam("_nodeExType", "MainNode");
         },
         getMainTableId:function(){
-
+            return this.getMainRelationTableNode().tableId;
         },
         getMainTableName:function(){
-
+            return this.getMainRelationTableNode().value;
         },
         getMainTableCaption:function(){
-
+            return this.getMainRelationTableNode().attr1;
         },
         isSelectedRootRelationTableNode:function(){
             return this.relationTableTree.currentSelectedNode.id == "-1";
@@ -764,6 +764,9 @@ Vue.component("db-table-relation-comp", {
             else{
                 alert("通过getExistResultItem获取不到数据!");
             }
+        },
+        getResultData:function(){
+            return this.resultData;
         },
         serializeRelation:function(isFormat){
             if(isFormat){

@@ -206,10 +206,12 @@
                 }
             },
             save:function (successFunc) {
-                this.formResourceEntity.formDataRelation= this.$refs.dbTableRelationComp.serializeRelation(false);
-                this.formResourceEntity.formHtmlSource=JBuild4D.FormDesign.GetCKEditorHTML();
                 if(this.validateSaveEnable(this.formResourceEntity)){
-
+                    this.formResourceEntity.formDataRelation= this.$refs.dbTableRelationComp.serializeRelation(false);
+                    this.formResourceEntity.formMainTableId= this.$refs.dbTableRelationComp.getMainTableId();
+                    this.formResourceEntity.formMainTableName= this.$refs.dbTableRelationComp.getMainTableName();
+                    this.formResourceEntity.formMainTableCaption= this.$refs.dbTableRelationComp.getMainTableCaption();
+                    this.formResourceEntity.formHtmlSource=JBuild4D.FormDesign.GetCKEditorHTML();
                 }
             },
             saveClose:function () {
@@ -225,9 +227,15 @@
             validateSaveEnable:function(formResourceEntity){
                 var resultMsg={
                     result:true,
-                    msg:""
+                    msg:[]
                 }
+
                 //校验是否设置了主表
+                if(this.$refs.dbTableRelationComp.getResultData().length==0){
+                    resultMsg.result=false;
+                    resultMsg.msg.push("请设置主表!");
+                }
+                return resultMsg;
             },
             validateDesign:function (formResourceEntity) {
                 if(this.validateSaveEnable(formResourceEntity)){
