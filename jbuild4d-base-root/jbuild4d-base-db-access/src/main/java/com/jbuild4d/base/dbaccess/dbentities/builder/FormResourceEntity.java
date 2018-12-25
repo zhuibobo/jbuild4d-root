@@ -60,6 +60,9 @@ public class FormResourceEntity {
     //FORM_ORGAN_NAME
     private String formOrganName;
 
+    //FORM_MAIN_TABLE_ID
+    private String formMainTableId;
+
     //FORM_MAIN_TABLE_NAME
     private String formMainTableName;
 
@@ -75,7 +78,7 @@ public class FormResourceEntity {
     //FORM_CONTENT_URL
     private String formContentUrl;
 
-    public FormResourceEntity(String formId, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formDataRelation, String formIsTemplate, String formContentUrl) {
+    public FormResourceEntity(String formId, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableId, String formMainTableName, String formMainTableCaption, String formDataRelation, String formIsTemplate, String formContentUrl) {
         this.formId = formId;
         this.formName = formName;
         this.formSingleName = formSingleName;
@@ -91,6 +94,7 @@ public class FormResourceEntity {
         this.formStatus = formStatus;
         this.formOrganId = formOrganId;
         this.formOrganName = formOrganName;
+        this.formMainTableId = formMainTableId;
         this.formMainTableName = formMainTableName;
         this.formMainTableCaption = formMainTableCaption;
         this.formDataRelation = formDataRelation;
@@ -220,6 +224,14 @@ public class FormResourceEntity {
 
     public void setFormOrganName(String formOrganName) {
         this.formOrganName = formOrganName == null ? null : formOrganName.trim();
+    }
+
+    public String getFormMainTableId() {
+        return formMainTableId;
+    }
+
+    public void setFormMainTableId(String formMainTableId) {
+        this.formMainTableId = formMainTableId == null ? null : formMainTableId.trim();
     }
 
     public String getFormMainTableName() {

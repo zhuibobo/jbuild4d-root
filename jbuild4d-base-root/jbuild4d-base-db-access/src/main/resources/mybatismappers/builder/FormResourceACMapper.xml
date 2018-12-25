@@ -18,6 +18,7 @@
             <arg column="FORM_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_MAIN_TABLE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_MAIN_TABLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_MAIN_TABLE_CAPTION" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_DATA_RELATION" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -42,6 +43,7 @@
             <arg column="FORM_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_MAIN_TABLE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_MAIN_TABLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_MAIN_TABLE_CAPTION" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_DATA_RELATION" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -58,8 +60,8 @@
     <sql id="Base_Column_List">
         FORM_ID, FORM_NAME, FORM_SINGLE_NAME, FORM_CREATE_TIME, FORM_CREATER, FORM_UPDATE_TIME,
         FORM_UPDATER, FORM_TYPE, FORM_ISSYSTEM, FORM_ORDER_NUM, FORM_DESC, FORM_MODULE_ID,
-        FORM_STATUS, FORM_ORGAN_ID, FORM_ORGAN_NAME, FORM_MAIN_TABLE_NAME, FORM_MAIN_TABLE_CAPTION,
-        FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_CONTENT_URL
+        FORM_STATUS, FORM_ORGAN_ID, FORM_ORGAN_NAME, FORM_MAIN_TABLE_ID, FORM_MAIN_TABLE_NAME,
+        FORM_MAIN_TABLE_CAPTION, FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_CONTENT_URL
     </sql>
     <sql id="Blob_Column_List">
         FORM_IS_RESOLVE, FORM_HTML_SOURCE, FORM_HTML_RESOLVE, FORM_JS_CONTENT, FORM_CSS_CONTENT,
@@ -83,7 +85,7 @@
                                         FORM_UPDATER, FORM_TYPE, FORM_ISSYSTEM,
                                         FORM_ORDER_NUM, FORM_DESC, FORM_MODULE_ID,
                                         FORM_STATUS, FORM_ORGAN_ID, FORM_ORGAN_NAME,
-                                        FORM_MAIN_TABLE_NAME, FORM_MAIN_TABLE_CAPTION,
+                                        FORM_MAIN_TABLE_ID, FORM_MAIN_TABLE_NAME, FORM_MAIN_TABLE_CAPTION,
                                         FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_CONTENT_URL,
                                         FORM_IS_RESOLVE, FORM_HTML_SOURCE,
                                         FORM_HTML_RESOLVE, FORM_JS_CONTENT,
@@ -94,7 +96,7 @@
                 #{formUpdater,jdbcType=VARCHAR}, #{formType,jdbcType=VARCHAR}, #{formIssystem,jdbcType=VARCHAR},
                 #{formOrderNum,jdbcType=INTEGER}, #{formDesc,jdbcType=VARCHAR}, #{formModuleId,jdbcType=VARCHAR},
                 #{formStatus,jdbcType=VARCHAR}, #{formOrganId,jdbcType=VARCHAR}, #{formOrganName,jdbcType=VARCHAR},
-                #{formMainTableName,jdbcType=VARCHAR}, #{formMainTableCaption,jdbcType=VARCHAR},
+                #{formMainTableId,jdbcType=VARCHAR}, #{formMainTableName,jdbcType=VARCHAR}, #{formMainTableCaption,jdbcType=VARCHAR},
                 #{formDataRelation,jdbcType=VARCHAR}, #{formIsTemplate,jdbcType=VARCHAR}, #{formContentUrl,jdbcType=VARCHAR},
                 #{formIsResolve,jdbcType=LONGVARCHAR}, #{formHtmlSource,jdbcType=LONGVARCHAR},
                 #{formHtmlResolve,jdbcType=LONGVARCHAR}, #{formJsContent,jdbcType=LONGVARCHAR},
@@ -148,6 +150,9 @@
             </if>
             <if test="formOrganName != null">
                 FORM_ORGAN_NAME,
+            </if>
+            <if test="formMainTableId != null">
+                FORM_MAIN_TABLE_ID,
             </if>
             <if test="formMainTableName != null">
                 FORM_MAIN_TABLE_NAME,
@@ -229,6 +234,9 @@
             <if test="formOrganName != null">
                 #{formOrganName,jdbcType=VARCHAR},
             </if>
+            <if test="formMainTableId != null">
+                #{formMainTableId,jdbcType=VARCHAR},
+            </if>
             <if test="formMainTableName != null">
                 #{formMainTableName,jdbcType=VARCHAR},
             </if>
@@ -309,6 +317,9 @@
             <if test="formOrganName != null">
                 FORM_ORGAN_NAME = #{formOrganName,jdbcType=VARCHAR},
             </if>
+            <if test="formMainTableId != null">
+                FORM_MAIN_TABLE_ID = #{formMainTableId,jdbcType=VARCHAR},
+            </if>
             <if test="formMainTableName != null">
                 FORM_MAIN_TABLE_NAME = #{formMainTableName,jdbcType=VARCHAR},
             </if>
@@ -361,6 +372,7 @@
             FORM_STATUS = #{formStatus,jdbcType=VARCHAR},
             FORM_ORGAN_ID = #{formOrganId,jdbcType=VARCHAR},
             FORM_ORGAN_NAME = #{formOrganName,jdbcType=VARCHAR},
+            FORM_MAIN_TABLE_ID = #{formMainTableId,jdbcType=VARCHAR},
             FORM_MAIN_TABLE_NAME = #{formMainTableName,jdbcType=VARCHAR},
             FORM_MAIN_TABLE_CAPTION = #{formMainTableCaption,jdbcType=VARCHAR},
             FORM_DATA_RELATION = #{formDataRelation,jdbcType=VARCHAR},
@@ -390,6 +402,7 @@
             FORM_STATUS = #{formStatus,jdbcType=VARCHAR},
             FORM_ORGAN_ID = #{formOrganId,jdbcType=VARCHAR},
             FORM_ORGAN_NAME = #{formOrganName,jdbcType=VARCHAR},
+            FORM_MAIN_TABLE_ID = #{formMainTableId,jdbcType=VARCHAR},
             FORM_MAIN_TABLE_NAME = #{formMainTableName,jdbcType=VARCHAR},
             FORM_MAIN_TABLE_CAPTION = #{formMainTableCaption,jdbcType=VARCHAR},
             FORM_DATA_RELATION = #{formDataRelation,jdbcType=VARCHAR},

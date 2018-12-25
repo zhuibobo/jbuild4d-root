@@ -691,6 +691,15 @@ Vue.component("db-table-relation-comp", {
         getMainRelationTableNode:function(){
             return this.relationTableTree.treeObj.getNodeByParam("_nodeExType", "MainNode");
         },
+        getMainTableId:function(){
+
+        },
+        getMainTableName:function(){
+
+        },
+        getMainTableCaption:function(){
+
+        },
         isSelectedRootRelationTableNode:function(){
             return this.relationTableTree.currentSelectedNode.id == "-1";
         },

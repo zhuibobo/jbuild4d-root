@@ -16,6 +16,7 @@
         <if test="formStatus !=null and formStatus !=''"> and FORM_STATUS like #{formStatus} </if>
         <if test="formOrganId !=null and formOrganId !=''"> and FORM_ORGAN_ID like #{formOrganId} </if>
         <if test="formOrganName !=null and formOrganName !=''"> and FORM_ORGAN_NAME like #{formOrganName} </if>
+        <if test="formMainTableId !=null and formMainTableId !=''"> and FORM_MAIN_TABLE_ID like #{formMainTableId} </if>
         <if test="formMainTableName !=null and formMainTableName !=''"> and FORM_MAIN_TABLE_NAME like #{formMainTableName} </if>
         <if test="formMainTableCaption !=null and formMainTableCaption !=''"> and FORM_MAIN_TABLE_CAPTION like #{formMainTableCaption} </if>
         <if test="formDataRelation !=null and formDataRelation !=''"> and FORM_DATA_RELATION like #{formDataRelation} </if>
