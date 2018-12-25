@@ -23,8 +23,12 @@
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
-    <div style="position: absolute;right: 10px;top: 10px;background-color: #00B83F">
-        按钮
+    <div style="position: absolute;right: 10px;top: 6px;z-index: 100">
+        <button-group size="small">
+            <i-button icon="md-cloud-done" type="primary" @click="saveClose()">保存并关闭</i-button>
+            <i-button icon="md-search" type="primary" @click="savePreview()">保存并预览</i-button>
+            <i-button icon="md-checkmark" type="primary" @click="validateDesign()">校验窗体设置</i-button>
+        </button-group>
     </div>
     <tabs @on-click="tabChange">
         <tab-pane name="Info" label="Info">
@@ -47,7 +51,7 @@
                             <i-input v-model="formResourceEntity.formDesc" type="textarea" :autosize="{minRows: 2,maxRows: 2}"></i-input>
                         </form-item>
                     </i-form>
-                    <db-table-relation-comp></db-table-relation-comp>
+                    <db-table-relation-comp ref="dbTableRelationComp"></db-table-relation-comp>
                 </div>
             </div>
         </tab-pane>
@@ -139,7 +143,6 @@
                 formUpdater:"",
                 formType:"",
                 formIssystem:"否",
-                formOrderNum:"",
                 formDesc:"",
                 formModuleId:"",
                 formStatus:"启用",
@@ -148,7 +151,7 @@
                 formMainTableName:"",
                 formMainTableCaption:"",
                 formDataRelation:"",
-                formIsTemplate:"",
+                formIsTemplate:"否",
                 formContentUrl:"",
                 formIsResolve:"",
                 formHtmlSource:"",
@@ -157,13 +160,10 @@
                 formCssContent:"",
                 formConfigContent:""
             },
-
-
             status: BaseUtility.GetUrlParaValue("op")
         },
         mounted:function () {
             this.initPageUI();
-
             this.bindStatusData();
         },
         methods: {
@@ -181,19 +181,17 @@
 
 
             },
-
-
             bindStatusData:function () {
                 this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
                 if(this.status=="add"){
                     this.formResourceEntity.formCreater=this.currUserEntity.userName;
                     this.formResourceEntity.formUpdater=this.currUserEntity.userName;
+                    this.formResourceEntity.formType="业务表单";
+                    this.formResourceEntity.formModuleId=BaseUtility.GetUrlParaValue("moduleId");
                 }
                 else {
-                    //this.editTableObj.LoadJsonData(this.tableFieldsData);
                     this.formResourceEntity.formId=BaseUtility.GetUrlParaValue("recordId");
                     this.formResourceEntity.formUpdater=this.currUserEntity.userName;
-                    //this.loadData(this.datasetEntity.dsId,this.status);
                 }
             },
             tabChange:function (name) {
@@ -203,6 +201,35 @@
                     JBuild4D.FormDesign.SetHTMLEditorHTML(html);
                 }
                 else if(name=="Design"){
+
+                }
+            },
+            save:function (successFunc) {
+                this.formResourceEntity.formDataRelation= this.$refs.dbTableRelationComp.serializeRelation(false);
+                this.formResourceEntity.formHtmlSource=JBuild4D.FormDesign.GetCKEditorHTML();
+                if(this.validateSaveEnable(this.formResourceEntity)){
+
+                }
+            },
+            saveClose:function () {
+                this.save(function () {
+
+                });
+            },
+            savePreview:function () {
+                this.save(function () {
+
+                })
+            },
+            validateSaveEnable:function(formResourceEntity){
+                var resultMsg={
+                    result:true,
+                    msg:""
+                }
+                //校验是否设置了主表
+            },
+            validateDesign:function (formResourceEntity) {
+                if(this.validateSaveEnable(formResourceEntity)){
 
                 }
             }
