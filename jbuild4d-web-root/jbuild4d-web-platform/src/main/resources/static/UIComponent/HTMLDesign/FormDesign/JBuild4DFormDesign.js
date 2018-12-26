@@ -310,6 +310,9 @@ var JBuild4D={
         GetCKEditorHTML:function(){
             return this._CKEditorInst.getData();
         },
+        SetCKEditorHTML:function(html){
+            this._CKEditorInst.setData(html);
+        },
         InitializeCKEditor:function(textAreaElemId,pluginsConfig,loadCompletedFunc) {
             var extraPlugins=new Array();
             for(var i=0;i<pluginsConfig.length;i++) {
@@ -398,7 +401,7 @@ var JBuild4D={
             }
         },
         GetHtmlEditorHTML:function(){
-            this.GetHTMLEditorInst().getValue();
+            return this.GetHTMLEditorInst().getValue();
         },
         InitializeHTMLCodeDesign:function () {
             var mixedMode = {

@@ -182,7 +182,9 @@
                     JBuild4D.FormDesign.SetHTMLEditorHTML(html);
                 }
                 else if(name=="Design"){
-
+                    var html=JBuild4D.FormDesign.GetHtmlEditorHTML();
+                    alert(html);
+                    JBuild4D.FormDesign.SetCKEditorHTML(html);
                 }
             },
             save:function (successFunc) {
