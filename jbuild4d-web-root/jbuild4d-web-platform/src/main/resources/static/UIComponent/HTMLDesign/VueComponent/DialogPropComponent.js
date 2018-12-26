@@ -689,16 +689,20 @@ Vue.component("db-table-relation-comp", {
             return sourceNode;
         },
         getMainRelationTableNode:function(){
-            return this.relationTableTree.treeObj.getNodeByParam("_nodeExType", "MainNode");
+            var node=this.relationTableTree.treeObj.getNodeByParam("_nodeExType", "MainNode");
+            if(node){
+                return node;
+            }
+            return null;
         },
-        getMainTableId:function(){
-            return this.getMainRelationTableNode().tableId;
+        getMainTableId:function() {
+            return this.getMainRelationTableNode() ? this.getMainRelationTableNode().tableId : "";
         },
-        getMainTableName:function(){
-            return this.getMainRelationTableNode().value;
+        getMainTableName:function() {
+            return this.getMainRelationTableNode() ? this.getMainRelationTableNode().value : "";
         },
-        getMainTableCaption:function(){
-            return this.getMainRelationTableNode().attr1;
+        getMainTableCaption:function() {
+            return this.getMainRelationTableNode() ? this.getMainRelationTableNode().attr1 : "";
         },
         isSelectedRootRelationTableNode:function(){
             return this.relationTableTree.currentSelectedNode.id == "-1";
@@ -769,12 +773,27 @@ Vue.component("db-table-relation-comp", {
             return this.resultData;
         },
         serializeRelation:function(isFormat){
+            alert("serializeRelation已经停用");
+            return;
             if(isFormat){
                 return JsonUtility.JsonToStringFormat(this.resultData);
             }
             return JsonUtility.JsonToString(this.resultData);
         },
         deserializeRelation:function(jsonString){
+            alert("deserializeRelation已经停用");
+            return;
+        },
+        getValue:function(){
+            var result={
+                mainTableId:this.getMainTableId(),
+                mainTableName:this.getMainTableName(),
+                mainTableCaption:this.getMainTableCaption(),
+                relationData:this.resultData
+            }
+            return result;
+        },
+        setValue:function(jsonString){
             var tempData=JsonUtility.StringToJson(jsonString);
             this.resultData=tempData;
             //构造树形式的展现

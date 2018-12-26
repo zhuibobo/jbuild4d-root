@@ -36,14 +36,14 @@
                 <div style="width: 1024px;height: 560px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">表单信息</divider>
                     <i-form  :model="formResourceEntity" :rules="ruleValidate" :label-width="110">
-                        <form-item label="表单名称：" prop="formName">
+                        <form-item label="表单名称：">
                             <row>
                                 <i-col span="10">
-                                    <i-input v-model="formResourceEntity.formName"></i-input>
+                                    <i-input v-model="formResourceEntity.formName" placeholder="请输入表单名称"></i-input>
                                 </i-col>
                                 <i-col span="4" style="text-align: center">唯一名称：</i-col>
                                 <i-col span="10">
-                                    <i-input v-model="formResourceEntity.formSingleName"></i-input>
+                                    <i-input v-model="formResourceEntity.formSingleName" placeholder="可以为空"></i-input>
                                 </i-col>
                             </row>
                         </form-item>
@@ -57,19 +57,9 @@
         </tab-pane>
         <tab-pane name="Design" label="Design">
             <div class="form-design-wraper">
-                <div class="left-wraper">
+                <div class="left-wraper" style="right: 10px">
                     <textarea name="html_design" id="html_design">
                     </textarea>
-                </div>
-                <div class="right-wraper">
-                    <tabs>
-                        <tab-pane label="Config">
-                            <div>Config</div>
-                        </tab-pane>
-                        <tab-pane label="Element">
-                            <div>Element</div>
-                        </tab-pane>
-                    </tabs>
                 </div>
             </div>
         </tab-pane>
@@ -108,6 +98,7 @@
             </div>
         </tab-pane>
         <tab-pane name="Be Referred" label="Be Referred"></tab-pane>
+        <tab-pane name="Config" label="Config"></tab-pane>
     </tabs>
 </div>
 
@@ -121,17 +112,6 @@
                 getPluginsConfig:"/PlatForm/Builder/WebFormDesign/GetPluginsConfig"
             },
             currUserEntity:null,
-            ruleValidate: {
-                formName: [
-                    {required: true, message: '【名称】不能空！', trigger: 'blur'}
-                ],
-                formMainTableName: [
-                    {required: true, message: '【绑定主表名称】不能空！', trigger: 'blur'}
-                ],
-                formMainTableCaption:[
-                    {required: true, message: '【绑定主表标题】不能空！', trigger: 'blur'}
-                ]
-            },
             /*Js Bean*/
             formResourceEntity:{
                 formId:"",
@@ -206,12 +186,19 @@
                 }
             },
             save:function (successFunc) {
-                if(this.validateSaveEnable(this.formResourceEntity)){
-                    this.formResourceEntity.formDataRelation= this.$refs.dbTableRelationComp.serializeRelation(false);
-                    this.formResourceEntity.formMainTableId= this.$refs.dbTableRelationComp.getMainTableId();
-                    this.formResourceEntity.formMainTableName= this.$refs.dbTableRelationComp.getMainTableName();
-                    this.formResourceEntity.formMainTableCaption= this.$refs.dbTableRelationComp.getMainTableCaption();
-                    this.formResourceEntity.formHtmlSource=JBuild4D.FormDesign.GetCKEditorHTML();
+                var relationConfig=this.$refs.dbTableRelationComp.getValue();
+                this.formResourceEntity.formDataRelation=JsonUtility.JsonToString(relationConfig.relationData);
+                this.formResourceEntity.formMainTableId=relationConfig.mainTableId;
+                this.formResourceEntity.formMainTableName=relationConfig.mainTableName;
+                this.formResourceEntity.formMainTableCaption=relationConfig.mainTableCaption;
+                this.formResourceEntity.formHtmlSource=JBuild4D.FormDesign.GetCKEditorHTML();
+
+                var validateResult=this.validateSaveEnable(this.formResourceEntity);
+                if(validateResult.result){
+
+                }
+                else{
+                    DialogUtility.AlertText(validateResult.msg.join("<br />"));
                 }
             },
             saveClose:function () {
@@ -230,8 +217,12 @@
                     msg:[]
                 }
 
+                if(formResourceEntity.formName==""){
+                    resultMsg.result=false;
+                    resultMsg.msg.push("请填写表单名称!");
+                }
                 //校验是否设置了主表
-                if(this.$refs.dbTableRelationComp.getResultData().length==0){
+                if(formResourceEntity.formMainTableId==""){
                     resultMsg.result=false;
                     resultMsg.msg.push("请设置主表!");
                 }
