@@ -28,6 +28,7 @@
             <i-button icon="md-cloud-done" type="primary" @click="saveClose()">保存并关闭</i-button>
             <i-button icon="md-search" type="primary" @click="savePreview()">保存并预览</i-button>
             <i-button icon="md-checkmark" type="primary" @click="validateDesign()">校验窗体设置</i-button>
+            <i-button icon="md-search" type="primary" @click="savePreview()">历史版本</i-button>
         </button-group>
     </div>
     <tabs @on-click="tabChange">
@@ -35,7 +36,7 @@
             <div style="width: 1024px;margin: auto">
                 <div style="width: 1024px;height: 560px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">表单信息</divider>
-                    <i-form  :model="formResourceEntity" :rules="ruleValidate" :label-width="110">
+                    <i-form  :model="formResourceEntity" :label-width="110">
                         <form-item label="表单名称：">
                             <row>
                                 <i-col span="10">
@@ -141,7 +142,8 @@
                 formCssContent:"",
                 formConfigContent:""
             },
-            status: BaseUtility.GetUrlParaValue("op")
+            status: BaseUtility.GetUrlParaValue("op"),
+            oldSelectedTabValue:""
         },
         mounted:function () {
             this.initPageUI();
@@ -159,8 +161,6 @@
                     });
                     JBuild4D.FormDesign.InitializeHTMLCodeDesign();
                 },"json");
-
-
             },
             bindStatusData:function () {
                 this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
@@ -169,23 +169,42 @@
                     this.formResourceEntity.formUpdater=this.currUserEntity.userName;
                     this.formResourceEntity.formType="业务表单";
                     this.formResourceEntity.formModuleId=BaseUtility.GetUrlParaValue("moduleId");
+                    this.oldSelectedTabName="Info";
                 }
                 else {
                     this.formResourceEntity.formId=BaseUtility.GetUrlParaValue("recordId");
                     this.formResourceEntity.formUpdater=this.currUserEntity.userName;
+                    this.oldSelectedTabName="HTML";
                 }
             },
+            isHTMLToDesign:function(name){
+                if(this.oldSelectedTabName=="HTML"){
+                    if(name=="Design"){
+                        return true;
+                    }
+                }
+                return false;
+            },
+            isDesignToHTML:function(name){
+                if(this.oldSelectedTabName=="Design"){
+                    if(name=="HTML"){
+                        return true;
+                    }
+                }
+                return false;
+            },
             tabChange:function (name) {
-                if(name=="HTML"){
+                if(this.isDesignToHTML(name)){
                     var html=JBuild4D.FormDesign.GetCKEditorHTML();
                     //JBuild4D.FormDesign.SetHTMLEditorHTML("<div id='aaa'><div><div><div>ssssssssss</div></div></div></div>");
                     JBuild4D.FormDesign.SetHTMLEditorHTML(html);
                 }
-                else if(name=="Design"){
+                else if(this.isHTMLToDesign(name)){
                     var html=JBuild4D.FormDesign.GetHtmlEditorHTML();
-                    alert(html);
+                    //alert(html);
                     JBuild4D.FormDesign.SetCKEditorHTML(html);
                 }
+                this.oldSelectedTabName=name;
             },
             save:function (successFunc) {
                 var relationConfig=this.$refs.dbTableRelationComp.getValue();

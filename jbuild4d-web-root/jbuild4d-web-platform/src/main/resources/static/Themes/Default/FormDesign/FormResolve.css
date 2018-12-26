@@ -39,12 +39,18 @@
     text-align: right;
 }
 
+/*
+.wathet-blue-table tr td input[type="text"]{
+    height: 20px;
+}
+*/
+
 .wathet-blue-table tr td input[type="text"], textarea, select {
     background: transparent;
     border: 1px solid #d3d7e0;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
     padding: 4px;
-    width: 100%;
-    overflow: auto;
+    width: 96%;
+    /*overflow: auto;*/
     font-size: 12px;
 }
