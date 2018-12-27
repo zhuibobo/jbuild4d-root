@@ -48,9 +48,10 @@
 .wathet-blue-table tr td input[type="text"], textarea, select {
     background: transparent;
     border: 1px solid #d3d7e0;
-    /*box-sizing: border-box;*/
+    box-sizing: border-box;
     padding: 4px;
-    width: 96%;
+    width: 100%;
     /*overflow: auto;*/
     font-size: 12px;
+    border-radius: 3px;
 }

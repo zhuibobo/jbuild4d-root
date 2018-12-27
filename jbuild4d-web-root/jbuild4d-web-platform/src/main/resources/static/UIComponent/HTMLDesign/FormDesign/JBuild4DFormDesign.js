@@ -382,7 +382,7 @@ var JBuild4D={
             CKEDITOR.on('instanceReady', function (e) {
                 if(typeof(loadCompletedFunc)=="function"){
                     loadCompletedFunc();
-                    JBuild4D.FormDesign.SetCKEditorHTML("<div class=\"table-width-wraper-1024\" clientresolve=\"2\" is_jbuild4d_data=\"false\" jbuild4d_custom=\"true\" serialize=\"false\" serverresolve=\"1\" singlename=\"FDCT_Template\">" +
+                    /*JBuild4D.FormDesign.SetCKEditorHTML("<div class=\"table-width-wraper-1024\" clientresolve=\"2\" is_jbuild4d_data=\"false\" jbuild4d_custom=\"true\" serialize=\"false\" serverresolve=\"1\" singlename=\"FDCT_Template\">" +
                         "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"wathet-blue-table\">" +
                         "<colgroup>" +
                         "<col style=\"width: 10%;\" />" +
@@ -424,7 +424,7 @@ var JBuild4D={
                         "</tr>" +
                         "</tbody>" +
                         "</table>" +
-                        "</div>");
+                        "</div>");*/
                 }
             });
         },

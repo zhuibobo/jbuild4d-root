@@ -159,7 +159,8 @@
                     //alert("1");
                     var $sender=$(event.currentTarget);
                     $sender.addClass("templateWraper-selected");
-                    this.resultHtml=$sender.html();
+                    this.resultHtml=$sender.html().replace(/&nbsp;/ig, '');
+                    //alert(this.resultHtml);
                 },
                 ready:function(actionName){
                 },
@@ -169,7 +170,7 @@
                         baseInfo:{
                             serialize:"false"
                         }
-                    }
+                    };
                     return JBuild4D.FormDesign.Control.ValidateSerializeControlDialogCompletedEnable(result);
                 },
                 setControlProps:function ($elem,props) {
