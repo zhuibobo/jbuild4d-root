@@ -470,10 +470,15 @@ var JBuild4D={
         _JsEditorInst:null,
         _GetNewFormJsString:function(){
             return "var FormPageObjectInstance={" +
-                "data:{}," +
+                "data:{" +
+                    "userEntity:{}," +
+                    "formData:[]," +
+                    "config:[]" +
+                "}," +
                 "PageReady:function(){}," +
-                "BindRecordDataReady:function(){}"+
+                "BindRecordDataReady:function(){}" +
                 "}";
+
         },
         GetJsEditorInst:function () {
             return this._JsEditorInst;
@@ -486,7 +491,8 @@ var JBuild4D={
         },
         InitializeJsCodeDesign:function (status) {
             this._JsEditorInst=CodeMirror.fromTextArea($("#TextAreaJsEditor")[0], {
-                mode: "javascript",
+                //mode: "javascript",
+                mode: "application/ld+json",
                 lineNumbers: true,
                 lineWrapping: true,
                 extraKeys: {
@@ -495,6 +501,8 @@ var JBuild4D={
                     }
                 },
                 foldGutter: true,
+                smartIndent:true,
+                matchBrackets: true,
                 theme: "monokai",
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
             });
