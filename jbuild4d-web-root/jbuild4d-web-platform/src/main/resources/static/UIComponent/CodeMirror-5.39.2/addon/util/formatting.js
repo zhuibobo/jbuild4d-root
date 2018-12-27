@@ -1,6 +1,3 @@
-/**
- * Created by zhuibobo on 2016/11/2.
- */
 (function() {
 
     CodeMirror.extendMode("css", {

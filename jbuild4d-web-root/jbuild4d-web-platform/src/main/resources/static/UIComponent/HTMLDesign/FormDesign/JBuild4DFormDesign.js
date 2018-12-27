@@ -472,7 +472,7 @@ var JBuild4D={
             return "var FormPageObjectInstance={" +
                 "data:{}," +
                 "PageReady:function(){}," +
-                "BindRecordDataReady:function(){}"
+                "BindRecordDataReady:function(){}"+
                 "}";
         },
         GetJsEditorInst:function () {
@@ -501,6 +501,9 @@ var JBuild4D={
             this._JsEditorInst.setSize("100%",PageStyleUtility.GetWindowHeight()-60);
             if(status=="add"){
                 this.SetJsEditorJs(this._GetNewFormJsString());
+                CodeMirror.commands["selectAll"](this.GetJsEditorInst());
+                var range = { from: this.GetJsEditorInst().getCursor(true), to: this.GetJsEditorInst().getCursor(false) };;
+                this.GetJsEditorInst().autoFormatRange(range.from, range.to);
             }
         }
     }
