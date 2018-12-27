@@ -382,6 +382,49 @@ var JBuild4D={
             CKEDITOR.on('instanceReady', function (e) {
                 if(typeof(loadCompletedFunc)=="function"){
                     loadCompletedFunc();
+                    JBuild4D.FormDesign.SetCKEditorHTML("<div class=\"table-width-wraper-1024\" clientresolve=\"2\" is_jbuild4d_data=\"false\" jbuild4d_custom=\"true\" serialize=\"false\" serverresolve=\"1\" singlename=\"FDCT_Template\">" +
+                        "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"wathet-blue-table\">" +
+                        "<colgroup>" +
+                        "<col style=\"width: 10%;\" />" +
+                        "<col style=\"width: 23%;\" />" +
+                        "<col style=\"width: 10%;\" />" +
+                        "<col style=\"width: 23%;\" />" +
+                        "<col style=\"width: 10%;\" />" +
+                        "<col style=\"width: 24%;\" />" +
+                        "</colgroup>" +
+                        "<tbody>" +
+                        "<tr>" +
+                        "<td colspan=\"6\" height=\"60\">" +
+                        "<h3 class=\"title\">请输入表单名称</h3>" +
+                        "</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                        "<td class=\"label\">&nbsp;</td>" +
+                        "<td>&nbsp;</td>" +
+                        "<td class=\"label\">&nbsp;</td>" +
+                        "<td>&nbsp;</td>" +
+                        "<td class=\"label\">&nbsp;</td>" +
+                        "<td>&nbsp;</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                        "<td class=\"label\">&nbsp;</td>" +
+                        "<td>&nbsp;</td>" +
+                        "<td class=\"label\">&nbsp;</td>" +
+                        "<td>&nbsp;</td>" +
+                        "<td class=\"label\">&nbsp;</td>" +
+                        "<td>&nbsp;</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                        "<td class=\"label\">&nbsp;</td>" +
+                        "<td>&nbsp;</td>" +
+                        "<td class=\"label\">&nbsp;</td>" +
+                        "<td>&nbsp;</td>" +
+                        "<td class=\"label\">&nbsp;</td>" +
+                        "<td>&nbsp;</td>" +
+                        "</tr>" +
+                        "</tbody>" +
+                        "</table>" +
+                        "</div>");
                 }
             });
         },

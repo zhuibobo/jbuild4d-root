@@ -11,7 +11,7 @@ CKEDITOR.editorConfig = function(config) {
         'justify,menubutton,language,link,list,liststyle,magicline,maximize,newpage,pagebreak,pastetext,' +
         'pastefromword,preview,print,removeformat,save,selectall,showblocks,showborders,sourcearea,' +
         'specialchar,scayt,stylescombo,tab,table,tabletools,undo,wsc';
-    config.skin = 'moono-dark';
+    config.skin = 'moono-lisa';
     config.uiColor = '#F7B42C';
     config.toolbarGroups = [
         { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },

@@ -31,7 +31,7 @@
             <i-button icon="md-search" type="primary" @click="savePreview()">历史版本</i-button>
         </button-group>
     </div>
-    <tabs @on-click="tabChange">
+    <tabs @on-click="tabChange" v-model="selectedTabName">
         <tab-pane name="Info" label="Info">
             <div style="width: 1024px;margin: auto">
                 <div style="width: 1024px;height: 560px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
@@ -143,7 +143,8 @@
                 formConfigContent:""
             },
             status: BaseUtility.GetUrlParaValue("op"),
-            oldSelectedTabValue:""
+            oldSelectedTabName:"",
+            selectedTabName:""
         },
         mounted:function () {
             this.initPageUI();
@@ -174,7 +175,9 @@
                 else {
                     this.formResourceEntity.formId=BaseUtility.GetUrlParaValue("recordId");
                     this.formResourceEntity.formUpdater=this.currUserEntity.userName;
-                    this.oldSelectedTabName="HTML";
+                    this.oldSelectedTabName="Design";
+                    this.selectedTabName="Design";
+                    //JBuild4D.FormDesign.SetCKEditorHTML("");
                 }
             },
             isHTMLToDesign:function(name){
