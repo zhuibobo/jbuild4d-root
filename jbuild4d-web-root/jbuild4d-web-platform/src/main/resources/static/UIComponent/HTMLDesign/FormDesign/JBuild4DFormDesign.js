@@ -301,7 +301,6 @@ var JBuild4D={
         PluginsServerConfig:{
 
         },
-
         //CKEditor
         _CKEditorInst:null,
         GetCKEditorInst:function(){
@@ -465,8 +464,28 @@ var JBuild4D={
             });
             this._HTMLEditorInst.setSize("100%",PageStyleUtility.GetWindowHeight()-60);
             //$(".CodeMirror").height(PageStyleUtility.GetWindowHeight()-60);
-
-            /*this._HTMLEditorInst=CodeMirror.fromTextArea($("#TextAreaJsEidtor")[0], {
+            /**/
+        },
+        //Js
+        _JsEditorInst:null,
+        _GetNewFormJsString:function(){
+            return "var FormPageObjectInstance={" +
+                "data:{}," +
+                "PageReady:function(){}," +
+                "BindRecordDataReady:function(){}"
+                "}";
+        },
+        GetJsEditorInst:function () {
+            return this._JsEditorInst;
+        },
+        SetJsEditorJs:function (js) {
+            this.GetJsEditorInst().setValue(js);
+        },
+        GetJsEditorJs:function () {
+            return this.GetJsEditorInst().getValue();
+        },
+        InitializeJsCodeDesign:function (status) {
+            this._JsEditorInst=CodeMirror.fromTextArea($("#TextAreaJsEditor")[0], {
                 mode: "javascript",
                 lineNumbers: true,
                 lineWrapping: true,
@@ -478,8 +497,11 @@ var JBuild4D={
                 foldGutter: true,
                 theme: "monokai",
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-            });*/
+            });
+            this._JsEditorInst.setSize("100%",PageStyleUtility.GetWindowHeight()-60);
+            if(status=="add"){
+                this.SetJsEditorJs(this._GetNewFormJsString());
+            }
         }
-        //Js
     }
 }

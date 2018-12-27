@@ -84,7 +84,7 @@
         <tab-pane name="JS" label="JS">
             <div class="js-design-wraper">
                 <div class="left-wraper">
-                    <textarea id="TextAreaJsEidtor"></textarea>
+                    <textarea id="TextAreaJsEditor"></textarea>
                 </div>
                 <div class="right-wraper">
                     <tabs>
@@ -153,7 +153,7 @@
         methods: {
             initPageUI:function(){
                 $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
-
+                var _self=this;
                 AjaxUtility.Post(this.acInterface.getPluginsConfig,{},function (result) {
                     console.log(result.data);
 
@@ -161,6 +161,7 @@
 
                     });
                     JBuild4D.FormDesign.InitializeHTMLCodeDesign();
+                    JBuild4D.FormDesign.InitializeJsCodeDesign(_self.status);
                 },"json");
             },
             bindStatusData:function () {
