@@ -908,3 +908,17 @@ Vue.component("db-table-relation-comp", {
                 </div>\
               </div>'
 });
+
+/*Js编辑器代码段组件*/
+Vue.component("js-design-code-fragment", {
+    data: function () {
+        return {
+        }
+    },
+    mounted:function(){
+    },
+    methods:{
+    },
+    template: '<div>\
+        </div>'
+});

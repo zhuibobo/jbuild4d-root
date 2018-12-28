@@ -13,11 +13,13 @@
   cursor: pointer;
 }
 .CodeMirror-foldgutter-open:after {
-  content: "\25be";
+  //content: "\25be";
   /*content: "\25bc";*/
+  content:"-";
 }
 .CodeMirror-foldgutter-folded:after {
   /*content: "\25b6";*/
-  content: "\25b8";
+  //content: "\25b8";
+  content:"+";
   color:red;
 }

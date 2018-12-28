@@ -469,15 +469,16 @@ var JBuild4D={
         //Js
         _JsEditorInst:null,
         _GetNewFormJsString:function(){
-            return "var FormPageObjectInstance={" +
+            return "<script>var FormPageObjectInstance={" +
                 "data:{" +
                     "userEntity:{}," +
-                    "formData:[]," +
+                    "formEntity:[]," +
                     "config:[]" +
                 "}," +
-                "PageReady:function(){}," +
-                "BindRecordDataReady:function(){}" +
-                "}";
+                "pageReady:function(){}," +
+                "bindRecordDataReady:function(){}," +
+                "validateEveryFromControl:function(controlObj){}" +
+                "}</script>";
 
         },
         GetJsEditorInst:function () {
