@@ -89,10 +89,10 @@
                 <div class="right-wraper">
                     <tabs>
                         <tab-pane label="CodeFragment">
-                            <js-design-code-fragment></js-design-code-fragment>
+                            <js-design-code-fragment ref="jsDesignCodeFragment"></js-design-code-fragment>
                         </tab-pane>
                         <tab-pane label="Element">
-                            <div>Element</div>
+                            <design-html-elem-list ref="designHtmlElemList"></design-html-elem-list>
                         </tab-pane>
                     </tabs>
                 </div>
@@ -162,6 +162,7 @@
                     });
                     JBuild4D.FormDesign.InitializeHTMLCodeDesign();
                     JBuild4D.FormDesign.InitializeJsCodeDesign(_self.status);
+                    _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JBuild4D.FormDesign.GetJsEditorInst());
                 },"json");
             },
             bindStatusData:function () {
