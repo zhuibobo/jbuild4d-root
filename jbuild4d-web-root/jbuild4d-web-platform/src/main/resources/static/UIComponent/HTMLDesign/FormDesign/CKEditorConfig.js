@@ -42,7 +42,7 @@ CKEDITOR.editorConfig = function(config) {
     config.allowedContent = true;
     config.stylesSet = false;
     //config.autoParagraph = false;
-    config.contentsCss = ['../../../Themes/Default/FormDesign/FormDesignWysiwyg.css','../../../Themes/Default/FormDesign/FormResolve.css'];
+    config.contentsCss = ['../../../Themes/Default/Css/FormDesignWysiwyg.css','../../../Themes/Default/Css/FormDesignMain.css'];
     //,Source
     config.removeButtons = 'Maximize,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,' +
         'Replace,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Bold,Italic,' +
