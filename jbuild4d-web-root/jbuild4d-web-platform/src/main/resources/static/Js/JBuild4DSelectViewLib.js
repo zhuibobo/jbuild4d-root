@@ -76,8 +76,3 @@ var JBuild4DSelectView={
         }
     }
 }
-
-/*
-var SelectEnvVariable={
-
-}*/
