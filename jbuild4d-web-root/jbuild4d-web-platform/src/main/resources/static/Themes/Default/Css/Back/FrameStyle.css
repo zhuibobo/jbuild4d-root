@@ -82,12 +82,12 @@
     color: #eca19a;
 }
 
-.frame-top-menu-data{ background-image:url(Images/TopMenu/TopMenu-Data.png);}
-.frame-top-menu-affairs{ background-image:url(Images/TopMenu/TopMenu-Affairs.png);}
-.frame-top-menu-assistance{ background-image:url(Images/TopMenu/TopMenu-Assistance.png);}
-.frame-top-menu-biangeng{ background-image:url(Images/TopMenu/TopMenu-Biangeng.png);}
-.frame-top-menu-bidui{ background-image:url(Images/TopMenu/TopMenu-Bidui.png);}
-.frame-top-menu-calendar{ background-image:url(Images/TopMenu/TopMenu-Calendar.png);}
+.frame-top-menu-data{ background-image:url(Back/Images/TopMenu/TopMenu-Data.png);}
+.frame-top-menu-affairs{ background-image:url(Back/Images/TopMenu/TopMenu-Affairs.png);}
+.frame-top-menu-assistance{ background-image:url(Back/Images/TopMenu/TopMenu-Assistance.png);}
+.frame-top-menu-biangeng{ background-image:url(Back/Images/TopMenu/TopMenu-Biangeng.png);}
+.frame-top-menu-bidui{ background-image:url(Back/Images/TopMenu/TopMenu-Bidui.png);}
+.frame-top-menu-calendar{ background-image:url(Back/Images/TopMenu/TopMenu-Calendar.png);}
 
 .frame-top-menu-op-c {
     /*background-color: #416db8;*/
@@ -105,16 +105,16 @@
     cursor: pointer;
 }
 .frame-top-menu-op-c .right{
-    background: url("Images/Arrow_R.png") no-repeat right;
+    background: url("Back/Images/Arrow_R.png") no-repeat right;
 }
 .frame-top-menu-op-c .right:hover{
-    background: url("Images/Arrow_R_Hover.png") no-repeat right;
+    background: url("Back/Images/Arrow_R_Hover.png") no-repeat right;
 }
 .frame-top-menu-op-c .left{
-    background: url("Images/Arrow_L.png") no-repeat right;
+    background: url("Back/Images/Arrow_L.png") no-repeat right;
 }
 .frame-top-menu-op-c .left:hover{
-    background: url("Images/Arrow_L_Hover.png") no-repeat right;
+    background: url("Back/Images/Arrow_L_Hover.png") no-repeat right;
 
 }
 
@@ -131,7 +131,7 @@
     cursor: pointer;
 }
 .frame-left-menu-affairs{
-    background-image:url(Images/LeftMenu/LeftMenu-Affairs.png);
+    background-image:url(Back/Images/LeftMenu/LeftMenu-Affairs.png);
 }
 
 .frame-top-right-wrap{
@@ -151,7 +151,7 @@
 }
 
 .frame-user-warp .user-header {
-    background: url(Images/User-Header.png) center no-repeat;
+    background: url(Back/Images/User-Header.png) center no-repeat;
     width: 52px;
     height: 54px;
     margin-top: 4px;
@@ -170,7 +170,7 @@
 }
 
 .logout {
-    background: url(Images/Logout.png) center no-repeat;
+    background: url(Back/Images/Logout.png) center no-repeat;
     width: 78px;
     height: 54px;
     margin-top: 4px;

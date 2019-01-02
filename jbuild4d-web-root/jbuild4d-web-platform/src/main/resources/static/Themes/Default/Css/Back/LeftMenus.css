@@ -17,12 +17,12 @@
     padding: 0;
     width: 20px;
     border: 0 none;
-    background: url("Images/Icon_Left_Edit.png") no-repeat;
+    background: url("Back/Images/Icon_Left_Edit.png") no-repeat;
     cursor: pointer;
 }
 
 .left-page-c .tool-bar-c div:hover{
-    background: url("Images/Icon_Left_Edit_On.png") no-repeat;
+    background: url("Back/Images/Icon_Left_Edit_On.png") no-repeat;
     cursor: pointer;
 }
 
