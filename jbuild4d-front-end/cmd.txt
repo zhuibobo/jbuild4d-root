@@ -1,0 +1,1 @@
+node "D:\JavaProject\SelfProject\jbuild4d-project\jbuild4d-root\jbuild4d-front-end\node_modules\babel-cli\bin\babel.js" "D:\JavaProject\SelfProject\jbuild4d-project\jbuild4d-root\jbuild4d-front-end\demo\index.js" -o D:\JavaProject\SelfProject\jbuild4d-project\jbuild4d-root\jbuild4d-front-end\demo\indexC.js

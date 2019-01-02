@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectTasksOptions">
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="$FileName$ $FileNameWithoutExtension$.css --source-map" />
+      <option name="arguments" value="$ProjectFileDir$\jbuild4d-front-end\node_modules\less\bin\lessc $FileName$ $FileNameWithoutExtension$.css --source-map" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ALWAYS" />
@@ -20,7 +20,7 @@
         </array>
       </option>
       <option name="outputFromStdout" value="false" />
-      <option name="program" value="D:/DevGeneral/node-v10.14.1-win-x64/node-global/lessc.cmd" />
+      <option name="program" value="D:/DevGeneral/node-v10.14.1-win-x64/node.exe" />
       <option name="runOnExternalChanges" value="true" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="true" />
