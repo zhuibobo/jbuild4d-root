@@ -374,7 +374,7 @@ select {
 .TreeTable .img-switch-open {
   width: 12px;
   height: 12px;
-  background-image: url("Images/open.gif");
+  background-image: url("../Css/Images/open.gif");
   display: inline-block;
   margin-left: 4px;
   margin-right: 4px;
@@ -383,7 +383,7 @@ select {
 .TreeTable .img-switch-close {
   width: 12px;
   height: 12px;
-  background-image: url("Images/close.gif");
+  background-image: url("../Css/Images/close.gif");
   display: inline-block;
   margin-left: 4px;
   margin-right: 4px;
