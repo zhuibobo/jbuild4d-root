@@ -20,7 +20,7 @@
     "less": "^3.9.0"
   },
   "scripts": {
-    "build": "chcp 65001 && babel demo -d demolib & node build-jbuild4d-web-platform\\index.js",
+    "buildplatform": "chcp 65001 && node build-jbuild4d-web-platform\\buildtemplates.js",
     "build1": "babel demo -d demolib"
   }
 }
