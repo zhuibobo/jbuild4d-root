@@ -21,6 +21,7 @@
   },
   "scripts": {
     "buildplatform": "chcp 65001 && node build-jbuild4d-web-platform\\buildtemplates.js",
+    "buildplatformless":"lessc build-jbuild4d-web-platform\\static\\Themes\\Default\\Css\\Jbuild4dPlatform.less ..\\jbuild4d-web-root\\jbuild4d-web-platform\\src\\main\\resources\\static\\Themes\\Default\\Css\\Jbuild4dPlatform.css --source-map",
     "build1": "babel demo -d demolib"
   }
 }

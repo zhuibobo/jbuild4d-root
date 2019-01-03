@@ -1,3 +1,5 @@
+$ProjectFileDir$\jbuild4d-front-end\node_modules\less\bin\lessc $FileName$ $FileNameWithoutExtension$.css --source-map
+
 node "D:\JavaProject\SelfProject\jbuild4d-project\jbuild4d-root\jbuild4d-front-end\node_modules\babel-cli\bin\babel.js" "D:\JavaProject\SelfProject\jbuild4d-project\jbuild4d-root\jbuild4d-front-end\demo\index.js" -o D:\JavaProject\SelfProject\jbuild4d-project\jbuild4d-root\jbuild4d-front-end\demo\indexC.js
 
 D:\DevGeneral\node-v10.14.1-win-x64\node.exe D:\JavaProject\SelfProject\jbuild4d-project\jbuild4d-root\jbuild4d-front-end\node_modules\babel-cli\bin\babel.js "D:\JavaProject\SelfProject\jbuild4d-project\jbuild4d-root\jbuild4d-web-root\jbuild4d-web-platform\src\main\resources\static\Js\Jbuild4dPlatform.js" --out-dir dist --source-maps --presets env
