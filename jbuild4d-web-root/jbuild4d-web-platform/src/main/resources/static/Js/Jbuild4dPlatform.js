@@ -1,1 +1,3 @@
-import "JBuild4DBaseLib.js"
+"use strict";
+
+require("JBuild4DBaseLib.js");
