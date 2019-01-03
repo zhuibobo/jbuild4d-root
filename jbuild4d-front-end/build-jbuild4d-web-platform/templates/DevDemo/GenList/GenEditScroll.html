@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+</head>
+<body>
+    <div id="appForm" class="general-edit-page-wrap" v-cloak>
+        <div class="general-edit-page-scroll">
+            <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
+                <form-item label="ddglKey：" prop="ddglKey">
+                    <i-input v-model="formEntity.ddglKey"></i-input>
+                </form-item>
+                <form-item label="ddglValue：" prop="ddglValue">
+                    <i-input v-model="formEntity.ddglValue"></i-input>
+                </form-item>
+                <form-item label="ddglName：" prop="ddglName">
+                    <i-input v-model="formEntity.ddglName"></i-input>
+                </form-item>
+                <form-item label="ddglCreatetime：">
+                    <date-picker type="date" placeholder="选择创建时间" v-model="formEntity.ddglCreatetime" disabled readonly></date-picker>
+                </form-item>
+                <form-item label="dictGroupDesc：">
+                    <i-input v-model="formEntity.dictGroupDesc" type="textarea" :autosize="{minRows: 23,maxRows: 23}"></i-input>
+                </form-item>
+            </i-form>
+        </div>
+        <div class="general-edit-page-scroll-button-warp">
+            <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')"> 保 存</i-button>
+            <i-button @click="handleClose()" style="margin-left: 8px"> 关 闭</i-button>
+        </div>
+    </div>
+    <script>
+        var appForm =new Vue({
+            el: "#appForm",
+            mounted:function () {
+                this.bindFormData();
+            },
+            data: {
+                acInterface:{
+                    getDataUrl:"/PlatForm/DevDemo/DevDemoGenList/GetDetailData",
+                    saveDataUrl:"/PlatForm/DevDemo/DevDemoGenList/SaveEdit"
+                },
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
+                formEntity: {
+                    ddglId: "",
+                    ddglKey: "",
+                    ddglValue: "",
+                    ddglName: "",
+                    ddglCreatetime:DateUtility.GetCurrentData(),
+                    ddglDesc: ""
+                },
+                ruleValidate: {
+                    ddglValue: [
+                        {required: true, message: '【ddglValue】不能空！', trigger: 'blur'}
+                    ],
+                    ddglName: [
+                        {required: true, message: '【ddglName】不能空！', trigger: 'blur'}
+                    ],
+                    ddglKey: [
+                        {required: true, message: '【ddglKey】不能空！', trigger: 'blur'}
+                    ]
+                },
+                status: BaseUtility.GetUrlParaValue("op")
+            },
+            methods: {
+                bindFormData:function(){
+                    //获取数据并赋值
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status);
+                },
+                handleSubmit: function (name) {
+                    var _self = this;
+                    this.$refs[name].validate(function (valid) {
+                        if (valid) {
+                            var sendData = JSON.stringify(_self.formEntity);
+                            //debugger;
+                            AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    //debugger;
+                                    window.OpenerWindowObj.appList.reloadData();
+                                    DialogUtility.Frame_CloseDialog(window);
+                                });
+                            }, "json");
+                        } else {
+                            this.$Message.error('Fail!');
+                        }
+                    })
+                },
+                handleClose: function () {
+                    DialogUtility.Frame_CloseDialog(window);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
