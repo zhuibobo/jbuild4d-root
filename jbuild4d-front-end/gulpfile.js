@@ -19,7 +19,12 @@ gulp.task('default', done => {
         .pipe(gulp.dest(publicResourcePath+"/templates"));
 
     /*拷贝样式图片*/
+    gulp.src(srcPlatformPath+"/static/Themes/**/*", {base:"build-jbuild4d-web-platform/static/Themes"})
+        .pipe(gulp.dest(publicResourcePath+"/static/Themes"));
 
+    /*拷贝第三方的JS库*/
+    gulp.src(srcPlatformPath+"/static/Js/T3P/**/*", {base:"build-jbuild4d-web-platform/static/Js/T3P"})
+        .pipe(gulp.dest(publicResourcePath+"/static/Js/T3P"));
 
     //console.log('End...................');
     done();
