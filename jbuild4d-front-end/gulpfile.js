@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const gulpCopy = require('gulp-copy');
+const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 
 const publicResourcePath="../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/static";
@@ -9,12 +10,12 @@ const srcPlatformStaticPath="build-jbuild4d-web-platform/static";
 gulp.task('default', done => {
     console.log('Start...................');
 
-    gulp.src([srcPlatformStaticPath+'/Js/JBuild4DBaseLib.js',
-        srcPlatformStaticPath+'/Js/BaseUtility.js'])
+    gulp.src([srcPlatformStaticPath+'/Js/*.js'])
         .pipe(babel({
             presets: ['@babel/env']
         }))
         .pipe(concat('JBuild4DPlatformLib.js'))
+        .pipe(uglify())
         .pipe(gulp.dest('build-jbuild4d-web-platform/dist'));
 
     /*处理工程中编写的js文件*/
