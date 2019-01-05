@@ -14,7 +14,7 @@ gulp.task('default', done => {
         }))
         .pipe(gulp.dest('build-jbuild4d-web-platform/dist'));*/
 
-    /*拷贝模本文件*/
+    /*拷贝HTML文件*/
     gulp.src(srcPlatformPath+"/templates/**/*", {base:"build-jbuild4d-web-platform/templates"})
         .pipe(gulp.dest(publicResourcePath+"/templates"));
 
