@@ -20,7 +20,6 @@ gulp.task('default', done => {
 
     /*处理工程中编写的js文件*/
 
-
     /*拷贝HTML文件*/
     //gulp.src(srcPlatformStaticPath+"/Html/**/*", {base:srcPlatformStaticPath+"/Html"}).pipe(gulp.dest(publicResourcePath+"/Html"));
 
