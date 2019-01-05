@@ -21,7 +21,7 @@ gulp.task('default', done => {
     /*处理工程中编写的js文件*/
 
     /*拷贝HTML文件*/
-    //gulp.src(srcPlatformStaticPath+"/Html/**/*", {base:srcPlatformStaticPath+"/Html"}).pipe(gulp.dest(publicResourcePath+"/Html"));
+    gulp.src(srcPlatformStaticPath+"/Html/**/*", {base:srcPlatformStaticPath+"/Html"}).pipe(gulp.dest(publicResourcePath+"/Html"));
 
     /*拷贝样式图片*/
     //gulp.src(srcPlatformStaticPath+"/Themes/**/*", {base:"build-jbuild4d-web-platform/static/Themes"}).pipe(gulp.dest(publicResourcePath+"/Themes"));
