@@ -3,6 +3,7 @@ const babel = require('gulp-babel');
 const gulpCopy = require('gulp-copy');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
+const replacecust=require("./gulp-plugin/gulp-replace-cust/index.js");
 
 const publicResourcePath="../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/static";
 const srcPlatformStaticPath="build-jbuild4d-web-platform/static";
@@ -21,7 +22,7 @@ gulp.task('default', done => {
     /*处理工程中编写的js文件*/
 
     /*拷贝HTML文件*/
-    gulp.src(srcPlatformStaticPath+"/Html/**/*", {base:srcPlatformStaticPath+"/Html"}).pipe(gulp.dest(publicResourcePath+"/Html"));
+    gulp.src(srcPlatformStaticPath+"/Html/**/*", {base:srcPlatformStaticPath+"/Html"}).pipe(replacecust('T3P', 'T3P1')).pipe(gulp.dest(publicResourcePath+"/Html"));
 
     /*拷贝样式图片*/
     //gulp.src(srcPlatformStaticPath+"/Themes/**/*", {base:"build-jbuild4d-web-platform/static/Themes"}).pipe(gulp.dest(publicResourcePath+"/Themes"));
