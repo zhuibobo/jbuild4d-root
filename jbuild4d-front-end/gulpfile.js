@@ -2,8 +2,8 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const gulpCopy = require('gulp-copy');
 
-const publicResourcePath="../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources";
-const srcPlatformPath="build-jbuild4d-web-platform";
+const publicResourcePath="../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/static";
+const srcPlatformStaticPath="build-jbuild4d-web-platform/static";
 
 gulp.task('default', done => {
     console.log('Start...................');
@@ -15,16 +15,16 @@ gulp.task('default', done => {
         .pipe(gulp.dest('build-jbuild4d-web-platform/dist'));*/
 
     /*拷贝HTML文件*/
-    gulp.src(srcPlatformPath+"/templates/**/*", {base:"build-jbuild4d-web-platform/templates"})
-        .pipe(gulp.dest(publicResourcePath+"/templates"));
+    gulp.src(srcPlatformStaticPath+"/Html/**/*", {base:srcPlatformStaticPath+"/Html"})
+        .pipe(gulp.dest(publicResourcePath+"/Html"));
 
     /*拷贝样式图片*/
-    gulp.src(srcPlatformPath+"/static/Themes/**/*", {base:"build-jbuild4d-web-platform/static/Themes"})
-        .pipe(gulp.dest(publicResourcePath+"/static/Themes"));
+    gulp.src(srcPlatformStaticPath+"/Themes/**/*", {base:"build-jbuild4d-web-platform/static/Themes"})
+        .pipe(gulp.dest(publicResourcePath+"/Themes"));
 
     /*拷贝第三方的JS库*/
-    gulp.src(srcPlatformPath+"/static/Js/T3P/**/*", {base:"build-jbuild4d-web-platform/static/Js/T3P"})
-        .pipe(gulp.dest(publicResourcePath+"/static/Js/T3P"));
+    gulp.src(srcPlatformStaticPath+"/Js/T3P/**/*", {base:"build-jbuild4d-web-platform/static/Js/T3P"})
+        .pipe(gulp.dest(publicResourcePath+"/Js/T3P"));
 
     //console.log('End...................');
     done();
