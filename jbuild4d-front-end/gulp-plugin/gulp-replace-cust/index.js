@@ -16,6 +16,7 @@ module.exports = function(search, _replacement, options) {
     return new Transform({
         objectMode: true,
         transform: function(file, enc, callback) {
+            //debugger;
             if (file.isNull()) {
                 return callback(null, file);
             }

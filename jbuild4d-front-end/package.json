@@ -25,6 +25,7 @@
     "buildplatform": "chcp 65001 && node build-jbuild4d-web-platform\\buildtemplates.js",
     "buildplatformless": "lessc build-jbuild4d-web-platform\\static\\Themes\\Default\\Css\\Jbuild4dPlatform.less ..\\jbuild4d-web-root\\jbuild4d-web-platform\\src\\main\\resources\\static\\Themes\\Default\\Css\\Jbuild4dPlatform.css --source-map",
     "buildplatformjs": "babel build-jbuild4d-web-platform\\static\\Js\\Jbuild4dPlatform.js -o ..\\jbuild4d-web-root\\jbuild4d-web-platform\\src\\main\\resources\\static\\Js\\Jbuild4dPlatform.js",
+    "gulpdebug": "node --inspect=[127.0.0.1:61975] gulp",
     "gulp": "gulp"
   }
 }
