@@ -9,9 +9,11 @@ const replacecust=require("./gulp-plugin/gulp-replace-cust/index.js");
 const publicResourcePath="../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/static";
 const srcPlatformStaticPath="build-jbuild4d-web-platform/static";
 
+console.log("1111");
+
 gulp.task('default', done => {
     console.log('Start...................');
-
+    debugger;
     gulp.src([srcPlatformStaticPath+'/Js/*.js'])
         .pipe(babel({
             presets: ['@babel/env']
