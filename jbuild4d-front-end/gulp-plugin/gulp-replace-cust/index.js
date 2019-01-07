@@ -17,6 +17,8 @@ module.exports = function(search, _replacement, options) {
         objectMode: true,
         transform: function(file, enc, callback) {
             //debugger;
+            //file api https://github.com/gulpjs/vinyl#instance-properties
+
             if (file.isNull()) {
                 return callback(null, file);
             }
@@ -50,7 +52,7 @@ module.exports = function(search, _replacement, options) {
                             // The replacement function should be called once for each match
                             for (var i = 1; i < chunks.length; i++) {
                                 // Add the replacement value
-                                result.push(replacement(search));
+                                result.push(replacement(search,file));
 
                                 // Add the next chunk
                                 result.push(chunks[i]);

@@ -52,3 +52,13 @@ $.fn.outerHTML = function () {
         return contents;
     })(this[0]));
 };
+
+function createStyleSheet(href) {
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    style.rel='stylesheet';
+    style.href=href;
+    head.appendChild(style);
+    return style.sheet ||style.styleSheet;
+}
