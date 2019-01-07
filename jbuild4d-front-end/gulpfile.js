@@ -76,11 +76,11 @@ gulp.task('default', done => {
         let levelPath=calculateFilePath(file);
 
         replaceArray.push("<script>");
-        replaceArray.push('createStyleSheet("'+levelPath+'Themes/Default/Css/Jbuild4dPlatform.css'+'");');
-        replaceArray.push('createStyleSheet("'+levelPath+'Themes/Default/IView-3.X/iview.css'+'");');
-        replaceArray.push('createStyleSheet("'+levelPath+'Themes/Default/JQueryUI/jquery-ui.css'+'");');
-        replaceArray.push('createStyleSheet("'+levelPath+'Themes/Default/ZTree/zTreeStyle/zTreeStyle.css'+'");');
-        replaceArray.push("</script>");
+        replaceArray.push('\n\t\tcreateStyleSheet("'+levelPath+'Themes/Default/Css/Jbuild4dPlatform.css'+'");');
+        replaceArray.push('\n\t\tcreateStyleSheet("'+levelPath+'Themes/Default/IView-3.X/iview.css'+'");');
+        replaceArray.push('\n\t\tcreateStyleSheet("'+levelPath+'Themes/Default/JQueryUI/jquery-ui.css'+'");');
+        replaceArray.push('\n\t\tcreateStyleSheet("'+levelPath+'Themes/Default/ZTree/zTreeStyle/zTreeStyle.css'+'");');
+        replaceArray.push("\n\t</script>");
         return replaceArray.join("");
     })).
     pipe(gulp.dest(publicResourcePath+"/Html"));
