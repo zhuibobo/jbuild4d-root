@@ -3,6 +3,9 @@ refVersion = 1;
 function calculateFilePath (file) {
     console.log(file.path);
     let repath = file.path.split('Html\\');
+    if(repath.length==1){
+        repath = file.path.split('Js\\');
+    }
     console.log(repath[1]);
     let levelPathArray = repath[1].split("\\");
     console.log(levelPathArray.length);
