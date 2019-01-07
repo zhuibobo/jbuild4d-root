@@ -39,17 +39,23 @@ gulp.task('default', done => {
     refVersion=1;
 
     /*处理工程中编写的js文件*/
-    gulp.src([srcPlatformStaticPath+'/Js/*.js'])
+    gulp.src([srcPlatformStaticPath+'/Js/Utility/*.js'])
         .pipe(babel({
             presets: ['@babel/env']
         }))
         .pipe(concat('JBuild4DPlatformLib.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('build-jbuild4d-web-platform/dist'));
+        .pipe(gulp.dest(publicResourcePath+"/Js"));
 
+    gulp.src([srcPlatformStaticPath+'/Js/VueComponent/*.js'])
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(concat('VueEXComponent.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(publicResourcePath+"/Js"));
 
-
-    gulp.src('build-jbuild4d-web-platform/dist/*.js', {base:"build-jbuild4d-web-platform/dist"}).pipe(gulp.dest(publicResourcePath+"/Js"));
+    //gulp.src('build-jbuild4d-web-platform/dist/*.js', {base:"build-jbuild4d-web-platform/dist"}).pipe(gulp.dest(publicResourcePath+"/Js"));
 
     /*拷贝HTML文件*/
     gulp.src(srcPlatformStaticPath+"/Html/**/*", {base:srcPlatformStaticPath+"/Html"}).
