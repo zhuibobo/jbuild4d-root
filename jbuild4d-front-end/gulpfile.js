@@ -14,7 +14,6 @@ gulp.task('default', done => {
     console.log('Start...................');
     let refVersion = Date.parse(new Date());
 
-
     /*处理工程中编写的js文件*/
     gulp.src([srcPlatformStaticPath + '/Js/Utility/*.js'])
         .pipe(babel({
