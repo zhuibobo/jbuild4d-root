@@ -29,6 +29,10 @@ function refCss(path){
     return '<link rel="stylesheet" type="text/css" href="'+path+'" />';
 }
 
+function replaceBlock(name){
+    return'<th:block th:replace="Fragment/GeneralLib::'+name+'"></th:block>';
+}
+
 gulp.task('default', done => {
     console.log('Start...................');
     let refVersion=Date.parse(new Date());
@@ -43,11 +47,13 @@ gulp.task('default', done => {
         .pipe(uglify())
         .pipe(gulp.dest('build-jbuild4d-web-platform/dist'));
 
+
+
     gulp.src('build-jbuild4d-web-platform/dist/*.js', {base:"build-jbuild4d-web-platform/dist"}).pipe(gulp.dest(publicResourcePath+"/Js"));
 
     /*拷贝HTML文件*/
     gulp.src(srcPlatformStaticPath+"/Html/**/*", {base:srcPlatformStaticPath+"/Html"}).
-    pipe(replacecust('<th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>',function (search,file) {
+    pipe(replacecust(replaceBlock('GeneralLib'),function (search,file) {
         let replaceArray=new Array();
         replaceArray.push('<title>JBuild4D</title>');
         replaceArray.push('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />');
@@ -73,7 +79,7 @@ gulp.task('default', done => {
 
         return replaceArray.join("\n\t");
     })).
-    pipe(replacecust('<th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>',function (search,file) {
+    pipe(replacecust(replaceBlock('ThemesLib'),function (search,file) {
         let replaceArray=new Array();
         //判断路径后进行引入js的路径
         let levelPath=calculateFilePath(file);
