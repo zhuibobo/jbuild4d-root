@@ -13,7 +13,7 @@ console.log("1111");
 
 gulp.task('default', done => {
     console.log('Start...................');
-    debugger;
+    //debugger;
     gulp.src([srcPlatformStaticPath+'/Js/*.js'])
         .pipe(babel({
             presets: ['@babel/env']
