@@ -67,21 +67,53 @@ gulp.task('default', done => {
         replaceArray.push('<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />');
         //判断路径后进行引入js的路径
         let levelPath=calculateFilePath(file);
+        replaceArray.push(refJs(levelPath+"Js/T3P/JQuery/jquery-3.3.1.min.js"));
+        replaceArray.push(refJs(levelPath+"Js/JBuild4DPlatformLib.js?refVersion="+refVersion));
+        replaceArray.push(refJs(levelPath+"Js/T3P/VUE-2.5.16/vue.js"));
+        replaceArray.push(refJs(levelPath+"Js/VueEXComponent.js?refVersion="+refVersion));
+        replaceArray.push(refJs(levelPath+"Js/T3P/IView-3.X/dist/iview.min.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/ZTree-V3/js/jquery.ztree.all.js"));
+        return replaceArray.join("\n\t");
+    })).
+    pipe(replacecust(replaceBlock('CodeMirror'),function (search,file) {
+        let replaceArray=new Array();
+        let levelPath=calculateFilePath(file);
 
-        let jquery=levelPath+"Js/T3P/JQuery/jquery-3.3.1.min.js";
-        replaceArray.push(refJs(jquery));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/lib/codemirror.js"));
+        replaceArray.push(refCss(levelPath+'Js/T3P/CodeMirror-5.39.2/lib/codemirror.css'));
+        replaceArray.push(refCss(levelPath+'Js/T3P/CodeMirror-5.39.2/theme/monokai.css'));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/mode/xml/xml.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/mode/javascript/javascript.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/mode/css/css.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/mode/htmlmixed/htmlmixed.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/addon/fold/foldcode.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/addon/fold/foldgutter.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/addon/fold/brace-fold.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/addon/fold/xml-fold.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/addon/fold/markdown-fold.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/addon/fold/comment-fold.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/addon/fold/brace-fold.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/CodeMirror-5.39.2/addon/util/formatting.js"));
+        replaceArray.push(refCss(levelPath+'Js/T3P/CodeMirror-5.39.2/addon/fold/foldgutter.css'));
 
-        let JBuild4DPlatformLib=levelPath+"Js/JBuild4DPlatformLib.js?refVersion="+refVersion;
-        replaceArray.push(refJs(JBuild4DPlatformLib));
+        return replaceArray.join("\n\t");
+    })).
+    pipe(replacecust(replaceBlock('FormDesignLib'),function (search,file) {
+        let replaceArray=new Array();
+        let levelPath=calculateFilePath(file);
 
-        let vue=levelPath+"Js/T3P/VUE-2.5.16/vue.js";
-        replaceArray.push(refJs(vue));
+        replaceArray.push(refJs(levelPath+"Js/HTMLDesign/Ckeditor-4.11.1/ckeditor.js"));
+        replaceArray.push(refJs(levelPath+"Js/HTMLDesign/FormDesign/JBuild4DFormDesign.js?refVersion="+refVersion));
 
-        let iview=levelPath+"Js/T3P/IView-3.X/dist/iview.min.js";
-        replaceArray.push(refJs(iview));
+        return replaceArray.join("\n\t");
+    })).
+    pipe(replacecust(replaceBlock('ZTreeExtendLib'),function (search,file) {
+        let replaceArray=new Array();
+        let levelPath=calculateFilePath(file);
 
-        let jqueryui=levelPath+"Js/T3P/JQuery-UI-1.12.1/jquery-ui.js";
-        replaceArray.push(refJs(jqueryui));
+        replaceArray.push(refJs(levelPath+"Js/T3P/ZTree-V3/js/jquery.ztree.exhide.js"));
+        replaceArray.push(refJs(levelPath+"Js/T3P/ZTree-V3/js/fuzzysearch.js"));
 
         return replaceArray.join("\n\t");
     })).
@@ -106,6 +138,12 @@ gulp.task('default', done => {
         return replaceArray.join("");
     })).
     pipe(gulp.dest(publicResourcePath+"/Html"));
+
+    //拷贝表单设计的相关的开发文件
+    gulp.src(srcPlatformStaticPath+"/Js/HTMLDesign/FormDesign/**/*", {base:"build-jbuild4d-web-platform/static/Js/HTMLDesign/FormDesign"}).pipe(gulp.dest(publicResourcePath+"/Js/HTMLDesign/FormDesign"));
+
+    //拷贝表单设计需要用到的Ckeditor-4.11.1
+    //gulp.src(srcPlatformStaticPath+"/Js/HTMLDesign/Ckeditor-4.11.1/**/*", {base:"build-jbuild4d-web-platform/static/Js/HTMLDesign/Ckeditor-4.11.1"}).pipe(gulp.dest(publicResourcePath+"/Js/HTMLDesign/Ckeditor-4.11.1"));
 
     /*拷贝样式图片*/
     //gulp.src(srcPlatformStaticPath+"/Themes/**/*", {base:"build-jbuild4d-web-platform/static/Themes"}).pipe(gulp.dest(publicResourcePath+"/Themes"));
