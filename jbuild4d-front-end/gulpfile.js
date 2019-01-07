@@ -1,4 +1,3 @@
-
 const babel = require('gulp-babel');
 const gulp = require('gulp');
 const gulpCopy = require('gulp-copy');
@@ -8,8 +7,6 @@ const replacecust=require("./gulp-plugin/gulp-replace-cust/index.js");
 
 const publicResourcePath="../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/static";
 const srcPlatformStaticPath="build-jbuild4d-web-platform/static";
-
-console.log("1111");
 
 function calculateFilePath(file){
     console.log(file.path);
@@ -28,8 +25,14 @@ function refJs(path){
     return '<script type="text/javascript" src="'+path+'"></script>';
 }
 
+function refCss(path){
+    return '<link rel="stylesheet" type="text/css" href="'+path+'" />';
+}
+
 gulp.task('default', done => {
     console.log('Start...................');
+    let refVersion=Date.parse(new Date());
+    refVersion=1;
 
     /*处理工程中编写的js文件*/
     gulp.src([srcPlatformStaticPath+'/Js/*.js'])
@@ -56,7 +59,7 @@ gulp.task('default', done => {
         let jquery=levelPath+"Js/T3P/JQuery/jquery-3.3.1.min.js";
         replaceArray.push(refJs(jquery));
 
-        let JBuild4DPlatformLib=levelPath+"Js/JBuild4DPlatformLib.js";
+        let JBuild4DPlatformLib=levelPath+"Js/JBuild4DPlatformLib.js?refVersion="+refVersion;
         replaceArray.push(refJs(JBuild4DPlatformLib));
 
         let vue=levelPath+"Js/T3P/VUE-2.5.16/vue.js";
@@ -75,8 +78,15 @@ gulp.task('default', done => {
         //判断路径后进行引入js的路径
         let levelPath=calculateFilePath(file);
 
+        replaceArray.push(refCss(levelPath+'Themes/Default/Css/Jbuild4dPlatform.css?refVersion='+refVersion));
+        replaceArray.push(refCss(levelPath+'Themes/Default/IView-3.X/iview.css'));
+        replaceArray.push(refCss(levelPath+'Themes/Default/JQueryUI/jquery-ui.css'));
+        replaceArray.push(refCss(levelPath+'Themes/Default/ZTree/zTreeStyle/zTreeStyle.css'));
+        return replaceArray.join("\n\t");
+
         replaceArray.push("<script>");
-        replaceArray.push('\n\t\trefCssLink("'+levelPath+'Themes/Default/Css/Jbuild4dPlatform.css'+'");');
+        replaceArray.push("<script>");
+        replaceArray.push('\n\t\trefCssLink("'+levelPath+'Themes/Default/Css/Jbuild4dPlatform.css?refVersion='+refVersion+'");');
         replaceArray.push('\n\t\trefCssLink("'+levelPath+'Themes/Default/IView-3.X/iview.css'+'");');
         replaceArray.push('\n\t\trefCssLink("'+levelPath+'Themes/Default/JQueryUI/jquery-ui.css'+'");');
         replaceArray.push('\n\t\trefCssLink("'+levelPath+'Themes/Default/ZTree/zTreeStyle/zTreeStyle.css'+'");');
