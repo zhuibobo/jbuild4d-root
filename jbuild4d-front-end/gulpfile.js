@@ -56,8 +56,8 @@ gulp.task('default', done => {
         let jquery=levelPath+"Js/T3P/JQuery/jquery-3.3.1.min.js";
         replaceArray.push(refJs(jquery));
 
-        let JBuild4DBaseLib=levelPath+"Js/T3P/JQuery/Jbuild4dPlatform.js";
-        replaceArray.push(refJs(JBuild4DBaseLib));
+        let JBuild4DPlatformLib=levelPath+"Js/JBuild4DPlatformLib.js";
+        replaceArray.push(refJs(JBuild4DPlatformLib));
 
         let vue=levelPath+"Js/T3P/VUE-2.5.16/vue.js";
         replaceArray.push(refJs(vue));
@@ -76,10 +76,10 @@ gulp.task('default', done => {
         let levelPath=calculateFilePath(file);
 
         replaceArray.push("<script>");
-        replaceArray.push('\n\t\tcreateStyleSheet("'+levelPath+'Themes/Default/Css/Jbuild4dPlatform.css'+'");');
-        replaceArray.push('\n\t\tcreateStyleSheet("'+levelPath+'Themes/Default/IView-3.X/iview.css'+'");');
-        replaceArray.push('\n\t\tcreateStyleSheet("'+levelPath+'Themes/Default/JQueryUI/jquery-ui.css'+'");');
-        replaceArray.push('\n\t\tcreateStyleSheet("'+levelPath+'Themes/Default/ZTree/zTreeStyle/zTreeStyle.css'+'");');
+        replaceArray.push('\n\t\trefCssLink("'+levelPath+'Themes/Default/Css/Jbuild4dPlatform.css'+'");');
+        replaceArray.push('\n\t\trefCssLink("'+levelPath+'Themes/Default/IView-3.X/iview.css'+'");');
+        replaceArray.push('\n\t\trefCssLink("'+levelPath+'Themes/Default/JQueryUI/jquery-ui.css'+'");');
+        replaceArray.push('\n\t\trefCssLink("'+levelPath+'Themes/Default/ZTree/zTreeStyle/zTreeStyle.css'+'");');
         replaceArray.push("\n\t</script>");
         return replaceArray.join("");
     })).

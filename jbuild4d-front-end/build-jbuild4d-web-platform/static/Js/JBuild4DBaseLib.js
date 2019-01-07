@@ -53,9 +53,9 @@ $.fn.outerHTML = function () {
     })(this[0]));
 };
 
-function createStyleSheet(href) {
+function refCssLink(href) {
     var head = document.head || document.getElementsByTagName('head')[0];
-    var style = document.createElement('style');
+    var style = document.createElement('link');
     style.type = 'text/css';
     style.rel='stylesheet';
     style.href=href;
