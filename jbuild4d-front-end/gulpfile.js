@@ -3,6 +3,8 @@ const gulp = require('gulp');
 const gulpCopy = require('gulp-copy');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
+const htmlclean = require('gulp-htmlclean');
+
 const replacecust = require("./gulp-plugin/gulp-replace-cust/index.js");
 
 const replaceBlockObj=require("./replaceBlock.js");
@@ -61,5 +63,9 @@ function copyAndResolveHtml(sourcePath,base,toPath) {
         .pipe(replacecust(replaceBlockObj.replaceBlock('FormDesignLib'), replaceBlockObj.replaceFormDesignLib))
         .pipe(replacecust(replaceBlockObj.replaceBlock('ZTreeExtendLib'), replaceBlockObj.replaceZTreeExtendLib))
         .pipe(replacecust(replaceBlockObj.replaceBlock('ThemesLib'), replaceBlockObj.replaceThemesLib))
+        .pipe(htmlclean({
+            protect: /<\!--%fooTemplate\b.*?%-->/g,
+            edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
+        }))
         .pipe(gulp.dest(toPath));
 }
