@@ -1,27 +1,6 @@
-<!DOCTYPE html>
-<html lang="zh" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script type="text/javascript" src="../PluginsGeneralRef.js"></script>
-    <script type="text/javascript">
+<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="UTF-8"><title>Title</title><script type="text/javascript" src="../PluginsGeneralRef.js"></script><script type="text/javascript">
         PluginsGeneralRef();
-    </script>
-</head>
-<body>
-    <div class="dialog-wraper" id="dialogApp" v-cloak>
-        <tabs size="small">
-            <tab-pane label="绑定信息">
-                <fd-control-bind-to :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" :validate-rules-prop="validateRules" @on-set-completed="setBindCompleted">
-                </fd-control-bind-to>
-            </tab-pane>
-            <tab-pane label="基础信息">
-                <fd-control-base-info v-model="baseInfo">
-                </fd-control-base-info>
-            </tab-pane>
-        </tabs>
-    </div>
-    <script>
+    </script></head><body><div class="dialog-wraper" id="dialogApp" v-cloak><tabs size="small"><tab-pane label="绑定信息"><fd-control-bind-to :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" :validate-rules-prop="validateRules" @on-set-completed="setBindCompleted"></fd-control-bind-to></tab-pane><tab-pane label="基础信息"><fd-control-base-info v-model="baseInfo"></fd-control-base-info></tab-pane></tabs></div><script>
         var DialogApp=new Vue({
             el:"#dialogApp",
             data: {
@@ -61,6 +40,4 @@
                 }
             }
         });
-    </script>
-</body>
-</html>
+    </script></body></html>
