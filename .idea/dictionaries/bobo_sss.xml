@@ -9,11 +9,14 @@
       <w>docobj</w>
       <w>envvariable</w>
       <w>formdesign</w>
+      <w>htmlclean</w>
       <w>htmlmsg</w>
       <w>issystem</w>
       <w>operer</w>
+      <w>replacecust</w>
       <w>serverresolve</w>
       <w>singlename</w>
+      <w>uglify</w>
       <w>validaterules</w>
       <w>wathet</w>
     </words>

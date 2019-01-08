@@ -1,3 +1,5 @@
+'use strict';
+
 const babel = require('gulp-babel');
 const gulp = require('gulp');
 const gulpCopy = require('gulp-copy');
