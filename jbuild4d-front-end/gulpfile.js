@@ -6,6 +6,8 @@ const gulpCopy = require('gulp-copy');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 const htmlclean = require('gulp-htmlclean');
+const less = require('gulp-less');
+const path = require('path');
 
 const replacecust = require("./gulp-plugin/gulp-replace-cust/index.js");
 
@@ -48,6 +50,11 @@ gulp.task('default', done => {
     //gulp.src(srcPlatformStaticPath+"/Js/HTMLDesign/Ckeditor-4.11.1/**/*", {base:"build-jbuild4d-web-platform/static/Js/HTMLDesign/Ckeditor-4.11.1"}).pipe(gulp.dest(publicResourcePath+"/Js/HTMLDesign/Ckeditor-4.11.1"));
 
     /*拷贝样式图片*/
+    gulp.src(srcPlatformStaticPath+"/Themes/Default/Css/*.less")
+        .pipe(less({
+            paths: [ path.join(__dirname, 'less', 'includes') ]
+        }))
+        .pipe(gulp.dest('./build-jbuild4d-web-platform/dist'));
     //gulp.src(srcPlatformStaticPath+"/Themes/**/*", {base:"build-jbuild4d-web-platform/static/Themes"}).pipe(gulp.dest(publicResourcePath+"/Themes"));
 
     /*拷贝第三方的JS库*/
