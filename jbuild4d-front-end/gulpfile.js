@@ -17,12 +17,25 @@ const replaceBlockObj=require("./replaceBlock.js");
 const publicResourcePath = "../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/static";
 const srcPlatformStaticPath = "build-jbuild4d-web-platform/static";
 
-gulp.task('default', done => {
-    console.log('Start...................');
-    let refVersion = Date.parse(new Date());
+/*gulp.task('watch', function() {
+    let watcherUtilityJs=gulp.watch(srcPlatformStaticPath + '/Js/Utility/!*.js', gulp.series('UtilityJs'));
+});*/
 
-    /*处理工程中编写的js文件*/
-    gulp.src([srcPlatformStaticPath + '/Js/Utility/*.js'])
+
+/*编译Vue的扩展插件*/
+gulp.task('JS-VueEXComponent',()=>{
+    return gulp.src([srcPlatformStaticPath + '/Js/VueComponent/*.js'])
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(concat('VueEXComponent.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(publicResourcePath + "/Js"));
+});
+
+/*编译工程的工具类JS*/
+gulp.task('JS-Utility',()=>{
+    return gulp.src([srcPlatformStaticPath + '/Js/Utility/*.js'])
         .pipe(babel({
             presets: ['@babel/env']
         }))
@@ -30,52 +43,45 @@ gulp.task('default', done => {
         .pipe(concat('JBuild4DPlatformLib.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write())
-        //.pipe(gulp.dest("./build-jbuild4d-web-platform/dist"));
         .pipe(gulp.dest(publicResourcePath + "/Js"));
+});
 
-    gulp.src([srcPlatformStaticPath + '/Js/VueComponent/*.js'])
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
-        .pipe(concat('VueEXComponent.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest(publicResourcePath + "/Js"));
+/*编译工程相关的JS*/
+gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility'));
 
-    //gulp.src('build-jbuild4d-web-platform/dist/*.js', {base:"build-jbuild4d-web-platform/dist"}).pipe(gulp.dest(publicResourcePath+"/Js"));
-
-    copyAndResolveHtml(srcPlatformStaticPath + "/Html/**/*",srcPlatformStaticPath + "/Html",publicResourcePath + "/Html");
-
-    //拷贝表单设计的相关的开发文件
-    gulp.src([srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.js",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.css",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.png"], {base: "build-jbuild4d-web-platform/static/Js/HTMLDesign/FormDesign"}).
-    pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/FormDesign"));
-    copyAndResolveHtml(srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.html",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign",publicResourcePath + "/Js/HTMLDesign/FormDesign");
-
-    //拷贝表单设计需要用到的Ckeditor-4.11.1
-    //gulp.src(srcPlatformStaticPath+"/Js/HTMLDesign/Ckeditor-4.11.1/**/*", {base:"build-jbuild4d-web-platform/static/Js/HTMLDesign/Ckeditor-4.11.1"}).pipe(gulp.dest(publicResourcePath+"/Js/HTMLDesign/Ckeditor-4.11.1"));
-
-    /*编译Less*/
-    gulp.src(srcPlatformStaticPath+"/Themes/Default/Css/*.less")
+/*编译工程相关的Less文件*/
+gulp.task('Less',()=>{
+    return gulp.src(srcPlatformStaticPath+"/Themes/Default/Css/*.less")
         .pipe(sourcemaps.init())
         .pipe(less({
             paths: [ path.join(__dirname, 'less', 'includes') ]
         }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(publicResourcePath+'/Themes/Default/Css'));
-        //.pipe(gulp.dest('./build-jbuild4d-web-platform/dist'));
-
-    /*拷贝样式图片*/
-    //gulp.src(srcPlatformStaticPath+"/Themes/**/*", {base:"build-jbuild4d-web-platform/static/Themes"}).pipe(gulp.dest(publicResourcePath+"/Themes"));
-
-    /*拷贝第三方的JS库*/
-    //gulp.src(srcPlatformStaticPath+"/Js/T3P/**/*", {base:"build-jbuild4d-web-platform/static/Js/T3P"}).pipe(gulp.dest(publicResourcePath+"/Js/T3P"));
-
-    //console.log('End...................');
-    done();
 });
+
+/*编译工程相关的前端模版*/
+gulp.task('HTMLTemplates',()=>{
+    return copyAndResolveHtml(srcPlatformStaticPath + "/Html/**/*",srcPlatformStaticPath + "/Html",publicResourcePath + "/Html");
+});
+
+/*编译表单设计器的相关的JS文件*/
+gulp.task('FormDesign-JS',()=>{
+    return gulp.src([srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.js",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.css",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.png"], {base: "build-jbuild4d-web-platform/static/Js/HTMLDesign/FormDesign"}).
+    pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/FormDesign"));
+});
+
+/*编译表单设计器的相关的HTML文件*/
+gulp.task('FormDesign-HTML',()=>{
+    return copyAndResolveHtml(srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.html",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign",publicResourcePath + "/Js/HTMLDesign/FormDesign");
+});
+
+/*编译表单设计器的相关文件*/
+gulp.task('FormDesign', gulp.series('FormDesign-JS','FormDesign-HTML'));
 
 function copyAndResolveHtml(sourcePath,base,toPath) {
     /*拷贝HTML文件*/
-    gulp.src(sourcePath, {base: base})
+    return gulp.src(sourcePath, {base: base})
         .pipe(replacecust(replaceBlockObj.replaceBlock('GeneralLib'), replaceBlockObj.replaceGeneralLib))
         .pipe(replacecust(replaceBlockObj.replaceBlock('CodeMirrorLib'), replaceBlockObj.replaceCodeMirrorLib))
         .pipe(replacecust(replaceBlockObj.replaceBlock('FormDesignLib'), replaceBlockObj.replaceFormDesignLib))
@@ -87,3 +93,7 @@ function copyAndResolveHtml(sourcePath,base,toPath) {
         //}))
         .pipe(gulp.dest(toPath));
 }
+
+gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign'));
+
+gulp.task('default', gulp.series('ALL'));
