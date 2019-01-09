@@ -81,9 +81,9 @@ function copyAndResolveHtml(sourcePath,base,toPath) {
         .pipe(replacecust(replaceBlockObj.replaceBlock('FormDesignLib'), replaceBlockObj.replaceFormDesignLib))
         .pipe(replacecust(replaceBlockObj.replaceBlock('ZTreeExtendLib'), replaceBlockObj.replaceZTreeExtendLib))
         .pipe(replacecust(replaceBlockObj.replaceBlock('ThemesLib'), replaceBlockObj.replaceThemesLib))
-        .pipe(htmlclean({
-            protect: /<\!--%fooTemplate\b.*?%-->/g,
-            edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
-        }))
+        //.pipe(htmlclean({
+        //    protect: /<\!--%fooTemplate\b.*?%-->/g,
+        //    edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
+        //}))
         .pipe(gulp.dest(toPath));
 }
