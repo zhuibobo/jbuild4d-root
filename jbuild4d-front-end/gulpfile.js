@@ -8,6 +8,7 @@ const concat = require('gulp-concat');
 const htmlclean = require('gulp-htmlclean');
 const less = require('gulp-less');
 const path = require('path');
+const sourcemaps = require('gulp-sourcemaps');
 
 const replacecust = require("./gulp-plugin/gulp-replace-cust/index.js");
 
@@ -25,8 +26,11 @@ gulp.task('default', done => {
         .pipe(babel({
             presets: ['@babel/env']
         }))
+        .pipe(sourcemaps.init())
         .pipe(concat('JBuild4DPlatformLib.js'))
         .pipe(uglify())
+        .pipe(sourcemaps.write())
+        //.pipe(gulp.dest("./build-jbuild4d-web-platform/dist"));
         .pipe(gulp.dest(publicResourcePath + "/Js"));
 
     gulp.src([srcPlatformStaticPath + '/Js/VueComponent/*.js'])
