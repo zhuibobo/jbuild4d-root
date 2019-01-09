@@ -5,6 +5,7 @@ target
 out
 libs
 log
+node_modules
 GenerateCodeFiles/
 !GenerateCodeFiles/GenerateCodeFiles.txt
 
