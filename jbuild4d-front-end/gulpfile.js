@@ -53,12 +53,17 @@ gulp.task('default', done => {
     //拷贝表单设计需要用到的Ckeditor-4.11.1
     //gulp.src(srcPlatformStaticPath+"/Js/HTMLDesign/Ckeditor-4.11.1/**/*", {base:"build-jbuild4d-web-platform/static/Js/HTMLDesign/Ckeditor-4.11.1"}).pipe(gulp.dest(publicResourcePath+"/Js/HTMLDesign/Ckeditor-4.11.1"));
 
-    /*拷贝样式图片*/
+    /*编译Less*/
     gulp.src(srcPlatformStaticPath+"/Themes/Default/Css/*.less")
+        .pipe(sourcemaps.init())
         .pipe(less({
             paths: [ path.join(__dirname, 'less', 'includes') ]
         }))
-        .pipe(gulp.dest('./build-jbuild4d-web-platform/dist'));
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(publicResourcePath+'/Themes/Default/Css'));
+        //.pipe(gulp.dest('./build-jbuild4d-web-platform/dist'));
+
+    /*拷贝样式图片*/
     //gulp.src(srcPlatformStaticPath+"/Themes/**/*", {base:"build-jbuild4d-web-platform/static/Themes"}).pipe(gulp.dest(publicResourcePath+"/Themes"));
 
     /*拷贝第三方的JS库*/
