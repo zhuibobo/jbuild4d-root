@@ -47,6 +47,18 @@ var BaseUtility = {
         /*var _url=this.GetRootPath()+url;
         return StringUtility.GetTimeStampUrl(_url);*/
     },
+    BuildHTMLView:function (action,para) {
+        var urlPara = "";
+        if (para) {
+            urlPara = $.param(para);
+        }
+        var _url = this.GetRootPath() + action + ".html";
+        if (urlPara != "") {
+            _url += "?" + urlPara;
+        }
+        //alert(_url);
+        return this.AppendTimeStampUrl(_url);
+    },
     BuildAction:function (action,para) {
         var urlPara = "";
         if (para) {

@@ -66,8 +66,8 @@
                 };
                 AjaxUtility.Post(url, senddata , function (result) {
                     if (result.success) {
-                        //window.location.href=BaseUtility.BuildAction("/PlatForm/Base/Frame");
-                        window.location.href=BaseUtility.BuildAction("/Html/Builder/Form/FormDesign.html?op=add&moduleId=448fa575-45ef-4101-97e7-1635e0f2c768&timestamp=1543572523689");
+                        window.location.href=BaseUtility.BuildHTMLView("/Html/Frame");
+                        //window.location.href=BaseUtility.BuildAction("/Html/Builder/Form/FormDesign.html?op=add&moduleId=448fa575-45ef-4101-97e7-1635e0f2c768&timestamp=1543572523689");
                     }
                     else {
                         DialogUtility.Alert(window,"LoginAlert",{},"帐号密码错误")

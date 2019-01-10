@@ -17,9 +17,6 @@ const replaceBlockObj=require("./replaceBlock.js");
 const publicResourcePath = "../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/static";
 const srcPlatformStaticPath = "build-jbuild4d-web-platform/static";
 
-/*gulp.task('watch', function() {
-    let watcherUtilityJs=gulp.watch(srcPlatformStaticPath + '/Js/Utility/!*.js', gulp.series('UtilityJs'));
-});*/
 
 
 /*编译Vue的扩展插件*/
@@ -96,4 +93,15 @@ function copyAndResolveHtml(sourcePath,base,toPath) {
 
 gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign'));
 
-gulp.task('default', gulp.series('ALL'));
+gulp.task('watch', function() {
+    let watcherUtilityJs=gulp.watch(srcPlatformStaticPath + '/Js/Utility/*.js', gulp.series('JS-Custom-ALL'));
+    let watcherLess=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Css/*.less", gulp.series('Less'));
+    let watcherHTMLTemplates=gulp.watch(srcPlatformStaticPath + "/Html/**/*", gulp.series('HTMLTemplates'));
+    let watcherFormDesign=gulp.watch([
+        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.js",
+        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.css",
+        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.png",
+        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.html"], gulp.series('FormDesign'));
+});
+
+gulp.task('default', gulp.series('watch'));
