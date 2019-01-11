@@ -20,7 +20,7 @@ public class FrameController {
 
     @RequestMapping(value = "FrameView", method = RequestMethod.GET)
     public ModelAndView frameView() throws JsonProcessingException {
-        ModelAndView modelAndView=new ModelAndView("Frame");
+        ModelAndView modelAndView=new ModelAndView("FrameView");
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
         modelAndView.addObject("menuJson",JsonUtility.toObjectString(menuService.getALL(jb4DSession)));
         //JB4DSession session= JB4DSessionUtility.getSession();

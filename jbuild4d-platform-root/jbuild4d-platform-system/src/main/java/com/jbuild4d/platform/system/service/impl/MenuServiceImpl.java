@@ -74,7 +74,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         //根菜单->系统设置分组
         String systemSettingRootId="JB4DSystemSettingRoot";
         MenuEntity systemSettingMenu=getMenu(rootMenu.getMenuId(),systemSettingRootId,"系统设置","系统设置","系统设置",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenu","","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenuView","","frame-top-menu-data");
         deleteByKey(jb4DSession,systemSettingMenu.getMenuId());
         save(jb4DSession,systemSettingMenu.getMenuId(),systemSettingMenu);
 

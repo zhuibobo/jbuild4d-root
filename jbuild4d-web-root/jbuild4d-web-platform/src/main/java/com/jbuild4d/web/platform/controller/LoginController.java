@@ -31,7 +31,7 @@ public class LoginController {
     @Autowired
     IOperationLogService operationLogService;
 
-    @RequestMapping(value = "/Login", method = RequestMethod.GET)
+    @RequestMapping(value = "/LoginView", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request) {
 
         System.out.println("Home Controller Call");
@@ -46,7 +46,7 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/LoginOut", method = RequestMethod.GET)
+    @RequestMapping(value = "/LoginOutView", method = RequestMethod.GET)
     public ModelAndView loginOut(HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException {
         ModelAndView modelAndView=new ModelAndView("Login");
         operationLogService.writeUserExitLog(JB4DSessionUtility.getSession(),this.getClass(),request);
@@ -54,7 +54,7 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/RedirectLogin", method = RequestMethod.GET)
+    @RequestMapping(value = "/RedirectLoginView", method = RequestMethod.GET)
     public ModelAndView RedirectLogin(HttpServletRequest request) {
 
         ModelAndView modelAndView=new ModelAndView("SessionTimeout");

@@ -103,7 +103,7 @@ gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign'
 gulp.task('watch', function() {
     let watcherUtilityJs=gulp.watch(srcPlatformStaticPath + '/Js/Utility/*.js', gulp.series('JS-Custom-ALL'));
     let watcherLess=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Css/*.less", gulp.series('Less'));
-    let watcherHTMLTemplates=gulp.watch(srcPlatformStaticPath + "/Html/**/*", gulp.series('HTMLTemplates'));
+    let watcherHTMLTemplates=gulp.watch("build-jbuild4d-web-platform/templates/**/*", gulp.series('HTMLTemplates'));
     let watcherFormDesign=gulp.watch([
         srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.js",
         srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.css",
