@@ -48,16 +48,12 @@ var BaseUtility = {
         return StringUtility.GetTimeStampUrl(_url);*/
     },
     BuildHTMLView:function (action,para) {
-        var urlPara = "";
-        if (para) {
-            urlPara = $.param(para);
+        if(StringUtility.EndWith(action,"View")) {
+            return this.BuildAction(action, para);
         }
-        var _url = this.GetRootPath() + action + ".html";
-        if (urlPara != "") {
-            _url += "?" + urlPara;
+        else {
+            DialogUtility.AlertText("视图Url请用View作为结尾.");
         }
-        //alert(_url);
-        return this.AppendTimeStampUrl(_url);
     },
     BuildAction:function (action,para) {
         var urlPara = "";
