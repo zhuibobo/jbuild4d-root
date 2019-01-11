@@ -98,8 +98,10 @@ function copyAndResolveHtml(sourcePath,base,toPath) {
         .pipe(gulp.dest(toPath));
 }
 
+/*编译所有的文件*/
 gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign'));
 
+/*监控文件更新*/
 gulp.task('watch', function() {
     let watcherUtilityJs=gulp.watch(srcPlatformStaticPath + '/Js/Utility/*.js', gulp.series('JS-Custom-ALL'));
     let watcherLess=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/*.less", gulp.series('Less'));
@@ -111,4 +113,5 @@ gulp.task('watch', function() {
         srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.html"], gulp.series('FormDesign'));
 });
 
+/*默认启动文件监控*/
 gulp.task('default', gulp.series('watch'));
