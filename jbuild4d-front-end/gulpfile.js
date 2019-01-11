@@ -17,8 +17,6 @@ const replaceBlockObj=require("./replaceBlock.js");
 const publicResourcePath = "../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/static";
 const srcPlatformStaticPath = "build-jbuild4d-web-platform/static";
 
-
-
 /*编译Vue的扩展插件*/
 gulp.task('JS-VueEXComponent',()=>{
     return gulp.src([srcPlatformStaticPath + '/Js/VueComponent/*.js'])
@@ -89,21 +87,6 @@ gulp.task('FormDesign-HTML',()=>{
 /*编译表单设计器的相关文件*/
 gulp.task('FormDesign', gulp.series('FormDesign-JS','FormDesign-HTML'));
 
-function copyAndResolveHtml(sourcePath,base,toPath) {
-    /*拷贝HTML文件*/
-    return gulp.src(sourcePath, {base: base})
-        .pipe(replacecust(replaceBlockObj.replaceBlock('GeneralLib'), replaceBlockObj.replaceGeneralLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('CodeMirrorLib'), replaceBlockObj.replaceCodeMirrorLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('FormDesignLib'), replaceBlockObj.replaceFormDesignLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('ZTreeExtendLib'), replaceBlockObj.replaceZTreeExtendLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('ThemesLib'), replaceBlockObj.replaceThemesLib))
-        //.pipe(htmlclean({
-        //    protect: /<\!--%fooTemplate\b.*?%-->/g,
-        //    edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
-        //}))
-        .pipe(gulp.dest(toPath));
-}
-
 /*编译所有的文件*/
 gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign','LessImages'));
 
@@ -122,3 +105,18 @@ gulp.task('watch', function() {
 
 /*默认启动文件监控*/
 gulp.task('default', gulp.series('watch'));
+
+function copyAndResolveHtml(sourcePath,base,toPath) {
+    /*拷贝HTML文件*/
+    return gulp.src(sourcePath, {base: base})
+        .pipe(replacecust(replaceBlockObj.replaceBlock('GeneralLib'), replaceBlockObj.replaceGeneralLib))
+        .pipe(replacecust(replaceBlockObj.replaceBlock('CodeMirrorLib'), replaceBlockObj.replaceCodeMirrorLib))
+        .pipe(replacecust(replaceBlockObj.replaceBlock('FormDesignLib'), replaceBlockObj.replaceFormDesignLib))
+        .pipe(replacecust(replaceBlockObj.replaceBlock('ZTreeExtendLib'), replaceBlockObj.replaceZTreeExtendLib))
+        .pipe(replacecust(replaceBlockObj.replaceBlock('ThemesLib'), replaceBlockObj.replaceThemesLib))
+        //.pipe(htmlclean({
+        //    protect: /<\!--%fooTemplate\b.*?%-->/g,
+        //    edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
+        //}))
+        .pipe(gulp.dest(toPath));
+}
