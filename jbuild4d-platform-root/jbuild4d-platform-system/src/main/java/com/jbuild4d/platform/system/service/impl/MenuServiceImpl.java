@@ -74,7 +74,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         //根菜单->系统设置分组
         String systemSettingRootId="JB4DSystemSettingRoot";
         MenuEntity systemSettingMenu=getMenu(rootMenu.getMenuId(),systemSettingRootId,"系统设置","系统设置","系统设置",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenuView","","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenuView","","menu-data");
         deleteByKey(jb4DSession,systemSettingMenu.getMenuId());
         save(jb4DSession,systemSettingMenu.getMenuId(),systemSettingMenu);
 
@@ -124,21 +124,21 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         //根菜单->开发示例
         String devDemoRootId="JB4DDevDemoRoot";
         MenuEntity devDemoRootMenu=getMenu(rootMenu.getMenuId(),devDemoRootId,"开发示例","开发示例","开发示例",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/PlatForm/DevDemo/MenusView","","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/PlatForm/DevDemo/MenusView","","menu-data");
         deleteByKey(jb4DSession,devDemoRootId);
         save(jb4DSession,devDemoRootMenu.getMenuId(),devDemoRootMenu);
 
         //根菜单->应用设计
         String appBuilderRootId="JB4DSystemAppBuilderRoot";
         MenuEntity appBuilderRootMenu=getMenu(rootMenu.getMenuId(),appBuilderRootId,"应用设计","应用设计","应用设计",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenuView","","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenuView","","menu-data");
         deleteByKey(jb4DSession,appBuilderRootMenu.getMenuId());
         save(jb4DSession,appBuilderRootMenu.getMenuId(),appBuilderRootMenu);
 
         //根菜单->应用管理->存储设计
         String appBuilderDataStorageBuilderId="JB4DSystemAppBuilderDataStorageBuilder";
         MenuEntity appManagerDataStorageMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderDataStorageBuilderId,"存储设计","存储设计","存储设计",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenuView","","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenuView","","top-menu-data");
         deleteByKey(jb4DSession,appManagerDataStorageMenu.getMenuId());
         save(jb4DSession,appManagerDataStorageMenu.getMenuId(),appManagerDataStorageMenu);
 

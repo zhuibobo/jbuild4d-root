@@ -14,25 +14,25 @@
 <div id="app">
     <div class="frame-layout">
         <layout :style="{minHeight: '100vh'}">
-            <i-header style="padding: 0 10px" class="frame-layout-header-wrap">
+            <i-header style="padding: 0 10px" class="header-wrap">
                 <div style="width: 100%;height: 65px">
-                    <div class="frame-layout-logo">
+                    <div class="layout-logo">
                         <Icon type="ios-monitor-outline"></Icon>&nbsp;&nbsp;JBuild4D-V-0.31
                     </div>
-                    <div class="frame-top-menu-item-warp">
-                        <div class="frame-top-menu-item-inner-warp">
+                    <div class="top-menu-item-warp">
+                        <div class="top-menu-item-inner-warp">
                             <div :class="topMenuItemClass(item)" @click="topMenuClick(item,true)"
                                  v-for="(item, key) in topMenuArrayJson" topmenu="true">
                                 {{item.menuText}}
                             </div>
                         </div>
                     </div>
-                    <div class="frame-top-menu-op-c">
+                    <div class="top-menu-op-c">
                         <div class="right" @click="nextTopMenu()"></div>
                         <div class="left" @click="prevTopMenu()"></div>
                     </div>
-                    <div class="frame-top-right-wrap">
-                        <div class="frame-user-warp">
+                    <div class="top-right-wrap">
+                        <div class="user-warp">
                             <div class="user-header"></div>
                             <div class="line"></div>
                             <div style="float: left">
@@ -45,7 +45,7 @@
                         <div class="logout" @click="logout()"></div>
                     </div>
                 </div>
-                <div class="layout-header-shadow-line" style="height: 4px;width: 100%"></div>
+                <div class="header-shadow-line" style="height: 4px;width: 100%"></div>
             </i-header>
             <layout>
                 <sider hide-trigger :style="sider_style" width="300">
@@ -113,9 +113,9 @@
         methods: {
             topMenuItemClass: function (item) {
                 if (item.selected) {
-                    return "frame-top-menu-item frame-top-menu-item-selected " + item.menuClassName;
+                    return "top-menu-item top-menu-item-selected " + item.menuClassName;
                 }
-                return "frame-top-menu-item " + item.menuClassName;
+                return "top-menu-item " + item.menuClassName;
             },
             unSelectedAllTopMenu: function () {
                 for (var i = 0; i < this.topMenuArrayJson.length; i++) {
@@ -205,7 +205,7 @@
                 this.unSelectedAllTopMenu();
                 item.selected = true;
                 this.leftMenuArrayJson = item.items;
-                debugger;
+                //debugger;
                 if (this.leftIframeUrl.indexOf("/PlatForm/Base/LeftMenu.do") >= 0 && reSetLeftMenu) {
                     $("#leftMenuIframe")[0].contentWindow.app.leftMenuArrayJson = app.leftMenuArrayJson;
                 };
