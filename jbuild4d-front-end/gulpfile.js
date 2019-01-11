@@ -59,7 +59,14 @@ gulp.task('Less',()=>{
 
 /*编译工程相关的前端模版*/
 gulp.task('HTMLTemplates',()=>{
-    return copyAndResolveHtml(srcPlatformStaticPath + "/Html/**/*",srcPlatformStaticPath + "/Html",publicResourcePath + "/Html");
+    //return copyAndResolveHtml(srcPlatformStaticPath + "/Html/**/*",srcPlatformStaticPath + "/Html",publicResourcePath + "/Html");
+    /*拷贝HTML文件*/
+    return gulp.src("build-jbuild4d-web-platform/templates/**/*", {base: "build-jbuild4d-web-platform/templates"})
+        //.pipe(htmlclean({
+        //    protect: /<\!--%fooTemplate\b.*?%-->/g,
+        //    edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
+        //}))
+        .pipe(gulp.dest("../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/templates"));
 });
 
 /*编译表单设计器的相关的JS文件*/
