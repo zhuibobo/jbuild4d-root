@@ -29,15 +29,15 @@ public class FrameController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "LeftMenu", method = RequestMethod.GET)
+    @RequestMapping(value = "LeftMenuView", method = RequestMethod.GET)
     public ModelAndView leftMenu() throws JsonProcessingException {
-        ModelAndView modelAndView=new ModelAndView("LeftMenu");
+        ModelAndView modelAndView=new ModelAndView("LeftMenuView");
         return modelAndView;
     }
 
-    @RequestMapping(value = "RightContent", method = RequestMethod.GET)
+    @RequestMapping(value = "RightContentView", method = RequestMethod.GET)
     public ModelAndView rightContent() throws JsonProcessingException {
-        ModelAndView modelAndView=new ModelAndView("RightContent");
+        ModelAndView modelAndView=new ModelAndView("RightContentView");
         return modelAndView;
     }
 }

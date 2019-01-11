@@ -55,7 +55,7 @@ var BaseUtility = {
             return this.BuildAction(action, para);
         }
         else {
-            DialogUtility.AlertText("视图Url请用View作为结尾.");
+            DialogUtility.AlertText(action+"视图Url请用View作为结尾.");
             return "";
         }
     },
