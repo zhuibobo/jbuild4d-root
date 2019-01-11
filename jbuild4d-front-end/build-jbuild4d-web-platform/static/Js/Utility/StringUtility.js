@@ -338,6 +338,7 @@ var StringUtility = {
     },
     EndWith:function (str,endStr) {
         var d=str.length-endStr.length;
+        //alert(str.lastIndexOf(endStr)==d);
         return (d>=0&&str.lastIndexOf(endStr)==d);
     }
 };

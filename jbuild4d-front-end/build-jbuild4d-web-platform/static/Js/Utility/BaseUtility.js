@@ -47,12 +47,16 @@ var BaseUtility = {
         /*var _url=this.GetRootPath()+url;
         return StringUtility.GetTimeStampUrl(_url);*/
     },
-    BuildHTMLView:function (action,para) {
+    BuildView:function (action,para) {
+        //debugger;
+        //alert(11);
+        //alert(StringUtility.EndWith(action,"View"));
         if(StringUtility.EndWith(action,"View")) {
             return this.BuildAction(action, para);
         }
         else {
             DialogUtility.AlertText("视图Url请用View作为结尾.");
+            return "";
         }
     },
     BuildAction:function (action,para) {

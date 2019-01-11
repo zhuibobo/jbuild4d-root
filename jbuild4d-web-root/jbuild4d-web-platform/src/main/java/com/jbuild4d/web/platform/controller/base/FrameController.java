@@ -18,8 +18,8 @@ public class FrameController {
     @Autowired
     IMenuService menuService;
 
-    @RequestMapping(value = "Frame", method = RequestMethod.GET)
-    public ModelAndView frame() throws JsonProcessingException {
+    @RequestMapping(value = "FrameView", method = RequestMethod.GET)
+    public ModelAndView frameView() throws JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView("Frame");
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
         modelAndView.addObject("menuJson",JsonUtility.toObjectString(menuService.getALL(jb4DSession)));
