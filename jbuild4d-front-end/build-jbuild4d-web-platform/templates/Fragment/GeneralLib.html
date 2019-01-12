@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>JBuild4D</title>
     <script type="text/javascript" th:src="@{/Js/T3P/JQuery/jquery-3.3.1.min.js}"></script>
-    <script type="text/javascript" th:src="@{/Js/JBuild4DPlatformLib.js(urlts=${urlts})}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/VUE-2.5.16/vue.js}"></script>
-    <script type="text/javascript" th:src="@{/Js/VueEXComponent.js(urlts=${urlts})}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/IView-3.X/dist/iview.min.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/JQuery-UI-1.12.1/jquery-ui.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/ZTree-V3/js/jquery.ztree.all.js}"></script>
+    <script type="text/javascript" th:src="@{/Js/JBuild4DPlatformLib.js(urlts=${urlts})}"></script>
+    <script type="text/javascript" th:src="@{/Js/VueEXComponent.js(urlts=${urlts})}"></script>
+    <script type="text/javascript" th:src="@{/Js/UIEXComponent.js(urlts=${urlts})}"></script>
 </th:block>
 <th:block th:fragment="ThemesLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/Jbuild4dPlatform.css(theme=${theme},urlts=${urlts})}" />
@@ -64,7 +65,7 @@
 <!--<th:block th:fragment="TreeTableLib" th:with="urlts=${'V1'}" >
     <script type="text/javascript" th:src="@{/UIComponent/TreeTable/Js/TreeTable.js}"></script>
 </th:block>-->
-<th:block th:fragment="EditTableLib" th:with="urlts=${'V1'}" >
+<!--<th:block th:fragment="EditTableLib" th:with="urlts=${'V1'}" >
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/EditTable.js}"></script>
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_CheckBox.js}"></script>
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_Label.js}"></script>
@@ -76,8 +77,8 @@
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_FieldName.js}"></script>
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_SelectFieldType.js}"></script>
     <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/DataSet/Column_SelectDefaultValue.js}"></script>
-</th:block>
-<th:block th:fragment="CodeMirrorSQL" th:with="urlts=${'V1'}" >
+</th:block>-->
+<!--<th:block th:fragment="CodeMirrorSQL" th:with="urlts=${'V1'}" >
     <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/mode/sql/sql.js}"></script>
 </th:block>
 <th:block th:fragment="CodeMirrorHTML" th:with="urlts=${'V1'}" >
@@ -102,7 +103,7 @@
 <th:block th:fragment="FormDesignLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
     <script type="text/javascript" th:src="@{/UIComponent/HTMLDesign/Ckeditor-4.11.1/ckeditor.js}"></script>
     <script type="text/javascript" th:src="@{/UIComponent/HTMLDesign/FormDesign/JBuild4DFormDesign.js}"></script>
-</th:block>
+</th:block>-->
 <!--
 <th:block th:fragment="FormDialogLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/FormDesign/Dialog.css(theme=${theme},urlts=${urlts})}" />

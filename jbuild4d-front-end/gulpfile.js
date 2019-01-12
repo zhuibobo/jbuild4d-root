@@ -23,8 +23,10 @@ gulp.task('JS-VueEXComponent',()=>{
         .pipe(babel({
             presets: ['@babel/env']
         }))
+        .pipe(sourcemaps.init())
         .pipe(concat('VueEXComponent.js'))
         .pipe(uglify())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(publicResourcePath + "/Js"));
 });
 
@@ -41,8 +43,21 @@ gulp.task('JS-Utility',()=>{
         .pipe(gulp.dest(publicResourcePath + "/Js"));
 });
 
+/*编译旧的UI的组件*/
+gulp.task('JS-UIComponent',()=>{
+    return gulp.src([srcPlatformStaticPath + '/Js/EditTable/**/*.js',srcPlatformStaticPath + '/Js/TreeTable/**/*.js'])
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(concat('UIEXComponent.js'))
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(publicResourcePath + "/Js"));
+});
+
 /*编译工程相关的JS*/
-gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility'));
+gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UIComponent'));
 
 /*编译工程相关的Less文件*/
 gulp.task('Less',()=>{
@@ -66,10 +81,10 @@ gulp.task('HTMLTemplates',()=>{
     //return copyAndResolveHtml(srcPlatformStaticPath + "/Html/**/*",srcPlatformStaticPath + "/Html",publicResourcePath + "/Html");
     /*拷贝HTML文件*/
     return gulp.src("build-jbuild4d-web-platform/templates/**/*", {base: "build-jbuild4d-web-platform/templates"})
-        //.pipe(htmlclean({
-        //    protect: /<\!--%fooTemplate\b.*?%-->/g,
-        //    edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
-        //}))
+        .pipe(htmlclean({
+            protect: /<\!--%fooTemplate\b.*?%-->/g,
+            edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
+        }))
         .pipe(gulp.dest("../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/templates"));
 });
 
@@ -92,7 +107,7 @@ gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign'
 
 /*监控文件更新*/
 gulp.task('watch', function() {
-    let watcherUtilityJs=gulp.watch(srcPlatformStaticPath + '/Js/Utility/*.js', gulp.series('JS-Custom-ALL'));
+    let watcherJs=gulp.watch(srcPlatformStaticPath + '/Js/**/*.js', gulp.series('JS-Custom-ALL'));
     let watcherLess=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/*.less", gulp.series('Less'));
     let watcherLessImages=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/Images/**/*", gulp.series('LessImages'));
     let watcherHTMLTemplates=gulp.watch("build-jbuild4d-web-platform/templates/**/*", gulp.series('HTMLTemplates'));

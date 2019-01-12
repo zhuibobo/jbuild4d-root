@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::TreeTableLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
 </head>
 <body>
@@ -26,6 +23,7 @@
             </div>
         </div>
         <div class="right-outer-wrap-c" style="padding: 10px;left: 260px">
+
             <div style="width: 100%">
                 <div style="float: right;margin-bottom: 15px;margin-top: 10px;margin-right: 10px">
                     <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
