@@ -9,6 +9,7 @@ const htmlclean = require('gulp-htmlclean');
 const less = require('gulp-less');
 const path = require('path');
 const sourcemaps = require('gulp-sourcemaps');
+const htmlmin = require('gulp-htmlmin');
 
 const replacecust = require("./gulp-plugin/gulp-replace-cust/index.js");
 
@@ -81,9 +82,14 @@ gulp.task('HTMLTemplates',()=>{
     //return copyAndResolveHtml(srcPlatformStaticPath + "/Html/**/*",srcPlatformStaticPath + "/Html",publicResourcePath + "/Html");
     /*拷贝HTML文件*/
     return gulp.src("build-jbuild4d-web-platform/templates/**/*", {base: "build-jbuild4d-web-platform/templates"})
-        .pipe(htmlclean({
-            protect: /<\!--%fooTemplate\b.*?%-->/g,
-            edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
+        //.pipe(htmlclean({
+        //    protect: /<\!--%fooTemplate\b.*?%-->/g,
+        //    edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
+        //}))
+        .pipe(htmlmin({
+            collapseWhitespace: true,
+            minifyCSS:true,
+            minifyJS:true
         }))
         .pipe(gulp.dest("../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/templates"));
 });

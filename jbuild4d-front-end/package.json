@@ -17,6 +17,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-copy": "^4.0.1",
     "gulp-htmlclean": "^2.7.22",
+    "gulp-htmlmin": "^5.0.1",
     "gulp-less": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
