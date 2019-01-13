@@ -72,7 +72,7 @@ var BaseUtility = {
         return this.AppendTimeStampUrl(_url);
     },
     RedirectToLogin:function () {
-        var url=BaseUtility.GetRootPath()+"/Login.do";
+        var url=BaseUtility.GetRootPath()+"/LoginView.do";
         window.parent.parent.location.href=url;
     },
     AppendTimeStampUrl:function (url) {
