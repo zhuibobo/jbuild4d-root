@@ -493,6 +493,7 @@ var DialogUtility={
         }
     },
     Frame_CloseDialog:function (opererWindow) {
+        //debugger;
         var wrwin = this.Frame_TryGetFrameWindowObj();
         var openerwin = opererWindow.OpenerWindowObj;
         var autodialogid = opererWindow.FrameWindowId;

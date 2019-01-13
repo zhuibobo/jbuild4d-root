@@ -25,6 +25,7 @@ gulp.task('JS-VueEXComponent',()=>{
             presets: ['@babel/env']
         }))
         .pipe(sourcemaps.init())
+        //.pipe(sourcemaps.identityMap())
         .pipe(concat('VueEXComponent.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write())
@@ -39,7 +40,11 @@ gulp.task('JS-Utility',()=>{
         }))
         .pipe(sourcemaps.init())
         .pipe(concat('JBuild4DPlatformLib.js'))
-        .pipe(uglify())
+        //.pipe(uglify(
+        //    {
+        //        compress: {drop_debugger: false}
+        //    }
+        //))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(publicResourcePath + "/Js"));
 });
