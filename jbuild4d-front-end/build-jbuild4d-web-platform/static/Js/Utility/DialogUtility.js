@@ -35,11 +35,17 @@ var DialogUtility={
         }
     },
     _CreateIfrmaeDialogElement: function (docobj, dialogid, url) {
-        var dialogEle = $("<div id=" + dialogid + " title='Basic dialog' style='display:none'>\
-                        <iframe width='100%' height='98%' frameborder='0' src='" + url + "'>\
+        /*var dialogEle = $("<div id=" + dialogid + " title='Basic dialog'>\
+                        <iframe name='dialogIframe' width='100%' height='98%' frameborder='0' src='" + url + "'>\
+                        </iframe>\
+                    </div>");*/
+        //直接设置iframe的src会造成一次请求http的canceled.
+        var dialogEle = $("<div id=" + dialogid + " title='Basic dialog'>\
+                        <iframe name='dialogIframe' width='100%' height='98%' frameborder='0'>\
                         </iframe>\
                     </div>");
         $(docobj.body).append(dialogEle);
+        //alert(url);
         return dialogEle;
     },
     _TestDialogElemIsExist:function(dialogId){
@@ -284,6 +290,7 @@ var DialogUtility={
 
         var dialogObj=$(dialogEle).dialog(defaultoptions);
         var $iframeobj = $(dialogEle).find("iframe");
+        $iframeobj.attr(src,url);
         $iframeobj[0].contentWindow.FrameWindowId = autodialogid;
         $iframeobj[0].contentWindow.OpenerWindowObj = openerwindow;
         return dialogObj;
@@ -426,6 +433,7 @@ var DialogUtility={
             $(".ui-widget-overlay").css("zIndex","1000");
             $(".ui-dialog").css("zIndex","1001");
             var $iframeobj = $(dialogEle).find("iframe");
+            $iframeobj.attr("src",url);
             $iframeobj[0].contentWindow.FrameWindowId = autodialogid;
             $iframeobj[0].contentWindow.OpenerWindowObj = openerwindow;
             $iframeobj[0].contentWindow.IsOpenForFrame=true;
