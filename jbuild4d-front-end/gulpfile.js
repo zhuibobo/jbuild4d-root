@@ -40,11 +40,11 @@ gulp.task('JS-Utility',()=>{
         }))
         .pipe(sourcemaps.init())
         .pipe(concat('JBuild4DPlatformLib.js'))
-        //.pipe(uglify(
-        //    {
-        //        compress: {drop_debugger: false}
-        //    }
-        //))
+        .pipe(uglify(
+            {
+                compress: {drop_debugger: false}
+            }
+        ))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(publicResourcePath + "/Js"));
 });

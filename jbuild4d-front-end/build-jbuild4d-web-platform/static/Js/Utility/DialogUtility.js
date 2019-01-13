@@ -434,9 +434,15 @@ var DialogUtility={
             $(".ui-dialog").css("zIndex","1001");
             var $iframeobj = $(dialogEle).find("iframe");
             $iframeobj.attr("src",url);
-            $iframeobj[0].contentWindow.FrameWindowId = autodialogid;
-            $iframeobj[0].contentWindow.OpenerWindowObj = openerwindow;
-            $iframeobj[0].contentWindow.IsOpenForFrame=true;
+            $iframeobj.on("load",function () {
+                this.contentWindow.FrameWindowId = autodialogid;
+                this.contentWindow.OpenerWindowObj = openerwindow;
+                this.contentWindow.IsOpenForFrame = true;
+            });
+            //$iframeobj[0].contentWindow.FrameWindowId = autodialogid;
+            //$iframeobj[0].contentWindow.OpenerWindowObj = openerwindow;
+            //alert(1);
+            //$iframeobj[0].contentWindow.IsOpenForFrame=true;
             /*$iframeobj.load(function () {
                 //alert($(this).contents().find("input").length);
                 try {
