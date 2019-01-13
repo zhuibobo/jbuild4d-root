@@ -277,7 +277,7 @@
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择上级字典!", null);
                             return false;
                         }
-                        var url = BaseUtility.BuildAction(this.acInterface.dictEditView, {
+                        var url = BaseUtility.BuildView(this.acInterface.dictEditView, {
                             "dictParentId": nodeData.dictId,
                             "op": "add",
                             "dictGroupId": this.treeSelectedNode.dictGroupId
@@ -288,7 +288,7 @@
                 edit:function() {
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
                         //debugger;
-                        var url = BaseUtility.BuildAction(this.acInterface.dictEditView, {
+                        var url = BaseUtility.BuildView(this.acInterface.dictEditView, {
                             "op": "update",
                             "recordId": nodeData.dictId
                         });
@@ -315,7 +315,7 @@
                 },
                 view:function() {
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildAction(this.acInterface.dictEditView, {
+                        var url = BaseUtility.BuildView(this.acInterface.dictEditView, {
                             "op": "view",
                             "recordId": nodeData.dictId
                         });
