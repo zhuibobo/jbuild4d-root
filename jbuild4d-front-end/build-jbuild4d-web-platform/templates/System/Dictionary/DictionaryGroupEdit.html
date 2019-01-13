@@ -14,9 +14,13 @@
 </head>
 <body>
     <div id="appForm" class="general-edit-page-wrap" v-cloak>
-        <div class="">
-            <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')"> 保 存 </i-button>
-            <i-button @click="handleClose()" style="margin-left: 8px"> 关 闭 </i-button>
+        <div class="button-outer-wrap">
+            <div class="button-inner-wrap">
+                <button-group size="small">
+                    <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')" icon="md-checkmark">保 存</i-button>
+                    <i-button @click="handleClose()" icon="md-close">关 闭</i-button>
+                </button-group>
+            </div>
         </div>
         <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
             <form-item label="ParentId：">
