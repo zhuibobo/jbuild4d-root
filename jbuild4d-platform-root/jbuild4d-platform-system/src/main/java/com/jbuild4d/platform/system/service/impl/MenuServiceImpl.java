@@ -102,7 +102,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         //根菜单->系统设置分组->代码生成
         String systemSettingCodeGenerateId="JB4DSystemSettingCodeGenerate";
         MenuEntity systemSettingCodeGenerateMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingCodeGenerateId,"代码生成","代码生成","代码生成",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/CodeGenerate/Manager","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/CodeGenerate/ManagerView","");
         deleteByKey(jb4DSession,systemSettingCodeGenerateMenu.getMenuId());
         save(jb4DSession,systemSettingCodeGenerateMenu.getMenuId(),systemSettingCodeGenerateMenu);
 

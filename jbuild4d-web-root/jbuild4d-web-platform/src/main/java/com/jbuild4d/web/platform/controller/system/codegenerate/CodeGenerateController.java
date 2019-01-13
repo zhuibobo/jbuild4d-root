@@ -36,8 +36,8 @@ public class CodeGenerateController {
     @Autowired
     ICodeGenerateService codeGenerateService;
 
-    @RequestMapping(value = "Manager", method = RequestMethod.GET)
-    public ModelAndView manger() {
+    @RequestMapping(value = "ManagerView", method = RequestMethod.GET)
+    public ModelAndView mangerView() {
         ModelAndView modelAndView=new ModelAndView("System/DBResolver/Manager");
         return modelAndView;
     }
