@@ -54,7 +54,7 @@ var TreeTable={
                 this.SetJsonDataExtendAttr_CurrentLevel(item, currentLevel);
                 this.SetJsonDataExtendAttr_ParentIdList(item, _pIdList);
 
-                rowElem = this.CreateRowElem(item, currentLevel, parentjsonNode, rowIsOpen, _pIdList);
+                var rowElem = this.CreateRowElem(item, currentLevel, parentjsonNode, rowIsOpen, _pIdList);
                 this._$Prop_TableElem.append(rowElem);
                 if (item.Nodes != undefined && item.Nodes != null && item.Nodes.length > 0) {
                     var _tp = currentLevel + 1;
