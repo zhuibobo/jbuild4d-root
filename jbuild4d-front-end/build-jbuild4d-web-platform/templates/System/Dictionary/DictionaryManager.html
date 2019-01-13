@@ -158,7 +158,7 @@
                 },
                 addGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                        var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
                             "op": "add",
                             "parentId": this.treeSelectedNode.dictGroupId
                         });
@@ -170,7 +170,7 @@
                 },
                 editGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                        var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
                             "op": "update",
                             "recordId": this.treeSelectedNode.dictGroupId
                         });
@@ -181,7 +181,7 @@
                     }
                 },
                 viewGroup:function () {
-                    var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                    var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
                         "op": "view",
                         "recordId": this.treeSelectedNode.dictGroupId
                     });
