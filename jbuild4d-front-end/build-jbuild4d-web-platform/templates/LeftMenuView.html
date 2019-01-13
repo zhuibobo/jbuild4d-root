@@ -75,7 +75,8 @@
             parentApp:window.parent.app
         },
         mounted:function(){
-            this.leftMenuArrayJson=this.parentApp.leftMenuArrayJson;
+            //debugger;
+            this.leftMenuArrayJson=JsonUtility.CloneSimple(this.parentApp.leftMenuArrayJson);
             //alert("LeftMenu.html");
         },
         methods:{

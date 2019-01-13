@@ -3,4 +3,8 @@
   User: zhuangrb
   Date: 2018/8/26
   To change this template use File | Settings | File Templates.
---><!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block><th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block><script>$(function(){DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请重新登陆系统",function(){BaseUtility.RedirectToLogin()})})</script></head><body>SessionTimeout</body></html>
+--><!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block><th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block><script>$(function () {
+            DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请重新登陆系统",function () {
+                BaseUtility.RedirectToLogin();
+            });
+        })</script></head><body>SessionTimeout</body></html>

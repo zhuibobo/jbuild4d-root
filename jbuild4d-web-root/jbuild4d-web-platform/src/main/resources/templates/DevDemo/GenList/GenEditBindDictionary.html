@@ -1,1 +1,84 @@
-<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block><th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block><th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block><th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block></head><body><div id="appForm" class="general-edit-page-wrap" v-cloak><i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100"><form-item label="ddglKey：" prop="ddglKey"><i-input v-model="formEntity.ddglKey"></i-input></form-item><form-item label="ddglValue：" prop="ddglValue"><i-input v-model="formEntity.ddglValue"></i-input></form-item><form-item label="ddglName：" prop="ddglName"><i-input v-model="formEntity.ddglName"></i-input></form-item><form-item label="number：" prop="ddglInputnumber"><row><i-col span="10"><form-item><input-number :max="10" :min="0" v-model="formEntity.ddglInputnumber" style="width:100%"></input-number></form-item></i-col><i-col span="4" style="text-align:center">radio：</i-col><i-col span="10"><form-item><radio-group v-model="formEntity.ddglBindDicRadio" style="width:100%"><radio v-for="item in dictionaryJson.DevDemoDictionaryGroupBindRadio" :label="item.dictValue">{{item.dictText}}</radio></radio-group></form-item></i-col></row></form-item><form-item label="Mucheckbox："><checkbox-group v-model="formEntity.ddglBindDicMucheckbox"><checkbox v-for="item in dictionaryJson.DevDemoDictionaryGroupBindCheckbox" :label="item.dictValue">{{item.dictText}}</checkbox></checkbox-group></form-item><form-item label="ddglCreatetime："><row><i-col span="10"><form-item><date-picker type="date" placeholder="选择创建时间" v-model="formEntity.ddglCreatetime" disabled="disabled" readonly="readonly"></date-picker></form-item></i-col><i-col span="4" style="text-align:center">selected</i-col><i-col span="10"><form-item prop="ddglBindDicSelected"><i-select clearable v-model="formEntity.ddglBindDicSelected" style="width:100%"><i-option v-for="item in dictionaryJson.DevDemoDictionaryGroupBindSelect" :value="item.dictValue" :key="item.dictValue">{{ item.dictText }}</i-option></i-select></form-item></i-col></row></form-item><form-item label="dictGroupDesc："><i-input v-model="formEntity.dictGroupDesc" type="textarea" :autosize="{minRows: 3,maxRows: 3}"></i-input></form-item><form-item class="general-edit-page-bottom-wrap"><i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')">保 存</i-button><i-button @click="handleClose()" style="margin-left:8px">关 闭</i-button></form-item></i-form></div><script>var appForm=new Vue({el:"#appForm",mounted:function(){this.bindFormData()},data:{acInterface:{getDataUrl:"/PlatForm/DevDemo/DevDemoGenListBindDictionary/GetDetailData",saveDataUrl:"/PlatForm/DevDemo/DevDemoGenListBindDictionary/SaveEdit"},recordId:BaseUtility.GetUrlParaValue("recordId"),dictionaryJson:{DevDemoDictionaryGroupBindSelect:null,DevDemoDictionaryGroupBindRadio:null,DevDemoDictionaryGroupBindCheckbox:null},formEntity:{ddglId:"",ddglKey:"",ddglValue:"",ddglName:"",ddglCreatetime:DateUtility.GetCurrentData(),ddglDesc:"",ddglInputnumber:0,ddglBindDicSelected:"",ddglBindDicRadio:"Radio-Value-5",ddglBindDicMucheckbox:[]},ruleValidate:{ddglValue:[{required:!0,message:"【ddglValue】不能空！",trigger:"blur"}],ddglName:[{required:!0,message:"【ddglName】不能空！",trigger:"blur"}],ddglKey:[{required:!0,message:"【ddglKey】不能空！",trigger:"blur"}],ddglInputnumber:[{required:!0,message:"【ddglInputnumber】不能空！",trigger:"blur",type:"number"}],ddglBindDicSelected:[{required:!0,message:"【ddglBindDicSelected】不能空！",trigger:"blur"}]},status:BaseUtility.GetUrlParaValue("op")},methods:{bindFormData:function(){DetailPageUtility.BindFormData(this.acInterface.getDataUrl,this.formEntity,this.recordId,this.status,null,function(e){appForm.dictionaryJson.DevDemoDictionaryGroupBindSelect=e.exKVData.dictionaryJson.DevDemoDictionaryGroupBindSelect,appForm.dictionaryJson.DevDemoDictionaryGroupBindRadio=e.exKVData.dictionaryJson.DevDemoDictionaryGroupBindRadio,appForm.dictionaryJson.DevDemoDictionaryGroupBindCheckbox=e.exKVData.dictionaryJson.DevDemoDictionaryGroupBindCheckbox,appForm.formEntity.ddglBindDicMucheckbox=e.data.ddglBindDicMucheckbox.split(";")})},handleSubmit:function(e){var t=this;this.$refs[e].validate(function(e){if(e){(i=JsonUtility.CloneSimple(t.formEntity)).ddglBindDicMucheckbox=i.ddglBindDicMucheckbox.join(";");var i=JSON.stringify(i);AjaxUtility.PostRequestBody("/PlatForm/DevDemo/DevDemoGenList/SaveEdit.do",i,function(e){DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},e.message,function(){window.OpenerWindowObj.appList.reloadData(),DialogUtility.Frame_CloseDialog(window)})},"json")}else this.$Message.error("Fail!")})},handleClose:function(){DialogUtility.Frame_CloseDialog(window)}}})</script></body></html>
+<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block><th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block><th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block><th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block></head><body><div id="appForm" class="general-edit-page-wrap" v-cloak><i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100"><form-item label="ddglKey：" prop="ddglKey"><i-input v-model="formEntity.ddglKey"></i-input></form-item><form-item label="ddglValue：" prop="ddglValue"><i-input v-model="formEntity.ddglValue"></i-input></form-item><form-item label="ddglName：" prop="ddglName"><i-input v-model="formEntity.ddglName"></i-input></form-item><form-item label="number：" prop="ddglInputnumber"><row><i-col span="10"><form-item><input-number :max="10" :min="0" v-model="formEntity.ddglInputnumber" style="width:100%"></input-number></form-item></i-col><i-col span="4" style="text-align:center">radio：</i-col><i-col span="10"><form-item><radio-group v-model="formEntity.ddglBindDicRadio" style="width:100%"><radio v-for="item in dictionaryJson.DevDemoDictionaryGroupBindRadio" :label="item.dictValue">{{item.dictText}}</radio></radio-group></form-item></i-col></row></form-item><form-item label="Mucheckbox："><checkbox-group v-model="formEntity.ddglBindDicMucheckbox"><checkbox v-for="item in dictionaryJson.DevDemoDictionaryGroupBindCheckbox" :label="item.dictValue">{{item.dictText}}</checkbox></checkbox-group></form-item><form-item label="ddglCreatetime："><row><i-col span="10"><form-item><date-picker type="date" placeholder="选择创建时间" v-model="formEntity.ddglCreatetime" disabled="disabled" readonly="readonly"></date-picker></form-item></i-col><i-col span="4" style="text-align:center">selected</i-col><i-col span="10"><form-item prop="ddglBindDicSelected"><i-select clearable v-model="formEntity.ddglBindDicSelected" style="width:100%"><i-option v-for="item in dictionaryJson.DevDemoDictionaryGroupBindSelect" :value="item.dictValue" :key="item.dictValue">{{ item.dictText }}</i-option></i-select></form-item></i-col></row></form-item><form-item label="dictGroupDesc："><i-input v-model="formEntity.dictGroupDesc" type="textarea" :autosize="{minRows: 3,maxRows: 3}"></i-input></form-item><form-item class="general-edit-page-bottom-wrap"><i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')">保 存</i-button><i-button @click="handleClose()" style="margin-left:8px">关 闭</i-button></form-item></i-form></div><script>var appForm =new Vue({
+            el: "#appForm",
+            mounted:function () {
+                this.bindFormData();
+
+            },
+            data: {
+                acInterface:{
+                    getDataUrl:"/PlatForm/DevDemo/DevDemoGenListBindDictionary/GetDetailData",
+                    saveDataUrl:"/PlatForm/DevDemo/DevDemoGenListBindDictionary/SaveEdit"
+                },
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
+                dictionaryJson:{
+                    DevDemoDictionaryGroupBindSelect:null,
+                    DevDemoDictionaryGroupBindRadio:null,
+                    DevDemoDictionaryGroupBindCheckbox:null
+                },
+                formEntity: {
+                    ddglId: "",
+                    ddglKey: "",
+                    ddglValue: "",
+                    ddglName: "",
+                    ddglCreatetime: DateUtility.GetCurrentData(),
+                    ddglDesc: "",
+                    ddglInputnumber:0,
+                    ddglBindDicSelected:"",
+                    ddglBindDicRadio:"Radio-Value-5",
+                    ddglBindDicMucheckbox:[]
+                },
+                ruleValidate: {
+                    ddglValue: [
+                        {required: true, message: '【ddglValue】不能空！', trigger: 'blur'}
+                    ],
+                    ddglName: [
+                        {required: true, message: '【ddglName】不能空！', trigger: 'blur'}
+                    ],
+                    ddglKey: [
+                        {required: true, message: '【ddglKey】不能空！', trigger: 'blur'}
+                    ],
+                    ddglInputnumber: [
+                        {required: true, message: '【ddglInputnumber】不能空！', trigger: 'blur',type:"number"}
+                    ],
+                    ddglBindDicSelected:[
+                        {required: true, message: '【ddglBindDicSelected】不能空！', trigger: 'blur'}
+                    ]
+                },
+                status: BaseUtility.GetUrlParaValue("op")
+            },
+            methods: {
+                bindFormData:function(){
+                    //获取数据并赋值
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,function (result) {
+                        appForm.dictionaryJson.DevDemoDictionaryGroupBindSelect = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindSelect;
+                        appForm.dictionaryJson.DevDemoDictionaryGroupBindRadio = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindRadio;
+                        appForm.dictionaryJson.DevDemoDictionaryGroupBindCheckbox = result.exKVData.dictionaryJson.DevDemoDictionaryGroupBindCheckbox;
+                        appForm.formEntity.ddglBindDicMucheckbox=result.data.ddglBindDicMucheckbox.split(";");
+                    });
+                },
+                handleSubmit: function (name) {
+                    var _self = this;
+                    this.$refs[name].validate(function (valid) {
+                        if (valid) {
+                            var sendData=JsonUtility.CloneSimple(_self.formEntity);
+                            sendData.ddglBindDicMucheckbox=sendData.ddglBindDicMucheckbox.join(";");
+                            var sendData = JSON.stringify(sendData);
+                            //debugger;
+                            var url = '/PlatForm/DevDemo/DevDemoGenList/SaveEdit.do';
+                            AjaxUtility.PostRequestBody(url, sendData, function (result) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    //debugger;
+                                    window.OpenerWindowObj.appList.reloadData();
+                                    DialogUtility.Frame_CloseDialog(window);
+                                });
+                            }, "json");
+                        } else {
+                            this.$Message.error('Fail!');
+                        }
+                    })
+                },
+                handleClose: function () {
+                    DialogUtility.Frame_CloseDialog(window);
+                }
+            }
+        });</script></body></html>

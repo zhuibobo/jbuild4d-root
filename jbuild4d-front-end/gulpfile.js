@@ -94,7 +94,7 @@ gulp.task('HTMLTemplates',()=>{
         .pipe(htmlmin({
             collapseWhitespace: true,
             minifyCSS:true,
-            minifyJS:true
+            minifyJS:false
         }))
         .pipe(gulp.dest("../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/templates"));
 });
