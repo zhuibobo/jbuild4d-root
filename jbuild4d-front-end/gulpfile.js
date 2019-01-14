@@ -62,6 +62,15 @@ gulp.task('JS-UIComponent',()=>{
         .pipe(gulp.dest(publicResourcePath + "/Js"));
 });
 
+/*编译Demo的ES6-JS文件*/
+gulp.task('ES6-JS-Demo',()=>{
+    return gulp.src([srcPlatformStaticPath + '/ES6/*.js'])
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(gulp.dest(srcPlatformStaticPath + "/ES6/ES5"));
+});
+
 /*编译工程相关的JS*/
 gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UIComponent'));
 
