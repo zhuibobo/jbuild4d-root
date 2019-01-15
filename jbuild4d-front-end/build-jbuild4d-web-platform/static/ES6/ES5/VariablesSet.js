@@ -22,3 +22,6 @@ var jsonData = {
 var id = jsonData.id,
     status = jsonData.status,
     number = jsonData.data;
+console.log(id);
+console.log(status);
+console.log(data);

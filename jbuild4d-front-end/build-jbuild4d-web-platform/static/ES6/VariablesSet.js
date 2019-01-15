@@ -1,3 +1,5 @@
+
+
 function example() {
     return [1, 2, 3];
 }
@@ -10,3 +12,6 @@ let jsonData = {
 };
 let { id, status, data: number } = jsonData;
 
+console.log(id);
+console.log(status);
+console.log(data);
