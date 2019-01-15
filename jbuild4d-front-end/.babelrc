@@ -15,11 +15,11 @@
                     "Android >= 6"
                 ]
             },
-            "useBuiltIns": "usage",
+            "useBuiltIns":false,
             "debug": false
         }]
     ],
-    "presets": ["@babel/preset-env"],
+    /*"presets": ["@babel/preset-env"],*/
     "plugins": [
         "@babel/plugin-transform-arrow-functions",
         "@babel/plugin-transform-block-scoping",
