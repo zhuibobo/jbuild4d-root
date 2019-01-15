@@ -66,10 +66,10 @@ gulp.task('JS-UIComponent',()=>{
 /*编译Demo的ES6-JS文件*/
 gulp.task('ES6-JS-Demo',()=>{
     return gulp.src([srcPlatformStaticPath + '/ES6/*.js'])
-        //.pipe(babel())
-        .pipe(babel({
+        .pipe(babel())
+        /*.pipe(babel({
             presets: ['@babel/env']
-        }))
+        }))*/
         /*.pipe(babel({
             plugins: ['@babel/babel-plugin-transform-runtime']        // babel-plugin-transform-runtime 在这里使用;
         }))*/

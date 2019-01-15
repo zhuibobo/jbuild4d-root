@@ -1,7 +1,7 @@
 class Point {
-    x=0
-    y=0
-    z=0
+    x = 0;
+    y = 0;
+    z = 0;
     constructor(x, y) {
         this.x = x;
         this.y = y;

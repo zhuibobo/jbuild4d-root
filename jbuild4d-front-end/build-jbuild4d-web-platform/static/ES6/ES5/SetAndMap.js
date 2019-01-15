@@ -10,8 +10,8 @@ var _iteratorError = undefined;
 
 try {
   for (var _iterator = s[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-    var _i = _step.value;
-    console.log(_i);
+    var i = _step.value;
+    console.log(i);
   }
 } catch (err) {
   _didIteratorError = true;

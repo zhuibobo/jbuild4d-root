@@ -6,9 +6,17 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var Point = function () {
   function Point(x, y) {
     _classCallCheck(this, Point);
+
+    _defineProperty(this, "x", 0);
+
+    _defineProperty(this, "y", 0);
+
+    _defineProperty(this, "z", 0);
 
     this.x = x;
     this.y = y;
@@ -17,7 +25,7 @@ var Point = function () {
   _createClass(Point, [{
     key: "toString",
     value: function toString() {
-      return '(' + this.x + ', ' + this.y + ')';
+      return '(${x},${y},${z})';
     }
   }]);
 
