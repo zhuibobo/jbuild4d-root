@@ -30,6 +30,18 @@ class Point {
     }
 }
 
+class PointExtend extends Point{
+    color="";
+    constructor(x, y, color) {
+        super(x, y); // 调用父类的constructor(x, y)
+        this.color = color;
+    }
+
+    toString() {
+        return this.color + ' ' + super.toString(); // 调用父类的toString()
+    }
+}
+
 let pointInstance=new Point(1,2);
 console.log(pointInstance.toString());
 pointInstance.prop="hellow";
@@ -37,3 +49,6 @@ console.log(pointInstance.prop);
 pointInstance.one();
 Point.static_x="酷狗";
 console.log(Point.staticMethod());
+
+let pointExtendInstance=new PointExtend(1,2,3);
+console.log(pointExtendInstance.toString());
