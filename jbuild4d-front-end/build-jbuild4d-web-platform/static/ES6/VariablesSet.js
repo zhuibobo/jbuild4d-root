@@ -14,4 +14,4 @@ let { id, status, data: number } = jsonData;
 
 console.log(id);
 console.log(status);
-console.log(data);
+console.log(number);
