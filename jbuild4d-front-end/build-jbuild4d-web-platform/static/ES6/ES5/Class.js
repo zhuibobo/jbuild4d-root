@@ -1,5 +1,7 @@
 "use strict";
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
@@ -70,6 +72,21 @@ var Point = function () {
 
 _defineProperty(Point, "static_x", 1);
 
+var Point1 = function () {
+  function Point1() {
+    _classCallCheck(this, Point1);
+  }
+
+  _createClass(Point1, [{
+    key: "toStringPoint1",
+    value: function toStringPoint1() {
+      return "Point1Point1Point1";
+    }
+  }]);
+
+  return Point1;
+}();
+
 var PointExtend = function (_Point) {
   _inherits(PointExtend, _Point);
 
@@ -105,3 +122,76 @@ Point.static_x = "酷狗";
 console.log(Point.staticMethod());
 var pointExtendInstance = new PointExtend(1, 2, 3);
 console.log(pointExtendInstance.toString());
+var a = {
+  a: 'a'
+};
+var b = {
+  b: 'b'
+};
+
+var c = _objectSpread({}, a, b);
+
+console.log(c.a + "-and-" + c.b);
+
+function mix() {
+  var Mix = function Mix() {
+    _classCallCheck(this, Mix);
+  };
+
+  for (var _len = arguments.length, mixins = new Array(_len), _key = 0; _key < _len; _key++) {
+    mixins[_key] = arguments[_key];
+  }
+
+  for (var _i = 0; _i < mixins.length; _i++) {
+    var mixin = mixins[_i];
+    copyProperties(Mix.prototype, mixin);
+    copyProperties(Mix.prototype, Reflect.getPrototypeOf(mixin));
+  }
+
+  return Mix;
+}
+
+function copyProperties(target, source) {
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = Reflect.ownKeys(source)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var key = _step.value;
+
+      if (key !== "constructor" && key !== "prototype" && key !== "name") {
+        var desc = Object.getOwnPropertyDescriptor(source, key);
+        Object.defineProperty(target, key, desc);
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+}
+
+var DistributedEdit = function (_mix) {
+  _inherits(DistributedEdit, _mix);
+
+  function DistributedEdit() {
+    _classCallCheck(this, DistributedEdit);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DistributedEdit).apply(this, arguments));
+  }
+
+  return DistributedEdit;
+}(mix(Point, Point1));
+
+var DistributedEditObj = new DistributedEdit();
+console.log(DistributedEditObj.toString());
