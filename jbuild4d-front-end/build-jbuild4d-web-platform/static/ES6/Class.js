@@ -8,7 +8,7 @@ class Point {
     }
 
     toString() {
-        return '(${x},${y},${z})';
+        return `(${this.x},${this.y},${this.z})`;
     }
 }
 

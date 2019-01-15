@@ -25,7 +25,7 @@ var Point = function () {
   _createClass(Point, [{
     key: "toString",
     value: function toString() {
-      return '(${x},${y},${z})';
+      return "(".concat(this.x, ",").concat(this.y, ",").concat(this.z, ")");
     }
   }]);
 
