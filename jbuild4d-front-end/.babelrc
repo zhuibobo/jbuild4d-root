@@ -23,7 +23,8 @@
     "plugins": [
         "@babel/plugin-transform-arrow-functions",
         "@babel/plugin-transform-block-scoping",
-        "@babel/plugin-transform-classes"/*,
+        "@babel/plugin-transform-classes",
+        "@babel/plugin-proposal-class-properties"/*,
         "@babel/transform-runtime"*/
     ],
     "comments": false
