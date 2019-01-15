@@ -8,6 +8,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var methodName = "one";
+
 var Point = function () {
   function Point(x, y) {
     _classCallCheck(this, Point);
@@ -27,9 +29,35 @@ var Point = function () {
     value: function toString() {
       return "(".concat(this.x, ",").concat(this.y, ",").concat(this.z, ")");
     }
+  }, {
+    key: methodName,
+    value: function value() {
+      console.log("Log......." + methodName);
+    }
+  }, {
+    key: "prop",
+    get: function get() {
+      return 'getter';
+    },
+    set: function set(value) {
+      console.log('setter: ' + value);
+    }
+  }], [{
+    key: "staticMethod",
+    value: function staticMethod() {
+      return 'static method hello ' + this.static_x;
+    }
   }]);
 
   return Point;
 }();
 
-console.log(new Point(1, 2).toString());
+_defineProperty(Point, "static_x", 1);
+
+var pointInstance = new Point(1, 2);
+console.log(pointInstance.toString());
+pointInstance.prop = "hellow";
+console.log(pointInstance.prop);
+pointInstance.one();
+Point.static_x = "酷狗";
+console.log(Point.staticMethod());
