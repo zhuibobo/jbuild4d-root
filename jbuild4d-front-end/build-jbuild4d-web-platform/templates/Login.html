@@ -11,7 +11,7 @@
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
 </head>
 <body>
-<div id="app">
+<div id="app" class="general-edit-page-wrap" v-cloak>
     <row>
         <i-col span="6" offset="9">
             <card style="margin-top: 200px">
@@ -23,11 +23,14 @@
                     <form-item label="密    码">
                         <i-input v-model="formItem.password" placeholder="Enter something..."></i-input>
                     </form-item>
-                    <form-item class="general-edit-page-bottom-wrap">
-                        <i-button type="primary" @click="handleSubmit('formValidate')">登陆</i-button>
-                        <i-button style="margin-left: 8px">重置</i-button>
+                    <form-item class="center-button-outer-wrap">
+
                     </form-item>
                 </i-form>
+                <div style="position: absolute;bottom: 0px;width: 100%;text-align: center;margin-bottom: 15px">
+                    <i-button type="primary" @click="handleSubmit('formValidate')">登陆</i-button>
+                    <i-button style="margin-left: 8px">重置</i-button>
+                </div>
             </card>
         </i-col>
     </row>
