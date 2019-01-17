@@ -17,7 +17,7 @@
     }
 }
 
-.general-edit-page-scroll{
+.general-edit-page-scroll-outer{
     position: absolute;
     left: 0px;
     top: 0px;
@@ -25,14 +25,20 @@
     bottom: 50px;
     overflow-x: hidden;
     overflow-y:scroll;
+    border: 1px solid @g-table-border-color;
+    border-radius: 6px;
+
+    .general-edit-page-scroll-inner{
+        margin: 10px;
+    }
 }
 
-.general-edit-page-scroll::-webkit-scrollbar{
+.general-edit-page-scroll-outer::-webkit-scrollbar{
     width: 8px;
     height: 8px;
 }
 
-.general-edit-page-scroll::-webkit-scrollbar-thumb {
+.general-edit-page-scroll-outer::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background: #3b97ed;
 }

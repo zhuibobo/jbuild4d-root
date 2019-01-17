@@ -8,24 +8,26 @@
 </head>
 <body>
     <div id="appForm" class="general-edit-page-wrap" v-cloak>
-        <div class="general-edit-page-scroll">
-            <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
-                <form-item label="ddglKey：" prop="ddglKey">
-                    <i-input v-model="formEntity.ddglKey"></i-input>
-                </form-item>
-                <form-item label="ddglValue：" prop="ddglValue">
-                    <i-input v-model="formEntity.ddglValue"></i-input>
-                </form-item>
-                <form-item label="ddglName：" prop="ddglName">
-                    <i-input v-model="formEntity.ddglName"></i-input>
-                </form-item>
-                <form-item label="ddglCreatetime：">
-                    <date-picker type="date" placeholder="选择创建时间" v-model="formEntity.ddglCreatetime" disabled readonly></date-picker>
-                </form-item>
-                <form-item label="dictGroupDesc：">
-                    <i-input v-model="formEntity.dictGroupDesc" type="textarea" :autosize="{minRows: 23,maxRows: 23}"></i-input>
-                </form-item>
-            </i-form>
+        <div class="general-edit-page-scroll-outer">
+            <div class="general-edit-page-scroll-inner">
+                <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
+                    <form-item label="ddglKey：" prop="ddglKey">
+                        <i-input v-model="formEntity.ddglKey"></i-input>
+                    </form-item>
+                    <form-item label="ddglValue：" prop="ddglValue">
+                        <i-input v-model="formEntity.ddglValue"></i-input>
+                    </form-item>
+                    <form-item label="ddglName：" prop="ddglName">
+                        <i-input v-model="formEntity.ddglName"></i-input>
+                    </form-item>
+                    <form-item label="ddglCreatetime：">
+                        <date-picker type="date" placeholder="选择创建时间" v-model="formEntity.ddglCreatetime" disabled readonly></date-picker>
+                    </form-item>
+                    <form-item label="dictGroupDesc：">
+                        <i-input v-model="formEntity.dictGroupDesc" type="textarea" :autosize="{minRows: 23,maxRows: 23}"></i-input>
+                    </form-item>
+                </i-form>
+            </div>
         </div>
         <div class="button-outer-wrap">
             <div class="button-inner-wrap">
