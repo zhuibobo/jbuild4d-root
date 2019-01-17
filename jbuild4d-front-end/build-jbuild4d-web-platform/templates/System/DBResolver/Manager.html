@@ -19,8 +19,8 @@
 </head>
 <body>
     <div id="appList" class="list-2column">
-        <div class="left-outer-wrap-c" style="width: 435px;">
-            <div class="left-page-c" style="padding: 10px">
+        <div class="left-outer-wrap " style="width: 435px;">
+            <div class="inner-wrap iv-list-page-wrap" style="padding: 10px">
                 <div class="list-simple-search-wrap" id="list-simple-search-wrap" style="border-width:0px ">
                     <table class="ls-table">
                         <colgroup>
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="right-outer-wrap-c" style="padding: 10px;left: 450px;">
+        <div class="right-outer-wrap" style="padding: 10px;left: 450px;">
             <spin size="large" fix v-if="codeIsGenerateing"></spin>
             <card :bordered="false" style="margin-bottom: 10px">
                 <p slot="title">参数设置</p>
@@ -184,7 +184,7 @@
                         render: function (h, params) {
                             return h('div',{class: "list-row-button-wrap"},[
                                 h('div', {
-                                    class: "list-row-button list-row-button-listmanager",
+                                    class: "list-row-button listmanager",
                                     on: {
                                         click: function () {
                                             appList.selectedTable(params.row.TableName);
