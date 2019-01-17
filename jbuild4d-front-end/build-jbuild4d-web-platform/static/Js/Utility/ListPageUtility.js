@@ -242,7 +242,7 @@ var ListPageUtility={
     IViewTableInnerButton:{
         ViewButton:function (h, params,idField,pageAppObj) {
             return h('div', {
-                class: "list-row-button list-row-button-view",
+                class: "list-row-button view",
                 on: {
                     click: function () {
                         pageAppObj.view(params.row[idField]);
@@ -252,7 +252,7 @@ var ListPageUtility={
         },
         EditButton:function (h, params,idField,pageAppObj) {
             return h('div', {
-                class: "list-row-button list-row-button-edit",
+                class: "list-row-button edit",
                 on: {
                     click: function () {
                         pageAppObj.edit(params.row[idField]);
@@ -262,7 +262,7 @@ var ListPageUtility={
         },
         DeleteButton:function (h, params,idField,pageAppObj) {
             return h('div', {
-                class: "list-row-button list-row-button-del",
+                class: "list-row-button del",
                 on: {
                     click: function () {
                         //debugger;
