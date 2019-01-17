@@ -1,0 +1,68 @@
+.list-2column {
+    width: 100%;
+    .left-outer-wrap {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        border: #0B61A4 1px solid;
+        border-radius: 4px;
+
+        .inner-wrap{
+            background-color: #ffffff;
+            width: 100%;
+            height: 100%;
+            float: left;
+
+            .tool-bar-wrap{
+                height: 39px;
+                background-color: #4d5d79;
+
+                div{
+                    float: left;
+                    height: 20px;
+                    margin:10px 5px 0 5px;
+                    padding: 0;
+                    width: 20px;
+                    border: 0 none;
+                    background: url("Images/Icon_Left_Edit.png") no-repeat;
+                    cursor: pointer;
+                }
+                div:hover{
+                    background: url("Images/Icon_Left_Edit_On.png") no-repeat;
+                    cursor: pointer;
+                }
+
+                .edit,.edit:hover{
+                    background-position: -30px 0;
+                }
+
+                .del,.del:hover{
+                    background-position: -60px 0;
+                }
+
+                .view,.view:hover{
+                    background-position: -90px 0;
+                }
+
+                .order-up,.order-up:hover{
+                    background-position: -120px 0;
+                }
+
+                .order-down,.order-down:hover{
+                    background-position: -150px 0;
+                }
+            }
+        }
+    }
+    .right-outer-wrap {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        border: #0B61A4 1px solid;
+        border-radius: 4px;
+    }
+
+
+}
