@@ -8,9 +8,9 @@
 </head>
 <body>
     <div id="appList" class="list-2column">
-        <div class="left-outer-wrap-c" style="width: 250px">
-            <div class="left-page-c">
-                <div class="tool-bar-c">
+        <div class="left-outer-wrap" style="width: 250px">
+            <div class="inner-wrap">
+                <div class="tool-bar-wrap">
                     <div alt="新增分类组" title="新增分类组" class="add" @click="addGroup()"></div>
                     <div alt="修改分类组" title="修改分类组" class="edit" @click="editGroup"></div>
                     <div alt="删除分类组" title="删除分类组" class="del" @click="delGroup"></div>
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="right-outer-wrap-c" style="padding: 10px;left: 260px">
+        <div class="right-outer-wrap iv-list-page-wrap" style="padding: 10px;left: 260px">
             <div class="list-simple-search-wrap" id="list-simple-search-wrap">
                 <table class="ls-table">
                     <colgroup>
@@ -60,11 +60,13 @@
             </div>
             <div id="list-button-wrap" class="list-button-outer-wrap">
                 <div class="list-button-inner-wrap">
-                    <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
-                    <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
-                    <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
-                    <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移 </i-button>
-                    <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
+                    <button-group>
+                        <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>
+                        <i-button type="primary" @click="statusEnable('启用')"><Icon type="checkmark-round"></Icon> 启用 </i-button>
+                        <i-button type="primary" @click="statusEnable('禁用')"><Icon type="minus-round"></Icon> 禁用 </i-button>
+                        <i-button type="primary" @click="move('up')"><Icon type="arrow-up-b"></Icon> 上移 </i-button>
+                        <i-button type="primary" @click="move('down')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>
+                    </button-group>
                 </div>
                 <div style="clear: both"></div>
             </div>
