@@ -375,10 +375,12 @@ var DialogUtility={
         return null;
     },
     _OpenWindowInFramePage: function (openerwindow, dialogId, url, options, whtype) {
+
         if (StringUtility.IsNullOrEmpty(dialogId)) {
             alert("dialogId不能为空");
             return;
         }
+        //debugger;
         url = BaseUtility.AppendTimeStampUrl(url);
         var autodialogid = "FrameDialogEle" + dialogId;
 
@@ -405,7 +407,7 @@ var DialogUtility={
             };
             if (whtype == 0) {
                 options.width = PageStyleUtility.GetPageWidth()-20;
-                options.height = PageStyleUtility.GetPageHeight()-10;
+                options.height = PageStyleUtility.GetPageHeight()-180;
             }
             else if (whtype == 1) {
                 defaultoptions = $.extend(true, {}, defaultoptions, {height: 680, width: 980});
@@ -425,7 +427,7 @@ var DialogUtility={
                 options.width = PageStyleUtility.GetPageWidth()-20;
             }
             if(options.height==0) {
-                options.height = PageStyleUtility.GetPageHeight()-10;
+                options.height = PageStyleUtility.GetPageHeight()-180;
             }
 
             defaultoptions = $.extend(true, {}, defaultoptions, options);

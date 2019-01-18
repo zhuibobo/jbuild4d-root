@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::EditTableLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
 </head>
 <body>
-    <div id="appForm" v-cloak>
+    <div id="appForm" v-cloak class="general-edit-page-wrap">
         <div class="list-2column">
-            <div class="left-outer-wrap-c" style="bottom: 50px;right: 350px;">
+            <div class="left-outer-wrap" style="bottom: 50px;right: 350px;">
                 <divider orientation="left" :dashed="true" style="font-size: 12px">表字段</divider>
                 <div style="width: 98%;margin: auto">
                     <div style="float: right;margin-bottom: 8px">
@@ -31,7 +28,7 @@
                 </div>
                 <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 98%;margin: auto"></div>
             </div>
-            <div class="right-outer-wrap-c" style="bottom: 50px;width: 340px;padding: 10px">
+            <div class="right-outer-wrap" style="bottom: 50px;width: 340px;padding: 10px">
                 <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px">表信息</divider>
                 <i-form :model="tableEntity" :label-width="65" style="margin-right: 10px">
                     <form-item label="标题：" prop="">
@@ -77,9 +74,13 @@
                 </i-form>
             </div>
         </div>
-        <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
-            <i-button type="primary" @click="saveEditTable()"> 保 存</i-button>
-            <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
+        <div class="button-outer-wrap">
+            <div class="button-inner-wrap">
+                <button-group>
+                    <i-button type="primary" @click="saveEditTable()"> 保 存</i-button>
+                    <i-button @click="handleClose()">关 闭</i-button>
+                </button-group>
+            </div>
         </div>
     </div>
     <script>
