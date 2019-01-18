@@ -93,22 +93,22 @@
                 ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData, this.pageNum, this.pageSize, this.searchCondition, this, this.idFieldName, true, null);
             },
             add: function () {
-                var url = BaseUtility.BuildAction(this.acInterface.editView, {"op": "add"});
+                var url = BaseUtility.BuildView(this.acInterface.editView, {"op": "add"});
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
             },
             addScroll: function () {
-                var url = BaseUtility.BuildAction(this.acInterface.editScrollView, {"op": "add"});
+                var url = BaseUtility.BuildView(this.acInterface.editScrollView, {"op": "add"});
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
             },
             edit: function (recordId) {
-                var url = BaseUtility.BuildAction(this.acInterface.editView, {
+                var url = BaseUtility.BuildView(this.acInterface.editView, {
                     "op": "update",
                     "recordId": recordId
                 });
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
             },
             view: function (recordId) {
-                var url = BaseUtility.BuildAction(this.acInterface.editView, {
+                var url = BaseUtility.BuildView(this.acInterface.editView, {
                     "op": "view",
                     "recordId": recordId
                 });

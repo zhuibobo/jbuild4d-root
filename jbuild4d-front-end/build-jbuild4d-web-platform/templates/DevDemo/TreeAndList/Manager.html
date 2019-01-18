@@ -230,7 +230,7 @@
                 },
                 addGroup:function () {
                     if (this.treeSelectedNode != null) {
-                        var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                        var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
                             "op": "add",
                             "parentId": this.treeSelectedNode[appList.treeIdFieldName]
                         });
@@ -242,7 +242,7 @@
                 },
                 editGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                        var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
                             "op": "update",
                             "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                         });
@@ -253,7 +253,7 @@
                     }
                 },
                 viewGroup:function () {
-                    var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                    var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
                         "op": "view",
                         "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
@@ -326,7 +326,7 @@
                 },
                 add: function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
+                        var url = BaseUtility.BuildView(this.acInterface.listEditView, {
                             "op": "add",
                             "groupId": this.treeSelectedNode[appList.treeIdFieldName]
                         });
@@ -337,14 +337,14 @@
                     }
                 },
                 edit: function (recordId) {
-                    var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
+                    var url = BaseUtility.BuildView(this.acInterface.listEditView, {
                         "op": "update",
                         "recordId": recordId
                     });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
                 },
                 view:function (recordId) {
-                    var url = BaseUtility.BuildAction(this.acInterface.listEditView, {
+                    var url = BaseUtility.BuildView(this.acInterface.listEditView, {
                         "op": "view",
                         "recordId": recordId
                     });

@@ -124,7 +124,7 @@
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择上级字典!", null);
                             return false;
                         }
-                        var url = BaseUtility.BuildAction(this.acInterface.editView, {
+                        var url = BaseUtility.BuildView(this.acInterface.editView, {
                             "parentId": nodeData[appList.treeTableConfig.IdField],
                             "op": "add"
                         });
@@ -133,7 +133,7 @@
                 },
                 edit:function() {
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildAction(this.acInterface.editView, {
+                        var url = BaseUtility.BuildView(this.acInterface.editView, {
                             "op": "update",
                             "recordId": nodeData[appList.treeTableConfig.IdField]
                         });
@@ -161,7 +161,7 @@
                 },
                 view:function() {
                     this.mareSureSelectedTreeTableRow("编辑").then(function (nodeData) {
-                        var url = BaseUtility.BuildAction(this.acInterface.editView, {
+                        var url = BaseUtility.BuildView(this.acInterface.editView, {
                             "op": "view",
                             "recordId": nodeData[appList.treeTableConfig.IdField]
                         });
