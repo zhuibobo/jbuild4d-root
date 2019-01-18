@@ -13,10 +13,11 @@
                 <divider orientation="left" :dashed="true" style="font-size: 12px">表字段</divider>
                 <div style="width: 98%;margin: auto">
                     <div style="float: right;margin-bottom: 8px">
-                        忽略物理表修改错误: <i-switch size="small" v-model="ignorePhysicalError"></i-switch>
+                        忽略物理表修改错误: &nbsp;
+                        <i-switch size="small" v-model="ignorePhysicalError"></i-switch>&nbsp;
                         <i-select v-model="useTemplateName" size="small" style="width:200px">
                             <i-option v-for="(item,key) in templateFieldGroup" :value="key" :key="key">使用模版:{{key}}</i-option>
-                        </i-select>
+                        </i-select>&nbsp;
                         <button-group>
                             <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
                             <i-button size="small" type="primary" icon="md-close" @click="removeField"></i-button>
