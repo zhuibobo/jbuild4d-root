@@ -489,6 +489,11 @@ var DialogUtility={
 
     },
     Frame_OpenIframeWindow:function (openerwindow, dialogId, url, options, whtype) {
+        //debugger;
+        if(url==""){
+            alert("url不能为空字符串!");
+            return;
+        }
         var wrwin = this.Frame_TryGetFrameWindowObj();
         this.FramePageRef = wrwin;
         if (wrwin != null) {

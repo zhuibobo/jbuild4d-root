@@ -19,14 +19,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/IView-3.X/iview.css(theme=${theme},urlts=${urlts})}" />
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/JQueryUI/jquery-ui.css(theme=${theme},urlts=${urlts})}" />
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/ZTree/zTreeStyle/zTreeStyle.css(theme=${theme},urlts=${urlts})}" />
-    <!--<link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/FrameStyle.css(theme=${theme},urlts=${urlts})}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/ListPageStyle.css(theme=${theme},urlts=${urlts})}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/DetailPageStyle.css(theme=${theme},urlts=${urlts})}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/LeftMenus.css(theme=${theme},urlts=${urlts})}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/{theme}/TreeTable/TreeTable.css(theme=${theme},urlts=${urlts})}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/{theme}/EditTable/EditTable.css(theme=${theme},urlts=${urlts})}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/GeneralHTMLElem.css(theme=${theme},urlts=${urlts})}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/{theme}/FormDesign/FormDesignMain.css(theme=${theme},urlts=${urlts})}" />-->
 </th:block>
 <th:block th:fragment="CodeMirrorLib" th:with="urlts=${'V1'}" >
     <link rel="stylesheet" th:href="@{/Js/T3P/CodeMirror-5.39.2/lib/codemirror.css}" />
@@ -50,61 +42,3 @@
     <script type="text/javascript" th:src="@{/Js/T3P/ZTree-V3/js/jquery.ztree.exhide.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/ZTree-V3/js/fuzzysearch.js}"></script>
 </th:block>
-<!--<th:block th:fragment="IViewLib" th:with="urlts=${'V3'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/IView-3.X/dist/iview.min.js(urlts=${urlts})}"></script>
-</th:block>
-<th:block th:fragment="VueExtend" th:with="urlts=${'V3'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/HTMLDesign/VueComponent/DialogPropComponent.js(urlts=${urlts})}"></script>
-</th:block>
-<th:block th:fragment="JQueryUILib" th:with="urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/JQuery-UI-1.12.1/jquery-ui.js}"></script>
-</th:block>
-<th:block th:fragment="ZTreeLib" th:with="urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/ZTree-V3/js/jquery.ztree.all.js}"></script>
-</th:block>-->
-<!--<th:block th:fragment="TreeTableLib" th:with="urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/TreeTable/Js/TreeTable.js}"></script>
-</th:block>-->
-<!--<th:block th:fragment="EditTableLib" th:with="urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/EditTable.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_CheckBox.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_Label.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_Radio.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_Select.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_SelectRowCheckBox.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/EditTable_TextBox.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_SelectDefaultValue.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_FieldName.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/TableDesign/EditTable_SelectFieldType.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/EditTable/Js/Renderers/DataSet/Column_SelectDefaultValue.js}"></script>
-</th:block>-->
-<!--<th:block th:fragment="CodeMirrorSQL" th:with="urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/mode/sql/sql.js}"></script>
-</th:block>
-<th:block th:fragment="CodeMirrorHTML" th:with="urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/mode/xml/xml.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/mode/javascript/javascript.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/mode/css/css.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/mode/htmlmixed/htmlmixed.js}"></script>
-</th:block>
-<th:block th:fragment="CodeMirrorJS" th:with="urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/javascript/javascript.js}"></script>
-</th:block>
-<th:block th:fragment="CodeMirrorFold" th:with="urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/foldcode.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/foldgutter.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/brace-fold.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/xml-fold.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/markdown-fold.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/fold/comment-fold.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/CodeMirror-5.39.2/addon/util/formatting.js}"></script>
-    <link rel="stylesheet" th:href="@{/UIComponent/CodeMirror-5.39.2/addon/fold/foldgutter.css}" />
-</th:block>
-<th:block th:fragment="FormDesignLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/UIComponent/HTMLDesign/Ckeditor-4.11.1/ckeditor.js}"></script>
-    <script type="text/javascript" th:src="@{/UIComponent/HTMLDesign/FormDesign/JBuild4DFormDesign.js}"></script>
-</th:block>-->
-<!--
-<th:block th:fragment="FormDialogLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
-    <link rel="stylesheet" type="text/css" th:href="@{/{theme}/FormDesign/Dialog.css(theme=${theme},urlts=${urlts})}" />
-</th:block>-->
