@@ -24,6 +24,7 @@
     <link rel="stylesheet" th:href="@{/Js/T3P/CodeMirror-5.39.2/lib/codemirror.css}" />
     <link rel="stylesheet" th:href="@{/Js/T3P/CodeMirror-5.39.2/theme/monokai.css}" />
     <link rel="stylesheet" th:href="@{/Js/T3P/CodeMirror-5.39.2/addon/fold/foldgutter.css}" />
+    <script type="text/javascript" th:src="@{/Js/T3P/CodeMirror-5.39.2/lib/codemirror.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/CodeMirror-5.39.2/mode/xml/xml.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/CodeMirror-5.39.2/mode/javascript/javascript.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/CodeMirror-5.39.2/mode/css/css.js}"></script>
@@ -35,10 +36,13 @@
     <script type="text/javascript" th:src="@{/Js/T3P/CodeMirror-5.39.2/addon/fold/markdown-fold.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/CodeMirror-5.39.2/addon/fold/comment-fold.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/CodeMirror-5.39.2/addon/fold/brace-fold.js}"></script>
-    <script type="text/javascript" th:src="@{/Js/T3P/CodeMirror-5.39.2/lib/codemirror.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/CodeMirror-5.39.2/addon/util/formatting.js}"></script>
 </th:block>
 <th:block th:fragment="ZTreeExtendLib" th:with="urlts=${'V1'}" >
     <script type="text/javascript" th:src="@{/Js/T3P/ZTree-V3/js/jquery.ztree.exhide.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/ZTree-V3/js/fuzzysearch.js}"></script>
+</th:block>
+<th:block th:fragment="FormDesignLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
+    <script type="text/javascript" th:src="@{/Js/T3P/Ckeditor-4.11.1-4Design/ckeditor.js}"></script>
+    <script type="text/javascript" th:src="@{/Js/HTMLDesign/FormDesign/JBuild4DFormDesign.js}"></script>
 </th:block>
