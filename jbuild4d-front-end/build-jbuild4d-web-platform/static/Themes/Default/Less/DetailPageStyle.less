@@ -44,3 +44,70 @@
     border-radius: 5px;
     background: @g-scrollbar-color;
 }
+
+.light-gray-table {
+    margin: 5px 0;
+    border-collapse: collapse;
+    font-size: 12px;
+    width: 100%;
+
+    .title{
+        color:#2e6e9e;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    tr {
+        td,th{
+            padding: 6px;
+            border: 1px solid #f0f0f0;
+
+            input[type="text"], textarea, select {
+                background: transparent;
+                border: 1px solid #d3d7e0;
+                box-sizing: border-box;
+                padding: 4px;
+                width: 100%;
+                overflow: auto;
+                font-size: 12px;
+            }
+        }
+        th{
+            color:#2e6e9e;
+            background-color: #f0f4fa;
+        }
+    }
+
+    .label {
+        background-color: #f7f7f7;
+        text-align: right;
+    }
+}
+
+.json-pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.json-string { color: green; }
+.json-number { color: darkorange; }
+.json-boolean { color: blue; }
+.json-null { color: magenta; }
+.json-key { color: red; }
+
+.js-code-fragment-wrap{
+    .js-code-fragment-item{
+        float: left;
+        width: 45%;
+        border: 1px solid #d5d5d5;
+        padding: 10px;
+        margin-left: 10px;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+    .js-code-fragment-item:hover{
+        background-color: #f0f4fa;
+    }
+}
+
+.design-html-elem-list-wrap{
+
+}
