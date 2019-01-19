@@ -35,7 +35,7 @@ public class DataSetDesignController {
     @Autowired
     IDatasetService datasetService;
 
-    @RequestMapping(value = "EditDataSet", method = RequestMethod.GET)
+    @RequestMapping(value = "EditDataSetView", method = RequestMethod.GET)
     public ModelAndView editDataSet(String recordId, String op, String groupId) throws JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataSet/DataSetEdit");
         JB4DSessionUtility.setUserInfoToMV(modelAndView);
