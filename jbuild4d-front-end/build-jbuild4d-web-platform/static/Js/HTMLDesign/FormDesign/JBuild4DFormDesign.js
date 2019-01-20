@@ -462,7 +462,7 @@ var JBuild4D={
                 lineNumbers: true,
                 lineWrapping: true
             });
-            this._HTMLEditorInst.setSize("100%",PageStyleUtility.GetWindowHeight()-65);
+            this._HTMLEditorInst.setSize("100%",PageStyleUtility.GetWindowHeight()-85);
             //$(".CodeMirror").height(PageStyleUtility.GetWindowHeight()-60);
             /**/
         },
@@ -507,7 +507,7 @@ var JBuild4D={
                 theme: "monokai",
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
             });
-            this._JsEditorInst.setSize("100%",PageStyleUtility.GetWindowHeight()-65);
+            this._JsEditorInst.setSize("100%",PageStyleUtility.GetWindowHeight()-85);
             if(status=="add"){
                 this.SetJsEditorJs(this._GetNewFormJsString());
                 CodeMirror.commands["selectAll"](this.GetJsEditorInst());
