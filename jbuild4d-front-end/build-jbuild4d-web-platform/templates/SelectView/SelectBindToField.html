@@ -4,12 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::EditTableLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
     <style>
         .select-table-wraper{
             border: #2d8cf0 1px solid;
@@ -37,7 +33,7 @@
     </style>
 </head>
 <body>
-    <div id="appSelectView">
+    <div id="appSelectView" class="general-edit-page-wrap">
         <div class="select-table-wraper">
             <divider orientation="left" :dashed="true" style="font-size: 12px">选择表</divider>
             <input type="text" id="txtSearchTableTree" style="width: 100%;height: 32px;margin-top: 2px" />
@@ -49,10 +45,14 @@
                      class="iv-list-table" :highlight-row="true"
                      @on-row-click="selectedField" :height="fieldTable.tableHeight" size="small" no-data-text="请选择表"></i-table>
         </div>
-        <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
-            <i-button type="primary" @click="selectComplete()"> 确 认 </i-button>
-            <i-button style="margin-left: 8px" type="primary" @click="clearComplete()"> 清 空 </i-button>
-            <i-button style="margin-left: 8px" @click="handleClose()">关 闭</i-button>
+        <div class="button-outer-wrap">
+            <div class="button-inner-wrap">
+                <button-group>
+                    <i-button type="primary" @click="selectComplete()"> 确 认 </i-button>
+                    <i-button type="primary" @click="clearComplete()"> 清 空 </i-button>
+                    <i-button @click="handleClose()">关 闭</i-button>
+                </button-group>
+            </div>
         </div>
     </div>
     <script>
@@ -152,9 +152,12 @@
                 }
             },
             mounted:function (){
-                this.bindOldSelectedValue();
-                this.bindHistorySelectedValue();
-                this.bindTableTree();
+                //alert("mounted");
+                window.setTimeout(function () {
+                    appSelectView.bindOldSelectedValue();
+                    appSelectView.bindHistorySelectedValue();
+                    appSelectView.bindTableTree();
+                },400);
             },
             methods:{
                 bindTableTree:function () {
@@ -204,6 +207,7 @@
                     }
                 },
                 bindOldSelectedValue:function(){
+                    //debugger;
                     var oldSelectedValue= window.OpenerWindowObj[this.getSelectInstanceName()].getSelectFieldResultValue();
                     //debugger;
                     if(!StringUtility.IsNullOrEmpty(oldSelectedValue.tableId)) {

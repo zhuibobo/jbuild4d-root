@@ -435,12 +435,13 @@ var DialogUtility={
             $(".ui-widget-overlay").css("zIndex","1000");
             $(".ui-dialog").css("zIndex","1001");
             var $iframeobj = $(dialogEle).find("iframe");
-            $iframeobj.attr("src",url);
             $iframeobj.on("load",function () {
+                //alert("load");
                 this.contentWindow.FrameWindowId = autodialogid;
                 this.contentWindow.OpenerWindowObj = openerwindow;
                 this.contentWindow.IsOpenForFrame = true;
             });
+            $iframeobj.attr("src",url);
             //$iframeobj[0].contentWindow.FrameWindowId = autodialogid;
             //$iframeobj[0].contentWindow.OpenerWindowObj = openerwindow;
             //alert(1);

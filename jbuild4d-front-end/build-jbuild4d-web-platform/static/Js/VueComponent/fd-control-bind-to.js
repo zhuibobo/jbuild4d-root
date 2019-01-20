@@ -89,6 +89,7 @@ Vue.component("fd-control-bind-to", {
             //alert(result);
         },
         getSelectFieldResultValue:function () {
+            //debugger;
             return JsonUtility.CloneSimple(this.bindToField);
             //return this.bindTo;
         },
