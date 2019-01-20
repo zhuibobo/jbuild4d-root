@@ -34,7 +34,7 @@ Vue.component("fd-control-base-info", {
     methods:{
 
     },
-    template: '<table class="dialog-table-wraper" cellpadding="0" cellspacing="0" border="0">' +
+    template: '<table class="html-design-plugin-dialog-table-wraper" cellpadding="0" cellspacing="0" border="0">' +
         '<colgroup>' +
         '<col style="width: 100px" />' +
         '<col style="width: 280px" />' +

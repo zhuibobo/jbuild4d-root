@@ -138,7 +138,7 @@ Vue.component("fd-control-bind-to", {
             return this.validateRules;
         }
     },
-    template: '<table cellpadding="0" cellspacing="0" border="0" class="dialog-table-wraper">' +
+    template: '<table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">' +
         '<colgroup>' +
         '<col style="width: 100px" />' +
         '<col style="width: 280px" />' +
@@ -187,7 +187,7 @@ Vue.component("fd-control-bind-to", {
         '</tr>' +
         '<tr>' +
         '<td colspan="4" style="background-color: #ffffff">' +
-        '<table class="dialog-table-wraper">' +
+        '<table class="html-design-plugin-dialog-table-wraper">' +
         '<colgroup>' +
         '<col style="width: 100px" />' +
         '<col />' +
