@@ -1,9 +1,9 @@
 refVersion = 1;
 
-function calculateFilePath (file) {
+function calculateFilePath(file) {
     //console.log(file.path);
     let repath = file.path.split('Html\\');
-    if(repath.length==1){
+    if (repath.length == 1) {
         repath = file.path.split('Js\\');
     }
     //console.log(repath[1]);
@@ -24,12 +24,12 @@ function refCss(path) {
     return '<link rel="stylesheet" type="text/css" href="' + path + '" />';
 }
 
-let replaceBlock={
+let replaceBlock = {
 
-    replaceBlock:function (name) {
+    replaceBlock: function (name) {
         return '<th:block th:replace="Fragment/GeneralLib::' + name + '"></th:block>';
     },
-    replaceGeneralLib:function (search, file) {
+    replaceGeneralLib: function (search, file) {
         let replaceArray = new Array();
         replaceArray.push('<title>JBuild4D</title>');
         replaceArray.push('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />');
@@ -46,7 +46,7 @@ let replaceBlock={
         replaceArray.push(refJs(levelPath + "Js/T3P/ZTree-V3/js/jquery.ztree.all.js"));
         return replaceArray.join("\n\t");
     },
-    replaceCodeMirrorLib:function (search, file) {
+    replaceCodeMirrorLib: function (search, file) {
         let replaceArray = new Array();
         let levelPath = calculateFilePath(file);
 
@@ -69,7 +69,7 @@ let replaceBlock={
 
         return replaceArray.join("\n\t");
     },
-    replaceFormDesignLib:function (search, file) {
+    replaceFormDesignLib: function (search, file) {
         let replaceArray = new Array();
         let levelPath = calculateFilePath(file);
 
@@ -78,7 +78,15 @@ let replaceBlock={
 
         return replaceArray.join("\n\t");
     },
-    replaceZTreeExtendLib:function (search, file) {
+    replaceJBuild4DFormDesignLib: function (search, file) {
+        let replaceArray = new Array();
+        let levelPath = calculateFilePath(file);
+
+        replaceArray.push(refJs(levelPath + "Js/HTMLDesign/FormDesign/JBuild4DFormDesign.js?refVersion=" + refVersion));
+
+        return replaceArray.join("\n\t");
+    },
+    replaceZTreeExtendLib: function (search, file) {
         let replaceArray = new Array();
         let levelPath = calculateFilePath(file);
 
@@ -87,7 +95,7 @@ let replaceBlock={
 
         return replaceArray.join("\n\t");
     },
-    replaceThemesLib:function (search, file) {
+    replaceThemesLib: function (search, file) {
         let replaceArray = new Array();
         //判断路径后进行引入js的路径
         let levelPath = calculateFilePath(file);
@@ -109,4 +117,4 @@ let replaceBlock={
     }
 }
 
-module.exports=replaceBlock;
+module.exports = replaceBlock;
