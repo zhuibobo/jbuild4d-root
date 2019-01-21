@@ -82,6 +82,12 @@ gulp.task('ES6-JS-Demo',()=>{
 /*编译工程相关的JS*/
 gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UIComponent'));
 
+/*编译FrameV1-Assets的资源文件*/
+gulp.task('FrameV1-Assets',()=>{
+    return gulp.src(srcPlatformStaticPath+"/FrameV1-Assets/**/*", {base: srcPlatformStaticPath+"/FrameV1-Assets"})
+        .pipe(gulp.dest(publicResourcePath+"/FrameV1-Assets"));
+});
+
 /*编译工程相关的Less文件*/
 gulp.task('Less',()=>{
     return gulp.src(srcPlatformStaticPath+"/Themes/Default/Css/*.less")
