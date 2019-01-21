@@ -46,6 +46,17 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" th:href="@{/FrameV1-Assets/assets/css/style.css}">
     <!-- END Custom CSS-->
+    <!-- BEGIN VENDOR JS-->
+    <script type="text/javascript" th:src="@{/FrameV1-Assets/vendors/js/vendors.min.js}"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN MODERN JS-->
+    <script type="text/javascript" th:src="@{/FrameV1-Assets/js/core/app-menu.js}"></script>
+    <script type="text/javascript" th:src="@{/FrameV1-Assets/js/core/app.js}"></script>
+    <script type="text/javascript" th:src="@{/FrameV1-Assets/js/scripts/customizer.js}" ></script>
+    <!-- END MODERN JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <!--<script type="text/javascript" th:src="@{/FrameV1-Assets/js/scripts/pages/dashboard-crypto.js}"></script>-->
+    <!-- END PAGE LEVEL JS-->
 </th:block>
 <th:block th:fragment="ThemesLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/Jbuild4dPlatform.css(theme=${theme},urlts=${urlts})}" />
