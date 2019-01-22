@@ -84,8 +84,8 @@ gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UICo
 
 /*编译FrameV1-Assets的资源文件*/
 gulp.task('FrameV1-Assets',()=>{
-    return gulp.src(srcPlatformStaticPath+"/FrameV1-Assets/**/*", {base: srcPlatformStaticPath+"/FrameV1-Assets"})
-        .pipe(gulp.dest(publicResourcePath+"/FrameV1-Assets"));
+    return gulp.src(srcPlatformStaticPath+"/FrameV1/**/*", {base: srcPlatformStaticPath+"/FrameV1"})
+        .pipe(gulp.dest(publicResourcePath+"/FrameV1"));
 });
 
 /*编译工程相关的Less文件*/
