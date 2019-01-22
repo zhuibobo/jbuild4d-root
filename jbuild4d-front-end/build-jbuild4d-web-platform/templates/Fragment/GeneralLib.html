@@ -15,13 +15,15 @@
     <script type="text/javascript" th:src="@{/Js/UIEXComponent.js(urlts=${urlts})}"></script>
 </th:block>
 <th:block th:fragment="FrameV1" th:with="urlts=${'V1'}" >
-    <link th:href="@{/FrameV1-Assets/fonts/line-awesome/css/line-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/FrameV1/line-awesome/css/line-awesome.min.css}" rel="stylesheet">
     <!-- BEGIN VENDOR CSS-->
     <!--<link rel="stylesheet" type="text/css" th:href="@{/FrameV1-Assets/css/vendors.css}">-->
-    <link rel="stylesheet" type="text/css" th:href="@{/Js/T3P/bootstrap-4.2.1-dist/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/FrameV1/bootstrap-4.2.1-dist/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/FrameV1/bootstrap-4.2.1-dist/css/bootstrap-extended.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/FrameV1/css/components.css}">
     <!-- END VENDOR CSS-->
     <!-- BEGIN MODERN CSS-->
-    <link rel="stylesheet" type="text/css" th:href="@{/FrameV1-Assets/css/app.css}">
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/FrameV1-Assets/css/app.css}">-->
     <!-- END MODERN CSS-->
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css" th:href="@{/FrameV1-Assets/css/core/menu/menu-types/vertical-menu.css}">
