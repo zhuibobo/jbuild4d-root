@@ -83,7 +83,7 @@ gulp.task('ES6-JS-Demo',()=>{
 gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UIComponent'));
 
 /*编译FrameV1-Assets的资源文件*/
-gulp.task('FrameV1-Assets',()=>{
+gulp.task('FrameV1',()=>{
     return gulp.src(srcPlatformStaticPath+"/FrameV1/**/*", {base: srcPlatformStaticPath+"/FrameV1"})
         .pipe(gulp.dest(publicResourcePath+"/FrameV1"));
 });
@@ -137,10 +137,11 @@ gulp.task('FormDesign-HTML',()=>{
 gulp.task('FormDesign', gulp.series('FormDesign-JS','FormDesign-HTML'));
 
 /*编译所有的文件*/
-gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign','LessImages'));
+gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign','LessImages','FrameV1'));
 
 /*监控文件更新*/
 gulp.task('watch', function() {
+    let watcherFrameV1=gulp.watch(srcPlatformStaticPath+"/FrameV1/**/*", gulp.series('FrameV1'));
     let watcherJs=gulp.watch(srcPlatformStaticPath + '/Js/**/*.js', gulp.series('JS-Custom-ALL'));
     let watcherLess=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/*.less", gulp.series('Less'));
     let watcherLessImages=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/Images/**/*", gulp.series('LessImages'));
