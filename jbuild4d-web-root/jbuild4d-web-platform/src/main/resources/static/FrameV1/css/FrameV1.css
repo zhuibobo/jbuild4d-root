@@ -491,7 +491,7 @@ html body .content {
     position: fixed;
     height: 100%;
     /* fallback if needed */
-    top: 5rem;
+    top: 70px;
     height: calc(100% - 5rem);
 }
 
