@@ -151,7 +151,7 @@ html body .content {
 .main-menu.menu-light .navigation > li ul {
     padding: 0;
     margin: 0;
-    font-size: 1rem;
+    font-size: 14px;
 }
 
 .main-menu.menu-light .navigation > li ul li {
@@ -381,7 +381,7 @@ html body .content {
 .main-menu.menu-dark .navigation > li ul {
     padding: 0;
     margin: 0;
-    font-size: 1rem;
+    font-size: 14px;
 }
 
 .main-menu.menu-dark .navigation > li ul li {
@@ -492,7 +492,7 @@ html body .content {
     height: 100%;
     /* fallback if needed */
     top: 70px;
-    height: calc(100% - 5rem);
+    /*height: calc(100% - 5rem);*/
 }
 
 .main-menu.menu-fixed .main-menu-footer {
@@ -543,20 +543,20 @@ html body .content {
 }
 
 .navigation {
-    font-size: 1.1rem;
+    font-size: 14px;
     letter-spacing: 0.2px;
-    font-family: "Quicksand", Georgia, "Times New Roman", Times, serif;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     font-weight: 400;
     overflow-y: hidden;
     padding-bottom: 20px;
 }
 
 .navigation .navigation-header {
-    font-family: "Quicksand", Georgia, "Times New Roman", Times, serif;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     font-weight: 400;
     line-height: 1.2;
     padding: 12px 22px;
-    font-size: 1rem;
+    font-size: 14px;
 }
 
 .navigation li {
