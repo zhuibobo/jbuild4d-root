@@ -972,7 +972,7 @@ select.form-control {
 
 .header-navbar {
     padding: 0px;
-    min-height: 5rem;
+    min-height: 70px;
     font-family: "Quicksand", Georgia, "Times New Roman", Times, serif;
     transition: 300ms ease all;
     /* For sm screen*/
@@ -1011,7 +1011,7 @@ select.form-control {
 .header-navbar .navbar-header {
     height: 100%;
     width: 260px;
-    height: 5rem;
+    height: 70px;
     float: left;
     position: relative;
     padding: 0rem 0.85rem;
@@ -1036,7 +1036,7 @@ select.form-control {
 
 .header-navbar .navbar-container {
     padding: 0rem 18px;
-    height: 5rem;
+    height: 70px;
     transition: 300ms ease all;
     background: inherit;
 }
