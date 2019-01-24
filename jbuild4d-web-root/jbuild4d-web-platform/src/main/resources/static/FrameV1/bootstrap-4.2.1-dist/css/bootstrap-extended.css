@@ -973,7 +973,7 @@ select.form-control {
 .header-navbar {
     padding: 0px;
     min-height: 70px;
-    font-family: "Quicksand", Georgia, "Times New Roman", Times, serif;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     transition: 300ms ease all;
     /* For sm screen*/
 }

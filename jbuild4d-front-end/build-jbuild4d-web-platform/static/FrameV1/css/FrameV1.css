@@ -8,6 +8,18 @@
 	Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
+html body .content {
+    padding: 0;
+    position: relative;
+    transition: 300ms ease all;
+    backface-visibility: hidden;
+    min-height: calc(100% - 32px);
+}
+
+.bg-info {
+    background-color: #1E9FF2 !important;
+}
+
 .main-menu {
     z-index: 1000;
     position: absolute;
