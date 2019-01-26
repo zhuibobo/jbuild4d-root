@@ -1815,9 +1815,12 @@ select.form-control {
     padding-left: .6rem;
 }
 
-.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
-    content: "-";
+.breadcrumb{
+    margin-bottom: 0px;
 }
+/*.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    content: "-";
+}*/
 
 /* Custom scss for page headers style */
 .breadcrumbs-right .breadcrumb {
