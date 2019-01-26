@@ -8,6 +8,41 @@
 	Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
+.top-right-wrap {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    z-index: 2000;
+    width: 290px;
+    /*background-color: #0a0e45;*/
+    font-size: 12px;
+    /*color: #0a0e45;*/
+}
+.top-right-wrap .user-warp {
+    display: inline-block;
+    float: left;
+    margin-left: 0px;
+    width: 200px;
+    color: #ffffff;
+}
+.top-right-wrap .user-warp .user-header {
+    background: url(../../Themes/Default/Css/Images/User-Header.png) center no-repeat;
+    width: 52px;
+    height: 54px;
+    margin-top: 4px;
+    display: inline-block;
+    float: left;
+}
+.top-right-wrap .user-warp .line {
+    border-right: 2px solid #ffffff;
+    width: 8px;
+    height: 46px;
+    display: inline-block;
+    float: left;
+    margin-top: 8px;
+    margin-right: 6px;
+}
+
 html body .content {
     padding: 0;
     position: relative;
