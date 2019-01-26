@@ -152,6 +152,7 @@ body.vertical-layout.vertical-menu.menu-collapsed .main-menu .main-menu-content 
     background-color: #1E9FF2;
     border-color: #1E9FF2;
     padding: 14px 20px;
+    font-size: 16px;
 }
 
 body.vertical-layout.vertical-menu.menu-collapsed .main-menu .main-menu-content > ul.menu-content {
