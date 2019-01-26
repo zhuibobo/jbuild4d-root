@@ -41,14 +41,14 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item">
+            <!--<li class=" nav-item">
                 <a href="index.html"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">系统管理</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#" data-i18n="nav.dash.ecommerce">eCommerce</a></li>
                     <li class="active"><a class="menu-item" href="#" data-i18n="nav.dash.crypto">Crypto</a></li>
                     <li><a class="menu-item" href="#" data-i18n="nav.dash.sales">Sales</a></li>
                 </ul>
-            </li>
+            </li>-->
         </ul>
     </div>
 </div>
@@ -65,6 +65,53 @@
     var myMenusJson=/*[[${myMenusJson}]]*/ 'Sebastian';
     console.log(myMenusJson);
     (function () {
+        function getChildMenuData(parentId) {
+            var childMenuData=new Array();
+            for(var i=0;i<myMenusJson.length;i++){
+                if(myMenusJson[i].menuParentId==parentId){
+                    childMenuData.push(myMenusJson[i]);
+                }
+            }
+            return childMenuData;
+        }
+        function getMenuData(menuId) {
+            for(var i=0;i<myMenusJson.length;i++){
+                if(myMenusJson[i].menuId==menuId){
+                    return myMenusJson[i];
+                }
+            }
+            return null;
+        }
+
+        function buildMenu(parentUl,menuId) {
+            var menuData=getMenuData(menuId);
+            var childMenuData=getChildMenuData(menuId);
+
+            if(childMenuData.length>0){
+                var li=$('<li class=" nav-item">\
+                            <a href="index.html"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">'+menuData.menuText+'</span></a>\
+                        </li>');
+                var ul=$('<ul class="menu-content">\
+                            </ul>');
+                li.append(ul);
+                parentUl.append(li);
+                for(var j=0;j<childMenuData.length;j++){
+                    buildMenu(ul,childMenuData[j].menuId);
+                }
+            }
+            else{
+                var li=$('<li class=" nav-item">\
+                            <a href="index.html"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">'+menuData.menuText+'</span></a>\
+                        </li>');
+                parentUl.append(li);
+            }
+        }
+
+        var rootMenus=getChildMenuData(0);
+        var parentUl=$("#main-menu-navigation")
+        for(var i=0;i<rootMenus.length;i++){
+            buildMenu(parentUl,rootMenus[i].menuId);
+        }
 
     })();
 </script>
