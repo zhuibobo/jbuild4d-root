@@ -38,8 +38,8 @@ public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoG
         return "/devdemo/GenList/GenEdit";
     }
 
-    @RequestMapping(value = "ListNotSearch", method = RequestMethod.GET)
-    public ModelAndView listNotSearch() {
+    @RequestMapping(value = "ListNotSearchView", method = RequestMethod.GET)
+    public ModelAndView listNotSearchView() {
         ModelAndView modelAndView=new ModelAndView("/devdemo/GenList/GenListNotSearch");
         return modelAndView;
     }
