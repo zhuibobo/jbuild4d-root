@@ -5,7 +5,7 @@
                     <li class="active"><a class="menu-item" href="#" data-i18n="nav.dash.crypto">Crypto</a></li>
                     <li><a class="menu-item" href="#" data-i18n="nav.dash.sales">Sales</a></li>
                 </ul>
-            </li>--></ul></div></div><div class="app-content content"><div class="content-wrapper"><div class="content-header row"></div><div class="content-body"></div></div></div><script th:inline="javascript">var myMenusJson=/*[[${myMenusJson}]]*/ 'Sebastian';
+            </li>--></ul></div></div><div class="content-outer-wrapper"><iframe id="fv_iframe" style="width:100%;height:100%" frameborder="0"></iframe></div><script th:inline="javascript">var myMenusJson=/*[[${myMenusJson}]]*/ 'Sebastian';
     console.log(myMenusJson);
     (function () {
         function getChildMenuData(parentId) {
@@ -26,13 +26,18 @@
             return null;
         }
 
-        function buildMenu(parentUl,menuId) {
+        function buildMenu(parentUl,menuId,level) {
             var menuData=getMenuData(menuId);
             var childMenuData=getChildMenuData(menuId);
 
-            var li=$('<li class="nav-item" id="">\
-                            <a href="#"><i class="la la-home"></i><span class="menu-title">'+menuData.menuText+'</span></a>\
-                        </li>');
+            var li=$('<li id="menu_'+menuId+'"></li>');
+            if(level==1){
+                li.addClass("nav-item");
+                li.append("<a href=\"#\"><i class=\"la la-home\"></i><span class=\"menu-title\">"+menuData.menuText+"</span></a>");
+            }
+            else{
+                li.append("<a href=\"#\">"+menuData.menuText+"</a>");
+            }
 
             var clickData={
                 "menuData":menuData,
@@ -42,12 +47,12 @@
                 //alert(sender.data.menuData.menuText);
             });
             if(childMenuData.length>0){
-                var ul=$('<ul class="menu-content">\
-                            </ul>');
+                var ul=$('<ul class="menu-content"></ul>');
                 li.append(ul);
                 parentUl.append(li);
+                var level=level+1;
                 for(var j=0;j<childMenuData.length;j++){
-                    buildMenu(ul,childMenuData[j].menuId);
+                    buildMenu(ul,childMenuData[j].menuId,level);
                 }
             }
             else{
@@ -58,7 +63,15 @@
         var rootMenus=getChildMenuData(0);
         var parentUl=$("#main-menu-navigation")
         for(var i=0;i<rootMenus.length;i++){
-            buildMenu(parentUl,rootMenus[i].menuId);
+            buildMenu(parentUl,rootMenus[i].menuId,1);
         }
 
+        function resetIframe() {
+            var height=PageStyleUtility.GetWindowHeight() - 70;
+            $("#fv_iframe").height(height - 8);
+        };
+        resetIframe();
+
+        $('#menu_JB4DSystemSettingDictionaryManager').addClass("active");
+            //.trigger("click");
     })();</script><th:block th:replace="Fragment/GeneralLib::FrameV1"></th:block></body></html>

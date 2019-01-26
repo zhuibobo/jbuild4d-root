@@ -16,6 +16,13 @@ html body .content {
     min-height: calc(100% - 32px);
 }
 
+.content-outer-wrapper{
+    margin-top: 70px;
+    margin-left: 260px;
+    bottom: 0px;
+    min-height:500px;
+}
+
 .bg-info {
     background-color: #1E9FF2 !important;
 }
