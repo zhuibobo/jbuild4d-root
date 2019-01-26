@@ -5,7 +5,7 @@
                     <li class="active"><a class="menu-item" href="#" data-i18n="nav.dash.crypto">Crypto</a></li>
                     <li><a class="menu-item" href="#" data-i18n="nav.dash.sales">Sales</a></li>
                 </ul>
-            </li>--></ul></div></div><div class="content-outer-wrapper"><nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Home</li><li class="breadcrumb-item">Library</li><li class="breadcrumb-item active" aria-current="page">Data</li></ol></nav><iframe id="fv_iframe" style="width:100%;height:100%" frameborder="0"></iframe></div><script th:inline="javascript">var IsTopFramePage = true;
+            </li>--></ul></div></div><div class="content-outer-wrapper"><nav aria-label="breadcrumb"><ol class="breadcrumb" id="menu_breadcrumb"><li class="breadcrumb-item">Home</li></ol></nav><iframe id="fv_iframe" style="width:100%;height:100%" frameborder="0"></iframe></div><script th:inline="javascript">var IsTopFramePage = true;
     var myMenusJson=/*[[${myMenusJson}]]*/ 'Sebastian';
     console.log(myMenusJson);
     (function () {
@@ -17,7 +17,7 @@
                 }
             }
             return childMenuData;
-        }
+        };
         function getMenuData(menuId) {
             for(var i=0;i<myMenusJson.length;i++){
                 if(myMenusJson[i].menuId==menuId){
@@ -25,6 +25,21 @@
                 }
             }
             return null;
+        };
+        function getParentListMenuData(menuId) {
+            var result=new Array();
+            var currentId=menuId;
+            var menu=getMenuData(menuId);
+            result.push(menu);
+            var menuParentId=menu.menuParentId;
+            for(var i=0;i<4;i++) {
+                if (menuParentId != "0") {
+                    var parentMenu = getMenuData(menuParentId);
+                    result.push(parentMenu);
+                    menuParentId=parentMenu.menuParentId;
+                }
+            }
+            return result.reverse();
         }
 
         function buildMenu(parentUl,menuId,level) {
@@ -49,7 +64,12 @@
                 var url=BaseUtility.BuildView(sender.data.menuData.menuRightUrl,sender.data.menuData);
                 $("#fv_iframe").attr("src",url);
                 //设置点击的路径breadcrumb
-                
+                var menuPath=getParentListMenuData(sender.data.menuData.menuId);
+                console.log(menuPath);
+                $("#menu_breadcrumb").html("");
+                for(var i=0;i<menuPath.length;i++){
+                    $("#menu_breadcrumb").append("<li class=\"breadcrumb-item\">"+menuPath[i].menuText+"</li>");
+                }
             });
             if(childMenuData.length>0){
                 var ul=$('<ul class="menu-content"></ul>');
@@ -73,7 +93,7 @@
 
         function resetIframe() {
             var height=PageStyleUtility.GetWindowHeight() - 70;
-            $("#fv_iframe").height(height - 88);
+            $("#fv_iframe").height(height - 81);
         };
         resetIframe();
 
