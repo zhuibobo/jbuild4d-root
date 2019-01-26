@@ -535,7 +535,7 @@ html body .content {
     height: 100%;
     /* fallback if needed */
     top: 70px;
-    /*height: calc(100% - 5rem);*/
+    height: calc(100% - 70px);
 }
 
 .main-menu.menu-fixed .main-menu-footer {

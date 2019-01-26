@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:replace="Fragment/GeneralLib::BootStrap4"></th:block>
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
 </head>
@@ -154,7 +155,13 @@
                 var level=level+1;
                 for(var j=0;j<childMenuData.length;j++){
                     buildMenu(ul,childMenuData[j].menuId,level);
+                }/*
+                for(var j=0;j<childMenuData.length;j++){
+                    buildMenu(ul,childMenuData[j].menuId,level);
                 }
+                for(var j=0;j<childMenuData.length;j++){
+                    buildMenu(ul,childMenuData[j].menuId,level);
+                }*/
             }
             else{
                 parentUl.append(li);
