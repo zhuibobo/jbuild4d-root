@@ -61,14 +61,17 @@
             };
             li.bind("click",clickData,function (sender) {
                 //alert(sender.data.menuData.menuText);
-                var url=BaseUtility.BuildView(sender.data.menuData.menuRightUrl,sender.data.menuData);
-                $("#fv_iframe").attr("src",url);
-                //设置点击的路径breadcrumb
-                var menuPath=getParentListMenuData(sender.data.menuData.menuId);
-                console.log(menuPath);
-                $("#menu_breadcrumb").html("");
-                for(var i=0;i<menuPath.length;i++){
-                    $("#menu_breadcrumb").append("<li class=\"breadcrumb-item\">"+menuPath[i].menuText+"</li>");
+                //console.log(sender.data.menuData.menuRightUrl);
+                if(sender.data.menuData.menuRightUrl) {
+                    var url = BaseUtility.BuildView(sender.data.menuData.menuRightUrl, sender.data.menuData);
+                    $("#fv_iframe").attr("src", url);
+                    //设置点击的路径breadcrumb
+                    var menuPath = getParentListMenuData(sender.data.menuData.menuId);
+                    //console.log(menuPath);
+                    $("#menu_breadcrumb").html("");
+                    for (var i = 0; i < menuPath.length; i++) {
+                        $("#menu_breadcrumb").append("<li class=\"breadcrumb-item\">" + menuPath[i].menuText + "</li>");
+                    }
                 }
             });
             if(childMenuData.length>0){
