@@ -6,7 +6,7 @@
 </head>
 <body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar"
       data-open="click" data-menu="vertical-menu" data-col="2-columns">
-<!-- fixed-top-->
+<!-- fixed-top-begin-->
 <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light bg-info navbar-shadow">
     <div class="navbar-wrapper">
         <div class="navbar-header">
@@ -37,98 +37,16 @@
         </div>
     </div>
 </nav>
-<!-- ////////////////////////////////////////////////////////////////////////////-->
-<div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true">
+<!-- fixed-top-end-->
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item">
                 <a href="index.html"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">系统管理</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#" data-i18n="nav.dash.ecommerce">eCommerce</a></li>
-                    <li><a class="menu-item" href="#" data-i18n="nav.dash.crypto">Crypto</a></li>
+                    <li class="active"><a class="menu-item" href="#" data-i18n="nav.dash.crypto">Crypto</a></li>
                     <li><a class="menu-item" href="#" data-i18n="nav.dash.sales">Sales</a></li>
-                </ul>
-            </li>
-            <li class=" navigation-header">
-                <span data-i18n="nav.category.layouts">Layouts</span>
-                <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
-            </li>
-            <li class=" nav-item">
-                <a href="#"><i class="la la-columns"></i><span class="menu-title" data-i18n="nav.page_layouts.main">Page layouts</span></a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.1_column"><i class="la la-file-text"></i>1 column</a>
-                    </li>
-                    <li class="active">
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.2_columns">2 columns</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="#" data-i18n="nav.page_layouts.3_columns.main">Content Sidebar</a>
-                        <ul class="menu-content">
-                            <li>
-                                <a class="menu-item" href="" data-i18n="nav.page_layouts.3_columns.left_sidebar">Left sidebar</a>
-                            </li>
-                            <li>
-                                <a class="menu-item" href="" data-i18n="nav.page_layouts.3_columns.left_sticky_sidebar">Left sticky sidebar</a>
-                            </li>
-                            <li>
-                                <a class="menu-item" href="" data-i18n="nav.page_layouts.3_columns.right_sidebar">Right sidebar</a>
-                            </li>
-                            <li>
-                                <a class="menu-item" href="" data-i18n="nav.page_layouts.3_columns.right_sticky_sidebar">Right sticky sidebar</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="#" data-i18n="nav.page_layouts.3_columns_detached.main">Content Det.Sidebar</a>
-                        <ul class="menu-content">
-                            <li>
-                                <a class="menu-item" href="" data-i18n="nav.page_layouts.3_columns_detached.detached_left_sidebar">Detached left sidebar</a>
-                            </li>
-                            <li>
-                                <a class="menu-item" href="" data-i18n="nav.page_layouts.3_columns_detached.detached_sticky_left_sidebar">Detached sticky left sidebar</a>
-                            </li>
-                            <li>
-                                <a class="menu-item" href="" data-i18n="nav.page_layouts.3_columns_detached.detached_right_sidebar">Detached right sidebar</a>
-                            </li>
-                            <li>
-                                <a class="menu-item" href="" data-i18n="nav.page_layouts.3_columns_detached.detached_sticky_right_sidebar">Detached sticky right</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="navigation-divider"></li>
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.fixed_navbar">Fixed navbar</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.fixed_navigation">Fixed navigation</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.fixed_navbar_navigation">Fixed navbar &amp; navigation</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.fixed_navbar_footer">Fixed navbar &amp; footer</a>
-                    </li>
-                    <li class="navigation-divider"></li>
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.fixed_layout">Fixed layout</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.boxed_layout">Boxed layout</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.static_layout">Static layout</a>
-                    </li>
-                    <li class="navigation-divider"></li>
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.light_layout">Light layout</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.dark_layout">Dark layout</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="" data-i18n="nav.page_layouts.semi_dark_layout">Semi dark layout</a>
-                    </li>
                 </ul>
             </li>
         </ul>
@@ -143,6 +61,13 @@
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+    var myMenusJson=/*[[${myMenusJson}]]*/ 'Sebastian';
+    console.log(myMenusJson);
+    (function () {
+
+    })();
+</script>
 <th:block th:replace="Fragment/GeneralLib::FrameV1"></th:block>
 </body>
 </html>

@@ -1,15 +1,19 @@
 package com.jbuild4d.web.platform.controller.base;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jbuild4d.base.dbaccess.dbentities.builder.MenuEntity;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.system.service.IMenuService;
+import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/PlatForm/Base")
@@ -23,9 +27,12 @@ public class FrameController {
         ModelAndView modelAndView=new ModelAndView("FrameV1/FrameView");
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
         modelAndView.addObject("menuJson",JsonUtility.toObjectString(menuService.getALL(jb4DSession)));
-        //JB4DSession session= JB4DSessionUtility.getSession();
-        //modelAndView.addObject("currUserEntity", JsonUtility.toObjectString(session));
         JB4DSessionUtility.setUserInfoToMV(modelAndView);
+
+        //todo
+        List<MenuEntity> myMenus=menuService.getALL(jb4DSession);
+        //String myMenusJsonString=JsonUtility.toObjectString(myMenus);
+        modelAndView.addObject("myMenusJson",myMenus);
         return modelAndView;
     }
 
