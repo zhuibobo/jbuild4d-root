@@ -149,6 +149,8 @@
                     for (var i = 0; i < menuPath.length; i++) {
                         $("#menu_breadcrumb").append("<li class=\"breadcrumb-item\">" + menuPath[i].menuText + "</li>");
                     }
+                    $("li.active").removeClass("active");
+                    $(this).addClass("active");
                 }
             });
             if(childMenuData.length>0){
