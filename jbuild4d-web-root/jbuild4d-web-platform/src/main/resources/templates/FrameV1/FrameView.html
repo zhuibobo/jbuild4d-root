@@ -30,10 +30,18 @@
             var menuData=getMenuData(menuId);
             var childMenuData=getChildMenuData(menuId);
 
-            if(childMenuData.length>0){
-                var li=$('<li class=" nav-item">\
-                            <a href="index.html"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">'+menuData.menuText+'</span></a>\
+            var li=$('<li class="nav-item" id="">\
+                            <a href="#"><i class="la la-home"></i><span class="menu-title">'+menuData.menuText+'</span></a>\
                         </li>');
+
+            var clickData={
+                "menuData":menuData,
+                "childMenuData":childMenuData
+            };
+            li.bind("click",clickData,function (sender) {
+                //alert(sender.data.menuData.menuText);
+            });
+            if(childMenuData.length>0){
                 var ul=$('<ul class="menu-content">\
                             </ul>');
                 li.append(ul);
@@ -43,9 +51,6 @@
                 }
             }
             else{
-                var li=$('<li class=" nav-item">\
-                            <a href="index.html"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">'+menuData.menuText+'</span></a>\
-                        </li>');
                 parentUl.append(li);
             }
         }
