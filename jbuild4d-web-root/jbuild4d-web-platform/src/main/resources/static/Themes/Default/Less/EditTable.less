@@ -1,0 +1,39 @@
+@import "Variable.less";
+
+.edit-table {
+    width: 100%;
+    border-collapse:collapse;
+
+    tr{
+        th{
+            border:1px solid @g-table-border-color;
+            padding:8px 6px;
+            color:@g-table-header-font-color;
+            background-color: @g-table-header-bg-color;
+            font-size: 12px;
+        }
+        td{
+            padding: 5px;
+            border:1px solid @g-table-border-color;
+            font-size: 12px;
+
+            input[type=checkbox]{
+                margin-top: 5px !important;
+            }
+        }
+    }
+}
+
+.EditTableAtWRPage{
+    top: 30px;bottom: 2px;left: 4px;right: 4px;overflow: auto
+}
+
+.edit-table-wrap::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+
+.edit-table-wrap::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: @g-scrollbar-color;
+}
