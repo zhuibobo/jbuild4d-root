@@ -708,12 +708,14 @@
                     // menu_header_height = ($('.main-menu-header').length) ? $('.main-menu-header').height() : 0,
                     // fromTop = menu_header_height + $this.position().top + parseInt($this.css( "border-top" ),10);
                     var fromTop;
+                    //alert(1);
                     if ($this.css("border-top")) {
                         fromTop = $this.position().top + parseInt($this.css("border-top"), 10);
                     }
                     else {
                         fromTop = $this.position().top;
                     }
+                    //debugger;
                     if ($body.data('menu') !== 'vertical-compact-menu') {
                         menuTitle.appendTo('.main-menu-content').css({
                             position: 'fixed',
@@ -919,7 +921,7 @@
             else {
                 topPos = menutop + $menuItem.height() + borderWidth;
             }
-
+            /*topPos+=40;*/
             if ($body.data('menu') == 'vertical-content-menu') {
                 ul.addClass('menu-popout').appendTo('.main-menu-content').css({
                     'top': topPos,
@@ -927,11 +929,21 @@
                 });
             }
             else {
-                ul.addClass('menu-popout').appendTo('.main-menu-content').css({
-                    'top': topPos,
-                    'position': 'fixed',
-                    'max-height': popOutMenuHeight,
-                });
+                if(BrowserInfoUtility.IsIE()){
+                    ul.addClass('menu-popout').appendTo('.main-menu-content').css({
+                        'top': topPos+20,
+                        'left':59,
+                        'position': 'fixed',
+                        'max-height': popOutMenuHeight,
+                    });
+                }
+                else {
+                    ul.addClass('menu-popout').appendTo('.main-menu-content').css({
+                        'top': topPos,
+                        'position': 'fixed',
+                        'max-height': popOutMenuHeight,
+                    });
+                }
 
                 $('.main-menu-content > ul.menu-content').perfectScrollbar({
                     theme: scroll_theme,
