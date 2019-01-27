@@ -14,7 +14,7 @@ import java.util.Date;
 public class FormResourceEntity {
     //FORM_ID
     @DBKeyField
-    private String formId;
+    protected String formId;
 
     //FORM_NAME
     private String formName;

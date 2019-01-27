@@ -5,9 +5,12 @@
         data: {
             acInterface:{
                 getTablesDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
-                getPluginsConfig:"/PlatForm/Builder/WebFormDesign/GetPluginsConfig"
+                getPluginsConfig:"/PlatForm/Builder/WebFormDesign/GetPluginsConfig",
+                saveDataUrl:"/PlatForm/Builder/Form/SaveEdit",
+                getDataUrl:"/PlatForm/Builder/Form/GetDetailData"
             },
             currUserEntity:null,
+            recordId:BaseUtility.GetUrlParaValue("recordId"),
             /*Js Bean*/
             formResourceEntity:{
                 formId:"",
@@ -58,6 +61,10 @@
                     HTMLEditorUtility.InitializeHTMLCodeDesign();
                     JsEditorUtility.InitializeJsCodeDesign(_self.status);
                     _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JsEditorUtility.GetJsEditorInst());
+
+                    //获取数据并赋值
+                    DetailPageUtility.BindFormData(_self.acInterface.getDataUrl, _self.formResourceEntity, _self.recordId, _self.status,null,null);
+
                 },"json");
             },
             bindStatusData:function () {
@@ -113,10 +120,21 @@
                 this.formResourceEntity.formMainTableName=relationConfig.mainTableName;
                 this.formResourceEntity.formMainTableCaption=relationConfig.mainTableCaption;
                 this.formResourceEntity.formHtmlSource=CKEditorUtility.GetCKEditorHTML();
+                this.formResourceEntity.formJsContent=JsEditorUtility.GetJsEditorJs();
 
                 var validateResult=this.validateSaveEnable(this.formResourceEntity);
                 if(validateResult.result){
-
+                    var sendData = JSON.stringify(this.formResourceEntity);
+                    debugger;
+                    AjaxUtility.PostRequestBody(this.acInterface.saveDataUrl, sendData, function (result) {
+                        //debugger;
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                            if (result.success) {
+                                window.OpenerWindowObj.appList.reloadData();
+                                DialogUtility.Frame_CloseDialog(window);
+                            }
+                        });
+                    }, "json");
                 }
                 else{
                     DialogUtility.AlertText(validateResult.msg.join("<br />"));
