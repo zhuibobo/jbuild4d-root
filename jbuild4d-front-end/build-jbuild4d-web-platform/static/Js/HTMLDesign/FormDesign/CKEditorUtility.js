@@ -27,10 +27,10 @@ class CKEditorUtility {
     }
 
     static GetCKEditorHTML(){
-        return this._CKEditorInst.getData();
+        return this.GetCKEditorInst().getData();
     }
     static SetCKEditorHTML(html){
-        this._CKEditorInst.setData(html);
+        this.GetCKEditorInst().setData(html);
     }
     static InitializeCKEditor(textAreaElemId,pluginsConfig,loadCompletedFunc) {
         var extraPlugins=new Array();

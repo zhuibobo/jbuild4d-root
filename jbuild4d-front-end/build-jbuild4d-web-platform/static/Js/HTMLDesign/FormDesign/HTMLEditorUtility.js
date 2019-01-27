@@ -1,4 +1,4 @@
-class JsEditorUtility{
+class HTMLEditorUtility{
     static _HTMLEditorInst=null
     static GetHTMLEditorInst(){
         return this._HTMLEditorInst;

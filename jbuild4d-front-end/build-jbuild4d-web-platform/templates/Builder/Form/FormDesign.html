@@ -157,8 +157,8 @@
                     CKEditorUtility.InitializeCKEditor('html_design',result.data,function () {
 
                     });
-                    //JBuild4D.FormDesign.InitializeHTMLCodeDesign();
-                    //JBuild4D.FormDesign.InitializeJsCodeDesign(_self.status);
+                    HTMLEditorUtility.InitializeHTMLCodeDesign();
+                    JsEditorUtility.InitializeJsCodeDesign(_self.status);
                     //_self.$refs.jsDesignCodeFragment.setJSEditorInstance(JBuild4D.FormDesign.GetJsEditorInst());
                 },"json");
             },
@@ -197,14 +197,14 @@
             },
             tabChange:function (name) {
                 if(this.isDesignToHTML(name)){
-                    var html=JBuild4D.FormDesign.GetCKEditorHTML();
+                    var html=CKEditorUtility.GetCKEditorHTML();
                     //JBuild4D.FormDesign.SetHTMLEditorHTML("<div id='aaa'><div><div><div>ssssssssss</div></div></div></div>");
-                    JBuild4D.FormDesign.SetHTMLEditorHTML(html);
+                    HTMLEditorUtility.SetHTMLEditorHTML(html);
                 }
                 else if(this.isHTMLToDesign(name)){
-                    var html=JBuild4D.FormDesign.GetHtmlEditorHTML();
+                    var html=HTMLEditorUtility.GetHtmlEditorHTML();
                     //alert(html);
-                    JBuild4D.FormDesign.SetCKEditorHTML(html);
+                    CKEditorUtility.SetCKEditorHTML(html);
                 }
                 this.oldSelectedTabName=name;
             },
@@ -214,7 +214,7 @@
                 this.formResourceEntity.formMainTableId=relationConfig.mainTableId;
                 this.formResourceEntity.formMainTableName=relationConfig.mainTableName;
                 this.formResourceEntity.formMainTableCaption=relationConfig.mainTableCaption;
-                this.formResourceEntity.formHtmlSource=JBuild4D.FormDesign.GetCKEditorHTML();
+                this.formResourceEntity.formHtmlSource=CKEditorUtility.GetCKEditorHTML();
 
                 var validateResult=this.validateSaveEnable(this.formResourceEntity);
                 if(validateResult.result){
