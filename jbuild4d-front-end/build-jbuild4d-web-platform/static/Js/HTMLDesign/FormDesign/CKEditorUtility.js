@@ -31,7 +31,8 @@ class CKEditorUtility {
             extraPlugins.push(singleName);
 
             //设置默认值
-            CKEditorPluginUtility.PluginsServerConfig[singleName]={
+            CKEditorPluginUtility.AddPluginsServerConfig(singleName,toolbarLocation,text,clientResolve,serverResolve,clientResolveJs,dialogWidth,dialogHeight,isJBuild4DData)
+            /*CKEditorPluginUtility.PluginsServerConfig[singleName]={
                 SingleName:singleName,
                 ToolbarLocation:toolbarLocation,
                 ToolbarLabel:text,
@@ -41,7 +42,7 @@ class CKEditorUtility {
                 DialogWidth:dialogWidth,
                 DialogHeight:dialogHeight,
                 IsJBuild4DData:isJBuild4DData
-            }
+            }*/
         }
 
         //加载默认配置文件

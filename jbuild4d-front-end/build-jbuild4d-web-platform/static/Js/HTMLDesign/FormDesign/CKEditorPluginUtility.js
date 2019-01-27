@@ -1,6 +1,22 @@
 class CKEditorPluginUtility {
+
+
     static PluginsServerConfig={
         //来自服务端的插件的相关的配置,在初始的时候写入
+    };
+
+    static AddPluginsServerConfig(singleName,toolbarLocation,text,clientResolve,serverResolve,clientResolveJs,dialogWidth,dialogHeight,isJBuild4DData){
+        this.PluginsServerConfig[singleName]={
+            SingleName:singleName,
+            ToolbarLocation:toolbarLocation,
+            ToolbarLabel:text,
+            ClientResolve:clientResolve,
+            ServerResolve:serverResolve,
+            ClientResolveJs:clientResolveJs,
+            DialogWidth:dialogWidth,
+            DialogHeight:dialogHeight,
+            IsJBuild4DData:isJBuild4DData
+        }
     };
 
     static Plugins={
@@ -8,7 +24,7 @@ class CKEditorPluginUtility {
     };
 
     static _UseServerConfigCoverEmptyPluginProp(obj) {
-        var coverObj = CKEditorPluginUtility.PluginsServerConfig[obj.SingleName];
+        var coverObj = this.PluginsServerConfig[obj.SingleName];
         //debugger;
         for (var prop in obj) {
             if (typeof(obj[prop]) != "function") {
