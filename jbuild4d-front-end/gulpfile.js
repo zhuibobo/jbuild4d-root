@@ -19,6 +19,15 @@ const replaceBlockObj=require("./replaceBlock.js");
 const publicResourcePath = "../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/static";
 const srcPlatformStaticPath = "build-jbuild4d-web-platform/static";
 
+/*拷贝第三方的相关文件*/
+gulp.task('Themes-ALL',()=>{
+   return gulp.src(srcPlatformStaticPath+"/Themes/**/*", {base:srcPlatformStaticPath+"/Themes"}).pipe(gulp.dest(publicResourcePath+"/Themes"));
+});
+
+gulp.task('JS-T3P',()=>{
+    return gulp.src(srcPlatformStaticPath+"/Js/T3P/**/*", {base:srcPlatformStaticPath+"/Js/T3P"}).pipe(gulp.dest(publicResourcePath+"/Js/T3P"));
+});
+
 /*编译Vue的扩展插件*/
 gulp.task('JS-VueEXComponent',()=>{
     return gulp.src([srcPlatformStaticPath + '/Js/VueComponent/*.js'])
@@ -82,7 +91,7 @@ gulp.task('ES6-JS-Demo',()=>{
 /*编译工程相关的JS*/
 gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UIComponent'));
 
-/*编译FrameV1-Assets的资源文件*/
+/*编译FrameV1的资源文件*/
 gulp.task('FrameV1',()=>{
     return gulp.src(srcPlatformStaticPath+"/FrameV1/**/*", {base: srcPlatformStaticPath+"/FrameV1"})
         .pipe(gulp.dest(publicResourcePath+"/FrameV1"));
