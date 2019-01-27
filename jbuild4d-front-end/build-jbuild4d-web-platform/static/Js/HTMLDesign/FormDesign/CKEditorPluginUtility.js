@@ -87,7 +87,7 @@ class CKEditorPluginUtility {
             function () {
                 var iframe = document.getElementById(this._.frameId);
                 pluginSetting.IFrameWindow = iframe;
-                JBuild4D.FormDesign.Dialog.SetElemPropsInEditDialog(pluginSetting.IFrameWindow, pluginSetting.IFrameExecuteActionName);
+                CKEditorPluginUtility.SetElemPropsInEditDialog(pluginSetting.IFrameWindow, pluginSetting.IFrameExecuteActionName);
             },
             {
                 //对话框确认按钮触发的事件
@@ -98,11 +98,11 @@ class CKEditorPluginUtility {
                     }
                     //JBuild4D.FormDesign.Control.BuildGeneralElemToCKWysiwyg("<input type='text' />",ControlSetting,props,ControlSetting.IFrameWindow.contentWindow);
                     okFunc(ckEditor, pluginSetting, props, pluginSetting.IFrameWindow.contentWindow);
-                    pluginSetting.IFrameExecuteActionName = JBuild4D.FormDesign.Dialog.DialogExecuteInsertActionName;
+                    pluginSetting.IFrameExecuteActionName = CKEditorPluginUtility.DialogExecuteInsertActionName;
                 },
                 //取消按钮对话框
                 onCancel: function () {
-                    pluginSetting.IFrameExecuteActionName = JBuild4D.FormDesign.Dialog.DialogExecuteInsertActionName;
+                    pluginSetting.IFrameExecuteActionName = CKEditorPluginUtility.DialogExecuteInsertActionName;
                 }
             }
         );
@@ -117,8 +117,182 @@ class CKEditorPluginUtility {
         });
 
         ckEditor.on('doubleclick', function (event) {
-            pluginSetting.IFrameExecuteActionName = JBuild4D.FormDesign.Dialog.DialogExecuteEditActionName;
-            JBuild4D.FormDesign.Control.OnCKWysiwygElemDBClickEvent(event, pluginSetting)
+            pluginSetting.IFrameExecuteActionName = CKEditorPluginUtility.DialogExecuteEditActionName;
+            CKEditorPluginUtility.OnCKWysiwygElemDBClickEvent(event, pluginSetting)
         });
+    }
+
+    static DefaultProps={
+        bindToField:{
+            tableId: "",
+            tableName: "",
+            tableCaption: "",
+            fieldName: "",
+            fieldCaption: "",
+            fieldDataType: "",
+            fieldLength:""
+        },
+        defaultValue:{
+            defaultType: "",
+            defaultValue: "",
+            defaultText: ""
+        },
+        validateRules:{
+            msg:"",
+            rules:[]
+        },
+        baseInfo:{
+            id:"",
+            serialize:"true",
+            name:"",
+            className:"",
+            placeholder:"",
+            readonly:"noreadonly",
+            disabled:"nodisabled",
+            style:"",
+            desc:""
+        }
+    }
+    static OnCKWysiwygElemDBClickEvent(event,controlSetting){
+        //debugger;
+        var element = event.data.element;
+        if(element.getAttribute("auto_remove")=="true"){
+            element=event.data.element.getParent();
+        }
+        var singleName=element.getAttribute("singleName");
+        if(singleName==controlSetting.SingleName) {
+            CKEditorUtility.SetSelectedElem(element.getOuterHtml());
+            event.data.dialog =controlSetting.DialogName;
+        }
+    }
+    static GetSelectedCKEditorElem(){
+        var id=CKEditorUtility.GetSelectedElem().attr("id");
+        var element =JBuild4D.FormDesign.GetCKEditorInst().document.getById(id);
+        return element;
+    }
+    static SerializePropsToElem(elem,props,controlSetting){
+        elem.setAttribute("jbuild4d_custom", "true");
+        elem.setAttribute("singlename",controlSetting.SingleName);
+        elem.setAttribute("clientresolve",controlSetting.ClientResolve);
+        elem.setAttribute("serverresolve",controlSetting.ServerResolve);
+        elem.setAttribute("is_jbuild4d_data",controlSetting.IsJBuild4DData);
+
+        if(props["baseInfo"]){
+            for (var key in props["baseInfo"]) {
+                if(key=="readonly"){
+                    if(props["baseInfo"][key]=="readonly"){
+                        elem.setAttribute(key.toLocaleLowerCase(), props["baseInfo"][key]);
+                    }
+                    else{
+                        elem.removeAttribute("readonly");
+                    }
+                }
+                else if(key=="disabled"){
+                    if(props["baseInfo"][key]=="disabled"){
+                        elem.setAttribute(key.toLocaleLowerCase(), props["baseInfo"][key]);
+                    }
+                    else{
+                        elem.removeAttribute("disabled");
+                    }
+                }
+                else{
+                    elem.setAttribute(key.toLocaleLowerCase(), props["baseInfo"][key]);
+                }
+            }
+        }
+
+        if(props["bindToField"]){
+            for (var key in props["bindToField"]) {
+                elem.setAttribute(key.toLocaleLowerCase(), props["bindToField"][key]);
+            }
+        }
+
+        if(props["defaultValue"]){
+            for (var key in props["defaultValue"]) {
+                elem.setAttribute(key.toLocaleLowerCase(), props["defaultValue"][key]);
+            }
+        }
+
+        if(props["validateRules"]){
+            if(props["validateRules"].rules) {
+                if (props["validateRules"].rules.length > 0) {
+                    elem.setAttribute("validaterules", encodeURIComponent(JsonUtility.JsonToString(props["validateRules"])));
+                }
+            }
+        }
+        return elem;
+    }
+    static DeserializePropsFromElem(elem){
+        var props={};
+        var $elem=$(elem);
+
+        function attrToProp(props,groupName) {
+            var groupProp={};
+            for(var key in this.DefaultProps[groupName]){
+                if($elem.attr(key)){
+                    groupProp[key]=$elem.attr(key);
+                }
+                else{
+                    groupProp[key]=this.DefaultProps[groupName][key];
+                }
+            }
+            props[groupName]=groupProp;
+            return props;
+        }
+
+        props=attrToProp.call(this,props,"baseInfo");
+        props=attrToProp.call(this,props,"bindToField");
+        props=attrToProp.call(this,props,"defaultValue");
+
+        if($elem.attr("validateRules")){
+            props.validateRules=JsonUtility.StringToJson(decodeURIComponent($elem.attr("validateRules")));
+        }
+
+        return props;
+    }
+    static BuildGeneralElemToCKWysiwyg (html,controlSetting,controlProps,_iframe) {
+        if(this.ValidateBuildEnable(html,controlSetting,controlProps,_iframe)) {
+            if (controlSetting.IFrameExecuteActionName == CKEditorPluginUtility.DialogExecuteInsertActionName) {
+                var elem = CKEDITOR.dom.element.createFromHtml(html);
+                this.SerializePropsToElem(elem,controlProps,controlSetting);
+                CKEditorUtility.GetCKEditorInst().insertElement(elem);
+                CKEditorUtility.GetCKEditorInst().getSelection().selectElement(elem);
+            }
+            else {
+                //debugger
+                var selectedElem=this.GetSelectedCKEditorElem();
+                if(selectedElem) {
+                    var reFreshElem = new CKEDITOR.dom.element.createFromHtml(selectedElem.getOuterHtml());
+                    selectedElem.copyAttributes(reFreshElem, {temp: "temp"});
+                    this.SerializePropsToElem(reFreshElem,controlProps,controlSetting);
+                    reFreshElem.replace(selectedElem);
+                }
+                //SimpleControlUtil.CommInsertOrReplaceElemInCKEditor(exsetting.IFrameWindow,exsetting.IRCommandName,"");
+            }
+
+            //exsetting.IRCommandName=SimpleControlUtil.PropInsertCommand;
+        }
+    }
+    static ValidateBuildEnable(html,controlSetting,controlProps,_iframe){
+        return true;
+    }
+    static ValidateSerializeControlDialogCompletedEnable (returnResult) {
+        //debugger;
+        if (returnResult.baseInfo.serialize == "true" && returnResult.bindToField.fieldName == "") {
+            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "序列化的控件必须绑定字段!", null);
+            return {success: false};
+        }
+        return returnResult;
+    }
+
+    static DialogExecuteEditActionName="Edit";
+    static DialogExecuteInsertActionName="Insert";
+    static SetElemPropsInEditDialog(iframeObj,actionName){
+        iframeObj.contentWindow.DialogApp.ready(actionName);
+        if(actionName==this.DialogExecuteEditActionName) {
+            var elem=CKEditorUtility.GetSelectedElem().outerHTML();
+            var props=this.DeserializePropsFromElem(elem);
+            iframeObj.contentWindow.DialogApp.setControlProps(elem,props);
+        }
     }
 }

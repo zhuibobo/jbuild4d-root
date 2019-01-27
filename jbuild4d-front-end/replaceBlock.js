@@ -74,7 +74,7 @@ let replaceBlock = {
         let levelPath = calculateFilePath(file);
 
         replaceArray.push(refJs(levelPath + "Js/T3P/Ckeditor-4.11.1-4Design/ckeditor.js"));
-        replaceArray.push(refJs(levelPath + "Js/HTMLDesign/FormDesign/JBuild4DFormDesign.js?refVersion=" + refVersion));
+        replaceArray.push(refJs(levelPath + "Js/HTMLDesign/FormDesign/FormDesignUtility.js?refVersion=" + refVersion));
 
         return replaceArray.join("\n\t");
     },
@@ -82,7 +82,7 @@ let replaceBlock = {
         let replaceArray = new Array();
         let levelPath = calculateFilePath(file);
 
-        replaceArray.push(refJs(levelPath + "Js/HTMLDesign/FormDesign/JBuild4DFormDesign.js?refVersion=" + refVersion));
+        replaceArray.push(refJs(levelPath + "Js/HTMLDesign/FormDesign/FormDesignUtility.js?refVersion=" + refVersion));
 
         return replaceArray.join("\n\t");
     },

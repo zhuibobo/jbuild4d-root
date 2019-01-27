@@ -24,10 +24,10 @@
         var DialogApp=new Vue({
             el:"#dialogApp",
             data: {
-                baseInfo:JBuild4D.FormDesign.Control.DefaultProps.baseInfo,
-                bindToField:JBuild4D.FormDesign.Control.DefaultProps.bindToField,
-                defaultValue: JBuild4D.FormDesign.Control.DefaultProps.defaultValue,
-                validateRules:JBuild4D.FormDesign.Control.DefaultProps.validateRules
+                baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
+                bindToField:CKEditorPluginUtility.DefaultProps.bindToField,
+                defaultValue: CKEditorPluginUtility.DefaultProps.defaultValue,
+                validateRules:CKEditorPluginUtility.DefaultProps.validateRules
             },
             mounted:function () {
 
@@ -50,7 +50,7 @@
                         defaultValue: this.defaultValue,
                         validateRules: this.validateRules
                     }
-                    return JBuild4D.FormDesign.Control.ValidateSerializeControlDialogCompletedEnable(result);
+                    return CKEditorPluginUtility.ValidateSerializeControlDialogCompletedEnable(result);
                 },
                 setControlProps:function ($elem,props) {
                     this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;

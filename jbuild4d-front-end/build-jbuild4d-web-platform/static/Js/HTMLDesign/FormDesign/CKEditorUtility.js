@@ -1,4 +1,14 @@
 class CKEditorUtility {
+    static _$CKEditorSelectElem=null;
+    static SetSelectedElem(elemHtml){
+        this._$CKEditorSelectElem=$(elemHtml);
+    }
+    static GetSelectedElem(){
+        if(this._$CKEditorSelectElem.length>0) {
+            return this._$CKEditorSelectElem;
+        }
+        return null;
+    }
 
     static _CKEditorInst=null;
     static GetCKEditorInst() {

@@ -136,8 +136,7 @@ gulp.task('FormDesign-Plugins',()=>{
     return gulp.src([
         srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.js",
         srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.css",
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.png",
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.html"
+        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.png"
     ], {base: "build-jbuild4d-web-platform/static/Js/HTMLDesign/FormDesign/Plugins"}).
     pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/FormDesign/Plugins"));
 });
@@ -154,12 +153,12 @@ gulp.task('FormDesign-Utility',()=> {
 });
 
 /*编译表单设计器的相关的HTML文件*/
-/*gulp.task('FormDesign-HTML',()=>{
-    return copyAndResolveHtml(srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/!**!/!*.html",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign",publicResourcePath + "/Js/HTMLDesign/FormDesign");
-});*/
+gulp.task('FormDesign-HTML',()=>{
+    return copyAndResolveHtml(srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.html",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign",publicResourcePath + "/Js/HTMLDesign/FormDesign");
+});
 
 /*编译表单设计器的相关文件*/
-gulp.task('FormDesign', gulp.series('FormDesign-Utility','FormDesign-Plugins'));
+gulp.task('FormDesign', gulp.series('FormDesign-Utility','FormDesign-HTML','FormDesign-Plugins'));
 
 /*编译所有的文件*/
 gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign','LessImages','FrameV1'));
