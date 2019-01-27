@@ -197,7 +197,7 @@ var JBuild4D={
             }
         },
         Plugins:{
-            _CoverEmptyPluginProp: function(obj) {
+            _UseServerConfigCoverEmptyPluginProp: function(obj) {
                 var coverObj = JBuild4D.FormDesign.PluginsServerConfig[obj.SingleName];
                 //debugger;
                 for (var prop in obj) {
@@ -246,7 +246,7 @@ var JBuild4D={
                 //使用方法参数覆盖默认值
                 defaultSetting = $.extend(true, {}, defaultSetting, exConfig);
                 //使用服务端定义覆盖定义的空值;
-                defaultSetting = this._CoverEmptyPluginProp(defaultSetting);
+                defaultSetting = this._UseServerConfigCoverEmptyPluginProp(defaultSetting);
                 defaultSetting.DialogName = defaultSetting.SingleName;
                 defaultSetting.ToolbarCommand = "JBuild4D.FormDesign.Plugins." + defaultSetting.SingleName;
                 defaultSetting.DialogSettingTitle = defaultSetting.ToolbarLabel + "Web控件";
@@ -299,7 +299,7 @@ var JBuild4D={
             }
         },
         PluginsServerConfig:{
-
+            //来自服务端的插件的相关的配置,在初始的时候写入
         },
         //CKEditor
         _CKEditorInst:null,

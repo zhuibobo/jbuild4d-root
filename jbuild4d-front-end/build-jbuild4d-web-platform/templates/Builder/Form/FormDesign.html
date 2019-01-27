@@ -154,12 +154,12 @@
                 AjaxUtility.Post(this.acInterface.getPluginsConfig,{},function (result) {
                     console.log(result.data);
 
-                    JBuild4D.FormDesign.InitializeCKEditor('html_design',result.data,function () {
+                    CKEditorUtility.InitializeCKEditor('html_design',result.data,function () {
 
                     });
-                    JBuild4D.FormDesign.InitializeHTMLCodeDesign();
-                    JBuild4D.FormDesign.InitializeJsCodeDesign(_self.status);
-                    _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JBuild4D.FormDesign.GetJsEditorInst());
+                    //JBuild4D.FormDesign.InitializeHTMLCodeDesign();
+                    //JBuild4D.FormDesign.InitializeJsCodeDesign(_self.status);
+                    //_self.$refs.jsDesignCodeFragment.setJSEditorInstance(JBuild4D.FormDesign.GetJsEditorInst());
                 },"json");
             },
             bindStatusData:function () {

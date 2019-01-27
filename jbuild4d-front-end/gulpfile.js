@@ -131,19 +131,35 @@ gulp.task('HTMLTemplates',()=>{
         .pipe(gulp.dest("../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/templates"));
 });
 
-/*编译表单设计器的相关的JS文件*/
-gulp.task('FormDesign-JS',()=>{
-    return gulp.src([srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.js",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.css",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.png"], {base: "build-jbuild4d-web-platform/static/Js/HTMLDesign/FormDesign"}).
-    pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/FormDesign"));
+/*编译表单设计器的相关的Plugins文件*/
+gulp.task('FormDesign-Plugins',()=>{
+    return gulp.src([
+        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.js",
+        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.css",
+        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.png",
+        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.html"
+    ], {base: "build-jbuild4d-web-platform/static/Js/HTMLDesign/FormDesign/Plugins"}).
+    pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/FormDesign/Plugins"));
+});
+
+gulp.task('FormDesign-Utility',()=> {
+    return gulp.src([
+            srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/*.js"
+        ])
+        .pipe(babel())
+        .pipe(sourcemaps.init())
+        .pipe(concat('FormDesignUtility.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/FormDesign"));
 });
 
 /*编译表单设计器的相关的HTML文件*/
-gulp.task('FormDesign-HTML',()=>{
-    return copyAndResolveHtml(srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.html",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign",publicResourcePath + "/Js/HTMLDesign/FormDesign");
-});
+/*gulp.task('FormDesign-HTML',()=>{
+    return copyAndResolveHtml(srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/!**!/!*.html",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign",publicResourcePath + "/Js/HTMLDesign/FormDesign");
+});*/
 
 /*编译表单设计器的相关文件*/
-gulp.task('FormDesign', gulp.series('FormDesign-JS','FormDesign-HTML'));
+gulp.task('FormDesign', gulp.series('FormDesign-Utility','FormDesign-Plugins'));
 
 /*编译所有的文件*/
 gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign','LessImages','FrameV1'));

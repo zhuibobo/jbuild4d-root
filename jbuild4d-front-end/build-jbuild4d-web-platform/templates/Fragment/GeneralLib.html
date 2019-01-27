@@ -10,9 +10,11 @@
     <script type="text/javascript" th:src="@{/Js/T3P/IView-3.X/dist/iview.min.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/JQuery-UI-1.12.1/jquery-ui.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/ZTree-V3/js/jquery.ztree.all.js}"></script>
+    <script type="text/javascript" th:src="@{/Js/T3P/polyfill.min.js}"></script>
     <script type="text/javascript" th:src="@{/Js/JBuild4DPlatformLib.js(urlts=${urlts})}"></script>
     <script type="text/javascript" th:src="@{/Js/VueEXComponent.js(urlts=${urlts})}"></script>
     <script type="text/javascript" th:src="@{/Js/UIEXComponent.js(urlts=${urlts})}"></script>
+
 </th:block>
 <th:block th:fragment="BootStrap4" th:with="urlts=${'V1'}" >
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -74,8 +76,8 @@
 </th:block>
 <th:block th:fragment="FormDesignLib" th:with="urlts=${'V1'}" >
     <script type="text/javascript" th:src="@{/Js/T3P/Ckeditor-4.11.1-4Design/ckeditor.js}"></script>
-    <script type="text/javascript" th:src="@{/Js/HTMLDesign/FormDesign/JBuild4DFormDesign.js(urlts=${urlts})}"></script>
+    <script type="text/javascript" th:src="@{/Js/HTMLDesign/FormDesign/FormDesignUtility.js(urlts=${urlts})}"></script>
 </th:block>
 <th:block th:fragment="JBuild4DFormDesignLib" th:with="urlts=${'V1'}" >
-    <script type="text/javascript" th:src="@{/Js/HTMLDesign/FormDesign/JBuild4DFormDesign.js(urlts=${urlts})}"></script>
+    <script type="text/javascript" th:src="@{/Js/HTMLDesign/FormDesign/FormDesignUtility.js(urlts=${urlts})}"></script>
 </th:block>

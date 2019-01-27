@@ -34,7 +34,7 @@
                         "Android >= 6"
                     ]
                 },
-                "modules": "amd",
+                "modules": "commonjs",
                 "debug":true,
                 "useBuiltIns": "entry"
             }
