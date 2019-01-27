@@ -1,6 +1,5 @@
 class CKEditorPluginUtility {
 
-
     static PluginsServerConfig={
         //来自服务端的插件的相关的配置,在初始的时候写入
     };
