@@ -3,13 +3,21 @@
  */
 CKEDITOR.editorConfig = function(config) {
     //config.language = 'zh-cn';
-    config.plugins = 'iframedialog,dialogui,dialog,about,a11yhelp,dialogadvtab,basicstyles,' +
+    /*config.plugins = 'iframedialog,dialogui,dialog,about,a11yhelp,dialogadvtab,basicstyles,' +
         'bidi,blockquote,clipboard,button,panelbutton,panel,floatpanel,colorbutton,colordialog,' +
         'templates,menu,contextmenu,div,resize,toolbar,elementspath,enterkey,entities,popup,' +
         'filebrowser,find,fakeobjects,flash,floatingspace,listblock,richcombo,font,format,' +
         'horizontalrule,htmlwriter,iframe,wysiwygarea,image,indent,indentblock,indentlist,smiley,' +
         'justify,menubutton,language,link,list,liststyle,magicline,maximize,newpage,pagebreak,pastetext,' +
         'pastefromword,preview,print,removeformat,save,selectall,showblocks,showborders,sourcearea,' +
+        'specialchar,scayt,stylescombo,tab,table,tabletools,undo,wsc';*/
+    config.plugins = 'iframedialog,dialogui,dialog,dialogadvtab,basicstyles,' +
+        'blockquote,clipboard,button,panelbutton,panel,floatpanel,colorbutton,colordialog,' +
+        'templates,menu,contextmenu,div,resize,toolbar,elementspath,enterkey,entities,popup,' +
+        'find,fakeobjects,floatingspace,listblock,richcombo,font,format,' +
+        'horizontalrule,htmlwriter,iframe,wysiwygarea,image,indent,indentblock,indentlist,smiley,' +
+        'justify,menubutton,link,list,liststyle,magicline,maximize,newpage,pagebreak,pastetext,' +
+        'pastefromword,removeformat,save,selectall,showblocks,showborders,sourcearea,' +
         'specialchar,scayt,stylescombo,tab,table,tabletools,undo,wsc';
     config.skin = 'moono-lisa';
     //config.uiColor = '#F7B42C';
@@ -26,7 +34,6 @@ CKEDITOR.editorConfig = function(config) {
         { name: 'colors', groups: [ 'colors' ] },
         { name: 'tools', groups: [ 'tools' ] },
         { name: 'others', groups: [ 'others' ] },
-        { name: 'about', groups: [ 'about' ] },
         { name: 'FDCT_Template', groups: [] },
         { name: 'FDCT_Container', groups: [] },
         '/',
