@@ -58,9 +58,8 @@
                 AjaxUtility.Post(url, senddata , function (result) {
                     if (result.success) {
                         //alert(11);
-                        //var url=BaseUtility.BuildView("/PlatForm/Base/FrameView");
-                        //window.location.href=url;
-                        window.location.href=BaseUtility.BuildView("/PlatForm/Builder/Form/DetailView",{op:"add","moduleId":"448fa575-45ef-4101-97e7-1635e0f2c768"});
+                        window.location.href=BaseUtility.BuildView("/PlatForm/Base/FrameView");
+                        //window.location.href=BaseUtility.BuildView("/PlatForm/Builder/Form/DetailView",{op:"add","moduleId":"448fa575-45ef-4101-97e7-1635e0f2c768"});
                     }
                     else {
                         DialogUtility.Alert(window,"LoginAlert",{},"帐号密码错误")

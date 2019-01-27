@@ -432,8 +432,8 @@ var DialogUtility={
 
             defaultoptions = $.extend(true, {}, defaultoptions, options);
             $(dialogEle).dialog(defaultoptions);
-            $(".ui-widget-overlay").css("zIndex","1000");
-            $(".ui-dialog").css("zIndex","1001");
+            $(".ui-widget-overlay").css("zIndex","2000");
+            $(".ui-dialog").css("zIndex","2001");
             var $iframeobj = $(dialogEle).find("iframe");
             $iframeobj.on("load",function () {
                 //alert("load");
