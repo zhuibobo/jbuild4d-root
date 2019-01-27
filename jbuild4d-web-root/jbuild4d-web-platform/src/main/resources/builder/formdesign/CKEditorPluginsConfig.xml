@@ -11,12 +11,12 @@
             <Config></Config>
             <Desc></Desc>
         </WebFormControl>-->
-        <!--<WebFormControl SingleName="FDCT_Template" Text="表格模版" ToolbarLocation="FDCT_Template,1"
+        <WebFormControl SingleName="FDCT_Template" Text="表格模版" ToolbarLocation="FDCT_Template,1"
                         ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
                         DialogWidth="780" DialogHeight="550" IsJBuild4DData="false">
             <Config></Config>
             <Desc></Desc>
-        </WebFormControl>-->
+        </WebFormControl>
         <WebFormControl SingleName="FDCT_TextBox" Text="单行输入框" ToolbarLocation="FDCT_Simple,1"
                         ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
                         DialogWidth="780" DialogHeight="550" IsJBuild4DData="true">

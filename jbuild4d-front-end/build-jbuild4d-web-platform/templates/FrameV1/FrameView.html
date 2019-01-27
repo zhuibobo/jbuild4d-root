@@ -51,7 +51,7 @@
                          <span class="badge badge-pill badge-default badge-danger badge-default badge-glow" style="position: absolute;top: -10px;right: 5px">5</span>
                      </a>
                 </div>
-                <div style="float: left;width: 40px;position: relative;margin-top: 20px" @click="logout()">
+                <div style="float: left;width: 40px;position: relative;margin-top: 20px;cursor: pointer" onclick="logout()">
                     <i style="font-size: 24px;color:#ffffff;" class="la la-sign-in"></i>
                 </div>
             </div>
@@ -85,6 +85,9 @@
     var IsTopFramePage = true;
     var myMenusJson=/*[[${myMenusJson}]]*/ 'Sebastian';
     console.log(myMenusJson);
+    function logout() {
+        window.location.href = BaseUtility.BuildView("/LoginView");
+    }
     (function () {
         function getChildMenuData(parentId) {
             var childMenuData=new Array();
