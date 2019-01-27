@@ -167,7 +167,7 @@ class CKEditorPluginUtility {
     }
     static GetSelectedCKEditorElem(){
         var id=CKEditorUtility.GetSelectedElem().attr("id");
-        var element =JBuild4D.FormDesign.GetCKEditorInst().document.getById(id);
+        var element =CKEditorUtility.GetCKEditorInst().document.getById(id);
         return element;
     }
     static SerializePropsToElem(elem,props,controlSetting){
