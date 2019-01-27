@@ -9,11 +9,23 @@ class CKEditorUtility {
         }
         return null;
     }
+    static GetSelectedCKEditorElem(){
+        if(this.GetSelectedElem()) {
+            var id = this.GetSelectedElem().attr("id");
+            var element = this.GetCKEditorInst().document.getById(id);
+            return element;
+        }
+        return null;
+    }
 
     static _CKEditorInst=null;
     static GetCKEditorInst() {
         return this._CKEditorInst;
     }
+    static SetCKEditorInst(inst){
+        this._CKEditorInst=inst;
+    }
+
     static GetCKEditorHTML(){
         return this._CKEditorInst.getData();
     }
@@ -85,7 +97,8 @@ class CKEditorUtility {
             }
         });
 
-        this._CKEditorInst = CKEDITOR.instances.html_design;
+        //this._CKEditorInst = CKEDITOR.instances.html_design;
+        this.SetCKEditorInst(CKEDITOR.instances.html_design);
 
         CKEDITOR.on('instanceReady', function (e) {
             if(typeof(loadCompletedFunc)=="function"){

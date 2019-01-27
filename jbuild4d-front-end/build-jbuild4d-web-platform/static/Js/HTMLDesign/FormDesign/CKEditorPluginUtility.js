@@ -165,11 +165,7 @@ class CKEditorPluginUtility {
             event.data.dialog =controlSetting.DialogName;
         }
     }
-    static GetSelectedCKEditorElem(){
-        var id=CKEditorUtility.GetSelectedElem().attr("id");
-        var element =CKEditorUtility.GetCKEditorInst().document.getById(id);
-        return element;
-    }
+
     static SerializePropsToElem(elem,props,controlSetting){
         elem.setAttribute("jbuild4d_custom", "true");
         elem.setAttribute("singlename",controlSetting.SingleName);
@@ -260,7 +256,7 @@ class CKEditorPluginUtility {
             }
             else {
                 //debugger
-                var selectedElem=this.GetSelectedCKEditorElem();
+                var selectedElem=CKEditorUtility.GetSelectedCKEditorElem();
                 if(selectedElem) {
                     var reFreshElem = new CKEDITOR.dom.element.createFromHtml(selectedElem.getOuterHtml());
                     selectedElem.copyAttributes(reFreshElem, {temp: "temp"});
