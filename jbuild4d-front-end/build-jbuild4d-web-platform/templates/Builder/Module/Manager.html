@@ -50,7 +50,7 @@
                               :total="pageTotal"></page>
                     </div>
                 </div>-->
-                <module-list-webform-comp></module-list-webform-comp>
+                <module-list-webform-comp :list-height="listHeight" :module-data="moduleData"></module-list-webform-comp>
             </tab-pane>
             <tab-pane label="APP表单设计">
 
@@ -132,7 +132,9 @@
                         appList.treeObj.expandAll(true);
                     }
                 }
-            }
+            },
+            listHeight:100,
+            moduleData:null
         },
         methods:{
             <!--Module-->
@@ -143,6 +145,7 @@
             treeNodeSelected:function (event, treeId, treeNode) {
                 // 根节点不触发任何事件
                 this.treeSelectedNode=treeNode;
+                this.moduleData=treeNode;
             },
             addModule:function () {
                 if (this.treeSelectedNode != null) {
