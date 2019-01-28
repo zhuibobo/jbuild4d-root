@@ -26,7 +26,7 @@
     <div class="right-outer-wrap iv-list-page-wrap" style="padding: 10px;left: 260px">
         <tabs>
             <tab-pane label="表单设计">
-                <div style="width: 100%;">
+                <!--<div style="width: 100%;">
                     <div id="list-button-wrap" class="list-button-outer-wrap">
                         <div class="list-button-inner-wrap">
                             <button-group>
@@ -49,7 +49,8 @@
                         <page @on-change="changePage" :current.sync="pageNum" :page-size="pageSize" show-total
                               :total="pageTotal"></page>
                     </div>
-                </div>
+                </div>-->
+                <module-list-webform-comp></module-list-webform-comp>
             </tab-pane>
             <tab-pane label="APP表单设计">
 
@@ -131,59 +132,7 @@
                         appList.treeObj.expandAll(true);
                     }
                 }
-            },
-            <!--List-->
-            idFieldName:"ddtlId",
-            columnsConfig: [
-                {
-                    type: 'selection',
-                    width: 60,
-                    align: 'center'
-                },
-                {
-                    title: 'ddtlKey',
-                    key: 'ddtlKey',
-                    align: "center"
-                }, {
-                    title: 'ddtlName',
-                    key: 'ddtlName',
-                    align: "center"
-                }, {
-                    title: 'ddtlDesc',
-                    key: 'ddtlDesc'
-                }, {
-                    title: 'ddtlStatus',
-                    width: 100,
-                    align: "center",
-                    key: 'ddtlStatus'
-                }, {
-                    title: 'CT',
-                    key: 'ddtlCreatetime',
-                    width: 100,
-                    align: "center",
-                    render: function (h, params) {
-                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddtlCreatetime);
-                    }
-                }, {
-                    title: '操作',
-                    key: 'dictGroupId',
-                    width: 120,
-                    align: "center",
-                    render: function (h, params) {
-                        return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
-                        ]);
-                    }
-                }
-            ],
-            tableData: [],
-            selectionRows: null,
-            pageTotal: 0,
-            pageSize: 12,
-            pageNum: 1,
-            listHeight: 300
+            }
         },
         methods:{
             <!--Module-->
@@ -194,11 +143,6 @@
             treeNodeSelected:function (event, treeId, treeNode) {
                 // 根节点不触发任何事件
                 this.treeSelectedNode=treeNode;
-                /*this.selectionRows=null;
-                this.pageNum=1;
-                this.clearSearchCondition();
-                this.searchCondition.groupId.value=this.treeSelectedNode[this.treeIdFieldName];
-                this.reloadData();*/
             },
             addModule:function () {
                 if (this.treeSelectedNode != null) {
@@ -283,64 +227,7 @@
                 appList.treeObj.updateNode(this.treeSelectedNode);
             },
             <!--Template-->
-            form_add:function () {
-                if(this.treeSelectedNode!=null) {
-                    var url = BaseUtility.BuildView(this.acInterface.form.designView, {
-                        "op": "add",
-                        "moduleId": this.treeSelectedNode[appList.treeIdFieldName]
-                    });
-                    //alert(url);
-                    DialogUtility.OpenNewWindow(window, DialogUtility.DialogId, url, {width: 0, height: 0}, 2);
-                }
-                else {
-                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择模块!", null);
-                }
-            },
 
-            clearSearchCondition:function () {
-                for(var key in this.searchCondition){
-                    this.searchCondition[key].value="";
-                }
-            },
-            selectionChange: function (selection) {
-                this.selectionRows = selection;
-            },
-            reloadData: function () {
-                ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadListData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null,false);
-                //this.selectionRows=null;
-            },
-            edit: function (recordId) {
-                var url = BaseUtility.BuildView(this.acInterface.listEditView, {
-                    "op": "update",
-                    "recordId": recordId
-                });
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
-            },
-            view:function (recordId) {
-                var url = BaseUtility.BuildView(this.acInterface.listEditView, {
-                    "op": "view",
-                    "recordId": recordId
-                });
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
-            },
-            del: function (recordId) {
-                ListPageUtility.IViewTableDeleteRow(this.acInterface.deleteListRecord,recordId,appList);
-            },
-            statusEnable: function (statusName) {
-                ListPageUtility.IViewChangeServerStatusFace(this.acInterface.listStatusChange,this.selectionRows,appList.idFieldName,statusName,appList);
-            },
-            move:function (type) {
-                ListPageUtility.IViewMoveFace(this.acInterface.listMove,this.selectionRows,appList.idFieldName,type,appList);
-            },
-            changePage: function (pageNum) {
-                this.pageNum = pageNum;
-                this.reloadData();
-                this.selectionRows=null;
-            },
-            search:function () {
-                this.pageNum=1;
-                this.reloadData();
-            }
         }
     });
 </script>
