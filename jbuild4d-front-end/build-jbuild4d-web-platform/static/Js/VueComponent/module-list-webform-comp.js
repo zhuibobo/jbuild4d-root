@@ -2,7 +2,6 @@
 Vue.component("module-list-webform-comp", {
     props:['listHeight','moduleData','activeTabName'],
     data: function () {
-        var self=this;
         return {
             acInterface:{
                 editView: "/PlatForm/Builder/Form/DetailView",
@@ -55,12 +54,12 @@ Vue.component("module-list-webform-comp", {
                     width: 120,
                     align: "center",
                     render: function (h, params) {
-                        console.log(params);
-                        console.log(this);
+                        //console.log(params);
+                        //console.log(this);
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,this.idFieldName,self),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,this.idFieldName,this),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,this.idFieldName,this)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp)
                         ]);
                     }
                 }
@@ -76,7 +75,8 @@ Vue.component("module-list-webform-comp", {
     },
     mounted:function(){
         this.reloadData();
-
+        //将对象附加到window上,提供给后边进行操作
+        window._modulelistwebformcomp=this;
         //alert(this.activeTabName);
         //alert(this.listHeight);
     },
@@ -145,10 +145,10 @@ Vue.component("module-list-webform-comp", {
                 "op": "view",
                 "recordId": recordId
             });
-            DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+            DialogUtility.OpenNewWindow(window, DialogUtility.DialogId, url, {width: 0, height: 0}, 2);
         },
         del: function (recordId) {
-            ListPageUtility.IViewTableDeleteRow(this.acInterface.delete, recordId, appList);
+            ListPageUtility.IViewTableDeleteRow(this.acInterface.delete, recordId, this);
         },
         statusEnable: function (statusName) {
             ListPageUtility.IViewChangeServerStatusFace(this.acInterface.statusChange, this.selectionRows, appList.idFieldName, statusName, appList);
