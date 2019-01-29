@@ -17,16 +17,13 @@
     <div id="list-button-wrap" class="list-button-outer-wrap">
         <div class="list-button-inner-wrap">
             <button-group>
-                <i-button type="success" @click="add()">
-                    <Icon type="plus"></Icon>
+                <i-button type="success" @click="add()" icon="md-add">
                     新增
                 </i-button>
-                <i-button type="primary" @click="statusEnable('启用')">
-                    <Icon type="checkmark-round"></Icon>
+                <i-button type="primary" @click="statusEnable('启用')" icon="md-checkmark-circle">
                     启用
                 </i-button>
-                <i-button type="primary" @click="statusEnable('禁用')">
-                    <Icon type="minus-round"></Icon>
+                <i-button type="primary" @click="statusEnable('禁用')" icon="md-close-circle">
                     禁用
                 </i-button>
             </button-group>
