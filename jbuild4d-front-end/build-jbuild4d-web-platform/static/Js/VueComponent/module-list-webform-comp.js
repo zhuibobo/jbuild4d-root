@@ -67,7 +67,13 @@ Vue.component("module-list-webform-comp", {
     watch: {
     },
     methods:{
-        form_add:function () {
+        selectionChange: function (selection) {
+            this.selectionRows = selection;
+        },
+        reloadData: function () {
+            ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData, this.pageNum, this.pageSize, this.searchCondition, this, this.idFieldName, true, null);
+        },
+        add: function () {
             if(this.moduleData!=null) {
                 var url = BaseUtility.BuildView(this.acInterface.editView, {
                     "op": "add",
@@ -80,26 +86,60 @@ Vue.component("module-list-webform-comp", {
                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择模块!", null);
             }
         },
-        selectionChange:function () {
-
+        addScroll: function () {
+            var url = BaseUtility.BuildView(this.acInterface.editScrollView, {"op": "add"});
+            DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
         },
-        changePage:function () {
-
+        edit: function (recordId) {
+            var url = BaseUtility.BuildView(this.acInterface.editView, {
+                "op": "update",
+                "recordId": recordId
+            });
+            DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+        },
+        view: function (recordId) {
+            var url = BaseUtility.BuildView(this.acInterface.editView, {
+                "op": "view",
+                "recordId": recordId
+            });
+            DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+        },
+        del: function (recordId) {
+            ListPageUtility.IViewTableDeleteRow(this.acInterface.delete, recordId, appList);
+        },
+        statusEnable: function (statusName) {
+            ListPageUtility.IViewChangeServerStatusFace(this.acInterface.statusChange, this.selectionRows, appList.idFieldName, statusName, appList);
+        },
+        move: function (type) {
+            ListPageUtility.IViewMoveFace(this.acInterface.move, this.selectionRows, appList.idFieldName, type, appList);
+        },
+        changePage: function (pageNum) {
+            this.pageNum = pageNum;
+            this.reloadData();
+            this.selectionRows = null;
+        },
+        search: function () {
+            this.pageNum = 1;
+            this.reloadData();
         }
     },
-    template: '<div style="width: 100%;">\
+    template: '<div class="module-list-wrap">\
                     <div id="list-button-wrap" class="list-button-outer-wrap">\
                         <div class="list-button-inner-wrap">\
                             <button-group>\
-                                <i-button type="success" @click="form_add()"><Icon type="plus"></Icon> 新增 </i-button>\
-                                <i-button type="success" @click="form_add()"><Icon type="plus"></Icon> 引入URL </i-button>\
-                                <i-button type="primary" @click="form_add(\'启用\')"><Icon type="checkmark-round"></Icon> 复制 </i-button>\
-                                <i-button type="primary" @click="form_add(\'禁用\')"><Icon type="minus-round"></Icon> 预览 </i-button>\
-                                <i-button type="primary" @click="form_add(\'禁用\')"><Icon type="minus-round"></Icon> 历史版本 </i-button>\
-                                <i-button type="primary" @click="form_add(\'禁用\')"><Icon type="minus-round"></Icon> 复制ID </i-button>\
-                                <i-button type="primary" @click="form_add(\'up\')"><Icon type="arrow-up-b"></Icon> 上移 </i-button>\
-                                <i-button type="primary" @click="form_add(\'down\')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>\
+                                <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>\
+                                <i-button type="success" @click="add()"><Icon type="plus"></Icon> 引入URL </i-button>\
+                                <i-button type="primary" @click="add(\'启用\')"><Icon type="checkmark-round"></Icon> 复制 </i-button>\
+                                <i-button type="primary" @click="add(\'禁用\')"><Icon type="minus-round"></Icon> 预览 </i-button>\
+                                <i-button type="primary" @click="add(\'禁用\')"><Icon type="minus-round"></Icon> 历史版本 </i-button>\
+                                <i-button type="primary" @click="add(\'禁用\')"><Icon type="minus-round"></Icon> 复制ID </i-button>\
+                                <i-button type="primary" @click="add(\'up\')"><Icon type="arrow-up-b"></Icon> 上移 </i-button>\
+                                <i-button type="primary" @click="add(\'down\')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>\
                             </button-group>\
+                        </div>\
+                         <div style="float: right;width: 200px;margin-right: 10px;">\
+                            <i-input search class="input_border_bottom">\
+                            </i-input>\
                         </div>\
                         <div style="clear: both"></div>\
                     </div>\
