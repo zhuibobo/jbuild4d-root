@@ -385,6 +385,7 @@ Vue.component("db-table-relation-comp", {
             return result;
         },
         setValue:function(jsonString){
+            //debugger;
             var tempData=JsonUtility.StringToJson(jsonString);
             this.resultData=tempData;
             //构造树形式的展现
@@ -395,8 +396,8 @@ Vue.component("db-table-relation-comp", {
                 tempData[i].text=tempData[i].tableCaption+"【"+tempData[i].tableName+"】";
             }
             //this.relationTableTree.treeObj.removeChildNodes(this.relationTableTree.tableTreeRootData);
-            tempdata.push(this.relationTableTree.tableTreeRootData);
-            this.relationTableTree.treeObj = $.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,tempdata);
+            tempData.push(this.relationTableTree.tableTreeRootData);
+            this.relationTableTree.treeObj = $.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,tempData);
             this.relationTableTree.treeObj.expandAll(true);
         },
         alertSerializeRelation:function(){

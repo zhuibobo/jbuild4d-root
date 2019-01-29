@@ -165,7 +165,10 @@
                     _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JsEditorUtility.GetJsEditorInst());
 
                     //获取数据并赋值
-                    DetailPageUtility.BindFormData(_self.acInterface.getDataUrl, _self.formResourceEntity, _self.recordId, _self.status,null,null);
+                    DetailPageUtility.BindFormData(_self.acInterface.getDataUrl, _self.formResourceEntity, _self.recordId, _self.status,null,function (result) {
+                        alert(_self.formResourceEntity.formDataRelation);
+                        _self.$refs.dbTableRelationComp.setValue(_self.formResourceEntity.formDataRelation);
+                    });
 
                 },"json");
             },
