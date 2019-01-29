@@ -161,16 +161,16 @@ Vue.component("module-list-webform-comp", {
     template: '<div class="module-list-wrap">\
                     <div id="list-button-wrap" class="list-button-outer-wrap">\
                         <div class="list-button-inner-wrap">\
-                            <button-group>\
-                                <i-button type="success" @click="add()"><Icon type="plus"></Icon> 新增 </i-button>\
-                                <i-button type="success" @click="add()"><Icon type="plus"></Icon> 引入URL </i-button>\
-                                <i-button type="primary" @click="add(\'启用\')"><Icon type="checkmark-round"></Icon> 复制 </i-button>\
-                                <i-button type="primary" @click="add(\'禁用\')"><Icon type="minus-round"></Icon> 预览 </i-button>\
-                                <i-button type="primary" @click="add(\'禁用\')"><Icon type="minus-round"></Icon> 历史版本 </i-button>\
-                                <i-button type="primary" @click="add(\'禁用\')"><Icon type="minus-round"></Icon> 复制ID </i-button>\
-                                <i-button type="primary" @click="add(\'up\')"><Icon type="arrow-up-b"></Icon> 上移 </i-button>\
-                                <i-button type="primary" @click="add(\'down\')"><Icon type="arrow-down-b"></Icon> 下移 </i-button>\
-                            </button-group>\
+                            <ButtonGroup>\
+                                <i-button  type="success" @click="add()" icon="md-add">新增</i-button>\
+                                <i-button type="primary" icon="md-add">引入URL </i-button>\
+                                <i-button type="primary" icon="md-albums">复制</i-button>\
+                                <i-button type="primary" icon="md-pricetag">预览</i-button>\
+                                <i-button type="primary" icon="md-bookmarks">历史版本</i-button>\
+                                <i-button type="primary" icon="md-brush">复制ID</i-button>\
+                                <i-button type="primary" icon="md-arrow-up">上移</i-button>\
+                                <i-button type="primary" icon="md-arrow-down">下移</i-button>\
+                            </ButtonGroup>\
                         </div>\
                          <div style="float: right;width: 200px;margin-right: 10px;">\
                             <i-input search class="input_border_bottom" v-model="searchText">\
