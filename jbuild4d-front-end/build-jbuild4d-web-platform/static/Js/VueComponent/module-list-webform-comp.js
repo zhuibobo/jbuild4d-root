@@ -23,6 +23,12 @@ Vue.component("module-list-webform-comp", {
                     align: 'center'
                 },
                 {
+                    title: '编号',
+                    key: 'formCode',
+                    align: "center",
+                    width: 80
+                },
+                {
                     title: '表单名称',
                     key: 'formName',
                     align: "center"
@@ -57,6 +63,7 @@ Vue.component("module-list-webform-comp", {
                 }
             ],
             tableData: [],
+            tableDataOriginal:[],
             selectionRows: null,
             pageTotal: 0,
             pageSize: 500,
@@ -78,7 +85,23 @@ Vue.component("module-list-webform-comp", {
             this.reloadData();
         },
         searchText:function (newVal) {
-
+            //console.log(this.searchText);
+            if(newVal) {
+                var filterTableData = [];
+                for (var i = 0; i < this.tableData.length; i++) {
+                    var row = this.tableData[i];
+                    if (row.formCode.indexOf(newVal) >= 0) {
+                        filterTableData.push(row);
+                    }
+                    else if (row.formName.indexOf(newVal) >= 0) {
+                        filterTableData.push(row);
+                    }
+                }
+                this.tableData = filterTableData;
+            }
+            else{
+                this.tableData = this.tableDataOriginal ;
+            }
         }
     },
     methods:{
@@ -88,7 +111,9 @@ Vue.component("module-list-webform-comp", {
         reloadData: function () {
             if(this.moduleData!=null&&this.activeTabName=="list-webform") {
                 this.searchCondition.formModuleId.value = this.moduleData.moduleId;
-                ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData, this.pageNum, this.pageSize, this.searchCondition, this, this.idFieldName, true, null);
+                ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData, this.pageNum, this.pageSize, this.searchCondition, this, this.idFieldName, true, function (result,pageAppObj) {
+                    pageAppObj.tableDataOriginal=result.data.list;
+                },false);
             }
         },
         add: function () {
