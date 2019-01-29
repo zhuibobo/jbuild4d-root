@@ -2,6 +2,7 @@
 Vue.component("module-list-webform-comp", {
     props:['listHeight','moduleData','activeTabName'],
     data: function () {
+        var self=this;
         return {
             acInterface:{
                 editView: "/PlatForm/Builder/Form/DetailView",
@@ -50,14 +51,16 @@ Vue.component("module-list-webform-comp", {
                     }
                 }, {
                     title: '操作',
-                    key: 'dictGroupId',
+                    key: 'formId',
                     width: 120,
                     align: "center",
                     render: function (h, params) {
+                        console.log(params);
+                        console.log(this);
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,this.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,this.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,this.idFieldName,appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,this.idFieldName,self),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,this.idFieldName,this),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,this.idFieldName,this)
                         ]);
                     }
                 }
@@ -73,6 +76,7 @@ Vue.component("module-list-webform-comp", {
     },
     mounted:function(){
         this.reloadData();
+
         //alert(this.activeTabName);
         //alert(this.listHeight);
     },
@@ -134,7 +138,7 @@ Vue.component("module-list-webform-comp", {
                 "op": "update",
                 "recordId": recordId
             });
-            DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+            DialogUtility.OpenNewWindow(window, DialogUtility.DialogId, url, {width: 0, height: 0}, 2);
         },
         view: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
@@ -151,11 +155,6 @@ Vue.component("module-list-webform-comp", {
         },
         move: function (type) {
             ListPageUtility.IViewMoveFace(this.acInterface.move, this.selectionRows, appList.idFieldName, type, appList);
-        },
-        changePage: function (pageNum) {
-            this.pageNum = pageNum;
-            this.reloadData();
-            this.selectionRows = null;
         }
     },
     template: '<div class="module-list-wrap">\
@@ -163,11 +162,11 @@ Vue.component("module-list-webform-comp", {
                         <div class="list-button-inner-wrap">\
                             <ButtonGroup>\
                                 <i-button  type="success" @click="add()" icon="md-add">新增</i-button>\
-                                <i-button type="primary" icon="md-add">引入URL </i-button>\
-                                <i-button type="primary" icon="md-albums">复制</i-button>\
-                                <i-button type="primary" icon="md-pricetag">预览</i-button>\
-                                <i-button type="primary" icon="md-bookmarks">历史版本</i-button>\
-                                <i-button type="primary" icon="md-brush">复制ID</i-button>\
+                                <i-button type="error" icon="md-add">引入URL </i-button>\
+                                <i-button type="error" icon="md-albums">复制</i-button>\
+                                <i-button type="error" icon="md-pricetag">预览</i-button>\
+                                <i-button type="error" icon="md-bookmarks">历史版本</i-button>\
+                                <i-button type="error" icon="md-brush">复制ID</i-button>\
                                 <i-button type="primary" icon="md-arrow-up">上移</i-button>\
                                 <i-button type="primary" icon="md-arrow-down">下移</i-button>\
                             </ButtonGroup>\

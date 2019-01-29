@@ -37,7 +37,7 @@ gulp.task('JS-VueEXComponent',()=>{
         .pipe(sourcemaps.init())
         //.pipe(sourcemaps.identityMap())
         .pipe(concat('VueEXComponent.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(publicResourcePath + "/Js"));
 });

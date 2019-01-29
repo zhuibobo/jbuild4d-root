@@ -246,6 +246,7 @@ var ListPageUtility={
                 class: "list-row-button view",
                 on: {
                     click: function () {
+                        debugger;
                         pageAppObj.view(params.row[idField]);
                     }
                 }
