@@ -53,7 +53,7 @@
                 $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
                 var _self=this;
                 AjaxUtility.Post(this.acInterface.getPluginsConfig,{},function (result) {
-                    console.log(result.data);
+                    //console.log(result.data);
 
                     CKEditorUtility.InitializeCKEditor('html_design',result.data,function () {
 
@@ -64,7 +64,7 @@
 
                     //获取数据并赋值
                     DetailPageUtility.BindFormData(_self.acInterface.getDataUrl, _self.formResourceEntity, _self.recordId, _self.status,null,function (result) {
-                        alert(_self.formResourceEntity.formDataRelation);
+                        //alert(_self.formResourceEntity.formDataRelation);
                         _self.$refs.dbTableRelationComp.setValue(_self.formResourceEntity.formDataRelation);
                     });
 
@@ -128,7 +128,7 @@
                 var validateResult=this.validateSaveEnable(this.formResourceEntity);
                 if(validateResult.result){
                     var sendData = JSON.stringify(this.formResourceEntity);
-                    debugger;
+                    //debugger;
                     AjaxUtility.PostRequestBody(this.acInterface.saveDataUrl, sendData, function (result) {
                         //debugger;
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {

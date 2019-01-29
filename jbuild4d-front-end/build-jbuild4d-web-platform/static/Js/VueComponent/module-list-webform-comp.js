@@ -57,7 +57,6 @@ Vue.component("module-list-webform-comp", {
                         //console.log(params);
                         //console.log(this);
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp),
                             ListPageUtility.IViewTableInnerButton.EditButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp),
                             ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp)
                         ]);
@@ -136,13 +135,6 @@ Vue.component("module-list-webform-comp", {
         edit: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
                 "op": "update",
-                "recordId": recordId
-            });
-            DialogUtility.OpenNewWindow(window, DialogUtility.DialogId, url, {width: 0, height: 0}, 2);
-        },
-        view: function (recordId) {
-            var url = BaseUtility.BuildView(this.acInterface.editView, {
-                "op": "view",
                 "recordId": recordId
             });
             DialogUtility.OpenNewWindow(window, DialogUtility.DialogId, url, {width: 0, height: 0}, 2);
