@@ -1,6 +1,6 @@
 /*html编辑器中的元素辅助列表*/
 Vue.component("module-list-webform-comp", {
-    props:['listHeight','moduleData'],
+    props:['listHeight','moduleData','activeTabName'],
     data: function () {
         return {
             acInterface:{
@@ -60,16 +60,25 @@ Vue.component("module-list-webform-comp", {
             selectionRows: null,
             pageTotal: 0,
             pageSize: 500,
-            pageNum: 1
+            pageNum: 1,
+            searchText:""
         }
     },
     mounted:function(){
         this.reloadData();
+        //alert(this.activeTabName);
         //alert(this.listHeight);
     },
     watch: {
         moduleData:function (newVal) {
             this.reloadData();
+        },
+        activeTabName:function (newVal) {
+            //alert(this.activeTabName);
+            this.reloadData();
+        },
+        searchText:function (newVal) {
+
         }
     },
     methods:{
@@ -77,7 +86,7 @@ Vue.component("module-list-webform-comp", {
             this.selectionRows = selection;
         },
         reloadData: function () {
-            if(this.moduleData!=null) {
+            if(this.moduleData!=null&&this.activeTabName=="list-webform") {
                 this.searchCondition.formModuleId.value = this.moduleData.moduleId;
                 ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData, this.pageNum, this.pageSize, this.searchCondition, this, this.idFieldName, true, null);
             }
@@ -94,10 +103,6 @@ Vue.component("module-list-webform-comp", {
             else {
                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择模块!", null);
             }
-        },
-        addScroll: function () {
-            var url = BaseUtility.BuildView(this.acInterface.editScrollView, {"op": "add"});
-            DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
         },
         edit: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
@@ -126,10 +131,6 @@ Vue.component("module-list-webform-comp", {
             this.pageNum = pageNum;
             this.reloadData();
             this.selectionRows = null;
-        },
-        search: function () {
-            this.pageNum = 1;
-            this.reloadData();
         }
     },
     template: '<div class="module-list-wrap">\
@@ -147,7 +148,7 @@ Vue.component("module-list-webform-comp", {
                             </button-group>\
                         </div>\
                          <div style="float: right;width: 200px;margin-right: 10px;">\
-                            <i-input search class="input_border_bottom">\
+                            <i-input search class="input_border_bottom" v-model="searchText">\
                             </i-input>\
                         </div>\
                         <div style="clear: both"></div>\

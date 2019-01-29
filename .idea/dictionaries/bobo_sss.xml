@@ -1,6 +1,9 @@
 <component name="ProjectDictionaryState">
   <dictionary name="bobo-sss">
     <words>
+      <w>aboutconfig</w>
+      <w>appform</w>
+      <w>applist</w>
       <w>clientresolve</w>
       <w>datas</w>
       <w>dbaccess</w>
@@ -20,6 +23,7 @@
       <w>validaterules</w>
       <w>wathet</w>
       <w>webform</w>
+      <w>weblist</w>
     </words>
   </dictionary>
 </component>

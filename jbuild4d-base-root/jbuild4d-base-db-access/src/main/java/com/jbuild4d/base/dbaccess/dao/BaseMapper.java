@@ -20,6 +20,8 @@ public interface BaseMapper<T> {
 
     int updateByPrimaryKeySelective(T record);
 
+    int updateByPrimaryKeyWithBLOBs(T record);
+
     int updateByPrimaryKey(T record);
 
     int deleteAll();

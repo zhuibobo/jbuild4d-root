@@ -5,6 +5,7 @@
     <delete id="deleteAll">delete from TB4D_FORM_RESOURCE</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(FORM_ORDER_NUM) is null then 1 else max(FORM_ORDER_NUM)+1 end ORDERNUM from TB4D_FORM_RESOURCE</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_FORM_RESOURCE<where>
+        <if test="formCode !=null and formCode !=''"> and FORM_CODE like #{formCode} </if>
         <if test="formName !=null and formName !=''"> and FORM_NAME like #{formName} </if>
         <if test="formSingleName !=null and formSingleName !=''"> and FORM_SINGLE_NAME like #{formSingleName} </if>
         <if test="formCreater !=null and formCreater !=''"> and FORM_CREATER like #{formCreater} </if>
@@ -16,13 +17,12 @@
         <if test="formStatus !=null and formStatus !=''"> and FORM_STATUS like #{formStatus} </if>
         <if test="formOrganId !=null and formOrganId !=''"> and FORM_ORGAN_ID like #{formOrganId} </if>
         <if test="formOrganName !=null and formOrganName !=''"> and FORM_ORGAN_NAME like #{formOrganName} </if>
-        <if test="formMainTableId !=null and formMainTableId !=''"> and FORM_MAIN_TABLE_ID like #{formMainTableId} </if>
         <if test="formMainTableName !=null and formMainTableName !=''"> and FORM_MAIN_TABLE_NAME like #{formMainTableName} </if>
         <if test="formMainTableCaption !=null and formMainTableCaption !=''"> and FORM_MAIN_TABLE_CAPTION like #{formMainTableCaption} </if>
         <if test="formDataRelation !=null and formDataRelation !=''"> and FORM_DATA_RELATION like #{formDataRelation} </if>
         <if test="formIsTemplate !=null and formIsTemplate !=''"> and FORM_IS_TEMPLATE like #{formIsTemplate} </if>
-        <if test="formContentUrl !=null and formContentUrl !=''"> and FORM_CONTENT_URL like #{formContentUrl} </if>
         <if test="formIsResolve !=null and formIsResolve !=''"> and FORM_IS_RESOLVE like #{formIsResolve} </if>
+        <if test="formContentUrl !=null and formContentUrl !=''"> and FORM_CONTENT_URL like #{formContentUrl} </if>
         <if test="formHtmlSource !=null and formHtmlSource !=''"> and FORM_HTML_SOURCE like #{formHtmlSource} </if>
         <if test="formHtmlResolve !=null and formHtmlResolve !=''"> and FORM_HTML_RESOLVE like #{formHtmlResolve} </if>
         <if test="formJsContent !=null and formJsContent !=''"> and FORM_JS_CONTENT like #{formJsContent} </if>
