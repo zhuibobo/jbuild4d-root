@@ -153,7 +153,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         deleteByKey(jb4DSession,devDemoRootId_DialogSearchListId);
         save(jb4DSession,devDemoRootId_DialogSearchList.getMenuId(),devDemoRootId_DialogSearchList);
         //根菜单->开发示例->树形表格
-        String devDemoRootId_TreeTableId="devDemoRootId_TreeList";
+        String devDemoRootId_TreeTableId="devDemoRootId_TreeTable";
         MenuEntity devDemoRootId_TreeTable=getMenu(devDemoRootMenu.getMenuId(),devDemoRootId_TreeTableId,"树形表格","树形表格","树形表格",
                 MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/DevDemo/DevDemoTreeTable/ListView","menu-data");
         deleteByKey(jb4DSession,devDemoRootId_TreeTableId);
