@@ -25,15 +25,10 @@ Vue.component("module-list-webform-comp", {
                     key: 'ddtlName',
                     align: "center"
                 }, {
-                    title: 'ddtlDesc',
+                    title: '备注',
                     key: 'ddtlDesc'
                 }, {
-                    title: 'ddtlStatus',
-                    width: 100,
-                    align: "center",
-                    key: 'ddtlStatus'
-                }, {
-                    title: 'CT',
+                    title: '编辑时间',
                     key: 'ddtlCreatetime',
                     width: 100,
                     align: "center",
