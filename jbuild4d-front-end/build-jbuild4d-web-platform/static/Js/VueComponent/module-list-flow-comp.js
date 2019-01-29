@@ -28,7 +28,7 @@ Vue.component("module-list-flow-comp", {
                     width: 80
                 },
                 {
-                    title: '表单名称',
+                    title: '流程名称',
                     key: 'formName',
                     align: "center"
                 }, {
