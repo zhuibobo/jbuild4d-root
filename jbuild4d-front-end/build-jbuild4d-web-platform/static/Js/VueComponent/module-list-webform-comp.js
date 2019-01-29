@@ -5,10 +5,16 @@ Vue.component("module-list-webform-comp", {
         return {
             acInterface:{
                 editView: "/PlatForm/Builder/Form/DetailView",
-                reloadData: "/PlatForm/DevDemo/DevDemoGenList/GetListData",
-                delete: "/PlatForm/DevDemo/DevDemoGenList/Delete",
-                statusChange: "/PlatForm/DevDemo/DevDemoGenList/StatusChange",
-                move: "/PlatForm/DevDemo/DevDemoGenList/Move",
+                reloadData: "/PlatForm/Builder/Form/GetListData",
+                delete: "/PlatForm/Builder/Form/Delete",
+                move: "/PlatForm/Builder/Form/Move",
+            },
+            idFieldName: "formId",
+            searchCondition: {
+                formModuleId: {
+                    value: "",
+                    type: SearchUtility.SearchFieldType.StringType
+                }
             },
             columnsConfig: [
                 {
@@ -18,22 +24,23 @@ Vue.component("module-list-webform-comp", {
                 },
                 {
                     title: '表单名称',
-                    key: 'ddtlKey',
+                    key: 'formName',
                     align: "center"
                 }, {
                     title: '唯一名',
-                    key: 'ddtlName',
+                    key: 'formSingleName',
                     align: "center"
                 }, {
                     title: '备注',
-                    key: 'ddtlDesc'
+                    key: 'formDesc',
+                    align: "center"
                 }, {
                     title: '编辑时间',
-                    key: 'ddtlCreatetime',
+                    key: 'formUpdateTime',
                     width: 100,
                     align: "center",
                     render: function (h, params) {
-                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddtlCreatetime);
+                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.formUpdateTime);
                     }
                 }, {
                     title: '操作',
@@ -42,9 +49,9 @@ Vue.component("module-list-webform-comp", {
                     align: "center",
                     render: function (h, params) {
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,this.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,this.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,this.idFieldName,appList)
                         ]);
                     }
                 }
@@ -52,21 +59,28 @@ Vue.component("module-list-webform-comp", {
             tableData: [],
             selectionRows: null,
             pageTotal: 0,
-            pageSize: 12,
+            pageSize: 500,
             pageNum: 1
         }
     },
     mounted:function(){
+        this.reloadData();
         //alert(this.listHeight);
     },
     watch: {
+        moduleData:function (newVal) {
+            this.reloadData();
+        }
     },
     methods:{
         selectionChange: function (selection) {
             this.selectionRows = selection;
         },
         reloadData: function () {
-            ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData, this.pageNum, this.pageSize, this.searchCondition, this, this.idFieldName, true, null);
+            if(this.moduleData!=null) {
+                this.searchCondition.formModuleId.value = this.moduleData.moduleId;
+                ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData, this.pageNum, this.pageSize, this.searchCondition, this, this.idFieldName, true, null);
+            }
         },
         add: function () {
             if(this.moduleData!=null) {
@@ -141,9 +155,5 @@ Vue.component("module-list-webform-comp", {
                     <i-table :height="listHeight" stripe border :columns="columnsConfig" :data="tableData"\
                              class="iv-list-table" :highlight-row="true"\
                              @on-selection-change="selectionChange"></i-table>\
-                    <div style="float: right;" id="list-pager-wrap">\
-                        <page @on-change="changePage" :current.sync="pageNum" :page-size="pageSize" show-total\
-                              :total="pageTotal"></page>\
-                    </div>\
                 </div>'
 });
