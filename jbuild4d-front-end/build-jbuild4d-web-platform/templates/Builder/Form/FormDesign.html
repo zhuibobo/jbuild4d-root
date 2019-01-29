@@ -232,8 +232,10 @@
                         //debugger;
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                             if (result.success) {
-                                window.OpenerWindowObj.appList.reloadData();
-                                DialogUtility.Frame_CloseDialog(window);
+                                //window.OpenerWindowObj.appList.reloadData();
+                                //DialogUtility.Frame_CloseDialog(window);
+                                window.opener._modulelistwebformcomp.reloadData();
+                                successFunc();
                             }
                         });
                     }, "json");
@@ -244,7 +246,7 @@
             },
             saveClose:function () {
                 this.save(function () {
-
+                    window.close();
                 });
             },
             savePreview:function () {

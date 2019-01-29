@@ -154,7 +154,7 @@ Vue.component("module-list-webform-comp", {
             ListPageUtility.IViewChangeServerStatusFace(this.acInterface.statusChange, this.selectionRows, appList.idFieldName, statusName, appList);
         },
         move: function (type) {
-            ListPageUtility.IViewMoveFace(this.acInterface.move, this.selectionRows, appList.idFieldName, type, appList);
+            ListPageUtility.IViewMoveFace(this.acInterface.move, this.selectionRows, this.idFieldName, type, this);
         }
     },
     template: '<div class="module-list-wrap">\
@@ -167,8 +167,8 @@ Vue.component("module-list-webform-comp", {
                                 <i-button type="error" icon="md-pricetag">预览</i-button>\
                                 <i-button type="error" icon="md-bookmarks">历史版本</i-button>\
                                 <i-button type="error" icon="md-brush">复制ID</i-button>\
-                                <i-button type="primary" icon="md-arrow-up">上移</i-button>\
-                                <i-button type="primary" icon="md-arrow-down">下移</i-button>\
+                                <i-button type="primary" @click="move(\'up\')" icon="md-arrow-up">上移</i-button>\
+                                <i-button type="primary" @click="move(\'down\')" icon="md-arrow-down">下移</i-button>\
                             </ButtonGroup>\
                         </div>\
                          <div style="float: right;width: 200px;margin-right: 10px;">\

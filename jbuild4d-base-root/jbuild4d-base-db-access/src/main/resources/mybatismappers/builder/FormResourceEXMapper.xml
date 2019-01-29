@@ -29,8 +29,28 @@
         <if test="formCssContent !=null and formCssContent !=''"> and FORM_CSS_CONTENT like #{formCssContent} </if>
         <if test="formConfigContent !=null and formConfigContent !=''"> and FORM_CONFIG_CONTENT like #{formConfigContent} </if>
     </where>ORDER by FORM_ORDER_NUM DESC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_FORM_RESOURCE
-                                                                                                          where FORM_ORDER_NUM = (select max(FORM_ORDER_NUM) from TB4D_FORM_RESOURCE where FORM_ORDER_NUM<(select FORM_ORDER_NUM from TB4D_FORM_RESOURCE where FORM_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_FORM_RESOURCE
-                                                                                                             where FORM_ORDER_NUM = (select min(FORM_ORDER_NUM) from TB4D_FORM_RESOURCE where FORM_ORDER_NUM>(select FORM_ORDER_NUM from TB4D_FORM_RESOURCE where FORM_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        <![CDATA[
+        select * from TB4D_FORM_RESOURCE
+        where FORM_ORDER_NUM = (
+                               select max(FORM_ORDER_NUM) from TB4D_FORM_RESOURCE
+                               where FORM_ORDER_NUM<(select FORM_ORDER_NUM from TB4D_FORM_RESOURCE where FORM_ID=#{id,jdbcType=NVARCHAR})
+                                 and
+                                     FORM_MODULE_ID=#{formModuleId,jdbcType=NVARCHAR})
+          and
+              FORM_MODULE_ID=#{formModuleId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        <![CDATA[
+        select * from TB4D_FORM_RESOURCE
+        where FORM_ORDER_NUM = (
+                               select min(FORM_ORDER_NUM) from TB4D_FORM_RESOURCE
+                               where FORM_ORDER_NUM>(select FORM_ORDER_NUM from TB4D_FORM_RESOURCE where FORM_ID=#{id,jdbcType=NVARCHAR})
+                                 and
+                                     FORM_MODULE_ID=#{formModuleId,jdbcType=NVARCHAR})
+          and
+              FORM_MODULE_ID=#{formModuleId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
 </mapper>

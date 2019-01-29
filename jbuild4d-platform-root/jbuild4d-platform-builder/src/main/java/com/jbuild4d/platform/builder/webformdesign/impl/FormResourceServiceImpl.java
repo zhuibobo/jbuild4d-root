@@ -1,6 +1,7 @@
 package com.jbuild4d.platform.builder.webformdesign.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.FormResourceMapper;
+import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
@@ -47,5 +48,29 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntityW
                 return sourceEntity;
             }
         });
+    }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        FormResourceEntityWithBLOBs selfEntity=formResourceMapper.selectByPrimaryKey(id);
+        FormResourceEntityWithBLOBs ltEntity=formResourceMapper.selectGreaterThanRecord(id,selfEntity.getFormModuleId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        FormResourceEntityWithBLOBs selfEntity=formResourceMapper.selectByPrimaryKey(id);
+        FormResourceEntityWithBLOBs ltEntity=formResourceMapper.selectLessThanRecord(id,selfEntity.getFormModuleId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    private void switchOrder(FormResourceEntityWithBLOBs toEntity,FormResourceEntityWithBLOBs selfEntity) {
+        if(toEntity !=null){
+            int newNum= toEntity.getFormOrderNum();
+            toEntity.setFormOrderNum(selfEntity.getFormOrderNum());
+            selfEntity.setFormOrderNum(newNum);
+            formResourceMapper.updateByPrimaryKeySelective(toEntity);
+            formResourceMapper.updateByPrimaryKeySelective(selfEntity);
+        }
     }
 }
