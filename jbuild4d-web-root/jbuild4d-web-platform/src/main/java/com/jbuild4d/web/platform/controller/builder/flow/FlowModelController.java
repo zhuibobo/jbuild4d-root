@@ -1,7 +1,6 @@
 package com.jbuild4d.web.platform.controller.builder.flow;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity;
-import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.platform.builder.flow.IFlowModelService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
