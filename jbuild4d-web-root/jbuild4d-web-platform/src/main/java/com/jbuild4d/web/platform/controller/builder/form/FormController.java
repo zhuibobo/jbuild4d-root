@@ -45,6 +45,6 @@ public class FormController extends GeneralCRUDImplController<FormResourceEntity
 
     @Override
     public String getModuleName() {
-        return null;
+        return "模块设计-Web表单设计";
     }
 }

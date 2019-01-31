@@ -47,7 +47,7 @@ public class DataSetGroupController extends GeneralCRUDImplController<DatasetGro
 
     @Override
     public String getModuleName() {
-        return "数据集分组";
+        return "模块设计--数据集分组";
     }
 
     @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
