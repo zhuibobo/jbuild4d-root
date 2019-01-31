@@ -3,10 +3,10 @@ Vue.component("module-list-flow-comp", {
     data: function () {
         return {
             acInterface:{
-                editView: "/PlatForm/Builder/Form/DetailView",
-                reloadData: "/PlatForm/Builder/Form/GetListData",
-                delete: "/PlatForm/Builder/Form/Delete",
-                move: "/PlatForm/Builder/Form/Move",
+                editView: "/PlatForm/Builder/FlowModel/DetailView",
+                reloadData: "/PlatForm/Builder/FlowModel/GetListData",
+                delete: "/PlatForm/Builder/FlowModel/Delete",
+                move: "/PlatForm/Builder/FlowModel/Move",
             },
             idFieldName: "formId",
             searchCondition: {
