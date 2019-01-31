@@ -1,18 +1,24 @@
 package com.jbuild4d.web.platform.controller.builder.flow;
 
+import com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.base.service.IBaseService;
+import com.jbuild4d.platform.builder.flow.IFlowModelService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value = "/PlatForm/Builder/FlowModel")
-public class FlowModelController extends GeneralCRUDImplController<FormResourceEntity> {
+public class FlowModelController extends GeneralCRUDImplController<FlowModelEntity> {
+
+    @Autowired
+    IFlowModelService flowModelService;
 
     @Override
-    protected IBaseService<FormResourceEntity> getBaseService() {
-        return null;
+    protected IBaseService<FlowModelEntity> getBaseService() {
+        return flowModelService;
     }
 
     @Override
@@ -22,7 +28,7 @@ public class FlowModelController extends GeneralCRUDImplController<FormResourceE
 
     @Override
     public String getDetailViewName() {
-        return null;
+        return "Builder/Flow/FlowModelDesign";
     }
 
     @Override
