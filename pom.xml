@@ -178,6 +178,10 @@
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-engine</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -455,6 +459,12 @@
                 <groupId>javax.cache</groupId>
                 <artifactId>cache-api</artifactId>
                 <version>1.1.0</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.flowable/flowable-engine -->
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-engine</artifactId>
+                <version>6.4.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
