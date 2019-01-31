@@ -134,7 +134,7 @@ Vue.component("module-list-flow-comp", {
         },
         uploadModel:function(){
             var url = BaseUtility.BuildView(this.acInterface.uploadFlowModelView, {"op": "add"});
-            DialogUtility.DialogElem("#divUploadFlowModelWrap",{});
+            DialogUtility.DialogElem("#divUploadFlowModelWrap",{modal:true,width:600,height:400,title:"上传流程模型"});
         },
         edit: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
@@ -154,7 +154,26 @@ Vue.component("module-list-flow-comp", {
         }
     },
     template: '<div class="module-list-wrap">\
-                    <div style="display: none" id="divUploadFlowModelWrap">上传流程模型</div>\
+                    <div style="display: none" id="divUploadFlowModelWrap">\
+                        <div class="general-edit-page-wrap">\
+                            <i-form :label-width="100">\
+                                <form-item label="模型名称：">\
+                                    <i-input></i-input>\
+                                </form-item>\
+                                <form-item label="备注：">\
+                                    <i-input type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>\
+                                </form-item>\
+                            </i-form>\
+                            <div class="button-outer-wrap">\
+                                <div class="button-inner-wrap">\
+                                    <button-group>\
+                                        <i-button type="primary" @click="handleSubmit(\'formEntity\')"> 保 存</i-button>\
+                                        <i-button @click="handleClose()">关 闭</i-button>\
+                                    </button-group>\
+                                </div>\
+                            </div>\
+                        </div>\
+                    </div>\
                     <div id="list-button-wrap" class="list-button-outer-wrap">\
                         <div class="list-button-inner-wrap">\
                             <ButtonGroup>\
