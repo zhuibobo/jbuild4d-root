@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.FlowModelMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_FLOW_MODEL ORDER by  DESC</select>
+    <delete id="deleteAll">delete from TB4D_FLOW_MODEL</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max() is null then 1 else max()+1 end ORDERNUM from TB4D_FLOW_MODEL</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_FLOW_MODEL<where>
+        <if test="modelModuleId !=null and modelModuleId !=''"> and MODEL_MODULE_ID like #{modelModuleId} </if>
+        <if test="modelGroupId !=null and modelGroupId !=''"> and MODEL_GROUP_ID like #{modelGroupId} </if>
+        <if test="modelName !=null and modelName !=''"> and MODEL_NAME like #{modelName} </if>
+        <if test="modelCreater !=null and modelCreater !=''"> and MODEL_CREATER like #{modelCreater} </if>
+        <if test="modelUpdater !=null and modelUpdater !=''"> and MODEL_UPDATER like #{modelUpdater} </if>
+        <if test="modelDesc !=null and modelDesc !=''"> and MODEL_DESC like #{modelDesc} </if>
+        <if test="modelStatus !=null and modelStatus !=''"> and MODEL_STATUS like #{modelStatus} </if>
+        <if test="modelDeploymentId !=null and modelDeploymentId !=''"> and MODEL_DEPLOYMENT_ID like #{modelDeploymentId} </if>
+        <if test="modelStartKey !=null and modelStartKey !=''"> and MODEL_START_KEY like #{modelStartKey} </if>
+        <if test="modelResourceName !=null and modelResourceName !=''"> and MODEL_RESOURCE_NAME like #{modelResourceName} </if>
+    </where>ORDER by  DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_FLOW_MODEL
+                                                                                                          where  = (select max() from TB4D_FLOW_MODEL where <(select  from TB4D_FLOW_MODEL where MODEL_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_FLOW_MODEL
+                                                                                                             where  = (select min() from TB4D_FLOW_MODEL where >(select  from TB4D_FLOW_MODEL where MODEL_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>
