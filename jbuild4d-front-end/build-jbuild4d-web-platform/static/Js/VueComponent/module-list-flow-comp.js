@@ -4,6 +4,7 @@ Vue.component("module-list-flow-comp", {
         return {
             acInterface:{
                 editView: "/PlatForm/Builder/FlowModel/DetailView",
+                uploadFlowModelView: "/PlatForm/Builder/FlowModel/UploadFlowModelView",
                 reloadData: "/PlatForm/Builder/FlowModel/GetListData",
                 delete: "/PlatForm/Builder/FlowModel/Delete",
                 move: "/PlatForm/Builder/FlowModel/Move",
@@ -132,7 +133,8 @@ Vue.component("module-list-flow-comp", {
             }
         },
         uploadModel:function(){
-
+            var url = BaseUtility.BuildView(this.acInterface.uploadFlowModelView, {"op": "add"});
+            DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "上传流程模型"}, 2);
         },
         edit: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
@@ -156,9 +158,9 @@ Vue.component("module-list-flow-comp", {
                         <div class="list-button-inner-wrap">\
                             <ButtonGroup>\
                                 <i-button  type="success" @click="add()" icon="md-add">新增</i-button>\
-                                <i-button type="error" icon="md-add">上传模型 </i-button>\
+                                <i-button type="primary" @click="uploadModel()" icon="md-add">上传模型 </i-button>\
                                 <i-button type="error" icon="md-albums">复制</i-button>\
-                                <i-button type="error" icon="md-bookmarks">历史版本</i-button>\
+                                <i-button type="error" icon="md-bookmarks">历史模型</i-button>\
                                 <i-button type="error" icon="md-brush">复制ID</i-button>\
                                 <i-button type="primary" @click="move(\'up\')" icon="md-arrow-up">上移</i-button>\
                                 <i-button type="primary" @click="move(\'down\')" icon="md-arrow-down">下移</i-button>\
