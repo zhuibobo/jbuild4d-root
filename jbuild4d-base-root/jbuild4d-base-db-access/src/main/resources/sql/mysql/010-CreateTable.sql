@@ -504,4 +504,22 @@ CREATE TABLE `TB4D_FORM_CONFIG` (
   PRIMARY KEY (`FCONFIG_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-表单参数配置';
 
+/*------------------------------------------Flowable集成--------------------------------------*/
+DROP TABLE IF EXISTS `TB4D_FLOW_MODEL`;
+CREATE TABLE `TB4D_FLOW_MODEL` (
+  `MODEL_ID`            NVARCHAR(100)  NOT NULL,
+  `MODEL_MODULE_ID`     NVARCHAR(100)  NOT NULL,
+  `MODEL_GROUP_ID`            NVARCHAR(100)  NOT NULL,
+  `MODEL_NAME`          NVARCHAR(100)  NOT NULL,
+  `MODEL_CREATE_TIME`   DATETIME       NULL,
+  `MODEL_CREATER`       NVARCHAR(100)  NULL,
+  `MODEL_UPDATE_TIME`   DATETIME       NULL,
+  `MODEL_UPDATER`       NVARCHAR(100)  NULL,
+  `MODEL_DESC`          NVARCHAR(1000) NULL,
+  `MODEL_DEPLOYMENT_ID` NVARCHAR(1000) NULL,
+  `MODEL_START_KEY`     NVARCHAR(1000) NULL,
+  `MODEL_RESOURCE_NAME` NVARCHAR(1000) NULL,
+  PRIMARY KEY (`MODEL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-Flowable集成表';
+
 /*-----------------------------------------应用设计相关表--结束-----------------------------------------*/

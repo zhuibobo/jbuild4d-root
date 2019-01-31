@@ -1,5 +1,6 @@
 //列表页面处理工具类
 var ListPageUtility={
+    DefaultListHeight:678,
     GetGeneralPageHeight:function (fixHeight) {
         var pageHeight=jQuery(document).height();
         //alert(pageHeight);

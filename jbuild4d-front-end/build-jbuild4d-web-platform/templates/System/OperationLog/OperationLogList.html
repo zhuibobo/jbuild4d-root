@@ -68,6 +68,7 @@
                 this.reloadData();
                 window.setTimeout(function () {
                     appList.listHeight=ListPageUtility.GetGeneralPageHeight(0);
+                    //alert(appList.listHeight);
                 },500);
             },
             data: {
@@ -140,7 +141,7 @@
                 pageTotal: 0,
                 pageSize: 12,
                 pageNum: 1,
-                listHeight: 300
+                listHeight: ListPageUtility.DefaultListHeight
             },
             methods: {
                 selectionChange: function (selection) {
