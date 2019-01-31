@@ -134,7 +134,7 @@ Vue.component("module-list-flow-comp", {
         },
         uploadModel:function(){
             var url = BaseUtility.BuildView(this.acInterface.uploadFlowModelView, {"op": "add"});
-            DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "上传流程模型"}, 2);
+            DialogUtility.DialogElem("#divUploadFlowModelWrap",{});
         },
         edit: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
@@ -154,6 +154,7 @@ Vue.component("module-list-flow-comp", {
         }
     },
     template: '<div class="module-list-wrap">\
+                    <div style="display: none" id="divUploadFlowModelWrap">上传流程模型</div>\
                     <div id="list-button-wrap" class="list-button-outer-wrap">\
                         <div class="list-button-inner-wrap">\
                             <ButtonGroup>\
