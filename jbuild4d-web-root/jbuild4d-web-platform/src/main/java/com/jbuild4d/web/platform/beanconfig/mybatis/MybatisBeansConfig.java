@@ -190,6 +190,10 @@ public class MybatisBeansConfig {
         return sqlSessionTemplate.getMapper(Jb4dCacheMapper.class);
     }
 
+    @Bean
+    public FlowModelMapper flowModelMapper(SqlSessionTemplate sqlSessionTemplate){
+        return sqlSessionTemplate.getMapper(FlowModelMapper.class);
+    }
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);

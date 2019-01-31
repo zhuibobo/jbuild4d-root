@@ -17,6 +17,8 @@ import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.datastorage.impl.TableFieldServiceImpl;
 import com.jbuild4d.platform.builder.datastorage.impl.TableGroupServiceImpl;
 import com.jbuild4d.platform.builder.datastorage.impl.TableServiceImpl;
+import com.jbuild4d.platform.builder.flow.IFlowModelService;
+import com.jbuild4d.platform.builder.flow.impl.FlowModelServiceImpl;
 import com.jbuild4d.platform.builder.service.*;
 import com.jbuild4d.platform.builder.service.impl.*;
 import com.jbuild4d.platform.builder.webformdesign.IFDCKEditorPluginsService;
@@ -120,5 +122,11 @@ public class BuilderBeansConfig {
     public IFDCKEditorPluginsService ckEditorPluginsService(IJb4dCacheService jb4dCacheService){
         IFDCKEditorPluginsService ifdckEditorPluginsService=new FDCKEditorPluginsServiceImpl(jb4dCacheService);
         return ifdckEditorPluginsService;
+    }
+
+    @Bean
+    public IFlowModelService flowModelService(ISQLBuilderService _sqlBuilderService, FlowModelMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        IFlowModelService flowModelService1=new FlowModelServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return flowModelService1;
     }
 }
