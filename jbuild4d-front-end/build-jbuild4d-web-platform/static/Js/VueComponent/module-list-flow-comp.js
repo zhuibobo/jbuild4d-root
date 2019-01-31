@@ -131,6 +131,9 @@ Vue.component("module-list-flow-comp", {
                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择模块!", null);
             }
         },
+        uploadModel:function(){
+
+        },
         edit: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
                 "op": "update",

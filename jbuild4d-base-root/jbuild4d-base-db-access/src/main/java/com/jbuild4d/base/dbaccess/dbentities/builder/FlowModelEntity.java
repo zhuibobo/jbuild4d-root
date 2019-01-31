@@ -57,7 +57,10 @@ public class FlowModelEntity {
     //MODEL_RESOURCE_NAME
     private String modelResourceName;
 
-    public FlowModelEntity(String modelId, String modelModuleId, String modelGroupId, String modelName, Date modelCreateTime, String modelCreater, Date modelUpdateTime, String modelUpdater, String modelDesc, String modelStatus, Integer modelOrderNum, String modelDeploymentId, String modelStartKey, String modelResourceName) {
+    //MODEL_FROM_TYPE
+    private String modelFromType;
+
+    public FlowModelEntity(String modelId, String modelModuleId, String modelGroupId, String modelName, Date modelCreateTime, String modelCreater, Date modelUpdateTime, String modelUpdater, String modelDesc, String modelStatus, Integer modelOrderNum, String modelDeploymentId, String modelStartKey, String modelResourceName, String modelFromType) {
         this.modelId = modelId;
         this.modelModuleId = modelModuleId;
         this.modelGroupId = modelGroupId;
@@ -72,6 +75,7 @@ public class FlowModelEntity {
         this.modelDeploymentId = modelDeploymentId;
         this.modelStartKey = modelStartKey;
         this.modelResourceName = modelResourceName;
+        this.modelFromType = modelFromType;
     }
 
     public FlowModelEntity() {
@@ -188,5 +192,13 @@ public class FlowModelEntity {
 
     public void setModelResourceName(String modelResourceName) {
         this.modelResourceName = modelResourceName == null ? null : modelResourceName.trim();
+    }
+
+    public String getModelFromType() {
+        return modelFromType;
+    }
+
+    public void setModelFromType(String modelFromType) {
+        this.modelFromType = modelFromType == null ? null : modelFromType.trim();
     }
 }
