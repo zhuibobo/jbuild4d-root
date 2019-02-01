@@ -155,7 +155,7 @@ Vue.component("module-list-flow-comp", {
     },
     template: '<div class="module-list-wrap">\
                     <div style="display: none" id="divUploadFlowModelWrap">\
-                        <div class="general-edit-page-wrap">\
+                        <div class="general-edit-page-wrap" style="padding: 10px">\
                             <i-form :label-width="100">\
                                 <form-item label="模型名称：">\
                                     <i-input></i-input>\
@@ -164,7 +164,7 @@ Vue.component("module-list-flow-comp", {
                                     <i-input type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>\
                                 </form-item>\
                             </i-form>\
-                            <div class="button-outer-wrap">\
+                            <div class="button-outer-wrap" style="height: 40px;padding-right: 10px">\
                                 <div class="button-inner-wrap">\
                                     <button-group>\
                                         <i-button type="primary" @click="handleSubmit(\'formEntity\')"> 保 存</i-button>\
