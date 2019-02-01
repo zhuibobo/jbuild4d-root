@@ -33,7 +33,6 @@
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.3.2.Final" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.3.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:5.0.8.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.0.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:5.0.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.0.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.0.8.RELEASE" level="project" />
@@ -120,5 +119,38 @@
     <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.11.3" level="project" />
     <orderEntry type="library" name="Maven: org.ehcache:ehcache:3.6.2" level="project" />
     <orderEntry type="library" name="Maven: javax.cache:cache-api:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-engine:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-bpmn-converter:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-bpmn-model:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-process-validation:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-image-generator:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-engine-common-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-engine-common:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-variable-service-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-variable-service:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-identitylink-service:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-identitylink-service-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-entitylink-service:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-entitylink-service-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-task-service:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-task-service-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-job-service:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-job-service-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-idm-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-idm-engine:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.uuid:java-uuid-generator:3.1.5" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-idm-engine-configurator:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-cmmn-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-cmmn-model:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-dmn-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-dmn-model:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-form-model:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-form-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.flowable:flowable-content-api:6.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-email:1.5" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.mail:javax.mail:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.0.8.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.9" level="project" />
   </component>
 </module>

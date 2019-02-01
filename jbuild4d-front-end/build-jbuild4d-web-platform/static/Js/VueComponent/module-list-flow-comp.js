@@ -134,7 +134,7 @@ Vue.component("module-list-flow-comp", {
         },
         uploadModel:function(){
             var url = BaseUtility.BuildView(this.acInterface.uploadFlowModelView, {"op": "add"});
-            DialogUtility.DialogElem("#divUploadFlowModelWrap",{modal:true,width:600,height:400,title:"上传流程模型"});
+            DialogUtility.DialogElem("#divUploadFlowModelWrap",{modal:true,width:700,height:600,title:"上传流程模型"});
         },
         edit: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
@@ -164,6 +164,9 @@ Vue.component("module-list-flow-comp", {
                                     <i-input type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>\
                                 </form-item>\
                             </i-form>\
+                            <Upload action="//jsonplaceholder.typicode.com/posts/">\
+                                <Button icon="ios-cloud-upload-outline">Upload files</Button>\
+                            </Upload>\
                             <div class="button-outer-wrap" style="height: 40px;padding-right: 10px">\
                                 <div class="button-inner-wrap">\
                                     <button-group>\
