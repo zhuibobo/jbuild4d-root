@@ -13,17 +13,29 @@ import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.UniversalIntEnumHandler;
 import com.jbuild4d.base.dbaccess.general.DBProp;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import liquibase.Liquibase;
+import liquibase.database.Database;
+import liquibase.database.DatabaseConnection;
+import liquibase.database.DatabaseFactory;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.DatabaseException;
+import liquibase.resource.ClassLoaderResourceAccessor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.Properties;
@@ -31,6 +43,8 @@ import java.util.Properties;
 @Configuration
 /*@MapperScan(basePackages = "com.jbuild4d.base")*/
 public class MybatisBeansConfig {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MybatisBeansConfig.class);
 
     /*@Bean(destroyMethod="close")*/
     @Bean
@@ -47,6 +61,43 @@ public class MybatisBeansConfig {
         comboPooledDataSource.setIdleConnectionTestPeriod(60);
         //comboPooledDataSource.sett
         return comboPooledDataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate() throws PropertyVetoException {
+        JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSourceBean());
+        return jdbcTemplate;
+    }
+
+    @Bean(name = "jbuild4d_liquibase")
+    public Liquibase liquibase(DataSource dataSource) throws JBuild4DGenerallyException {
+        LOGGER.info("Configuring Liquibase");
+
+        Liquibase liquibase = null;
+        try {
+            DatabaseConnection connection = new JdbcConnection(dataSource.getConnection());
+            Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(connection);
+            database.setDatabaseChangeLogTableName(database.getDatabaseChangeLogTableName());
+            database.setDatabaseChangeLogLockTableName(database.getDatabaseChangeLogLockTableName());
+
+            liquibase = new Liquibase("liquibase/jbuild4d-platform-db-changelog.xml", new ClassLoaderResourceAccessor(), database);
+            liquibase.update("zhuangrb");
+            return liquibase;
+
+        } catch (Exception e) {
+            throw new JBuild4DGenerallyException("执行数据库更新失败！");
+        } finally {
+            if (liquibase != null) {
+                Database database = liquibase.getDatabase();
+                if (database != null) {
+                    try {
+                        database.close();
+                    } catch (DatabaseException e) {
+                        LOGGER.warn("关闭数据库连接失败！", e);
+                    }
+                }
+            }
+        }
     }
 
     @Bean

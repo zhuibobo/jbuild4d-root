@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="yuicompressor-2.4.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler-app/oryx-editor-code/lib/yuicompressor-2.4.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

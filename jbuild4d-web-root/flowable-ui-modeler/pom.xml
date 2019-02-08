@@ -1,0 +1,88 @@
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>Flowable Modeler UI</name>
+    <artifactId>flowable-ui-modeler</artifactId>
+    <packaging>pom</packaging>
+
+    <parent>
+        <artifactId>jbuild4d-web-root</artifactId>
+        <groupId>jbuild4d</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <!-- Web container version -->
+        <!--<tomcat.version>7.0.53</tomcat.version>-->
+    </properties>
+
+    <modules>
+        <module>flowable-ui-common</module>
+        <module>flowable-ui-modeler-logic</module>
+        <module>flowable-ui-modeler-rest</module>
+        <module>flowable-ui-modeler-conf</module>
+        <module>flowable-ui-modeler-app</module>
+    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>jbuild4d</groupId>
+                <artifactId>flowable-ui-modeler-logic</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jbuild4d</groupId>
+                <artifactId>flowable-ui-modeler-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jbuild4d</groupId>
+                <artifactId>flowable-ui-modeler-conf</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jbuild4d</groupId>
+                <artifactId>flowable-ui-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-Xmx256m</argLine>
+                    <forkCount>1</forkCount>
+                    <reuseForks>true</reuseForks>
+                    <!-- Force alphabetical order to have a reproducible build -->
+                    <runOrder>alphabetical</runOrder>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

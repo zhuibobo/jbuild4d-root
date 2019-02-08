@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="flowable-ui-modeler-app:war">
+    <output-path>$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler-app/target</output-path>
+    <root id="archive" name="flowable-modeler.war">
+      <element id="artifact" artifact-name="flowable-ui-modeler-app:war exploded" />
+    </root>
+  </artifact>
+</component>

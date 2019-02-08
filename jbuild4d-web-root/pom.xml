@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>jbuild4d-web-platform</module>
+        <module>flowable-ui-modeler</module>
     </modules>
 
 

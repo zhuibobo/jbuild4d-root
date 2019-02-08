@@ -13,7 +13,7 @@ import java.beans.PropertyVetoException;
  * Date: 2018/8/8
  * To change this template use File | Settings | File Templates.
  */
-@Configuration
+/*@Configuration
 public class JdbcTemplateBeansConfig extends MybatisBeansConfig {
 
     @Bean
@@ -21,4 +21,4 @@ public class JdbcTemplateBeansConfig extends MybatisBeansConfig {
         JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSourceBean());
         return jdbcTemplate;
     }
-}
+}*/

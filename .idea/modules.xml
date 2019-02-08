@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-common/flowable-ui-common.iml" filepath="$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-common/flowable-ui-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler.iml" filepath="$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler-app/flowable-ui-modeler-app.iml" filepath="$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler-app/flowable-ui-modeler-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler-conf/flowable-ui-modeler-conf.iml" filepath="$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler-conf/flowable-ui-modeler-conf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler-logic/flowable-ui-modeler-logic.iml" filepath="$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler-logic/flowable-ui-modeler-logic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler-rest/flowable-ui-modeler-rest.iml" filepath="$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-modeler-rest/flowable-ui-modeler-rest.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-db-access/jbuild4d-base-db-access.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-db-access/jbuild4d-base-db-access.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-exception/jbuild4d-base-exception.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-exception/jbuild4d-base-exception.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-root.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-root.iml" />

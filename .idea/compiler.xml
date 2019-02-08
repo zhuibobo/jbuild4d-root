@@ -8,6 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="build4d-base-service" />
         <module name="build4d-base-tools" />
+        <module name="flowable-ui-common" />
+        <module name="flowable-ui-modeler-app" />
+        <module name="flowable-ui-modeler-conf" />
+        <module name="flowable-ui-modeler-logic" />
+        <module name="flowable-ui-modeler-rest" />
         <module name="jbuild4d-base-db-access" />
         <module name="jbuild4d-base-exception" />
         <module name="jbuild4d-base-service" />
@@ -21,6 +26,12 @@
     <bytecodeTargetLevel>
       <module name="build4d-base-service" target="1.8" />
       <module name="build4d-base-tools" target="1.8" />
+      <module name="flowable-ui-common" target="1.8" />
+      <module name="flowable-ui-modeler" target="1.8" />
+      <module name="flowable-ui-modeler-app" target="1.8" />
+      <module name="flowable-ui-modeler-conf" target="1.8" />
+      <module name="flowable-ui-modeler-logic" target="1.8" />
+      <module name="flowable-ui-modeler-rest" target="1.8" />
       <module name="jbuild4d-base-db-access" target="1.8" />
       <module name="jbuild4d-base-exception" target="1.8" />
       <module name="jbuild4d-base-root" target="1.8" />
