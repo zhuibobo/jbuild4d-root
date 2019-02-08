@@ -155,6 +155,9 @@ Vue.component("module-list-flow-comp", {
     },
     template: '<div class="module-list-wrap">\
                     <div style="display: none" id="divUploadFlowModelWrap">\
+                        \
+                    </div>\
+                    <div style="display: none" id="divUploadFlowModelWrap">\
                         <div class="general-edit-page-wrap" style="padding: 10px">\
                             <i-form :label-width="100">\
                                 <form-item label="模型名称：">\
