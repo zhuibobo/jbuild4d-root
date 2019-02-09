@@ -4,6 +4,7 @@
 target
 out
 log
+t3plibs
 node_modules
 GenerateCodeFiles/
 !GenerateCodeFiles/GenerateCodeFiles.txt
