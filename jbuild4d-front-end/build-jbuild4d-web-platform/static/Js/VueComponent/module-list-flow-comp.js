@@ -137,7 +137,7 @@ Vue.component("module-list-flow-comp", {
             DialogUtility.DialogElem("#divUploadFlowModelWrap",{modal:true,width:700,height:600,title:"上传流程模型"});
         },
         newModel:function(){
-            DialogUtility.DialogElem("#divNewFlowModelWrap",{modal:true,width:700,height:600,title:"创建流程模型"});
+            DialogUtility.DialogElem("#divNewFlowModelWrap",{modal:true,width:600,height:500,title:"创建流程模型"});
         },
         edit: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
@@ -170,7 +170,7 @@ Vue.component("module-list-flow-comp", {
                                     <i-input></i-input>\
                                 </form-item>\
                                 <form-item label="描述：">\
-                                    <i-input type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>\
+                                    <i-input type="textarea" :autosize="{minRows: 8,maxRows: 8}"></i-input>\
                                 </form-item>\
                             </i-form>\
                             <div class="button-outer-wrap" style="height: 40px;padding-right: 10px">\
