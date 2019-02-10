@@ -136,6 +136,9 @@ Vue.component("module-list-flow-comp", {
             var url = BaseUtility.BuildView(this.acInterface.uploadFlowModelView, {"op": "add"});
             DialogUtility.DialogElem("#divUploadFlowModelWrap",{modal:true,width:700,height:600,title:"上传流程模型"});
         },
+        newModel:function(){
+            DialogUtility.DialogElem("#divNewFlowModelWrap",{modal:true,width:700,height:600,title:"创建流程模型"});
+        },
         edit: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
                 "op": "update",
@@ -151,11 +154,34 @@ Vue.component("module-list-flow-comp", {
         },
         move: function (type) {
             ListPageUtility.IViewMoveFace(this.acInterface.move, this.selectionRows, this.idFieldName, type, this);
+        },
+        getModuleName:function () {
+            return this.moduleData==null?"请选中模块":this.moduleData.moduleText;
         }
     },
     template: '<div class="module-list-wrap">\
-                    <div style="display: none" id="divUploadFlowModelWrap">\
-                        \
+                    <div style="display: none" id="divNewFlowModelWrap">\
+                        <div class="general-edit-page-wrap" style="padding: 10px">\
+                            <i-form :label-width="100">\
+                                <form-item label="模型名称：">\
+                                    <i-input></i-input>\
+                                </form-item>\
+                                <form-item label="模型Key：">\
+                                    <i-input></i-input>\
+                                </form-item>\
+                                <form-item label="描述：">\
+                                    <i-input type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>\
+                                </form-item>\
+                            </i-form>\
+                            <div class="button-outer-wrap" style="height: 40px;padding-right: 10px">\
+                                <div class="button-inner-wrap">\
+                                    <button-group>\
+                                        <i-button type="primary" @click="handleSubmit(\'formEntity\')"> 保 存</i-button>\
+                                        <i-button @click="handleClose()">关 闭</i-button>\
+                                    </button-group>\
+                                </div>\
+                            </div>\
+                        </div>\
                     </div>\
                     <div style="display: none" id="divUploadFlowModelWrap">\
                         <div class="general-edit-page-wrap" style="padding: 10px">\
@@ -173,7 +199,7 @@ Vue.component("module-list-flow-comp", {
                             <div class="button-outer-wrap" style="height: 40px;padding-right: 10px">\
                                 <div class="button-inner-wrap">\
                                     <button-group>\
-                                        <i-button type="primary" @click="handleSubmit(\'formEntity\')"> 保 存</i-button>\
+                                        <i-button type="primary" @click="handleSubmit(\'formEntity\')">保 存</i-button>\
                                         <i-button @click="handleClose()">关 闭</i-button>\
                                     </button-group>\
                                 </div>\
@@ -181,9 +207,10 @@ Vue.component("module-list-flow-comp", {
                         </div>\
                     </div>\
                     <div id="list-button-wrap" class="list-button-outer-wrap">\
+                        <div class="module-list-name"><Icon type="ios-arrow-dropright-circle" />&nbsp;模块【{{getModuleName()}}】</div>\
                         <div class="list-button-inner-wrap">\
                             <ButtonGroup>\
-                                <i-button  type="success" @click="add()" icon="md-add">新增</i-button>\
+                                <i-button  type="success" @click="newModel()" icon="md-add">新增</i-button>\
                                 <i-button type="primary" @click="uploadModel()" icon="md-add">上传模型 </i-button>\
                                 <i-button type="error" icon="md-albums">复制</i-button>\
                                 <i-button type="error" icon="md-bookmarks">历史模型</i-button>\

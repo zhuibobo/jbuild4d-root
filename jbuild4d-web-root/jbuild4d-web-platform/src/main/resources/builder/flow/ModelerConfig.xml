@@ -2,7 +2,7 @@
 <Config>
     <ModelerRest>
         <BaseUrl>
-
+            <![CDATA[http://localhost:8877/flowable-modeler/]]>
         </BaseUrl>
     </ModelerRest>
 </Config>
