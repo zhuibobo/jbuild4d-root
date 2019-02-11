@@ -231,7 +231,11 @@ Vue.component("module-list-flow-comp", {
         },
         editModel:function (recordId) {
             AjaxUtility.Post(this.acInterface.editModel, {modelId: recordId}, function (result) {
-                DialogUtility.OpenNewWindow(window, "editModelWebWindow", result.data.editModelWebUrl);
+                //DialogUtility.OpenNewWindow(window, "editModelWebWindow", result.data.editModelWebUrl);
+                DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,result.data.editModelWebUrl,{
+                    title:"流程设计",
+                    modal:true
+                },0);
             }, "json");
         }
     },
