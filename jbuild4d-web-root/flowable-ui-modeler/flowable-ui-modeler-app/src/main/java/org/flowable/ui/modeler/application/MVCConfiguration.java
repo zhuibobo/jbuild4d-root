@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * Date: 2019/2/11
  * To change this template use File | Settings | File Templates.
  */
-@Configuration
+/*@Configuration
 public class MVCConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -23,4 +23,4 @@ public class MVCConfiguration extends WebMvcConfigurerAdapter {
         super.addViewControllers(registry);
 
     }
-}
+}*/
