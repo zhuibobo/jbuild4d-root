@@ -82,7 +82,7 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
     @Override
     public String buildEditModelWebUrl(FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException {
         FlowModelerConfigVo configVo=flowModelerConfigService.getVoFromCache();
-        String url=configVo.getBaseUrl()+"#"+"/editor/"+flowModelEntity.getModelDeId();
+        String url=configVo.getBaseUrl()+configVo.getModelDesignView()+flowModelEntity.getModelDeId();
         return url;
     }
 }

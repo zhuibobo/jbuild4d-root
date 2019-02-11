@@ -9,6 +9,7 @@ package com.jbuild4d.platform.builder.vo;
 public class FlowModelerConfigVo {
     private String baseUrl;
     private String newModelRest;
+    private String modelDesignView;
 
     public String getBaseUrl() {
         return baseUrl;
@@ -24,5 +25,13 @@ public class FlowModelerConfigVo {
 
     public void setNewModelRest(String newModelRest) {
         this.newModelRest = newModelRest;
+    }
+
+    public String getModelDesignView() {
+        return modelDesignView;
+    }
+
+    public void setModelDesignView(String modelDesignView) {
+        this.modelDesignView = modelDesignView;
     }
 }

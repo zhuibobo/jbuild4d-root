@@ -46,10 +46,12 @@ public class FlowModelerConfigServiceImpl implements IFlowModelerConfigService {
             xmlDocument = XMLUtility.parseForDoc(inputStream);
             Node modelerRestNode = XMLUtility.parseForNode(xmlDocument, "/Config/ModelerRest");
             String baseUrl=XMLUtility.parseForNode(modelerRestNode,"BaseUrl").getTextContent().trim();
+            String modelDesignView=XMLUtility.parseForNode(modelerRestNode,"ModelDesignView").getTextContent().trim();
             String newModelRest=XMLUtility.parseForNode(modelerRestNode,"NewModelRest").getTextContent().trim();
             FlowModelerConfigVo flowModelerConfigVo=new FlowModelerConfigVo();
             flowModelerConfigVo.setBaseUrl(baseUrl);
             flowModelerConfigVo.setNewModelRest(newModelRest);
+            flowModelerConfigVo.setModelDesignView(modelDesignView);
             return flowModelerConfigVo;
         }
         catch (Exception ex){
