@@ -29,3 +29,35 @@ div.canvas-wrapper::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background: #C7DFF7;
 }
+
+.stencils{
+    border-right: 1pt solid #c7cacd;
+    overflow: auto;
+    z-index: 5000;
+}
+
+.stencils::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.stencils::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #C7DFF7;
+}
+
+.property-row span.title{
+    font-size: 12px;
+}
+
+.property-row > span {
+    margin: 0 2%;
+}
+
+.selected-item-title{
+    font-size: 14px;
+}
+
+.selected-item-body{
+    height: 210px;
+}
