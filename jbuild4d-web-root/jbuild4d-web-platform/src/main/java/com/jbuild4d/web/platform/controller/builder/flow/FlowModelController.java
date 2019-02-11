@@ -62,4 +62,15 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
         result.put("flowModelEntity",_flowModelEntity);
         return JBuild4DResponseVo.success("新建流程模型成功!",result);
     }
+
+    @RequestMapping(value = "EditModel")
+    @ResponseBody
+    public JBuild4DResponseVo editModel(String modelId) throws JBuild4DGenerallyException {
+        FlowModelEntity _flowModelEntity=flowModelService.getByPrimaryKey(JB4DSessionUtility.getSession(),modelId);
+        String editModelWebUrl=flowModelService.buildEditModelWebUrl(_flowModelEntity);
+        Map<String,Object> result=new HashedMap();
+        result.put("editModelWebUrl",editModelWebUrl);
+        result.put("flowModelEntity",_flowModelEntity);
+        return JBuild4DResponseVo.success("获取数据成功!",result);
+    }
 }

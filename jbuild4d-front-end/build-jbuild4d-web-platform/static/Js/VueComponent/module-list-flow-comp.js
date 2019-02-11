@@ -3,14 +3,15 @@ Vue.component("module-list-flow-comp", {
     data: function () {
         return {
             acInterface:{
-                editView: "/PlatForm/Builder/FlowModel/DetailView",
-                uploadFlowModelView: "/PlatForm/Builder/FlowModel/UploadFlowModelView",
+                //editView: "/PlatForm/Builder/FlowModel/DetailView",
+                //uploadFlowModelView: "/PlatForm/Builder/FlowModel/UploadFlowModelView",
                 newModel:"/PlatForm/Builder/FlowModel/NewModel",
+                editModel:"/PlatForm/Builder/FlowModel/EditModel",
                 reloadData: "/PlatForm/Builder/FlowModel/GetListData",
                 delete: "/PlatForm/Builder/FlowModel/Delete",
                 move: "/PlatForm/Builder/FlowModel/Move",
             },
-            idFieldName: "formId",
+            idFieldName: "modelId",
             searchCondition: {
                 modelModuleId: {
                     value: "",
@@ -58,8 +59,9 @@ Vue.component("module-list-flow-comp", {
                         //console.log(params);
                         //console.log(this);
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp)
+                            window._modulelistflowcomp.editModelButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp)
                         ]);
                     }
                 }
@@ -216,6 +218,21 @@ Vue.component("module-list-flow-comp", {
         },
         getModuleName:function () {
             return this.moduleData==null?"请选中模块":this.moduleData.moduleText;
+        },
+        editModelButton:function (h, params,idField,pageAppObj) {
+            return h('div', {
+                class: "list-row-button edit-model",
+                on: {
+                    click: function () {
+                        pageAppObj.editModel(params.row[idField]);
+                    }
+                }
+            });
+        },
+        editModel:function (recordId) {
+            AjaxUtility.Post(this.acInterface.editModel, {modelId: recordId}, function (result) {
+                DialogUtility.OpenNewWindow(window, "editModelWebWindow", result.data.editModelWebUrl);
+            }, "json");
         }
     },
     template: '<div class="module-list-wrap">\
