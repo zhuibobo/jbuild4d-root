@@ -1,3 +1,8 @@
+window.addEventListener("message", function( event ) {
+    // 把父窗口发送过来的数据显示在子窗口中
+    DialogUtility.CloseDialog("FrameDialogEle"+DialogUtility.DialogId);
+}, false );
+
 Vue.component("module-list-flow-comp", {
     props:['listHeight','moduleData','activeTabName'],
     data: function () {
@@ -237,6 +242,9 @@ Vue.component("module-list-flow-comp", {
                     modal:true
                 },0);
             }, "json");
+        },
+        a:function () {
+            alert("a");
         }
     },
     template: '<div class="module-list-wrap">\

@@ -43,7 +43,12 @@
     <link rel="stylesheet" href="styles/custom-style.css">
 </headToolbarController>
 <body ng-app="flowableModeler" ng-cloak>
-
+<script>
+    function closeparent() {
+        window.parent.postMessage("aa1111","*");
+    }
+</script>
+<input type="button" value="close" onclick="closeparent()" />
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation" id="main-header" style="display:none">
     <div class="fixed-container">
         <div class="navbar-header">
