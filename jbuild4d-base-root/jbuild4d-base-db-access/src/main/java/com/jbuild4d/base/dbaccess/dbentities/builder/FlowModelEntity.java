@@ -16,6 +16,9 @@ public class FlowModelEntity {
     @DBKeyField
     private String modelId;
 
+    //MODEL_DE_ID
+    private String modelDeId;
+
     //MODEL_MODULE_ID
     private String modelModuleId;
 
@@ -60,8 +63,9 @@ public class FlowModelEntity {
     //MODEL_FROM_TYPE
     private String modelFromType;
 
-    public FlowModelEntity(String modelId, String modelModuleId, String modelGroupId, String modelName, Date modelCreateTime, String modelCreater, Date modelUpdateTime, String modelUpdater, String modelDesc, String modelStatus, Integer modelOrderNum, String modelDeploymentId, String modelStartKey, String modelResourceName, String modelFromType) {
+    public FlowModelEntity(String modelId, String modelDeId, String modelModuleId, String modelGroupId, String modelName, Date modelCreateTime, String modelCreater, Date modelUpdateTime, String modelUpdater, String modelDesc, String modelStatus, Integer modelOrderNum, String modelDeploymentId, String modelStartKey, String modelResourceName, String modelFromType) {
         this.modelId = modelId;
+        this.modelDeId = modelDeId;
         this.modelModuleId = modelModuleId;
         this.modelGroupId = modelGroupId;
         this.modelName = modelName;
@@ -88,6 +92,14 @@ public class FlowModelEntity {
 
     public void setModelId(String modelId) {
         this.modelId = modelId == null ? null : modelId.trim();
+    }
+
+    public String getModelDeId() {
+        return modelDeId;
+    }
+
+    public void setModelDeId(String modelDeId) {
+        this.modelDeId = modelDeId == null ? null : modelDeId.trim();
     }
 
     public String getModelModuleId() {

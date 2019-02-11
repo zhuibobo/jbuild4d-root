@@ -5,6 +5,7 @@
     <delete id="deleteAll">delete from TB4D_FLOW_MODEL</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(MODEL_ORDER_NUM) is null then 1 else max(MODEL_ORDER_NUM)+1 end ORDERNUM from TB4D_FLOW_MODEL</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_FLOW_MODEL<where>
+        <if test="modelDeId !=null and modelDeId !=''"> and MODEL_DE_ID like #{modelDeId} </if>
         <if test="modelModuleId !=null and modelModuleId !=''"> and MODEL_MODULE_ID like #{modelModuleId} </if>
         <if test="modelGroupId !=null and modelGroupId !=''"> and MODEL_GROUP_ID like #{modelGroupId} </if>
         <if test="modelName !=null and modelName !=''"> and MODEL_NAME like #{modelName} </if>

@@ -4,5 +4,8 @@
         <BaseUrl>
             <![CDATA[http://localhost:8877/flowable-modeler/]]>
         </BaseUrl>
+        <NewModelRest>
+            <![CDATA[app/rest/models]]>
+        </NewModelRest>
     </ModelerRest>
 </Config>

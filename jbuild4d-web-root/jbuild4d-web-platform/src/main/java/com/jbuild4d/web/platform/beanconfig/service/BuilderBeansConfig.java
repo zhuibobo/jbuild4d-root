@@ -18,7 +18,9 @@ import com.jbuild4d.platform.builder.datastorage.impl.TableFieldServiceImpl;
 import com.jbuild4d.platform.builder.datastorage.impl.TableGroupServiceImpl;
 import com.jbuild4d.platform.builder.datastorage.impl.TableServiceImpl;
 import com.jbuild4d.platform.builder.flow.IFlowModelService;
+import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
 import com.jbuild4d.platform.builder.flow.impl.FlowModelServiceImpl;
+import com.jbuild4d.platform.builder.flow.impl.FlowModelerConfigServiceImpl;
 import com.jbuild4d.platform.builder.service.*;
 import com.jbuild4d.platform.builder.service.impl.*;
 import com.jbuild4d.platform.builder.webformdesign.IFDCKEditorPluginsService;
@@ -34,6 +36,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.client.RestTemplate;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -125,8 +128,14 @@ public class BuilderBeansConfig {
     }
 
     @Bean
-    public IFlowModelService flowModelService(ISQLBuilderService _sqlBuilderService, FlowModelMapper mapper, SqlSessionTemplate sqlSessionTemplate){
-        IFlowModelService flowModelService1=new FlowModelServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
-        return flowModelService1;
+    public IFlowModelerConfigService flowModelerConfigService(IJb4dCacheService jb4dCacheService){
+        IFlowModelerConfigService flowModelerConfigService=new FlowModelerConfigServiceImpl(jb4dCacheService);
+        return flowModelerConfigService;
+    }
+
+    @Bean
+    public IFlowModelService flowModelService(ISQLBuilderService _sqlBuilderService, FlowModelMapper mapper, SqlSessionTemplate sqlSessionTemplate, RestTemplate restTemplate,IFlowModelerConfigService flowModelerConfigService){
+        IFlowModelService flowModelService=new FlowModelServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,restTemplate,flowModelerConfigService);
+        return flowModelService;
     }
 }
