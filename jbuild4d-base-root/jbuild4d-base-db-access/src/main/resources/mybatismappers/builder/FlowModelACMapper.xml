@@ -6,7 +6,7 @@
             <idArg column="MODEL_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="MODEL_DE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="MODEL_MODULE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="MODEL_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODEL_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="MODEL_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="MODEL_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="MODEL_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -22,7 +22,7 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        MODEL_ID, MODEL_DE_ID, MODEL_MODULE_ID, MODEL_GROUP_ID, MODEL_NAME, MODEL_CREATE_TIME,
+        MODEL_ID, MODEL_DE_ID, MODEL_MODULE_ID, MODEL_CODE, MODEL_NAME, MODEL_CREATE_TIME,
         MODEL_CREATER, MODEL_UPDATE_TIME, MODEL_UPDATER, MODEL_DESC, MODEL_STATUS, MODEL_ORDER_NUM,
         MODEL_DEPLOYMENT_ID, MODEL_START_KEY, MODEL_RESOURCE_NAME, MODEL_FROM_TYPE
     </sql>
@@ -38,13 +38,13 @@
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity">
         insert into TB4D_FLOW_MODEL (MODEL_ID, MODEL_DE_ID, MODEL_MODULE_ID,
-                                     MODEL_GROUP_ID, MODEL_NAME, MODEL_CREATE_TIME,
+                                     MODEL_CODE, MODEL_NAME, MODEL_CREATE_TIME,
                                      MODEL_CREATER, MODEL_UPDATE_TIME, MODEL_UPDATER,
                                      MODEL_DESC, MODEL_STATUS, MODEL_ORDER_NUM,
                                      MODEL_DEPLOYMENT_ID, MODEL_START_KEY, MODEL_RESOURCE_NAME,
                                      MODEL_FROM_TYPE)
         values (#{modelId,jdbcType=VARCHAR}, #{modelDeId,jdbcType=VARCHAR}, #{modelModuleId,jdbcType=VARCHAR},
-                #{modelGroupId,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, #{modelCreateTime,jdbcType=TIMESTAMP},
+                #{modelCode,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, #{modelCreateTime,jdbcType=TIMESTAMP},
                 #{modelCreater,jdbcType=VARCHAR}, #{modelUpdateTime,jdbcType=TIMESTAMP}, #{modelUpdater,jdbcType=VARCHAR},
                 #{modelDesc,jdbcType=VARCHAR}, #{modelStatus,jdbcType=VARCHAR}, #{modelOrderNum,jdbcType=INTEGER},
                 #{modelDeploymentId,jdbcType=VARCHAR}, #{modelStartKey,jdbcType=VARCHAR}, #{modelResourceName,jdbcType=VARCHAR},
@@ -62,8 +62,8 @@
             <if test="modelModuleId != null">
                 MODEL_MODULE_ID,
             </if>
-            <if test="modelGroupId != null">
-                MODEL_GROUP_ID,
+            <if test="modelCode != null">
+                MODEL_CODE,
             </if>
             <if test="modelName != null">
                 MODEL_NAME,
@@ -112,8 +112,8 @@
             <if test="modelModuleId != null">
                 #{modelModuleId,jdbcType=VARCHAR},
             </if>
-            <if test="modelGroupId != null">
-                #{modelGroupId,jdbcType=VARCHAR},
+            <if test="modelCode != null">
+                #{modelCode,jdbcType=VARCHAR},
             </if>
             <if test="modelName != null">
                 #{modelName,jdbcType=VARCHAR},
@@ -162,8 +162,8 @@
             <if test="modelModuleId != null">
                 MODEL_MODULE_ID = #{modelModuleId,jdbcType=VARCHAR},
             </if>
-            <if test="modelGroupId != null">
-                MODEL_GROUP_ID = #{modelGroupId,jdbcType=VARCHAR},
+            <if test="modelCode != null">
+                MODEL_CODE = #{modelCode,jdbcType=VARCHAR},
             </if>
             <if test="modelName != null">
                 MODEL_NAME = #{modelName,jdbcType=VARCHAR},
@@ -208,7 +208,7 @@
         update TB4D_FLOW_MODEL
         set MODEL_DE_ID = #{modelDeId,jdbcType=VARCHAR},
             MODEL_MODULE_ID = #{modelModuleId,jdbcType=VARCHAR},
-            MODEL_GROUP_ID = #{modelGroupId,jdbcType=VARCHAR},
+            MODEL_CODE = #{modelCode,jdbcType=VARCHAR},
             MODEL_NAME = #{modelName,jdbcType=VARCHAR},
             MODEL_CREATE_TIME = #{modelCreateTime,jdbcType=TIMESTAMP},
             MODEL_CREATER = #{modelCreater,jdbcType=VARCHAR},

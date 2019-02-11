@@ -7,7 +7,7 @@
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_FLOW_MODEL<where>
         <if test="modelDeId !=null and modelDeId !=''"> and MODEL_DE_ID like #{modelDeId} </if>
         <if test="modelModuleId !=null and modelModuleId !=''"> and MODEL_MODULE_ID like #{modelModuleId} </if>
-        <if test="modelGroupId !=null and modelGroupId !=''"> and MODEL_GROUP_ID like #{modelGroupId} </if>
+        <if test="modelCode !=null and modelCode !=''"> and MODEL_CODE like #{modelCode} </if>
         <if test="modelName !=null and modelName !=''"> and MODEL_NAME like #{modelName} </if>
         <if test="modelCreater !=null and modelCreater !=''"> and MODEL_CREATER like #{modelCreater} </if>
         <if test="modelUpdater !=null and modelUpdater !=''"> and MODEL_UPDATER like #{modelUpdater} </if>

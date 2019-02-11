@@ -110,8 +110,8 @@ public class BuilderBeansConfig {
     }
 
     @Bean
-    public IFormResourceService formResourceService(ISQLBuilderService _sqlBuilderService, FormResourceMapper mapper, SqlSessionTemplate sqlSessionTemplate){
-        IFormResourceService bean=new FormResourceServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+    public IFormResourceService formResourceService(ISQLBuilderService _sqlBuilderService, FormResourceMapper mapper, SqlSessionTemplate sqlSessionTemplate,IModuleService moduleService){
+        IFormResourceService bean=new FormResourceServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,moduleService);
         return bean;
     }
 
@@ -134,8 +134,8 @@ public class BuilderBeansConfig {
     }
 
     @Bean
-    public IFlowModelService flowModelService(ISQLBuilderService _sqlBuilderService, FlowModelMapper mapper, SqlSessionTemplate sqlSessionTemplate, RestTemplate restTemplate,IFlowModelerConfigService flowModelerConfigService){
-        IFlowModelService flowModelService=new FlowModelServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,restTemplate,flowModelerConfigService);
+    public IFlowModelService flowModelService(ISQLBuilderService _sqlBuilderService, FlowModelMapper mapper, SqlSessionTemplate sqlSessionTemplate, RestTemplate restTemplate,IFlowModelerConfigService flowModelerConfigService,IModuleService moduleService){
+        IFlowModelService flowModelService=new FlowModelServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,restTemplate,flowModelerConfigService,moduleService);
         return flowModelService;
     }
 }

@@ -233,8 +233,8 @@ var DialogUtility={
         $(htmlElem).dialog(defaultConfig);
         //dialog.textAreaObj=textArea;
     },
-    DialogElem:function (elem,config) {
-        $(elem).dialog(config);
+    DialogElem:function (elemId,config) {
+        $("#"+elemId).dialog(config);
     },
     OpenIframeWindow:function(openerwindow, dialogId, url, options, whtype){
         var defaultoptions = {
@@ -334,8 +334,12 @@ var DialogUtility={
         }
     },
     OpenNewWindow: function (openerwindow, dialogId, url, options, whtype) {
-        var width=options.width;
-        var height=options.height;
+        var width=0;
+        var height=0;
+        if(options){
+            width=options.width;
+            height=options.height;
+        }
         var left = parseInt((screen.availWidth - width) / 2).toString();
         var top = parseInt((screen.availHeight - height) / 2).toString();
         if (width.toString() == "0" && height.toString() == "0") {

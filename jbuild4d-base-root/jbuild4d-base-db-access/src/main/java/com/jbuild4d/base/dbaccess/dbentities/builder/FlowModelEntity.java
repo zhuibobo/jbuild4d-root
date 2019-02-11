@@ -22,8 +22,8 @@ public class FlowModelEntity {
     //MODEL_MODULE_ID
     private String modelModuleId;
 
-    //MODEL_GROUP_ID
-    private String modelGroupId;
+    //MODEL_CODE
+    private String modelCode;
 
     //MODEL_NAME
     private String modelName;
@@ -63,11 +63,11 @@ public class FlowModelEntity {
     //MODEL_FROM_TYPE
     private String modelFromType;
 
-    public FlowModelEntity(String modelId, String modelDeId, String modelModuleId, String modelGroupId, String modelName, Date modelCreateTime, String modelCreater, Date modelUpdateTime, String modelUpdater, String modelDesc, String modelStatus, Integer modelOrderNum, String modelDeploymentId, String modelStartKey, String modelResourceName, String modelFromType) {
+    public FlowModelEntity(String modelId, String modelDeId, String modelModuleId, String modelCode, String modelName, Date modelCreateTime, String modelCreater, Date modelUpdateTime, String modelUpdater, String modelDesc, String modelStatus, Integer modelOrderNum, String modelDeploymentId, String modelStartKey, String modelResourceName, String modelFromType) {
         this.modelId = modelId;
         this.modelDeId = modelDeId;
         this.modelModuleId = modelModuleId;
-        this.modelGroupId = modelGroupId;
+        this.modelCode = modelCode;
         this.modelName = modelName;
         this.modelCreateTime = modelCreateTime;
         this.modelCreater = modelCreater;
@@ -110,12 +110,12 @@ public class FlowModelEntity {
         this.modelModuleId = modelModuleId == null ? null : modelModuleId.trim();
     }
 
-    public String getModelGroupId() {
-        return modelGroupId;
+    public String getModelCode() {
+        return modelCode;
     }
 
-    public void setModelGroupId(String modelGroupId) {
-        this.modelGroupId = modelGroupId == null ? null : modelGroupId.trim();
+    public void setModelCode(String modelCode) {
+        this.modelCode = modelCode == null ? null : modelCode.trim();
     }
 
     public String getModelName() {

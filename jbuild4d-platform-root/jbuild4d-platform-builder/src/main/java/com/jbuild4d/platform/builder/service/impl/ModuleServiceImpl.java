@@ -88,5 +88,10 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleEntity> implements 
             moduleMapper.updateByPrimaryKeySelective(selfEntity);
         }
     }
+
+    @Override
+    public String buildModuleItemCode(int num){
+        return String.format("1%05d", num);
+    }
 }
 

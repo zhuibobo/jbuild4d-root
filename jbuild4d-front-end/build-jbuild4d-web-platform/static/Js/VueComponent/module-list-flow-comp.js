@@ -5,13 +5,14 @@ Vue.component("module-list-flow-comp", {
             acInterface:{
                 editView: "/PlatForm/Builder/FlowModel/DetailView",
                 uploadFlowModelView: "/PlatForm/Builder/FlowModel/UploadFlowModelView",
+                newModel:"/PlatForm/Builder/FlowModel/NewModel",
                 reloadData: "/PlatForm/Builder/FlowModel/GetListData",
                 delete: "/PlatForm/Builder/FlowModel/Delete",
                 move: "/PlatForm/Builder/FlowModel/Move",
             },
             idFieldName: "formId",
             searchCondition: {
-                formModuleId: {
+                modelModuleId: {
                     value: "",
                     type: SearchUtility.SearchFieldType.StringType
                 }
@@ -24,33 +25,33 @@ Vue.component("module-list-flow-comp", {
                 },
                 {
                     title: '编号',
-                    key: 'formCode',
+                    key: 'modelCode',
                     align: "center",
                     width: 80
                 },
                 {
                     title: '流程名称',
-                    key: 'formName',
+                    key: 'modelName',
                     align: "center"
                 }, {
-                    title: '唯一名',
-                    key: 'formSingleName',
+                    title: '启动Key',
+                    key: 'modelStartKey',
                     align: "center"
                 }, {
                     title: '备注',
-                    key: 'formDesc',
+                    key: 'modelDesc',
                     align: "center"
                 }, {
                     title: '编辑时间',
-                    key: 'formUpdateTime',
+                    key: 'modelUpdateTime',
                     width: 100,
                     align: "center",
                     render: function (h, params) {
-                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.formUpdateTime);
+                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.modelUpdateTime);
                     }
                 }, {
                     title: '操作',
-                    key: 'formId',
+                    key: 'modelId',
                     width: 120,
                     align: "center",
                     render: function (h, params) {
@@ -69,7 +70,33 @@ Vue.component("module-list-flow-comp", {
             pageTotal: 0,
             pageSize: 500,
             pageNum: 1,
-            searchText:""
+            searchText:"",
+            flowModelEntity:{
+                modelId:"",
+                modelDeId:"",
+                modelModuleId:"",
+                modelGroupId:"",
+                modelName:"",
+                modelCreateTime:DateUtility.GetCurrentData(),
+                modelCreater:"",
+                modelUpdateTime:DateUtility.GetCurrentData(),
+                modelUpdater:"",
+                modelDesc:"",
+                modelStatus:"启用",
+                modelOrderNum:"",
+                modelDeploymentId:"",
+                modelStartKey:"",
+                modelResourceName:"",
+                modelFromType:""
+            },
+            ruleValidate: {
+                modelName: [
+                    {required: true, message: '【模型名称】不能空！', trigger: 'blur'}
+                ],
+                modelStartKey: [
+                    {required: true, message: '【模型Key】不能空！', trigger: 'blur'}
+                ]
+            }
         }
     },
     mounted:function(){
@@ -93,10 +120,10 @@ Vue.component("module-list-flow-comp", {
                 var filterTableData = [];
                 for (var i = 0; i < this.tableData.length; i++) {
                     var row = this.tableData[i];
-                    if (row.formCode.indexOf(newVal) >= 0) {
+                    if (row.modelCode.indexOf(newVal) >= 0) {
                         filterTableData.push(row);
                     }
-                    else if (row.formName.indexOf(newVal) >= 0) {
+                    else if (row.modelName.indexOf(newVal) >= 0) {
                         filterTableData.push(row);
                     }
                 }
@@ -112,8 +139,8 @@ Vue.component("module-list-flow-comp", {
             this.selectionRows = selection;
         },
         reloadData: function () {
-            if(this.moduleData!=null&&this.activeTabName=="list-webform") {
-                this.searchCondition.formModuleId.value = this.moduleData.moduleId;
+            if(this.moduleData!=null&&this.activeTabName=="list-flow") {
+                this.searchCondition.modelModuleId.value = this.moduleData.moduleId;
                 ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData, this.pageNum, this.pageSize, this.searchCondition, this, this.idFieldName, true, function (result,pageAppObj) {
                     pageAppObj.tableDataOriginal=result.data.list;
                 },false);
@@ -137,7 +164,39 @@ Vue.component("module-list-flow-comp", {
             DialogUtility.DialogElem("#divUploadFlowModelWrap",{modal:true,width:700,height:600,title:"上传流程模型"});
         },
         newModel:function(){
-            DialogUtility.DialogElem("#divNewFlowModelWrap",{modal:true,width:600,height:500,title:"创建流程模型"});
+            if(this.moduleData!=null) {
+                DialogUtility.DialogElem("divNewFlowModelWrap",{modal:true,width:600,height:500,title:"创建流程模型"});
+            }
+            else {
+                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择模块!", null);
+            }
+        },
+        newModelHandleSubmit:function(name){
+            var _self = this;
+            this.$refs[name].validate(function (valid) {
+                if (valid) {
+                    _self.flowModelEntity.modelModuleId=_self.moduleData.moduleId;
+                    var sendData = JSON.stringify(_self.flowModelEntity);
+                    //debugger;
+                    AjaxUtility.PostRequestBody(_self.acInterface.newModel, sendData, function (result) {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                            //debugger;
+                            //window.OpenerWindowObj.appList.reloadData();
+                            //DialogUtility.Frame_CloseDialog(window);
+                            _self.handleClose("divNewFlowModelWrap");
+                            _self.reloadData();
+                            //console.log(result);
+                            DialogUtility.OpenNewWindow(window,"editModelWebWindow",result.data.editModelWebUrl);
+                            //打开流程设计页面
+                        });
+                    }, "json");
+                } else {
+                    this.$Message.error('Fail!');
+                }
+            })
+        },
+        handleClose:function(dialogId){
+            DialogUtility.CloseDialog(dialogId);
         },
         edit: function (recordId) {
             var url = BaseUtility.BuildView(this.acInterface.editView, {
@@ -162,22 +221,22 @@ Vue.component("module-list-flow-comp", {
     template: '<div class="module-list-wrap">\
                     <div style="display: none" id="divNewFlowModelWrap">\
                         <div class="general-edit-page-wrap" style="padding: 10px">\
-                            <i-form :label-width="100">\
-                                <form-item label="模型名称：">\
-                                    <i-input></i-input>\
+                            <i-form ref="flowModelEntity" :model="flowModelEntity" :rules="ruleValidate" :label-width="100">\
+                                <form-item label="模型名称：" prop="modelName">\
+                                    <i-input v-model="flowModelEntity.modelName"></i-input>\
                                 </form-item>\
-                                <form-item label="模型Key：">\
-                                    <i-input></i-input>\
+                                <form-item label="模型Key：" prop="modelStartKey">\
+                                    <i-input v-model="flowModelEntity.modelStartKey"></i-input>\
                                 </form-item>\
                                 <form-item label="描述：">\
-                                    <i-input type="textarea" :autosize="{minRows: 8,maxRows: 8}"></i-input>\
+                                    <i-input v-model="flowModelEntity.modelDesc" type="textarea" :autosize="{minRows: 8,maxRows: 8}"></i-input>\
                                 </form-item>\
                             </i-form>\
                             <div class="button-outer-wrap" style="height: 40px;padding-right: 10px">\
                                 <div class="button-inner-wrap">\
                                     <button-group>\
-                                        <i-button type="primary" @click="handleSubmit(\'formEntity\')"> 保 存</i-button>\
-                                        <i-button @click="handleClose()">关 闭</i-button>\
+                                        <i-button type="primary" @click="newModelHandleSubmit(\'flowModelEntity\')"> 保 存</i-button>\
+                                        <i-button @click="handleClose(\'divNewFlowModelWrap\')">关 闭</i-button>\
                                     </button-group>\
                                 </div>\
                             </div>\
