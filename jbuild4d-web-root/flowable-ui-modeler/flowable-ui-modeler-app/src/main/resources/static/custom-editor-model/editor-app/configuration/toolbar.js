@@ -16,18 +16,6 @@ var FLOWABLE = FLOWABLE || {};
 FLOWABLE.TOOLBAR_CONFIG = {
     "items" : [
         {
-            "type" : "button",
-            "title" : "TOOLBAR.ACTION.SAVE",
-            "cssClass" : "editor-icon editor-icon-save",
-            "action" : "FLOWABLE.TOOLBAR.ACTIONS.saveModel"
-        },
-        {
-			"type" : "button",
-			"title" : "TOOLBAR.ACTION.VALIDATE",
-			"cssClass" : "glyphicon glyphicon-ok",
-			"action": "FLOWABLE.TOOLBAR.ACTIONS.validate"
-		},
-        {
             "type" : "separator",
             "title" : "",
             "cssClass" : "toolbar-separator"
@@ -180,6 +168,24 @@ FLOWABLE.TOOLBAR_CONFIG = {
             "title" : "TOOLBAR.ACTION.HELP",
             "cssClass" : "glyphicon glyphicon-question-sign",
             "action" : "FLOWABLE.TOOLBAR.ACTIONS.help"
+        },
+        {
+            "type" : "separator",
+            "title": "",
+            "cssClass" : "toolbar-separator",
+            "disableInForm" : true
+        },
+        {
+            "type" : "button",
+            "title" : "TOOLBAR.ACTION.VALIDATE",
+            "cssClass" : "glyphicon glyphicon-ok",
+            "action": "FLOWABLE.TOOLBAR.ACTIONS.validate"
+        },
+        {
+            "type" : "button",
+            "title" : "TOOLBAR.ACTION.SAVE",
+            "cssClass" : "editor-icon editor-icon-save",
+            "action" : "FLOWABLE.TOOLBAR.ACTIONS.saveModel"
         }
     ],
     
