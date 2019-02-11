@@ -441,9 +441,14 @@ var DialogUtility={
             var $iframeobj = $(dialogEle).find("iframe");
             $iframeobj.on("load",function () {
                 //alert("load");
-                this.contentWindow.FrameWindowId = autodialogid;
-                this.contentWindow.OpenerWindowObj = openerwindow;
-                this.contentWindow.IsOpenForFrame = true;
+                if(StringUtility.IsSameOrgin(window.location.href,url)) {
+                    this.contentWindow.FrameWindowId = autodialogid;
+                    this.contentWindow.OpenerWindowObj = openerwindow;
+                    this.contentWindow.IsOpenForFrame = true;
+                }
+                else{
+                    console.log("跨域Iframe,无法设置属性!");
+                }
             });
             $iframeobj.attr("src",url);
             //$iframeobj[0].contentWindow.FrameWindowId = autodialogid;
