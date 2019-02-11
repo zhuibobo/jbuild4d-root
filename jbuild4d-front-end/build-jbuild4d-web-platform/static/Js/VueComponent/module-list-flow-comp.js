@@ -13,6 +13,7 @@ Vue.component("module-list-flow-comp", {
                 newModel:"/PlatForm/Builder/FlowModel/NewModel",
                 editModel:"/PlatForm/Builder/FlowModel/EditModel",
                 reloadData: "/PlatForm/Builder/FlowModel/GetListData",
+                getSingleData:"/PlatForm/Builder/FlowModel/GetDetailData",
                 delete: "/PlatForm/Builder/FlowModel/Delete",
                 move: "/PlatForm/Builder/FlowModel/Move",
             },
@@ -206,11 +207,14 @@ Vue.component("module-list-flow-comp", {
             DialogUtility.CloseDialog(dialogId);
         },
         edit: function (recordId) {
-            var url = BaseUtility.BuildView(this.acInterface.editView, {
-                "op": "update",
-                "recordId": recordId
-            });
-            DialogUtility.OpenNewWindow(window, DialogUtility.DialogId, url, {width: 0, height: 0}, 2);
+            AjaxUtility.Post(this.acInterface.getSingleData,{recordId:recordId,op:"edit"},function (result) {
+                if(result.success) {
+                    DialogUtility.DialogElem("divNewFlowModelWrap",{modal:true,width:600,height:500,title:"编辑流程模型概况"});
+                }
+                else {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                }
+            },"json");
         },
         del: function (recordId) {
             ListPageUtility.IViewTableDeleteRow(this.acInterface.delete, recordId, this);
