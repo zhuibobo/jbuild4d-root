@@ -493,7 +493,7 @@ blockquote {
 }
 .general-edit-page-scroll-outer::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background: #3b97ed;
+  background: #C7DFF7;
 }
 .table-width-wraper-1024 {
   width: 1024px;
@@ -755,7 +755,7 @@ blockquote {
 }
 .edit-table-wrap::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background: #3b97ed;
+  background: #C7DFF7;
 }
 .form-design-wraper {
   position: relative;

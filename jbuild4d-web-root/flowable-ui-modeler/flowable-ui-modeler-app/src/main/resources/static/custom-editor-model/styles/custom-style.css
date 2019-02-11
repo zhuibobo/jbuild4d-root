@@ -1,0 +1,31 @@
+.wrapper.full {
+    padding: 0px 0px 0px 0px;
+    overflow: hidden;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+div.canvas-wrapper {
+    overflow: auto;
+    background-color: #F8F8F8;
+}
+
+div.canvas-wrapper::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+div.canvas-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #C7DFF7;
+}
+
+.selected-item-body::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.selected-item-body::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #C7DFF7;
+}

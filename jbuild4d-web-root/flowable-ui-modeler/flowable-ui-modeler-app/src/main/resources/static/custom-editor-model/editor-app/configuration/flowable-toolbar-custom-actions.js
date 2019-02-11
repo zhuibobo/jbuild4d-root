@@ -33,12 +33,12 @@ FLOWABLE.TOOLBAR.ACTIONS.navigateToProcess = function(processId) {
 
 // Add custom buttons 
 FLOWABLE.TOOLBAR_CONFIG.secondaryItems.push( 
-	{
+	/*{
         "type" : "button",
-        "title" : "Close",
+        "title" : "关闭",
         "cssClass" : "glyphicon glyphicon-remove",
         "action" : "FLOWABLE.TOOLBAR.ACTIONS.closeEditor"
-    }
+    }*/
 );
 
 
