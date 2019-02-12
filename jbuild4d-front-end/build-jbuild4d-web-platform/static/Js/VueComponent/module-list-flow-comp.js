@@ -232,6 +232,20 @@ Vue.component("module-list-flow-comp", {
                 }
             })
         },
+        importModel:function(){
+            if(this.moduleData!=null) {
+                DetailPageUtility.OverrideObjectValueFull(this.flowModelEntity, this.emptyFlowModelEntity);
+                DialogUtility.DialogElem("divImportFlowModelWrap", {
+                    modal: true,
+                    width: 600,
+                    height: 300,
+                    title: "导入流程模型"
+                });
+            }
+            else {
+                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择模块!", null);
+            }
+        },
         /*集成的流程模型编辑器*/
         editModelButton:function (h, params,idField,pageAppObj) {
             return h('div', {
@@ -278,19 +292,14 @@ Vue.component("module-list-flow-comp", {
                             </div>\
                         </div>\
                     </div>\
-                    <div style="display: none" id="divUploadFlowModelWrap">\
+                    <div style="display: none" id="divImportFlowModelWrap">\
                         <div class="general-edit-page-wrap" style="padding: 10px">\
-                            <i-form :label-width="100">\
-                                <form-item label="模型名称：">\
-                                    <i-input></i-input>\
-                                </form-item>\
-                                <form-item label="备注：">\
-                                    <i-input type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>\
-                                </form-item>\
-                            </i-form>\
-                            <Upload action="//jsonplaceholder.typicode.com/posts/">\
-                                <Button icon="ios-cloud-upload-outline">Upload files</Button>\
-                            </Upload>\
+                            <upload multiple type="drag" action="//jsonplaceholder.typicode.com/posts/" accept=".bpmn">\
+                                <div style="padding: 20px 0">\
+                                    <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>\
+                                    <p>Click or drag files here to upload</p>\
+                                </div>\
+                            </upload>\
                             <div class="button-outer-wrap" style="height: 40px;padding-right: 10px">\
                                 <div class="button-inner-wrap">\
                                     <button-group>\
@@ -306,7 +315,7 @@ Vue.component("module-list-flow-comp", {
                         <div class="list-button-inner-wrap">\
                             <ButtonGroup>\
                                 <i-button  type="success" @click="add()" icon="md-add">新增</i-button>\
-                                <i-button type="primary" @click="uploadModel()" icon="md-add">上传模型 </i-button>\
+                                <i-button type="primary" @click="importModel()" icon="md-add">上传模型 </i-button>\
                                 <i-button type="error" icon="md-albums">复制</i-button>\
                                 <i-button type="error" icon="md-bookmarks">历史模型</i-button>\
                                 <i-button type="error" icon="md-brush">复制ID</i-button>\
