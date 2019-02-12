@@ -10,7 +10,8 @@ import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 
 public interface IFlowModelService extends IBaseService<FlowModelEntity> {
-    FlowModelEntity importNewModel(JB4DSession jb4DSession, MultipartFile file) throws IOException, XMLStreamException, JBuild4DGenerallyException;
+
+    FlowModelEntity importNewModel(JB4DSession jb4DSession, String modelModuleId, MultipartFile file) throws IOException, XMLStreamException, JBuild4DGenerallyException;
 
     FlowModelEntity newModel(JB4DSession jb4DSession, FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException;
 

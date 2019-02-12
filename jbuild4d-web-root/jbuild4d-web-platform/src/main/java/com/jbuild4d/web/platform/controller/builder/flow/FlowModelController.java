@@ -56,8 +56,8 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
 
     @RequestMapping(value = "/ImportProcessModel", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public JBuild4DResponseVo importProcessModel(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws JBuild4DGenerallyException, XMLStreamException, IOException {
-        FlowModelEntity _flowModelEntity=flowModelService.importNewModel(JB4DSessionUtility.getSession(),file);
+    public JBuild4DResponseVo importProcessModel(HttpServletRequest request,String modelModuleId, @RequestParam("file") MultipartFile file) throws JBuild4DGenerallyException, XMLStreamException, IOException {
+        FlowModelEntity _flowModelEntity=flowModelService.importNewModel(JB4DSessionUtility.getSession(),modelModuleId,file);
         String editModelWebUrl = flowModelService.buildEditModelWebUrl(_flowModelEntity);
         Map<String, Object> result = new HashedMap();
         result.put("editModelWebUrl", editModelWebUrl);

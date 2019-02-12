@@ -16,6 +16,7 @@ import com.sun.xml.internal.ws.util.xml.XmlUtil;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.BpmnModel;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -60,7 +61,7 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
     }
 
     @Override
-    public FlowModelEntity importNewModel(JB4DSession jb4DSession, MultipartFile file) throws IOException, XMLStreamException, JBuild4DGenerallyException {
+    public FlowModelEntity importNewModel(JB4DSession jb4DSession, String modelModuleId, MultipartFile file) throws IOException, XMLStreamException, JBuild4DGenerallyException {
 
         XMLInputFactory xif = XMLUtility.createSafeXmlInputFactory();
         InputStreamReader xmlIn = new InputStreamReader(file.getInputStream(), "UTF-8");
@@ -72,13 +73,31 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
         FlowModelerConfigVo configVo=flowModelerConfigService.getVoFromCache();
         String url=configVo.getBaseUrl()+configVo.getImportModelRest();
         try {
-            HttpHeaders headers = new HttpHeaders();
+            /*HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
             MultiValueMap<String,Object> parts = new LinkedMultiValueMap<>();
-            parts.add("file",file);
-            HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(parts, headers);
-            ResponseEntity<DeModelVo> responseEntity = restTemplate.exchange(url, HttpMethod.POST, request, DeModelVo.class);
-            deModelVo = responseEntity.getBody();
+
+           // parts.add("file",new ByteArrayResource(file.getBytes()));
+
+            MultiValueMap<String, Object> formData = new LinkedMultiValueMap<String, Object>();
+            formData.add("file" ,new ByteArrayResource(file.getBytes()));
+            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<MultiValueMap<String, Object>>(formData, headers);
+            ResponseEntity<DeModelVo> responseEntity = restTemplate.postForEntity(url, requestEntity, DeModelVo.class);
+            deModelVo = responseEntity.getBody();*/
+
+            HttpHeaders requestHeaders = new HttpHeaders();
+            requestHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
+            MultiValueMap<String, Object> mvm = new LinkedMultiValueMap<String, Object>();
+            ByteArrayResource resource = new ByteArrayResource(file.getBytes()) {
+                @Override
+                public String getFilename() {
+                    return file.getOriginalFilename();
+                }
+            };
+            mvm.add("file" ,resource);
+            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<MultiValueMap<String, Object>>(mvm, requestHeaders);
+            ResponseEntity<DeModelVo> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, DeModelVo.class);
+            deModelVo = response.getBody();
         }
         catch (Exception ex){
             ex.printStackTrace();
@@ -92,13 +111,14 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
         flowModelEntity.setModelStartKey(deModelVo.getKey());
         flowModelEntity.setModelCreater(jb4DSession.getUserName());
         flowModelEntity.setModelCreateTime(new Date());
-        flowModelEntity.setModelFromType("Web设计");
+        flowModelEntity.setModelFromType("Web导入");
         flowModelEntity.setModelUpdater(jb4DSession.getUserName());
         flowModelEntity.setModelUpdateTime(new Date());
         flowModelEntity.setModelOrderNum(flowModelMapper.nextOrderNum());
         flowModelEntity.setModelCode(moduleService.buildModuleItemCode(flowModelEntity.getModelOrderNum()));
+        flowModelEntity.setModelModuleId(modelModuleId);
 
-        bpmnModel.getMainProcess().getName();
+        flowModelMapper.insert(flowModelEntity);
 
         return flowModelEntity;
     }
