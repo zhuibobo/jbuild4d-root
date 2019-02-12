@@ -7,6 +7,9 @@
         <ModelDesignView>
             <![CDATA[custom-editor-model/edit#/editor/]]>
         </ModelDesignView>
+        <ModelView>
+            <![CDATA[custom-editor-model/edit#/processes/]]>
+        </ModelView>
         <ModelRest>
             <![CDATA[app/rest/models]]>
         </ModelRest>

@@ -12,6 +12,7 @@ Vue.component("module-list-flow-comp", {
                 //uploadFlowModelView: "/PlatForm/Builder/FlowModel/UploadFlowModelView",
                 saveModel:"/PlatForm/Builder/FlowModel/SaveModel",
                 getEditModelURL:"/PlatForm/Builder/FlowModel/GetEditModelURL",
+                getViewModelURL:"/PlatForm/Builder/FlowModel/GetViewModelURL",
                 reloadData: "/PlatForm/Builder/FlowModel/GetListData",
                 getSingleData:"/PlatForm/Builder/FlowModel/GetDetailData",
                 delete: "/PlatForm/Builder/FlowModel/DeleteModel",
@@ -300,6 +301,16 @@ Vue.component("module-list-flow-comp", {
                 //console.log(result);
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, result.data.editModelWebUrl, {
                     title: "流程设计",
+                    modal: true
+                }, 0);
+            }, "json");
+        },
+        viewModel:function (recordId) {
+            AjaxUtility.Post(this.acInterface.getViewModelURL, {modelId: recordId}, function (result) {
+                //DialogUtility.OpenNewWindow(window, "editModelWebWindow", result.data.editModelWebUrl);
+                //console.log(result);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, result.data.editModelWebUrl, {
+                    title: "流程浏览",
                     modal: true
                 }, 0);
             }, "json");
