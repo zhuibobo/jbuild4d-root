@@ -30,6 +30,12 @@ var DetailPageUtility={
             }
         }
     },
+    OverrideObjectValueFull:function (sourceObject, dataObject) {
+        //console.log(dataObject);
+        for(var key in sourceObject) {
+            sourceObject[key] = dataObject[key];
+        }
+    },
     BindFormData:function(interfaceUrl,vueFormData,recordId,op,befFunc,afFunc){
         //获取数据并赋值
         AjaxUtility.Post(interfaceUrl,{recordId:recordId,op:op},function (result) {
