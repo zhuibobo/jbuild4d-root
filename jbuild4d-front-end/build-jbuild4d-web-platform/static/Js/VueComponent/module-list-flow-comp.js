@@ -192,9 +192,9 @@ Vue.component("module-list-flow-comp", {
         },
         edit: function (recordId) {
             var _self=this;
+            _self.$refs["flowModelEntity"].resetFields();
             AjaxUtility.Post(this.acInterface.getSingleData,{recordId:recordId,op:"edit"},function (result) {
                 if(result.success) {
-                    _self.$refs["flowModelEntity"].resetFields();
                     DetailPageUtility.OverrideObjectValueFull(_self.flowModelEntity, result.data);
                     DialogUtility.DialogElem("divNewFlowModelWrap",{modal:true,width:600,height:500,title:"编辑流程模型概况"});
                 }
