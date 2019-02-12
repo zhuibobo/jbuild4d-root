@@ -99,4 +99,10 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
         result.put("flowModelEntity",_flowModelEntity);
         return JBuild4DResponseVo.success("获取数据成功!",result);
     }
+
+    @RequestMapping(value = "")
+    @ResponseBody
+    public JBuild4DResponseVo getViewModelURL(String modelId){
+
+    }
 }
