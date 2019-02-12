@@ -70,14 +70,14 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
         DeModelVo deModelVo=new DeModelVo();
 
         FlowModelerConfigVo configVo=flowModelerConfigService.getVoFromCache();
-        String url=configVo.getBaseUrl()+configVo.getModelRest();
+        String url=configVo.getBaseUrl()+configVo.getImportModelRest();
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
             MultiValueMap<String,Object> parts = new LinkedMultiValueMap<>();
             parts.add("file",file);
             HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(parts, headers);
-            ResponseEntity<DeModelVo> responseEntity = restTemplate.exchange("http://localhost:9303/upload", HttpMethod.POST, request, DeModelVo.class);
+            ResponseEntity<DeModelVo> responseEntity = restTemplate.exchange(url, HttpMethod.POST, request, DeModelVo.class);
             deModelVo = responseEntity.getBody();
         }
         catch (Exception ex){
@@ -86,7 +86,10 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
         }
 
         FlowModelEntity flowModelEntity=new FlowModelEntity();
-
+        flowModelEntity.setModelId(deModelVo.getId());
+        flowModelEntity.setModelDeId(deModelVo.getId());
+        flowModelEntity.setModelName(deModelVo.getName());
+        flowModelEntity.setModelStartKey(deModelVo.getKey());
         flowModelEntity.setModelCreater(jb4DSession.getUserName());
         flowModelEntity.setModelCreateTime(new Date());
         flowModelEntity.setModelFromType("Web设计");

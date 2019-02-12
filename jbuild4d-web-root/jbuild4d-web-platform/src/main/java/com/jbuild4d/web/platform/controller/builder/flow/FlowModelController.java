@@ -11,10 +11,12 @@ import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.stream.XMLStreamException;
+import java.io.IOException;
 import java.util.Map;
 
 @Controller
@@ -50,6 +52,16 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
     @Override
     public String getModuleName() {
         return "模块设计-流程模型";
+    }
+
+    @RequestMapping(value = "/ImportProcessModel", method = RequestMethod.POST, produces = "application/json")
+    public JBuild4DResponseVo importProcessModel(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws JBuild4DGenerallyException, XMLStreamException, IOException {
+        FlowModelEntity _flowModelEntity=flowModelService.importNewModel(JB4DSessionUtility.getSession(),file);
+        String editModelWebUrl = flowModelService.buildEditModelWebUrl(_flowModelEntity);
+        Map<String, Object> result = new HashedMap();
+        result.put("editModelWebUrl", editModelWebUrl);
+        result.put("flowModelEntity", _flowModelEntity);
+        return JBuild4DResponseVo.success("导入流程模型成功!", result);
     }
 
     @RequestMapping(value = "SaveModel")
