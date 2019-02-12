@@ -22,6 +22,22 @@ public class DeModelVo {
     protected Integer modelType;
     protected String tenantId;
 
+    public DeModelVo() {
+    }
+
+    public DeModelVo(String name, String key, String description) {
+        this.name = name;
+        this.key = key;
+        this.description = description;
+    }
+
+    public DeModelVo(String name, String key, String description, Integer modelType) {
+        this.name = name;
+        this.key = key;
+        this.description = description;
+        this.modelType = modelType;
+    }
+
     public String getId() {
         return id;
     }

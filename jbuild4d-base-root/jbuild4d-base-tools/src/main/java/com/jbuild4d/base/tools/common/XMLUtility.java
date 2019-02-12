@@ -16,6 +16,7 @@ import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.XMLInputFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -340,5 +341,21 @@ public class XMLUtility {
         result.setOutputStream(os);
 
         transformer.transform(source, result);
+    }
+
+    public static XMLInputFactory createSafeXmlInputFactory() {
+        XMLInputFactory xif = XMLInputFactory.newInstance();
+        if (xif.isPropertySupported(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES)) {
+            xif.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, false);
+        }
+
+        if (xif.isPropertySupported(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES)) {
+            xif.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        }
+
+        if (xif.isPropertySupported(XMLInputFactory.SUPPORT_DTD)) {
+            xif.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+        }
+        return xif;
     }
 }

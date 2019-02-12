@@ -8,7 +8,8 @@ package com.jbuild4d.platform.builder.vo;
  */
 public class FlowModelerConfigVo {
     private String baseUrl;
-    private String newModelRest;
+    private String modelRest;
+    private String importModelRest;
     private String modelDesignView;
 
     public String getBaseUrl() {
@@ -19,12 +20,12 @@ public class FlowModelerConfigVo {
         this.baseUrl = baseUrl;
     }
 
-    public String getNewModelRest() {
-        return newModelRest;
+    public String getModelRest() {
+        return modelRest;
     }
 
-    public void setNewModelRest(String newModelRest) {
-        this.newModelRest = newModelRest;
+    public void setModelRest(String modelRest) {
+        this.modelRest = modelRest;
     }
 
     public String getModelDesignView() {
@@ -33,5 +34,13 @@ public class FlowModelerConfigVo {
 
     public void setModelDesignView(String modelDesignView) {
         this.modelDesignView = modelDesignView;
+    }
+
+    public String getImportModelRest() {
+        return importModelRest;
+    }
+
+    public void setImportModelRest(String importModelRest) {
+        this.importModelRest = importModelRest;
     }
 }

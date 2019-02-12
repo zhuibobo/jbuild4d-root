@@ -7,8 +7,11 @@
         <ModelDesignView>
             <![CDATA[custom-editor-model/edit#/editor/]]>
         </ModelDesignView>
-        <NewModelRest>
+        <ModelRest>
             <![CDATA[app/rest/models]]>
-        </NewModelRest>
+        </ModelRest>
+        <ImportModelRest>
+            <![CDATA[app/rest/import-process-model]]>
+        </ImportModelRest>
     </ModelerRest>
 </Config>
