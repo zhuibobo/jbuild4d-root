@@ -66,7 +66,14 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
         Map<String, Object> result = new HashedMap();
         result.put("editModelWebUrl", editModelWebUrl);
         result.put("flowModelEntity", _flowModelEntity);
-        return JBuild4DResponseVo.success("新建流程模型成功!", result);
+        return JBuild4DResponseVo.success("保存流程模型成功!", result);
+    }
+
+    @RequestMapping(value = "DeleteModel")
+    @ResponseBody
+    public JBuild4DResponseVo deleteModel(String modelId) throws JBuild4DGenerallyException {
+        flowModelService.deleteByKey(JB4DSessionUtility.getSession(),modelId);
+        return JBuild4DResponseVo.success("删除模型成功");
     }
 
     @RequestMapping(value = "GetEditModelURL")

@@ -80,7 +80,7 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
     }
 
     @Override
-    public FlowModelEntity updateModel(JB4DSession jb4DSession,FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException {
+    public FlowModelEntity updateModel(JB4DSession jb4DSession, FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException {
 
         FlowModelerConfigVo configVo=flowModelerConfigService.getVoFromCache();
         String url=configVo.getBaseUrl()+configVo.getNewModelRest()+"/{1}";
@@ -97,8 +97,29 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
             ex.printStackTrace();
             throw new JBuild4DGenerallyException("调用REST接口失败!"+ex.getMessage());
         }
+
+        flowModelEntity.setModelUpdateTime(new Date());
+        flowModelEntity.setModelUpdater(jb4DSession.getUserName());
+
         flowModelMapper.updateByPrimaryKeySelective(flowModelEntity);
         return flowModelEntity;
+    }
+
+    @Override
+    public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        //return super.deleteByKey(jb4DSession, id);
+        FlowModelerConfigVo configVo=flowModelerConfigService.getVoFromCache();
+        String url=configVo.getBaseUrl()+configVo.getNewModelRest()+"/{1}";
+
+        FlowModelEntity flowModelEntity=flowModelMapper.selectByPrimaryKey(id);
+        try {
+            restTemplate.delete(url, flowModelEntity.getModelDeId());
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            throw new JBuild4DGenerallyException("调用REST接口失败!"+ex.getMessage());
+        }
+        return flowModelMapper.deleteByPrimaryKey(id);
     }
 
     @Override
@@ -106,5 +127,29 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
         FlowModelerConfigVo configVo=flowModelerConfigService.getVoFromCache();
         String url=configVo.getBaseUrl()+configVo.getModelDesignView()+flowModelEntity.getModelDeId();
         return url;
+    }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        FlowModelEntity selfEntity = flowModelMapper.selectByPrimaryKey(id);
+        FlowModelEntity ltEntity = flowModelMapper.selectGreaterThanRecord(id, selfEntity.getModelModuleId());
+        switchOrder(ltEntity, selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        FlowModelEntity selfEntity = flowModelMapper.selectByPrimaryKey(id);
+        FlowModelEntity ltEntity = flowModelMapper.selectLessThanRecord(id, selfEntity.getModelModuleId());
+        switchOrder(ltEntity, selfEntity);
+    }
+
+    private void switchOrder(FlowModelEntity toEntity, FlowModelEntity selfEntity) {
+        if (toEntity != null) {
+            int newNum = toEntity.getModelOrderNum();
+            toEntity.setModelOrderNum(selfEntity.getModelOrderNum());
+            selfEntity.setModelOrderNum(newNum);
+            flowModelMapper.updateByPrimaryKeySelective(toEntity);
+            flowModelMapper.updateByPrimaryKeySelective(selfEntity);
+        }
     }
 }

@@ -14,7 +14,7 @@ Vue.component("module-list-flow-comp", {
                 getEditModelURL:"/PlatForm/Builder/FlowModel/GetEditModelURL",
                 reloadData: "/PlatForm/Builder/FlowModel/GetListData",
                 getSingleData:"/PlatForm/Builder/FlowModel/GetDetailData",
-                delete: "/PlatForm/Builder/FlowModel/Delete",
+                delete: "/PlatForm/Builder/FlowModel/DeleteModel",
                 move: "/PlatForm/Builder/FlowModel/Move",
             },
             idFieldName: "modelId",
@@ -211,6 +211,7 @@ Vue.component("module-list-flow-comp", {
             this.$refs[name].validate(function (valid) {
                 if (valid) {
                     _self.flowModelEntity.modelModuleId=_self.moduleData.moduleId;
+                    var _designModel=(_self.flowModelEntity.modelId==""?true:false)
                     var sendData = JSON.stringify(_self.flowModelEntity);
                     AjaxUtility.PostRequestBody(_self.acInterface.saveModel, sendData, function (result) {
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
@@ -220,7 +221,9 @@ Vue.component("module-list-flow-comp", {
                             _self.handleClose("divNewFlowModelWrap");
                             _self.reloadData();
                             //console.log(result);
-                            DialogUtility.OpenNewWindow(window,"editModelWebWindow",result.data.editModelWebUrl);
+                            if(_designModel) {
+                                DialogUtility.OpenNewWindow(window, "editModelWebWindow", result.data.editModelWebUrl);
+                            }
                             //打开流程设计页面
                         });
                     }, "json");
