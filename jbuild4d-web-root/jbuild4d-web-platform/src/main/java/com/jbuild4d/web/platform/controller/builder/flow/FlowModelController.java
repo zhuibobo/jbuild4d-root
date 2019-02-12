@@ -71,8 +71,8 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
 
     @RequestMapping(value = "DeleteModel")
     @ResponseBody
-    public JBuild4DResponseVo deleteModel(String modelId) throws JBuild4DGenerallyException {
-        flowModelService.deleteByKey(JB4DSessionUtility.getSession(),modelId);
+    public JBuild4DResponseVo deleteModel(String recordId) throws JBuild4DGenerallyException {
+        flowModelService.deleteByKey(JB4DSessionUtility.getSession(),recordId);
         return JBuild4DResponseVo.success("删除模型成功");
     }
 
