@@ -59,13 +59,14 @@ Vue.component("module-list-flow-comp", {
                 }, {
                     title: '操作',
                     key: 'modelId',
-                    width: 120,
+                    width: 140,
                     align: "center",
                     render: function (h, params) {
                         //console.log(params);
                         //console.log(this);
                         return h('div',{class: "list-row-button-wrap"},[
                             window._modulelistflowcomp.editModelButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp),
+                            window._modulelistflowcomp.viewModelButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp),
                             ListPageUtility.IViewTableInnerButton.EditButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp),
                             ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp)
                         ]);
@@ -284,7 +285,14 @@ Vue.component("module-list-flow-comp", {
             });
         },
         viewModelButton:function(h, params, idField, pageAppObj){
-
+            return h('div', {
+                class: "list-row-button view-model",
+                on: {
+                    click: function () {
+                        pageAppObj.editModel(params.row[idField]);
+                    }
+                }
+            });
         },
         editModel: function (recordId) {
             AjaxUtility.Post(this.acInterface.getEditModelURL, {modelId: recordId}, function (result) {
