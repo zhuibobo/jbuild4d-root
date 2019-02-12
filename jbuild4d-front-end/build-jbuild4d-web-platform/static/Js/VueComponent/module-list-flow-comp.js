@@ -246,6 +246,12 @@ Vue.component("module-list-flow-comp", {
                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择模块!", null);
             }
         },
+        uploadSuccess:function(response, file, fileList){
+            //debugger;
+            if(response.success==false){
+                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, response.message, null);
+            }
+        },
         /*集成的流程模型编辑器*/
         editModelButton:function (h, params,idField,pageAppObj) {
             return h('div', {
@@ -294,7 +300,7 @@ Vue.component("module-list-flow-comp", {
                     </div>\
                     <div style="display: none" id="divImportFlowModelWrap">\
                         <div class="general-edit-page-wrap" style="padding: 10px">\
-                            <upload multiple type="drag" action="//jsonplaceholder.typicode.com/posts/" accept=".bpmn">\
+                            <upload :on-success="uploadSuccess" multiple type="drag" name="file" action="../../../PlatForm/Builder/FlowModel/ImportProcessModel.do" accept=".bpmn">\
                                 <div style="padding: 20px 0">\
                                     <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>\
                                     <p>Click or drag files here to upload</p>\
@@ -303,8 +309,7 @@ Vue.component("module-list-flow-comp", {
                             <div class="button-outer-wrap" style="height: 40px;padding-right: 10px">\
                                 <div class="button-inner-wrap">\
                                     <button-group>\
-                                        <i-button type="primary" @click="handleSubmit(\'formEntity\')">保 存</i-button>\
-                                        <i-button @click="handleClose()">关 闭</i-button>\
+                                        <i-button @click="handleClose(\'divImportFlowModelWrap\')">关 闭</i-button>\
                                     </button-group>\
                                 </div>\
                             </div>\

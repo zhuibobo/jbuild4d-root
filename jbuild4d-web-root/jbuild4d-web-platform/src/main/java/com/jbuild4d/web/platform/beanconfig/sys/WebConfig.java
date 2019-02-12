@@ -88,12 +88,13 @@ public class WebConfig implements WebMvcConfigurer {
         //super.addFormatters(registry);
     }
 
-    @Bean
+    /*@Bean
     public MultipartResolver multipartResolver(){
         CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver();
         multipartResolver.setMaxUploadSize(100000000);
+        //multipartResolver.setUploadTempDir();
         return multipartResolver;
-    }
+    }*/
 
     @Bean
     MappingJackson2HttpMessageConverter extendConverter() {
