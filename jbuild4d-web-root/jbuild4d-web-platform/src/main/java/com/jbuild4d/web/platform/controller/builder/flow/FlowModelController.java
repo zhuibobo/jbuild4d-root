@@ -52,20 +52,26 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
         return "模块设计-流程模型";
     }
 
-    @RequestMapping(value = "NewModel")
+    @RequestMapping(value = "SaveModel")
     @ResponseBody
-    public JBuild4DResponseVo newModel(@RequestBody FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException {
-        FlowModelEntity _flowModelEntity=flowModelService.newModel(JB4DSessionUtility.getSession(),flowModelEntity);
-        String editModelWebUrl=flowModelService.buildEditModelWebUrl(_flowModelEntity);
-        Map<String,Object> result=new HashedMap();
-        result.put("editModelWebUrl",editModelWebUrl);
-        result.put("flowModelEntity",_flowModelEntity);
-        return JBuild4DResponseVo.success("新建流程模型成功!",result);
+    public JBuild4DResponseVo saveModel(@RequestBody FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException {
+        FlowModelEntity _flowModelEntity = null;
+        if (flowModelEntity.getModelId().equals("")) {
+            _flowModelEntity=flowModelService.newModel(JB4DSessionUtility.getSession(), flowModelEntity);
+        }
+        else {
+            _flowModelEntity=flowModelService.updateModel(JB4DSessionUtility.getSession(), flowModelEntity);
+        }
+        String editModelWebUrl = flowModelService.buildEditModelWebUrl(_flowModelEntity);
+        Map<String, Object> result = new HashedMap();
+        result.put("editModelWebUrl", editModelWebUrl);
+        result.put("flowModelEntity", _flowModelEntity);
+        return JBuild4DResponseVo.success("新建流程模型成功!", result);
     }
 
-    @RequestMapping(value = "EditModel")
+    @RequestMapping(value = "GetEditModelURL")
     @ResponseBody
-    public JBuild4DResponseVo editModel(String modelId) throws JBuild4DGenerallyException {
+    public JBuild4DResponseVo getEditModelURL(String modelId) throws JBuild4DGenerallyException {
         FlowModelEntity _flowModelEntity=flowModelService.getByPrimaryKey(JB4DSessionUtility.getSession(),modelId);
         String editModelWebUrl=flowModelService.buildEditModelWebUrl(_flowModelEntity);
         Map<String,Object> result=new HashedMap();

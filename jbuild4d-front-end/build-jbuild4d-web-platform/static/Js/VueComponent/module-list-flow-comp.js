@@ -10,8 +10,8 @@ Vue.component("module-list-flow-comp", {
             acInterface:{
                 //editView: "/PlatForm/Builder/FlowModel/DetailView",
                 //uploadFlowModelView: "/PlatForm/Builder/FlowModel/UploadFlowModelView",
-                newModel:"/PlatForm/Builder/FlowModel/NewModel",
-                editModel:"/PlatForm/Builder/FlowModel/EditModel",
+                saveModel:"/PlatForm/Builder/FlowModel/SaveModel",
+                getEditModelURL:"/PlatForm/Builder/FlowModel/GetEditModelURL",
                 reloadData: "/PlatForm/Builder/FlowModel/GetListData",
                 getSingleData:"/PlatForm/Builder/FlowModel/GetDetailData",
                 delete: "/PlatForm/Builder/FlowModel/Delete",
@@ -212,7 +212,7 @@ Vue.component("module-list-flow-comp", {
                 if (valid) {
                     _self.flowModelEntity.modelModuleId=_self.moduleData.moduleId;
                     var sendData = JSON.stringify(_self.flowModelEntity);
-                    AjaxUtility.PostRequestBody(_self.acInterface.newModel, sendData, function (result) {
+                    AjaxUtility.PostRequestBody(_self.acInterface.saveModel, sendData, function (result) {
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                             //debugger;
                             //window.OpenerWindowObj.appList.reloadData();
@@ -241,7 +241,7 @@ Vue.component("module-list-flow-comp", {
             });
         },
         editModel:function (recordId) {
-            AjaxUtility.Post(this.acInterface.editModel, {modelId: recordId}, function (result) {
+            AjaxUtility.Post(this.acInterface.getEditModelURL, {modelId: recordId}, function (result) {
                 //DialogUtility.OpenNewWindow(window, "editModelWebWindow", result.data.editModelWebUrl);
                 //console.log(result);
                 DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId,result.data.editModelWebUrl,{

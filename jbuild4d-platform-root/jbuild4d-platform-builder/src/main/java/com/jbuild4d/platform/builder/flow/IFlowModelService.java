@@ -8,5 +8,7 @@ import com.jbuild4d.base.service.general.JB4DSession;
 public interface IFlowModelService extends IBaseService<FlowModelEntity> {
     FlowModelEntity newModel(JB4DSession jb4DSession, FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException;
 
+    FlowModelEntity updateModel(JB4DSession jb4DSession, FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException;
+
     String buildEditModelWebUrl(FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException;
 }

@@ -80,6 +80,28 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
     }
 
     @Override
+    public FlowModelEntity updateModel(JB4DSession jb4DSession,FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException {
+
+        FlowModelerConfigVo configVo=flowModelerConfigService.getVoFromCache();
+        String url=configVo.getBaseUrl()+configVo.getNewModelRest()+"/{1}";
+
+        DeModelVo deModelVo=new DeModelVo();
+        deModelVo.setName(flowModelEntity.getModelName());
+        deModelVo.setKey(flowModelEntity.getModelStartKey());
+        deModelVo.setDescription(flowModelEntity.getModelDesc());
+
+        try {
+            restTemplate.put(url, deModelVo, flowModelEntity.getModelDeId());
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            throw new JBuild4DGenerallyException("调用REST接口失败!"+ex.getMessage());
+        }
+        flowModelMapper.updateByPrimaryKeySelective(flowModelEntity);
+        return flowModelEntity;
+    }
+
+    @Override
     public String buildEditModelWebUrl(FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException {
         FlowModelerConfigVo configVo=flowModelerConfigService.getVoFromCache();
         String url=configVo.getBaseUrl()+configVo.getModelDesignView()+flowModelEntity.getModelDeId();
