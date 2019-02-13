@@ -207,6 +207,13 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
     }
 
     @Override
+    public String buildViewModelWebUrl(FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException {
+        FlowModelerConfigVo configVo=flowModelerConfigService.getVoFromCache();
+        String url=configVo.getBaseUrl()+configVo.getModelView()+flowModelEntity.getModelDeId();
+        return url;
+    }
+
+    @Override
     public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
         FlowModelEntity selfEntity = flowModelMapper.selectByPrimaryKey(id);
         FlowModelEntity ltEntity = flowModelMapper.selectGreaterThanRecord(id, selfEntity.getModelModuleId());

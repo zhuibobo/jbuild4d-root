@@ -100,9 +100,14 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
         return JBuild4DResponseVo.success("获取数据成功!",result);
     }
 
-    @RequestMapping(value = "")
+    @RequestMapping(value = "GetViewModelURL")
     @ResponseBody
-    public JBuild4DResponseVo getViewModelURL(String modelId){
-
+    public JBuild4DResponseVo getViewModelURL(String modelId) throws JBuild4DGenerallyException {
+        FlowModelEntity _flowModelEntity=flowModelService.getByPrimaryKey(JB4DSessionUtility.getSession(),modelId);
+        String editModelWebUrl=flowModelService.buildViewModelWebUrl(_flowModelEntity);
+        Map<String,Object> result=new HashedMap();
+        result.put("editModelWebUrl",editModelWebUrl);
+        result.put("flowModelEntity",_flowModelEntity);
+        return JBuild4DResponseVo.success("获取数据成功!",result);
     }
 }

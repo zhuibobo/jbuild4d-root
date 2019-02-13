@@ -48,6 +48,7 @@ public class FlowModelerConfigServiceImpl implements IFlowModelerConfigService {
 
             String baseUrl=XMLUtility.parseForNode(modelerRestNode,"BaseUrl").getTextContent().trim();
             String modelDesignView=XMLUtility.parseForNode(modelerRestNode,"ModelDesignView").getTextContent().trim();
+            String modelView=XMLUtility.parseForNode(modelerRestNode,"ModelView").getTextContent().trim();
             String modelRest=XMLUtility.parseForNode(modelerRestNode,"ModelRest").getTextContent().trim();
             String importModelRest=XMLUtility.parseForNode(modelerRestNode,"ImportModelRest").getTextContent().trim();
 
@@ -55,6 +56,7 @@ public class FlowModelerConfigServiceImpl implements IFlowModelerConfigService {
             flowModelerConfigVo.setBaseUrl(baseUrl);
             flowModelerConfigVo.setModelRest(modelRest);
             flowModelerConfigVo.setModelDesignView(modelDesignView);
+            flowModelerConfigVo.setModelView(modelView);
             flowModelerConfigVo.setImportModelRest(importModelRest);
 
             return flowModelerConfigVo;

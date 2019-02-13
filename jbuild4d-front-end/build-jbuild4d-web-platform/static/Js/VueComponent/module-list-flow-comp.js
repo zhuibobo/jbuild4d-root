@@ -290,7 +290,7 @@ Vue.component("module-list-flow-comp", {
                 class: "list-row-button view-model",
                 on: {
                     click: function () {
-                        pageAppObj.editModel(params.row[idField]);
+                        pageAppObj.viewModel(params.row[idField]);
                     }
                 }
             });
@@ -307,8 +307,7 @@ Vue.component("module-list-flow-comp", {
         },
         viewModel:function (recordId) {
             AjaxUtility.Post(this.acInterface.getViewModelURL, {modelId: recordId}, function (result) {
-                //DialogUtility.OpenNewWindow(window, "editModelWebWindow", result.data.editModelWebUrl);
-                //console.log(result);
+                //alert(result.data.editModelWebUrl);
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, result.data.editModelWebUrl, {
                     title: "流程浏览",
                     modal: true

@@ -18,4 +18,6 @@ public interface IFlowModelService extends IBaseService<FlowModelEntity> {
     FlowModelEntity updateModel(JB4DSession jb4DSession, FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException;
 
     String buildEditModelWebUrl(FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException;
+
+    String buildViewModelWebUrl(FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException;
 }

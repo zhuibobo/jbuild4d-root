@@ -11,6 +11,7 @@ public class FlowModelerConfigVo {
     private String modelRest;
     private String importModelRest;
     private String modelDesignView;
+    private String modelView;
 
     public String getBaseUrl() {
         return baseUrl;
@@ -34,6 +35,14 @@ public class FlowModelerConfigVo {
 
     public void setModelDesignView(String modelDesignView) {
         this.modelDesignView = modelDesignView;
+    }
+
+    public String getModelView() {
+        return modelView;
+    }
+
+    public void setModelView(String modelView) {
+        this.modelView = modelView;
     }
 
     public String getImportModelRest() {
