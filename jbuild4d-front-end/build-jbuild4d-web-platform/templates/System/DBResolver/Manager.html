@@ -85,6 +85,9 @@
                                     <radio label="systemsetting">
                                         <span>systemsetting</span>
                                     </radio>
+                                    <radio label="files">
+                                        <span>files</span>
+                                    </radio>
                                 </radio-group>
                             </i-col>
                         </row>
@@ -204,6 +207,9 @@
             },
             methods:{
                 beginGenerateCode:function () {
+                    if(this.formValidate.tableName==""){
+                        return false;
+                    }
                     var _self=this;
                     _self.codeIsGenerateing=true;
                     var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode';

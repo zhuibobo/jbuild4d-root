@@ -15,6 +15,7 @@
         <module>jbuild4d-platform-system</module>
         <module>jbuild4d-platform-builder</module>
         <module>jbuild4d-platform-organ</module>
+        <module>jbuild4d-platform-files</module>
     </modules>
 
     <dependencies>

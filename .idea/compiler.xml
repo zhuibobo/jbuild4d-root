@@ -18,6 +18,7 @@
         <module name="jbuild4d-base-service" />
         <module name="jbuild4d-base-tools" />
         <module name="jbuild4d-platform-builder" />
+        <module name="jbuild4d-platform-files" />
         <module name="jbuild4d-platform-organ" />
         <module name="jbuild4d-platform-system" />
         <module name="jbuild4d-web-platform" />
@@ -38,6 +39,7 @@
       <module name="jbuild4d-base-service" target="1.8" />
       <module name="jbuild4d-base-tools" target="1.8" />
       <module name="jbuild4d-platform-builder" target="1.8" />
+      <module name="jbuild4d-platform-files" target="1.8" />
       <module name="jbuild4d-platform-organ" target="1.8" />
       <module name="jbuild4d-platform-root" target="1.8" />
       <module name="jbuild4d-platform-system" target="1.8" />
