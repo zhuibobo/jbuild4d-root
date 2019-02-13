@@ -57,7 +57,7 @@ flowableModeler
             controller: 'ProcessesCtrl'
         })
         .when('/processes/:modelId', {
-            templateUrl: appResourceRoot + 'views/process.html',
+            templateUrl: appResourceRoot + 'custom-editor-model/views/process.html',
             controller: 'ProcessCtrl'
         })
         .when('/processes/:modelId/history/:modelHistoryId', {
