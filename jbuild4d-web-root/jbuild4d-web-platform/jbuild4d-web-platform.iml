@@ -37,6 +37,7 @@
     <orderEntry type="module" module-name="jbuild4d-platform-system" />
     <orderEntry type="module" module-name="jbuild4d-platform-organ" />
     <orderEntry type="module" module-name="jbuild4d-platform-builder" />
+    <orderEntry type="module" module-name="jbuild4d-platform-files" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.1.2.RELEASE" level="project" />
