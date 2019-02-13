@@ -1,5 +1,5 @@
 
-<div class="subheader" ng-if="model.process">123123123
+<div class="subheader" ng-if="model.process">
 	<div class="fixed-container">
 		<div class="btn-group pull-right">
 			<button type="button" class="btn btn-default" ng-click="openEditor()" ng-if="model.process.latestVersion">
@@ -15,6 +15,12 @@
 	        </a>
 		</div>
 		<div class="btn-group pull-right">
+			<button id="toggle-history" type="button" class="btn btn-subtle" ng-click="toggleHistory($event)"
+					title="{{'PROCESS.ACTION.EDIT' | translate}}">
+				{{'PROCESS.DETAILS.HISTORY-TITLE' | translate}} <span class="counter" ng-show="model.versions.data.length">{{model.versions.data.length}}</span>
+			</button>
+		</div>
+		<div class="btn-group pull-right" style="display: none">
 			<button type="button" class="btn btn-default" ng-click="editProcess()" ng-disabled="!model.process.latestVersion"
 				title="{{'PROCESS.ACTION.EDIT' | translate}}">
 				<i class="glyphicon glyphicon-pencil"></i>
@@ -28,28 +34,28 @@
 				<i class="glyphicon glyphicon-trash"></i>
 			</button>
 		</div>		
-		<div class="pull-right">
+		<div class="pull-right" style="display: none">
 			<a ng-click="returnToList()" class="action">&larr; {{'GENERAL.ACTION.RETURN-TO-LIST' | translate}}</a>
 		</div>
 		<h2><span class="version">v{{model.process.version}}</span>{{model.process.name}}</h2>
 		<div class="clearfix">
-			<div class="col-xs-4 details">
+			<div class="col-xs-4 details" style="display: none">
 				<span><i class="glyphicon glyphicon-user"></i>{{'PROCESS.DETAILS.CREATED-BY' | translate:model.process}}</span> 
 				<span><i class="glyphicon glyphicon-pencil"></i>{{'PROCESS.DETAILS.LAST-UPDATED-BY' | translate:model.process}}</span>
 			</div>
 			<div class="col-xs-8 details clearfix">
-                <div class="related btn-group">
+                <!--<div class="related btn-group">
                     <button id="toggle-history" type="button" class="btn btn-subtle" ng-click="toggleHistory($event)"
                         title="{{'PROCESS.ACTION.EDIT' | translate}}">
                         {{'PROCESS.DETAILS.HISTORY-TITLE' | translate}} <span class="counter" ng-show="model.versions.data.length">{{model.versions.data.length}}</span>
                     </button>
-                </div>
+                </div>-->
                 <a ng-show="model.stencil" ng-click="goToStencil()" class="pull-right action">{{model.stencil.name}}</a>
                 <p ng-if="model.process.description">
                     {{model.process.description}}
                 </p>
                 <p ng-if="!model.process.description && model.process.latestVersion" class="hint">
-                    <a ng-click="editProcess()" class="subtle-select">
+                    <a ng-click="editProcess()" class="subtle-select" style="display: none">
                         {{'PROCESS.DETAILS.NO-DESCRIPTION' | translate}} <i class="glyphicon glyphicon-pencil"></i>
                     </a>
                 </p>
