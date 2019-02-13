@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.files.FileRefMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_FILE_REF ORDER by REF_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_FILE_REF</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(REF_ORDER_NUM) is null then 1 else max(REF_ORDER_NUM)+1 end ORDERNUM from TB4D_FILE_REF</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_FILE_REF<where>
+        <if test="refFileId !=null and refFileId !=''"> and REF_FILE_ID like #{refFileId} </if>
+        <if test="refObjId !=null and refObjId !=''"> and REF_OBJ_ID like #{refObjId} </if>
+    </where>ORDER by REF_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_FILE_REF
+                                                                                                          where REF_ORDER_NUM = (select max(REF_ORDER_NUM) from TB4D_FILE_REF where REF_ORDER_NUM<(select REF_ORDER_NUM from TB4D_FILE_REF where REF_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_FILE_REF
+                                                                                                             where REF_ORDER_NUM = (select min(REF_ORDER_NUM) from TB4D_FILE_REF where REF_ORDER_NUM>(select REF_ORDER_NUM from TB4D_FILE_REF where REF_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>
