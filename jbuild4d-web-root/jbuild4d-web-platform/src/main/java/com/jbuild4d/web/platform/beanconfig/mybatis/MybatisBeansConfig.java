@@ -6,6 +6,9 @@ import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoGenListMapper;
 import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTLTreeListMapper;
 import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTLTreeMapper;
 import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTreeTableMapper;
+import com.jbuild4d.base.dbaccess.dao.files.FileContentMapper;
+import com.jbuild4d.base.dbaccess.dao.files.FileInfoMapper;
+import com.jbuild4d.base.dbaccess.dao.files.FileRefMapper;
 import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganMapper;
 import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganTypeMapper;
 import com.jbuild4d.base.dbaccess.dao.systemsetting.*;
@@ -244,6 +247,21 @@ public class MybatisBeansConfig {
     @Bean
     public FlowModelMapper flowModelMapper(SqlSessionTemplate sqlSessionTemplate){
         return sqlSessionTemplate.getMapper(FlowModelMapper.class);
+    }
+
+    @Bean
+    public FileInfoMapper fileInfoMapper(SqlSessionTemplate sqlSessionTemplate){
+        return sqlSessionTemplate.getMapper(FileInfoMapper.class);
+    }
+
+    @Bean
+    public FileContentMapper fileContentMapper(SqlSessionTemplate sqlSessionTemplate){
+        return sqlSessionTemplate.getMapper(FileContentMapper.class);
+    }
+
+    @Bean
+    public FileRefMapper fileRefMapper(SqlSessionTemplate sqlSessionTemplate){
+        return sqlSessionTemplate.getMapper(FileRefMapper.class);
     }
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {

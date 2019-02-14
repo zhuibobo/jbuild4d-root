@@ -1,20 +1,20 @@
-window.addEventListener("message", function( event ) {
+window.addEventListener("message", function (event) {
     // 把父窗口发送过来的数据显示在子窗口中
-    DialogUtility.CloseDialog("FrameDialogEle"+DialogUtility.DialogId);
-}, false );
+    DialogUtility.CloseDialog("FrameDialogEle" + DialogUtility.DialogId);
+}, false);
 
 Vue.component("module-list-flow-comp", {
-    props:['listHeight','moduleData','activeTabName'],
+    props: ['listHeight', 'moduleData', 'activeTabName'],
     data: function () {
         return {
-            acInterface:{
+            acInterface: {
                 //editView: "/PlatForm/Builder/FlowModel/DetailView",
                 //uploadFlowModelView: "/PlatForm/Builder/FlowModel/UploadFlowModelView",
-                saveModel:"/PlatForm/Builder/FlowModel/SaveModel",
-                getEditModelURL:"/PlatForm/Builder/FlowModel/GetEditModelURL",
-                getViewModelURL:"/PlatForm/Builder/FlowModel/GetViewModelURL",
+                saveModel: "/PlatForm/Builder/FlowModel/SaveModel",
+                getEditModelURL: "/PlatForm/Builder/FlowModel/GetEditModelURL",
+                getViewModelURL: "/PlatForm/Builder/FlowModel/GetViewModelURL",
                 reloadData: "/PlatForm/Builder/FlowModel/GetListData",
-                getSingleData:"/PlatForm/Builder/FlowModel/GetDetailData",
+                getSingleData: "/PlatForm/Builder/FlowModel/GetDetailData",
                 delete: "/PlatForm/Builder/FlowModel/DeleteModel",
                 move: "/PlatForm/Builder/FlowModel/Move",
             },
@@ -65,45 +65,43 @@ Vue.component("module-list-flow-comp", {
                     render: function (h, params) {
                         //console.log(params);
                         //console.log(this);
-                        return h('div',{class: "list-row-button-wrap"},[
-                            window._modulelistflowcomp.editModelButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp),
-                            window._modulelistflowcomp.viewModelButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp),
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,window._modulelistflowcomp.idFieldName,window._modulelistflowcomp)
+                        return h('div', {class: "list-row-button-wrap"}, [
+                            window._modulelistflowcomp.editModelButton(h, params, window._modulelistflowcomp.idFieldName, window._modulelistflowcomp),
+                            window._modulelistflowcomp.viewModelButton(h, params, window._modulelistflowcomp.idFieldName, window._modulelistflowcomp),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h, params, window._modulelistflowcomp.idFieldName, window._modulelistflowcomp),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h, params, window._modulelistflowcomp.idFieldName, window._modulelistflowcomp)
                         ]);
                     }
                 }
             ],
             tableData: [],
-            tableDataOriginal:[],
+            tableDataOriginal: [],
             selectionRows: null,
             pageTotal: 0,
             pageSize: 500,
             pageNum: 1,
-            searchText:"",
-            flowModelEntity:{
-                modelId:"",
-                modelDeId:"",
-                modelModuleId:"",
-                modelGroupId:"",
-                modelName:"",
-                modelCreateTime:DateUtility.GetCurrentData(),
-                modelCreater:"",
-                modelUpdateTime:DateUtility.GetCurrentData(),
-                modelUpdater:"",
-                modelDesc:"",
-                modelStatus:"启用",
-                modelOrderNum:"",
-                modelDeploymentId:"",
-                modelStartKey:"",
-                modelResourceName:"",
-                modelFromType:""
+            searchText: "",
+            flowModelEntity: {
+                modelId: "",
+                modelDeId: "",
+                modelModuleId: "",
+                modelGroupId: "",
+                modelName: "",
+                modelCreateTime: DateUtility.GetCurrentData(),
+                modelCreater: "",
+                modelUpdateTime: DateUtility.GetCurrentData(),
+                modelUpdater: "",
+                modelDesc: "",
+                modelStatus: "启用",
+                modelOrderNum: "",
+                modelDeploymentId: "",
+                modelStartKey: "",
+                modelResourceName: "",
+                modelFromType: ""
             },
-            emptyFlowModelEntity:{
-
-            },
-            importEXData:{
-                modelModuleId:""
+            emptyFlowModelEntity: {},
+            importEXData: {
+                modelModuleId: ""
             },
             ruleValidate: {
                 modelName: [
@@ -115,27 +113,27 @@ Vue.component("module-list-flow-comp", {
             }
         }
     },
-    mounted:function(){
+    mounted: function () {
         this.reloadData();
         //将对象附加到window上,提供给后边进行操作
-        window._modulelistflowcomp=this;
-        for(var key in this.flowModelEntity){
-            this.emptyFlowModelEntity[key]=this.flowModelEntity[key];
+        window._modulelistflowcomp = this;
+        for (var key in this.flowModelEntity) {
+            this.emptyFlowModelEntity[key] = this.flowModelEntity[key];
         }
         //alert(this.activeTabName);
         //alert(this.listHeight);
     },
     watch: {
-        moduleData:function (newVal) {
+        moduleData: function (newVal) {
             this.reloadData();
         },
-        activeTabName:function (newVal) {
+        activeTabName: function (newVal) {
             //alert(this.activeTabName);
             this.reloadData();
         },
-        searchText:function (newVal) {
+        searchText: function (newVal) {
             //console.log(this.searchText);
-            if(newVal) {
+            if (newVal) {
                 var filterTableData = [];
                 for (var i = 0; i < this.tableData.length; i++) {
                     var row = this.tableData[i];
@@ -148,8 +146,8 @@ Vue.component("module-list-flow-comp", {
                 }
                 this.tableData = filterTableData;
             }
-            else{
-                this.tableData = this.tableDataOriginal ;
+            else {
+                this.tableData = this.tableDataOriginal;
             }
         }
     },
@@ -186,7 +184,7 @@ Vue.component("module-list-flow-comp", {
                 DetailPageUtility.OverrideObjectValueFull(this.flowModelEntity, this.emptyFlowModelEntity);
                 DialogUtility.DialogElem("divNewFlowModelWrap", {
                     modal: true,
-                    width: 600,
+                    width: 670,
                     height: 500,
                     title: "创建流程模型"
                 });
@@ -272,7 +270,7 @@ Vue.component("module-list-flow-comp", {
         bindUploadExData: function () {
             //return {modelModuleId: this.moduleData.moduleId};
             //alert(this.moduleData.moduleId);
-            this.importEXData.modelModuleId=this.moduleData.moduleId;
+            this.importEXData.modelModuleId = this.moduleData.moduleId;
         },
         /*集成的流程模型编辑器*/
         editModelButton: function (h, params, idField, pageAppObj) {
@@ -285,7 +283,7 @@ Vue.component("module-list-flow-comp", {
                 }
             });
         },
-        viewModelButton:function(h, params, idField, pageAppObj){
+        viewModelButton: function (h, params, idField, pageAppObj) {
             return h('div', {
                 class: "list-row-button view-model",
                 on: {
@@ -305,7 +303,7 @@ Vue.component("module-list-flow-comp", {
                 }, 0);
             }, "json");
         },
-        viewModel:function (recordId) {
+        viewModel: function (recordId) {
             AjaxUtility.Post(this.acInterface.getViewModelURL, {modelId: recordId}, function (result) {
                 //alert(result.data.editModelWebUrl);
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, result.data.editModelWebUrl, {
@@ -317,7 +315,7 @@ Vue.component("module-list-flow-comp", {
     },
     template: '<div class="module-list-wrap">\
                     <div style="display: none" id="divNewFlowModelWrap">\
-                        <div class="general-edit-page-wrap" style="padding: 10px;width: 70%">\
+                        <div class="general-edit-page-wrap" style="padding: 10px;width: 100%">\
                             <div style="width: 70%;float: left">\
                                 <i-form ref="flowModelEntity" :model="flowModelEntity" :rules="ruleValidate" :label-width="100">\
                                     <form-item label="模型名称：" prop="modelName">\
@@ -327,15 +325,20 @@ Vue.component("module-list-flow-comp", {
                                         <i-input v-model="flowModelEntity.modelStartKey"></i-input>\
                                     </form-item>\
                                     <form-item label="描述：">\
-                                        <i-input v-model="flowModelEntity.modelDesc" type="textarea" :autosize="{minRows: 8,maxRows: 8}"></i-input>\
+                                        <i-input v-model="flowModelEntity.modelDesc" type="textarea" :autosize="{minRows: 11,maxRows: 11}"></i-input>\
                                     </form-item>\
                                 </i-form>\
                             </div>\
                             <div style="width: 29%;float: right">\
                                 <div>\
-                                    <img src="" />\
+                                    <img src="" class="flowModelImg" />\
                                 </div>\
-                                \
+                                <upload style="margin:10px 12px 0 20px" :data="importEXData" :before-upload="bindUploadExData" :on-success="uploadSuccess" multiple type="drag" name="file" action="../../../PlatForm/Builder/FlowModel/ImportProcessModel.do" accept=".bpmn">\
+                                    <div style="padding:20px 0px">\
+                                        <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>\
+                                        <p>上传流程主题图片</p>\
+                                    </div>\
+                                </upload>\
                             </div>\
                             <div class="button-outer-wrap" style="height: 40px;padding-right: 10px">\
                                 <div class="button-inner-wrap">\

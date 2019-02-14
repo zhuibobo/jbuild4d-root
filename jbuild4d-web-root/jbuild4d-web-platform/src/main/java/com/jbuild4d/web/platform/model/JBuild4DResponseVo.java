@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JBuild4DResponseVo {
+    public static final String SUCCESSMSG = "操作成功!";
     /**
      * 是否成功
      */

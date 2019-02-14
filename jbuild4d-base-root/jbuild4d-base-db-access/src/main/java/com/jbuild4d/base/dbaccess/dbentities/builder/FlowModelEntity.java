@@ -63,7 +63,10 @@ public class FlowModelEntity {
     //MODEL_FROM_TYPE
     private String modelFromType;
 
-    public FlowModelEntity(String modelId, String modelDeId, String modelModuleId, String modelCode, String modelName, Date modelCreateTime, String modelCreater, Date modelUpdateTime, String modelUpdater, String modelDesc, String modelStatus, Integer modelOrderNum, String modelDeploymentId, String modelStartKey, String modelResourceName, String modelFromType) {
+    //MODEL_MAIN_IMAGE_ID
+    private String modelMainImageId;
+
+    public FlowModelEntity(String modelId, String modelDeId, String modelModuleId, String modelCode, String modelName, Date modelCreateTime, String modelCreater, Date modelUpdateTime, String modelUpdater, String modelDesc, String modelStatus, Integer modelOrderNum, String modelDeploymentId, String modelStartKey, String modelResourceName, String modelFromType, String modelMainImageId) {
         this.modelId = modelId;
         this.modelDeId = modelDeId;
         this.modelModuleId = modelModuleId;
@@ -80,6 +83,7 @@ public class FlowModelEntity {
         this.modelStartKey = modelStartKey;
         this.modelResourceName = modelResourceName;
         this.modelFromType = modelFromType;
+        this.modelMainImageId = modelMainImageId;
     }
 
     public FlowModelEntity() {
@@ -212,5 +216,13 @@ public class FlowModelEntity {
 
     public void setModelFromType(String modelFromType) {
         this.modelFromType = modelFromType == null ? null : modelFromType.trim();
+    }
+
+    public String getModelMainImageId() {
+        return modelMainImageId;
+    }
+
+    public void setModelMainImageId(String modelMainImageId) {
+        this.modelMainImageId = modelMainImageId == null ? null : modelMainImageId.trim();
     }
 }

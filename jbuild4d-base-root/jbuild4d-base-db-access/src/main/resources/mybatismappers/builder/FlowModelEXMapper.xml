@@ -13,18 +13,19 @@
                                                    from TB4D_FLOW_MODEL</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_FLOW_MODEL
         <where>
-            <if test="modelDeId !=null and modelDeId !=''">and MODEL_DE_ID like #{modelDeId}</if>
-            <if test="modelModuleId !=null and modelModuleId !=''">and MODEL_MODULE_ID like #{modelModuleId}</if>
-            <if test="modelCode !=null and modelCode !=''">and MODEL_CODE like #{modelCode}</if>
-            <if test="modelName !=null and modelName !=''">and MODEL_NAME like #{modelName}</if>
-            <if test="modelCreater !=null and modelCreater !=''">and MODEL_CREATER like #{modelCreater}</if>
-            <if test="modelUpdater !=null and modelUpdater !=''">and MODEL_UPDATER like #{modelUpdater}</if>
-            <if test="modelDesc !=null and modelDesc !=''">and MODEL_DESC like #{modelDesc}</if>
-            <if test="modelStatus !=null and modelStatus !=''">and MODEL_STATUS like #{modelStatus}</if>
-            <if test="modelDeploymentId !=null and modelDeploymentId !=''">and MODEL_DEPLOYMENT_ID like #{modelDeploymentId}</if>
-            <if test="modelStartKey !=null and modelStartKey !=''">and MODEL_START_KEY like #{modelStartKey}</if>
-            <if test="modelResourceName !=null and modelResourceName !=''">and MODEL_RESOURCE_NAME like #{modelResourceName}</if>
-            <if test="modelFromType !=null and modelFromType !=''">and MODEL_FROM_TYPE like #{modelFromType}</if>
+            <if test="modelDeId !=null and modelDeId !=''"> and MODEL_DE_ID like #{modelDeId} </if>
+            <if test="modelModuleId !=null and modelModuleId !=''"> and MODEL_MODULE_ID like #{modelModuleId} </if>
+            <if test="modelCode !=null and modelCode !=''"> and MODEL_CODE like #{modelCode} </if>
+            <if test="modelName !=null and modelName !=''"> and MODEL_NAME like #{modelName} </if>
+            <if test="modelCreater !=null and modelCreater !=''"> and MODEL_CREATER like #{modelCreater} </if>
+            <if test="modelUpdater !=null and modelUpdater !=''"> and MODEL_UPDATER like #{modelUpdater} </if>
+            <if test="modelDesc !=null and modelDesc !=''"> and MODEL_DESC like #{modelDesc} </if>
+            <if test="modelStatus !=null and modelStatus !=''"> and MODEL_STATUS like #{modelStatus} </if>
+            <if test="modelDeploymentId !=null and modelDeploymentId !=''"> and MODEL_DEPLOYMENT_ID like #{modelDeploymentId} </if>
+            <if test="modelStartKey !=null and modelStartKey !=''"> and MODEL_START_KEY like #{modelStartKey} </if>
+            <if test="modelResourceName !=null and modelResourceName !=''"> and MODEL_RESOURCE_NAME like #{modelResourceName} </if>
+            <if test="modelFromType !=null and modelFromType !=''"> and MODEL_FROM_TYPE like #{modelFromType} </if>
+            <if test="modelMainImageId !=null and modelMainImageId !=''"> and MODEL_MAIN_IMAGE_ID like #{modelMainImageId} </if>
         </where>
         ORDER by MODEL_ORDER_NUM DESC
     </select>

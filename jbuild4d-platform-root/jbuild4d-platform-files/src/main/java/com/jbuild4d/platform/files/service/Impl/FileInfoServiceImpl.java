@@ -1,5 +1,6 @@
 package com.jbuild4d.platform.files.service.Impl;
 
+import com.jbuild4d.base.dbaccess.dao.files.FileContentMapper;
 import com.jbuild4d.base.dbaccess.dao.files.FileInfoMapper;
 import com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
@@ -9,13 +10,16 @@ import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.files.service.IFileInfoService;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoEntity> implements IFileInfoService
 {
     FileInfoMapper fileInfoMapper;
-    public FileInfoServiceImpl(FileInfoMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
+    FileContentMapper contentMapper;
+    public FileInfoServiceImpl(FileInfoMapper _defaultBaseMapper, FileContentMapper _contentMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         fileInfoMapper=_defaultBaseMapper;
+        contentMapper=_contentMapper;
     }
 
     @Override
@@ -27,5 +31,10 @@ public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoEntity> impleme
                 return sourceEntity;
             }
         });
+    }
+
+    @Override
+    public FileInfoEntity addFile(MultipartFile file) {
+        return null;
     }
 }

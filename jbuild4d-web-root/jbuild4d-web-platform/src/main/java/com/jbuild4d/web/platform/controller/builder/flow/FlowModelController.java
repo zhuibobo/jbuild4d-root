@@ -1,11 +1,13 @@
 package com.jbuild4d.web.platform.controller.builder.flow;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity;
+import com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.builder.flow.IFlowModelService;
 import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
+import com.jbuild4d.platform.files.service.IFileInfoService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.apache.commons.collections.map.HashedMap;
@@ -25,6 +27,9 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
 
     @Autowired
     IFlowModelService flowModelService;
+
+    @Autowired
+    IFileInfoService fileInfoService;
 
     /*@Autowired
     IFlowModelerConfigService flowModelerConfigService;*/
@@ -63,6 +68,17 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
         result.put("editModelWebUrl", editModelWebUrl);
         result.put("flowModelEntity", _flowModelEntity);
         return JBuild4DResponseVo.success("导入流程模型成功!", result);
+    }
+
+    @RequestMapping(value = "/UploadProcessModelMainImg", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public JBuild4DResponseVo uploadProcessModelMainImg(HttpServletRequest request, @RequestParam("file") MultipartFile file){
+        FileInfoEntity fileInfoEntity=fileInfoService.addFile(file);
+        return JBuild4DResponseVo.success(JBuild4DResponseVo.SUCCESSMSG,fileInfoEntity);
+    }
+
+    public void getProcessModelMainImg(){
+
     }
 
     @RequestMapping(value = "SaveModel")

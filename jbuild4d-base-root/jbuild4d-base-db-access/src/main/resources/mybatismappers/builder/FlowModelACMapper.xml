@@ -19,12 +19,13 @@
             <arg column="MODEL_START_KEY" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="MODEL_RESOURCE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="MODEL_FROM_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MODEL_MAIN_IMAGE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         MODEL_ID, MODEL_DE_ID, MODEL_MODULE_ID, MODEL_CODE, MODEL_NAME, MODEL_CREATE_TIME,
         MODEL_CREATER, MODEL_UPDATE_TIME, MODEL_UPDATER, MODEL_DESC, MODEL_STATUS, MODEL_ORDER_NUM,
-        MODEL_DEPLOYMENT_ID, MODEL_START_KEY, MODEL_RESOURCE_NAME, MODEL_FROM_TYPE
+        MODEL_DEPLOYMENT_ID, MODEL_START_KEY, MODEL_RESOURCE_NAME, MODEL_FROM_TYPE, MODEL_MAIN_IMAGE_ID
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -42,13 +43,13 @@
                                      MODEL_CREATER, MODEL_UPDATE_TIME, MODEL_UPDATER,
                                      MODEL_DESC, MODEL_STATUS, MODEL_ORDER_NUM,
                                      MODEL_DEPLOYMENT_ID, MODEL_START_KEY, MODEL_RESOURCE_NAME,
-                                     MODEL_FROM_TYPE)
+                                     MODEL_FROM_TYPE, MODEL_MAIN_IMAGE_ID)
         values (#{modelId,jdbcType=VARCHAR}, #{modelDeId,jdbcType=VARCHAR}, #{modelModuleId,jdbcType=VARCHAR},
                 #{modelCode,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, #{modelCreateTime,jdbcType=TIMESTAMP},
                 #{modelCreater,jdbcType=VARCHAR}, #{modelUpdateTime,jdbcType=TIMESTAMP}, #{modelUpdater,jdbcType=VARCHAR},
                 #{modelDesc,jdbcType=VARCHAR}, #{modelStatus,jdbcType=VARCHAR}, #{modelOrderNum,jdbcType=INTEGER},
                 #{modelDeploymentId,jdbcType=VARCHAR}, #{modelStartKey,jdbcType=VARCHAR}, #{modelResourceName,jdbcType=VARCHAR},
-                #{modelFromType,jdbcType=VARCHAR})
+                #{modelFromType,jdbcType=VARCHAR}, #{modelMainImageId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity">
         insert into TB4D_FLOW_MODEL
@@ -101,6 +102,9 @@
             <if test="modelFromType != null">
                 MODEL_FROM_TYPE,
             </if>
+            <if test="modelMainImageId != null">
+                MODEL_MAIN_IMAGE_ID,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="modelId != null">
@@ -150,6 +154,9 @@
             </if>
             <if test="modelFromType != null">
                 #{modelFromType,jdbcType=VARCHAR},
+            </if>
+            <if test="modelMainImageId != null">
+                #{modelMainImageId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -201,6 +208,9 @@
             <if test="modelFromType != null">
                 MODEL_FROM_TYPE = #{modelFromType,jdbcType=VARCHAR},
             </if>
+            <if test="modelMainImageId != null">
+                MODEL_MAIN_IMAGE_ID = #{modelMainImageId,jdbcType=VARCHAR},
+            </if>
         </set>
         where MODEL_ID = #{modelId,jdbcType=VARCHAR}
     </update>
@@ -220,7 +230,8 @@
             MODEL_DEPLOYMENT_ID = #{modelDeploymentId,jdbcType=VARCHAR},
             MODEL_START_KEY = #{modelStartKey,jdbcType=VARCHAR},
             MODEL_RESOURCE_NAME = #{modelResourceName,jdbcType=VARCHAR},
-            MODEL_FROM_TYPE = #{modelFromType,jdbcType=VARCHAR}
+            MODEL_FROM_TYPE = #{modelFromType,jdbcType=VARCHAR},
+            MODEL_MAIN_IMAGE_ID = #{modelMainImageId,jdbcType=VARCHAR}
         where MODEL_ID = #{modelId,jdbcType=VARCHAR}
     </update>
 </mapper>
