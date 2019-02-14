@@ -12,6 +12,7 @@ import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -77,7 +78,8 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
         return JBuild4DResponseVo.success(JBuild4DResponseVo.SUCCESSMSG,fileInfoEntity);
     }
 
-    public void getProcessModelMainImg(){
+    @RequestMapping(value = "/GetProcessModelMainImg", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getProcessModelMainImg(String fileId){
 
     }
 
