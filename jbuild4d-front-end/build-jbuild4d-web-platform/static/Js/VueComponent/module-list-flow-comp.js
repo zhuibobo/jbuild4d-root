@@ -317,18 +317,26 @@ Vue.component("module-list-flow-comp", {
     },
     template: '<div class="module-list-wrap">\
                     <div style="display: none" id="divNewFlowModelWrap">\
-                        <div class="general-edit-page-wrap" style="padding: 10px;width: 60%">\
-                            <i-form ref="flowModelEntity" :model="flowModelEntity" :rules="ruleValidate" :label-width="100">\
-                                <form-item label="模型名称：" prop="modelName">\
-                                    <i-input v-model="flowModelEntity.modelName"></i-input>\
-                                </form-item>\
-                                <form-item label="模型Key：" prop="modelStartKey">\
-                                    <i-input v-model="flowModelEntity.modelStartKey"></i-input>\
-                                </form-item>\
-                                <form-item label="描述：">\
-                                    <i-input v-model="flowModelEntity.modelDesc" type="textarea" :autosize="{minRows: 8,maxRows: 8}"></i-input>\
-                                </form-item>\
-                            </i-form>\
+                        <div class="general-edit-page-wrap" style="padding: 10px;width: 70%">\
+                            <div style="width: 70%;float: left">\
+                                <i-form ref="flowModelEntity" :model="flowModelEntity" :rules="ruleValidate" :label-width="100">\
+                                    <form-item label="模型名称：" prop="modelName">\
+                                        <i-input v-model="flowModelEntity.modelName"></i-input>\
+                                    </form-item>\
+                                    <form-item label="模型Key：" prop="modelStartKey">\
+                                        <i-input v-model="flowModelEntity.modelStartKey"></i-input>\
+                                    </form-item>\
+                                    <form-item label="描述：">\
+                                        <i-input v-model="flowModelEntity.modelDesc" type="textarea" :autosize="{minRows: 8,maxRows: 8}"></i-input>\
+                                    </form-item>\
+                                </i-form>\
+                            </div>\
+                            <div style="width: 29%;float: right">\
+                                <div>\
+                                    <img src="" />\
+                                </div>\
+                                \
+                            </div>\
                             <div class="button-outer-wrap" style="height: 40px;padding-right: 10px">\
                                 <div class="button-inner-wrap">\
                                     <button-group>\
