@@ -317,7 +317,7 @@ Vue.component("module-list-flow-comp", {
     },
     template: '<div class="module-list-wrap">\
                     <div style="display: none" id="divNewFlowModelWrap">\
-                        <div class="general-edit-page-wrap" style="padding: 10px">\
+                        <div class="general-edit-page-wrap" style="padding: 10px;width: 60%">\
                             <i-form ref="flowModelEntity" :model="flowModelEntity" :rules="ruleValidate" :label-width="100">\
                                 <form-item label="模型名称：" prop="modelName">\
                                     <i-input v-model="flowModelEntity.modelName"></i-input>\
