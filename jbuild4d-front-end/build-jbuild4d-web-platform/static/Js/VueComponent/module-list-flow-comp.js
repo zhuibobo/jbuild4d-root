@@ -17,6 +17,7 @@ Vue.component("module-list-flow-comp", {
                 getSingleData: "/PlatForm/Builder/FlowModel/GetDetailData",
                 delete: "/PlatForm/Builder/FlowModel/DeleteModel",
                 move: "/PlatForm/Builder/FlowModel/Move",
+                defaultFlowModelImage:"/PlatForm/Builder/FlowModel/GetProcessModelMainImg"
             },
             idFieldName: "modelId",
             searchCondition: {
@@ -97,7 +98,8 @@ Vue.component("module-list-flow-comp", {
                 modelDeploymentId: "",
                 modelStartKey: "",
                 modelResourceName: "",
-                modelFromType: ""
+                modelFromType: "",
+                modelMainImageId:"DefModelMainImageId"
             },
             emptyFlowModelEntity: {},
             importEXData: {
@@ -110,7 +112,9 @@ Vue.component("module-list-flow-comp", {
                 modelStartKey: [
                     {required: true, message: '【模型Key】不能空！', trigger: 'blur'}
                 ]
-            }
+            },
+            defaultFlowModelImageSrc:"",
+            value1:false
         }
     },
     mounted: function () {
@@ -182,6 +186,8 @@ Vue.component("module-list-flow-comp", {
             if (this.moduleData != null) {
                 //debugger;
                 DetailPageUtility.OverrideObjectValueFull(this.flowModelEntity, this.emptyFlowModelEntity);
+                this.defaultFlowModelImageSrc=BaseUtility.BuildAction(this.acInterface.defaultFlowModelImage,{fileId:"defaultFlowModelImage"});
+
                 DialogUtility.DialogElem("divNewFlowModelWrap", {
                     modal: true,
                     width: 670,
@@ -199,6 +205,7 @@ Vue.component("module-list-flow-comp", {
             AjaxUtility.Post(this.acInterface.getSingleData, {recordId: recordId, op: "edit"}, function (result) {
                 if (result.success) {
                     DetailPageUtility.OverrideObjectValueFull(_self.flowModelEntity, result.data);
+                    _self.defaultFlowModelImageSrc = BaseUtility.BuildAction(_self.acInterface.defaultFlowModelImage, {fileId: _self.flowModelEntity.modelMainImageId});
                     DialogUtility.DialogElem("divNewFlowModelWrap", {
                         modal: true,
                         width: 600,
@@ -272,6 +279,11 @@ Vue.component("module-list-flow-comp", {
             //alert(this.moduleData.moduleId);
             this.importEXData.modelModuleId = this.moduleData.moduleId;
         },
+        uploadFlowModelImageSuccess:function(response, file, fileList) {
+            var data = response.data;
+            this.flowModelEntity.modelMainImageId = data.fileId;
+            this.defaultFlowModelImageSrc = BaseUtility.BuildAction(this.acInterface.defaultFlowModelImage, {fileId: this.flowModelEntity.modelMainImageId});
+        },
         /*集成的流程模型编辑器*/
         editModelButton: function (h, params, idField, pageAppObj) {
             return h('div', {
@@ -331,9 +343,9 @@ Vue.component("module-list-flow-comp", {
                             </div>\
                             <div style="width: 29%;float: right">\
                                 <div>\
-                                    <img src="" class="flowModelImg" />\
+                                    <img :src="defaultFlowModelImageSrc" class="flowModelImg" />\
                                 </div>\
-                                <upload style="margin:10px 12px 0 20px" :data="importEXData" :before-upload="bindUploadExData" :on-success="uploadSuccess" multiple type="drag" name="file" action="../../../PlatForm/Builder/FlowModel/ImportProcessModel.do" accept=".bpmn">\
+                                <upload style="margin:10px 12px 0 20px" :data="importEXData" :before-upload="bindUploadExData" :on-success="uploadFlowModelImageSuccess" multiple type="drag" name="file" action="../../../PlatForm/Builder/FlowModel/UploadProcessModelMainImg.do" accept=".png">\
                                     <div style="padding:20px 0px">\
                                         <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>\
                                         <p>上传流程主题图片</p>\

@@ -82,12 +82,13 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
 
     @RequestMapping(value = "/UploadProcessModelMainImg", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public JBuild4DResponseVo uploadProcessModelMainImg(HttpServletRequest request, @RequestParam("file") MultipartFile file){
-        FileInfoEntity fileInfoEntity=fileInfoService.addFile(file);
+    public JBuild4DResponseVo uploadProcessModelMainImg(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
+        FileInfoEntity fileInfoEntity=fileInfoService.addSmallFileToDB(JB4DSessionUtility.getSession(),file);
         return JBuild4DResponseVo.success(JBuild4DResponseVo.SUCCESSMSG,fileInfoEntity);
     }
 
     @RequestMapping(value = "/GetProcessModelMainImg", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    @ResponseBody
     public byte[] getProcessModelMainImg(String fileId) throws IOException, JBuild4DGenerallyException {
         FileInfoEntity fileInfoEntity=fileInfoService.getByPrimaryKey(JB4DSessionUtility.getSession(),fileId);
         if(fileInfoEntity==null) {
@@ -95,7 +96,7 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
             if (JB4DCacheManager.exist(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey)) {
                 return JB4DCacheManager.getObject(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey);
             } else {
-                InputStream is = this.getClass().getResourceAsStream("/static/Themes/Default/Css/Images");
+                InputStream is = this.getClass().getResourceAsStream("/static/Themes/Default/Css/Images/DefaultModel.png");
                 byte[] defaultImageByte = IOUtils.toByteArray(is);
                 is.close();
                 JB4DCacheManager.put(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey, defaultImageByte);
@@ -103,7 +104,7 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
             }
         }
         else{
-            return fileInfoService.get
+            return fileInfoService.getContent(fileId);
         }
     }
 

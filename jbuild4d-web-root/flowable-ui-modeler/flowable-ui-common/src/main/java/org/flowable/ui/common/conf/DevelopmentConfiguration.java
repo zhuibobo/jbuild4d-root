@@ -36,7 +36,7 @@ public class DevelopmentConfiguration {
 
     protected static final String DATASOURCE_DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
     //protected static final String DATASOURCE_URL = "jdbc:mysql://120.24.254.101:3306/Flowable?characterEncoding=UTF-8&serverTimezone=UTC&nullCatalogMeansCurrent=true";
-    protected static final String DATASOURCE_URL = "jdbc:mysql://120.24.254.101:3306/JBuild4d?characterEncoding=UTF-8&serverTimezone=UTC&nullCatalogMeansCurrent=true&autoReconnect=true&failOverReadOnly=false";
+    protected static final String DATASOURCE_URL = "jdbc:mysql://120.24.254.101:3306/JBuild4d?characterEncoding=UTF-8&serverTimezone=Hongkong&nullCatalogMeansCurrent=true&autoReconnect=true&failOverReadOnly=false";
     protected static final String DATASOURCE_USERNAME = "root";
     protected static final String DATASOURCE_PASSWORD = "root";
 
