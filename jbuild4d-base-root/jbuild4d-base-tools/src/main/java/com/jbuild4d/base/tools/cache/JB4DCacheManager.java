@@ -33,6 +33,10 @@ public class JB4DCacheManager {
         return (T) cacheManager.getCache(cacheName,String.class,Object.class).get(key);
     }
 
+    public static boolean exist(String cacheName, String key) {
+        return cacheManager.getCache(cacheName, String.class, Object.class).get(key) != null ? true : false;
+    }
+
     public static <T> T autoGetFromCache(String cacheName,boolean cancelCache,String key,IBuildGeneralObj<T> builder) throws JBuild4DGenerallyException {
         T result=null;
         if(cancelCache){
