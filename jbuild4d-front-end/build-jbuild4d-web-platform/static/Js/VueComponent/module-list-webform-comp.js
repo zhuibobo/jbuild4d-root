@@ -133,6 +133,7 @@ Vue.component("module-list-webform-comp", {
             }
         },
         edit: function (recordId) {
+            debugger;
             var url = BaseUtility.BuildView(this.acInterface.editView, {
                 "op": "update",
                 "recordId": recordId

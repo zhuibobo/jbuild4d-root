@@ -11,6 +11,7 @@
     <script type="text/javascript" th:src="@{/Js/T3P/JQuery-UI-1.12.1/jquery-ui.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/ZTree-V3/js/jquery.ztree.all.js}"></script>
     <script type="text/javascript" th:src="@{/Js/T3P/polyfill.min.js}"></script>
+    <script type="text/javascript" th:src="@{/Js/T3P/perfect-scrollbar-14/perfect-scrollbar.js}"></script>
     <script type="text/javascript" th:src="@{/Js/JBuild4DPlatformLib.js(urlts=${urlts})}"></script>
     <script type="text/javascript" th:src="@{/Js/VueEXComponent.js(urlts=${urlts})}"></script>
     <script type="text/javascript" th:src="@{/Js/UIEXComponent.js(urlts=${urlts})}"></script>
@@ -48,6 +49,7 @@
 <th:block th:fragment="ThemesLib" th:with="theme=${'Themes/Default'},urlts=${'V1'}" >
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/Css/Jbuild4dPlatform.css(theme=${theme},urlts=${urlts})}" />
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/IView-3.X/iview.css(theme=${theme},urlts=${urlts})}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/Js/T3P/perfect-scrollbar-14/perfect-scrollbar.css(theme=${theme},urlts=${urlts})}" />
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/JQueryUI/jquery-ui.css(theme=${theme},urlts=${urlts})}" />
     <link rel="stylesheet" type="text/css" th:href="@{/{theme}/ZTree/zTreeStyle/zTreeStyle.css(theme=${theme},urlts=${urlts})}" />
 </th:block>

@@ -179,6 +179,9 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     public JBuild4DResponseVo saveEdit(@RequestBody T entity,HttpServletRequest request) throws JBuild4DGenerallyException {
         try {
             String recordID=DBAnnoUtility.getIdValue(entity);
+            if(recordID.equals("")||recordID==null){
+                throw new JBuild4DGenerallyException("recordID不能为空或字符串!");
+            }
             JB4DSession jb4DSession=JB4DSessionUtility.getSession();
             if(getBaseService()==null){
                 throw new JBuild4DGenerallyException(this.getClass().getSimpleName()+".getBaseService()返回的对象为Null");
