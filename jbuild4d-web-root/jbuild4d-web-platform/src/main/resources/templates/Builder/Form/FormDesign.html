@@ -62,7 +62,9 @@
                     JsEditorUtility.InitializeJsCodeDesign(_self.status);
                     _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JsEditorUtility.GetJsEditorInst());
 
-                    _self.getServerDataBind();
+                    if(_self.status!="add") {
+                        _self.getServerDataBind();
+                    }
                 },"json");
             },
             getServerDataBind:function(){

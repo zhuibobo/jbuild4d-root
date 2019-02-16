@@ -112,7 +112,33 @@ var DialogUtility={
             }
             return '<span class="' + cls + '">' + match + '</span>';
         });
-        this.Alert(window, DialogUtility.DialogAlertId, {width:900,height:600},"<pre class='json-pre'>"+json+"</pre>", null);
+        //this.Alert(window, DialogUtility.DialogAlertId, {width:900,height:600},"<pre class='json-pre'>"+json+"</pre>", null);
+        var htmlElem = this._CreateDialogElem(window.document.body,DialogUtility.DialogAlertId);
+        var defaultConfig = {
+            height: 600,
+            width: 900,
+            title:"系统提示",
+            show:true,
+            modal:true,
+            buttons:{
+                "关闭": function () {
+                    $(htmlElem).dialog("close");
+                },
+                "复制并关闭": function () {
+                    $(htmlElem).dialog("close");
+                }
+            },
+            open:function () {
+            },
+            close:function () {
+                /*if(sFunc){
+                    sFunc();
+                }*/
+            }
+        };
+        //var defaultConfig = $.extend(true, {}, defaultConfig, config);
+        $(htmlElem).html("<pre class='json-pre'>"+json+"</pre>");
+        $(htmlElem).dialog(defaultConfig);
     },
     ShowHTML:function (opererWindow,dialogId,config,htmlmsg,close_after_event,params) {
         var htmlElem = this._CreateDialogElem(opererWindow.document.body,dialogId);
@@ -226,9 +252,9 @@ var DialogUtility={
             }
         };
         var defaultConfig = $.extend(true, {}, defaultConfig, config);
-        $(textArea).css("height",defaultConfig.height - 130);
+        $(textArea).css("height",defaultConfig.height - 130).css("width","100%");
 
-        var htmlContent = $("<div>" + labelMsg + "：</div>").append(textArea);
+        var htmlContent = $("<div><div style='width: 100%'>" + labelMsg + "：</div></div>").append(textArea);
         $(htmlElem).html(htmlContent);
         $(htmlElem).dialog(defaultConfig);
         //dialog.textAreaObj=textArea;

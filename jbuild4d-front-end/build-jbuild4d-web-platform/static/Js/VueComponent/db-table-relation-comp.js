@@ -125,7 +125,11 @@ Vue.component("db-table-relation-comp", {
                 selectedTableName: "无"
             },
             tempDataStore: {},
-            resultData: []
+            resultData: [],
+            treeNodeSetting:{
+                MainTableNodeImg: "../../../Themes/Png16X16/page_key.png",
+                SubTableNodeImg:"../../../Themes/Png16X16/page_refresh.png"
+            }
         }
     },
     mounted:function(){
@@ -266,14 +270,24 @@ Vue.component("db-table-relation-comp", {
                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "选择一个父节点!", null);
             }
         },
+        appendMainTableNodeProp:function(node){
+            node._nodeExType = "MainNode";
+            node.icon = this.treeNodeSetting.MainTableNodeImg;
+        },
+        appendSubTableNodeProp:function(node){
+            node._nodeExType = "SubNode";
+            node.icon = this.treeNodeSetting.SubTableNodeImg;
+        },
         buildRelationTableNode:function(sourceNode,treeNodeId){
             if (this.relationTableTree.currentSelectedNode._nodeExType == "root") {
-                sourceNode._nodeExType = "MainNode";
-                sourceNode.icon = "../../../Themes/Png16X16/page_key.png";
+                //sourceNode._nodeExType = "MainNode";
+                //sourceNode.icon = this.treeNodeSetting.MainTableNodeImg;
+                this.appendMainTableNodeProp(sourceNode);
             }
             else {
-                sourceNode._nodeExType = "SubNode";
-                sourceNode.icon = "../../../Themes/Png16X16/page_refresh.png";
+                //sourceNode._nodeExType = "SubNode";
+                //sourceNode.icon = this.treeNodeSetting.SubTableNodeImg;
+                this.appendSubTableNodeProp(sourceNode);
             }
             sourceNode.tableId=sourceNode.id;
             if(treeNodeId){
@@ -396,16 +410,30 @@ Vue.component("db-table-relation-comp", {
             this.resultData=tempData;
             //构造树形式的展现
             //转换数据为树格式的数据
+            var treeNodeData=new Array();
             for(var i=0;i<tempData.length;i++){
-                tempData[i].value=tempData[i].tableName;
-                tempData[i].attr1=tempData[i].tableCaption;
-                tempData[i].text=tempData[i].tableCaption+"【"+tempData[i].tableName+"】";
-                this.buildRelationTableNode(tempData[i],tempData[i].id);
+                var treeNode={
+                    "value":tempData[i].tableName,
+                    "attr1":tempData[i].tableCaption,
+                    "text":tempData[i].tableCaption+"【"+tempData[i].tableName+"】",
+                    "id":tempData[i].id,
+                    "parentId":tempData[i].parentId
+                }
+                if(tempData[i].parentId=="-1"){
+                    this.appendMainTableNodeProp(treeNode);
+                }
+                else{
+                    this.appendSubTableNodeProp(treeNode);
+                }
+                //tempData[i].value=tempData[i].tableName;
+                //tempData[i].attr1=tempData[i].tableCaption;
+                //tempData[i].text=tempData[i].tableCaption+"【"+tempData[i].tableName+"】";
+                treeNodeData.push(treeNode);
             }
             //this.relationTableTree.treeObj.removeChildNodes(this.relationTableTree.tableTreeRootData);
-            tempData.push(this.relationTableTree.tableTreeRootData);
+            treeNodeData.push(this.relationTableTree.tableTreeRootData);
             //debugger;
-            this.relationTableTree.treeObj = $.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,tempData);
+            this.relationTableTree.treeObj = $.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,treeNodeData);
             this.relationTableTree.treeObj.expandAll(true);
         },
         alertSerializeRelation:function(){
@@ -417,7 +445,7 @@ Vue.component("db-table-relation-comp", {
                 height: 600
             },DialogUtility.DialogPromptId,"请贴入数据关联Json设置字符串",function (jsonString) {
                 try{
-                    window._dbtablerelationcomp.deserializeRelation(jsonString);
+                    window._dbtablerelationcomp.setValue(jsonString);
                 }
                 catch (e) {
                     alert("反序列化失败:"+e);
