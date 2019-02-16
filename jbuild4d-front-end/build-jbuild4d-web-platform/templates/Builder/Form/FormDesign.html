@@ -173,7 +173,7 @@
                 var _self=this;
                 DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formResourceEntity, this.recordId, this.status,null,function (result) {
                     //alert(_self.formResourceEntity.formDataRelation);
-                    debugger;
+                    //debugger;
                     if(_self.status!="add") {
                         _self.$refs.dbTableRelationComp.setValue(_self.formResourceEntity.formDataRelation);
                         HTMLEditorUtility.SetHTMLEditorHTML(_self.formResourceEntity.formHtmlSource);

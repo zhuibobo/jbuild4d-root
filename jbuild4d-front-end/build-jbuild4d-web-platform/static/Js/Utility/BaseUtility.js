@@ -95,5 +95,23 @@ var BaseUtility = {
         var r = urlString.substr(1).match(reg);
         if (r != null)return decodeURIComponent(r[2]);
         return "";
+    },
+    CopyValueClipboard:function (value) {
+        //debugger;
+        var transfer = document.getElementById('J_CopyTransfer');
+        if (!transfer) {
+            transfer = document.createElement('textarea');
+            transfer.id = 'J_CopyTransfer';
+            transfer.style.position = 'absolute';
+            transfer.style.left = '-9999px';
+            transfer.style.top = '-9999px';
+            transfer.style.zIndex = 9999;
+            document.body.appendChild(transfer);
+        }
+        //$(transfer).val(value);
+        transfer.value = value;
+        transfer.focus();
+        transfer.select();
+        document.execCommand('copy');
     }
 };

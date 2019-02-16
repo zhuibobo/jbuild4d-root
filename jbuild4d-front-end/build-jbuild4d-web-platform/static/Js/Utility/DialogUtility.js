@@ -125,7 +125,11 @@ var DialogUtility={
                     $(htmlElem).dialog("close");
                 },
                 "复制并关闭": function () {
+                    //var value=json;
+                    //alert(value);
                     $(htmlElem).dialog("close");
+                    BaseUtility.CopyValueClipboard($(".json-pre").text());
+                    //$(htmlElem).dialog("close");
                 }
             },
             open:function () {
@@ -136,9 +140,13 @@ var DialogUtility={
                 }*/
             }
         };
+
         //var defaultConfig = $.extend(true, {}, defaultConfig, config);
-        $(htmlElem).html("<pre class='json-pre'>"+json+"</pre>");
+        $(htmlElem).html("<div id='pscontainer' style='width: 100%;height: 100%;overflow: auto;position: relative;'><pre class='json-pre'>"+json+"</pre></div>");
         $(htmlElem).dialog(defaultConfig);
+
+        //var $qs = document.querySelector.bind(document);
+        var ps = new PerfectScrollbar('#pscontainer');
     },
     ShowHTML:function (opererWindow,dialogId,config,htmlmsg,close_after_event,params) {
         var htmlElem = this._CreateDialogElem(opererWindow.document.body,dialogId);
