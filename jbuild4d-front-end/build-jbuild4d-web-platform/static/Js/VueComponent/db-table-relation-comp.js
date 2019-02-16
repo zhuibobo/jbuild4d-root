@@ -266,7 +266,7 @@ Vue.component("db-table-relation-comp", {
                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "选择一个父节点!", null);
             }
         },
-        buildRelationTableNode:function(sourceNode){
+        buildRelationTableNode:function(sourceNode,treeNodeId){
             if (this.relationTableTree.currentSelectedNode._nodeExType == "root") {
                 sourceNode._nodeExType = "MainNode";
                 sourceNode.icon = "../../../Themes/Png16X16/page_key.png";
@@ -276,7 +276,12 @@ Vue.component("db-table-relation-comp", {
                 sourceNode.icon = "../../../Themes/Png16X16/page_refresh.png";
             }
             sourceNode.tableId=sourceNode.id;
-            sourceNode.id=StringUtility.Guid();
+            if(treeNodeId){
+                sourceNode.id = treeNodeId;
+            }
+            else {
+                sourceNode.id = StringUtility.Guid();
+            }
             return sourceNode;
         },
         getMainRelationTableNode:function(){
@@ -318,6 +323,7 @@ Vue.component("db-table-relation-comp", {
             newResultItem.tableId=newNode.tableId;
             newResultItem.tableName=newNode.value;
             newResultItem.tableCaption=newNode.attr1;
+
             this.resultData.push(newResultItem);
         },
         selectedRelationTableNode: function (node) {
@@ -394,9 +400,11 @@ Vue.component("db-table-relation-comp", {
                 tempData[i].value=tempData[i].tableName;
                 tempData[i].attr1=tempData[i].tableCaption;
                 tempData[i].text=tempData[i].tableCaption+"【"+tempData[i].tableName+"】";
+                this.buildRelationTableNode(tempData[i],tempData[i].id);
             }
             //this.relationTableTree.treeObj.removeChildNodes(this.relationTableTree.tableTreeRootData);
             tempData.push(this.relationTableTree.tableTreeRootData);
+            //debugger;
             this.relationTableTree.treeObj = $.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,tempData);
             this.relationTableTree.treeObj.expandAll(true);
         },

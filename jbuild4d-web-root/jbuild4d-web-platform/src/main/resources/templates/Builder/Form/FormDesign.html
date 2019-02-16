@@ -62,13 +62,20 @@
                     JsEditorUtility.InitializeJsCodeDesign(_self.status);
                     _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JsEditorUtility.GetJsEditorInst());
 
-                    //获取数据并赋值
-                    DetailPageUtility.BindFormData(_self.acInterface.getDataUrl, _self.formResourceEntity, _self.recordId, _self.status,null,function (result) {
-                        //alert(_self.formResourceEntity.formDataRelation);
-                        _self.$refs.dbTableRelationComp.setValue(_self.formResourceEntity.formDataRelation);
-                    });
-
+                    _self.getServerDataBind();
                 },"json");
+            },
+            getServerDataBind:function(){
+                //获取数据并赋值
+                var _self=this;
+                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formResourceEntity, this.recordId, this.status,null,function (result) {
+                    //alert(_self.formResourceEntity.formDataRelation);
+                    //debugger;
+                    _self.$refs.dbTableRelationComp.setValue(_self.formResourceEntity.formDataRelation);
+                    HTMLEditorUtility.SetHTMLEditorHTML(_self.formResourceEntity.formHtmlSource);
+                    CKEditorUtility.SetCKEditorHTML(_self.formResourceEntity.formHtmlSource);
+                    JsEditorUtility.SetJsEditorJs(_self.formResourceEntity.formJsContent);
+                });
             },
             bindStatusData:function () {
                 this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
@@ -117,6 +124,7 @@
                 this.oldSelectedTabName=name;
             },
             save:function (successFunc) {
+                debugger;
                 var relationConfig=this.$refs.dbTableRelationComp.getValue();
                 this.formResourceEntity.formDataRelation=JsonUtility.JsonToString(relationConfig.relationData);
                 this.formResourceEntity.formMainTableId=relationConfig.mainTableId;
