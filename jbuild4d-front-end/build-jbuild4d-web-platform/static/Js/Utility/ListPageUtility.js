@@ -1,6 +1,19 @@
 //列表页面处理工具类
 var ListPageUtility={
-    DefaultListHeight:678,
+    DefaultListHeight:function(){
+        //alert(PageStyleUtility.GetPageHeight());
+        if(PageStyleUtility.GetPageHeight()>780)
+        {
+            return 678;
+        }
+        return 500;
+    },
+    DefaultListHeight_50:function(){
+        return this.DefaultListHeight()-50;
+    },
+    DefaultListHeight_100:function(){
+        return this.DefaultListHeight()-100;
+    },
     GetGeneralPageHeight:function (fixHeight) {
         var pageHeight=jQuery(document).height();
         //alert(pageHeight);
