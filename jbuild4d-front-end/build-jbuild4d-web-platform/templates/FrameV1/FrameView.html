@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div style="float: left;width: 44px;position: relative;margin-top: 20px">
-                     <a href="#" data-toggle="dropdown"><i style="font-size: 24px;color:#ffffff;" class="la la-bell"></i>
+                     <a href="#" id="notice_btn" data-toggle="dropdown"><i style="font-size: 24px;color:#ffffff;" class="la la-bell"></i>
                          <span class="badge badge-pill badge-default badge-danger badge-default badge-glow" style="position: absolute;top: -10px;right: 5px">5</span>
                      </a>
                 </div>
@@ -58,6 +58,23 @@
         </div>
     </div>
 </nav>
+<script>
+    var notice_is_show=false;
+    $(function () {
+
+        $("#notice_btn").click(function () {
+            if(!notice_is_show) {
+                $("#notice-Outer-Wraper").show().animate({width:"400px"});
+                notice_is_show=true;
+            }
+            else{
+                $("#notice-Outer-Wraper").animate({width:"0px"}).hide();
+                notice_is_show=false;
+            }
+        })
+    })
+</script>
+<div id="notice-Outer-Wraper" style="position: absolute;right: 10px;top: 0px;background-color: #f9f9f9;height: 100%;width: 0px;display: none">ddd</div>
 <!-- fixed-top-end-->
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
