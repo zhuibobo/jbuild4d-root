@@ -295,27 +295,7 @@
                 <artifactId>jbuild4d-base-db-access</artifactId>
                 <version>${platform.version}</version>
             </dependency>
-            <dependency>
-                <groupId>jbuild4d</groupId>
-                <artifactId>jbuild4d-base-exception</artifactId>
-                <version>${platform.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jbuild4d</groupId>
-                <artifactId>jbuild4d-base-tools</artifactId>
-                <version>${platform.version}</version>
-            </dependency>
             <!--项目本身的相关工程-platform-root-->
-            <dependency>
-                <groupId>jbuild4d</groupId>
-                <artifactId>jbuild4d-base-service</artifactId>
-                <version>${platform.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jbuild4d</groupId>
-                <artifactId>jbuild4d-base-db-access</artifactId>
-                <version>${platform.version}</version>
-            </dependency>
             <dependency>
                 <groupId>jbuild4d</groupId>
                 <artifactId>jbuild4d-platform-system</artifactId>
