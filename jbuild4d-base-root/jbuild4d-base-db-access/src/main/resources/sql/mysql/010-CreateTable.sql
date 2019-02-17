@@ -504,6 +504,33 @@ CREATE TABLE `TB4D_FORM_CONFIG` (
   PRIMARY KEY (`FCONFIG_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-表单参数配置';
 
+DROP TABLE IF EXISTS `TB4D_LIST_RESOURCE`;
+CREATE TABLE `TB4D_LIST_RESOURCE` (
+  `LIST_ID`                 NVARCHAR(100)  NOT NULL,
+  `LIST_CODE`               NVARCHAR(50)   NOT NULL,
+  `LIST_NAME`               NVARCHAR(200)  NOT NULL,
+  `LIST_SINGLE_NAME`        NVARCHAR(200)  NOT NULL,
+  `LIST_CREATE_TIME`        DATETIME       NULL,
+  `LIST_CREATER`            NVARCHAR(100)  NULL,
+  `LIST_UPDATE_TIME`        DATETIME       NULL,
+  `LIST_UPDATER`            NVARCHAR(100)  NULL,
+  `LIST_TYPE`               NVARCHAR(100)  NULL,
+  `LIST_ISSYSTEM`           NVARCHAR(10)   NULL,
+  `LIST_ORDER_NUM`          INT            NULL,
+  `LIST_DESC`               NVARCHAR(1000) NULL,
+  `LIST_MODULE_ID`          NVARCHAR(100)  NOT NULL,
+  `LIST_STATUS`             NVARCHAR(10)   NULL,
+  `LIST_ORGAN_ID`           NVARCHAR(100)  NULL,
+  `LIST_ORGAN_NAME`         NVARCHAR(100)  NULL,
+  `LIST_DATASET_ID`         NVARCHAR(100)  NULL,
+  `LIST_HTML_SOURCE`        MEDIUMTEXT     NULL,
+  `LIST_HTML_RESOLVE`       MEDIUMTEXT     NULL,
+  `LIST_JS_CONTENT`         MEDIUMTEXT     NULL,
+  `LIST_CSS_CONTENT`        MEDIUMTEXT     NULL,
+  `LIST_CONFIG_CONTENT`     MEDIUMTEXT     NULL,
+  PRIMARY KEY (`LIST_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-列表设计';
+
 /*------------------------------------------Flowable集成--------------------------------------*/
 DROP TABLE IF EXISTS `TB4D_FLOW_MODEL`;
 CREATE TABLE `TB4D_FLOW_MODEL` (
@@ -529,6 +556,7 @@ CREATE TABLE `TB4D_FLOW_MODEL` (
   COMMENT '关联到TB4D_FILE_INFO表的FILE_ID',
   PRIMARY KEY (`MODEL_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-Flowable集成表';
+
 
 DROP TABLE IF EXISTS `TB4D_FILE_INFO`;
 CREATE TABLE `TB4D_FILE_INFO` (
@@ -569,5 +597,6 @@ CREATE TABLE `TB4D_FILE_REF` (
   `REF_ORDER_NUM` INT           NULL,
   PRIMARY KEY (`REF_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文件的引用表,用于关联文件与其他记录的关系';
+
 
 /*-----------------------------------------应用设计相关表--结束-----------------------------------------*/
