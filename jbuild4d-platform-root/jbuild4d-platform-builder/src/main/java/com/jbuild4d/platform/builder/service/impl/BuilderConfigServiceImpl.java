@@ -20,7 +20,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class BuilderConfigServiceImpl implements IBuilderConfigService {
-    static String configResource="builder"+ File.separator +"BuilderConfig.xml";
+    static String configResource="/builder/BuilderConfig.xml";
     static Document xmlDocument=null;
     static String _tablePrefix=null;
 

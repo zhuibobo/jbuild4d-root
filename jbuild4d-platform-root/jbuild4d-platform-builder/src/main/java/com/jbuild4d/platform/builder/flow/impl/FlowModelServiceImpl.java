@@ -12,7 +12,6 @@ import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
 import com.jbuild4d.platform.builder.service.IModuleService;
 import com.jbuild4d.platform.builder.vo.DeModelVo;
 import com.jbuild4d.platform.builder.vo.FlowModelerConfigVo;
-import com.sun.xml.internal.ws.util.xml.XmlUtil;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.BpmnModel;
 import org.mybatis.spring.SqlSessionTemplate;
