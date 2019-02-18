@@ -1,9 +1,9 @@
-package com.jbuild4d.platform.builder.webformdesign.impl;
+package com.jbuild4d.platform.builder.htmldesign.impl;
 
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.builder.vo.WebFormControlDefinitionVo;
-import com.jbuild4d.platform.builder.webformdesign.IFDCKEditorPluginsConfigService;
-import com.jbuild4d.platform.builder.webformdesign.IFDCKEditorPluginsService;
+import com.jbuild4d.platform.builder.htmldesign.IFDCKEditorPluginsConfigService;
+import com.jbuild4d.platform.builder.htmldesign.IFDCKEditorPluginsService;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 
 import java.util.List;

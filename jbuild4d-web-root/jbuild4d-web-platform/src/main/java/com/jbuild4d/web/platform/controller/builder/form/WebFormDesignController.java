@@ -1,7 +1,7 @@
 package com.jbuild4d.web.platform.controller.builder.form;
 
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.platform.builder.webformdesign.IFDCKEditorPluginsService;
+import com.jbuild4d.platform.builder.htmldesign.IFDCKEditorPluginsService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

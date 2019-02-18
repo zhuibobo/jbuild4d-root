@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.webformdesign;
+package com.jbuild4d.platform.builder.htmldesign;
 
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.builder.vo.WebFormControlDefinitionVo;
