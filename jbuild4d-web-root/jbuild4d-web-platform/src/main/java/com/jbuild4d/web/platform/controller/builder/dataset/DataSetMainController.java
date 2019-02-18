@@ -29,8 +29,8 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping(value = "/PlatForm/Builder/DataSet/DataSetDesign")
-public class DataSetDesignController {
+@RequestMapping(value = "/PlatForm/Builder/DataSet/DataSetMain")
+public class DataSetMainController {
 
     @Autowired
     IDatasetService datasetService;

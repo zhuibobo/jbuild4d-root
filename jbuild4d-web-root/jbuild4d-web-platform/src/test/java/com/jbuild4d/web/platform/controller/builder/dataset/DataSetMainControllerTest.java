@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
  * Date: 2018/9/3
  * To change this template use File | Settings | File Templates.
  */
-public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
+public class DataSetMainControllerTest extends DataSetSQLDesignerControllerTest {
 
     @Autowired
     IDatasetService datasetService;
@@ -78,7 +78,7 @@ public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
             dataSetVo.setColumnVoList(resolveToDataSetVo.getDataSetVo().getColumnVoList());
             dataSetVo.setRelatedTableVoList(resolveToDataSetVo.getDataSetVo().getRelatedTableVoList());
 
-            MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataSet/DataSetDesign/SaveDataSetEdit.do");
+            MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataSet/DataSetMain/SaveDataSetEdit.do");
             requestBuilder.sessionAttr("JB4DSession", getSession());
             requestBuilder.param("op","add");
             requestBuilder.param("dataSetVoJson", JsonUtility.toObjectString(dataSetVo));
@@ -94,7 +94,7 @@ public class DataSetControllerTest extends DataSetSQLDesignerControllerTest {
     @Test
     public void deleteSQLDataSet() throws Exception{
         addSQLDataSet();
-        MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataSet/DataSetDesign/DeleteDataSet.do");
+        MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataSet/DataSetMain/DeleteDataSet.do");
         requestBuilder.sessionAttr("JB4DSession", getSession());
         requestBuilder.param("dataSetId",dataSetId);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
