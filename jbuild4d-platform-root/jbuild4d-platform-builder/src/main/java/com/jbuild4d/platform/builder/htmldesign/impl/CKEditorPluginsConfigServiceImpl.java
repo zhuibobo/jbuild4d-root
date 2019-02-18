@@ -4,7 +4,7 @@ import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.cache.IBuildGeneralObj;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
 import com.jbuild4d.base.tools.common.XMLUtility;
-import com.jbuild4d.platform.builder.htmldesign.IFDCKEditorPluginsConfigService;
+import com.jbuild4d.platform.builder.htmldesign.ICKEditorPluginsConfigService;
 import com.jbuild4d.platform.builder.vo.WebFormControlDefinitionVo;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.w3c.dom.Document;
@@ -20,14 +20,14 @@ import java.util.List;
  * Date: 2018/11/22
  * To change this template use File | Settings | File Templates.
  */
-public class FDCKEditorPluginsConfigServiceImpl implements IFDCKEditorPluginsConfigService {
+public class CKEditorPluginsConfigServiceImpl implements ICKEditorPluginsConfigService {
 
     String configResource= "/builder/htmldesign/CKEditorPluginsConfig.xml";
     Document xmlDocument=null;
     IJb4dCacheService jb4dCacheService;
 
 
-    public FDCKEditorPluginsConfigServiceImpl(IJb4dCacheService jb4dCacheService) {
+    public CKEditorPluginsConfigServiceImpl(IJb4dCacheService jb4dCacheService) {
         this.jb4dCacheService = jb4dCacheService;
     }
 
@@ -45,7 +45,7 @@ public class FDCKEditorPluginsConfigServiceImpl implements IFDCKEditorPluginsCon
         try {
             InputStream inputStream = this.getClass().getResourceAsStream(configResource);
             xmlDocument = XMLUtility.parseForDoc(inputStream);
-            List<Node> nodeList = XMLUtility.parseForNodeList(xmlDocument, "/Config/WebControl/WebFormControl");
+            List<Node> nodeList = XMLUtility.parseForNodeList(xmlDocument, "/Config/WebFormControls/Control");
             List<WebFormControlDefinitionVo> result = new ArrayList<>();
             for (Node node : nodeList) {
                 result.add(WebFormControlDefinitionVo.parseWebFormControlNode(node));

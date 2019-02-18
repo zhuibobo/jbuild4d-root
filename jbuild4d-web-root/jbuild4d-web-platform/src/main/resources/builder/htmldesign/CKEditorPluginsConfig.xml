@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
-    <WebControl>
+    <WebFormControls>
         <!--
         1:Plugin存放于resources\static\UIComponent\HTMLDesign\WebFormDesign\Plugins文件夹下
         2:Plugin Js文件定义以SingleNamePlugin.js命名
@@ -11,20 +11,23 @@
             <Config></Config>
             <Desc></Desc>
         </WebFormControl>-->
-        <WebFormControl SingleName="FDCT_Template" Text="表格模版" ToolbarLocation="FDCT_Template,1"
+        <Control SingleName="FDCT_Template" Text="表格模版" ToolbarLocation="FDCT_Template,1"
                         ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
                         DialogWidth="780" DialogHeight="550" IsJBuild4DData="false">
             <Config></Config>
             <Desc></Desc>
-        </WebFormControl>
-        <WebFormControl SingleName="FDCT_TextBox" Text="单行输入框" ToolbarLocation="FDCT_Simple,1"
+        </Control>
+        <Control SingleName="FDCT_TextBox" Text="单行输入框" ToolbarLocation="FDCT_Simple,1"
                         ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
                         DialogWidth="780" DialogHeight="550" IsJBuild4DData="true">
             <Config></Config>
             <Desc></Desc>
-        </WebFormControl>
-    </WebControl>
-    <AppControl>
+        </Control>
+    </WebFormControls>
+    <AppControls>
 
-    </AppControl>
+    </AppControls>
+    <ListControls>
+
+    </ListControls>
 </Config>

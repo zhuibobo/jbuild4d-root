@@ -11,6 +11,6 @@ import java.util.List;
  * Date: 2018/11/22
  * To change this template use File | Settings | File Templates.
  */
-public interface IFDCKEditorPluginsService {
-    List<WebFormControlDefinitionVo> getVoList() throws JBuild4DGenerallyException;
+public interface ICKEditorPluginsConfigService {
+    List<WebFormControlDefinitionVo> getVoListFromCache() throws JBuild4DGenerallyException;
 }
