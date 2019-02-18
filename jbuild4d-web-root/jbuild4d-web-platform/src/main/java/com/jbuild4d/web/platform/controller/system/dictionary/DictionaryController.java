@@ -43,14 +43,14 @@ public class DictionaryController extends GeneralCRUDImplController<DictionaryEn
         return "System/Dictionary/DictionaryEdit";
     }
 
-    @RequestMapping(value = "GetListDataByGroupId", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetListDataByGroupId", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListDataByGroupId(String groupId) {
         List<DictionaryEntity> dictionaryEntityList=dictionaryService.getListDataByGroupId(JB4DSessionUtility.getSession(),groupId);
         return JBuild4DResponseVo.success("",dictionaryEntityList);
     }
 
-    @RequestMapping(value = "SetSelected", method = RequestMethod.POST)
+    @RequestMapping(value = "/SetSelected", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo setSelected(String recordId) throws JBuild4DGenerallyException {
         dictionaryService.setSelected(JB4DSessionUtility.getSession(),recordId);

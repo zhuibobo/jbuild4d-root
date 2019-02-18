@@ -166,7 +166,7 @@ public class TableController {
         }
     }
 
-    @RequestMapping(value = "GetListData", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetListData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
@@ -175,7 +175,7 @@ public class TableController {
         return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
     }
 
-    @RequestMapping(value = "Move", method = RequestMethod.POST)
+    @RequestMapping(value = "/Move", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo move(String recordId,String type ,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
@@ -188,7 +188,7 @@ public class TableController {
         return JBuild4DResponseVo.opSuccess();
     }
 
-    @RequestMapping(value = "Delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/Delete", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo delete(String recordId) throws JBuild4DGenerallyException {
         try {
@@ -200,7 +200,7 @@ public class TableController {
         }
     }
 
-    @RequestMapping(value = "GetTablesForZTreeNodeList", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetTablesForZTreeNodeList", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getTablesForZTreeNodeList(){
         try {

@@ -51,7 +51,7 @@ public class DevDemoTLTreeController  extends GeneralCRUDImplController<DevDemoT
         return "开发示例";
     }
 
-    @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
     @ResponseBody
     public List<DevDemoTLTreeEntity> getTreeData() {
         List<DevDemoTLTreeEntity> dictionaryGroupEntityList=devDemoTLTreeService.getALL(JB4DSessionUtility.getSession());

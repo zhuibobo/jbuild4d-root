@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/PlatForm/System/Dictionary")
 public class DictionaryManagerController {
 
-    @RequestMapping(value = "DictionaryManagerView", method = RequestMethod.GET)
+    @RequestMapping(value = "/DictionaryManagerView", method = RequestMethod.GET)
     public ModelAndView dictionaryManagerView() {
         ModelAndView modelAndView=new ModelAndView("System/Dictionary/DictionaryManager");
         return modelAndView;

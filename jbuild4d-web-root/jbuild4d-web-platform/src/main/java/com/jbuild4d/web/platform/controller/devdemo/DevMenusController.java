@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/PlatForm/DevDemo")
 public class DevMenusController {
 
-    @RequestMapping(value = "MenusView", method = RequestMethod.GET)
+    @RequestMapping(value = "/MenusView", method = RequestMethod.GET)
     public ModelAndView menus() {
         ModelAndView modelAndView=new ModelAndView("DevDemo/DevLeftMenus");
         return modelAndView;

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "/PlatForm/SelectView/SelectValidateRule")
 public class SelectValidateRuleController {
-    @RequestMapping(value = "Select", method = RequestMethod.GET)
+    @RequestMapping(value = "/Select", method = RequestMethod.GET)
     public ModelAndView select() {
         ModelAndView modelAndView=new ModelAndView("SelectView/SelectValidateRule");
         return modelAndView;

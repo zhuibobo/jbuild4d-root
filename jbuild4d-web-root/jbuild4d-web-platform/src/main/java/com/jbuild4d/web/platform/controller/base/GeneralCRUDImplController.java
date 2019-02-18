@@ -93,7 +93,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         operationLogService.writeOperationLog(JB4DSessionUtility.getSession(), systemName,getModuleName(),actionName,getLogTypeName(),text,data,this.getClass(),request);
     }
 
-    @RequestMapping(value = "ListView", method = RequestMethod.GET)
+    @RequestMapping(value = "/ListView", method = RequestMethod.GET)
     public ModelAndView listView() throws JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView(getListViewName());
         //List<String> dictionaryGroupValueList=bindDictionaryToPage();
@@ -118,7 +118,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         //return JsonUtility.toObjectString(dictionarysMap);
     }
 
-    @RequestMapping(value = "GetListData", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetListData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition,boolean loadDict) throws IOException, ParseException {
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
@@ -140,13 +140,13 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         //return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
     }
 
-    @RequestMapping(value = "DetailView", method = RequestMethod.GET)
+    @RequestMapping(value = "/DetailView", method = RequestMethod.GET)
     public ModelAndView detailView(){
         ModelAndView modelAndView=new ModelAndView(getDetailViewName());
         return modelAndView;
     }
 
-    @RequestMapping(value = "GetDetailData", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetDetailData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getDetailData(String recordId,String op) throws IllegalAccessException, InstantiationException, JsonProcessingException, JBuild4DGenerallyException {
         T entity;
@@ -178,7 +178,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         return responseVo;
     }
 
-    @RequestMapping(value = "SaveEdit", method = RequestMethod.POST)
+    @RequestMapping(value = "/SaveEdit", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo saveEdit(@RequestBody T entity,HttpServletRequest request) throws JBuild4DGenerallyException {
         try {
@@ -206,7 +206,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         }
     }
 
-    @RequestMapping(value = "StatusChange", method = RequestMethod.POST)
+    @RequestMapping(value = "/StatusChange", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo statusChange(String ids,String status,HttpServletRequest request) throws JsonProcessingException {
         try {
@@ -226,7 +226,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         //dictionaryGroupService.saveBySelective(dictionaryEntity.getDictGroupId(), dictionaryEntity);
     }
 
-    @RequestMapping(value = "Delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/Delete", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo delete(String recordId,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
@@ -236,7 +236,7 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
         return JBuild4DResponseVo.opSuccess();
     }
 
-    @RequestMapping(value = "Move", method = RequestMethod.POST)
+    @RequestMapping(value = "/Move", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo move(String recordId,String type,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();

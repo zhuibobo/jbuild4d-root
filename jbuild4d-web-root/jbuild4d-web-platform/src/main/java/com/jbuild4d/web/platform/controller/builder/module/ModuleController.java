@@ -51,7 +51,7 @@ public class ModuleController extends GeneralCRUDImplController<ModuleEntity> {
         return "模块设计";
     }
 
-    @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
     @ResponseBody
     public List<ModuleEntity> getTreeData() {
         List<ModuleEntity> moduleEntityList=moduleService.getALL(JB4DSessionUtility.getSession());

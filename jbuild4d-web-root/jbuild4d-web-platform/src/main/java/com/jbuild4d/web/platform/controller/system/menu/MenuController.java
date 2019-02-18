@@ -26,7 +26,7 @@ public class MenuController {
     @Autowired
     IMenuService menuService;
 
-    @RequestMapping(value = "GetMyMenu", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetMyMenu", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getMyMenu() {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();

@@ -32,13 +32,13 @@ public class SelectEnvVariableController {
     @Autowired
     IEnvVariableService envVariableService;
 
-    @RequestMapping(value = "Select", method = RequestMethod.GET)
+    @RequestMapping(value = "/Select", method = RequestMethod.GET)
     public ModelAndView select() {
         ModelAndView modelAndView=new ModelAndView("SelectView/SelectEnvVariable");
         return modelAndView;
     }
 
-    @RequestMapping(value = "GetSelectData",method = RequestMethod.POST)
+    @RequestMapping(value = "/GetSelectData",method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getSelectData() throws XPathExpressionException, ParserConfigurationException, JBuild4DGenerallyException, SAXException, IOException {
         Map<String,List<EnvVariableVo>> resultData=new HashMap<>();

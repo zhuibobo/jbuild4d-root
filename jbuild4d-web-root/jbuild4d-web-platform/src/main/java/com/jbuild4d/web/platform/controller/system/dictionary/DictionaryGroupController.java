@@ -52,14 +52,14 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
         return "数据字典分组";
     }
 
-    @RequestMapping(value = "MoveUp", method = RequestMethod.POST)
+    @RequestMapping(value = "/MoveUp", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo moveUp(String recordId) {
         //dictionaryGroupService.moveUp(recordId);
         return JBuild4DResponseVo.opSuccess();
     }
 
-    @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
     @ResponseBody
     public List<DictionaryGroupEntity> getTreeData() {
         //dictionaryGroupService.moveUp(recordId);

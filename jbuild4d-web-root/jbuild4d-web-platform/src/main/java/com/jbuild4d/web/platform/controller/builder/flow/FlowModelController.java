@@ -105,7 +105,7 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
         }
     }
 
-    @RequestMapping(value = "SaveModel")
+    @RequestMapping(value = "/SaveModel")
     @ResponseBody
     public JBuild4DResponseVo saveModel(@RequestBody FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException {
         FlowModelEntity _flowModelEntity = null;
@@ -122,14 +122,14 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
         return JBuild4DResponseVo.success("保存流程模型成功!", result);
     }
 
-    @RequestMapping(value = "DeleteModel")
+    @RequestMapping(value = "/DeleteModel")
     @ResponseBody
     public JBuild4DResponseVo deleteModel(String recordId) throws JBuild4DGenerallyException {
         flowModelService.deleteByKey(JB4DSessionUtility.getSession(),recordId);
         return JBuild4DResponseVo.success("删除模型成功");
     }
 
-    @RequestMapping(value = "GetEditModelURL")
+    @RequestMapping(value = "/GetEditModelURL")
     @ResponseBody
     public JBuild4DResponseVo getEditModelURL(String modelId) throws JBuild4DGenerallyException {
         FlowModelEntity _flowModelEntity=flowModelService.getByPrimaryKey(JB4DSessionUtility.getSession(),modelId);
@@ -140,7 +140,7 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
         return JBuild4DResponseVo.success("获取数据成功!",result);
     }
 
-    @RequestMapping(value = "GetViewModelURL")
+    @RequestMapping(value = "/GetViewModelURL")
     @ResponseBody
     public JBuild4DResponseVo getViewModelURL(String modelId) throws JBuild4DGenerallyException {
         FlowModelEntity _flowModelEntity=flowModelService.getByPrimaryKey(JB4DSessionUtility.getSession(),modelId);

@@ -35,7 +35,7 @@ public class DataSetDesignController {
     @Autowired
     IDatasetService datasetService;
 
-    @RequestMapping(value = "EditDataSetView", method = RequestMethod.GET)
+    @RequestMapping(value = "/EditDataSetView", method = RequestMethod.GET)
     public ModelAndView editDataSet(String recordId, String op, String groupId) throws JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataSet/DataSetEdit");
         JB4DSessionUtility.setUserInfoToMV(modelAndView);
@@ -72,7 +72,7 @@ public class DataSetDesignController {
         return JBuild4DResponseVo.success("删除数据集成功!");
     }
 
-    @RequestMapping(value = "GetListData", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetListData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
 

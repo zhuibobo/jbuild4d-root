@@ -50,7 +50,7 @@ public class TableGroupController extends GeneralCRUDImplController<TableGroupEn
         return "表分组";
     }
 
-    @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
     @ResponseBody
     public List<TableGroupEntity> getTreeData() {
         List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALL(JB4DSessionUtility.getSession());

@@ -20,7 +20,7 @@ import java.io.IOException;
 @RequestMapping(value = "/PlatForm/MyInfo")
 public class MyInfoController {
 
-    @RequestMapping(value = "GetUserInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetUserInfo", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getUserInfo() {
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();

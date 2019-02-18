@@ -36,13 +36,13 @@ public class CodeGenerateController {
     @Autowired
     ICodeGenerateService codeGenerateService;
 
-    @RequestMapping(value = "ManagerView", method = RequestMethod.GET)
+    @RequestMapping(value = "/ManagerView", method = RequestMethod.GET)
     public ModelAndView mangerView() {
         ModelAndView modelAndView=new ModelAndView("System/DBResolver/Manager");
         return modelAndView;
     }
 
-    @RequestMapping(value = "GetListData", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetListData", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize, Integer pageNum, String searchCondition) throws IOException, ParseException, JBuild4DGenerallyException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
@@ -51,7 +51,7 @@ public class CodeGenerateController {
         return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
     }
 
-    @RequestMapping(value = "GetTableGenerateCode", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetTableGenerateCode", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getTableGenerateCode(String tableName,String packageType,String packageLevel2Name,String orderFieldName,String statusFieldName) throws IOException, ParseException, XPathExpressionException, SAXException, ParserConfigurationException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
@@ -59,7 +59,7 @@ public class CodeGenerateController {
         return JBuild4DResponseVo.success("获取成功",result);
     }
 
-    @RequestMapping(value = "GetTableFields", method = RequestMethod.POST)
+    @RequestMapping(value = "/GetTableFields", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo getTableFields(String tableName) throws IOException, ParseException, JBuild4DGenerallyException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
