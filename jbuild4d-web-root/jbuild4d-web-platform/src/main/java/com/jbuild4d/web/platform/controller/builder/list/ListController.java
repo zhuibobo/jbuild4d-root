@@ -32,7 +32,7 @@ public class ListController extends GeneralCRUDImplController<ListResourceEntity
 
     @Override
     public String getDetailViewName() {
-        return "Builder/Form/FormDesign";
+        return "Builder/List/ListDesign";
     }
 
     @Override
