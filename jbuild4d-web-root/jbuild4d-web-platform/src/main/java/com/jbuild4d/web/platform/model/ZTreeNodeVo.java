@@ -1,5 +1,7 @@
 package com.jbuild4d.web.platform.model;
 
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 
@@ -131,6 +133,34 @@ public class ZTreeNodeVo {
         }
 
         return result;
+    }
 
+    public static List<ZTreeNodeVo> parseDataSetToZTreeNodeList(List<DatasetGroupEntity> datasetGroupEntityList, List<DatasetEntity> datasetEntityList){
+        List<ZTreeNodeVo> result=new ArrayList<>();
+        for (DatasetGroupEntity group : datasetGroupEntityList) {
+            ZTreeNodeVo nodeVo=new ZTreeNodeVo();
+            nodeVo.setId(group.getDsGroupId());
+            nodeVo.setValue(group.getDsGroupValue());
+            nodeVo.setText(group.getDsGroupText());
+            nodeVo.setAttr1(group.getDsGroupText());
+            nodeVo.setParentId(group.getDsGroupParentId());
+            nodeVo.setNocheck(true);
+            nodeVo.setNodeTypeName("DataSetGroup");
+            result.add(nodeVo);
+        }
+
+        for (DatasetEntity datasetEntity : datasetEntityList) {
+            ZTreeNodeVo nodeVo=new ZTreeNodeVo();
+            nodeVo.setId(datasetEntity.getDsId());
+            nodeVo.setValue(datasetEntity.getDsName());
+            nodeVo.setText(datasetEntity.getDsCaption()+"【"+datasetEntity.getDsName()+"】");
+            nodeVo.setAttr1(datasetEntity.getDsCaption());
+            nodeVo.setParentId(datasetEntity.getDsGroupId());
+            nodeVo.setNodeTypeName("Table");
+            nodeVo.setNocheck(false);
+            result.add(nodeVo);
+        }
+
+        return result;
     }
 }
