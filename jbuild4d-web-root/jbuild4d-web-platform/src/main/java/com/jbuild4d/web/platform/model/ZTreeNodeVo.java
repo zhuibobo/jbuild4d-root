@@ -156,7 +156,7 @@ public class ZTreeNodeVo {
             nodeVo.setText(datasetEntity.getDsCaption()+"【"+datasetEntity.getDsName()+"】");
             nodeVo.setAttr1(datasetEntity.getDsCaption());
             nodeVo.setParentId(datasetEntity.getDsGroupId());
-            nodeVo.setNodeTypeName("Table");
+            nodeVo.setNodeTypeName("DataSet");
             nodeVo.setNocheck(false);
             result.add(nodeVo);
         }
