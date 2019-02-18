@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class FDCKEditorPluginsConfigServiceImpl implements IFDCKEditorPluginsConfigService {
 
-    String configResource= "/builder/form/CKEditorPluginsConfig.xml";
+    String configResource= "/builder/htmldesign/CKEditorPluginsConfig.xml";
     Document xmlDocument=null;
     IJb4dCacheService jb4dCacheService;
 
