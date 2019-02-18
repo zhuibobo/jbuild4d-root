@@ -28,6 +28,11 @@
 
     </AppControls>
     <ListControls>
-
+        <Control SingleName="FDCT_Template" Text="表格模版" ToolbarLocation="FDCT_Template,1"
+                 ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" Type="列表查询控件">
+            <Config></Config>
+            <Desc></Desc>
+        </Control>
     </ListControls>
 </Config>

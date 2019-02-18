@@ -5,7 +5,7 @@ import org.w3c.dom.Node;
 
 import javax.xml.xpath.XPathExpressionException;
 
-public class WebFormControlDefinitionVo {
+public class HtmlControlDefinitionVo {
     private String singleName;
     private String text;
     private String toolbarLocation;
@@ -107,8 +107,8 @@ public class WebFormControlDefinitionVo {
         this.dialogHeight = dialogHeight;
     }
 
-    public static WebFormControlDefinitionVo parseWebFormControlNode(Node node) throws XPathExpressionException {
-        WebFormControlDefinitionVo vo=new WebFormControlDefinitionVo();
+    public static HtmlControlDefinitionVo parseWebFormControlNode(Node node) throws XPathExpressionException {
+        HtmlControlDefinitionVo vo=new HtmlControlDefinitionVo();
         vo.setSingleName(XMLUtility.getAttribute(node,"SingleName"));
         vo.setText(XMLUtility.getAttribute(node,"Text"));
         vo.setToolbarLocation(XMLUtility.getAttribute(node,"ToolbarLocation"));

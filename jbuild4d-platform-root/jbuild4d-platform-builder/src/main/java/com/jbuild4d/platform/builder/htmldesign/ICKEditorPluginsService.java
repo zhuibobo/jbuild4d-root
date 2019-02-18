@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.builder.htmldesign;
 
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.platform.builder.vo.WebFormControlDefinitionVo;
+import com.jbuild4d.platform.builder.vo.HtmlControlDefinitionVo;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface ICKEditorPluginsService {
-    List<WebFormControlDefinitionVo> getVoList() throws JBuild4DGenerallyException;
+    List<HtmlControlDefinitionVo> getWebFormControlVoList() throws JBuild4DGenerallyException;
 }
