@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.service.impl;
+package com.jbuild4d.platform.builder.module.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.ServiceLinkMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity;
@@ -7,7 +7,7 @@ import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.platform.builder.service.IServiceLinkService;
+import com.jbuild4d.platform.builder.module.IServiceLinkService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 /**

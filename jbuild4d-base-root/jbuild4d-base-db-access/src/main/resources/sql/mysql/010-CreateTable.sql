@@ -526,10 +526,11 @@ CREATE TABLE `TB4D_LIST_RESOURCE` (
   `LIST_HTML_SOURCE`        MEDIUMTEXT     NULL,
   `LIST_HTML_RESOLVE`       MEDIUMTEXT     NULL,
   `LIST_JS_CONTENT`         MEDIUMTEXT     NULL,
-  `LIST_CSS_CONTENT`        MEDIUMTEXT     NULL,
   `LIST_CONFIG_CONTENT`     MEDIUMTEXT     NULL,
   PRIMARY KEY (`LIST_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用设计-列表设计';
+
+
 
 /*------------------------------------------Flowable集成--------------------------------------*/
 DROP TABLE IF EXISTS `TB4D_FLOW_MODEL`;

@@ -21,8 +21,11 @@ import com.jbuild4d.platform.builder.flow.IFlowModelService;
 import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
 import com.jbuild4d.platform.builder.flow.impl.FlowModelServiceImpl;
 import com.jbuild4d.platform.builder.flow.impl.FlowModelerConfigServiceImpl;
-import com.jbuild4d.platform.builder.service.*;
-import com.jbuild4d.platform.builder.service.impl.*;
+import com.jbuild4d.platform.builder.list.IListResourceService;
+import com.jbuild4d.platform.builder.list.impl.ListResourceServiceImpl;
+import com.jbuild4d.platform.builder.module.IBuilderConfigService;
+import com.jbuild4d.platform.builder.module.IModuleService;
+import com.jbuild4d.platform.builder.module.impl.*;
 import com.jbuild4d.platform.builder.webformdesign.IFDCKEditorPluginsService;
 import com.jbuild4d.platform.builder.webformdesign.IFormConfigService;
 import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
@@ -137,5 +140,11 @@ public class BuilderBeansConfig {
     public IFlowModelService flowModelService(ISQLBuilderService _sqlBuilderService, FlowModelMapper mapper, SqlSessionTemplate sqlSessionTemplate, RestTemplate restTemplate,IFlowModelerConfigService flowModelerConfigService,IModuleService moduleService){
         IFlowModelService flowModelService=new FlowModelServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,restTemplate,flowModelerConfigService,moduleService);
         return flowModelService;
+    }
+
+    @Bean
+    public IListResourceService listResourceService(ISQLBuilderService _sqlBuilderService, ListResourceMapper mapper, SqlSessionTemplate sqlSessionTemplate, IModuleService moduleService){
+        IListResourceService listResourceService=new ListResourceServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,moduleService);
+        return listResourceService;
     }
 }

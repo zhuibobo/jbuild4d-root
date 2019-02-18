@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.service;
+package com.jbuild4d.platform.builder.module;
 
 import org.xml.sax.SAXException;
 

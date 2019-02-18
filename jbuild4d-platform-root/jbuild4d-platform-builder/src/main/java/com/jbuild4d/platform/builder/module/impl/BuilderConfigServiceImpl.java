@@ -1,17 +1,15 @@
-package com.jbuild4d.platform.builder.service.impl;
+package com.jbuild4d.platform.builder.module.impl;
 
 import com.jbuild4d.base.tools.common.XMLUtility;
-import com.jbuild4d.platform.builder.service.IBuilderConfigService;
+import com.jbuild4d.platform.builder.module.IBuilderConfigService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,7 +18,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class BuilderConfigServiceImpl implements IBuilderConfigService {
-    static String configResource="/builder/BuilderConfig.xml";
+    static String configResource="builder/BuilderConfig.xml";
     static Document xmlDocument=null;
     static String _tablePrefix=null;
 

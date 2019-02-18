@@ -250,6 +250,11 @@ public class MybatisBeansConfig {
     }
 
     @Bean
+    public ListResourceMapper listResourceMapper(SqlSessionTemplate sqlSessionTemplate){
+        return sqlSessionTemplate.getMapper(ListResourceMapper.class);
+    }
+
+    @Bean
     public FileInfoMapper fileInfoMapper(SqlSessionTemplate sqlSessionTemplate){
         return sqlSessionTemplate.getMapper(FileInfoMapper.class);
     }

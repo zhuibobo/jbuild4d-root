@@ -9,7 +9,7 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.XMLUtility;
 import com.jbuild4d.platform.builder.flow.IFlowModelService;
 import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
-import com.jbuild4d.platform.builder.service.IModuleService;
+import com.jbuild4d.platform.builder.module.IModuleService;
 import com.jbuild4d.platform.builder.vo.DeModelVo;
 import com.jbuild4d.platform.builder.vo.FlowModelerConfigVo;
 import org.flowable.bpmn.converter.BpmnXMLConverter;

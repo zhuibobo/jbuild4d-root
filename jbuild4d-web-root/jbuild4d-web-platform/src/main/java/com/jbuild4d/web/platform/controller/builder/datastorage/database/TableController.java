@@ -11,7 +11,7 @@ import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
-import com.jbuild4d.platform.builder.service.IBuilderConfigService;
+import com.jbuild4d.platform.builder.module.IBuilderConfigService;
 import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.datastorage.ITableService;

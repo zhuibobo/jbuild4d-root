@@ -1,7 +1,6 @@
-package com.jbuild4d.platform.builder.service.impl;
+package com.jbuild4d.platform.builder.module.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.ModuleMapper;
-import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
@@ -9,7 +8,7 @@ import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.platform.builder.service.IModuleService;
+import com.jbuild4d.platform.builder.module.IModuleService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.Date;

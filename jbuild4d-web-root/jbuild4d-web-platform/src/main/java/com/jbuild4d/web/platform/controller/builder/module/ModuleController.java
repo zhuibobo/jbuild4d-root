@@ -3,7 +3,7 @@ package com.jbuild4d.web.platform.controller.builder.module;
 import com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
-import com.jbuild4d.platform.builder.service.IModuleService;
+import com.jbuild4d.platform.builder.module.IModuleService;
 import com.jbuild4d.web.platform.controller.base.GeneralCRUDImplController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

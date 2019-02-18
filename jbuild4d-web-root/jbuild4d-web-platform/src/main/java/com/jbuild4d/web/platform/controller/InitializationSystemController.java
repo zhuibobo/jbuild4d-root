@@ -5,7 +5,7 @@ import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
-import com.jbuild4d.platform.builder.service.IModuleService;
+import com.jbuild4d.platform.builder.module.IModuleService;
 import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.organ.service.IOrganService;
