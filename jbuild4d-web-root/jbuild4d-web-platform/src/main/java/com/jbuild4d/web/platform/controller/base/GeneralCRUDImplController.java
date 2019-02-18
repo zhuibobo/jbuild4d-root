@@ -86,7 +86,11 @@ public abstract class GeneralCRUDImplController<T> implements IGeneralCRUDContro
     }
 
     protected void writeOperationLog(String actionName,String text,String data,HttpServletRequest request) throws JsonProcessingException, JBuild4DGenerallyException {
-        operationLogService.writeOperationLog(JB4DSessionUtility.getSession(), getJBuild4DSystemName(),getModuleName(),actionName,getLogTypeName(),text,data,this.getClass(),request);
+        String systemName=this.getJBuild4DSystemName();
+        if(systemName==null){
+            systemName=jBuild4DSystemName;
+        }
+        operationLogService.writeOperationLog(JB4DSessionUtility.getSession(), systemName,getModuleName(),actionName,getLogTypeName(),text,data,this.getClass(),request);
     }
 
     @RequestMapping(value = "ListView", method = RequestMethod.GET)

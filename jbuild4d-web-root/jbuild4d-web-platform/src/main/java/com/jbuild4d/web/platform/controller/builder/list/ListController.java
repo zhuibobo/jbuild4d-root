@@ -37,7 +37,7 @@ public class ListController extends GeneralCRUDImplController<ListResourceEntity
 
     @Override
     public String getJBuild4DSystemName() {
-        return null;
+        return this.jBuild4DSystemName;
     }
 
     @Override
