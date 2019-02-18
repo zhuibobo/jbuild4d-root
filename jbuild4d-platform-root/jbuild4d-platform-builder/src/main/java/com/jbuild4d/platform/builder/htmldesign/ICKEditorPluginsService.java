@@ -13,4 +13,6 @@ import java.util.List;
  */
 public interface ICKEditorPluginsService {
     List<HtmlControlDefinitionVo> getWebFormControlVoList() throws JBuild4DGenerallyException;
+
+    List<HtmlControlDefinitionVo> getListControlVoList() throws JBuild4DGenerallyException;
 }

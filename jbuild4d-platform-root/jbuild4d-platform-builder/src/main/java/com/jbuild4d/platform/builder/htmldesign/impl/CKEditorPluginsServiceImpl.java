@@ -44,6 +44,25 @@ public class CKEditorPluginsServiceImpl implements ICKEditorPluginsService {
         });
     }
 
+    @Override
+    public List<HtmlControlDefinitionVo> getListControlVoList() throws JBuild4DGenerallyException {
+        CKEditorPluginsConfigService configService=new CKEditorPluginsConfigService(jb4dCacheService);
+        return JB4DCacheManager.autoGetFromCache(JB4DCacheManager.jb4dPlatformBuilderCacheName, jb4dCacheService.sysRunStatusIsDebug(), "EnvVariableVoList", new IBuildGeneralObj<List<HtmlControlDefinitionVo>>() {
+            @Override
+            public List<HtmlControlDefinitionVo> BuildObj() throws JBuild4DGenerallyException {
+                try
+                {
+                    List<Node> nodeList=configService.getListControlNodes();
+                    return parseNodeListToVoList(nodeList);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                    throw new JBuild4DGenerallyException(ex.getMessage());
+                }
+            }
+        });
+    }
+
     private List<HtmlControlDefinitionVo> parseNodeListToVoList(List<Node> nodeList) throws JBuild4DGenerallyException {
         try {
             List<HtmlControlDefinitionVo> result = new ArrayList<>();

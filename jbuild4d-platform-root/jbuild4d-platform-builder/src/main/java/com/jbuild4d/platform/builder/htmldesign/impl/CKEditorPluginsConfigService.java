@@ -1,10 +1,6 @@
 package com.jbuild4d.platform.builder.htmldesign.impl;
 
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.tools.cache.IBuildGeneralObj;
-import com.jbuild4d.base.tools.cache.JB4DCacheManager;
 import com.jbuild4d.base.tools.common.XMLUtility;
-import com.jbuild4d.platform.builder.vo.HtmlControlDefinitionVo;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -14,7 +10,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
