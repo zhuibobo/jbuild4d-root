@@ -41,7 +41,7 @@ public class FormController extends GeneralCRUDImplController<FormResourceEntity
     }
 
     @Override
-    public String getjBuild4DSystemName() {
+    public String getJBuild4DSystemName() {
         return null;
     }
 

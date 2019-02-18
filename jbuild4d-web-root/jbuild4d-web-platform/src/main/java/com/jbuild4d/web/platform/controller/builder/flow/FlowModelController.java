@@ -57,7 +57,7 @@ public class FlowModelController extends GeneralCRUDImplController<FlowModelEnti
     }
 
     @Override
-    public String getjBuild4DSystemName() {
+    public String getJBuild4DSystemName() {
         return null;
     }
 

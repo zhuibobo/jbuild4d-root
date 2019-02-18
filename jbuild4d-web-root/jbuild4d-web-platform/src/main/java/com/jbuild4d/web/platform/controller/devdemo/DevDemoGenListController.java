@@ -51,7 +51,7 @@ public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoG
     }
 
     @Override
-    public String getjBuild4DSystemName() {
+    public String getJBuild4DSystemName() {
         return this.jBuild4DSystemName;
     }
 

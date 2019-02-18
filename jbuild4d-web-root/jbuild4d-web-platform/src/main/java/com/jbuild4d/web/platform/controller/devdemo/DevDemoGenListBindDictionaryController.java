@@ -49,7 +49,7 @@ public class DevDemoGenListBindDictionaryController  extends GeneralCRUDImplCont
     }
 
     @Override
-    public String getjBuild4DSystemName() {
+    public String getJBuild4DSystemName() {
         return this.jBuild4DSystemName;
     }
 

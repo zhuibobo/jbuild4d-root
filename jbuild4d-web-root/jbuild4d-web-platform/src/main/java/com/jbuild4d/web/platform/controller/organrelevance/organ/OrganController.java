@@ -46,7 +46,7 @@ public class OrganController extends GeneralCRUDImplController<OrganEntity> {
     }
 
     @Override
-    public String getjBuild4DSystemName() {
+    public String getJBuild4DSystemName() {
         return this.jBuild4DSystemName;
     }
 

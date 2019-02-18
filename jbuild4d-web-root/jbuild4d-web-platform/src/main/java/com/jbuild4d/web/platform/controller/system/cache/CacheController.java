@@ -37,7 +37,7 @@ public class CacheController extends GeneralCRUDImplController<Jb4dCacheEntity> 
     }
 
     @Override
-    public String getjBuild4DSystemName() {
+    public String getJBuild4DSystemName() {
         return this.jBuild4DSystemName;
     }
 
