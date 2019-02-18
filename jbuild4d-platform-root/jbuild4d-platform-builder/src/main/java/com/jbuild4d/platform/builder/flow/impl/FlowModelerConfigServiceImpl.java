@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class FlowModelerConfigServiceImpl implements IFlowModelerConfigService {
 
-    String configResource= "builder"+ File.separator+"flow"+File.separator +"ModelerConfig.xml";
+    String configResource= "/builder/flow/ModelerConfig.xml";
     Document xmlDocument=null;
     IJb4dCacheService jb4dCacheService;
 
@@ -42,7 +42,7 @@ public class FlowModelerConfigServiceImpl implements IFlowModelerConfigService {
 
     private FlowModelerConfigVo parseXMLDocToVo() throws JBuild4DGenerallyException {
         try {
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
+            InputStream inputStream = this.getClass().getResourceAsStream(configResource);
             xmlDocument = XMLUtility.parseForDoc(inputStream);
             Node modelerRestNode = XMLUtility.parseForNode(xmlDocument, "/Config/ModelerRest");
 

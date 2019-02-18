@@ -18,7 +18,7 @@ import java.io.InputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class BuilderConfigServiceImpl implements IBuilderConfigService {
-    static String configResource="builder/BuilderConfig.xml";
+    static String configResource="/builder/BuilderConfig.xml";
     static Document xmlDocument=null;
     static String _tablePrefix=null;
 
@@ -31,7 +31,7 @@ public class BuilderConfigServiceImpl implements IBuilderConfigService {
     }
 
     private void loadDocument() throws ParserConfigurationException, SAXException, IOException {
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
+        InputStream inputStream = this.getClass().getResourceAsStream(configResource);
         xmlDocument = XMLUtility.parseForDoc(inputStream);
     }
 

@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class DataSetColumnCaptionConfigServiceImpl implements IDataSetColumnCaptionConfigService {
 
-    String configResource= "builder"+File.separator+"dataset"+File.separator +"BuilderDataSetColumnCaptionConfig.xml";
+    String configResource= "/builder/dataset/BuilderDataSetColumnCaptionConfig.xml";
     Document xmlDocument=null;
 
     public DataSetColumnCaptionConfigServiceImpl() throws IOException, SAXException, ParserConfigurationException {
@@ -30,7 +30,7 @@ public class DataSetColumnCaptionConfigServiceImpl implements IDataSetColumnCapt
     }
 
     private void loadDocument() throws ParserConfigurationException, SAXException, IOException {
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
+        InputStream inputStream = this.getClass().getResourceAsStream(configResource);
         xmlDocument = XMLUtility.parseForDoc(inputStream);
     }
 

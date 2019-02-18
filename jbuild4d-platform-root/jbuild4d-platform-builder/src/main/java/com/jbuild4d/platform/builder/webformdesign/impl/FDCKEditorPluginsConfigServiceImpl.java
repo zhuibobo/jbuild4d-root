@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class FDCKEditorPluginsConfigServiceImpl implements IFDCKEditorPluginsConfigService {
 
-    String configResource= "builder"+ File.separator+"formdesign"+File.separator +"CKEditorPluginsConfig.xml";
+    String configResource= "/builder/formdesign/CKEditorPluginsConfig.xml";
     Document xmlDocument=null;
     IJb4dCacheService jb4dCacheService;
 
@@ -44,7 +44,7 @@ public class FDCKEditorPluginsConfigServiceImpl implements IFDCKEditorPluginsCon
 
     private List<WebFormControlDefinitionVo> parseXMLDocToVoList() throws JBuild4DGenerallyException {
         try {
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
+            InputStream inputStream = this.getClass().getResourceAsStream(configResource);
             xmlDocument = XMLUtility.parseForDoc(inputStream);
             List<Node> nodeList = XMLUtility.parseForNodeList(xmlDocument, "/Config/WebControl/WebFormControl");
             List<WebFormControlDefinitionVo> result = new ArrayList<>();
