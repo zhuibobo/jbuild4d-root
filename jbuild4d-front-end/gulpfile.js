@@ -187,6 +187,7 @@ gulp.task('watch', function() {
         srcPlatformStaticPath + "/Js/HTMLDesign/**/*.css",
         srcPlatformStaticPath + "/Js/HTMLDesign/**/*.png",
         srcPlatformStaticPath + "/Js/HTMLDesign/**/*.html"], gulp.series('HTMLDesign-ALL'));
+    let watcherPluginLess=gulp.watch(srcPlatformStaticPath+"/Js/**/*.less", gulp.series('Less'));
 });
 
 /*默认启动文件监控*/
