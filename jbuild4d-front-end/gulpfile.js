@@ -183,10 +183,10 @@ gulp.task('watch', function() {
     let watcherLessImages=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/Images/**/*", gulp.series('LessImages'));
     let watcherHTMLTemplates=gulp.watch("build-jbuild4d-web-platform/templates/**/*", gulp.series('HTMLTemplates'));
     let watcherFormDesign=gulp.watch([
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.js",
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.css",
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.png",
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.html"], gulp.series('FormDesign'));
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.js",
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.css",
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.png",
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.html"], gulp.series('HTMLDesign-ALL'));
 });
 
 /*默认启动文件监控*/

@@ -1,7 +1,6 @@
 /**
  * Created by zhuangrb on 2018/11/23.
  */
-
 (function(pluginName){
     CKEditorPluginUtility.Plugins[pluginName]=CKEditorPluginUtility.GetGeneralPluginInstance(pluginName,{});
 

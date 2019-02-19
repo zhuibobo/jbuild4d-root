@@ -324,7 +324,7 @@ var DialogUtility={
 
         var dialogObj=$(dialogEle).dialog(defaultoptions);
         var $iframeobj = $(dialogEle).find("iframe");
-        $iframeobj.attr(src,url);
+        $iframeobj.attr("src",url);
         $iframeobj[0].contentWindow.FrameWindowId = autodialogid;
         $iframeobj[0].contentWindow.OpenerWindowObj = openerwindow;
         return dialogObj;
