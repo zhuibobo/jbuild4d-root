@@ -22,4 +22,4 @@
             CKEditorPluginUtility.RegGeneralPluginToEditor(editor, this.path, CKEditorPluginUtility.Plugins[pluginName].Setting,addToEditor);
         }
     });
-})("FDCT_Template");
+})("WFDCT_Template");
