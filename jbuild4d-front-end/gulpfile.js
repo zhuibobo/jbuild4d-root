@@ -157,11 +157,11 @@ gulp.task('HTMLDesign-CKEditorConfig',()=> {
 /*WebForm相关的插件*/
 gulp.task('HTMLDesign-Plugins',()=>{
     return gulp.src([
-        srcPlatformStaticPath + "/Js/HTMLDesign/WebFormDesign/Plugins/**/*.js",
-        srcPlatformStaticPath + "/Js/HTMLDesign/WebFormDesign/Plugins/**/*.css",
-        srcPlatformStaticPath + "/Js/HTMLDesign/WebFormDesign/Plugins/**/*.png"
-    ], {base: "build-jbuild4d-web-platform/static/Js/HTMLDesign/WebFormDesign/Plugins"}).
-    pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/WebFormDesign/Plugins"));
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/Plugins/**/*.js",
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/Plugins/**/*.css",
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/Plugins/**/*.png"
+    ], {base: "build-jbuild4d-web-platform/static/Js/HTMLDesign/**/Plugins"}).
+    pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/**/Plugins"));
 });
 
 /*编译表单设计器的相关的HTML文件*/
