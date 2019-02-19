@@ -34,10 +34,10 @@ CKEDITOR.editorConfig = function(config) {
         { name: 'colors', groups: [ 'colors' ] },
         { name: 'tools', groups: [ 'tools' ] },
         { name: 'others', groups: [ 'others' ] },
-        { name: 'FDCT_Template', groups: [] },
-        { name: 'FDCT_Container', groups: [] },
+        { name: 'LC_Template', groups: [] },
+        { name: 'LC_Container', groups: [] },
         '/',
-        { name: 'FDCT_Simple', groups: [] }
+        { name: 'LC_Simple', groups: [] }
     ];
     config.height=jQuery(".form-design-wraper").height()-112;
     config.fillEmptyBlocks = false;
