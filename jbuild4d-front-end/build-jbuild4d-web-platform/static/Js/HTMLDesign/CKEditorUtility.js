@@ -32,7 +32,7 @@ class CKEditorUtility {
     static SetCKEditorHTML(html){
         this.GetCKEditorInst().setData(html);
     }
-    static InitializeCKEditor(textAreaElemId,pluginsConfig,loadCompletedFunc) {
+    static InitializeCKEditor(textAreaElemId,pluginsConfig,loadCompletedFunc,ckeditorConfigFullPath,pluginBasePath) {
         var extraPlugins=new Array();
         for(var i=0;i<pluginsConfig.length;i++) {
             var singlePluginConfig = pluginsConfig[i];
@@ -47,7 +47,7 @@ class CKEditorUtility {
             var isJBuild4DData=singlePluginConfig.isJBuild4DData;
             //debugger;
             var pluginFileName = singleName + "Plugin.js";
-            var pluginFolderName = "../../HTMLDesign/FormDesign/Plugins/" + singleName + "/";
+            var pluginFolderName = pluginBasePath + singleName + "/";
             //注册扩展组件
             CKEDITOR.plugins.addExternal(singleName, pluginFolderName, pluginFileName);
             extraPlugins.push(singleName);
@@ -68,7 +68,7 @@ class CKEditorUtility {
         }
 
         //加载默认配置文件
-        var editorConfigUrl = BaseUtility.AppendTimeStampUrl('../../HTMLDesign/FormDesign/Plugins/CKEditorConfig.js');
+        var editorConfigUrl = BaseUtility.AppendTimeStampUrl(ckeditorConfigFullPath);
 
         //把扩展组件加入工具条
         CKEDITOR.replace(textAreaElemId, {

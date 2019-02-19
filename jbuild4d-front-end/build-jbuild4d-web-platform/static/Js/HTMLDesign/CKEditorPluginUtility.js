@@ -251,6 +251,7 @@ class CKEditorPluginUtility {
             if (controlSetting.IFrameExecuteActionName == CKEditorPluginUtility.DialogExecuteInsertActionName) {
                 var elem = CKEDITOR.dom.element.createFromHtml(html);
                 this.SerializePropsToElem(elem,controlProps,controlSetting);
+                //debugger;
                 CKEditorUtility.GetCKEditorInst().insertElement(elem);
                 CKEditorUtility.GetCKEditorInst().getSelection().selectElement(elem);
             }
@@ -265,7 +266,6 @@ class CKEditorPluginUtility {
                 }
                 //SimpleControlUtil.CommInsertOrReplaceElemInCKEditor(exsetting.IFrameWindow,exsetting.IRCommandName,"");
             }
-
             //exsetting.IRCommandName=SimpleControlUtil.PropInsertCommand;
         }
     }
