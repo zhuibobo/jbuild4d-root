@@ -22,8 +22,8 @@ public class ListResourceEntityWithBLOBs extends ListResourceEntity {
     //LIST_CONFIG_CONTENT
     private String listConfigContent;
 
-    public ListResourceEntityWithBLOBs(String listId, String listCode, String listName, String listSingleName, Date listCreateTime, String listCreater, Date listUpdateTime, String listUpdater, String listType, String listIssystem, Integer listOrderNum, String listDesc, String listModuleId, String listStatus, String listOrganId, String listOrganName, String listDatasetId, String listHtmlSource, String listHtmlResolve, String listJsContent, String listConfigContent) {
-        super(listId, listCode, listName, listSingleName, listCreateTime, listCreater, listUpdateTime, listUpdater, listType, listIssystem, listOrderNum, listDesc, listModuleId, listStatus, listOrganId, listOrganName, listDatasetId);
+    public ListResourceEntityWithBLOBs(String listId, String listCode, String listName, String listSingleName, Date listCreateTime, String listCreater, Date listUpdateTime, String listUpdater, String listType, String listIssystem, Integer listOrderNum, String listDesc, String listModuleId, String listStatus, String listOrganId, String listOrganName, String listDatasetId, String listEnableSSear, String listEnableCSear, String listHtmlSource, String listHtmlResolve, String listJsContent, String listConfigContent) {
+        super(listId, listCode, listName, listSingleName, listCreateTime, listCreater, listUpdateTime, listUpdater, listType, listIssystem, listOrderNum, listDesc, listModuleId, listStatus, listOrganId, listOrganName, listDatasetId, listEnableSSear, listEnableCSear);
         this.listHtmlSource = listHtmlSource;
         this.listHtmlResolve = listHtmlResolve;
         this.listJsContent = listJsContent;

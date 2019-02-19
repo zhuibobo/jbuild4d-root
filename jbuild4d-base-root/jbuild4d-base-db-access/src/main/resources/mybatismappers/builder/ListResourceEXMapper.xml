@@ -18,6 +18,8 @@
         <if test="listOrganId !=null and listOrganId !=''"> and LIST_ORGAN_ID like #{listOrganId} </if>
         <if test="listOrganName !=null and listOrganName !=''"> and LIST_ORGAN_NAME like #{listOrganName} </if>
         <if test="listDatasetId !=null and listDatasetId !=''"> and LIST_DATASET_ID like #{listDatasetId} </if>
+        <if test="listEnableSSear !=null and listEnableSSear !=''"> and LIST_ENABLE_S_SEAR like #{listEnableSSear} </if>
+        <if test="listEnableCSear !=null and listEnableCSear !=''"> and LIST_ENABLE_C_SEAR like #{listEnableCSear} </if>
         <if test="listHtmlSource !=null and listHtmlSource !=''"> and LIST_HTML_SOURCE like #{listHtmlSource} </if>
         <if test="listHtmlResolve !=null and listHtmlResolve !=''"> and LIST_HTML_RESOLVE like #{listHtmlResolve} </if>
         <if test="listJsContent !=null and listJsContent !=''"> and LIST_JS_CONTENT like #{listJsContent} </if>

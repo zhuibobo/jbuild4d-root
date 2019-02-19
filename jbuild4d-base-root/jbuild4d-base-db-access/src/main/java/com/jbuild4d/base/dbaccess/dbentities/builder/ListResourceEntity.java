@@ -66,7 +66,13 @@ public class ListResourceEntity {
     //LIST_DATASET_ID
     private String listDatasetId;
 
-    public ListResourceEntity(String listId, String listCode, String listName, String listSingleName, Date listCreateTime, String listCreater, Date listUpdateTime, String listUpdater, String listType, String listIssystem, Integer listOrderNum, String listDesc, String listModuleId, String listStatus, String listOrganId, String listOrganName, String listDatasetId) {
+    //LIST_ENABLE_S_SEAR
+    private String listEnableSSear;
+
+    //LIST_ENABLE_C_SEAR
+    private String listEnableCSear;
+
+    public ListResourceEntity(String listId, String listCode, String listName, String listSingleName, Date listCreateTime, String listCreater, Date listUpdateTime, String listUpdater, String listType, String listIssystem, Integer listOrderNum, String listDesc, String listModuleId, String listStatus, String listOrganId, String listOrganName, String listDatasetId, String listEnableSSear, String listEnableCSear) {
         this.listId = listId;
         this.listCode = listCode;
         this.listName = listName;
@@ -84,6 +90,8 @@ public class ListResourceEntity {
         this.listOrganId = listOrganId;
         this.listOrganName = listOrganName;
         this.listDatasetId = listDatasetId;
+        this.listEnableSSear = listEnableSSear;
+        this.listEnableCSear = listEnableCSear;
     }
 
     public ListResourceEntity() {
@@ -224,5 +232,21 @@ public class ListResourceEntity {
 
     public void setListDatasetId(String listDatasetId) {
         this.listDatasetId = listDatasetId == null ? null : listDatasetId.trim();
+    }
+
+    public String getListEnableSSear() {
+        return listEnableSSear;
+    }
+
+    public void setListEnableSSear(String listEnableSSear) {
+        this.listEnableSSear = listEnableSSear == null ? null : listEnableSSear.trim();
+    }
+
+    public String getListEnableCSear() {
+        return listEnableCSear;
+    }
+
+    public void setListEnableCSear(String listEnableCSear) {
+        this.listEnableCSear = listEnableCSear == null ? null : listEnableCSear.trim();
     }
 }
