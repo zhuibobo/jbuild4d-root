@@ -20,6 +20,8 @@
             <arg column="LIST_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_DATASET_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_ENABLE_S_SEAR" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_ENABLE_C_SEAR" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs">
@@ -41,6 +43,8 @@
             <arg column="LIST_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_DATASET_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_ENABLE_S_SEAR" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_ENABLE_C_SEAR" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_HTML_SOURCE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="LIST_HTML_RESOLVE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="LIST_JS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
@@ -50,7 +54,8 @@
     <sql id="Base_Column_List">
         LIST_ID, LIST_CODE, LIST_NAME, LIST_SINGLE_NAME, LIST_CREATE_TIME, LIST_CREATER,
         LIST_UPDATE_TIME, LIST_UPDATER, LIST_TYPE, LIST_ISSYSTEM, LIST_ORDER_NUM, LIST_DESC,
-        LIST_MODULE_ID, LIST_STATUS, LIST_ORGAN_ID, LIST_ORGAN_NAME, LIST_DATASET_ID
+        LIST_MODULE_ID, LIST_STATUS, LIST_ORGAN_ID, LIST_ORGAN_NAME, LIST_DATASET_ID, LIST_ENABLE_S_SEAR,
+        LIST_ENABLE_C_SEAR
     </sql>
     <sql id="Blob_Column_List">
         LIST_HTML_SOURCE, LIST_HTML_RESOLVE, LIST_JS_CONTENT, LIST_CONFIG_CONTENT
@@ -73,17 +78,19 @@
                                         LIST_UPDATE_TIME, LIST_UPDATER, LIST_TYPE,
                                         LIST_ISSYSTEM, LIST_ORDER_NUM, LIST_DESC,
                                         LIST_MODULE_ID, LIST_STATUS, LIST_ORGAN_ID,
-                                        LIST_ORGAN_NAME, LIST_DATASET_ID, LIST_HTML_SOURCE,
-                                        LIST_HTML_RESOLVE, LIST_JS_CONTENT,
-                                        LIST_CONFIG_CONTENT)
+                                        LIST_ORGAN_NAME, LIST_DATASET_ID, LIST_ENABLE_S_SEAR,
+                                        LIST_ENABLE_C_SEAR, LIST_HTML_SOURCE, LIST_HTML_RESOLVE,
+                                        LIST_JS_CONTENT, LIST_CONFIG_CONTENT
+                )
         values (#{listId,jdbcType=VARCHAR}, #{listCode,jdbcType=VARCHAR}, #{listName,jdbcType=VARCHAR},
                 #{listSingleName,jdbcType=VARCHAR}, #{listCreateTime,jdbcType=TIMESTAMP}, #{listCreater,jdbcType=VARCHAR},
                 #{listUpdateTime,jdbcType=TIMESTAMP}, #{listUpdater,jdbcType=VARCHAR}, #{listType,jdbcType=VARCHAR},
                 #{listIssystem,jdbcType=VARCHAR}, #{listOrderNum,jdbcType=INTEGER}, #{listDesc,jdbcType=VARCHAR},
                 #{listModuleId,jdbcType=VARCHAR}, #{listStatus,jdbcType=VARCHAR}, #{listOrganId,jdbcType=VARCHAR},
-                #{listOrganName,jdbcType=VARCHAR}, #{listDatasetId,jdbcType=VARCHAR}, #{listHtmlSource,jdbcType=LONGVARCHAR},
-                #{listHtmlResolve,jdbcType=LONGVARCHAR}, #{listJsContent,jdbcType=LONGVARCHAR},
-                #{listConfigContent,jdbcType=LONGVARCHAR})
+                #{listOrganName,jdbcType=VARCHAR}, #{listDatasetId,jdbcType=VARCHAR}, #{listEnableSSear,jdbcType=VARCHAR},
+                #{listEnableCSear,jdbcType=VARCHAR}, #{listHtmlSource,jdbcType=LONGVARCHAR}, #{listHtmlResolve,jdbcType=LONGVARCHAR},
+                #{listJsContent,jdbcType=LONGVARCHAR}, #{listConfigContent,jdbcType=LONGVARCHAR}
+                       )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs">
         insert into TB4D_LIST_RESOURCE
@@ -138,6 +145,12 @@
             </if>
             <if test="listDatasetId != null">
                 LIST_DATASET_ID,
+            </if>
+            <if test="listEnableSSear != null">
+                LIST_ENABLE_S_SEAR,
+            </if>
+            <if test="listEnableCSear != null">
+                LIST_ENABLE_C_SEAR,
             </if>
             <if test="listHtmlSource != null">
                 LIST_HTML_SOURCE,
@@ -204,6 +217,12 @@
             <if test="listDatasetId != null">
                 #{listDatasetId,jdbcType=VARCHAR},
             </if>
+            <if test="listEnableSSear != null">
+                #{listEnableSSear,jdbcType=VARCHAR},
+            </if>
+            <if test="listEnableCSear != null">
+                #{listEnableCSear,jdbcType=VARCHAR},
+            </if>
             <if test="listHtmlSource != null">
                 #{listHtmlSource,jdbcType=LONGVARCHAR},
             </if>
@@ -269,6 +288,12 @@
             <if test="listDatasetId != null">
                 LIST_DATASET_ID = #{listDatasetId,jdbcType=VARCHAR},
             </if>
+            <if test="listEnableSSear != null">
+                LIST_ENABLE_S_SEAR = #{listEnableSSear,jdbcType=VARCHAR},
+            </if>
+            <if test="listEnableCSear != null">
+                LIST_ENABLE_C_SEAR = #{listEnableCSear,jdbcType=VARCHAR},
+            </if>
             <if test="listHtmlSource != null">
                 LIST_HTML_SOURCE = #{listHtmlSource,jdbcType=LONGVARCHAR},
             </if>
@@ -302,6 +327,8 @@
             LIST_ORGAN_ID = #{listOrganId,jdbcType=VARCHAR},
             LIST_ORGAN_NAME = #{listOrganName,jdbcType=VARCHAR},
             LIST_DATASET_ID = #{listDatasetId,jdbcType=VARCHAR},
+            LIST_ENABLE_S_SEAR = #{listEnableSSear,jdbcType=VARCHAR},
+            LIST_ENABLE_C_SEAR = #{listEnableCSear,jdbcType=VARCHAR},
             LIST_HTML_SOURCE = #{listHtmlSource,jdbcType=LONGVARCHAR},
             LIST_HTML_RESOLVE = #{listHtmlResolve,jdbcType=LONGVARCHAR},
             LIST_JS_CONTENT = #{listJsContent,jdbcType=LONGVARCHAR},
@@ -325,7 +352,9 @@
             LIST_STATUS = #{listStatus,jdbcType=VARCHAR},
             LIST_ORGAN_ID = #{listOrganId,jdbcType=VARCHAR},
             LIST_ORGAN_NAME = #{listOrganName,jdbcType=VARCHAR},
-            LIST_DATASET_ID = #{listDatasetId,jdbcType=VARCHAR}
+            LIST_DATASET_ID = #{listDatasetId,jdbcType=VARCHAR},
+            LIST_ENABLE_S_SEAR = #{listEnableSSear,jdbcType=VARCHAR},
+            LIST_ENABLE_C_SEAR = #{listEnableCSear,jdbcType=VARCHAR}
         where LIST_ID = #{listId,jdbcType=VARCHAR}
     </update>
 </mapper>

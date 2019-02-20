@@ -30,6 +30,8 @@
                 listOrganId:"",
                 listOrganName:"",
                 listDatasetId:"",
+                listEnableSSear:"启用",
+                listEnableCSear:"禁用",
                 listHtmlSource:"",
                 listHtmlResolve:"",
                 listJsContent:"",
@@ -51,7 +53,7 @@
                     //console.log(result.data);
                     CKEditorUtility.InitializeCKEditor('html_design',result.data,function () {
 
-                    });
+                    },"../../HTMLDesign/CKEditorConfig/CKEditorConfig.js","../../HTMLDesign/WebListDesign/Plugins/");
                     HTMLEditorUtility.InitializeHTMLCodeDesign();
                     JsEditorUtility.InitializeJsCodeDesign(_self.status);
                     _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JsEditorUtility.GetJsEditorInst());

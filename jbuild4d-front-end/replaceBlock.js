@@ -82,7 +82,8 @@ let replaceBlock = {
         let replaceArray = new Array();
         let levelPath = calculateFilePath(file);
 
-        replaceArray.push(refJs(levelPath + "Js/HTMLDesign/FormDesign/FormDesignUtility.js?refVersion=" + refVersion));
+        replaceArray.push(refJs(levelPath + "Js/HTMLDesign/HTMLDesignUtility.js?refVersion=" + refVersion));
+        /*replaceArray.push(refJs(levelPath + "Js/HTMLDesign/WebFormDesign/WebFormDesignUtility.js?refVersion=" + refVersion));*/
 
         return replaceArray.join("\n\t");
     },

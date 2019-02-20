@@ -4,14 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::IViewLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::JQueryUILib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::EditTableLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::ZTreeLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::CodeMirror"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::CodeMirrorSQL"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::CodeMirrorLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
     <style>
         .CodeMirror {
             height: 100px;
@@ -24,11 +19,11 @@
         }
 
         .tableTreeWrap {
-            float: left;height: 380px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px;padding: 6px
+            float: left;height: 360px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px;padding: 6px
         }
 
         .tableFieldWrap{
-            float: left;height: 380px;width: 57%;border: #01a0e4 1px solid;border-radius: 4px;margin-left: 10px;padding: 10px
+            float: left;height: 360px;width: 57%;border: #01a0e4 1px solid;border-radius: 4px;margin-left: 10px;padding: 10px
         }
 
         .tableName{
@@ -53,7 +48,7 @@
     </style>
 </head>
 <body>
-    <div id="sqlDesignerForm" v-cloak>
+    <div id="sqlDesignerForm" v-cloak class="general-edit-page-wrap">
         <div>
             <div style="width: 100%">请编辑SQL语句[字段请统一使用大写]
                 <div style="float: right;margin-bottom: 8px">
@@ -87,7 +82,7 @@
                             </div>
                             <div class="tableFieldWrap">
                                 表：【<span class="tableName" @click="insertTableNameToCodeMirror">{{tree.selectedTableName}}</span>】
-                                <i-table size="small" height="335" stripe border :columns="tableField.columnsConfig" :data="tableField.fieldData"
+                                <i-table size="small" height="315" stripe border :columns="tableField.columnsConfig" :data="tableField.fieldData"
                                          class="iv-list-table" :highlight-row="true"></i-table>
                             </div>
                         </div>
@@ -103,10 +98,14 @@
                 </tabs>
             </div>
         </div>
-        <div style="position: absolute;bottom: 0px;width: 100%;text-align: center">
-            <i-button type="success" @click="coverSQLDesign"> 覆 盖 </i-button>
-            <i-button style="margin-left: 8px" @click="appendSQLDesign"> 追 加 </i-button>
-            <i-button style="margin-left: 8px" @click="handleClose()"> 关 闭 </i-button>
+        <div class="button-outer-wrap">
+            <div class="button-inner-wrap">
+                <button-group>
+                    <i-button type="success" @click="coverSQLDesign"> 覆 盖 </i-button>
+                    <i-button style="margin-left: 8px" @click="appendSQLDesign"> 追 加 </i-button>
+                    <i-button style="margin-left: 8px" @click="handleClose()"> 关 闭 </i-button>
+                </button-group>
+            </div>
         </div>
         <div id="validateSQLEnableWarp" style="display: none" class="validate-sql-enable-warp">
             <div>解析为SQL</div>

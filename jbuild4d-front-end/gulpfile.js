@@ -131,37 +131,49 @@ gulp.task('HTMLTemplates',()=>{
         .pipe(gulp.dest("../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/templates"));
 });
 
-/*编译表单设计器的相关的Plugins文件*/
-gulp.task('FormDesign-Plugins',()=>{
+/*HTML设计的基础的工具类*/
+gulp.task('HTMLDesign-Utility',()=> {
     return gulp.src([
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.js",
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.css",
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/Plugins/**/*.png"
-    ], {base: "build-jbuild4d-web-platform/static/Js/HTMLDesign/FormDesign/Plugins"}).
-    pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/FormDesign/Plugins"));
-});
-
-gulp.task('FormDesign-Utility',()=> {
-    return gulp.src([
-            srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/*.js"
-        ])
+        srcPlatformStaticPath + "/Js/HTMLDesign/*.js"
+    ])
         .pipe(babel())
         .pipe(sourcemaps.init())
-        .pipe(concat('FormDesignUtility.js'))
+        .pipe(concat('HTMLDesignUtility.js'))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/FormDesign"));
+        .pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign"));
+});
+
+gulp.task('HTMLDesign-CKEditorConfig',()=> {
+    return gulp.src([
+        srcPlatformStaticPath + "/Js/HTMLDesign/CKEditorConfig/*.js"
+    ])
+        .pipe(babel())
+        .pipe(sourcemaps.init())
+        .pipe(concat('CKEditorConfig.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/CKEditorConfig"));
+});
+
+/*WebForm相关的插件*/
+gulp.task('HTMLDesign-Plugins',()=>{
+    return gulp.src([
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/Plugins/**/*.js",
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/Plugins/**/*.css",
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/Plugins/**/*.png"
+    ], {base: "build-jbuild4d-web-platform/static/Js/HTMLDesign/**/Plugins"}).
+    pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/**/Plugins"));
 });
 
 /*编译表单设计器的相关的HTML文件*/
-gulp.task('FormDesign-HTML',()=>{
-    return copyAndResolveHtml(srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.html",srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign",publicResourcePath + "/Js/HTMLDesign/FormDesign");
+gulp.task('HTMLDesign-HTML',()=>{
+    return copyAndResolveHtml(srcPlatformStaticPath + "/Js/HTMLDesign/**/*.html",srcPlatformStaticPath + "/Js/HTMLDesign",publicResourcePath + "/Js/HTMLDesign");
 });
 
 /*编译表单设计器的相关文件*/
-gulp.task('FormDesign', gulp.series('FormDesign-Utility','FormDesign-HTML','FormDesign-Plugins'));
+gulp.task('HTMLDesign-ALL', gulp.series('HTMLDesign-Utility','HTMLDesign-CKEditorConfig','HTMLDesign-Plugins','HTMLDesign-HTML'));
 
 /*编译所有的文件*/
-gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','FormDesign','LessImages','FrameV1'));
+gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','HTMLDesign-ALL','LessImages','FrameV1'));
 
 /*监控文件更新*/
 gulp.task('watch', function() {
@@ -171,10 +183,11 @@ gulp.task('watch', function() {
     let watcherLessImages=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/Images/**/*", gulp.series('LessImages'));
     let watcherHTMLTemplates=gulp.watch("build-jbuild4d-web-platform/templates/**/*", gulp.series('HTMLTemplates'));
     let watcherFormDesign=gulp.watch([
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.js",
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.css",
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.png",
-        srcPlatformStaticPath + "/Js/HTMLDesign/FormDesign/**/*.html"], gulp.series('FormDesign'));
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.js",
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.css",
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.png",
+        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.html"], gulp.series('HTMLDesign-ALL'));
+    let watcherPluginLess=gulp.watch(srcPlatformStaticPath+"/Js/**/*.less", gulp.series('Less'));
 });
 
 /*默认启动文件监控*/
