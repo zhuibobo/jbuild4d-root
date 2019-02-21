@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 @RestController
+@RequestMapping(value = "/PlatForm/Builder/FlowModel")
 public class FlowModelRestResource extends GeneralRestResource<FlowModelEntity> {
 
     @Autowired

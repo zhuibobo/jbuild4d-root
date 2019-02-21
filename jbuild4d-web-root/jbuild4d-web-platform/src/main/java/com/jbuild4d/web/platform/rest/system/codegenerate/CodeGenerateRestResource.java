@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping(value = "/PlatForm/System/CodeGenerate")
 public class CodeGenerateRestResource {
     @Autowired
     ICodeGenerateService codeGenerateService;

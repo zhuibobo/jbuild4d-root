@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/PlatForm/Builder/DataStorage/DataBase/TableGroup")
 public class TableGroupRestResource extends GeneralRestResource<TableGroupEntity> {
 
     @Autowired

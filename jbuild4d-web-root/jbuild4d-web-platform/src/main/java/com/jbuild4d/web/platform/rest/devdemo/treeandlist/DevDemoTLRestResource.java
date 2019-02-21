@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/PlatForm/DevDemo/TreeAndList/DevDemoTLTree")
 public class DevDemoTLRestResource extends GeneralRestResource<DevDemoTLTreeEntity> {
 
     @Autowired

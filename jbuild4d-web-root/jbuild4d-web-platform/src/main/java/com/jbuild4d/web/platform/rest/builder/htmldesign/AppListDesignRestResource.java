@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/PlatForm/Builder/HtmlDesign/ListDesign")
 public class AppListDesignRestResource {
     @Autowired
     ICKEditorPluginsService ckEditorPluginsService;

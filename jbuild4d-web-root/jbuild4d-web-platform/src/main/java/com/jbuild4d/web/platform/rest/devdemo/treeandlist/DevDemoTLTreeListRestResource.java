@@ -5,9 +5,11 @@ import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeListService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/PlatForm/DevDemo/TreeAndList/DevDemoTLList")
 public class DevDemoTLTreeListRestResource extends GeneralRestResource<DevDemoTLTreeListEntity> {
 
     @Autowired

@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping(value = "/PlatForm/Builder/DataStorage/DataBase/Table")
 public class TableRestResource {
 
     @Autowired

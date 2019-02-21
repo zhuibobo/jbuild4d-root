@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/PlatForm/MyInfo")
 public class MyInfoRestResource {
 
     @RequestMapping(value = "/GetUserInfo", method = RequestMethod.POST)

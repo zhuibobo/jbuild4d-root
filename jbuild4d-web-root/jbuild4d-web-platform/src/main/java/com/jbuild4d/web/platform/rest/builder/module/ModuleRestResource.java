@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/PlatForm/Builder/Module")
 public class ModuleRestResource extends GeneralRestResource<ModuleEntity> {
     @Autowired
     IModuleService moduleService;

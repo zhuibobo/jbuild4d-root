@@ -24,6 +24,7 @@ import java.net.URLDecoder;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/PlatForm/Builder/DataSet/DataSetSQLDesigner")
 public class DataSetSQLDesignerRestResource {
     @Autowired
     IEnvVariableService envVariableService;

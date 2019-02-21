@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/PlatForm/System/Dictionary")
 public class DictionaryRestResource extends GeneralRestResource<DictionaryEntity> {
 
     @Autowired

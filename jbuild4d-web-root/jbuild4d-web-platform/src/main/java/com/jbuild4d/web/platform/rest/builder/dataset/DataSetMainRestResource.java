@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping(value = "/PlatForm/Builder/DataSet/DataSetMain")
 public class DataSetMainRestResource  {
     @Autowired
     IDatasetService datasetService;

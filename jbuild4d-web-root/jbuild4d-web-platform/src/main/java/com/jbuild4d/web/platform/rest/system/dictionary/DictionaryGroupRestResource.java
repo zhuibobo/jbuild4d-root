@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/PlatForm/System/DictionaryGroup")
 public class DictionaryGroupRestResource extends GeneralRestResource<DictionaryGroupEntity> {
 
 

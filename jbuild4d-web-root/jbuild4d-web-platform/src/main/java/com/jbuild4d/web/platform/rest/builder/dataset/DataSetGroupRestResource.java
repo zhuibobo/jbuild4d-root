@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/PlatFormRest/Builder/DataSet/DataSetGroup")
 public class DataSetGroupRestResource extends GeneralRestResource<DatasetGroupEntity> {
     @Autowired
     IDatasetGroupService datasetGroupService;
