@@ -76,7 +76,7 @@
                     }
                     var _self=this;
                     _self.codeIsGenerateing=true;
-                    var url = '/PlatForm/System/CodeGenerate/GetTableGenerateCode';
+                    var url = '/PlatFormRest/System/CodeGenerate/GetTableGenerateCode';
                     AjaxUtility.Post(url, this.formValidate, function (result) {
                         if (result.success) {
                             _self.generateCode.EntityContent = result.data.EntityContent;
@@ -99,7 +99,7 @@
                     this.selectionRows = selection;
                 },
                 reloadData: function () {
-                    var url = '/PlatForm/System/CodeGenerate/GetListData.do';
+                    var url = '/PlatFormRest/System/CodeGenerate/GetListData.do';
                     //debugger;
                     ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                     //this.selectionRows=null;
@@ -107,7 +107,7 @@
                 selectedTable:function (tableName) {
                     this.formValidate.tableName=tableName;
                     var _self=this;
-                    var url = '/PlatForm/System/CodeGenerate/GetTableFields.do';
+                    var url = '/PlatFormRest/System/CodeGenerate/GetTableFields.do';
                     AjaxUtility.Post(url, this.formValidate, function (result) {
                         if(result.success){
                             for(var i=0;i<result.data.length;i++){

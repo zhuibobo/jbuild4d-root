@@ -2,8 +2,8 @@
             el:"#appForm",
             data:{
                 acInterface:{
-                    getDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/GetEditTableData",
-                    saveDataUrl:"/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit"
+                    getDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetEditTableData",
+                    saveDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/SaveTableEdit"
                 },
                 recordId:BaseUtility.GetUrlParaValue("recordId"),
                 useTemplateName:"GeneralTemplate",
@@ -197,7 +197,7 @@
                         var _self=this;
                         var rowId=editRow.attr("id");
                         var fieldId=this.editTableObj.GetSelectRowDataByRowId(rowId).fieldId;
-                        var url = '/PlatForm/Builder/DataStorage/DataBase/Table/Move.do';
+                        var url = '/PlatFormRest/Builder/DataStorage/DataBase/Table/Move.do';
                         AjaxUtility.Post(url, {recordId: fieldId,type:type}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {

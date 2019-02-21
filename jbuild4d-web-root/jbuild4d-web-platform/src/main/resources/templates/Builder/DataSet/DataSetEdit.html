@@ -2,9 +2,9 @@
             el:"#dataSetEditForm",
             data:{
                 acInterface:{
-                    getDataUrl:"/PlatForm/Builder/DataSet/DataSetMain/GetDataSetData",
-                    saveDataUrl:"/PlatForm/Builder/DataSet/DataSetMain/SaveDataSetEdit",
-                    loadApiDataUrl:"/PlatForm/Builder/DataSet/DataSetMain/GetApiDataSetVoStructure"
+                    getDataUrl:"/PlatFormRest/Builder/DataSet/DataSetMain/GetDataSetData",
+                    saveDataUrl:"/PlatFormRest/Builder/DataSet/DataSetMain/SaveDataSetEdit",
+                    loadApiDataUrl:"/PlatFormRest/Builder/DataSet/DataSetMain/GetApiDataSetVoStructure"
                 },
                 currUserEntity:null,
                 ruleValidate: {
@@ -269,7 +269,7 @@
                     DialogUtility.Frame_CloseDialog(window);
                 },
                 designSQL:function () {
-                    var url=BaseUtility.BuildAction("/PlatForm/Builder/DataSet/DataSetSQLDesigner/SQLDesigner",{});
+                    var url=BaseUtility.BuildAction("/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/SQLDesigner",{});
                     DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑SQL语句",modal:true}, 1);
                 },
                 completedSQLDesign:function (result) {

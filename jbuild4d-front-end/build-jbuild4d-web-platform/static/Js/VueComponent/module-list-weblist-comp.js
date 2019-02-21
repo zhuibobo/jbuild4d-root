@@ -5,9 +5,9 @@ Vue.component("module-list-weblist-comp", {
         return {
             acInterface:{
                 editView: "/PlatForm/Builder/List/DetailView",
-                reloadData: "/PlatForm/Builder/List/GetListData",
-                delete: "/PlatForm/Builder/List/Delete",
-                move: "/PlatForm/Builder/List/Move",
+                reloadData: "/PlatFormRest/Builder/List/GetListData",
+                delete: "/PlatFormRest/Builder/List/Delete",
+                move: "/PlatFormRest/Builder/List/Move",
             },
             idFieldName: "formId",
             searchCondition: {

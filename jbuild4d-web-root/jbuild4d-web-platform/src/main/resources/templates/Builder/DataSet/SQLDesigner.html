@@ -2,7 +2,7 @@
             el:"#sqlDesignerForm",
             data:{
                 acInterface:{
-                    getDataUrl:"/PlatForm/Builder/DataSet/DataSetSQLDesigner/GetSqlDesignerViewData"
+                    getDataUrl:"/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/GetSqlDesignerViewData"
                 },
                 formResourceEntity:{
                     formId:"",
@@ -206,7 +206,7 @@
                     //debugger;
                     var tableId=treeNode.id;
                     var _self=this;
-                    var url = '/PlatForm/Builder/DataSet/DataSetSQLDesigner/GetTableField.do';
+                    var url = '/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/GetTableField.do';
                     AjaxUtility.Post(url, {tableId:tableId}, function (result) {
                         if(result.success){
                             _self.tableField.fieldData=result.data;
@@ -234,7 +234,7 @@
                 },
                 validateSQLEnable:function (func) {
                     var sql=this.getEditSQL();
-                    var url = '/PlatForm/Builder/DataSet/DataSetSQLDesigner/ValidateSQLEnable.do';
+                    var url = '/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/ValidateSQLEnable.do';
                     AjaxUtility.Post(url, {sqlText:encodeURIComponent(sql)}, function (result) {
                         if(result.success){
                             //debugger;

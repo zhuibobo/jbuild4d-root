@@ -10,14 +10,14 @@ Vue.component("module-list-flow-comp", {
             acInterface: {
                 //editView: "/PlatForm/Builder/FlowModel/DetailView",
                 //uploadFlowModelView: "/PlatForm/Builder/FlowModel/UploadFlowModelView",
-                saveModel: "/PlatForm/Builder/FlowModel/SaveModel",
-                getEditModelURL: "/PlatForm/Builder/FlowModel/GetEditModelURL",
-                getViewModelURL: "/PlatForm/Builder/FlowModel/GetViewModelURL",
-                reloadData: "/PlatForm/Builder/FlowModel/GetListData",
-                getSingleData: "/PlatForm/Builder/FlowModel/GetDetailData",
-                delete: "/PlatForm/Builder/FlowModel/DeleteModel",
-                move: "/PlatForm/Builder/FlowModel/Move",
-                defaultFlowModelImage:"/PlatForm/Builder/FlowModel/GetProcessModelMainImg"
+                saveModel: "/PlatFormRest/Builder/FlowModel/SaveModel",
+                getEditModelURL: "/PlatFormRest/Builder/FlowModel/GetEditModelURL",
+                getViewModelURL: "/PlatFormRest/Builder/FlowModel/GetViewModelURL",
+                reloadData: "/PlatFormRest/Builder/FlowModel/GetListData",
+                getSingleData: "/PlatFormRest/Builder/FlowModel/GetDetailData",
+                delete: "/PlatFormRest/Builder/FlowModel/DeleteModel",
+                move: "/PlatFormRest/Builder/FlowModel/Move",
+                defaultFlowModelImage:"/PlatFormRest/Builder/FlowModel/GetProcessModelMainImg"
             },
             idFieldName: "modelId",
             searchCondition: {

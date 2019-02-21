@@ -2,7 +2,7 @@ Vue.component("dataset-simple-select-comp", {
     data: function () {
         return {
             acInterface:{
-                getDataSetData:"/PlatForm/Builder/DataSet/DataSetMain/GetDataSetsForZTreeNodeList"
+                getDataSetData:"/PlatFormRest/Builder/DataSet/DataSetMain/GetDataSetsForZTreeNodeList"
             },
             dataSetTree: {
                 tableTreeObj: null,

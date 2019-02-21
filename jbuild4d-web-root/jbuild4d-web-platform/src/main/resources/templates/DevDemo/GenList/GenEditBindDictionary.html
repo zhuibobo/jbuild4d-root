@@ -6,8 +6,8 @@
             },
             data: {
                 acInterface:{
-                    getDataUrl:"/PlatForm/DevDemo/DevDemoGenListBindDictionary/GetDetailData",
-                    saveDataUrl:"/PlatForm/DevDemo/DevDemoGenListBindDictionary/SaveEdit"
+                    getDataUrl:"/PlatFormRest/DevDemo/DevDemoGenListBindDictionary/GetDetailData",
+                    saveDataUrl:"/PlatFormRest/DevDemo/DevDemoGenListBindDictionary/SaveEdit"
                 },
                 recordId:BaseUtility.GetUrlParaValue("recordId"),
                 dictionaryJson:{
@@ -64,7 +64,7 @@
                             sendData.ddglBindDicMucheckbox=sendData.ddglBindDicMucheckbox.join(";");
                             var sendData = JSON.stringify(sendData);
                             //debugger;
-                            var url = '/PlatForm/DevDemo/DevDemoGenList/SaveEdit.do';
+                            var url = '/PlatFormRest/DevDemo/DevDemoGenList/SaveEdit.do';
                             AjaxUtility.PostRequestBody(url, sendData, function (result) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     //debugger;

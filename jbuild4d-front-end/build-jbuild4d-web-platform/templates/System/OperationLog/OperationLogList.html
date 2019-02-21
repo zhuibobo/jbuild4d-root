@@ -148,7 +148,7 @@
                     this.selectionRows = selection;
                 },
                 reloadData: function () {
-                    var url = '/PlatForm/System/OperationLog/GetListData';
+                    var url = '/PlatFormRest/System/OperationLog/GetListData';
                     ListPageUtility.IViewTableLoadDataSearch(url,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
                     //this.selectionRows=null;
                 },
