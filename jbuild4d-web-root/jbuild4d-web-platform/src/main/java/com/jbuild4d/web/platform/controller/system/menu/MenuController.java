@@ -23,14 +23,5 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/PlatForm/System/Menu")
 public class MenuController {
-    @Autowired
-    IMenuService menuService;
 
-    @RequestMapping(value = "/GetMyMenu", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo getMyMenu() {
-        JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-        List<MenuEntity> myMenus=menuService.getALL(jb4DSession);
-        return JBuild4DResponseVo.success("",myMenus);
-    }
 }

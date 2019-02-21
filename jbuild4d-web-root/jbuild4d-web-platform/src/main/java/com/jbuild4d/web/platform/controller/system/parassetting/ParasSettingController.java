@@ -18,14 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/PlatForm/System/ParasSetting")
 public class ParasSettingController  extends GeneralCRUDImplController<SettingEntity> {
-    @Autowired
-    ISettingService settingService;
-
-    @Override
-    protected IBaseService<SettingEntity> getBaseService() {
-        return settingService;
-    }
-
     @Override
     public String getListViewName() {
         return "System/ParasSetting/ParasSettingList";
@@ -34,15 +26,5 @@ public class ParasSettingController  extends GeneralCRUDImplController<SettingEn
     @Override
     public String getDetailViewName() {
         return "System/ParasSetting/ParasSettingEdit";
-    }
-
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "系统参数设置";
     }
 }

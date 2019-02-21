@@ -25,14 +25,6 @@ import java.util.List;
 @RequestMapping(value = "/PlatForm/System/Dictionary")
 public class DictionaryController extends GeneralCRUDImplController<DictionaryEntity> {
 
-    @Autowired
-    IDictionaryService dictionaryService;
-
-    @Override
-    protected IBaseService<DictionaryEntity> getBaseService() {
-        return dictionaryService;
-    }
-
     @Override
     public String getListViewName() {
         return "";
@@ -43,27 +35,4 @@ public class DictionaryController extends GeneralCRUDImplController<DictionaryEn
         return "System/Dictionary/DictionaryEdit";
     }
 
-    @RequestMapping(value = "/GetListDataByGroupId", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo getListDataByGroupId(String groupId) {
-        List<DictionaryEntity> dictionaryEntityList=dictionaryService.getListDataByGroupId(JB4DSessionUtility.getSession(),groupId);
-        return JBuild4DResponseVo.success("",dictionaryEntityList);
-    }
-
-    @RequestMapping(value = "/SetSelected", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo setSelected(String recordId) throws JBuild4DGenerallyException {
-        dictionaryService.setSelected(JB4DSessionUtility.getSession(),recordId);
-        return JBuild4DResponseVo.opSuccess();
-    }
-
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "数据字典";
-    }
 }

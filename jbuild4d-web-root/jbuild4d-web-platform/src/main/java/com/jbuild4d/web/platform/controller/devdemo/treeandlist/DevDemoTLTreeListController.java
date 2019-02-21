@@ -19,14 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/PlatForm/DevDemo/TreeAndList/DevDemoTLList")
 public class DevDemoTLTreeListController extends GeneralCRUDImplController<DevDemoTLTreeListEntity> {
 
-    @Autowired
-    IDevDemoTLTreeListService devDemoTLTreeListService;
-
-    @Override
-    protected IBaseService<DevDemoTLTreeListEntity> getBaseService() {
-        return devDemoTLTreeListService;
-    }
-
     @Override
     public String getListViewName() {
         return "";
@@ -35,15 +27,5 @@ public class DevDemoTLTreeListController extends GeneralCRUDImplController<DevDe
     @Override
     public String getDetailViewName() {
         return "devdemo/TreeAndList/ListEdit";
-    }
-
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "开发示例";
     }
 }

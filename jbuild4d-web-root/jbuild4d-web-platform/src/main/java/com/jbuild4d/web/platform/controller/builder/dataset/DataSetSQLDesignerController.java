@@ -35,20 +35,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/PlatForm/Builder/DataSet/DataSetSQLDesigner")
 public class DataSetSQLDesignerController {
-    @Autowired
-    IEnvVariableService envVariableService;
 
-    @Autowired
-    ITableGroupService tableGroupService;
-
-    @Autowired
-    ITableService tableService;
-
-    @Autowired
-    IDatasetService datasetService;
-
-    @Autowired
-    ITableFieldService tableFieldService;
 
     @RequestMapping(value = "SQLDesigner", method = RequestMethod.GET)
     public ModelAndView sqlDesigner() throws JsonProcessingException, XPathExpressionException {
@@ -58,64 +45,4 @@ public class DataSetSQLDesignerController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "GetSqlDesignerViewData", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo getSqlDesignerViewData() {
-        try {
-            JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
-            responseVo.setSuccess(true);
-            responseVo.setMessage("获取数据成功！");
-
-            List<EnvVariableVo> dateTimeVoList=envVariableService.getDateTimeVars();
-            List<EnvVariableVo> apiVarVoList=envVariableService.getAPIVars();
-
-            JB4DSession jb4DSession= JB4DSessionUtility.getSession();
-
-            List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALL(jb4DSession);
-            List<TableEntity> tableEntityList=tableService.getALL(jb4DSession);
-
-            //modelAndView.addObject("datetimeTreeData", JsonUtility.toObjectString(dateTimeVoList));
-            //modelAndView.addObject("apiVarTreeData",JsonUtility.toObjectString(apiVarVoList));
-            //modelAndView.addObject("tableTreeData", JsonUtility.toObjectString(ZTreeNodeVo.parseTableToZTreeNodeList(tableGroupEntityList,tableEntityList)));
-
-            responseVo.addExKVData("datetimeTreeData",dateTimeVoList);
-            responseVo.addExKVData("apiVarTreeData",apiVarVoList);
-            responseVo.addExKVData("tableTreeData",ZTreeNodeVo.parseTableToZTreeNodeList(tableGroupEntityList,tableEntityList));
-
-            return responseVo;
-        }
-        catch (Exception ex){
-            return JBuild4DResponseVo.error(ex.getMessage());
-        }
-    }
-
-    @RequestMapping(value = "ValidateSQLEnable", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo validateSQLEnable(String sqlText) {
-        try {
-            JB4DSession jb4DSession = JB4DSessionUtility.getSession();
-            //String sqlValue=datasetService.sqlReplaceEnvTextToEnvValue(jb4DSession,sqlText);
-            //String sqlWithEnvText=sqlText;
-            sqlText= URLDecoder.decode(sqlText,"utf-8");
-            SQLResolveToDataSetVo sqlResolveToDataSetVo=datasetService.sqlResolveToDataSetVo(jb4DSession,sqlText);
-            //List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(tableId);
-            return JBuild4DResponseVo.success("校验成功！",sqlResolveToDataSetVo);
-        }
-        catch (Exception ex){
-            return JBuild4DResponseVo.error(ex.getMessage());
-        }
-    }
-
-    @RequestMapping(value = "GetTableField", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo getTableField(String tableId) {
-        try {
-            JB4DSession jb4DSession = JB4DSessionUtility.getSession();
-            List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableId(tableId);
-            return JBuild4DResponseVo.success("获取成功", tableFieldVOList);
-        }
-        catch (Exception ex){
-            return JBuild4DResponseVo.error(ex.getMessage());
-        }
-    }
 }

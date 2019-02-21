@@ -17,13 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/PlatForm/Builder/List")
 public class ListController extends GeneralCRUDImplController<ListResourceEntityWithBLOBs> {
-    @Autowired
-    IListResourceService listResourceService;
 
-    @Override
-    protected IBaseService<ListResourceEntityWithBLOBs> getBaseService() {
-        return listResourceService;
-    }
 
     @Override
     public String getListViewName() {
@@ -35,13 +29,4 @@ public class ListController extends GeneralCRUDImplController<ListResourceEntity
         return "Builder/List/ListDesign";
     }
 
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "模块设计-列表设计";
-    }
 }

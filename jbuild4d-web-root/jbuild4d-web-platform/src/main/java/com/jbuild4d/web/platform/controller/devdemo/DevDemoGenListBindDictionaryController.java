@@ -21,13 +21,6 @@ import java.util.List;
 @RequestMapping(value = "/PlatForm/DevDemo/DevDemoGenListBindDictionary")
 public class DevDemoGenListBindDictionaryController  extends GeneralCRUDImplController<DevDemoGenListEntity> {
 
-    @Autowired
-    IDevDemoGenListService devDemoGenListService;
-
-    @Override
-    protected IBaseService<DevDemoGenListEntity> getBaseService() {
-        return devDemoGenListService;
-    }
 
     @Override
     public String getListViewName() {
@@ -37,24 +30,5 @@ public class DevDemoGenListBindDictionaryController  extends GeneralCRUDImplCont
     @Override
     public String getDetailViewName() {
         return "/devdemo/GenList/GenEditBindDictionary";
-    }
-
-    @Override
-    public List<String> bindDictionaryToPage() {
-        List<String> groupValueList=new ArrayList<>();
-        groupValueList.add("DevDemoDictionaryGroupBindSelect");
-        groupValueList.add("DevDemoDictionaryGroupBindRadio");
-        groupValueList.add("DevDemoDictionaryGroupBindCheckbox");
-        return groupValueList;
-    }
-
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "开发示例";
     }
 }

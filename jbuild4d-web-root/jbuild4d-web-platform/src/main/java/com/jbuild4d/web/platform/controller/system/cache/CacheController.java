@@ -18,14 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/PlatForm/System/Cache")
 public class CacheController extends GeneralCRUDImplController<Jb4dCacheEntity> {
 
-    @Autowired
-    IJb4dCacheService jb4dCacheService;
-
-    @Override
-    protected IBaseService<Jb4dCacheEntity> getBaseService() {
-        return jb4dCacheService;
-    }
-
     @Override
     public String getListViewName() {
         return "System/Cache/CacheList";
@@ -34,15 +26,5 @@ public class CacheController extends GeneralCRUDImplController<Jb4dCacheEntity> 
     @Override
     public String getDetailViewName() {
         return "System/Cache/CacheEdit";
-    }
-
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName()  {
-        return "缓存状态设置";
     }
 }

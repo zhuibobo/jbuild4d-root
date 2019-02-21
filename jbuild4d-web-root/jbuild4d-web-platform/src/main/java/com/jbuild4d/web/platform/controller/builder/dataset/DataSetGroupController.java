@@ -22,13 +22,6 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/PlatForm/Builder/DataSet/DataSetGroup")
 public class DataSetGroupController extends GeneralCRUDImplController<DatasetGroupEntity> {
-    @Autowired
-    IDatasetGroupService datasetGroupService;
-
-    @Override
-    protected IBaseService<DatasetGroupEntity> getBaseService() {
-        return datasetGroupService;
-    }
 
     @Override
     public String getListViewName() {
@@ -38,22 +31,5 @@ public class DataSetGroupController extends GeneralCRUDImplController<DatasetGro
     @Override
     public String getDetailViewName() {
         return "Builder/DataSet/DataSetGroupEdit";
-    }
-
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "模块设计--数据集分组";
-    }
-
-    @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
-    @ResponseBody
-    public List<DatasetGroupEntity> getTreeData() {
-        List<DatasetGroupEntity> datasetGroupEntityList=datasetGroupService.getALL(JB4DSessionUtility.getSession());
-        return datasetGroupEntityList;
     }
 }

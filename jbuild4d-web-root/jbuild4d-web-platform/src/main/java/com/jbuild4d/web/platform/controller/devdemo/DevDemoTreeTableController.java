@@ -18,14 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/PlatForm/DevDemo/DevDemoTreeTable")
 public class DevDemoTreeTableController  extends GeneralCRUDImplController<DevDemoTreeTableEntity> {
 
-    @Autowired
-    IDevDemoTreeTableService devDemoTreeTableService;
-
-    @Override
-    protected IBaseService<DevDemoTreeTableEntity> getBaseService() {
-        return devDemoTreeTableService;
-    }
-
     @Override
     public String getListViewName() {
         return "devdemo/TreeTable/TreeTableList";
@@ -36,13 +28,4 @@ public class DevDemoTreeTableController  extends GeneralCRUDImplController<DevDe
         return "devdemo/TreeTable/TreeTableEdit";
     }
 
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "开发示例";
-    }
 }

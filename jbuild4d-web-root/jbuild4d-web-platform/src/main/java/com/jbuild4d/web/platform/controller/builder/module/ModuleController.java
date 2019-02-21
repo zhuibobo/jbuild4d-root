@@ -23,13 +23,7 @@ import java.util.List;
 @RequestMapping(value = "/PlatForm/Builder/Module")
 public class ModuleController extends GeneralCRUDImplController<ModuleEntity> {
 
-    @Autowired
-    IModuleService moduleService;
 
-    @Override
-    protected IBaseService<ModuleEntity> getBaseService() {
-        return moduleService;
-    }
 
     @Override
     public String getListViewName() {
@@ -41,20 +35,4 @@ public class ModuleController extends GeneralCRUDImplController<ModuleEntity> {
         return "Builder/Module/ModuleEdit";
     }
 
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "模块设计";
-    }
-
-    @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    @ResponseBody
-    public List<ModuleEntity> getTreeData() {
-        List<ModuleEntity> moduleEntityList=moduleService.getALL(JB4DSessionUtility.getSession());
-        return moduleEntityList;
-    }
 }

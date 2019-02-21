@@ -24,14 +24,6 @@ import java.util.List;
 @RequestMapping(value = "/PlatForm/System/DictionaryGroup")
 public class DictionaryGroupController extends GeneralCRUDImplController<DictionaryGroupEntity> {
 
-    @Autowired
-    IDictionaryGroupService dictionaryGroupService;
-
-    @Override
-    protected IBaseService<DictionaryGroupEntity> getBaseService() {
-        return dictionaryGroupService;
-    }
-
     @Override
     public String getListViewName() {
         return "";
@@ -42,28 +34,4 @@ public class DictionaryGroupController extends GeneralCRUDImplController<Diction
         return "System/Dictionary/DictionaryGroupEdit";
     }
 
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "数据字典分组";
-    }
-
-    @RequestMapping(value = "/MoveUp", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo moveUp(String recordId) {
-        //dictionaryGroupService.moveUp(recordId);
-        return JBuild4DResponseVo.opSuccess();
-    }
-
-    @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    @ResponseBody
-    public List<DictionaryGroupEntity> getTreeData() {
-        //dictionaryGroupService.moveUp(recordId);
-        List<DictionaryGroupEntity> dictionaryGroupEntityList=dictionaryGroupService.getALL(JB4DSessionUtility.getSession());
-        return dictionaryGroupEntityList;
-    }
 }

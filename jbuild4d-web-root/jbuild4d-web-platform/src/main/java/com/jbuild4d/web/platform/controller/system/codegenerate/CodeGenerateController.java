@@ -33,37 +33,9 @@ import java.util.Map;
 @RequestMapping(value = "/PlatForm/System/CodeGenerate")
 public class CodeGenerateController {
 
-    @Autowired
-    ICodeGenerateService codeGenerateService;
-
     @RequestMapping(value = "/ManagerView", method = RequestMethod.GET)
     public ModelAndView mangerView() {
         ModelAndView modelAndView=new ModelAndView("System/DBResolver/Manager");
         return modelAndView;
-    }
-
-    @RequestMapping(value = "/GetListData", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo getListData(Integer pageSize, Integer pageNum, String searchCondition) throws IOException, ParseException, JBuild4DGenerallyException {
-        JB4DSession jb4DSession = JB4DSessionUtility.getSession();
-        Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
-        PageInfo<List<Map<String, Object>>> proOrganPageInfo=codeGenerateService.getTables(jb4DSession,pageNum,pageSize,searchMap);
-        return JBuild4DResponseVo.success("获取成功",proOrganPageInfo);
-    }
-
-    @RequestMapping(value = "/GetTableGenerateCode", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo getTableGenerateCode(String tableName,String packageType,String packageLevel2Name,String orderFieldName,String statusFieldName) throws IOException, ParseException, XPathExpressionException, SAXException, ParserConfigurationException {
-        JB4DSession jb4DSession = JB4DSessionUtility.getSession();
-        Map<String,String> result=codeGenerateService.getTableGenerateCode(jb4DSession,tableName,orderFieldName,statusFieldName,packageType,packageLevel2Name);
-        return JBuild4DResponseVo.success("获取成功",result);
-    }
-
-    @RequestMapping(value = "/GetTableFields", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo getTableFields(String tableName) throws IOException, ParseException, JBuild4DGenerallyException {
-        JB4DSession jb4DSession = JB4DSessionUtility.getSession();
-        List<SimpleTableFieldVo> result=codeGenerateService.getTableFields(jb4DSession,tableName);
-        return JBuild4DResponseVo.success("获取成功",result);
     }
 }

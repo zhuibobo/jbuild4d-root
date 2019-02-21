@@ -17,14 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/PlatForm/System/OperationLog")
 public class OperationLogController extends GeneralCRUDImplController<OperationLogEntity> {
-    @Autowired
-    IOperationLogService operationLogService;
-
-    @Override
-    protected IBaseService<OperationLogEntity> getBaseService() {
-        return operationLogService;
-    }
-
     @Override
     public String getListViewName() {
         return "System/OperationLog/OperationLogList";
@@ -35,13 +27,4 @@ public class OperationLogController extends GeneralCRUDImplController<OperationL
         return "System/OperationLog/OperationLogEdit";
     }
 
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "操作日志";
-    }
 }

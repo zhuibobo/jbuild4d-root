@@ -20,13 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/PlatForm/DevDemo/DevDemoGenList")
 public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoGenListEntity> {
 
-    @Autowired
-    IDevDemoGenListService devDemoGenListService;
-
-    @Override
-    protected IBaseService<DevDemoGenListEntity> getBaseService() {
-        return devDemoGenListService;
-    }
 
     @Override
     public String getListViewName() {
@@ -48,15 +41,5 @@ public class DevDemoGenListController extends GeneralCRUDImplController<DevDemoG
     public ModelAndView detailScrollView(){
         ModelAndView modelAndView=new ModelAndView("/devdemo/GenList/GenEditScroll");
         return modelAndView;
-    }
-
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "开发示例";
     }
 }

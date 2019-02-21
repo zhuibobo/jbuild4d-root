@@ -22,13 +22,9 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/PlatForm/Builder/DataStorage/DataBase/TableGroup")
 public class TableGroupController extends GeneralCRUDImplController<TableGroupEntity> {
-    @Autowired
-    ITableGroupService tableGroupService;
 
-    @Override
-    protected IBaseService<TableGroupEntity> getBaseService() {
-        return tableGroupService;
-    }
+
+
 
     @Override
     public String getListViewName() {
@@ -40,20 +36,4 @@ public class TableGroupController extends GeneralCRUDImplController<TableGroupEn
         return "Builder/DataStorage/DataBase/TableGroupEdit";
     }
 
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "表分组";
-    }
-
-    @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    @ResponseBody
-    public List<TableGroupEntity> getTreeData() {
-        List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALL(JB4DSessionUtility.getSession());
-        return tableGroupEntityList;
-    }
 }

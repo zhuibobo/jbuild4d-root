@@ -24,16 +24,6 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/PlatForm/OrganRelevance/Organ")
 public class OrganController extends GeneralCRUDImplController<OrganEntity> {
-    @Autowired
-    IOrganService organService;
-
-    @Autowired
-    IOrganTypeService organTypeService;
-
-    @Override
-    protected IBaseService<OrganEntity> getBaseService() {
-        return organService;
-    }
 
     @Override
     public String getListViewName() {
@@ -43,23 +33,5 @@ public class OrganController extends GeneralCRUDImplController<OrganEntity> {
     @Override
     public String getDetailViewName() {
         return "OrganRelevance/Organ/OrganEdit";
-    }
-
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "组织管理";
-    }
-
-    @Override
-    protected Map<String, Object> bindObjectsToMV() {
-        List<OrganTypeEntity> organTypeEntityList=organTypeService.getALL(JB4DSessionUtility.getSession());
-        Map<String,Object> result=new HashMap<>();
-        result.put("OrganType",organTypeEntityList);
-        return result;
     }
 }

@@ -36,92 +36,11 @@ import java.util.Map;
 @RequestMapping(value = "/PlatForm/Builder/DataSet/DataSetMain")
 public class DataSetMainController {
 
-    @Autowired
-    IDatasetService datasetService;
-
-    @Autowired
-    IDatasetGroupService datasetGroupService;
-
     @RequestMapping(value = "/EditDataSetView", method = RequestMethod.GET)
     public ModelAndView editDataSet(String recordId, String op, String groupId) throws JsonProcessingException {
         ModelAndView modelAndView=new ModelAndView("Builder/DataSet/DataSetEdit");
         JB4DSessionUtility.setUserInfoToMV(modelAndView);
         modelAndView.addObject("op",op);
         return modelAndView;
-    }
-
-    @RequestMapping(value = "/GetDataSetData")
-    @ResponseBody
-    public JBuild4DResponseVo getDataSetData(String op,String recordId) throws JBuild4DGenerallyException, IOException {
-        DataSetVo dataSetVo = datasetService.getVoByPrimaryKey(JB4DSessionUtility.getSession(),recordId);
-        return JBuild4DResponseVo.success("获取数据成功!",dataSetVo);
-    }
-
-    @RequestMapping(value = "/GetApiDataSetVoStructure")
-    @ResponseBody
-    public JBuild4DResponseVo getApiDataSetVoStructure(String op,String recordId,String groupId,String fullClassName) throws InstantiationException, IllegalAccessException {
-        DataSetVo dataSetVo = datasetService.getApiDataSetVoStructure(JB4DSessionUtility.getSession(),recordId,op,groupId,fullClassName);
-        return JBuild4DResponseVo.success("获取数据成功!",dataSetVo);
-    }
-
-    @RequestMapping(value = "/SaveDataSetEdit")
-    @ResponseBody
-    public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetId, String dataSetVoJson) throws JBuild4DGenerallyException, IOException {
-        DataSetVo dataSetVo = JsonUtility.toObjectIgnoreProp(dataSetVoJson, DataSetVo.class);
-        datasetService.saveDataSetVo(JB4DSessionUtility.getSession(), dataSetId, dataSetVo);
-        return JBuild4DResponseVo.opSuccess();
-    }
-
-    @RequestMapping(value = "/DeleteDataSet")
-    @ResponseBody
-    public JBuild4DResponseVo deleteDataSet(String dataSetId) throws JBuild4DGenerallyException, IOException {
-        datasetService.deleteByKey(JB4DSessionUtility.getSession(), dataSetId);
-        return JBuild4DResponseVo.success("删除数据集成功!");
-    }
-
-    @RequestMapping(value = "/GetListData", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
-
-        JB4DSession jb4DSession= JB4DSessionUtility.getSession();
-        Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
-        PageInfo<DatasetEntity> proOrganPageInfo=datasetService.getPage(jb4DSession,pageNum,pageSize,searchMap);
-        JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
-        responseVo.setData(proOrganPageInfo);
-        responseVo.setMessage("获取成功");
-        responseVo.setSuccess(true);
-        return responseVo;
-
-        /*JB4DSession jb4DSession= JB4DSessionUtility.getSession();
-        //Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
-        PageInfo<DatasetEntity> proOrganPageInfo=datasetService.getPageByGroupId(jb4DSession,pageNum,pageSize,groupId);
-        JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
-        responseVo.setData(proOrganPageInfo);
-        responseVo.setMessage("获取成功");
-        responseVo.setSuccess(true);
-
-        return responseVo;*/
-    }
-
-    @RequestMapping(value = "/GetDataSetsForZTreeNodeList", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo getDataSetsForZTreeNodeList(){
-        try {
-            JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
-            responseVo.setSuccess(true);
-            responseVo.setMessage("获取数据成功！");
-
-            JB4DSession jb4DSession= JB4DSessionUtility.getSession();
-
-            List<DatasetGroupEntity> tableGroupEntityList=datasetGroupService.getALL(jb4DSession);
-            List<DatasetEntity> tableEntityList=datasetService.getALL(jb4DSession);
-
-            responseVo.setData(ZTreeNodeVo.parseDataSetToZTreeNodeList(tableGroupEntityList,tableEntityList));
-
-            return responseVo;
-        }
-        catch (Exception ex){
-            return JBuild4DResponseVo.error(ex.getMessage());
-        }
     }
 }

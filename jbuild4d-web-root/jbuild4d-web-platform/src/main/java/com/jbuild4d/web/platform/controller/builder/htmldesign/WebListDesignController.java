@@ -12,12 +12,5 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/PlatForm/Builder/HtmlDesign/WebListDesign")
 public class WebListDesignController {
-    @Autowired
-    ICKEditorPluginsService ckEditorPluginsService;
 
-    @RequestMapping(value = "/GetPluginsConfig")
-    @ResponseBody
-    public JBuild4DResponseVo getPluginsConfig() throws JBuild4DGenerallyException {
-        return JBuild4DResponseVo.success("获取插件定义成功!",ckEditorPluginsService.getListControlVoList());
-    }
 }

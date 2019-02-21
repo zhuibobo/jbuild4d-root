@@ -22,14 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/PlatForm/Builder/Form")
 public class FormController extends GeneralCRUDImplController<FormResourceEntityWithBLOBs> {
 
-    @Autowired
-    IFormResourceService formResourceService;
-
-    @Override
-    protected IBaseService<FormResourceEntityWithBLOBs> getBaseService() {
-        return formResourceService;
-    }
-
     @Override
     public String getListViewName() {
         return null;
@@ -40,13 +32,4 @@ public class FormController extends GeneralCRUDImplController<FormResourceEntity
         return "Builder/Form/FormDesign";
     }
 
-    @Override
-    public String getJBuild4DSystemName() {
-        return this.jBuild4DSystemName;
-    }
-
-    @Override
-    public String getModuleName() {
-        return "模块设计-Web表单设计";
-    }
 }
