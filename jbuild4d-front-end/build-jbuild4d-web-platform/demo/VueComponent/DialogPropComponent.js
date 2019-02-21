@@ -412,8 +412,8 @@ Vue.component("db-table-relation-comp", {
     data:function(){
         return {
             acInterface: {
-                getTablesDataUrl: "/PlatForm/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
-                getTableFieldsUrl: "/PlatForm/Builder/DataStorage/DataBase/Table/GetTableFieldsByTableId"
+                getTablesDataUrl: "/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
+                getTableFieldsUrl: "/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTableFieldsByTableId"
             },
             relationTableTree: {
                 treeObj: null,

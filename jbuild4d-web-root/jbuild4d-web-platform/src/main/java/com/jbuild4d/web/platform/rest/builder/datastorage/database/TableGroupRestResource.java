@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/PlatForm/Builder/DataStorage/DataBase/TableGroup")
+@RequestMapping(value = "/PlatFormRest/Builder/DataStorage/DataBase/TableGroup")
 public class TableGroupRestResource extends GeneralRestResource<TableGroupEntity> {
 
     @Autowired
@@ -36,7 +36,6 @@ public class TableGroupRestResource extends GeneralRestResource<TableGroupEntity
     }
 
     @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    @ResponseBody
     public List<TableGroupEntity> getTreeData() {
         List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALL(JB4DSessionUtility.getSession());
         return tableGroupEntityList;

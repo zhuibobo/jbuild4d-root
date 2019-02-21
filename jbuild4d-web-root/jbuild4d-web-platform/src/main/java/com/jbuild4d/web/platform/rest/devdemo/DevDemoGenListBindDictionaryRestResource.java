@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/PlatForm/DevDemo/DevDemoGenListBindDictionary")
+@RequestMapping(value = "/PlatFormRest/DevDemo/DevDemoGenListBindDictionary")
 public class DevDemoGenListBindDictionaryRestResource extends GeneralRestResource<DevDemoGenListEntity> {
 
     @Autowired

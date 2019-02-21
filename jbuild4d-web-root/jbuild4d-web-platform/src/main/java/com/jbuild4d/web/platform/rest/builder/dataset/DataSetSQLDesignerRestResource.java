@@ -24,7 +24,7 @@ import java.net.URLDecoder;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/PlatForm/Builder/DataSet/DataSetSQLDesigner")
+@RequestMapping(value = "/PlatFormRest/Builder/DataSet/DataSetSQLDesigner")
 public class DataSetSQLDesignerRestResource {
     @Autowired
     IEnvVariableService envVariableService;
@@ -43,7 +43,6 @@ public class DataSetSQLDesignerRestResource {
 
 
     @RequestMapping(value = "GetSqlDesignerViewData", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getSqlDesignerViewData() {
         try {
             JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
@@ -74,7 +73,6 @@ public class DataSetSQLDesignerRestResource {
     }
 
     @RequestMapping(value = "ValidateSQLEnable", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo validateSQLEnable(String sqlText) {
         try {
             JB4DSession jb4DSession = JB4DSessionUtility.getSession();
@@ -91,7 +89,6 @@ public class DataSetSQLDesignerRestResource {
     }
 
     @RequestMapping(value = "GetTableField", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getTableField(String tableId) {
         try {
             JB4DSession jb4DSession = JB4DSessionUtility.getSession();

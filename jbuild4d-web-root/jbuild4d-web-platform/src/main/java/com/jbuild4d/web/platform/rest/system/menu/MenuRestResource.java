@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/PlatForm/System/Menu")
+@RequestMapping(value = "/PlatFormRest/System/Menu")
 public class MenuRestResource {
 
     @Autowired
     IMenuService menuService;
 
     @RequestMapping(value = "/GetMyMenu", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getMyMenu() {
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
         List<MenuEntity> myMenus=menuService.getALL(jb4DSession);

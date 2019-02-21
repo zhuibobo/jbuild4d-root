@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/PlatForm/OrganRelevance/Organ")
+@RequestMapping(value = "/PlatFormRest/OrganRelevance/Organ")
 public class OrganRestResource extends GeneralRestResource<OrganEntity> {
 
     @Autowired

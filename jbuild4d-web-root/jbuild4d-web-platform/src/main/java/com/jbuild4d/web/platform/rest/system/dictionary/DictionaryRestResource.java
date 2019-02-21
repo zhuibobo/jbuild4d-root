@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/PlatForm/System/Dictionary")
+@RequestMapping(value = "/PlatFormRest/System/Dictionary")
 public class DictionaryRestResource extends GeneralRestResource<DictionaryEntity> {
 
     @Autowired
@@ -28,14 +28,12 @@ public class DictionaryRestResource extends GeneralRestResource<DictionaryEntity
     }
 
     @RequestMapping(value = "/GetListDataByGroupId", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getListDataByGroupId(String groupId) {
         List<DictionaryEntity> dictionaryEntityList=dictionaryService.getListDataByGroupId(JB4DSessionUtility.getSession(),groupId);
         return JBuild4DResponseVo.success("",dictionaryEntityList);
     }
 
     @RequestMapping(value = "/SetSelected", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo setSelected(String recordId) throws JBuild4DGenerallyException {
         dictionaryService.setSelected(JB4DSessionUtility.getSession(),recordId);
         return JBuild4DResponseVo.opSuccess();

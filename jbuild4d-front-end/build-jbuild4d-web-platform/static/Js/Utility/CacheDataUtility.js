@@ -10,7 +10,7 @@ var CacheDataUtility={
                 return window.parent.CacheDataUtility._CurrentUserInfo;
             }
             else{
-                AjaxUtility.PostSync("/PlatForm/MyInfo/GetUserInfo",{},function (result) {
+                AjaxUtility.PostSync("/PlatFormRest/MyInfo/GetUserInfo",{},function (result) {
                     if(result.success){
                         CacheDataUtility._CurrentUserInfo=result.data;
                     }

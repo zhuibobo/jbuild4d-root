@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/PlatForm/Builder/HtmlDesign/WebListDesign")
+@RequestMapping(value = "/PlatFormRest/Builder/HtmlDesign/WebListDesign")
 public class WebListDesignRestResource {
 
     @Autowired
     ICKEditorPluginsService ckEditorPluginsService;
 
     @RequestMapping(value = "/GetPluginsConfig")
-    @ResponseBody
     public JBuild4DResponseVo getPluginsConfig() throws JBuild4DGenerallyException {
         return JBuild4DResponseVo.success("获取插件定义成功!",ckEditorPluginsService.getListControlVoList());
     }

@@ -8,7 +8,7 @@ var EditTable_SelectFieldTypeDataLoader={
         if (this._fieldDataTypeArray == null) {
             var _self = this;
 
-            AjaxUtility.PostSync("/PlatForm/Builder/DataStorage/DataBase/Table/GetTableFieldType.do",{},function(data){
+            AjaxUtility.PostSync("/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTableFieldType.do",{},function(data){
                 //debugger;
                 if (data.success == true) {
                     var list = JsonUtility.StringToJson(data.data);

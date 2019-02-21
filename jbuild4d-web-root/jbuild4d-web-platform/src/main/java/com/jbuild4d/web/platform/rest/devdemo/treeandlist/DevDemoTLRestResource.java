@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/PlatForm/DevDemo/TreeAndList/DevDemoTLTree")
+@RequestMapping(value = "/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree")
 public class DevDemoTLRestResource extends GeneralRestResource<DevDemoTLTreeEntity> {
 
     @Autowired
@@ -37,7 +37,6 @@ public class DevDemoTLRestResource extends GeneralRestResource<DevDemoTLTreeEnti
     }
 
     @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    @ResponseBody
     public List<DevDemoTLTreeEntity> getTreeData() {
         List<DevDemoTLTreeEntity> dictionaryGroupEntityList=devDemoTLTreeService.getALL(JB4DSessionUtility.getSession());
         return dictionaryGroupEntityList;

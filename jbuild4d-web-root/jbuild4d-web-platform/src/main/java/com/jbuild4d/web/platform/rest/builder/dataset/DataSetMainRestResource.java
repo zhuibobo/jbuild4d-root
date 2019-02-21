@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/PlatForm/Builder/DataSet/DataSetMain")
+@RequestMapping(value = "/PlatFormRest/Builder/DataSet/DataSetMain")
 public class DataSetMainRestResource  {
     @Autowired
     IDatasetService datasetService;
@@ -36,21 +36,18 @@ public class DataSetMainRestResource  {
     IDatasetGroupService datasetGroupService;
 
     @RequestMapping(value = "/GetDataSetData")
-    @ResponseBody
     public JBuild4DResponseVo getDataSetData(String op, String recordId) throws JBuild4DGenerallyException, IOException {
         DataSetVo dataSetVo = datasetService.getVoByPrimaryKey(JB4DSessionUtility.getSession(),recordId);
         return JBuild4DResponseVo.success("获取数据成功!",dataSetVo);
     }
 
     @RequestMapping(value = "/GetApiDataSetVoStructure")
-    @ResponseBody
     public JBuild4DResponseVo getApiDataSetVoStructure(String op,String recordId,String groupId,String fullClassName) throws InstantiationException, IllegalAccessException {
         DataSetVo dataSetVo = datasetService.getApiDataSetVoStructure(JB4DSessionUtility.getSession(),recordId,op,groupId,fullClassName);
         return JBuild4DResponseVo.success("获取数据成功!",dataSetVo);
     }
 
     @RequestMapping(value = "/SaveDataSetEdit")
-    @ResponseBody
     public JBuild4DResponseVo saveDataSetEdit(String op,String dataSetId, String dataSetVoJson) throws JBuild4DGenerallyException, IOException {
         DataSetVo dataSetVo = JsonUtility.toObjectIgnoreProp(dataSetVoJson, DataSetVo.class);
         datasetService.saveDataSetVo(JB4DSessionUtility.getSession(), dataSetId, dataSetVo);
@@ -58,14 +55,12 @@ public class DataSetMainRestResource  {
     }
 
     @RequestMapping(value = "/DeleteDataSet")
-    @ResponseBody
     public JBuild4DResponseVo deleteDataSet(String dataSetId) throws JBuild4DGenerallyException, IOException {
         datasetService.deleteByKey(JB4DSessionUtility.getSession(), dataSetId);
         return JBuild4DResponseVo.success("删除数据集成功!");
     }
 
     @RequestMapping(value = "/GetListData", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
 
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
@@ -79,7 +74,6 @@ public class DataSetMainRestResource  {
     }
 
     @RequestMapping(value = "/GetDataSetsForZTreeNodeList", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getDataSetsForZTreeNodeList(){
         try {
             JBuild4DResponseVo responseVo=new JBuild4DResponseVo();

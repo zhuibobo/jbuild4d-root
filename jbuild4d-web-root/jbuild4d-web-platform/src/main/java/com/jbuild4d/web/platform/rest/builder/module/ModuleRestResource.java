@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/PlatForm/Builder/Module")
+@RequestMapping(value = "/PlatFormRest/Builder/Module")
 public class ModuleRestResource extends GeneralRestResource<ModuleEntity> {
     @Autowired
     IModuleService moduleService;
@@ -35,7 +35,6 @@ public class ModuleRestResource extends GeneralRestResource<ModuleEntity> {
     }
 
     @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    @ResponseBody
     public List<ModuleEntity> getTreeData() {
         List<ModuleEntity> moduleEntityList=moduleService.getALL(JB4DSessionUtility.getSession());
         return moduleEntityList;

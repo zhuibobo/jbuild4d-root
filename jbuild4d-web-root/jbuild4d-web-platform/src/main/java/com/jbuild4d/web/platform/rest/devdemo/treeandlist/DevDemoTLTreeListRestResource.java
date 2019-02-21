@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/PlatForm/DevDemo/TreeAndList/DevDemoTLList")
+@RequestMapping(value = "/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList")
 public class DevDemoTLTreeListRestResource extends GeneralRestResource<DevDemoTLTreeListEntity> {
 
     @Autowired

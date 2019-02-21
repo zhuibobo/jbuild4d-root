@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/PlatForm/System/DictionaryGroup")
+@RequestMapping(value = "/PlatFormRest/System/DictionaryGroup")
 public class DictionaryGroupRestResource extends GeneralRestResource<DictionaryGroupEntity> {
 
 
@@ -38,14 +38,12 @@ public class DictionaryGroupRestResource extends GeneralRestResource<DictionaryG
     }
 
     @RequestMapping(value = "/MoveUp", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo moveUp(String recordId) {
         //dictionaryGroupService.moveUp(recordId);
         return JBuild4DResponseVo.opSuccess();
     }
 
     @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    @ResponseBody
     public List<DictionaryGroupEntity> getTreeData() {
         //dictionaryGroupService.moveUp(recordId);
         List<DictionaryGroupEntity> dictionaryGroupEntityList=dictionaryGroupService.getALL(JB4DSessionUtility.getSession());

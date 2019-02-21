@@ -26,7 +26,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/PlatForm/Builder/FlowModel")
+@RequestMapping(value = "/PlatFormRest/Builder/FlowModel")
 public class FlowModelRestResource extends GeneralRestResource<FlowModelEntity> {
 
     @Autowired
@@ -57,7 +57,6 @@ public class FlowModelRestResource extends GeneralRestResource<FlowModelEntity> 
     }
 
     @RequestMapping(value = "/ImportProcessModel", method = RequestMethod.POST, produces = "application/json")
-    @ResponseBody
     public JBuild4DResponseVo importProcessModel(HttpServletRequest request, String modelModuleId, @RequestParam("file") MultipartFile file) throws JBuild4DGenerallyException, XMLStreamException, IOException {
         FlowModelEntity _flowModelEntity=flowModelService.importNewModel(JB4DSessionUtility.getSession(),modelModuleId,file);
         String editModelWebUrl = flowModelService.buildEditModelWebUrl(_flowModelEntity);
@@ -68,14 +67,12 @@ public class FlowModelRestResource extends GeneralRestResource<FlowModelEntity> 
     }
 
     @RequestMapping(value = "/UploadProcessModelMainImg", method = RequestMethod.POST, produces = "application/json")
-    @ResponseBody
     public JBuild4DResponseVo uploadProcessModelMainImg(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
         FileInfoEntity fileInfoEntity=fileInfoService.addSmallFileToDB(JB4DSessionUtility.getSession(),file);
         return JBuild4DResponseVo.success(JBuild4DResponseVo.SUCCESSMSG,fileInfoEntity);
     }
 
     @RequestMapping(value = "/GetProcessModelMainImg", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
-    @ResponseBody
     public byte[] getProcessModelMainImg(String fileId) throws IOException, JBuild4DGenerallyException {
         FileInfoEntity fileInfoEntity=fileInfoService.getByPrimaryKey(JB4DSessionUtility.getSession(),fileId);
         if(fileInfoEntity==null) {
@@ -96,7 +93,6 @@ public class FlowModelRestResource extends GeneralRestResource<FlowModelEntity> 
     }
 
     @RequestMapping(value = "/SaveModel")
-    @ResponseBody
     public JBuild4DResponseVo saveModel(@RequestBody FlowModelEntity flowModelEntity) throws JBuild4DGenerallyException {
         FlowModelEntity _flowModelEntity = null;
         if (flowModelEntity.getModelId().equals("")) {
@@ -113,14 +109,12 @@ public class FlowModelRestResource extends GeneralRestResource<FlowModelEntity> 
     }
 
     @RequestMapping(value = "/DeleteModel")
-    @ResponseBody
     public JBuild4DResponseVo deleteModel(String recordId) throws JBuild4DGenerallyException {
         flowModelService.deleteByKey(JB4DSessionUtility.getSession(),recordId);
         return JBuild4DResponseVo.success("删除模型成功");
     }
 
     @RequestMapping(value = "/GetEditModelURL")
-    @ResponseBody
     public JBuild4DResponseVo getEditModelURL(String modelId) throws JBuild4DGenerallyException {
         FlowModelEntity _flowModelEntity=flowModelService.getByPrimaryKey(JB4DSessionUtility.getSession(),modelId);
         String editModelWebUrl=flowModelService.buildEditModelWebUrl(_flowModelEntity);
@@ -131,7 +125,6 @@ public class FlowModelRestResource extends GeneralRestResource<FlowModelEntity> 
     }
 
     @RequestMapping(value = "/GetViewModelURL")
-    @ResponseBody
     public JBuild4DResponseVo getViewModelURL(String modelId) throws JBuild4DGenerallyException {
         FlowModelEntity _flowModelEntity=flowModelService.getByPrimaryKey(JB4DSessionUtility.getSession(),modelId);
         String editModelWebUrl=flowModelService.buildViewModelWebUrl(_flowModelEntity);

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/PlatForm/Builder/List")
+@RequestMapping(value = "/PlatFormRest/Builder/List")
 public class ListRestResource extends GeneralRestResource<ListResourceEntityWithBLOBs> {
 
     @Autowired

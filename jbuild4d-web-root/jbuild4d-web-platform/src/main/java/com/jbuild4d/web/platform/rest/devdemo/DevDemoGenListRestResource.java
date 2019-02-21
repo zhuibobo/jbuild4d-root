@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping(value = "/PlatForm/DevDemo/DevDemoGenList")
+@RequestMapping(value = "/PlatFormRest/DevDemo/DevDemoGenList")
 public class DevDemoGenListRestResource extends GeneralRestResource<DevDemoGenListEntity> {
 
     @Autowired

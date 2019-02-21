@@ -51,7 +51,6 @@ public class TableRestResource {
     ITableGroupService tableGroupService;
 
     @RequestMapping(value = "/ValidateTableIsNoExist")
-    @ResponseBody
     public JBuild4DResponseVo validateTableIsExist(String tableName){
         //TableEntity tableEntity=tableService.getByTableName(tableName);
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
@@ -68,7 +67,6 @@ public class TableRestResource {
 
 
     @RequestMapping(value = "/GetEditTableData")
-    @ResponseBody
     public JBuild4DResponseVo getEditTableData(String recordId, String op,String groupId) throws IOException, XPathExpressionException, JBuild4DGenerallyException {
         JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
         responseVo.setSuccess(true);
@@ -108,33 +106,28 @@ public class TableRestResource {
     }
 
     @RequestMapping(value = "/GetTableFieldsByTableId")
-    @ResponseBody
     public JBuild4DResponseVo getTableFieldsByTableId(String tableId) throws IOException {
         return JBuild4DResponseVo.getDataSuccess(tableFieldService.getTableFieldsByTableId(tableId));
     }
 
     @RequestMapping(value = "/GetTableFieldType")
-    @ResponseBody
     public JBuild4DResponseVo getFieldDataType() throws JBuild4DGenerallyException {
         return JBuild4DResponseVo.success("", TableFieldTypeEnum.getJsonString());
     }
 
     @RequestMapping(value = "/GetFieldTemplateName")
-    @ResponseBody
     public JBuild4DResponseVo getFieldTemplateName(){
         List<String> namesList=tableFieldService.getFieldTemplateName();
         return JBuild4DResponseVo.success("",namesList);
     }
 
     @RequestMapping(value = "/GetTemplateFieldsByName")
-    @ResponseBody
     public JBuild4DResponseVo getTemplateFieldsByName(String templateName) throws IOException {
         List<TableFieldVO> tableFieldEntityList=tableFieldService.getTemplateFieldsByName(templateName);
         return JBuild4DResponseVo.success("",tableFieldEntityList);
     }
 
     @RequestMapping(value = "/SaveTableEdit")
-    @ResponseBody
     public JBuild4DResponseVo saveTableEdit(String op, String tableEntityJson,String fieldVoListJson,boolean ignorePhysicalError) throws IOException, JBuild4DGenerallyException {
         try {
             tableEntityJson = URLDecoder.decode(URLDecoder.decode(tableEntityJson, "utf-8"),"utf-8");
@@ -155,7 +148,6 @@ public class TableRestResource {
     }
 
     @RequestMapping(value = "/GetListData", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
         Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
@@ -164,7 +156,6 @@ public class TableRestResource {
     }
 
     @RequestMapping(value = "/Move", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo move(String recordId, String type , HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
         if(type.equals("up")) {
@@ -177,7 +168,6 @@ public class TableRestResource {
     }
 
     @RequestMapping(value = "/Delete", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo delete(String recordId) throws JBuild4DGenerallyException {
         try {
             tableService.deleteByKey(JB4DSessionUtility.getSession(), recordId);
@@ -189,7 +179,6 @@ public class TableRestResource {
     }
 
     @RequestMapping(value = "/GetTablesForZTreeNodeList", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getTablesForZTreeNodeList(){
         try {
             JBuild4DResponseVo responseVo=new JBuild4DResponseVo();

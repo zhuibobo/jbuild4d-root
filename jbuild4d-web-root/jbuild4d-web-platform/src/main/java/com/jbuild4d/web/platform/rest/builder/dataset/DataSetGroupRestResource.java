@@ -35,7 +35,6 @@ public class DataSetGroupRestResource extends GeneralRestResource<DatasetGroupEn
     }
 
     @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
-    @ResponseBody
     public List<DatasetGroupEntity> getTreeData() {
         List<DatasetGroupEntity> datasetGroupEntityList=datasetGroupService.getALL(JB4DSessionUtility.getSession());
         return datasetGroupEntityList;

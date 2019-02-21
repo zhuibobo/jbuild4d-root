@@ -24,13 +24,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/PlatForm/System/CodeGenerate")
+@RequestMapping(value = "/PlatFormRest/System/CodeGenerate")
 public class CodeGenerateRestResource {
     @Autowired
     ICodeGenerateService codeGenerateService;
 
     @RequestMapping(value = "/GetListData", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getListData(Integer pageSize, Integer pageNum, String searchCondition) throws IOException, ParseException, JBuild4DGenerallyException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
         Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
@@ -39,7 +38,6 @@ public class CodeGenerateRestResource {
     }
 
     @RequestMapping(value = "/GetTableGenerateCode", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getTableGenerateCode(String tableName,String packageType,String packageLevel2Name,String orderFieldName,String statusFieldName) throws IOException, ParseException, XPathExpressionException, SAXException, ParserConfigurationException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
         Map<String,String> result=codeGenerateService.getTableGenerateCode(jb4DSession,tableName,orderFieldName,statusFieldName,packageType,packageLevel2Name);
@@ -47,7 +45,6 @@ public class CodeGenerateRestResource {
     }
 
     @RequestMapping(value = "/GetTableFields", method = RequestMethod.POST)
-    @ResponseBody
     public JBuild4DResponseVo getTableFields(String tableName) throws IOException, ParseException, JBuild4DGenerallyException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
         List<SimpleTableFieldVo> result=codeGenerateService.getTableFields(jb4DSession,tableName);
