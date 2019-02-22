@@ -59,8 +59,8 @@ var BaseUtility = {
             return "";
         }
     },
-    BuildFrameView:function(action,para){
-        if(StringUtility.EndWith(action,"View")) {
+    BuildFrameInnerView:function(action,para){
+        //if(StringUtility.EndWith(action,"View")) {
             var urlPara = "";
             if (para) {
                 urlPara = $.param(para);
@@ -71,11 +71,11 @@ var BaseUtility = {
             }
             //alert(_url);
             return this.AppendTimeStampUrl(_url);
-        }
+        /*}
         else {
             DialogUtility.AlertText(action+"视图Url请用View作为结尾.");
             return "";
-        }
+        }*/
     },
     BuildAction:function (action,para) {
         var urlPara = "";

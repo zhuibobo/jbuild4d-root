@@ -160,7 +160,7 @@
                 //alert(sender.data.menuData.menuText);
                 //console.log(sender.data.menuData.menuRightUrl);
                 if(sender.data.menuData.menuRightUrl) {
-                    var url = BaseUtility.BuildFrameView(sender.data.menuData.menuRightUrl, sender.data.menuData);
+                    var url = BaseUtility.BuildFrameInnerView(sender.data.menuData.menuRightUrl, sender.data.menuData);
                     $("#fv_iframe").attr("src", url);
                     //设置点击的路径breadcrumb
                     var menuPath = getParentListMenuData(sender.data.menuData.menuId);
