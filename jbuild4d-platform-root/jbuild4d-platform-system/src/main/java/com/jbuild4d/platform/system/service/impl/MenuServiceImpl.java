@@ -222,12 +222,12 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         deleteByKey(jb4DSession,appBuilderMenuBuilderMenu.getMenuId());
         save(jb4DSession,appBuilderMenuBuilderMenu.getMenuId(),appBuilderMenuBuilderMenu);
 
-        /*//根菜单->应用管理->流程设计
+        //根菜单->应用管理->流程设计
         String appBuilderFlowBuilderId="JB4DSystemAppBuilderFlowBuilder";
         MenuEntity appBuilderFlowBuilderMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderFlowBuilderId,"流程设计","流程设计","流程设计",
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"","","frame-top-menu-data");
         deleteByKey(jb4DSession,appBuilderFlowBuilderMenu.getMenuId());
-        save(jb4DSession,appBuilderFlowBuilderMenu.getMenuId(),appBuilderFlowBuilderMenu);*/
+        save(jb4DSession,appBuilderFlowBuilderMenu.getMenuId(),appBuilderFlowBuilderMenu);
 
         //根菜单->应用管理->桌面设计
         String appBuilderDesktopBuilderId="JB4DSystemAppBuilderDesktopBuilder";
