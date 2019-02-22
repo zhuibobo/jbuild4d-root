@@ -4,7 +4,7 @@ Vue.component("module-list-webform-comp", {
     data: function () {
         return {
             acInterface:{
-                editView: "/PlatForm/Builder/Form/DetailView",
+                editView: "/HTML/Builder/Form/FormDesign.html",
                 reloadData: "/PlatFormRest/Builder/Form/GetListData",
                 delete: "/PlatFormRest/Builder/Form/Delete",
                 move: "/PlatFormRest/Builder/Form/Move",
