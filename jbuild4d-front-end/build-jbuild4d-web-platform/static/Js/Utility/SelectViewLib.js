@@ -40,13 +40,13 @@ var JBuild4DSelectView={
         }
     },
     SelectBindToField:{
-        URL:"/PlatForm/SelectView/SelectBindToTableField/Select",
+        URL:"/HTML/SelectView/SelectBindToField.html",
         beginSelect:function (instanceName) {
             var url=this.URL+"?instanceName="+instanceName;
             DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "选择变量",modal:true}, 2);
         },
         beginSelectInFrame:function (opener,instanceName,option) {
-            var url=BaseUtility.BuildAction(this.URL, {"instanceName": instanceName});
+            var url=BaseUtility.BuildView(this.URL, {"instanceName": instanceName});
             var option = $.extend(true, {}, {
                 modal: true,
                 title: "选择绑定字段"
@@ -58,13 +58,13 @@ var JBuild4DSelectView={
         }
     },
     SelectValidateRule:{
-        URL:"/PlatForm/SelectView/SelectValidateRule/Select",
+        URL:"/HTML/SelectView/SelectValidateRule.html",
         beginSelect:function (instanceName) {
             var url=this.URL+"?instanceName="+instanceName;
             DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "验证规则",modal:true}, 2);
         },
         beginSelectInFrame:function (opener,instanceName,option) {
-            var url=BaseUtility.BuildAction(this.URL, {"instanceName": instanceName});
+            var url=BaseUtility.BuildView(this.URL, {"instanceName": instanceName});
             var option = $.extend(true, {}, {
                 modal: true,
                 title: "验证规则"
