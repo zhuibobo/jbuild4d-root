@@ -4,7 +4,7 @@ Vue.component("module-list-weblist-comp", {
     data: function () {
         return {
             acInterface:{
-                editView: "/PlatForm/Builder/List/DetailView",
+                editView: "/HTML/Builder/List/ListDesign.html",
                 reloadData: "/PlatFormRest/Builder/List/GetListData",
                 delete: "/PlatFormRest/Builder/List/Delete",
                 move: "/PlatFormRest/Builder/List/Move",
