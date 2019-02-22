@@ -22,10 +22,10 @@ public class LoginedInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         Map<String,String> igUrl=new HashMap<>();
-        igUrl.put("/LoginView.do","");
-        igUrl.put("/RedirectLoginView.do","");
-        igUrl.put("/ValidateAccount.do","");
-        igUrl.put("/LoginOutView.do","");
+        igUrl.put("/PlatForm/LoginView.do","");
+        igUrl.put("/PlatForm/RedirectLoginView.do","");
+        igUrl.put("/PlatFormRest/ValidateAccount.do","");
+        igUrl.put("/PlatForm/LoginOutView.do","");
         String absPath=request.getRequestURI();
         String appName=request.getContextPath();
         String url=absPath.replaceAll(appName,"");

@@ -2,7 +2,7 @@ refVersion = 1;
 
 function calculateFilePath(file) {
     //console.log(file.path);
-    let repath = file.path.split('Html\\');
+    let repath = file.path.split('HTML\\');
     if (repath.length == 1) {
         repath = file.path.split('Js\\');
     }
@@ -115,6 +115,38 @@ let replaceBlock = {
         replaceArray.push('\n\t\trefCssLink("' + levelPath + 'Themes/Default/ZTree/zTreeStyle/zTreeStyle.css' + '");');
         replaceArray.push("\n\t</script>");
         return replaceArray.join("");
+    },
+    replaceBootStrap4Lib: function (search, file) {
+        let replaceArray = new Array();
+        //判断路径后进行引入js的路径
+        let levelPath = calculateFilePath(file);
+
+        replaceArray.push("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
+        replaceArray.push("<meta charset=\"utf-8\" />");
+        replaceArray.push("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />");
+        replaceArray.push("<title>JBuild4D</title>");
+        replaceArray.push(refJs(levelPath + "Js/T3P/JQuery/jquery-3.3.1.min.js"));
+        replaceArray.push(refJs(levelPath + "HTML/FrameV1/bootstrap-4.2.1-dist/js/bootstrap.bundle.js"));
+        replaceArray.push(refCss(levelPath + 'HTML/FrameV1/bootstrap-4.2.1-dist/css/bootstrap.css'));
+
+        return replaceArray.join("\n\t");
+    },
+    replaceFrameV1Lib:function (search, file) {
+        let replaceArray = new Array();
+        let levelPath = calculateFilePath(file);
+
+        replaceArray.push(refJs(levelPath + "HTML/FrameV1/js/perfect-scrollbar-v0.6.11.js"));
+        replaceArray.push(refJs(levelPath + "HTML/FrameV1/js/Unison-JS.js"));
+        replaceArray.push(refJs(levelPath + "HTML/FrameV1/js/jQuery-Sliding-Menu.js"));
+        replaceArray.push(refJs(levelPath + "HTML/FrameV1/js/app-menu.js"));
+        replaceArray.push(refJs(levelPath + "HTML/FrameV1/js/app.js"));
+        replaceArray.push(refJs(levelPath + "HTML/FrameV1/js/customizer.js"));
+        replaceArray.push(refCss(levelPath + 'HTML/FrameV1/line-awesome/css/line-awesome.min.css'));
+        replaceArray.push(refCss(levelPath + 'HTML/FrameV1/bootstrap-4.2.1-dist/css/bootstrap-extended.css'));
+        replaceArray.push(refCss(levelPath + 'HTML/FrameV1/css/FrameV1.css'));
+        replaceArray.push(refCss(levelPath + 'HTML/FrameV1/css/menu-types/vertical-menu.css'));
+
+        return replaceArray.join("\n\t");
     }
 }
 

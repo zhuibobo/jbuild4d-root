@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 @Controller
+@RequestMapping(value = "/PlatForm")
 public class LoginController {
 
     Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -41,7 +42,6 @@ public class LoginController {
         logger.error("Error");
         ModelAndView modelAndView=new ModelAndView("Login");
 
-
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
         return modelAndView;
     }
@@ -60,22 +60,5 @@ public class LoginController {
         ModelAndView modelAndView=new ModelAndView("SessionTimeout");
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
         return modelAndView;
-    }
-
-    @RequestMapping(value = "/ValidateAccount", method = RequestMethod.POST)
-    @ResponseBody
-    public JBuild4DResponseVo validateAccount(String account, String password,HttpServletRequest request) throws IOException, ParseException, JBuild4DGenerallyException {
-        JB4DSession b4DSession = new JB4DSession();
-        b4DSession.setOrganName("4D");
-        b4DSession.setOrganId("OrganId");
-        b4DSession.setUserName("Alex");
-        b4DSession.setUserId("UserId");
-        JB4DSessionUtility.addSessionAttr(JB4DSessionUtility.UserLoginSessionKey, b4DSession);
-        request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
-        JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-        //List<MenuEntity> entityList=menuService.getALL(jb4DSession);
-        //System.out.println(JsonUtility.toObjectString(entityList));
-        operationLogService.writeUserLoginLog(jb4DSession,this.getClass(),request);
-        return JBuild4DResponseVo.opSuccess();
     }
 }

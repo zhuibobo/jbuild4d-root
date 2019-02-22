@@ -47,7 +47,7 @@ public class InitializationSystemControllerTest extends ControllerTestBase {
     @Test
     public void initializationSystem() throws Exception {
         //context.getServletContext().
-        MockHttpServletRequestBuilder requestBuilder =post("/PlatForm/InitializationSystem/Running.do");
+        MockHttpServletRequestBuilder requestBuilder =post("/PlatFormRest/InitializationSystem/Running.do");
 
         requestBuilder.sessionAttr("JB4DSession",getSession());
         MvcResult result=mockMvc.perform(requestBuilder).andReturn();

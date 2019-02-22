@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <title>JBuild4D</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<script type="text/javascript" src="../../../Js/T3P/JQuery/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="../../../Js/JBuild4DPlatformLib.js?refVersion=1"></script>
+	<script type="text/javascript" src="../../../Js/T3P/VUE-2.5.16/vue.js"></script>
+	<script type="text/javascript" src="../../../Js/VueEXComponent.js?refVersion=1"></script>
+	<script type="text/javascript" src="../../../Js/T3P/IView-3.X/dist/iview.min.js"></script>
+	<script type="text/javascript" src="../../../Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="../../../Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1" />
+	<link rel="stylesheet" type="text/css" href="../../../Themes/Default/IView-3.X/iview.css" />
+	<link rel="stylesheet" type="text/css" href="../../../Themes/Default/JQueryUI/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="../../../Themes/Default/ZTree/zTreeStyle/zTreeStyle.css" />
+</head>
+<body>
+<div id="appList" class="iv-list-page-wrap">
+    <div id="list-button-wrap" class="list-button-outer-wrap">
+    </div>
+    <i-table :height="listHeight" stripe border :columns="columnsConfig" :data="tableData"
+             class="iv-list-table" :highlight-row="true"
+             @on-selection-change="selectionChange"></i-table>
+    <div style="float: right;" id="list-pager-wrap">
+        <page @on-change="changePage" :current.sync="pageNum" :page-size="pageSize" show-total
+              :total="pageTotal"></page>
+    </div>
+</div>
+<script>
+    var appList = new Vue({
+        el: "#appList",
+        mounted: function () {
+            this.reloadData();
+            window.setTimeout(function () {
+                appList.listHeight=ListPageUtility.GetGeneralPageHeight(0);
+            },500);
+        },
+        data: {
+            acInterface:{
+                editView:"/PlatForm/System/Cache/DetailView",
+                reloadData:"/PlatFormRest/System/Cache/GetListData",
+                delete:"/PlatFormRest/System/Cache/Delete"
+            },
+            idFieldName:"cacheId",
+            searchCondition:{
+                ddglKey:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.LikeStringType
+                },
+                ddglName:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.StringType
+                },
+                ddglCreatetime_s:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.DataStringType
+                },
+                ddglCreatetime_e:{
+                    value:"",
+                    type:SearchUtility.SearchFieldType.DataStringType
+                }
+            },
+            columnsConfig: [
+                {
+                    type: 'selection',
+                    width: 60,
+                    align: 'center'
+                },
+                {
+                    title: 'CacheName',
+                    key: 'cacheName',
+                    align: "center"
+                }, {
+                    title: 'CacheIsGlobal',
+                    key: 'cacheIsGlobal',
+                    align: "center"
+                }, {
+                    title: 'CacheMode',
+                    key: 'cacheMode'
+                }, {
+                    title: 'CacheVersion',
+                    width: 140,
+                    align: "center",
+                    key: 'cacheVersion'
+                }, {
+                    title: '操作',
+                    key: 'dictGroupId',
+                    width: 120,
+                    align: "center",
+                    render: function (h, params) {
+                        return h('div',{class: "list-row-button-wrap"},[
+                            ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
+                        ]);
+                    }
+                }
+            ],
+            tableData: [],
+            selectionRows: null,
+            pageTotal: 0,
+            pageSize: 12,
+            pageNum: 1,
+            listHeight: ListPageUtility.DefaultListHeight()
+        },
+        methods: {
+            selectionChange: function (selection) {
+                this.selectionRows = selection;
+            },
+            reloadData: function () {
+                ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
+            },
+            add: function () {
+                var url = BaseUtility.BuildView(this.acInterface.editView, {"op": "add"});
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+            },
+            edit: function (recordId) {
+                var url = BaseUtility.BuildView(this.acInterface.editView, {
+                    "op": "update",
+                    "recordId": recordId
+                });
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+            },
+            view:function (recordId) {
+                var url = BaseUtility.BuildView(this.acInterface.editView, {
+                    "op": "view",
+                    "recordId": recordId
+                });
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+            },
+            del: function (recordId) {
+                ListPageUtility.IViewTableDeleteRow(this.acInterface.delete,recordId,appList);
+            },
+            statusEnable: function (statusName) {
+                ListPageUtility.IViewChangeServerStatusFace(this.acInterface.statusChange,this.selectionRows,appList.idFieldName,statusName,appList);
+            },
+            move:function (type) {
+                ListPageUtility.IViewMoveFace(this.acInterface.move,this.selectionRows,appList.idFieldName,type,appList);
+            },
+            changePage: function (pageNum) {
+                this.pageNum = pageNum;
+                this.reloadData();
+                this.selectionRows=null;
+            },
+            search:function () {
+                this.pageNum=1;
+                this.reloadData();
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -81,42 +81,42 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         //根菜单->系统设置分组->数据字典分组
         String systemSettingDictionaryManagerId="JB4DSystemSettingDictionaryManager";
         MenuEntity systemSettingDictionaryGroupMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingDictionaryManagerId,"数据字典","数据字典","数据字典",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/Dictionary/DictionaryManagerView","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","System/Dictionary/DictionaryManagerView","");
         deleteByKey(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId());
         save(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId(),systemSettingDictionaryGroupMenu);
 
         //根菜单->系统设置分组->操作日志
         String systemSettingOperationLogId="JB4DSystemSettingOperationLog";
         MenuEntity systemSettingOperationLogMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOperationLogId,"操作日志","操作日志","操作日志",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/OperationLog/ListView","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","System/OperationLog/ListView","");
         deleteByKey(jb4DSession,systemSettingOperationLogMenu.getMenuId());
         save(jb4DSession,systemSettingOperationLogMenu.getMenuId(),systemSettingOperationLogMenu);
 
         //根菜单->系统设置分组->参数设置
         String systemSettingParasSettingId="JB4DSystemSettingParasSetting";
         MenuEntity systemSettingParasSettingMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingParasSettingId,"参数设置","参数设置","参数设置",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/ParasSetting/ListView","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","System/ParasSetting/ListView","");
         deleteByKey(jb4DSession,systemSettingParasSettingMenu.getMenuId());
         save(jb4DSession,systemSettingParasSettingMenu.getMenuId(),systemSettingParasSettingMenu);
 
         //根菜单->系统设置分组->代码生成
         String systemSettingCodeGenerateId="JB4DSystemSettingCodeGenerate";
         MenuEntity systemSettingCodeGenerateMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingCodeGenerateId,"代码生成","代码生成","代码生成",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/CodeGenerate/ManagerView","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","System/CodeGenerate/ManagerView","");
         deleteByKey(jb4DSession,systemSettingCodeGenerateMenu.getMenuId());
         save(jb4DSession,systemSettingCodeGenerateMenu.getMenuId(),systemSettingCodeGenerateMenu);
 
         //根菜单->系统设置分组->组织管理
         String systemSettingOrganManageId="JB4DSystemSettingOrganManage";
         MenuEntity systemSettingOrganManageMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingOrganManageId,"组织管理","组织管理","组织管理",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/OrganRelevance/Organ/ListView","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","OrganRelevance/Organ/ListView","");
         deleteByKey(jb4DSession,systemSettingOrganManageMenu.getMenuId());
         save(jb4DSession,systemSettingOrganManageMenu.getMenuId(),systemSettingOrganManageMenu);
 
         //根菜单->系统设置分组->缓存管理
         String systemSettingCacheManageId="JB4DSystemSettingCacheManage";
         MenuEntity systemSettingCacheManageMenu=getMenu(systemSettingMenu.getMenuId(),systemSettingCacheManageId,"缓存管理","缓存管理","缓存管理",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/System/Cache/ListView","");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","System/Cache/ListView","");
         deleteByKey(jb4DSession,systemSettingCacheManageMenu.getMenuId());
         save(jb4DSession,systemSettingCacheManageMenu.getMenuId(),systemSettingCacheManageMenu);
 
@@ -124,44 +124,44 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         //根菜单->开发示例
         String devDemoRootId="JB4DDevDemoRoot";
         MenuEntity devDemoRootMenu=getMenu(rootMenu.getMenuId(),devDemoRootId,"开发示例","开发示例","开发示例",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"/PlatForm/DevDemo/MenusView","","menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"DevDemo/MenusView","","menu-data");
         deleteByKey(jb4DSession,devDemoRootId);
         save(jb4DSession,devDemoRootMenu.getMenuId(),devDemoRootMenu);
 
         //根菜单->开发示例->通用列表(带查询)
         String devDemoRootId_SearchListId="JB4DDevDemoRoot_SearchList";
         MenuEntity devDemoRootMenu_SearchList=getMenu(devDemoRootMenu.getMenuId(),devDemoRootId_SearchListId,"通用列表(带查询)","通用列表(带查询)","通用列表(带查询)",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/DevDemo/DevDemoGenList/ListView","menu-data");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","DevDemo/DevDemoGenList/ListView","menu-data");
         deleteByKey(jb4DSession,devDemoRootId_SearchListId);
         save(jb4DSession,devDemoRootMenu_SearchList.getMenuId(),devDemoRootMenu_SearchList);
         //根菜单->开发示例->通用列表(不带查询)
         String devDemoRootId_NoSearchListId="JB4DDevDemoRoot_NoSearchList";
         MenuEntity devDemoRootMenu_NoSearchList=getMenu(devDemoRootMenu.getMenuId(),devDemoRootId_NoSearchListId,"通用列表(不带查询)","通用列表(不带查询)","通用列表(不带查询)",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/DevDemo/DevDemoGenList/ListNotSearchView","menu-data");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","DevDemo/DevDemoGenList/ListNotSearchView","menu-data");
         deleteByKey(jb4DSession,devDemoRootId_NoSearchListId);
         save(jb4DSession,devDemoRootMenu_NoSearchList.getMenuId(),devDemoRootMenu_NoSearchList);
         //根菜单->开发示例->通用列表(绑定数据字典)
         String devDemoRootId_BindDictSearchListId="JB4DDevDemoRoot_BindDictSearchList";
         MenuEntity devDemoRootId_BindDictSearchList=getMenu(devDemoRootMenu.getMenuId(),devDemoRootId_BindDictSearchListId,"通用列表(绑定数据字典)","通用列表(绑定数据字典)","通用列表(绑定数据字典)",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/DevDemo/DevDemoGenListBindDictionary/ListView","menu-data");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","DevDemo/DevDemoGenListBindDictionary/ListView","menu-data");
         deleteByKey(jb4DSession,devDemoRootId_BindDictSearchListId);
         save(jb4DSession,devDemoRootId_BindDictSearchList.getMenuId(),devDemoRootId_BindDictSearchList);
         //根菜单->开发示例->通用列表(弹出列表)
         String devDemoRootId_DialogSearchListId="JB4DDevDemoRoot_DialogSearchList";
         MenuEntity devDemoRootId_DialogSearchList=getMenu(devDemoRootMenu.getMenuId(),devDemoRootId_DialogSearchListId,"通用列表(弹出列表)","通用列表(弹出列表)","通用列表(弹出列表)",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/DevDemo/DevDemoGenList/ListView","menu-data");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","DevDemo/DevDemoGenList/ListView","menu-data");
         deleteByKey(jb4DSession,devDemoRootId_DialogSearchListId);
         save(jb4DSession,devDemoRootId_DialogSearchList.getMenuId(),devDemoRootId_DialogSearchList);
         //根菜单->开发示例->树形表格
         String devDemoRootId_TreeTableId="devDemoRootId_TreeTable";
         MenuEntity devDemoRootId_TreeTable=getMenu(devDemoRootMenu.getMenuId(),devDemoRootId_TreeTableId,"树形表格","树形表格","树形表格",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/DevDemo/DevDemoTreeTable/ListView","menu-data");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","DevDemo/DevDemoTreeTable/ListView","menu-data");
         deleteByKey(jb4DSession,devDemoRootId_TreeTableId);
         save(jb4DSession,devDemoRootId_TreeTable.getMenuId(),devDemoRootId_TreeTable);
         //根菜单->开发示例->树与列表
         String devDemoRootId_TreeAndListId="devDemoRootId_TreeList";
         MenuEntity devDemoRootId_TreeAndList=getMenu(devDemoRootMenu.getMenuId(),devDemoRootId_TreeAndListId,"树与列表","树与列表","树与列表",
-                MenuTypeEnum.LeftMenu.getDisplayName(),"","/PlatForm/DevDemo/TreeAndList/DevDemoTLTree/ListView","menu-data");
+                MenuTypeEnum.LeftMenu.getDisplayName(),"","DevDemo/TreeAndList/DevDemoTLTree/ListView","menu-data");
         deleteByKey(jb4DSession,devDemoRootId_TreeAndListId);
         save(jb4DSession,devDemoRootId_TreeAndList.getMenuId(),devDemoRootId_TreeAndList);
 
@@ -183,14 +183,14 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         //根菜单->应用管理->存储设计->服务链接
         String appBuilderDataLinkId="JB4DSystemAppBuilderDataLink";
         MenuEntity appBuilderDataLinkMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appBuilderDataLinkId,"服务链接","服务链接","服务链接",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/DataStorage/DataLink/ListView","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","Builder/DataStorage/DataLink/ListView","frame-top-menu-data");
         deleteByKey(jb4DSession,appBuilderDataLinkMenu.getMenuId());
         //menuService.save(jb4DSession,appBuilderDataLinkMenu.getMenuId(),appBuilderDataLinkMenu);
 
         //根菜单->应用管理->存储设计->数据库管理
         String appBuilderDataBaseId="JB4DSystemAppBuilderDataBase";
         MenuEntity appBuilderDataBaseMenu=getMenu(appManagerDataStorageMenu.getMenuId(),appBuilderDataBaseId,"数据库管理","数据库管理","数据库管理",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/DataStorage/DataBase/TableGroup/ListView","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","Builder/DataStorage/DataBase/TableGroup/ListView","frame-top-menu-data");
         deleteByKey(jb4DSession,appBuilderDataBaseMenu.getMenuId());
         save(jb4DSession,appBuilderDataBaseMenu.getMenuId(),appBuilderDataBaseMenu);
 
@@ -204,14 +204,14 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         //根菜单->应用管理->数据集设计
         String appBuilderDataSetId="JB4DSystemAppBuilderDataSetBuilder";
         MenuEntity appBuilderDataSetMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderDataSetId,"数据集设计","数据集设计","数据集设计",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/DataSet/DataSetGroup/ListView","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","Builder/DataSet/DataSetGroup/ListView","frame-top-menu-data");
         deleteByKey(jb4DSession,appBuilderDataSetMenu.getMenuId());
         save(jb4DSession,appBuilderDataSetMenu.getMenuId(),appBuilderDataSetMenu);
 
         //根菜单->应用管理->模块设计
         String appBuilderModuleBuilderId="JB4DSystemAppBuilderModuleBuilder";
         MenuEntity appBuilderModuleBuilderMenu=getMenu(appBuilderRootMenu.getMenuId(),appBuilderModuleBuilderId,"模块设计","模块设计","模块设计",
-                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","/PlatForm/Builder/Module/ListView","frame-top-menu-data");
+                MenuTypeEnum.GroupTopMenu.getDisplayName(),"","Builder/Module/ListView","frame-top-menu-data");
         deleteByKey(jb4DSession,appBuilderModuleBuilderMenu.getMenuId());
         save(jb4DSession,appBuilderModuleBuilderMenu.getMenuId(),appBuilderModuleBuilderMenu);
 

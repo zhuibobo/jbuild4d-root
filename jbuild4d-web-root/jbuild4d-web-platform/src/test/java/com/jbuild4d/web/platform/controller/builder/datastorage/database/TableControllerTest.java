@@ -52,8 +52,8 @@ public class TableControllerTest  extends ControllerTestBase {
     @Autowired
     private ITableFieldService tableFieldService;
 
-    @Autowired
-    private TableController tableController;
+    /*@Autowired
+    private TableController tableController;*/
 
     @Test
     public void saveTableEdit() throws Exception {
