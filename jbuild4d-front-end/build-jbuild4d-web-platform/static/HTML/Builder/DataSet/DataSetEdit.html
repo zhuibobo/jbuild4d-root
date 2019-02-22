@@ -399,7 +399,7 @@
                     DialogUtility.Frame_CloseDialog(window);
                 },
                 designSQL:function () {
-                    var url=BaseUtility.BuildAction("/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/SQLDesigner",{});
+                    var url=BaseUtility.BuildView("/HTML/Builder/DataSet/SQLDesigner.html",{});
                     DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑SQL语句",modal:true}, 1);
                 },
                 completedSQLDesign:function (result) {

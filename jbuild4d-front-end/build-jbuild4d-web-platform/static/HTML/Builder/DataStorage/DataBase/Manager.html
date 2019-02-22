@@ -79,11 +79,11 @@
                 acInterface:{
                     <!--Tree -->
                     getGroupTreeData:"/PlatFormRest/Builder/DataStorage/DataBase/TableGroup/GetTreeData",
-                    groupEditView:"/PlatForm/Builder/DataStorage/DataBase/TableGroup/DetailView",
+                    groupEditView:"/HTML/Builder/DataStorage/DataBase/TableGroupEdit.html",
                     deleteGroup:"/PlatFormRest/Builder/DataStorage/DataBase/TableGroup/Delete",
                     moveGroup:"/PlatFormRest/Builder/DataStorage/DataBase/TableGroup/Move",
                     <!--List -->
-                    editTableView:"/PlatForm/Builder/DataStorage/DataBase/Table/EditTableView",
+                    editTableView:"/HTML/Builder/DataStorage/DataBase/TableEdit.html",
                     reloadTableListData:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetListData",
                     deleteTable:"/PlatFormRest/Builder/DataStorage/DataBase/Table/Delete",
                     tableMove:"/PlatFormRest/Builder/DataStorage/DataBase/Table/Move"
@@ -211,7 +211,7 @@
                 },
                 addGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                        var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
                             "op": "add",
                             "parentId": this.treeSelectedNode[appList.treeIdFieldName]
                         });
@@ -223,7 +223,7 @@
                 },
                 editGroup:function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                        var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
                             "op": "update",
                             "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                         });
@@ -235,7 +235,7 @@
                 },
                 viewGroup:function () {
                     //var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/TableGroup/Detail.do?op=view&recordId=" + this.treeSelectedNode[appList.treeIdFieldName]);
-                    var url = BaseUtility.BuildAction(this.acInterface.groupEditView, {
+                    var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
                         "op": "update",
                         "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
@@ -307,7 +307,7 @@
                 },
                 add: function () {
                     if(this.treeSelectedNode!=null) {
-                        var url = BaseUtility.BuildAction(this.acInterface.editTableView, {
+                        var url = BaseUtility.BuildView(this.acInterface.editTableView, {
                             "op": "add",
                             "groupId": this.treeSelectedNode[appList.treeIdFieldName]
                         });
@@ -318,7 +318,7 @@
                     }
                 },
                 edit: function (recordId) {
-                    var url = BaseUtility.BuildAction(this.acInterface.editTableView, {
+                    var url = BaseUtility.BuildView(this.acInterface.editTableView, {
                         "op": "update",
                         "recordId": recordId
                     });
@@ -326,7 +326,7 @@
                 },
                 view:function (recordId) {
                     //var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=view&recordId=" + recordId);
-                    var url = BaseUtility.BuildAction(this.acInterface.editTableView, {
+                    var url = BaseUtility.BuildView(this.acInterface.editTableView, {
                         "op": "view",
                         "recordId": recordId
                     });
