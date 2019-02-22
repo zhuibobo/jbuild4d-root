@@ -38,12 +38,13 @@ let replaceBlock = {
         //判断路径后进行引入js的路径
         let levelPath = calculateFilePath(file);
         replaceArray.push(refJs(levelPath + "Js/T3P/JQuery/jquery-3.3.1.min.js"));
-        replaceArray.push(refJs(levelPath + "Js/JBuild4DPlatformLib.js?refVersion=" + refVersion));
         replaceArray.push(refJs(levelPath + "Js/T3P/VUE-2.5.16/vue.js"));
-        replaceArray.push(refJs(levelPath + "Js/VueEXComponent.js?refVersion=" + refVersion));
         replaceArray.push(refJs(levelPath + "Js/T3P/IView-3.X/dist/iview.min.js"));
         replaceArray.push(refJs(levelPath + "Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"));
         replaceArray.push(refJs(levelPath + "Js/T3P/ZTree-V3/js/jquery.ztree.all.js"));
+        replaceArray.push(refJs(levelPath + "Js/JBuild4DPlatformLib.js?refVersion=" + refVersion));
+        replaceArray.push(refJs(levelPath + "Js/UIEXComponent.js?refVersion=" + refVersion));
+        replaceArray.push(refJs(levelPath + "Js/VueEXComponent.js?refVersion=" + refVersion));
         return replaceArray.join("\n\t");
     },
     replaceCodeMirrorLib: function (search, file) {

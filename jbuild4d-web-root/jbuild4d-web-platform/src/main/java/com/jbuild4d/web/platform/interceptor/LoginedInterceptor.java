@@ -36,12 +36,12 @@ public class LoginedInterceptor implements HandlerInterceptor {
             try {
                 JB4DSession session = JB4DSessionUtility.getSession();
                 if (session == null) {
-                    response.sendRedirect(appName+"/RedirectLoginView.do");
+                    response.sendRedirect(appName+"/PlatForm/RedirectLoginView.do");
                     return false;
                 }
             }
             catch (SessionTimeoutException ex){
-                response.sendRedirect(appName+"/RedirectLoginView.do");
+                response.sendRedirect(appName+"/PlatForm/RedirectLoginView.do");
                 return false;
             }
         }

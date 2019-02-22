@@ -9,6 +9,7 @@ var console = console || {
 
 //重写Date方法，解决T16:00:00.000Z问题
 function DateExtend_DateFormat(date, fmt) {
+
     if (null == date || undefined == date) return '';
     var o = {
         "M+": date.getMonth() + 1, //月份

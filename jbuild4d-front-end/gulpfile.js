@@ -181,7 +181,7 @@ gulp.task('watch', function() {
     let watcherJs=gulp.watch(srcPlatformStaticPath + '/Js/**/*.js', gulp.series('JS-Custom-ALL'));
     let watcherLess=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/*.less", gulp.series('Less'));
     let watcherLessImages=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/Images/**/*", gulp.series('LessImages'));
-    let watcherHTMLTemplates=gulp.watch("build-jbuild4d-web-platform/templates/**/*", gulp.series('HTMLTemplates'));
+    let watcherHTMLTemplates=gulp.watch("build-jbuild4d-web-platform/static/HTML/**/*", gulp.series('HTMLTemplates'));
     let watcherFormDesign=gulp.watch([
         srcPlatformStaticPath + "/Js/HTMLDesign/**/*.js",
         srcPlatformStaticPath + "/Js/HTMLDesign/**/*.css",

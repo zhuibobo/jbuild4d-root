@@ -48,16 +48,16 @@ var BaseUtility = {
         return StringUtility.GetTimeStampUrl(_url);*/
     },
     BuildView:function (action,para) {
-        //debugger;
-        //alert(11);
-        //alert(StringUtility.EndWith(action,"View"));
-        if(StringUtility.EndWith(action,"View")) {
-            return this.BuildAction(action, para);
+        var urlPara = "";
+        if (para) {
+            urlPara = $.param(para);
         }
-        else {
-            DialogUtility.AlertText(action+"视图Url请用View作为结尾.");
-            return "";
+        var _url = this.GetRootPath() + action;
+        if (urlPara != "") {
+            _url += "?" + urlPara;
         }
+        //alert(_url);
+        return this.AppendTimeStampUrl(_url);
     },
     BuildFrameInnerView:function(action,para){
         //if(StringUtility.EndWith(action,"View")) {
@@ -90,7 +90,7 @@ var BaseUtility = {
         return this.AppendTimeStampUrl(_url);
     },
     RedirectToLogin:function () {
-        var url=BaseUtility.GetRootPath()+"/LoginView.do";
+        var url=BaseUtility.GetRootPath()+"/PlatForm/LoginView.do";
         window.parent.parent.location.href=url;
     },
     AppendTimeStampUrl:function (url) {

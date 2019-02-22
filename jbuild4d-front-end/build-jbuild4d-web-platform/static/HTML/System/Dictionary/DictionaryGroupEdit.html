@@ -84,7 +84,7 @@
                     dictGroupId: '',
                     dictGroupValue: '',
                     dictGroupText: '',
-                    dictGroupCreateTime: DateUtility.GetCurrentData("-"),
+                    dictGroupCreateTime: DateUtility.GetCurrentData(),
                     dictGroupDesc: '',
                     dictGroupParentId: BaseUtility.GetUrlParaValue("parentId"),
                     dictGroupIssystem: '否',
@@ -125,7 +125,10 @@
                     var _self = this;
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
+                            //debugger;
                             var sendData = JSON.stringify(_self.formEntity);
+                            //console.log(sendData);
+                            //return;
                             AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     if(result.success) {
