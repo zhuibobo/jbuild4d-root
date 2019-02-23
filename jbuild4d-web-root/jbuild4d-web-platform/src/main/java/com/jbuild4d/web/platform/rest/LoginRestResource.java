@@ -34,7 +34,7 @@ public class LoginRestResource {
     @Autowired
     IOperationLogService operationLogService;
 
-    @ApiOperation(value="添加用户信息", notes = "添加用户信息")
+    @ApiOperation(value="验证用户", notes = "验证用户")
     @ApiImplicitParam(name="user", value="User", required = true, dataType = "User")
     @RequestMapping(value = "/ValidateAccount", method = RequestMethod.POST)
     public JBuild4DResponseVo validateAccount(String account, String password, HttpServletRequest request) throws IOException, ParseException, JBuild4DGenerallyException {
