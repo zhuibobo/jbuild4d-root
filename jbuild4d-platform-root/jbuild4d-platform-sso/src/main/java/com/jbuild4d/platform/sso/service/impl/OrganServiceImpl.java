@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.sso.service.impl;
 
-import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganMapper;
+import com.jbuild4d.base.dbaccess.dao.sso.OrganMapper;
 import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
