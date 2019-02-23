@@ -1,3 +1,5 @@
+CREATE DATABASE  `jbuild4d_v04` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 /*-----------------------------------------开发适用DEMO-----------------------------------------*/
 DROP TABLE IF EXISTS `TB4D_DEV_DEMO_GEN_LIST`;
 CREATE TABLE `TB4D_DEV_DEMO_GEN_LIST` (

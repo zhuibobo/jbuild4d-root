@@ -1,21 +1,792 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    <changeSet id="1" author="zhuangrb">
-
-        <!-- model -->
-        <createTable tableName="liquibase_demo1">
-            <column name="id" type="varchar(100)">
-                <constraints primaryKey="true" nullable="false" />
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="zhuangrb" id="1550906195565-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_dataset">
+            <column name="DS_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
             </column>
-            <column name="name" type="varchar(400)">
-                <constraints nullable="false" />
+            <column name="DS_CAPTION" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
             </column>
-            <column name="model_key" type="varchar(400)">
-                <constraints nullable="false" />
+            <column name="DS_NAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_CREATE_TIME" type="datetime(6)"/>
+            <column name="DS_CREATER" type="NVARCHAR(100)"/>
+            <column name="DS_UPDATE_TIME" type="datetime(6)"/>
+            <column name="DS_UPDATER" type="NVARCHAR(100)"/>
+            <column name="DS_TYPE" type="NVARCHAR(100)"/>
+            <column name="DS_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="DS_ORDER_NUM" type="INT"/>
+            <column name="DS_DESC" type="NVARCHAR(1000)"/>
+            <column name="DS_GROUP_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_STATUS" type="NVARCHAR(10)"/>
+            <column name="DS_SQL_SELECT_TEXT" type="NVARCHAR(4000)"/>
+            <column name="DS_SQL_SELECT_VALUE" type="NVARCHAR(4000)"/>
+            <column name="DS_CLASS_NAME" type="NVARCHAR(300)"/>
+            <column name="DS_REST_STRUCTURE_URL" type="NVARCHAR(500)"/>
+            <column name="DS_REST_DATA_URL" type="NVARCHAR(500)"/>
+            <column name="DS_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="DS_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_dataset_column">
+            <column name="COLUMN_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COLUMN_DS_ID" type="NVARCHAR(100)"/>
+            <column name="COLUMN_CAPTION" type="NVARCHAR(200)"/>
+            <column name="COLUMN_NAME" type="NVARCHAR(200)"/>
+            <column name="COLUMN_CREATE_TIME" type="datetime(6)"/>
+            <column name="COLUMN_CREATER" type="NVARCHAR(100)"/>
+            <column name="COLUMN_UPDATE_TIME" type="datetime(6)"/>
+            <column name="COLUMN_UPDATER" type="NVARCHAR(100)"/>
+            <column name="COLUMN_DESC" type="NVARCHAR(1000)"/>
+            <column name="COLUMN_DEFAULT_TYPE" type="NVARCHAR(50)"/>
+            <column name="COLUMN_DEFAULT_VALUE" type="NVARCHAR(1000)"/>
+            <column name="COLUMN_DEFAULT_TEXT" type="NVARCHAR(400)"/>
+            <column name="COLUMN_ORDER_NUM" type="INT"/>
+            <column name="COLUMN_TABLE_NAME" type="NVARCHAR(50)"/>
+            <column name="COLUMN_IS_CUSTOM" type="NVARCHAR(10)"/>
+            <column name="COLUMN_FORMATTER" type="NVARCHAR(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_dataset_group">
+            <column name="DS_GROUP_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_GROUP_VALUE" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_GROUP_TEXT" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_GROUP_ORDER_NUM" type="INT"/>
+            <column name="DS_GROUP_CREATE_TIME" type="datetime(6)"/>
+            <column name="DS_GROUP_DESC" type="NVARCHAR(500)"/>
+            <column name="DS_GROUP_STATUS" type="NVARCHAR(10)"/>
+            <column name="DS_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="DS_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="DS_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
+            <column name="DS_GROUP_PID_LIST" type="NVARCHAR(1200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_GROUP_CHILD_COUNT" type="INT"/>
+            <column name="DS_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="DS_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_dataset_related_table">
+            <column name="RT_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RT_DS_ID" type="NVARCHAR(100)"/>
+            <column name="RT_TABLE_NAME" type="NVARCHAR(200)"/>
+            <column name="RT_TABLE_CAPTION" type="NVARCHAR(200)"/>
+            <column name="RT_TABLE_ID" type="NVARCHAR(200)"/>
+            <column name="RT_TABLE_TYPE" type="NVARCHAR(200)"/>
+            <column name="RT_DESC" type="NVARCHAR(1000)"/>
+            <column name="RT_ORDER_NUM" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_dev_demo_gen_list">
+            <column name="DDGL_ID" remarks="主键" type="NVARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DDGL_KEY" type="NVARCHAR(128)"/>
+            <column name="DDGL_NAME" type="NVARCHAR(128)"/>
+            <column name="DDGL_VALUE" type="NVARCHAR(500)"/>
+            <column name="DDGL_STATUS" type="NVARCHAR(10)"/>
+            <column name="DDGL_DESC" type="NVARCHAR(2000)"/>
+            <column name="DDGL_CREATETIME" type="datetime(6)"/>
+            <column name="DDGL_USER_ID" type="NVARCHAR(100)"/>
+            <column name="DDGL_USER_NAME" type="NVARCHAR(100)"/>
+            <column name="DDGL_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="DDGL_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="DDGL_API" type="NVARCHAR(100)"/>
+            <column name="DDGL_ORDER_NUM" type="INT"/>
+            <column name="DDGL_INPUTNUMBER" type="DECIMAL(18, 2)"/>
+            <column name="DDGL_BIND_DIC_SELECTED" type="NVARCHAR(100)"/>
+            <column name="DDGL_BIND_DIC_RADIO" type="NVARCHAR(100)"/>
+            <column name="DDGL_BIND_DIC_CHECKBOX1" type="NVARCHAR(100)"/>
+            <column name="DDGL_BIND_DIC_CHECKBOX2" type="NVARCHAR(100)"/>
+            <column name="DDGL_BIND_DIC_CHECKBOX3" type="NVARCHAR(100)"/>
+            <column name="DDGL_BIND_DIC_MUCHECKBOX" type="NVARCHAR(1000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_dev_demo_tl_tree">
+            <column name="DDTT_ID" type="NVARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DDTT_KEY" type="NVARCHAR(128)"/>
+            <column name="DDTT_NAME" type="NVARCHAR(128)"/>
+            <column name="DDTT_VALUE" type="NVARCHAR(500)"/>
+            <column name="DDTT_STATUS" type="NVARCHAR(10)"/>
+            <column name="DDTT_DESC" type="NVARCHAR(2000)"/>
+            <column name="DDTT_CREATETIME" type="datetime(6)"/>
+            <column name="DDTT_ORDER_NUM" type="INT"/>
+            <column name="DDTT_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="DDTT_PARENT_IDLIST" type="NVARCHAR(1200)"/>
+            <column name="DDTT_CHILD_COUNT" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_dev_demo_tl_tree_list">
+            <column name="DDTL_ID" type="NVARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DDTL_GROUP_ID" type="NVARCHAR(128)"/>
+            <column name="DDTL_KEY" type="NVARCHAR(128)"/>
+            <column name="DDTL_NAME" type="NVARCHAR(128)"/>
+            <column name="DDTL_VALUE" type="NVARCHAR(500)"/>
+            <column name="DDTL_STATUS" type="NVARCHAR(10)"/>
+            <column name="DDTL_DESC" type="NVARCHAR(2000)"/>
+            <column name="DDTL_CREATETIME" type="datetime(6)"/>
+            <column name="DDTL_ORDER_NUM" type="INT"/>
+            <column name="DDTL_BIND_DIC_SELECTED" type="NVARCHAR(100)"/>
+            <column name="DDTL_BIND_DIC_RADIO" type="NVARCHAR(100)"/>
+            <column name="DDTL_DDTT_BIND_DIC_MUCHECKBOX" type="NVARCHAR(1000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_dev_demo_tree_table">
+            <column name="DDTT_ID" type="NVARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DDTT_KEY" type="NVARCHAR(128)"/>
+            <column name="DDTT_NAME" type="NVARCHAR(128)"/>
+            <column name="DDTT_VALUE" type="NVARCHAR(500)"/>
+            <column name="DDTT_STATUS" type="NVARCHAR(10)"/>
+            <column name="DDTT_DESC" type="NVARCHAR(2000)"/>
+            <column name="DDTT_CREATETIME" type="datetime(6)"/>
+            <column name="DDTT_ORDER_NUM" type="INT"/>
+            <column name="DDTT_BIND_DIC_SELECTED" type="NVARCHAR(100)"/>
+            <column name="DDTT_BIND_DIC_RADIO" type="NVARCHAR(100)"/>
+            <column name="DDTT_DDTT_BIND_DIC_MUCHECKBOX" type="NVARCHAR(1000)"/>
+            <column name="DDTT_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="DDTT_PARENT_IDLIST" type="NVARCHAR(1200)"/>
+            <column name="DDTT_CHILD_COUNT" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_dictionary">
+            <column name="DICT_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DICT_KEY" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DICT_VALUE" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DICT_TEXT" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DICT_GROUP_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DICT_ORDER_NUM" type="INT"/>
+            <column name="DICT_CREATE_TIME" type="datetime(6)"/>
+            <column name="DICT_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="DICT_PARENT_IDLIST" type="NVARCHAR(1200)"/>
+            <column name="DICT_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="DICT_DEL_ENABLE" type="NVARCHAR(10)"/>
+            <column name="DICT_STATUS" type="NVARCHAR(10)"/>
+            <column name="DICT_IS_SELECTED" type="NVARCHAR(10)"/>
+            <column name="DICT_DESC" type="NVARCHAR(500)"/>
+            <column name="DICT_CHILD_COUNT" type="INT"/>
+            <column name="DICT_EX_ATTR1" type="NVARCHAR(500)"/>
+            <column name="DICT_EX_ATTR2" type="NVARCHAR(500)"/>
+            <column name="DICT_EX_ATTR3" type="NVARCHAR(500)"/>
+            <column name="DICT_EX_ATTR4" type="NVARCHAR(500)"/>
+            <column name="DICT_USER_ID" type="NVARCHAR(100)"/>
+            <column name="DICT_USER_NAME" type="NVARCHAR(100)"/>
+            <column name="DICT_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="DICT_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_dictionary_group">
+            <column name="DICT_GROUP_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DICT_GROUP_VALUE" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DICT_GROUP_TEXT" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DICT_GROUP_ORDER_NUM" type="INT"/>
+            <column name="DICT_GROUP_CREATE_TIME" type="datetime(6)"/>
+            <column name="DICT_GROUP_DESC" type="NVARCHAR(500)"/>
+            <column name="DICT_GROUP_STATUS" type="NVARCHAR(10)"/>
+            <column name="DICT_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="DICT_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="DICT_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
+            <column name="DICT_GROUP_ENP_ITEM" type="NVARCHAR(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_file_content">
+            <column name="FILE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FILE_CONTENT" type="LONGBLOB">
+                <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_file_info">
+            <column name="FILE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FILE_CREATE_TIME" type="datetime(6)"/>
+            <column name="FILE_CREATER" type="NVARCHAR(100)"/>
+            <column name="FILE_NAME" type="NVARCHAR(200)"/>
+            <column name="FILE_SIZE" type="BIGINT"/>
+            <column name="FILE_STORE_TYPE" remarks="文件的存储位置,小文件可以存储于数据库中" type="NVARCHAR(100)"/>
+            <column name="FILE_STORE_PATH" remarks="文件的存储路径" type="NVARCHAR(400)"/>
+            <column name="FILE_STORE_NAME" remarks="文件的物理存储名称" type="NVARCHAR(100)"/>
+            <column name="FILE_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="FILE_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="FILE_EXTENSION" remarks="文件的扩展名称" type="NVARCHAR(100)"/>
+            <column name="FILE_DESCRIPTION" type="NVARCHAR(500)"/>
+            <column name="FILE_READTIME" remarks="文件的读取次数" type="INT"/>
+            <column name="FILE_STATUS" type="NVARCHAR(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_file_ref">
+            <column name="REF_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REF_FILE_ID" type="NVARCHAR(100)"/>
+            <column name="REF_OBJ_ID" type="NVARCHAR(100)"/>
+            <column name="REF_ORDER_NUM" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_flow_model">
+            <column name="MODEL_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODEL_DE_ID" remarks="act_de_model表的ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODEL_MODULE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODEL_CODE" type="NVARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODEL_NAME" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODEL_CREATE_TIME" type="datetime(6)"/>
+            <column name="MODEL_CREATER" type="NVARCHAR(100)"/>
+            <column name="MODEL_UPDATE_TIME" type="datetime(6)"/>
+            <column name="MODEL_UPDATER" type="NVARCHAR(100)"/>
+            <column name="MODEL_DESC" type="NVARCHAR(1000)"/>
+            <column name="MODEL_STATUS" type="NVARCHAR(10)"/>
+            <column name="MODEL_ORDER_NUM" type="INT"/>
+            <column name="MODEL_DEPLOYMENT_ID" type="NVARCHAR(1000)"/>
+            <column name="MODEL_START_KEY" type="NVARCHAR(1000)"/>
+            <column name="MODEL_RESOURCE_NAME" type="NVARCHAR(1000)"/>
+            <column name="MODEL_FROM_TYPE" remarks="流程模型来自上传或者页面设计" type="NVARCHAR(50)"/>
+            <column name="MODEL_MAIN_IMAGE_ID" remarks="关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_form_config">
+            <column name="FCONFIG_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FCONFIG_FORM_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FCONFIG_TYPE" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FCONFIG_NAME" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FCONFIG_VALUE" type="NVARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FCONFIG_DESC" type="NVARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FCONFIG_CREATE_TIME" type="datetime(6)"/>
+            <column name="FCONFIG_CREATER" type="NVARCHAR(100)"/>
+            <column name="FCONFIG_ORDER_NUM" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_form_resource">
+            <column name="FORM_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FORM_CODE" type="NVARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FORM_NAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FORM_SINGLE_NAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FORM_CREATE_TIME" type="datetime(6)"/>
+            <column name="FORM_CREATER" type="NVARCHAR(100)"/>
+            <column name="FORM_UPDATE_TIME" type="datetime(6)"/>
+            <column name="FORM_UPDATER" type="NVARCHAR(100)"/>
+            <column name="FORM_TYPE" type="NVARCHAR(100)"/>
+            <column name="FORM_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="FORM_ORDER_NUM" type="INT"/>
+            <column name="FORM_DESC" type="NVARCHAR(1000)"/>
+            <column name="FORM_MODULE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FORM_STATUS" type="NVARCHAR(10)"/>
+            <column name="FORM_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="FORM_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="FORM_MAIN_TABLE_NAME" remarks="表单的主表名称,从数据关系字段提取" type="NVARCHAR(100)"/>
+            <column name="FORM_MAIN_TABLE_CAPTION" remarks="表单的主表标题,从数据关系字段提取" type="NVARCHAR(100)"/>
+            <column name="FORM_DATA_RELATION" remarks="数据关系的设置,根节点为主表" type="NVARCHAR(4000)"/>
+            <column name="FORM_IS_TEMPLATE" type="NVARCHAR(100)"/>
+            <column name="FORM_IS_RESOLVE" remarks="是否进行了解析" type="NVARCHAR(10)"/>
+            <column name="FORM_HTML_SOURCE" remarks="原始的HTML" type="MEDIUMTEXT"/>
+            <column name="FORM_HTML_RESOLVE" remarks="解析后的HTML" type="MEDIUMTEXT"/>
+            <column name="FORM_JS_CONTENT" type="MEDIUMTEXT"/>
+            <column name="FORM_CSS_CONTENT" type="MEDIUMTEXT"/>
+            <column name="FORM_CONFIG_CONTENT" type="MEDIUMTEXT"/>
+            <column name="FORM_CONTENT_URL" type="NVARCHAR(1000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_jb4d_cache">
+            <column name="CACHE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CACHE_KEY" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CACHE_NAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CACHE_DESC" type="NVARCHAR(500)"/>
+            <column name="CACHE_ORDER_NUM" type="INT"/>
+            <column name="CACHE_STATUS" type="NVARCHAR(50)"/>
+            <column name="CACHE_IS_GLOBAL" type="NVARCHAR(50)"/>
+            <column name="CACHE_USER_ID" type="NVARCHAR(50)"/>
+            <column name="CACHE_MODE" type="NVARCHAR(50)"/>
+            <column name="CACHE_VERSION" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_list_resource">
+            <column name="LIST_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIST_CODE" type="NVARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIST_NAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIST_SINGLE_NAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIST_CREATE_TIME" type="datetime(6)"/>
+            <column name="LIST_CREATER" type="NVARCHAR(100)"/>
+            <column name="LIST_UPDATE_TIME" type="datetime(6)"/>
+            <column name="LIST_UPDATER" type="NVARCHAR(100)"/>
+            <column name="LIST_TYPE" type="NVARCHAR(100)"/>
+            <column name="LIST_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="LIST_ORDER_NUM" type="INT"/>
+            <column name="LIST_DESC" type="NVARCHAR(1000)"/>
+            <column name="LIST_MODULE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIST_STATUS" type="NVARCHAR(10)"/>
+            <column name="LIST_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="LIST_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="LIST_DATASET_ID" type="NVARCHAR(100)"/>
+            <column name="LIST_HTML_SOURCE" type="MEDIUMTEXT"/>
+            <column name="LIST_HTML_RESOLVE" type="MEDIUMTEXT"/>
+            <column name="LIST_JS_CONTENT" type="MEDIUMTEXT"/>
+            <column name="LIST_CONFIG_CONTENT" type="MEDIUMTEXT"/>
+            <column name="LIST_ENABLE_S_SEAR" remarks="是否启用简单查询" type="NVARCHAR(10)"/>
+            <column name="LIST_ENABLE_C_SEAR" remarks="是否启用复杂查询" type="NVARCHAR(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_menu">
+            <column name="MENU_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENU_NAME" type="NVARCHAR(100)"/>
+            <column name="MENU_TEXT" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENU_VALUE" type="NVARCHAR(100)"/>
+            <column name="MENU_TYPE" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENU_USER_ID" type="NVARCHAR(100)"/>
+            <column name="MENU_USER_NAME" type="NVARCHAR(100)"/>
+            <column name="MENU_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="MENU_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="MENU_IS_EXPAND" type="NVARCHAR(10)"/>
+            <column name="MENU_IS_SYSTEM" type="NVARCHAR(10)"/>
+            <column name="MENU_LEFT_URL" type="NVARCHAR(600)"/>
+            <column name="MENU_LEFT_URL_PARA" type="NVARCHAR(600)"/>
+            <column name="MENU_RIGHT_URL" type="NVARCHAR(800)"/>
+            <column name="MENU_RIGHT_URL_PARA" type="NVARCHAR(600)"/>
+            <column name="MENU_ORDER_NUM" type="INT"/>
+            <column name="MENU_PARENT_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENU_PARENT_ID_LIST" type="NVARCHAR(1200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENU_TARGET" type="NVARCHAR(100)"/>
+            <column name="MENU_CREATOR" type="NVARCHAR(200)"/>
+            <column name="MENU_CREATE_TIME" type="datetime(6)"/>
+            <column name="MENU_UPDATER" type="NVARCHAR(200)"/>
+            <column name="MENU_UPDATE_TIME" type="datetime(6)"/>
+            <column name="MENU_USE_ORGAN_NAME" type="NVARCHAR(500)"/>
+            <column name="MENU_USE_ORGAN_ID" type="NVARCHAR(500)"/>
+            <column name="MENU_USE_ORGAN_TYPE_NAME" type="NVARCHAR(500)"/>
+            <column name="MENU_USE_ORGAN_TYPE_ID" type="NVARCHAR(500)"/>
+            <column name="MENU_CLASS_NAME" type="NVARCHAR(100)"/>
+            <column name="MENU_CLASS_NAME_HOVER" type="NVARCHAR(100)"/>
+            <column name="MENU_CLASS_NAME_SELECTED" type="NVARCHAR(100)"/>
+            <column name="MENU_MENU_CHILD_COUNT" type="INT"/>
+            <column name="MENU_MENU_DESCRIPTION" type="NVARCHAR(1000)"/>
+            <column name="MENU_JS_EXPRESSION" type="NVARCHAR(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_module">
+            <column name="MODULE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODULE_VALUE" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODULE_TEXT" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODULE_ORDER_NUM" type="INT"/>
+            <column name="MODULE_CREATE_TIME" type="datetime(6)"/>
+            <column name="MODULE_DESC" type="NVARCHAR(500)"/>
+            <column name="MODULE_STATUS" type="NVARCHAR(10)"/>
+            <column name="MODULE_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="MODULE_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="MODULE_DEL_ENABLE" type="NVARCHAR(10)"/>
+            <column name="MODULE_PID_LIST" type="NVARCHAR(1200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODULE_CHILD_COUNT" type="INT"/>
+            <column name="MODULE_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="MODULE_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_operation_log">
+            <column name="LOG_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LOG_TEXT" type="NVARCHAR(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LOG_ORDER_NUM" type="INT"/>
+            <column name="LOG_CREATE_TIME" type="datetime(6)"/>
+            <column name="LOG_SYSTEM_NAME" type="NVARCHAR(200)"/>
+            <column name="LOG_MODULE_NAME" type="NVARCHAR(200)"/>
+            <column name="LOG_ACTION_NAME" type="NVARCHAR(200)"/>
+            <column name="LOG_DATA" type="TEXT"/>
+            <column name="LOG_USER_ID" type="NVARCHAR(100)"/>
+            <column name="LOG_USER_NAME" type="NVARCHAR(100)"/>
+            <column name="LOG_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="LOG_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="LOG_IP" type="NVARCHAR(100)"/>
+            <column name="LOG_TYPE" type="NVARCHAR(100)"/>
+            <column name="LOG_CLASS_NAME" type="NVARCHAR(200)"/>
+            <column name="LOG_STATUS" type="NVARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_organ">
+            <column name="ORGAN_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORGAN_NAME" type="NVARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORGAN_NO" type="NVARCHAR(200)"/>
+            <column name="ORGAN_CODE" type="NVARCHAR(200)"/>
+            <column name="ORGAN_CREATE_TIME" type="datetime(6)"/>
+            <column name="ORGAN_PHONE" type="NVARCHAR(100)"/>
+            <column name="ORGAN_POST" type="NVARCHAR(20)"/>
+            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(50)"/>
+            <column name="ORGAN_ADDRESS" type="NVARCHAR(1000)"/>
+            <column name="ORGAN_CONTACTOR" type="NVARCHAR(100)"/>
+            <column name="ORGAN_CONTACTOR_MOBILE" type="NVARCHAR(100)"/>
+            <column name="ORGAN_DOMAIN" type="NVARCHAR(300)"/>
+            <column name="ORGAN_FAX" type="NVARCHAR(100)"/>
+            <column name="ORGAN_CHILD_COUNT" type="INT"/>
+            <column name="ORGAN_IS_VIRTUAL" type="NVARCHAR(10)"/>
+            <column name="ORGAN_ORDER_NUM" type="INT"/>
+            <column name="ORGAN_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="ORGAN_PARENT_ID_LIST" type="NVARCHAR(1200)"/>
+            <column name="ORGAN_SHORT_NAME" type="NVARCHAR(150)"/>
+            <column name="ORGAN_STATUS" type="NVARCHAR(10)"/>
+            <column name="ORGAN_CREATRE_ORG_ID" type="NVARCHAR(100)"/>
+            <column name="ORGAN_OUTER_ID" type="NVARCHAR(100)"/>
+            <column name="ORGAN_OUTER_TYPE" type="NVARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_organ_type">
+            <column name="ORGAN_TYPE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORGAN_TYPE_NAME" type="NVARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORGAN_TYPE_DESC" type="NVARCHAR(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_service_link">
+            <column name="LINK_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LINK_VALUE" type="NVARCHAR(200)"/>
+            <column name="LINK_NAME" type="NVARCHAR(200)"/>
+            <column name="LINK_TYPE" type="NVARCHAR(200)"/>
+            <column name="LINK_URL" type="NVARCHAR(1000)"/>
+            <column name="LINK_PARAS" type="NVARCHAR(2000)"/>
+            <column name="LINK_USER" type="NVARCHAR(100)"/>
+            <column name="LINK_PASSWORD" type="NVARCHAR(100)"/>
+            <column name="LINK_CREATE_TIME" type="datetime(6)"/>
+            <column name="LINK_ORDER_NUM" type="INT"/>
+            <column name="LINK_DESC" type="NVARCHAR(500)"/>
+            <column name="LINK_IS_LOCATION" type="NVARCHAR(10)"/>
+            <column name="LINK_STATUS" type="NVARCHAR(50)"/>
+            <column name="LINK_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="LINK_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_setting">
+            <column name="SETTING_ID" type="NVARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SETTING_KEY" type="NVARCHAR(128)"/>
+            <column name="SETTING_NAME" type="NVARCHAR(128)"/>
+            <column name="SETTING_VALUE" type="NVARCHAR(500)"/>
+            <column name="SETTING_STATUS" type="NVARCHAR(10)"/>
+            <column name="SETTING_DESC" type="NVARCHAR(2000)"/>
+            <column name="SETTING_CREATETIME" type="datetime(6)"/>
+            <column name="SETTING_USER_ID" type="NVARCHAR(100)"/>
+            <column name="SETTING_USER_NAME" type="NVARCHAR(100)"/>
+            <column name="SETTING_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="SETTING_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="SETTING_API" type="NVARCHAR(100)"/>
+            <column name="SETTING_IS_SYSTEM" type="NVARCHAR(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_table">
+            <column name="TABLE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_CAPTION" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_NAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_DBNAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_CREATE_TIME" type="datetime(6)"/>
+            <column name="TABLE_CREATER" type="NVARCHAR(100)"/>
+            <column name="TABLE_UPDATE_TIME" type="datetime(6)"/>
+            <column name="TABLE_UPDATER" type="NVARCHAR(100)"/>
+            <column name="TABLE_SERVICE_VALUE" type="NVARCHAR(100)"/>
+            <column name="TABLE_TYPE" type="NVARCHAR(100)"/>
+            <column name="TABLE_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="TABLE_ORDER_NUM" type="INT"/>
+            <column name="TABLE_DESC" type="NVARCHAR(2000)"/>
+            <column name="TABLE_GROUP_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_STATUS" type="NVARCHAR(10)"/>
+            <column name="TABLE_LINK_ID" type="NVARCHAR(100)"/>
+            <column name="TABLE_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="TABLE_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_table_field">
+            <column name="FIELD_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_TABLE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_NAME" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_CAPTION" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_IS_PK" type="NVARCHAR(10)"/>
+            <column name="FIELD_ALLOW_NULL" type="NVARCHAR(10)"/>
+            <column name="FIELD_DATA_TYPE" type="NVARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_DATA_LENGTH" type="INT"/>
+            <column name="FIELD_DECIMAL_LENGTH" type="INT"/>
+            <column name="FIELD_DEFAULT_TYPE" type="NVARCHAR(50)"/>
+            <column name="FIELD_DEFAULT_VALUE" type="NVARCHAR(1000)"/>
+            <column name="FIELD_DEFAULT_TEXT" type="NVARCHAR(400)"/>
+            <column name="FIELD_CREATE_TIME" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_CREATER" type="NVARCHAR(100)"/>
+            <column name="FIELD_UPDATE_TIME" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_UPDATER" type="NVARCHAR(100)"/>
+            <column name="FIELD_DESC" type="NVARCHAR(500)"/>
+            <column name="FIELD_ORDER_NUM" type="INT"/>
+            <column name="FIELD_TEMPLATE_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb4d_table_group">
+            <column name="TABLE_GROUP_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_GROUP_VALUE" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_GROUP_TEXT" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_GROUP_ORDER_NUM" type="INT"/>
+            <column name="TABLE_GROUP_CREATE_TIME" type="datetime(6)"/>
+            <column name="TABLE_GROUP_DESC" type="NVARCHAR(500)"/>
+            <column name="TABLE_GROUP_STATUS" type="NVARCHAR(10)"/>
+            <column name="TABLE_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="TABLE_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="TABLE_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
+            <column name="TABLE_GROUP_PID_LIST" type="NVARCHAR(1200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_GROUP_CHILD_COUNT" type="INT"/>
+            <column name="TABLE_GROUP_LINK_ID" type="NVARCHAR(100)"/>
+            <column name="TABLE_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="TABLE_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="DS_ID" constraintName="PRIMARY" tableName="tb4d_dataset"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="COLUMN_ID" constraintName="PRIMARY" tableName="tb4d_dataset_column"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="DS_GROUP_ID" constraintName="PRIMARY" tableName="tb4d_dataset_group"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="RT_ID" constraintName="PRIMARY" tableName="tb4d_dataset_related_table"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-33" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="DDGL_ID" constraintName="PRIMARY" tableName="tb4d_dev_demo_gen_list"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-34" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="DDTT_ID" constraintName="PRIMARY" tableName="tb4d_dev_demo_tl_tree"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-35" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="DDTL_ID" constraintName="PRIMARY" tableName="tb4d_dev_demo_tl_tree_list"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-36" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="DDTT_ID" constraintName="PRIMARY" tableName="tb4d_dev_demo_tree_table"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-37" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="DICT_ID" constraintName="PRIMARY" tableName="tb4d_dictionary"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-38" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="DICT_GROUP_ID" constraintName="PRIMARY" tableName="tb4d_dictionary_group"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-39" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="FILE_ID" constraintName="PRIMARY" tableName="tb4d_file_content"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-40" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="FILE_ID" constraintName="PRIMARY" tableName="tb4d_file_info"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-41" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="REF_ID" constraintName="PRIMARY" tableName="tb4d_file_ref"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-42" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="MODEL_ID" constraintName="PRIMARY" tableName="tb4d_flow_model"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-43" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="FCONFIG_ID" constraintName="PRIMARY" tableName="tb4d_form_config"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-44" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="FORM_ID" constraintName="PRIMARY" tableName="tb4d_form_resource"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-45" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="CACHE_ID" constraintName="PRIMARY" tableName="tb4d_jb4d_cache"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-46" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="LIST_ID" constraintName="PRIMARY" tableName="tb4d_list_resource"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-47" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="MENU_ID" constraintName="PRIMARY" tableName="tb4d_menu"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-48" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="MODULE_ID" constraintName="PRIMARY" tableName="tb4d_module"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-49" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="LOG_ID" constraintName="PRIMARY" tableName="tb4d_operation_log"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-50" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ORGAN_ID" constraintName="PRIMARY" tableName="tb4d_organ"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-51" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ORGAN_TYPE_ID" constraintName="PRIMARY" tableName="tb4d_organ_type"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-52" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="LINK_ID" constraintName="PRIMARY" tableName="tb4d_service_link"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-53" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SETTING_ID" constraintName="PRIMARY" tableName="tb4d_setting"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-54" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="TABLE_ID" constraintName="PRIMARY" tableName="tb4d_table"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-55" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="FIELD_ID" constraintName="PRIMARY" tableName="tb4d_table_field"/>
+    </changeSet>
+    <changeSet author="zhuangrb" id="1550906195565-56" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="TABLE_GROUP_ID" constraintName="PRIMARY" tableName="tb4d_table_group"/>
     </changeSet>
 </databaseChangeLog>
