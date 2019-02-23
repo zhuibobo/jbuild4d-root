@@ -6,6 +6,7 @@ import com.jbuild4d.web.platform.beanconfig.sys.WebConfig;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -23,9 +24,10 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration(value = "src/main/webapp")
-@ContextHierarchy({
+/*@ContextHierarchy({
         @ContextConfiguration(name = "parent", classes = RootConfig.class),
-        @ContextConfiguration(name = "child", classes = WebConfig.class)})
+        @ContextConfiguration(name = "child", classes = WebConfig.class)})*/
+@SpringBootTest
 public class ControllerTestBase {
 
     public MockMvc mockMvc;
