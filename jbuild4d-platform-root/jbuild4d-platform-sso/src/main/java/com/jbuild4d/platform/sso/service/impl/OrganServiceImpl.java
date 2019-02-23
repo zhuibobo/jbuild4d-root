@@ -1,15 +1,15 @@
-package com.jbuild4d.platform.organ.service.impl;
+package com.jbuild4d.platform.sso.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganMapper;
 import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.StringUtility;
-import com.jbuild4d.platform.organ.service.IOrganService;
+import com.jbuild4d.platform.sso.service.IOrganService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.Date;
@@ -27,7 +27,7 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
     private String rootParentId="-1";
 
     OrganMapper organMapper;
-    public OrganServiceImpl(OrganMapper _defaultBaseMapper,SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
+    public OrganServiceImpl(OrganMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         organMapper=_defaultBaseMapper;
     }

@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>jbuild4d</groupId>
-            <artifactId>jbuild4d-platform-organ</artifactId>
+            <artifactId>jbuild4d-platform-sso</artifactId>
         </dependency>
         <dependency>
             <groupId>jbuild4d</groupId>

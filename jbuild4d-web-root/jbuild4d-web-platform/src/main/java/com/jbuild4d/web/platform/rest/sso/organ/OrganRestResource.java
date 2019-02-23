@@ -1,11 +1,11 @@
-package com.jbuild4d.web.platform.rest.organrelevance.organ;
+package com.jbuild4d.web.platform.rest.sso.organ;
 
 import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganEntity;
 import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganTypeEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
-import com.jbuild4d.platform.organ.service.IOrganService;
-import com.jbuild4d.platform.organ.service.IOrganTypeService;
+import com.jbuild4d.platform.sso.service.IOrganService;
+import com.jbuild4d.platform.sso.service.IOrganTypeService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/PlatFormRest/OrganRelevance/Organ")
+@RequestMapping(value = "/PlatFormRest/SSO/Organ")
 public class OrganRestResource extends GeneralRestResource<OrganEntity> {
 
     @Autowired

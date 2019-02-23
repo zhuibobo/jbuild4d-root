@@ -14,6 +14,12 @@
         <option value="$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-common/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/jbuild4d-platform-root/build4d-platform-sso/pom.xml" />
+        <option value="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-organ/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

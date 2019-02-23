@@ -1,13 +1,13 @@
-package com.jbuild4d.platform.organ.service.impl;
+package com.jbuild4d.platform.sso.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.organrelevance.OrganTypeMapper;
 import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganTypeEntity;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.platform.organ.service.IOrganTypeService;
+import com.jbuild4d.platform.sso.service.IOrganTypeService;
 import org.mybatis.spring.SqlSessionTemplate;
 
 /**

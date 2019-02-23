@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.organ.service;
+package com.jbuild4d.platform.sso.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganTypeEntity;
 import com.jbuild4d.base.service.IBaseService;
