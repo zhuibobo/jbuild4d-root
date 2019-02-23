@@ -88,6 +88,7 @@ public class MybatisBeansConfig {
             return liquibase;
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new JBuild4DGenerallyException("执行数据库更新失败！");
         } finally {
             if (liquibase != null) {
