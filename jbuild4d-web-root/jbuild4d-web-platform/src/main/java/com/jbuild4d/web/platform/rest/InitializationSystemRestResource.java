@@ -9,6 +9,7 @@ import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.module.IModuleService;
 import com.jbuild4d.platform.sso.service.IOrganService;
+import com.jbuild4d.platform.sso.service.IOrganTypeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
 import com.jbuild4d.platform.system.service.IDictionaryGroupService;
@@ -45,6 +46,9 @@ public class InitializationSystemRestResource {
     private IOrganService organService;
 
     @Autowired
+    private IOrganTypeService organTypeService;
+
+    @Autowired
     private ITableGroupService tableGroupService;
 
     @Autowired
@@ -78,8 +82,10 @@ public class InitializationSystemRestResource {
         devDemoTLTreeService.createRootNode(jb4DSession);
 
         //初始化根组织
-        //organService.deleteByKey(jb4DSession,"0");
-        //organService.createRootOrgan(jb4DSession);
+        organTypeService.deleteByKeyNotValidate(jb4DSession,"0");
+        organTypeService.createDefaultOrganType(jb4DSession);
+        organService.deleteByKey(jb4DSession,"0");
+        organService.createRootOrgan(jb4DSession);
 
         //初始化根表分组
         tableGroupService.deleteByKeyNotValidate(jb4DSession,"0");

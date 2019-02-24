@@ -80,7 +80,10 @@ public class OrganEntity {
     //ORGAN_MAIN_IMAGE_ID:主题Logo,关联到TB4D_FILE_INFO表的FILE_ID
     private String organMainImageId;
 
-    public OrganEntity(String organId, String organName, String organShortName, String organNo, String organCode, Date organCreateTime, String organPhone, String organPost, String organTypeValue, String organAddress, String organContacts, String organContactsMobile, String organWebSite, String organFax, Integer organChildCount, String organIsVirtual, Integer organOrderNum, String organParentId, String organParentIdList, String organStatus, String organCreaterOrgId, String organMainImageId) {
+    //ORGAN_DESC:组织机构备注
+    private String organDesc;
+
+    public OrganEntity(String organId, String organName, String organShortName, String organNo, String organCode, Date organCreateTime, String organPhone, String organPost, String organTypeValue, String organAddress, String organContacts, String organContactsMobile, String organWebSite, String organFax, Integer organChildCount, String organIsVirtual, Integer organOrderNum, String organParentId, String organParentIdList, String organStatus, String organCreaterOrgId, String organMainImageId, String organDesc) {
         this.organId = organId;
         this.organName = organName;
         this.organShortName = organShortName;
@@ -103,6 +106,7 @@ public class OrganEntity {
         this.organStatus = organStatus;
         this.organCreaterOrgId = organCreaterOrgId;
         this.organMainImageId = organMainImageId;
+        this.organDesc = organDesc;
     }
 
     public OrganEntity() {
@@ -283,5 +287,13 @@ public class OrganEntity {
 
     public void setOrganMainImageId(String organMainImageId) {
         this.organMainImageId = organMainImageId == null ? null : organMainImageId.trim();
+    }
+
+    public String getOrganDesc() {
+        return organDesc;
+    }
+
+    public void setOrganDesc(String organDesc) {
+        this.organDesc = organDesc == null ? null : organDesc.trim();
     }
 }
