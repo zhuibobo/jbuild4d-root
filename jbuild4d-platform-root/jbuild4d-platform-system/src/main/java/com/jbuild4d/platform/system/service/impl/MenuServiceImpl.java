@@ -86,7 +86,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"/LeftMenuView","","menu-data");
         deleteByKey(jb4DSession,systemSettingMenu.getMenuId());
         save(jb4DSession,systemSettingMenu.getMenuId(),systemSettingMenu);*/
-        MenuEntity systemSettingMenu=createMenu(jb4DSession,rootMenu.getMenuId(),"JB4DSystemSettingRoot","系统设置","系统设置","系统设置","","menu-data");
+        MenuEntity systemSettingRootMenu=createMenu(jb4DSession,rootMenu.getMenuId(),"JB4DSystemSettingRoot","系统设置","系统设置","系统设置","","menu-data");
 
         //根菜单->系统设置分组->数据字典分组
         /*String systemSettingDictionaryManagerId="JB4DSystemSettingDictionaryManager";
@@ -94,7 +94,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 MenuTypeEnum.LeftMenu.getDisplayName(),"","System/Dictionary/DictionaryManager.html","");
         deleteByKey(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId());
         save(jb4DSession,systemSettingDictionaryGroupMenu.getMenuId(),systemSettingDictionaryGroupMenu);*/
-        MenuEntity systemSettingDictionaryGroupMenu=createMenu(jb4DSession,systemSettingMenu.getMenuId(),"systemSettingDictionaryManagerId",
+        createMenu(jb4DSession,systemSettingRootMenu.getMenuId(),"systemSettingDictionaryManagerId",
                 "数据字典","数据字典","数据字典",
                 "System/Dictionary/DictionaryManager.html","");
 
@@ -104,7 +104,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 MenuTypeEnum.LeftMenu.getDisplayName(),"","System/OperationLog/OperationLogList.html","");
         deleteByKey(jb4DSession,systemSettingOperationLogMenu.getMenuId());
         save(jb4DSession,systemSettingOperationLogMenu.getMenuId(),systemSettingOperationLogMenu);*/
-        MenuEntity systemSettingOperationLogMenu=createMenu(jb4DSession,systemSettingMenu.getMenuId(),"JB4DSystemSettingOperationLog",
+        createMenu(jb4DSession,systemSettingRootMenu.getMenuId(),"JB4DSystemSettingOperationLog",
                 "操作日志","操作日志","操作日志",
                 "System/OperationLog/OperationLogList.html","");
 
@@ -114,7 +114,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 MenuTypeEnum.LeftMenu.getDisplayName(),"","System/ParasSetting/ParasSettingList.html","");
         deleteByKey(jb4DSession,systemSettingParasSettingMenu.getMenuId());
         save(jb4DSession,systemSettingParasSettingMenu.getMenuId(),systemSettingParasSettingMenu);*/
-        MenuEntity systemSettingParasSettingMenu=createMenu(jb4DSession,systemSettingMenu.getMenuId(),"JB4DSystemSettingParasSetting",
+        createMenu(jb4DSession,systemSettingRootMenu.getMenuId(),"JB4DSystemSettingParasSetting",
                 "参数设置","参数设置","参数设置",
                 "System/OperationLog/OperationLogList.html","");
 
@@ -124,7 +124,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 MenuTypeEnum.LeftMenu.getDisplayName(),"","System/DBResolver/Manager.html","");
         deleteByKey(jb4DSession,systemSettingCodeGenerateMenu.getMenuId());
         save(jb4DSession,systemSettingCodeGenerateMenu.getMenuId(),systemSettingCodeGenerateMenu);*/
-        MenuEntity systemSettingCodeGenerateMenu=createMenu(jb4DSession,systemSettingMenu.getMenuId(),"JB4DSystemSettingCodeGenerate",
+        createMenu(jb4DSession,systemSettingRootMenu.getMenuId(),"JB4DSystemSettingCodeGenerate",
                 "代码生成","代码生成","代码生成",
                 "System/DBResolver/Manager.html","");
 
@@ -134,9 +134,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 MenuTypeEnum.LeftMenu.getDisplayName(),"","OrganRelevance/Organ/OrganList.html","");
         deleteByKey(jb4DSession,systemSettingOrganManageMenu.getMenuId());
         save(jb4DSession,systemSettingOrganManageMenu.getMenuId(),systemSettingOrganManageMenu);*/
-        MenuEntity systemSettingOrganManageMenu=createMenu(jb4DSession,systemSettingMenu.getMenuId(),"JB4DSystemSettingOrganManage",
-                "组织管理","组织管理","组织管理",
-                "OrganRelevance/Organ/OrganList.html","");
+
 
         //根菜单->系统设置分组->缓存管理
         /*String systemSettingCacheManageId="JB4DSystemSettingCacheManage";
@@ -144,11 +142,23 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 MenuTypeEnum.LeftMenu.getDisplayName(),"","System/Cache/CacheList.html","");
         deleteByKey(jb4DSession,systemSettingCacheManageMenu.getMenuId());
         save(jb4DSession,systemSettingCacheManageMenu.getMenuId(),systemSettingCacheManageMenu);*/
-        MenuEntity systemSettingCacheManageMenu=createMenu(jb4DSession,systemSettingMenu.getMenuId(),"JB4DSystemSettingCacheManage",
+        createMenu(jb4DSession,systemSettingRootMenu.getMenuId(),"JB4DSystemSettingCacheManage",
                 "缓存管理","缓存管理","缓存管理",
                 "OrganRelevance/Organ/OrganList.html","");
 
         //根菜单->统一用户与单点登录
+        MenuEntity ssoRootMenu=createMenu(jb4DSession,rootMenu.getMenuId(),"JB4DSSORootMenu",
+                "单点登录","单点登录","单点登录",
+                "","");
+
+        createMenu(jb4DSession,ssoRootMenu.getMenuId(),"JB4DOrganTypeManage",
+                "组织类型","组织类型","组织类型",
+                "SSO/OrganType/OrganTypeList.html","");
+
+
+        createMenu(jb4DSession,ssoRootMenu.getMenuId(),"JB4DOrganManage",
+                "组织机构","组织机构","组织机构",
+                "SSO/Organ/OrganList.html","");
 
 
         //根菜单->开发示例
