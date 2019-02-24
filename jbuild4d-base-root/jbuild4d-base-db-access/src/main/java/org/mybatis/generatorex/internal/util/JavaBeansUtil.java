@@ -216,7 +216,7 @@ public class JavaBeansUtil {
         field.setVisibility(JavaVisibility.PRIVATE);
         field.setType(fqjt);
         field.setName(property);
-        field.addJavaDocLine("//"+introspectedColumn.getActualColumnName());
+        field.addJavaDocLine("//"+introspectedColumn.getActualColumnName()+":"+introspectedColumn.getRemarks());
 
         //Edit By zhuangrb
         if(introspectedTable.getPrimaryKeyColumns()!=null&&introspectedTable.getPrimaryKeyColumns().size()==1){

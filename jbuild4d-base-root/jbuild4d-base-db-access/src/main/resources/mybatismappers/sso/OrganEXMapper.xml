@@ -6,24 +6,23 @@
     <select id="nextOrderNum" resultType="integer">select case when max(ORGAN_ORDER_NUM) is null then 1 else max(ORGAN_ORDER_NUM)+1 end ORDERNUM from TB4D_ORGAN</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_ORGAN<where>
         <if test="organName !=null and organName !=''"> and ORGAN_NAME like #{organName} </if>
+        <if test="organShortName !=null and organShortName !=''"> and ORGAN_SHORT_NAME like #{organShortName} </if>
         <if test="organNo !=null and organNo !=''"> and ORGAN_NO like #{organNo} </if>
         <if test="organCode !=null and organCode !=''"> and ORGAN_CODE like #{organCode} </if>
         <if test="organPhone !=null and organPhone !=''"> and ORGAN_PHONE like #{organPhone} </if>
         <if test="organPost !=null and organPost !=''"> and ORGAN_POST like #{organPost} </if>
         <if test="organTypeValue !=null and organTypeValue !=''"> and ORGAN_TYPE_VALUE like #{organTypeValue} </if>
         <if test="organAddress !=null and organAddress !=''"> and ORGAN_ADDRESS like #{organAddress} </if>
-        <if test="organContactor !=null and organContactor !=''"> and ORGAN_CONTACTOR like #{organContactor} </if>
-        <if test="organContactorMobile !=null and organContactorMobile !=''"> and ORGAN_CONTACTOR_MOBILE like #{organContactorMobile} </if>
-        <if test="organDomain !=null and organDomain !=''"> and ORGAN_DOMAIN like #{organDomain} </if>
+        <if test="organContacts !=null and organContacts !=''"> and ORGAN_CONTACTS like #{organContacts} </if>
+        <if test="organContactsMobile !=null and organContactsMobile !=''"> and ORGAN_CONTACTS_MOBILE like #{organContactsMobile} </if>
+        <if test="organWebSite !=null and organWebSite !=''"> and ORGAN_WEB_SITE like #{organWebSite} </if>
         <if test="organFax !=null and organFax !=''"> and ORGAN_FAX like #{organFax} </if>
         <if test="organIsVirtual !=null and organIsVirtual !=''"> and ORGAN_IS_VIRTUAL like #{organIsVirtual} </if>
         <if test="organParentId !=null and organParentId !=''"> and ORGAN_PARENT_ID like #{organParentId} </if>
         <if test="organParentIdList !=null and organParentIdList !=''"> and ORGAN_PARENT_ID_LIST like #{organParentIdList} </if>
-        <if test="organShortName !=null and organShortName !=''"> and ORGAN_SHORT_NAME like #{organShortName} </if>
         <if test="organStatus !=null and organStatus !=''"> and ORGAN_STATUS like #{organStatus} </if>
-        <if test="organCreatreOrgId !=null and organCreatreOrgId !=''"> and ORGAN_CREATRE_ORG_ID like #{organCreatreOrgId} </if>
-        <if test="organOuterId !=null and organOuterId !=''"> and ORGAN_OUTER_ID like #{organOuterId} </if>
-        <if test="organOuterType !=null and organOuterType !=''"> and ORGAN_OUTER_TYPE like #{organOuterType} </if>
+        <if test="organCreaterOrgId !=null and organCreaterOrgId !=''"> and ORGAN_CREATER_ORG_ID like #{organCreaterOrgId} </if>
+        <if test="organMainImageId !=null and organMainImageId !=''"> and ORGAN_MAIN_IMAGE_ID like #{organMainImageId} </if>
     </where>ORDER by ORGAN_ORDER_NUM ASC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[

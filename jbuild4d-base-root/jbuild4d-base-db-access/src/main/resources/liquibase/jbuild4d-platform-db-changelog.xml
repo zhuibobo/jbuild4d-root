@@ -2,96 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <!--系统设置-->
-    <changeSet author="zhuangrb" id="changeSet-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TB4D_DATASET">
-            <column name="DS_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="DS_CAPTION" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DS_NAME" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DS_CREATE_TIME" type="datetime(6)"/>
-            <column name="DS_CREATER" type="NVARCHAR(100)"/>
-            <column name="DS_UPDATE_TIME" type="datetime(6)"/>
-            <column name="DS_UPDATER" type="NVARCHAR(100)"/>
-            <column name="DS_TYPE" type="NVARCHAR(100)"/>
-            <column name="DS_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="DS_ORDER_NUM" type="INT"/>
-            <column name="DS_DESC" type="NVARCHAR(1000)"/>
-            <column name="DS_GROUP_ID" type="NVARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DS_STATUS" type="NVARCHAR(10)"/>
-            <column name="DS_SQL_SELECT_TEXT" type="NVARCHAR(4000)"/>
-            <column name="DS_SQL_SELECT_VALUE" type="NVARCHAR(4000)"/>
-            <column name="DS_CLASS_NAME" type="NVARCHAR(300)"/>
-            <column name="DS_REST_STRUCTURE_URL" type="NVARCHAR(500)"/>
-            <column name="DS_REST_DATA_URL" type="NVARCHAR(500)"/>
-            <column name="DS_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="DS_ORGAN_NAME" type="NVARCHAR(100)"/>
-        </createTable>
-
-        <createTable tableName="TB4D_DATASET_COLUMN">
-            <column name="COLUMN_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="COLUMN_DS_ID" type="NVARCHAR(100)"/>
-            <column name="COLUMN_CAPTION" type="NVARCHAR(200)"/>
-            <column name="COLUMN_NAME" type="NVARCHAR(200)"/>
-            <column name="COLUMN_CREATE_TIME" type="datetime(6)"/>
-            <column name="COLUMN_CREATER" type="NVARCHAR(100)"/>
-            <column name="COLUMN_UPDATE_TIME" type="datetime(6)"/>
-            <column name="COLUMN_UPDATER" type="NVARCHAR(100)"/>
-            <column name="COLUMN_DESC" type="NVARCHAR(1000)"/>
-            <column name="COLUMN_DEFAULT_TYPE" type="NVARCHAR(50)"/>
-            <column name="COLUMN_DEFAULT_VALUE" type="NVARCHAR(1000)"/>
-            <column name="COLUMN_DEFAULT_TEXT" type="NVARCHAR(400)"/>
-            <column name="COLUMN_ORDER_NUM" type="INT"/>
-            <column name="COLUMN_TABLE_NAME" type="NVARCHAR(50)"/>
-            <column name="COLUMN_IS_CUSTOM" type="NVARCHAR(10)"/>
-            <column name="COLUMN_FORMATTER" type="NVARCHAR(200)"/>
-        </createTable>
-
-        <createTable tableName="TB4D_DATASET_GROUP">
-            <column name="DS_GROUP_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="DS_GROUP_VALUE" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DS_GROUP_TEXT" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DS_GROUP_ORDER_NUM" type="INT"/>
-            <column name="DS_GROUP_CREATE_TIME" type="datetime(6)"/>
-            <column name="DS_GROUP_DESC" type="NVARCHAR(500)"/>
-            <column name="DS_GROUP_STATUS" type="NVARCHAR(10)"/>
-            <column name="DS_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
-            <column name="DS_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="DS_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
-            <column name="DS_GROUP_PID_LIST" type="NVARCHAR(1200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DS_GROUP_CHILD_COUNT" type="INT"/>
-            <column name="DS_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="DS_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
-        </createTable>
-
-        <createTable tableName="TB4D_DATASET_RELATED_TABLE">
-            <column name="RT_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="RT_DS_ID" type="NVARCHAR(100)"/>
-            <column name="RT_TABLE_NAME" type="NVARCHAR(200)"/>
-            <column name="RT_TABLE_CAPTION" type="NVARCHAR(200)"/>
-            <column name="RT_TABLE_ID" type="NVARCHAR(200)"/>
-            <column name="RT_TABLE_TYPE" type="NVARCHAR(200)"/>
-            <column name="RT_DESC" type="NVARCHAR(1000)"/>
-            <column name="RT_ORDER_NUM" type="INT"/>
-        </createTable>
+    <changeSet author="zhuangrb" id="changeSet-System-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
 
         <createTable tableName="TB4D_DEV_DEMO_GEN_LIST">
             <column name="DDGL_ID" remarks="主键" type="NVARCHAR(128)">
@@ -226,41 +137,203 @@
             <column name="DICT_GROUP_ENP_ITEM" type="NVARCHAR(10)"/>
         </createTable>
 
-        <createTable tableName="TB4D_FILE_CONTENT">
-            <column name="FILE_ID" type="NVARCHAR(100)">
+        <createTable tableName="TB4D_JB4D_CACHE">
+            <column name="CACHE_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="FILE_CONTENT" type="LONGBLOB">
+            <column name="CACHE_KEY" type="NVARCHAR(200)">
                 <constraints nullable="false"/>
             </column>
+            <column name="CACHE_NAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CACHE_DESC" type="NVARCHAR(500)"/>
+            <column name="CACHE_ORDER_NUM" type="INT"/>
+            <column name="CACHE_STATUS" type="NVARCHAR(50)"/>
+            <column name="CACHE_IS_GLOBAL" type="NVARCHAR(50)"/>
+            <column name="CACHE_USER_ID" type="NVARCHAR(50)"/>
+            <column name="CACHE_MODE" type="NVARCHAR(50)"/>
+            <column name="CACHE_VERSION" type="INT"/>
         </createTable>
 
-        <createTable tableName="TB4D_FILE_INFO">
-            <column name="FILE_ID" type="NVARCHAR(100)">
+        <createTable tableName="TB4D_MENU">
+            <column name="MENU_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="FILE_CREATE_TIME" type="datetime(6)"/>
-            <column name="FILE_CREATER" type="NVARCHAR(100)"/>
-            <column name="FILE_NAME" type="NVARCHAR(200)"/>
-            <column name="FILE_SIZE" type="BIGINT"/>
-            <column name="FILE_STORE_TYPE" remarks="文件的存储位置,小文件可以存储于数据库中" type="NVARCHAR(100)"/>
-            <column name="FILE_STORE_PATH" remarks="文件的存储路径" type="NVARCHAR(400)"/>
-            <column name="FILE_STORE_NAME" remarks="文件的物理存储名称" type="NVARCHAR(100)"/>
-            <column name="FILE_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="FILE_ORGAN_NAME" type="NVARCHAR(100)"/>
-            <column name="FILE_EXTENSION" remarks="文件的扩展名称" type="NVARCHAR(100)"/>
-            <column name="FILE_DESCRIPTION" type="NVARCHAR(500)"/>
-            <column name="FILE_READTIME" remarks="文件的读取次数" type="INT"/>
-            <column name="FILE_STATUS" type="NVARCHAR(10)"/>
+            <column name="MENU_NAME" type="NVARCHAR(100)"/>
+            <column name="MENU_TEXT" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENU_VALUE" type="NVARCHAR(100)"/>
+            <column name="MENU_TYPE" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENU_USER_ID" type="NVARCHAR(100)"/>
+            <column name="MENU_USER_NAME" type="NVARCHAR(100)"/>
+            <column name="MENU_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="MENU_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="MENU_IS_EXPAND" type="NVARCHAR(10)"/>
+            <column name="MENU_IS_SYSTEM" type="NVARCHAR(10)"/>
+            <column name="MENU_LEFT_URL" type="NVARCHAR(600)"/>
+            <column name="MENU_LEFT_URL_PARA" type="NVARCHAR(600)"/>
+            <column name="MENU_RIGHT_URL" type="NVARCHAR(800)"/>
+            <column name="MENU_RIGHT_URL_PARA" type="NVARCHAR(600)"/>
+            <column name="MENU_ORDER_NUM" type="INT"/>
+            <column name="MENU_PARENT_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENU_PARENT_ID_LIST" type="NVARCHAR(1200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENU_TARGET" type="NVARCHAR(100)"/>
+            <column name="MENU_CREATOR" type="NVARCHAR(200)"/>
+            <column name="MENU_CREATE_TIME" type="datetime(6)"/>
+            <column name="MENU_UPDATER" type="NVARCHAR(200)"/>
+            <column name="MENU_UPDATE_TIME" type="datetime(6)"/>
+            <column name="MENU_USE_ORGAN_NAME" type="NVARCHAR(500)"/>
+            <column name="MENU_USE_ORGAN_ID" type="NVARCHAR(500)"/>
+            <column name="MENU_USE_ORGAN_TYPE_NAME" type="NVARCHAR(500)"/>
+            <column name="MENU_USE_ORGAN_TYPE_ID" type="NVARCHAR(500)"/>
+            <column name="MENU_CLASS_NAME" type="NVARCHAR(100)"/>
+            <column name="MENU_CLASS_NAME_HOVER" type="NVARCHAR(100)"/>
+            <column name="MENU_CLASS_NAME_SELECTED" type="NVARCHAR(100)"/>
+            <column name="MENU_MENU_CHILD_COUNT" type="INT"/>
+            <column name="MENU_MENU_DESCRIPTION" type="NVARCHAR(1000)"/>
+            <column name="MENU_JS_EXPRESSION" type="NVARCHAR(2000)"/>
         </createTable>
 
-        <createTable tableName="TB4D_FILE_REF">
-            <column name="REF_ID" type="NVARCHAR(100)">
+        <createTable tableName="TB4D_OPERATION_LOG">
+            <column name="LOG_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="REF_FILE_ID" type="NVARCHAR(100)"/>
-            <column name="REF_OBJ_ID" type="NVARCHAR(100)"/>
-            <column name="REF_ORDER_NUM" type="INT"/>
+            <column name="LOG_TEXT" type="NVARCHAR(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LOG_ORDER_NUM" type="INT"/>
+            <column name="LOG_CREATE_TIME" type="datetime(6)"/>
+            <column name="LOG_SYSTEM_NAME" type="NVARCHAR(200)"/>
+            <column name="LOG_MODULE_NAME" type="NVARCHAR(200)"/>
+            <column name="LOG_ACTION_NAME" type="NVARCHAR(200)"/>
+            <column name="LOG_DATA" type="TEXT"/>
+            <column name="LOG_USER_ID" type="NVARCHAR(100)"/>
+            <column name="LOG_USER_NAME" type="NVARCHAR(100)"/>
+            <column name="LOG_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="LOG_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="LOG_IP" type="NVARCHAR(100)"/>
+            <column name="LOG_TYPE" type="NVARCHAR(100)"/>
+            <column name="LOG_CLASS_NAME" type="NVARCHAR(200)"/>
+            <column name="LOG_STATUS" type="NVARCHAR(50)"/>
+        </createTable>
+
+        <createTable tableName="TB4D_SETTING">
+            <column name="SETTING_ID" type="NVARCHAR(128)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="SETTING_KEY" type="NVARCHAR(128)"/>
+            <column name="SETTING_NAME" type="NVARCHAR(128)"/>
+            <column name="SETTING_VALUE" type="NVARCHAR(500)"/>
+            <column name="SETTING_STATUS" type="NVARCHAR(10)"/>
+            <column name="SETTING_DESC" type="NVARCHAR(2000)"/>
+            <column name="SETTING_CREATETIME" type="datetime(6)"/>
+            <column name="SETTING_USER_ID" type="NVARCHAR(100)"/>
+            <column name="SETTING_USER_NAME" type="NVARCHAR(100)"/>
+            <column name="SETTING_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="SETTING_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="SETTING_API" type="NVARCHAR(100)"/>
+            <column name="SETTING_IS_SYSTEM" type="NVARCHAR(10)"/>
+        </createTable>
+
+    </changeSet>
+    <!--模块构建-->
+    <changeSet author="zhuangrb" id="changeSet-Module-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB4D_DATASET">
+            <column name="DS_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DS_CAPTION" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_NAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_CREATE_TIME" type="datetime(6)"/>
+            <column name="DS_CREATER" type="NVARCHAR(100)"/>
+            <column name="DS_UPDATE_TIME" type="datetime(6)"/>
+            <column name="DS_UPDATER" type="NVARCHAR(100)"/>
+            <column name="DS_TYPE" type="NVARCHAR(100)"/>
+            <column name="DS_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="DS_ORDER_NUM" type="INT"/>
+            <column name="DS_DESC" type="NVARCHAR(1000)"/>
+            <column name="DS_GROUP_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_STATUS" type="NVARCHAR(10)"/>
+            <column name="DS_SQL_SELECT_TEXT" type="NVARCHAR(4000)"/>
+            <column name="DS_SQL_SELECT_VALUE" type="NVARCHAR(4000)"/>
+            <column name="DS_CLASS_NAME" type="NVARCHAR(300)"/>
+            <column name="DS_REST_STRUCTURE_URL" type="NVARCHAR(500)"/>
+            <column name="DS_REST_DATA_URL" type="NVARCHAR(500)"/>
+            <column name="DS_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="DS_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+
+        <createTable tableName="TB4D_DATASET_COLUMN">
+            <column name="COLUMN_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="COLUMN_DS_ID" type="NVARCHAR(100)"/>
+            <column name="COLUMN_CAPTION" type="NVARCHAR(200)"/>
+            <column name="COLUMN_NAME" type="NVARCHAR(200)"/>
+            <column name="COLUMN_CREATE_TIME" type="datetime(6)"/>
+            <column name="COLUMN_CREATER" type="NVARCHAR(100)"/>
+            <column name="COLUMN_UPDATE_TIME" type="datetime(6)"/>
+            <column name="COLUMN_UPDATER" type="NVARCHAR(100)"/>
+            <column name="COLUMN_DESC" type="NVARCHAR(1000)"/>
+            <column name="COLUMN_DEFAULT_TYPE" type="NVARCHAR(50)"/>
+            <column name="COLUMN_DEFAULT_VALUE" type="NVARCHAR(1000)"/>
+            <column name="COLUMN_DEFAULT_TEXT" type="NVARCHAR(400)"/>
+            <column name="COLUMN_ORDER_NUM" type="INT"/>
+            <column name="COLUMN_TABLE_NAME" type="NVARCHAR(50)"/>
+            <column name="COLUMN_IS_CUSTOM" type="NVARCHAR(10)"/>
+            <column name="COLUMN_FORMATTER" type="NVARCHAR(200)"/>
+        </createTable>
+
+        <createTable tableName="TB4D_DATASET_GROUP">
+            <column name="DS_GROUP_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DS_GROUP_VALUE" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_GROUP_TEXT" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_GROUP_ORDER_NUM" type="INT"/>
+            <column name="DS_GROUP_CREATE_TIME" type="datetime(6)"/>
+            <column name="DS_GROUP_DESC" type="NVARCHAR(500)"/>
+            <column name="DS_GROUP_STATUS" type="NVARCHAR(10)"/>
+            <column name="DS_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="DS_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="DS_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
+            <column name="DS_GROUP_PID_LIST" type="NVARCHAR(1200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_GROUP_CHILD_COUNT" type="INT"/>
+            <column name="DS_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="DS_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+
+        <createTable tableName="TB4D_DATASET_RELATED_TABLE">
+            <column name="RT_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="RT_DS_ID" type="NVARCHAR(100)"/>
+            <column name="RT_TABLE_NAME" type="NVARCHAR(200)"/>
+            <column name="RT_TABLE_CAPTION" type="NVARCHAR(200)"/>
+            <column name="RT_TABLE_ID" type="NVARCHAR(200)"/>
+            <column name="RT_TABLE_TYPE" type="NVARCHAR(200)"/>
+            <column name="RT_DESC" type="NVARCHAR(1000)"/>
+            <column name="RT_ORDER_NUM" type="INT"/>
         </createTable>
 
         <createTable tableName="TB4D_FLOW_MODEL">
@@ -357,25 +430,6 @@
             <column name="FORM_CONTENT_URL" type="NVARCHAR(1000)"/>
         </createTable>
 
-        <createTable tableName="TB4D_JB4D_CACHE">
-            <column name="CACHE_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="CACHE_KEY" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="CACHE_NAME" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="CACHE_DESC" type="NVARCHAR(500)"/>
-            <column name="CACHE_ORDER_NUM" type="INT"/>
-            <column name="CACHE_STATUS" type="NVARCHAR(50)"/>
-            <column name="CACHE_IS_GLOBAL" type="NVARCHAR(50)"/>
-            <column name="CACHE_USER_ID" type="NVARCHAR(50)"/>
-            <column name="CACHE_MODE" type="NVARCHAR(50)"/>
-            <column name="CACHE_VERSION" type="INT"/>
-        </createTable>
-
         <createTable tableName="TB4D_LIST_RESOURCE">
             <column name="LIST_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -412,52 +466,6 @@
             <column name="LIST_ENABLE_C_SEAR" remarks="是否启用复杂查询" type="NVARCHAR(10)"/>
         </createTable>
 
-        <createTable tableName="TB4D_MENU">
-            <column name="MENU_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="MENU_NAME" type="NVARCHAR(100)"/>
-            <column name="MENU_TEXT" type="NVARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="MENU_VALUE" type="NVARCHAR(100)"/>
-            <column name="MENU_TYPE" type="NVARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="MENU_USER_ID" type="NVARCHAR(100)"/>
-            <column name="MENU_USER_NAME" type="NVARCHAR(100)"/>
-            <column name="MENU_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="MENU_ORGAN_NAME" type="NVARCHAR(100)"/>
-            <column name="MENU_IS_EXPAND" type="NVARCHAR(10)"/>
-            <column name="MENU_IS_SYSTEM" type="NVARCHAR(10)"/>
-            <column name="MENU_LEFT_URL" type="NVARCHAR(600)"/>
-            <column name="MENU_LEFT_URL_PARA" type="NVARCHAR(600)"/>
-            <column name="MENU_RIGHT_URL" type="NVARCHAR(800)"/>
-            <column name="MENU_RIGHT_URL_PARA" type="NVARCHAR(600)"/>
-            <column name="MENU_ORDER_NUM" type="INT"/>
-            <column name="MENU_PARENT_ID" type="NVARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="MENU_PARENT_ID_LIST" type="NVARCHAR(1200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="MENU_TARGET" type="NVARCHAR(100)"/>
-            <column name="MENU_CREATOR" type="NVARCHAR(200)"/>
-            <column name="MENU_CREATE_TIME" type="datetime(6)"/>
-            <column name="MENU_UPDATER" type="NVARCHAR(200)"/>
-            <column name="MENU_UPDATE_TIME" type="datetime(6)"/>
-            <column name="MENU_USE_ORGAN_NAME" type="NVARCHAR(500)"/>
-            <column name="MENU_USE_ORGAN_ID" type="NVARCHAR(500)"/>
-            <column name="MENU_USE_ORGAN_TYPE_NAME" type="NVARCHAR(500)"/>
-            <column name="MENU_USE_ORGAN_TYPE_ID" type="NVARCHAR(500)"/>
-            <column name="MENU_CLASS_NAME" type="NVARCHAR(100)"/>
-            <column name="MENU_CLASS_NAME_HOVER" type="NVARCHAR(100)"/>
-            <column name="MENU_CLASS_NAME_SELECTED" type="NVARCHAR(100)"/>
-            <column name="MENU_MENU_CHILD_COUNT" type="INT"/>
-            <column name="MENU_MENU_DESCRIPTION" type="NVARCHAR(1000)"/>
-            <column name="MENU_JS_EXPRESSION" type="NVARCHAR(2000)"/>
-        </createTable>
-
         <createTable tableName="TB4D_MODULE">
             <column name="MODULE_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -483,29 +491,6 @@
             <column name="MODULE_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TB4D_OPERATION_LOG">
-            <column name="LOG_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="LOG_TEXT" type="NVARCHAR(2000)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="LOG_ORDER_NUM" type="INT"/>
-            <column name="LOG_CREATE_TIME" type="datetime(6)"/>
-            <column name="LOG_SYSTEM_NAME" type="NVARCHAR(200)"/>
-            <column name="LOG_MODULE_NAME" type="NVARCHAR(200)"/>
-            <column name="LOG_ACTION_NAME" type="NVARCHAR(200)"/>
-            <column name="LOG_DATA" type="TEXT"/>
-            <column name="LOG_USER_ID" type="NVARCHAR(100)"/>
-            <column name="LOG_USER_NAME" type="NVARCHAR(100)"/>
-            <column name="LOG_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="LOG_ORGAN_NAME" type="NVARCHAR(100)"/>
-            <column name="LOG_IP" type="NVARCHAR(100)"/>
-            <column name="LOG_TYPE" type="NVARCHAR(100)"/>
-            <column name="LOG_CLASS_NAME" type="NVARCHAR(200)"/>
-            <column name="LOG_STATUS" type="NVARCHAR(50)"/>
-        </createTable>
-
         <createTable tableName="TB4D_SERVICE_LINK">
             <column name="LINK_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -524,24 +509,6 @@
             <column name="LINK_STATUS" type="NVARCHAR(50)"/>
             <column name="LINK_ORGAN_ID" type="NVARCHAR(100)"/>
             <column name="LINK_ORGAN_NAME" type="NVARCHAR(100)"/>
-        </createTable>
-
-        <createTable tableName="TB4D_SETTING">
-            <column name="SETTING_ID" type="NVARCHAR(128)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="SETTING_KEY" type="NVARCHAR(128)"/>
-            <column name="SETTING_NAME" type="NVARCHAR(128)"/>
-            <column name="SETTING_VALUE" type="NVARCHAR(500)"/>
-            <column name="SETTING_STATUS" type="NVARCHAR(10)"/>
-            <column name="SETTING_DESC" type="NVARCHAR(2000)"/>
-            <column name="SETTING_CREATETIME" type="datetime(6)"/>
-            <column name="SETTING_USER_ID" type="NVARCHAR(100)"/>
-            <column name="SETTING_USER_NAME" type="NVARCHAR(100)"/>
-            <column name="SETTING_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="SETTING_ORGAN_NAME" type="NVARCHAR(100)"/>
-            <column name="SETTING_API" type="NVARCHAR(100)"/>
-            <column name="SETTING_IS_SYSTEM" type="NVARCHAR(10)"/>
         </createTable>
 
         <createTable tableName="TB4D_TABLE">
@@ -636,43 +603,75 @@
             <column name="TABLE_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
             <column name="TABLE_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
-
     </changeSet>
-
-    <!--模块构建-->
-
     <!--文件存储-->
-
-    <!--单点登录模块-->
-    <changeSet author="zhuangrb" id="changeSet-0002" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TB4D_ORGAN">
-            <column name="ORGAN_ID" type="NVARCHAR(100)">
+    <changeSet author="zhuangrb" id="changeSet-File-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB4D_FILE_CONTENT">
+            <column name="FILE_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="ORGAN_NAME" type="NVARCHAR(300)">
+            <column name="FILE_CONTENT" type="LONGBLOB">
                 <constraints nullable="false"/>
             </column>
-            <column name="ORGAN_NO" type="NVARCHAR(200)"/>
-            <column name="ORGAN_CODE" type="NVARCHAR(200)"/>
-            <column name="ORGAN_CREATE_TIME" type="datetime(6)"/>
-            <column name="ORGAN_PHONE" type="NVARCHAR(100)"/>
-            <column name="ORGAN_POST" type="NVARCHAR(20)"/>
-            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(50)"/>
-            <column name="ORGAN_ADDRESS" type="NVARCHAR(1000)"/>
-            <column name="ORGAN_CONTACTOR" type="NVARCHAR(100)"/>
-            <column name="ORGAN_CONTACTOR_MOBILE" type="NVARCHAR(100)"/>
-            <column name="ORGAN_DOMAIN" type="NVARCHAR(300)"/>
-            <column name="ORGAN_FAX" type="NVARCHAR(100)"/>
-            <column name="ORGAN_CHILD_COUNT" type="INT"/>
-            <column name="ORGAN_IS_VIRTUAL" type="NVARCHAR(10)"/>
-            <column name="ORGAN_ORDER_NUM" type="INT"/>
-            <column name="ORGAN_PARENT_ID" type="NVARCHAR(100)"/>
-            <column name="ORGAN_PARENT_ID_LIST" type="NVARCHAR(1200)"/>
-            <column name="ORGAN_SHORT_NAME" type="NVARCHAR(150)"/>
-            <column name="ORGAN_STATUS" type="NVARCHAR(10)"/>
-            <column name="ORGAN_CREATRE_ORG_ID" type="NVARCHAR(100)"/>
-            <column name="ORGAN_OUTER_ID" type="NVARCHAR(100)"/>
-            <column name="ORGAN_OUTER_TYPE" type="NVARCHAR(100)"/>
+        </createTable>
+
+        <createTable tableName="TB4D_FILE_INFO">
+            <column name="FILE_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="FILE_CREATE_TIME" type="datetime(6)"/>
+            <column name="FILE_CREATER" type="NVARCHAR(100)"/>
+            <column name="FILE_NAME" type="NVARCHAR(200)"/>
+            <column name="FILE_SIZE" type="BIGINT"/>
+            <column name="FILE_STORE_TYPE" remarks="文件的存储位置,小文件可以存储于数据库中" type="NVARCHAR(100)"/>
+            <column name="FILE_STORE_PATH" remarks="文件的存储路径" type="NVARCHAR(400)"/>
+            <column name="FILE_STORE_NAME" remarks="文件的物理存储名称" type="NVARCHAR(100)"/>
+            <column name="FILE_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="FILE_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="FILE_EXTENSION" remarks="文件的扩展名称" type="NVARCHAR(100)"/>
+            <column name="FILE_DESCRIPTION" type="NVARCHAR(500)"/>
+            <column name="FILE_READTIME" remarks="文件的读取次数" type="INT"/>
+            <column name="FILE_STATUS" type="NVARCHAR(10)"/>
+        </createTable>
+
+        <createTable tableName="TB4D_FILE_REF">
+            <column name="REF_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="REF_FILE_ID" type="NVARCHAR(100)"/>
+            <column name="REF_OBJ_ID" type="NVARCHAR(100)"/>
+            <column name="REF_ORDER_NUM" type="INT"/>
+        </createTable>
+    </changeSet>
+    <!--单点登录模块-->
+    <changeSet author="zhuangrb" id="changeSet-SSO-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB4D_ORGAN" remarks="组织机构表">
+            <column name="ORGAN_ID" type="NVARCHAR(100)" remarks="组织机构ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ORGAN_NAME" type="NVARCHAR(300)" remarks="组织机构名称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORGAN_SHORT_NAME" type="NVARCHAR(150)" remarks="组织机构简称" />
+            <column name="ORGAN_NO" type="NVARCHAR(200)" remarks="组织机构号码" />
+            <column name="ORGAN_CODE" type="NVARCHAR(200)" remarks="组织机构编号" />
+            <column name="ORGAN_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+            <column name="ORGAN_PHONE" type="NVARCHAR(100)" remarks="联系电话" />
+            <column name="ORGAN_POST" type="NVARCHAR(20)" remarks="邮政编码" />
+            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(50)" remarks="组织机构类型,关联TB4D_ORGAN_TYPE表"/>
+            <column name="ORGAN_ADDRESS" type="NVARCHAR(1000)" remarks="组织机构地址" />
+            <column name="ORGAN_CONTACTS" type="NVARCHAR(100)" remarks="联系人" />
+            <column name="ORGAN_CONTACTS_MOBILE" type="NVARCHAR(100)" remarks="联系人电话" />
+            <column name="ORGAN_WEB_SITE" type="NVARCHAR(300)" remarks="站点地址" />
+            <column name="ORGAN_FAX" type="NVARCHAR(100)" remarks="传真号码" />
+            <column name="ORGAN_CHILD_COUNT" type="INT" remarks="子节点数量" />
+            <column name="ORGAN_IS_VIRTUAL" type="NVARCHAR(10)" remarks="是否虚拟" />
+            <column name="ORGAN_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="ORGAN_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID" />
+            <column name="ORGAN_PARENT_ID_LIST" type="NVARCHAR(1200)" remarks="父节点列表" />
+            <column name="ORGAN_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用" />
+            <column name="ORGAN_CREATER_ORG_ID" type="NVARCHAR(100)" remarks="创建组织者ID"/>
+            <column name="ORGAN_MAIN_IMAGE_ID" remarks="主题Logo,关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
         </createTable>
 
         <createTable tableName="TB4D_ORGAN_TYPE">

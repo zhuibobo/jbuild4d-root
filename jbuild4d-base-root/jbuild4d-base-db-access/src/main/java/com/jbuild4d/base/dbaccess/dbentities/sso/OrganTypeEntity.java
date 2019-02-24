@@ -1,4 +1,4 @@
-package com.jbuild4d.base.dbaccess.dbentities.organrelevance;
+package com.jbuild4d.base.dbaccess.dbentities.sso;
 
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
 

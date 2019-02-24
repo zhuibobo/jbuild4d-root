@@ -1,7 +1,7 @@
 package com.jbuild4d.web.platform.rest.sso.organ;
 
-import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganEntity;
-import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganTypeEntity;
+import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
+import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.sso.service.IOrganService;

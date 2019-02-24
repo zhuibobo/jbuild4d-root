@@ -78,8 +78,8 @@ public class InitializationSystemRestResource {
         devDemoTLTreeService.createRootNode(jb4DSession);
 
         //初始化根组织
-        organService.deleteByKey(jb4DSession,"0");
-        organService.createRootOrgan(jb4DSession);
+        //organService.deleteByKey(jb4DSession,"0");
+        //organService.createRootOrgan(jb4DSession);
 
         //初始化根表分组
         tableGroupService.deleteByKeyNotValidate(jb4DSession,"0");

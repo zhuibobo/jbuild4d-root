@@ -1,7 +1,7 @@
 package com.jbuild4d.base.dbaccess.dao.sso;
 
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
-import com.jbuild4d.base.dbaccess.dbentities.organrelevance.OrganEntity;
+import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import org.apache.ibatis.annotations.Param;
 
 /**
