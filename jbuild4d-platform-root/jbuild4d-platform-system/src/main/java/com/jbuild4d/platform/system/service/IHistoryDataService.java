@@ -10,4 +10,6 @@ import com.jbuild4d.base.service.general.JB4DSession;
  */
 public interface IHistoryDataService {
     void keepRecordData(JB4DSession jb4DSession, Object record);
+
+    void keepRecordData(JB4DSession jb4DSession, String tableName, String recordId, String recordData);
 }
