@@ -244,9 +244,17 @@
         </createTable>
     
         <createTable tableName="TB4D_HISTORY_DATA" remarks="历史数据表:存储各个表被删除数据的历史记录">
-            <column name="HISTORY_ID" type="NVARCHAR(128)">
+            <column name="HISTORY_ID" type="NVARCHAR(128)" remarks="主键,随机生成">
                 <constraints primaryKey="true" nullable="false"></constraints>
             </column>
+            <column name="HISTORY_RECORD" type="MEDIUMTEXT" remarks="被删除数据的json格式数据"/>
+            <column name="HISTORY_ORGAN_ID" type="NVARCHAR(100)" remarks="删除用户所在的组织id" />
+            <column name="HISTORY_ORGAN_NAME" type="NVARCHAR(100)" remarks="删除用户所在的组织名称"/>
+            <column name="HISTORY_USER_ID" type="NVARCHAR(100)" remarks="删除用户的ID"/>
+            <column name="HISTORY_USER_NAME" type="NVARCHAR(100)" remarks="删除用户的用户名"/>
+            <column name="HISTORY_CREATETIME" type="datetime(6)" remarks="记录的创建时间"/>
+            <column name="HISTORY_TABLE_NAME" type="NVARCHAR(100)" remarks="删除记录的表名"/>
+            <column name="HISTORY_RECORD_ID" type="NVARCHAR(100)" remarks="删除记录的主键值"/>
         </createTable>
     </changeSet>
     <!--模块构建-->
