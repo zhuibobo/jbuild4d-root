@@ -1,4 +1,5 @@
 package com.jbuild4d.platform.system.service.impl;
+import java.util.Date;
 
 import com.jbuild4d.base.dbaccess.dao.systemsetting.HistoryDataMapper;
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.HistoryDataEntity;
@@ -16,22 +17,32 @@ import org.mybatis.spring.SqlSessionTemplate;
  * Date: 2019/2/25
  * To change this template use File | Settings | File Templates.
  */
-public class HistoryDataServiceImpl extends BaseServiceImpl<HistoryDataEntity> implements IHistoryDataService
+public class HistoryDataServiceImpl implements IHistoryDataService
 {
     HistoryDataMapper historyDataMapper;
     public HistoryDataServiceImpl(HistoryDataMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
-        super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
+        //super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         historyDataMapper=_defaultBaseMapper;
     }
 
-    @Override
+    /*@Override
     public int save(JB4DSession jb4DSession, String id, HistoryDataEntity record) throws JBuild4DGenerallyException {
-        return super.save(jb4DSession,id, record, new IAddBefore<HistoryDataEntity>() {
-            @Override
-            public HistoryDataEntity run(JB4DSession jb4DSession,HistoryDataEntity sourceEntity) throws JBuild4DGenerallyException {
-                //设置排序,以及其他参数--nextOrderNum()
-                return sourceEntity;
-            }
-        });
+        throw
+    }*/
+
+    @Override
+    public void keepRecordData(JB4DSession jb4DSession, Object record){
+        HistoryDataEntity historyDataEntity=new HistoryDataEntity();
+        historyDataEntity.setHistoryId("");
+        historyDataEntity.setHistoryOrganId("");
+        historyDataEntity.setHistoryOrganName("");
+        historyDataEntity.setHistoryUserId("");
+        historyDataEntity.setHistoryUserName("");
+        historyDataEntity.setHistoryCreatetime(new Date());
+        historyDataEntity.setHistoryTableName("");
+        historyDataEntity.setHistoryRecordId("");
+        historyDataEntity.setHistoryRecord("");
+
+        historyDataMapper.insert(historyDataEntity);
     }
 }
