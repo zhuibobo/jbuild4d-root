@@ -1,4 +1,4 @@
-package com.jbuild4d.web.platform.controller.builder.dataset;
+package com.jbuild4d.test.web.platform.rest.builder.dataset;
 import java.util.Date;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
@@ -6,7 +6,7 @@ import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
-import com.jbuild4d.web.platform.controller.ControllerTestBase;
+import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
  * To change this template use File | Settings | File Templates.
  */
 @FixMethodOrder(MethodSorters.JVM)
-public class DataSetGroupControllerTest  extends ControllerTestBase {
+public class DataSetGroupRestTest extends RestTestBase {
 
     @Autowired
     IDatasetGroupService datasetGroupService;

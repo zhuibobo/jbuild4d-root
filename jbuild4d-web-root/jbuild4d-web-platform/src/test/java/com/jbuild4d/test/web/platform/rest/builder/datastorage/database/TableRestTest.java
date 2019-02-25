@@ -1,4 +1,4 @@
-package com.jbuild4d.web.platform.controller.builder.datastorage.database;
+package com.jbuild4d.test.web.platform.rest.builder.datastorage.database;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
@@ -13,7 +13,7 @@ import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
-import com.jbuild4d.web.platform.controller.ControllerTestBase;
+import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,7 +41,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @ContextHierarchy({
         @ContextConfiguration(name = "parent", classes = RootConfig.class),
         @ContextConfiguration(name = "child", classes = WebConfig.class)})*/
-public class TableControllerTest  extends ControllerTestBase {
+public class TableRestTest extends RestTestBase {
 
     @Autowired
     private ITableGroupService tableGroupService;

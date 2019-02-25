@@ -1,8 +1,8 @@
-package com.jbuild4d.web.platform.controller.builder.dataset;
+package com.jbuild4d.test.web.platform.rest.builder.dataset;
 
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.platform.builder.vo.SQLResolveToDataSetVo;
-import com.jbuild4d.web.platform.controller.ControllerTestBase;
+import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-public class DataSetSQLDesignerControllerTest  extends ControllerTestBase {
+public class DataSetSQLDesignerRestTest extends RestTestBase {
     @Test
     public void validateSQLEnable() throws Exception {
         JBuild4DResponseVo responseVo=validateSQLEnable("select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'address' address,'sex' sex from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID where TDEV_TEST_1.ID='#{ApiVar.当前用户所在组织ID}'");

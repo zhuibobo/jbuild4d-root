@@ -1,4 +1,4 @@
-package com.jbuild4d.web.platform.controller.builder.dataset;
+package com.jbuild4d.test.web.platform.rest.builder.dataset;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
@@ -28,13 +28,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
  * Date: 2018/9/3
  * To change this template use File | Settings | File Templates.
  */
-public class DataSetMainControllerTest extends DataSetSQLDesignerControllerTest {
+public class DataSetMainRestTest extends DataSetSQLDesignerRestTest {
 
     @Autowired
     IDatasetService datasetService;
 
     private String dataSetId="UnitTestDataSet001";
-    private String dataSetGroupId=DataSetGroupControllerTest.devGroupId;
+    private String dataSetGroupId= DataSetGroupRestTest.devGroupId;
 
     @Test
     public void addSQLDataSet() throws Exception {
@@ -44,7 +44,7 @@ public class DataSetMainControllerTest extends DataSetSQLDesignerControllerTest 
             datasetService.deleteByKeyNotValidate(getSession(),dataSetId);
         }
         if(existDataSet==null) {
-            //DataSetSQLDesignerControllerTest dataSetSQLDesignerControllerTest = new DataSetSQLDesignerControllerTest();
+            //DataSetSQLDesignerRestTest dataSetSQLDesignerControllerTest = new DataSetSQLDesignerRestTest();
             JBuild4DResponseVo jBuild4DResponseVo = this.validateSQLEnable("select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'ADDRESS' ADDRESS,'SEX' SEX from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID where TDEV_TEST_1.ID='#{ApiVar.当前用户所在组织ID}'");
             SQLResolveToDataSetVo resolveToDataSetVo = (SQLResolveToDataSetVo) jBuild4DResponseVo.getData();
             JB4DSession jb4DSession=getSession();

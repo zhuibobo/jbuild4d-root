@@ -1,10 +1,11 @@
 package com.jbuild4d.web.platform.controller;
 
+import com.jbuild4d.test.web.platform.InitializationSystemRestTest;
 import com.jbuild4d.web.platform.beanconfig.sys.RootConfig;
 import com.jbuild4d.web.platform.beanconfig.sys.WebConfig;
-import com.jbuild4d.web.platform.controller.builder.dataset.DataSetGroupControllerTest;
-import com.jbuild4d.web.platform.controller.builder.dataset.DataSetSQLDesignerControllerTest;
-import com.jbuild4d.web.platform.controller.builder.datastorage.database.TableControllerTest;
+import com.jbuild4d.test.web.platform.rest.builder.dataset.DataSetGroupRestTest;
+import com.jbuild4d.test.web.platform.rest.builder.dataset.DataSetSQLDesignerRestTest;
+import com.jbuild4d.test.web.platform.rest.builder.datastorage.database.TableRestTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,10 +23,10 @@ import org.springframework.test.context.ContextHierarchy;
         @ContextConfiguration(name = "parent", classes = RootConfig.class),
         @ContextConfiguration(name = "child", classes = WebConfig.class)})
 @Suite.SuiteClasses({
-        InitializationSystemControllerTest.class,
-        TableControllerTest.class,
-        DataSetGroupControllerTest.class,
-        DataSetSQLDesignerControllerTest.class
+        InitializationSystemRestTest.class,
+        TableRestTest.class,
+        DataSetGroupRestTest.class,
+        DataSetSQLDesignerRestTest.class
 })
 public class TestRunner {
 

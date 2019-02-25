@@ -1,7 +1,7 @@
-package com.jbuild4d.web.platform.tools;
+package com.jbuild4d.test.web.platform.tools;
 
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
-import com.jbuild4d.web.platform.controller.ControllerTestBase;
+import com.jbuild4d.test.web.platform.RestTestBase;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import org.junit.Test;
  * Date: 2018/11/21
  * To change this template use File | Settings | File Templates.
  */
-public class JB4DCacheManagerTest extends ControllerTestBase {
+public class JB4DCacheManagerTest extends RestTestBase {
 
     @Test
     public void putToCache(){

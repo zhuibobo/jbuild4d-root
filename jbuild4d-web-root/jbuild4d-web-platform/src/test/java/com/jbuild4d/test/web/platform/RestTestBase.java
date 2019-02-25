@@ -1,4 +1,4 @@
-package com.jbuild4d.web.platform.controller;
+package com.jbuild4d.test.web.platform;
 
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.web.platform.beanconfig.sys.RootConfig;
@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
         @ContextConfiguration(name = "parent", classes = RootConfig.class),
         @ContextConfiguration(name = "child", classes = WebConfig.class)})*/
 @SpringBootTest
-public class ControllerTestBase {
+public class RestTestBase {
 
     public MockMvc mockMvc;
 
