@@ -242,7 +242,12 @@
             <column name="SETTING_API" type="NVARCHAR(100)"/>
             <column name="SETTING_IS_SYSTEM" type="NVARCHAR(10)"/>
         </createTable>
-
+    
+        <createTable tableName="TB4D_HISTORY_DATA" remarks="历史数据表:存储各个表被删除数据的历史记录">
+            <column name="HISTORY_ID" type="NVARCHAR(128)">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+        </createTable>
     </changeSet>
     <!--模块构建-->
     <changeSet author="zhuangrb" id="changeSet-Module-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
