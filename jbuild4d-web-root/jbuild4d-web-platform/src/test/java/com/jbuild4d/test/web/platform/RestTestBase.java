@@ -1,6 +1,7 @@
 package com.jbuild4d.test.web.platform;
 
 import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.web.Application;
 import com.jbuild4d.web.platform.beanconfig.sys.RootConfig;
 import com.jbuild4d.web.platform.beanconfig.sys.WebConfig;
 import org.junit.Before;
@@ -27,7 +28,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 /*@ContextHierarchy({
         @ContextConfiguration(name = "parent", classes = RootConfig.class),
         @ContextConfiguration(name = "child", classes = WebConfig.class)})*/
-@SpringBootTest
+@SpringBootTest(classes = Application.class)
 public class RestTestBase {
 
     public MockMvc mockMvc;
