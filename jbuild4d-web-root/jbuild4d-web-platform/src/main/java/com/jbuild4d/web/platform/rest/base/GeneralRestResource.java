@@ -195,7 +195,7 @@ public abstract class GeneralRestResource<T> implements IGeneralRestResource<T> 
         //dictionaryGroupService.saveBySelective(dictionaryEntity.getDictGroupId(), dictionaryEntity);
     }
 
-    @RequestMapping(value = "/Delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/Delete", method = RequestMethod.DELETE)
     //@ResponseBody
     public JBuild4DResponseVo delete(String recordId,HttpServletRequest request) throws JBuild4DGenerallyException, JsonProcessingException {
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();

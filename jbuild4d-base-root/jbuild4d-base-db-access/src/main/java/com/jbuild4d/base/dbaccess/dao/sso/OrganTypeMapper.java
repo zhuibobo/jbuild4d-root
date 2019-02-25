@@ -10,4 +10,5 @@ import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
  * To change this template use File | Settings | File Templates.
  */
 public interface OrganTypeMapper extends BaseMapper<OrganTypeEntity> {
+    OrganTypeEntity selectByOrganValue(String organTypeValue);
 }

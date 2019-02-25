@@ -6,6 +6,7 @@ import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
+import com.jbuild4d.base.service.IUpdateBefore;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
@@ -21,6 +22,10 @@ import java.util.Date;
  */
 public class OrganTypeServiceImpl extends BaseServiceImpl<OrganTypeEntity> implements IOrganTypeService
 {
+    public static String getValueExistErrorMsg(String value){
+        return String.format("已经存在值为:%s的组织类型!", value);
+    }
+
     OrganTypeMapper organTypeMapper;
     public OrganTypeServiceImpl(OrganTypeMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
@@ -29,9 +34,30 @@ public class OrganTypeServiceImpl extends BaseServiceImpl<OrganTypeEntity> imple
 
     @Override
     public int save(JB4DSession jb4DSession, String id, OrganTypeEntity record) throws JBuild4DGenerallyException {
-        return super.save(jb4DSession,id, record, new IAddBefore<OrganTypeEntity>() {
+        //判断是否存在相同Value的记录
+        String value = record.getOrganTypeValue();
+        return super.save(jb4DSession, id, record, new IAddBefore<OrganTypeEntity>() {
             @Override
-            public OrganTypeEntity run(JB4DSession jb4DSession,OrganTypeEntity sourceEntity) throws JBuild4DGenerallyException {
+            public OrganTypeEntity run(JB4DSession jb4DSession, OrganTypeEntity sourceEntity) throws JBuild4DGenerallyException {
+
+                if (organTypeMapper.selectByOrganValue(value) == null) {
+                    sourceEntity.setOrganTypeStatus(EnableTypeEnum.enable.getDisplayName());
+                    sourceEntity.setOrganTypeOrderNum(organTypeMapper.nextOrderNum());
+                    sourceEntity.setOrganTypeCreateTime(new Date());
+                    return sourceEntity;
+                } else {
+                    throw new JBuild4DGenerallyException(getValueExistErrorMsg(value));
+                }
+            }
+        }, new IUpdateBefore<OrganTypeEntity>() {
+            @Override
+            public OrganTypeEntity run(JB4DSession jb4DSession, OrganTypeEntity sourceEntity) throws JBuild4DGenerallyException {
+                OrganTypeEntity oldEntity=organTypeMapper.selectByOrganValue(value);
+                if (oldEntity!=null){
+                    if(!oldEntity.getOrganTypeId().equals(sourceEntity.getOrganTypeId())){
+                        throw new JBuild4DGenerallyException(getValueExistErrorMsg(value));
+                    }
+                }
                 return sourceEntity;
             }
         });
