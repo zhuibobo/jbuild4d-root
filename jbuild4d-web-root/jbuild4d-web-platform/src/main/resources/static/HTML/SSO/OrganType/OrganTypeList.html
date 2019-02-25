@@ -63,11 +63,11 @@
         },
         data: {
             acInterface:{
-                editView: "/HTML/DevDemo/GenList/GenEdit.html",
-                reloadData:"/PlatFormRest/DevDemo/DevDemoGenList/GetListData",
-                delete:"/PlatFormRest/DevDemo/DevDemoGenList/Delete",
-                statusChange:"/PlatFormRest/DevDemo/DevDemoGenList/StatusChange",
-                move:"/PlatFormRest/DevDemo/DevDemoGenList/Move"
+                editView: "/HTML/SSO/OrganType/OrganTypeEdit.html",
+                reloadData:"/PlatFormRest/SSO/OrganType/GetListData",
+                delete:"/PlatFormRest/SSO/OrganType/Delete",
+                statusChange:"/PlatFormRest/SSO/OrganType/StatusChange",
+                move:"/PlatFormRest/SSO/OrganType/Move"
             },
             idFieldName:"organTypeId",
             columnsConfig: [
@@ -124,21 +124,21 @@
             },
             add: function () {
                 var url = BaseUtility.BuildView(this.acInterface.editView, {"op": "add"});
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "组织类型"}, 3);
             },
             edit: function (recordId) {
                 var url = BaseUtility.BuildView(this.acInterface.editView, {
                     "op": "update",
                     "recordId": recordId
                 });
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "组织类型"}, 3);
             },
             view:function (recordId) {
                 var url = BaseUtility.BuildView(this.acInterface.editView, {
                     "op": "view",
                     "recordId": recordId
                 });
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "通用列表"}, 2);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "组织类型"}, 3);
             },
             del: function (recordId) {
                 ListPageUtility.IViewTableDeleteRow(this.acInterface.delete,recordId,appList);

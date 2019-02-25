@@ -136,26 +136,37 @@ public abstract class GeneralRestResource<T> implements IGeneralRestResource<T> 
         return responseVo;
     }
 
+    public JBuild4DResponseVo saveEditEnable(JB4DSession jb4DSession,T entity, HttpServletRequest request){
+        return JBuild4DResponseVo.success("");
+    }
+
     @RequestMapping(value = "/SaveEdit", method = RequestMethod.POST)
     //@ResponseBody
     public JBuild4DResponseVo saveEdit(@RequestBody T entity, HttpServletRequest request) throws JBuild4DGenerallyException {
         try {
-            String recordID=DBAnnoUtility.getIdValue(entity);
-            if(recordID.equals("")||recordID==null){
-                throw new JBuild4DGenerallyException("recordID不能为空或字符串!");
-            }
             JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-            if(getBaseService()==null){
-                throw new JBuild4DGenerallyException(this.getClass().getSimpleName()+".getBaseService()返回的对象为Null");
+            JBuild4DResponseVo saveBeforeValidateVo=saveEditEnable(jb4DSession,entity,request);
+            if(saveBeforeValidateVo.isSuccess()) {
+                String recordID = DBAnnoUtility.getIdValue(entity);
+                if (recordID.equals("") || recordID == null) {
+                    throw new JBuild4DGenerallyException("recordID不能为空或字符串!");
+                }
+
+                if (getBaseService() == null) {
+                    throw new JBuild4DGenerallyException(this.getClass().getSimpleName() + ".getBaseService()返回的对象为Null");
+                }
+                if (getBaseService().getByPrimaryKey(jb4DSession, recordID) == null) {
+                    this.writeOperationLog("新增数据", "用户[" + jb4DSession.getUserName() + "]新增了ID为" + recordID + "的数据[" + getMyClass().getSimpleName() + "]", JsonUtility.toObjectString(entity), request);
+                } else {
+                    this.writeOperationLog("修改数据", "用户[" + jb4DSession.getUserName() + "]修改了ID为" + recordID + "的数据[" + getMyClass().getSimpleName() + "]", JsonUtility.toObjectString(entity), request);
+                }
+                getBaseService().save(jb4DSession, recordID, entity);
+                return JBuild4DResponseVo.saveSuccess();
             }
-            if(getBaseService().getByPrimaryKey(jb4DSession,recordID)==null){
-                this.writeOperationLog("新增数据","用户["+jb4DSession.getUserName()+"]新增了ID为"+recordID+"的数据["+getMyClass().getSimpleName()+"]", JsonUtility.toObjectString(entity),request);
+            else
+            {
+                return saveBeforeValidateVo;
             }
-            else{
-                this.writeOperationLog("修改数据","用户["+jb4DSession.getUserName()+"]修改了ID为"+recordID+"的数据["+getMyClass().getSimpleName()+"]",JsonUtility.toObjectString(entity),request);
-            }
-            getBaseService().save(jb4DSession,recordID, entity);
-            return JBuild4DResponseVo.saveSuccess();
         } catch (JBuild4DGenerallyException e) {
             return JBuild4DResponseVo.error(e.getMessage());
         }

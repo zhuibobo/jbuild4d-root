@@ -2,6 +2,7 @@ package com.jbuild4d.platform.sso.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.sso.OrganTypeMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
+import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
@@ -9,6 +10,8 @@ import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
 import org.mybatis.spring.SqlSessionTemplate;
+
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -41,6 +44,8 @@ public class OrganTypeServiceImpl extends BaseServiceImpl<OrganTypeEntity> imple
         organTypeEntity.setOrganTypeValue("TYPE10001");
         organTypeEntity.setOrganTypeName("默认类型");
         organTypeEntity.setOrganTypeDesc("默认类型");
+        organTypeEntity.setOrganTypeCreateTime(new Date());
+        organTypeEntity.setOrganTypeStatus(EnableTypeEnum.enable.getDisplayName());
         this.save(jb4DSession,organTypeEntity.getOrganTypeId(),organTypeEntity);
     }
 }
