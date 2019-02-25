@@ -196,7 +196,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         save(jb4DSession,systemSettingCodeGenerateMenu.getMenuId(),systemSettingCodeGenerateMenu);*/
         createMenu(jb4DSession,systemSettingRootMenu.getMenuId(),"JB4DSystemSettingCodeGenerate",
                 "代码生成","代码生成","代码生成",
-                "System/DBResolver/Manager.html","");
+                "System/CodeGeneration/Manager.html","");
 
         //根菜单->系统设置分组->组织管理
         /*String systemSettingOrganManageId="JB4DSystemSettingOrganManage";
