@@ -1,0 +1,231 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2018/8/26
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <title>JBuild4D</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<script type="text/javascript" src="../../../Js/T3P/JQuery/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="../../../Js/T3P/VUE-2.5.16/vue.js"></script>
+	<script type="text/javascript" src="../../../Js/T3P/IView-3.X/dist/iview.min.js"></script>
+	<script type="text/javascript" src="../../../Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="../../../Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script>
+	<script type="text/javascript" src="../../../Js/JBuild4DPlatformLib.js?refVersion=1"></script>
+	<script type="text/javascript" src="../../../Js/UIEXComponent.js?refVersion=1"></script>
+	<script type="text/javascript" src="../../../Js/VueEXComponent.js?refVersion=1"></script>
+    <link rel="stylesheet" type="text/css" href="../../../Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1" />
+	<link rel="stylesheet" type="text/css" href="../../../Themes/Default/IView-3.X/iview.css" />
+	<link rel="stylesheet" type="text/css" href="../../../Themes/Default/JQueryUI/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="../../../Themes/Default/ZTree/zTreeStyle/zTreeStyle.css" />
+</head>
+<body>
+    <div id="appForm" class="general-edit-page-wrap" v-cloak>
+        <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
+            <form-item label="组织名称：" prop="organName">
+                <i-input v-model="formEntity.organName"></i-input>
+            </form-item>
+            <form-item label="组织简称：" prop="organShortName">
+                <i-input v-model="formEntity.organShortName"></i-input>
+            </form-item>
+            <form-item label="组织编号：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organNo"></i-input>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">组织机构代码：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organCode"></i-input>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="创建时间：">
+                <row>
+                    <i-col span="10">
+                        <form-item prop="">
+                            <date-picker type="date" placeholder="" v-model="formEntity.organCreateTime"></date-picker>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">状态：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <radio-group v-model="formEntity.organStatus">
+                                <radio label="启用">启用</radio>
+                                <radio label="禁用">禁用</radio>
+                            </radio-group>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="联系电话：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organPhone"></i-input>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">邮政编码：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organPost"></i-input>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="地址：">
+                <i-input v-model="formEntity.organAddress"></i-input>
+            </form-item>
+            <form-item label="联系人：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organContactor"></i-input>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">联系人手机：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organContactorMobile"></i-input>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="域名：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organDomain"></i-input>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">传真：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organFax"></i-input>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="是否虚拟：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <radio-group v-model="formEntity.organIsVirtual">
+                                <radio label="是">是</radio>
+                                <radio label="否">否</radio>
+                            </radio-group>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">组织类型：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <radio-group v-model="formEntity.organTypeValue" style="width: 100%">
+                                <radio v-for="item in exObjectsJson.OrganType" :label="item.organTypeValue">{{item.organTypeName}}</radio>
+                            </radio-group>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+        </i-form>
+        <div class="button-outer-wrap">
+            <div class="button-inner-wrap">
+                <button-group>
+                    <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')" icon="md-checkmark">保存</i-button>
+                    <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button>
+                </button-group>
+            </div>
+        </div>
+    </div>
+    <script>
+        var appForm = new Vue({
+            el:"#appForm",
+            data: {
+                acInterface:{
+                    getDataUrl:"/PlatFormRest/OrganRelevance/Organ/GetDetailData",
+                    saveDataUrl:"/PlatFormRest/OrganRelevance/Organ/SaveEdit"
+                },
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
+                exObjectsJson:{OrganType:[]},
+                formEntity: {
+                    organId: '',
+                    organParentId: BaseUtility.GetUrlParaValue("parentId"),
+                    organName: '',
+                    organNo: '',
+                    organCode: '',
+                    organPhone: '',
+                    organPost: '',
+                    organAddress: '',
+                    organContactor: '',
+                    organContactorMobile: '',
+                    organDomain: '',
+                    organFax: '',
+                    organIsVirtual: '否',
+                    organShortName: '',
+                    organStatus:'启用',
+                    organCreateTime:DateUtility.GetCurrentData(),
+                    organTypeValue:''
+                },
+                ruleValidate: {
+                    organName: [
+                        { required: true, message: '【组织名称】不能空！', trigger: 'blur' }
+                    ],
+                    organShortName: [
+                        { required: true, message: '【组织简称】不能空！', trigger: 'blur' }
+                    ]
+                },
+                status:BaseUtility.GetUrlParaValue("op")
+            },
+            mounted:function () {
+                this.bindFormData();
+            },
+            methods: {
+                bindFormData:function(){
+                    //获取数据并赋值
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,function (result) {
+                        appForm.exObjectsJson.OrganType=result.exKVData.exObjectsJson.OrganType;
+                        if(appForm.status=="add") {
+                            appForm.formEntity.organTypeValue = appForm.exObjectsJson.OrganType[0].organTypeValue;
+                        }
+                    });
+                },
+                handleSubmit: function (name) {
+                    var _self=this;
+                    this.$refs[name].validate(function (valid) {
+                        if (valid) {
+                            var sendData=JSON.stringify(_self.formEntity);
+                            AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl,sendData,function (result) {
+                                DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},result.message,function () {
+                                    if(result.success) {
+                                        if (appForm.status == "add") {
+                                            window.OpenerWindowObj.appList.newTreeTableNode(_self.formEntity);
+                                        }
+                                        else if (appForm.status == "update") {
+                                            window.OpenerWindowObj.appList.updateTreeTableNode(_self.formEntity);
+                                        }
+                                    }
+                                    DialogUtility.Frame_CloseDialog(window);
+                                });
+                            },"json");
+                        } else {
+                            this.$Message.error('Fail!');
+                        }
+                    })
+                },
+                handleReset: function (name) {
+                    this.$refs[name].resetFields();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
