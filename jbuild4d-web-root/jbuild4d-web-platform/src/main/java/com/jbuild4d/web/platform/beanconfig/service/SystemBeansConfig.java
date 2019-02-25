@@ -92,4 +92,10 @@ public class SystemBeansConfig {
         IJb4dCacheService bean=new Jb4dCacheServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
+
+    @Bean
+    public IHistoryDataService historyDataService(ISQLBuilderService _sqlBuilderService, HistoryDataMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        IHistoryDataService bean=new HistoryDataServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
 }

@@ -269,6 +269,11 @@ public class MybatisBeansConfig {
     public FileRefMapper fileRefMapper(SqlSessionTemplate sqlSessionTemplate){
         return sqlSessionTemplate.getMapper(FileRefMapper.class);
     }
+
+    @Bean
+    public HistoryDataMapper historyDataMapper(SqlSessionTemplate sqlSessionTemplate){
+        return sqlSessionTemplate.getMapper(HistoryDataMapper.class);
+    }
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);

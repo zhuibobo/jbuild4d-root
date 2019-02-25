@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.systemsetting.HistoryDataMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_HISTORY_DATA ORDER by FORM_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_HISTORY_DATA</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(FORM_ORDER_NUM) is null then 1 else max(FORM_ORDER_NUM)+1 end ORDERNUM from TB4D_HISTORY_DATA</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_HISTORY_DATA<where>
+        <if test="historyOrganId !=null and historyOrganId !=''"> and HISTORY_ORGAN_ID like #{historyOrganId} </if>
+        <if test="historyOrganName !=null and historyOrganName !=''"> and HISTORY_ORGAN_NAME like #{historyOrganName} </if>
+        <if test="historyUserId !=null and historyUserId !=''"> and HISTORY_USER_ID like #{historyUserId} </if>
+        <if test="historyUserName !=null and historyUserName !=''"> and HISTORY_USER_NAME like #{historyUserName} </if>
+        <if test="historyTableName !=null and historyTableName !=''"> and HISTORY_TABLE_NAME like #{historyTableName} </if>
+        <if test="historyRecordId !=null and historyRecordId !=''"> and HISTORY_RECORD_ID like #{historyRecordId} </if>
+        <if test="historyRecord !=null and historyRecord !=''"> and HISTORY_RECORD like #{historyRecord} </if>
+    </where>ORDER by FORM_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_HISTORY_DATA
+                                                                                                          where FORM_ORDER_NUM = (select max(FORM_ORDER_NUM) from TB4D_HISTORY_DATA where FORM_ORDER_NUM<(select FORM_ORDER_NUM from TB4D_HISTORY_DATA where HISTORY_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_HISTORY_DATA
+                                                                                                             where FORM_ORDER_NUM = (select min(FORM_ORDER_NUM) from TB4D_HISTORY_DATA where FORM_ORDER_NUM>(select FORM_ORDER_NUM from TB4D_HISTORY_DATA where HISTORY_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

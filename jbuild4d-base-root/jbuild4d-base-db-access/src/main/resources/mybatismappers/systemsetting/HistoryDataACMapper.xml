@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.systemsetting.HistoryDataMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.systemsetting.HistoryDataEntity">
+        <constructor>
+            <idArg column="HISTORY_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_CREATETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="HISTORY_TABLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_RECORD_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.systemsetting.HistoryDataEntity">
+        <constructor>
+            <idArg column="HISTORY_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_CREATETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="HISTORY_TABLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_RECORD_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HISTORY_RECORD" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        HISTORY_ID, HISTORY_ORGAN_ID, HISTORY_ORGAN_NAME, HISTORY_USER_ID, HISTORY_USER_NAME,
+        HISTORY_CREATETIME, HISTORY_TABLE_NAME, HISTORY_RECORD_ID
+    </sql>
+    <sql id="Blob_Column_List">
+        HISTORY_RECORD
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from TB4D_HISTORY_DATA
+        where HISTORY_ID = #{historyId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_HISTORY_DATA
+        where HISTORY_ID = #{historyId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.HistoryDataEntity">
+        insert into TB4D_HISTORY_DATA (HISTORY_ID, HISTORY_ORGAN_ID, HISTORY_ORGAN_NAME,
+                                       HISTORY_USER_ID, HISTORY_USER_NAME, HISTORY_CREATETIME,
+                                       HISTORY_TABLE_NAME, HISTORY_RECORD_ID, HISTORY_RECORD
+                )
+        values (#{historyId,jdbcType=VARCHAR}, #{historyOrganId,jdbcType=VARCHAR}, #{historyOrganName,jdbcType=VARCHAR},
+                #{historyUserId,jdbcType=VARCHAR}, #{historyUserName,jdbcType=VARCHAR}, #{historyCreatetime,jdbcType=TIMESTAMP},
+                #{historyTableName,jdbcType=VARCHAR}, #{historyRecordId,jdbcType=VARCHAR}, #{historyRecord,jdbcType=LONGVARCHAR}
+                       )
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.HistoryDataEntity">
+        insert into TB4D_HISTORY_DATA
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="historyId != null">
+                HISTORY_ID,
+            </if>
+            <if test="historyOrganId != null">
+                HISTORY_ORGAN_ID,
+            </if>
+            <if test="historyOrganName != null">
+                HISTORY_ORGAN_NAME,
+            </if>
+            <if test="historyUserId != null">
+                HISTORY_USER_ID,
+            </if>
+            <if test="historyUserName != null">
+                HISTORY_USER_NAME,
+            </if>
+            <if test="historyCreatetime != null">
+                HISTORY_CREATETIME,
+            </if>
+            <if test="historyTableName != null">
+                HISTORY_TABLE_NAME,
+            </if>
+            <if test="historyRecordId != null">
+                HISTORY_RECORD_ID,
+            </if>
+            <if test="historyRecord != null">
+                HISTORY_RECORD,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="historyId != null">
+                #{historyId,jdbcType=VARCHAR},
+            </if>
+            <if test="historyOrganId != null">
+                #{historyOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="historyOrganName != null">
+                #{historyOrganName,jdbcType=VARCHAR},
+            </if>
+            <if test="historyUserId != null">
+                #{historyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="historyUserName != null">
+                #{historyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="historyCreatetime != null">
+                #{historyCreatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="historyTableName != null">
+                #{historyTableName,jdbcType=VARCHAR},
+            </if>
+            <if test="historyRecordId != null">
+                #{historyRecordId,jdbcType=VARCHAR},
+            </if>
+            <if test="historyRecord != null">
+                #{historyRecord,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.HistoryDataEntity">
+        update TB4D_HISTORY_DATA
+        <set>
+            <if test="historyOrganId != null">
+                HISTORY_ORGAN_ID = #{historyOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="historyOrganName != null">
+                HISTORY_ORGAN_NAME = #{historyOrganName,jdbcType=VARCHAR},
+            </if>
+            <if test="historyUserId != null">
+                HISTORY_USER_ID = #{historyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="historyUserName != null">
+                HISTORY_USER_NAME = #{historyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="historyCreatetime != null">
+                HISTORY_CREATETIME = #{historyCreatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="historyTableName != null">
+                HISTORY_TABLE_NAME = #{historyTableName,jdbcType=VARCHAR},
+            </if>
+            <if test="historyRecordId != null">
+                HISTORY_RECORD_ID = #{historyRecordId,jdbcType=VARCHAR},
+            </if>
+            <if test="historyRecord != null">
+                HISTORY_RECORD = #{historyRecord,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where HISTORY_ID = #{historyId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.HistoryDataEntity">
+        update TB4D_HISTORY_DATA
+        set HISTORY_ORGAN_ID = #{historyOrganId,jdbcType=VARCHAR},
+            HISTORY_ORGAN_NAME = #{historyOrganName,jdbcType=VARCHAR},
+            HISTORY_USER_ID = #{historyUserId,jdbcType=VARCHAR},
+            HISTORY_USER_NAME = #{historyUserName,jdbcType=VARCHAR},
+            HISTORY_CREATETIME = #{historyCreatetime,jdbcType=TIMESTAMP},
+            HISTORY_TABLE_NAME = #{historyTableName,jdbcType=VARCHAR},
+            HISTORY_RECORD_ID = #{historyRecordId,jdbcType=VARCHAR},
+            HISTORY_RECORD = #{historyRecord,jdbcType=LONGVARCHAR}
+        where HISTORY_ID = #{historyId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.HistoryDataEntity">
+        update TB4D_HISTORY_DATA
+        set HISTORY_ORGAN_ID = #{historyOrganId,jdbcType=VARCHAR},
+            HISTORY_ORGAN_NAME = #{historyOrganName,jdbcType=VARCHAR},
+            HISTORY_USER_ID = #{historyUserId,jdbcType=VARCHAR},
+            HISTORY_USER_NAME = #{historyUserName,jdbcType=VARCHAR},
+            HISTORY_CREATETIME = #{historyCreatetime,jdbcType=TIMESTAMP},
+            HISTORY_TABLE_NAME = #{historyTableName,jdbcType=VARCHAR},
+            HISTORY_RECORD_ID = #{historyRecordId,jdbcType=VARCHAR}
+        where HISTORY_ID = #{historyId,jdbcType=VARCHAR}
+    </update>
+</mapper>
