@@ -2,6 +2,7 @@ package com.jbuild4d.base.dbaccess.dbentities.sso;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
+import java.util.Date;
 
 /**
  *
@@ -24,11 +25,24 @@ public class OrganTypeEntity {
     //ORGAN_TYPE_DESC:组织机构类型备注
     private String organTypeDesc;
 
-    public OrganTypeEntity(String organTypeId, String organTypeValue, String organTypeName, String organTypeDesc) {
+    //ORGAN_TYPE_ORDER_NUM:排序号
+    private Integer organTypeOrderNum;
+
+    //ORGAN_TYPE_STATUS:状态:启用,禁用
+    private String organTypeStatus;
+
+    //ORGAN_TYPE_CREATE_TIME:创建时间
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date organTypeCreateTime;
+
+    public OrganTypeEntity(String organTypeId, String organTypeValue, String organTypeName, String organTypeDesc, Integer organTypeOrderNum, String organTypeStatus, Date organTypeCreateTime) {
         this.organTypeId = organTypeId;
         this.organTypeValue = organTypeValue;
         this.organTypeName = organTypeName;
         this.organTypeDesc = organTypeDesc;
+        this.organTypeOrderNum = organTypeOrderNum;
+        this.organTypeStatus = organTypeStatus;
+        this.organTypeCreateTime = organTypeCreateTime;
     }
 
     public OrganTypeEntity() {
@@ -65,5 +79,29 @@ public class OrganTypeEntity {
 
     public void setOrganTypeDesc(String organTypeDesc) {
         this.organTypeDesc = organTypeDesc == null ? null : organTypeDesc.trim();
+    }
+
+    public Integer getOrganTypeOrderNum() {
+        return organTypeOrderNum;
+    }
+
+    public void setOrganTypeOrderNum(Integer organTypeOrderNum) {
+        this.organTypeOrderNum = organTypeOrderNum;
+    }
+
+    public String getOrganTypeStatus() {
+        return organTypeStatus;
+    }
+
+    public void setOrganTypeStatus(String organTypeStatus) {
+        this.organTypeStatus = organTypeStatus == null ? null : organTypeStatus.trim();
+    }
+
+    public Date getOrganTypeCreateTime() {
+        return organTypeCreateTime;
+    }
+
+    public void setOrganTypeCreateTime(Date organTypeCreateTime) {
+        this.organTypeCreateTime = organTypeCreateTime;
     }
 }

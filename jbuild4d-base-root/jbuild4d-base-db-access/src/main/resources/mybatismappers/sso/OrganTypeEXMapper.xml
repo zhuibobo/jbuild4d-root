@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.OrganTypeMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_ORGAN_TYPE</select>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_ORGAN_TYPE ORDER by ORGAN_TYPE_ORDER_NUM DESC</select>
     <delete id="deleteAll">delete from TB4D_ORGAN_TYPE</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(ORGAN_TYPE_ORDER_NUM) is null then 1 else max(ORGAN_TYPE_ORDER_NUM)+1 end ORDERNUM from TB4D_ORGAN_TYPE</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_ORGAN_TYPE<where>
+        <if test="organTypeValue !=null and organTypeValue !=''"> and ORGAN_TYPE_VALUE like #{organTypeValue} </if>
+        <if test="organTypeName !=null and organTypeName !=''"> and ORGAN_TYPE_NAME like #{organTypeName} </if>
+        <if test="organTypeDesc !=null and organTypeDesc !=''"> and ORGAN_TYPE_DESC like #{organTypeDesc} </if>
+        <if test="organTypeStatus !=null and organTypeStatus !=''"> and ORGAN_TYPE_STATUS like #{organTypeStatus} </if>
+    </where>ORDER by ORGAN_TYPE_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ORGAN_TYPE
+                                                                                                          where ORGAN_TYPE_ORDER_NUM = (select max(ORGAN_TYPE_ORDER_NUM) from TB4D_ORGAN_TYPE where ORGAN_TYPE_ORDER_NUM<(select ORGAN_TYPE_ORDER_NUM from TB4D_ORGAN_TYPE where ORGAN_TYPE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ORGAN_TYPE
+                                                                                                             where ORGAN_TYPE_ORDER_NUM = (select min(ORGAN_TYPE_ORDER_NUM) from TB4D_ORGAN_TYPE where ORGAN_TYPE_ORDER_NUM>(select ORGAN_TYPE_ORDER_NUM from TB4D_ORGAN_TYPE where ORGAN_TYPE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
 </mapper>

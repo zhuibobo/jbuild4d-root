@@ -55,25 +55,7 @@
                 statusChange:"/PlatFormRest/DevDemo/DevDemoGenList/StatusChange",
                 move:"/PlatFormRest/DevDemo/DevDemoGenList/Move"
             },
-            idFieldName:"ddglId",
-            searchCondition:{
-                ddglKey:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.LikeStringType
-                },
-                ddglName:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.StringType
-                },
-                ddglCreatetime_s:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.DataStringType
-                },
-                ddglCreatetime_e:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.DataStringType
-                }
-            },
+            idFieldName:"organTypeId",
             columnsConfig: [
                 {
                     type: 'selection',
@@ -81,32 +63,26 @@
                     align: 'center'
                 },
                 {
-                    title: 'ddglKey',
-                    key: 'ddglKey',
+                    title: '组织类型值',
+                    key: 'organTypeValue',
+                    width: 250,
                     align: "center"
                 }, {
-                    title: 'ddglName',
-                    key: 'ddglName',
+                    title: '组织类型名称',
+                    key: 'organTypeName',
+                    width: 250,
                     align: "center"
                 }, {
-                    title: 'ddglDesc',
-                    key: 'ddglDesc'
+                    title: '组织类型备注',
+                    key: 'organTypeDesc'
                 }, {
-                    title: 'ddglStatus',
-                    width: 100,
+                    title: '组织类型状态',
+                    width: 150,
                     align: "center",
-                    key: 'ddglStatus'
-                }, {
-                    title: 'CT',
-                    key: 'ddglCreatetime',
-                    width: 100,
-                    align: "center",
-                    render: function (h, params) {
-                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddglCreatetime);
-                    }
+                    key: 'organTypeStatus'
                 }, {
                     title: '操作',
-                    key: 'dictGroupId',
+                    key: 'organTypeId',
                     width: 120,
                     align: "center",
                     render: function (h, params) {

@@ -658,6 +658,22 @@
     </changeSet>
     <!--单点登录模块-->
     <changeSet author="zhuangrb" id="changeSet-SSO-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB4D_ORGAN_TYPE" remarks="组织机构类型">
+            <column name="ORGAN_TYPE_ID" type="NVARCHAR(100)" remarks="组织机构类型ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(300)" remarks="组织机构编码值,唯一,与组织机构表关联">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORGAN_TYPE_NAME" type="NVARCHAR(300)" remarks="组织机构类型名称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORGAN_TYPE_DESC" type="NVARCHAR(2000)" remarks="组织机构类型备注" />
+            <column name="ORGAN_TYPE_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="ORGAN_TYPE_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用" />
+            <column name="ORGAN_TYPE_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+        </createTable>
+
         <createTable tableName="TB4D_ORGAN" remarks="组织机构表">
             <column name="ORGAN_ID" type="NVARCHAR(100)" remarks="组织机构ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
@@ -686,19 +702,6 @@
             <column name="ORGAN_CREATER_ORG_ID" type="NVARCHAR(100)" remarks="创建组织者ID"/>
             <column name="ORGAN_MAIN_IMAGE_ID" remarks="主题Logo,关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
             <column name="ORGAN_DESC" type="NVARCHAR(2000)" remarks="组织机构备注" />
-        </createTable>
-
-        <createTable tableName="TB4D_ORGAN_TYPE" remarks="组织机构类型">
-            <column name="ORGAN_TYPE_ID" type="NVARCHAR(100)" remarks="组织机构类型ID">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(300)" remarks="组织机构编码值,唯一,与组织机构表关联">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ORGAN_TYPE_NAME" type="NVARCHAR(300)" remarks="组织机构类型名称">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ORGAN_TYPE_DESC" type="NVARCHAR(2000)" remarks="组织机构类型备注" />
         </createTable>
     </changeSet>
 </databaseChangeLog>
