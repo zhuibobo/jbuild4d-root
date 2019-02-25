@@ -19,7 +19,7 @@
 </head>
 <body>
     <div id="appList" class="list-2column">
-        <div class="left-outer-wrap " style="width: 435px;">
+        <div class="left-outer-wrap " style="width: 385px;">
             <div class="inner-wrap iv-list-page-wrap" style="padding: 10px">
                 <div class="list-simple-search-wrap" id="list-simple-search-wrap" style="border-width:0px ">
                     <table class="ls-table">
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="right-outer-wrap" style="padding: 10px;left: 450px;">
+        <div class="right-outer-wrap" style="padding: 10px;left: 400px;">
             <spin size="large" fix v-if="codeIsGenerateing"></spin>
             <card :bordered="false" style="margin-bottom: 10px">
                 <p slot="title">参数设置</p>
@@ -107,7 +107,7 @@
                     </i-col>
                 </row>
             </card>
-            <tabs type="card">
+            <tabs type="line" size="small">
                 <tab-pane label="Entity">
                     <textarea name="txtAreaCode" id="txtAreaEntity" style="width: 100%;">{{generateCode.EntityContent}}</textarea>
                 </tab-pane>
@@ -126,9 +126,9 @@
                 <tab-pane label="IService">
                     <textarea name="txtAreaCode" id="txtAreaIService" style="width: 100%;">{{generateCode.IServiceContent}}</textarea>
                 </tab-pane>
-                <tab-pane label="ServiceImpl">
+                <!--<tab-pane label="ServiceImpl">
                     <textarea name="txtAreaCode" id="txtAreaServiceImpl" style="width: 100%;">{{generateCode.ServiceImplContent}}</textarea>
-                </tab-pane>
+                </tab-pane>-->
                 <tab-pane label="代码段">
                     <textarea name="txtAreaCode" id="txtAreaListJsp" style="width: 100%;">{{generateCode.CodeFragmentContent}}</textarea>
                 </tab-pane>
@@ -219,8 +219,8 @@
                             _self.generateCode.DaoContent = result.data.DaoContent;
                             _self.generateCode.MapperACContent = result.data.MapperACContent;
                             _self.generateCode.MapperEXContent = result.data.MapperEXContent;
-                            _self.generateCode.IServiceContent = result.data.IServiceContent;
-                            _self.generateCode.ServiceImplContent = result.data.ServiceImplContent;
+                            _self.generateCode.IServiceContent ="//逻辑接口\n" + result.data.IServiceContent+"\n\n//逻辑实现类\n"+result.data.ServiceImplContent;
+                            //_self.generateCode.ServiceImplContent = result.data.ServiceImplContent;
                             _self.generateCode.EntityWithBLOBContent = result.data.EntityWithBLOBContent;
                             _self.generateCode.CodeFragmentContent = result.data.CodeFragmentContent;
                         }
