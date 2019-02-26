@@ -62,7 +62,7 @@ public class RestTestBase {
     }
 
     public JBuild4DResponseVo simpleDelete(String url,String recordId) throws Exception {
-        MockHttpServletRequestBuilder requestDeleteBuilder = delete("/PlatFormRest/SSO/OrganType/Delete.do");
+        MockHttpServletRequestBuilder requestDeleteBuilder = delete(url);
         requestDeleteBuilder.contentType(MediaType.APPLICATION_JSON_UTF8);
         requestDeleteBuilder.sessionAttr("JB4DSession", getSession());
 
@@ -74,7 +74,7 @@ public class RestTestBase {
     }
 
     public JBuild4DResponseVo simpleSaveEdit(String url,Object entity) throws Exception {
-        MockHttpServletRequestBuilder requestPostBuilder = post("/PlatFormRest/SSO/OrganType/SaveEdit.do");
+        MockHttpServletRequestBuilder requestPostBuilder = post(url);
         requestPostBuilder.contentType(MediaType.APPLICATION_JSON_UTF8);
         requestPostBuilder.sessionAttr("JB4DSession", getSession());
         requestPostBuilder.content(JsonUtility.toObjectString(entity));
