@@ -10,14 +10,18 @@ import com.jbuild4d.base.tools.cache.JB4DCacheManager;
 import com.jbuild4d.platform.files.service.IFileInfoService;
 import com.jbuild4d.platform.sso.service.IOrganService;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
+import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -58,6 +62,12 @@ public class OrganRestResource extends GeneralRestResource<OrganEntity> {
         Map<String,Object> result=new HashMap<>();
         result.put("OrganType",organTypeEntityList);
         return result;
+    }
+
+    @RequestMapping(value = "/UploadOrganLogo", method = RequestMethod.POST, produces = "application/json")
+    public JBuild4DResponseVo uploadOrganLogo(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
+        FileInfoEntity fileInfoEntity=fileInfoService.addSmallFileToDB(JB4DSessionUtility.getSession(),file);
+        return JBuild4DResponseVo.success(JBuild4DResponseVo.SUCCESSMSG,fileInfoEntity);
     }
 
     @RequestMapping(value = "/GetOrganLogo", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)

@@ -16,121 +16,124 @@
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
     <div style="width: 80%;float: left">
         <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
-        <form-item label="组织名称：" prop="organName">
-            <i-input v-model="formEntity.organName"></i-input>
-        </form-item>
-        <form-item label="组织简称：" prop="organShortName">
-            <i-input v-model="formEntity.organShortName"></i-input>
-        </form-item>
-        <form-item label="组织编号：">
-            <row>
-                <i-col span="10">
-                    <form-item>
-                        <i-input v-model="formEntity.organNo"></i-input>
-                    </form-item>
-                </i-col>
-                <i-col span="4" style="text-align: center">组织机构代码：</i-col>
-                <i-col span="10">
-                    <form-item>
-                        <i-input v-model="formEntity.organCode"></i-input>
-                    </form-item>
-                </i-col>
-            </row>
-        </form-item>
-        <form-item label="创建时间：">
-            <row>
-                <i-col span="10">
-                    <form-item prop="">
-                        <date-picker type="date" placeholder="" v-model="formEntity.organCreateTime"></date-picker>
-                    </form-item>
-                </i-col>
-                <i-col span="4" style="text-align: center">状态：</i-col>
-                <i-col span="10">
-                    <form-item>
-                        <radio-group v-model="formEntity.organStatus">
-                            <radio label="启用">启用</radio>
-                            <radio label="禁用">禁用</radio>
-                        </radio-group>
-                    </form-item>
-                </i-col>
-            </row>
-        </form-item>
-        <form-item label="联系电话：">
-            <row>
-                <i-col span="10">
-                    <form-item>
-                        <i-input v-model="formEntity.organPhone"></i-input>
-                    </form-item>
-                </i-col>
-                <i-col span="4" style="text-align: center">邮政编码：</i-col>
-                <i-col span="10">
-                    <form-item>
-                        <i-input v-model="formEntity.organPost"></i-input>
-                    </form-item>
-                </i-col>
-            </row>
-        </form-item>
-        <form-item label="地址：">
-            <i-input v-model="formEntity.organAddress"></i-input>
-        </form-item>
-        <form-item label="联系人：">
-            <row>
-                <i-col span="10">
-                    <form-item>
-                        <i-input v-model="formEntity.organContacts"></i-input>
-                    </form-item>
-                </i-col>
-                <i-col span="4" style="text-align: center">联系人手机：</i-col>
-                <i-col span="10">
-                    <form-item>
-                        <i-input v-model="formEntity.organContactsMobile"></i-input>
-                    </form-item>
-                </i-col>
-            </row>
-        </form-item>
-        <form-item label="域名：">
-            <row>
-                <i-col span="10">
-                    <form-item>
-                        <i-input v-model="formEntity.organWebSite"></i-input>
-                    </form-item>
-                </i-col>
-                <i-col span="4" style="text-align: center">传真：</i-col>
-                <i-col span="10">
-                    <form-item>
-                        <i-input v-model="formEntity.organFax"></i-input>
-                    </form-item>
-                </i-col>
-            </row>
-        </form-item>
-        <form-item label="是否虚拟：">
-            <row>
-                <i-col span="10">
-                    <form-item>
-                        <radio-group v-model="formEntity.organIsVirtual">
-                            <radio label="是">是</radio>
-                            <radio label="否">否</radio>
-                        </radio-group>
-                    </form-item>
-                </i-col>
-                <i-col span="4" style="text-align: center">组织类型：</i-col>
-                <i-col span="10">
-                    <form-item>
-                        <radio-group v-model="formEntity.organTypeValue" style="width: 100%">
-                            <radio v-for="item in exObjectsJson.OrganType" :label="item.organTypeValue">{{item.organTypeName}}</radio>
-                        </radio-group>
-                    </form-item>
-                </i-col>
-            </row>
-        </form-item>
-    </i-form>
+            <form-item label="组织名称：" prop="organName">
+                <i-input v-model="formEntity.organName"></i-input>
+            </form-item>
+            <form-item label="组织简称：" prop="organShortName">
+                <i-input v-model="formEntity.organShortName"></i-input>
+            </form-item>
+            <form-item label="组织编号：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organNo"></i-input>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">组织机构代码：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organCode"></i-input>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="创建时间：">
+                <row>
+                    <i-col span="10">
+                        <form-item prop="">
+                            <date-picker type="date" placeholder="" v-model="formEntity.organCreateTime"></date-picker>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">状态：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <radio-group v-model="formEntity.organStatus">
+                                <radio label="启用">启用</radio>
+                                <radio label="禁用">禁用</radio>
+                            </radio-group>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="联系电话：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organPhone"></i-input>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">邮政编码：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organPost"></i-input>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="地址：">
+                <i-input v-model="formEntity.organAddress"></i-input>
+            </form-item>
+            <form-item label="联系人：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organContacts"></i-input>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">联系人手机：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organContactsMobile"></i-input>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="域名：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organWebSite"></i-input>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">传真：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <i-input v-model="formEntity.organFax"></i-input>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="是否虚拟：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <radio-group v-model="formEntity.organIsVirtual">
+                                <radio label="是">是</radio>
+                                <radio label="否">否</radio>
+                            </radio-group>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">组织类型：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <radio-group v-model="formEntity.organTypeValue" style="width: 100%">
+                                <radio v-for="item in exObjectsJson.OrganType" :label="item.organTypeValue">{{item.organTypeName}}</radio>
+                            </radio-group>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="备注：">
+                <i-input v-model="formEntity.organDesc"></i-input>
+            </form-item>
+        </i-form>
     </div>
     <div style="width: 19%;float: right">
-        <div style="border-radius: 8px">
-            <img :src="logoImageSrc" />
+        <div style="border-radius: 8px;text-align: center;margin-top: 20px;margin-bottom: 30px">
+            <img :src="logoImageSrc" style="width: 80px;height: 80px" />
         </div>
         <upload style="margin:10px 12px 0 20px" :data="importEXData" :before-upload="bindUploadExData" :on-success="uploadFlowModelImageSuccess" multiple type="drag" name="file" action="../../../PlatForm/Builder/FlowModel/UploadProcessModelMainImg.do" accept=".png">
-            <div style="padding:20px 0px">
+            <div style="padding:10px 0px">
                 <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>
                 <p>上传Logo</p>
             </div>
@@ -202,7 +205,7 @@
                     appForm.exObjectsJson.OrganType=result.exKVData.exObjectsJson.OrganType;
                     if(appForm.status=="add") {
                         appForm.formEntity.organTypeValue = appForm.exObjectsJson.OrganType[0].organTypeValue;
-                        appForm.logoImageSrc = BaseUtility.BuildAction(appForm.acInterface.defaultFlowModelImage, {fileId: "defaultLogoImage"});
+                        appForm.logoImageSrc = BaseUtility.BuildAction(appForm.acInterface.organLogoUrl, {fileId: "defaultLogoImage"});
                     }
                     else {
 
