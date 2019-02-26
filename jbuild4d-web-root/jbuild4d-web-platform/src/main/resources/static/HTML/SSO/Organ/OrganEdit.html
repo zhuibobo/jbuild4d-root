@@ -146,7 +146,7 @@
         <div style="border-radius: 8px;text-align: center;margin-top: 20px;margin-bottom: 30px">
             <img :src="logoImageSrc" style="width: 80px;height: 80px" />
         </div>
-        <upload style="margin:10px 12px 0 20px" :data="importEXData" :before-upload="bindUploadExData" :on-success="uploadFlowModelImageSuccess" multiple type="drag" name="file" action="../../../PlatForm/Builder/FlowModel/UploadProcessModelMainImg.do" accept=".png">
+        <upload style="margin:10px 12px 0 20px" :on-success="uploadOrganLogoImageSuccess" multiple type="drag" name="file" action="../../../PlatFormRest/SSO/Organ/UploadOrganLogo.do" accept=".png">
             <div style="padding:10px 0px">
                 <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>
                 <p>上传Logo</p>
@@ -222,7 +222,7 @@
                         appForm.logoImageSrc = BaseUtility.BuildAction(appForm.acInterface.organLogoUrl, {fileId: "defaultLogoImage"});
                     }
                     else {
-
+                        appForm.logoImageSrc = BaseUtility.BuildAction(appForm.acInterface.organLogoUrl, {fileId: appForm.formEntity.organMainImageId});
                     }
                 });
             },
@@ -251,6 +251,11 @@
             },
             handleClose: function () {
                 DialogUtility.Frame_CloseDialog(window);
+            },
+            uploadOrganLogoImageSuccess:function (response, file, fileList) {
+                var data = response.data;
+                this.formEntity.organMainImageId = data.fileId;
+                this.logoImageSrc = BaseUtility.BuildAction(this.acInterface.organLogoUrl, {fileId: this.formEntity.organMainImageId});
             }
         }
     });
