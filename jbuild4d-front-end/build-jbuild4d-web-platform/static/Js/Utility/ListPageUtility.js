@@ -170,7 +170,7 @@ var ListPageUtility={
     },
     IViewTableDeleteRow:function (url, recordId,pageAppObj) {
         DialogUtility.Confirm(window, "确认要删除当前记录吗？", function () {
-            AjaxUtility.Post(url, {recordId: recordId}, function (result) {
+            AjaxUtility.Delete(url, {recordId: recordId}, function (result) {
                 if (result.success) {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                         pageAppObj.reloadData();
