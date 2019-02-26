@@ -23,6 +23,7 @@
         <if test="organStatus !=null and organStatus !=''"> and ORGAN_STATUS like #{organStatus} </if>
         <if test="organCreaterOrgId !=null and organCreaterOrgId !=''"> and ORGAN_CREATER_ORG_ID like #{organCreaterOrgId} </if>
         <if test="organMainImageId !=null and organMainImageId !=''"> and ORGAN_MAIN_IMAGE_ID like #{organMainImageId} </if>
+        <if test="organDesc !=null and organDesc !=''"> and ORGAN_DESC like #{organDesc} </if>
     </where>ORDER by ORGAN_ORDER_NUM ASC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[

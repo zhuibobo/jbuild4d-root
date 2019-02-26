@@ -70,6 +70,7 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
         organEntity.setOrganIsVirtual(TrueFalseEnum.False.getDisplayName());
         organEntity.setOrganParentId(rootParentId);
         organEntity.setOrganStatus("启用");
+        organEntity.setOrganShortName("组织管理");
         this.save(jb4DSession,organEntity.getOrganId(),organEntity);
         return organEntity;
     }
