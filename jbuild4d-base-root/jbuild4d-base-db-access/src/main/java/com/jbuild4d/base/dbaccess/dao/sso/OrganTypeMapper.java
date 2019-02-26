@@ -11,4 +11,8 @@ import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
  */
 public interface OrganTypeMapper extends BaseMapper<OrganTypeEntity> {
     OrganTypeEntity selectByOrganValue(String organTypeValue);
+
+    OrganTypeEntity selectLessThanRecord(String id);
+
+    OrganTypeEntity selectGreaterThanRecord(String id);
 }

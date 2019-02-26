@@ -1,6 +1,7 @@
 package com.jbuild4d.platform.sso.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.sso.OrganTypeMapper;
+import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
@@ -9,6 +10,7 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.IUpdateBefore;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -73,5 +75,40 @@ public class OrganTypeServiceImpl extends BaseServiceImpl<OrganTypeEntity> imple
         organTypeEntity.setOrganTypeCreateTime(new Date());
         organTypeEntity.setOrganTypeStatus(EnableTypeEnum.enable.getDisplayName());
         this.save(jb4DSession,organTypeEntity.getOrganTypeId(),organTypeEntity);
+    }
+
+    @Override
+    public void statusChange(JB4DSession jb4DSession, String ids, String status) throws JBuild4DGenerallyException {
+        if(StringUtility.isNotEmpty(ids)) {
+            String[] idArray = ids.split(";");
+            for (int i = 0; i < idArray.length; i++) {
+                OrganTypeEntity entity = getByPrimaryKey(jb4DSession, idArray[i]);
+                entity.setOrganTypeStatus(status);
+                organTypeMapper.updateByPrimaryKeySelective(entity);
+            }
+        }
+    }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        OrganTypeEntity gtEntity=organTypeMapper.selectGreaterThanRecord(id);
+        switchOrder(id, gtEntity);
+    }
+
+    private void switchOrder(String id, OrganTypeEntity toEntity) {
+        if(toEntity !=null){
+            OrganTypeEntity selfEntity=organTypeMapper.selectByPrimaryKey(id);
+            int newNum= toEntity.getOrganTypeOrderNum();
+            toEntity.setOrganTypeOrderNum(selfEntity.getOrganTypeOrderNum());
+            selfEntity.setOrganTypeOrderNum(newNum);
+            organTypeMapper.updateByPrimaryKeySelective(toEntity);
+            organTypeMapper.updateByPrimaryKeySelective(selfEntity);
+        }
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        OrganTypeEntity ltEntity=organTypeMapper.selectLessThanRecord(id);
+        switchOrder(id, ltEntity);
     }
 }
