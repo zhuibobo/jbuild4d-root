@@ -1,23 +1,13 @@
 package com.jbuild4d.test.web.platform.rest.sso.organ;
-import java.util.Date;
-
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
-import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.sso.service.impl.OrganTypeServiceImpl;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 public class OrganTypeRestResourceTest extends RestTestBase {
-
 
     /**
      * 新增,修改 组织类型的Value重复测试
