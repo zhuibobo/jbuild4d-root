@@ -148,6 +148,12 @@ let replaceBlock = {
         replaceArray.push(refCss(levelPath + 'HTML/FrameV1/css/menu-types/vertical-menu.css'));
 
         return replaceArray.join("\n\t");
+    },
+    replaceGoJsLib:function (search, file) {
+        let replaceArray = new Array();
+        let levelPath = calculateFilePath(file);
+        replaceArray.push(refJs(levelPath + "Js/T3P/Go/go-debug.js"));
+        return replaceArray.join("\n\t");
     }
 }
 
