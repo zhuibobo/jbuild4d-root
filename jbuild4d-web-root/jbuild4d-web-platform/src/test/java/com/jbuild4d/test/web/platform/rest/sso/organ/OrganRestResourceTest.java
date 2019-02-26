@@ -28,13 +28,6 @@ public class OrganRestResourceTest extends RestTestBase {
 
     @Test
     public void addOrganNotDeleteTest() throws Exception {
-        /*InputStream is = this.getClass().getResourceAsStream("/OrganLogo/Logo_1.png");
-        byte[] defaultImageByte = IOUtils.toByteArray(is);
-        is.close();*/
-
-        //System.out.println(responseVo.getData());
-
-        //return responseVo;
         for (int i=1;i<11;i++) {
             String organIdL1="Root_"+i;
             NewOrgan(organIdL1,"0","Logo_"+i+".png");

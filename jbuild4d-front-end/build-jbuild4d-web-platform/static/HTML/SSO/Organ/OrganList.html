@@ -54,7 +54,7 @@
                     </div>
                     <div style="clear: both"></div>
                 </div>
-                <div id="divTreeTable" style="width: 100%;margin: auto"></div>
+                <div id="divTreeTable" style="width: 100%;margin: auto;overflow: auto"></div>
             </div>
         </tab-pane>
         <tab-pane label="组织机构图">
@@ -94,6 +94,10 @@
         el: "#appList",
         mounted: function () {
             this.reloadTreeTableData();
+
+            window.setTimeout(function () {
+                $("#divTreeTable").css("height",ListPageUtility.GetGeneralPageHeight(-20));
+            },500);
         },
         data: {
             acInterface: {
