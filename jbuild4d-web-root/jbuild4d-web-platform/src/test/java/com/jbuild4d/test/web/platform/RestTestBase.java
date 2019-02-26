@@ -1,20 +1,31 @@
 package com.jbuild4d.test.web.platform;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.web.Application;
 import com.jbuild4d.web.platform.beanconfig.sys.RootConfig;
 import com.jbuild4d.web.platform.beanconfig.sys.WebConfig;
+import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
@@ -48,5 +59,28 @@ public class RestTestBase {
         b4DSession.setUserName("Alex");
         b4DSession.setUserId("UserId");
         return b4DSession;
+    }
+
+    public JBuild4DResponseVo simpleDelete(String url,String recordId) throws Exception {
+        MockHttpServletRequestBuilder requestDeleteBuilder = delete("/PlatFormRest/SSO/OrganType/Delete.do");
+        requestDeleteBuilder.contentType(MediaType.APPLICATION_JSON_UTF8);
+        requestDeleteBuilder.sessionAttr("JB4DSession", getSession());
+
+        requestDeleteBuilder.param("recordId",recordId);
+        MvcResult result = mockMvc.perform(requestDeleteBuilder).andReturn();
+        String json = result.getResponse().getContentAsString();
+        JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        return responseVo;
+    }
+
+    public JBuild4DResponseVo simpleSaveEdit(String url,Object entity) throws Exception {
+        MockHttpServletRequestBuilder requestPostBuilder = post("/PlatFormRest/SSO/OrganType/SaveEdit.do");
+        requestPostBuilder.contentType(MediaType.APPLICATION_JSON_UTF8);
+        requestPostBuilder.sessionAttr("JB4DSession", getSession());
+        requestPostBuilder.content(JsonUtility.toObjectString(entity));
+        MvcResult result = mockMvc.perform(requestPostBuilder).andReturn();
+        String json = result.getResponse().getContentAsString();
+        JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        return responseVo;
     }
 }
