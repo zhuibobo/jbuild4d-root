@@ -14,7 +14,8 @@
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
-    <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
+    <div style="width: 80%;float: left">
+        <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
         <form-item label="组织名称：" prop="organName">
             <i-input v-model="formEntity.organName"></i-input>
         </form-item>
@@ -76,13 +77,13 @@
             <row>
                 <i-col span="10">
                     <form-item>
-                        <i-input v-model="formEntity.organContactor"></i-input>
+                        <i-input v-model="formEntity.organContacts"></i-input>
                     </form-item>
                 </i-col>
                 <i-col span="4" style="text-align: center">联系人手机：</i-col>
                 <i-col span="10">
                     <form-item>
-                        <i-input v-model="formEntity.organContactorMobile"></i-input>
+                        <i-input v-model="formEntity.organContactsMobile"></i-input>
                     </form-item>
                 </i-col>
             </row>
@@ -91,7 +92,7 @@
             <row>
                 <i-col span="10">
                     <form-item>
-                        <i-input v-model="formEntity.organDomain"></i-input>
+                        <i-input v-model="formEntity.organWebSite"></i-input>
                     </form-item>
                 </i-col>
                 <i-col span="4" style="text-align: center">传真：</i-col>
@@ -123,6 +124,18 @@
             </row>
         </form-item>
     </i-form>
+    </div>
+    <div style="width: 19%;float: right">
+        <div style="border-radius: 8px">
+            <img :src="logoImageSrc" />
+        </div>
+        <upload style="margin:10px 12px 0 20px" :data="importEXData" :before-upload="bindUploadExData" :on-success="uploadFlowModelImageSuccess" multiple type="drag" name="file" action="../../../PlatForm/Builder/FlowModel/UploadProcessModelMainImg.do" accept=".png">
+            <div style="padding:20px 0px">
+                <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>
+                <p>上传Logo</p>
+            </div>
+        </upload>
+    </div>
     <div class="button-outer-wrap">
         <div class="button-inner-wrap">
             <button-group>
@@ -138,7 +151,8 @@
         data: {
             acInterface:{
                 getDataUrl:"/PlatFormRest/SSO/Organ/GetDetailData",
-                saveDataUrl:"/PlatFormRest/SSO/Organ/SaveEdit"
+                saveDataUrl:"/PlatFormRest/SSO/Organ/SaveEdit",
+                organLogoUrl:"/PlatFormRest/SSO/Organ/GetOrganLogo"
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
             exObjectsJson:{OrganType:[]},
@@ -175,7 +189,8 @@
                     { required: true, message: '【组织简称】不能空！', trigger: 'blur' }
                 ]
             },
-            status:BaseUtility.GetUrlParaValue("op")
+            status:BaseUtility.GetUrlParaValue("op"),
+            logoImageSrc:""
         },
         mounted:function () {
             this.bindFormData();
@@ -187,6 +202,10 @@
                     appForm.exObjectsJson.OrganType=result.exKVData.exObjectsJson.OrganType;
                     if(appForm.status=="add") {
                         appForm.formEntity.organTypeValue = appForm.exObjectsJson.OrganType[0].organTypeValue;
+                        appForm.logoImageSrc = BaseUtility.BuildAction(appForm.acInterface.defaultFlowModelImage, {fileId: "defaultLogoImage"});
+                    }
+                    else {
+
                     }
                 });
             },

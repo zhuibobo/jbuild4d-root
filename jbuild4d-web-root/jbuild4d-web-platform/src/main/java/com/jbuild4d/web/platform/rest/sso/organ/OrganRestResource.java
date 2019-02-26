@@ -1,16 +1,25 @@
 package com.jbuild4d.web.platform.rest.sso.organ;
 
+import com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.base.tools.cache.JB4DCacheManager;
+import com.jbuild4d.platform.files.service.IFileInfoService;
 import com.jbuild4d.platform.sso.service.IOrganService;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +33,9 @@ public class OrganRestResource extends GeneralRestResource<OrganEntity> {
 
     @Autowired
     IOrganTypeService organTypeService;
+
+    @Autowired
+    IFileInfoService fileInfoService;
 
     @Override
     protected IBaseService<OrganEntity> getBaseService() {
@@ -48,4 +60,23 @@ public class OrganRestResource extends GeneralRestResource<OrganEntity> {
         return result;
     }
 
+    @RequestMapping(value = "/GetOrganLogo", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getProcessModelMainImg(String fileId) throws IOException, JBuild4DGenerallyException {
+        FileInfoEntity fileInfoEntity=fileInfoService.getByPrimaryKey(JB4DSessionUtility.getSession(),fileId);
+        if(fileInfoEntity==null) {
+            String cacheKey = "LogoDefaultImage";
+            if (JB4DCacheManager.exist(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey)) {
+                return JB4DCacheManager.getObject(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey);
+            } else {
+                InputStream is = this.getClass().getResourceAsStream("/static/Themes/Default/Css/Images/DefaultLogo.png");
+                byte[] defaultImageByte = IOUtils.toByteArray(is);
+                is.close();
+                JB4DCacheManager.put(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey, defaultImageByte);
+                return defaultImageByte;
+            }
+        }
+        else{
+            return fileInfoService.getContent(fileId);
+        }
+    }
 }
