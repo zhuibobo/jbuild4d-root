@@ -96,8 +96,8 @@
             this.reloadTreeTableData();
 
             window.setTimeout(function () {
-                $("#divTreeTable").css("height",ListPageUtility.GetGeneralPageHeight(-20));
-            },500);
+                $("#divTreeTable").css("height", ListPageUtility.GetGeneralPageHeight(-20));
+            }, 500);
         },
         data: {
             acInterface: {
@@ -309,12 +309,26 @@
             },
             updateTreeTableNode: function (newData) {
                 this.treeTableObject.UpdateToRow(newData[appList.treeTableConfig.IdField], newData);
+            },
+            reloadOrganData: function (rendererFunc) {
+                //var _self = this;
+                var sendData = {pageSize: 2000, pageNum: 1};
+                AjaxUtility.Post(this.acInterface.reloadData, sendData, function (result) {
+                    if (result.success) {
+                        rendererFunc(result);
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
+                }, "json");
             }
         }
     });
 </script>
 <script>
-    function init() {
+    function init(organData) {
+        console.log(organData);
+
         if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
         var $ = go.GraphObject.make;  // for conciseness in defining templates
 
@@ -372,12 +386,14 @@
             $(go.Node, "Auto",
                 // the outer shape for the node, surrounding the Table
                 $(go.Shape, "Rectangle",
-                    { stroke: null, strokeWidth: 0 },
+                    {stroke: null, strokeWidth: 0},
                     /* reddish if highlighted, blue otherwise */
-                    new go.Binding("fill", "isHighlighted", function(h) { return h ? "#F44336" : "#A7E7FC"; }).ofObject()),
+                    new go.Binding("fill", "isHighlighted", function (h) {
+                        return h ? "#F44336" : "#A7E7FC";
+                    }).ofObject()),
                 // a table to contain the different parts of the node
                 $(go.Panel, "Table",
-                    { margin: 6, maxSize: new go.Size(200, NaN) },
+                    {margin: 6, maxSize: new go.Size(200, NaN)},
                     // the two TextBlocks in column 0 both stretch in width
                     // but align on the left side
                     $(go.RowColumnDefinition,
@@ -403,7 +419,9 @@
                             alignment: go.Spot.TopRight
                         },
                         // only set a desired size if a flag is also present:
-                        new go.Binding("desiredSize", "nation", function(){ return new go.Size(34, 26) }),
+                        new go.Binding("desiredSize", "nation", function () {
+                            return new go.Size(34, 26)
+                        }),
                         new go.Binding("source", "nation", theNationFlagConverter)),
                     // the additional textual information
                     $(go.TextBlock,
@@ -418,28 +436,36 @@
         // define the Link template, a simple orthogonal line
         myDiagram.linkTemplate =
             $(go.Link, go.Link.Orthogonal,
-                { corner: 5, selectable: false },
-                $(go.Shape, { strokeWidth: 3, stroke: "#424242" } ));  // dark gray, rounded corner links
+                {corner: 5, selectable: false},
+                $(go.Shape, {strokeWidth: 3, stroke: "#424242"}));  // dark gray, rounded corner links
 
 
         // set up the nodeDataArray, describing each person/position
         var nodeDataArray = [
-            { key: 0, name: "Ban Ki-moon 반기문", nation: "South Korea", title: "Secretary-General of the United Nations", headOf: "Secretariat" },
-            { key: 1, boss: 0, name: "Patricia O'Brien", nation: "Ireland", title: "Under-Secretary-General for Legal Affairs and United Nations Legal Counsel", headOf: "Office of Legal Affairs" },
-            { key: 3, boss: 1, name: "Peter Taksøe-Jensen", nation: "Denmark", title: "Assistant Secretary-General for Legal Affairs" },
-            { key: 9, boss: 3, name: "Other Employees" }
+            {key: 0, name: "Ban Ki-moon 반기문", nation: "South Korea", title: "Secretary-General of the United Nations", headOf: "Secretariat"},
+            {
+                key: 1,
+                boss: 0,
+                name: "Patricia O'Brien",
+                nation: "Ireland",
+                title: "Under-Secretary-General for Legal Affairs and United Nations Legal Counsel",
+                headOf: "Office of Legal Affairs"
+            },
+            {key: 3, boss: 1, name: "Peter Taksøe-Jensen", nation: "Denmark", title: "Assistant Secretary-General for Legal Affairs"},
+            {key: 9, boss: 3, name: "Other Employees"}
         ];
 
         // create the Model with data for the tree, and assign to the Diagram
-        myDiagram.model =
-            $(go.TreeModel,
-                { nodeParentKeyProperty: "boss",  // this property refers to the parent node data
-                    nodeDataArray: nodeDataArray });
+        myDiagram.model = $(go.TreeModel,
+                {
+                    nodeParentKeyProperty: "organParentId",  // this property refers to the parent node data
+                    nodeDataArray: organData
+                });
 
         // Overview
         myOverview =
             $(go.Overview, "myOverviewDiv",  // the HTML DIV element for the Overview
-                { observed: myDiagram, contentAlignment: go.Spot.Center });   // tell it which Diagram to show and pan
+                {observed: myDiagram, contentAlignment: go.Spot.Center});   // tell it which Diagram to show and pan
     }
 
     // the Search functionality highlights all of the nodes that have at least one data property match a RegExp
@@ -454,10 +480,10 @@
             // search four different data properties for the string, any of which may match for success
             // create a case insensitive RegExp from what the user typed
             var regex = new RegExp(input.value, "i");
-            var results = myDiagram.findNodesByExample({ name: regex },
-                { nation: regex },
-                { title: regex },
-                { headOf: regex });
+            var results = myDiagram.findNodesByExample({name: regex},
+                {nation: regex},
+                {title: regex},
+                {headOf: regex});
             myDiagram.highlightCollection(results);
             // try to center the diagram at the first node that was found
             if (results.count > 0) myDiagram.centerRect(results.first().actualBounds);
@@ -468,7 +494,10 @@
         myDiagram.commitTransaction("highlight search");
     }
 
-    init();
+    //init();
+    appList.reloadOrganData(function (result) {
+        init(result.data.list);
+    });
 </script>
 </body>
 </html>
