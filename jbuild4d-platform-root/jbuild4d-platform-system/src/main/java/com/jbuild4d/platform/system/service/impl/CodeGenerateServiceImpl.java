@@ -71,7 +71,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
             sql="Select Name as TableName FROM SysObjects Where XType='U' and Name like #{searchTableName} orDER BY Name";
         }
         else if(DBProp.isMySql()){
-            sql="select upper(table_name) TableName from information_schema.tables where table_schema='"+DBProp.getDatabaseName()+"' and table_name like #{searchTableName} and table_type='base table'";
+            sql="select upper(table_name) TableName from information_schema.tables where table_schema='"+DBProp.getDatabaseName()+"' and table_name like #{searchTableName} and table_type='base table' and table_name not in ('DATABASECHANGELOG','DATABASECHANGELOGLOCK')";
         }
         else if(DBProp.isOracle()){
             throw JBuild4DGenerallyException.getNotSupportOracleException();

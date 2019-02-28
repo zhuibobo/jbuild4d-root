@@ -30,22 +30,12 @@
         .ivu-tabs-nav-scroll {
             float: right;
         }
-        #myOverviewDiv {
-            position: absolute;
-            width:200px;
-            height:100px;
-            top: 10px;
-            left: 10px;
-            background-color: aliceblue;
-            z-index: 300; /* make sure its in front */
-            border: solid 1px blue;
-        }
     </style>
 </head>
 <body>
 <div id="appList">
     <tabs type="card">
-        <tab-pane label="组织机构信息">
+        <tab-pane label="组织机构信息1">
             <div class="iv-list-page-wrap">
                 <div class="list-button-outer-wrap" id="list-button-wrap">
                     <div class="list-button-inner-wrap" style="margin-bottom: 10px">
@@ -83,16 +73,13 @@
         </tab-pane>
         <tab-pane label="组织机构图">
             <div>
-                <div style="float: right;width: 200px;margin-right: 10px;">
-                    <i-input search class="input_border_bottom" v-model="searchDiagramText">
-                    </i-input>
+                <div id="sample" style="position: relative;">
+                    <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; width: 100%; height: 700px"></div>
+                    <div id="myOverviewDiv"></div> <!-- Styled in a <style> tag at the top of the html page -->
+                    <input type="search" id="mySearch" onkeypress="if (event.keyCode === 13) searchDiagram()">
+                    <button onclick="searchDiagram()">Search</button>
                 </div>
-                <div id="sample" style="position: relative;top: 40px">
-                    <!--<input type="search" id="mySearch" onkeypress="if (event.keyCode === 13) searchDiagram()">
-                    <button onclick="searchDiagram()">Search</button>-->
-                    <div id="myDiagramDiv" class="div-inner-div-custom-scroll" style="background-color: white; border: solid 1px black; width: 100%;"></div>
-                    <div id="myOverviewDiv">123</div> <!-- Styled in a <style> tag at the top of the html page -->
-                </div>
+
                 <input id="xxo_photo" type="hidden" value=""><input id="hdminWidthValue" type="hidden" value="10"><input id="hdminHeightValue" type="hidden" value="10">
             </div>
         </tab-pane>
@@ -107,7 +94,6 @@
 
             window.setTimeout(function () {
                 $("#divTreeTable").css("height", ListPageUtility.GetGeneralPageHeight(-20));
-                $("#myDiagramDiv").css("height", ListPageUtility.GetGeneralPageHeight(-20));
             }, 500);
         },
         data: {
@@ -169,12 +155,6 @@
                 RendererTo: "divTreeTable",//div elem
                 TableId: "TreeTable",
                 TableAttrs: {cellpadding: "0", cellspacing: "0", border: "0"}
-            },
-            searchDiagramText:""
-        },
-        watch: {
-            searchDiagramText: function (newVal) {
-                searchDiagram(newVal);
             }
         },
         methods: {
@@ -381,8 +361,8 @@
                 });
 
         // define Converters to be used for Bindings
-        function theNationFlagConverter(fileId) {
-            return BaseUtility.BuildAction("/PlatFormRest/SSO/Organ/GetOrganLogo",{"fileId":fileId});
+        function theNationFlagConverter(nation) {
+            return "https://www.nwoods.com/go/Flags/" + nation.toLowerCase().replace(/\s/g, "-") + "-flag.Png";
         }
 
         function theInfoTextConverter(info) {
@@ -427,21 +407,19 @@
                             font: "500 16px Roboto, sans-serif",
                             alignment: go.Spot.Top
                         },
-                        new go.Binding("text", "organName")),
+                        new go.Binding("text", "name")),
                     // the country flag
                     $(go.Picture,
                         {
                             row: 0, column: 1, margin: 2,
                             imageStretch: go.GraphObject.Uniform,
-                            alignment: go.Spot.TopRight,
-                            width: 32,
-                            height: 32
+                            alignment: go.Spot.TopRight
                         },
                         // only set a desired size if a flag is also present:
                         new go.Binding("desiredSize", "nation", function () {
                             return new go.Size(34, 26)
                         }),
-                        new go.Binding("source", "organMainImageId", theNationFlagConverter)),
+                        new go.Binding("source", "nation", theNationFlagConverter)),
                     // the additional textual information
                     $(go.TextBlock,
                         {
@@ -488,18 +466,18 @@
     }
 
     // the Search functionality highlights all of the nodes that have at least one data property match a RegExp
-    function searchDiagram(searchDiagramText) {  // called by button
-        //var input = document.getElementById("mySearch");
-        //if (!input) return;
-        //input.focus();
+    function searchDiagram() {  // called by button
+        var input = document.getElementById("mySearch");
+        if (!input) return;
+        input.focus();
 
         myDiagram.startTransaction("highlight search");
 
-        if (searchDiagramText) {
+        if (input.value) {
             // search four different data properties for the string, any of which may match for success
             // create a case insensitive RegExp from what the user typed
-            var regex = new RegExp(searchDiagramText, "i");
-            var results = myDiagram.findNodesByExample({organName: regex},
+            var regex = new RegExp(input.value, "i");
+            var results = myDiagram.findNodesByExample({name: regex},
                 {nation: regex},
                 {title: regex},
                 {headOf: regex});
