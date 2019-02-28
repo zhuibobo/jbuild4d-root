@@ -392,7 +392,7 @@ Vue.component("module-list-flow-comp", {
                                 <i-button type="primary" @click="move(\'down\')" icon="md-arrow-down">下移</i-button>\
                             </ButtonGroup>\
                         </div>\
-                         <div style="float: right;width: 200px;margin-right: 10px;">\
+                        <div style="float: right;width: 200px;margin-right: 10px;">\
                             <i-input search class="input_border_bottom" v-model="searchText">\
                             </i-input>\
                         </div>\

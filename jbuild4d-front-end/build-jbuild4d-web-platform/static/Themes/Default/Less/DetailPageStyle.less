@@ -56,6 +56,32 @@
     background: @g-scrollbar-color;
 }
 
+.div-custom-scroll{
+
+}
+
+.div-custom-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.div-custom-scroll::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: @g-scrollbar-color;
+}
+
+.div-inner-div-custom-scroll{
+    div::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    div::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: @g-scrollbar-color;
+    }
+}
+
 .table-width-wraper-1024 {
     width: 1024px;
     margin: auto;

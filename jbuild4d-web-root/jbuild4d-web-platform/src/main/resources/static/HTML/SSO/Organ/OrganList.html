@@ -35,7 +35,7 @@
 <body>
 <div id="appList">
     <tabs type="card">
-        <tab-pane label="组织机构信息1">
+        <tab-pane label="组织机构信息">
             <div class="iv-list-page-wrap">
                 <div class="list-button-outer-wrap" id="list-button-wrap">
                     <div class="list-button-inner-wrap" style="margin-bottom: 10px">
@@ -73,30 +73,16 @@
         </tab-pane>
         <tab-pane label="组织机构图">
             <div>
-                <div id="sample" style="position: relative;">
-                    <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; width: 100%; height: 700px"></div>
-                    <div id="myOverviewDiv"></div> <!-- Styled in a <style> tag at the top of the html page -->
-                    <p>
-                        This sample shows an organizational chart diagram and uses an in-laid GoJS <a>Overview</a> to aid the user in navigation.
-                        The diagram uses a <a>TreeLayout</a> featuring <a>TreeLayout,StyleLastParents</a> to allow for different alignments on the last parents.
-                        The data was taken from the UN web site in August 2009.
-                    </p>
-                    <p>
-                        A search box demonstrates one way of finding and highlighting nodes whose data includes particular strings.
-                        Note that one can see all of the highlighted nodes in the Overview.
-                    </p>
-                    <input type="search" id="mySearch" onkeypress="if (event.keyCode === 13) searchDiagram()">
-                    <button onclick="searchDiagram()">Search</button>
-                    <p>
-                        To learn how to build an org chart from scratch with GoJS, see the <a href="../learn/index.html">Getting Started tutorial</a>.
-                    </p>
-                    <p>
-                        If you want to have some "assistant" nodes on the side, above the regular reports,
-                        see the <a href="orgChartAssistants.html">Org Chart Assistants</a> sample, which is a copy of this sample
-                        that uses a custom <a>TreeLayout</a> to position "assistants" that way.
-                    </p>
+                <div style="float: right;width: 200px;margin-right: 10px;">
+                    <i-input search class="input_border_bottom" v-model="searchDiagramText">
+                    </i-input>
                 </div>
-
+                <div id="sample" style="position: relative;top: 40px">
+                    <!--<input type="search" id="mySearch" onkeypress="if (event.keyCode === 13) searchDiagram()">
+                    <button onclick="searchDiagram()">Search</button>-->
+                    <div id="myDiagramDiv" class="div-inner-div-custom-scroll" style="background-color: white; border: solid 1px black; width: 100%;"></div>
+                    <div id="myOverviewDiv"></div> <!-- Styled in a <style> tag at the top of the html page -->
+                </div>
                 <input id="xxo_photo" type="hidden" value=""><input id="hdminWidthValue" type="hidden" value="10"><input id="hdminHeightValue" type="hidden" value="10">
             </div>
         </tab-pane>
@@ -111,6 +97,7 @@
 
             window.setTimeout(function () {
                 $("#divTreeTable").css("height", ListPageUtility.GetGeneralPageHeight(-20));
+                $("#myDiagramDiv").css("height", ListPageUtility.GetGeneralPageHeight(-20));
             }, 500);
         },
         data: {
@@ -172,6 +159,12 @@
                 RendererTo: "divTreeTable",//div elem
                 TableId: "TreeTable",
                 TableAttrs: {cellpadding: "0", cellspacing: "0", border: "0"}
+            },
+            searchDiagramText:""
+        },
+        watch: {
+            searchDiagramText: function (newVal) {
+                searchDiagram(newVal);
             }
         },
         methods: {
@@ -378,8 +371,8 @@
                 });
 
         // define Converters to be used for Bindings
-        function theNationFlagConverter(nation) {
-            return "https://www.nwoods.com/go/Flags/" + nation.toLowerCase().replace(/\s/g, "-") + "-flag.Png";
+        function theNationFlagConverter(fileId) {
+            return BaseUtility.BuildAction("/PlatFormRest/SSO/Organ/GetOrganLogo",{"fileId":fileId});
         }
 
         function theInfoTextConverter(info) {
@@ -424,19 +417,21 @@
                             font: "500 16px Roboto, sans-serif",
                             alignment: go.Spot.Top
                         },
-                        new go.Binding("text", "name")),
+                        new go.Binding("text", "organName")),
                     // the country flag
                     $(go.Picture,
                         {
                             row: 0, column: 1, margin: 2,
                             imageStretch: go.GraphObject.Uniform,
-                            alignment: go.Spot.TopRight
+                            alignment: go.Spot.TopRight,
+                            width: 32,
+                            height: 32
                         },
                         // only set a desired size if a flag is also present:
                         new go.Binding("desiredSize", "nation", function () {
                             return new go.Size(34, 26)
                         }),
-                        new go.Binding("source", "nation", theNationFlagConverter)),
+                        new go.Binding("source", "organMainImageId", theNationFlagConverter)),
                     // the additional textual information
                     $(go.TextBlock,
                         {
@@ -483,18 +478,18 @@
     }
 
     // the Search functionality highlights all of the nodes that have at least one data property match a RegExp
-    function searchDiagram() {  // called by button
-        var input = document.getElementById("mySearch");
-        if (!input) return;
-        input.focus();
+    function searchDiagram(searchDiagramText) {  // called by button
+        //var input = document.getElementById("mySearch");
+        //if (!input) return;
+        //input.focus();
 
         myDiagram.startTransaction("highlight search");
 
-        if (input.value) {
+        if (searchDiagramText) {
             // search four different data properties for the string, any of which may match for success
             // create a case insensitive RegExp from what the user typed
-            var regex = new RegExp(input.value, "i");
-            var results = myDiagram.findNodesByExample({name: regex},
+            var regex = new RegExp(searchDiagramText, "i");
+            var results = myDiagram.findNodesByExample({organName: regex},
                 {nation: regex},
                 {title: regex},
                 {headOf: regex});
@@ -510,6 +505,9 @@
 
     //init();
     appList.reloadOrganData(function (result) {
+        for(var i=0;i<result.data.list.length;i++){
+            result.data.list[i].key=result.data.list[i].organId;
+        }
         init(result.data.list);
     });
 </script>
