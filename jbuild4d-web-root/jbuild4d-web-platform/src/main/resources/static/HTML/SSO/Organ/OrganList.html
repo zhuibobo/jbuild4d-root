@@ -30,6 +30,16 @@
         .ivu-tabs-nav-scroll {
             float: right;
         }
+        #myOverviewDiv {
+            position: absolute;
+            width:200px;
+            height:100px;
+            top: 10px;
+            left: 10px;
+            background-color: aliceblue;
+            z-index: 300; /* make sure its in front */
+            border: solid 1px blue;
+        }
     </style>
 </head>
 <body>
@@ -81,7 +91,7 @@
                     <!--<input type="search" id="mySearch" onkeypress="if (event.keyCode === 13) searchDiagram()">
                     <button onclick="searchDiagram()">Search</button>-->
                     <div id="myDiagramDiv" class="div-inner-div-custom-scroll" style="background-color: white; border: solid 1px black; width: 100%;"></div>
-                    <div id="myOverviewDiv"></div> <!-- Styled in a <style> tag at the top of the html page -->
+                    <div id="myOverviewDiv">123</div> <!-- Styled in a <style> tag at the top of the html page -->
                 </div>
                 <input id="xxo_photo" type="hidden" value=""><input id="hdminWidthValue" type="hidden" value="10"><input id="hdminHeightValue" type="hidden" value="10">
             </div>
