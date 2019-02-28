@@ -682,8 +682,8 @@
                 <constraints nullable="false"/>
             </column>
             <column name="ORGAN_SHORT_NAME" type="NVARCHAR(150)" remarks="组织机构简称" />
-            <column name="ORGAN_NO" type="NVARCHAR(200)" remarks="组织机构号码" />
-            <column name="ORGAN_CODE" type="NVARCHAR(200)" remarks="组织机构编号" />
+            <column name="ORGAN_NO" type="NVARCHAR(200)" remarks="组织机构编号" />
+            <column name="ORGAN_CODE" type="NVARCHAR(200)" remarks="组织机构代码" />
             <column name="ORGAN_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
             <column name="ORGAN_PHONE" type="NVARCHAR(100)" remarks="联系电话" />
             <column name="ORGAN_POST" type="NVARCHAR(20)" remarks="邮政编码" />
@@ -702,6 +702,25 @@
             <column name="ORGAN_CREATER_ORG_ID" type="NVARCHAR(100)" remarks="创建组织者ID"/>
             <column name="ORGAN_MAIN_IMAGE_ID" remarks="主题Logo,关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
             <column name="ORGAN_DESC" type="NVARCHAR(2000)" remarks="组织机构备注" />
+        </createTable>
+
+        <createTable tableName="TB4D_DEPARTMENT" remarks="组织内部部门表">
+            <column name="DEPT_ID" type="NVARCHAR(100)" remarks="部门ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DEPT_NAME" type="NVARCHAR(150)" remarks="部门名称" />
+            <column name="DEPT_SHORT_NAME" type="NVARCHAR(150)" remarks="部门简称" />
+            <column name="DEPT_NO" type="NVARCHAR(200)" remarks="部门编号" />
+            <column name="DEPT_IS_VIRTUAL" type="NVARCHAR(10)" remarks="是否虚拟" />
+            <column name="DEPT_CHILD_COUNT" type="INT" remarks="子节点数量" />
+            <column name="DEPT_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+            <column name="DEPT_CREATE_USER_ID" type="NVARCHAR(100)" remarks="创建用户ID" />
+            <column name="DEPT_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="DEPT_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID" />
+            <column name="DEPT_PARENT_ID_LIST" type="NVARCHAR(1200)" remarks="父节点列表" />
+            <column name="DEPT_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用" />
+            <column name="DEPT_ORGAN_ID" type="NVARCHAR(100)" remarks="所属组织ID" />
+            <column name="DEPT_DESC" type="NVARCHAR(2000)" remarks="部门备注" />
         </createTable>
     </changeSet>
 </databaseChangeLog>
