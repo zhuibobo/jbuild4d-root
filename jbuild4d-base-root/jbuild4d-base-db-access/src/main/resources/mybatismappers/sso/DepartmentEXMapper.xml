@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.DepartmentMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_DEPARTMENT ORDER by DEPT_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_DEPARTMENT</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(DEPT_ORDER_NUM) is null then 1 else max(DEPT_ORDER_NUM)+1 end ORDERNUM from TB4D_DEPARTMENT</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DEPARTMENT<where>
+        <if test="deptName !=null and deptName !=''"> and DEPT_NAME like #{deptName} </if>
+        <if test="deptShortName !=null and deptShortName !=''"> and DEPT_SHORT_NAME like #{deptShortName} </if>
+        <if test="deptNo !=null and deptNo !=''"> and DEPT_NO like #{deptNo} </if>
+        <if test="deptIsVirtual !=null and deptIsVirtual !=''"> and DEPT_IS_VIRTUAL like #{deptIsVirtual} </if>
+        <if test="deptCreateUserId !=null and deptCreateUserId !=''"> and DEPT_CREATE_USER_ID like #{deptCreateUserId} </if>
+        <if test="deptParentId !=null and deptParentId !=''"> and DEPT_PARENT_ID like #{deptParentId} </if>
+        <if test="deptParentIdList !=null and deptParentIdList !=''"> and DEPT_PARENT_ID_LIST like #{deptParentIdList} </if>
+        <if test="deptStatus !=null and deptStatus !=''"> and DEPT_STATUS like #{deptStatus} </if>
+        <if test="deptOrganId !=null and deptOrganId !=''"> and DEPT_ORGAN_ID like #{deptOrganId} </if>
+        <if test="deptDesc !=null and deptDesc !=''"> and DEPT_DESC like #{deptDesc} </if>
+    </where>ORDER by DEPT_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DEPARTMENT
+                                                                                                          where DEPT_ORDER_NUM = (select max(DEPT_ORDER_NUM) from TB4D_DEPARTMENT where DEPT_ORDER_NUM<(select DEPT_ORDER_NUM from TB4D_DEPARTMENT where DEPT_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DEPARTMENT
+                                                                                                             where DEPT_ORDER_NUM = (select min(DEPT_ORDER_NUM) from TB4D_DEPARTMENT where DEPT_ORDER_NUM>(select DEPT_ORDER_NUM from TB4D_DEPARTMENT where DEPT_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.SsoAppMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
+        <constructor>
+            <idArg column="APP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        APP_ID, APP_NAME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_SSO_APP
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_SSO_APP
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
+        insert into TB4D_SSO_APP (APP_ID, APP_NAME)
+        values (#{appId,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
+        insert into TB4D_SSO_APP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                APP_ID,
+            </if>
+            <if test="appName != null">
+                APP_NAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="appName != null">
+                #{appName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
+        update TB4D_SSO_APP
+        <set>
+            <if test="appName != null">
+                APP_NAME = #{appName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
+        update TB4D_SSO_APP
+        set APP_NAME = #{appName,jdbcType=VARCHAR}
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+    </update>
+</mapper>

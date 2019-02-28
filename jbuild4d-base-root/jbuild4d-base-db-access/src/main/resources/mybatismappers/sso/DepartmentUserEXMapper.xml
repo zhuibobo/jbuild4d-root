@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.DepartmentUserMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_DEPARTMENT_USER ORDER by DEPT_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_DEPARTMENT_USER</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(DEPT_ORDER_NUM) is null then 1 else max(DEPT_ORDER_NUM)+1 end ORDERNUM from TB4D_DEPARTMENT_USER</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DEPARTMENT_USER<where>
+        <if test="duDeptId !=null and duDeptId !=''"> and DU_DEPT_ID like #{duDeptId} </if>
+        <if test="duUserId !=null and duUserId !=''"> and DU_USER_ID like #{duUserId} </if>
+        <if test="duIsMain !=null and duIsMain !=''"> and DU_IS_MAIN like #{duIsMain} </if>
+        <if test="duTitle !=null and duTitle !=''"> and DU_TITLE like #{duTitle} </if>
+        <if test="duDesc !=null and duDesc !=''"> and DU_DESC like #{duDesc} </if>
+    </where>ORDER by DEPT_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DEPARTMENT_USER
+                                                                                                          where DEPT_ORDER_NUM = (select max(DEPT_ORDER_NUM) from TB4D_DEPARTMENT_USER where DEPT_ORDER_NUM<(select DEPT_ORDER_NUM from TB4D_DEPARTMENT_USER where DU_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DEPARTMENT_USER
+                                                                                                             where DEPT_ORDER_NUM = (select min(DEPT_ORDER_NUM) from TB4D_DEPARTMENT_USER where DEPT_ORDER_NUM>(select DEPT_ORDER_NUM from TB4D_DEPARTMENT_USER where DU_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

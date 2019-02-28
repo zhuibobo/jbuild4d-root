@@ -722,5 +722,54 @@
             <column name="DEPT_ORGAN_ID" type="NVARCHAR(100)" remarks="所属组织ID" />
             <column name="DEPT_DESC" type="NVARCHAR(2000)" remarks="部门备注" />
         </createTable>
+
+        <createTable tableName="TB4D_DEPARTMENT_USER" remarks="部门与用户关联表">
+            <column name="DU_ID" type="NVARCHAR(100)" remarks="部门用户ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DU_DEPT_ID" type="NVARCHAR(100)" remarks="部门ID"/>
+            <column name="DU_USER_ID" type="NVARCHAR(100)" remarks="用户ID"/>
+            <column name="DU_IS_MAIN" type="NVARCHAR(100)" remarks="是否主属"/>
+            <column name="DU_TITLE" type="NVARCHAR(100)" remarks="部门用户职位"/>
+            <column name="DU_DESC" type="NVARCHAR(2000)" remarks="部门用户备注"/>
+        </createTable>
+        <createTable tableName="TB4D_USER" remarks="用户信息表">
+            <column name="USER_ID" type="NVARCHAR(100)" remarks="用户ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="USER_NAME" type="NVARCHAR(100)" remarks="用户名"/>
+            <column name="USER_ACCOUNT" type="NVARCHAR(100)" remarks="账号"/>
+            <column name="USER_PASSWORD" type="NVARCHAR(100)" remarks="密码"/>
+            <column name="USER_EMAIL" type="NVARCHAR(100)" remarks="邮件地址"/>
+            <column name="USER_PHONE_NUMBER" type="NVARCHAR(100)" remarks="手机号码"/>
+            <column name="USER_AVATAR_ID" remarks="头像ID,关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
+            <column name="USER_ORGAN_ID" type="NVARCHAR(100)" remarks="所属组织ID" />
+            <column name="USER_DESC" type="NVARCHAR(2000)" remarks="用户备注"/>
+        </createTable>
+        <createTable tableName="TB4D_ROLE" remarks="角色表">
+            <column name="ROLE_ID" type="NVARCHAR(100)" remarks="角色ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ROLE_NAME" type="NVARCHAR(100)" remarks="角色名称"/>
+        </createTable>
+        <createTable tableName="TB4D_AUTHORITY" remarks="角色权限表">
+            <column name="AUTH_ID" type="NVARCHAR(100)" remarks="权限ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ROLE_ID" type="NVARCHAR(100)" remarks="角色ID,主键" />
+        </createTable>
+        <createTable tableName="TB4D_SSO_APP" remarks="SSO集成APP表">
+            <column name="APP_ID" type="NVARCHAR(100)" remarks="SSO集成APP ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APP_NAME" type="NVARCHAR(100)" remarks="集成系统名称"/>
+        </createTable>
+        <createTable tableName="TB4D_SSO_USER_MAPPING" remarks="SSO集成APP账号映射表">
+            <column name="MAPPING_ID" type="NVARCHAR(100)" remarks="账号映射ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APP_ID" type="NVARCHAR(100)" remarks="SSO集成APP"/>
+        </createTable>
     </changeSet>
+    <!--集成消息与待办-->
 </databaseChangeLog>

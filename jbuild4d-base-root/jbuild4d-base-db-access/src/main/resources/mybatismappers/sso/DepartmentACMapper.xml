@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.DepartmentMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
+        <constructor>
+            <idArg column="DEPT_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_SHORT_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_NO" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_IS_VIRTUAL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="DEPT_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="DEPT_CREATE_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="DEPT_PARENT_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_PARENT_ID_LIST" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        DEPT_ID, DEPT_NAME, DEPT_SHORT_NAME, DEPT_NO, DEPT_IS_VIRTUAL, DEPT_CHILD_COUNT,
+        DEPT_CREATE_TIME, DEPT_CREATE_USER_ID, DEPT_ORDER_NUM, DEPT_PARENT_ID, DEPT_PARENT_ID_LIST,
+        DEPT_STATUS, DEPT_ORGAN_ID, DEPT_DESC
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_DEPARTMENT
+        where DEPT_ID = #{deptId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_DEPARTMENT
+        where DEPT_ID = #{deptId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
+        insert into TB4D_DEPARTMENT (DEPT_ID, DEPT_NAME, DEPT_SHORT_NAME,
+                                     DEPT_NO, DEPT_IS_VIRTUAL, DEPT_CHILD_COUNT,
+                                     DEPT_CREATE_TIME, DEPT_CREATE_USER_ID, DEPT_ORDER_NUM,
+                                     DEPT_PARENT_ID, DEPT_PARENT_ID_LIST, DEPT_STATUS,
+                                     DEPT_ORGAN_ID, DEPT_DESC)
+        values (#{deptId,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{deptShortName,jdbcType=VARCHAR},
+                #{deptNo,jdbcType=VARCHAR}, #{deptIsVirtual,jdbcType=VARCHAR}, #{deptChildCount,jdbcType=INTEGER},
+                #{deptCreateTime,jdbcType=TIMESTAMP}, #{deptCreateUserId,jdbcType=VARCHAR}, #{deptOrderNum,jdbcType=INTEGER},
+                #{deptParentId,jdbcType=VARCHAR}, #{deptParentIdList,jdbcType=VARCHAR}, #{deptStatus,jdbcType=VARCHAR},
+                #{deptOrganId,jdbcType=VARCHAR}, #{deptDesc,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
+        insert into TB4D_DEPARTMENT
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptId != null">
+                DEPT_ID,
+            </if>
+            <if test="deptName != null">
+                DEPT_NAME,
+            </if>
+            <if test="deptShortName != null">
+                DEPT_SHORT_NAME,
+            </if>
+            <if test="deptNo != null">
+                DEPT_NO,
+            </if>
+            <if test="deptIsVirtual != null">
+                DEPT_IS_VIRTUAL,
+            </if>
+            <if test="deptChildCount != null">
+                DEPT_CHILD_COUNT,
+            </if>
+            <if test="deptCreateTime != null">
+                DEPT_CREATE_TIME,
+            </if>
+            <if test="deptCreateUserId != null">
+                DEPT_CREATE_USER_ID,
+            </if>
+            <if test="deptOrderNum != null">
+                DEPT_ORDER_NUM,
+            </if>
+            <if test="deptParentId != null">
+                DEPT_PARENT_ID,
+            </if>
+            <if test="deptParentIdList != null">
+                DEPT_PARENT_ID_LIST,
+            </if>
+            <if test="deptStatus != null">
+                DEPT_STATUS,
+            </if>
+            <if test="deptOrganId != null">
+                DEPT_ORGAN_ID,
+            </if>
+            <if test="deptDesc != null">
+                DEPT_DESC,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptId != null">
+                #{deptId,jdbcType=VARCHAR},
+            </if>
+            <if test="deptName != null">
+                #{deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="deptShortName != null">
+                #{deptShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="deptNo != null">
+                #{deptNo,jdbcType=VARCHAR},
+            </if>
+            <if test="deptIsVirtual != null">
+                #{deptIsVirtual,jdbcType=VARCHAR},
+            </if>
+            <if test="deptChildCount != null">
+                #{deptChildCount,jdbcType=INTEGER},
+            </if>
+            <if test="deptCreateTime != null">
+                #{deptCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deptCreateUserId != null">
+                #{deptCreateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="deptOrderNum != null">
+                #{deptOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="deptParentId != null">
+                #{deptParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="deptParentIdList != null">
+                #{deptParentIdList,jdbcType=VARCHAR},
+            </if>
+            <if test="deptStatus != null">
+                #{deptStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="deptOrganId != null">
+                #{deptOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="deptDesc != null">
+                #{deptDesc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
+        update TB4D_DEPARTMENT
+        <set>
+            <if test="deptName != null">
+                DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="deptShortName != null">
+                DEPT_SHORT_NAME = #{deptShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="deptNo != null">
+                DEPT_NO = #{deptNo,jdbcType=VARCHAR},
+            </if>
+            <if test="deptIsVirtual != null">
+                DEPT_IS_VIRTUAL = #{deptIsVirtual,jdbcType=VARCHAR},
+            </if>
+            <if test="deptChildCount != null">
+                DEPT_CHILD_COUNT = #{deptChildCount,jdbcType=INTEGER},
+            </if>
+            <if test="deptCreateTime != null">
+                DEPT_CREATE_TIME = #{deptCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deptCreateUserId != null">
+                DEPT_CREATE_USER_ID = #{deptCreateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="deptOrderNum != null">
+                DEPT_ORDER_NUM = #{deptOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="deptParentId != null">
+                DEPT_PARENT_ID = #{deptParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="deptParentIdList != null">
+                DEPT_PARENT_ID_LIST = #{deptParentIdList,jdbcType=VARCHAR},
+            </if>
+            <if test="deptStatus != null">
+                DEPT_STATUS = #{deptStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="deptOrganId != null">
+                DEPT_ORGAN_ID = #{deptOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="deptDesc != null">
+                DEPT_DESC = #{deptDesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where DEPT_ID = #{deptId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
+        update TB4D_DEPARTMENT
+        set DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+            DEPT_SHORT_NAME = #{deptShortName,jdbcType=VARCHAR},
+            DEPT_NO = #{deptNo,jdbcType=VARCHAR},
+            DEPT_IS_VIRTUAL = #{deptIsVirtual,jdbcType=VARCHAR},
+            DEPT_CHILD_COUNT = #{deptChildCount,jdbcType=INTEGER},
+            DEPT_CREATE_TIME = #{deptCreateTime,jdbcType=TIMESTAMP},
+            DEPT_CREATE_USER_ID = #{deptCreateUserId,jdbcType=VARCHAR},
+            DEPT_ORDER_NUM = #{deptOrderNum,jdbcType=INTEGER},
+            DEPT_PARENT_ID = #{deptParentId,jdbcType=VARCHAR},
+            DEPT_PARENT_ID_LIST = #{deptParentIdList,jdbcType=VARCHAR},
+            DEPT_STATUS = #{deptStatus,jdbcType=VARCHAR},
+            DEPT_ORGAN_ID = #{deptOrganId,jdbcType=VARCHAR},
+            DEPT_DESC = #{deptDesc,jdbcType=VARCHAR}
+        where DEPT_ID = #{deptId,jdbcType=VARCHAR}
+    </update>
+</mapper>

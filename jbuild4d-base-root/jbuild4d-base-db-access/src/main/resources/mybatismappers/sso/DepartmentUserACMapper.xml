@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.DepartmentUserMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
+        <constructor>
+            <idArg column="DU_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DU_DEPT_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DU_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DU_IS_MAIN" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DU_TITLE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DU_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        DU_ID, DU_DEPT_ID, DU_USER_ID, DU_IS_MAIN, DU_TITLE, DU_DESC
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_DEPARTMENT_USER
+        where DU_ID = #{duId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_DEPARTMENT_USER
+        where DU_ID = #{duId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
+        insert into TB4D_DEPARTMENT_USER (DU_ID, DU_DEPT_ID, DU_USER_ID,
+                                          DU_IS_MAIN, DU_TITLE, DU_DESC
+                )
+        values (#{duId,jdbcType=VARCHAR}, #{duDeptId,jdbcType=VARCHAR}, #{duUserId,jdbcType=VARCHAR},
+                #{duIsMain,jdbcType=VARCHAR}, #{duTitle,jdbcType=VARCHAR}, #{duDesc,jdbcType=VARCHAR}
+                       )
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
+        insert into TB4D_DEPARTMENT_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="duId != null">
+                DU_ID,
+            </if>
+            <if test="duDeptId != null">
+                DU_DEPT_ID,
+            </if>
+            <if test="duUserId != null">
+                DU_USER_ID,
+            </if>
+            <if test="duIsMain != null">
+                DU_IS_MAIN,
+            </if>
+            <if test="duTitle != null">
+                DU_TITLE,
+            </if>
+            <if test="duDesc != null">
+                DU_DESC,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="duId != null">
+                #{duId,jdbcType=VARCHAR},
+            </if>
+            <if test="duDeptId != null">
+                #{duDeptId,jdbcType=VARCHAR},
+            </if>
+            <if test="duUserId != null">
+                #{duUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="duIsMain != null">
+                #{duIsMain,jdbcType=VARCHAR},
+            </if>
+            <if test="duTitle != null">
+                #{duTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="duDesc != null">
+                #{duDesc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
+        update TB4D_DEPARTMENT_USER
+        <set>
+            <if test="duDeptId != null">
+                DU_DEPT_ID = #{duDeptId,jdbcType=VARCHAR},
+            </if>
+            <if test="duUserId != null">
+                DU_USER_ID = #{duUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="duIsMain != null">
+                DU_IS_MAIN = #{duIsMain,jdbcType=VARCHAR},
+            </if>
+            <if test="duTitle != null">
+                DU_TITLE = #{duTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="duDesc != null">
+                DU_DESC = #{duDesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where DU_ID = #{duId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
+        update TB4D_DEPARTMENT_USER
+        set DU_DEPT_ID = #{duDeptId,jdbcType=VARCHAR},
+            DU_USER_ID = #{duUserId,jdbcType=VARCHAR},
+            DU_IS_MAIN = #{duIsMain,jdbcType=VARCHAR},
+            DU_TITLE = #{duTitle,jdbcType=VARCHAR},
+            DU_DESC = #{duDesc,jdbcType=VARCHAR}
+        where DU_ID = #{duId,jdbcType=VARCHAR}
+    </update>
+</mapper>

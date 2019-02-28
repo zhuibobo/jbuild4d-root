@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.UserMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
+        <constructor>
+            <idArg column="USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_ACCOUNT" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_PHONE_NUMBER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_AVATAR_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        USER_ID, USER_NAME, USER_ACCOUNT, USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER, USER_AVATAR_ID,
+        USER_ORGAN_ID, USER_DESC
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_USER
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_USER
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
+        insert into TB4D_USER (USER_ID, USER_NAME, USER_ACCOUNT,
+                               USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER,
+                               USER_AVATAR_ID, USER_ORGAN_ID, USER_DESC
+                )
+        values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR},
+                #{userPassword,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userPhoneNumber,jdbcType=VARCHAR},
+                #{userAvatarId,jdbcType=VARCHAR}, #{userOrganId,jdbcType=VARCHAR}, #{userDesc,jdbcType=VARCHAR}
+                       )
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
+        insert into TB4D_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="userAccount != null">
+                USER_ACCOUNT,
+            </if>
+            <if test="userPassword != null">
+                USER_PASSWORD,
+            </if>
+            <if test="userEmail != null">
+                USER_EMAIL,
+            </if>
+            <if test="userPhoneNumber != null">
+                USER_PHONE_NUMBER,
+            </if>
+            <if test="userAvatarId != null">
+                USER_AVATAR_ID,
+            </if>
+            <if test="userOrganId != null">
+                USER_ORGAN_ID,
+            </if>
+            <if test="userDesc != null">
+                USER_DESC,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userAccount != null">
+                #{userAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhoneNumber != null">
+                #{userPhoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="userAvatarId != null">
+                #{userAvatarId,jdbcType=VARCHAR},
+            </if>
+            <if test="userOrganId != null">
+                #{userOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="userDesc != null">
+                #{userDesc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
+        update TB4D_USER
+        <set>
+            <if test="userName != null">
+                USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userAccount != null">
+                USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhoneNumber != null">
+                USER_PHONE_NUMBER = #{userPhoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="userAvatarId != null">
+                USER_AVATAR_ID = #{userAvatarId,jdbcType=VARCHAR},
+            </if>
+            <if test="userOrganId != null">
+                USER_ORGAN_ID = #{userOrganId,jdbcType=VARCHAR},
+            </if>
+            <if test="userDesc != null">
+                USER_DESC = #{userDesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
+        update TB4D_USER
+        set USER_NAME = #{userName,jdbcType=VARCHAR},
+            USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+            USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+            USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+            USER_PHONE_NUMBER = #{userPhoneNumber,jdbcType=VARCHAR},
+            USER_AVATAR_ID = #{userAvatarId,jdbcType=VARCHAR},
+            USER_ORGAN_ID = #{userOrganId,jdbcType=VARCHAR},
+            USER_DESC = #{userDesc,jdbcType=VARCHAR}
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </update>
+</mapper>
