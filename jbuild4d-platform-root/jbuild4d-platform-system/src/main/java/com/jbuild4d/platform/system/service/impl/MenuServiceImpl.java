@@ -186,7 +186,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         save(jb4DSession,systemSettingParasSettingMenu.getMenuId(),systemSettingParasSettingMenu);*/
         createMenu(jb4DSession,systemSettingRootMenu.getMenuId(),"JB4DSystemSettingParasSetting",
                 "参数设置","参数设置","参数设置",
-                "System/OperationLog/OperationLogList.html","");
+                "System/ParasSetting/ParasSettingList.html","");
 
         //根菜单->系统设置分组->代码生成
         /*String systemSettingCodeGenerateId="JB4DSystemSettingCodeGenerate";
@@ -214,7 +214,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         save(jb4DSession,systemSettingCacheManageMenu.getMenuId(),systemSettingCacheManageMenu);*/
         createMenu(jb4DSession,systemSettingRootMenu.getMenuId(),"JB4DSystemSettingCacheManage",
                 "缓存管理","缓存管理","缓存管理",
-                "OrganRelevance/Organ/OrganList.html","");
+                "System/Cache/CacheList.html","");
 
         //根菜单->统一用户与单点登录
         MenuEntity ssoRootMenu=createMenu(jb4DSession,rootMenu.getMenuId(),"JB4DSSORootMenu",
@@ -225,11 +225,21 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 "组织类型","组织类型","组织类型",
                 "SSO/OrganType/OrganTypeList.html","");
 
-
         createMenu(jb4DSession,ssoRootMenu.getMenuId(),"JB4DOrganManage",
                 "组织机构","组织机构","组织机构",
                 "SSO/Organ/OrganList.html","");
 
+        createMenu(jb4DSession,ssoRootMenu.getMenuId(),"JB4DDepartmentManage",
+                "部门管理","部门管理","部门管理",
+                "SSO/Department/DepartmentManager.html","");
+
+        createMenu(jb4DSession,ssoRootMenu.getMenuId(),"JB4DRoleManage",
+                "角色管理","角色管理","角色管理",
+                "","");
+
+        createMenu(jb4DSession,ssoRootMenu.getMenuId(),"JB4DAppManage",
+                "应用管理","应用管理","应用管理",
+                "","");
 
         //根菜单->应用设计
         /*String appBuilderRootId="JB4DSystemAppBuilderRoot";
