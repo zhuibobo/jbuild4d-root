@@ -85,13 +85,14 @@
     var appList=new Vue({
         el:"#appList",
         mounted:function () {
-            this.initTree();
+            //this.initTree();
             window.setTimeout(function () {
                 appList.listHeight=ListPageUtility.GetGeneralPageHeight(-20);
             },500);
             var oldSelectedOrganId=CookieUtility.GetCookie("DMORGSID");
             if(oldSelectedOrganId){
                 this.$refs.selectOrganComp.setOldSelectedOrgan(oldSelectedOrganId);
+                this.initTree(oldSelectedOrganId);
             }
         },
         data:{
@@ -219,11 +220,12 @@
         methods:{
             <!--Organ-->
             changeOrgan:function(organData){
-                console.log(organData);
+                //console.log(organData);
                 CookieUtility.SetCookie1Month("DMORGSID",organData.organId);
+                this.initTree(organData.organId);
             },
-            <!--Tree-->
-            initTree:function () {
+            <!--DepartmentTree-->
+            initTree:function (organId) {
                 this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});
                 this.treeObj=$.fn.zTree.init($("#zTreeUL"), this.treeSetting);
             },

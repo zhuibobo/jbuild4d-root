@@ -9,8 +9,7 @@ import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTreeTableMapper;
 import com.jbuild4d.base.dbaccess.dao.files.FileContentMapper;
 import com.jbuild4d.base.dbaccess.dao.files.FileInfoMapper;
 import com.jbuild4d.base.dbaccess.dao.files.FileRefMapper;
-import com.jbuild4d.base.dbaccess.dao.sso.OrganMapper;
-import com.jbuild4d.base.dbaccess.dao.sso.OrganTypeMapper;
+import com.jbuild4d.base.dbaccess.dao.sso.*;
 import com.jbuild4d.base.dbaccess.dao.systemsetting.*;
 import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
@@ -181,16 +180,6 @@ public class MybatisBeansConfig {
     }
 
     @Bean
-    public OrganMapper organMapper(SqlSessionTemplate sqlSessionTemplate) {
-        return sqlSessionTemplate.getMapper(OrganMapper.class);
-    }
-
-    @Bean
-    public OrganTypeMapper organTypeMapper(SqlSessionTemplate sqlSessionTemplate) {
-        return sqlSessionTemplate.getMapper(OrganTypeMapper.class);
-    }
-
-    @Bean
     public TableGroupMapper tableGroupMapper(SqlSessionTemplate sqlSessionTemplate) {
         return sqlSessionTemplate.getMapper(TableGroupMapper.class);
     }
@@ -274,6 +263,53 @@ public class MybatisBeansConfig {
     public HistoryDataMapper historyDataMapper(SqlSessionTemplate sqlSessionTemplate){
         return sqlSessionTemplate.getMapper(HistoryDataMapper.class);
     }
+
+    //SSO-Mapper-Beans
+    @Bean
+    public OrganTypeMapper organTypeMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(OrganTypeMapper.class);
+    }
+
+    @Bean
+    public OrganMapper organMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(OrganMapper.class);
+    }
+
+    @Bean
+    public DepartmentMapper departmentMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(DepartmentMapper.class);
+    }
+
+    @Bean
+    public DepartmentUserMapper departmentUserMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(DepartmentUserMapper.class);
+    }
+
+    @Bean
+    public RoleMapper roleMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(RoleMapper.class);
+    }
+
+    @Bean
+    public SsoAppMapper ssoAppMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(SsoAppMapper.class);
+    }
+
+    @Bean
+    public SsoUserMappingMapper ssoUserMappingMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(SsoUserMappingMapper.class);
+    }
+
+    @Bean
+    public UserMapper userMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(UserMapper.class);
+    }
+
+    @Bean
+    public AuthorityMapper authorityMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(AuthorityMapper.class);
+    }
+
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);

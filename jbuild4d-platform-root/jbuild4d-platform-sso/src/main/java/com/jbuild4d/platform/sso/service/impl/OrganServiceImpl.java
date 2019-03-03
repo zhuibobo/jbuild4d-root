@@ -27,6 +27,8 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
     private String rootParentId="-1";
 
     OrganMapper organMapper;
+
+
     public OrganServiceImpl(OrganMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         organMapper=_defaultBaseMapper;
