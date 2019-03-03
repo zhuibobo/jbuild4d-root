@@ -1,5 +1,6 @@
 package com.jbuild4d.web.platform.rest.sso.organ;
 
+import com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity;
 import com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
@@ -88,5 +89,11 @@ public class OrganRestResource extends GeneralRestResource<OrganEntity> {
         else{
             return fileInfoService.getContent(fileId);
         }
+    }
+
+    @RequestMapping(value = "/GetFullOrgan", method = RequestMethod.POST)
+    public JBuild4DResponseVo getFullOrgan() {
+        List<OrganEntity> organEntityList=organService.getALL(JB4DSessionUtility.getSession());
+        return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,organEntityList);
     }
 }

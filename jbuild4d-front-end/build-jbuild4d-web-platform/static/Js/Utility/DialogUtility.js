@@ -270,6 +270,9 @@ var DialogUtility={
     DialogElem:function (elemId,config) {
         $("#"+elemId).dialog(config);
     },
+    DialogElemObj:function (elemObj,config) {
+        $(elemObj).dialog(config);
+    },
     OpenIframeWindow:function(openerwindow, dialogId, url, options, whtype){
         var defaultoptions = {
             height: 410,

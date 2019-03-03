@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class JBuild4DResponseVo {
     public static final String SUCCESSMSG = "操作成功!";
+    public static final String GETDATASUCCESSMSG = "获取数据成功!";
     /**
      * 是否成功
      */
