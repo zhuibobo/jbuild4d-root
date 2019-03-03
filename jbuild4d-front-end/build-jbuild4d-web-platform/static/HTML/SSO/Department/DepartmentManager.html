@@ -10,7 +10,7 @@
 <body>
 <div id="appList" class="list-2column">
     <div class="left-outer-wrap" style="width: 250px;">
-        <select-view-organ></select-view-organ>
+        <select-organ-single-comp @on-selected-organ="changeOrgan" ref="selectOrganComp"></select-organ-single-comp>
         <div class="inner-wrap" style="position:absolute;top: 30px;bottom: 10px;height: auto">
             <div class="tool-bar-wrap">
                 <div alt="新增分类组" title="新增分类组" class="add" @click="addGroup()"></div>
@@ -89,6 +89,10 @@
             window.setTimeout(function () {
                 appList.listHeight=ListPageUtility.GetGeneralPageHeight(-20);
             },500);
+            var oldSelectedOrganId=CookieUtility.GetCookie("DMORGSID");
+            if(oldSelectedOrganId){
+                this.$refs.selectOrganComp.setOldSelectedOrgan(oldSelectedOrganId);
+            }
         },
         data:{
             acInterface:{
@@ -213,6 +217,11 @@
             listHeight: ListPageUtility.DefaultListHeight_50()
         },
         methods:{
+            <!--Organ-->
+            changeOrgan:function(organData){
+                console.log(organData);
+                CookieUtility.SetCookie1Month("DMORGSID",organData.organId);
+            },
             <!--Tree-->
             initTree:function () {
                 this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});

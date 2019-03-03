@@ -356,10 +356,10 @@ var DialogUtility={
         //alert(dialogId);
         openerwindow.OpenerWindowObj.DialogUtility.CloseDialog(dialogId)
     },
-    CloseDialog:function(dialogId){
+    CloseDialogElem:function(dialogElem){
         //debugger;
-        this._GetElem(dialogId).find("iframe").remove();
-        $(this._GetElem(dialogId)).dialog("close");
+        $(dialogElem).find("iframe").remove();
+        $(dialogElem).dialog("close");
 
         try {
             if($("#Forfocus").length>0){
@@ -369,6 +369,21 @@ var DialogUtility={
         catch(e){
 
         }
+    },
+    CloseDialog:function(dialogId){
+        //debugger;
+        /*this._GetElem(dialogId).find("iframe").remove();
+        $(this._GetElem(dialogId)).dialog("close");
+
+        try {
+            if($("#Forfocus").length>0){
+                $("#Forfocus")[0].focus();
+            }
+        }
+        catch(e){
+
+        }*/
+        this.CloseDialogElem(this._GetElem(dialogId));
     },
     OpenNewWindow: function (openerwindow, dialogId, url, options, whtype) {
         var width=0;
