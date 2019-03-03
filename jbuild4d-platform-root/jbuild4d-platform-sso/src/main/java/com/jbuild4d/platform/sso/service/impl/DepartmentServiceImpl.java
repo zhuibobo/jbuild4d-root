@@ -33,6 +33,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentEntity> imp
 
     @Override
     public boolean organCreated(JB4DSession jb4DSession, OrganEntity organEntity) {
+
         return true;
     }
 }
