@@ -14,6 +14,7 @@ import org.springframework.web.context.ContextLoader;
 public class JB4DCacheManager {
 
     public static String jb4dPlatformBuilderCacheName="jb4dPlatformBuilder";
+    public static String jb4dPlatformSSOCacheName="jb4dPlatformSSO";
 
     private static CacheManager cacheManager = BeanUtility.getBean(CacheManager.class);
 

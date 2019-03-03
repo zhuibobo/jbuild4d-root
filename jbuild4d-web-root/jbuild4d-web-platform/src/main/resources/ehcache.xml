@@ -22,4 +22,6 @@
     </cache-template>
     <cache alias="jb4dPlatformBuilder" uses-template="jb4dCacheDefault">
     </cache>
+    <cache alias="jb4dPlatformSSO" uses-template="jb4dCacheDefault">
+    </cache>
 </config>

@@ -716,7 +716,8 @@
             <column name="DEPT_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
             <column name="DEPT_CREATE_USER_ID" type="NVARCHAR(100)" remarks="创建用户ID" />
             <column name="DEPT_ORDER_NUM" type="INT" remarks="排序号" />
-            <column name="DEPT_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID" />
+            <column name="DEPT_IS_ROOT" type="NVARCHAR(10)" remarks="是否根节点,根节点再组织创建时自动创建" />
+            <column name="DEPT_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID,根节点的ParentId为0" />
             <column name="DEPT_PARENT_ID_LIST" type="NVARCHAR(1200)" remarks="父节点列表" />
             <column name="DEPT_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用" />
             <column name="DEPT_ORGAN_ID" type="NVARCHAR(100)" remarks="所属组织ID" />

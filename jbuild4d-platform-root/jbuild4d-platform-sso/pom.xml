@@ -11,5 +11,10 @@
 
     <artifactId>jbuild4d-platform-sso</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>jbuild4d</groupId>
+            <artifactId>jbuild4d-platform-system</artifactId>
+        </dependency>
+    </dependencies>
 </project>

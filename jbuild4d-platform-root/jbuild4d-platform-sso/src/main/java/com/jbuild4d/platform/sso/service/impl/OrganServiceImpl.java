@@ -8,11 +8,23 @@ import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.base.tools.cache.IBuildGeneralObj;
+import com.jbuild4d.base.tools.cache.JB4DCacheManager;
+import com.jbuild4d.base.tools.common.BeanUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
+import com.jbuild4d.base.tools.common.XMLUtility;
+import com.jbuild4d.platform.sso.service.ICreateOrganAware;
+import com.jbuild4d.platform.sso.service.IDepartmentService;
 import com.jbuild4d.platform.sso.service.IOrganService;
+import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
+import javax.xml.xpath.XPathExpressionException;
+import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,17 +38,26 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
     private String rootId="0";
     private String rootParentId="-1";
 
+    String configResource= "/sso/OrganInitConfig.xml";
+    Document xmlDocument=null;
+
     OrganMapper organMapper;
+    IJb4dCacheService jb4dCacheService;
 
-
-    public OrganServiceImpl(OrganMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
+    public OrganServiceImpl(OrganMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService,IJb4dCacheService _jb4dCacheService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         organMapper=_defaultBaseMapper;
+        jb4dCacheService=_jb4dCacheService;
     }
 
     @Override
     public int save(JB4DSession jb4DSession, String id, OrganEntity record) throws JBuild4DGenerallyException {
-        return super.save(jb4DSession,id, record, new IAddBefore<OrganEntity>() {
+        boolean isNew=false;
+        if(this.getByPrimaryKey(jb4DSession,id)==null){
+            isNew=true;
+        }
+
+        int result=super.save(jb4DSession,id, record, new IAddBefore<OrganEntity>() {
             @Override
             public OrganEntity run(JB4DSession jb4DSession,OrganEntity sourceEntity) throws JBuild4DGenerallyException {
                 sourceEntity.setOrganChildCount(0);
@@ -56,6 +77,47 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
                 }
                 sourceEntity.setOrganParentIdList(parentIdList+"*"+sourceEntity.getOrganId());
                 return sourceEntity;
+            }
+        });
+
+        if(isNew){
+
+            xmlDocument=getOrganInitConfigDoc();
+            try {
+                List<Node> nodeList=XMLUtility.parseForNodeList(xmlDocument,"//Bean");
+                for (Node node : nodeList) {
+                    String beanName=XMLUtility.getAttribute(node,"Name");
+                    ICreateOrganAware createOrganAware= BeanUtility.getBean(beanName);
+                    if(createOrganAware==null){
+                        throw new JBuild4DGenerallyException("再容器中找不到名称为"+beanName+"的Bean");
+                    }
+                    else {
+                        createOrganAware.organCreated(jb4DSession,record);
+                    }
+                }
+
+            } catch (XPathExpressionException e) {
+                throw new JBuild4DGenerallyException(e);
+            }
+        }
+
+        return result;
+    }
+
+    private Document getOrganInitConfigDoc() throws JBuild4DGenerallyException {
+        return JB4DCacheManager.autoGetFromCache(JB4DCacheManager.jb4dPlatformSSOCacheName, jb4dCacheService.sysRunStatusIsDebug(), "OrganServiceImpl.getOrganInitConfigDoc", new IBuildGeneralObj<Document>() {
+            @Override
+            public Document BuildObj() throws JBuild4DGenerallyException {
+                try
+                {
+                    InputStream inputStream = this.getClass().getResourceAsStream(configResource);
+                    Document _xml = XMLUtility.parseForDoc(inputStream);
+                    return _xml;
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                    throw new JBuild4DGenerallyException(ex.getMessage());
+                }
             }
         });
     }

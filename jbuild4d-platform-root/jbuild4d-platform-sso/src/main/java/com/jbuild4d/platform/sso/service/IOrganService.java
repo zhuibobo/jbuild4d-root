@@ -12,5 +12,6 @@ import com.jbuild4d.base.service.general.JB4DSession;
  * To change this template use File | Settings | File Templates.
  */
 public interface IOrganService extends IBaseService<OrganEntity> {
+
     OrganEntity createRootOrgan(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
 }

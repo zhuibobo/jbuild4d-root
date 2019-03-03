@@ -2,7 +2,9 @@ package com.jbuild4d.web.platform.beanconfig.sys;
 
 import com.jbuild4d.base.tools.common.BeanUtility;
 import com.jbuild4d.base.tools.common.PathUtility;
+import com.jbuild4d.web.platform.beanconfig.service.SSOBeansConfig;
 import com.jbuild4d.web.platform.interceptor.LoginedInterceptor;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +32,7 @@ import java.util.List;
 @Configuration
 /*@EnableWebMvc*/
 @ComponentScan("com.jbuild4d.web")
+@AutoConfigureBefore(SSOBeansConfig.class)
 public class WebConfig implements WebMvcConfigurer {
 
     /*@Bean

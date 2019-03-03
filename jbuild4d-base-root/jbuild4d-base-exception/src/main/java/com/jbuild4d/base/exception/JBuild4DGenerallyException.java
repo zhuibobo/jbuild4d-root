@@ -8,6 +8,11 @@ public class JBuild4DGenerallyException extends JBuild4DBaseException {
         super(defaultCode, message);
     }
 
+    public JBuild4DGenerallyException(Exception ex) {
+        //super(ex.getCause());
+        super(defaultCode, ex.getMessage(),ex.getCause());
+    }
+
     public JBuild4DGenerallyException(int errorCode, String message) {
         super(errorCode, message);
     }
