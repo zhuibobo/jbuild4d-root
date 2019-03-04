@@ -173,7 +173,7 @@
                         var _self=this;
                         var recordId=nodeData[appList.treeTableConfig.IdField];
                         DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
-                            AjaxUtility.Post(_self.acInterface.delete, {recordId: recordId}, function (result) {
+                            AjaxUtility.Delete(_self.acInterface.delete, {recordId: recordId}, function (result) {
                                 if (result.success) {
                                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                         _self.treeTableObject.DeleteRow(recordId);
