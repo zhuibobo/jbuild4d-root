@@ -1,18 +1,9 @@
 package com.jbuild4d.web.platform.beanconfig.service;
 
-import com.jbuild4d.base.dbaccess.dao.sso.DepartmentMapper;
-import com.jbuild4d.base.dbaccess.dao.sso.DepartmentUserMapper;
-import com.jbuild4d.base.dbaccess.dao.sso.OrganMapper;
-import com.jbuild4d.base.dbaccess.dao.sso.OrganTypeMapper;
+import com.jbuild4d.base.dbaccess.dao.sso.*;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.platform.sso.service.IDepartmentService;
-import com.jbuild4d.platform.sso.service.IDepartmentUserService;
-import com.jbuild4d.platform.sso.service.IOrganService;
-import com.jbuild4d.platform.sso.service.IOrganTypeService;
-import com.jbuild4d.platform.sso.service.impl.DepartmentServiceImpl;
-import com.jbuild4d.platform.sso.service.impl.DepartmentUserServiceImpl;
-import com.jbuild4d.platform.sso.service.impl.OrganServiceImpl;
-import com.jbuild4d.platform.sso.service.impl.OrganTypeServiceImpl;
+import com.jbuild4d.platform.sso.service.*;
+import com.jbuild4d.platform.sso.service.impl.*;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
@@ -43,9 +34,15 @@ public class SSOBeansConfig {
     }
 
     @Bean
-    IDepartmentUserService departmentUserService(ISQLBuilderService _sqlBuilderService, DepartmentUserMapper mapper, SqlSessionTemplate sqlSessionTemplate){
-        IDepartmentUserService departmentUserService=new DepartmentUserServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+    IDepartmentUserService departmentUserService(ISQLBuilderService _sqlBuilderService, DepartmentUserMapper mapper, SqlSessionTemplate sqlSessionTemplate, IUserService userService){
+        IDepartmentUserService departmentUserService=new DepartmentUserServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,userService);
         return departmentUserService;
+    }
+
+    @Bean
+    IUserService userService(ISQLBuilderService _sqlBuilderService, UserMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        IUserService userService=new UserServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return userService;
     }
 
     @PostConstruct

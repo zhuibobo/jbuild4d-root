@@ -3,47 +3,48 @@
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.systemsetting.SettingMapper">
   <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.systemsetting.SettingEntity">
     <constructor>
-      <idArg column="SETTING_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SETTING_KEY" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SETTING_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SETTING_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SETTING_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SETTING_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <idArg column="SETTING_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_KEY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_VALUE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="SETTING_CREATETIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="SETTING_USER_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SETTING_USER_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SETTING_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SETTING_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SETTING_API" javaType="java.lang.String" jdbcType="NVARCHAR" />
-      <arg column="SETTING_IS_SYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
+      <arg column="SETTING_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_API" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_IS_SYSTEM" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SETTING_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    SETTING_ID, SETTING_KEY, SETTING_NAME, SETTING_VALUE, SETTING_STATUS, SETTING_DESC, 
-    SETTING_CREATETIME, SETTING_USER_ID, SETTING_USER_NAME, SETTING_ORGAN_ID, SETTING_ORGAN_NAME, 
-    SETTING_API, SETTING_IS_SYSTEM
+    SETTING_ID, SETTING_KEY, SETTING_NAME, SETTING_VALUE, SETTING_STATUS, SETTING_DESC,
+    SETTING_CREATETIME, SETTING_USER_ID, SETTING_USER_NAME, SETTING_ORGAN_ID, SETTING_ORGAN_NAME,
+    SETTING_API, SETTING_IS_SYSTEM, SETTING_ORDER_NUM
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from TB4D_SETTING
-    where SETTING_ID = #{settingId,jdbcType=NVARCHAR}
+    where SETTING_ID = #{settingId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from TB4D_SETTING
-    where SETTING_ID = #{settingId,jdbcType=NVARCHAR}
+    where SETTING_ID = #{settingId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.SettingEntity">
-    insert into TB4D_SETTING (SETTING_ID, SETTING_KEY, SETTING_NAME, 
-      SETTING_VALUE, SETTING_STATUS, SETTING_DESC, 
-      SETTING_CREATETIME, SETTING_USER_ID, SETTING_USER_NAME, 
-      SETTING_ORGAN_ID, SETTING_ORGAN_NAME, SETTING_API, 
-      SETTING_IS_SYSTEM)
-    values (#{settingId,jdbcType=NVARCHAR}, #{settingKey,jdbcType=NVARCHAR}, #{settingName,jdbcType=NVARCHAR}, 
-      #{settingValue,jdbcType=NVARCHAR}, #{settingStatus,jdbcType=NVARCHAR}, #{settingDesc,jdbcType=NVARCHAR}, 
-      #{settingCreatetime,jdbcType=TIMESTAMP}, #{settingUserId,jdbcType=NVARCHAR}, #{settingUserName,jdbcType=NVARCHAR}, 
-      #{settingOrganId,jdbcType=NVARCHAR}, #{settingOrganName,jdbcType=NVARCHAR}, #{settingApi,jdbcType=NVARCHAR}, 
-      #{settingIsSystem,jdbcType=NVARCHAR})
+    insert into TB4D_SETTING (SETTING_ID, SETTING_KEY, SETTING_NAME,
+                              SETTING_VALUE, SETTING_STATUS, SETTING_DESC,
+                              SETTING_CREATETIME, SETTING_USER_ID, SETTING_USER_NAME,
+                              SETTING_ORGAN_ID, SETTING_ORGAN_NAME, SETTING_API,
+                              SETTING_IS_SYSTEM, SETTING_ORDER_NUM)
+    values (#{settingId,jdbcType=VARCHAR}, #{settingKey,jdbcType=VARCHAR}, #{settingName,jdbcType=VARCHAR},
+            #{settingValue,jdbcType=VARCHAR}, #{settingStatus,jdbcType=VARCHAR}, #{settingDesc,jdbcType=VARCHAR},
+            #{settingCreatetime,jdbcType=TIMESTAMP}, #{settingUserId,jdbcType=VARCHAR}, #{settingUserName,jdbcType=VARCHAR},
+            #{settingOrganId,jdbcType=VARCHAR}, #{settingOrganName,jdbcType=VARCHAR}, #{settingApi,jdbcType=VARCHAR},
+            #{settingIsSystem,jdbcType=VARCHAR}, #{settingOrderNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.SettingEntity">
     insert into TB4D_SETTING
@@ -87,46 +88,52 @@
       <if test="settingIsSystem != null">
         SETTING_IS_SYSTEM,
       </if>
+      <if test="settingOrderNum != null">
+        SETTING_ORDER_NUM,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="settingId != null">
-        #{settingId,jdbcType=NVARCHAR},
+        #{settingId,jdbcType=VARCHAR},
       </if>
       <if test="settingKey != null">
-        #{settingKey,jdbcType=NVARCHAR},
+        #{settingKey,jdbcType=VARCHAR},
       </if>
       <if test="settingName != null">
-        #{settingName,jdbcType=NVARCHAR},
+        #{settingName,jdbcType=VARCHAR},
       </if>
       <if test="settingValue != null">
-        #{settingValue,jdbcType=NVARCHAR},
+        #{settingValue,jdbcType=VARCHAR},
       </if>
       <if test="settingStatus != null">
-        #{settingStatus,jdbcType=NVARCHAR},
+        #{settingStatus,jdbcType=VARCHAR},
       </if>
       <if test="settingDesc != null">
-        #{settingDesc,jdbcType=NVARCHAR},
+        #{settingDesc,jdbcType=VARCHAR},
       </if>
       <if test="settingCreatetime != null">
         #{settingCreatetime,jdbcType=TIMESTAMP},
       </if>
       <if test="settingUserId != null">
-        #{settingUserId,jdbcType=NVARCHAR},
+        #{settingUserId,jdbcType=VARCHAR},
       </if>
       <if test="settingUserName != null">
-        #{settingUserName,jdbcType=NVARCHAR},
+        #{settingUserName,jdbcType=VARCHAR},
       </if>
       <if test="settingOrganId != null">
-        #{settingOrganId,jdbcType=NVARCHAR},
+        #{settingOrganId,jdbcType=VARCHAR},
       </if>
       <if test="settingOrganName != null">
-        #{settingOrganName,jdbcType=NVARCHAR},
+        #{settingOrganName,jdbcType=VARCHAR},
       </if>
       <if test="settingApi != null">
-        #{settingApi,jdbcType=NVARCHAR},
+        #{settingApi,jdbcType=VARCHAR},
       </if>
       <if test="settingIsSystem != null">
-        #{settingIsSystem,jdbcType=NVARCHAR},
+        #{settingIsSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="settingOrderNum != null">
+        #{settingOrderNum,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -134,58 +141,62 @@
     update TB4D_SETTING
     <set>
       <if test="settingKey != null">
-        SETTING_KEY = #{settingKey,jdbcType=NVARCHAR},
+        SETTING_KEY = #{settingKey,jdbcType=VARCHAR},
       </if>
       <if test="settingName != null">
-        SETTING_NAME = #{settingName,jdbcType=NVARCHAR},
+        SETTING_NAME = #{settingName,jdbcType=VARCHAR},
       </if>
       <if test="settingValue != null">
-        SETTING_VALUE = #{settingValue,jdbcType=NVARCHAR},
+        SETTING_VALUE = #{settingValue,jdbcType=VARCHAR},
       </if>
       <if test="settingStatus != null">
-        SETTING_STATUS = #{settingStatus,jdbcType=NVARCHAR},
+        SETTING_STATUS = #{settingStatus,jdbcType=VARCHAR},
       </if>
       <if test="settingDesc != null">
-        SETTING_DESC = #{settingDesc,jdbcType=NVARCHAR},
+        SETTING_DESC = #{settingDesc,jdbcType=VARCHAR},
       </if>
       <if test="settingCreatetime != null">
         SETTING_CREATETIME = #{settingCreatetime,jdbcType=TIMESTAMP},
       </if>
       <if test="settingUserId != null">
-        SETTING_USER_ID = #{settingUserId,jdbcType=NVARCHAR},
+        SETTING_USER_ID = #{settingUserId,jdbcType=VARCHAR},
       </if>
       <if test="settingUserName != null">
-        SETTING_USER_NAME = #{settingUserName,jdbcType=NVARCHAR},
+        SETTING_USER_NAME = #{settingUserName,jdbcType=VARCHAR},
       </if>
       <if test="settingOrganId != null">
-        SETTING_ORGAN_ID = #{settingOrganId,jdbcType=NVARCHAR},
+        SETTING_ORGAN_ID = #{settingOrganId,jdbcType=VARCHAR},
       </if>
       <if test="settingOrganName != null">
-        SETTING_ORGAN_NAME = #{settingOrganName,jdbcType=NVARCHAR},
+        SETTING_ORGAN_NAME = #{settingOrganName,jdbcType=VARCHAR},
       </if>
       <if test="settingApi != null">
-        SETTING_API = #{settingApi,jdbcType=NVARCHAR},
+        SETTING_API = #{settingApi,jdbcType=VARCHAR},
       </if>
       <if test="settingIsSystem != null">
-        SETTING_IS_SYSTEM = #{settingIsSystem,jdbcType=NVARCHAR},
+        SETTING_IS_SYSTEM = #{settingIsSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="settingOrderNum != null">
+        SETTING_ORDER_NUM = #{settingOrderNum,jdbcType=INTEGER},
       </if>
     </set>
-    where SETTING_ID = #{settingId,jdbcType=NVARCHAR}
+    where SETTING_ID = #{settingId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.SettingEntity">
     update TB4D_SETTING
-    set SETTING_KEY = #{settingKey,jdbcType=NVARCHAR},
-      SETTING_NAME = #{settingName,jdbcType=NVARCHAR},
-      SETTING_VALUE = #{settingValue,jdbcType=NVARCHAR},
-      SETTING_STATUS = #{settingStatus,jdbcType=NVARCHAR},
-      SETTING_DESC = #{settingDesc,jdbcType=NVARCHAR},
-      SETTING_CREATETIME = #{settingCreatetime,jdbcType=TIMESTAMP},
-      SETTING_USER_ID = #{settingUserId,jdbcType=NVARCHAR},
-      SETTING_USER_NAME = #{settingUserName,jdbcType=NVARCHAR},
-      SETTING_ORGAN_ID = #{settingOrganId,jdbcType=NVARCHAR},
-      SETTING_ORGAN_NAME = #{settingOrganName,jdbcType=NVARCHAR},
-      SETTING_API = #{settingApi,jdbcType=NVARCHAR},
-      SETTING_IS_SYSTEM = #{settingIsSystem,jdbcType=NVARCHAR}
-    where SETTING_ID = #{settingId,jdbcType=NVARCHAR}
+    set SETTING_KEY = #{settingKey,jdbcType=VARCHAR},
+        SETTING_NAME = #{settingName,jdbcType=VARCHAR},
+        SETTING_VALUE = #{settingValue,jdbcType=VARCHAR},
+        SETTING_STATUS = #{settingStatus,jdbcType=VARCHAR},
+        SETTING_DESC = #{settingDesc,jdbcType=VARCHAR},
+        SETTING_CREATETIME = #{settingCreatetime,jdbcType=TIMESTAMP},
+        SETTING_USER_ID = #{settingUserId,jdbcType=VARCHAR},
+        SETTING_USER_NAME = #{settingUserName,jdbcType=VARCHAR},
+        SETTING_ORGAN_ID = #{settingOrganId,jdbcType=VARCHAR},
+        SETTING_ORGAN_NAME = #{settingOrganName,jdbcType=VARCHAR},
+        SETTING_API = #{settingApi,jdbcType=VARCHAR},
+        SETTING_IS_SYSTEM = #{settingIsSystem,jdbcType=VARCHAR},
+        SETTING_ORDER_NUM = #{settingOrderNum,jdbcType=INTEGER}
+    where SETTING_ID = #{settingId,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -241,6 +241,7 @@
             <column name="SETTING_ORGAN_NAME" type="NVARCHAR(100)"/>
             <column name="SETTING_API" type="NVARCHAR(100)"/>
             <column name="SETTING_IS_SYSTEM" type="NVARCHAR(10)"/>
+            <column name="SETTING_ORDER_NUM" type="INT" remarks="排序号" />
         </createTable>
     
         <createTable tableName="TB4D_HISTORY_DATA" remarks="历史数据表:存储各个表被删除数据的历史记录">

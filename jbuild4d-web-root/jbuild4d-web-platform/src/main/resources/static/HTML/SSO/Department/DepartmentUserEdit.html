@@ -22,40 +22,66 @@
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
-    <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
-        <form-item label="ddtlGroupId：">
-            <i-input v-model="formEntity.ddtlGroupId"></i-input>
-        </form-item>
-        <form-item label="ddtlKey：" prop="ddtlKey">
-            <i-input v-model="formEntity.ddtlKey"></i-input>
-        </form-item>
-        <form-item label="ddtlValue：" prop="ddtlValue">
-            <i-input v-model="formEntity.ddtlValue"></i-input>
-        </form-item>
-        <form-item label="ddtlName：" prop="ddtlName">
-            <i-input v-model="formEntity.ddtlName"></i-input>
-        </form-item>
-        <form-item label="创建时间：">
-            <row>
-                <i-col span="10">
-                    <date-picker type="date" placeholder="选择创建时间" v-model="formEntity.ddtlCreatetime" disabled
-                                 readonly></date-picker>
-                </i-col>
-                <i-col span="4" style="text-align: center">状态：</i-col>
-                <i-col span="10">
-                    <form-item>
-                        <radio-group v-model="formEntity.ddtlStatus">
-                            <radio label="启用">启用</radio>
-                            <radio label="禁用">禁用</radio>
-                        </radio-group>
-                    </form-item>
-                </i-col>
-            </row>
-        </form-item>
-        <form-item label="ddtlDesc：">
-            <i-input v-model="formEntity.ddtlDesc" type="textarea" :autosize="{minRows: 7,maxRows: 7}"></i-input>
-        </form-item>
-    </i-form>
+    <div style="width: 80%;float: left">
+        <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
+            <form-item label="用户名：" prop="deptName">
+                <row>
+                    <i-col span="10">
+                        <form-item prop="deptName">
+                            <i-input v-model="formEntity.deptName"></i-input>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">账号：</i-col>
+                    <i-col span="10" prop="deptShortName">
+                        <form-item prop="deptShortName">
+                            <i-input v-model="formEntity.deptShortName"></i-input>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="负责人：">
+                <row>
+                    <i-col span="10">
+                        <i-input v-model="formEntity.deptPerCharge"></i-input>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">联系电话：</i-col>
+                    <i-col span="10">
+                        <i-input v-model="formEntity.deptPerChargePhone"></i-input>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="部门编号：">
+                <row>
+                    <i-col span="10">
+                        <i-input v-model="formEntity.deptNo"></i-input>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">状态：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <radio-group v-model="formEntity.deptStatus">
+                                <radio label="启用">启用</radio>
+                                <radio label="禁用">禁用</radio>
+                            </radio-group>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="备注：">
+                <i-input v-model="formEntity.deptDesc" type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>
+            </form-item>
+        </i-form>
+    </div>
+    <div style="width: 19%;float: right">
+        <div style="border-radius: 8px;text-align: center;margin-top: 20px;margin-bottom: 30px">
+            <img :src="logoImageSrc" style="width: 80px;height: 80px" />
+        </div>
+        <upload style="margin:10px 12px 0 20px" :on-success="uploadOrganLogoImageSuccess" multiple type="drag" name="file" action="../../../PlatFormRest/SSO/Organ/UploadOrganLogo.do" accept=".png">
+            <div style="padding:10px 0px">
+                <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>
+                <p>上传用户头像</p>
+            </div>
+        </upload>
+    </div>
     <div class="button-outer-wrap">
         <div class="button-inner-wrap">
             <button-group>
@@ -83,12 +109,33 @@
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
             formEntity: {
-                duId:"",
-                duDeptId:BaseUtility.GetUrlParaValue("groupId"),
-                duUserId:"",
-                duIsMain:"",
-                duTitle:"",
-                duDesc:""
+                departmentUserEntity:{
+                    duId:"",
+                    duDeptId:"",
+                    duUserId:"",
+                    duIsMain:"",
+                    duTitle:"",
+                    duDesc:"",
+                    duCreateTime:DateUtility.GetCurrentData(),
+                    duCreateUserId:"",
+                    duStatus:"启用",
+                    duOrderNum:""
+                },
+                userEntity:{
+                    userId:"",
+                    userName:"",
+                    userAccount:"",
+                    userPassword:"",
+                    userEmail:"",
+                    userPhoneNumber:"",
+                    userAvatarId:"",
+                    userOrganId:"",
+                    userDesc:"",
+                    userCreateTime:DateUtility.GetCurrentData(),
+                    userCreateUserId:"",
+                    userStatus:"启用",
+                    userOrderNum:""
+                }
             },
             ruleValidate: {
                 ddtlValue: [

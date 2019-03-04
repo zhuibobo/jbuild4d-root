@@ -2,40 +2,61 @@ package com.jbuild4d.base.dbaccess.dbentities.systemsetting;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
-
 import java.util.Date;
 
+/**
+ *
+ * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
+ * This class corresponds to the database table :tb4d_setting
+ *
+ * @mbg.generated do_not_delete_during_merge
+ */
 public class SettingEntity {
-
+    //SETTING_ID:
     @DBKeyField
     private String settingId;
 
+    //SETTING_KEY:
     private String settingKey;
 
+    //SETTING_NAME:
     private String settingName;
 
+    //SETTING_VALUE:
     private String settingValue;
 
+    //SETTING_STATUS:
     private String settingStatus;
 
+    //SETTING_DESC:
     private String settingDesc;
 
+    //SETTING_CREATETIME:
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date settingCreatetime;
 
+    //SETTING_USER_ID:
     private String settingUserId;
 
+    //SETTING_USER_NAME:
     private String settingUserName;
 
+    //SETTING_ORGAN_ID:
     private String settingOrganId;
 
+    //SETTING_ORGAN_NAME:
     private String settingOrganName;
 
+    //SETTING_API:
     private String settingApi;
 
+    //SETTING_IS_SYSTEM:
     private String settingIsSystem;
 
-    public SettingEntity(String settingId, String settingKey, String settingName, String settingValue, String settingStatus, String settingDesc, Date settingCreatetime, String settingUserId, String settingUserName, String settingOrganId, String settingOrganName, String settingApi, String settingIsSystem) {
+    //SETTING_ORDER_NUM:排序号
+    private Integer settingOrderNum;
+
+    public SettingEntity(String settingId, String settingKey, String settingName, String settingValue, String settingStatus, String settingDesc, Date settingCreatetime, String settingUserId, String settingUserName, String settingOrganId, String settingOrganName, String settingApi, String settingIsSystem, Integer settingOrderNum) {
         this.settingId = settingId;
         this.settingKey = settingKey;
         this.settingName = settingName;
@@ -49,6 +70,7 @@ public class SettingEntity {
         this.settingOrganName = settingOrganName;
         this.settingApi = settingApi;
         this.settingIsSystem = settingIsSystem;
+        this.settingOrderNum = settingOrderNum;
     }
 
     public SettingEntity() {
@@ -157,5 +179,13 @@ public class SettingEntity {
 
     public void setSettingIsSystem(String settingIsSystem) {
         this.settingIsSystem = settingIsSystem == null ? null : settingIsSystem.trim();
+    }
+
+    public Integer getSettingOrderNum() {
+        return settingOrderNum;
+    }
+
+    public void setSettingOrderNum(Integer settingOrderNum) {
+        this.settingOrderNum = settingOrderNum;
     }
 }

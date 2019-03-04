@@ -12,10 +12,7 @@ import com.jbuild4d.platform.sso.service.IOrganService;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
-import com.jbuild4d.platform.system.service.IDictionaryGroupService;
-import com.jbuild4d.platform.system.service.IDictionaryService;
-import com.jbuild4d.platform.system.service.IJb4dCacheService;
-import com.jbuild4d.platform.system.service.IMenuService;
+import com.jbuild4d.platform.system.service.*;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,6 +60,9 @@ public class InitializationSystemRestResource {
     @Autowired
     private IJb4dCacheService jb4dCacheService;
 
+    @Autowired
+    private ISettingService settingService;
+
     @RequestMapping(value = "/Running", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo running() throws JBuild4DGenerallyException {
@@ -105,6 +105,9 @@ public class InitializationSystemRestResource {
 
         //初始化缓存Key
         jb4dCacheService.initSystemData(jb4DSession);
+
+        //初始化系统参数
+        settingService.initSystemData(jb4DSession);
 
         return JBuild4DResponseVo.success("系统数据初始化成功！");
     }

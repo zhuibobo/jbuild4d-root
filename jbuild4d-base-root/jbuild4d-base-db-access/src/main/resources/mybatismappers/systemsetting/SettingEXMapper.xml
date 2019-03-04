@@ -6,6 +6,7 @@
         <include refid="Base_Column_List" />
         from TB4D_SETTING ORDER by SETTING_CREATETIME DESC
     </select>
+    <select id="nextOrderNum" resultType="integer">select case when max(SETTING_ORDER_NUM) is null then 1 else max(SETTING_ORDER_NUM)+1 end ORDERNUM from TB4D_SETTING</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
@@ -14,4 +15,10 @@
     <delete id="deleteAll">
         delete from TB4D_SETTING
     </delete>
+
+    <select id="selectByKeyField" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_SETTING where SETTING_KEY=#{key,jdbcType=NVARCHAR}
+    </select>
 </mapper>
