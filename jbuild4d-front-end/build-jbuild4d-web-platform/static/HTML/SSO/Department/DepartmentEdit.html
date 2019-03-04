@@ -9,25 +9,41 @@
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
     <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
-        <form-item label="ParentId：">
-            <i-input v-model="formEntity.ddttParentId"></i-input>
-        </form-item>
-        <form-item label="分 组 值1：" prop="ddttValue">
-            <i-input v-model="formEntity.ddttValue"></i-input>
-        </form-item>
-        <form-item label="分组名称：" prop="ddttName">
-            <i-input v-model="formEntity.ddttName"></i-input>
-        </form-item>
-        <form-item label="创建时间：">
+        <form-item label="部门名称：" prop="deptName">
             <row>
                 <i-col span="10">
-                    <date-picker type="date" placeholder="选择创建时间" v-model="formEntity.ddttCreatetime" disabled
-                                 readonly></date-picker>
+                    <form-item prop="deptName">
+                        <i-input v-model="formEntity.deptName"></i-input>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center">部门简称：</i-col>
+                <i-col span="10" prop="deptShortName">
+                    <form-item prop="deptShortName">
+                        <i-input v-model="formEntity.deptShortName"></i-input>
+                    </form-item>
+                </i-col>
+            </row>
+        </form-item>
+        <form-item label="负责人：">
+            <row>
+                <i-col span="10">
+                    <i-input v-model="formEntity.deptPerCharge"></i-input>
+                </i-col>
+                <i-col span="4" style="text-align: center">联系电话：</i-col>
+                <i-col span="10">
+                    <i-input v-model="formEntity.deptPerChargePhone"></i-input>
+                </i-col>
+            </row>
+        </form-item>
+        <form-item label="部门编号：">
+            <row>
+                <i-col span="10">
+                    <i-input v-model="formEntity.deptNo"></i-input>
                 </i-col>
                 <i-col span="4" style="text-align: center">状态：</i-col>
                 <i-col span="10">
                     <form-item>
-                        <radio-group v-model="formEntity.ddttStatus">
+                        <radio-group v-model="formEntity.deptStatus">
                             <radio label="启用">启用</radio>
                             <radio label="禁用">禁用</radio>
                         </radio-group>
@@ -36,7 +52,7 @@
             </row>
         </form-item>
         <form-item label="备注：">
-            <i-input v-model="formEntity.ddttDesc" type="textarea" :autosize="{minRows: 7,maxRows: 7}"></i-input>
+            <i-input v-model="formEntity.deptDesc" type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>
         </form-item>
     </i-form>
     <div class="button-outer-wrap">
@@ -53,8 +69,8 @@
         el:"#appForm",
         data: {
             acInterface:{
-                getDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/GetDetailData",
-                saveDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/SaveEdit"
+                getDataUrl:"/PlatFormRest/SSO/Department/GetDetailData",
+                saveDataUrl:"/PlatFormRest/SSO/Department/SaveEdit"
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
             formEntity: {
@@ -62,24 +78,26 @@
                 deptName:"",
                 deptShortName:"",
                 deptNo:"",
-                deptIsVirtual:"",
+                deptPerCharge:"",
+                deptPerChargePhone:"",
+                deptIsVirtual:"否",
                 deptChildCount:"",
                 deptCreateTime:DateUtility.GetCurrentData(),
                 deptCreateUserId:"",
                 deptOrderNum:"",
                 deptIsRoot:"",
-                deptParentId:"",
+                deptParentId: BaseUtility.GetUrlParaValue("parentId"),
                 deptParentIdList:"",
                 deptStatus:"启用",
                 deptOrganId:"",
                 deptDesc:""
             },
             ruleValidate: {
-                ddttValue: [
-                    {required: true, message: '【值】不能空！', trigger: 'blur'}
+                deptName: [
+                    {required: true, message: '【部门名称】不能为空！', trigger: 'blur'}
                 ],
-                ddttName: [
-                    {required: true, message: '【名称】不能空！', trigger: 'blur'}
+                deptShortName: [
+                    {required: true, message: '【部门简称】不能为空！', trigger: 'blur'}
                 ]
             },
             status: BaseUtility.GetUrlParaValue("op")

@@ -30,7 +30,23 @@ public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentEntity> imp
         return super.save(jb4DSession,id, record, new IAddBefore<DepartmentEntity>() {
             @Override
             public DepartmentEntity run(JB4DSession jb4DSession,DepartmentEntity sourceEntity) throws JBuild4DGenerallyException {
-                //设置排序,以及其他参数--nextOrderNum()
+                //父节点
+                DepartmentEntity parentDepartmentEntity = departmentMapper.selectByPrimaryKey(sourceEntity.getDeptParentId());
+
+                sourceEntity.setDeptChildCount(0);
+                sourceEntity.setDeptOrderNum(departmentMapper.nextOrderNum());
+                sourceEntity.setDeptCreateTime(new Date());
+                String parentIdList;
+
+                parentIdList = parentDepartmentEntity.getDeptParentIdList();
+                parentDepartmentEntity.setDeptChildCount(parentDepartmentEntity.getDeptChildCount() + 1);
+                departmentMapper.updateByPrimaryKeySelective(parentDepartmentEntity);
+
+                sourceEntity.setDeptParentIdList(parentIdList + "*" + sourceEntity.getDeptId());
+                sourceEntity.setDeptOrganId(parentDepartmentEntity.getDeptOrganId());
+                sourceEntity.setDeptCreateUserId(jb4DSession.getUserId());
+                sourceEntity.setDeptIsRoot(TrueFalseEnum.False.getDisplayName());
+
                 return sourceEntity;
             }
         });

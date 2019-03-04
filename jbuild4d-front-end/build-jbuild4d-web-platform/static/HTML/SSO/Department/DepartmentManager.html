@@ -225,10 +225,11 @@
             },
             <!--DepartmentTree-->
             initTree:function (organId) {
-                var self=this;
+                var _self=this;
                 AjaxUtility.Post(this.acInterface.getDepartmentTreeData, {"organId":organId}, function (result) {
                     if (result.success) {
-                        self.treeObj=$.fn.zTree.init($("#zTreeUL"), self.treeSetting,result.data);
+                        _self.treeObj=$.fn.zTree.init($("#zTreeUL"), _self.treeSetting,result.data);
+                        _self.treeObj.expandAll(true);
                     }
                     else {
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
@@ -253,7 +254,7 @@
                         "op": "add",
                         "parentId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门管理"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门管理"}, 3);
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择父节点!", null);
@@ -261,22 +262,22 @@
             },
             editGroup:function () {
                 if(this.treeSelectedNode!=null) {
-                    var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
+                    var url = BaseUtility.BuildView(this.acInterface.departmentEditView, {
                         "op": "update",
                         "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门管理"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门管理"}, 3);
                 }
                 else {
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
                 }
             },
             viewGroup:function () {
-                var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
+                var url = BaseUtility.BuildView(this.acInterface.departmentEditView, {
                     "op": "view",
                     "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                 });
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门管理"}, 2);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门管理"}, 3);
             },
             delGroup:function () {
                 //var url="/PlatForm/devdemo/TreeAndList/DevDemoTLTree/Delete.do";
