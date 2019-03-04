@@ -45,8 +45,9 @@ public class ExceptionControllerAdvice {
 
     private void handlerGenerallyException(HttpServletResponse response, HttpServletRequest request, Exception e) {
         try {
-            String error=org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(e);
-            response.getWriter().print(JsonUtility.toObjectString(JBuild4DResponseVo.error(error)));
+            String msg=e.getMessage();
+            String traceMsg=org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(e);
+            response.getWriter().print(JsonUtility.toObjectString(JBuild4DResponseVo.error(msg,traceMsg)));
         } catch (IOException e1) {
             logger.error(request.getRequestURI()+":"+e1.getMessage(),e1);
             e1.printStackTrace();

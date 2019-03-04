@@ -15,4 +15,8 @@
                                                                                                           where DEPT_ORDER_NUM = (select max(DEPT_ORDER_NUM) from TB4D_DEPARTMENT_USER where DEPT_ORDER_NUM<(select DEPT_ORDER_NUM from TB4D_DEPARTMENT_USER where DU_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DEPARTMENT_USER
                                                                                                              where DEPT_ORDER_NUM = (select min(DEPT_ORDER_NUM) from TB4D_DEPARTMENT_USER where DEPT_ORDER_NUM>(select DEPT_ORDER_NUM from TB4D_DEPARTMENT_USER where DU_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+
+    <select id="selectDepartmentUserCount" resultType="int">
+        select count(DU_USER_ID) from TB4D_DEPARTMENT_USER where DU_DEPT_ID=#{Id,jdbcType=NVARCHAR}
+    </select>
 </mapper>

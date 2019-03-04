@@ -4,4 +4,5 @@ import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity;
 
 public interface DepartmentUserMapper extends BaseMapper<DepartmentUserEntity> {
+    int selectDepartmentUserCount(String departmentId);
 }

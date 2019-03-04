@@ -5,7 +5,6 @@ import com.jbuild4d.base.dbaccess.dao.sso.DepartmentUserMapper;
 import com.jbuild4d.base.dbaccess.dao.sso.OrganMapper;
 import com.jbuild4d.base.dbaccess.dao.sso.OrganTypeMapper;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.tools.common.BeanUtility;
 import com.jbuild4d.platform.sso.service.IDepartmentService;
 import com.jbuild4d.platform.sso.service.IDepartmentUserService;
 import com.jbuild4d.platform.sso.service.IOrganService;
@@ -16,9 +15,6 @@ import com.jbuild4d.platform.sso.service.impl.OrganServiceImpl;
 import com.jbuild4d.platform.sso.service.impl.OrganTypeServiceImpl;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -41,8 +37,8 @@ public class SSOBeansConfig {
     }
 
     @Bean
-    public IDepartmentService departmentService(ISQLBuilderService _sqlBuilderService, DepartmentMapper mapper, SqlSessionTemplate sqlSessionTemplate){
-        IDepartmentService departmentService=new DepartmentServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+    public IDepartmentService departmentService(ISQLBuilderService _sqlBuilderService, DepartmentMapper mapper, SqlSessionTemplate sqlSessionTemplate,IDepartmentUserService departmentUserService){
+        IDepartmentService departmentService=new DepartmentServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,departmentUserService);
         return departmentService;
     }
 

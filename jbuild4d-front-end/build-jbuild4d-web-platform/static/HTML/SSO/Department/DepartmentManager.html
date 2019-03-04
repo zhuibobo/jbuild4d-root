@@ -13,12 +13,12 @@
         <select-organ-single-comp @on-selected-organ="changeOrgan" ref="selectOrganComp"></select-organ-single-comp>
         <div class="inner-wrap" style="position:absolute;top: 30px;bottom: 10px;height: auto">
             <div class="tool-bar-wrap">
-                <div alt="新增分类组" title="新增分类组" class="add" @click="addGroup()"></div>
-                <div alt="修改分类组" title="修改分类组" class="edit" @click="editGroup"></div>
-                <div alt="删除分类组" title="删除分类组" class="del" @click="delGroup"></div>
-                <div alt="浏览分类组" title="浏览分类组" class="view" @click="viewGroup"></div>
-                <div alt="上移" title="上移" class="order-up" @click="moveGroup('up')"></div>
-                <div alt="下移" title="下移" class="order-down last" @click="moveGroup('down')"></div>
+                <div alt="新增部门" title="新增部门" class="add" @click="addDepartment()"></div>
+                <div alt="修改部门" title="修改部门" class="edit" @click="editDepartment"></div>
+                <div alt="删除部门" title="删除部门" class="del" @click="delDepartment"></div>
+                <div alt="浏览部门" title="浏览部门" class="view" @click="viewDepartment"></div>
+                <div alt="上移" title="上移" class="order-up" @click="moveDepartment('up')"></div>
+                <div alt="下移" title="下移" class="order-down last" @click="moveDepartment('down')"></div>
             </div>
             <div>
                 <ul id="zTreeUL" class="ztree"></ul>
@@ -100,8 +100,8 @@
                 <!--Department -->
                 getDepartmentTreeData:"/PlatFormRest/SSO/Department/GetDepartmentsByOrganId",
                 departmentEditView:"/HTML/SSO/Department/DepartmentEdit.html",
-                deleteGroup:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/Delete",
-                moveGroup:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/Move",
+                deleteDepartment:"/PlatFormRest/SSO/Department/Delete",
+                moveDepartment:"/PlatFormRest/SSO/Department/Move",
                 <!--List -->
                 listEditView:"/HTML/DevDemo/TreeAndList/ListEdit.html",
                 reloadListData:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/GetListData",
@@ -248,7 +248,7 @@
                 //appList.reloadTreeTableData();
                 //}
             },
-            addGroup:function () {
+            addDepartment:function () {
                 if (this.treeSelectedNode != null) {
                     var url = BaseUtility.BuildView(this.acInterface.departmentEditView, {
                         "op": "add",
@@ -260,7 +260,7 @@
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择父节点!", null);
                 }
             },
-            editGroup:function () {
+            editDepartment:function () {
                 if(this.treeSelectedNode!=null) {
                     var url = BaseUtility.BuildView(this.acInterface.departmentEditView, {
                         "op": "update",
@@ -272,19 +272,19 @@
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
                 }
             },
-            viewGroup:function () {
+            viewDepartment:function () {
                 var url = BaseUtility.BuildView(this.acInterface.departmentEditView, {
                     "op": "view",
                     "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                 });
                 DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门管理"}, 3);
             },
-            delGroup:function () {
+            delDepartment:function () {
                 //var url="/PlatForm/devdemo/TreeAndList/DevDemoTLTree/Delete.do";
                 var _self=this;
                 var recordId=this.treeSelectedNode[appList.treeIdFieldName];
                 DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
-                    AjaxUtility.Post(_self.acInterface.deleteGroup, {recordId: recordId}, function (result) {
+                    AjaxUtility.Delete(_self.acInterface.deleteDepartment, {recordId: recordId}, function (result) {
                         if (result.success) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 appList.treeObj.removeNode(appList.treeSelectedNode);
@@ -297,10 +297,10 @@
                     }, "json");
                 });
             },
-            moveGroup:function (type) {
+            moveDepartment:function (type) {
                 if(this.treeSelectedNode!=null) {
                     var recordId = this.treeSelectedNode[appList.treeIdFieldName];
-                    AjaxUtility.Post(this.acInterface.moveGroup, {recordId: recordId,type:type}, function (result) {
+                    AjaxUtility.Post(this.acInterface.moveDepartment, {recordId: recordId,type:type}, function (result) {
                         if (result.success) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                 if(type=="down") {

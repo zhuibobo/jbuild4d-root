@@ -16,6 +16,8 @@ public class JBuild4DResponseVo {
      */
     private String message = "";
 
+    private String traceMsg="";
+
     /**
      * 错误码
      */
@@ -36,6 +38,14 @@ public class JBuild4DResponseVo {
         this.message = message;
         this.data = data;
         this.errorCode = errorCode;
+    }
+
+    public JBuild4DResponseVo(boolean success, String message, Object data, Integer errorCode, String traceMsg) {
+        this.success = success;
+        this.message = message;
+        this.traceMsg = traceMsg;
+        this.errorCode = errorCode;
+        this.data = data;
     }
 
     public boolean isSuccess() {
@@ -157,6 +167,10 @@ public class JBuild4DResponseVo {
      */
     public static JBuild4DResponseVo error(String message) {
         return new JBuild4DResponseVo(false, message, null, null);
+    }
+
+    public static JBuild4DResponseVo error(String message,String traceMsg) {
+        return new JBuild4DResponseVo(false, message, null, null,traceMsg);
     }
 
     /**

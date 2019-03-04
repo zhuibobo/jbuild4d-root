@@ -28,4 +28,10 @@ public class DepartmentUserServiceImpl extends BaseServiceImpl<DepartmentUserEnt
             }
         });
     }
+
+    @Override
+    public boolean existUserInDepartment(JB4DSession jb4DSession, String departmentId) {
+        int count=departmentUserMapper.selectDepartmentUserCount(departmentId);
+        return count>0;
+    }
 }

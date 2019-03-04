@@ -11,4 +11,6 @@ public interface DepartmentMapper extends BaseMapper<DepartmentEntity> {
     DepartmentEntity selectOrganRootDepartment(String organId);
 
     List<DepartmentEntity> selectDepartmentsByOrganId(String organId);
+
+    int existChildsDepartment(String id);
 }

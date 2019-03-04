@@ -10,5 +10,9 @@ public interface IDepartmentService extends IBaseService<DepartmentEntity> {
 
     boolean existOrganRootDept(JB4DSession jb4DSession, String organId);
 
+    boolean existChildsDepartment(JB4DSession jb4DSession, String id);
+
     List<DepartmentEntity> getDepartmentsByOrganId(String organId);
+
+    DepartmentEntity getOrganRootDepartment(JB4DSession jb4DSession, String organId);
 }
