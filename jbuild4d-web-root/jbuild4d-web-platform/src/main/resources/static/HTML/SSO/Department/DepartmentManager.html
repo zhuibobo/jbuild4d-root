@@ -112,8 +112,8 @@
         },
         data:{
             acInterface:{
-                <!--Tree -->
-                getGroupTreeData:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/GetTreeData",
+                <!--Department -->
+                getDepartmentTreeData:"/PlatFormRest/SSO/Department/GetDepartmentsByOrganId",
                 groupEditView:"/HTML/DevDemo/TreeAndList/TreeEdit.html",
                 deleteGroup:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/Delete",
                 moveGroup:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/Move",
@@ -125,7 +125,7 @@
                 listMove:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/Move"
             },
             <!--Tree-->
-            treeIdFieldName:"ddttId",
+            treeIdFieldName:"deptId",
             treeObj:null,
             treeSelectedNode:null,
             treeSetting:{
@@ -137,13 +137,12 @@
                 // 必须使用data
                 data:{
                     key:{
-                        name:"ddttName"
+                        name:"deptName"
                     },
                     simpleData : {
                         enable : true,
-                        idKey : "ddttId", // id编号命名
-                        pIdKey : "ddttParentId",  // 父id编号命名
-                        rootId : 0
+                        idKey : "deptId", // id编号命名
+                        pIdKey : "deptParentId"  // 父id编号命名
                     }
                 },
                 // 回调函数
@@ -241,8 +240,15 @@
             },
             <!--DepartmentTree-->
             initTree:function (organId) {
-                this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});
-                this.treeObj=$.fn.zTree.init($("#zTreeUL"), this.treeSetting);
+                var self=this;
+                AjaxUtility.Post(this.acInterface.getDepartmentTreeData, {"organId":organId}, function (result) {
+                    if (result.success) {
+                        self.treeObj=$.fn.zTree.init($("#zTreeUL"), self.treeSetting,result.data);
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                    }
+                }, "json");
             },
             treeNodeSelected:function (event, treeId, treeNode) {
                 // 根节点不触发任何事件

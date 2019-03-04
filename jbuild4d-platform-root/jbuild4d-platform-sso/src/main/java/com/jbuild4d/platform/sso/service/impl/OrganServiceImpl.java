@@ -17,6 +17,7 @@ import com.jbuild4d.platform.sso.service.IOnOrganChangeAware;
 import com.jbuild4d.platform.sso.service.IOrganService;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -50,6 +51,7 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
     }
 
     @Override
+    @Transactional(rollbackFor=JBuild4DGenerallyException.class)
     public int save(JB4DSession jb4DSession, String id, OrganEntity record) throws JBuild4DGenerallyException {
         boolean isNew=false;
         if(this.getByPrimaryKey(jb4DSession,id)==null){
@@ -80,27 +82,53 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
         });
 
         if(isNew){
-
-            xmlDocument=getOrganInitConfigDoc();
-            try {
-                List<Node> nodeList=XMLUtility.parseForNodeList(xmlDocument,"//Bean");
-                for (Node node : nodeList) {
-                    String beanName=XMLUtility.getAttribute(node,"Name");
-                    IOnOrganChangeAware createOrganAware= BeanUtility.getBean(beanName);
-                    if(createOrganAware==null){
-                        throw new JBuild4DGenerallyException("再容器中找不到名称为"+beanName+"的Bean");
-                    }
-                    else {
-                        createOrganAware.organCreated(jb4DSession,record);
-                    }
-                }
-
-            } catch (XPathExpressionException e) {
-                throw new JBuild4DGenerallyException(e);
-            }
+            this.awareCreatedOrgan(jb4DSession,record);
+        }
+        else{
+            this.awareUpdatedOrgan(jb4DSession,record);
         }
 
         return result;
+    }
+
+    private void awareCreatedOrgan(JB4DSession jb4DSession, OrganEntity organEntity) throws JBuild4DGenerallyException {
+        xmlDocument=getOrganInitConfigDoc();
+        try {
+            List<Node> nodeList=XMLUtility.parseForNodeList(xmlDocument,"//Bean");
+            for (Node node : nodeList) {
+                String beanName=XMLUtility.getAttribute(node,"Name");
+                IOnOrganChangeAware createOrganAware= BeanUtility.getBean(beanName);
+                if(createOrganAware==null){
+                    throw new JBuild4DGenerallyException("再容器中找不到名称为"+beanName+"的Bean");
+                }
+                else {
+                    createOrganAware.organCreated(jb4DSession,organEntity);
+                }
+            }
+
+        } catch (XPathExpressionException e) {
+            throw new JBuild4DGenerallyException(e);
+        }
+    }
+
+    private void awareUpdatedOrgan(JB4DSession jb4DSession, OrganEntity organEntity) throws JBuild4DGenerallyException {
+        xmlDocument=getOrganInitConfigDoc();
+        try {
+            List<Node> nodeList=XMLUtility.parseForNodeList(xmlDocument,"//Bean");
+            for (Node node : nodeList) {
+                String beanName=XMLUtility.getAttribute(node,"Name");
+                IOnOrganChangeAware createOrganAware= BeanUtility.getBean(beanName);
+                if(createOrganAware==null){
+                    throw new JBuild4DGenerallyException("再容器中找不到名称为"+beanName+"的Bean");
+                }
+                else {
+                    createOrganAware.organUpdated(jb4DSession,organEntity);
+                }
+            }
+
+        } catch (XPathExpressionException e) {
+            throw new JBuild4DGenerallyException(e);
+        }
     }
 
     private Document getOrganInitConfigDoc() throws JBuild4DGenerallyException {

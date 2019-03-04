@@ -1,11 +1,14 @@
 package com.jbuild4d.platform.sso.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity;
-import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSession;
+
+import java.util.List;
 
 public interface IDepartmentService extends IBaseService<DepartmentEntity> {
 
     boolean existOrganRootDept(JB4DSession jb4DSession, String organId);
+
+    List<DepartmentEntity> getDepartmentsByOrganId(String organId);
 }

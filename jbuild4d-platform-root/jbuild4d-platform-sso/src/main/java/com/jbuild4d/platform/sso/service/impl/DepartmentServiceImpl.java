@@ -1,5 +1,6 @@
 package com.jbuild4d.platform.sso.service.impl;
 import java.util.Date;
+import java.util.List;
 
 import com.jbuild4d.base.dbaccess.dao.sso.DepartmentMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity;
@@ -39,6 +40,11 @@ public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentEntity> imp
     public boolean existOrganRootDept(JB4DSession jb4DSession, String organId){
         int count=departmentMapper.existOrganRootDept(organId);
         return count>0;
+    }
+
+    @Override
+    public List<DepartmentEntity> getDepartmentsByOrganId(String organId) {
+        return departmentMapper.selectDepartmentsByOrganId(organId);
     }
 
     public DepartmentEntity getOrganRootDepartment(JB4DSession jb4DSession,String organId){
