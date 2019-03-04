@@ -8,6 +8,8 @@
         <if test="deptName !=null and deptName !=''"> and DEPT_NAME like #{deptName} </if>
         <if test="deptShortName !=null and deptShortName !=''"> and DEPT_SHORT_NAME like #{deptShortName} </if>
         <if test="deptNo !=null and deptNo !=''"> and DEPT_NO like #{deptNo} </if>
+        <if test="deptPerCharge !=null and deptPerCharge !=''"> and DEPT_PER_CHARGE like #{deptPerCharge} </if>
+        <if test="deptPerChargePhone !=null and deptPerChargePhone !=''"> and DEPT_PER_CHARGE_PHONE like #{deptPerChargePhone} </if>
         <if test="deptIsVirtual !=null and deptIsVirtual !=''"> and DEPT_IS_VIRTUAL like #{deptIsVirtual} </if>
         <if test="deptCreateUserId !=null and deptCreateUserId !=''"> and DEPT_CREATE_USER_ID like #{deptCreateUserId} </if>
         <if test="deptIsRoot !=null and deptIsRoot !=''"> and DEPT_IS_ROOT like #{deptIsRoot} </if>

@@ -569,6 +569,8 @@ var DialogUtility={
     },
     Frame_CloseDialog:function (opererWindow) {
         //debugger;
+        //console.log("close Frame_CloseDialog");
+        //window.setInterval()
         var wrwin = this.Frame_TryGetFrameWindowObj();
         var openerwin = opererWindow.OpenerWindowObj;
         var autodialogid = opererWindow.FrameWindowId;

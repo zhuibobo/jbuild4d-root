@@ -12,7 +12,7 @@
         <form-item label="ParentId：">
             <i-input v-model="formEntity.ddttParentId"></i-input>
         </form-item>
-        <form-item label="分 组 值：" prop="ddttValue">
+        <form-item label="分 组 值1：" prop="ddttValue">
             <i-input v-model="formEntity.ddttValue"></i-input>
         </form-item>
         <form-item label="分组名称：" prop="ddttName">
@@ -117,6 +117,7 @@
                 })
             },
             handleClose: function () {
+
                 DialogUtility.Frame_CloseDialog(window);
             }
         }

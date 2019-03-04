@@ -1,6 +1,7 @@
 window.addEventListener("message", function (event) {
     // 把父窗口发送过来的数据显示在子窗口中
-    DialogUtility.CloseDialog("FrameDialogEle" + DialogUtility.DialogId);
+    // 和本地安装的插件冲突,后边再修订!
+    //DialogUtility.CloseDialog("FrameDialogEle" + DialogUtility.DialogId);
 }, false);
 
 Vue.component("module-list-flow-comp", {

@@ -8,7 +8,7 @@ import java.util.Date;
  *
  * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
  * This class corresponds to the database table :tb4d_department
- *
+ *de
  * @mbg.generated do_not_delete_during_merge
  */
 public class DepartmentEntity {
@@ -24,6 +24,12 @@ public class DepartmentEntity {
 
     //DEPT_NO:部门编号
     private String deptNo;
+
+    //DEPT_PER_CHARGE:部门负责人
+    private String deptPerCharge;
+
+    //DEPT_PER_CHARGE_PHONE:部门负责人电话
+    private String deptPerChargePhone;
 
     //DEPT_IS_VIRTUAL:是否虚拟
     private String deptIsVirtual;
@@ -59,11 +65,13 @@ public class DepartmentEntity {
     //DEPT_DESC:部门备注
     private String deptDesc;
 
-    public DepartmentEntity(String deptId, String deptName, String deptShortName, String deptNo, String deptIsVirtual, Integer deptChildCount, Date deptCreateTime, String deptCreateUserId, Integer deptOrderNum, String deptIsRoot, String deptParentId, String deptParentIdList, String deptStatus, String deptOrganId, String deptDesc) {
+    public DepartmentEntity(String deptId, String deptName, String deptShortName, String deptNo, String deptPerCharge, String deptPerChargePhone, String deptIsVirtual, Integer deptChildCount, Date deptCreateTime, String deptCreateUserId, Integer deptOrderNum, String deptIsRoot, String deptParentId, String deptParentIdList, String deptStatus, String deptOrganId, String deptDesc) {
         this.deptId = deptId;
         this.deptName = deptName;
         this.deptShortName = deptShortName;
         this.deptNo = deptNo;
+        this.deptPerCharge = deptPerCharge;
+        this.deptPerChargePhone = deptPerChargePhone;
         this.deptIsVirtual = deptIsVirtual;
         this.deptChildCount = deptChildCount;
         this.deptCreateTime = deptCreateTime;
@@ -111,6 +119,22 @@ public class DepartmentEntity {
 
     public void setDeptNo(String deptNo) {
         this.deptNo = deptNo == null ? null : deptNo.trim();
+    }
+
+    public String getDeptPerCharge() {
+        return deptPerCharge;
+    }
+
+    public void setDeptPerCharge(String deptPerCharge) {
+        this.deptPerCharge = deptPerCharge == null ? null : deptPerCharge.trim();
+    }
+
+    public String getDeptPerChargePhone() {
+        return deptPerChargePhone;
+    }
+
+    public void setDeptPerChargePhone(String deptPerChargePhone) {
+        this.deptPerChargePhone = deptPerChargePhone == null ? null : deptPerChargePhone.trim();
     }
 
     public String getDeptIsVirtual() {

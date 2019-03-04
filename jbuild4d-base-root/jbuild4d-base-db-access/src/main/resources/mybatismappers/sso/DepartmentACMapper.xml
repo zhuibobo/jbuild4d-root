@@ -7,6 +7,8 @@
             <arg column="DEPT_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DEPT_SHORT_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DEPT_NO" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_PER_CHARGE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DEPT_PER_CHARGE_PHONE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DEPT_IS_VIRTUAL" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DEPT_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="DEPT_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -21,9 +23,9 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        DEPT_ID, DEPT_NAME, DEPT_SHORT_NAME, DEPT_NO, DEPT_IS_VIRTUAL, DEPT_CHILD_COUNT,
-        DEPT_CREATE_TIME, DEPT_CREATE_USER_ID, DEPT_ORDER_NUM, DEPT_IS_ROOT, DEPT_PARENT_ID,
-        DEPT_PARENT_ID_LIST, DEPT_STATUS, DEPT_ORGAN_ID, DEPT_DESC
+        DEPT_ID, DEPT_NAME, DEPT_SHORT_NAME, DEPT_NO, DEPT_PER_CHARGE, DEPT_PER_CHARGE_PHONE,
+        DEPT_IS_VIRTUAL, DEPT_CHILD_COUNT, DEPT_CREATE_TIME, DEPT_CREATE_USER_ID, DEPT_ORDER_NUM,
+        DEPT_IS_ROOT, DEPT_PARENT_ID, DEPT_PARENT_ID_LIST, DEPT_STATUS, DEPT_ORGAN_ID, DEPT_DESC
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -37,17 +39,17 @@
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
         insert into TB4D_DEPARTMENT (DEPT_ID, DEPT_NAME, DEPT_SHORT_NAME,
-                                     DEPT_NO, DEPT_IS_VIRTUAL, DEPT_CHILD_COUNT,
-                                     DEPT_CREATE_TIME, DEPT_CREATE_USER_ID, DEPT_ORDER_NUM,
-                                     DEPT_IS_ROOT, DEPT_PARENT_ID, DEPT_PARENT_ID_LIST,
-                                     DEPT_STATUS, DEPT_ORGAN_ID, DEPT_DESC
-                )
+                                     DEPT_NO, DEPT_PER_CHARGE, DEPT_PER_CHARGE_PHONE,
+                                     DEPT_IS_VIRTUAL, DEPT_CHILD_COUNT, DEPT_CREATE_TIME,
+                                     DEPT_CREATE_USER_ID, DEPT_ORDER_NUM, DEPT_IS_ROOT,
+                                     DEPT_PARENT_ID, DEPT_PARENT_ID_LIST, DEPT_STATUS,
+                                     DEPT_ORGAN_ID, DEPT_DESC)
         values (#{deptId,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{deptShortName,jdbcType=VARCHAR},
-                #{deptNo,jdbcType=VARCHAR}, #{deptIsVirtual,jdbcType=VARCHAR}, #{deptChildCount,jdbcType=INTEGER},
-                #{deptCreateTime,jdbcType=TIMESTAMP}, #{deptCreateUserId,jdbcType=VARCHAR}, #{deptOrderNum,jdbcType=INTEGER},
-                #{deptIsRoot,jdbcType=VARCHAR}, #{deptParentId,jdbcType=VARCHAR}, #{deptParentIdList,jdbcType=VARCHAR},
-                #{deptStatus,jdbcType=VARCHAR}, #{deptOrganId,jdbcType=VARCHAR}, #{deptDesc,jdbcType=VARCHAR}
-                       )
+                #{deptNo,jdbcType=VARCHAR}, #{deptPerCharge,jdbcType=VARCHAR}, #{deptPerChargePhone,jdbcType=VARCHAR},
+                #{deptIsVirtual,jdbcType=VARCHAR}, #{deptChildCount,jdbcType=INTEGER}, #{deptCreateTime,jdbcType=TIMESTAMP},
+                #{deptCreateUserId,jdbcType=VARCHAR}, #{deptOrderNum,jdbcType=INTEGER}, #{deptIsRoot,jdbcType=VARCHAR},
+                #{deptParentId,jdbcType=VARCHAR}, #{deptParentIdList,jdbcType=VARCHAR}, #{deptStatus,jdbcType=VARCHAR},
+                #{deptOrganId,jdbcType=VARCHAR}, #{deptDesc,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
         insert into TB4D_DEPARTMENT
@@ -63,6 +65,12 @@
             </if>
             <if test="deptNo != null">
                 DEPT_NO,
+            </if>
+            <if test="deptPerCharge != null">
+                DEPT_PER_CHARGE,
+            </if>
+            <if test="deptPerChargePhone != null">
+                DEPT_PER_CHARGE_PHONE,
             </if>
             <if test="deptIsVirtual != null">
                 DEPT_IS_VIRTUAL,
@@ -111,6 +119,12 @@
             <if test="deptNo != null">
                 #{deptNo,jdbcType=VARCHAR},
             </if>
+            <if test="deptPerCharge != null">
+                #{deptPerCharge,jdbcType=VARCHAR},
+            </if>
+            <if test="deptPerChargePhone != null">
+                #{deptPerChargePhone,jdbcType=VARCHAR},
+            </if>
             <if test="deptIsVirtual != null">
                 #{deptIsVirtual,jdbcType=VARCHAR},
             </if>
@@ -158,6 +172,12 @@
             <if test="deptNo != null">
                 DEPT_NO = #{deptNo,jdbcType=VARCHAR},
             </if>
+            <if test="deptPerCharge != null">
+                DEPT_PER_CHARGE = #{deptPerCharge,jdbcType=VARCHAR},
+            </if>
+            <if test="deptPerChargePhone != null">
+                DEPT_PER_CHARGE_PHONE = #{deptPerChargePhone,jdbcType=VARCHAR},
+            </if>
             <if test="deptIsVirtual != null">
                 DEPT_IS_VIRTUAL = #{deptIsVirtual,jdbcType=VARCHAR},
             </if>
@@ -199,6 +219,8 @@
         set DEPT_NAME = #{deptName,jdbcType=VARCHAR},
             DEPT_SHORT_NAME = #{deptShortName,jdbcType=VARCHAR},
             DEPT_NO = #{deptNo,jdbcType=VARCHAR},
+            DEPT_PER_CHARGE = #{deptPerCharge,jdbcType=VARCHAR},
+            DEPT_PER_CHARGE_PHONE = #{deptPerChargePhone,jdbcType=VARCHAR},
             DEPT_IS_VIRTUAL = #{deptIsVirtual,jdbcType=VARCHAR},
             DEPT_CHILD_COUNT = #{deptChildCount,jdbcType=INTEGER},
             DEPT_CREATE_TIME = #{deptCreateTime,jdbcType=TIMESTAMP},

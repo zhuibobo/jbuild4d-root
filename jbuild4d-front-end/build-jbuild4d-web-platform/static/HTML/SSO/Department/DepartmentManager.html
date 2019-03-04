@@ -99,7 +99,7 @@
             acInterface:{
                 <!--Department -->
                 getDepartmentTreeData:"/PlatFormRest/SSO/Department/GetDepartmentsByOrganId",
-                groupEditView:"/HTML/DevDemo/TreeAndList/TreeEdit.html",
+                departmentEditView:"/HTML/SSO/Department/DepartmentEdit.html",
                 deleteGroup:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/Delete",
                 moveGroup:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/Move",
                 <!--List -->
@@ -249,11 +249,11 @@
             },
             addGroup:function () {
                 if (this.treeSelectedNode != null) {
-                    var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
+                    var url = BaseUtility.BuildView(this.acInterface.departmentEditView, {
                         "op": "add",
                         "parentId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门管理"}, 2);
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择父节点!", null);
@@ -265,7 +265,7 @@
                         "op": "update",
                         "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门管理"}, 2);
                 }
                 else {
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
@@ -276,7 +276,7 @@
                     "op": "view",
                     "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                 });
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门管理"}, 2);
             },
             delGroup:function () {
                 //var url="/PlatForm/devdemo/TreeAndList/DevDemoTLTree/Delete.do";
