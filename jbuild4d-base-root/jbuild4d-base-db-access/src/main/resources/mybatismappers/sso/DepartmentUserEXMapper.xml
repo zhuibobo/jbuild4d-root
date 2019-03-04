@@ -10,6 +10,8 @@
         <if test="duIsMain !=null and duIsMain !=''"> and DU_IS_MAIN like #{duIsMain} </if>
         <if test="duTitle !=null and duTitle !=''"> and DU_TITLE like #{duTitle} </if>
         <if test="duDesc !=null and duDesc !=''"> and DU_DESC like #{duDesc} </if>
+        <if test="duCreateUserId !=null and duCreateUserId !=''"> and DU_CREATE_USER_ID like #{duCreateUserId} </if>
+        <if test="duStatus !=null and duStatus !=''"> and DU_STATUS like #{duStatus} </if>
     </where>ORDER by DEPT_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DEPARTMENT_USER
                                                                                                           where DEPT_ORDER_NUM = (select max(DEPT_ORDER_NUM) from TB4D_DEPARTMENT_USER where DEPT_ORDER_NUM<(select DEPT_ORDER_NUM from TB4D_DEPARTMENT_USER where DU_ID=#{Id,jdbcType=NVARCHAR}))]]></select>

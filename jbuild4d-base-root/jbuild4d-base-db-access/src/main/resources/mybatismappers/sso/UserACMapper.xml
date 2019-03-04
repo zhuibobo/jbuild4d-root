@@ -12,11 +12,15 @@
             <arg column="USER_AVATAR_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="USER_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="USER_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="USER_CREATE_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         USER_ID, USER_NAME, USER_ACCOUNT, USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER, USER_AVATAR_ID,
-        USER_ORGAN_ID, USER_DESC
+        USER_ORGAN_ID, USER_DESC, USER_CREATE_TIME, USER_CREATE_USER_ID, USER_STATUS, USER_ORDER_NUM
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -31,12 +35,14 @@
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
         insert into TB4D_USER (USER_ID, USER_NAME, USER_ACCOUNT,
                                USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER,
-                               USER_AVATAR_ID, USER_ORGAN_ID, USER_DESC
-                )
+                               USER_AVATAR_ID, USER_ORGAN_ID, USER_DESC,
+                               USER_CREATE_TIME, USER_CREATE_USER_ID, USER_STATUS,
+                               USER_ORDER_NUM)
         values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR},
                 #{userPassword,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userPhoneNumber,jdbcType=VARCHAR},
-                #{userAvatarId,jdbcType=VARCHAR}, #{userOrganId,jdbcType=VARCHAR}, #{userDesc,jdbcType=VARCHAR}
-                       )
+                #{userAvatarId,jdbcType=VARCHAR}, #{userOrganId,jdbcType=VARCHAR}, #{userDesc,jdbcType=VARCHAR},
+                #{userCreateTime,jdbcType=TIMESTAMP}, #{userCreateUserId,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR},
+                #{userOrderNum,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
         insert into TB4D_USER
@@ -68,6 +74,18 @@
             <if test="userDesc != null">
                 USER_DESC,
             </if>
+            <if test="userCreateTime != null">
+                USER_CREATE_TIME,
+            </if>
+            <if test="userCreateUserId != null">
+                USER_CREATE_USER_ID,
+            </if>
+            <if test="userStatus != null">
+                USER_STATUS,
+            </if>
+            <if test="userOrderNum != null">
+                USER_ORDER_NUM,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">
@@ -96,6 +114,18 @@
             </if>
             <if test="userDesc != null">
                 #{userDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="userCreateTime != null">
+                #{userCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userCreateUserId != null">
+                #{userCreateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="userStatus != null">
+                #{userStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="userOrderNum != null">
+                #{userOrderNum,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -126,6 +156,18 @@
             <if test="userDesc != null">
                 USER_DESC = #{userDesc,jdbcType=VARCHAR},
             </if>
+            <if test="userCreateTime != null">
+                USER_CREATE_TIME = #{userCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userCreateUserId != null">
+                USER_CREATE_USER_ID = #{userCreateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="userStatus != null">
+                USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="userOrderNum != null">
+                USER_ORDER_NUM = #{userOrderNum,jdbcType=INTEGER},
+            </if>
         </set>
         where USER_ID = #{userId,jdbcType=VARCHAR}
     </update>
@@ -138,7 +180,11 @@
             USER_PHONE_NUMBER = #{userPhoneNumber,jdbcType=VARCHAR},
             USER_AVATAR_ID = #{userAvatarId,jdbcType=VARCHAR},
             USER_ORGAN_ID = #{userOrganId,jdbcType=VARCHAR},
-            USER_DESC = #{userDesc,jdbcType=VARCHAR}
+            USER_DESC = #{userDesc,jdbcType=VARCHAR},
+            USER_CREATE_TIME = #{userCreateTime,jdbcType=TIMESTAMP},
+            USER_CREATE_USER_ID = #{userCreateUserId,jdbcType=VARCHAR},
+            USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+            USER_ORDER_NUM = #{userOrderNum,jdbcType=INTEGER}
         where USER_ID = #{userId,jdbcType=VARCHAR}
     </update>
 </mapper>

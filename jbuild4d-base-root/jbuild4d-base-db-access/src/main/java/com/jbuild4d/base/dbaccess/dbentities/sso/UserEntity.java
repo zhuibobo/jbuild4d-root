@@ -2,6 +2,7 @@ package com.jbuild4d.base.dbaccess.dbentities.sso;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jbuild4d.base.dbaccess.anno.DBKeyField;
+import java.util.Date;
 
 /**
  *
@@ -39,7 +40,20 @@ public class UserEntity {
     //USER_DESC:用户备注
     private String userDesc;
 
-    public UserEntity(String userId, String userName, String userAccount, String userPassword, String userEmail, String userPhoneNumber, String userAvatarId, String userOrganId, String userDesc) {
+    //USER_CREATE_TIME:创建时间
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date userCreateTime;
+
+    //USER_CREATE_USER_ID:创建用户ID
+    private String userCreateUserId;
+
+    //USER_STATUS:状态:启用,禁用
+    private String userStatus;
+
+    //USER_ORDER_NUM:排序号
+    private Integer userOrderNum;
+
+    public UserEntity(String userId, String userName, String userAccount, String userPassword, String userEmail, String userPhoneNumber, String userAvatarId, String userOrganId, String userDesc, Date userCreateTime, String userCreateUserId, String userStatus, Integer userOrderNum) {
         this.userId = userId;
         this.userName = userName;
         this.userAccount = userAccount;
@@ -49,6 +63,10 @@ public class UserEntity {
         this.userAvatarId = userAvatarId;
         this.userOrganId = userOrganId;
         this.userDesc = userDesc;
+        this.userCreateTime = userCreateTime;
+        this.userCreateUserId = userCreateUserId;
+        this.userStatus = userStatus;
+        this.userOrderNum = userOrderNum;
     }
 
     public UserEntity() {
@@ -125,5 +143,37 @@ public class UserEntity {
 
     public void setUserDesc(String userDesc) {
         this.userDesc = userDesc == null ? null : userDesc.trim();
+    }
+
+    public Date getUserCreateTime() {
+        return userCreateTime;
+    }
+
+    public void setUserCreateTime(Date userCreateTime) {
+        this.userCreateTime = userCreateTime;
+    }
+
+    public String getUserCreateUserId() {
+        return userCreateUserId;
+    }
+
+    public void setUserCreateUserId(String userCreateUserId) {
+        this.userCreateUserId = userCreateUserId == null ? null : userCreateUserId.trim();
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus == null ? null : userStatus.trim();
+    }
+
+    public Integer getUserOrderNum() {
+        return userOrderNum;
+    }
+
+    public void setUserOrderNum(Integer userOrderNum) {
+        this.userOrderNum = userOrderNum;
     }
 }

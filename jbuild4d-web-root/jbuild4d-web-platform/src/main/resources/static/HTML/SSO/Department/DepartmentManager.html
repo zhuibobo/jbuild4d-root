@@ -187,29 +187,33 @@
                     align: 'center'
                 },
                 {
-                    title: 'ddtlKey',
-                    key: 'ddtlKey',
+                    title: '用户名',
+                    key: 'userName',
+                    align: "center",
+                    width: 140,
+                }, {
+                    title: '账号',
+                    key: 'userAccount',
+                    width:200,
                     align: "center"
                 }, {
-                    title: 'ddtlName',
-                    key: 'ddtlName',
+                    title: '手机号码',
+                    key: 'userPhoneNumber',
+                    width:200,
                     align: "center"
                 }, {
-                    title: 'ddtlDesc',
-                    key: 'ddtlDesc'
+                    title: '是否主属',
+                    key: 'duIsMain',
+                    width: 120,
                 }, {
-                    title: 'ddtlStatus',
-                    width: 100,
+                    title: '职位',
+                    width: 200,
                     align: "center",
-                    key: 'ddtlStatus'
+                    key: 'duTitle'
                 }, {
-                    title: 'CT',
-                    key: 'ddtlCreatetime',
-                    width: 100,
-                    align: "center",
-                    render: function (h, params) {
-                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.ddtlCreatetime);
-                    }
+                    title: '备注',
+                    key: 'userDesc',
+                    align: "center"
                 }, {
                     title: '操作',
                     key: 'dictGroupId',

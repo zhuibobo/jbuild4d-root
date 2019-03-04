@@ -9,10 +9,15 @@
             <arg column="DU_IS_MAIN" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DU_TITLE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DU_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DU_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="DU_CREATE_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DU_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DU_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        DU_ID, DU_DEPT_ID, DU_USER_ID, DU_IS_MAIN, DU_TITLE, DU_DESC
+        DU_ID, DU_DEPT_ID, DU_USER_ID, DU_IS_MAIN, DU_TITLE, DU_DESC, DU_CREATE_TIME, DU_CREATE_USER_ID,
+        DU_STATUS, DU_ORDER_NUM
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -26,11 +31,13 @@
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
         insert into TB4D_DEPARTMENT_USER (DU_ID, DU_DEPT_ID, DU_USER_ID,
-                                          DU_IS_MAIN, DU_TITLE, DU_DESC
-                )
+                                          DU_IS_MAIN, DU_TITLE, DU_DESC,
+                                          DU_CREATE_TIME, DU_CREATE_USER_ID, DU_STATUS,
+                                          DU_ORDER_NUM)
         values (#{duId,jdbcType=VARCHAR}, #{duDeptId,jdbcType=VARCHAR}, #{duUserId,jdbcType=VARCHAR},
-                #{duIsMain,jdbcType=VARCHAR}, #{duTitle,jdbcType=VARCHAR}, #{duDesc,jdbcType=VARCHAR}
-                       )
+                #{duIsMain,jdbcType=VARCHAR}, #{duTitle,jdbcType=VARCHAR}, #{duDesc,jdbcType=VARCHAR},
+                #{duCreateTime,jdbcType=TIMESTAMP}, #{duCreateUserId,jdbcType=VARCHAR}, #{duStatus,jdbcType=VARCHAR},
+                #{duOrderNum,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
         insert into TB4D_DEPARTMENT_USER
@@ -53,6 +60,18 @@
             <if test="duDesc != null">
                 DU_DESC,
             </if>
+            <if test="duCreateTime != null">
+                DU_CREATE_TIME,
+            </if>
+            <if test="duCreateUserId != null">
+                DU_CREATE_USER_ID,
+            </if>
+            <if test="duStatus != null">
+                DU_STATUS,
+            </if>
+            <if test="duOrderNum != null">
+                DU_ORDER_NUM,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="duId != null">
@@ -72,6 +91,18 @@
             </if>
             <if test="duDesc != null">
                 #{duDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="duCreateTime != null">
+                #{duCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="duCreateUserId != null">
+                #{duCreateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="duStatus != null">
+                #{duStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="duOrderNum != null">
+                #{duOrderNum,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -93,6 +124,18 @@
             <if test="duDesc != null">
                 DU_DESC = #{duDesc,jdbcType=VARCHAR},
             </if>
+            <if test="duCreateTime != null">
+                DU_CREATE_TIME = #{duCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="duCreateUserId != null">
+                DU_CREATE_USER_ID = #{duCreateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="duStatus != null">
+                DU_STATUS = #{duStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="duOrderNum != null">
+                DU_ORDER_NUM = #{duOrderNum,jdbcType=INTEGER},
+            </if>
         </set>
         where DU_ID = #{duId,jdbcType=VARCHAR}
     </update>
@@ -102,7 +145,11 @@
             DU_USER_ID = #{duUserId,jdbcType=VARCHAR},
             DU_IS_MAIN = #{duIsMain,jdbcType=VARCHAR},
             DU_TITLE = #{duTitle,jdbcType=VARCHAR},
-            DU_DESC = #{duDesc,jdbcType=VARCHAR}
+            DU_DESC = #{duDesc,jdbcType=VARCHAR},
+            DU_CREATE_TIME = #{duCreateTime,jdbcType=TIMESTAMP},
+            DU_CREATE_USER_ID = #{duCreateUserId,jdbcType=VARCHAR},
+            DU_STATUS = #{duStatus,jdbcType=VARCHAR},
+            DU_ORDER_NUM = #{duOrderNum,jdbcType=INTEGER}
         where DU_ID = #{duId,jdbcType=VARCHAR}
     </update>
 </mapper>

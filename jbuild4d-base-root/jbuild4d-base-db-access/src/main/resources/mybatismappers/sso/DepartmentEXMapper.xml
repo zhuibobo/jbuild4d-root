@@ -27,5 +27,5 @@
     <select id="existOrganRootDept" resultType="int">select count(DEPT_ID) from TB4D_DEPARTMENT where DEPT_IS_ROOT='是' and DEPT_PARENT_ID='0' and DEPT_ORGAN_ID=#{organId,jdbcType=NVARCHAR}</select>
     <select id="existChildsDepartment" resultType="int">select count(DEPT_ID) from TB4D_DEPARTMENT where DEPT_PARENT_ID=#{id,jdbcType=NVARCHAR}</select>
     <select id="selectOrganRootDepartment" resultMap="BaseResultMap">select <include refid="Base_Column_List"/> from TB4D_DEPARTMENT where DEPT_IS_ROOT='是' and DEPT_PARENT_ID='0' and DEPT_ORGAN_ID=#{organId,jdbcType=NVARCHAR}</select>
-    <select id="selectDepartmentsByOrganId" resultMap="BaseResultMap">select <include refid="Base_Column_List"/> from TB4D_DEPARTMENT where DEPT_ORGAN_ID=#{organId,jdbcType=NVARCHAR}</select>
+    <select id="selectDepartmentsByOrganId" resultMap="BaseResultMap">select <include refid="Base_Column_List"/> from TB4D_DEPARTMENT where DEPT_ORGAN_ID=#{organId,jdbcType=NVARCHAR} order by DEPT_ORDER_NUM asc</select>
 </mapper>
