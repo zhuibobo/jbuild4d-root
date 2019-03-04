@@ -12,6 +12,7 @@
             <arg column="DEPT_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="DEPT_CREATE_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DEPT_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="DEPT_IS_ROOT" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DEPT_PARENT_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DEPT_PARENT_ID_LIST" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="DEPT_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -21,8 +22,8 @@
     </resultMap>
     <sql id="Base_Column_List">
         DEPT_ID, DEPT_NAME, DEPT_SHORT_NAME, DEPT_NO, DEPT_IS_VIRTUAL, DEPT_CHILD_COUNT,
-        DEPT_CREATE_TIME, DEPT_CREATE_USER_ID, DEPT_ORDER_NUM, DEPT_PARENT_ID, DEPT_PARENT_ID_LIST,
-        DEPT_STATUS, DEPT_ORGAN_ID, DEPT_DESC
+        DEPT_CREATE_TIME, DEPT_CREATE_USER_ID, DEPT_ORDER_NUM, DEPT_IS_ROOT, DEPT_PARENT_ID,
+        DEPT_PARENT_ID_LIST, DEPT_STATUS, DEPT_ORGAN_ID, DEPT_DESC
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -38,13 +39,15 @@
         insert into TB4D_DEPARTMENT (DEPT_ID, DEPT_NAME, DEPT_SHORT_NAME,
                                      DEPT_NO, DEPT_IS_VIRTUAL, DEPT_CHILD_COUNT,
                                      DEPT_CREATE_TIME, DEPT_CREATE_USER_ID, DEPT_ORDER_NUM,
-                                     DEPT_PARENT_ID, DEPT_PARENT_ID_LIST, DEPT_STATUS,
-                                     DEPT_ORGAN_ID, DEPT_DESC)
+                                     DEPT_IS_ROOT, DEPT_PARENT_ID, DEPT_PARENT_ID_LIST,
+                                     DEPT_STATUS, DEPT_ORGAN_ID, DEPT_DESC
+                )
         values (#{deptId,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{deptShortName,jdbcType=VARCHAR},
                 #{deptNo,jdbcType=VARCHAR}, #{deptIsVirtual,jdbcType=VARCHAR}, #{deptChildCount,jdbcType=INTEGER},
                 #{deptCreateTime,jdbcType=TIMESTAMP}, #{deptCreateUserId,jdbcType=VARCHAR}, #{deptOrderNum,jdbcType=INTEGER},
-                #{deptParentId,jdbcType=VARCHAR}, #{deptParentIdList,jdbcType=VARCHAR}, #{deptStatus,jdbcType=VARCHAR},
-                #{deptOrganId,jdbcType=VARCHAR}, #{deptDesc,jdbcType=VARCHAR})
+                #{deptIsRoot,jdbcType=VARCHAR}, #{deptParentId,jdbcType=VARCHAR}, #{deptParentIdList,jdbcType=VARCHAR},
+                #{deptStatus,jdbcType=VARCHAR}, #{deptOrganId,jdbcType=VARCHAR}, #{deptDesc,jdbcType=VARCHAR}
+                       )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
         insert into TB4D_DEPARTMENT
@@ -75,6 +78,9 @@
             </if>
             <if test="deptOrderNum != null">
                 DEPT_ORDER_NUM,
+            </if>
+            <if test="deptIsRoot != null">
+                DEPT_IS_ROOT,
             </if>
             <if test="deptParentId != null">
                 DEPT_PARENT_ID,
@@ -120,6 +126,9 @@
             <if test="deptOrderNum != null">
                 #{deptOrderNum,jdbcType=INTEGER},
             </if>
+            <if test="deptIsRoot != null">
+                #{deptIsRoot,jdbcType=VARCHAR},
+            </if>
             <if test="deptParentId != null">
                 #{deptParentId,jdbcType=VARCHAR},
             </if>
@@ -164,6 +173,9 @@
             <if test="deptOrderNum != null">
                 DEPT_ORDER_NUM = #{deptOrderNum,jdbcType=INTEGER},
             </if>
+            <if test="deptIsRoot != null">
+                DEPT_IS_ROOT = #{deptIsRoot,jdbcType=VARCHAR},
+            </if>
             <if test="deptParentId != null">
                 DEPT_PARENT_ID = #{deptParentId,jdbcType=VARCHAR},
             </if>
@@ -192,6 +204,7 @@
             DEPT_CREATE_TIME = #{deptCreateTime,jdbcType=TIMESTAMP},
             DEPT_CREATE_USER_ID = #{deptCreateUserId,jdbcType=VARCHAR},
             DEPT_ORDER_NUM = #{deptOrderNum,jdbcType=INTEGER},
+            DEPT_IS_ROOT = #{deptIsRoot,jdbcType=VARCHAR},
             DEPT_PARENT_ID = #{deptParentId,jdbcType=VARCHAR},
             DEPT_PARENT_ID_LIST = #{deptParentIdList,jdbcType=VARCHAR},
             DEPT_STATUS = #{deptStatus,jdbcType=VARCHAR},

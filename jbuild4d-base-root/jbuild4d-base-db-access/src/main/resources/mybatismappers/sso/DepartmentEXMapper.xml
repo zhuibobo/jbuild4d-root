@@ -10,6 +10,7 @@
         <if test="deptNo !=null and deptNo !=''"> and DEPT_NO like #{deptNo} </if>
         <if test="deptIsVirtual !=null and deptIsVirtual !=''"> and DEPT_IS_VIRTUAL like #{deptIsVirtual} </if>
         <if test="deptCreateUserId !=null and deptCreateUserId !=''"> and DEPT_CREATE_USER_ID like #{deptCreateUserId} </if>
+        <if test="deptIsRoot !=null and deptIsRoot !=''"> and DEPT_IS_ROOT like #{deptIsRoot} </if>
         <if test="deptParentId !=null and deptParentId !=''"> and DEPT_PARENT_ID like #{deptParentId} </if>
         <if test="deptParentIdList !=null and deptParentIdList !=''"> and DEPT_PARENT_ID_LIST like #{deptParentIdList} </if>
         <if test="deptStatus !=null and deptStatus !=''"> and DEPT_STATUS like #{deptStatus} </if>
@@ -20,4 +21,7 @@
                                                                                                           where DEPT_ORDER_NUM = (select max(DEPT_ORDER_NUM) from TB4D_DEPARTMENT where DEPT_ORDER_NUM<(select DEPT_ORDER_NUM from TB4D_DEPARTMENT where DEPT_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DEPARTMENT
                                                                                                              where DEPT_ORDER_NUM = (select min(DEPT_ORDER_NUM) from TB4D_DEPARTMENT where DEPT_ORDER_NUM>(select DEPT_ORDER_NUM from TB4D_DEPARTMENT where DEPT_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+
+    <select id="existOrganRootDept" resultType="int">select count(DEPT_ID) from TB4D_DEPARTMENT where DEPT_IS_ROOT='是' and DEPT_PARENT_ID='0' and DEPT_ORGAN_ID=#{organId,jdbcType=NVARCHAR}</select>
+    <select id="selectOrganRootDepartment" resultType="BaseResultMap">select <include refid="Base_Column_List"/> from TB4D_DEPARTMENT where DEPT_IS_ROOT='是' and DEPT_PARENT_ID='0' and DEPT_ORGAN_ID=#{organId,jdbcType=NVARCHAR}</select>
 </mapper>

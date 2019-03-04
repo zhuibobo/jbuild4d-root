@@ -7,4 +7,5 @@ import com.jbuild4d.base.service.general.JB4DSession;
 
 public interface IDepartmentService extends IBaseService<DepartmentEntity> {
 
+    boolean existOrganRootDept(JB4DSession jb4DSession, String organId);
 }

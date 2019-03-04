@@ -13,8 +13,7 @@ import com.jbuild4d.base.tools.cache.JB4DCacheManager;
 import com.jbuild4d.base.tools.common.BeanUtility;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.XMLUtility;
-import com.jbuild4d.platform.sso.service.ICreateOrganAware;
-import com.jbuild4d.platform.sso.service.IDepartmentService;
+import com.jbuild4d.platform.sso.service.IOnOrganChangeAware;
 import com.jbuild4d.platform.sso.service.IOrganService;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -87,7 +86,7 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
                 List<Node> nodeList=XMLUtility.parseForNodeList(xmlDocument,"//Bean");
                 for (Node node : nodeList) {
                     String beanName=XMLUtility.getAttribute(node,"Name");
-                    ICreateOrganAware createOrganAware= BeanUtility.getBean(beanName);
+                    IOnOrganChangeAware createOrganAware= BeanUtility.getBean(beanName);
                     if(createOrganAware==null){
                         throw new JBuild4DGenerallyException("再容器中找不到名称为"+beanName+"的Bean");
                     }

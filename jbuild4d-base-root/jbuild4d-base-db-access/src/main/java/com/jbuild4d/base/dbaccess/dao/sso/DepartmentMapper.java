@@ -4,4 +4,7 @@ import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity;
 
 public interface DepartmentMapper extends BaseMapper<DepartmentEntity> {
+    int existOrganRootDept(String organId);
+
+    DepartmentEntity selectOrganRootDepartment(String organId);
 }

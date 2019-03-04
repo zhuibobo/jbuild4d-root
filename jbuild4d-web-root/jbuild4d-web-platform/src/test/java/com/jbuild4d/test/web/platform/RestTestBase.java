@@ -54,10 +54,10 @@ public class RestTestBase {
 
     public JB4DSession getSession(){
         JB4DSession b4DSession = new JB4DSession();
-        b4DSession.setOrganName("4D");
-        b4DSession.setOrganId("OrganId");
-        b4DSession.setUserName("Alex");
-        b4DSession.setUserId("UserId");
+        b4DSession.setOrganName("4D-UnitTest");
+        b4DSession.setOrganId("OrganId-UnitTest");
+        b4DSession.setUserName("Alex-UnitTest");
+        b4DSession.setUserId("UserId-UnitTest");
         return b4DSession;
     }
 
