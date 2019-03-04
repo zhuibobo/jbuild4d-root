@@ -278,7 +278,7 @@
                     var _self=this;
                     var recordId=this.treeSelectedNode[appList.treeIdFieldName];
                     DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
-                        AjaxUtility.Post(_self.acInterface.deleteGroup, {recordId: recordId}, function (result) {
+                        AjaxUtility.Delete(_self.acInterface.deleteGroup, {recordId: recordId}, function (result) {
                             if (result.success) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
                                     appList.treeObj.removeNode(appList.treeSelectedNode);
