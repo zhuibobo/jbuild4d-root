@@ -1,98 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <title>JBuild4D</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<script type="text/javascript" src="../../../Js/T3P/JQuery/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="../../../Js/T3P/VUE-2.5.16/vue.js"></script>
-	<script type="text/javascript" src="../../../Js/T3P/IView-3.X/dist/iview.min.js"></script>
-	<script type="text/javascript" src="../../../Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="../../../Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script>
-	<script type="text/javascript" src="../../../Js/JBuild4DPlatformLib.js?refVersion=1"></script>
-	<script type="text/javascript" src="../../../Js/UIEXComponent.js?refVersion=1"></script>
-	<script type="text/javascript" src="../../../Js/VueEXComponent.js?refVersion=1"></script>
-    <link rel="stylesheet" type="text/css" href="../../../Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1" />
-	<link rel="stylesheet" type="text/css" href="../../../Themes/Default/IView-3.X/iview.css" />
-	<link rel="stylesheet" type="text/css" href="../../../Themes/Default/JQueryUI/jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" href="../../../Themes/Default/ZTree/zTreeStyle/zTreeStyle.css" />
-</head>
-<body>
-<div id="appForm" class="general-edit-page-wrap" v-cloak>
-    <div style="width: 80%;float: left">
-        <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
-            <form-item label="用户名：" prop="deptName">
-                <row>
-                    <i-col span="10">
-                        <form-item prop="deptName">
-                            <i-input v-model="formEntity.deptName"></i-input>
-                        </form-item>
-                    </i-col>
-                    <i-col span="4" style="text-align: center">账号：</i-col>
-                    <i-col span="10" prop="deptShortName">
-                        <form-item prop="deptShortName">
-                            <i-input v-model="formEntity.deptShortName"></i-input>
-                        </form-item>
-                    </i-col>
-                </row>
-            </form-item>
-            <form-item label="负责人：">
-                <row>
-                    <i-col span="10">
-                        <i-input v-model="formEntity.deptPerCharge"></i-input>
-                    </i-col>
-                    <i-col span="4" style="text-align: center">联系电话：</i-col>
-                    <i-col span="10">
-                        <i-input v-model="formEntity.deptPerChargePhone"></i-input>
-                    </i-col>
-                </row>
-            </form-item>
-            <form-item label="部门编号：">
-                <row>
-                    <i-col span="10">
-                        <i-input v-model="formEntity.deptNo"></i-input>
-                    </i-col>
-                    <i-col span="4" style="text-align: center">状态：</i-col>
-                    <i-col span="10">
-                        <form-item>
-                            <radio-group v-model="formEntity.deptStatus">
-                                <radio label="启用">启用</radio>
-                                <radio label="禁用">禁用</radio>
-                            </radio-group>
-                        </form-item>
-                    </i-col>
-                </row>
-            </form-item>
-            <form-item label="备注：">
-                <i-input v-model="formEntity.deptDesc" type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>
-            </form-item>
-        </i-form>
-    </div>
-    <div style="width: 19%;float: right">
-        <div style="border-radius: 8px;text-align: center;margin-top: 20px;margin-bottom: 30px">
-            <img :src="logoImageSrc" style="width: 80px;height: 80px" />
-        </div>
-        <upload style="margin:10px 12px 0 20px" :on-success="uploadOrganLogoImageSuccess" multiple type="drag" name="file" action="../../../PlatFormRest/SSO/Organ/UploadOrganLogo.do" accept=".png">
-            <div style="padding:10px 0px">
-                <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>
-                <p>上传用户头像</p>
-            </div>
-        </upload>
-    </div>
-    <div class="button-outer-wrap">
-        <div class="button-inner-wrap">
-            <button-group>
-                <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')" icon="md-checkmark">保存</i-button>
-                <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button>
-            </button-group>
-        </div>
-    </div>
-</div>
-<script>
-    var appForm =new Vue({
+<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../../Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../../Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../../Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../../Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../../Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../../Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../../Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../Js/VueEXComponent.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../../Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"></head><body><div id="appForm" class="general-edit-page-wrap" v-cloak><div style="width:80%;float:left"><i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100"><form-item label="用户名：" prop="deptName"><row><i-col span="10"><form-item prop="deptName"><i-input v-model="formEntity.deptName"></i-input></form-item></i-col><i-col span="4" style="text-align:center">账号：</i-col><i-col span="10" prop="deptShortName"><form-item prop="deptShortName"><i-input v-model="formEntity.deptShortName"></i-input></form-item></i-col></row></form-item><form-item label="负责人："><row><i-col span="10"><i-input v-model="formEntity.deptPerCharge"></i-input></i-col><i-col span="4" style="text-align:center">联系电话：</i-col><i-col span="10"><i-input v-model="formEntity.deptPerChargePhone"></i-input></i-col></row></form-item><form-item label="部门编号："><row><i-col span="10"><i-input v-model="formEntity.deptNo"></i-input></i-col><i-col span="4" style="text-align:center">状态：</i-col><i-col span="10"><form-item><radio-group v-model="formEntity.deptStatus"><radio label="启用">启用</radio><radio label="禁用">禁用</radio></radio-group></form-item></i-col></row></form-item><form-item label="备注："><i-input v-model="formEntity.deptDesc" type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input></form-item></i-form></div><div style="width:19%;float:right"><div style="border-radius:8px;text-align:center;margin-top:20px;margin-bottom:30px"><img :src="userHeadImageSrc" style="width:110px;height:120px"></div><upload style="margin:10px 12px 0 20px" :on-success="uploadOrganLogoImageSuccess" multiple="multiple" type="drag" name="file" action="../../../PlatFormRest/SSO/Organ/UploadOrganLogo.do" accept=".png"><div style="padding:10px 0"><icon type="ios-cloud-upload" size="52" style="color:#39f"></icon><p>上传用户头像</p></div></upload></div><div class="button-outer-wrap"><div class="button-inner-wrap"><button-group><i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')" icon="md-checkmark">保存</i-button><i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button></button-group></div></div></div><script>var appForm =new Vue({
         el: "#appForm",
         mounted:function () {
             if(this.formEntity.ddtlGroupId==""&&this.status=="add"){
@@ -105,7 +11,8 @@
         data: {
             acInterface:{
                 getDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/GetDetailData",
-                saveDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/SaveEdit"
+                saveDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/SaveEdit",
+                userHeadUrl:"/PlatFormRest/SSO/DepartmentUser/GetUserHeadIMG"
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
             formEntity: {
@@ -148,12 +55,20 @@
                     {required: true, message: '【ddtlKey】不能空！', trigger: 'blur'}
                 ]
             },
-            status: BaseUtility.GetUrlParaValue("op")
+            status: BaseUtility.GetUrlParaValue("op"),
+            userHeadImageSrc:""
         },
         methods: {
             bindFormData:function(){
                 //获取数据并赋值
-                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,null);
+                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,function (result) {
+                    if(appForm.status=="add") {
+                        appForm.userHeadImageSrc = BaseUtility.BuildAction(appForm.acInterface.userHeadUrl, {fileId: "defaultUserHeadImage"});
+                    }
+                    else {
+                        appForm.userHeadImageSrc = BaseUtility.BuildAction(appForm.acInterface.userHeadUrl, {fileId: appForm.formEntity.userEntity.userHeadId});
+                    }
+                });
             },
             handleSubmit: function (name) {
                 var _self = this;
@@ -176,7 +91,4 @@
                 DialogUtility.Frame_CloseDialog(window);
             }
         }
-    });
-</script>
-</body>
-</html>
+    });</script></body></html>

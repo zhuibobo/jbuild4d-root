@@ -53,14 +53,14 @@ public class DepartmentUserRestResource {
         }
     }
 
-    @RequestMapping(value = "/UploadUserIMG", method = RequestMethod.POST, produces = "application/json")
-    public JBuild4DResponseVo uploadUserIMG(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
+    @RequestMapping(value = "/UploadUserHeadIMG", method = RequestMethod.POST, produces = "application/json")
+    public JBuild4DResponseVo uploadUserHeadIMG(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
         FileInfoEntity fileInfoEntity=fileInfoService.addSmallFileToDB(JB4DSessionUtility.getSession(),file);
         return JBuild4DResponseVo.success(JBuild4DResponseVo.SUCCESSMSG,fileInfoEntity);
     }
 
-    @RequestMapping(value = "/GetUserIMG", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
-    public byte[] getUserIMG(String fileId) throws IOException, JBuild4DGenerallyException {
+    @RequestMapping(value = "/GetUserHeadIMG", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getUserHeadIMG(String fileId) throws IOException, JBuild4DGenerallyException {
         FileInfoEntity fileInfoEntity=fileInfoService.getByPrimaryKey(JB4DSessionUtility.getSession(),fileId);
         if(fileInfoEntity==null) {
             //String cacheKey = "UserDefaultIMG";

@@ -59,7 +59,7 @@
     </div>
     <div style="width: 19%;float: right">
         <div style="border-radius: 8px;text-align: center;margin-top: 20px;margin-bottom: 30px">
-            <img :src="logoImageSrc" style="width: 80px;height: 80px" />
+            <img :src="userHeadImageSrc" style="width: 110px;height: 120px" />
         </div>
         <upload style="margin:10px 12px 0 20px" :on-success="uploadOrganLogoImageSuccess" multiple type="drag" name="file" action="../../../PlatFormRest/SSO/Organ/UploadOrganLogo.do" accept=".png">
             <div style="padding:10px 0px">
@@ -91,7 +91,8 @@
         data: {
             acInterface:{
                 getDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/GetDetailData",
-                saveDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/SaveEdit"
+                saveDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/SaveEdit",
+                userHeadUrl:"/PlatFormRest/SSO/DepartmentUser/GetUserHeadIMG"
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
             formEntity: {
@@ -134,12 +135,20 @@
                     {required: true, message: '【ddtlKey】不能空！', trigger: 'blur'}
                 ]
             },
-            status: BaseUtility.GetUrlParaValue("op")
+            status: BaseUtility.GetUrlParaValue("op"),
+            userHeadImageSrc:""
         },
         methods: {
             bindFormData:function(){
                 //获取数据并赋值
-                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,null);
+                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,function (result) {
+                    if(appForm.status=="add") {
+                        appForm.userHeadImageSrc = BaseUtility.BuildAction(appForm.acInterface.userHeadUrl, {fileId: "defaultUserHeadImage"});
+                    }
+                    else {
+                        appForm.userHeadImageSrc = BaseUtility.BuildAction(appForm.acInterface.userHeadUrl, {fileId: appForm.formEntity.userEntity.userHeadId});
+                    }
+                });
             },
             handleSubmit: function (name) {
                 var _self = this;

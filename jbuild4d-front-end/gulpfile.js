@@ -116,7 +116,7 @@ gulp.task('LessImages',()=>{
 
 /*编译工程相关的前端模版*/
 gulp.task('HTMLTemplates',()=>{
-    return copyAndResolveHtml(srcPlatformStaticPath + "/HTML/**/*",srcPlatformStaticPath + "/HTML",publicResourcePath + "/HTML");
+    return copyAndResolveHtml(srcPlatformStaticPath + "/HTML/**/*.html",srcPlatformStaticPath + "/HTML",publicResourcePath + "/HTML");
     /*拷贝HTML文件*/
     /*return gulp.src("build-jbuild4d-web-platform/templates/!**!/!*", {base: "build-jbuild4d-web-platform/templates"})
         //.pipe(htmlclean({
@@ -205,6 +205,11 @@ function copyAndResolveHtml(sourcePath,base,toPath) {
         .pipe(replacecust(replaceBlockObj.replaceBlock('BootStrap4Lib'), replaceBlockObj.replaceBootStrap4Lib))
         .pipe(replacecust(replaceBlockObj.replaceBlock('FrameV1Lib'), replaceBlockObj.replaceFrameV1Lib))
         .pipe(replacecust(replaceBlockObj.replaceBlock('GoJsLib'), replaceBlockObj.replaceGoJsLib))
+        .pipe(htmlmin({
+            collapseWhitespace: true,
+            minifyCSS:true,
+            minifyJS:false
+        }))
         /*.pipe(htmlmin({
             collapseWhitespace: true,
             minifyCSS:true,
