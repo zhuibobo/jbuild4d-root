@@ -12,6 +12,7 @@ import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.base.tools.common.encryption.digitaldigest.MD5Utility;
 import com.jbuild4d.platform.sso.service.IDepartmentService;
@@ -161,6 +162,24 @@ public class DepartmentUserServiceImpl implements IDepartmentUserService
         List<Map<String,Object>> list=departmentUserMapper.selectDUByDepartment(searchMap);
         PageInfo<List<Map<String,Object>>> pageInfo = new PageInfo(list);
         return pageInfo;
+    }
+
+    @Override
+    public void statusChange(JB4DSession jb4DSession, String ids, String status) throws JBuild4DGenerallyException {
+        if(StringUtility.isNotEmpty(ids)) {
+            String[] idArray = ids.split(";");
+            for (int i = 0; i < idArray.length; i++) {
+                DepartmentUserEntity entity = getByPrimaryKey(jb4DSession, idArray[i]);
+                userService.statusChange(jb4DSession,entity.getDuUserId(),status);
+                //entity.setOrganStatus(status);
+                //organMapper.updateByPrimaryKeySelective(entity);
+            }
+        }
+    }
+
+    @Override
+    public DepartmentUserEntity getByPrimaryKey(JB4DSession jb4DSession, String recordId) {
+        return departmentUserMapper.selectByPrimaryKey(recordId);
     }
 
     @Override

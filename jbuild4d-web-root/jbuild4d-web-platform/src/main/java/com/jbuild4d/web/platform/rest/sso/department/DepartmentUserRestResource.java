@@ -7,6 +7,7 @@ import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
+import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
 import com.jbuild4d.platform.files.service.IFileInfoService;
 import com.jbuild4d.platform.sso.service.IDepartmentUserService;
@@ -106,5 +107,24 @@ public class DepartmentUserRestResource {
         }
         PageInfo<List<Map<String,Object>>> pageInfo=departmentUserService.getDepartmentUser(jb4DSession,pageNum,pageSize,searchMap);
         return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,pageInfo);
+    }
+
+    @RequestMapping(value = "/StatusChange",method = RequestMethod.POST)
+    public JBuild4DResponseVo statusChange(String ids,String status,HttpServletRequest request)
+    {
+        try {
+            if(StringUtility.isEmpty(ids)){
+                throw new JBuild4DGenerallyException("参数Ids不能为空或空串!");
+            }
+            if(StringUtility.isEmpty(status)){
+                throw new JBuild4DGenerallyException("参数status不能为空或空串!");
+            }
+            JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+            //operationLogService.writeOperationLog(JB4DSessionUtility.getSession(), "单点登录",getModuleName(),actionName,getLogTypeName(),text,data,this.getClass(),request);
+            departmentUserService.statusChange(jb4DSession,ids,status);
+            return JBuild4DResponseVo.opSuccess();
+        } catch (JBuild4DGenerallyException e) {
+            return JBuild4DResponseVo.opError(e.getMessage());
+        }
     }
 }
