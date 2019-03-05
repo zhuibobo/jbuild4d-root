@@ -53,7 +53,10 @@ public class UserEntity {
     //USER_ORDER_NUM:排序号
     private Integer userOrderNum;
 
-    public UserEntity(String userId, String userName, String userAccount, String userPassword, String userEmail, String userPhoneNumber, String userHeadId, String userOrganId, String userDesc, Date userCreateTime, String userCreateUserId, String userStatus, Integer userOrderNum) {
+    //USER_TYPE:用户类型:平台管理员,组织机构管理员,一般用户
+    private String userType;
+
+    public UserEntity(String userId, String userName, String userAccount, String userPassword, String userEmail, String userPhoneNumber, String userHeadId, String userOrganId, String userDesc, Date userCreateTime, String userCreateUserId, String userStatus, Integer userOrderNum, String userType) {
         this.userId = userId;
         this.userName = userName;
         this.userAccount = userAccount;
@@ -67,6 +70,7 @@ public class UserEntity {
         this.userCreateUserId = userCreateUserId;
         this.userStatus = userStatus;
         this.userOrderNum = userOrderNum;
+        this.userType = userType;
     }
 
     public UserEntity() {
@@ -175,5 +179,13 @@ public class UserEntity {
 
     public void setUserOrderNum(Integer userOrderNum) {
         this.userOrderNum = userOrderNum;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType == null ? null : userType.trim();
     }
 }

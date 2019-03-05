@@ -15,6 +15,7 @@
         <if test="userDesc !=null and userDesc !=''"> and USER_DESC like #{userDesc} </if>
         <if test="userCreateUserId !=null and userCreateUserId !=''"> and USER_CREATE_USER_ID like #{userCreateUserId} </if>
         <if test="userStatus !=null and userStatus !=''"> and USER_STATUS like #{userStatus} </if>
+        <if test="userType !=null and userType !=''"> and USER_TYPE like #{userType} </if>
     </where>ORDER by USER_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_USER
                                                                                                           where USER_ORDER_NUM = (select max(USER_ORDER_NUM) from TB4D_USER where USER_ORDER_NUM<(select USER_ORDER_NUM from TB4D_USER where USER_ID=#{Id,jdbcType=NVARCHAR}))]]></select>

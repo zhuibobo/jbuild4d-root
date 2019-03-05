@@ -757,6 +757,7 @@
             <column name="USER_CREATE_USER_ID" type="NVARCHAR(100)" remarks="创建用户ID" />
             <column name="USER_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用" />
             <column name="USER_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="USER_TYPE" type="NVARCHAR(30)" remarks="用户类型:平台管理员,组织机构管理员,一般用户" />
         </createTable>
         <createTable tableName="TB4D_ROLE" remarks="角色表">
             <column name="ROLE_ID" type="NVARCHAR(100)" remarks="角色ID,主键">

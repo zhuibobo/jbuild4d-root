@@ -55,21 +55,24 @@
                     <col style="width: 80px">
                 </colgroup>
                 <tr class="ls-table-row">
-                    <td>ddtlName：</td>
+                    <td>用户名：</td>
                     <td>
-                        <i-input v-model="searchCondition.ddtlName.value" placeholder=""></i-input>
+                        <i-input v-model="searchCondition.userName" placeholder=""></i-input>
                     </td>
-                    <td>ddtlValue：</td>
+                    <td>账号：</td>
                     <td>
-                        <i-input v-model="searchCondition.ddtlValue.value" placeholder=""></i-input>
+                        <i-input v-model="searchCondition.account" placeholder=""></i-input>
                     </td>
-                    <td>ddtlCreatetime（从）：</td>
+                    <td>手机号码：</td>
                     <td>
-                        <date-picker v-model="searchCondition.ddtlCreatetime_s.value" type="date" placeholder="" style="width: 100%"></date-picker>
+                        <i-input v-model="searchCondition.userPhoneNumber"></i-input>
                     </td>
-                    <td>（到）：</td>
+                    <td>全局搜索：</td>
                     <td>
-                        <date-picker v-model="searchCondition.ddtlCreatetime_e.value" type="date" placeholder="" style="width: 100%"></date-picker>
+                        <radio-group v-model="searchCondition.searchInALL">
+                            <radio label="是">是</radio>
+                            <radio label="否">否</radio>
+                        </radio-group>
                     </td>
                     <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
                 </tr>
@@ -81,6 +84,11 @@
                     <i-button type="success" @click="add()" icon="md-add"> 新增 </i-button>
                     <i-button type="primary" @click="statusEnable('启用')" icon="md-checkmark-circle"> 启用 </i-button>
                     <i-button type="primary" @click="statusEnable('禁用')" icon="md-close-circle"> 禁用 </i-button>
+                    <i-button type="primary" @click="statusEnable('禁用')" icon="md-close-circle"> 迁移 </i-button>
+                    <i-button type="primary" @click="statusEnable('禁用')" icon="md-close-circle"> 兼职 </i-button>
+                    <i-button type="primary" @click="statusEnable('禁用')" icon="md-close-circle"> 取消兼职 </i-button>
+                    <i-button type="primary" @click="statusEnable('禁用')" icon="md-close-circle"> 重置密码 </i-button>
+                    <i-button type="primary" @click="statusEnable('禁用')" icon="md-close-circle"> 角色设置 </i-button>
                     <i-button type="primary" @click="move('up')" icon="md-arrow-up"> 上移 </i-button>
                     <i-button type="primary" @click="move('down')" icon="md-arrow-down"> 下移 </i-button>
                 </button-group>
@@ -119,7 +127,7 @@
                 moveDepartment:"/PlatFormRest/SSO/Department/Move",
                 <!--List -->
                 listEditView:"/HTML/SSO/Department/DepartmentUserEdit.html",
-                reloadListData:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/GetListData",
+                reloadListData:"/PlatFormRest/SSO/DepartmentUser/GetListData",
                 deleteListRecord:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/Delete",
                 listStatusChange:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/StatusChange",
                 listMove:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/Move"
@@ -159,26 +167,10 @@
             <!--List-->
             idFieldName:"ddtlId",
             searchCondition:{
-                groupId:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.StringType
-                },
-                ddtlName:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.LikeStringType
-                },
-                ddtlValue:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.LikeStringType
-                },
-                ddtlCreatetime_s:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.DataStringType
-                },
-                ddtlCreatetime_e:{
-                    value:"",
-                    type:SearchUtility.SearchFieldType.DataStringType
-                }
+                userName:"",
+                account:"",
+                userPhoneNumber:"",
+                searchInALL:"否"
             },
             columnsConfig: [
                 {
@@ -207,13 +199,13 @@
                     width: 120,
                 }, {
                     title: '职位',
-                    width: 200,
                     align: "center",
                     key: 'duTitle'
                 }, {
-                    title: '备注',
+                    title: '状态',
                     key: 'userDesc',
-                    align: "center"
+                    align: "center",
+                    width: 120
                 }, {
                     title: '操作',
                     key: 'dictGroupId',

@@ -218,7 +218,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
 
         //根菜单->统一用户与单点登录
         MenuEntity ssoRootMenu=createMenu(jb4DSession,rootMenu.getMenuId(),"JB4DSSORootMenu",
-                "单点登录","单点登录","单点登录",
+                "单点登录与统一用户","单点登录与统一用户","单点登录与统一用户",
                 "","");
 
         createMenu(jb4DSession,ssoRootMenu.getMenuId(),"JB4DOrganTypeManage",
