@@ -155,7 +155,7 @@ public class DepartmentUserServiceImpl implements IDepartmentUserService
     }
 
     @Override
-    public PageInfo<List<Map<String, Object>>> getDepartmentUser(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, String departmentId, Map<String, Object> searchMap) {
+    public PageInfo<List<Map<String, Object>>> getDepartmentUser(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, Map<String, Object> searchMap) {
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.
         List<Map<String,Object>> list=departmentUserMapper.selectDUByDepartment(searchMap);

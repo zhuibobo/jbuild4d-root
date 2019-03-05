@@ -62,15 +62,15 @@
             searchCondition:{
                 userName:{
                     value: "",
-                    type: SearchUtility.SearchFieldType.StringType
+                    type: SearchUtility.SearchFieldType.LikeStringType
                 },
                 account:{
                     value: "",
-                    type: SearchUtility.SearchFieldType.StringType
+                    type: SearchUtility.SearchFieldType.LikeStringType
                 },
                 userPhoneNumber:{
                     value: "",
-                    type: SearchUtility.SearchFieldType.StringType
+                    type: SearchUtility.SearchFieldType.LikeStringType
                 },
                 departmentId: {
                     value: "",
@@ -89,35 +89,47 @@
                 },
                 {
                     title: '用户名',
-                    key: 'userName',
+                    key: 'USER_NAME',
                     align: "center",
                     width: 140,
                 }, {
                     title: '账号',
-                    key: 'userAccount',
-                    width:200,
+                    key: 'USER_ACCOUNT',
+                    width:140,
                     align: "center"
                 }, {
                     title: '手机号码',
-                    key: 'userPhoneNumber',
-                    width:200,
+                    key: 'USER_PHONE_NUMBER',
+                    width:140,
                     align: "center"
                 }, {
-                    title: '是否主属',
-                    key: 'duIsMain',
-                    width: 120,
+                    title: '组织机构',
+                    key: 'ORGAN_NAME',
+                    width:140,
+                    align: "center"
+                }, {
+                    title: '部门',
+                    key: 'DEPT_NAME',
+                    width:140,
+                    align: "center"
+                }, {
+                    title: '主属',
+                    key: 'DU_IS_MAIN',
+                    width: 70,
+                    align: "center"
                 }, {
                     title: '职位',
                     align: "center",
-                    key: 'duTitle'
+                    key: 'DU_TITLE',
+                    align: "center"
                 }, {
                     title: '状态',
-                    key: 'userDesc',
+                    key: 'USER_STATUS',
                     align: "center",
-                    width: 120
+                    width: 70
                 }, {
                     title: '操作',
-                    key: 'dictGroupId',
+                    key: 'DU_ID',
                     width: 120,
                     align: "center",
                     render: function (h, params) {
@@ -142,6 +154,8 @@
                 //console.log(organData);
                 CookieUtility.SetCookie1Month("DMORGSID",organData.organId);
                 this.initTree(organData.organId);
+                this.clearSearchCondition();
+                this.tableData=[];
             },
             <!--DepartmentTree-->
             initTree:function (organId) {

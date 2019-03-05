@@ -19,5 +19,5 @@ public interface IDepartmentUserService {
 
     DepartmentUserVo getVo(JB4DSession jb4DSession, String departmentUserId) throws JBuild4DGenerallyException;
 
-    PageInfo<List<Map<String, Object>>> getDepartmentUser(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, String departmentId, Map<String, Object> searchMap);
+    PageInfo<List<Map<String, Object>>> getDepartmentUser(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, Map<String, Object> searchMap);
 }

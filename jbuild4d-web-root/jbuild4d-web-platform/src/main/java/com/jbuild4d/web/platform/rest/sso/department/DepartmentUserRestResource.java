@@ -100,8 +100,11 @@ public class DepartmentUserRestResource {
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
         Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
-        String departmentId="";
-        PageInfo<List<Map<String,Object>>> pageInfo=departmentUserService.getDepartmentUser(jb4DSession,pageNum,pageSize,departmentId,searchMap);
+        //String departmentId="";
+        if(searchMap.get("searchInALL").toString().equals("是")){
+            searchMap.remove("departmentId");
+        }
+        PageInfo<List<Map<String,Object>>> pageInfo=departmentUserService.getDepartmentUser(jb4DSession,pageNum,pageSize,searchMap);
         return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,pageInfo);
     }
 }
