@@ -17,16 +17,19 @@ import com.jbuild4d.platform.sso.service.IDepartmentUserService;
 import com.jbuild4d.platform.sso.service.IOnOrganChangeAware;
 import com.jbuild4d.platform.sso.service.IDepartmentService;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentEntity> implements IDepartmentService, IOnOrganChangeAware
 {
     DepartmentMapper departmentMapper;
 
+    @Autowired
     IDepartmentUserService departmentUserService;
-    public DepartmentServiceImpl(DepartmentMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService,IDepartmentUserService _departmentUserService){
+
+    public DepartmentServiceImpl(DepartmentMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         departmentMapper=_defaultBaseMapper;
-        departmentUserService=_departmentUserService;
+        //departmentUserService=_departmentUserService;
     }
 
     @Override

@@ -28,5 +28,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity> implements IUse
             }
         });
     }
+
+    @Override
+    public UserEntity getByAccount(String userAccount) {
+        return userMapper.selectByAccount(userAccount);
+    }
 }
 

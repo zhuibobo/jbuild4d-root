@@ -352,7 +352,7 @@
                 if(this.treeSelectedNode!=null) {
                     var url = BaseUtility.BuildView(this.acInterface.listEditView, {
                         "op": "add",
-                        "groupId": this.treeSelectedNode[appList.treeIdFieldName]
+                        "departmentId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "部门用户管理"}, 2);
                 }

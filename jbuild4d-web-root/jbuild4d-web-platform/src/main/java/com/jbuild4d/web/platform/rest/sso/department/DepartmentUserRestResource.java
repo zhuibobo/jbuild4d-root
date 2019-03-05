@@ -37,6 +37,18 @@ public class DepartmentUserRestResource {
     @Autowired
     IFileInfoService fileInfoService;
 
+    @RequestMapping(value = "/getEmptyNewVo",method = RequestMethod.POST)
+    public JBuild4DResponseVo getEmptyNewVo(String departmentId) throws JBuild4DGenerallyException {
+        JB4DSession jb4DSession = JB4DSessionUtility.getSession();
+        return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,departmentUserService.getEmptyNewVo(jb4DSession,departmentId));
+    }
+
+    @RequestMapping(value = "/getVo",method = RequestMethod.POST)
+    public JBuild4DResponseVo getVo(String departmentUserId) throws JBuild4DGenerallyException {
+        JB4DSession jb4DSession = JB4DSessionUtility.getSession();
+        return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,departmentUserService.getVo(jb4DSession,departmentUserId));
+    }
+
     @RequestMapping(value = "/SaveEdit", method = RequestMethod.POST)
     public JBuild4DResponseVo saveEdit(@RequestBody DepartmentUserVo entity, HttpServletRequest request) throws JBuild4DGenerallyException {
         try {

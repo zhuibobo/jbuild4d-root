@@ -10,17 +10,17 @@
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
     <div style="width: 80%;float: left">
         <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
-            <form-item label="用户名：" prop="deptName">
+            <form-item label="用户名：" prop="userEntity.userName">
                 <row>
                     <i-col span="10">
-                        <form-item prop="deptName">
-                            <i-input v-model="formEntity.deptName"></i-input>
+                        <form-item prop="userEntity.userName">
+                            <i-input v-model="formEntity.userEntity.userName"></i-input>
                         </form-item>
                     </i-col>
-                    <i-col span="4" style="text-align: center">账号：</i-col>
-                    <i-col span="10" prop="deptShortName">
-                        <form-item prop="deptShortName">
-                            <i-input v-model="formEntity.deptShortName"></i-input>
+                    <i-col span="4" style="text-align: center"><span style="color: red">*</span> 账号：</i-col>
+                    <i-col span="10">
+                        <form-item prop="userEntity.userAccount">
+                            <i-input v-model="formEntity.userEntity.userAccount"></i-input>
                         </form-item>
                     </i-col>
                 </row>
@@ -28,33 +28,33 @@
             <form-item label="邮件地址：">
                 <row>
                     <i-col span="10">
-                        <i-input v-model="formEntity.deptPerCharge"></i-input>
+                        <i-input v-model="formEntity.userEntity.userEmail"></i-input>
                     </i-col>
                     <i-col span="4" style="text-align: center">手机号码：</i-col>
                     <i-col span="10">
-                        <i-input v-model="formEntity.deptPerChargePhone"></i-input>
+                        <i-input v-model="formEntity.userEntity.userPhoneNumber"></i-input>
                     </i-col>
                 </row>
             </form-item>
             <form-item label="所属部门：">
                 <row>
                     <i-col span="10">
-                        <i-input v-model="formEntity.deptPerCharge"></i-input>
+                        <i-input v-model="formEntity.departmentEntity.deptName" disabled></i-input>
                     </i-col>
                     <i-col span="4" style="text-align: center">所属组织：</i-col>
                     <i-col span="10">
-                        <i-input v-model="formEntity.deptPerChargePhone"></i-input>
+                        <i-input v-model="formEntity.organEntity.organName" disabled></i-input>
                     </i-col>
                 </row>
             </form-item>
             <form-item label="职位：">
                 <row>
                     <i-col span="10">
-                        <i-input v-model="formEntity.deptPerCharge"></i-input>
+                        <i-input v-model="formEntity.departmentUserEntity.duTitle"></i-input>
                     </i-col>
                     <i-col span="4" style="text-align: center">状态：</i-col>
                     <i-col span="10">
-                        <radio-group v-model="formEntity.isSave" type="button">
+                        <radio-group v-model="formEntity.userEntity.userStatus" type="button">
                             <radio label="启用">启用</radio>
                             <radio label="禁用">禁用</radio>
                         </radio-group>
@@ -62,7 +62,7 @@
                 </row>
             </form-item>
             <form-item label="备注：">
-                <i-input v-model="formEntity.deptDesc" type="textarea" :autosize="{minRows: 11,maxRows: 11}"></i-input>
+                <i-input v-model="formEntity.departmentUserEntity.duDesc" type="textarea" :autosize="{minRows: 11,maxRows: 11}"></i-input>
             </form-item>
         </i-form>
     </div>
@@ -99,8 +99,9 @@
         },
         data: {
             acInterface:{
-                getDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/GetDetailData",
-                saveDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/SaveEdit",
+                getEmptyDataUrl:"/PlatFormRest/SSO/DepartmentUser/getEmptyNewVo",
+                getDataUrl:"/PlatFormRest/SSO/DepartmentUser/getVo",
+                saveDataUrl:"/PlatFormRest/SSO/DepartmentUser/SaveEdit",
                 userHeadUrl:"/PlatFormRest/SSO/DepartmentUser/GetUserHeadIMG"
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
@@ -131,17 +132,20 @@
                     userCreateUserId:"",
                     userStatus:"启用",
                     userOrderNum:""
+                },
+                organEntity:{
+
+                },
+                departmentEntity:{
+
                 }
             },
             ruleValidate: {
-                ddtlValue: [
-                    {required: true, message: '【ddtlValue】不能空！', trigger: 'blur'}
+                'userEntity.userName': [
+                    {required: true, message: '【用户名】不能空！', trigger: 'blur'}
                 ],
-                ddtlName: [
-                    {required: true, message: '【ddtlName】不能空！', trigger: 'blur'}
-                ],
-                ddtlKey: [
-                    {required: true, message: '【ddtlKey】不能空！', trigger: 'blur'}
+                'userEntity.userAccount': [
+                    {required: true, message: '【账号】不能空！', trigger: 'blur'}
                 ]
             },
             status: BaseUtility.GetUrlParaValue("op"),
@@ -149,15 +153,21 @@
         },
         methods: {
             bindFormData:function(){
-                //获取数据并赋值
-                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,function (result) {
-                    if(appForm.status=="add") {
-                        appForm.userHeadImageSrc = BaseUtility.BuildAction(appForm.acInterface.userHeadUrl, {fileId: "defaultUserHeadImage"});
-                    }
-                    else {
-                        appForm.userHeadImageSrc = BaseUtility.BuildAction(appForm.acInterface.userHeadUrl, {fileId: appForm.formEntity.userEntity.userHeadId});
-                    }
-                });
+                var _self=this;
+                if(this.status=="add") {
+                    this.userHeadImageSrc = BaseUtility.BuildAction(this.acInterface.userHeadUrl, {fileId: "defaultUserHeadImage"});
+                    var departmentId=BaseUtility.GetUrlParaValue("departmentId")
+                    AjaxUtility.Post(this.acInterface.getEmptyDataUrl,{"departmentId":departmentId},function (result) {
+                        console.log(result);
+                        if(result.success){
+                            _self.formEntity=result.data;
+                        }
+                    },"json");
+                    //alert(departmentId);
+                }
+                else {
+                    this.userHeadImageSrc = BaseUtility.BuildAction(appForm.acInterface.userHeadUrl, {fileId: appForm.formEntity.userEntity.userHeadId});
+                }
             },
             handleSubmit: function (name) {
                 var _self = this;

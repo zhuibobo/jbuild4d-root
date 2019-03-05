@@ -1,12 +1,15 @@
 package com.jbuild4d.platform.sso.vo;
 
+import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity;
+import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity;
 
 public class DepartmentUserVo {
     private DepartmentUserEntity departmentUserEntity;
     private UserEntity userEntity;
-    private String tempAccountPassword;
+    private OrganEntity organEntity;
+    private DepartmentEntity departmentEntity;
 
     public DepartmentUserEntity getDepartmentUserEntity() {
         return departmentUserEntity;
@@ -24,11 +27,19 @@ public class DepartmentUserVo {
         this.userEntity = userEntity;
     }
 
-    public String getTempAccountPassword() {
-        return tempAccountPassword;
+    public OrganEntity getOrganEntity() {
+        return organEntity;
     }
 
-    public void setTempAccountPassword(String tempAccountPassword) {
-        this.tempAccountPassword = tempAccountPassword;
+    public void setOrganEntity(OrganEntity organEntity) {
+        this.organEntity = organEntity;
+    }
+
+    public DepartmentEntity getDepartmentEntity() {
+        return departmentEntity;
+    }
+
+    public void setDepartmentEntity(DepartmentEntity departmentEntity) {
+        this.departmentEntity = departmentEntity;
     }
 }
