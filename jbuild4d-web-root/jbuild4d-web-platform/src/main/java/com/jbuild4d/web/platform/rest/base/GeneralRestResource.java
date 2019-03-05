@@ -86,9 +86,9 @@ public abstract class GeneralRestResource<T> implements IGeneralRestResource<T> 
     public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition,boolean loadDict) throws IOException, ParseException {
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
         Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
-        PageInfo<T> proOrganPageInfo=getBaseService().getPage(jb4DSession,pageNum,pageSize,searchMap);
+        PageInfo<T> proPageInfo=getBaseService().getPage(jb4DSession,pageNum,pageSize,searchMap);
         JBuild4DResponseVo responseVo=new JBuild4DResponseVo();
-        responseVo.setData(proOrganPageInfo);
+        responseVo.setData(proPageInfo);
         responseVo.setMessage("获取成功");
         responseVo.setSuccess(true);
 

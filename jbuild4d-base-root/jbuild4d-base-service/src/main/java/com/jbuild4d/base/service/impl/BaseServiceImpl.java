@@ -136,8 +136,8 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     public PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.
-        List<T> lsit=defaultBaseMapper.selectAll();
-        PageInfo<T> pageInfo = new PageInfo<T>(lsit);
+        List<T> list=defaultBaseMapper.selectAll();
+        PageInfo<T> pageInfo = new PageInfo<T>(list);
         return pageInfo;
     }
 

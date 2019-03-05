@@ -1,6 +1,10 @@
 package com.jbuild4d.platform.sso.service.impl;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dao.sso.DepartmentUserMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.*;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
@@ -148,6 +152,15 @@ public class DepartmentUserServiceImpl implements IDepartmentUserService
         departmentUserVo.setDepartmentEntity(departmentEntity);
 
         return departmentUserVo;
+    }
+
+    @Override
+    public PageInfo<List<Map<String, Object>>> getDepartmentUser(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, String departmentId, Map<String, Object> searchMap) {
+        PageHelper.startPage(pageNum, pageSize);
+        //PageHelper.
+        List<Map<String,Object>> list=departmentUserMapper.selectDUByDepartment(searchMap);
+        PageInfo<List<Map<String,Object>>> pageInfo = new PageInfo(list);
+        return pageInfo;
     }
 
     @Override

@@ -1,11 +1,13 @@
 package com.jbuild4d.web.platform.rest.sso.department;
 
+import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity;
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.SettingEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
+import com.jbuild4d.base.tools.common.search.GeneralSearchUtility;
 import com.jbuild4d.platform.files.service.IFileInfoService;
 import com.jbuild4d.platform.sso.service.IDepartmentUserService;
 import com.jbuild4d.platform.sso.vo.DepartmentUserVo;
@@ -21,6 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/PlatFormRest/SSO/DepartmentUser")
@@ -37,13 +42,13 @@ public class DepartmentUserRestResource {
     @Autowired
     IFileInfoService fileInfoService;
 
-    @RequestMapping(value = "/getEmptyNewVo",method = RequestMethod.POST)
+    @RequestMapping(value = "/GetEmptyNewVo",method = RequestMethod.POST)
     public JBuild4DResponseVo getEmptyNewVo(String departmentId) throws JBuild4DGenerallyException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
         return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,departmentUserService.getEmptyNewVo(jb4DSession,departmentId));
     }
 
-    @RequestMapping(value = "/getVo",method = RequestMethod.POST)
+    @RequestMapping(value = "/GetVo",method = RequestMethod.POST)
     public JBuild4DResponseVo getVo(String departmentUserId) throws JBuild4DGenerallyException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
         return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,departmentUserService.getVo(jb4DSession,departmentUserId));
@@ -89,5 +94,14 @@ public class DepartmentUserRestResource {
         else{
             return fileInfoService.getContent(fileId);
         }
+    }
+
+    @RequestMapping(value = "/GetListData",method = RequestMethod.POST)
+    public JBuild4DResponseVo getListData(Integer pageSize,Integer pageNum,String searchCondition) throws IOException, ParseException {
+        JB4DSession jb4DSession= JB4DSessionUtility.getSession();
+        Map<String,Object> searchMap= GeneralSearchUtility.deserializationToMap(searchCondition);
+        String departmentId="";
+        PageInfo<List<Map<String,Object>>> pageInfo=departmentUserService.getDepartmentUser(jb4DSession,pageNum,pageSize,departmentId,searchMap);
+        return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,pageInfo);
     }
 }

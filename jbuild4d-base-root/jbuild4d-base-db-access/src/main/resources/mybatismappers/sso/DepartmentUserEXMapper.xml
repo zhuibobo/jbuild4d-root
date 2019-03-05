@@ -20,4 +20,15 @@
     <select id="selectDepartmentUserCount" resultType="int">
         select count(DU_USER_ID) from TB4D_DEPARTMENT_USER where DU_DEPT_ID=#{Id,jdbcType=NVARCHAR}
     </select>
+
+    <select id="selectDUByDepartment" resultType="map">
+        SELECT * FROM TB4D_DEPARTMENT_USER JOIN TB4D_USER ON TB4D_DEPARTMENT_USER.DU_USER_ID=TB4D_USER.USER_ID JOIN TB4D_DEPARTMENT ON TB4D_DEPARTMENT_USER.DU_DEPT_ID=TB4D_DEPARTMENT.DEPT_ID JOIN TB4D_ORGAN ON TB4D_DEPARTMENT.DEPT_ORGAN_ID=TB4D_ORGAN.ORGAN_ID
+        <where>
+            <if test="userName !=null and userName !=''"> and TB4D_USER.USER_NAME like #{userName} </if>
+            <if test="account !=null and account !=''"> and TB4D_USER.USER_ACCOUNT like #{account} </if>
+            <if test="userPhoneNumber !=null and userPhoneNumber !=''"> and TB4D_USER.USER_PHONE_NUMBER like #{userPhoneNumber} </if>
+            <if test="departmentId !=null and departmentId !=''"> and TB4D_DEPARTMENT_USER.DU_DEPT_ID like #{departmentId} </if>
+        </where>
+        ORDER by DU_ORDER_NUM asc
+    </select>
 </mapper>

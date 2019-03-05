@@ -42,19 +42,19 @@
                 <tr class="ls-table-row">
                     <td>用户名：</td>
                     <td>
-                        <i-input v-model="searchCondition.userName" placeholder=""></i-input>
+                        <i-input v-model="searchCondition.userName.value" placeholder=""></i-input>
                     </td>
                     <td>账号：</td>
                     <td>
-                        <i-input v-model="searchCondition.account" placeholder=""></i-input>
+                        <i-input v-model="searchCondition.account.value" placeholder=""></i-input>
                     </td>
                     <td>手机号码：</td>
                     <td>
-                        <i-input v-model="searchCondition.userPhoneNumber"></i-input>
+                        <i-input v-model="searchCondition.userPhoneNumber.value"></i-input>
                     </td>
                     <td>全局搜索：</td>
                     <td>
-                        <radio-group v-model="searchCondition.searchInALL">
+                        <radio-group v-model="searchCondition.searchInALL.value">
                             <radio label="是">是</radio>
                             <radio label="否">否</radio>
                         </radio-group>
@@ -150,12 +150,28 @@
                 }
             },
             <!--List-->
-            idFieldName:"ddtlId",
+            idFieldName:"DU_ID",
             searchCondition:{
-                userName:"",
-                account:"",
-                userPhoneNumber:"",
-                searchInALL:"否"
+                userName:{
+                    value: "",
+                    type: SearchUtility.SearchFieldType.StringType
+                },
+                account:{
+                    value: "",
+                    type: SearchUtility.SearchFieldType.StringType
+                },
+                userPhoneNumber:{
+                    value: "",
+                    type: SearchUtility.SearchFieldType.StringType
+                },
+                departmentId: {
+                    value: "",
+                    type: SearchUtility.SearchFieldType.StringType
+                },
+                searchInALL:{
+                    value: "否",
+                    type: SearchUtility.SearchFieldType.StringType
+                }
             },
             columnsConfig: [
                 {
@@ -239,7 +255,7 @@
                 this.selectionRows=null;
                 this.pageNum=1;
                 this.clearSearchCondition();
-                this.searchCondition.groupId.value=this.treeSelectedNode[this.treeIdFieldName];
+                this.searchCondition.departmentId.value=this.treeSelectedNode[this.treeIdFieldName];
                 this.reloadData();
                 //appList.reloadTreeTableData();
                 //}
@@ -332,13 +348,13 @@
                 for(var key in this.searchCondition){
                     this.searchCondition[key].value="";
                 }
+                this.searchCondition["searchInALL"].value="否";
             },
             selectionChange: function (selection) {
                 this.selectionRows = selection;
             },
             reloadData: function () {
                 ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadListData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null,false);
-                //this.selectionRows=null;
             },
             add: function () {
                 if(this.treeSelectedNode!=null) {
