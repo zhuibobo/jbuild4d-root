@@ -25,35 +25,44 @@
                     </i-col>
                 </row>
             </form-item>
-            <form-item label="负责人：">
+            <form-item label="邮件地址：">
                 <row>
                     <i-col span="10">
                         <i-input v-model="formEntity.deptPerCharge"></i-input>
                     </i-col>
-                    <i-col span="4" style="text-align: center">联系电话：</i-col>
+                    <i-col span="4" style="text-align: center">手机号码：</i-col>
                     <i-col span="10">
                         <i-input v-model="formEntity.deptPerChargePhone"></i-input>
                     </i-col>
                 </row>
             </form-item>
-            <form-item label="部门编号：">
+            <form-item label="所属部门：">
                 <row>
                     <i-col span="10">
-                        <i-input v-model="formEntity.deptNo"></i-input>
+                        <i-input v-model="formEntity.deptPerCharge"></i-input>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">所属组织：</i-col>
+                    <i-col span="10">
+                        <i-input v-model="formEntity.deptPerChargePhone"></i-input>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="职位：">
+                <row>
+                    <i-col span="10">
+                        <i-input v-model="formEntity.deptPerCharge"></i-input>
                     </i-col>
                     <i-col span="4" style="text-align: center">状态：</i-col>
                     <i-col span="10">
-                        <form-item>
-                            <radio-group v-model="formEntity.deptStatus">
-                                <radio label="启用">启用</radio>
-                                <radio label="禁用">禁用</radio>
-                            </radio-group>
-                        </form-item>
+                        <radio-group v-model="formEntity.isSave" type="button">
+                            <radio label="启用">启用</radio>
+                            <radio label="禁用">禁用</radio>
+                        </radio-group>
                     </i-col>
                 </row>
             </form-item>
             <form-item label="备注：">
-                <i-input v-model="formEntity.deptDesc" type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>
+                <i-input v-model="formEntity.deptDesc" type="textarea" :autosize="{minRows: 11,maxRows: 11}"></i-input>
             </form-item>
         </i-form>
     </div>
@@ -61,7 +70,7 @@
         <div style="border-radius: 8px;text-align: center;margin-top: 20px;margin-bottom: 30px">
             <img :src="userHeadImageSrc" style="width: 110px;height: 120px" />
         </div>
-        <upload style="margin:10px 12px 0 20px" :on-success="uploadOrganLogoImageSuccess" multiple type="drag" name="file" action="../../../PlatFormRest/SSO/Organ/UploadOrganLogo.do" accept=".png">
+        <upload style="margin:10px 12px 0 20px" :on-success="uploadUserHeadImageSuccess" multiple type="drag" name="file" action="../../../PlatFormRest/SSO/DepartmentUser/UploadUserHeadIMG.do" accept=".png">
             <div style="padding:10px 0px">
                 <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>
                 <p>上传用户头像</p>
@@ -169,6 +178,11 @@
             },
             handleClose: function (name) {
                 DialogUtility.Frame_CloseDialog(window);
+            },
+            uploadUserHeadImageSuccess:function (response, file, fileList) {
+                var data = response.data;
+                this.formEntity.userEntity.userHeadId = data.fileId;
+                this.userHeadImageSrc = BaseUtility.BuildAction(this.acInterface.userHeadUrl, {fileId: this.formEntity.userEntity.userHeadId});
             }
         }
     });
