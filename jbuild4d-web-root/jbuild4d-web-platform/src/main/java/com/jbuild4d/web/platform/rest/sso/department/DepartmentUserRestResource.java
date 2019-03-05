@@ -49,9 +49,9 @@ public class DepartmentUserRestResource {
     }
 
     @RequestMapping(value = "/GetVo",method = RequestMethod.POST)
-    public JBuild4DResponseVo getVo(String departmentUserId) throws JBuild4DGenerallyException {
+    public JBuild4DResponseVo getVo(String recordId) throws JBuild4DGenerallyException {
         JB4DSession jb4DSession = JB4DSessionUtility.getSession();
-        return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,departmentUserService.getVo(jb4DSession,departmentUserId));
+        return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,departmentUserService.getVo(jb4DSession,recordId));
     }
 
     @RequestMapping(value = "/SaveEdit", method = RequestMethod.POST)

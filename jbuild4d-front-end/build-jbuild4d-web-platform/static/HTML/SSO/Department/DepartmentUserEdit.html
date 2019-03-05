@@ -166,7 +166,13 @@
                     //alert(departmentId);
                 }
                 else {
-                    this.userHeadImageSrc = BaseUtility.BuildAction(appForm.acInterface.userHeadUrl, {fileId: appForm.formEntity.userEntity.userHeadId});
+                    this.userHeadImageSrc = BaseUtility.BuildAction(this.acInterface.userHeadUrl, {fileId: this.formEntity.userEntity.userHeadId});
+                    AjaxUtility.Post(this.acInterface.getDataUrl,{"recordId":this.recordId},function (result) {
+                        console.log(result);
+                        if(result.success){
+                            _self.formEntity=result.data;
+                        }
+                    },"json");
                 }
             },
             handleSubmit: function (name) {
