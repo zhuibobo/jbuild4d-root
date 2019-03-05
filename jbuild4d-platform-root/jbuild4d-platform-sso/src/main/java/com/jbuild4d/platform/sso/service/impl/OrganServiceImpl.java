@@ -52,7 +52,7 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
 
     @Override
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    public int save(JB4DSession jb4DSession, String id, OrganEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, OrganEntity record) throws JBuild4DGenerallyException {
         boolean isNew=false;
         if(this.getByPrimaryKey(jb4DSession,id)==null){
             isNew=true;
@@ -162,7 +162,7 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
         organEntity.setOrganParentId(rootParentId);
         organEntity.setOrganStatus("启用");
         organEntity.setOrganShortName("组织管理");
-        this.save(jb4DSession,organEntity.getOrganId(),organEntity);
+        this.saveSimple(jb4DSession,organEntity.getOrganId(),organEntity);
         return organEntity;
     }
 

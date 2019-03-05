@@ -45,7 +45,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, TableEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, TableEntity record) throws JBuild4DGenerallyException {
         throw new JBuild4DGenerallyException("未使用改方法");
     }
 

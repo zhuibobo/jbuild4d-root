@@ -19,7 +19,7 @@ public class SsoAppServiceImpl extends BaseServiceImpl<SsoAppEntity> implements 
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, SsoAppEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, SsoAppEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<SsoAppEntity>() {
             @Override
             public SsoAppEntity run(JB4DSession jb4DSession,SsoAppEntity sourceEntity) throws JBuild4DGenerallyException {

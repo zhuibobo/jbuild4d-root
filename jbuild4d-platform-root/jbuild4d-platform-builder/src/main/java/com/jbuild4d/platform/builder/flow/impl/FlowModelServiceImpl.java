@@ -48,9 +48,9 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, FlowModelEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, FlowModelEntity record) throws JBuild4DGenerallyException {
         throw new JBuild4DGenerallyException("请调用newModel或者updateModel方法!");
-        /*return super.save(jb4DSession,id, record, new IAddBefore<FlowModelEntity>() {
+        /*return super.saveSimple(jb4DSession,id, record, new IAddBefore<FlowModelEntity>() {
             @Override
             public FlowModelEntity run(JB4DSession jb4DSession,FlowModelEntity sourceEntity) throws JBuild4DGenerallyException {
                 //设置排序,以及其他参数--nextOrderNum()

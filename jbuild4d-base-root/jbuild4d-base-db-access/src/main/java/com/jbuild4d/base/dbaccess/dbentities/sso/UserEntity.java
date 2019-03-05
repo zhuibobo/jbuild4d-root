@@ -31,8 +31,8 @@ public class UserEntity {
     //USER_PHONE_NUMBER:手机号码
     private String userPhoneNumber;
 
-    //USER_AVATAR_ID:头像ID,关联到TB4D_FILE_INFO表的FILE_ID
-    private String userAvatarId;
+    //USER_HEAD_ID:头像ID,关联到TB4D_FILE_INFO表的FILE_ID
+    private String userHeadId;
 
     //USER_ORGAN_ID:所属组织ID
     private String userOrganId;
@@ -53,14 +53,14 @@ public class UserEntity {
     //USER_ORDER_NUM:排序号
     private Integer userOrderNum;
 
-    public UserEntity(String userId, String userName, String userAccount, String userPassword, String userEmail, String userPhoneNumber, String userAvatarId, String userOrganId, String userDesc, Date userCreateTime, String userCreateUserId, String userStatus, Integer userOrderNum) {
+    public UserEntity(String userId, String userName, String userAccount, String userPassword, String userEmail, String userPhoneNumber, String userHeadId, String userOrganId, String userDesc, Date userCreateTime, String userCreateUserId, String userStatus, Integer userOrderNum) {
         this.userId = userId;
         this.userName = userName;
         this.userAccount = userAccount;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
         this.userPhoneNumber = userPhoneNumber;
-        this.userAvatarId = userAvatarId;
+        this.userHeadId = userHeadId;
         this.userOrganId = userOrganId;
         this.userDesc = userDesc;
         this.userCreateTime = userCreateTime;
@@ -121,12 +121,12 @@ public class UserEntity {
         this.userPhoneNumber = userPhoneNumber == null ? null : userPhoneNumber.trim();
     }
 
-    public String getUserAvatarId() {
-        return userAvatarId;
+    public String getUserHeadId() {
+        return userHeadId;
     }
 
-    public void setUserAvatarId(String userAvatarId) {
-        this.userAvatarId = userAvatarId == null ? null : userAvatarId.trim();
+    public void setUserHeadId(String userHeadId) {
+        this.userHeadId = userHeadId == null ? null : userHeadId.trim();
     }
 
     public String getUserOrganId() {

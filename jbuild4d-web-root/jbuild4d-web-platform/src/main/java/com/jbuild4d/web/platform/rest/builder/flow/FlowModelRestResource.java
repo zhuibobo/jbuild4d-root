@@ -76,14 +76,14 @@ public class FlowModelRestResource extends GeneralRestResource<FlowModelEntity> 
     public byte[] getProcessModelMainImg(String fileId) throws IOException, JBuild4DGenerallyException {
         FileInfoEntity fileInfoEntity=fileInfoService.getByPrimaryKey(JB4DSessionUtility.getSession(),fileId);
         if(fileInfoEntity==null) {
-            String cacheKey = "ProcessModelMainImage";
-            if (JB4DCacheManager.exist(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey)) {
-                return JB4DCacheManager.getObject(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey);
+            //String cacheKey = "ProcessModelMainImage";
+            if (JB4DCacheManager.exist(JB4DCacheManager.jb4dPlatformBuilderCacheName, JB4DCacheManager.CACHE_KEY_PROCESS_MODEL_MAIN_IMAGE)) {
+                return JB4DCacheManager.getObject(JB4DCacheManager.jb4dPlatformBuilderCacheName, JB4DCacheManager.CACHE_KEY_PROCESS_MODEL_MAIN_IMAGE);
             } else {
                 InputStream is = this.getClass().getResourceAsStream("/static/Themes/Default/Css/Images/DefaultModel.png");
                 byte[] defaultImageByte = IOUtils.toByteArray(is);
                 is.close();
-                JB4DCacheManager.put(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey, defaultImageByte);
+                JB4DCacheManager.put(JB4DCacheManager.jb4dPlatformBuilderCacheName, JB4DCacheManager.CACHE_KEY_PROCESS_MODEL_MAIN_IMAGE, defaultImageByte);
                 return defaultImageByte;
             }
         }

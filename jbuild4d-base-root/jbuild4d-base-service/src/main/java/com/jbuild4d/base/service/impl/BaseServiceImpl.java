@@ -1,11 +1,13 @@
 package com.jbuild4d.base.service.impl;
 
+import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
 import com.jbuild4d.base.service.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.tools.common.UUIDUtility;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.List;
@@ -88,29 +90,11 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
         return defaultBaseMapper.updateByPrimaryKey(entity);
     }
 
-    /*@Override
-    public int save(JB4DSession jb4DSession,String id,T entity){
-        if(getByPrimaryKey(jb4DSession,id)==null){
-            return add(jb4DSession,entity);
-        }
-        else{
-            return updateByKey(jb4DSession,entity);
-        }
-    }*/
-
-    /*@Override
-    public int saveBySelective(JB4DSession jb4DSession,String id,T record) throws JBuild4DGenerallyException {
-        if(getByPrimaryKey(jb4DSession,id)==null){
-            return addSelective(jb4DSession,record);
-        }
-        else{
-            return updateByKeySelective(jb4DSession,record);
-        }
-    }*/
 
     @Override
     public int save(JB4DSession jb4DSession,String id, T entity, IAddBefore<T> addBefore) throws JBuild4DGenerallyException {
         if(getByPrimaryKey(jb4DSession,id)==null){
+            autoSetEntityId(entity);
             entity=addBefore.run(jb4DSession,entity);
             return addSelective(jb4DSession,entity);
         }
@@ -119,9 +103,21 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
         }
     }
 
+    private void autoSetEntityId(T entity) throws JBuild4DGenerallyException {
+        try {
+            String entId= DBAnnoUtility.getIdValue(entity);
+            if(entId==null||entId.equals("")){
+                DBAnnoUtility.setIdValue(entity, UUIDUtility.getUUID());
+            }
+        } catch (Exception e) {
+            throw new JBuild4DGenerallyException(e.getMessage(),e.getCause());
+        }
+    }
+
     @Override
     public int save(JB4DSession jb4DSession, String id, T entity, IAddBefore<T> addBefore, IUpdateBefore<T> updateBefore) throws JBuild4DGenerallyException {
         if(getByPrimaryKey(jb4DSession,id)==null){
+            autoSetEntityId(entity);
             entity=addBefore.run(jb4DSession,entity);
             return addSelective(jb4DSession,entity);
         }

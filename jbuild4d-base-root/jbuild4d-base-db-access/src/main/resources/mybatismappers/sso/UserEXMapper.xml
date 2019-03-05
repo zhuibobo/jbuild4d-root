@@ -10,7 +10,7 @@
         <if test="userPassword !=null and userPassword !=''"> and USER_PASSWORD like #{userPassword} </if>
         <if test="userEmail !=null and userEmail !=''"> and USER_EMAIL like #{userEmail} </if>
         <if test="userPhoneNumber !=null and userPhoneNumber !=''"> and USER_PHONE_NUMBER like #{userPhoneNumber} </if>
-        <if test="userAvatarId !=null and userAvatarId !=''"> and USER_AVATAR_ID like #{userAvatarId} </if>
+        <if test="userHeadId !=null and userHeadId !=''"> and USER_HEAD_ID like #{userHeadId} </if>
         <if test="userOrganId !=null and userOrganId !=''"> and USER_ORGAN_ID like #{userOrganId} </if>
         <if test="userDesc !=null and userDesc !=''"> and USER_DESC like #{userDesc} </if>
         <if test="userCreateUserId !=null and userCreateUserId !=''"> and USER_CREATE_USER_ID like #{userCreateUserId} </if>

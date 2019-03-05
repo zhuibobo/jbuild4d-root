@@ -36,7 +36,7 @@ public class SettingServiceImpl extends BaseServiceImpl<SettingEntity> implement
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, SettingEntity entity) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, SettingEntity entity) throws JBuild4DGenerallyException {
         //判断是否存在相同Value的记录
         String value = entity.getSettingValue();
 
@@ -92,7 +92,7 @@ public class SettingServiceImpl extends BaseServiceImpl<SettingEntity> implement
         defaultUserPasswordEntity.setSettingValue("j4d123456");
         defaultUserPasswordEntity.setSettingStatus(EnableTypeEnum.enable.getDisplayName());
         defaultUserPasswordEntity.setSettingIsSystem(TrueFalseEnum.True.getDisplayName());
-        this.save(jb4DSession,defaultUserPasswordEntity.getSettingId(),defaultUserPasswordEntity);
+        this.saveSimple(jb4DSession,defaultUserPasswordEntity.getSettingId(),defaultUserPasswordEntity);
     }
 
     @Override

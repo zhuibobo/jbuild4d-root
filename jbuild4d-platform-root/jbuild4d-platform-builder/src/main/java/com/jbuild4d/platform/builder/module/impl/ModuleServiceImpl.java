@@ -32,12 +32,12 @@ public class ModuleServiceImpl extends BaseServiceImpl<ModuleEntity> implements 
         rootEntity.setModuleIssystem(TrueFalseEnum.True.getDisplayName());
         rootEntity.setModuleText("模块分组");
         rootEntity.setModuleValue("模块分组");
-        this.save(jb4DSession,rootEntity.getModuleId(),rootEntity);
+        this.saveSimple(jb4DSession,rootEntity.getModuleId(),rootEntity);
         return rootEntity;
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, ModuleEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, ModuleEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<ModuleEntity>() {
             @Override
             public ModuleEntity run(JB4DSession jb4DSession,ModuleEntity sourceEntity) throws JBuild4DGenerallyException {

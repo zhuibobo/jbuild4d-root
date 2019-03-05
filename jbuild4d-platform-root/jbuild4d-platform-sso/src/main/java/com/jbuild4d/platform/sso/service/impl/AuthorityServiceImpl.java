@@ -19,7 +19,7 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityEntity> imple
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, AuthorityEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, AuthorityEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<AuthorityEntity>() {
             @Override
             public AuthorityEntity run(JB4DSession jb4DSession,AuthorityEntity sourceEntity) throws JBuild4DGenerallyException {

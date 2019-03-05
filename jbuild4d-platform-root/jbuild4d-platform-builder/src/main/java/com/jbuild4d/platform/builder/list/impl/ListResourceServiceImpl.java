@@ -30,7 +30,7 @@ public class ListResourceServiceImpl extends BaseServiceImpl<ListResourceEntityW
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, ListResourceEntityWithBLOBs record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, ListResourceEntityWithBLOBs record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<ListResourceEntityWithBLOBs>() {
             @Override
             public ListResourceEntityWithBLOBs run(JB4DSession jb4DSession,ListResourceEntityWithBLOBs sourceEntity) throws JBuild4DGenerallyException {

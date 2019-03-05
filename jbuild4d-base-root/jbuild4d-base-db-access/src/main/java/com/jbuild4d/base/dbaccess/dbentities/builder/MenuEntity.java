@@ -1,11 +1,13 @@
 package com.jbuild4d.base.dbaccess.dbentities.builder;
 
+import com.jbuild4d.base.dbaccess.anno.DBKeyField;
+
 import javax.persistence.Id;
 import java.util.Date;
 
 public class MenuEntity {
     //MENU_ID
-    @Id
+    @DBKeyField
     private String menuId;
 
     //MENU_NAME

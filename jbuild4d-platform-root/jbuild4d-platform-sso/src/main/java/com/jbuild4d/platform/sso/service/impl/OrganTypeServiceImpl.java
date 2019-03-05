@@ -1,7 +1,6 @@
 package com.jbuild4d.platform.sso.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.sso.OrganTypeMapper;
-import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
@@ -35,7 +34,7 @@ public class OrganTypeServiceImpl extends BaseServiceImpl<OrganTypeEntity> imple
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, OrganTypeEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, OrganTypeEntity record) throws JBuild4DGenerallyException {
         //判断是否存在相同Value的记录
         String value = record.getOrganTypeValue();
         return super.save(jb4DSession, id, record, new IAddBefore<OrganTypeEntity>() {
@@ -74,7 +73,7 @@ public class OrganTypeServiceImpl extends BaseServiceImpl<OrganTypeEntity> imple
         organTypeEntity.setOrganTypeDesc("默认类型");
         organTypeEntity.setOrganTypeCreateTime(new Date());
         organTypeEntity.setOrganTypeStatus(EnableTypeEnum.enable.getDisplayName());
-        this.save(jb4DSession,organTypeEntity.getOrganTypeId(),organTypeEntity);
+        this.saveSimple(jb4DSession,organTypeEntity.getOrganTypeId(),organTypeEntity);
     }
 
     @Override

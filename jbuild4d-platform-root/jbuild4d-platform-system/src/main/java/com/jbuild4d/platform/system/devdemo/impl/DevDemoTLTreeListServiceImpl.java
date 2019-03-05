@@ -28,7 +28,7 @@ public class DevDemoTLTreeListServiceImpl extends BaseServiceImpl<DevDemoTLTreeL
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, DevDemoTLTreeListEntity entity) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, DevDemoTLTreeListEntity entity) throws JBuild4DGenerallyException {
         return this.save(jb4DSession, id, entity, new IAddBefore<DevDemoTLTreeListEntity>() {
             @Override
             public DevDemoTLTreeListEntity run(JB4DSession jb4DSession, DevDemoTLTreeListEntity sourceEntity) throws JBuild4DGenerallyException {

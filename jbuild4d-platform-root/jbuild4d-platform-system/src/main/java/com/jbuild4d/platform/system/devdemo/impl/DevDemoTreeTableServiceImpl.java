@@ -32,7 +32,7 @@ public class DevDemoTreeTableServiceImpl extends BaseServiceImpl<DevDemoTreeTabl
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, DevDemoTreeTableEntity entity) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, DevDemoTreeTableEntity entity) throws JBuild4DGenerallyException {
         return this.save(jb4DSession, id, entity, new IAddBefore<DevDemoTreeTableEntity>() {
             @Override
             public DevDemoTreeTableEntity run(JB4DSession jb4DSession, DevDemoTreeTableEntity sourceEntity) throws JBuild4DGenerallyException {
@@ -66,7 +66,7 @@ public class DevDemoTreeTableServiceImpl extends BaseServiceImpl<DevDemoTreeTabl
         treeTableEntity.setDdttName("Root");
         treeTableEntity.setDdttValue("Root");
         treeTableEntity.setDdttStatus("启用");
-        this.save(jb4DSession,treeTableEntity.getDdttId(),treeTableEntity);
+        this.saveSimple(jb4DSession,treeTableEntity.getDdttId(),treeTableEntity);
         return treeTableEntity;
     }
 

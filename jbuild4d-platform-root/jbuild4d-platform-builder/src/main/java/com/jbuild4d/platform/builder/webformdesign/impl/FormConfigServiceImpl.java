@@ -25,7 +25,7 @@ public class FormConfigServiceImpl extends BaseServiceImpl<FormConfigEntity> imp
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, FormConfigEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, FormConfigEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<FormConfigEntity>() {
             @Override
             public FormConfigEntity run(JB4DSession jb4DSession,FormConfigEntity sourceEntity) throws JBuild4DGenerallyException {

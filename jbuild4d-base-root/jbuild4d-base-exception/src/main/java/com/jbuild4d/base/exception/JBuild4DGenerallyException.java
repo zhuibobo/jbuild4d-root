@@ -21,6 +21,10 @@ public class JBuild4DGenerallyException extends JBuild4DBaseException {
         super(errorCode, message, cause);
     }
 
+    public JBuild4DGenerallyException(String message, Throwable cause) {
+        super(defaultCode, message, cause);
+    }
+
     public static JBuild4DGenerallyException getSystemRecordDelException(){
         return new JBuild4DGenerallyException("系统数据不能删除！");
     }

@@ -27,7 +27,7 @@ public class DevDemoGenListServiceImpl extends BaseServiceImpl<DevDemoGenListEnt
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, DevDemoGenListEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, DevDemoGenListEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<DevDemoGenListEntity>() {
             @Override
             public DevDemoGenListEntity run(JB4DSession jb4DSession,DevDemoGenListEntity item) throws JBuild4DGenerallyException {

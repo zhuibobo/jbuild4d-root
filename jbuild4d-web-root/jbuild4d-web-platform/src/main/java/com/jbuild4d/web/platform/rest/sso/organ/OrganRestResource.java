@@ -72,17 +72,17 @@ public class OrganRestResource extends GeneralRestResource<OrganEntity> {
     }
 
     @RequestMapping(value = "/GetOrganLogo", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
-    public byte[] getProcessModelMainImg(String fileId) throws IOException, JBuild4DGenerallyException {
+    public byte[] getOrganLogo(String fileId) throws IOException, JBuild4DGenerallyException {
         FileInfoEntity fileInfoEntity=fileInfoService.getByPrimaryKey(JB4DSessionUtility.getSession(),fileId);
         if(fileInfoEntity==null) {
-            String cacheKey = "LogoDefaultImage";
-            if (JB4DCacheManager.exist(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey)) {
-                return JB4DCacheManager.getObject(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey);
+            //String cacheKey = "LogoDefaultImage";
+            if (JB4DCacheManager.exist(JB4DCacheManager.jb4dPlatformBuilderCacheName, JB4DCacheManager.CACHE_KEY_ORGAN_LOGO)) {
+                return JB4DCacheManager.getObject(JB4DCacheManager.jb4dPlatformBuilderCacheName, JB4DCacheManager.CACHE_KEY_ORGAN_LOGO);
             } else {
                 InputStream is = this.getClass().getResourceAsStream("/static/Themes/Default/Css/Images/DefaultLogo.png");
                 byte[] defaultImageByte = IOUtils.toByteArray(is);
                 is.close();
-                JB4DCacheManager.put(JB4DCacheManager.jb4dPlatformBuilderCacheName, cacheKey, defaultImageByte);
+                JB4DCacheManager.put(JB4DCacheManager.jb4dPlatformBuilderCacheName, JB4DCacheManager.CACHE_KEY_ORGAN_LOGO, defaultImageByte);
                 return defaultImageByte;
             }
         }

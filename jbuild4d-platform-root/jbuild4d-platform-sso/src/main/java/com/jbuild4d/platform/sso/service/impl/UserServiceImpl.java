@@ -19,7 +19,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity> implements IUse
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, UserEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, UserEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<UserEntity>() {
             @Override
             public UserEntity run(JB4DSession jb4DSession,UserEntity sourceEntity) throws JBuild4DGenerallyException {

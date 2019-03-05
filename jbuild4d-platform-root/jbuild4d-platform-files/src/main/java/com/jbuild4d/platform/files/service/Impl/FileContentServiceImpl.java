@@ -19,7 +19,7 @@ public class FileContentServiceImpl extends BaseServiceImpl<FileContentEntity> i
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, FileContentEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, FileContentEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<FileContentEntity>() {
             @Override
             public FileContentEntity run(JB4DSession jb4DSession, FileContentEntity sourceEntity) throws JBuild4DGenerallyException {

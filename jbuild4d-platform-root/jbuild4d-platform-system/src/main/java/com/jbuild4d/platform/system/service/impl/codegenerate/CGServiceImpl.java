@@ -49,9 +49,9 @@ public class CGServiceImpl {
         builder.append(CGTool.newLineChar());
         builder.append(CGTool.tabChar(1)+"@Override");
         builder.append(CGTool.newLineChar());
-        builder.append(CGTool.tabChar(1)+"public int save(JB4DSession jb4DSession, String id, "+domainObjectName+" record) throws JBuild4DGenerallyException {");
+        builder.append(CGTool.tabChar(1)+"public int saveSimple(JB4DSession jb4DSession, String id, "+domainObjectName+" record) throws JBuild4DGenerallyException {");
         builder.append(CGTool.newLineChar());
-        builder.append(CGTool.tabChar(2)+"return super.save(jb4DSession,id, record, new IAddBefore<"+domainObjectName+">() {");
+        builder.append(CGTool.tabChar(2)+"return super.saveSimple(jb4DSession,id, record, new IAddBefore<"+domainObjectName+">() {");
         builder.append(CGTool.newLineChar());
         builder.append(CGTool.tabChar(3)+"@Override");
         builder.append(CGTool.newLineChar());

@@ -29,7 +29,7 @@ public class DatasetRelatedTableServiceImpl extends BaseServiceImpl<DatasetRelat
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, DatasetRelatedTableEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, DatasetRelatedTableEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<DatasetRelatedTableEntity>() {
             @Override
             public DatasetRelatedTableEntity run(JB4DSession jb4DSession,DatasetRelatedTableEntity sourceEntity) throws JBuild4DGenerallyException {

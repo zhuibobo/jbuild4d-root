@@ -45,7 +45,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, TableGroupEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, TableGroupEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<TableGroupEntity>() {
             @Override
             public TableGroupEntity run(JB4DSession jb4DSession,TableGroupEntity sourceEntity) throws JBuild4DGenerallyException {
@@ -80,7 +80,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         treeTableEntity.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         treeTableEntity.setTableGroupText("表分组");
         treeTableEntity.setTableGroupValue("表分组");
-        this.save(jb4DSession,treeTableEntity.getTableGroupId(),treeTableEntity);
+        this.saveSimple(jb4DSession,treeTableEntity.getTableGroupId(),treeTableEntity);
         return treeTableEntity;
     }
 
@@ -94,7 +94,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemBase.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemBase.setTableGroupText("基础系统");
         jBuild4DSystemBase.setTableGroupValue("基础系统");
-        this.save(jb4DSession,TableGroupJBuild4DSystem,jBuild4DSystemBase);
+        this.saveSimple(jb4DSession,TableGroupJBuild4DSystem,jBuild4DSystemBase);
 
         //系统设置相关表
         deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemSetting);
@@ -104,7 +104,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemSetting.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemSetting.setTableGroupText("系统设置相关表");
         jBuild4DSystemSetting.setTableGroupValue("系统设置相关表");
-        this.save(jb4DSession,TableGroupJBuild4DSystemSetting,jBuild4DSystemSetting);
+        this.saveSimple(jb4DSession,TableGroupJBuild4DSystemSetting,jBuild4DSystemSetting);
 
         //组织用户相关表
         deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemOrganRelevance);
@@ -114,7 +114,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemOrganRelevance.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemOrganRelevance.setTableGroupText("组织用户相关表");
         jBuild4DSystemOrganRelevance.setTableGroupValue("组织用户相关表");
-        this.save(jb4DSession,TableGroupJBuild4DSystemOrganRelevance,jBuild4DSystemOrganRelevance);
+        this.saveSimple(jb4DSession,TableGroupJBuild4DSystemOrganRelevance,jBuild4DSystemOrganRelevance);
 
         //权限相关表
         deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemAuth);
@@ -124,7 +124,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemAuth.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemAuth.setTableGroupText("权限相关表");
         jBuild4DSystemAuth.setTableGroupValue("权限相关表");
-        this.save(jb4DSession,TableGroupJBuild4DSystemAuth,jBuild4DSystemAuth);
+        this.saveSimple(jb4DSession,TableGroupJBuild4DSystemAuth,jBuild4DSystemAuth);
 
         //应用设计相关表
         deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemBuilder);
@@ -134,7 +134,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemBuilder.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemBuilder.setTableGroupText("应用设计相关表");
         jBuild4DSystemBuilder.setTableGroupValue("应用设计相关表");
-        this.save(jb4DSession,TableGroupJBuild4DSystemBuilder,jBuild4DSystemBuilder);
+        this.saveSimple(jb4DSession,TableGroupJBuild4DSystemBuilder,jBuild4DSystemBuilder);
 
         //开发示例相关表
         deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemDevDemo);
@@ -144,7 +144,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemDevDemo.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemDevDemo.setTableGroupText("开发示例相关表");
         jBuild4DSystemDevDemo.setTableGroupValue("开发示例相关表");
-        this.save(jb4DSession,TableGroupJBuild4DSystemDevDemo,jBuild4DSystemDevDemo);
+        this.saveSimple(jb4DSession,TableGroupJBuild4DSystemDevDemo,jBuild4DSystemDevDemo);
 
         return jBuild4DSystemBase;
     }

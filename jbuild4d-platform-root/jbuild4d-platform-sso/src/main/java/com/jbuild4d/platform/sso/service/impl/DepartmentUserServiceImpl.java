@@ -7,15 +7,12 @@ import com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
-import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.encryption.digitaldigest.MD5Utility;
 import com.jbuild4d.platform.sso.service.IDepartmentUserService;
 import com.jbuild4d.platform.sso.service.IUserService;
 import com.jbuild4d.platform.sso.vo.DepartmentUserVo;
-import org.flowable.idm.api.User;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,7 +52,7 @@ public class DepartmentUserServiceImpl implements IDepartmentUserService
             addUser.setUserCreateUserId(jb4DSession.getUserId());
             addUser.setUserStatus(EnableTypeEnum.enable.getDisplayName());
             addUser.setUserOrderNum(userService.getNextOrderNum(jb4DSession));
-            userService.save(jb4DSession,addUser.getUserId(),addUser);
+            userService.saveSimple(jb4DSession,addUser.getUserId(),addUser);
 
             //新增部门用户
             DepartmentUserEntity addDepartmentUserEntity=record.getDepartmentUserEntity();
@@ -71,7 +68,7 @@ public class DepartmentUserServiceImpl implements IDepartmentUserService
         else{
             //修改用户
             UserEntity updateUser=record.getUserEntity();
-            userService.save(jb4DSession,updateUser.getUserId(),updateUser);
+            userService.saveSimple(jb4DSession,updateUser.getUserId(),updateUser);
 
             //修改部门用户
             DepartmentUserEntity updateDepartmentUserEntity=record.getDepartmentUserEntity();

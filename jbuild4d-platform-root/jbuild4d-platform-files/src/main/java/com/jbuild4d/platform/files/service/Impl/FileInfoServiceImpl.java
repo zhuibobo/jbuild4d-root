@@ -29,7 +29,7 @@ public class FileInfoServiceImpl extends BaseServiceImpl<FileInfoEntity> impleme
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, FileInfoEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, FileInfoEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<FileInfoEntity>() {
             @Override
             public FileInfoEntity run(JB4DSession jb4DSession,FileInfoEntity sourceEntity) throws JBuild4DGenerallyException {

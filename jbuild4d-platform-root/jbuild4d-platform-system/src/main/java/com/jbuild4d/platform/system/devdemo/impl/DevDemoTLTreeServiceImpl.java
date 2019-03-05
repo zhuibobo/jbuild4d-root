@@ -38,12 +38,12 @@ public class DevDemoTLTreeServiceImpl  extends BaseServiceImpl<DevDemoTLTreeEnti
         treeTableEntity.setDdttName("Root");
         treeTableEntity.setDdttValue("Root");
         treeTableEntity.setDdttStatus("启用");
-        this.save(jb4DSession,treeTableEntity.getDdttId(),treeTableEntity);
+        this.saveSimple(jb4DSession,treeTableEntity.getDdttId(),treeTableEntity);
         return treeTableEntity;
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, DevDemoTLTreeEntity entity) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, DevDemoTLTreeEntity entity) throws JBuild4DGenerallyException {
         return this.save(jb4DSession, id, entity, new IAddBefore<DevDemoTLTreeEntity>() {
             @Override
             public DevDemoTLTreeEntity run(JB4DSession jb4DSession, DevDemoTLTreeEntity sourceEntity) throws JBuild4DGenerallyException {

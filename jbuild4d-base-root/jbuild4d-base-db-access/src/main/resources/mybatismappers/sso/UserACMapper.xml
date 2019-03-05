@@ -9,7 +9,7 @@
             <arg column="USER_PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="USER_EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="USER_PHONE_NUMBER" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="USER_AVATAR_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="USER_HEAD_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="USER_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="USER_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="USER_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -19,7 +19,7 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        USER_ID, USER_NAME, USER_ACCOUNT, USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER, USER_AVATAR_ID,
+        USER_ID, USER_NAME, USER_ACCOUNT, USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER, USER_HEAD_ID,
         USER_ORGAN_ID, USER_DESC, USER_CREATE_TIME, USER_CREATE_USER_ID, USER_STATUS, USER_ORDER_NUM
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -35,12 +35,12 @@
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
         insert into TB4D_USER (USER_ID, USER_NAME, USER_ACCOUNT,
                                USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER,
-                               USER_AVATAR_ID, USER_ORGAN_ID, USER_DESC,
+                               USER_HEAD_ID, USER_ORGAN_ID, USER_DESC,
                                USER_CREATE_TIME, USER_CREATE_USER_ID, USER_STATUS,
                                USER_ORDER_NUM)
         values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR},
                 #{userPassword,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userPhoneNumber,jdbcType=VARCHAR},
-                #{userAvatarId,jdbcType=VARCHAR}, #{userOrganId,jdbcType=VARCHAR}, #{userDesc,jdbcType=VARCHAR},
+                #{userHeadId,jdbcType=VARCHAR}, #{userOrganId,jdbcType=VARCHAR}, #{userDesc,jdbcType=VARCHAR},
                 #{userCreateTime,jdbcType=TIMESTAMP}, #{userCreateUserId,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR},
                 #{userOrderNum,jdbcType=INTEGER})
     </insert>
@@ -65,8 +65,8 @@
             <if test="userPhoneNumber != null">
                 USER_PHONE_NUMBER,
             </if>
-            <if test="userAvatarId != null">
-                USER_AVATAR_ID,
+            <if test="userHeadId != null">
+                USER_HEAD_ID,
             </if>
             <if test="userOrganId != null">
                 USER_ORGAN_ID,
@@ -106,8 +106,8 @@
             <if test="userPhoneNumber != null">
                 #{userPhoneNumber,jdbcType=VARCHAR},
             </if>
-            <if test="userAvatarId != null">
-                #{userAvatarId,jdbcType=VARCHAR},
+            <if test="userHeadId != null">
+                #{userHeadId,jdbcType=VARCHAR},
             </if>
             <if test="userOrganId != null">
                 #{userOrganId,jdbcType=VARCHAR},
@@ -147,8 +147,8 @@
             <if test="userPhoneNumber != null">
                 USER_PHONE_NUMBER = #{userPhoneNumber,jdbcType=VARCHAR},
             </if>
-            <if test="userAvatarId != null">
-                USER_AVATAR_ID = #{userAvatarId,jdbcType=VARCHAR},
+            <if test="userHeadId != null">
+                USER_HEAD_ID = #{userHeadId,jdbcType=VARCHAR},
             </if>
             <if test="userOrganId != null">
                 USER_ORGAN_ID = #{userOrganId,jdbcType=VARCHAR},
@@ -178,7 +178,7 @@
             USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
             USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
             USER_PHONE_NUMBER = #{userPhoneNumber,jdbcType=VARCHAR},
-            USER_AVATAR_ID = #{userAvatarId,jdbcType=VARCHAR},
+            USER_HEAD_ID = #{userHeadId,jdbcType=VARCHAR},
             USER_ORGAN_ID = #{userOrganId,jdbcType=VARCHAR},
             USER_DESC = #{userDesc,jdbcType=VARCHAR},
             USER_CREATE_TIME = #{userCreateTime,jdbcType=TIMESTAMP},

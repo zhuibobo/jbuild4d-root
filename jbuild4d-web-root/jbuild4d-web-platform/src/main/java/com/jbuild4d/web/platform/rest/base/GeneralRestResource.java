@@ -18,7 +18,6 @@ import com.jbuild4d.platform.system.service.IOperationLogService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -160,7 +159,7 @@ public abstract class GeneralRestResource<T> implements IGeneralRestResource<T> 
                 } else {
                     this.writeOperationLog("修改数据", "用户[" + jb4DSession.getUserName() + "]修改了ID为" + recordID + "的数据[" + getMyClass().getSimpleName() + "]", JsonUtility.toObjectString(entity), request);
                 }
-                getBaseService().save(jb4DSession, recordID, entity);
+                getBaseService().saveSimple(jb4DSession, recordID, entity);
                 return JBuild4DResponseVo.saveSuccess();
             }
             else

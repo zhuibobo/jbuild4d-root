@@ -30,7 +30,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentEntity> imp
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, DepartmentEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, DepartmentEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<DepartmentEntity>() {
             @Override
             public DepartmentEntity run(JB4DSession jb4DSession,DepartmentEntity sourceEntity) throws JBuild4DGenerallyException {

@@ -19,7 +19,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleEntity> implements IRol
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, RoleEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, RoleEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<RoleEntity>() {
             @Override
             public RoleEntity run(JB4DSession jb4DSession,RoleEntity sourceEntity) throws JBuild4DGenerallyException {

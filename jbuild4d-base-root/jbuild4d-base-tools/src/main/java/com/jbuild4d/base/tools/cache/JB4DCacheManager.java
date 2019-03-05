@@ -16,6 +16,10 @@ public class JB4DCacheManager {
     public static String jb4dPlatformBuilderCacheName="jb4dPlatformBuilder";
     public static String jb4dPlatformSSOCacheName="jb4dPlatformSSO";
 
+    public static String CACHE_KEY_USER_HEAD_IMG="JB4DCacheManager.CACHE_KEY_USER_HEAD_IMG";
+    public static String CACHE_KEY_ORGAN_LOGO="JB4DCacheManager.CACHE_KEY_ORGAN_LOGO";
+    public static String CACHE_KEY_PROCESS_MODEL_MAIN_IMAGE="JB4DCacheManager.CACHE_KEY_PROCESS_MODEL_MAIN_IMAGE";
+
     private static CacheManager cacheManager = BeanUtility.getBean(CacheManager.class);
 
     public static void put(String cacheName,String key,String value){

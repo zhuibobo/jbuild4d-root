@@ -10,7 +10,6 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.InetAddressUtility;
-import com.jbuild4d.base.tools.common.UUIDUtility;
 import com.jbuild4d.platform.system.general.JBuild4DProp;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -32,7 +31,7 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, Jb4dCacheEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, Jb4dCacheEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<Jb4dCacheEntity>() {
             @Override
             public Jb4dCacheEntity run(JB4DSession jb4DSession,Jb4dCacheEntity sourceEntity) throws JBuild4DGenerallyException {
@@ -86,7 +85,7 @@ public class Jb4dCacheServiceImpl extends BaseServiceImpl<Jb4dCacheEntity> imple
         record.setCacheMode("Release");
         record.setCacheVersion(1);
 
-        this.save(null,record.getCacheId(),record);
+        this.saveSimple(null,record.getCacheId(),record);
     }
 
     @Override

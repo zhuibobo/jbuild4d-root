@@ -41,7 +41,7 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, TableFieldEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, TableFieldEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<TableFieldEntity>() {
             @Override
             public TableFieldEntity run(JB4DSession jb4DSession,TableFieldEntity sourceEntity) throws JBuild4DGenerallyException {

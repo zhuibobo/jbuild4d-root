@@ -33,7 +33,7 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogEntity>
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, OperationLogEntity entity) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, OperationLogEntity entity) throws JBuild4DGenerallyException {
         return this.save(jb4DSession, id, entity, new IAddBefore<OperationLogEntity>() {
             @Override
             public OperationLogEntity run(JB4DSession jb4DSession, OperationLogEntity sourceEntity) throws JBuild4DGenerallyException {
@@ -115,6 +115,6 @@ public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogEntity>
         logEntity.setLogId(UUIDUtility.getUUID());
         logEntity.setLogStatus("正常");
         logEntity.setLogIp(InetAddressUtility.getClientIpAdrress(request));
-        this.save(jb4DSession, logEntity.getLogId(), logEntity);
+        this.saveSimple(jb4DSession, logEntity.getLogId(), logEntity);
     }
 }

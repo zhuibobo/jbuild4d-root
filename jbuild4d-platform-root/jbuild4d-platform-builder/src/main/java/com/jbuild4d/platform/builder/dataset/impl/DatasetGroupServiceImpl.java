@@ -31,7 +31,7 @@ public class DatasetGroupServiceImpl extends BaseServiceImpl<DatasetGroupEntity>
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, DatasetGroupEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, DatasetGroupEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<DatasetGroupEntity>() {
             @Override
             public DatasetGroupEntity run(JB4DSession jb4DSession,DatasetGroupEntity sourceEntity) throws JBuild4DGenerallyException {
@@ -66,7 +66,7 @@ public class DatasetGroupServiceImpl extends BaseServiceImpl<DatasetGroupEntity>
         rootEntity.setDsGroupIssystem(TrueFalseEnum.True.getDisplayName());
         rootEntity.setDsGroupText("数据集分组");
         rootEntity.setDsGroupValue("数据集分组");
-        this.save(jb4DSession,rootEntity.getDsGroupId(),rootEntity);
+        this.saveSimple(jb4DSession,rootEntity.getDsGroupId(),rootEntity);
         return rootEntity;
     }
 

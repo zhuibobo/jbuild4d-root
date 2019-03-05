@@ -19,7 +19,7 @@ public class SsoUserMappingServiceImpl extends BaseServiceImpl<SsoUserMappingEnt
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, SsoUserMappingEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, SsoUserMappingEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<SsoUserMappingEntity>() {
             @Override
             public SsoUserMappingEntity run(JB4DSession jb4DSession,SsoUserMappingEntity sourceEntity) throws JBuild4DGenerallyException {

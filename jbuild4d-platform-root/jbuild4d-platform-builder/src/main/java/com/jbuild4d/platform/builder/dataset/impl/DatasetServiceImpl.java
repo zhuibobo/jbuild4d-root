@@ -75,7 +75,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, DatasetEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, DatasetEntity record) throws JBuild4DGenerallyException {
         throw new JBuild4DGenerallyException("请调用方法saveDataSetVo");
     }
 

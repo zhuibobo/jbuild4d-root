@@ -1,8 +1,11 @@
 package com.jbuild4d.base.dbaccess.dbentities.systemsetting;
 
+import com.jbuild4d.base.dbaccess.anno.DBKeyField;
+
 import java.util.Date;
 
 public class OperationLogEntity {
+    @DBKeyField
     private String logId;
 
     private String logText;

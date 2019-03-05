@@ -19,7 +19,7 @@ public class FileRefServiceImpl extends BaseServiceImpl<FileRefEntity> implement
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, FileRefEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, FileRefEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<FileRefEntity>() {
             @Override
             public FileRefEntity run(JB4DSession jb4DSession,FileRefEntity sourceEntity) throws JBuild4DGenerallyException {

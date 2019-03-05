@@ -31,7 +31,7 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntityW
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession, id, record, new IAddBefore<FormResourceEntityWithBLOBs>() {
             @Override
             public FormResourceEntityWithBLOBs run(JB4DSession jb4DSession, FormResourceEntityWithBLOBs sourceEntity) throws JBuild4DGenerallyException {

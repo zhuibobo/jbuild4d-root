@@ -31,7 +31,7 @@ public class DictionaryServiceImpl extends BaseServiceImpl<DictionaryEntity> imp
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, DictionaryEntity entity) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, DictionaryEntity entity) throws JBuild4DGenerallyException {
         return this.save(jb4DSession, id, entity, new IAddBefore<DictionaryEntity>() {
             @Override
             public DictionaryEntity run(JB4DSession jb4DSession, DictionaryEntity sourceEntity) throws JBuild4DGenerallyException {

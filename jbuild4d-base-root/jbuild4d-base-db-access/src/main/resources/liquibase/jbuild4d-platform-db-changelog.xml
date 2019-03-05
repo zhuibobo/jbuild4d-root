@@ -750,7 +750,7 @@
             <column name="USER_PASSWORD" type="NVARCHAR(100)" remarks="密码"/>
             <column name="USER_EMAIL" type="NVARCHAR(100)" remarks="邮件地址"/>
             <column name="USER_PHONE_NUMBER" type="NVARCHAR(100)" remarks="手机号码"/>
-            <column name="USER_AVATAR_ID" remarks="头像ID,关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
+            <column name="USER_HEAD_ID" remarks="头像ID,关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
             <column name="USER_ORGAN_ID" type="NVARCHAR(100)" remarks="所属组织ID" />
             <column name="USER_DESC" type="NVARCHAR(2000)" remarks="用户备注"/>
             <column name="USER_CREATE_TIME" type="datetime(6)" remarks="创建时间" />

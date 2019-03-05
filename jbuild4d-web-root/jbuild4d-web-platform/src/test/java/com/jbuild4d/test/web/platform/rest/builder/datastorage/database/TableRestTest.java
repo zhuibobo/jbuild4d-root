@@ -212,7 +212,7 @@ public class TableRestTest extends RestTestBase {
             tableGroupEntity.setTableGroupIssystem(TrueFalseEnum.False.getDisplayName());
             tableGroupEntity.setTableGroupDelEnable(TrueFalseEnum.False.getDisplayName());
             tableGroupEntity.setTableGroupLinkId("");
-            tableGroupService.save(jb4DSession,tableGroupEntity.getTableGroupId(),tableGroupEntity);
+            tableGroupService.saveSimple(jb4DSession,tableGroupEntity.getTableGroupId(),tableGroupEntity);
         }
 
         tableEntity.setTableGroupId(tableGroupEntity.getTableGroupId());

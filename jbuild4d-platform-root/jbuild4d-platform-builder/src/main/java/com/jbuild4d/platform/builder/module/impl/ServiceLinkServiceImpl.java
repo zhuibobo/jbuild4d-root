@@ -25,7 +25,7 @@ public class ServiceLinkServiceImpl extends BaseServiceImpl<ServiceLinkEntity> i
     }
 
     @Override
-    public int save(JB4DSession jb4DSession, String id, ServiceLinkEntity record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, ServiceLinkEntity record) throws JBuild4DGenerallyException {
         return super.save(jb4DSession,id, record, new IAddBefore<ServiceLinkEntity>() {
             @Override
             public ServiceLinkEntity run(JB4DSession jb4DSession,ServiceLinkEntity sourceEntity) throws JBuild4DGenerallyException {
