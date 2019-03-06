@@ -121,8 +121,8 @@ public class OrganRestResourceTest extends RestTestBase {
         JBuild4DResponseVo responseVo=simpleSaveEdit("/PlatFormRest/SSO/Department/SaveEdit.do",departmentEntity);
         Assert.assertTrue(responseVo.isSuccess());
 
-        for(int i=0;i<4;i++){
-            NewDepartmentUser(deptId,deptId+"_UserName_"+i + DateUtility.getDate_yyyyMMddHHmmssSSS(),deptId+"_Account_"+i+ DateUtility.getDate_yyyyMMddHHmmssSSS());
+        for(int i=0;i<4;i++) {
+            NewDepartmentUser(deptId, deptId + "_UserName_" + i + DateUtility.getDate_yyyyMMddHHmmssSSS(), deptId + "_Account_" + i + DateUtility.getDate_yyyyMMddHHmmssSSS());
         }
     }
 
