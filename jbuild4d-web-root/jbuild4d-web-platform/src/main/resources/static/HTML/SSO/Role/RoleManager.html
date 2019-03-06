@@ -9,7 +9,7 @@
         data:{
             acInterface:{
                 <!--Tree -->
-                getGroupTreeData:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/GetTreeData",
+                getGroupTreeData:"/PlatFormRest/SSO/RoleGroup/GetTreeData",
                 groupEditView:"/HTML/DevDemo/TreeAndList/TreeEdit.html",
                 deleteGroup:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/Delete",
                 moveGroup:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/Move",
@@ -33,12 +33,12 @@
                 // 必须使用data
                 data:{
                     key:{
-                        name:"ddttName"
+                        name:"roleGroupName"
                     },
                     simpleData : {
                         enable : true,
-                        idKey : "ddttId", // id编号命名
-                        pIdKey : "ddttParentId",  // 父id编号命名
+                        idKey : "roleGroupId", // id编号命名
+                        pIdKey : "roleGroupParentId",  // 父id编号命名
                         rootId : 0
                     }
                 },

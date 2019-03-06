@@ -1,5 +1,6 @@
 package com.jbuild4d.platform.sso.service.impl;
 import java.util.Date;
+import java.util.List;
 
 import com.jbuild4d.base.dbaccess.dao.sso.RoleGroupMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
@@ -9,6 +10,7 @@ import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.sso.service.IRoleGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -60,12 +62,21 @@ public class RoleGroupServiceImpl extends BaseServiceImpl<RoleGroupEntity> imple
 
     @Override
     public void initSystemData(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+        this.deleteByKeyNotValidate(jb4DSession,rootId, JBuild4DProp.getWarningOperationCode());
         RoleGroupEntity rootEntity=new RoleGroupEntity();
         rootEntity.setRoleGroupId(rootId);
         rootEntity.setRoleGroupParentId(rootParentId);
         rootEntity.setRoleGroupIssystem(TrueFalseEnum.True.getDisplayName());
-        rootEntity.setRoleGroupName("数据集分组");
+        rootEntity.setRoleGroupName("角色组分组");
         rootEntity.setRoleGroupDelEnable(TrueFalseEnum.False.getDisplayName());
         this.saveSimple(jb4DSession,rootEntity.getRoleGroupId(),rootEntity);
+        rootEntity=roleGroupMapper.selectByPrimaryKey(rootId);
+        rootEntity.setRoleGroupOrderNum(1);
+        roleGroupMapper.updateByPrimaryKeySelective(rootEntity);
+    }
+
+    @Override
+    public List<RoleGroupEntity> getALLOrderByAsc(JB4DSession session) {
+        return roleGroupMapper.selectAllOrderByAsc();
     }
 }

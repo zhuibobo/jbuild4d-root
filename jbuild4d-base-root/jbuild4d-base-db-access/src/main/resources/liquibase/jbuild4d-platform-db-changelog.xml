@@ -795,6 +795,25 @@
             <column name="ROLE_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
 
+        <createTable tableName="TB4D_USER_ROLE" remarks="角色与用户绑定表">
+            <column name="BIND_ID" type="NVARCHAR(100)" remarks="绑定ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="BIND_ROLE_ID" type="NVARCHAR(100)" remarks="角色ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BIND_USER_ID" type="NVARCHAR(100)" remarks="角色ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BIND_ORDER_NUM" type="INT" remarks="排序号">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BIND_CREATE_TIME" type="datetime(6)" remarks="创建时间">
+            </column>
+            <column name="BIND_CREATER_ID" type="NVARCHAR(100)" remarks="创建者的ID" />
+            <column name="BIND_ORGAN_ID" type="NVARCHAR(100)" remarks="组织ID" />
+        </createTable>
+
         <createTable tableName="TB4D_AUTHORITY" remarks="角色权限表">
             <column name="AUTH_ID" type="NVARCHAR(100)" remarks="权限ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
