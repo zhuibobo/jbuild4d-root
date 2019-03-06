@@ -1,5 +1,6 @@
 /*选择组织组件*/
-Vue.component("select-department-dialog-comp", {
+Vue.component("select-tree-data-dialog-comp", {
+
     data: function () {
         return {
             acInterface: {

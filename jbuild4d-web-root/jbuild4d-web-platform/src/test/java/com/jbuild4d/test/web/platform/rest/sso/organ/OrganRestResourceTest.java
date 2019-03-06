@@ -91,7 +91,7 @@ public class OrganRestResourceTest extends RestTestBase {
             DeleteDepartment(deptIdL1);
             NewDepartment(deptIdL1,rootDepartmentId,organId);
             for(int j=1;j<4;j++) {
-                String deptIdL2 = "Dept_"+i+"_"+j;
+                String deptIdL2 = "Dept_"+i+"_"+j+"_"+organId;
                 DeleteDepartment(deptIdL2);
                 NewDepartment(deptIdL2, deptIdL1, organId);
             }
