@@ -417,10 +417,13 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
 
     @Override
     public int deleteByKeyNotValidate(JB4DSession jb4DSession, String id, String warningOperationCode) throws JBuild4DGenerallyException {
-        datasetMapper.deleteByPrimaryKey(id);
-        datasetRelatedTableService.deleteByDataSetId(jb4DSession,id);
-        datasetColumnService.deleteByDataSetId(jb4DSession,id);
-        return 0;
+        if(JBuild4DProp.getWarningOperationCode().equals(warningOperationCode)) {
+            datasetMapper.deleteByPrimaryKey(id);
+            datasetRelatedTableService.deleteByDataSetId(jb4DSession, id);
+            datasetColumnService.deleteByDataSetId(jb4DSession, id);
+            return 0;
+        }
+        throw new JBuild4DGenerallyException("删除失败WarningOperationCode错误");
         //return super.deleteByKeyNotValidate(jb4DSession, id);
     }
 }

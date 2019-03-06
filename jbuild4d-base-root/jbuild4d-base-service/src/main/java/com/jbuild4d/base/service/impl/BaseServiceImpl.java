@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.base.tools.common.UUIDUtility;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -57,8 +58,10 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
 
     @Override
     public int deleteByKeyNotValidate(JB4DSession jb4DSession, String id, String warningOperationCode ) throws JBuild4DGenerallyException {
-        //if(JBuild4DProp)
-        return defaultBaseMapper.deleteByPrimaryKey(id);
+        if(JBuild4DProp.getWarningOperationCode().equals(warningOperationCode)) {
+            return defaultBaseMapper.deleteByPrimaryKey(id);
+        }
+        throw new JBuild4DGenerallyException("删除失败WarningOperationCode错误");
     }
 
     @Override
