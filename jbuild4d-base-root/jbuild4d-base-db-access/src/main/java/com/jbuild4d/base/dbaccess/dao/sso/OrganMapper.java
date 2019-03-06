@@ -14,4 +14,8 @@ public interface OrganMapper extends BaseMapper<OrganEntity> {
     OrganEntity selectLessThanRecord(@Param("id") String id,@Param("parentId") String organParentId);
 
     OrganEntity selectGreaterThanRecord(@Param("id") String id,@Param("parentId") String organParentId);
+
+    void deleteByOrganName(String organName);
+
+    int countChildsOrgan(String organId);
 }

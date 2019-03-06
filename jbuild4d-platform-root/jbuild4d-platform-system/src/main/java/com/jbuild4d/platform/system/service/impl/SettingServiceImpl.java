@@ -11,6 +11,7 @@ import com.jbuild4d.base.service.IUpdateBefore;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.StringUtility;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.platform.system.service.ISettingService;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -84,7 +85,7 @@ public class SettingServiceImpl extends BaseServiceImpl<SettingEntity> implement
     @Override
     public void initSystemData(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
         //String userDefaultPasswordId="SettingUserDefaultPassword";
-        this.deleteByKeyNotValidate(jb4DSession,SETTINGUSERDEFAULTPASSWORD);
+        this.deleteByKeyNotValidate(jb4DSession,SETTINGUSERDEFAULTPASSWORD, JBuild4DProp.getWarningOperationCode());
         SettingEntity defaultUserPasswordEntity=new SettingEntity();
         defaultUserPasswordEntity.setSettingId(SETTINGUSERDEFAULTPASSWORD);
         defaultUserPasswordEntity.setSettingKey(SETTINGUSERDEFAULTPASSWORD);

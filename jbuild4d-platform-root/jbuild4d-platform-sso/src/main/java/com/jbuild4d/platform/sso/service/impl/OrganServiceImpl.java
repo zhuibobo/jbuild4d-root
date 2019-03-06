@@ -2,6 +2,7 @@ package com.jbuild4d.platform.sso.service.impl;
 
 import com.jbuild4d.base.dbaccess.dao.sso.OrganMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
+import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
@@ -15,6 +16,7 @@ import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.base.tools.common.XMLUtility;
 import com.jbuild4d.platform.sso.service.IOnOrganChangeAware;
 import com.jbuild4d.platform.sso.service.IOrganService;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.transaction.annotation.Transactional;
@@ -160,10 +162,25 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
         organEntity.setOrganNo("0000");
         organEntity.setOrganIsVirtual(TrueFalseEnum.False.getDisplayName());
         organEntity.setOrganParentId(rootParentId);
-        organEntity.setOrganStatus("启用");
+        organEntity.setOrganStatus(EnableTypeEnum.enable.getDisplayName());
         organEntity.setOrganShortName("组织管理");
         this.saveSimple(jb4DSession,organEntity.getOrganId(),organEntity);
         return organEntity;
+    }
+
+    @Override
+    public void deleteByOrganName(JB4DSession session, String organName, String warningOperationCode) {
+        if(JBuild4DProp.getWarningOperationCode().equals(warningOperationCode)){
+            organMapper.deleteByOrganName(organName);
+        }
+    }
+
+    @Override
+    public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        OrganEntity organEntity=getByPrimaryKey(jb4DSession,id);
+        organEntity.setOrganStatus(EnableTypeEnum.delete.getDisplayName());
+        return organMapper.updateByPrimaryKey(organEntity);
+        //return super.deleteByKey(jb4DSession, id);
     }
 
     @Override

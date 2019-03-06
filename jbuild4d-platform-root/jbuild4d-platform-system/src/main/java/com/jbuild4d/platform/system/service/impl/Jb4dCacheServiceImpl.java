@@ -10,7 +10,7 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.InetAddressUtility;
-import com.jbuild4d.platform.system.general.JBuild4DProp;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
 

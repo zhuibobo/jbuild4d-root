@@ -39,6 +39,10 @@ public class OrganRestResourceTest extends RestTestBase {
         }
     }
 
+    private void DeleteOrgan(String organId){
+
+    }
+
     private void NewOrgan(String organId,String parentId,String logoFileName) throws Exception {
         OrganEntity organEntity=new OrganEntity();
         organEntity.setOrganParentId(parentId);

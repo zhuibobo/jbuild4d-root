@@ -96,4 +96,10 @@ public class OrganRestResource extends GeneralRestResource<OrganEntity> {
         List<OrganEntity> organEntityList=organService.getALL(JB4DSessionUtility.getSession());
         return JBuild4DResponseVo.success(JBuild4DResponseVo.GETDATASUCCESSMSG,organEntityList);
     }
+
+    @RequestMapping(value = "/DeleteByName",method = RequestMethod.DELETE)
+    public JBuild4DResponseVo deleteByName(String organName,String warningOperationCode){
+        organService.deleteByOrganName(JB4DSessionUtility.getSession(),organName,warningOperationCode);
+        return JBuild4DResponseVo.deleteSuccess();
+    }
 }

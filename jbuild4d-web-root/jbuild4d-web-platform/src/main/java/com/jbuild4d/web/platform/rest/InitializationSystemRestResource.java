@@ -12,6 +12,7 @@ import com.jbuild4d.platform.sso.service.IOrganService;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.platform.system.service.*;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,16 +83,16 @@ public class InitializationSystemRestResource {
         devDemoTLTreeService.createRootNode(jb4DSession);
 
         //初始化根组织
-        organTypeService.deleteByKeyNotValidate(jb4DSession,"0");
+        organTypeService.deleteByKeyNotValidate(jb4DSession,"0", JBuild4DProp.getWarningOperationCode());
         organTypeService.createDefaultOrganType(jb4DSession);
         organService.deleteByKey(jb4DSession,"0");
         organService.createRootOrgan(jb4DSession);
 
         //初始化根表分组
-        tableGroupService.deleteByKeyNotValidate(jb4DSession,"0");
+        tableGroupService.deleteByKeyNotValidate(jb4DSession,"0", JBuild4DProp.getWarningOperationCode());
         TableGroupEntity rootTableGroupEntity=tableGroupService.createRootNode(jb4DSession);
 
-        tableGroupService.deleteByKeyNotValidate(jb4DSession,"TableGroupJBuild4DSystem");
+        tableGroupService.deleteByKeyNotValidate(jb4DSession,"TableGroupJBuild4DSystem", JBuild4DProp.getWarningOperationCode());
         tableGroupService.createSystemTableGroupNode(jb4DSession,rootTableGroupEntity);
 
         //初始化表模版

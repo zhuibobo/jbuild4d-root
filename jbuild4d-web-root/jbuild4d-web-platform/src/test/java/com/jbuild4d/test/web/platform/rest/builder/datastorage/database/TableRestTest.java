@@ -13,6 +13,7 @@ import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.junit.Assert;
@@ -82,7 +83,7 @@ public class TableRestTest extends RestTestBase {
         JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
         if (!responseVo.isSuccess()) {
             TableEntity tempTableEntity=tableService.getByTableName(getSession(),newTable.getTableName());
-            tableService.deleteByKeyNotValidate(getSession(),tempTableEntity.getTableId());
+            tableService.deleteByKeyNotValidate(getSession(),tempTableEntity.getTableId(), JBuild4DProp.getWarningOperationCode());
             tableFieldService.deleteByTableId(getSession(),tempTableEntity.getTableId());
             tableService.deletePhysicsTable(getSession(),newTable.getTableName());
         }

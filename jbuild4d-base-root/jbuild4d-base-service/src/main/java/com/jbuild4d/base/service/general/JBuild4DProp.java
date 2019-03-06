@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.system.general;
+package com.jbuild4d.base.service.general;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,5 +42,9 @@ public class JBuild4DProp {
 
     public static boolean hostOperationSystemIsWindow(){
         return getHostOperationSystem().toLowerCase().equals("window");
+    }
+
+    public static String getWarningOperationCode(){
+        return getValue("WarningOperationCode");
     }
 }

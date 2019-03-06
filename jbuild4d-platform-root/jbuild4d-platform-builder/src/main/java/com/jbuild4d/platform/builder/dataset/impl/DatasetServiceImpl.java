@@ -25,6 +25,7 @@ import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.extend.IDataSetAPI;
 import com.jbuild4d.platform.builder.module.IBuilderConfigService;
 import com.jbuild4d.platform.builder.vo.*;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -411,11 +412,11 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
 
     @Override
     public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
-        return deleteByKeyNotValidate(jb4DSession, id);
+        return deleteByKeyNotValidate(jb4DSession, id, JBuild4DProp.getWarningOperationCode());
     }
 
     @Override
-    public int deleteByKeyNotValidate(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+    public int deleteByKeyNotValidate(JB4DSession jb4DSession, String id, String warningOperationCode) throws JBuild4DGenerallyException {
         datasetMapper.deleteByPrimaryKey(id);
         datasetRelatedTableService.deleteByDataSetId(jb4DSession,id);
         datasetColumnService.deleteByDataSetId(jb4DSession,id);

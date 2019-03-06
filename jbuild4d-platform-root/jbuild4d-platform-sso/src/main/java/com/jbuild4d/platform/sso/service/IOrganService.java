@@ -14,4 +14,6 @@ import com.jbuild4d.base.service.general.JB4DSession;
 public interface IOrganService extends IBaseService<OrganEntity> {
 
     OrganEntity createRootOrgan(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
+
+    void deleteByOrganName(JB4DSession session, String organName, String warningOperationCode);
 }

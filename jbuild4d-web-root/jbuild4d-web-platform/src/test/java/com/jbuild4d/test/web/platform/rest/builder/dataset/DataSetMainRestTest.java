@@ -11,6 +11,7 @@ import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
 import com.jbuild4d.platform.builder.vo.DataSetRelatedTableVo;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
 import com.jbuild4d.platform.builder.vo.SQLResolveToDataSetVo;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,7 +42,7 @@ public class DataSetMainRestTest extends DataSetSQLDesignerRestTest {
 
         DatasetEntity existDataSet=datasetService.getVoByPrimaryKey(getSession(),dataSetId);
         if(existDataSet!=null){
-            datasetService.deleteByKeyNotValidate(getSession(),dataSetId);
+            datasetService.deleteByKeyNotValidate(getSession(),dataSetId, JBuild4DProp.getWarningOperationCode());
         }
         if(existDataSet==null) {
             //DataSetSQLDesignerRestTest dataSetSQLDesignerControllerTest = new DataSetSQLDesignerRestTest();

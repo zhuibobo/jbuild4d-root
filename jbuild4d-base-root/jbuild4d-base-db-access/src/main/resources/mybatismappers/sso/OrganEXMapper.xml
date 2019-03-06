@@ -41,4 +41,11 @@
         where ORGAN_ORDER_NUM = (select min(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM>(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{id,jdbcType=NVARCHAR} ) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
         ]]>
     </select>
+
+    <delete id="deleteByOrganName">
+        delete from TB4D_ORGAN
+        where ORGAN_NAME = #{organName,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="countChildsOrgan" resultType="int">select count(ORGAN_ID) from TB4D_ORGAN where ORGAN_PARENT_ID=#{id,jdbcType=NVARCHAR}</select>
 </mapper>

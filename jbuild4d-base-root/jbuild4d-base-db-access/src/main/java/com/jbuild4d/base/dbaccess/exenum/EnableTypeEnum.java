@@ -5,7 +5,8 @@ import java.util.Map;
 
 public enum EnableTypeEnum implements BaseEnum<EnableTypeEnum, Integer> {
     enable(1,"启用"),
-    disable(0,"禁用");
+    disable(0,"禁用"),
+    delete(2,"删除");
 
     private Integer value;
     private String displayName;

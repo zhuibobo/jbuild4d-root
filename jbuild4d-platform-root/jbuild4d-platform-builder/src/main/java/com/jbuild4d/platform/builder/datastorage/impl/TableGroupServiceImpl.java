@@ -9,6 +9,7 @@ import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.Date;
@@ -87,7 +88,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
     @Override
     public TableGroupEntity createSystemTableGroupNode(JB4DSession jb4DSession,TableGroupEntity parentGroup) throws JBuild4DGenerallyException {
         //系统基础
-        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystem);
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystem, JBuild4DProp.getWarningOperationCode());
         TableGroupEntity jBuild4DSystemBase=new TableGroupEntity();
         jBuild4DSystemBase.setTableGroupId(TableGroupJBuild4DSystem);
         jBuild4DSystemBase.setTableGroupParentId(parentGroup.getTableGroupId());
@@ -97,7 +98,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystem,jBuild4DSystemBase);
 
         //系统设置相关表
-        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemSetting);
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemSetting, JBuild4DProp.getWarningOperationCode());
         TableGroupEntity jBuild4DSystemSetting=new TableGroupEntity();
         jBuild4DSystemSetting.setTableGroupId(TableGroupJBuild4DSystemSetting);
         jBuild4DSystemSetting.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
@@ -107,7 +108,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemSetting,jBuild4DSystemSetting);
 
         //组织用户相关表
-        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemOrganRelevance);
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemOrganRelevance, JBuild4DProp.getWarningOperationCode());
         TableGroupEntity jBuild4DSystemOrganRelevance=new TableGroupEntity();
         jBuild4DSystemOrganRelevance.setTableGroupId(TableGroupJBuild4DSystemOrganRelevance);
         jBuild4DSystemOrganRelevance.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
@@ -117,7 +118,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemOrganRelevance,jBuild4DSystemOrganRelevance);
 
         //权限相关表
-        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemAuth);
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemAuth, JBuild4DProp.getWarningOperationCode());
         TableGroupEntity jBuild4DSystemAuth=new TableGroupEntity();
         jBuild4DSystemAuth.setTableGroupId(TableGroupJBuild4DSystemAuth);
         jBuild4DSystemAuth.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
@@ -127,7 +128,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemAuth,jBuild4DSystemAuth);
 
         //应用设计相关表
-        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemBuilder);
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemBuilder, JBuild4DProp.getWarningOperationCode());
         TableGroupEntity jBuild4DSystemBuilder=new TableGroupEntity();
         jBuild4DSystemBuilder.setTableGroupId(TableGroupJBuild4DSystemBuilder);
         jBuild4DSystemBuilder.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
@@ -137,7 +138,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemBuilder,jBuild4DSystemBuilder);
 
         //开发示例相关表
-        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemDevDemo);
+        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemDevDemo, JBuild4DProp.getWarningOperationCode());
         TableGroupEntity jBuild4DSystemDevDemo=new TableGroupEntity();
         jBuild4DSystemDevDemo.setTableGroupId(TableGroupJBuild4DSystemDevDemo);
         jBuild4DSystemDevDemo.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());

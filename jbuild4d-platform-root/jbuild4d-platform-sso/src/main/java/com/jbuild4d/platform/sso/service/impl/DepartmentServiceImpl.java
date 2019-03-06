@@ -67,7 +67,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentEntity> imp
 
     @Override
     public boolean existChildsDepartment(JB4DSession jb4DSession, String id){
-        int count=departmentMapper.existChildsDepartment(id);
+        int count=departmentMapper.countChildsDepartment(id);
         return count>0;
     }
 

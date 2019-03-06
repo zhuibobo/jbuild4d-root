@@ -56,7 +56,8 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public int deleteByKeyNotValidate(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+    public int deleteByKeyNotValidate(JB4DSession jb4DSession, String id, String warningOperationCode ) throws JBuild4DGenerallyException {
+        //if(JBuild4DProp)
         return defaultBaseMapper.deleteByPrimaryKey(id);
     }
 
