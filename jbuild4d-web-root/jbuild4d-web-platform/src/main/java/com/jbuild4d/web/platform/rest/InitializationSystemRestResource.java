@@ -10,6 +10,7 @@ import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.module.IModuleService;
 import com.jbuild4d.platform.sso.service.IOrganService;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
+import com.jbuild4d.platform.sso.service.IRoleGroupService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
 import com.jbuild4d.base.service.general.JBuild4DProp;
@@ -64,6 +65,9 @@ public class InitializationSystemRestResource {
     @Autowired
     private ISettingService settingService;
 
+    @Autowired
+    private IRoleGroupService roleGroupService;
+
     @RequestMapping(value = "/Running", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo running() throws JBuild4DGenerallyException {
@@ -109,6 +113,9 @@ public class InitializationSystemRestResource {
 
         //初始化系统参数
         settingService.initSystemData(jb4DSession);
+
+        //初始化根角色组
+        roleGroupService.initSystemData(jb4DSession);
 
         return JBuild4DResponseVo.success("系统数据初始化成功！");
     }
