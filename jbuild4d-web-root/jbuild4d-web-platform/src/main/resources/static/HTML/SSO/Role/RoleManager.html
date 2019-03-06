@@ -245,7 +245,7 @@
                         "op": "add",
                         "groupId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 3);
                 }
                 else {
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择分组!",null);
@@ -256,14 +256,14 @@
                     "op": "update",
                     "recordId": recordId
                 });
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 3);
             },
             view:function (recordId) {
                 var url = BaseUtility.BuildView(this.acInterface.listEditView, {
                     "op": "view",
                     "recordId": recordId
                 });
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 2);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "列表"}, 3);
             },
             del: function (recordId) {
                 ListPageUtility.IViewTableDeleteRow(this.acInterface.deleteListRecord,recordId,appList);

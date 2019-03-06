@@ -1,4 +1,5 @@
 package com.jbuild4d.platform.sso.service.impl;
+import java.util.Date;
 
 import com.jbuild4d.base.dbaccess.dao.sso.RoleMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity;
@@ -23,7 +24,10 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleEntity> implements IRol
         return super.save(jb4DSession,id, record, new IAddBefore<RoleEntity>() {
             @Override
             public RoleEntity run(JB4DSession jb4DSession,RoleEntity sourceEntity) throws JBuild4DGenerallyException {
-                //设置排序,以及其他参数--nextOrderNum()
+                sourceEntity.setRoleOrderNum(roleMapper.nextOrderNum());
+                sourceEntity.setRoleCreateTime(new Date());
+                sourceEntity.setRoleCreaterId(jb4DSession.getUserId());
+                sourceEntity.setRoleOrganId(jb4DSession.getOrganId());
                 return sourceEntity;
             }
         });
