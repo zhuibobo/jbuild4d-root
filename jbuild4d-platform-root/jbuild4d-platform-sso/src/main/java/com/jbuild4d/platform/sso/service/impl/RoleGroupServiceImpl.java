@@ -95,4 +95,28 @@ public class RoleGroupServiceImpl extends BaseServiceImpl<RoleGroupEntity> imple
         }
         return super.deleteByKey(jb4DSession, id);
     }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        RoleGroupEntity selfEntity=roleGroupMapper.selectByPrimaryKey(id);
+        RoleGroupEntity ltEntity=roleGroupMapper.selectLessThanRecord(id,selfEntity.getRoleGroupParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        RoleGroupEntity selfEntity=roleGroupMapper.selectByPrimaryKey(id);
+        RoleGroupEntity ltEntity=roleGroupMapper.selectGreaterThanRecord(id,selfEntity.getRoleGroupParentId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    private void switchOrder(RoleGroupEntity toEntity,RoleGroupEntity selfEntity) {
+        if(toEntity !=null){
+            int newNum= toEntity.getRoleGroupOrderNum();
+            toEntity.setRoleGroupOrderNum(selfEntity.getRoleGroupOrderNum());
+            selfEntity.setRoleGroupOrderNum(newNum);
+            roleGroupMapper.updateByPrimaryKeySelective(toEntity);
+            roleGroupMapper.updateByPrimaryKeySelective(selfEntity);
+        }
+    }
 }

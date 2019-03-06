@@ -16,10 +16,32 @@
         <if test="roleGroupCreaterId !=null and roleGroupCreaterId !=''"> and ROLE_GROUP_CREATER_ID like #{roleGroupCreaterId} </if>
         <if test="roleGroupOrganId !=null and roleGroupOrganId !=''"> and ROLE_GROUP_ORGAN_ID like #{roleGroupOrganId} </if>
     </where>ORDER by ROLE_GROUP_ORDER_NUM DESC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ROLE_GROUP
-                                                                                                          where ROLE_GROUP_ORDER_NUM = (select max(ROLE_GROUP_ORDER_NUM) from TB4D_ROLE_GROUP where ROLE_GROUP_ORDER_NUM<(select ROLE_GROUP_ORDER_NUM from TB4D_ROLE_GROUP where ROLE_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ROLE_GROUP
-                                                                                                             where ROLE_GROUP_ORDER_NUM = (select min(ROLE_GROUP_ORDER_NUM) from TB4D_ROLE_GROUP where ROLE_GROUP_ORDER_NUM>(select ROLE_GROUP_ORDER_NUM from TB4D_ROLE_GROUP where ROLE_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select *
+        from TB4D_ROLE_GROUP
+        where ROLE_GROUP_ORDER_NUM = (select max(ROLE_GROUP_ORDER_NUM)
+                                       from TB4D_ROLE_GROUP
+                                       where ROLE_GROUP_ORDER_NUM <
+                                             (select ROLE_GROUP_ORDER_NUM from TB4D_ROLE_GROUP where ROLE_GROUP_ID = #{id,jdbcType=NVARCHAR})
+                                         and ROLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR})
+          and ROLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
+
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select *
+        from TB4D_ROLE_GROUP
+        where ROLE_GROUP_ORDER_NUM = (select min(ROLE_GROUP_ORDER_NUM)
+                                       from TB4D_ROLE_GROUP
+                                       where ROLE_GROUP_ORDER_NUM >
+                                             (select ROLE_GROUP_ORDER_NUM from TB4D_ROLE_GROUP where ROLE_GROUP_ID = #{id,jdbcType=NVARCHAR})
+                                         and ROLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR})
+          and ROLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
 
     <select id="countChildsRoleGroup" resultType="int">select count(ROLE_GROUP_ID) from TB4D_ROLE_GROUP where ROLE_GROUP_PARENT_ID=#{id,jdbcType=NVARCHAR}</select>
 </mapper>
