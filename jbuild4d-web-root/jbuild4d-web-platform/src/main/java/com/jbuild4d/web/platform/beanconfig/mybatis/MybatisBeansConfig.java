@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Role;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -283,6 +284,11 @@ public class MybatisBeansConfig {
     @Bean
     public DepartmentUserMapper departmentUserMapper(SqlSessionTemplate sqlSessionTemplate) {
         return sqlSessionTemplate.getMapper(DepartmentUserMapper.class);
+    }
+
+    @Bean
+    public RoleGroupMapper roleGroupMapper(SqlSessionTemplate sqlSessionTemplate){
+        return sqlSessionTemplate.getMapper(RoleGroupMapper.class);
     }
 
     @Bean

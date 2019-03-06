@@ -45,6 +45,18 @@ public class SSOBeansConfig {
         return userService;
     }
 
+    @Bean
+    IRoleGroupService roleGroupService(ISQLBuilderService _sqlBuilderService, RoleGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        IRoleGroupService roleGroupService=new RoleGroupServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return roleGroupService;
+    }
+
+    @Bean
+    IRoleService roleService(ISQLBuilderService _sqlBuilderService, RoleMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        IRoleService roleService=new RoleServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return roleService;
+    }
+
     @PostConstruct
     public void postConstruct (){
         //this.organService().setDepartmentService(this.departmentService());
