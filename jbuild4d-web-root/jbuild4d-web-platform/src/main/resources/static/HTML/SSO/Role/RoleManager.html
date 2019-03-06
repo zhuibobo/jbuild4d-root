@@ -10,9 +10,9 @@
             acInterface:{
                 <!--Tree -->
                 getGroupTreeData:"/PlatFormRest/SSO/RoleGroup/GetTreeData",
-                groupEditView:"/HTML/DevDemo/TreeAndList/TreeEdit.html",
-                deleteGroup:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/Delete",
-                moveGroup:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLTree/Move",
+                groupEditView:"/HTML/SSO/Role/RoleGroupEdit.html",
+                deleteGroup:"/PlatFormRest/SSO/RoleGroup/Delete",
+                moveGroup:"/PlatFormRest/SSO/RoleGroup/Move",
                 <!--List -->
                 listEditView:"/HTML/DevDemo/TreeAndList/ListEdit.html",
                 reloadListData:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/GetListData",
@@ -21,7 +21,7 @@
                 listMove:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/Move"
             },
             <!--Tree-->
-            treeIdFieldName:"ddttId",
+            treeIdFieldName:"roleGroupId",
             treeObj:null,
             treeSelectedNode:null,
             treeSetting:{
@@ -152,7 +152,7 @@
                         "op": "add",
                         "parentId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "角色分组"}, 3);
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择父节点!", null);
@@ -164,7 +164,7 @@
                         "op": "update",
                         "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                     });
-                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "角色分组"}, 3);
                 }
                 else {
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
@@ -175,7 +175,7 @@
                     "op": "view",
                     "recordId": this.treeSelectedNode[appList.treeIdFieldName]
                 });
-                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "角色分组"}, 3);
             },
             delGroup:function () {
                 //var url="/PlatForm/devdemo/TreeAndList/DevDemoTLTree/Delete.do";
