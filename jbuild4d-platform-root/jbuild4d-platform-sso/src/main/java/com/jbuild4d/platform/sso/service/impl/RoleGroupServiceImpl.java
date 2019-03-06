@@ -13,12 +13,17 @@ import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.sso.service.IRoleGroupService;
+import com.jbuild4d.platform.sso.service.IRoleService;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class RoleGroupServiceImpl extends BaseServiceImpl<RoleGroupEntity> implements IRoleGroupService
 {
     private String rootId="0";
     private String rootParentId="-1";
+
+    @Autowired
+    IRoleService roleService;
 
     RoleGroupMapper roleGroupMapper;
     public RoleGroupServiceImpl(RoleGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
@@ -78,5 +83,16 @@ public class RoleGroupServiceImpl extends BaseServiceImpl<RoleGroupEntity> imple
     @Override
     public List<RoleGroupEntity> getALLOrderByAsc(JB4DSession session) {
         return roleGroupMapper.selectAllOrderByAsc();
+    }
+
+    @Override
+    public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        if(roleGroupMapper.countChildsRoleGroup(id)>0){
+            throw new JBuild4DGenerallyException("该分组下存在子节点,请先删除子节点!");
+        }
+        if(roleService.countInRoleGroup(id)>0){
+            throw new JBuild4DGenerallyException("该分组下存在角色,请先删除角色!");
+        }
+        return super.deleteByKey(jb4DSession, id);
     }
 }

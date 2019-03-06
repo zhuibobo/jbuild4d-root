@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RoleGroupMapper extends BaseMapper<RoleGroupEntity> {
     List<RoleGroupEntity> selectAllOrderByAsc();
+
+    int countChildsRoleGroup(String groupId);
 }

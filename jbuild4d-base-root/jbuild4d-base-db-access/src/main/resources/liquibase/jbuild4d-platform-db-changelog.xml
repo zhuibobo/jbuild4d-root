@@ -786,7 +786,8 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="ROLE_KEY" type="NVARCHAR(100)" remarks="角色键值"/>
-            <column name="ROLE_NAME" type="NVARCHAR(100)" remarks="角色名称"/>
+            <column name="ROLE_NAME" type="NVARCHAR(100)" remarks="角色组ID"/>
+            <column name="ROLE_GROUP_ID" type="NVARCHAR(100)" remarks="角色名称"/>
             <column name="ROLE_ORDER_NUM" type="INT" remarks="排序号" />
             <column name="ROLE_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
             <column name="ROLE_DESC" type="NVARCHAR(500)" remarks="备注" />

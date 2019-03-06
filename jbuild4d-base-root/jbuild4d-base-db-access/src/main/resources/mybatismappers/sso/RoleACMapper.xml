@@ -4,11 +4,20 @@
     <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity">
         <constructor>
             <idArg column="ROLE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_KEY" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="ROLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="ROLE_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="ROLE_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_CREATER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        ROLE_ID, ROLE_NAME
+        ROLE_ID, ROLE_KEY, ROLE_NAME, ROLE_GROUP_ID, ROLE_ORDER_NUM, ROLE_CREATE_TIME, ROLE_DESC,
+        ROLE_STATUS, ROLE_CREATER_ID, ROLE_ORGAN_ID
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -21,8 +30,14 @@
         where ROLE_ID = #{roleId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity">
-        insert into TB4D_ROLE (ROLE_ID, ROLE_NAME)
-        values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR})
+        insert into TB4D_ROLE (ROLE_ID, ROLE_KEY, ROLE_NAME,
+                               ROLE_GROUP_ID, ROLE_ORDER_NUM, ROLE_CREATE_TIME,
+                               ROLE_DESC, ROLE_STATUS, ROLE_CREATER_ID,
+                               ROLE_ORGAN_ID)
+        values (#{roleId,jdbcType=VARCHAR}, #{roleKey,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR},
+                #{roleGroupId,jdbcType=VARCHAR}, #{roleOrderNum,jdbcType=INTEGER}, #{roleCreateTime,jdbcType=TIMESTAMP},
+                #{roleDesc,jdbcType=VARCHAR}, #{roleStatus,jdbcType=VARCHAR}, #{roleCreaterId,jdbcType=VARCHAR},
+                #{roleOrganId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity">
         insert into TB4D_ROLE
@@ -30,31 +45,111 @@
             <if test="roleId != null">
                 ROLE_ID,
             </if>
+            <if test="roleKey != null">
+                ROLE_KEY,
+            </if>
             <if test="roleName != null">
                 ROLE_NAME,
+            </if>
+            <if test="roleGroupId != null">
+                ROLE_GROUP_ID,
+            </if>
+            <if test="roleOrderNum != null">
+                ROLE_ORDER_NUM,
+            </if>
+            <if test="roleCreateTime != null">
+                ROLE_CREATE_TIME,
+            </if>
+            <if test="roleDesc != null">
+                ROLE_DESC,
+            </if>
+            <if test="roleStatus != null">
+                ROLE_STATUS,
+            </if>
+            <if test="roleCreaterId != null">
+                ROLE_CREATER_ID,
+            </if>
+            <if test="roleOrganId != null">
+                ROLE_ORGAN_ID,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="roleId != null">
                 #{roleId,jdbcType=VARCHAR},
             </if>
+            <if test="roleKey != null">
+                #{roleKey,jdbcType=VARCHAR},
+            </if>
             <if test="roleName != null">
                 #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupId != null">
+                #{roleGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleOrderNum != null">
+                #{roleOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="roleCreateTime != null">
+                #{roleCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleDesc != null">
+                #{roleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="roleStatus != null">
+                #{roleStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCreaterId != null">
+                #{roleCreaterId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleOrganId != null">
+                #{roleOrganId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity">
         update TB4D_ROLE
         <set>
+            <if test="roleKey != null">
+                ROLE_KEY = #{roleKey,jdbcType=VARCHAR},
+            </if>
             <if test="roleName != null">
                 ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupId != null">
+                ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleOrderNum != null">
+                ROLE_ORDER_NUM = #{roleOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="roleCreateTime != null">
+                ROLE_CREATE_TIME = #{roleCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleDesc != null">
+                ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="roleStatus != null">
+                ROLE_STATUS = #{roleStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCreaterId != null">
+                ROLE_CREATER_ID = #{roleCreaterId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleOrganId != null">
+                ROLE_ORGAN_ID = #{roleOrganId,jdbcType=VARCHAR},
             </if>
         </set>
         where ROLE_ID = #{roleId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity">
         update TB4D_ROLE
-        set ROLE_NAME = #{roleName,jdbcType=VARCHAR}
+        set ROLE_KEY = #{roleKey,jdbcType=VARCHAR},
+            ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+            ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR},
+            ROLE_ORDER_NUM = #{roleOrderNum,jdbcType=INTEGER},
+            ROLE_CREATE_TIME = #{roleCreateTime,jdbcType=TIMESTAMP},
+            ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+            ROLE_STATUS = #{roleStatus,jdbcType=VARCHAR},
+            ROLE_CREATER_ID = #{roleCreaterId,jdbcType=VARCHAR},
+            ROLE_ORGAN_ID = #{roleOrganId,jdbcType=VARCHAR}
         where ROLE_ID = #{roleId,jdbcType=VARCHAR}
     </update>
 </mapper>

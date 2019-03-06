@@ -28,4 +28,9 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleEntity> implements IRol
             }
         });
     }
+
+    @Override
+    public int countInRoleGroup(String groupId) {
+        return roleMapper.countInRoleGroup(groupId);
+    }
 }
