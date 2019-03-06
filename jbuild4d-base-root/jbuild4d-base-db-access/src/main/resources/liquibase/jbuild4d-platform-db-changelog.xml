@@ -741,6 +741,7 @@
             <column name="DU_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用" />
             <column name="DU_ORDER_NUM" type="INT" remarks="排序号" />
         </createTable>
+
         <createTable tableName="TB4D_USER" remarks="用户信息表">
             <column name="USER_ID" type="NVARCHAR(100)" remarks="用户ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
@@ -759,24 +760,55 @@
             <column name="USER_ORDER_NUM" type="INT" remarks="排序号" />
             <column name="USER_TYPE" type="NVARCHAR(30)" remarks="用户类型:平台管理员,组织机构管理员,一般用户" />
         </createTable>
+
+        <createTable tableName="TB4D_ROLE_GROUP" remarks="角色组表">
+            <column name="ROLE_GROUP_ID" type="NVARCHAR(100)" remarks="角色组ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ROLE_GROUP_NAME" type="NVARCHAR(100)" remarks="角色组名称"/>
+            <column name="ROLE_GROUP_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="ROLE_GROUP_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+            <column name="ROLE_GROUP_DESC" type="NVARCHAR(500)" remarks="备注" />
+            <column name="ROLE_GROUP_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="ROLE_GROUP_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID" />
+            <column name="ROLE_GROUP_ISSYSTEM" type="NVARCHAR(10)" remarks="是否系统" />
+            <column name="ROLE_GROUP_DEL_ENABLE" type="NVARCHAR(10)" remarks="能否删除" />
+            <column name="ROLE_GROUP_PID_LIST" type="NVARCHAR(1200)" remarks="父节点列表" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROLE_GROUP_CHILD_COUNT" type="INT" remarks="子节点数量" />
+            <column name="ROLE_GROUP_CREATER_ID" type="NVARCHAR(100)" remarks="创建者的ID" />
+            <column name="ROLE_GROUP_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
+        </createTable>
+
         <createTable tableName="TB4D_ROLE" remarks="角色表">
             <column name="ROLE_ID" type="NVARCHAR(100)" remarks="角色ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="ROLE_KEY" type="NVARCHAR(100)" remarks="角色键值"/>
             <column name="ROLE_NAME" type="NVARCHAR(100)" remarks="角色名称"/>
+            <column name="ROLE_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="ROLE_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+            <column name="ROLE_DESC" type="NVARCHAR(500)" remarks="备注" />
+            <column name="ROLE_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="ROLE_CREATER_ID" type="NVARCHAR(100)" remarks="创建者的ID" />
+            <column name="ROLE_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
+
         <createTable tableName="TB4D_AUTHORITY" remarks="角色权限表">
             <column name="AUTH_ID" type="NVARCHAR(100)" remarks="权限ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="ROLE_ID" type="NVARCHAR(100)" remarks="角色ID,主键" />
         </createTable>
+
         <createTable tableName="TB4D_SSO_APP" remarks="SSO集成APP表">
             <column name="APP_ID" type="NVARCHAR(100)" remarks="SSO集成APP ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="APP_NAME" type="NVARCHAR(100)" remarks="集成系统名称"/>
         </createTable>
+
         <createTable tableName="TB4D_SSO_USER_MAPPING" remarks="SSO集成APP账号映射表">
             <column name="MAPPING_ID" type="NVARCHAR(100)" remarks="账号映射ID,主键">
                 <constraints primaryKey="true" nullable="false"/>

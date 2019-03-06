@@ -85,7 +85,7 @@ public class InitializationSystemRestResource {
         //初始化根组织
         organTypeService.deleteByKeyNotValidate(jb4DSession,"0", JBuild4DProp.getWarningOperationCode());
         organTypeService.createDefaultOrganType(jb4DSession);
-        organService.deleteByKey(jb4DSession,"0");
+        organService.deleteByKeyNotValidate(jb4DSession,"0", JBuild4DProp.getWarningOperationCode());
         organService.createRootOrgan(jb4DSession);
 
         //初始化根表分组
