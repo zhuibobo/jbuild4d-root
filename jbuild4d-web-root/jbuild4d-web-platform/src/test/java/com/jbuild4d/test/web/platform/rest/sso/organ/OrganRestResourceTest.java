@@ -5,13 +5,18 @@ import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JBuild4DProp;
+import com.jbuild4d.base.tools.common.DateUtility;
 import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.platform.sso.service.IDepartmentUserService;
+import com.jbuild4d.platform.sso.vo.DepartmentUserVo;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -93,6 +98,13 @@ public class OrganRestResourceTest extends RestTestBase {
         }
     }
 
+    private void DeleteDepartment(String departmentId) throws Exception {
+        Map<String,String> paras=new HashMap<>();
+        paras.put("warningOperationCode", JBuild4DProp.getWarningOperationCode());
+        paras.put("departmentId", departmentId);
+        JBuild4DResponseVo responseVo =simpleDelete("/PlatFormRest/SSO/Department/DeleteByDepartmentId.do",departmentId,paras);
+    }
+
     private void NewDepartment(String deptId,String parentId,String organId) throws Exception {
         DepartmentEntity departmentEntity=new DepartmentEntity();
         departmentEntity.setDeptId(deptId);
@@ -108,12 +120,23 @@ public class OrganRestResourceTest extends RestTestBase {
         departmentEntity.setDeptDesc("DeptDesc");
         JBuild4DResponseVo responseVo=simpleSaveEdit("/PlatFormRest/SSO/Department/SaveEdit.do",departmentEntity);
         Assert.assertTrue(responseVo.isSuccess());
+
+        for(int i=0;i<4;i++){
+            NewDepartmentUser(deptId,deptId+"_UserName_"+i + DateUtility.getDate_yyyyMMddHHmmssSSS(),deptId+"_Account_"+i+ DateUtility.getDate_yyyyMMddHHmmssSSS());
+        }
     }
 
-    private void DeleteDepartment(String departmentId) throws Exception {
-        Map<String,String> paras=new HashMap<>();
-        paras.put("warningOperationCode", JBuild4DProp.getWarningOperationCode());
-        paras.put("departmentId", departmentId);
-        JBuild4DResponseVo responseVo =simpleDelete("/PlatFormRest/SSO/Department/DeleteByDepartmentId.do",departmentId,paras);
+    @Autowired
+    IDepartmentUserService departmentUserService;
+    private void NewDepartmentUser(String departmentId,String userName,String account) throws Exception {
+        //DepartmentUserVo departmentUserVo=simpleGetData("/PlatFormRest/SSO/Department",)
+        DepartmentUserVo newDepartmentUserVo=departmentUserService.getEmptyNewVo(null,departmentId);
+        newDepartmentUserVo.getUserEntity().setUserAccount(account);
+        newDepartmentUserVo.getUserEntity().setUserName(userName);
+        newDepartmentUserVo.getUserEntity().setUserPhoneNumber("13927425407");
+        newDepartmentUserVo.getDepartmentUserEntity().setDuTitle("清洁工");
+        JBuild4DResponseVo responseVo=simpleSaveEdit("/PlatFormRest/SSO/DepartmentUser/SaveEdit.do",newDepartmentUserVo);
+        System.out.println(responseVo.getMessage());
+        Assert.assertTrue(responseVo.isSuccess());
     }
 }
