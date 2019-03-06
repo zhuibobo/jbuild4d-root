@@ -5,7 +5,11 @@ import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.platform.sso.service.IRoleService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping(value = "/PlatFormRest/SSO/Role")
 public class RoleRestResource extends GeneralRestResource<RoleEntity> {
     @Autowired
     IRoleService roleService;
