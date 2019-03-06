@@ -89,4 +89,20 @@ public class RestTestBase {
         JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
         return responseVo;
     }
+
+    public JBuild4DResponseVo simpleGetData(String url,Map<String,String> paras) throws Exception {
+        MockHttpServletRequestBuilder requestDeleteBuilder = post(url);
+        requestDeleteBuilder.contentType(MediaType.APPLICATION_JSON_UTF8);
+        requestDeleteBuilder.sessionAttr("JB4DSession", getSession());
+
+        if(paras!=null&&paras.size()>0){
+            for (Map.Entry<String, String> stringStringEntry : paras.entrySet()) {
+                requestDeleteBuilder.param(stringStringEntry.getKey(),stringStringEntry.getValue());
+            }
+        }
+        MvcResult result = mockMvc.perform(requestDeleteBuilder).andReturn();
+        String json = result.getResponse().getContentAsString();
+        JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        return responseVo;
+    }
 }

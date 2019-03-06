@@ -1,7 +1,9 @@
 package com.jbuild4d.web.platform.rest.sso.department;
 
 import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity;
+import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
+import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.sso.service.IDepartmentService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
@@ -38,5 +40,18 @@ public class DepartmentRestResource extends GeneralRestResource<DepartmentEntity
     public JBuild4DResponseVo getDepartmentsByOrganId(String organId){
         List<DepartmentEntity> departmentEntityList=departmentService.getDepartmentsByOrganId(organId);
         return JBuild4DResponseVo.getDataSuccess(departmentEntityList);
+    }
+
+    @RequestMapping(value = "/GetOrganRootDepartment",method = RequestMethod.POST)
+    public JBuild4DResponseVo getOrganRootDepartment(String organId)
+    {
+        DepartmentEntity rootEntity=departmentService.getOrganRootDepartment(JB4DSessionUtility.getSession(),organId);
+        return JBuild4DResponseVo.getDataSuccess(rootEntity);
+    }
+
+    @RequestMapping(value = "/DeleteByDepartmentId",method = RequestMethod.DELETE)
+    public JBuild4DResponseVo deleteByDepartmentId(String departmentId,String warningOperationCode) throws JBuild4DGenerallyException {
+        departmentService.deleteByKeyNotValidate(JB4DSessionUtility.getSession(),departmentId,warningOperationCode);
+        return JBuild4DResponseVo.deleteSuccess();
     }
 }

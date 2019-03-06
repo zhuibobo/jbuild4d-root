@@ -1,7 +1,10 @@
 package com.jbuild4d.test.web.platform.rest.sso.organ;
+import java.util.Date;
 
+import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
+import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.test.web.platform.RestTestBase;
@@ -30,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class OrganRestResourceTest extends RestTestBase {
 
     @Test
-    public void addOrganNotDeleteTest() throws Exception {
+    public void addOrganAndDepartmentAndUserTest() throws Exception {
         for (int i=1;i<11;i++) {
             String organIdL1="Root_"+i;
             DeleteOrgan(organIdL1);
@@ -71,5 +74,46 @@ public class OrganRestResourceTest extends RestTestBase {
         organEntity.setOrganMainImageId(logoFileId);
         responseVo=simpleSaveEdit("/PlatFormRest/SSO/Organ/SaveEdit.do",organEntity);
         Assert.assertTrue(responseVo.isSuccess());
+
+
+        //获取根部门
+        Map<String,String> paras=new HashMap<>();
+        paras.put("organId", organId);
+        JBuild4DResponseVo departmentVo=simpleGetData("/PlatFormRest/SSO/Department/GetOrganRootDepartment",paras);
+        String rootDepartmentId=((LinkedHashMap) departmentVo.getData()).get("deptId").toString();
+        for (int i=1;i<4;i++) {
+            String deptIdL1="Dept_1_"+i+"_ORG="+organId;
+            DeleteDepartment(deptIdL1);
+            NewDepartment(deptIdL1,rootDepartmentId,organId);
+            for(int j=1;j<4;j++) {
+                String deptIdL2 = "Dept_"+i+"_"+j;
+                DeleteDepartment(deptIdL2);
+                NewDepartment(deptIdL2, deptIdL1, organId);
+            }
+        }
+    }
+
+    private void NewDepartment(String deptId,String parentId,String organId) throws Exception {
+        DepartmentEntity departmentEntity=new DepartmentEntity();
+        departmentEntity.setDeptId(deptId);
+        departmentEntity.setDeptName(deptId);
+        departmentEntity.setDeptShortName(deptId);
+        departmentEntity.setDeptNo(deptId);
+        departmentEntity.setDeptPerCharge("PerCharge");
+        departmentEntity.setDeptPerChargePhone("PerChargePhone");
+        departmentEntity.setDeptIsVirtual(TrueFalseEnum.False.getDisplayName());
+        departmentEntity.setDeptParentId(parentId);
+        departmentEntity.setDeptStatus(EnableTypeEnum.enable.getDisplayName());
+        departmentEntity.setDeptOrganId(organId);
+        departmentEntity.setDeptDesc("DeptDesc");
+        JBuild4DResponseVo responseVo=simpleSaveEdit("/PlatFormRest/SSO/Department/SaveEdit.do",departmentEntity);
+        Assert.assertTrue(responseVo.isSuccess());
+    }
+
+    private void DeleteDepartment(String departmentId) throws Exception {
+        Map<String,String> paras=new HashMap<>();
+        paras.put("warningOperationCode", JBuild4DProp.getWarningOperationCode());
+        paras.put("departmentId", departmentId);
+        JBuild4DResponseVo responseVo =simpleDelete("/PlatFormRest/SSO/Department/DeleteByDepartmentId.do",departmentId,paras);
     }
 }
