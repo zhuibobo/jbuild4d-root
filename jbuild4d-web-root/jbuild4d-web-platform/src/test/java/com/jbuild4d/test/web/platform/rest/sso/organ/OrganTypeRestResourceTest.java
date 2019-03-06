@@ -55,10 +55,10 @@ public class OrganTypeRestResourceTest extends RestTestBase {
         Assert.assertTrue(responseVo.getMessage(),responseVo.isSuccess());
         //清空测试数据
 
-        responseVo=simpleDelete("/PlatFormRest/SSO/OrganType/Delete.do",recordId1);
+        responseVo=simpleDelete("/PlatFormRest/SSO/OrganType/Delete.do",recordId1,null);
         Assert.assertTrue(responseVo.getMessage(),responseVo.isSuccess());
 
-        responseVo=simpleDelete("/PlatFormRest/SSO/OrganType/Delete.do",recordId2);
+        responseVo=simpleDelete("/PlatFormRest/SSO/OrganType/Delete.do",recordId2,null);
         Assert.assertTrue(responseVo.getMessage(),responseVo.isSuccess());
     }
 }

@@ -102,4 +102,10 @@ public class OrganRestResource extends GeneralRestResource<OrganEntity> {
         organService.deleteByOrganName(JB4DSessionUtility.getSession(),organName,warningOperationCode);
         return JBuild4DResponseVo.deleteSuccess();
     }
+
+    @RequestMapping(value = "/DeleteByOrganId",method = RequestMethod.DELETE)
+    public JBuild4DResponseVo deleteByOrganId(String organId,String warningOperationCode) throws JBuild4DGenerallyException {
+        organService.deleteByKeyNotValidate(JB4DSessionUtility.getSession(),organId,warningOperationCode);
+        return JBuild4DResponseVo.deleteSuccess();
+    }
 }

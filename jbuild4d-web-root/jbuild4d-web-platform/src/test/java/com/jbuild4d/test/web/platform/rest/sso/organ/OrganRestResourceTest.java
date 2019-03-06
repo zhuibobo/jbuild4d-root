@@ -2,6 +2,7 @@ package com.jbuild4d.test.web.platform.rest.sso.organ;
 
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.base.tools.common.JsonUtility;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
@@ -14,7 +15,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
@@ -30,17 +33,21 @@ public class OrganRestResourceTest extends RestTestBase {
     public void addOrganNotDeleteTest() throws Exception {
         for (int i=1;i<11;i++) {
             String organIdL1="Root_"+i;
+            DeleteOrgan(organIdL1);
             NewOrgan(organIdL1,"0","Logo_"+i+".png");
-
             for(int j=1;j<11;j++) {
                 String organIdL2 = organIdL1 + "_" + j;
+                DeleteOrgan(organIdL2);
                 NewOrgan(organIdL2, organIdL1, "Logo_" + j + ".png");
             }
         }
     }
 
-    private void DeleteOrgan(String organId){
-
+    private void DeleteOrgan(String organId) throws Exception {
+        Map<String,String> paras=new HashMap<>();
+        paras.put("warningOperationCode", JBuild4DProp.getWarningOperationCode());
+        paras.put("organId", organId);
+        JBuild4DResponseVo responseVo =simpleDelete("/PlatFormRest/SSO/Organ/DeleteByOrganId.do",organId,paras);
     }
 
     private void NewOrgan(String organId,String parentId,String logoFileName) throws Exception {

@@ -23,6 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -61,12 +62,17 @@ public class RestTestBase {
         return b4DSession;
     }
 
-    public JBuild4DResponseVo simpleDelete(String url,String recordId) throws Exception {
+    public JBuild4DResponseVo simpleDelete(String url, String recordId, Map<String,String> paras) throws Exception {
         MockHttpServletRequestBuilder requestDeleteBuilder = delete(url);
         requestDeleteBuilder.contentType(MediaType.APPLICATION_JSON_UTF8);
         requestDeleteBuilder.sessionAttr("JB4DSession", getSession());
 
         requestDeleteBuilder.param("recordId",recordId);
+        if(paras!=null&&paras.size()>0){
+            for (Map.Entry<String, String> stringStringEntry : paras.entrySet()) {
+                requestDeleteBuilder.param(stringStringEntry.getKey(),stringStringEntry.getValue());
+            }
+        }
         MvcResult result = mockMvc.perform(requestDeleteBuilder).andReturn();
         String json = result.getResponse().getContentAsString();
         JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
