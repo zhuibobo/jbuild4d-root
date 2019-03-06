@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.RoleGroupMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.sso.RoleGroupEntity">
+        <constructor>
+            <idArg column="ROLE_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_GROUP_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_GROUP_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="ROLE_GROUP_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="ROLE_GROUP_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_GROUP_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_GROUP_PARENT_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_GROUP_ISSYSTEM" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_GROUP_DEL_ENABLE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_GROUP_PID_LIST" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_GROUP_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="ROLE_GROUP_CREATER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="ROLE_GROUP_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ROLE_GROUP_ID, ROLE_GROUP_NAME, ROLE_GROUP_ORDER_NUM, ROLE_GROUP_CREATE_TIME, ROLE_GROUP_DESC,
+        ROLE_GROUP_STATUS, ROLE_GROUP_PARENT_ID, ROLE_GROUP_ISSYSTEM, ROLE_GROUP_DEL_ENABLE,
+        ROLE_GROUP_PID_LIST, ROLE_GROUP_CHILD_COUNT, ROLE_GROUP_CREATER_ID, ROLE_GROUP_ORGAN_ID
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_ROLE_GROUP
+        where ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_ROLE_GROUP
+        where ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleGroupEntity">
+        insert into TB4D_ROLE_GROUP (ROLE_GROUP_ID, ROLE_GROUP_NAME, ROLE_GROUP_ORDER_NUM,
+                                     ROLE_GROUP_CREATE_TIME, ROLE_GROUP_DESC, ROLE_GROUP_STATUS,
+                                     ROLE_GROUP_PARENT_ID, ROLE_GROUP_ISSYSTEM, ROLE_GROUP_DEL_ENABLE,
+                                     ROLE_GROUP_PID_LIST, ROLE_GROUP_CHILD_COUNT,
+                                     ROLE_GROUP_CREATER_ID, ROLE_GROUP_ORGAN_ID)
+        values (#{roleGroupId,jdbcType=VARCHAR}, #{roleGroupName,jdbcType=VARCHAR}, #{roleGroupOrderNum,jdbcType=INTEGER},
+                #{roleGroupCreateTime,jdbcType=TIMESTAMP}, #{roleGroupDesc,jdbcType=VARCHAR}, #{roleGroupStatus,jdbcType=VARCHAR},
+                #{roleGroupParentId,jdbcType=VARCHAR}, #{roleGroupIssystem,jdbcType=VARCHAR}, #{roleGroupDelEnable,jdbcType=VARCHAR},
+                #{roleGroupPidList,jdbcType=VARCHAR}, #{roleGroupChildCount,jdbcType=INTEGER},
+                #{roleGroupCreaterId,jdbcType=VARCHAR}, #{roleGroupOrganId,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleGroupEntity">
+        insert into TB4D_ROLE_GROUP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleGroupId != null">
+                ROLE_GROUP_ID,
+            </if>
+            <if test="roleGroupName != null">
+                ROLE_GROUP_NAME,
+            </if>
+            <if test="roleGroupOrderNum != null">
+                ROLE_GROUP_ORDER_NUM,
+            </if>
+            <if test="roleGroupCreateTime != null">
+                ROLE_GROUP_CREATE_TIME,
+            </if>
+            <if test="roleGroupDesc != null">
+                ROLE_GROUP_DESC,
+            </if>
+            <if test="roleGroupStatus != null">
+                ROLE_GROUP_STATUS,
+            </if>
+            <if test="roleGroupParentId != null">
+                ROLE_GROUP_PARENT_ID,
+            </if>
+            <if test="roleGroupIssystem != null">
+                ROLE_GROUP_ISSYSTEM,
+            </if>
+            <if test="roleGroupDelEnable != null">
+                ROLE_GROUP_DEL_ENABLE,
+            </if>
+            <if test="roleGroupPidList != null">
+                ROLE_GROUP_PID_LIST,
+            </if>
+            <if test="roleGroupChildCount != null">
+                ROLE_GROUP_CHILD_COUNT,
+            </if>
+            <if test="roleGroupCreaterId != null">
+                ROLE_GROUP_CREATER_ID,
+            </if>
+            <if test="roleGroupOrganId != null">
+                ROLE_GROUP_ORGAN_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleGroupId != null">
+                #{roleGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupName != null">
+                #{roleGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupOrderNum != null">
+                #{roleGroupOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="roleGroupCreateTime != null">
+                #{roleGroupCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleGroupDesc != null">
+                #{roleGroupDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupStatus != null">
+                #{roleGroupStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupParentId != null">
+                #{roleGroupParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupIssystem != null">
+                #{roleGroupIssystem,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupDelEnable != null">
+                #{roleGroupDelEnable,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupPidList != null">
+                #{roleGroupPidList,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupChildCount != null">
+                #{roleGroupChildCount,jdbcType=INTEGER},
+            </if>
+            <if test="roleGroupCreaterId != null">
+                #{roleGroupCreaterId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupOrganId != null">
+                #{roleGroupOrganId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleGroupEntity">
+        update TB4D_ROLE_GROUP
+        <set>
+            <if test="roleGroupName != null">
+                ROLE_GROUP_NAME = #{roleGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupOrderNum != null">
+                ROLE_GROUP_ORDER_NUM = #{roleGroupOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="roleGroupCreateTime != null">
+                ROLE_GROUP_CREATE_TIME = #{roleGroupCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleGroupDesc != null">
+                ROLE_GROUP_DESC = #{roleGroupDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupStatus != null">
+                ROLE_GROUP_STATUS = #{roleGroupStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupParentId != null">
+                ROLE_GROUP_PARENT_ID = #{roleGroupParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupIssystem != null">
+                ROLE_GROUP_ISSYSTEM = #{roleGroupIssystem,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupDelEnable != null">
+                ROLE_GROUP_DEL_ENABLE = #{roleGroupDelEnable,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupPidList != null">
+                ROLE_GROUP_PID_LIST = #{roleGroupPidList,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupChildCount != null">
+                ROLE_GROUP_CHILD_COUNT = #{roleGroupChildCount,jdbcType=INTEGER},
+            </if>
+            <if test="roleGroupCreaterId != null">
+                ROLE_GROUP_CREATER_ID = #{roleGroupCreaterId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupOrganId != null">
+                ROLE_GROUP_ORGAN_ID = #{roleGroupOrganId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleGroupEntity">
+        update TB4D_ROLE_GROUP
+        set ROLE_GROUP_NAME = #{roleGroupName,jdbcType=VARCHAR},
+            ROLE_GROUP_ORDER_NUM = #{roleGroupOrderNum,jdbcType=INTEGER},
+            ROLE_GROUP_CREATE_TIME = #{roleGroupCreateTime,jdbcType=TIMESTAMP},
+            ROLE_GROUP_DESC = #{roleGroupDesc,jdbcType=VARCHAR},
+            ROLE_GROUP_STATUS = #{roleGroupStatus,jdbcType=VARCHAR},
+            ROLE_GROUP_PARENT_ID = #{roleGroupParentId,jdbcType=VARCHAR},
+            ROLE_GROUP_ISSYSTEM = #{roleGroupIssystem,jdbcType=VARCHAR},
+            ROLE_GROUP_DEL_ENABLE = #{roleGroupDelEnable,jdbcType=VARCHAR},
+            ROLE_GROUP_PID_LIST = #{roleGroupPidList,jdbcType=VARCHAR},
+            ROLE_GROUP_CHILD_COUNT = #{roleGroupChildCount,jdbcType=INTEGER},
+            ROLE_GROUP_CREATER_ID = #{roleGroupCreaterId,jdbcType=VARCHAR},
+            ROLE_GROUP_ORGAN_ID = #{roleGroupOrganId,jdbcType=VARCHAR}
+        where ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR}
+    </update>
+</mapper>

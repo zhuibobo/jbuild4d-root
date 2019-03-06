@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.RoleGroupMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_ROLE_GROUP ORDER by ROLE_GROUP_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_ROLE_GROUP</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(ROLE_GROUP_ORDER_NUM) is null then 1 else max(ROLE_GROUP_ORDER_NUM)+1 end ORDERNUM from TB4D_ROLE_GROUP</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_ROLE_GROUP<where>
+        <if test="roleGroupName !=null and roleGroupName !=''"> and ROLE_GROUP_NAME like #{roleGroupName} </if>
+        <if test="roleGroupDesc !=null and roleGroupDesc !=''"> and ROLE_GROUP_DESC like #{roleGroupDesc} </if>
+        <if test="roleGroupStatus !=null and roleGroupStatus !=''"> and ROLE_GROUP_STATUS like #{roleGroupStatus} </if>
+        <if test="roleGroupParentId !=null and roleGroupParentId !=''"> and ROLE_GROUP_PARENT_ID like #{roleGroupParentId} </if>
+        <if test="roleGroupIssystem !=null and roleGroupIssystem !=''"> and ROLE_GROUP_ISSYSTEM like #{roleGroupIssystem} </if>
+        <if test="roleGroupDelEnable !=null and roleGroupDelEnable !=''"> and ROLE_GROUP_DEL_ENABLE like #{roleGroupDelEnable} </if>
+        <if test="roleGroupPidList !=null and roleGroupPidList !=''"> and ROLE_GROUP_PID_LIST like #{roleGroupPidList} </if>
+        <if test="roleGroupCreaterId !=null and roleGroupCreaterId !=''"> and ROLE_GROUP_CREATER_ID like #{roleGroupCreaterId} </if>
+        <if test="roleGroupOrganId !=null and roleGroupOrganId !=''"> and ROLE_GROUP_ORGAN_ID like #{roleGroupOrganId} </if>
+    </where>ORDER by ROLE_GROUP_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ROLE_GROUP
+                                                                                                          where ROLE_GROUP_ORDER_NUM = (select max(ROLE_GROUP_ORDER_NUM) from TB4D_ROLE_GROUP where ROLE_GROUP_ORDER_NUM<(select ROLE_GROUP_ORDER_NUM from TB4D_ROLE_GROUP where ROLE_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ROLE_GROUP
+                                                                                                             where ROLE_GROUP_ORDER_NUM = (select min(ROLE_GROUP_ORDER_NUM) from TB4D_ROLE_GROUP where ROLE_GROUP_ORDER_NUM>(select ROLE_GROUP_ORDER_NUM from TB4D_ROLE_GROUP where ROLE_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>
