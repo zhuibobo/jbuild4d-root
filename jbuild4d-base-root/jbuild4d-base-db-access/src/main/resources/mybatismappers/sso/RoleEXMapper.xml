@@ -13,10 +13,31 @@
         <if test="roleCreaterId !=null and roleCreaterId !=''"> and ROLE_CREATER_ID like #{roleCreaterId} </if>
         <if test="roleOrganId !=null and roleOrganId !=''"> and ROLE_ORGAN_ID like #{roleOrganId} </if>
     </where>ORDER by ROLE_ORDER_NUM DESC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ROLE
-                                                                                                          where ROLE_ORDER_NUM = (select max(ROLE_ORDER_NUM) from TB4D_ROLE where ROLE_ORDER_NUM<(select ROLE_ORDER_NUM from TB4D_ROLE where ROLE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_ROLE
-                                                                                                             where ROLE_ORDER_NUM = (select min(ROLE_ORDER_NUM) from TB4D_ROLE where ROLE_ORDER_NUM>(select ROLE_ORDER_NUM from TB4D_ROLE where ROLE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
 
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select * from TB4D_ROLE
+        where ROLE_ORDER_NUM = (
+                               select max(ROLE_ORDER_NUM) from TB4D_ROLE
+                               where ROLE_ORDER_NUM<(select ROLE_ORDER_NUM from TB4D_ROLE where ROLE_ID=#{id,jdbcType=NVARCHAR})
+                                 and
+                                     ROLE_GROUP_ID=#{groupId,jdbcType=NVARCHAR})
+          and
+              ROLE_GROUP_ID=#{groupId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <![CDATA[
+        select * from TB4D_ROLE
+        where ROLE_ORDER_NUM = (
+                               select min(ROLE_ORDER_NUM) from TB4D_ROLE
+                               where ROLE_ORDER_NUM>(select ROLE_ORDER_NUM from TB4D_ROLE where ROLE_ID=#{id,jdbcType=NVARCHAR})
+                                 and
+                                     ROLE_GROUP_ID=#{groupId,jdbcType=NVARCHAR})
+          and
+              ROLE_GROUP_ID=#{groupId,jdbcType=NVARCHAR}
+        ]]>
+    </select>
+    
     <select id="countInRoleGroup" resultType="int">select count(ROLE_ID) from TB4D_ROLE where ROLE_GROUP_ID=#{id,jdbcType=NVARCHAR}</select>
 </mapper>
