@@ -297,6 +297,11 @@ public class MybatisBeansConfig {
     }
 
     @Bean
+    public UserRoleMapper userRoleMapper(SqlSessionTemplate sqlSessionTemplate){
+        return sqlSessionTemplate.getMapper(UserRoleMapper.class);
+    }
+
+    @Bean
     public SsoAppMapper ssoAppMapper(SqlSessionTemplate sqlSessionTemplate) {
         return sqlSessionTemplate.getMapper(SsoAppMapper.class);
     }

@@ -55,8 +55,8 @@
                 </p>
                 <div slot="extra">
                     <button-group size="small">
-                        <i-button type="success" @click="addUserToRole()" icon="md-add"></i-button>
-                        <i-button type="primary" icon="ios-trash"></i-button>
+                        <i-button type="success" @click="showAddUserToRoleDialog()" icon="md-add"></i-button>
+                        <i-button type="primary" @click="clearAllRoleMember()" icon="ios-trash"></i-button>
                     </button-group>
                 </div>
                 <i-table :height="roleMemberList.roleMemberListHeight" stripe border :columns="roleMemberList.columnsConfig" :data="roleMemberList.tableData"
@@ -65,7 +65,7 @@
             </Card>
         </div>
     </div>
-    <select-department-user-dialog ref="selectDepartmentUserDialog"></select-department-user-dialog>
+    <select-department-user-dialog ref="selectDepartmentUserDialog" @on-selected-completed="bindUsersToRole"></select-department-user-dialog>
 </div>
 <script>
     var appList=new Vue({
@@ -100,7 +100,9 @@
                 reloadListData:"/PlatFormRest/SSO/Role/GetListData",
                 deleteListRecord:"/PlatFormRest/SSO/Role/Delete",
                 listStatusChange:"/PlatFormRest/SSO/Role/StatusChange",
-                listMove:"/PlatFormRest/SSO/Role/Move"
+                listMove:"/PlatFormRest/SSO/Role/Move",
+                <!--UserRole-->
+                bindUserWithRole:"/PlatFormRest/SSO/UserRoleBind/BindUsersWithRole"
             },
             <!--Tree-->
             treeIdFieldName:"roleGroupId",
@@ -403,13 +405,32 @@
                 }
                 return "";
             },
-            addUserToRole:function () {
+            showAddUserToRoleDialog:function () {
                 if(this.roleList.editMemberRow) {
                     this.$refs.selectDepartmentUserDialog.beginSelect();
                 }
                 else{
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请先选中角色!",null);
                 }
+            },
+            bindUsersToRole:function (users) {
+                var _self=this;
+                var userIds = new Array();
+                for(var i=0;i<users.length;i++){
+                    userIds.push(users[i].USER_ID);
+                }
+
+                AjaxUtility.Post(this.acInterface.bindUserWithRole, {"userIds":userIds,"roleId":this.roleList.editMemberRow.roleId}, function (result) {
+                    if (result.success) {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                    }
+                }, "json");
+            },
+            clearAllRoleMember:function () {
+
             }
         }
     });

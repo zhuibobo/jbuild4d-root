@@ -14,4 +14,8 @@
                                                                                                           where BIND_ORDER_NUM = (select max(BIND_ORDER_NUM) from TB4D_USER_ROLE where BIND_ORDER_NUM<(select BIND_ORDER_NUM from TB4D_USER_ROLE where BIND_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_USER_ROLE
                                                                                                              where BIND_ORDER_NUM = (select min(BIND_ORDER_NUM) from TB4D_USER_ROLE where BIND_ORDER_NUM>(select BIND_ORDER_NUM from TB4D_USER_ROLE where BIND_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+
+    <select id="bindExist" resultType="int">
+        select count(BIND_ID) from TB4D_USER_ROLE where BIND_ROLE_ID=#{roleId} and BIND_USER_ID=#{userId}
+    </select>
 </mapper>

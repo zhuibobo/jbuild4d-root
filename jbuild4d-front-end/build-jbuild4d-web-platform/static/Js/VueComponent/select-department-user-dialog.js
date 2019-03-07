@@ -39,7 +39,8 @@ Vue.component("select-department-user-dialog", {
                 // 回调函数
                 callback : {
                     onClick : function(event, treeId, treeNode) {
-                        appList.treeNodeSelected(event,treeId,treeNode);
+                        var _self=this.getZTreeObj(treeId)._host;
+                        _self.treeNodeSelected(event,treeId,treeNode);
                     },
                     //成功的回调函数
                     onAsyncSuccess : function(event, treeId, treeNode, msg){
@@ -112,7 +113,11 @@ Vue.component("select-department-user-dialog", {
         }
     },
     mounted:function(){
-
+        var oldSelectedOrganId=CookieUtility.GetCookie("DMORGSID");
+        if(oldSelectedOrganId){
+            this.$refs.selectOrganComp.setOldSelectedOrgan(oldSelectedOrganId);
+            this.initTree(oldSelectedOrganId);
+        }
     },
     methods:{
         //Organ
@@ -131,6 +136,7 @@ Vue.component("select-department-user-dialog", {
                     _self.$refs.zTreeUL.setAttribute("id","select-department-user-dialog-"+StringUtility.Guid());
                     _self.treeObj=$.fn.zTree.init($(_self.$refs.zTreeUL), _self.treeSetting,result.data);
                     _self.treeObj.expandAll(true);
+                    _self.treeObj._host=_self;
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
@@ -322,7 +328,21 @@ Vue.component("select-department-user-dialog", {
                 height: dialogHeight,
                 title: "选择组织机构"
             });
-        }
+        },
+        completed:function () {
+            console.log(this.selectionRows);
+            if(this.selectionRows) {
+                this.$emit('on-selected-completed', this.selectionRows)
+                this.handleClose();
+            }
+            else{
+                DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请先选中人员!",null);
+            }
+
+        },
+        handleClose: function () {
+            DialogUtility.CloseDialogElem(this.$refs.selectDepartmentUserModelDialogWrap);
+        },
     },
     template: `<div ref="selectDepartmentUserModelDialogWrap" class="c1-select-model-wrap general-edit-page-wrap" style="display: none">
                     <div class="list-2column">
@@ -378,7 +398,7 @@ Vue.component("select-department-user-dialog", {
                     <div class="button-outer-wrap" style="bottom: 12px;right: 12px">
                         <div class="button-inner-wrap">
                             <button-group>
-                                <i-button type="primary" @click="handleSubmit('formEntity')" icon="md-checkmark">确认</i-button>
+                                <i-button type="primary" @click="completed()" icon="md-checkmark">确认</i-button>
                                 <i-button @click="handleClose()" icon="md-close">关闭</i-button>
                             </button-group>
                         </div>
