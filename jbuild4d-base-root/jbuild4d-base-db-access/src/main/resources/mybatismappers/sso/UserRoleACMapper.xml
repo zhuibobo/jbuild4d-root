@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.sso.UserRoleEntity">
+        <constructor>
+            <idArg column="BIND_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="BIND_ROLE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="BIND_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="BIND_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="BIND_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="BIND_CREATER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="BIND_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        BIND_ID, BIND_ROLE_ID, BIND_USER_ID, BIND_ORDER_NUM, BIND_CREATE_TIME, BIND_CREATER_ID,
+        BIND_ORGAN_ID
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_USER_ROLE
+        where BIND_ID = #{bindId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_USER_ROLE
+        where BIND_ID = #{bindId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserRoleEntity">
+        insert into TB4D_USER_ROLE (BIND_ID, BIND_ROLE_ID, BIND_USER_ID,
+                                    BIND_ORDER_NUM, BIND_CREATE_TIME, BIND_CREATER_ID,
+                                    BIND_ORGAN_ID)
+        values (#{bindId,jdbcType=VARCHAR}, #{bindRoleId,jdbcType=VARCHAR}, #{bindUserId,jdbcType=VARCHAR},
+                #{bindOrderNum,jdbcType=INTEGER}, #{bindCreateTime,jdbcType=TIMESTAMP}, #{bindCreaterId,jdbcType=VARCHAR},
+                #{bindOrganId,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserRoleEntity">
+        insert into TB4D_USER_ROLE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bindId != null">
+                BIND_ID,
+            </if>
+            <if test="bindRoleId != null">
+                BIND_ROLE_ID,
+            </if>
+            <if test="bindUserId != null">
+                BIND_USER_ID,
+            </if>
+            <if test="bindOrderNum != null">
+                BIND_ORDER_NUM,
+            </if>
+            <if test="bindCreateTime != null">
+                BIND_CREATE_TIME,
+            </if>
+            <if test="bindCreaterId != null">
+                BIND_CREATER_ID,
+            </if>
+            <if test="bindOrganId != null">
+                BIND_ORGAN_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bindId != null">
+                #{bindId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindRoleId != null">
+                #{bindRoleId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindUserId != null">
+                #{bindUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindOrderNum != null">
+                #{bindOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="bindCreateTime != null">
+                #{bindCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bindCreaterId != null">
+                #{bindCreaterId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindOrganId != null">
+                #{bindOrganId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserRoleEntity">
+        update TB4D_USER_ROLE
+        <set>
+            <if test="bindRoleId != null">
+                BIND_ROLE_ID = #{bindRoleId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindUserId != null">
+                BIND_USER_ID = #{bindUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindOrderNum != null">
+                BIND_ORDER_NUM = #{bindOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="bindCreateTime != null">
+                BIND_CREATE_TIME = #{bindCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bindCreaterId != null">
+                BIND_CREATER_ID = #{bindCreaterId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindOrganId != null">
+                BIND_ORGAN_ID = #{bindOrganId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where BIND_ID = #{bindId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserRoleEntity">
+        update TB4D_USER_ROLE
+        set BIND_ROLE_ID = #{bindRoleId,jdbcType=VARCHAR},
+            BIND_USER_ID = #{bindUserId,jdbcType=VARCHAR},
+            BIND_ORDER_NUM = #{bindOrderNum,jdbcType=INTEGER},
+            BIND_CREATE_TIME = #{bindCreateTime,jdbcType=TIMESTAMP},
+            BIND_CREATER_ID = #{bindCreaterId,jdbcType=VARCHAR},
+            BIND_ORGAN_ID = #{bindOrganId,jdbcType=VARCHAR}
+        where BIND_ID = #{bindId,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -6,10 +6,18 @@ var ListPageUtility={
         {
             return 678;
         }
-        return 500;
+        else if(PageStyleUtility.GetPageHeight()>680){
+            return 578;
+        }
+        else {
+            return 378;
+        }
     },
     DefaultListHeight_50:function(){
         return this.DefaultListHeight()-50;
+    },
+    DefaultListHeight_80:function(){
+        return this.DefaultListHeight()-80;
     },
     DefaultListHeight_100:function(){
         return this.DefaultListHeight()-100;
@@ -283,6 +291,17 @@ var ListPageUtility={
                     click: function () {
                         //debugger;
                         pageAppObj.del(params.row[idField]);
+                    }
+                }
+            });
+        },
+        SelectedButton:function (h, params,idField,pageAppObj) {
+            return h('div', {
+                class: "list-row-button selected",
+                on: {
+                    click: function () {
+                        //debugger;
+                        pageAppObj.selected(params.row[idField]);
                     }
                 }
             });
