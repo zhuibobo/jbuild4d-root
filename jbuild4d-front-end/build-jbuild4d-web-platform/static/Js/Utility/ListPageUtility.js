@@ -269,7 +269,7 @@ var ListPageUtility={
                 on: {
                     click: function () {
                         //debugger;
-                        pageAppObj.view(params.row[idField]);
+                        pageAppObj.view(params.row[idField],params);
                     }
                 }
             });
@@ -279,7 +279,7 @@ var ListPageUtility={
                 class: "list-row-button edit",
                 on: {
                     click: function () {
-                        pageAppObj.edit(params.row[idField]);
+                        pageAppObj.edit(params.row[idField],params);
                     }
                 }
             });
@@ -290,7 +290,7 @@ var ListPageUtility={
                 on: {
                     click: function () {
                         //debugger;
-                        pageAppObj.del(params.row[idField]);
+                        pageAppObj.del(params.row[idField],params);
                     }
                 }
             });
@@ -301,7 +301,7 @@ var ListPageUtility={
                 on: {
                     click: function () {
                         //debugger;
-                        pageAppObj.selected(params.row[idField]);
+                        pageAppObj.selected(params.row[idField],params);
                     }
                 }
             });

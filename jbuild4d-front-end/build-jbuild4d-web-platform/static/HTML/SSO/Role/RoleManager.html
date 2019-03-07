@@ -5,6 +5,7 @@
     <title>Title</title>
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
 </head>
 <body>
 <div id="appList" class="list-2column">
@@ -50,7 +51,7 @@
         <div style="position: absolute;right: 10px;top: 10px;left: 440px;bottom: 10px" id="roleMemberList-wraper">
             <Card style="width:100%">
                 <p slot="title">
-                    <Icon type="md-people"></Icon>&nbsp;角色成员
+                    <Icon type="md-people"></Icon>&nbsp;角色成员<span style="color: #f2b17c">{{getCurrentEditMemberRole()}}</span>
                 </p>
                 <div slot="extra">
                     <button-group size="small">
@@ -173,7 +174,8 @@
                 pageTotal: 0,
                 pageSize: 12,
                 pageNum: 1,
-                listHeight: ListPageUtility.DefaultListHeight_50()
+                listHeight: ListPageUtility.DefaultListHeight_50(),
+                editMemberRow:null
             },
             <!--Role Member List-->
             roleMemberList:{
@@ -390,13 +392,24 @@
                 this.roleList.pageNum=1;
                 this.reloadData();
             },
-            selected:function (recordId) {
-
+            selected:function (recordId,params) {
+                //console.log(params);
+                this.roleList.editMemberRow=params.row;
             },
             <!--RoleMember-->
+            getCurrentEditMemberRole:function(){
+                if(this.roleList.editMemberRow){
+                    return "【"+this.roleList.editMemberRow.roleName+"】";
+                }
+                return "";
+            },
             addUserToRole:function () {
-                //alert("1");
-                this.$refs.selectDepartmentUserDialog.beginSelect();
+                if(this.roleList.editMemberRow) {
+                    this.$refs.selectDepartmentUserDialog.beginSelect();
+                }
+                else{
+                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请先选中角色!",null);
+                }
             }
         }
     });

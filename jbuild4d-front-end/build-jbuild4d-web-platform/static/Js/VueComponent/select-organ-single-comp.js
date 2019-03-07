@@ -94,6 +94,7 @@ Vue.component("select-organ-single-comp", {
             this.$emit('on-selected-organ', organData)
         },
         getSelectedOrganName:function () {
+            //debugger;
             if(this.selectedOrganData==null){
                 return "请选择组织机构"
             }

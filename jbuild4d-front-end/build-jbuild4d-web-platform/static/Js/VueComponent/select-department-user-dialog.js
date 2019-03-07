@@ -128,7 +128,8 @@ Vue.component("select-department-user-dialog", {
             var _self=this;
             AjaxUtility.Post(this.acInterface.getDepartmentTreeData, {"organId":organId}, function (result) {
                 if (result.success) {
-                    _self.treeObj=$.fn.zTree.init($("#zTreeUL"), _self.treeSetting,result.data);
+                    _self.$refs.zTreeUL.setAttribute("id","select-department-user-dialog-"+StringUtility.Guid());
+                    _self.treeObj=$.fn.zTree.init($(_self.$refs.zTreeUL), _self.treeSetting,result.data);
                     _self.treeObj.expandAll(true);
                 }
                 else {
@@ -324,17 +325,17 @@ Vue.component("select-department-user-dialog", {
         }
     },
     template: `<div ref="selectDepartmentUserModelDialogWrap" class="c1-select-model-wrap general-edit-page-wrap" style="display: none">
-                    <div id="appList" class="list-2column">
+                    <div class="list-2column">
                         <div class="left-outer-wrap" style="width: 180px;top: 10px;left: 10px;bottom: 55px">
                             <select-organ-single-comp @on-selected-organ="changeOrgan" ref="selectOrganComp"></select-organ-single-comp>
-                            <div class="inner-wrap" style="position:absolute;top: 30px;bottom: 10px;height: auto">
+                            <div class="inner-wrap" style="position:absolute;top: 30px;bottom: 10px;height: auto;overflow: auto">
                                 <div>
-                                    <ul id="zTreeUL" class="ztree"></ul>
+                                    <ul ref="zTreeUL" class="ztree"></ul>
                                 </div>
                             </div>
                         </div>
                         <div class="right-outer-wrap iv-list-page-wrap" style="padding: 10px;left: 200px;top: 10px;right: 10px;bottom: 55px">
-                            <div class="list-simple-search-wrap" id="list-simple-search-wrap">
+                            <div class="list-simple-search-wrap">
                                 <table class="ls-table">
                                     <colgroup>
                                         <col style="width: 80px">
@@ -368,7 +369,7 @@ Vue.component("select-department-user-dialog", {
                             <i-table :height="listHeight" stripe border :columns="columnsConfig" :data="tableData"
                                      class="iv-list-table" :highlight-row="true"
                                      @on-selection-change="selectionChange"></i-table>
-                            <div style="float: right;" id="list-pager-wrap">
+                            <div style="float: right;">
                                 <page @on-change="changePage" :current.sync="pageNum" :page-size="pageSize" show-total
                                       :total="pageTotal"></page>
                             </div>
