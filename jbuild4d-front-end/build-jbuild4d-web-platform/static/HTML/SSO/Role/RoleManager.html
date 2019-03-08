@@ -206,7 +206,15 @@
                         align: "center",
                         render: function (h, params) {
                             return h('div',{class: "list-row-button-wrap"},[
-                                ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.roleList.idFieldName,appList)
+                                h('div', {
+                                    class: "list-row-button del",
+                                    on: {
+                                        click: function () {
+                                            //debugger;
+                                            appList.delUserRoleBind(params);
+                                        }
+                                    }
+                                })
                             ]);
                         }
                     }
@@ -471,6 +479,21 @@
             },
             clearAllRoleMember:function () {
 
+            },
+            delUserRoleBind:function (params) {
+                var _self=this;
+                DialogUtility.Confirm(window, "确认要删除当前记录吗？", function () {
+                    AjaxUtility.Delete(_self.acInterface.deleteUserRoleBind, {"roleId": _self.roleList.editMemberRow.roleId,"userId":params.row.userId}, function (result) {
+                        if (result.success) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                _self.reloadUserRoleBindData();
+                            });
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
+                    }, "json");
+                });
             }
         }
     });

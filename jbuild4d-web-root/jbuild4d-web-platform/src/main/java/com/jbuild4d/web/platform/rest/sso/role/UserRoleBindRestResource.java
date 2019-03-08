@@ -37,14 +37,14 @@ public class UserRoleBindRestResource {
         return JBuild4DResponseVo.getDataSuccess(pageInfo);
     }
 
-    @RequestMapping(value = "DeleteUserRoleBind", method = RequestMethod.POST)
+    @RequestMapping(value = "DeleteUserRoleBind", method = RequestMethod.DELETE)
     public JBuild4DResponseVo deleteUserRoleBind(String roleId,String userId) throws JBuild4DGenerallyException {
         userRoleService.deleteUserRoleBind(roleId,userId);
         return JBuild4DResponseVo.opSuccess();
     }
 
-    @RequestMapping(value = "ClearAllRoleMember", method = RequestMethod.POST)
-    public JBuild4DResponseVo clearAllRoleMember(String roleId,String userId) throws JBuild4DGenerallyException {
+    @RequestMapping(value = "ClearAllRoleMember", method = RequestMethod.DELETE)
+    public JBuild4DResponseVo clearAllRoleMember(String roleId) throws JBuild4DGenerallyException {
         userRoleService.clearAllRoleMember(roleId);
         return JBuild4DResponseVo.opSuccess();
     }
