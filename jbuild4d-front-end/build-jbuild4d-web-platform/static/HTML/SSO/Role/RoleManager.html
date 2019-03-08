@@ -63,7 +63,7 @@
                              class="iv-list-table" :highlight-row="true"
                              @on-selection-change="selectionChange"></i-table>
                 <div style="text-align: right">
-                    <page @on-change="changePage" :current.sync="roleMemberList.pageNum" :page-size="roleMemberList.pageSize" show-total
+                    <page @on-change="roleMemberChangePage" :current.sync="roleMemberList.pageNum" :page-size="roleMemberList.pageSize" show-total
                           :total="roleMemberList.pageTotal"></page>
                 </div>
             </Card>
@@ -451,6 +451,10 @@
                         }
                     }, "json");
             },
+            roleMemberChangePage:function(pageNum){
+                this.roleMemberList.pageNum = pageNum;
+                this.reloadUserRoleBindData();
+            },
             getCurrentEditMemberRole:function(){
                 if(this.roleList.editMemberRow){
                     return "【"+this.roleList.editMemberRow.roleName+"】";
@@ -474,8 +478,9 @@
 
                 AjaxUtility.Post(this.acInterface.bindUserWithRole, {"userIds":userIds,"roleId":this.roleList.editMemberRow.roleId}, function (result) {
                     if (result.success) {
-                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
-                        appList.roleMemberList.pageNum=1;
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                        });
+                        appList.roleMemberList.pageNum = 1;
                         appList.reloadUserRoleBindData();
                     }
                     else {
