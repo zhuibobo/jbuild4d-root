@@ -24,4 +24,8 @@
     <select id="selectByAccount" resultMap="BaseResultMap">
         select<include refid="Base_Column_List"/> from TB4D_USER where USER_ACCOUNT=#{userAccount,jdbcType=NVARCHAR}
     </select>
+
+    <select id="selectBindRoleUsers" resultMap="BaseResultMap">
+        select<include refid="Base_Column_List"/> from TB4D_USER where USER_ID in (select BIND_USER_ID from TB4D_USER_ROLE where BIND_ROLE_ID=#{roleId})
+    </select>
 </mapper>

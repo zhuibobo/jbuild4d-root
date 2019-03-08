@@ -86,6 +86,15 @@
                     key: 'roleName',
                     align: "center"
                 })
+
+                //alert($("#roleMemberList-wraper").width());
+                if($("#roleMemberList-wraper").width()>500){
+                    this.roleMemberList.columnsConfig.splice(1,0,{
+                        title: '账号',
+                        key: 'userAccount',
+                        align: "center"
+                    })
+                }
             }
         },
         data:{
@@ -102,7 +111,10 @@
                 listStatusChange:"/PlatFormRest/SSO/Role/StatusChange",
                 listMove:"/PlatFormRest/SSO/Role/Move",
                 <!--UserRole-->
-                bindUserWithRole:"/PlatFormRest/SSO/UserRoleBind/BindUsersWithRole"
+                bindUserWithRole:"/PlatFormRest/SSO/UserRoleBind/BindUsersWithRole",
+                reloadUserRoleBindData:"/PlatFormRest/SSO/UserRoleBind/GetBindRoleUsers",
+                deleteUserRoleBind:"/PlatFormRest/SSO/UserRoleBind/DeleteUserRoleBind",
+                clearAllRoleMember:"/PlatFormRest/SSO/UserRoleBind/ClearAllRoleMember"
             },
             <!--Tree-->
             treeIdFieldName:"roleGroupId",
@@ -184,28 +196,30 @@
                 tableData:[],
                 columnsConfig: [
                     {
-                        type: 'selection',
-                        width: 60,
-                        align: 'center'
-                    },
-                    {
                         title: '用户名称',
-                        key: 'roleName',
+                        key: 'userName',
                         align: "center"
                     }, {
                         title: '操作',
-                        key: 'roleId',
-                        width: 120,
+                        key: 'userId',
+                        width: 80,
                         align: "center",
                         render: function (h, params) {
                             return h('div',{class: "list-row-button-wrap"},[
-                                ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.roleList.idFieldName,appList),
-                                ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.roleList.idFieldName,appList),
                                 ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.roleList.idFieldName,appList)
                             ]);
                         }
                     }
                 ],
+                pageTotal: 0,
+                pageSize: 12,
+                pageNum: 1,
+                searchCondition:{
+                    roleId:{
+                        value:"",
+                        type:SearchUtility.SearchFieldType.StringType
+                    }
+                },
                 roleMemberListHeight:ListPageUtility.DefaultListHeight_80()
             }
         },
@@ -397,8 +411,34 @@
             selected:function (recordId,params) {
                 //console.log(params);
                 this.roleList.editMemberRow=params.row;
+
+                this.roleMemberList.pageNum=1;
+                //this.clearSearchCondition();
+                this.roleMemberList.searchCondition.roleId.value=this.roleList.editMemberRow.roleId;
+                this.reloadUserRoleBindData();
             },
             <!--RoleMember-->
+            reloadUserRoleBindData:function(){
+                var _self=this;
+                //debugger;
+                AjaxUtility.Post(this.acInterface.reloadUserRoleBindData,
+                    {
+                        "pageNum": this.roleMemberList.pageNum,
+                        "pageSize": this.roleMemberList.pageSize,
+                        "roleId":this.roleMemberList.searchCondition.roleId.value
+                    },
+                    function (result) {
+                        if (result.success) {
+                            _self.roleMemberList.tableData = new Array();
+                            _self.roleMemberList.tableData = result.data.list;
+                            _self.roleMemberList.pageTotal = result.data.total;
+                        }
+                        else
+                        {
+                            DialogUtility.AlertError(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
+                    }, "json");
+            },
             getCurrentEditMemberRole:function(){
                 if(this.roleList.editMemberRow){
                     return "【"+this.roleList.editMemberRow.roleName+"】";

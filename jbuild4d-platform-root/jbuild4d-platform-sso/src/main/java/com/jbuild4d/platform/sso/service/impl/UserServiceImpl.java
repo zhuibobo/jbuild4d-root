@@ -1,5 +1,7 @@
 package com.jbuild4d.platform.sso.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dao.sso.UserMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity;
@@ -11,6 +13,8 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.base.tools.common.StringUtility;
 import com.jbuild4d.platform.sso.service.IUserService;
 import org.mybatis.spring.SqlSessionTemplate;
+
+import java.util.List;
 
 public class UserServiceImpl extends BaseServiceImpl<UserEntity> implements IUserService
 {
@@ -34,6 +38,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity> implements IUse
     @Override
     public UserEntity getByAccount(String userAccount) {
         return userMapper.selectByAccount(userAccount);
+    }
+
+    @Override
+    public PageInfo<UserEntity> getBindRoleUsers(String roleId,int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<UserEntity> list=userMapper.selectBindRoleUsers(roleId);
+        PageInfo<UserEntity> pageInfo = new PageInfo<UserEntity>(list);
+        return pageInfo;
     }
 
     @Override

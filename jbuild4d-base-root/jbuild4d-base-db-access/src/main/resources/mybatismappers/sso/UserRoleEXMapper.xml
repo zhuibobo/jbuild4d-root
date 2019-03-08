@@ -18,4 +18,12 @@
     <select id="bindExist" resultType="int">
         select count(BIND_ID) from TB4D_USER_ROLE where BIND_ROLE_ID=#{roleId} and BIND_USER_ID=#{userId}
     </select>
+
+    <delete id="deleteUserRoleBind">
+        delete from TB4D_USER_ROLE where BIND_ROLE_ID=#{roleId} and BIND_USER_ID=#{userId}
+    </delete>
+
+    <delete id="clearAllRoleMember">
+        delete from TB4D_USER_ROLE where BIND_ROLE_ID=#{roleId}
+    </delete>
 </mapper>

@@ -60,4 +60,14 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleEntity> impleme
         }
         return false;
     }
+
+    @Override
+    public void deleteUserRoleBind(String roleId, String userId) {
+        userRoleMapper.deleteUserRoleBind(roleId,userId);
+    }
+
+    @Override
+    public void clearAllRoleMember(String roleId) {
+        userRoleMapper.clearAllRoleMember(roleId);
+    }
 }
