@@ -415,7 +415,20 @@
                 }, "json");
             },
             clearAllRoleMember:function () {
-
+                var _self=this;
+                DialogUtility.Confirm(window, "确认要删除全部记录吗？", function () {
+                    AjaxUtility.Delete(_self.acInterface.clearAllRoleMember, {"roleId": _self.roleList.editMemberRow.roleId}, function (result) {
+                        if (result.success) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                appList.roleMemberList.pageNum = 1;
+                                _self.reloadUserRoleBindData();
+                            });
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
+                    }, "json");
+                });
             },
             delUserRoleBind:function (params) {
                 var _self=this;
