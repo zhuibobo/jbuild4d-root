@@ -1,10 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <style>
+        .apps-outer-wrap{
+            /*background-color: #00B83F;*/
+            margin: auto;
+            /*height: 200px;*/
+        }
+        .app-outer-wrap{
+            width: 200px;
+            height: 250px;
+            float: left;
+            background-color:#93c6ef;
+            border: solid 1px #e8eaec;
+            margin-top: 10px;
+            margin-left: 10px;
+            border-radius: 10px;
+        }
+        @media (min-width: 1000px) {
+            .apps-outer-wrap{
+                width: 850px;
+            }
+        }
+        @media (min-width: 1200px) {
+            .apps-outer-wrap{
+                width: 1060px;
+            }
+        }
+        @media (min-width: 1600px) {
+            .apps-outer-wrap{
+                width: 1480px;
+            }
+        }
+        @media (min-width: 2000px) {
+            .apps-outer-wrap{
+                width: 1900px;
+            }
+        }
+
+    </style>
 </head>
 <body>
+    <div id="appForm">
+        <div class="apps-outer-wrap">
+            <div v-for="item in items" class="app-outer-wrap">
+                {{ item.message }}
+            </div>
+        </div>
+    </div>
+    <script>
+        var appForm = new Vue({
+            el:"#appForm",
+            data: {
+                items: [
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Foo' },
+                    { message: 'Bar' }
+                ]
+            },
+            mounted:function () {
 
+            },
+            methods: {
+
+            }
+        })
+    </script>
 </body>
 </html>
