@@ -46,6 +46,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity> implements IUse
         List<UserEntity> list=userMapper.selectBindRoleUsers(roleId);
         PageInfo<UserEntity> pageInfo = new PageInfo<UserEntity>(list);
         if(pageInfo.getSize()==0&&pageInfo.getPageNum()>1){
+            //如果查询的结果为0,退回查询前一页的数据;
             return getBindRoleUsers(roleId,pageNum-1,pageSize);
         }
         return pageInfo;

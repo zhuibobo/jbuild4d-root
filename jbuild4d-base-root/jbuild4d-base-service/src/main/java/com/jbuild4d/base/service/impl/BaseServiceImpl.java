@@ -143,6 +143,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
         List<T> list=defaultBaseMapper.selectAll();
         PageInfo<T> pageInfo = new PageInfo<T>(list);
         if(pageInfo.getSize()==0&&pageInfo.getPageNum()>1){
+            //如果查询的结果为0,退回查询前一页的数据;
             return getPage(jb4DSession,pageNum-1,pageSize);
         }
         return pageInfo;
@@ -153,8 +154,9 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
         PageHelper.startPage(pageNum, pageSize);
         List<T> list=defaultBaseMapper.selectBySearch(searchItemMap);
         PageInfo<T> pageInfo = new PageInfo<T>(list);
-        if(pageInfo.getSize()==0&&pageInfo.getPageNum()>1){
-            return getPage(jb4DSession,pageNum-1,pageSize,searchItemMap);
+        if(pageInfo.getSize()==0&&pageInfo.getPageNum()>1) {
+            //如果查询的结果为0,退回查询前一页的数据;
+            return getPage(jb4DSession, pageNum - 1, pageSize, searchItemMap);
         }
         return pageInfo;
     }
