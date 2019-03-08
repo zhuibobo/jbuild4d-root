@@ -62,6 +62,10 @@
                 <i-table :height="roleMemberList.roleMemberListHeight" stripe border :columns="roleMemberList.columnsConfig" :data="roleMemberList.tableData"
                              class="iv-list-table" :highlight-row="true"
                              @on-selection-change="selectionChange"></i-table>
+                <div style="text-align: right">
+                    <page @on-change="changePage" :current.sync="roleMemberList.pageNum" :page-size="roleMemberList.pageSize" show-total
+                          :total="roleMemberList.pageTotal"></page>
+                </div>
             </Card>
         </div>
     </div>
@@ -74,7 +78,7 @@
             this.initTree();
             window.setTimeout(function () {
                 appList.roleList.listHeight=ListPageUtility.GetGeneralPageHeight(-20);
-                appList.roleMemberList.roleMemberListHeight=ListPageUtility.GetGeneralPageHeight(-40);
+                appList.roleMemberList.roleMemberListHeight=ListPageUtility.GetGeneralPageHeight(-70);
             },500);
             //alert(PageStyleUtility.GetPageWidth());
             if(PageStyleUtility.GetPageWidth()>1500){
@@ -471,6 +475,8 @@
                 AjaxUtility.Post(this.acInterface.bindUserWithRole, {"userIds":userIds,"roleId":this.roleList.editMemberRow.roleId}, function (result) {
                     if (result.success) {
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        appList.roleMemberList.pageNum=1;
+                        appList.reloadUserRoleBindData();
                     }
                     else {
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
