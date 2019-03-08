@@ -142,15 +142,20 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
         //PageHelper.
         List<T> list=defaultBaseMapper.selectAll();
         PageInfo<T> pageInfo = new PageInfo<T>(list);
+        if(pageInfo.getSize()==0&&pageInfo.getPageNum()>1){
+            return getPage(jb4DSession,pageNum-1,pageSize);
+        }
         return pageInfo;
     }
 
     @Override
     public PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize, Map<String,Object> searchItemMap){
         PageHelper.startPage(pageNum, pageSize);
-        //PageHelper.
-        List<T> lsit=defaultBaseMapper.selectBySearch(searchItemMap);
-        PageInfo<T> pageInfo = new PageInfo<T>(lsit);
+        List<T> list=defaultBaseMapper.selectBySearch(searchItemMap);
+        PageInfo<T> pageInfo = new PageInfo<T>(list);
+        if(pageInfo.getSize()==0&&pageInfo.getPageNum()>1){
+            return getPage(jb4DSession,pageNum-1,pageSize,searchItemMap);
+        }
         return pageInfo;
     }
 

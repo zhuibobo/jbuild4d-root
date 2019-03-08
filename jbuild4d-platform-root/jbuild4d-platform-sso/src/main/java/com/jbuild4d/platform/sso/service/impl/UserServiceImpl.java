@@ -45,6 +45,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity> implements IUse
         PageHelper.startPage(pageNum, pageSize);
         List<UserEntity> list=userMapper.selectBindRoleUsers(roleId);
         PageInfo<UserEntity> pageInfo = new PageInfo<UserEntity>(list);
+        if(pageInfo.getSize()==0&&pageInfo.getPageNum()>1){
+            return getBindRoleUsers(roleId,pageNum-1,pageSize);
+        }
         return pageInfo;
     }
 
