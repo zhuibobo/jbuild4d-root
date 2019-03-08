@@ -328,9 +328,9 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 MenuTypeEnum.GroupTopMenu.getDisplayName(),"","","frame-top-menu-data");
         deleteByKey(jb4DSession,appBuilderFlowBuilderMenu.getMenuId());
         saveSimple(jb4DSession,appBuilderFlowBuilderMenu.getMenuId(),appBuilderFlowBuilderMenu);*/
-        MenuEntity appBuilderFlowBuilderMenu=createMenu(jb4DSession,appBuilderRootMenu.getMenuId(),"JB4DSystemAppBuilderFlowBuilder",
+        /*MenuEntity appBuilderFlowBuilderMenu=createMenu(jb4DSession,appBuilderRootMenu.getMenuId(),"JB4DSystemAppBuilderFlowBuilder",
                 "流程设计","流程设计","流程设计",
-                "","top-menu-data");
+                "","top-menu-data");*/
 
         //根菜单->应用管理->桌面设计
         /*String appBuilderDesktopBuilderId="JB4DSystemAppBuilderDesktopBuilder";
@@ -340,6 +340,10 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
         saveSimple(jb4DSession,appBuilderDesktopBuilderMenu.getMenuId(),appBuilderDesktopBuilderMenu);*/
         MenuEntity appBuilderDesktopBuilderMenu=createMenu(jb4DSession,appBuilderRootMenu.getMenuId(),"JB4DSystemAppBuilderDesktopBuilder",
                 "桌面设计","桌面设计","桌面设计",
+                "","frame-top-menu-data");
+
+        createMenu(jb4DSession,appBuilderRootMenu.getMenuId(),"JB4DSystemAppBuilderBigScreen",
+                "大屏设计","大屏设计","大屏设计",
                 "","frame-top-menu-data");
     }
 

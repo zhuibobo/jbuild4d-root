@@ -6,48 +6,28 @@
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
     <style>
-        .apps-outer-wrap{
-            /*background-color: #00B83F;*/
-            margin: auto;
-            /*height: 200px;*/
-        }
-        .app-outer-wrap{
-            width: 200px;
-            height: 250px;
-            float: left;
-            background-color:#93c6ef;
-            border: solid 1px #e8eaec;
-            margin-top: 10px;
-            margin-left: 10px;
-            border-radius: 10px;
-        }
-        @media (min-width: 1000px) {
-            .apps-outer-wrap{
-                width: 850px;
-            }
-        }
-        @media (min-width: 1200px) {
-            .apps-outer-wrap{
-                width: 1060px;
-            }
-        }
-        @media (min-width: 1600px) {
-            .apps-outer-wrap{
-                width: 1480px;
-            }
-        }
-        @media (min-width: 2000px) {
-            .apps-outer-wrap{
-                width: 1900px;
-            }
-        }
+
     </style>
 </head>
 <body>
-    <div id="appForm">
+    <div id="appForm" class="apps-manager-outer-wrap">
         <div class="apps-outer-wrap">
             <div v-for="item in items" class="app-outer-wrap">
-                {{ item.message }}
+                <div class="title">
+                    <span>深圳市明天不知道干什么可能会下雨科技有限股份未明公司</span>
+                </div>
+                <div class="content">
+                    <div class="mainImg">
+                        <img src="../../../Themes/Default/Css/Images/DefaultModel.png" />
+                    </div>
+                    <div class="button">
+                        系统设置
+                    </div>
+                </div>
+            </div>
+            <div class="app-outer-wrap new-system-outer-wrap">
+                <div class="add-system-button">添加集成系统</div>
+                <div class="add-system-button">添加模拟系统</div>
             </div>
         </div>
     </div>
@@ -56,28 +36,6 @@
             el:"#appForm",
             data: {
                 items: [
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
                     { message: 'Foo' },
                     { message: 'Bar' },
                     { message: 'Foo' },
