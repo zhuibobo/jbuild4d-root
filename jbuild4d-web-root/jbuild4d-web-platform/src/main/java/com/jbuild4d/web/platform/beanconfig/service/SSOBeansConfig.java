@@ -63,6 +63,30 @@ public class SSOBeansConfig {
         return userRoleService;
     }
 
+    @Bean
+    ISsoAppService ssoAppService(ISQLBuilderService _sqlBuilderService, SsoAppMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        ISsoAppService ssoAppService=new SsoAppServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return ssoAppService;
+    }
+
+    @Bean
+    ISsoAppInterfaceService ssoAppInterfaceService(ISQLBuilderService _sqlBuilderService, SsoAppInterfaceMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        ISsoAppInterfaceService ssoAppInterfaceService=new SsoAppInterfaceServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return ssoAppInterfaceService;
+    }
+
+    @Bean
+    ISsoAppFileService ssoAppFileService(ISQLBuilderService _sqlBuilderService, SsoAppFileMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        ISsoAppFileService ssoAppFileService=new SsoAppFileServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return ssoAppFileService;
+    }
+
+    @Bean
+    ISsoAppUserMappingService ssoAppUserMappingService(ISQLBuilderService _sqlBuilderService, SsoAppUserMappingMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        ISsoAppUserMappingService ssoAppUserMappingService=new SsoAppUserMappingServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return ssoAppUserMappingService;
+    }
+
     @PostConstruct
     public void postConstruct (){
         //this.organService().setDepartmentService(this.departmentService());

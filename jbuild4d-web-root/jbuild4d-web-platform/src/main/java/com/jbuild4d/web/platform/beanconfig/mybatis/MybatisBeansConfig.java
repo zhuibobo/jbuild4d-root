@@ -302,11 +302,6 @@ public class MybatisBeansConfig {
     }
 
     @Bean
-    public SsoAppMapper ssoAppMapper(SqlSessionTemplate sqlSessionTemplate) {
-        return sqlSessionTemplate.getMapper(SsoAppMapper.class);
-    }
-
-    @Bean
     public UserMapper userMapper(SqlSessionTemplate sqlSessionTemplate) {
         return sqlSessionTemplate.getMapper(UserMapper.class);
     }
@@ -314,6 +309,26 @@ public class MybatisBeansConfig {
     @Bean
     public AuthorityMapper authorityMapper(SqlSessionTemplate sqlSessionTemplate) {
         return sqlSessionTemplate.getMapper(AuthorityMapper.class);
+    }
+
+    @Bean
+    public SsoAppMapper ssoAppMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(SsoAppMapper.class);
+    }
+
+    @Bean
+    public SsoAppInterfaceMapper ssoAppInterfaceMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(SsoAppInterfaceMapper.class);
+    }
+
+    @Bean
+    public SsoAppFileMapper ssoAppFileMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(SsoAppFileMapper.class);
+    }
+
+    @Bean
+    public SsoAppUserMappingMapper ssoAppUserMappingMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(SsoAppUserMappingMapper.class);
     }
 
     /*@Bean
