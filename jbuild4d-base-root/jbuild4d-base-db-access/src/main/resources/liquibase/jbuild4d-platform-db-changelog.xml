@@ -855,6 +855,7 @@
             <column name="INTERFACE_ID" type="NVARCHAR(100)" remarks="接口ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="INTERFACE_BELONG_APP_ID" type="NVARCHAR(100)" remarks="所属系统ID"/>
             <column name="INTERFACE_TYPE_NAME" type="NVARCHAR(100)" remarks="接口类型:默认定义和自定义:eg[登录接口]"/>
             <column name="INTERFACE_NAME" type="NVARCHAR(100)" remarks="接口名称"/>
             <column name="INTERFACE_URL" type="NVARCHAR(1000)" remarks="接口地址"/>
@@ -872,6 +873,7 @@
             <column name="APP_FILE_ID" type="NVARCHAR(100)" remarks="SSO集成APP的文件ID,主键">
                 <constraints primaryKey="true" nullable="false" />
             </column>
+            <column name="APP_BELONG_APP_ID" type="NVARCHAR(100)" remarks="所属系统ID"/>
             <column name="APP_FILE_NAME" type="NVARCHAR(100)" remarks="文件名称"/>
             <column name="APP_FILE_IS_MAIN" type="NVARCHAR(100)" remarks="是否是主文件,用于Post模拟时的主执行文件"/>
             <column name="APP_FILE_DESC" type="NVARCHAR(500)" remarks="备注" />
@@ -887,7 +889,12 @@
             <column name="MAPPING_ID" type="NVARCHAR(100)" remarks="账号映射ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="APP_ID" type="NVARCHAR(100)" remarks="SSO集成APP"/>
+            <column name="MAPPING_BELONG_APP_ID" type="NVARCHAR(100)" remarks="所属系统ID" />
+            <column name="MAPPING_ACCOUNT" type="NVARCHAR(100)" remarks="账号" />
+            <column name="MAPPING_PASSWORD" type="NVARCHAR(100)" remarks="密码" />
+            <column name="MAPPING_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+            <column name="MAPPING_CREATER_ID" type="NVARCHAR(100)" remarks="创建者的ID" />
+            <column name="MAPPING_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
     </changeSet>
     <!--集成消息与待办-->
