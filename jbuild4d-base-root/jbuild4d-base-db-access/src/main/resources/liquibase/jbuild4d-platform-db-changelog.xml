@@ -815,6 +815,7 @@
             <column name="BIND_ORGAN_ID" type="NVARCHAR(100)" remarks="组织ID" />
         </createTable>
 
+        <!--未实现-->
         <createTable tableName="TB4D_AUTHORITY" remarks="角色权限表">
             <column name="AUTH_ID" type="NVARCHAR(100)" remarks="权限ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
@@ -822,11 +823,51 @@
             <column name="ROLE_ID" type="NVARCHAR(100)" remarks="角色ID,主键" />
         </createTable>
 
-        <createTable tableName="TB4D_SSO_APP" remarks="SSO集成APP表">
-            <column name="APP_ID" type="NVARCHAR(100)" remarks="SSO集成APP ID,主键">
+        <createTable tableName="TB4D_SSO_APP" remarks="SSO集成系统表">
+            <column name="APP_ID" type="NVARCHAR(100)" remarks="SSO集成系统 ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="APP_NAME" type="NVARCHAR(100)" remarks="集成系统名称"/>
+            <column name="APP_CODE" type="NVARCHAR(100)" remarks="集成系统标识键">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APP_NAME" type="NVARCHAR(100)" remarks="集成系统名称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APP_PUBLIC_KEY" type="NVARCHAR(200)" remarks="公钥">
+            </column>
+            <column name="APP_PRIVATE_KEY" type="NVARCHAR(200)" remarks="私钥">
+            </column>
+            <column name="APP_DOMAIN" type="NVARCHAR(300)" remarks="域名或者ip,用于验证来源使用"></column>
+            <column name="APP_INDEX_URL" type="NVARCHAR(1000)" remarks="主页的地址,用于默认登录完成之后的目标地址"></column>
+            <column name="APP_INTEGRATED_TYPE" type="NVARCHAR(50)" remarks="系统的集成类型:开发集成或者模拟登录集成,模拟登录为post模拟账号进行登录"></column>
+            <column name="APP_MAIN_IMAGE_ID" remarks="主题图片ID,关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
+            <column name="APP_DESC" type="NVARCHAR(500)" remarks="备注" />
+            <column name="APP_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="APP_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+            <column name="APP_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="APP_CREATER_ID" type="NVARCHAR(100)" remarks="创建者的ID" />
+            <column name="APP_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
+        </createTable>
+
+        <createTable tableName="TB4D_SSO_SUB_APP" remarks="SSO集成系统所有的子系统表">
+            <column name="SUB_APP_ID" type="NVARCHAR(100)" remarks="SSO集成APP的子系统 ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="SUB_APP_NAME" type="NVARCHAR(100)" remarks="集成系统名称"/>
+        </createTable>
+
+        <createTable tableName="TB4D_SSO_APP_INTERFACE" remarks="集成系统的接口配置表">
+            <column name="INTERFACE_ID" type="NVARCHAR(100)" remarks="接口ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="INTERFACE_NAME" type="NVARCHAR(100)" remarks="集成系统名称"/>
+        </createTable>
+
+        <createTable tableName="TB4D_SSO_APP_FILE" remarks="系统相关的文件表,主要用于存储模拟登录的html模拟文件">
+            <column name="APP_FILE_ID" type="NVARCHAR(100)" remarks="SSO集成APP的文件ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APP_FILENAME" type="NVARCHAR(100)" remarks="文件名称"/>
         </createTable>
 
         <createTable tableName="TB4D_SSO_USER_MAPPING" remarks="SSO集成APP账号映射表">
