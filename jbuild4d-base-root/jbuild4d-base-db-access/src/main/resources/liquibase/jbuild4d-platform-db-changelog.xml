@@ -842,7 +842,7 @@
             <column name="APP_INTEGRATED_TYPE" type="NVARCHAR(50)" remarks="系统的集成类型:开发集成或者模拟登录集成,模拟登录为post模拟账号进行登录"></column>
             <column name="APP_MAIN_IMAGE_ID" type="NVARCHAR(100)" remarks="主题图片ID,关联到TB4D_FILE_INFO表的FILE_ID"/>
             <column name="APP_TYPE" type="NVARCHAR(50)" remarks="系统类型:主系统或者为子系统"></column>
-            <column name="APP_TYPE_MAIN_ID" type="NVARCHAR(50)" remarks="为子系统时,用于存储主系统的ID"></column>
+            <column name="APP_TYPE_MAIN_ID" type="NVARCHAR(50)" remarks="为子系统时,用于存储主系统的ID:TB4D_SSO_APP中的APP_ID"></column>
             <column name="APP_DESC" type="NVARCHAR(500)" remarks="备注" />
             <column name="APP_ORDER_NUM" type="INT" remarks="排序号" />
             <column name="APP_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
@@ -855,7 +855,17 @@
             <column name="INTERFACE_ID" type="NVARCHAR(100)" remarks="接口ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="INTERFACE_NAME" type="NVARCHAR(100)" remarks="集成系统名称"/>
+            <column name="INTERFACE_TYPE_NAME" type="NVARCHAR(100)" remarks="接口类型:默认定义和自定义:eg[登录接口]"/>
+            <column name="INTERFACE_NAME" type="NVARCHAR(100)" remarks="接口名称"/>
+            <column name="INTERFACE_URL" type="NVARCHAR(1000)" remarks="接口地址"/>
+            <column name="INTERFACE_URL_PARAS" type="NVARCHAR(1000)" remarks="参数"/>
+            <column name="INTERFACE_URL_FORMAT" type="NVARCHAR(100)" remarks="格式化方法"/>
+            <column name="INTERFACE_URL_DESC" type="NVARCHAR(500)" remarks="备注" />
+            <column name="INTERFACE_URL_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="INTERFACE_URL_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+            <column name="INTERFACE_URL_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="INTERFACE_URL_CREATER_ID" type="NVARCHAR(100)" remarks="创建者的ID" />
+            <column name="INTERFACE_URL_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
 
         <createTable tableName="TB4D_SSO_APP_FILE" remarks="系统相关的文件表,主要用于存储模拟登录的html模拟文件">
