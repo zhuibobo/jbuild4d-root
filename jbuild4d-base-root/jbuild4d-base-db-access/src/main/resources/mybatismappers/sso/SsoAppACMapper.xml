@@ -4,11 +4,28 @@
     <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
         <constructor>
             <idArg column="APP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="APP_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_PUBLIC_KEY" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_PRIVATE_KEY" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_DOMAIN" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_INDEX_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_INTEGRATED_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_MAIN_IMAGE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_TYPE_MAIN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="APP_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="APP_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_CREATER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        APP_ID, APP_NAME
+        APP_ID, APP_CODE, APP_NAME, APP_PUBLIC_KEY, APP_PRIVATE_KEY, APP_DOMAIN, APP_INDEX_URL,
+        APP_INTEGRATED_TYPE, APP_MAIN_IMAGE_ID, APP_TYPE, APP_TYPE_MAIN_ID, APP_DESC, APP_ORDER_NUM,
+        APP_CREATE_TIME, APP_STATUS, APP_CREATER_ID, APP_ORGAN_ID
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -21,8 +38,18 @@
         where APP_ID = #{appId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
-        insert into TB4D_SSO_APP (APP_ID, APP_NAME)
-        values (#{appId,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR})
+        insert into TB4D_SSO_APP (APP_ID, APP_CODE, APP_NAME,
+                                  APP_PUBLIC_KEY, APP_PRIVATE_KEY, APP_DOMAIN,
+                                  APP_INDEX_URL, APP_INTEGRATED_TYPE, APP_MAIN_IMAGE_ID,
+                                  APP_TYPE, APP_TYPE_MAIN_ID, APP_DESC,
+                                  APP_ORDER_NUM, APP_CREATE_TIME, APP_STATUS,
+                                  APP_CREATER_ID, APP_ORGAN_ID)
+        values (#{appId,jdbcType=VARCHAR}, #{appCode,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR},
+                #{appPublicKey,jdbcType=VARCHAR}, #{appPrivateKey,jdbcType=VARCHAR}, #{appDomain,jdbcType=VARCHAR},
+                #{appIndexUrl,jdbcType=VARCHAR}, #{appIntegratedType,jdbcType=VARCHAR}, #{appMainImageId,jdbcType=VARCHAR},
+                #{appType,jdbcType=VARCHAR}, #{appTypeMainId,jdbcType=VARCHAR}, #{appDesc,jdbcType=VARCHAR},
+                #{appOrderNum,jdbcType=INTEGER}, #{appCreateTime,jdbcType=TIMESTAMP}, #{appStatus,jdbcType=VARCHAR},
+                #{appCreaterId,jdbcType=VARCHAR}, #{appOrganId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
         insert into TB4D_SSO_APP
@@ -30,31 +57,181 @@
             <if test="appId != null">
                 APP_ID,
             </if>
+            <if test="appCode != null">
+                APP_CODE,
+            </if>
             <if test="appName != null">
                 APP_NAME,
+            </if>
+            <if test="appPublicKey != null">
+                APP_PUBLIC_KEY,
+            </if>
+            <if test="appPrivateKey != null">
+                APP_PRIVATE_KEY,
+            </if>
+            <if test="appDomain != null">
+                APP_DOMAIN,
+            </if>
+            <if test="appIndexUrl != null">
+                APP_INDEX_URL,
+            </if>
+            <if test="appIntegratedType != null">
+                APP_INTEGRATED_TYPE,
+            </if>
+            <if test="appMainImageId != null">
+                APP_MAIN_IMAGE_ID,
+            </if>
+            <if test="appType != null">
+                APP_TYPE,
+            </if>
+            <if test="appTypeMainId != null">
+                APP_TYPE_MAIN_ID,
+            </if>
+            <if test="appDesc != null">
+                APP_DESC,
+            </if>
+            <if test="appOrderNum != null">
+                APP_ORDER_NUM,
+            </if>
+            <if test="appCreateTime != null">
+                APP_CREATE_TIME,
+            </if>
+            <if test="appStatus != null">
+                APP_STATUS,
+            </if>
+            <if test="appCreaterId != null">
+                APP_CREATER_ID,
+            </if>
+            <if test="appOrganId != null">
+                APP_ORGAN_ID,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="appId != null">
                 #{appId,jdbcType=VARCHAR},
             </if>
+            <if test="appCode != null">
+                #{appCode,jdbcType=VARCHAR},
+            </if>
             <if test="appName != null">
                 #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="appPublicKey != null">
+                #{appPublicKey,jdbcType=VARCHAR},
+            </if>
+            <if test="appPrivateKey != null">
+                #{appPrivateKey,jdbcType=VARCHAR},
+            </if>
+            <if test="appDomain != null">
+                #{appDomain,jdbcType=VARCHAR},
+            </if>
+            <if test="appIndexUrl != null">
+                #{appIndexUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="appIntegratedType != null">
+                #{appIntegratedType,jdbcType=VARCHAR},
+            </if>
+            <if test="appMainImageId != null">
+                #{appMainImageId,jdbcType=VARCHAR},
+            </if>
+            <if test="appType != null">
+                #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="appTypeMainId != null">
+                #{appTypeMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="appDesc != null">
+                #{appDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="appOrderNum != null">
+                #{appOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="appCreateTime != null">
+                #{appCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appStatus != null">
+                #{appStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="appCreaterId != null">
+                #{appCreaterId,jdbcType=VARCHAR},
+            </if>
+            <if test="appOrganId != null">
+                #{appOrganId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
         update TB4D_SSO_APP
         <set>
+            <if test="appCode != null">
+                APP_CODE = #{appCode,jdbcType=VARCHAR},
+            </if>
             <if test="appName != null">
                 APP_NAME = #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="appPublicKey != null">
+                APP_PUBLIC_KEY = #{appPublicKey,jdbcType=VARCHAR},
+            </if>
+            <if test="appPrivateKey != null">
+                APP_PRIVATE_KEY = #{appPrivateKey,jdbcType=VARCHAR},
+            </if>
+            <if test="appDomain != null">
+                APP_DOMAIN = #{appDomain,jdbcType=VARCHAR},
+            </if>
+            <if test="appIndexUrl != null">
+                APP_INDEX_URL = #{appIndexUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="appIntegratedType != null">
+                APP_INTEGRATED_TYPE = #{appIntegratedType,jdbcType=VARCHAR},
+            </if>
+            <if test="appMainImageId != null">
+                APP_MAIN_IMAGE_ID = #{appMainImageId,jdbcType=VARCHAR},
+            </if>
+            <if test="appType != null">
+                APP_TYPE = #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="appTypeMainId != null">
+                APP_TYPE_MAIN_ID = #{appTypeMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="appDesc != null">
+                APP_DESC = #{appDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="appOrderNum != null">
+                APP_ORDER_NUM = #{appOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="appCreateTime != null">
+                APP_CREATE_TIME = #{appCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appStatus != null">
+                APP_STATUS = #{appStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="appCreaterId != null">
+                APP_CREATER_ID = #{appCreaterId,jdbcType=VARCHAR},
+            </if>
+            <if test="appOrganId != null">
+                APP_ORGAN_ID = #{appOrganId,jdbcType=VARCHAR},
             </if>
         </set>
         where APP_ID = #{appId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
         update TB4D_SSO_APP
-        set APP_NAME = #{appName,jdbcType=VARCHAR}
+        set APP_CODE = #{appCode,jdbcType=VARCHAR},
+            APP_NAME = #{appName,jdbcType=VARCHAR},
+            APP_PUBLIC_KEY = #{appPublicKey,jdbcType=VARCHAR},
+            APP_PRIVATE_KEY = #{appPrivateKey,jdbcType=VARCHAR},
+            APP_DOMAIN = #{appDomain,jdbcType=VARCHAR},
+            APP_INDEX_URL = #{appIndexUrl,jdbcType=VARCHAR},
+            APP_INTEGRATED_TYPE = #{appIntegratedType,jdbcType=VARCHAR},
+            APP_MAIN_IMAGE_ID = #{appMainImageId,jdbcType=VARCHAR},
+            APP_TYPE = #{appType,jdbcType=VARCHAR},
+            APP_TYPE_MAIN_ID = #{appTypeMainId,jdbcType=VARCHAR},
+            APP_DESC = #{appDesc,jdbcType=VARCHAR},
+            APP_ORDER_NUM = #{appOrderNum,jdbcType=INTEGER},
+            APP_CREATE_TIME = #{appCreateTime,jdbcType=TIMESTAMP},
+            APP_STATUS = #{appStatus,jdbcType=VARCHAR},
+            APP_CREATER_ID = #{appCreaterId,jdbcType=VARCHAR},
+            APP_ORGAN_ID = #{appOrganId,jdbcType=VARCHAR}
         where APP_ID = #{appId,jdbcType=VARCHAR}
     </update>
 </mapper>

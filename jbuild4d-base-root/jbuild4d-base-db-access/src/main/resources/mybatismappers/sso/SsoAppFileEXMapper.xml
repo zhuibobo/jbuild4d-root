@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.SsoAppFileMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP_FILE ORDER by APP_FILE_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_SSO_APP_FILE</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(APP_FILE_ORDER_NUM) is null then 1 else max(APP_FILE_ORDER_NUM)+1 end ORDERNUM from TB4D_SSO_APP_FILE</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_SSO_APP_FILE<where>
+        <if test="appBelongAppId !=null and appBelongAppId !=''"> and APP_BELONG_APP_ID like #{appBelongAppId} </if>
+        <if test="appFileName !=null and appFileName !=''"> and APP_FILE_NAME like #{appFileName} </if>
+        <if test="appFileIsMain !=null and appFileIsMain !=''"> and APP_FILE_IS_MAIN like #{appFileIsMain} </if>
+        <if test="appFileDesc !=null and appFileDesc !=''"> and APP_FILE_DESC like #{appFileDesc} </if>
+        <if test="appFileStatus !=null and appFileStatus !=''"> and APP_FILE_STATUS like #{appFileStatus} </if>
+        <if test="appFileCreaterId !=null and appFileCreaterId !=''"> and APP_FILE_CREATER_ID like #{appFileCreaterId} </if>
+        <if test="appFileOrganId !=null and appFileOrganId !=''"> and APP_FILE_ORGAN_ID like #{appFileOrganId} </if>
+        <if test="appFileCntFileId !=null and appFileCntFileId !=''"> and APP_FILE_CNT_FILE_ID like #{appFileCntFileId} </if>
+    </where>ORDER by APP_FILE_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_SSO_APP_FILE
+                                                                                                          where APP_FILE_ORDER_NUM = (select max(APP_FILE_ORDER_NUM) from TB4D_SSO_APP_FILE where APP_FILE_ORDER_NUM<(select APP_FILE_ORDER_NUM from TB4D_SSO_APP_FILE where APP_FILE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_SSO_APP_FILE
+                                                                                                             where APP_FILE_ORDER_NUM = (select min(APP_FILE_ORDER_NUM) from TB4D_SSO_APP_FILE where APP_FILE_ORDER_NUM>(select APP_FILE_ORDER_NUM from TB4D_SSO_APP_FILE where APP_FILE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

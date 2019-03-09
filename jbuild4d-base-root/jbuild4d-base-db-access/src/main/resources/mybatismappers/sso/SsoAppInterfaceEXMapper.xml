@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.SsoAppInterfaceMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP_INTERFACE ORDER by INTERFACE_URL_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TB4D_SSO_APP_INTERFACE</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(INTERFACE_URL_ORDER_NUM) is null then 1 else max(INTERFACE_URL_ORDER_NUM)+1 end ORDERNUM from TB4D_SSO_APP_INTERFACE</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_SSO_APP_INTERFACE<where>
+        <if test="interfaceBelongAppId !=null and interfaceBelongAppId !=''"> and INTERFACE_BELONG_APP_ID like #{interfaceBelongAppId} </if>
+        <if test="interfaceTypeName !=null and interfaceTypeName !=''"> and INTERFACE_TYPE_NAME like #{interfaceTypeName} </if>
+        <if test="interfaceName !=null and interfaceName !=''"> and INTERFACE_NAME like #{interfaceName} </if>
+        <if test="interfaceUrl !=null and interfaceUrl !=''"> and INTERFACE_URL like #{interfaceUrl} </if>
+        <if test="interfaceUrlParas !=null and interfaceUrlParas !=''"> and INTERFACE_URL_PARAS like #{interfaceUrlParas} </if>
+        <if test="interfaceUrlFormat !=null and interfaceUrlFormat !=''"> and INTERFACE_URL_FORMAT like #{interfaceUrlFormat} </if>
+        <if test="interfaceUrlDesc !=null and interfaceUrlDesc !=''"> and INTERFACE_URL_DESC like #{interfaceUrlDesc} </if>
+        <if test="interfaceUrlStatus !=null and interfaceUrlStatus !=''"> and INTERFACE_URL_STATUS like #{interfaceUrlStatus} </if>
+        <if test="interfaceUrlCreaterId !=null and interfaceUrlCreaterId !=''"> and INTERFACE_URL_CREATER_ID like #{interfaceUrlCreaterId} </if>
+        <if test="interfaceUrlOrganId !=null and interfaceUrlOrganId !=''"> and INTERFACE_URL_ORGAN_ID like #{interfaceUrlOrganId} </if>
+    </where>ORDER by INTERFACE_URL_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_SSO_APP_INTERFACE
+                                                                                                          where INTERFACE_URL_ORDER_NUM = (select max(INTERFACE_URL_ORDER_NUM) from TB4D_SSO_APP_INTERFACE where INTERFACE_URL_ORDER_NUM<(select INTERFACE_URL_ORDER_NUM from TB4D_SSO_APP_INTERFACE where INTERFACE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_SSO_APP_INTERFACE
+                                                                                                             where INTERFACE_URL_ORDER_NUM = (select min(INTERFACE_URL_ORDER_NUM) from TB4D_SSO_APP_INTERFACE where INTERFACE_URL_ORDER_NUM>(select INTERFACE_URL_ORDER_NUM from TB4D_SSO_APP_INTERFACE where INTERFACE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

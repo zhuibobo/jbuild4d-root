@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.SsoAppUserMappingMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppUserMappingEntity">
+        <constructor>
+            <idArg column="MAPPING_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MAPPING_BELONG_APP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MAPPING_ACCOUNT" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MAPPING_PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MAPPING_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="MAPPING_CREATER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="MAPPING_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        MAPPING_ID, MAPPING_BELONG_APP_ID, MAPPING_ACCOUNT, MAPPING_PASSWORD, MAPPING_CREATE_TIME,
+        MAPPING_CREATER_ID, MAPPING_ORGAN_ID
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_SSO_APP_USER_MAPPING
+        where MAPPING_ID = #{mappingId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_SSO_APP_USER_MAPPING
+        where MAPPING_ID = #{mappingId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppUserMappingEntity">
+        insert into TB4D_SSO_APP_USER_MAPPING (MAPPING_ID, MAPPING_BELONG_APP_ID, MAPPING_ACCOUNT,
+                                               MAPPING_PASSWORD, MAPPING_CREATE_TIME, MAPPING_CREATER_ID,
+                                               MAPPING_ORGAN_ID)
+        values (#{mappingId,jdbcType=VARCHAR}, #{mappingBelongAppId,jdbcType=VARCHAR}, #{mappingAccount,jdbcType=VARCHAR},
+                #{mappingPassword,jdbcType=VARCHAR}, #{mappingCreateTime,jdbcType=TIMESTAMP}, #{mappingCreaterId,jdbcType=VARCHAR},
+                #{mappingOrganId,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppUserMappingEntity">
+        insert into TB4D_SSO_APP_USER_MAPPING
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mappingId != null">
+                MAPPING_ID,
+            </if>
+            <if test="mappingBelongAppId != null">
+                MAPPING_BELONG_APP_ID,
+            </if>
+            <if test="mappingAccount != null">
+                MAPPING_ACCOUNT,
+            </if>
+            <if test="mappingPassword != null">
+                MAPPING_PASSWORD,
+            </if>
+            <if test="mappingCreateTime != null">
+                MAPPING_CREATE_TIME,
+            </if>
+            <if test="mappingCreaterId != null">
+                MAPPING_CREATER_ID,
+            </if>
+            <if test="mappingOrganId != null">
+                MAPPING_ORGAN_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mappingId != null">
+                #{mappingId,jdbcType=VARCHAR},
+            </if>
+            <if test="mappingBelongAppId != null">
+                #{mappingBelongAppId,jdbcType=VARCHAR},
+            </if>
+            <if test="mappingAccount != null">
+                #{mappingAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="mappingPassword != null">
+                #{mappingPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="mappingCreateTime != null">
+                #{mappingCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mappingCreaterId != null">
+                #{mappingCreaterId,jdbcType=VARCHAR},
+            </if>
+            <if test="mappingOrganId != null">
+                #{mappingOrganId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppUserMappingEntity">
+        update TB4D_SSO_APP_USER_MAPPING
+        <set>
+            <if test="mappingBelongAppId != null">
+                MAPPING_BELONG_APP_ID = #{mappingBelongAppId,jdbcType=VARCHAR},
+            </if>
+            <if test="mappingAccount != null">
+                MAPPING_ACCOUNT = #{mappingAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="mappingPassword != null">
+                MAPPING_PASSWORD = #{mappingPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="mappingCreateTime != null">
+                MAPPING_CREATE_TIME = #{mappingCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mappingCreaterId != null">
+                MAPPING_CREATER_ID = #{mappingCreaterId,jdbcType=VARCHAR},
+            </if>
+            <if test="mappingOrganId != null">
+                MAPPING_ORGAN_ID = #{mappingOrganId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where MAPPING_ID = #{mappingId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppUserMappingEntity">
+        update TB4D_SSO_APP_USER_MAPPING
+        set MAPPING_BELONG_APP_ID = #{mappingBelongAppId,jdbcType=VARCHAR},
+            MAPPING_ACCOUNT = #{mappingAccount,jdbcType=VARCHAR},
+            MAPPING_PASSWORD = #{mappingPassword,jdbcType=VARCHAR},
+            MAPPING_CREATE_TIME = #{mappingCreateTime,jdbcType=TIMESTAMP},
+            MAPPING_CREATER_ID = #{mappingCreaterId,jdbcType=VARCHAR},
+            MAPPING_ORGAN_ID = #{mappingOrganId,jdbcType=VARCHAR}
+        where MAPPING_ID = #{mappingId,jdbcType=VARCHAR}
+    </update>
+</mapper>

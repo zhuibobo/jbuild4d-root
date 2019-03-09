@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.SsoAppMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP ORDER by  DESC</select>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP ORDER by APP_ORDER_NUM DESC</select>
     <delete id="deleteAll">delete from TB4D_SSO_APP</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max() is null then 1 else max()+1 end ORDERNUM from TB4D_SSO_APP</select>
+    <select id="nextOrderNum" resultType="integer">select case when max(APP_ORDER_NUM) is null then 1 else max(APP_ORDER_NUM)+1 end ORDERNUM from TB4D_SSO_APP</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_SSO_APP<where>
+        <if test="appCode !=null and appCode !=''"> and APP_CODE like #{appCode} </if>
         <if test="appName !=null and appName !=''"> and APP_NAME like #{appName} </if>
-    </where>ORDER by  DESC</select>
+        <if test="appPublicKey !=null and appPublicKey !=''"> and APP_PUBLIC_KEY like #{appPublicKey} </if>
+        <if test="appPrivateKey !=null and appPrivateKey !=''"> and APP_PRIVATE_KEY like #{appPrivateKey} </if>
+        <if test="appDomain !=null and appDomain !=''"> and APP_DOMAIN like #{appDomain} </if>
+        <if test="appIndexUrl !=null and appIndexUrl !=''"> and APP_INDEX_URL like #{appIndexUrl} </if>
+        <if test="appIntegratedType !=null and appIntegratedType !=''"> and APP_INTEGRATED_TYPE like #{appIntegratedType} </if>
+        <if test="appMainImageId !=null and appMainImageId !=''"> and APP_MAIN_IMAGE_ID like #{appMainImageId} </if>
+        <if test="appType !=null and appType !=''"> and APP_TYPE like #{appType} </if>
+        <if test="appTypeMainId !=null and appTypeMainId !=''"> and APP_TYPE_MAIN_ID like #{appTypeMainId} </if>
+        <if test="appDesc !=null and appDesc !=''"> and APP_DESC like #{appDesc} </if>
+        <if test="appStatus !=null and appStatus !=''"> and APP_STATUS like #{appStatus} </if>
+        <if test="appCreaterId !=null and appCreaterId !=''"> and APP_CREATER_ID like #{appCreaterId} </if>
+        <if test="appOrganId !=null and appOrganId !=''"> and APP_ORGAN_ID like #{appOrganId} </if>
+    </where>ORDER by APP_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_SSO_APP
-                                                                                                          where  = (select max() from TB4D_SSO_APP where <(select  from TB4D_SSO_APP where APP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+                                                                                                          where APP_ORDER_NUM = (select max(APP_ORDER_NUM) from TB4D_SSO_APP where APP_ORDER_NUM<(select APP_ORDER_NUM from TB4D_SSO_APP where APP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_SSO_APP
-                                                                                                             where  = (select min() from TB4D_SSO_APP where >(select  from TB4D_SSO_APP where APP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+                                                                                                             where APP_ORDER_NUM = (select min(APP_ORDER_NUM) from TB4D_SSO_APP where APP_ORDER_NUM>(select APP_ORDER_NUM from TB4D_SSO_APP where APP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
 </mapper>

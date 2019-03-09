@@ -851,7 +851,7 @@
             <column name="APP_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
 
-        <createTable tableName="TB4D_SSO_APP_INTERFACE" remarks="集成系统的接口配置表">
+        <createTable tableName="TB4D_SSO_APP_INTERFACE" remarks="SSO集成系统的接口配置表">
             <column name="INTERFACE_ID" type="NVARCHAR(100)" remarks="接口ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -869,7 +869,7 @@
             <column name="INTERFACE_URL_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
 
-        <createTable tableName="TB4D_SSO_APP_FILE" remarks="系统相关的文件表,主要用于存储模拟登录的html模拟文件">
+        <createTable tableName="TB4D_SSO_APP_FILE" remarks="SSO集成系统的相关文件表,主要用于存储模拟登录的html模拟文件">
             <column name="APP_FILE_ID" type="NVARCHAR(100)" remarks="SSO集成APP的文件ID,主键">
                 <constraints primaryKey="true" nullable="false" />
             </column>
@@ -885,7 +885,7 @@
             <column name="APP_FILE_CNT_FILE_ID" type="NVARCHAR(100)" remarks="存储的文件ID,关联到TB4D_FILE_INFO表的FILE_ID" />
         </createTable>
 
-        <createTable tableName="TB4D_SSO_USER_MAPPING" remarks="SSO集成APP账号映射表">
+        <createTable tableName="TB4D_SSO_APP_USER_MAPPING" remarks="SSO集成系统的账号映射表">
             <column name="MAPPING_ID" type="NVARCHAR(100)" remarks="账号映射ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
