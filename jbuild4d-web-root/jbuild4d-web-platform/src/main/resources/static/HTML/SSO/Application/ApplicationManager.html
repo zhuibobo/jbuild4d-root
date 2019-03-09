@@ -1,6 +1,10 @@
-<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../../Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../../Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../../Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../../Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../../Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../../Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../../Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../Js/VueEXComponent.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../../Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"><style></style></head><body><div id="appForm" class="apps-manager-outer-wrap"><div class="apps-outer-wrap"><div v-for="item in items" class="app-outer-wrap"><div class="title"><span>深圳市明天不知道干什么可能会下雨科技有限股份未明公司</span></div><div class="content"><div class="mainImg"><img src="../../../Themes/Default/Css/Images/DefaultModel.png"></div><div class="button">系统设置</div></div></div><div class="app-outer-wrap new-system-outer-wrap"><div class="add-system-button">添加集成系统</div><div class="add-system-button">添加模拟系统</div></div></div></div><script>var appForm = new Vue({
+<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../../Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../../Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../../Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../../Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../../Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../../Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../../Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../Js/VueEXComponent.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../../Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"><style></style></head><body><div id="appForm" class="apps-manager-outer-wrap"><div class="apps-outer-wrap"><div v-for="item in items" class="app-outer-wrap"><div class="title"><span>深圳市明天不知道干什么可能会下雨科技有限股份未明公司</span></div><div class="content"><div class="mainImg"><img src="../../../Themes/Default/Css/Images/DefaultModel.png"></div><div class="button">系统设置</div></div></div><div class="app-outer-wrap new-system-outer-wrap"><div class="add-system-button" @click="addIntegratedSystem()">添加集成系统</div><div class="add-system-button" @click="addPostSystem()">添加模拟系统</div></div></div></div><script>var appForm = new Vue({
             el:"#appForm",
             data: {
+                acInterface:{
+                    integratedSystemEditView:"/HTML/SSO/Application/IntegratedAppEdit.html",
+                    postSystemEditView:"/HTML/SSO/Department/PostAppEdit.html"
+                },
                 items: [
                     { message: 'Foo' },
                     { message: 'Bar' },
@@ -14,6 +18,14 @@
 
             },
             methods: {
+                addIntegratedSystem:function() {
+                    var url = BaseUtility.BuildView(this.acInterface.integratedSystemEditView, {
+                        "op": "add"
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "添加集成系统"}, 2);
+                },
+                addPostSystem:function () {
 
+                }
             }
         })</script></body></html>

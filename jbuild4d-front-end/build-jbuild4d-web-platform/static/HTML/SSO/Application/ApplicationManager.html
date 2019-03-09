@@ -26,8 +26,8 @@
                 </div>
             </div>
             <div class="app-outer-wrap new-system-outer-wrap">
-                <div class="add-system-button">添加集成系统</div>
-                <div class="add-system-button">添加模拟系统</div>
+                <div class="add-system-button" @click="addIntegratedSystem()">添加集成系统</div>
+                <div class="add-system-button" @click="addPostSystem()">添加模拟系统</div>
             </div>
         </div>
     </div>
@@ -35,6 +35,10 @@
         var appForm = new Vue({
             el:"#appForm",
             data: {
+                acInterface:{
+                    integratedSystemEditView:"/HTML/SSO/Application/IntegratedAppEdit.html",
+                    postSystemEditView:"/HTML/SSO/Department/PostAppEdit.html"
+                },
                 items: [
                     { message: 'Foo' },
                     { message: 'Bar' },
@@ -48,7 +52,15 @@
 
             },
             methods: {
+                addIntegratedSystem:function() {
+                    var url = BaseUtility.BuildView(this.acInterface.integratedSystemEditView, {
+                        "op": "add"
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "添加集成系统"}, 2);
+                },
+                addPostSystem:function () {
 
+                }
             }
         })
     </script>

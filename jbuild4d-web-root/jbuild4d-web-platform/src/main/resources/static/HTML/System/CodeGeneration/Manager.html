@@ -110,6 +110,8 @@
                     this.formValidate.tableName=tableName;
                     var _self=this;
                     var url = '/PlatFormRest/System/CodeGenerate/GetTableFields';
+                    _self.formValidate.orderFieldName="";
+                    _self.formValidate.statusFieldName="";
                     AjaxUtility.Post(url, this.formValidate, function (result) {
                         if(result.success){
                             for(var i=0;i<result.data.length;i++){
