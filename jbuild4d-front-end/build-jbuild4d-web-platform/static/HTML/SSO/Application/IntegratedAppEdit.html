@@ -7,7 +7,7 @@
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
 </head>
 <body>
-<div id="appForm" class="general-edit-page-wrap" v-cloak>
+<div id="appForm" class="general-edit-page-wrap" style="margin-top: 0px" v-cloak>
     <tabs @on-click="tabChange" v-model="selectedTabName">
         <tab-pane label="系统设置">
             <div style="width: 80%;float: left">
@@ -81,7 +81,7 @@
             </div>
         </tab-pane>
         <tab-pane label="接口设置">
-            <module-list-weblist-comp :list-height="listHeight" :module-data="moduleData" :active-tab-name="selectedTabName"></module-list-weblist-comp>
+
         </tab-pane>
         <tab-pane label="子系统配置">
 
