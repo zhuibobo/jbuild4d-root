@@ -843,6 +843,7 @@
             <column name="APP_MAIN_IMAGE_ID" type="NVARCHAR(100)" remarks="主题图片ID,关联到TB4D_FILE_INFO表的FILE_ID"/>
             <column name="APP_TYPE" type="NVARCHAR(50)" remarks="系统类型:主系统或者为子系统"></column>
             <column name="APP_TYPE_MAIN_ID" type="NVARCHAR(50)" remarks="为子系统时,用于存储主系统的ID:TB4D_SSO_APP中的APP_ID"></column>
+            <column name="APP_CATEGORY" type="NVARCHAR(50)" remarks="系统分类:App或者Web系统"></column>
             <column name="APP_DESC" type="NVARCHAR(500)" remarks="备注" />
             <column name="APP_ORDER_NUM" type="INT" remarks="排序号" />
             <column name="APP_CREATE_TIME" type="datetime(6)" remarks="创建时间" />

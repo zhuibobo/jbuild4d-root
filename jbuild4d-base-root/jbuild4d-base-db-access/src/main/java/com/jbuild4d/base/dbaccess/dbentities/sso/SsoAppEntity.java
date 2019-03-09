@@ -46,6 +46,9 @@ public class SsoAppEntity {
     //APP_TYPE_MAIN_ID:为子系统时,用于存储主系统的ID:TB4D_SSO_APP中的APP_ID
     private String appTypeMainId;
 
+    //APP_CATEGORY:系统分类:App或者Web系统
+    private String appCategory;
+
     //APP_DESC:备注
     private String appDesc;
 
@@ -65,7 +68,7 @@ public class SsoAppEntity {
     //APP_ORGAN_ID:创建组织ID
     private String appOrganId;
 
-    public SsoAppEntity(String appId, String appCode, String appName, String appPublicKey, String appPrivateKey, String appDomain, String appIndexUrl, String appIntegratedType, String appMainImageId, String appType, String appTypeMainId, String appDesc, Integer appOrderNum, Date appCreateTime, String appStatus, String appCreaterId, String appOrganId) {
+    public SsoAppEntity(String appId, String appCode, String appName, String appPublicKey, String appPrivateKey, String appDomain, String appIndexUrl, String appIntegratedType, String appMainImageId, String appType, String appTypeMainId, String appCategory, String appDesc, Integer appOrderNum, Date appCreateTime, String appStatus, String appCreaterId, String appOrganId) {
         this.appId = appId;
         this.appCode = appCode;
         this.appName = appName;
@@ -77,6 +80,7 @@ public class SsoAppEntity {
         this.appMainImageId = appMainImageId;
         this.appType = appType;
         this.appTypeMainId = appTypeMainId;
+        this.appCategory = appCategory;
         this.appDesc = appDesc;
         this.appOrderNum = appOrderNum;
         this.appCreateTime = appCreateTime;
@@ -175,6 +179,14 @@ public class SsoAppEntity {
 
     public void setAppTypeMainId(String appTypeMainId) {
         this.appTypeMainId = appTypeMainId == null ? null : appTypeMainId.trim();
+    }
+
+    public String getAppCategory() {
+        return appCategory;
+    }
+
+    public void setAppCategory(String appCategory) {
+        this.appCategory = appCategory == null ? null : appCategory.trim();
     }
 
     public String getAppDesc() {

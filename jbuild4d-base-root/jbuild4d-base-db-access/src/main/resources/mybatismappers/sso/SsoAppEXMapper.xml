@@ -15,6 +15,7 @@
         <if test="appMainImageId !=null and appMainImageId !=''"> and APP_MAIN_IMAGE_ID like #{appMainImageId} </if>
         <if test="appType !=null and appType !=''"> and APP_TYPE like #{appType} </if>
         <if test="appTypeMainId !=null and appTypeMainId !=''"> and APP_TYPE_MAIN_ID like #{appTypeMainId} </if>
+        <if test="appCategory !=null and appCategory !=''"> and APP_CATEGORY like #{appCategory} </if>
         <if test="appDesc !=null and appDesc !=''"> and APP_DESC like #{appDesc} </if>
         <if test="appStatus !=null and appStatus !=''"> and APP_STATUS like #{appStatus} </if>
         <if test="appCreaterId !=null and appCreaterId !=''"> and APP_CREATER_ID like #{appCreaterId} </if>

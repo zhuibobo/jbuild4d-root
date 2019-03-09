@@ -14,6 +14,7 @@
             <arg column="APP_MAIN_IMAGE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="APP_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="APP_TYPE_MAIN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="APP_CATEGORY" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="APP_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="APP_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="APP_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -24,8 +25,8 @@
     </resultMap>
     <sql id="Base_Column_List">
         APP_ID, APP_CODE, APP_NAME, APP_PUBLIC_KEY, APP_PRIVATE_KEY, APP_DOMAIN, APP_INDEX_URL,
-        APP_INTEGRATED_TYPE, APP_MAIN_IMAGE_ID, APP_TYPE, APP_TYPE_MAIN_ID, APP_DESC, APP_ORDER_NUM,
-        APP_CREATE_TIME, APP_STATUS, APP_CREATER_ID, APP_ORGAN_ID
+        APP_INTEGRATED_TYPE, APP_MAIN_IMAGE_ID, APP_TYPE, APP_TYPE_MAIN_ID, APP_CATEGORY,
+        APP_DESC, APP_ORDER_NUM, APP_CREATE_TIME, APP_STATUS, APP_CREATER_ID, APP_ORGAN_ID
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -41,15 +42,17 @@
         insert into TB4D_SSO_APP (APP_ID, APP_CODE, APP_NAME,
                                   APP_PUBLIC_KEY, APP_PRIVATE_KEY, APP_DOMAIN,
                                   APP_INDEX_URL, APP_INTEGRATED_TYPE, APP_MAIN_IMAGE_ID,
-                                  APP_TYPE, APP_TYPE_MAIN_ID, APP_DESC,
-                                  APP_ORDER_NUM, APP_CREATE_TIME, APP_STATUS,
-                                  APP_CREATER_ID, APP_ORGAN_ID)
+                                  APP_TYPE, APP_TYPE_MAIN_ID, APP_CATEGORY,
+                                  APP_DESC, APP_ORDER_NUM, APP_CREATE_TIME,
+                                  APP_STATUS, APP_CREATER_ID, APP_ORGAN_ID
+                )
         values (#{appId,jdbcType=VARCHAR}, #{appCode,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR},
                 #{appPublicKey,jdbcType=VARCHAR}, #{appPrivateKey,jdbcType=VARCHAR}, #{appDomain,jdbcType=VARCHAR},
                 #{appIndexUrl,jdbcType=VARCHAR}, #{appIntegratedType,jdbcType=VARCHAR}, #{appMainImageId,jdbcType=VARCHAR},
-                #{appType,jdbcType=VARCHAR}, #{appTypeMainId,jdbcType=VARCHAR}, #{appDesc,jdbcType=VARCHAR},
-                #{appOrderNum,jdbcType=INTEGER}, #{appCreateTime,jdbcType=TIMESTAMP}, #{appStatus,jdbcType=VARCHAR},
-                #{appCreaterId,jdbcType=VARCHAR}, #{appOrganId,jdbcType=VARCHAR})
+                #{appType,jdbcType=VARCHAR}, #{appTypeMainId,jdbcType=VARCHAR}, #{appCategory,jdbcType=VARCHAR},
+                #{appDesc,jdbcType=VARCHAR}, #{appOrderNum,jdbcType=INTEGER}, #{appCreateTime,jdbcType=TIMESTAMP},
+                #{appStatus,jdbcType=VARCHAR}, #{appCreaterId,jdbcType=VARCHAR}, #{appOrganId,jdbcType=VARCHAR}
+                       )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
         insert into TB4D_SSO_APP
@@ -86,6 +89,9 @@
             </if>
             <if test="appTypeMainId != null">
                 APP_TYPE_MAIN_ID,
+            </if>
+            <if test="appCategory != null">
+                APP_CATEGORY,
             </if>
             <if test="appDesc != null">
                 APP_DESC,
@@ -140,6 +146,9 @@
             <if test="appTypeMainId != null">
                 #{appTypeMainId,jdbcType=VARCHAR},
             </if>
+            <if test="appCategory != null">
+                #{appCategory,jdbcType=VARCHAR},
+            </if>
             <if test="appDesc != null">
                 #{appDesc,jdbcType=VARCHAR},
             </if>
@@ -193,6 +202,9 @@
             <if test="appTypeMainId != null">
                 APP_TYPE_MAIN_ID = #{appTypeMainId,jdbcType=VARCHAR},
             </if>
+            <if test="appCategory != null">
+                APP_CATEGORY = #{appCategory,jdbcType=VARCHAR},
+            </if>
             <if test="appDesc != null">
                 APP_DESC = #{appDesc,jdbcType=VARCHAR},
             </if>
@@ -226,6 +238,7 @@
             APP_MAIN_IMAGE_ID = #{appMainImageId,jdbcType=VARCHAR},
             APP_TYPE = #{appType,jdbcType=VARCHAR},
             APP_TYPE_MAIN_ID = #{appTypeMainId,jdbcType=VARCHAR},
+            APP_CATEGORY = #{appCategory,jdbcType=VARCHAR},
             APP_DESC = #{appDesc,jdbcType=VARCHAR},
             APP_ORDER_NUM = #{appOrderNum,jdbcType=INTEGER},
             APP_CREATE_TIME = #{appCreateTime,jdbcType=TIMESTAMP},
