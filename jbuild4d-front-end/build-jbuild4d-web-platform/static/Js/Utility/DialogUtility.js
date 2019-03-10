@@ -466,7 +466,7 @@ var DialogUtility={
                 options.height = PageStyleUtility.GetPageHeight()-180;
             }
             else if (whtype == 1) {
-                defaultoptions = $.extend(true, {}, defaultoptions, {height: 680, width: 980});
+                defaultoptions = $.extend(true, {}, defaultoptions, {height: 610, width: 980});
             }
             else if (whtype == 2) {
                 defaultoptions = $.extend(true, {}, defaultoptions, {height: 600, width: 800});

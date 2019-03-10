@@ -8,9 +8,9 @@
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" style="margin-top: 0px" v-cloak>
-    <tabs @on-click="tabChange" v-model="selectedTabName">
+    <tabs>
         <tab-pane label="系统设置">
-            <sso-app-sub-system-list-comp></sso-app-sub-system-list-comp>
+            <sso-app-detail-from-comp></sso-app-detail-from-comp>
         </tab-pane>
         <tab-pane label="接口设置">
 
@@ -41,6 +41,7 @@
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
             formEntity: {
+
             },
             ruleValidate: {
                 'userEntity.userName': [

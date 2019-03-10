@@ -71,50 +71,49 @@
                 </row>
             </form-item>
             <form-item label="地址：">
-                <i-input v-model="formEntity.organAddress"></i-input>
+                <row>
+                    <i-col span="15">
+                        <i-input v-model="formEntity.organAddress"></i-input>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">是否虚拟：</i-col>
+                    <i-col span="5">
+                        <radio-group v-model="formEntity.organIsVirtual">
+                            <radio label="是">是</radio>
+                            <radio label="否">否</radio>
+                        </radio-group>
+                    </i-col>
+                </row>
             </form-item>
             <form-item label="联系人：">
                 <row>
-                    <i-col span="10">
+                    <i-col span="6">
                         <form-item>
                             <i-input v-model="formEntity.organContacts"></i-input>
                         </form-item>
                     </i-col>
                     <i-col span="4" style="text-align: center">联系人手机：</i-col>
-                    <i-col span="10">
+                    <i-col span="5">
                         <form-item>
                             <i-input v-model="formEntity.organContactsMobile"></i-input>
                         </form-item>
                     </i-col>
-                </row>
-            </form-item>
-            <form-item label="域名：">
-                <row>
-                    <i-col span="10">
-                        <form-item>
-                            <i-input v-model="formEntity.organWebSite"></i-input>
-                        </form-item>
-                    </i-col>
                     <i-col span="4" style="text-align: center">传真：</i-col>
-                    <i-col span="10">
+                    <i-col span="5">
                         <form-item>
                             <i-input v-model="formEntity.organFax"></i-input>
                         </form-item>
                     </i-col>
                 </row>
             </form-item>
-            <form-item label="是否虚拟：">
+            <form-item label="域名：">
                 <row>
-                    <i-col span="10">
+                    <i-col span="6">
                         <form-item>
-                            <radio-group v-model="formEntity.organIsVirtual">
-                                <radio label="是">是</radio>
-                                <radio label="否">否</radio>
-                            </radio-group>
+                            <i-input v-model="formEntity.organWebSite"></i-input>
                         </form-item>
                     </i-col>
                     <i-col span="4" style="text-align: center">组织类型：</i-col>
-                    <i-col span="10">
+                    <i-col span="14">
                         <form-item>
                             <radio-group v-model="formEntity.organTypeValue" style="width: 100%">
                                 <radio v-for="item in exObjectsJson.OrganType" :label="item.organTypeValue">{{item.organTypeName}}</radio>
