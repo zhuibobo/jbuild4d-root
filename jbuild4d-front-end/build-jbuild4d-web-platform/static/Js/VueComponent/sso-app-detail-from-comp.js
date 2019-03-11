@@ -3,7 +3,8 @@ Vue.component("sso-app-detail-from-comp", {
     data: function () {
         return {
             acInterface:{
-                appLogoUrl:"/PlatFormRest/SSO/Application/GetAppLogo"
+                appLogoUrl:"/PlatFormRest/SSO/Application/GetAppLogo",
+                getNewKeys:"/PlatFormRest/SSO/Application/GetNewKeys"
             },
             appEntity:{
                 appId:"",
@@ -19,11 +20,12 @@ Vue.component("sso-app-detail-from-comp", {
                 appCategory:"web",
                 appDesc:"",
                 appStatus:"启用",
-                appCreateTime:""
+                appCreateTime:DateUtility.GetCurrentData()
             },
             ruleValidate:{
                 appCode: [
-                    {required: true, message: '【系统编码】不能为空！', trigger: 'blur'}
+                    {required: true, message: '【系统编码】不能为空！', trigger: 'blur'},
+                    { type: 'string',pattern:/^[A-Za-z0-9]+$/, message:'请使用字母或数字', trigger:'blur'},
                 ],
                 appName:[
                     {required: true, message: '【系统名称】不能为空！', trigger: 'blur'}
@@ -43,13 +45,27 @@ Vue.component("sso-app-detail-from-comp", {
     },
     methods:{
         uploadSystemLogoImageSuccess:function (response, file, fileList) {
-
+            var data = response.data;
+            this.appEntity.appMainImageId = data.fileId;
+            this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: this.appEntity.appMainImageId});
         },
         getAppEntity:function () {
 
         },
         setAppEntity:function () {
 
+        },
+        createKeys:function () {
+            var _self=this;
+            AjaxUtility.Post(this.acInterface.getNewKeys, {}, function (result) {
+                if (result.success) {
+                    _self.appEntity.appPublicKey=result.data.publicKey;
+                    _self.appEntity.appPrivateKey=result.data.privateKey;
+                }
+                else {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
+                }
+            }, "json");
         }
     },
     template: `<div>
@@ -85,7 +101,7 @@ Vue.component("sso-app-detail-from-comp", {
                                 </row>
                             </form-item>
                             <form-item label="公钥：">
-                                <i-input v-model="appEntity.appPublicKey"></i-input>
+                                <i-input placeholder="请创建密钥对,用于数据的加密使用" search enter-button="创建密钥对" v-model="appEntity.appPublicKey" @on-search="createKeys()"></i-input>
                             </form-item>
                             <form-item label="私钥：">
                                 <i-input v-model="appEntity.appPrivateKey"></i-input>

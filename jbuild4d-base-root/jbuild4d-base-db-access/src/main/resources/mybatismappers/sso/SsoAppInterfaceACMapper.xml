@@ -5,7 +5,7 @@
         <constructor>
             <idArg column="INTERFACE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="INTERFACE_BELONG_APP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="INTERFACE_TYPE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="INTERFACE_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="INTERFACE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="INTERFACE_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="INTERFACE_URL_PARAS" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -19,7 +19,7 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        INTERFACE_ID, INTERFACE_BELONG_APP_ID, INTERFACE_TYPE_NAME, INTERFACE_NAME, INTERFACE_URL,
+        INTERFACE_ID, INTERFACE_BELONG_APP_ID, INTERFACE_CODE, INTERFACE_NAME, INTERFACE_URL,
         INTERFACE_URL_PARAS, INTERFACE_URL_FORMAT, INTERFACE_URL_DESC, INTERFACE_URL_ORDER_NUM,
         INTERFACE_URL_CREATE_TIME, INTERFACE_URL_STATUS, INTERFACE_URL_CREATER_ID, INTERFACE_URL_ORGAN_ID
     </sql>
@@ -35,14 +35,14 @@
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity">
         insert into TB4D_SSO_APP_INTERFACE (INTERFACE_ID, INTERFACE_BELONG_APP_ID,
-                                            INTERFACE_TYPE_NAME, INTERFACE_NAME, INTERFACE_URL,
+                                            INTERFACE_CODE, INTERFACE_NAME, INTERFACE_URL,
                                             INTERFACE_URL_PARAS, INTERFACE_URL_FORMAT,
                                             INTERFACE_URL_DESC, INTERFACE_URL_ORDER_NUM,
                                             INTERFACE_URL_CREATE_TIME, INTERFACE_URL_STATUS,
                                             INTERFACE_URL_CREATER_ID, INTERFACE_URL_ORGAN_ID
                 )
         values (#{interfaceId,jdbcType=VARCHAR}, #{interfaceBelongAppId,jdbcType=VARCHAR},
-                #{interfaceTypeName,jdbcType=VARCHAR}, #{interfaceName,jdbcType=VARCHAR}, #{interfaceUrl,jdbcType=VARCHAR},
+                #{interfaceCode,jdbcType=VARCHAR}, #{interfaceName,jdbcType=VARCHAR}, #{interfaceUrl,jdbcType=VARCHAR},
                 #{interfaceUrlParas,jdbcType=VARCHAR}, #{interfaceUrlFormat,jdbcType=VARCHAR},
                 #{interfaceUrlDesc,jdbcType=VARCHAR}, #{interfaceUrlOrderNum,jdbcType=INTEGER},
                 #{interfaceUrlCreateTime,jdbcType=TIMESTAMP}, #{interfaceUrlStatus,jdbcType=VARCHAR},
@@ -58,8 +58,8 @@
             <if test="interfaceBelongAppId != null">
                 INTERFACE_BELONG_APP_ID,
             </if>
-            <if test="interfaceTypeName != null">
-                INTERFACE_TYPE_NAME,
+            <if test="interfaceCode != null">
+                INTERFACE_CODE,
             </if>
             <if test="interfaceName != null">
                 INTERFACE_NAME,
@@ -99,8 +99,8 @@
             <if test="interfaceBelongAppId != null">
                 #{interfaceBelongAppId,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceTypeName != null">
-                #{interfaceTypeName,jdbcType=VARCHAR},
+            <if test="interfaceCode != null">
+                #{interfaceCode,jdbcType=VARCHAR},
             </if>
             <if test="interfaceName != null">
                 #{interfaceName,jdbcType=VARCHAR},
@@ -140,8 +140,8 @@
             <if test="interfaceBelongAppId != null">
                 INTERFACE_BELONG_APP_ID = #{interfaceBelongAppId,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceTypeName != null">
-                INTERFACE_TYPE_NAME = #{interfaceTypeName,jdbcType=VARCHAR},
+            <if test="interfaceCode != null">
+                INTERFACE_CODE = #{interfaceCode,jdbcType=VARCHAR},
             </if>
             <if test="interfaceName != null">
                 INTERFACE_NAME = #{interfaceName,jdbcType=VARCHAR},
@@ -179,7 +179,7 @@
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity">
         update TB4D_SSO_APP_INTERFACE
         set INTERFACE_BELONG_APP_ID = #{interfaceBelongAppId,jdbcType=VARCHAR},
-            INTERFACE_TYPE_NAME = #{interfaceTypeName,jdbcType=VARCHAR},
+            INTERFACE_CODE = #{interfaceCode,jdbcType=VARCHAR},
             INTERFACE_NAME = #{interfaceName,jdbcType=VARCHAR},
             INTERFACE_URL = #{interfaceUrl,jdbcType=VARCHAR},
             INTERFACE_URL_PARAS = #{interfaceUrlParas,jdbcType=VARCHAR},

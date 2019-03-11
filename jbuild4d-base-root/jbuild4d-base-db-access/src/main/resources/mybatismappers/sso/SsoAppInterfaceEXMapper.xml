@@ -6,7 +6,7 @@
     <select id="nextOrderNum" resultType="integer">select case when max(INTERFACE_URL_ORDER_NUM) is null then 1 else max(INTERFACE_URL_ORDER_NUM)+1 end ORDERNUM from TB4D_SSO_APP_INTERFACE</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_SSO_APP_INTERFACE<where>
         <if test="interfaceBelongAppId !=null and interfaceBelongAppId !=''"> and INTERFACE_BELONG_APP_ID like #{interfaceBelongAppId} </if>
-        <if test="interfaceTypeName !=null and interfaceTypeName !=''"> and INTERFACE_TYPE_NAME like #{interfaceTypeName} </if>
+        <if test="interfaceCode !=null and interfaceCode !=''"> and INTERFACE_CODE like #{interfaceCode} </if>
         <if test="interfaceName !=null and interfaceName !=''"> and INTERFACE_NAME like #{interfaceName} </if>
         <if test="interfaceUrl !=null and interfaceUrl !=''"> and INTERFACE_URL like #{interfaceUrl} </if>
         <if test="interfaceUrlParas !=null and interfaceUrlParas !=''"> and INTERFACE_URL_PARAS like #{interfaceUrlParas} </if>

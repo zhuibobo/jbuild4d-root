@@ -857,7 +857,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="INTERFACE_BELONG_APP_ID" type="NVARCHAR(100)" remarks="所属系统ID"/>
-            <column name="INTERFACE_TYPE_NAME" type="NVARCHAR(100)" remarks="接口类型:默认定义和自定义:eg[登录接口]"/>
+            <column name="INTERFACE_CODE" type="NVARCHAR(100)" remarks="接口类型:默认定义和自定义:eg[LOGIN]"/>
             <column name="INTERFACE_NAME" type="NVARCHAR(100)" remarks="接口名称"/>
             <column name="INTERFACE_URL" type="NVARCHAR(1000)" remarks="接口地址"/>
             <column name="INTERFACE_URL_PARAS" type="NVARCHAR(1000)" remarks="参数"/>

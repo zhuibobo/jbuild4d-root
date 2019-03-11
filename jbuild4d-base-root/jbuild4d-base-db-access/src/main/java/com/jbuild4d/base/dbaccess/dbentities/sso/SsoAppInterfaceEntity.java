@@ -19,8 +19,8 @@ public class SsoAppInterfaceEntity {
     //INTERFACE_BELONG_APP_ID:所属系统ID
     private String interfaceBelongAppId;
 
-    //INTERFACE_TYPE_NAME:接口类型:默认定义和自定义:eg[登录接口]
-    private String interfaceTypeName;
+    //INTERFACE_CODE:接口类型:默认定义和自定义:eg[LOGIN]
+    private String interfaceCode;
 
     //INTERFACE_NAME:接口名称
     private String interfaceName;
@@ -53,10 +53,10 @@ public class SsoAppInterfaceEntity {
     //INTERFACE_URL_ORGAN_ID:创建组织ID
     private String interfaceUrlOrganId;
 
-    public SsoAppInterfaceEntity(String interfaceId, String interfaceBelongAppId, String interfaceTypeName, String interfaceName, String interfaceUrl, String interfaceUrlParas, String interfaceUrlFormat, String interfaceUrlDesc, Integer interfaceUrlOrderNum, Date interfaceUrlCreateTime, String interfaceUrlStatus, String interfaceUrlCreaterId, String interfaceUrlOrganId) {
+    public SsoAppInterfaceEntity(String interfaceId, String interfaceBelongAppId, String interfaceCode, String interfaceName, String interfaceUrl, String interfaceUrlParas, String interfaceUrlFormat, String interfaceUrlDesc, Integer interfaceUrlOrderNum, Date interfaceUrlCreateTime, String interfaceUrlStatus, String interfaceUrlCreaterId, String interfaceUrlOrganId) {
         this.interfaceId = interfaceId;
         this.interfaceBelongAppId = interfaceBelongAppId;
-        this.interfaceTypeName = interfaceTypeName;
+        this.interfaceCode = interfaceCode;
         this.interfaceName = interfaceName;
         this.interfaceUrl = interfaceUrl;
         this.interfaceUrlParas = interfaceUrlParas;
@@ -89,12 +89,12 @@ public class SsoAppInterfaceEntity {
         this.interfaceBelongAppId = interfaceBelongAppId == null ? null : interfaceBelongAppId.trim();
     }
 
-    public String getInterfaceTypeName() {
-        return interfaceTypeName;
+    public String getInterfaceCode() {
+        return interfaceCode;
     }
 
-    public void setInterfaceTypeName(String interfaceTypeName) {
-        this.interfaceTypeName = interfaceTypeName == null ? null : interfaceTypeName.trim();
+    public void setInterfaceCode(String interfaceCode) {
+        this.interfaceCode = interfaceCode == null ? null : interfaceCode.trim();
     }
 
     public String getInterfaceName() {

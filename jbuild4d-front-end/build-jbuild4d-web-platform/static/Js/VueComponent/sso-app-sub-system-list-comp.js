@@ -4,10 +4,6 @@ Vue.component("sso-app-sub-system-list-comp", {
         return {
             items: [
                 { message: 'Foo' },
-                { message: 'Bar' },
-                { message: 'Foo' },
-                { message: 'Bar' },
-                { message: 'Foo' },
                 { message: 'Bar' }
             ]
         }

@@ -4,6 +4,7 @@ import com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
+import com.jbuild4d.base.tools.common.encryption.nsymmetric.RSAUtility;
 import com.jbuild4d.platform.files.service.IFileInfoService;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.apache.commons.io.IOUtils;
@@ -18,6 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.KeyPair;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/PlatFormRest/SSO/Application")
@@ -51,4 +55,14 @@ public class AppRestResource {
         }
     }
 
+    @RequestMapping(value = "/GetNewKeys", method = RequestMethod.POST, produces = "application/json")
+    public JBuild4DResponseVo getNewKeys() throws Exception {
+        KeyPair keyPair= RSAUtility.getKeyPair();
+        String publicKey=RSAUtility.getPublicKeyBase64(keyPair);
+        String privateKey=RSAUtility.getPrivateKeyBase64(keyPair);
+        Map<String,String> keys=new HashMap<>();
+        keys.put("publicKey",publicKey);
+        keys.put("privateKey",privateKey);
+        return JBuild4DResponseVo.getDataSuccess(keys);
+    }
 }
