@@ -17,6 +17,15 @@ Vue.component("sso-app-interface-list-comp", {
                 interfaceUrlCreaterId:"",
                 interfaceUrlOrganId:""
             },
+            ruleValidate:{
+                interfaceCode: [
+                    {required: true, message: '【接口类型】不能为空！', trigger: 'blur'},
+                    { type: 'string',pattern:/^[A-Za-z0-9]+$/, message:'请使用字母或数字', trigger:'blur'},
+                ],
+                interfaceName:[
+                    {required: true, message: '【接口名称】不能为空！', trigger: 'blur'}
+                ]
+            },
             list:{
                 columnsConfig: [
                     {
@@ -70,56 +79,48 @@ Vue.component("sso-app-interface-list-comp", {
             DialogUtility.DialogElemObj(elem, {
                 modal: true,
                 width: 570,
-                height: 300,
+                height: 350,
                 title: "接口设置"
             });
         },
         saveInterfaceEdit:function () {
 
+        },
+        changeInterfaceCode:function () {
+            alert("1");
         }
     },
     template: `<div class="iv-list-page-wrap">
                     <div ref="ssoAppInterfaceEditModelDialogWrap" class="general-edit-page-wrap" style="display: none;margin-top: 0px">
-                        <table style="width: 100%" class="app-interface-table-detail-edit">
-                            <tr>
-                                <td>接口类型：</td>
-                                <td>
-                                    <i-input v-model="interfaceEntity.interfaceCode" size="small"></i-input>
-                                </td>
-                                <td>接口名称：</td>
-                                <td>
-                                    <i-input v-model="interfaceEntity.interfaceName" size="small"></i-input>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>接口地址：</td>
-                                <td colspan="3">
-                                    <i-input v-model="interfaceEntity.interfaceUrl" size="small"></i-input>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>参数：</td>
-                                <td colspan="3">
-                                     <i-input v-model="interfaceEntity.interfaceUrlParas" type="textarea" :autosize="{minRows: 2,maxRows: 2}" size="small"></i-input>    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>格式化方法：</td>
-                                <td colspan="3">
-                                    <i-input v-model="interfaceEntity.interfaceUrlFormat" size="small"></i-input>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>备注：</td>
-                                <td colspan="3">
-                                    <i-input v-model="interfaceEntity.interfaceUrlDesc" size="small"></i-input>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="button-outer-wrap">
+                        <i-form ref="interfaceEntity" :model="interfaceEntity" :rules="ruleValidate" :label-width="130">
+                            <form-item label="接口类型：" prop="interfaceCode" style="margin-bottom: 13px">
+                                <i-input v-model="interfaceEntity.interfaceCode" size="small">
+                                    <Select slot="append" style="width: 90px" @on-change="changeInterfaceCode()">
+                                        <Option value="Login">登录接口</Option>
+                                        <Option value="Other">其他</Option>
+                                    </Select>
+                                </i-input>
+                            </form-item>
+                            <form-item label="接口名称：" prop="interfaceName" style="margin-bottom: 18px">
+                                <i-input v-model="interfaceEntity.interfaceName" size="small"></i-input>
+                            </form-item>
+                            <form-item label="接口地址：" style="margin-bottom: 2px">
+                                <i-input v-model="interfaceEntity.interfaceUrl" size="small"></i-input>
+                            </form-item>
+                            <form-item label="参数：" style="margin-bottom: 2px">
+                                <i-input v-model="interfaceEntity.interfaceUrlParas" type="textarea" :autosize="{minRows: 2,maxRows: 2}" size="small"></i-input>    
+                            </form-item>
+                            <form-item label="格式化方法：" style="margin-bottom: 2px">
+                                <i-input v-model="interfaceEntity.interfaceUrlFormat" size="small"></i-input>
+                            </form-item>
+                            <form-item label="备注：" style="margin-bottom: 2px">
+                                <i-input v-model="interfaceEntity.interfaceUrlDesc" size="small"></i-input>
+                            </form-item>
+                        </i-form>
+                        <div class="button-outer-wrap" style="margin-left: 8px">
                             <div class="button-inner-wrap">
                                 <button-group size="small">
-                                    <i-button type="primary" @click="handleSubmit('formEntity')" icon="md-checkmark"></i-button>
+                                    <i-button type="primary" @click="saveInterfaceEdit('interfaceEntity')" icon="md-checkmark"></i-button>
                                     <i-button @click="handleClose()" icon="md-close"></i-button>
                                 </button-group>
                             </div>
