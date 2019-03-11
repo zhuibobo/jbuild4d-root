@@ -44,6 +44,12 @@ Vue.component("sso-app-detail-from-comp", {
     methods:{
         uploadSystemLogoImageSuccess:function (response, file, fileList) {
 
+        },
+        getAppEntity:function () {
+
+        },
+        setAppEntity:function () {
+
         }
     },
     template: `<div>
