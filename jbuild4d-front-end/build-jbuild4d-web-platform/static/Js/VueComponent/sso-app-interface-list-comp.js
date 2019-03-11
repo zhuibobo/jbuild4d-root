@@ -54,7 +54,9 @@ Vue.component("sso-app-interface-list-comp", {
                 </table>
             </div>
             <div>
-                
+                <i-table :height="roleList.listHeight" stripe border :columns="roleList.columnsConfig" :data="roleList.tableData"
+                     class="iv-list-table" :highlight-row="true"
+                     @on-selection-change="selectionChange"></i-table>
             </div>
         </div>
         <div>2</div>
