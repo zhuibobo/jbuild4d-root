@@ -19,6 +19,7 @@ public class JB4DCacheManager {
     public static String CACHE_KEY_USER_HEAD_IMG="JB4DCacheManager.CACHE_KEY_USER_HEAD_IMG";
     public static String CACHE_KEY_ORGAN_LOGO="JB4DCacheManager.CACHE_KEY_ORGAN_LOGO";
     public static String CACHE_KEY_PROCESS_MODEL_MAIN_IMAGE="JB4DCacheManager.CACHE_KEY_PROCESS_MODEL_MAIN_IMAGE";
+    public static String CACHE_KEY_SSO_APP_LOGO="JB4DCacheManager.CACHE_KEY_SSO_APP_LOGO";
 
     private static CacheManager cacheManager = BeanUtility.getBean(CacheManager.class);
 
