@@ -9,12 +9,12 @@
         <if test="interfaceCode !=null and interfaceCode !=''"> and INTERFACE_CODE like #{interfaceCode} </if>
         <if test="interfaceName !=null and interfaceName !=''"> and INTERFACE_NAME like #{interfaceName} </if>
         <if test="interfaceUrl !=null and interfaceUrl !=''"> and INTERFACE_URL like #{interfaceUrl} </if>
-        <if test="interfaceUrlParas !=null and interfaceUrlParas !=''"> and INTERFACE_URL_PARAS like #{interfaceUrlParas} </if>
-        <if test="interfaceUrlFormat !=null and interfaceUrlFormat !=''"> and INTERFACE_URL_FORMAT like #{interfaceUrlFormat} </if>
-        <if test="interfaceUrlDesc !=null and interfaceUrlDesc !=''"> and INTERFACE_URL_DESC like #{interfaceUrlDesc} </if>
-        <if test="interfaceUrlStatus !=null and interfaceUrlStatus !=''"> and INTERFACE_URL_STATUS like #{interfaceUrlStatus} </if>
-        <if test="interfaceUrlCreaterId !=null and interfaceUrlCreaterId !=''"> and INTERFACE_URL_CREATER_ID like #{interfaceUrlCreaterId} </if>
-        <if test="interfaceUrlOrganId !=null and interfaceUrlOrganId !=''"> and INTERFACE_URL_ORGAN_ID like #{interfaceUrlOrganId} </if>
+        <if test="interfaceParas !=null and interfaceParas !=''"> and INTERFACE_PARAS like #{interfaceParas} </if>
+        <if test="interfaceFormat !=null and interfaceFormat !=''"> and INTERFACE_FORMAT like #{interfaceFormat} </if>
+        <if test="interfaceDesc !=null and interfaceDesc !=''"> and INTERFACE_DESC like #{interfaceDesc} </if>
+        <if test="interfaceStatus !=null and interfaceStatus !=''"> and INTERFACE_STATUS like #{interfaceStatus} </if>
+        <if test="interfaceCreaterId !=null and interfaceCreaterId !=''"> and INTERFACE_CREATER_ID like #{interfaceCreaterId} </if>
+        <if test="interfaceOrganId !=null and interfaceOrganId !=''"> and INTERFACE_ORGAN_ID like #{interfaceOrganId} </if>
     </where>ORDER by INTERFACE_URL_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_SSO_APP_INTERFACE
                                                                                                           where INTERFACE_URL_ORDER_NUM = (select max(INTERFACE_URL_ORDER_NUM) from TB4D_SSO_APP_INTERFACE where INTERFACE_URL_ORDER_NUM<(select INTERFACE_URL_ORDER_NUM from TB4D_SSO_APP_INTERFACE where INTERFACE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>

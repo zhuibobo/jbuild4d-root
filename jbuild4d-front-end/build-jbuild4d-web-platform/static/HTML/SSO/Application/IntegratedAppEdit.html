@@ -10,13 +10,13 @@
 <div id="appForm" class="general-edit-page-wrap" style="margin-top: 0px" v-cloak>
     <tabs>
         <tab-pane label="系统设置">
-            <sso-app-detail-from-comp></sso-app-detail-from-comp>
+            <sso-app-detail-from-comp :status="status" ref="mainAppDetailFromComp"></sso-app-detail-from-comp>
         </tab-pane>
         <tab-pane label="接口设置">
-            <sso-app-interface-list-comp></sso-app-interface-list-comp>
+            <sso-app-interface-list-comp ref="mainAppInterfaceListComp" :interfaceBelongAppId="formEntity.appId"></sso-app-interface-list-comp>
         </tab-pane>
         <tab-pane label="子系统配置">
-            <sso-app-sub-system-list-comp></sso-app-sub-system-list-comp>
+            <sso-app-sub-system-list-comp :status="status"></sso-app-sub-system-list-comp>
         </tab-pane>
     </tabs>
     <div class="button-outer-wrap">
@@ -32,7 +32,13 @@
     var appForm =new Vue({
         el: "#appForm",
         mounted:function () {
-
+            if(this.status=="add") {
+                this.formEntity.appId=StringUtility.Guid();
+                //this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: "defaultSSOAppLogoImage"});
+            }
+            else {
+                //this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: ""});
+            }
         },
         data: {
             acInterface:{
@@ -41,7 +47,20 @@
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
             formEntity: {
-
+                appId:"",
+                appCode:"",
+                appName:"",
+                appPublicKey:"",
+                appPrivateKey:"",
+                appDomain:"",
+                appIndexUrl:"",
+                appMainImageId:"",
+                appType:"",
+                appTypeMainId:"",
+                appCategory:"web",
+                appDesc:"",
+                appStatus:"启用",
+                appCreateTime:DateUtility.GetCurrentData()
             },
             ruleValidate: {
                 'userEntity.userName': [

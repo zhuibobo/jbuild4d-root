@@ -1,7 +1,13 @@
-<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../../Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../../Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../../Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../../Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../../Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../../Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../../Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../Js/VueEXComponent.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../../Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"></head><body><div id="appForm" class="general-edit-page-wrap" style="margin-top:0" v-cloak><tabs><tab-pane label="系统设置"><sso-app-detail-from-comp></sso-app-detail-from-comp></tab-pane><tab-pane label="接口设置"><sso-app-interface-list-comp></sso-app-interface-list-comp></tab-pane><tab-pane label="子系统配置"><sso-app-sub-system-list-comp></sso-app-sub-system-list-comp></tab-pane></tabs><div class="button-outer-wrap"><div class="button-inner-wrap"><button-group><i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')" icon="md-checkmark">保存</i-button><i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button></button-group></div></div></div><script>var appForm =new Vue({
+<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../../Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../../Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../../Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../../Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../../Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../../Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../../Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../Js/VueEXComponent.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../../Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../../Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"></head><body><div id="appForm" class="general-edit-page-wrap" style="margin-top:0" v-cloak><tabs><tab-pane label="系统设置"><sso-app-detail-from-comp :status="status" ref="mainAppDetailFromComp"></sso-app-detail-from-comp></tab-pane><tab-pane label="接口设置"><sso-app-interface-list-comp ref="mainAppInterfaceListComp" :interfacebelongappid="formEntity.appId"></sso-app-interface-list-comp></tab-pane><tab-pane label="子系统配置"><sso-app-sub-system-list-comp :status="status"></sso-app-sub-system-list-comp></tab-pane></tabs><div class="button-outer-wrap"><div class="button-inner-wrap"><button-group><i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')" icon="md-checkmark">保存</i-button><i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button></button-group></div></div></div><script>var appForm =new Vue({
         el: "#appForm",
         mounted:function () {
-
+            if(this.status=="add") {
+                this.formEntity.appId=StringUtility.Guid();
+                //this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: "defaultSSOAppLogoImage"});
+            }
+            else {
+                //this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: ""});
+            }
         },
         data: {
             acInterface:{
@@ -10,7 +16,20 @@
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
             formEntity: {
-
+                appId:"",
+                appCode:"",
+                appName:"",
+                appPublicKey:"",
+                appPrivateKey:"",
+                appDomain:"",
+                appIndexUrl:"",
+                appMainImageId:"",
+                appType:"",
+                appTypeMainId:"",
+                appCategory:"web",
+                appDesc:"",
+                appStatus:"启用",
+                appCreateTime:DateUtility.GetCurrentData()
             },
             ruleValidate: {
                 'userEntity.userName': [

@@ -8,20 +8,20 @@
             <arg column="INTERFACE_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="INTERFACE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="INTERFACE_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="INTERFACE_URL_PARAS" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="INTERFACE_URL_FORMAT" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="INTERFACE_URL_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="INTERFACE_URL_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
-            <arg column="INTERFACE_URL_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-            <arg column="INTERFACE_URL_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="INTERFACE_URL_CREATER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="INTERFACE_URL_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="INTERFACE_PARAS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="INTERFACE_FORMAT" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="INTERFACE_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="INTERFACE_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="INTERFACE_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="INTERFACE_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="INTERFACE_CREATER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="INTERFACE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         INTERFACE_ID, INTERFACE_BELONG_APP_ID, INTERFACE_CODE, INTERFACE_NAME, INTERFACE_URL,
-        INTERFACE_URL_PARAS, INTERFACE_URL_FORMAT, INTERFACE_URL_DESC, INTERFACE_URL_ORDER_NUM,
-        INTERFACE_URL_CREATE_TIME, INTERFACE_URL_STATUS, INTERFACE_URL_CREATER_ID, INTERFACE_URL_ORGAN_ID
+        INTERFACE_PARAS, INTERFACE_FORMAT, INTERFACE_DESC, INTERFACE_ORDER_NUM, INTERFACE_CREATE_TIME,
+        INTERFACE_STATUS, INTERFACE_CREATER_ID, INTERFACE_ORGAN_ID
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -36,17 +36,15 @@
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity">
         insert into TB4D_SSO_APP_INTERFACE (INTERFACE_ID, INTERFACE_BELONG_APP_ID,
                                             INTERFACE_CODE, INTERFACE_NAME, INTERFACE_URL,
-                                            INTERFACE_URL_PARAS, INTERFACE_URL_FORMAT,
-                                            INTERFACE_URL_DESC, INTERFACE_URL_ORDER_NUM,
-                                            INTERFACE_URL_CREATE_TIME, INTERFACE_URL_STATUS,
-                                            INTERFACE_URL_CREATER_ID, INTERFACE_URL_ORGAN_ID
+                                            INTERFACE_PARAS, INTERFACE_FORMAT, INTERFACE_DESC,
+                                            INTERFACE_ORDER_NUM, INTERFACE_CREATE_TIME,
+                                            INTERFACE_STATUS, INTERFACE_CREATER_ID, INTERFACE_ORGAN_ID
                 )
         values (#{interfaceId,jdbcType=VARCHAR}, #{interfaceBelongAppId,jdbcType=VARCHAR},
                 #{interfaceCode,jdbcType=VARCHAR}, #{interfaceName,jdbcType=VARCHAR}, #{interfaceUrl,jdbcType=VARCHAR},
-                #{interfaceUrlParas,jdbcType=VARCHAR}, #{interfaceUrlFormat,jdbcType=VARCHAR},
-                #{interfaceUrlDesc,jdbcType=VARCHAR}, #{interfaceUrlOrderNum,jdbcType=INTEGER},
-                #{interfaceUrlCreateTime,jdbcType=TIMESTAMP}, #{interfaceUrlStatus,jdbcType=VARCHAR},
-                #{interfaceUrlCreaterId,jdbcType=VARCHAR}, #{interfaceUrlOrganId,jdbcType=VARCHAR}
+                #{interfaceParas,jdbcType=VARCHAR}, #{interfaceFormat,jdbcType=VARCHAR}, #{interfaceDesc,jdbcType=VARCHAR},
+                #{interfaceOrderNum,jdbcType=INTEGER}, #{interfaceCreateTime,jdbcType=TIMESTAMP},
+                #{interfaceStatus,jdbcType=VARCHAR}, #{interfaceCreaterId,jdbcType=VARCHAR}, #{interfaceOrganId,jdbcType=VARCHAR}
                        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity">
@@ -67,29 +65,29 @@
             <if test="interfaceUrl != null">
                 INTERFACE_URL,
             </if>
-            <if test="interfaceUrlParas != null">
-                INTERFACE_URL_PARAS,
+            <if test="interfaceParas != null">
+                INTERFACE_PARAS,
             </if>
-            <if test="interfaceUrlFormat != null">
-                INTERFACE_URL_FORMAT,
+            <if test="interfaceFormat != null">
+                INTERFACE_FORMAT,
             </if>
-            <if test="interfaceUrlDesc != null">
-                INTERFACE_URL_DESC,
+            <if test="interfaceDesc != null">
+                INTERFACE_DESC,
             </if>
-            <if test="interfaceUrlOrderNum != null">
-                INTERFACE_URL_ORDER_NUM,
+            <if test="interfaceOrderNum != null">
+                INTERFACE_ORDER_NUM,
             </if>
-            <if test="interfaceUrlCreateTime != null">
-                INTERFACE_URL_CREATE_TIME,
+            <if test="interfaceCreateTime != null">
+                INTERFACE_CREATE_TIME,
             </if>
-            <if test="interfaceUrlStatus != null">
-                INTERFACE_URL_STATUS,
+            <if test="interfaceStatus != null">
+                INTERFACE_STATUS,
             </if>
-            <if test="interfaceUrlCreaterId != null">
-                INTERFACE_URL_CREATER_ID,
+            <if test="interfaceCreaterId != null">
+                INTERFACE_CREATER_ID,
             </if>
-            <if test="interfaceUrlOrganId != null">
-                INTERFACE_URL_ORGAN_ID,
+            <if test="interfaceOrganId != null">
+                INTERFACE_ORGAN_ID,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -108,29 +106,29 @@
             <if test="interfaceUrl != null">
                 #{interfaceUrl,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlParas != null">
-                #{interfaceUrlParas,jdbcType=VARCHAR},
+            <if test="interfaceParas != null">
+                #{interfaceParas,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlFormat != null">
-                #{interfaceUrlFormat,jdbcType=VARCHAR},
+            <if test="interfaceFormat != null">
+                #{interfaceFormat,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlDesc != null">
-                #{interfaceUrlDesc,jdbcType=VARCHAR},
+            <if test="interfaceDesc != null">
+                #{interfaceDesc,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlOrderNum != null">
-                #{interfaceUrlOrderNum,jdbcType=INTEGER},
+            <if test="interfaceOrderNum != null">
+                #{interfaceOrderNum,jdbcType=INTEGER},
             </if>
-            <if test="interfaceUrlCreateTime != null">
-                #{interfaceUrlCreateTime,jdbcType=TIMESTAMP},
+            <if test="interfaceCreateTime != null">
+                #{interfaceCreateTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="interfaceUrlStatus != null">
-                #{interfaceUrlStatus,jdbcType=VARCHAR},
+            <if test="interfaceStatus != null">
+                #{interfaceStatus,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlCreaterId != null">
-                #{interfaceUrlCreaterId,jdbcType=VARCHAR},
+            <if test="interfaceCreaterId != null">
+                #{interfaceCreaterId,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlOrganId != null">
-                #{interfaceUrlOrganId,jdbcType=VARCHAR},
+            <if test="interfaceOrganId != null">
+                #{interfaceOrganId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -149,29 +147,29 @@
             <if test="interfaceUrl != null">
                 INTERFACE_URL = #{interfaceUrl,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlParas != null">
-                INTERFACE_URL_PARAS = #{interfaceUrlParas,jdbcType=VARCHAR},
+            <if test="interfaceParas != null">
+                INTERFACE_PARAS = #{interfaceParas,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlFormat != null">
-                INTERFACE_URL_FORMAT = #{interfaceUrlFormat,jdbcType=VARCHAR},
+            <if test="interfaceFormat != null">
+                INTERFACE_FORMAT = #{interfaceFormat,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlDesc != null">
-                INTERFACE_URL_DESC = #{interfaceUrlDesc,jdbcType=VARCHAR},
+            <if test="interfaceDesc != null">
+                INTERFACE_DESC = #{interfaceDesc,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlOrderNum != null">
-                INTERFACE_URL_ORDER_NUM = #{interfaceUrlOrderNum,jdbcType=INTEGER},
+            <if test="interfaceOrderNum != null">
+                INTERFACE_ORDER_NUM = #{interfaceOrderNum,jdbcType=INTEGER},
             </if>
-            <if test="interfaceUrlCreateTime != null">
-                INTERFACE_URL_CREATE_TIME = #{interfaceUrlCreateTime,jdbcType=TIMESTAMP},
+            <if test="interfaceCreateTime != null">
+                INTERFACE_CREATE_TIME = #{interfaceCreateTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="interfaceUrlStatus != null">
-                INTERFACE_URL_STATUS = #{interfaceUrlStatus,jdbcType=VARCHAR},
+            <if test="interfaceStatus != null">
+                INTERFACE_STATUS = #{interfaceStatus,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlCreaterId != null">
-                INTERFACE_URL_CREATER_ID = #{interfaceUrlCreaterId,jdbcType=VARCHAR},
+            <if test="interfaceCreaterId != null">
+                INTERFACE_CREATER_ID = #{interfaceCreaterId,jdbcType=VARCHAR},
             </if>
-            <if test="interfaceUrlOrganId != null">
-                INTERFACE_URL_ORGAN_ID = #{interfaceUrlOrganId,jdbcType=VARCHAR},
+            <if test="interfaceOrganId != null">
+                INTERFACE_ORGAN_ID = #{interfaceOrganId,jdbcType=VARCHAR},
             </if>
         </set>
         where INTERFACE_ID = #{interfaceId,jdbcType=VARCHAR}
@@ -182,14 +180,14 @@
             INTERFACE_CODE = #{interfaceCode,jdbcType=VARCHAR},
             INTERFACE_NAME = #{interfaceName,jdbcType=VARCHAR},
             INTERFACE_URL = #{interfaceUrl,jdbcType=VARCHAR},
-            INTERFACE_URL_PARAS = #{interfaceUrlParas,jdbcType=VARCHAR},
-            INTERFACE_URL_FORMAT = #{interfaceUrlFormat,jdbcType=VARCHAR},
-            INTERFACE_URL_DESC = #{interfaceUrlDesc,jdbcType=VARCHAR},
-            INTERFACE_URL_ORDER_NUM = #{interfaceUrlOrderNum,jdbcType=INTEGER},
-            INTERFACE_URL_CREATE_TIME = #{interfaceUrlCreateTime,jdbcType=TIMESTAMP},
-            INTERFACE_URL_STATUS = #{interfaceUrlStatus,jdbcType=VARCHAR},
-            INTERFACE_URL_CREATER_ID = #{interfaceUrlCreaterId,jdbcType=VARCHAR},
-            INTERFACE_URL_ORGAN_ID = #{interfaceUrlOrganId,jdbcType=VARCHAR}
+            INTERFACE_PARAS = #{interfaceParas,jdbcType=VARCHAR},
+            INTERFACE_FORMAT = #{interfaceFormat,jdbcType=VARCHAR},
+            INTERFACE_DESC = #{interfaceDesc,jdbcType=VARCHAR},
+            INTERFACE_ORDER_NUM = #{interfaceOrderNum,jdbcType=INTEGER},
+            INTERFACE_CREATE_TIME = #{interfaceCreateTime,jdbcType=TIMESTAMP},
+            INTERFACE_STATUS = #{interfaceStatus,jdbcType=VARCHAR},
+            INTERFACE_CREATER_ID = #{interfaceCreaterId,jdbcType=VARCHAR},
+            INTERFACE_ORGAN_ID = #{interfaceOrganId,jdbcType=VARCHAR}
         where INTERFACE_ID = #{interfaceId,jdbcType=VARCHAR}
     </update>
 </mapper>

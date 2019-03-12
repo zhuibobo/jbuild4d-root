@@ -1,5 +1,6 @@
 /*SSO系统集成详情页面*/
 Vue.component("sso-app-detail-from-comp", {
+    props:["status"],
     data: function () {
         return {
             acInterface:{
@@ -31,11 +32,11 @@ Vue.component("sso-app-detail-from-comp", {
                     {required: true, message: '【系统名称】不能为空！', trigger: 'blur'}
                 ]
             },
-            systemLogoImageSrc:"",
-            status:"add",
+            systemLogoImageSrc:""
         }
     },
     mounted:function(){
+        //alert(this.status);
         if(this.status=="add") {
             this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: "defaultSSOAppLogoImage"});
         }

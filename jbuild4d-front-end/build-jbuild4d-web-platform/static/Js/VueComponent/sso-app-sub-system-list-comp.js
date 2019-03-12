@@ -1,5 +1,6 @@
 /*SSO子系统列表页面*/
 Vue.component("sso-app-sub-system-list-comp", {
+    props:["status"],
     data: function () {
         return {
             items: [
@@ -9,7 +10,9 @@ Vue.component("sso-app-sub-system-list-comp", {
         }
     },
     mounted:function(){
+        if(this.status=="add"){
 
+        }
     },
     methods:{
         addIntegratedSystem:function() {
@@ -36,7 +39,7 @@ Vue.component("sso-app-sub-system-list-comp", {
                         </tabs>
                     </div>
                     <div class="apps-manager-outer-wrap">
-                        <div class="apps-outer-wrap">
+                        <div class="apps-outer-wrap" ref="appsOuterWrap" v-if="status!='add'">
                             <div v-for="item in items" class="app-outer-wrap">
                                 <div class="title">
                                     <span>深圳市明天不知道干什么可能会下雨科技有限股份未明公司</span>
@@ -55,6 +58,7 @@ Vue.component("sso-app-sub-system-list-comp", {
                                 <div class="add-system-button" @click="addPostSystem()">添加模拟系统</div>
                             </div>
                         </div>
+                        <div v-if="status=='add'">请先保存主系统,再设置其中的子系统!</div>
                     </div>
                  </div>`
 });

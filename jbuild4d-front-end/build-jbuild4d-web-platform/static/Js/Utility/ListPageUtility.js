@@ -279,6 +279,8 @@ var ListPageUtility={
                 class: "list-row-button edit",
                 on: {
                     click: function () {
+                        //this;
+                        //debugger;
                         pageAppObj.edit(params.row[idField],params);
                     }
                 }

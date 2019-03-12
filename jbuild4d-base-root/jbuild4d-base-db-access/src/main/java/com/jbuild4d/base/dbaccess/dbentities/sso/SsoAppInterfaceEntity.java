@@ -28,45 +28,45 @@ public class SsoAppInterfaceEntity {
     //INTERFACE_URL:接口地址
     private String interfaceUrl;
 
-    //INTERFACE_URL_PARAS:参数
-    private String interfaceUrlParas;
+    //INTERFACE_PARAS:参数
+    private String interfaceParas;
 
-    //INTERFACE_URL_FORMAT:格式化方法
-    private String interfaceUrlFormat;
+    //INTERFACE_FORMAT:格式化方法
+    private String interfaceFormat;
 
-    //INTERFACE_URL_DESC:备注
-    private String interfaceUrlDesc;
+    //INTERFACE_DESC:备注
+    private String interfaceDesc;
 
-    //INTERFACE_URL_ORDER_NUM:排序号
-    private Integer interfaceUrlOrderNum;
+    //INTERFACE_ORDER_NUM:排序号
+    private Integer interfaceOrderNum;
 
-    //INTERFACE_URL_CREATE_TIME:创建时间
+    //INTERFACE_CREATE_TIME:创建时间
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date interfaceUrlCreateTime;
+    private Date interfaceCreateTime;
 
-    //INTERFACE_URL_STATUS:状态
-    private String interfaceUrlStatus;
+    //INTERFACE_STATUS:状态
+    private String interfaceStatus;
 
-    //INTERFACE_URL_CREATER_ID:创建者的ID
-    private String interfaceUrlCreaterId;
+    //INTERFACE_CREATER_ID:创建者的ID
+    private String interfaceCreaterId;
 
-    //INTERFACE_URL_ORGAN_ID:创建组织ID
-    private String interfaceUrlOrganId;
+    //INTERFACE_ORGAN_ID:创建组织ID
+    private String interfaceOrganId;
 
-    public SsoAppInterfaceEntity(String interfaceId, String interfaceBelongAppId, String interfaceCode, String interfaceName, String interfaceUrl, String interfaceUrlParas, String interfaceUrlFormat, String interfaceUrlDesc, Integer interfaceUrlOrderNum, Date interfaceUrlCreateTime, String interfaceUrlStatus, String interfaceUrlCreaterId, String interfaceUrlOrganId) {
+    public SsoAppInterfaceEntity(String interfaceId, String interfaceBelongAppId, String interfaceCode, String interfaceName, String interfaceUrl, String interfaceParas, String interfaceFormat, String interfaceDesc, Integer interfaceOrderNum, Date interfaceCreateTime, String interfaceStatus, String interfaceCreaterId, String interfaceOrganId) {
         this.interfaceId = interfaceId;
         this.interfaceBelongAppId = interfaceBelongAppId;
         this.interfaceCode = interfaceCode;
         this.interfaceName = interfaceName;
         this.interfaceUrl = interfaceUrl;
-        this.interfaceUrlParas = interfaceUrlParas;
-        this.interfaceUrlFormat = interfaceUrlFormat;
-        this.interfaceUrlDesc = interfaceUrlDesc;
-        this.interfaceUrlOrderNum = interfaceUrlOrderNum;
-        this.interfaceUrlCreateTime = interfaceUrlCreateTime;
-        this.interfaceUrlStatus = interfaceUrlStatus;
-        this.interfaceUrlCreaterId = interfaceUrlCreaterId;
-        this.interfaceUrlOrganId = interfaceUrlOrganId;
+        this.interfaceParas = interfaceParas;
+        this.interfaceFormat = interfaceFormat;
+        this.interfaceDesc = interfaceDesc;
+        this.interfaceOrderNum = interfaceOrderNum;
+        this.interfaceCreateTime = interfaceCreateTime;
+        this.interfaceStatus = interfaceStatus;
+        this.interfaceCreaterId = interfaceCreaterId;
+        this.interfaceOrganId = interfaceOrganId;
     }
 
     public SsoAppInterfaceEntity() {
@@ -113,67 +113,67 @@ public class SsoAppInterfaceEntity {
         this.interfaceUrl = interfaceUrl == null ? null : interfaceUrl.trim();
     }
 
-    public String getInterfaceUrlParas() {
-        return interfaceUrlParas;
+    public String getInterfaceParas() {
+        return interfaceParas;
     }
 
-    public void setInterfaceUrlParas(String interfaceUrlParas) {
-        this.interfaceUrlParas = interfaceUrlParas == null ? null : interfaceUrlParas.trim();
+    public void setInterfaceParas(String interfaceParas) {
+        this.interfaceParas = interfaceParas == null ? null : interfaceParas.trim();
     }
 
-    public String getInterfaceUrlFormat() {
-        return interfaceUrlFormat;
+    public String getInterfaceFormat() {
+        return interfaceFormat;
     }
 
-    public void setInterfaceUrlFormat(String interfaceUrlFormat) {
-        this.interfaceUrlFormat = interfaceUrlFormat == null ? null : interfaceUrlFormat.trim();
+    public void setInterfaceFormat(String interfaceFormat) {
+        this.interfaceFormat = interfaceFormat == null ? null : interfaceFormat.trim();
     }
 
-    public String getInterfaceUrlDesc() {
-        return interfaceUrlDesc;
+    public String getInterfaceDesc() {
+        return interfaceDesc;
     }
 
-    public void setInterfaceUrlDesc(String interfaceUrlDesc) {
-        this.interfaceUrlDesc = interfaceUrlDesc == null ? null : interfaceUrlDesc.trim();
+    public void setInterfaceDesc(String interfaceDesc) {
+        this.interfaceDesc = interfaceDesc == null ? null : interfaceDesc.trim();
     }
 
-    public Integer getInterfaceUrlOrderNum() {
-        return interfaceUrlOrderNum;
+    public Integer getInterfaceOrderNum() {
+        return interfaceOrderNum;
     }
 
-    public void setInterfaceUrlOrderNum(Integer interfaceUrlOrderNum) {
-        this.interfaceUrlOrderNum = interfaceUrlOrderNum;
+    public void setInterfaceOrderNum(Integer interfaceOrderNum) {
+        this.interfaceOrderNum = interfaceOrderNum;
     }
 
-    public Date getInterfaceUrlCreateTime() {
-        return interfaceUrlCreateTime;
+    public Date getInterfaceCreateTime() {
+        return interfaceCreateTime;
     }
 
-    public void setInterfaceUrlCreateTime(Date interfaceUrlCreateTime) {
-        this.interfaceUrlCreateTime = interfaceUrlCreateTime;
+    public void setInterfaceCreateTime(Date interfaceCreateTime) {
+        this.interfaceCreateTime = interfaceCreateTime;
     }
 
-    public String getInterfaceUrlStatus() {
-        return interfaceUrlStatus;
+    public String getInterfaceStatus() {
+        return interfaceStatus;
     }
 
-    public void setInterfaceUrlStatus(String interfaceUrlStatus) {
-        this.interfaceUrlStatus = interfaceUrlStatus == null ? null : interfaceUrlStatus.trim();
+    public void setInterfaceStatus(String interfaceStatus) {
+        this.interfaceStatus = interfaceStatus == null ? null : interfaceStatus.trim();
     }
 
-    public String getInterfaceUrlCreaterId() {
-        return interfaceUrlCreaterId;
+    public String getInterfaceCreaterId() {
+        return interfaceCreaterId;
     }
 
-    public void setInterfaceUrlCreaterId(String interfaceUrlCreaterId) {
-        this.interfaceUrlCreaterId = interfaceUrlCreaterId == null ? null : interfaceUrlCreaterId.trim();
+    public void setInterfaceCreaterId(String interfaceCreaterId) {
+        this.interfaceCreaterId = interfaceCreaterId == null ? null : interfaceCreaterId.trim();
     }
 
-    public String getInterfaceUrlOrganId() {
-        return interfaceUrlOrganId;
+    public String getInterfaceOrganId() {
+        return interfaceOrganId;
     }
 
-    public void setInterfaceUrlOrganId(String interfaceUrlOrganId) {
-        this.interfaceUrlOrganId = interfaceUrlOrganId == null ? null : interfaceUrlOrganId.trim();
+    public void setInterfaceOrganId(String interfaceOrganId) {
+        this.interfaceOrganId = interfaceOrganId == null ? null : interfaceOrganId.trim();
     }
 }
