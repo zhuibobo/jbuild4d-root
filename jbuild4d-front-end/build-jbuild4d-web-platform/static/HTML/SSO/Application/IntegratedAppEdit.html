@@ -10,10 +10,10 @@
 <div id="appForm" class="general-edit-page-wrap" style="margin-top: 0px" v-cloak>
     <tabs>
         <tab-pane label="系统设置">
-            <sso-app-detail-from-comp :status="status" ref="mainAppDetailFromComp"></sso-app-detail-from-comp>
+            <sso-app-detail-from-comp :status="status" :app-id="formEntity.appId" ref="mainAppDetailFromComp"></sso-app-detail-from-comp>
         </tab-pane>
         <tab-pane label="接口设置">
-            <sso-app-interface-list-comp ref="mainAppInterfaceListComp" :interfaceBelongAppId="formEntity.appId"></sso-app-interface-list-comp>
+            <sso-app-interface-list-comp ref="mainAppInterfaceListComp" :interface-belong-app-Id="formEntity.appId"></sso-app-interface-list-comp>
         </tab-pane>
         <tab-pane label="子系统配置">
             <sso-app-sub-system-list-comp :status="status"></sso-app-sub-system-list-comp>
@@ -22,7 +22,7 @@
     <div class="button-outer-wrap">
         <div class="button-inner-wrap">
             <button-group>
-                <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')" icon="md-checkmark">保存</i-button>
+                <i-button type="primary" v-if="status!='view'" @click="handleSubmit()" icon="md-checkmark">保存</i-button>
                 <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button>
             </button-group>
         </div>
@@ -34,41 +34,19 @@
         mounted:function () {
             if(this.status=="add") {
                 this.formEntity.appId=StringUtility.Guid();
-                //this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: "defaultSSOAppLogoImage"});
             }
             else {
-                //this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: ""});
+
             }
         },
         data: {
             acInterface:{
-                getEmptyDataUrl:"/PlatFormRest/SSO/DepartmentUser/GetEmptyNewVo",
-                getDataUrl:"/PlatFormRest/SSO/DepartmentUser/GetVo"
+                saveMainAppUrl:"/PlatFormRest/SSO/Application/SaveMainApp",
+                getDataUrl:""
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
             formEntity: {
-                appId:"",
-                appCode:"",
-                appName:"",
-                appPublicKey:"",
-                appPrivateKey:"",
-                appDomain:"",
-                appIndexUrl:"",
-                appMainImageId:"",
-                appType:"",
-                appTypeMainId:"",
-                appCategory:"web",
-                appDesc:"",
-                appStatus:"启用",
-                appCreateTime:DateUtility.GetCurrentData()
-            },
-            ruleValidate: {
-                'userEntity.userName': [
-                    {required: true, message: '【用户名】不能空！', trigger: 'blur'}
-                ],
-                'userEntity.userAccount': [
-                    {required: true, message: '【账号】不能空！', trigger: 'blur'}
-                ]
+                appId:""
             },
             status: BaseUtility.GetUrlParaValue("op"),
             userHeadImageSrc:""
@@ -77,10 +55,17 @@
             bindFormData:function(){
 
             },
-            handleSubmit: function (name) {
+            handleSubmit: function () {
+                var vo={
+                    ssoAppEntity:this.$refs.mainAppDetailFromComp.getAppEntity(),
+                    ssoAppInterfaceEntityList:this.$refs.mainAppInterfaceListComp.getInterfaceListData()
+                }
+                var sendData=JSON.stringify(vo);
+                AjaxUtility.PostRequestBody(this.acInterface.saveMainAppUrl,sendData,function (result) {
 
+                },"json");
             },
-            handleClose: function (name) {
+            handleClose: function () {
                 DialogUtility.Frame_CloseDialog(window);
             }
         }

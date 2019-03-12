@@ -1,6 +1,11 @@
 /*SSO系统集成接口列表页面*/
 Vue.component("sso-app-interface-list-comp", {
     props:["interfaceBelongAppId"],
+    watch: {
+        interfaceBelongAppId:function (newVal) {
+            this.interfaceEntity.interfaceBelongAppId=newVal;
+        }
+    },
     data: function () {
         var _self = this;
         return {
@@ -61,7 +66,8 @@ Vue.component("sso-app-interface-list-comp", {
         }
     },
     mounted:function(){
-        this.interfaceEntity.interfaceBelongAppId=this.interfaceBelongAppId;
+        //this.interfaceEntity.interfaceBelongAppId=this.interfaceBelongAppId;
+        //alert(this.interfaceBelongAppId);
     },
     methods:{
         addInterface:function () {

@@ -1,6 +1,11 @@
 /*SSO系统集成详情页面*/
 Vue.component("sso-app-detail-from-comp", {
-    props:["status"],
+    props:["status","appId"],
+    watch: {
+        appId:function (newVal) {
+            this.appEntity.appId=newVal;
+        }
+    },
     data: function () {
         return {
             acInterface:{
@@ -36,8 +41,10 @@ Vue.component("sso-app-detail-from-comp", {
         }
     },
     mounted:function(){
-        //alert(this.status);
+        //
         if(this.status=="add") {
+            //this.appEntity.appId=this.appId;
+            //alert(this.status);
             this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: "defaultSSOAppLogoImage"});
         }
         else {
@@ -51,10 +58,10 @@ Vue.component("sso-app-detail-from-comp", {
             this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: this.appEntity.appMainImageId});
         },
         getAppEntity:function () {
-
+            return this.appEntity;
         },
-        setAppEntity:function () {
-
+        setAppEntity:function (appEntity) {
+            this.appEntity=appEntity;
         },
         createKeys:function () {
             var _self=this;
