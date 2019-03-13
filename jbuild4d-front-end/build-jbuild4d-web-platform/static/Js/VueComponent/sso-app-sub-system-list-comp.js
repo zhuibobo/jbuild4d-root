@@ -1,24 +1,28 @@
 /*SSO子系统列表页面*/
 Vue.component("sso-app-sub-system-list-comp", {
-    props:["status"],
+    props:["status","belongAppId"],
     data: function () {
         return {
-            items: [
-                { message: 'Foo' },
-                { message: 'Bar' }
-            ]
+            acInterface:{
+                saveSubAppUrl:"/PlatFormRest/SSO/Application/SaveSubApp",
+                reloadData:"/PlatFormRest/SSO/Application/GetAllSubSsoApp",
+                appLogoUrl:"/PlatFormRest/SSO/Application/GetAppLogo",
+                delete:"/PlatFormRest/SSO/Application/Delete"
+            },
+            appList: [
+            ],
+            innerEditModelDialogStatus:"add"
         }
     },
     mounted:function(){
-        if(this.status=="add"){
-
-        }
+        this.reloadData();
     },
     methods:{
         addIntegratedSystem:function() {
-            var elem=this.$refs.ssoAppInterfaceEditModelDialogWrap;
+            var elem=this.$refs.ssoAppSubSystemEditModelDialogWrap;
             //debugger;
             //this.getOrganDataInitTree();
+            this.innerEditModelDialogStatus="add";
             DialogUtility.DialogElemObj(elem, {
                 modal: true,
                 width: 900,
@@ -26,21 +30,98 @@ Vue.component("sso-app-sub-system-list-comp", {
                 title: "接口设置"
             });
         },
+        saveSubSystemSetting:function () {
+            var _self=this;
+            var ssoAppEntity=this.$refs.subAppDetailFromComp.getAppEntity();
+            var ssoAppInterfaceEntityList=this.$refs.subAppInterfaceListComp.getInterfaceListData();
+            ssoAppEntity.appMainId=this.belongAppId;
+            //alert(this.belongAppId);
+            if(this.innerEditModelDialogStatus=="add"){
+                ssoAppEntity.appId=StringUtility.Guid();
+            }
+            if(ssoAppInterfaceEntityList){
+                for(var i=0;i<ssoAppInterfaceEntityList.length;i++){
+                    ssoAppInterfaceEntityList.interfaceBelongAppId=ssoAppEntity.appId;
+                }
+            }
+
+            var vo={
+                "ssoAppEntity":ssoAppEntity,
+                "ssoAppInterfaceEntityList":ssoAppInterfaceEntityList
+            };
+            var sendData=JSON.stringify(vo);
+            AjaxUtility.PostRequestBody(this.acInterface.saveSubAppUrl,sendData,function (result) {
+                if(result.success){
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                        _self.reloadData();
+                        _self.handleClose();
+                    });
+                }
+                else {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                }
+
+            },"json");
+        },
+        handleClose:function () {
+            DialogUtility.CloseDialogElem(this.$refs.ssoAppSubSystemEditModelDialogWrap);
+        },
+        reloadData:function () {
+            var _self=this;
+            AjaxUtility.Post(this.acInterface.reloadData,{appId:_self.belongAppId},function (result) {
+                if(result.success){
+                    _self.appList=result.data;
+                }
+                else{
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                }
+            },"json");
+        },
+        buildLogoUrl:function (app) {
+            if(app.appMainImageId==""){
+                return BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: "defaultSSOAppLogoImage"});
+            }
+            else{
+                return BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId:app.appMainImageId});
+            }
+        },
+        settingApp:function (app) {
+            var url = BaseUtility.BuildView(this.acInterface.integratedSystemEditView, {
+                "op": "update",
+                "recordId": app.appId
+            });
+            DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑集成系统"}, 1);
+        },
+        removeApp:function (app) {
+            var _self=this;
+            DialogUtility.Confirm(window, "确认要注销系统["+app.appName+"]吗？", function () {
+                AjaxUtility.Delete(_self.acInterface.delete, {appId: app.appId}, function (result) {
+                    if (result.success) {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                            _self.reloadData();
+                        });
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
+                }, "json");
+            });
+        }
     },
     template: `<div>
-                    <div ref="ssoAppInterfaceEditModelDialogWrap" class="general-edit-page-wrap" style="display: none;margin-top: 0px">
+                    <div ref="ssoAppSubSystemEditModelDialogWrap" class="general-edit-page-wrap" style="display: none;margin-top: 0px">
                         <tabs>
                             <tab-pane label="系统设置">
-                                <sso-app-detail-from-comp :is-sub-system="true"></sso-app-detail-from-comp>
+                                <sso-app-detail-from-comp ref="subAppDetailFromComp" :is-sub-system="true" :status="innerEditModelDialogStatus"></sso-app-detail-from-comp>
                             </tab-pane>
                             <tab-pane label="接口设置">
-                                <sso-app-interface-list-comp></sso-app-interface-list-comp>
+                                <sso-app-interface-list-comp ref="subAppInterfaceListComp"></sso-app-interface-list-comp>
                             </tab-pane>
                         </tabs>
                         <div class="button-outer-wrap" style="margin-right: 10px;margin-bottom: 10px">
                             <div class="button-inner-wrap">
                                 <button-group>
-                                    <i-button type="primary" v-if="status!='view'" @click="handleSubmit()" icon="md-checkmark">保存</i-button>
+                                    <i-button type="primary" v-if="status!='view'" @click="saveSubSystemSetting()" icon="md-checkmark">保存子系统设置</i-button>
                                     <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button>
                                 </button-group>
                             </div>
@@ -48,13 +129,13 @@ Vue.component("sso-app-sub-system-list-comp", {
                     </div>
                     <div class="apps-manager-outer-wrap">
                         <div class="apps-outer-wrap" ref="appsOuterWrap" v-if="status!='add'">
-                            <div v-for="item in items" class="app-outer-wrap app-outer-wrap-sub-system">
+                            <div  v-for="app in appList" class="app-outer-wrap app-outer-wrap-sub-system">
                                 <div class="title">
-                                    <span>深圳市明天不知道干什么可能会下雨科技有限股份未明公司</span>
+                                    <span>{{app.appName}}</span>
                                 </div>
                                 <div class="content">
                                     <div class="mainImg">
-                                        <img src="../../../Themes/Default/Css/Images/DefaultSSOAppLogo.png" />
+                                        <img :src="buildLogoUrl(app)" />
                                     </div>
                                     <div class="button-wrap">
                                         <div class="button setting-button" @click="settingApp(app)">

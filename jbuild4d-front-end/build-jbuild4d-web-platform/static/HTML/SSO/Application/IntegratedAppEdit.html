@@ -16,7 +16,7 @@
             <sso-app-interface-list-comp ref="mainAppInterfaceListComp" :interface-belong-app-Id="recordId"></sso-app-interface-list-comp>
         </tab-pane>
         <tab-pane label="子系统配置">
-            <sso-app-sub-system-list-comp :status="status"></sso-app-sub-system-list-comp>
+            <sso-app-sub-system-list-comp :status="status" :belong-app-id="recordId"></sso-app-sub-system-list-comp>
         </tab-pane>
     </tabs>
     <div class="button-outer-wrap">

@@ -44,6 +44,12 @@ public class AppRestResource {
         return JBuild4DResponseVo.opSuccess();
     }
 
+    @RequestMapping(value = "/SaveSubApp", method = RequestMethod.POST, produces = "application/json")
+    public JBuild4DResponseVo saveSubApp(@RequestBody SSOAppVo entity, HttpServletRequest request) throws JBuild4DGenerallyException {
+        ssoAppService.saveIntegratedSubApp(JB4DSessionUtility.getSession(),entity);
+        return JBuild4DResponseVo.opSuccess();
+    }
+
     @RequestMapping(value = "/GetAppLogo", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getOrganLogo(String fileId) throws IOException, JBuild4DGenerallyException {
         FileInfoEntity fileInfoEntity=fileInfoService.getByPrimaryKey(JB4DSessionUtility.getSession(),fileId);
@@ -74,9 +80,14 @@ public class AppRestResource {
         return JBuild4DResponseVo.getDataSuccess(keys);
     }
 
-    @RequestMapping(value = "/GetAllSsoApp", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/GetAllMainSsoApp", method = RequestMethod.POST, produces = "application/json")
     public JBuild4DResponseVo getAllSsoApp(){
-        return JBuild4DResponseVo.getDataSuccess(ssoAppService.getALLASC(JB4DSessionUtility.getSession()));
+        return JBuild4DResponseVo.getDataSuccess(ssoAppService.getALLMainApp(JB4DSessionUtility.getSession()));
+    }
+
+    @RequestMapping(value = "/GetAllSubSsoApp", method = RequestMethod.POST, produces = "application/json")
+    public JBuild4DResponseVo getAllSubSsoApp(String appId){
+        return JBuild4DResponseVo.getDataSuccess(ssoAppService.getALLSubApp(JB4DSessionUtility.getSession(),appId));
     }
 
     @RequestMapping(value = "/GetAppVo", method = RequestMethod.POST, produces = "application/json")

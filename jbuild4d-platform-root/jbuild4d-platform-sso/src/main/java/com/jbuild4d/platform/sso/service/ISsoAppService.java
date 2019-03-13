@@ -6,8 +6,16 @@ import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.platform.sso.vo.SSOAppVo;
 
+import java.util.List;
+
 public interface ISsoAppService extends IBaseService<SsoAppEntity> {
     void saveIntegratedMainApp(JB4DSession jb4DSession, SSOAppVo entity) throws JBuild4DGenerallyException;
 
     SSOAppVo getAppVo(JB4DSession jb4DSession, String appId);
+
+    void saveIntegratedSubApp(JB4DSession jb4DSession, SSOAppVo entity) throws JBuild4DGenerallyException;
+
+    List<SsoAppEntity> getALLSubApp(JB4DSession session, String appId);
+
+    List<SsoAppEntity> getALLMainApp(JB4DSession session);
 }

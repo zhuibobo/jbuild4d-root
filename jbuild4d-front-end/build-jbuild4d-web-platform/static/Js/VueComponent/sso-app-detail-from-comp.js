@@ -4,6 +4,9 @@ Vue.component("sso-app-detail-from-comp", {
     watch: {
         appId:function (newVal) {
             this.appEntity.appId=newVal;
+        },
+        status:function (newVal) {
+            this.innerStatus=newVal;
         }
     },
     data: function () {
@@ -37,13 +40,14 @@ Vue.component("sso-app-detail-from-comp", {
                     {required: true, message: '【系统名称】不能为空！', trigger: 'blur'}
                 ]
             },
-            systemLogoImageSrc:""
+            systemLogoImageSrc:"",
+            innerStatus:"add"
         }
     },
     mounted:function(){
         //
         //alert(this.isSubSystem);
-        if(this.status=="add") {
+        if(this.innerStatus=="add") {
             //this.appEntity.appId=this.appId;
             //alert(this.status);
             this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: "defaultSSOAppLogoImage"});

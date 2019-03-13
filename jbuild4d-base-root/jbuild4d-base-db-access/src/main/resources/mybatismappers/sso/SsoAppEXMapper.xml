@@ -3,6 +3,10 @@
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.SsoAppMapper">
     <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP ORDER by APP_ORDER_NUM DESC</select>
     <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP ORDER by APP_ORDER_NUM ASC</select>
+
+    <select id="selectAllMainApp" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP where APP_TYPE='主系统' ORDER by APP_ORDER_NUM ASC</select>
+    <select id="selectALLSubApp" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP where APP_MAIN_ID=#{appId} ORDER by APP_ORDER_NUM ASC</select>
+
     <delete id="deleteAll">delete from TB4D_SSO_APP</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(APP_ORDER_NUM) is null then 1 else max(APP_ORDER_NUM)+1 end ORDERNUM from TB4D_SSO_APP</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_SSO_APP<where>

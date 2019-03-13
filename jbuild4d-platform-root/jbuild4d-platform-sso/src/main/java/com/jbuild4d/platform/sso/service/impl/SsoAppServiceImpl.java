@@ -64,4 +64,29 @@ public class SsoAppServiceImpl extends BaseServiceImpl<SsoAppEntity> implements 
         ssoAppVo.setSsoAppInterfaceEntityList(ssoAppInterfaceEntityList);
         return ssoAppVo;
     }
+
+    @Override
+    public void saveIntegratedSubApp(JB4DSession jb4DSession, SSOAppVo entity) throws JBuild4DGenerallyException {
+        if(entity.getSsoAppEntity().getAppMainId()==null||entity.getSsoAppEntity().getAppMainId().equals("")){
+            throw new JBuild4DGenerallyException("所属主系统ID不能为空!");
+        }
+        entity.getSsoAppEntity().setAppIntegratedType("开发集成");
+        entity.getSsoAppEntity().setAppType("子系统");
+        this.saveSimple(jb4DSession,entity.getSsoAppEntity().getAppId(),entity.getSsoAppEntity());
+        if(entity.getSsoAppInterfaceEntityList()!=null&&entity.getSsoAppInterfaceEntityList().size()>0){
+            for (SsoAppInterfaceEntity ssoAppInterfaceEntity : entity.getSsoAppInterfaceEntityList()) {
+                ssoAppInterfaceService.saveSimple(jb4DSession,ssoAppInterfaceEntity.getInterfaceId(),ssoAppInterfaceEntity);
+            }
+        }
+    }
+
+    @Override
+    public List<SsoAppEntity> getALLSubApp(JB4DSession session, String appId) {
+        return ssoAppMapper.selectALLSubApp(appId);
+    }
+
+    @Override
+    public List<SsoAppEntity> getALLMainApp(JB4DSession session) {
+        return ssoAppMapper.selectAllMainApp();
+    }
 }
