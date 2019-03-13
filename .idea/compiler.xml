@@ -20,8 +20,11 @@
         <module name="jbuild4d-platform-builder" />
         <module name="jbuild4d-platform-files" />
         <module name="jbuild4d-platform-sso" />
+        <module name="jbuild4d-platform-sso-client" />
         <module name="jbuild4d-platform-system" />
         <module name="jbuild4d-web-platform" />
+        <module name="jbuild4d-web-sso-client-demo1" />
+        <module name="jbuild4d-web-sso-client-demo2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -43,10 +46,13 @@
       <module name="jbuild4d-platform-organ" target="1.8" />
       <module name="jbuild4d-platform-root" target="1.8" />
       <module name="jbuild4d-platform-sso" target="1.8" />
+      <module name="jbuild4d-platform-sso-client" target="1.8" />
       <module name="jbuild4d-platform-system" target="1.8" />
       <module name="jbuild4d-root" target="1.8" />
       <module name="jbuild4d-web-platform" target="1.8" />
       <module name="jbuild4d-web-root" target="1.8" />
+      <module name="jbuild4d-web-sso-client-demo1" target="1.5" />
+      <module name="jbuild4d-web-sso-client-demo2" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
