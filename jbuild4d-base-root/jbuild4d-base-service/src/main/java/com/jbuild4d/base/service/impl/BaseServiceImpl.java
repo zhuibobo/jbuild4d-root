@@ -137,6 +137,11 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
+    public List<T> getALLASC(JB4DSession jb4DSession) {
+        return defaultBaseMapper.selectAllASC();
+    }
+
+    @Override
     public PageInfo<T> getPage(JB4DSession jb4DSession,int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         //PageHelper.

@@ -6,6 +6,7 @@ import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
 import com.jbuild4d.base.tools.common.encryption.nsymmetric.RSAUtility;
 import com.jbuild4d.platform.files.service.IFileInfoService;
+import com.jbuild4d.platform.sso.service.ISsoAppService;
 import com.jbuild4d.platform.sso.vo.SSOAppVo;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import org.apache.commons.io.IOUtils;
@@ -28,6 +29,9 @@ public class AppRestResource {
     @Autowired
     IFileInfoService fileInfoService;
 
+    @Autowired
+    ISsoAppService ssoAppService;
+
     @RequestMapping(value = "/UploadAppLogo", method = RequestMethod.POST, produces = "application/json")
     public JBuild4DResponseVo uploadOrganLogo(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
         FileInfoEntity fileInfoEntity=fileInfoService.addSmallFileToDB(JB4DSessionUtility.getSession(),file);
@@ -35,7 +39,8 @@ public class AppRestResource {
     }
 
     @RequestMapping(value = "/SaveMainApp", method = RequestMethod.POST, produces = "application/json")
-    public JBuild4DResponseVo saveMainApp(@RequestBody SSOAppVo entity, HttpServletRequest request){
+    public JBuild4DResponseVo saveMainApp(@RequestBody SSOAppVo entity, HttpServletRequest request) throws JBuild4DGenerallyException {
+        ssoAppService.saveIntegratedMainApp(JB4DSessionUtility.getSession(),entity);
         return JBuild4DResponseVo.opSuccess();
     }
 
@@ -67,5 +72,10 @@ public class AppRestResource {
         keys.put("publicKey",publicKey);
         keys.put("privateKey",privateKey);
         return JBuild4DResponseVo.getDataSuccess(keys);
+    }
+
+    @RequestMapping(value = "/GetAllSsoApp", method = RequestMethod.POST, produces = "application/json")
+    public JBuild4DResponseVo getAllSsoApp(){
+        return JBuild4DResponseVo.getDataSuccess(ssoAppService.getALLASC(JB4DSessionUtility.getSession()));
     }
 }

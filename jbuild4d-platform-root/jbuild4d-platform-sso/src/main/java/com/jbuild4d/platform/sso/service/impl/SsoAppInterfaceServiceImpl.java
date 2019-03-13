@@ -1,7 +1,9 @@
 package com.jbuild4d.platform.sso.service.impl;
+import java.util.Date;
 
 import com.jbuild4d.base.dbaccess.dao.sso.SsoAppInterfaceMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity;
+import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
@@ -23,7 +25,13 @@ public class SsoAppInterfaceServiceImpl extends BaseServiceImpl<SsoAppInterfaceE
         return super.save(jb4DSession,id, record, new IAddBefore<SsoAppInterfaceEntity>() {
             @Override
             public SsoAppInterfaceEntity run(JB4DSession jb4DSession,SsoAppInterfaceEntity sourceEntity) throws JBuild4DGenerallyException {
+
                 //设置排序,以及其他参数--nextOrderNum()
+                sourceEntity.setInterfaceOrderNum(ssoAppInterfaceMapper.nextOrderNum());
+                sourceEntity.setInterfaceCreateTime(new Date());
+                sourceEntity.setInterfaceStatus(EnableTypeEnum.enable.getDisplayName());
+                sourceEntity.setInterfaceCreaterId(jb4DSession.getUserId());
+                sourceEntity.setInterfaceOrganId(jb4DSession.getOrganId());
                 return sourceEntity;
             }
         });

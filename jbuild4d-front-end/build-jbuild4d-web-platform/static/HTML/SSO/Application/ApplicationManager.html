@@ -10,18 +10,23 @@
     </style>
 </head>
 <body>
-    <div id="appForm" class="apps-manager-outer-wrap">
+    <div id="appList" class="apps-manager-outer-wrap">
         <div class="apps-outer-wrap">
-            <div v-for="item in items" class="app-outer-wrap">
+            <div v-for="app in appList" class="app-outer-wrap">
                 <div class="title">
-                    <span>深圳市明天不知道干什么可能会下雨科技有限股份未明公司</span>
+                    <span>{{app.appName}}</span>
                 </div>
                 <div class="content">
                     <div class="mainImg">
-                        <img src="../../../Themes/Default/Css/Images/DefaultSSOAppLogo.png" />
+                        <img :src="buildLogoUrl(app)" />
                     </div>
-                    <div class="button">
-                        系统设置
+                    <div class="button-wrap">
+                        <div class="button setting-button" @click="settingApp(app)">
+                            系统设置
+                        </div>
+                        <div class="button remove-button" @click="removeApp(app)">
+                            注销
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,24 +37,21 @@
         </div>
     </div>
     <script>
-        var appForm = new Vue({
-            el:"#appForm",
+        var appList = new Vue({
+            el:"#appList",
             data: {
                 acInterface:{
                     integratedSystemEditView:"/HTML/SSO/Application/IntegratedAppEdit.html",
-                    postSystemEditView:"/HTML/SSO/Department/PostAppEdit.html"
+                    postSystemEditView:"/HTML/SSO/Department/PostAppEdit.html",
+                    reloadData:"/PlatFormRest/SSO/Application/GetAllSsoApp",
+                    appLogoUrl:"/PlatFormRest/SSO/Application/GetAppLogo"
                 },
-                items: [
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' },
-                    { message: 'Foo' },
-                    { message: 'Bar' }
+                appList: [
+
                 ]
             },
             mounted:function () {
-
+                this.reloadData();
             },
             methods: {
                 addIntegratedSystem:function() {
@@ -60,6 +62,32 @@
                 },
                 addPostSystem:function () {
 
+                },
+                reloadData :function () {
+                    var _self=this;
+                    AjaxUtility.Post(this.acInterface.reloadData,{},function (result) {
+                        if(result.success){
+                            console.log(result.data);
+                            _self.appList=result.data;
+                        }
+                        else{
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                        }
+                    },"json");
+                },
+                buildLogoUrl:function (app) {
+                    if(app.appMainImageId==""){
+                        return BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: "defaultSSOAppLogoImage"});
+                    }
+                    else{
+                        return BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId:app.appMainImageId});
+                    }
+                },
+                settingApp:function (app) {
+
+                },
+                removeApp:function (app) {
+                    alert(app.appId);
                 }
             }
         })

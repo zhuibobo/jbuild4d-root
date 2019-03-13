@@ -28,6 +28,8 @@ public interface BaseMapper<T> {
 
     List<T> selectAll();
 
+    List<T> selectAllASC();
+
     List<T> selectBySearch(Map<String, Object> searchItemMap);
 
     int count();

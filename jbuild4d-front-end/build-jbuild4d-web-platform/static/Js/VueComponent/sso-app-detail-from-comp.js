@@ -22,7 +22,7 @@ Vue.component("sso-app-detail-from-comp", {
                 appIndexUrl:"",
                 appMainImageId:"",
                 appType:"",
-                appTypeMainId:"",
+                appMainId:"",
                 appCategory:"web",
                 appDesc:"",
                 appStatus:"启用",

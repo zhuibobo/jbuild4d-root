@@ -56,12 +56,22 @@
 
             },
             handleSubmit: function () {
+                var _self=this;
                 var vo={
                     ssoAppEntity:this.$refs.mainAppDetailFromComp.getAppEntity(),
                     ssoAppInterfaceEntityList:this.$refs.mainAppInterfaceListComp.getInterfaceListData()
                 }
                 var sendData=JSON.stringify(vo);
                 AjaxUtility.PostRequestBody(this.acInterface.saveMainAppUrl,sendData,function (result) {
+                    if(result.success){
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                            window.OpenerWindowObj.appList.reloadData();
+                            _self.handleClose();
+                        });
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
 
                 },"json");
             },

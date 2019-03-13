@@ -51,6 +51,8 @@ public interface IBaseService<T> {
 
     List<T> getALL(JB4DSession jb4DSession);
 
+    List<T> getALLASC(JB4DSession jb4DSession);
+
     int getNextOrderNum(JB4DSession jb4DSession);
 
     void statusChange(JB4DSession jb4DSession,String ids, String status) throws JBuild4DGenerallyException;

@@ -43,8 +43,8 @@ public class SsoAppEntity {
     //APP_TYPE:系统类型:主系统或者为子系统
     private String appType;
 
-    //APP_TYPE_MAIN_ID:为子系统时,用于存储主系统的ID:TB4D_SSO_APP中的APP_ID
-    private String appTypeMainId;
+    //APP_MAIN_ID:为子系统时,用于存储主系统的ID:TB4D_SSO_APP中的APP_ID
+    private String appMainId;
 
     //APP_CATEGORY:系统分类:App或者Web系统
     private String appCategory;
@@ -68,7 +68,7 @@ public class SsoAppEntity {
     //APP_ORGAN_ID:创建组织ID
     private String appOrganId;
 
-    public SsoAppEntity(String appId, String appCode, String appName, String appPublicKey, String appPrivateKey, String appDomain, String appIndexUrl, String appIntegratedType, String appMainImageId, String appType, String appTypeMainId, String appCategory, String appDesc, Integer appOrderNum, Date appCreateTime, String appStatus, String appCreaterId, String appOrganId) {
+    public SsoAppEntity(String appId, String appCode, String appName, String appPublicKey, String appPrivateKey, String appDomain, String appIndexUrl, String appIntegratedType, String appMainImageId, String appType, String appMainId, String appCategory, String appDesc, Integer appOrderNum, Date appCreateTime, String appStatus, String appCreaterId, String appOrganId) {
         this.appId = appId;
         this.appCode = appCode;
         this.appName = appName;
@@ -79,7 +79,7 @@ public class SsoAppEntity {
         this.appIntegratedType = appIntegratedType;
         this.appMainImageId = appMainImageId;
         this.appType = appType;
-        this.appTypeMainId = appTypeMainId;
+        this.appMainId = appMainId;
         this.appCategory = appCategory;
         this.appDesc = appDesc;
         this.appOrderNum = appOrderNum;
@@ -173,12 +173,12 @@ public class SsoAppEntity {
         this.appType = appType == null ? null : appType.trim();
     }
 
-    public String getAppTypeMainId() {
-        return appTypeMainId;
+    public String getAppMainId() {
+        return appMainId;
     }
 
-    public void setAppTypeMainId(String appTypeMainId) {
-        this.appTypeMainId = appTypeMainId == null ? null : appTypeMainId.trim();
+    public void setAppMainId(String appMainId) {
+        this.appMainId = appMainId == null ? null : appMainId.trim();
     }
 
     public String getAppCategory() {
