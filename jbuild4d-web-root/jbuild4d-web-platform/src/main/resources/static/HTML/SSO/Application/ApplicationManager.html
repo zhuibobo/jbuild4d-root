@@ -5,7 +5,8 @@
                     integratedSystemEditView:"/HTML/SSO/Application/IntegratedAppEdit.html",
                     postSystemEditView:"/HTML/SSO/Department/PostAppEdit.html",
                     reloadData:"/PlatFormRest/SSO/Application/GetAllSsoApp",
-                    appLogoUrl:"/PlatFormRest/SSO/Application/GetAppLogo"
+                    appLogoUrl:"/PlatFormRest/SSO/Application/GetAppLogo",
+                    delete:"/PlatFormRest/SSO/Application/Delete"
                 },
                 appList: [
 
@@ -52,7 +53,19 @@
                     DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑集成系统"}, 1);
                 },
                 removeApp:function (app) {
-                    alert(app.appId);
+                    var _self=this;
+                    DialogUtility.Confirm(window, "确认要注销系统["+app.appName+"]吗？", function () {
+                        AjaxUtility.Delete(_self.acInterface.delete, {appId: app.appId}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    _self.reloadData();
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                            }
+                        }, "json");
+                    });
                 }
             }
         })</script></body></html>
