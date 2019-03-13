@@ -28,15 +28,23 @@ Vue.component("sso-app-sub-system-list-comp", {
         },
     },
     template: `<div>
-                    <div ref="ssoAppInterfaceEditModelDialogWrap" class="general-edit-page-wrap" style="display: none">
+                    <div ref="ssoAppInterfaceEditModelDialogWrap" class="general-edit-page-wrap" style="display: none;margin-top: 0px">
                         <tabs>
                             <tab-pane label="系统设置">
-                                <sso-app-detail-from-comp></sso-app-detail-from-comp>
+                                <sso-app-detail-from-comp :is-sub-system="true"></sso-app-detail-from-comp>
                             </tab-pane>
                             <tab-pane label="接口设置">
                                 <sso-app-interface-list-comp></sso-app-interface-list-comp>
                             </tab-pane>
                         </tabs>
+                        <div class="button-outer-wrap" style="margin-right: 10px;margin-bottom: 10px">
+                            <div class="button-inner-wrap">
+                                <button-group>
+                                    <i-button type="primary" v-if="status!='view'" @click="handleSubmit()" icon="md-checkmark">保存</i-button>
+                                    <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button>
+                                </button-group>
+                            </div>
+                        </div>
                     </div>
                     <div class="apps-manager-outer-wrap">
                         <div class="apps-outer-wrap" ref="appsOuterWrap" v-if="status!='add'">

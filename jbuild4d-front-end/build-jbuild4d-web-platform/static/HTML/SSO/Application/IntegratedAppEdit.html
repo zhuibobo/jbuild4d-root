@@ -10,7 +10,7 @@
 <div id="appForm" class="general-edit-page-wrap" style="margin-top: 0px" v-cloak>
     <tabs>
         <tab-pane label="系统设置">
-            <sso-app-detail-from-comp :status="status" :app-id="recordId" ref="mainAppDetailFromComp"></sso-app-detail-from-comp>
+            <sso-app-detail-from-comp :status="status" :app-id="recordId" :is-sub-system="false" ref="mainAppDetailFromComp"></sso-app-detail-from-comp>
         </tab-pane>
         <tab-pane label="接口设置">
             <sso-app-interface-list-comp ref="mainAppInterfaceListComp" :interface-belong-app-Id="recordId"></sso-app-interface-list-comp>

@@ -1,6 +1,6 @@
 /*SSO系统集成详情页面*/
 Vue.component("sso-app-detail-from-comp", {
-    props:["status","appId"],
+    props:["status","appId","isSubSystem"],
     watch: {
         appId:function (newVal) {
             this.appEntity.appId=newVal;
@@ -42,7 +42,7 @@ Vue.component("sso-app-detail-from-comp", {
     },
     mounted:function(){
         //
-        //alert(this.status);
+        //alert(this.isSubSystem);
         if(this.status=="add") {
             //this.appEntity.appId=this.appId;
             //alert(this.status);
@@ -110,10 +110,10 @@ Vue.component("sso-app-detail-from-comp", {
                                     </i-col>
                                 </row>
                             </form-item>
-                            <form-item label="公钥：">
+                            <form-item label="公钥：" v-if="isSubSystem=='0'">
                                 <i-input placeholder="请创建密钥对,用于数据的加密使用" search enter-button="创建密钥对" v-model="appEntity.appPublicKey" @on-search="createKeys()"></i-input>
                             </form-item>
-                            <form-item label="私钥：">
+                            <form-item label="私钥：" v-if="isSubSystem==0">
                                 <i-input v-model="appEntity.appPrivateKey"></i-input>
                             </form-item>
                             <form-item label="创建时间：">
