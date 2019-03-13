@@ -53,6 +53,15 @@ public class CGMapperEX {
         selectAllElem.appendChild(document.createTextNode( " from "+tableName+" ORDER by "+orderFieldName+" DESC"));
         mapperNode.appendChild(selectAllElem);
 
+        //-----select all
+        Element selectAllASCElem=document.createElement("select");
+        selectAllASCElem.setAttribute("id","selectAllASC");
+        selectAllASCElem.setAttribute("resultMap","BaseResultMap");
+        selectAllASCElem.appendChild(document.createTextNode("select"));
+        selectAllASCElem.appendChild(includeElem.cloneNode(true));
+        selectAllASCElem.appendChild(document.createTextNode( " from "+tableName+" ORDER by "+orderFieldName+" ASC"));
+        mapperNode.appendChild(selectAllASCElem);
+
         //-----delete all
         Element deleteAllElem=document.createElement("delete");
         deleteAllElem.setAttribute("id","deleteAll");
