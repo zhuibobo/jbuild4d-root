@@ -6,6 +6,7 @@ import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
 import com.jbuild4d.base.tools.common.encryption.nsymmetric.RSAUtility;
 import com.jbuild4d.platform.files.service.IFileInfoService;
+import com.jbuild4d.platform.sso.service.ISsoAppInterfaceService;
 import com.jbuild4d.platform.sso.service.ISsoAppService;
 import com.jbuild4d.platform.sso.vo.SSOAppVo;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
@@ -31,6 +32,9 @@ public class AppRestResource {
 
     @Autowired
     ISsoAppService ssoAppService;
+
+    @Autowired
+    ISsoAppInterfaceService ssoAppInterfaceService;
 
     @RequestMapping(value = "/UploadAppLogo", method = RequestMethod.POST, produces = "application/json")
     public JBuild4DResponseVo uploadOrganLogo(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
@@ -97,8 +101,14 @@ public class AppRestResource {
     }
 
     @RequestMapping(value = "/Delete", method = RequestMethod.DELETE, produces = "application/json")
-    public JBuild4DResponseVo Delete(String appId) throws JBuild4DGenerallyException {
+    public JBuild4DResponseVo delete(String appId) throws JBuild4DGenerallyException {
         ssoAppService.deleteByKey(JB4DSessionUtility.getSession(),appId);
+        return JBuild4DResponseVo.opSuccess();
+    }
+
+    @RequestMapping(value = "/DeleteInterface", method = RequestMethod.DELETE, produces = "application/json")
+    public JBuild4DResponseVo deleteInterface(String interfaceId) throws JBuild4DGenerallyException {
+        ssoAppInterfaceService.deleteByKey(JB4DSessionUtility.getSession(),interfaceId);
         return JBuild4DResponseVo.opSuccess();
     }
 }

@@ -9,6 +9,9 @@ Vue.component("sso-app-interface-list-comp", {
     data: function () {
         var _self = this;
         return {
+            acInterface:{
+                delete:"/PlatFormRest/SSO/Application/DeleteInterface"
+            },
             interfaceEntity:{
                 interfaceId:"",
                 interfaceBelongAppId:"",
@@ -157,10 +160,19 @@ Vue.component("sso-app-interface-list-comp", {
             });
         },
         del:function (interfaceId,params) {
+            var _self=this;
             for(var i=0;i<this.list.tableData.length;i++){
-                if(this.list.tableData[i].interfaceId==this.interfaceEntity.interfaceId){
-                    this.list.tableData.splice(i,1);
-                    //this.list.tableData[i]=JsonUtility.CloneSimple(this.interfaceEntity);
+                if(this.list.tableData[i].interfaceId==interfaceId){
+                    _self.list.tableData.splice(i,1);
+                    DialogUtility.Confirm(window, "确认要删除该接口吗？", function () {
+                        AjaxUtility.Delete(_self.acInterface.delete, {"interfaceId": interfaceId}, function (result) {
+                            if (result.success) {
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                            }
+                        }, "json");
+                    });
                 }
             }
         }
