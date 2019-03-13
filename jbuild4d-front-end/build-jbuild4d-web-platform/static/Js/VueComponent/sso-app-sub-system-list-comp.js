@@ -24,6 +24,7 @@ Vue.component("sso-app-sub-system-list-comp", {
             //debugger;
             //this.getOrganDataInitTree();
             this.$refs.subAppDetailFromComp.resetAppEntity();
+            this.$refs.subAppInterfaceListComp.resetListData();
             this.innerEditModelDialogStatus="add";
             DialogUtility.DialogElemObj(elem, {
                 modal: true,

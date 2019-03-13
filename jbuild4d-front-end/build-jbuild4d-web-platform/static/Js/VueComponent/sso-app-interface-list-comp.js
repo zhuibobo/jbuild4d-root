@@ -70,6 +70,9 @@ Vue.component("sso-app-interface-list-comp", {
         //alert(this.interfaceBelongAppId);
     },
     methods:{
+        resetListData:function(){
+            this.list.tableData=[];
+        },
         addInterface:function () {
             var elem=this.$refs.ssoAppInterfaceEditModelDialogWrap;
             //debugger;
