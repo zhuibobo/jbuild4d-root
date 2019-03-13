@@ -40,7 +40,7 @@ Vue.component("sso-app-sub-system-list-comp", {
                     </div>
                     <div class="apps-manager-outer-wrap">
                         <div class="apps-outer-wrap" ref="appsOuterWrap" v-if="status!='add'">
-                            <div v-for="item in items" class="app-outer-wrap">
+                            <div v-for="item in items" class="app-outer-wrap app-outer-wrap-sub-system">
                                 <div class="title">
                                     <span>深圳市明天不知道干什么可能会下雨科技有限股份未明公司</span>
                                 </div>
@@ -48,14 +48,18 @@ Vue.component("sso-app-sub-system-list-comp", {
                                     <div class="mainImg">
                                         <img src="../../../Themes/Default/Css/Images/DefaultSSOAppLogo.png" />
                                     </div>
-                                    <div class="button">
-                                        系统设置
+                                    <div class="button-wrap">
+                                        <div class="button setting-button" @click="settingApp(app)">
+                                            设置
+                                        </div>
+                                        <div class="button remove-button" @click="removeApp(app)">
+                                            注销
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="app-outer-wrap new-system-outer-wrap">
-                                <div class="add-system-button" @click="addIntegratedSystem()">添加集成系统</div>
-                                <div class="add-system-button" @click="addPostSystem()">添加模拟系统</div>
+                            <div class="app-outer-wrap app-outer-wrap-sub-system new-system-outer-wrap">
+                                <div class="add-system-button" @click="addIntegratedSystem()" style="margin-top: 60px">新增</div>
                             </div>
                         </div>
                         <div v-if="status=='add'">请先保存主系统,再设置其中的子系统!</div>
