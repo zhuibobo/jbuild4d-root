@@ -55,6 +55,7 @@
                     console.log(result);
                     if(result.success){
                         _self.$refs.mainAppDetailFromComp.setAppEntity(result.data.ssoAppEntity);
+                        _self.$refs.mainAppInterfaceListComp.setInterfaceListData(result.data.ssoAppInterfaceEntityList);
                     }
                     else{
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);

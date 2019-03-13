@@ -76,6 +76,7 @@ Vue.component("sso-app-interface-list-comp", {
             //this.getOrganDataInitTree();
             this.innerStatus=="add";
             this.interfaceEntity.interfaceId="";
+            this.interfaceEntity.interfaceBelongAppId=this.interfaceBelongAppId;
             this.interfaceEntity.interfaceCode="";
             this.interfaceEntity.interfaceName="";
             this.interfaceEntity.interfaceUrl="";
@@ -143,6 +144,7 @@ Vue.component("sso-app-interface-list-comp", {
             this.interfaceEntity.interfaceStatus=params.row.interfaceStatus;
             this.interfaceEntity.interfaceCreaterId=params.row.interfaceCreaterId;
             this.interfaceEntity.interfaceOrganId=params.row.interfaceOrganId;
+            this.interfaceEntity.interfaceBelongAppId=params.row.interfaceBelongAppId;
             var elem=this.$refs.ssoAppInterfaceEditModelDialogWrap;
             DialogUtility.DialogElemObj(elem, {
                 modal: true,
