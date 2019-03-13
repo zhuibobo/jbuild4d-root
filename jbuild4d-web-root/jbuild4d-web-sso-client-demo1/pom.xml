@@ -18,6 +18,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jbuild4d</groupId>
+            <artifactId>jbuild4d-platform-sso-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--Tomcat支持Begin-->
         <!-- servlet依赖-->
         <!--<dependency>
