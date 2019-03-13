@@ -141,7 +141,7 @@ Vue.component("sso-app-sub-system-list-comp", {
                             <div class="button-inner-wrap">
                                 <button-group>
                                     <i-button type="primary" v-if="status!='view'" @click="saveSubSystemSetting()" icon="md-checkmark">保存子系统设置</i-button>
-                                    <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button>
+                                    <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">关闭</i-button>
                                 </button-group>
                             </div>
                         </div>
