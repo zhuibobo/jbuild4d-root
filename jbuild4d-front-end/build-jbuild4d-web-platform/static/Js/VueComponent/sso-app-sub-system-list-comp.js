@@ -7,7 +7,8 @@ Vue.component("sso-app-sub-system-list-comp", {
                 saveSubAppUrl:"/PlatFormRest/SSO/Application/SaveSubApp",
                 reloadData:"/PlatFormRest/SSO/Application/GetAllSubSsoApp",
                 appLogoUrl:"/PlatFormRest/SSO/Application/GetAppLogo",
-                delete:"/PlatFormRest/SSO/Application/Delete"
+                delete:"/PlatFormRest/SSO/Application/Delete",
+                getDataUrl:"/PlatFormRest/SSO/Application/GetAppVo"
             },
             appList: [
             ],
@@ -22,12 +23,13 @@ Vue.component("sso-app-sub-system-list-comp", {
             var elem=this.$refs.ssoAppSubSystemEditModelDialogWrap;
             //debugger;
             //this.getOrganDataInitTree();
+            this.$refs.subAppDetailFromComp.resetAppEntity();
             this.innerEditModelDialogStatus="add";
             DialogUtility.DialogElemObj(elem, {
                 modal: true,
                 width: 900,
                 height: 500,
-                title: "接口设置"
+                title: "子系统设置"
             });
         },
         saveSubSystemSetting:function () {
@@ -41,10 +43,10 @@ Vue.component("sso-app-sub-system-list-comp", {
             }
             if(ssoAppInterfaceEntityList){
                 for(var i=0;i<ssoAppInterfaceEntityList.length;i++){
-                    ssoAppInterfaceEntityList.interfaceBelongAppId=ssoAppEntity.appId;
+                    ssoAppInterfaceEntityList[i].interfaceBelongAppId=ssoAppEntity.appId;
                 }
             }
-
+            //debugger;
             var vo={
                 "ssoAppEntity":ssoAppEntity,
                 "ssoAppInterfaceEntityList":ssoAppInterfaceEntityList
@@ -86,11 +88,27 @@ Vue.component("sso-app-sub-system-list-comp", {
             }
         },
         settingApp:function (app) {
-            var url = BaseUtility.BuildView(this.acInterface.integratedSystemEditView, {
-                "op": "update",
-                "recordId": app.appId
-            });
-            DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑集成系统"}, 1);
+            var elem=this.$refs.ssoAppSubSystemEditModelDialogWrap;
+            this.innerEditModelDialogStatus="update";
+
+            var _self=this;
+            AjaxUtility.Post(this.acInterface.getDataUrl,{appId:app.appId},function (result) {
+                console.log(result);
+                if(result.success){
+                    _self.$refs.subAppDetailFromComp.setAppEntity(result.data.ssoAppEntity);
+                    _self.$refs.subAppInterfaceListComp.setInterfaceListData(result.data.ssoAppInterfaceEntityList);
+
+                    DialogUtility.DialogElemObj(elem, {
+                        modal: true,
+                        width: 900,
+                        height: 500,
+                        title: "子系统设置"
+                    });
+                }
+                else{
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                }
+            },"json");
         },
         removeApp:function (app) {
             var _self=this;

@@ -58,6 +58,22 @@ Vue.component("sso-app-detail-from-comp", {
         }
     },
     methods:{
+        resetAppEntity:function(){
+            this.appEntity.appId="";
+            this.appEntity.appCode="";
+            this.appEntity.appName="";
+            this.appEntity.appPublicKey="";
+            this.appEntity.appPrivateKey="";
+            this.appEntity.appDomain="";
+            this.appEntity.appIndexUrl="";
+            this.appEntity.appMainImageId="";
+            this.appEntity.appType="";
+            this.appEntity.appMainId="";
+            this.appEntity.appCategory="web";
+            this.appEntity.appDesc="";
+            this.appEntity.appStatus="启用";
+            this.appEntity.appCreateTime=DateUtility.GetCurrentData();
+        },
         uploadSystemLogoImageSuccess:function (response, file, fileList) {
             var data = response.data;
             this.appEntity.appMainImageId = data.fileId;
