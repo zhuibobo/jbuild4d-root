@@ -78,4 +78,10 @@ public class AppRestResource {
     public JBuild4DResponseVo getAllSsoApp(){
         return JBuild4DResponseVo.getDataSuccess(ssoAppService.getALLASC(JB4DSessionUtility.getSession()));
     }
+
+    @RequestMapping(value = "/getAppVo", method = RequestMethod.POST, produces = "application/json")
+    public JBuild4DResponseVo getAppVo(String appId){
+        SSOAppVo ssoAppVo=ssoAppService.getAppVo(JB4DSessionUtility.getSession(),appId);
+        return JBuild4DResponseVo.getDataSuccess(ssoAppVo);
+    }
 }

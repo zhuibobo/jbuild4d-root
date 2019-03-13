@@ -1,5 +1,6 @@
 package com.jbuild4d.platform.sso.service.impl;
 import java.util.Date;
+import java.util.List;
 
 import com.jbuild4d.base.dbaccess.dao.sso.SsoAppInterfaceMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity;
@@ -35,5 +36,10 @@ public class SsoAppInterfaceServiceImpl extends BaseServiceImpl<SsoAppInterfaceE
                 return sourceEntity;
             }
         });
+    }
+
+    @Override
+    public List<SsoAppInterfaceEntity> getAppInterfaces(JB4DSession jb4DSession, String appId) {
+        return ssoAppInterfaceMapper.selectAppInterfaces(appId);
     }
 }

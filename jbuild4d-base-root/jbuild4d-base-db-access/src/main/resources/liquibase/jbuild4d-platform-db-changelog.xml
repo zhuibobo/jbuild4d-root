@@ -833,9 +833,9 @@
             <column name="APP_NAME" type="NVARCHAR(100)" remarks="集成系统名称">
                 <constraints nullable="false"/>
             </column>
-            <column name="APP_PUBLIC_KEY" type="NVARCHAR(200)" remarks="公钥">
+            <column name="APP_PUBLIC_KEY" type="NVARCHAR(1000)" remarks="公钥">
             </column>
-            <column name="APP_PRIVATE_KEY" type="NVARCHAR(200)" remarks="私钥">
+            <column name="APP_PRIVATE_KEY" type="NVARCHAR(1000)" remarks="私钥">
             </column>
             <column name="APP_DOMAIN" type="NVARCHAR(300)" remarks="域名或者ip,用于验证来源使用"></column>
             <column name="APP_INDEX_URL" type="NVARCHAR(1000)" remarks="主页的地址,用于默认登录完成之后的目标地址"></column>

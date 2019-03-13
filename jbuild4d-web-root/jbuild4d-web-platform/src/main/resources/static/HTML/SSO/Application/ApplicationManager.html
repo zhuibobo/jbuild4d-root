@@ -45,7 +45,11 @@
                     }
                 },
                 settingApp:function (app) {
-
+                    var url = BaseUtility.BuildView(this.acInterface.integratedSystemEditView, {
+                        "op": "update",
+                        "recordId": app.appId
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑集成系统"}, 1);
                 },
                 removeApp:function (app) {
                     alert(app.appId);

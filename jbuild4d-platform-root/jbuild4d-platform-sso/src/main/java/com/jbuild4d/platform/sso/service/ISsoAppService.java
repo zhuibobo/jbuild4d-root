@@ -8,4 +8,6 @@ import com.jbuild4d.platform.sso.vo.SSOAppVo;
 
 public interface ISsoAppService extends IBaseService<SsoAppEntity> {
     void saveIntegratedMainApp(JB4DSession jb4DSession, SSOAppVo entity) throws JBuild4DGenerallyException;
+
+    SSOAppVo getAppVo(JB4DSession jb4DSession, String appId);
 }

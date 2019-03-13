@@ -1,5 +1,6 @@
 package com.jbuild4d.platform.sso.service.impl;
 import java.util.Date;
+import java.util.List;
 
 import com.jbuild4d.base.dbaccess.dao.sso.SsoAppMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity;
@@ -52,5 +53,15 @@ public class SsoAppServiceImpl extends BaseServiceImpl<SsoAppEntity> implements 
                 ssoAppInterfaceService.saveSimple(jb4DSession,ssoAppInterfaceEntity.getInterfaceId(),ssoAppInterfaceEntity);
             }
         }
+    }
+
+    @Override
+    public SSOAppVo getAppVo(JB4DSession jb4DSession, String appId) {
+        SSOAppVo ssoAppVo=new SSOAppVo();
+        SsoAppEntity ssoAppEntity=ssoAppMapper.selectByPrimaryKey(appId);
+        List<SsoAppInterfaceEntity> ssoAppInterfaceEntityList= ssoAppInterfaceService.getAppInterfaces(jb4DSession,appId);
+        ssoAppVo.setSsoAppEntity(ssoAppEntity);
+        ssoAppVo.setSsoAppInterfaceEntityList(ssoAppInterfaceEntityList);
+        return ssoAppVo;
     }
 }

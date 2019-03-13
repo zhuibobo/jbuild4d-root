@@ -42,12 +42,14 @@ Vue.component("sso-app-detail-from-comp", {
     },
     mounted:function(){
         //
+        //alert(this.status);
         if(this.status=="add") {
             //this.appEntity.appId=this.appId;
             //alert(this.status);
             this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: "defaultSSOAppLogoImage"});
         }
         else {
+
             this.systemLogoImageSrc = BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: ""});
         }
     },

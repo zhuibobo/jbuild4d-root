@@ -10,10 +10,10 @@
 <div id="appForm" class="general-edit-page-wrap" style="margin-top: 0px" v-cloak>
     <tabs>
         <tab-pane label="系统设置">
-            <sso-app-detail-from-comp :status="status" :app-id="formEntity.appId" ref="mainAppDetailFromComp"></sso-app-detail-from-comp>
+            <sso-app-detail-from-comp :status="status" :app-id="recordId" ref="mainAppDetailFromComp"></sso-app-detail-from-comp>
         </tab-pane>
         <tab-pane label="接口设置">
-            <sso-app-interface-list-comp ref="mainAppInterfaceListComp" :interface-belong-app-Id="formEntity.appId"></sso-app-interface-list-comp>
+            <sso-app-interface-list-comp ref="mainAppInterfaceListComp" :interface-belong-app-Id="recordId"></sso-app-interface-list-comp>
         </tab-pane>
         <tab-pane label="子系统配置">
             <sso-app-sub-system-list-comp :status="status"></sso-app-sub-system-list-comp>
@@ -33,27 +33,33 @@
         el: "#appForm",
         mounted:function () {
             if(this.status=="add") {
-                this.formEntity.appId=StringUtility.Guid();
+                this.recordId=StringUtility.Guid();
             }
             else {
-
+                this.bindFormData();
             }
         },
         data: {
             acInterface:{
                 saveMainAppUrl:"/PlatFormRest/SSO/Application/SaveMainApp",
-                getDataUrl:""
+                getDataUrl:"/PlatFormRest/SSO/Application/getAppVo"
             },
             recordId:BaseUtility.GetUrlParaValue("recordId"),
-            formEntity: {
-                appId:""
-            },
             status: BaseUtility.GetUrlParaValue("op"),
             userHeadImageSrc:""
         },
         methods: {
             bindFormData:function(){
-
+                var _self=this;
+                AjaxUtility.Post(this.acInterface.getDataUrl,{appId:this.recordId},function (result) {
+                    console.log(result);
+                    if(result.success){
+                        _self.$refs.mainAppDetailFromComp.setAppEntity(result.data.ssoAppEntity);
+                    }
+                    else{
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
+                },"json");
             },
             handleSubmit: function () {
                 var _self=this;
