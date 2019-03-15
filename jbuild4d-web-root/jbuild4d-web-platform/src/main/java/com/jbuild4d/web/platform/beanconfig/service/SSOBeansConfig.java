@@ -2,8 +2,7 @@ package com.jbuild4d.web.platform.beanconfig.service;
 
 import com.jbuild4d.base.dbaccess.dao.sso.*;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.platform.sso.service.*;
-import com.jbuild4d.platform.sso.service.impl.*;
+import com.jbuild4d.platform.sso.service1.impl.*;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;

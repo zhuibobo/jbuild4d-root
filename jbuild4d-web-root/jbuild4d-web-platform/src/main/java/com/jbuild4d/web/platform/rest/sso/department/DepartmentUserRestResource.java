@@ -11,7 +11,7 @@ import com.jbuild4d.core.base.tools.StringUtility;
 import com.jbuild4d.base.service.search.GeneralSearchUtility;
 import com.jbuild4d.platform.files.service.IFileInfoService;
 import com.jbuild4d.platform.sso.service.IDepartmentUserService;
-import com.jbuild4d.platform.sso.vo.DepartmentUserVo;
+import com.jbuild4d.platform.sso.service1.vo.DepartmentUserVo;
 import com.jbuild4d.platform.system.service.IOperationLogService;
 import com.jbuild4d.platform.system.service.ISettingService;
 import com.jbuild4d.core.base.vo.JBuild4DResponseVo;

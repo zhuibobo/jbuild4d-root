@@ -8,7 +8,7 @@ import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.core.base.tools.DateUtility;
 import com.jbuild4d.base.tools.JsonUtility;
 import com.jbuild4d.platform.sso.service.IDepartmentUserService;
-import com.jbuild4d.platform.sso.vo.DepartmentUserVo;
+import com.jbuild4d.platform.sso.service1.vo.DepartmentUserVo;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import org.junit.Assert;

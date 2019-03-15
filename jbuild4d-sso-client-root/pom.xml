@@ -12,7 +12,6 @@
     <artifactId>jbuild4d-sso-client-root</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>jbuild4d-sso-client</module>
         <module>jbuild4d-sso-web-client-demo1</module>
         <module>jbuild4d-sso-web-client-demo2</module>
     </modules>

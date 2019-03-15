@@ -11,5 +11,10 @@
 
     <artifactId>jbuild4d-sso-root</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>jbuild4d-platform-sso-service</module>
+        <module>jbuild4d-sso-client</module>
+        <module>jbuild4d-platform-sso-core</module>
+    </modules>
 
 </project>

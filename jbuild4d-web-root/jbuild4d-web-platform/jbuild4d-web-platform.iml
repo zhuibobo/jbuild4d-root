@@ -37,7 +37,7 @@
     <orderEntry type="module" module-name="jbuild4d-base-service" />
     <orderEntry type="module" module-name="jbuild4d-base-db-access" />
     <orderEntry type="module" module-name="jbuild4d-platform-system" />
-    <orderEntry type="module" module-name="jbuild4d-platform-sso" />
+    <orderEntry type="library" name="Maven: jbuild4d:jbuild4d-platform-sso:1.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="jbuild4d-platform-builder" />
     <orderEntry type="module" module-name="jbuild4d-platform-files" />
     <orderEntry type="library" name="Maven: io.springfox:springfox-swagger2:2.9.2" level="project" />
