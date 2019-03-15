@@ -25,6 +25,7 @@
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-root.iml" filepath="$PROJECT_DIR$/jbuild4d-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-client-root/jbuild4d-sso-client/jbuild4d-sso-client.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-client-root/jbuild4d-sso-client/jbuild4d-sso-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-client-root/jbuild4d-sso-client-root.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-client-root/jbuild4d-sso-client-root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-root.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-client-root/jbuild4d-sso-web-client-demo1/jbuild4d-sso-web-client-demo1.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-client-root/jbuild4d-sso-web-client-demo1/jbuild4d-sso-web-client-demo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-client-root/jbuild4d-sso-web-client-demo2/jbuild4d-sso-web-client-demo2.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-client-root/jbuild4d-sso-web-client-demo2/jbuild4d-sso-web-client-demo2.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-web-root/jbuild4d-web-platform/jbuild4d-web-platform.iml" filepath="$PROJECT_DIR$/jbuild4d-web-root/jbuild4d-web-platform/jbuild4d-web-platform.iml" />

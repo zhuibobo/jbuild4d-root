@@ -18,6 +18,7 @@
         <module>jbuild4d-web-root</module>
         <module>jbuild4d-core-root</module>
         <module>jbuild4d-sso-client-root</module>
+        <module>jbuild4d-sso-root</module>
     </modules>
     <packaging>pom</packaging>
 
