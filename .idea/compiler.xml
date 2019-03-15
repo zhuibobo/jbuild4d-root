@@ -21,7 +21,6 @@
         <module name="jbuild4d-platform-builder" />
         <module name="jbuild4d-platform-files" />
         <module name="jbuild4d-platform-sso" />
-        <module name="jbuild4d-platform-sso-client" />
         <module name="jbuild4d-platform-system" />
         <module name="jbuild4d-sso-client" />
         <module name="jbuild4d-sso-web-client-demo1" />

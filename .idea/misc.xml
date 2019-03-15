@@ -18,6 +18,7 @@
       <set>
         <option value="$PROJECT_DIR$/jbuild4d-platform-root/build4d-platform-sso/pom.xml" />
         <option value="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-organ/pom.xml" />
+        <option value="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-sso-client/pom.xml" />
         <option value="$PROJECT_DIR$/jbuild4d-sso-root/pom.xml" />
         <option value="$PROJECT_DIR$/jbuild4d-web-root/jbuild4d-web-sso-client-demo1/pom.xml" />
         <option value="$PROJECT_DIR$/jbuild4d-web-root/jbuild4d-web-sso-client-demo2/pom.xml" />

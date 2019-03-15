@@ -11,6 +11,9 @@ public class SsoConfig {
     @Value("${jbuild4d.sso.server}")
     private String ssoServer;
 
+    @Value("${jbuild4d.sso.login.path}")
+    private String ssoLoginPath;
+
     @Value("${jbuild4d.sso.logout.path}")
     private String ssoLogoutPath;
 
@@ -30,6 +33,7 @@ public class SsoConfig {
         registration.addUrlPatterns("/*");
         registration.setFilter(new SsoWebFilter());
         registration.addInitParameter(SsoWebFilter.KEY_SSO_SERVER, ssoServer);
+        registration.addInitParameter(SsoWebFilter.KEY_SSO_LOGIN_PATH,ssoLoginPath);
         registration.addInitParameter(SsoWebFilter.KEY_SSO_LOGOUT_PATH, ssoLogoutPath);
         registration.addInitParameter(SsoWebFilter.KEY_SSO_EXCLUDED_PATHS, ssoExcludedPaths);
 
