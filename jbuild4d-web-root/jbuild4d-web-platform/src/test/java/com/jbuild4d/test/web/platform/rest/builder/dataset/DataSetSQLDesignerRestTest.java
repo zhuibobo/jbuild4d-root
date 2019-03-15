@@ -3,7 +3,7 @@ package com.jbuild4d.test.web.platform.rest.builder.dataset;
 import com.jbuild4d.base.tools.JsonUtility;
 import com.jbuild4d.platform.builder.vo.SQLResolveToDataSetVo;
 import com.jbuild4d.test.web.platform.RestTestBase;
-import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MvcResult;

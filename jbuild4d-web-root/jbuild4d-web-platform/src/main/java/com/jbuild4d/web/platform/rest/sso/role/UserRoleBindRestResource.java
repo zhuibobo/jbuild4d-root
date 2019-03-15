@@ -6,7 +6,7 @@ import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.sso.service.IUserRoleService;
 import com.jbuild4d.platform.sso.service.IUserService;
-import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

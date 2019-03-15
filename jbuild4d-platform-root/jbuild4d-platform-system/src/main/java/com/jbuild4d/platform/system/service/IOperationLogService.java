@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 
 import javax.servlet.http.HttpServletRequest;
 

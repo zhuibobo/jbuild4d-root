@@ -6,7 +6,7 @@ import com.jbuild4d.base.dbaccess.anno.DBAnnoUtility;
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryEntity;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.core.base.tools.ClassUtility;
 import com.jbuild4d.base.tools.JsonUtility;
@@ -15,7 +15,7 @@ import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.base.service.search.GeneralSearchUtility;
 import com.jbuild4d.platform.system.service.IDictionaryService;
 import com.jbuild4d.platform.system.service.IOperationLogService;
-import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

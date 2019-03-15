@@ -7,7 +7,7 @@ import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.core.base.tools.StringUtility;
 import com.jbuild4d.platform.system.service.IMenuService;

@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.sso.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 
 public interface IOnOrganChangeAware {
      boolean organCreated(JB4DSession jb4DSession, OrganEntity organEntity);

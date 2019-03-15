@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.platform.builder.extend.IDataSetAPI;
 import com.jbuild4d.platform.builder.vo.DataSetColumnVo;

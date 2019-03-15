@@ -2,7 +2,7 @@ package com.jbuild4d.web.platform.rest;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
@@ -15,7 +15,7 @@ import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
 import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.platform.system.service.*;
-import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

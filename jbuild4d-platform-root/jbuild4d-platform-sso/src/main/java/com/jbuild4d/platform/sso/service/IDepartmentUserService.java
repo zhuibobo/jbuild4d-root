@@ -3,7 +3,7 @@ package com.jbuild4d.platform.sso.service;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.sso.vo.DepartmentUserVo;
 
 import java.util.List;

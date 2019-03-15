@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.system.extend.apivariable;
 
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.system.vo.EnvVariableVo;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;

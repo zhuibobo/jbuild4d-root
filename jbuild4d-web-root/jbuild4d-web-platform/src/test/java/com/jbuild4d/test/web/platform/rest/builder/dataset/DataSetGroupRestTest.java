@@ -7,7 +7,7 @@ import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.tools.JsonUtility;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.test.web.platform.RestTestBase;
-import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

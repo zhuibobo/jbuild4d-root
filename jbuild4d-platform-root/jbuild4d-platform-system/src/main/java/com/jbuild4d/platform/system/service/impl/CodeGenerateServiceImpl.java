@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.general.DBProp;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.core.base.tools.DateUtility;
 import com.jbuild4d.base.tools.PathUtility;
 import com.jbuild4d.core.base.tools.StringUtility;

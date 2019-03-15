@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.extend;
 
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
 
 /**

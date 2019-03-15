@@ -2,7 +2,7 @@ package com.jbuild4d.web.platform.controller.base;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.base.dbaccess.dbentities.builder.MenuEntity;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.JsonUtility;
 import com.jbuild4d.platform.system.service.IMenuService;

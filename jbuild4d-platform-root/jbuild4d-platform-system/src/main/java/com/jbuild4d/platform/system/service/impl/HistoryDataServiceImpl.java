@@ -2,7 +2,7 @@ package com.jbuild4d.platform.system.service.impl;
 import com.jbuild4d.base.dbaccess.dao.systemsetting.HistoryDataMapper;
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.HistoryDataEntity;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.platform.system.service.IHistoryDataService;
 import org.mybatis.spring.SqlSessionTemplate;

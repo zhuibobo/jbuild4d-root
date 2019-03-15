@@ -6,7 +6,7 @@ import com.jbuild4d.base.service.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.core.base.tools.UUIDUtility;
 import org.mybatis.spring.SqlSessionTemplate;

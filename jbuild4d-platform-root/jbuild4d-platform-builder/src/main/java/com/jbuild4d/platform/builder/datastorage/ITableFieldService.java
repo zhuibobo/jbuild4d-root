@@ -2,7 +2,7 @@ package com.jbuild4d.platform.builder.datastorage;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 
 import java.io.IOException;

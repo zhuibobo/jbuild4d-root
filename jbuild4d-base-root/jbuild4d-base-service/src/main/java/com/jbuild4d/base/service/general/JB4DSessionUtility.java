@@ -3,6 +3,7 @@ package com.jbuild4d.base.service.general;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jbuild4d.core.base.exception.SessionTimeoutException;
 import com.jbuild4d.base.tools.JsonUtility;
+import com.jbuild4d.core.base.session.JB4DSession;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 public class JB4DSessionUtility {
-
 
     public static String UserLoginSessionKey="JB4DSession";
     public static String EXSessionKey1="EXSessionKey1";

@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.system.service.impl;
 
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.tools.cache.IBuildGeneralObj;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
 import com.jbuild4d.core.base.tools.ClassUtility;

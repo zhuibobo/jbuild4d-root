@@ -1,4 +1,4 @@
-package com.jbuild4d.base.service.general;
+package com.jbuild4d.core.base.session;
 
 import java.io.*;
 import java.util.List;

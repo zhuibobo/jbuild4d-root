@@ -1,4 +1,4 @@
-package com.jbuild4d.web.platform.model;
+package com.jbuild4d.core.base.vo;
 
 import java.util.HashMap;
 import java.util.Map;

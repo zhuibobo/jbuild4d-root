@@ -1,17 +1,12 @@
 package com.jbuild4d.web.platform.rest.sso.organ;
 
-import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
-import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(value = "/PlatFormRest/SSO/OrganType")

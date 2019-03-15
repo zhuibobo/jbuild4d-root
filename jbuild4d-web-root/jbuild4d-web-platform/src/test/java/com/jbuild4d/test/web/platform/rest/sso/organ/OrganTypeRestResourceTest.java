@@ -3,7 +3,7 @@ import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
 import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.platform.sso.service.impl.OrganTypeServiceImpl;
 import com.jbuild4d.test.web.platform.RestTestBase;
-import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import org.junit.Assert;
 import org.junit.Test;
 

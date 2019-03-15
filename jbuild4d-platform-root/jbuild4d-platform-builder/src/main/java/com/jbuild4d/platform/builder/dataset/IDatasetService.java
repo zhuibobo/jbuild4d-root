@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
 import com.jbuild4d.platform.builder.vo.SQLResolveToDataSetVo;
 import org.xml.sax.SAXException;

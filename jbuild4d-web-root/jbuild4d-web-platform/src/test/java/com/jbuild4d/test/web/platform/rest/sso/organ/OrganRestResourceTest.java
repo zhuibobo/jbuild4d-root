@@ -10,7 +10,7 @@ import com.jbuild4d.base.tools.JsonUtility;
 import com.jbuild4d.platform.sso.service.IDepartmentUserService;
 import com.jbuild4d.platform.sso.vo.DepartmentUserVo;
 import com.jbuild4d.test.web.platform.RestTestBase;
-import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

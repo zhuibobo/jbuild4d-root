@@ -2,7 +2,7 @@ package com.jbuild4d.platform.files.service;
 
 import com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.base.service.general.JB4DSession;
+import com.jbuild4d.core.base.session.JB4DSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

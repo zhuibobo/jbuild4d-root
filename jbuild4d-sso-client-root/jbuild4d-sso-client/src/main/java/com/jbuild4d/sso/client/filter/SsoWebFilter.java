@@ -1,5 +1,7 @@
 package com.jbuild4d.sso.client.filter;
 
+import com.jbuild4d.core.base.session.JB4DSession;
+import com.jbuild4d.sso.client.proxy.LoginProxyUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +38,7 @@ public class SsoWebFilter extends HttpServlet implements Filter {
         // make url
         String servletPath = req.getServletPath();
 
-        //=LoginProxyUtility.loginCheck(req,res);
+        JB4DSession jb4DSession=LoginProxyUtility.loginCheck(req,res);
 
         chain.doFilter(request, response);
         return;
