@@ -16,6 +16,7 @@
         <module>jbuild4d-platform-builder</module>
         <module>jbuild4d-platform-files</module>
         <module>jbuild4d-platform-sso</module>
+        <module>jbuild4d-platform-sso-core</module>
     </modules>
 
     <dependencies>
