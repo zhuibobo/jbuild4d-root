@@ -21,6 +21,14 @@
         </dependency>
         <dependency>
             <groupId>jbuild4d</groupId>
+            <artifactId>jbuild4d-platform-sso-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jbuild4d</groupId>
+            <artifactId>jbuild4d-platform-sso-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jbuild4d</groupId>
             <artifactId>jbuild4d-base-tools</artifactId>
         </dependency>
         <dependency>
@@ -34,10 +42,6 @@
         <dependency>
             <groupId>jbuild4d</groupId>
             <artifactId>jbuild4d-platform-system</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jbuild4d</groupId>
-            <artifactId>jbuild4d-platform-sso</artifactId>
         </dependency>
         <dependency>
             <groupId>jbuild4d</groupId>

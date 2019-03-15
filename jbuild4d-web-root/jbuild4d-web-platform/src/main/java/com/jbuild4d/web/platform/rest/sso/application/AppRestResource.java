@@ -8,7 +8,7 @@ import com.jbuild4d.core.base.encryption.nsymmetric.RSAUtility;
 import com.jbuild4d.platform.files.service.IFileInfoService;
 import com.jbuild4d.platform.sso.service.ISsoAppInterfaceService;
 import com.jbuild4d.platform.sso.service.ISsoAppService;
-import com.jbuild4d.platform.sso.service1.vo.SSOAppVo;
+import com.jbuild4d.platform.sso.service.vo.SSOAppVo;
 import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
