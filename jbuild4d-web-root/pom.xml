@@ -14,8 +14,6 @@
     <modules>
         <module>jbuild4d-web-platform</module>
         <module>flowable-ui-modeler</module>
-        <module>jbuild4d-web-sso-client-demo1</module>
-        <module>jbuild4d-web-sso-client-demo2</module>
     </modules>
     <dependencies>
         <dependency>
