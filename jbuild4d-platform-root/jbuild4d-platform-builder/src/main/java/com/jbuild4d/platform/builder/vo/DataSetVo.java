@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.builder.vo;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
-import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.base.tools.JsonUtility;
 
 import java.io.IOException;
 import java.util.List;

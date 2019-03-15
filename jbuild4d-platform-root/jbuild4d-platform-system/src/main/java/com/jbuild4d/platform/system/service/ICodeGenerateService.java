@@ -1,14 +1,13 @@
 package com.jbuild4d.platform.system.service;
 
 import com.github.pagehelper.PageInfo;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.platform.system.vo.SimpleTableFieldVo;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map; /**

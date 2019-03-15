@@ -3,10 +3,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.jbuild4d.base.dbaccess.dao.sso.RoleGroupMapper;
-import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.RoleGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;

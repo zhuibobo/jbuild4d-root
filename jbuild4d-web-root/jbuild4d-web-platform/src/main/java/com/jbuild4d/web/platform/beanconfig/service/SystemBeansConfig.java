@@ -5,7 +5,7 @@ import com.jbuild4d.base.dbaccess.dao.systemsetting.*;
 import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.dbaccess.dynamic.ISQLBuilderMapper;
 import com.jbuild4d.base.dbaccess.dynamic.SQLBuilderMapper;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.impl.GeneralServiceImpl;

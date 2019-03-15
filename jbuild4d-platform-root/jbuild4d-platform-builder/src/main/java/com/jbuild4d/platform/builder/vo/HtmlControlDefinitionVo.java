@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.vo;
 
-import com.jbuild4d.base.tools.common.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLUtility;
 import org.w3c.dom.Node;
 
 import javax.xml.xpath.XPathExpressionException;

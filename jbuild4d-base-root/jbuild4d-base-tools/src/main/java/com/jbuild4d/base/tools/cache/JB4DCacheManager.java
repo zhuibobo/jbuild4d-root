@@ -1,9 +1,8 @@
 package com.jbuild4d.base.tools.cache;
 
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.tools.common.BeanUtility;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.base.tools.BeanUtility;
 import org.ehcache.CacheManager;
-import org.springframework.web.context.ContextLoader;
 
 /**
  * Created with IntelliJ IDEA.

@@ -3,7 +3,7 @@ package com.jbuild4d.platform.builder.dataset.impl;
 import com.jbuild4d.base.dbaccess.dao.builder.DatasetGroupMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;

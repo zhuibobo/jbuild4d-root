@@ -2,7 +2,7 @@ package com.jbuild4d.web.platform.beanconfig.service;
 
 import com.jbuild4d.base.dbaccess.dao.builder.*;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.builder.dataset.IDatasetColumnService;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.platform.builder.dataset.IDatasetRelatedTableService;

@@ -5,12 +5,12 @@ import com.jbuild4d.base.dbaccess.dao.systemsetting.OperationLogMapper;
 import com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.base.tools.common.InetAddressUtility;
-import com.jbuild4d.base.tools.common.JsonUtility;
-import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.base.tools.InetAddressUtility;
+import com.jbuild4d.base.tools.JsonUtility;
+import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.platform.system.service.IOperationLogService;
 import org.mybatis.spring.SqlSessionTemplate;
 

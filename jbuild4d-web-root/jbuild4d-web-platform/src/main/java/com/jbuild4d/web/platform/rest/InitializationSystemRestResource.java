@@ -1,7 +1,7 @@
 package com.jbuild4d.web.platform.rest;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;

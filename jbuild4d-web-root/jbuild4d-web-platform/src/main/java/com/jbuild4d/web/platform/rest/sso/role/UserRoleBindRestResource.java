@@ -2,7 +2,7 @@ package com.jbuild4d.web.platform.rest.sso.role;
 
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.sso.service.IUserRoleService;
 import com.jbuild4d.platform.sso.service.IUserService;

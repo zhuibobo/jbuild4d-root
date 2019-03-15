@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.builder.dataset.impl;
 
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.tools.common.XMLUtility;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.tools.XMLUtility;
 import com.jbuild4d.platform.builder.dataset.IDataSetColumnCaptionConfigService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -9,7 +9,6 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;

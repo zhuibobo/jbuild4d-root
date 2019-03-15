@@ -1,6 +1,6 @@
 package com.jbuild4d.test.web.platform.rest.sso.organ;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
-import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.platform.sso.service.impl.OrganTypeServiceImpl;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;

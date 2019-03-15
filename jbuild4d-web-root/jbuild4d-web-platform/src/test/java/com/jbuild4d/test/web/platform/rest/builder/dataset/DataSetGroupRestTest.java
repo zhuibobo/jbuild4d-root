@@ -4,7 +4,7 @@ import java.util.Date;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
-import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.base.tools.JsonUtility;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;

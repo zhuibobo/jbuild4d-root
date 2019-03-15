@@ -3,12 +3,12 @@ import java.util.Date;
 
 import com.jbuild4d.base.dbaccess.dao.sso.UserRoleMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.UserRoleEntity;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.base.tools.common.UUIDUtility;
+import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.platform.sso.service.IUserRoleService;
 import org.mybatis.spring.SqlSessionTemplate;
 

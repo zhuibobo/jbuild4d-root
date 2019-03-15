@@ -1,10 +1,10 @@
 package com.jbuild4d.web.platform.rest.sso.application;
 
 import com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
-import com.jbuild4d.base.tools.common.encryption.nsymmetric.RSAUtility;
+import com.jbuild4d.core.base.encryption.nsymmetric.RSAUtility;
 import com.jbuild4d.platform.files.service.IFileInfoService;
 import com.jbuild4d.platform.sso.service.ISsoAppInterfaceService;
 import com.jbuild4d.platform.sso.service.ISsoAppService;

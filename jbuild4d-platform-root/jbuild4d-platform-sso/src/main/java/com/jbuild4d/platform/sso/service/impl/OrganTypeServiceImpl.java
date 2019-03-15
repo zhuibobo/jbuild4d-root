@@ -3,13 +3,13 @@ package com.jbuild4d.platform.sso.service.impl;
 import com.jbuild4d.base.dbaccess.dao.sso.OrganTypeMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.IUpdateBefore;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.base.tools.common.StringUtility;
+import com.jbuild4d.core.base.tools.StringUtility;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
 import org.mybatis.spring.SqlSessionTemplate;
 

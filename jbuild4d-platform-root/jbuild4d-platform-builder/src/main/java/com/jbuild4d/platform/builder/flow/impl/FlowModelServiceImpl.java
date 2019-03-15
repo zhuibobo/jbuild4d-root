@@ -2,11 +2,11 @@ package com.jbuild4d.platform.builder.flow.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.FlowModelMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.base.tools.common.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLUtility;
 import com.jbuild4d.platform.builder.flow.IFlowModelService;
 import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
 import com.jbuild4d.platform.builder.module.IModuleService;

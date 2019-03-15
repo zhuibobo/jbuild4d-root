@@ -1,9 +1,8 @@
 package com.jbuild4d.platform.builder.list.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.ListResourceMapper;
-import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;

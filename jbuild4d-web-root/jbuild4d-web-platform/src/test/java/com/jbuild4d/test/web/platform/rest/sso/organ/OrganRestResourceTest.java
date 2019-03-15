@@ -1,19 +1,16 @@
 package com.jbuild4d.test.web.platform.rest.sso.organ;
-import java.util.Date;
 
 import com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JBuild4DProp;
-import com.jbuild4d.base.tools.common.DateUtility;
-import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.core.base.tools.DateUtility;
+import com.jbuild4d.base.tools.JsonUtility;
 import com.jbuild4d.platform.sso.service.IDepartmentUserService;
 import com.jbuild4d.platform.sso.vo.DepartmentUserVo;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;
-import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +19,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.io.BufferedInputStream;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 /**
  * Created with IntelliJ IDEA.

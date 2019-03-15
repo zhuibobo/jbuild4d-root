@@ -24,5 +24,9 @@
             <groupId>jbuild4d</groupId>
             <artifactId>jbuild4d-base-tools</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jbuild4d</groupId>
+            <artifactId>jbuild4d-core-base</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -1,7 +1,7 @@
 package com.jbuild4d.base.dbaccess.general;
 
 import com.jbuild4d.base.dbaccess.exenum.DBTypeEnum;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,14 +1,14 @@
 package com.jbuild4d.platform.system.service.impl;
 
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.tools.cache.IBuildGeneralObj;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
-import com.jbuild4d.base.tools.common.ClassUtility;
-import com.jbuild4d.base.tools.common.StringUtility;
-import com.jbuild4d.base.tools.common.XMLUtility;
-import com.jbuild4d.base.tools.common.list.IListWhereCondition;
-import com.jbuild4d.base.tools.common.list.ListUtility;
+import com.jbuild4d.core.base.tools.ClassUtility;
+import com.jbuild4d.core.base.tools.StringUtility;
+import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.list.IListWhereCondition;
+import com.jbuild4d.core.base.list.ListUtility;
 import com.jbuild4d.platform.system.extend.apivariable.IAPIVariableCreater;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;

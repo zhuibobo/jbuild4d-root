@@ -1,6 +1,6 @@
 package com.jbuild4d.test.web.platform.rest.builder.dataset;
 
-import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.base.tools.JsonUtility;
 import com.jbuild4d.platform.builder.vo.SQLResolveToDataSetVo;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import com.jbuild4d.web.platform.model.JBuild4DResponseVo;

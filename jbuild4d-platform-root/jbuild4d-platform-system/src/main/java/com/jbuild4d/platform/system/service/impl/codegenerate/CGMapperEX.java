@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.system.service.impl.codegenerate;
 
-import com.jbuild4d.base.tools.common.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLUtility;
 import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
 import com.jbuild4d.platform.system.vo.CodeGenerateVo;
 import org.mybatis.generatorex.api.IntrospectedColumn;

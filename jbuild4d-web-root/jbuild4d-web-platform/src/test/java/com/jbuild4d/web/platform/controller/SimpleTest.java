@@ -1,6 +1,5 @@
 package com.jbuild4d.web.platform.controller;
 
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
 import org.junit.Test;
 
 import java.util.regex.Matcher;

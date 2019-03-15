@@ -2,7 +2,7 @@ package com.jbuild4d.platform.files.service.Impl;
 
 import com.jbuild4d.base.dbaccess.dao.files.FileContentMapper;
 import com.jbuild4d.base.dbaccess.dbentities.files.FileContentEntity;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;

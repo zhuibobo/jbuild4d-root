@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.flow;
 
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.platform.builder.vo.FlowModelerConfigVo;
 
 /**

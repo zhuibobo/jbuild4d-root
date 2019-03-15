@@ -2,10 +2,8 @@ package com.jbuild4d.platform.sso.service.impl;
 import java.util.Date;
 
 import com.jbuild4d.base.dbaccess.dao.sso.RoleMapper;
-import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity;
-import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeListEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;

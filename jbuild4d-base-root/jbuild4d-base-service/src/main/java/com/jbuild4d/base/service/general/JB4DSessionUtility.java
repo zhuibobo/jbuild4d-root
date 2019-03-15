@@ -1,8 +1,8 @@
 package com.jbuild4d.base.service.general;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jbuild4d.base.exception.SessionTimeoutException;
-import com.jbuild4d.base.tools.common.JsonUtility;
+import com.jbuild4d.core.base.exception.SessionTimeoutException;
+import com.jbuild4d.base.tools.JsonUtility;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;

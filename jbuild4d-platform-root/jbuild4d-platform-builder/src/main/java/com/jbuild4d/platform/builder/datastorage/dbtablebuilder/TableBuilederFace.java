@@ -2,11 +2,11 @@ package com.jbuild4d.platform.builder.datastorage.dbtablebuilder;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.general.DBProp;
-import com.jbuild4d.base.exception.JBuild4DPhysicalTableException;
-import com.jbuild4d.base.exception.JBuild4DSQLKeyWordException;
+import com.jbuild4d.core.base.exception.JBuild4DPhysicalTableException;
+import com.jbuild4d.core.base.exception.JBuild4DSQLKeyWordException;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.base.tools.common.SQLKeyWordUtility;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.tools.SQLKeyWordUtility;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 
 import java.util.List;

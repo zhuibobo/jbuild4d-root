@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.htmldesign.impl;
 
-import com.jbuild4d.base.tools.common.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLUtility;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;

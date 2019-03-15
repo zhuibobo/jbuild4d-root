@@ -13,6 +13,8 @@
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-root.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-service/jbuild4d-base-service.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-service/jbuild4d-base-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-tools/jbuild4d-base-tools.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-tools/jbuild4d-base-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-base/jbuild4d-core-base.iml" filepath="$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-base/jbuild4d-core-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-root.iml" filepath="$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-front-end/jbuild4d-front-end.iml" filepath="$PROJECT_DIR$/jbuild4d-front-end/jbuild4d-front-end.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-builder/jbuild4d-platform-builder.iml" filepath="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-builder/jbuild4d-platform-builder.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-files/jbuild4d-platform-files.iml" filepath="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-files/jbuild4d-platform-files.iml" />

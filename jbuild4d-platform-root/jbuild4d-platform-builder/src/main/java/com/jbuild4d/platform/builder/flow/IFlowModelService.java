@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.builder.flow;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSession;
 import org.springframework.web.multipart.MultipartFile;

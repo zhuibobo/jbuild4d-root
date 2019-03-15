@@ -1,7 +1,7 @@
 package com.jbuild4d.web.platform.beanconfig.sys;
 
-import com.jbuild4d.base.tools.common.BeanUtility;
-import com.jbuild4d.base.tools.common.PathUtility;
+import com.jbuild4d.base.tools.BeanUtility;
+import com.jbuild4d.base.tools.PathUtility;
 import com.jbuild4d.web.platform.beanconfig.service.SSOBeansConfig;
 import com.jbuild4d.web.platform.interceptor.LoginedInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -13,8 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

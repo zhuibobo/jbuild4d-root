@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.system.vo;
 
-import com.jbuild4d.base.tools.common.UUIDUtility;
-import com.jbuild4d.base.tools.common.XMLUtility;
+import com.jbuild4d.core.base.tools.UUIDUtility;
+import com.jbuild4d.core.base.tools.XMLUtility;
 import org.w3c.dom.Node; /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb

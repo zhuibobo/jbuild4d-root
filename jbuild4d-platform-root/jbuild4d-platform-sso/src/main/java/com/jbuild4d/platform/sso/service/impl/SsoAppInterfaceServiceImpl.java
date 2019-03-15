@@ -5,7 +5,7 @@ import java.util.List;
 import com.jbuild4d.base.dbaccess.dao.sso.SsoAppInterfaceMapper;
 import com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.general.JB4DSession;

@@ -1,7 +1,5 @@
 package com.jbuild4d.base.service;
 
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
-
 import java.util.List;
 import java.util.Map;
 

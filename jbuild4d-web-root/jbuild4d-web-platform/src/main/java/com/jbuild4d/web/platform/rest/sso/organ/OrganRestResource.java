@@ -1,10 +1,9 @@
 package com.jbuild4d.web.platform.rest.sso.organ;
 
-import com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity;
 import com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity;
 import com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;

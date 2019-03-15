@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.exenum;
 
-import com.jbuild4d.base.exception.JBuild4DBaseException;
+import com.jbuild4d.core.base.exception.JBuild4DBaseException;
 
 /**
  * Created with IntelliJ IDEA.

@@ -4,10 +4,10 @@ import com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTreeTableMapper;
 import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTreeTableEntity;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.general.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.base.tools.common.StringUtility;
+import com.jbuild4d.core.base.tools.StringUtility;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTreeTableService;
 import org.mybatis.spring.SqlSessionTemplate;
 

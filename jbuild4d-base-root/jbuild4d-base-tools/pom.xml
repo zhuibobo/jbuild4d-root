@@ -15,6 +15,12 @@
         <dependency>
             <groupId>jbuild4d</groupId>
             <artifactId>jbuild4d-base-exception</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jbuild4d</groupId>
+            <artifactId>jbuild4d-core-base</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

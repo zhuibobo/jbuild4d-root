@@ -7,7 +7,7 @@ package com.jbuild4d.base.dbaccess.anno;
  * To change this template use File | Settings | File Templates.
  */
 
-import com.jbuild4d.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 
 import java.lang.reflect.Field;
 
