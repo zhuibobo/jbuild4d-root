@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CookieUtility {
     // 默认缓存时间,单位/秒, 2H
-    private static final int COOKIE_MAX_AGE = Integer.MAX_VALUE;
+    public static final int COOKIE_MAX_AGE = Integer.MAX_VALUE;
     // 保存路径,根路径
-    private static final String COOKIE_PATH = "/";
+    public static final String COOKIE_PATH = "/";
 
     /**
      * 保存
@@ -31,7 +31,7 @@ public class CookieUtility {
      * @param value
      * @param maxAge
      */
-    private static void set(HttpServletResponse response, String key, String value, String domain, String path, int maxAge, boolean isHttpOnly) {
+    public static void set(HttpServletResponse response, String key, String value, String domain, String path, int maxAge, boolean isHttpOnly) {
         Cookie cookie = new Cookie(key, value);
         if (domain != null) {
             cookie.setDomain(domain);
@@ -63,7 +63,7 @@ public class CookieUtility {
      * @param request
      * @param key
      */
-    private static Cookie get(HttpServletRequest request, String key) {
+    public static Cookie get(HttpServletRequest request, String key) {
         Cookie[] arr_cookie = request.getCookies();
         if (arr_cookie != null && arr_cookie.length > 0) {
             for (Cookie cookie : arr_cookie) {

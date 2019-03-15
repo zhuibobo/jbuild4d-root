@@ -56,7 +56,7 @@
       <module name="jbuild4d-sso-client" target="1.8" />
       <module name="jbuild4d-sso-client-root" target="1.8" />
       <module name="jbuild4d-sso-root" target="1.8" />
-      <module name="jbuild4d-sso-web-client-demo1" target="1.5" />
+      <module name="jbuild4d-sso-web-client-demo1" target="1.8" />
       <module name="jbuild4d-sso-web-client-demo2" target="1.8" />
       <module name="jbuild4d-web-platform" target="1.8" />
       <module name="jbuild4d-web-root" target="1.8" />

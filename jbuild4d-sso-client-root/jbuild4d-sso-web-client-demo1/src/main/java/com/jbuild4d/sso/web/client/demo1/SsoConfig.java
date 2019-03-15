@@ -8,17 +8,17 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SsoConfig {
-    @Value("${xxl.sso.server}")
-    private String xxlSsoServer;
+    @Value("${jbuild4d.sso.server}")
+    private String ssoServer;
 
-    @Value("${xxl.sso.logout.path}")
-    private String xxlSsoLogoutPath;
+    @Value("${jbuild4d.sso.logout.path}")
+    private String ssoLogoutPath;
 
-    @Value("${xxl-sso.excluded.paths}")
-    private String xxlSsoExcludedPaths;
+    @Value("${jbuild4d.sso.excluded.paths}")
+    private String ssoExcludedPaths;
 
-    @Value("${xxl.sso.redis.address}")
-    private String xxlSsoRedisAddress;
+    /*@Value("${xxl.sso.redis.address}")
+    private String xxlSsoRedisAddress;*/
 
     @Bean
     public FilterRegistrationBean xxlSsoFilterRegistration() {
@@ -29,9 +29,9 @@ public class SsoConfig {
         registration.setOrder(1);
         registration.addUrlPatterns("/*");
         registration.setFilter(new SsoWebFilter());
-        registration.addInitParameter(SsoWebFilter.KEY_SSO_SERVER, xxlSsoServer);
-        registration.addInitParameter(SsoWebFilter.KEY_SSO_LOGOUT_PATH, xxlSsoLogoutPath);
-        registration.addInitParameter(SsoWebFilter.KEY_SSO_EXCLUDED_PATHS, xxlSsoExcludedPaths);
+        registration.addInitParameter(SsoWebFilter.KEY_SSO_SERVER, ssoServer);
+        registration.addInitParameter(SsoWebFilter.KEY_SSO_LOGOUT_PATH, ssoLogoutPath);
+        registration.addInitParameter(SsoWebFilter.KEY_SSO_EXCLUDED_PATHS, ssoExcludedPaths);
 
         return registration;
     }
