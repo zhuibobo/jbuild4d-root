@@ -50,11 +50,6 @@
             <!--单点登录相关工程-->
             <dependency>
                 <groupId>jbuild4d</groupId>
-                <artifactId>jbuild4d-platform-sso-core</artifactId>
-                <version>${platform.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jbuild4d</groupId>
                 <artifactId>jbuild4d-platform-sso-service</artifactId>
                 <version>${platform.version}</version>
             </dependency>

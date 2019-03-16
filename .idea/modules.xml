@@ -19,7 +19,6 @@
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-builder/jbuild4d-platform-builder.iml" filepath="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-builder/jbuild4d-platform-builder.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-files/jbuild4d-platform-files.iml" filepath="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-files/jbuild4d-platform-files.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-root.iml" filepath="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-root.iml" />
-      <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-platform-sso-core/jbuild4d-platform-sso-core.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-platform-sso-core/jbuild4d-platform-sso-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-platform-sso-service/jbuild4d-platform-sso-service.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-platform-sso-service/jbuild4d-platform-sso-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-system/jbuild4d-platform-system.iml" filepath="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-system/jbuild4d-platform-system.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-root.iml" filepath="$PROJECT_DIR$/jbuild4d-root.iml" />

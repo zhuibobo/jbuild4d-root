@@ -33,7 +33,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="jbuild4d-base-exception" />
     <orderEntry type="module" module-name="jbuild4d-core-base" />
-    <orderEntry type="module" module-name="jbuild4d-platform-sso-core" />
     <orderEntry type="module" module-name="jbuild4d-platform-sso-service" />
     <orderEntry type="module" module-name="jbuild4d-base-tools" />
     <orderEntry type="module" module-name="jbuild4d-base-service" />

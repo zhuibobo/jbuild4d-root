@@ -20,7 +20,6 @@
         <module name="jbuild4d-core-base" />
         <module name="jbuild4d-platform-builder" />
         <module name="jbuild4d-platform-files" />
-        <module name="jbuild4d-platform-sso-core" />
         <module name="jbuild4d-platform-sso-service" />
         <module name="jbuild4d-platform-system" />
         <module name="jbuild4d-sso-client" />

@@ -13,7 +13,6 @@
         <option value="$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/pom.xml" />
         <option value="$PROJECT_DIR$/jbuild4d-web-root/flowable-ui-modeler/flowable-ui-common/pom.xml" />
         <option value="$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-client/pom.xml" />
-        <option value="$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-platform-sso-core/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
