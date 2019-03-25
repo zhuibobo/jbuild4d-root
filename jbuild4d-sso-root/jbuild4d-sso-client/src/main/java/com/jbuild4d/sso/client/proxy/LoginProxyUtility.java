@@ -1,18 +1,23 @@
 package com.jbuild4d.sso.client.proxy;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.core.base.tools.CookieUtility;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import com.jbuild4d.sso.client.conf.Conf;
 import com.jbuild4d.sso.client.utils.HttpClientUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginProxyUtility {
 
-    public static JB4DSession loginCheck(HttpServletRequest request, HttpServletResponse response) {
+    public static JB4DSession loginCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        JB4DSession jb4DSession=null;
 
         String sessionCode = CookieUtility.getValue(request, Conf.SSO_SESSION_STORE_KEY);
 
@@ -32,12 +37,18 @@ public class LoginProxyUtility {
         sendData.put(Conf.SSS_CODE_URL_PARA_NAME,sessionCode);
         String httpResult=HttpClientUtil.getHttpPostResult(url,sendData,true);
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        JBuild4DResponseVo jBuild4DResponseVo=objectMapper.readValue(httpResult, JBuild4DResponseVo.class);
+        if(jBuild4DResponseVo.isSuccess()){
+            jb4DSession=(JB4DSession)jBuild4DResponseVo.getData();
+        }
+        else{
+            throw new Exception("SSO服务端错误:"+jBuild4DResponseVo.getMessage());
+        }
+
         //将sessionCode写入Cookie中
         CookieUtility.set(response,Conf.SSO_SESSION_STORE_KEY,sessionCode,false);
 
-        //如果获取到用户,则返回用户.
-
-        //如果获取不到用户,则
-        return null;
+        return jb4DSession;
     }
 }

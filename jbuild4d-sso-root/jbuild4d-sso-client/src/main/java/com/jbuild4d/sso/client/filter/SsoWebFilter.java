@@ -48,7 +48,12 @@ public class SsoWebFilter extends HttpServlet implements Filter {
         // make url
         String servletPath = req.getServletPath();
 
-        JB4DSession jb4DSession=LoginProxyUtility.loginCheck(req,res);
+        JB4DSession jb4DSession= null;
+        try {
+            jb4DSession = LoginProxyUtility.loginCheck(req,res);
+        } catch (Exception e) {
+            throw new ServletException(e.getMessage(),e.getCause());
+        }
 
         if(jb4DSession==null){
             String header = req.getHeader("content-type");
