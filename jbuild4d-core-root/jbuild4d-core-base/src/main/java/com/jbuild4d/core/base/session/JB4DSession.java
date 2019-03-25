@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.List;
 import java.util.Map;
 
-public class JB4DSession {
+public class JB4DSession implements java.io.Serializable {
 
     /**
      * 用户所在的组织ID

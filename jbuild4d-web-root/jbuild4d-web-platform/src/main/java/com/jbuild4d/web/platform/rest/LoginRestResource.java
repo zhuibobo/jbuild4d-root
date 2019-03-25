@@ -3,6 +3,8 @@ package com.jbuild4d.web.platform.rest;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.platform.sso.core.ISSOLoginStore;
+import com.jbuild4d.platform.sso.core.vo.SSOCodeVo;
 import com.jbuild4d.platform.system.service.IMenuService;
 import com.jbuild4d.platform.system.service.IOperationLogService;
 import com.jbuild4d.web.platform.controller.LoginController;
@@ -34,6 +36,9 @@ public class LoginRestResource {
     @Autowired
     IOperationLogService operationLogService;
 
+    @Autowired
+    ISSOLoginStore ssoLoginStore;
+
     @ApiOperation(value="验证用户", notes = "验证用户")
     @ApiImplicitParam(name="user", value="User", required = true, dataType = "User")
     @RequestMapping(value = "/ValidateAccount", method = RequestMethod.POST)
@@ -55,7 +60,7 @@ public class LoginRestResource {
     @ApiOperation(value="验证用户", notes = "验证用户")
     @ApiImplicitParam(name="user", value="User", required = true, dataType = "User")
     @RequestMapping(value = "/ValidateAccountSSO", method = RequestMethod.POST)
-    public JBuild4DResponseVo validateAccountSSO(String account, String password, HttpServletRequest request) throws IOException, ParseException, JBuild4DGenerallyException {
+    public JBuild4DResponseVo validateAccountSSO(String account, String password,String redirect_url,String appId, HttpServletRequest request) throws IOException, ParseException, JBuild4DGenerallyException {
         JB4DSession b4DSession = new JB4DSession();
         b4DSession.setOrganName("4D");
         b4DSession.setOrganId("OrganId");
@@ -64,10 +69,10 @@ public class LoginRestResource {
         JB4DSessionUtility.addSessionAttr(JB4DSessionUtility.UserLoginSessionKey, b4DSession);
 
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-
+        SSOCodeVo code=ssoLoginStore.createAccessCode(jb4DSession,redirect_url,appId);
 
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
         operationLogService.writeUserLoginLog(jb4DSession,this.getClass(),request);
-        return JBuild4DResponseVo.opSuccess();
+        return JBuild4DResponseVo.opSuccess(code);
     }
 }

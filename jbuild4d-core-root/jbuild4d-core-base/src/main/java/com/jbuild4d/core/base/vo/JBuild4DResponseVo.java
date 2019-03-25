@@ -130,6 +130,10 @@ public class JBuild4DResponseVo {
         return success("操作成功！");
     }
 
+    public static JBuild4DResponseVo opSuccess(Object data){
+        return success("操作成功！",data);
+    }
+
     public static JBuild4DResponseVo deleteError(){
         return success("删除失败！");
     }

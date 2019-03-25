@@ -1,5 +1,6 @@
 package com.jbuild4d.sso.web.client.demo1;
 
+import com.jbuild4d.sso.client.conf.Conf;
 import com.jbuild4d.sso.client.filter.SsoWebFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -21,8 +22,8 @@ public class SSOBeanConfig {
     @Value("${jbuild4d.sso.excluded.paths}")
     private String ssoExcludedPaths;
 
-    /*@Value("${xxl.sso.redis.address}")
-    private String xxlSsoRedisAddress;*/
+    @Value("${jbuild4d.sso.server.rest.base.path}")
+    private String restBasePath;
 
     @Bean
     public FilterRegistrationBean xxlSsoFilterRegistration() {
@@ -37,6 +38,7 @@ public class SSOBeanConfig {
         registration.addInitParameter(SsoWebFilter.KEY_SSO_LOGIN_PATH,ssoLoginPath);
         registration.addInitParameter(SsoWebFilter.KEY_SSO_LOGOUT_PATH, ssoLogoutPath);
         registration.addInitParameter(SsoWebFilter.KEY_SSO_EXCLUDED_PATHS, ssoExcludedPaths);
+        registration.addInitParameter(SsoWebFilter.KEY_SSO_REST_BASE_PATH,restBasePath);
 
         return registration;
     }

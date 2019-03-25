@@ -14,6 +14,7 @@ public class JB4DCacheManager {
 
     public static String jb4dPlatformBuilderCacheName="jb4dPlatformBuilder";
     public static String jb4dPlatformSSOCacheName="jb4dPlatformSSO";
+    public static String jb4dPlatformSSOSessionStoreName="SSOSessionStore";
 
     public static String CACHE_KEY_USER_HEAD_IMG="JB4DCacheManager.CACHE_KEY_USER_HEAD_IMG";
     public static String CACHE_KEY_ORGAN_LOGO="JB4DCacheManager.CACHE_KEY_ORGAN_LOGO";
@@ -29,6 +30,10 @@ public class JB4DCacheManager {
     public static void put(String cacheName,String key,Object value){
         cacheManager.getCache(cacheName,String.class,Object.class).put(key,value);
     }
+
+   /* public static <T> void putT(String cacheName,String key,T value){
+        cacheManager.getCache(cacheName,String.class,value.getClass()).put(key,value);
+    }*/
 
     public static <T> T getString(String cacheName,String key){
         return (T) cacheManager.getCache(cacheName,String.class,String.class).get(key);

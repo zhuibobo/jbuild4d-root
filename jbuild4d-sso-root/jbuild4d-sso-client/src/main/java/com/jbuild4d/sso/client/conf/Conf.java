@@ -10,20 +10,24 @@ import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 public class Conf {
 
     /**
-     * sso sessionid, between browser and sso-server (web + token client)
+     * 存储于Cookie中的key,value为当前Session的获取Code
      */
     public static final String SSO_SESSION_STORE_KEY = "jbuild4d_sso_session_id";
 
-
     /**
-     * redirect url (web client)
+     * 返回到登录页面时,附带上的来源URL参数名
      */
     public static final String SSO_REDIRECT_URL = "redirect_url";
+
+    public static String SSO_SERVER_ADDRESS="http://localhost:9091/jb4d";
+
+    public static String SSO_REST_BASE="/PlatFormRest";
 
     /**
      * sso user, request attribute (web client)
      */
     //public static final String SSO_USER = "xxl_sso_user";
+
 
 
     /**

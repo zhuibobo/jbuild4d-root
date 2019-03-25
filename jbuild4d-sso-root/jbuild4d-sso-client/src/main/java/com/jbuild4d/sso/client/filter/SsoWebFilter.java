@@ -18,6 +18,7 @@ public class SsoWebFilter extends HttpServlet implements Filter {
     public static final String KEY_SSO_LOGIN_PATH="SSO_LOGIN_PATH";
     public static final String KEY_SSO_LOGOUT_PATH = "SSO_LOGOUT_PATH";
     public static final String KEY_SSO_EXCLUDED_PATHS = "SSO_EXCLUDED_PATHS";
+    public static final String KEY_SSO_REST_BASE_PATH="SSO_REST_BASE_PATH";
 
     private static Logger logger = LoggerFactory.getLogger(SsoWebFilter.class);
 
@@ -25,12 +26,17 @@ public class SsoWebFilter extends HttpServlet implements Filter {
     private String loginPath;
     private String logoutPath;
     private String excludedPaths;
+    private String restBasePath;
 
     public void init(FilterConfig filterConfig) throws ServletException {
         ssoServer = filterConfig.getInitParameter(KEY_SSO_SERVER);
         loginPath = filterConfig.getInitParameter(KEY_SSO_LOGIN_PATH);
         logoutPath = filterConfig.getInitParameter(KEY_SSO_LOGOUT_PATH);
         excludedPaths = filterConfig.getInitParameter(KEY_SSO_EXCLUDED_PATHS);
+        restBasePath = filterConfig.getInitParameter(KEY_SSO_REST_BASE_PATH);
+
+        Conf.SSO_SERVER_ADDRESS=ssoServer;
+        Conf.SSO_REST_BASE=restBasePath;
 
         logger.info("SsoWebFilter init.");
     }

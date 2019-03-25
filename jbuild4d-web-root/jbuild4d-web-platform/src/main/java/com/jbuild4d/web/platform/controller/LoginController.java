@@ -30,7 +30,7 @@ public class LoginController {
     @RequestMapping(value = "/LoginSSOView", method = RequestMethod.GET)
     public ModelAndView loginSSOView(HttpServletRequest request) {
 
-        ModelAndView modelAndView=new ModelAndView("Login");
+        ModelAndView modelAndView=new ModelAndView("LoginSSO");
 
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
         return modelAndView;
