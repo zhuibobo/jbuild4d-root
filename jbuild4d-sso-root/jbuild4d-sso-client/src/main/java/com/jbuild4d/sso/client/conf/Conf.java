@@ -26,6 +26,11 @@ public class Conf {
     public static String SSO_REST_BASE="/PlatFormRest";
 
     /**
+    *存储到本地Session中的Key,避免每次都通过Http进行请求.
+    **/
+    public static String SSO_LOCATION_SESSION_KEY="JBUILD4D_SSO_LOCATION_SESSION_KEY";
+
+    /**
      * sso user, request attribute (web client)
      */
     //public static final String SSO_USER = "xxl_sso_user";

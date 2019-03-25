@@ -2,6 +2,7 @@ package com.jbuild4d.sso.client.filter;
 
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.sso.client.conf.Conf;
+import com.jbuild4d.sso.client.extend.ICheckSessionSuccess;
 import com.jbuild4d.sso.client.proxy.LoginProxyUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,13 +15,19 @@ import java.io.IOException;
 
 public class SsoWebFilter extends HttpServlet implements Filter {
 
+    private static Logger logger = LoggerFactory.getLogger(SsoWebFilter.class);
+
     public static final String KEY_SSO_SERVER = "SSO_SERVER";
     public static final String KEY_SSO_LOGIN_PATH="SSO_LOGIN_PATH";
     public static final String KEY_SSO_LOGOUT_PATH = "SSO_LOGOUT_PATH";
     public static final String KEY_SSO_EXCLUDED_PATHS = "SSO_EXCLUDED_PATHS";
     public static final String KEY_SSO_REST_BASE_PATH="SSO_REST_BASE_PATH";
 
-    private static Logger logger = LoggerFactory.getLogger(SsoWebFilter.class);
+    private ICheckSessionSuccess checkSessionSuccess;
+
+    public void setCheckSessionSuccess(ICheckSessionSuccess checkSessionSuccess) {
+        this.checkSessionSuccess = checkSessionSuccess;
+    }
 
     private String ssoServer;
     private String loginPath;
@@ -74,6 +81,10 @@ public class SsoWebFilter extends HttpServlet implements Filter {
                 res.sendRedirect(loginPageUrl);
                 return;
             }
+        }
+        else{
+            ((HttpServletRequest) request).getSession().setAttribute(Conf.SSO_LOCATION_SESSION_KEY,jb4DSession);
+            checkSessionSuccess.run(request,response,chain,jb4DSession);
         }
 
         chain.doFilter(request, response);
