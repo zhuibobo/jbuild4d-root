@@ -15,7 +15,7 @@ public class SSOLoginStoreImpl implements ISSOLoginStore {
         SSOCodeVo codeVo=new SSOCodeVo();
         codeVo.setCode(jBuild4DSSOCode);
         codeVo.setTime(DateUtility.getDate_yyyy_MM_dd_HH_mm_ss());
-        codeVo.setReturnUrl(returnUrl);
+        codeVo.setRedirectUrl(returnUrl);
         return codeVo;
     }
 

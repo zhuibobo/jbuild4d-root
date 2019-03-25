@@ -3,7 +3,7 @@ package com.jbuild4d.platform.sso.core.vo;
 public class SSOCodeVo {
     private String code;
     private String time;
-    private String returnUrl;
+    private String redirectUrl;
 
     public String getCode() {
         return code;
@@ -21,11 +21,11 @@ public class SSOCodeVo {
         this.time = time;
     }
 
-    public String getReturnUrl() {
-        return returnUrl;
+    public String getRedirectUrl() {
+        return redirectUrl;
     }
 
-    public void setReturnUrl(String returnUrl) {
-        this.returnUrl = returnUrl;
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
     }
 }

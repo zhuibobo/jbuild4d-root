@@ -15,18 +15,18 @@
             handleSubmit: function (name) {
                 var url='/PlatFormRest/ValidateAccountSSO';
                 var _self=this;
-                var redirect_url=BaseUtility.GetUrlParaValue("redirect_url");
+                var redirectUrl=BaseUtility.GetUrlParaValue("redirectUrl");
                 //debugger;
                 var senddata={
                     account:_self.formItem.account,
                     password:_self.formItem.password,
-                    redirect_url:redirect_url
+                    redirectUrl:redirectUrl
                 };
                 AjaxUtility.Post(url, senddata , function (result) {
                     if (result.success) {
                         debugger;
                         //alert(11);
-                        window.location.href=result.data.redirect_url+"?JBuild4DSSOCode="+result.data.code;
+                        window.location.href=result.data.redirectUrl+"?JBuild4DSSOCode="+result.data.code;
                         //window.location.href=BaseUtility.BuildView("/PlatForm/Builder/Form/DetailView",{op:"add","moduleId":"448fa575-45ef-4101-97e7-1635e0f2c768"});
                     }
                     else {
