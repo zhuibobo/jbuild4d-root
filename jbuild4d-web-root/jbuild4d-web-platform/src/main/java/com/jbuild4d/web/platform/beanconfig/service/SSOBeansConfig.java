@@ -2,6 +2,10 @@ package com.jbuild4d.web.platform.beanconfig.service;
 
 import com.jbuild4d.base.dbaccess.dao.sso.*;
 import com.jbuild4d.base.service.ISQLBuilderService;
+import com.jbuild4d.platform.sso.core.ISSOLogin;
+import com.jbuild4d.platform.sso.core.ISSOLoginStore;
+import com.jbuild4d.platform.sso.core.impl.SSOLoginImpl;
+import com.jbuild4d.platform.sso.core.impl.SSOLoginStoreImpl;
 import com.jbuild4d.platform.sso.service.*;
 import com.jbuild4d.platform.sso.service.impl.*;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
@@ -85,6 +89,18 @@ public class SSOBeansConfig {
     ISsoAppUserMappingService ssoAppUserMappingService(ISQLBuilderService _sqlBuilderService, SsoAppUserMappingMapper mapper, SqlSessionTemplate sqlSessionTemplate){
         ISsoAppUserMappingService ssoAppUserMappingService=new SsoAppUserMappingServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return ssoAppUserMappingService;
+    }
+
+    @Bean
+    ISSOLogin ssoLogin(ISQLBuilderService _sqlBuilderService, UserMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        ISSOLogin ssoLogin=new SSOLoginImpl();
+        return ssoLogin;
+    }
+
+    @Bean
+    ISSOLoginStore ssoLoginStore(ISQLBuilderService _sqlBuilderService, UserMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        ISSOLoginStore ssoLoginStore=new SSOLoginStoreImpl();
+        return ssoLoginStore;
     }
 
     @PostConstruct
