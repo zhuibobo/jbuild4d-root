@@ -4,6 +4,7 @@ import com.jbuild4d.base.tools.BeanUtility;
 import com.jbuild4d.base.tools.PathUtility;
 import com.jbuild4d.web.platform.beanconfig.service.SSOBeansConfig;
 import com.jbuild4d.web.platform.interceptor.LoginedInterceptor;
+import com.jbuild4d.web.platform.interceptor.SSOLoginedInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -82,6 +83,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginedInterceptor());
+        registry.addInterceptor(new SSOLoginedInterceptor());
     }
 
     @Override
