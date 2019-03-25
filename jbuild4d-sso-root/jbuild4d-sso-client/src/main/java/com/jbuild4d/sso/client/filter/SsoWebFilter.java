@@ -84,7 +84,7 @@ public class SsoWebFilter extends HttpServlet implements Filter {
                     String link = req.getRequestURL().toString();
                     // 重定向到登录页面,带上原始的地址,登录后返回原始页面.
                     String loginPageUrl = ssoServer.concat(loginPath)
-                            + "?" + Conf.SSO_REDIRECT_URL + "=" + link;
+                            + "?" + Conf.SSO_REDIRECT_URL_PARA_NAME + "=" + link+"&"+Conf.SSO_IS_INT_SYSTEM_URL_PARA_NAME+"=true";
 
                     res.sendRedirect(loginPageUrl);
                     return;

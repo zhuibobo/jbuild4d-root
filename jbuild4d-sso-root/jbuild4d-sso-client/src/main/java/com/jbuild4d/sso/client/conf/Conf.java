@@ -17,7 +17,9 @@ public class Conf {
     /**
      * 返回到登录页面时,附带上的来源URL参数名
      */
-    public static final String SSO_REDIRECT_URL = "redirectUrl";
+    public static final String SSO_REDIRECT_URL_PARA_NAME = "redirectUrl";
+
+    public static final String SSO_IS_INT_SYSTEM_URL_PARA_NAME="IsJBuild4DSSOIntegrateSystem";
 
     public static final String SSS_CODE_URL_PARA_NAME="JBuild4DSSOCode";
 

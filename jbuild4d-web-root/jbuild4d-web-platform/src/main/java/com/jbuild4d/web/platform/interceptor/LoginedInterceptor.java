@@ -23,11 +23,15 @@ public class LoginedInterceptor implements HandlerInterceptor {
         response.setContentType("text/html;charset=UTF-8");
         Map<String,String> igUrl=new HashMap<>();
         igUrl.put("/PlatForm/LoginView.do","");
+        igUrl.put("/PlatForm/LoginSSOView.do","");
+
         igUrl.put("/PlatForm/RedirectLoginView.do","");
+
         igUrl.put("/PlatFormRest/ValidateAccount.do","");
         igUrl.put("/PlatFormRest/ValidateAccountSSO.do","");
+
         igUrl.put("/PlatForm/LoginOutView.do","");
-        igUrl.put("/PlatForm/LoginSSOView.do","");
+
         String absPath=request.getRequestURI();
         String appName=request.getContextPath();
         String url=absPath.replaceAll(appName,"");

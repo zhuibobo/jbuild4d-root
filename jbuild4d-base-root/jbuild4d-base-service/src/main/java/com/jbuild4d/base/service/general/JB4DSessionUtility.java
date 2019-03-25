@@ -32,6 +32,18 @@ public class JB4DSessionUtility {
         return b4DSession;
     }
 
+    public static JB4DSession getSessionNotException() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        if(request == null) {
+            throw new SessionTimeoutException();
+        }
+        JB4DSession b4DSession = (JB4DSession)request.getSession().getAttribute(UserLoginSessionKey);
+        if(b4DSession == null) {
+            return null;
+        }
+        return b4DSession;
+    }
+
     public static void addSessionAttr(String key,Object value){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         if(request == null) {

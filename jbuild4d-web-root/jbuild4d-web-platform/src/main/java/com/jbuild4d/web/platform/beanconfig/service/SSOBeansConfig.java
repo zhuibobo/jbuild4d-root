@@ -92,8 +92,8 @@ public class SSOBeansConfig {
     }
 
     @Bean
-    ISSOLogin ssoLogin(ISQLBuilderService _sqlBuilderService, UserMapper mapper, SqlSessionTemplate sqlSessionTemplate){
-        ISSOLogin ssoLogin=new SSOLoginImpl();
+    ISSOLogin ssoLogin(ISQLBuilderService _sqlBuilderService, UserMapper mapper, SqlSessionTemplate sqlSessionTemplate,ISSOLoginStore ssoLoginStore){
+        ISSOLogin ssoLogin=new SSOLoginImpl(ssoLoginStore);
         return ssoLogin;
     }
 

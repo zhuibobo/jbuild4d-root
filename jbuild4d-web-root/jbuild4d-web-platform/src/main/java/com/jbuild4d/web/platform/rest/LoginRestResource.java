@@ -3,6 +3,7 @@ package com.jbuild4d.web.platform.rest;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.platform.sso.core.ISSOLogin;
 import com.jbuild4d.platform.sso.core.ISSOLoginStore;
 import com.jbuild4d.platform.sso.core.vo.SSOCodeVo;
 import com.jbuild4d.platform.system.service.IMenuService;
@@ -39,20 +40,18 @@ public class LoginRestResource {
     @Autowired
     ISSOLoginStore ssoLoginStore;
 
+    @Autowired
+    ISSOLogin ssoLogin;
+
     @ApiOperation(value="验证用户", notes = "验证用户")
     @ApiImplicitParam(name="user", value="User", required = true, dataType = "User")
     @RequestMapping(value = "/ValidateAccount", method = RequestMethod.POST)
     public JBuild4DResponseVo validateAccount(String account, String password, HttpServletRequest request) throws IOException, ParseException, JBuild4DGenerallyException {
-        JB4DSession b4DSession = new JB4DSession();
-        b4DSession.setOrganName("4D");
-        b4DSession.setOrganId("OrganId");
-        b4DSession.setUserName("Alex");
-        b4DSession.setUserId("UserId");
-        JB4DSessionUtility.addSessionAttr(JB4DSessionUtility.UserLoginSessionKey, b4DSession);
+
+        JB4DSession jb4DSession = ssoLogin.LoginMainSystem(account,password);
+
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
-        JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-        //List<MenuEntity> entityList=menuService.getALL(jb4DSession);
-        //System.out.println(JsonUtility.toObjectString(entityList));
+
         operationLogService.writeUserLoginLog(jb4DSession,this.getClass(),request);
         return JBuild4DResponseVo.opSuccess();
     }
@@ -61,18 +60,13 @@ public class LoginRestResource {
     @ApiImplicitParam(name="user", value="User", required = true, dataType = "User")
     @RequestMapping(value = "/ValidateAccountSSO", method = RequestMethod.POST)
     public JBuild4DResponseVo validateAccountSSO(String account, String password,String redirectUrl,String appId, HttpServletRequest request) throws IOException, ParseException, JBuild4DGenerallyException {
-        JB4DSession b4DSession = new JB4DSession();
-        b4DSession.setOrganName("4D");
-        b4DSession.setOrganId("OrganId");
-        b4DSession.setUserName("Alex");
-        b4DSession.setUserId("UserId");
-        JB4DSessionUtility.addSessionAttr(JB4DSessionUtility.UserLoginSessionKey, b4DSession);
+
+        SSOCodeVo code = ssoLogin.LoginSSOSystem(account,password,redirectUrl,appId);
 
         JB4DSession jb4DSession=JB4DSessionUtility.getSession();
-        SSOCodeVo code=ssoLoginStore.createAccessCode(jb4DSession,redirectUrl,appId);
-
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
         operationLogService.writeUserLoginLog(jb4DSession,this.getClass(),request);
+
         return JBuild4DResponseVo.opSuccess(code);
     }
 }
