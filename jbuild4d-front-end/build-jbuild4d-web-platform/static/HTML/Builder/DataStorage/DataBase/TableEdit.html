@@ -10,28 +10,33 @@
     <div id="appForm" v-cloak class="general-edit-page-wrap">
         <div class="list-2column">
             <div class="left-outer-wrap" style="bottom: 50px;right: 350px;">
-                <divider orientation="left" :dashed="true" style="font-size: 12px">表字段</divider>
+                <tabs @on-click="tabChange" v-model="selectedTabName">
+                    <tab-pane label="表字段">
+                        <div style="width: 98%;margin: auto">
+                            <div style="float: right;margin-bottom: 8px">
+                                忽略物理表修改错误: &nbsp;
+                                <i-switch size="small" v-model="ignorePhysicalError"></i-switch>&nbsp;
+                                <i-select v-model="useTemplateName" size="small" style="width:200px">
+                                    <i-option v-for="(item,key) in templateFieldGroup" :value="key" :key="key">使用模版:{{key}}</i-option>
+                                </i-select>&nbsp;
+                                <button-group>
+                                    <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
+                                    <i-button size="small" type="primary" icon="md-close" @click="removeField"></i-button>
+                                    <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveField('up')"></i-button>
+                                    <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveField('down')"></i-button>
+                                </button-group>
+                            </div>
+                            <div style="clear: bottom"></div>
+                        </div>
+                        <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 98%;margin: auto"></div>
+                    </tab-pane>
+                    <tab-pane label="关联设置">
 
-                <div style="width: 98%;margin: auto">
-                    <div style="float: right;margin-bottom: 8px">
-                        忽略物理表修改错误: &nbsp;
-                        <i-switch size="small" v-model="ignorePhysicalError"></i-switch>&nbsp;
-                        <i-select v-model="useTemplateName" size="small" style="width:200px">
-                            <i-option v-for="(item,key) in templateFieldGroup" :value="key" :key="key">使用模版:{{key}}</i-option>
-                        </i-select>&nbsp;
-                        <button-group>
-                            <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
-                            <i-button size="small" type="primary" icon="md-close" @click="removeField"></i-button>
-                            <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveField('up')"></i-button>
-                            <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveField('down')"></i-button>
-                        </button-group>
-                    </div>
-                    <div style="clear: bottom"></div>
-                </div>
-                <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 98%;margin: auto"></div>
+                    </tab-pane>
+                </tabs>
             </div>
             <div class="right-outer-wrap" style="bottom: 50px;width: 340px;padding: 10px">
-                <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px">表信息</divider>
+                <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px;margin-top: 7px">表信息</divider>
                 <i-form :model="tableEntity" :label-width="65" style="margin-right: 10px">
                     <form-item label="标题：" prop="">
                         <i-input v-model="tableEntity.tableCaption"></i-input>
