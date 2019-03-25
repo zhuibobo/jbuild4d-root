@@ -27,17 +27,20 @@ public class LoginController {
     @Autowired
     IOperationLogService operationLogService;
 
-    @RequestMapping(value = "/LoginView", method = RequestMethod.GET)
-    public ModelAndView login(HttpServletRequest request) {
+    @RequestMapping(value = "/LoginSSOView", method = RequestMethod.GET)
+    public ModelAndView loginSSOView(HttpServletRequest request) {
 
-        System.out.println("Home Controller Call");
-
-        logger.info("Info");
-        logger.warn("Warring");
-        logger.error("Error");
         ModelAndView modelAndView=new ModelAndView("Login");
 
+        request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
+        return modelAndView;
+    }
 
+    @RequestMapping(value = "/LoginView", method = RequestMethod.GET)
+    public ModelAndView loginView(HttpServletRequest request) {
+
+        System.out.println("Home Controller Call");
+        ModelAndView modelAndView=new ModelAndView("Login");
 
         request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
         return modelAndView;

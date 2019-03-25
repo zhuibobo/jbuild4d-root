@@ -51,4 +51,23 @@ public class LoginRestResource {
         operationLogService.writeUserLoginLog(jb4DSession,this.getClass(),request);
         return JBuild4DResponseVo.opSuccess();
     }
+
+    @ApiOperation(value="验证用户", notes = "验证用户")
+    @ApiImplicitParam(name="user", value="User", required = true, dataType = "User")
+    @RequestMapping(value = "/ValidateAccountSSO", method = RequestMethod.POST)
+    public JBuild4DResponseVo validateAccountSSO(String account, String password, HttpServletRequest request) throws IOException, ParseException, JBuild4DGenerallyException {
+        JB4DSession b4DSession = new JB4DSession();
+        b4DSession.setOrganName("4D");
+        b4DSession.setOrganId("OrganId");
+        b4DSession.setUserName("Alex");
+        b4DSession.setUserId("UserId");
+        JB4DSessionUtility.addSessionAttr(JB4DSessionUtility.UserLoginSessionKey, b4DSession);
+
+        JB4DSession jb4DSession=JB4DSessionUtility.getSession();
+
+
+        request.getSession().setAttribute("theme",request.getContextPath()+"/Themes/Default");
+        operationLogService.writeUserLoginLog(jb4DSession,this.getClass(),request);
+        return JBuild4DResponseVo.opSuccess();
+    }
 }

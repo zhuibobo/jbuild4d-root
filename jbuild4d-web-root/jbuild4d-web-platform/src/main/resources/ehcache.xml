@@ -24,4 +24,15 @@
     </cache>
     <cache alias="jb4dPlatformSSO" uses-template="jb4dCacheDefault">
     </cache>
+
+    <cache alias="SSO_Session_Store">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.lang.Object</value-type>
+        <resources>
+            <!--声明在堆上保存多达2,000个条目。-->
+            <heap unit="entries">2000</heap>
+            <!--在它开始被驱逐之前，还有多达1MB的外堆内存-->
+            <offheap unit="MB">1</offheap>
+        </resources>
+    </cache>
 </config>

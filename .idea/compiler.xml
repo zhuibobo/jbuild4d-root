@@ -23,8 +23,9 @@
         <module name="jbuild4d-platform-sso-service" />
         <module name="jbuild4d-platform-system" />
         <module name="jbuild4d-sso-client" />
-        <module name="jbuild4d-sso-web-client-demo1" />
-        <module name="jbuild4d-sso-web-client-demo2" />
+        <module name="jbuild4d-sso-java-web-client-demo1" />
+        <module name="jbuild4d-sso-java-web-client-demo2" />
+        <module name="jbuild4d-sso-web-client-demo-root" />
         <module name="jbuild4d-web-platform" />
       </profile>
     </annotationProcessing>
@@ -44,6 +45,7 @@
       <module name="jbuild4d-base-tools" target="1.8" />
       <module name="jbuild4d-core-base" target="1.8" />
       <module name="jbuild4d-core-root" target="1.8" />
+      <module name="jbuild4d-java-web-client-demo-root" target="1.8" />
       <module name="jbuild4d-platform-builder" target="1.8" />
       <module name="jbuild4d-platform-files" target="1.8" />
       <module name="jbuild4d-platform-organ" target="1.8" />
@@ -56,7 +58,11 @@
       <module name="jbuild4d-root" target="1.8" />
       <module name="jbuild4d-sso-client" target="1.8" />
       <module name="jbuild4d-sso-client-root" target="1.8" />
+      <module name="jbuild4d-sso-java-web-client-demo-root" target="1.8" />
+      <module name="jbuild4d-sso-java-web-client-demo1" target="1.8" />
+      <module name="jbuild4d-sso-java-web-client-demo2" target="1.8" />
       <module name="jbuild4d-sso-root" target="1.8" />
+      <module name="jbuild4d-sso-web-client-demo-root" target="1.8" />
       <module name="jbuild4d-sso-web-client-demo1" target="1.8" />
       <module name="jbuild4d-sso-web-client-demo2" target="1.8" />
       <module name="jbuild4d-web-platform" target="1.8" />
