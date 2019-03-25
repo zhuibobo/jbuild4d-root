@@ -40,7 +40,8 @@ public class LoginProxyUtility {
         ObjectMapper objectMapper = new ObjectMapper();
         JBuild4DResponseVo jBuild4DResponseVo=objectMapper.readValue(httpResult, JBuild4DResponseVo.class);
         if(jBuild4DResponseVo.isSuccess()){
-            jb4DSession=(JB4DSession)jBuild4DResponseVo.getData();
+            jb4DSession = objectMapper.convertValue(jBuild4DResponseVo.getData(), JB4DSession.class);
+            //jb4DSession=(JB4DSession)jBuild4DResponseVo.getData();
         }
         else{
             throw new Exception("SSO服务端错误:"+jBuild4DResponseVo.getMessage());
