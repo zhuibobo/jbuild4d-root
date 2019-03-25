@@ -15,7 +15,7 @@ public class JB4DClientSessionUtil {
         }
         JB4DSession b4DSession = (JB4DSession)request.getSession().getAttribute(Conf.SSO_LOCATION_SESSION_KEY);
         if(b4DSession == null) {
-            throw new SessionTimeoutException();
+            return null;
         }
         return b4DSession;
     }
