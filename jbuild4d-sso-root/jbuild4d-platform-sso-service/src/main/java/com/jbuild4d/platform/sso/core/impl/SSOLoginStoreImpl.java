@@ -10,12 +10,19 @@ import com.jbuild4d.platform.sso.core.vo.SSOCodeVo;
 public class SSOLoginStoreImpl implements ISSOLoginStore {
     @Override
     public SSOCodeVo createAccessCode(JB4DSession jb4DSession,String returnUrl,String appId) {
-        String uuid= UUIDUtility.getUUIDNotSplit();
-        JB4DCacheManager.put(JB4DCacheManager.jb4dPlatformSSOSessionStoreName,uuid,jb4DSession);
+        String jBuild4DSSOCode= UUIDUtility.getUUIDNotSplit();
+        JB4DCacheManager.put(JB4DCacheManager.jb4dPlatformSSOSessionStoreName,jBuild4DSSOCode,jb4DSession);
         SSOCodeVo codeVo=new SSOCodeVo();
-        codeVo.setCode(uuid);
+        codeVo.setCode(jBuild4DSSOCode);
         codeVo.setTime(DateUtility.getDate_yyyy_MM_dd_HH_mm_ss());
         codeVo.setReturnUrl(returnUrl);
         return codeVo;
+    }
+
+    @Override
+    public JB4DSession getSession(String jBuild4DSSOCode) {
+        JB4DSession jb4DSession=JB4DCacheManager.getObject(JB4DCacheManager.jb4dPlatformSSOSessionStoreName,jBuild4DSSOCode);
+        jb4DSession.setSsoCode(jBuild4DSSOCode);
+        return jb4DSession;
     }
 }

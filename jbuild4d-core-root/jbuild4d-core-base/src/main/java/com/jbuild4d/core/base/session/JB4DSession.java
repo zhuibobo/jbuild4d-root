@@ -65,6 +65,8 @@ public class JB4DSession implements java.io.Serializable {
 
     private boolean fullPriv;
 
+    private String ssoCode;
+
     /**
      * @return 拷贝Session对象
      */
@@ -183,5 +185,13 @@ public class JB4DSession implements java.io.Serializable {
 
     public void setFullPriv(boolean fullPriv) {
         this.fullPriv = fullPriv;
+    }
+
+    public String getSsoCode() {
+        return ssoCode;
+    }
+
+    public void setSsoCode(String ssoCode) {
+        this.ssoCode = ssoCode;
     }
 }

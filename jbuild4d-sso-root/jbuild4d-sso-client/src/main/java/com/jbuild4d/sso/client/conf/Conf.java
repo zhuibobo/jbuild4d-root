@@ -19,6 +19,8 @@ public class Conf {
      */
     public static final String SSO_REDIRECT_URL = "redirect_url";
 
+    public static final String SSS_CODE_URL_PARA_NAME="JBuild4DSSOCode";
+
     public static String SSO_SERVER_ADDRESS="http://localhost:9091/jb4d";
 
     public static String SSO_REST_BASE="/PlatFormRest";

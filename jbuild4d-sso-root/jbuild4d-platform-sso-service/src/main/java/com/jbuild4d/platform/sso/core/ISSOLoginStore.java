@@ -5,4 +5,6 @@ import com.jbuild4d.platform.sso.core.vo.SSOCodeVo;
 
 public interface ISSOLoginStore {
     SSOCodeVo createAccessCode(JB4DSession jb4DSession,String returnUrl,String appId);
+
+    JB4DSession getSession(String jBuild4DSSOCode);
 }
