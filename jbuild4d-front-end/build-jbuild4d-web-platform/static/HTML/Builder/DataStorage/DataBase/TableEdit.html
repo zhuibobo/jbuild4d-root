@@ -16,7 +16,7 @@
                             <div style="float: right;margin-bottom: 8px">
                                 忽略物理表修改错误: &nbsp;
                                 <i-switch size="small" v-model="ignorePhysicalError"></i-switch>&nbsp;
-                                <i-select v-model="useTemplateName" size="small" style="width:200px">
+                                <i-select v-model="useTemplateName" size="small" style="width:200px" @on-change="changeFieldsTemplate">
                                     <i-option v-for="(item,key) in templateFieldGroup" :value="key" :key="key">使用模版:{{key}}</i-option>
                                 </i-select>&nbsp;
                                 <button-group>
@@ -340,6 +340,10 @@
                 },
                 handleClose: function () {
                     DialogUtility.Frame_CloseDialog(window);
+                },
+                changeFieldsTemplate:function (value) {
+                    this.editTableObj.RemoveAllRow();
+                    this.editTableObj.LoadJsonData(this.templateFieldGroup[value]);
                 }
             }
         });

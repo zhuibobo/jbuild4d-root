@@ -160,7 +160,26 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
                 "",templateName);
         tableFieldMapper.insert(statueField);
 
+        TableFieldEntity keyWordField=newFiled(jb4DSession,"Template","F_KEY_WORDS","关键字",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,200,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(keyWordField);
 
+        TableFieldEntity columnIdField=newFiled(jb4DSession,"Template","F_COLUMN_ID","所属栏目ID",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(columnIdField);
+
+        TableFieldEntity authorField=newFiled(jb4DSession,"Template","F_AUTHOR","作者",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(authorField);
     }
 
     @Override
