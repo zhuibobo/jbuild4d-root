@@ -70,7 +70,7 @@ public class InitializationSystemRestResource {
 
     @RequestMapping(value = "/Running", method = RequestMethod.POST)
     @ResponseBody
-    public JBuild4DResponseVo running() throws JBuild4DGenerallyException {
+    public JBuild4DResponseVo running(String createTestData) throws JBuild4DGenerallyException {
         JB4DSession jb4DSession= JB4DSessionUtility.getSession();
 
         //初始化菜单
@@ -116,6 +116,10 @@ public class InitializationSystemRestResource {
 
         //初始化根角色组
         roleGroupService.initSystemData(jb4DSession);
+
+        if(createTestData!=null&&createTestData.toLowerCase().equals("true")){
+
+        }
 
         return JBuild4DResponseVo.success("系统数据初始化成功！");
     }

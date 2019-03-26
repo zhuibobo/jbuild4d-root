@@ -617,6 +617,63 @@
             <column name="TABLE_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
             <column name="TABLE_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
+
+        <!--表关系只是作为逻辑上的描述,便于了解项目的数据结构,不做实际上表之间的物理关系-->
+        <createTable tableName="TB4D_TABLE_RELATION_GROUP" remarks="表关系分组表">
+            <column name="REL_GROUP_ID" type="NVARCHAR(100)" remarks="关联分组ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="REL_GROUP_VALUE" type="NVARCHAR(200)" remarks="关联分组值">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REL_GROUP_TEXT" type="NVARCHAR(200)" remarks="关联分组标题">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REL_GROUP_ORDER_NUM" type="INT" remarks="排序号"/>
+            <column name="REL_GROUP_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="REL_GROUP_DESC" type="NVARCHAR(500)" remarks="描述" />
+            <column name="REL_GROUP_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="REL_GROUP_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID" />
+            <column name="REL_GROUP_ISSYSTEM" type="NVARCHAR(10)" remarks="是否系统" />
+            <column name="REL_GROUP_DEL_ENABLE" type="NVARCHAR(10)" remarks="是否允许删除" />
+            <column name="REL_GROUP_PID_LIST" type="NVARCHAR(1200)" remarks="父节点列表" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="REL_GROUP_CHILD_COUNT" type="INT" remarks="子节点数量" />
+            <column name="REL_GROUP_USER_ID" type="NVARCHAR(100)" remarks="创建人ID" />
+            <column name="REL_GROUP_USER_NAME" type="NVARCHAR(100)" remarks="创建人" />
+        </createTable>
+
+        <createTable tableName="TB4D_TABLE_RELATION" remarks="表关系描述信息表">
+            <column name="RELATION_ID" type="NVARCHAR(100)" remarks="表关联ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="RELATION_GROUP_ID" type="NVARCHAR(100)" remarks="所属分组ID" />
+            <column name="RELATION_NAME" type="NVARCHAR(100)" remarks="表关联名称" />
+            <column name="RELATION_USER_ID" type="NVARCHAR(100)" remarks="创建人ID" />
+            <column name="RELATION_USER_NAME" type="NVARCHAR(100)" remarks="创建人" />
+            <column name="RELATION_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="RELATION_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="RELATION_DESC" type="NVARCHAR(500)" remarks="描述" />
+            <column name="RELATION_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="RELATION_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述" />
+        </createTable>
+
+        <createTable tableName="TB4D_TABLE_RELATION_HIS" remarks="表关系描述信息历史表">
+            <column name="HIS_ID" type="NVARCHAR(100)" remarks="表关联ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="HIS_GROUP_ID" type="NVARCHAR(100)" remarks="所属分组ID" />
+            <column name="HIS_NAME" type="NVARCHAR(100)" remarks="表关联名称" />
+            <column name="HIS_USER_ID" type="NVARCHAR(100)" remarks="创建人ID" />
+            <column name="HIS_USER_NAME" type="NVARCHAR(100)" remarks="创建人" />
+            <column name="HIS_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="HIS_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="HIS_DESC" type="NVARCHAR(500)" remarks="描述" />
+            <column name="HIS_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="HIS_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述" />
+            <column name="HIS_BELONG_REL_ID" type="NVARCHAR(100)" remarks="所属记录ID" />
+        </createTable>
     </changeSet>
     <!--文件存储-->
     <changeSet author="zhuangrb" id="changeSet-File-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
