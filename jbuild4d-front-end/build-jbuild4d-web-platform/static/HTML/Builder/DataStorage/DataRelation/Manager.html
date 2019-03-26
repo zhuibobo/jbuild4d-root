@@ -26,7 +26,7 @@
     <div class="right-outer-wrap iv-list-page-wrap" style="padding: 10px;left: 260px">
         <tabs type="card" @on-click="selectedRelationChange">
             <tab-pane v-for="relation in relationList" :label="relation.relationName" :name="relation.relationId">
-                <table-relation-content-comp :relation="relation"></table-relation-content-comp>
+                <table-relation-content-comp :relation="relation" v-if="relation.relationId==selectedRelationId"></table-relation-content-comp>
             </tab-pane>
             <button-group slot="extra">
                 <i-button size="small" @click="addRelation" type="success" icon="md-add">新增</i-button>
