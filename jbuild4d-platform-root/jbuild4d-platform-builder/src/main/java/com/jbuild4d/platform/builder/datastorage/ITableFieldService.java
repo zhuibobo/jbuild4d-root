@@ -19,7 +19,7 @@ public interface ITableFieldService extends IBaseService<TableFieldEntity> {
 
     List<TableFieldVO> getTemplateFieldsByName(String templateName) throws IOException;
 
-    void createGeneralTemplate(JB4DSession jb4DSession);
+    void createTableFieldTemplates(JB4DSession jb4DSession);
 
     List<TableFieldVO> getTableFieldsByTableId(String tableId) throws IOException;
 

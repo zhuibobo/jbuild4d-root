@@ -100,7 +100,7 @@ public class InitializationSystemRestResource {
         tableGroupService.createSystemTableGroupNode(jb4DSession,rootTableGroupEntity);
 
         //初始化表模版
-        tableFieldService.createGeneralTemplate(jb4DSession);
+        tableFieldService.createTableFieldTemplates(jb4DSession);
 
         //初始化数据集分组
         datasetGroupService.createRootNode(jb4DSession);
