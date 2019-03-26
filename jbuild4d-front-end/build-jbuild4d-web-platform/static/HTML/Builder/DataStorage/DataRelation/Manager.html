@@ -252,6 +252,7 @@
             },
             move:function (type) {
                 var _self=this;
+                //var oldselectedRelationId=_self.selectedRelationId;
                 AjaxUtility.Post(this.acInterface.moveRelation,
                     {
                         recordId: _self.selectedRelationId,
@@ -260,6 +261,7 @@
                     function (result) {
                         if (result.success) {
                             _self.reloadRelations(_self.treeSelectedNode.relGroupId);
+
                         }
                         else{
                             DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},result.message,null);
@@ -278,7 +280,9 @@
                         if (result.success) {
                             _self.relationList=result.data;
                             if(_self.relationList.length>0){
-                                _self.selectedRelationId=_self.relationList[0].relationId;
+                                if(!_self.selectedRelationId) {
+                                    _self.selectedRelationId = _self.relationList[0].relationId;
+                                }
                             }
                             else{
                                 _self.selectedRelationId=null;
