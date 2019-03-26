@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableRelationHisMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
+        <constructor>
+            <idArg column="HIS_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="HIS_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="HIS_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_BELONG_REL_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
+        <constructor>
+            <idArg column="HIS_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="HIS_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="HIS_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_BELONG_REL_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="HIS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        HIS_ID, HIS_GROUP_ID, HIS_NAME, HIS_USER_ID, HIS_USER_NAME, HIS_ORDER_NUM, HIS_CREATE_TIME,
+        HIS_DESC, HIS_STATUS, HIS_BELONG_REL_ID
+    </sql>
+    <sql id="Blob_Column_List">
+        HIS_CONTENT
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from TB4D_TABLE_RELATION_HIS
+        where HIS_ID = #{hisId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_TABLE_RELATION_HIS
+        where HIS_ID = #{hisId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
+        insert into TB4D_TABLE_RELATION_HIS (HIS_ID, HIS_GROUP_ID, HIS_NAME,
+                                             HIS_USER_ID, HIS_USER_NAME, HIS_ORDER_NUM,
+                                             HIS_CREATE_TIME, HIS_DESC, HIS_STATUS,
+                                             HIS_BELONG_REL_ID, HIS_CONTENT)
+        values (#{hisId,jdbcType=VARCHAR}, #{hisGroupId,jdbcType=VARCHAR}, #{hisName,jdbcType=VARCHAR},
+                #{hisUserId,jdbcType=VARCHAR}, #{hisUserName,jdbcType=VARCHAR}, #{hisOrderNum,jdbcType=INTEGER},
+                #{hisCreateTime,jdbcType=TIMESTAMP}, #{hisDesc,jdbcType=VARCHAR}, #{hisStatus,jdbcType=VARCHAR},
+                #{hisBelongRelId,jdbcType=VARCHAR}, #{hisContent,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
+        insert into TB4D_TABLE_RELATION_HIS
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hisId != null">
+                HIS_ID,
+            </if>
+            <if test="hisGroupId != null">
+                HIS_GROUP_ID,
+            </if>
+            <if test="hisName != null">
+                HIS_NAME,
+            </if>
+            <if test="hisUserId != null">
+                HIS_USER_ID,
+            </if>
+            <if test="hisUserName != null">
+                HIS_USER_NAME,
+            </if>
+            <if test="hisOrderNum != null">
+                HIS_ORDER_NUM,
+            </if>
+            <if test="hisCreateTime != null">
+                HIS_CREATE_TIME,
+            </if>
+            <if test="hisDesc != null">
+                HIS_DESC,
+            </if>
+            <if test="hisStatus != null">
+                HIS_STATUS,
+            </if>
+            <if test="hisBelongRelId != null">
+                HIS_BELONG_REL_ID,
+            </if>
+            <if test="hisContent != null">
+                HIS_CONTENT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hisId != null">
+                #{hisId,jdbcType=VARCHAR},
+            </if>
+            <if test="hisGroupId != null">
+                #{hisGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="hisName != null">
+                #{hisName,jdbcType=VARCHAR},
+            </if>
+            <if test="hisUserId != null">
+                #{hisUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="hisUserName != null">
+                #{hisUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="hisOrderNum != null">
+                #{hisOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="hisCreateTime != null">
+                #{hisCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hisDesc != null">
+                #{hisDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="hisStatus != null">
+                #{hisStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="hisBelongRelId != null">
+                #{hisBelongRelId,jdbcType=VARCHAR},
+            </if>
+            <if test="hisContent != null">
+                #{hisContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
+        update TB4D_TABLE_RELATION_HIS
+        <set>
+            <if test="hisGroupId != null">
+                HIS_GROUP_ID = #{hisGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="hisName != null">
+                HIS_NAME = #{hisName,jdbcType=VARCHAR},
+            </if>
+            <if test="hisUserId != null">
+                HIS_USER_ID = #{hisUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="hisUserName != null">
+                HIS_USER_NAME = #{hisUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="hisOrderNum != null">
+                HIS_ORDER_NUM = #{hisOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="hisCreateTime != null">
+                HIS_CREATE_TIME = #{hisCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hisDesc != null">
+                HIS_DESC = #{hisDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="hisStatus != null">
+                HIS_STATUS = #{hisStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="hisBelongRelId != null">
+                HIS_BELONG_REL_ID = #{hisBelongRelId,jdbcType=VARCHAR},
+            </if>
+            <if test="hisContent != null">
+                HIS_CONTENT = #{hisContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where HIS_ID = #{hisId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
+        update TB4D_TABLE_RELATION_HIS
+        set HIS_GROUP_ID = #{hisGroupId,jdbcType=VARCHAR},
+            HIS_NAME = #{hisName,jdbcType=VARCHAR},
+            HIS_USER_ID = #{hisUserId,jdbcType=VARCHAR},
+            HIS_USER_NAME = #{hisUserName,jdbcType=VARCHAR},
+            HIS_ORDER_NUM = #{hisOrderNum,jdbcType=INTEGER},
+            HIS_CREATE_TIME = #{hisCreateTime,jdbcType=TIMESTAMP},
+            HIS_DESC = #{hisDesc,jdbcType=VARCHAR},
+            HIS_STATUS = #{hisStatus,jdbcType=VARCHAR},
+            HIS_BELONG_REL_ID = #{hisBelongRelId,jdbcType=VARCHAR},
+            HIS_CONTENT = #{hisContent,jdbcType=LONGVARCHAR}
+        where HIS_ID = #{hisId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
+        update TB4D_TABLE_RELATION_HIS
+        set HIS_GROUP_ID = #{hisGroupId,jdbcType=VARCHAR},
+            HIS_NAME = #{hisName,jdbcType=VARCHAR},
+            HIS_USER_ID = #{hisUserId,jdbcType=VARCHAR},
+            HIS_USER_NAME = #{hisUserName,jdbcType=VARCHAR},
+            HIS_ORDER_NUM = #{hisOrderNum,jdbcType=INTEGER},
+            HIS_CREATE_TIME = #{hisCreateTime,jdbcType=TIMESTAMP},
+            HIS_DESC = #{hisDesc,jdbcType=VARCHAR},
+            HIS_STATUS = #{hisStatus,jdbcType=VARCHAR},
+            HIS_BELONG_REL_ID = #{hisBelongRelId,jdbcType=VARCHAR}
+        where HIS_ID = #{hisId,jdbcType=VARCHAR}
+    </update>
+</mapper>

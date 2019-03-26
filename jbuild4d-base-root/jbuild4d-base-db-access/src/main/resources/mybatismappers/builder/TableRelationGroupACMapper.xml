@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableRelationGroupMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity">
+        <constructor>
+            <idArg column="REL_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="REL_GROUP_VALUE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="REL_GROUP_TEXT" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="REL_GROUP_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="REL_GROUP_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="REL_GROUP_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="REL_GROUP_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="REL_GROUP_PARENT_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="REL_GROUP_ISSYSTEM" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="REL_GROUP_DEL_ENABLE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="REL_GROUP_PID_LIST" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="REL_GROUP_CHILD_COUNT" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="REL_GROUP_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="REL_GROUP_USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        REL_GROUP_ID, REL_GROUP_VALUE, REL_GROUP_TEXT, REL_GROUP_ORDER_NUM, REL_GROUP_CREATE_TIME,
+        REL_GROUP_DESC, REL_GROUP_STATUS, REL_GROUP_PARENT_ID, REL_GROUP_ISSYSTEM, REL_GROUP_DEL_ENABLE,
+        REL_GROUP_PID_LIST, REL_GROUP_CHILD_COUNT, REL_GROUP_USER_ID, REL_GROUP_USER_NAME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TB4D_TABLE_RELATION_GROUP
+        where REL_GROUP_ID = #{relGroupId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_TABLE_RELATION_GROUP
+        where REL_GROUP_ID = #{relGroupId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity">
+        insert into TB4D_TABLE_RELATION_GROUP (REL_GROUP_ID, REL_GROUP_VALUE, REL_GROUP_TEXT,
+                                               REL_GROUP_ORDER_NUM, REL_GROUP_CREATE_TIME,
+                                               REL_GROUP_DESC, REL_GROUP_STATUS, REL_GROUP_PARENT_ID,
+                                               REL_GROUP_ISSYSTEM, REL_GROUP_DEL_ENABLE, REL_GROUP_PID_LIST,
+                                               REL_GROUP_CHILD_COUNT, REL_GROUP_USER_ID, REL_GROUP_USER_NAME
+                )
+        values (#{relGroupId,jdbcType=VARCHAR}, #{relGroupValue,jdbcType=VARCHAR}, #{relGroupText,jdbcType=VARCHAR},
+                #{relGroupOrderNum,jdbcType=INTEGER}, #{relGroupCreateTime,jdbcType=TIMESTAMP},
+                #{relGroupDesc,jdbcType=VARCHAR}, #{relGroupStatus,jdbcType=VARCHAR}, #{relGroupParentId,jdbcType=VARCHAR},
+                #{relGroupIssystem,jdbcType=VARCHAR}, #{relGroupDelEnable,jdbcType=VARCHAR}, #{relGroupPidList,jdbcType=VARCHAR},
+                #{relGroupChildCount,jdbcType=INTEGER}, #{relGroupUserId,jdbcType=VARCHAR}, #{relGroupUserName,jdbcType=VARCHAR}
+                       )
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity">
+        insert into TB4D_TABLE_RELATION_GROUP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="relGroupId != null">
+                REL_GROUP_ID,
+            </if>
+            <if test="relGroupValue != null">
+                REL_GROUP_VALUE,
+            </if>
+            <if test="relGroupText != null">
+                REL_GROUP_TEXT,
+            </if>
+            <if test="relGroupOrderNum != null">
+                REL_GROUP_ORDER_NUM,
+            </if>
+            <if test="relGroupCreateTime != null">
+                REL_GROUP_CREATE_TIME,
+            </if>
+            <if test="relGroupDesc != null">
+                REL_GROUP_DESC,
+            </if>
+            <if test="relGroupStatus != null">
+                REL_GROUP_STATUS,
+            </if>
+            <if test="relGroupParentId != null">
+                REL_GROUP_PARENT_ID,
+            </if>
+            <if test="relGroupIssystem != null">
+                REL_GROUP_ISSYSTEM,
+            </if>
+            <if test="relGroupDelEnable != null">
+                REL_GROUP_DEL_ENABLE,
+            </if>
+            <if test="relGroupPidList != null">
+                REL_GROUP_PID_LIST,
+            </if>
+            <if test="relGroupChildCount != null">
+                REL_GROUP_CHILD_COUNT,
+            </if>
+            <if test="relGroupUserId != null">
+                REL_GROUP_USER_ID,
+            </if>
+            <if test="relGroupUserName != null">
+                REL_GROUP_USER_NAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="relGroupId != null">
+                #{relGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupValue != null">
+                #{relGroupValue,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupText != null">
+                #{relGroupText,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupOrderNum != null">
+                #{relGroupOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="relGroupCreateTime != null">
+                #{relGroupCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="relGroupDesc != null">
+                #{relGroupDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupStatus != null">
+                #{relGroupStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupParentId != null">
+                #{relGroupParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupIssystem != null">
+                #{relGroupIssystem,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupDelEnable != null">
+                #{relGroupDelEnable,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupPidList != null">
+                #{relGroupPidList,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupChildCount != null">
+                #{relGroupChildCount,jdbcType=INTEGER},
+            </if>
+            <if test="relGroupUserId != null">
+                #{relGroupUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupUserName != null">
+                #{relGroupUserName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity">
+        update TB4D_TABLE_RELATION_GROUP
+        <set>
+            <if test="relGroupValue != null">
+                REL_GROUP_VALUE = #{relGroupValue,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupText != null">
+                REL_GROUP_TEXT = #{relGroupText,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupOrderNum != null">
+                REL_GROUP_ORDER_NUM = #{relGroupOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="relGroupCreateTime != null">
+                REL_GROUP_CREATE_TIME = #{relGroupCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="relGroupDesc != null">
+                REL_GROUP_DESC = #{relGroupDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupStatus != null">
+                REL_GROUP_STATUS = #{relGroupStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupParentId != null">
+                REL_GROUP_PARENT_ID = #{relGroupParentId,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupIssystem != null">
+                REL_GROUP_ISSYSTEM = #{relGroupIssystem,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupDelEnable != null">
+                REL_GROUP_DEL_ENABLE = #{relGroupDelEnable,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupPidList != null">
+                REL_GROUP_PID_LIST = #{relGroupPidList,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupChildCount != null">
+                REL_GROUP_CHILD_COUNT = #{relGroupChildCount,jdbcType=INTEGER},
+            </if>
+            <if test="relGroupUserId != null">
+                REL_GROUP_USER_ID = #{relGroupUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="relGroupUserName != null">
+                REL_GROUP_USER_NAME = #{relGroupUserName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where REL_GROUP_ID = #{relGroupId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity">
+        update TB4D_TABLE_RELATION_GROUP
+        set REL_GROUP_VALUE = #{relGroupValue,jdbcType=VARCHAR},
+            REL_GROUP_TEXT = #{relGroupText,jdbcType=VARCHAR},
+            REL_GROUP_ORDER_NUM = #{relGroupOrderNum,jdbcType=INTEGER},
+            REL_GROUP_CREATE_TIME = #{relGroupCreateTime,jdbcType=TIMESTAMP},
+            REL_GROUP_DESC = #{relGroupDesc,jdbcType=VARCHAR},
+            REL_GROUP_STATUS = #{relGroupStatus,jdbcType=VARCHAR},
+            REL_GROUP_PARENT_ID = #{relGroupParentId,jdbcType=VARCHAR},
+            REL_GROUP_ISSYSTEM = #{relGroupIssystem,jdbcType=VARCHAR},
+            REL_GROUP_DEL_ENABLE = #{relGroupDelEnable,jdbcType=VARCHAR},
+            REL_GROUP_PID_LIST = #{relGroupPidList,jdbcType=VARCHAR},
+            REL_GROUP_CHILD_COUNT = #{relGroupChildCount,jdbcType=INTEGER},
+            REL_GROUP_USER_ID = #{relGroupUserId,jdbcType=VARCHAR},
+            REL_GROUP_USER_NAME = #{relGroupUserName,jdbcType=VARCHAR}
+        where REL_GROUP_ID = #{relGroupId,jdbcType=VARCHAR}
+    </update>
+</mapper>

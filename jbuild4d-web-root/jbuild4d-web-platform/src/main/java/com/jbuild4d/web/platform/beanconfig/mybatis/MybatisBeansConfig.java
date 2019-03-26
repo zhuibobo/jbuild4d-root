@@ -330,6 +330,21 @@ public class MybatisBeansConfig {
         return sqlSessionTemplate.getMapper(SsoAppUserMappingMapper.class);
     }
 
+    @Bean
+    public TableRelationGroupMapper tableRelationGroupMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(TableRelationGroupMapper.class);
+    }
+
+    @Bean
+    public TableRelationMapper tableRelationMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(TableRelationMapper.class);
+    }
+
+    @Bean
+    public TableRelationHisMapper tableRelationHisMapper(SqlSessionTemplate sqlSessionTemplate) {
+        return sqlSessionTemplate.getMapper(TableRelationHisMapper.class);
+    }
+
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);

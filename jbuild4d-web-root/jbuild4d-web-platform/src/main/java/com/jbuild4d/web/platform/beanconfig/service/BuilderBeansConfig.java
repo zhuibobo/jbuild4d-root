@@ -11,12 +11,8 @@ import com.jbuild4d.platform.builder.dataset.impl.DatasetColumnServiceImpl;
 import com.jbuild4d.platform.builder.dataset.impl.DatasetGroupServiceImpl;
 import com.jbuild4d.platform.builder.dataset.impl.DatasetRelatedTableServiceImpl;
 import com.jbuild4d.platform.builder.dataset.impl.DatasetServiceImpl;
-import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
-import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
-import com.jbuild4d.platform.builder.datastorage.ITableService;
-import com.jbuild4d.platform.builder.datastorage.impl.TableFieldServiceImpl;
-import com.jbuild4d.platform.builder.datastorage.impl.TableGroupServiceImpl;
-import com.jbuild4d.platform.builder.datastorage.impl.TableServiceImpl;
+import com.jbuild4d.platform.builder.datastorage.*;
+import com.jbuild4d.platform.builder.datastorage.impl.*;
 import com.jbuild4d.platform.builder.flow.IFlowModelService;
 import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
 import com.jbuild4d.platform.builder.flow.impl.FlowModelServiceImpl;
@@ -146,5 +142,23 @@ public class BuilderBeansConfig {
     public IListResourceService listResourceService(ISQLBuilderService _sqlBuilderService, ListResourceMapper mapper, SqlSessionTemplate sqlSessionTemplate, IModuleService moduleService){
         IListResourceService listResourceService=new ListResourceServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService,moduleService);
         return listResourceService;
+    }
+
+    @Bean
+    public ITableRelationGroupService tableGroupService(ISQLBuilderService _sqlBuilderService, TableRelationGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        ITableRelationGroupService bean=new TableRelationGroupServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
+    public ITableRelationService tableGroupService(ISQLBuilderService _sqlBuilderService, TableRelationMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        ITableRelationService bean=new TableRelationServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
+
+    @Bean
+    public ITableRelationHisService tableGroupService(ISQLBuilderService _sqlBuilderService, TableRelationHisMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+        ITableRelationHisService bean=new TableRelationHisServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
     }
 }

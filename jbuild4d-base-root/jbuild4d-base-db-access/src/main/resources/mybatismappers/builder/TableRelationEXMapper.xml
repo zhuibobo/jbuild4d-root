@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableRelationMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE_RELATION ORDER by RELATION_ORDER_NUM DESC</select>
+    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE_RELATION ORDER by RELATION_ORDER_NUM ASC</select>
+    <delete id="deleteAll">delete from TB4D_TABLE_RELATION</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(RELATION_ORDER_NUM) is null then 1 else max(RELATION_ORDER_NUM)+1 end ORDERNUM from TB4D_TABLE_RELATION</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_TABLE_RELATION<where>
+        <if test="relationGroupId !=null and relationGroupId !=''"> and RELATION_GROUP_ID like #{relationGroupId} </if>
+        <if test="relationName !=null and relationName !=''"> and RELATION_NAME like #{relationName} </if>
+        <if test="relationUserId !=null and relationUserId !=''"> and RELATION_USER_ID like #{relationUserId} </if>
+        <if test="relationUserName !=null and relationUserName !=''"> and RELATION_USER_NAME like #{relationUserName} </if>
+        <if test="relationDesc !=null and relationDesc !=''"> and RELATION_DESC like #{relationDesc} </if>
+        <if test="relationStatus !=null and relationStatus !=''"> and RELATION_STATUS like #{relationStatus} </if>
+        <if test="relationContent !=null and relationContent !=''"> and RELATION_CONTENT like #{relationContent} </if>
+    </where>ORDER by RELATION_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_RELATION
+                                                                                                          where RELATION_ORDER_NUM = (select max(RELATION_ORDER_NUM) from TB4D_TABLE_RELATION where RELATION_ORDER_NUM<(select RELATION_ORDER_NUM from TB4D_TABLE_RELATION where RELATION_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_RELATION
+                                                                                                             where RELATION_ORDER_NUM = (select min(RELATION_ORDER_NUM) from TB4D_TABLE_RELATION where RELATION_ORDER_NUM>(select RELATION_ORDER_NUM from TB4D_TABLE_RELATION where RELATION_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>

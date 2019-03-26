@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableRelationMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+        <constructor>
+            <idArg column="RELATION_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="RELATION_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="RELATION_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+        <constructor>
+            <idArg column="RELATION_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="RELATION_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="RELATION_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="RELATION_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        RELATION_ID, RELATION_GROUP_ID, RELATION_NAME, RELATION_USER_ID, RELATION_USER_NAME,
+        RELATION_ORDER_NUM, RELATION_CREATE_TIME, RELATION_DESC, RELATION_STATUS
+    </sql>
+    <sql id="Blob_Column_List">
+        RELATION_CONTENT
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from TB4D_TABLE_RELATION
+        where RELATION_ID = #{relationId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TB4D_TABLE_RELATION
+        where RELATION_ID = #{relationId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+        insert into TB4D_TABLE_RELATION (RELATION_ID, RELATION_GROUP_ID, RELATION_NAME,
+                                         RELATION_USER_ID, RELATION_USER_NAME, RELATION_ORDER_NUM,
+                                         RELATION_CREATE_TIME, RELATION_DESC, RELATION_STATUS,
+                                         RELATION_CONTENT)
+        values (#{relationId,jdbcType=VARCHAR}, #{relationGroupId,jdbcType=VARCHAR}, #{relationName,jdbcType=VARCHAR},
+                #{relationUserId,jdbcType=VARCHAR}, #{relationUserName,jdbcType=VARCHAR}, #{relationOrderNum,jdbcType=INTEGER},
+                #{relationCreateTime,jdbcType=TIMESTAMP}, #{relationDesc,jdbcType=VARCHAR}, #{relationStatus,jdbcType=VARCHAR},
+                #{relationContent,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+        insert into TB4D_TABLE_RELATION
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="relationId != null">
+                RELATION_ID,
+            </if>
+            <if test="relationGroupId != null">
+                RELATION_GROUP_ID,
+            </if>
+            <if test="relationName != null">
+                RELATION_NAME,
+            </if>
+            <if test="relationUserId != null">
+                RELATION_USER_ID,
+            </if>
+            <if test="relationUserName != null">
+                RELATION_USER_NAME,
+            </if>
+            <if test="relationOrderNum != null">
+                RELATION_ORDER_NUM,
+            </if>
+            <if test="relationCreateTime != null">
+                RELATION_CREATE_TIME,
+            </if>
+            <if test="relationDesc != null">
+                RELATION_DESC,
+            </if>
+            <if test="relationStatus != null">
+                RELATION_STATUS,
+            </if>
+            <if test="relationContent != null">
+                RELATION_CONTENT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationGroupId != null">
+                #{relationGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationName != null">
+                #{relationName,jdbcType=VARCHAR},
+            </if>
+            <if test="relationUserId != null">
+                #{relationUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationUserName != null">
+                #{relationUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="relationOrderNum != null">
+                #{relationOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="relationCreateTime != null">
+                #{relationCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="relationDesc != null">
+                #{relationDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="relationStatus != null">
+                #{relationStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="relationContent != null">
+                #{relationContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+        update TB4D_TABLE_RELATION
+        <set>
+            <if test="relationGroupId != null">
+                RELATION_GROUP_ID = #{relationGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationName != null">
+                RELATION_NAME = #{relationName,jdbcType=VARCHAR},
+            </if>
+            <if test="relationUserId != null">
+                RELATION_USER_ID = #{relationUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationUserName != null">
+                RELATION_USER_NAME = #{relationUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="relationOrderNum != null">
+                RELATION_ORDER_NUM = #{relationOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="relationCreateTime != null">
+                RELATION_CREATE_TIME = #{relationCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="relationDesc != null">
+                RELATION_DESC = #{relationDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="relationStatus != null">
+                RELATION_STATUS = #{relationStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="relationContent != null">
+                RELATION_CONTENT = #{relationContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where RELATION_ID = #{relationId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+        update TB4D_TABLE_RELATION
+        set RELATION_GROUP_ID = #{relationGroupId,jdbcType=VARCHAR},
+            RELATION_NAME = #{relationName,jdbcType=VARCHAR},
+            RELATION_USER_ID = #{relationUserId,jdbcType=VARCHAR},
+            RELATION_USER_NAME = #{relationUserName,jdbcType=VARCHAR},
+            RELATION_ORDER_NUM = #{relationOrderNum,jdbcType=INTEGER},
+            RELATION_CREATE_TIME = #{relationCreateTime,jdbcType=TIMESTAMP},
+            RELATION_DESC = #{relationDesc,jdbcType=VARCHAR},
+            RELATION_STATUS = #{relationStatus,jdbcType=VARCHAR},
+            RELATION_CONTENT = #{relationContent,jdbcType=LONGVARCHAR}
+        where RELATION_ID = #{relationId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+        update TB4D_TABLE_RELATION
+        set RELATION_GROUP_ID = #{relationGroupId,jdbcType=VARCHAR},
+            RELATION_NAME = #{relationName,jdbcType=VARCHAR},
+            RELATION_USER_ID = #{relationUserId,jdbcType=VARCHAR},
+            RELATION_USER_NAME = #{relationUserName,jdbcType=VARCHAR},
+            RELATION_ORDER_NUM = #{relationOrderNum,jdbcType=INTEGER},
+            RELATION_CREATE_TIME = #{relationCreateTime,jdbcType=TIMESTAMP},
+            RELATION_DESC = #{relationDesc,jdbcType=VARCHAR},
+            RELATION_STATUS = #{relationStatus,jdbcType=VARCHAR}
+        where RELATION_ID = #{relationId,jdbcType=VARCHAR}
+    </update>
+</mapper>
