@@ -12,6 +12,7 @@ import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.builder.datastorage.ITableRelationGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.Date;
 import java.util.List;
 
 public class TableRelationGroupServiceImpl extends BaseServiceImpl<TableRelationGroupEntity> implements ITableRelationGroupService
@@ -25,9 +26,38 @@ public class TableRelationGroupServiceImpl extends BaseServiceImpl<TableRelation
     private String rootParentId="-1";
 
     TableRelationGroupMapper tableRelationGroupMapper;
+
     public TableRelationGroupServiceImpl(TableRelationGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         tableRelationGroupMapper=_defaultBaseMapper;
+    }
+
+    @Override
+    public int saveSimple(JB4DSession jb4DSession, String id, TableRelationGroupEntity record) throws JBuild4DGenerallyException {
+        return super.save(jb4DSession,id, record, new IAddBefore<TableRelationGroupEntity>() {
+            @Override
+            public TableRelationGroupEntity run(JB4DSession jb4DSession,TableRelationGroupEntity sourceEntity) throws JBuild4DGenerallyException {
+                sourceEntity.setRelGroupOrderNum(tableRelationGroupMapper.nextOrderNum());
+                sourceEntity.setRelGroupChildCount(0);
+                sourceEntity.setRelGroupCreateTime(new Date());
+                sourceEntity.setRelGroupUserId(jb4DSession.getUserId());
+                sourceEntity.setRelGroupUserName(jb4DSession.getUserName());
+                String parentIdList;
+                if(sourceEntity.getRelGroupId().equals(rootId)){
+                    parentIdList=rootParentId;
+                    sourceEntity.setRelGroupParentId(rootParentId);
+                }
+                else
+                {
+                    TableRelationGroupEntity parentEntity=tableRelationGroupMapper.selectByPrimaryKey(sourceEntity.getRelGroupParentId());
+                    parentIdList=parentEntity.getRelGroupPidList();
+                    parentEntity.setRelGroupChildCount(parentEntity.getRelGroupChildCount()+1);
+                    tableRelationGroupMapper.updateByPrimaryKeySelective(parentEntity);
+                }
+                sourceEntity.setRelGroupPidList(parentIdList+"*"+sourceEntity.getRelGroupId());
+                return sourceEntity;
+            }
+        });
     }
 
     @Override
@@ -62,16 +92,5 @@ public class TableRelationGroupServiceImpl extends BaseServiceImpl<TableRelation
         {
             throw new JBuild4DGenerallyException("找不到要删除的记录!");
         }
-    }
-
-    @Override
-    public int saveSimple(JB4DSession jb4DSession, String id, TableRelationGroupEntity record) throws JBuild4DGenerallyException {
-        return super.save(jb4DSession,id, record, new IAddBefore<TableRelationGroupEntity>() {
-            @Override
-            public TableRelationGroupEntity run(JB4DSession jb4DSession,TableRelationGroupEntity sourceEntity) throws JBuild4DGenerallyException {
-                //设置排序,以及其他参数--nextOrderNum()
-                return sourceEntity;
-            }
-        });
     }
 }

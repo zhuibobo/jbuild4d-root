@@ -3,8 +3,9 @@
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableGroupMapper">
     <select id="selectAll" resultMap="BaseResultMap">select
         <include refid="Base_Column_List"/>
-        from TB4D_TABLE_GROUP ORDER by TABLE_GROUP_ORDER_NUM ASC
+        from TB4D_TABLE_GROUP ORDER by TABLE_GROUP_ORDER_NUM DESC
     </select>
+    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE_GROUP ORDER by TABLE_GROUP_ORDER_NUM ASC</select>
     <delete id="deleteAll">delete
                            from TB4D_TABLE_GROUP</delete>
     <select id="nextOrderNum" resultType="integer">select case

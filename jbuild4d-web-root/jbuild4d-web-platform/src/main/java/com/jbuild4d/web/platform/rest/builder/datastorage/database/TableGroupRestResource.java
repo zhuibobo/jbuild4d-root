@@ -37,7 +37,7 @@ public class TableGroupRestResource extends GeneralRestResource<TableGroupEntity
 
     @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
     public List<TableGroupEntity> getTreeData() {
-        List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALL(JB4DSessionUtility.getSession());
+        List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALLASC(JB4DSessionUtility.getSession());
         return tableGroupEntityList;
     }
 }
