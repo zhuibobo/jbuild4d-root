@@ -65,15 +65,16 @@
                 // 根节点不触发任何事件
                 //if(treeNode.level != 0) {
                 this.treeSelectedNode=treeNode;
-                this.selectionRows=null;
-                this.pageNum=1;
-                this.clearSearchCondition();
-                this.searchCondition.groupId.value=this.treeSelectedNode[this.treeIdFieldName];
-                this.reloadData();
+                //this.selectionRows=null;
+                //this.pageNum=1;
+                //this.clearSearchCondition();
+                //this.searchCondition.groupId.value=this.treeSelectedNode[this.treeIdFieldName];
+                //this.reloadData();
                 //appList.reloadTreeTableData();
                 //}
             },
             addGroup:function () {
+                //debugger;
                 if (this.treeSelectedNode != null) {
                     var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
                         "op": "add",
