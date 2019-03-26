@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ITableRelationService extends IBaseService<TableRelationEntity> {
     List<TableRelationEntity> getRelationByGroup(JB4DSession session, String groupId);
+
+
 }

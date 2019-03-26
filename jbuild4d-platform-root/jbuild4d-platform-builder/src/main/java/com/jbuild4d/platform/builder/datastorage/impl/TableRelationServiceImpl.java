@@ -41,4 +41,28 @@ public class TableRelationServiceImpl extends BaseServiceImpl<TableRelationEntit
     public List<TableRelationEntity> getRelationByGroup(JB4DSession session, String groupId) {
         return tableRelationMapper.selectByGroupId(groupId);
     }
+
+    @Override
+    public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        TableRelationEntity selfEntity=tableRelationMapper.selectByPrimaryKey(id);
+        TableRelationEntity ltEntity=tableRelationMapper.selectLessThanRecord(id,selfEntity.getRelationGroupId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    @Override
+    public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        TableRelationEntity selfEntity=tableRelationMapper.selectByPrimaryKey(id);
+        TableRelationEntity ltEntity=tableRelationMapper.selectGreaterThanRecord(id,selfEntity.getRelationGroupId());
+        switchOrder(ltEntity,selfEntity);
+    }
+
+    private void switchOrder(TableRelationEntity toEntity,TableRelationEntity selfEntity) {
+        if(toEntity !=null){
+            int newNum= toEntity.getRelationOrderNum();
+            toEntity.setRelationOrderNum(selfEntity.getRelationOrderNum());
+            selfEntity.setRelationOrderNum(newNum);
+            tableRelationMapper.updateByPrimaryKeySelective(toEntity);
+            tableRelationMapper.updateByPrimaryKeySelective(selfEntity);
+        }
+    }
 }
