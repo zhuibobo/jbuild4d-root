@@ -5,8 +5,7 @@ import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
-import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
-import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
+import com.jbuild4d.platform.builder.datastorage.*;
 import com.jbuild4d.platform.builder.module.IModuleService;
 import com.jbuild4d.platform.sso.service.IOrganService;
 import com.jbuild4d.platform.sso.service.IOrganTypeService;
@@ -68,6 +67,15 @@ public class InitializationSystemRestResource {
     @Autowired
     private IRoleGroupService roleGroupService;
 
+    @Autowired
+    private ITableRelationGroupService tableRelationGroupService;
+
+    @Autowired
+    private ITableRelationService tableRelationService;
+
+    @Autowired
+    private ITableRelationHisService tableRelationHisService;
+
     @RequestMapping(value = "/Running", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo running(String createTestData) throws JBuild4DGenerallyException {
@@ -93,11 +101,15 @@ public class InitializationSystemRestResource {
         organService.createRootOrgan(jb4DSession);
 
         //初始化根表分组
-        tableGroupService.deleteByKeyNotValidate(jb4DSession,"0", JBuild4DProp.getWarningOperationCode());
+        tableGroupService.deleteByKeyNotValidate(jb4DSession,tableGroupService.getRootId(), JBuild4DProp.getWarningOperationCode());
         TableGroupEntity rootTableGroupEntity=tableGroupService.createRootNode(jb4DSession);
 
         tableGroupService.deleteByKeyNotValidate(jb4DSession,"TableGroupJBuild4DSystem", JBuild4DProp.getWarningOperationCode());
         tableGroupService.createSystemTableGroupNode(jb4DSession,rootTableGroupEntity);
+
+        //初始化表关系
+        tableRelationGroupService.deleteByKeyNotValidate(jb4DSession,tableRelationGroupService.getRootId(),JBuild4DProp.getWarningOperationCode());
+        tableRelationGroupService.createRootNode(jb4DSession);
 
         //初始化表模版
         tableFieldService.createTableFieldTemplates(jb4DSession);

@@ -12,6 +12,8 @@ import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.builder.datastorage.ITableRelationGroupService;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.List;
+
 public class TableRelationGroupServiceImpl extends BaseServiceImpl<TableRelationGroupEntity> implements ITableRelationGroupService
 {
     @Override
@@ -34,10 +36,32 @@ public class TableRelationGroupServiceImpl extends BaseServiceImpl<TableRelation
         treeTableEntity.setRelGroupId(rootId);
         treeTableEntity.setRelGroupParentId(rootParentId);
         treeTableEntity.setRelGroupIssystem(TrueFalseEnum.True.getDisplayName());
-        treeTableEntity.setRelGroupText("表分组");
-        treeTableEntity.setRelGroupValue("表分组");
+        treeTableEntity.setRelGroupText("表关系分组");
+        treeTableEntity.setRelGroupValue("表关系分组");
         this.saveSimple(jb4DSession,treeTableEntity.getRelGroupId(),treeTableEntity);
         return treeTableEntity;
+    }
+
+    @Override
+    public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        TableRelationGroupEntity groupEntity=tableRelationGroupMapper.selectByPrimaryKey(id);
+        if(groupEntity!=null){
+            if(groupEntity.getRelGroupIssystem().equals(TrueFalseEnum.True.getDisplayName())){
+                throw JBuild4DGenerallyException.getSystemRecordDelException();
+            }
+            if(groupEntity.getRelGroupDelEnable().equals(TrueFalseEnum.False.getDisplayName())){
+                throw JBuild4DGenerallyException.getDBFieldSettingDelException();
+            }
+            List<TableRelationGroupEntity> childEntityList=tableRelationGroupMapper.selectChilds(id);
+            if(childEntityList!=null&&childEntityList.size()>0){
+                throw JBuild4DGenerallyException.getHadChildDelException();
+            }
+            return super.deleteByKey(jb4DSession, id);
+        }
+        else
+        {
+            throw new JBuild4DGenerallyException("找不到要删除的记录!");
+        }
     }
 
     @Override

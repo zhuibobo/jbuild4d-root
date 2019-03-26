@@ -17,6 +17,13 @@
         <if test="relGroupUserId !=null and relGroupUserId !=''"> and REL_GROUP_USER_ID like #{relGroupUserId} </if>
         <if test="relGroupUserName !=null and relGroupUserName !=''"> and REL_GROUP_USER_NAME like #{relGroupUserName} </if>
     </where>ORDER by REL_GROUP_ORDER_NUM DESC</select>
+
+    <select id="selectChilds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TB4D_TABLE_RELATION_GROUP where REL_GROUP_PARENT_ID=#{parentId} ORDER by REL_GROUP_ORDER_NUM ASC
+    </select>
+
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_RELATION_GROUP
                                                                                                           where REL_GROUP_ORDER_NUM = (select max(REL_GROUP_ORDER_NUM) from TB4D_TABLE_RELATION_GROUP where REL_GROUP_ORDER_NUM<(select REL_GROUP_ORDER_NUM from TB4D_TABLE_RELATION_GROUP where REL_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_RELATION_GROUP
