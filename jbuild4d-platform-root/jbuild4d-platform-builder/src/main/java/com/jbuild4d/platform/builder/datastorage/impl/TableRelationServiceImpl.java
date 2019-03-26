@@ -1,7 +1,10 @@
 package com.jbuild4d.platform.builder.datastorage.impl;
+import java.util.Date;
+import java.util.List;
 
 import com.jbuild4d.base.dbaccess.dao.builder.TableRelationMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity;
+import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
@@ -24,8 +27,18 @@ public class TableRelationServiceImpl extends BaseServiceImpl<TableRelationEntit
             @Override
             public TableRelationEntity run(JB4DSession jb4DSession,TableRelationEntity sourceEntity) throws JBuild4DGenerallyException {
                 //设置排序,以及其他参数--nextOrderNum()
+                sourceEntity.setRelationUserId(jb4DSession.getUserId());
+                sourceEntity.setRelationUserName(jb4DSession.getUserName());
+                sourceEntity.setRelationOrderNum(tableRelationMapper.nextOrderNum());
+                sourceEntity.setRelationCreateTime(new Date());
+                sourceEntity.setRelationStatus(EnableTypeEnum.enable.getDisplayName());
                 return sourceEntity;
             }
         });
+    }
+
+    @Override
+    public List<TableRelationEntity> getRelationByGroup(JB4DSession session, String groupId) {
+        return tableRelationMapper.selectByGroupId(groupId);
     }
 }
