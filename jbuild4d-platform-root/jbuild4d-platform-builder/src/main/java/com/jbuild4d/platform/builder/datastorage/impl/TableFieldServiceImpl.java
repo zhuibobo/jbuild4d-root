@@ -63,11 +63,14 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
 
     @Override
     public void createTableFieldTemplates(JB4DSession jb4DSession) {
+        tableFieldMapper.deleteTemplate("通用模版");
         this.createGeneralTableFieldTemplate("通用模版",jb4DSession);
+
+        tableFieldMapper.deleteTemplate("新闻类模版");
+        this.createCMSTableFieldTemplate("新闻类模版",jb4DSession);
     }
 
     private void createGeneralTableFieldTemplate(String templateName,JB4DSession jb4DSession){
-        tableFieldMapper.deleteTemplate(templateName);
 
         TableFieldEntity idField=newFiled(jb4DSession,"Template","ID","ID",
                 TrueFalseEnum.True,TrueFalseEnum.False,
@@ -117,6 +120,47 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
                 "ApiVar","ApiVarCurrentUserName","当前用户名称",
                 "",templateName);
         tableFieldMapper.insert(userNameField);
+    }
+
+    private void createCMSTableFieldTemplate(String templateName,JB4DSession jb4DSession){
+        this.createGeneralTableFieldTemplate(templateName,jb4DSession);
+
+        TableFieldEntity mainImgField=newFiled(jb4DSession,"Template","F_MAIN_IMG_ID","主题图片ID",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(mainImgField);
+
+        TableFieldEntity titleField=newFiled(jb4DSession,"Template","F_TITLE","标题",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,200,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(titleField);
+
+        TableFieldEntity contentField=newFiled(jb4DSession,"Template","F_CONTENT","内容",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.TextType,0,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(contentField);
+
+        TableFieldEntity publicTimeField=newFiled(jb4DSession,"Template","F_PUBLIC_TIME","发布时间",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.DataTimeType,20,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(publicTimeField);
+
+        TableFieldEntity statueField=newFiled(jb4DSession,"Template","F_PUBLIC_STATUS","发布状态",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(statueField);
+
+
     }
 
     @Override

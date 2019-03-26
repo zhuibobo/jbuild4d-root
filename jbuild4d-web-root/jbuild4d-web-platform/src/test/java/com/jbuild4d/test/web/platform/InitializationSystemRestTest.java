@@ -39,6 +39,7 @@ public class InitializationSystemRestTest extends RestTestBase {
     }
 
     @Test
+    /*@DisplayName("When zero operands")*/
     public void initializationSystem() throws Exception {
         //context.getServletContext().
         MockHttpServletRequestBuilder requestBuilder =post("/PlatFormRest/InitializationSystem/Running.do");
