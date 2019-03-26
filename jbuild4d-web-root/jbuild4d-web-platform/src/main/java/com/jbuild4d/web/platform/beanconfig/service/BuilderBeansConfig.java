@@ -145,19 +145,19 @@ public class BuilderBeansConfig {
     }
 
     @Bean
-    public ITableRelationGroupService tableGroupService(ISQLBuilderService _sqlBuilderService, TableRelationGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+    public ITableRelationGroupService tableRelationGroupService(ISQLBuilderService _sqlBuilderService, TableRelationGroupMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
         ITableRelationGroupService bean=new TableRelationGroupServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
 
     @Bean
-    public ITableRelationService tableGroupService(ISQLBuilderService _sqlBuilderService, TableRelationMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+    public ITableRelationService tableRelationService(ISQLBuilderService _sqlBuilderService, TableRelationMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
         ITableRelationService bean=new TableRelationServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
 
     @Bean
-    public ITableRelationHisService tableGroupService(ISQLBuilderService _sqlBuilderService, TableRelationHisMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
+    public ITableRelationHisService tableRelationHisService(ISQLBuilderService _sqlBuilderService, TableRelationHisMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
         ITableRelationHisService bean=new TableRelationHisServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
     }
