@@ -20,13 +20,13 @@ Vue.component("table-relation-content-comp", {
         init:function () {
             if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
             var $ = go.GraphObject.make;  // for conciseness in defining templates
-
+            alert("1");
             this.tableRelationDiagram =
-                $(go.Diagram, "tableRelationDiagramDiv",  // must name or refer to the DIV HTML element
+                $(go.Diagram, "tableRelationDiagramDiv",
                     {
                         allowDelete: true,
                         allowCopy: false,
-                        layout: $(go.ForceDirectedLayout),
+                        layout: $(go.ForceDirectedLayout,{isOngoing: false}),
                         "undoManager.isEnabled": true
                     });
             var tableRelationDiagram=this.tableRelationDiagram;
@@ -196,7 +196,7 @@ Vue.component("table-relation-content-comp", {
             }
         },
         connectSelectionNode:function () {
-            var statrData=null;
+            /*var statrData=null;
             var endData=null;
 
             var i=0;
@@ -214,9 +214,11 @@ Vue.component("table-relation-content-comp", {
                 else if (part instanceof go.Link) {
                     console.log(part.data);
                 }
-            });
+            });*/
 
-            this.tableRelationDiagram.model.addLinkData({ from: statrData.key, to: endData.key, text: "[ProductID]0..N", toText: "[Discount]1",items:[{cdata:"1"}],cdata:"1" });
+            this.tableRelationDiagram.model.startTransaction("flash");
+            this.tableRelationDiagram.model.addLinkData({ from: "Categories", to: "Order Details", text: "[ProductID]0..N", toText: "[Discount]1",items:[{cdata:"1"}],cdata:"1" });
+            this.tableRelationDiagram.model.commitTransaction("flash");
         },
         saveModel:function () {
             alert("location -202 -170");
