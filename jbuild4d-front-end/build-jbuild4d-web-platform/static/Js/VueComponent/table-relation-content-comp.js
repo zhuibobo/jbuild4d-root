@@ -3,13 +3,18 @@ Vue.component("table-relation-content-comp", {
     props:["relation"],
     data: function () {
         return {
-            tableRelationDiagram:null
+            tableRelationDiagram:null,
+            displayDesc:true
         }
     },
     mounted:function(){
         //alert(PageStyleUtility.GetPageHeight());
         $(this.$refs.relationContentOuterWrap).css("height",PageStyleUtility.GetPageHeight()-75);
         this.init();
+        if(PageStyleUtility.GetPageWidth()<1000){
+            this.displayDesc=false;
+            $(".table-relation-op-buttons-outer-wrap").css("width","100%");
+        }
     },
     methods:{
         init:function () {
@@ -219,18 +224,24 @@ Vue.component("table-relation-content-comp", {
     },
     template: `<div ref="relationContentOuterWrap" class="table-relation-content-outer-wrap">
                     <div class="table-relation-content-header-wrap">
-                        <div class="table-relation-desc-outer-wrap">
+                        <div class="table-relation-desc-outer-wrap" v-if="displayDesc">
                             <div class="table-relation-desc">
                                 备注：{{relation.relationDesc}}
                             </div>
                         </div>
                         <div class="table-relation-op-buttons-outer-wrap">
                             <div class="table-relation-op-buttons-inner-wrap">
+                                <radio-group type="button">
+                                    <radio label="列名"></radio>
+                                    <radio label="标题"></radio>
+                                    <radio label="全部"></radio>
+                                </radio-group>
                                 <button-group shape="circle">
                                     <i-button type="success" icon="md-add"></i-button>
                                     <i-button @click="saveModel" type="primary" icon="logo-instagram">保存</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-add">连接</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-return-left">引入</i-button>
+                                    <i-button @click="connectSelectionNode" type="primary" icon="md-return-left">全屏</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-git-compare">历史</i-button>
                                     <i-button @click="deleteSelection" type="primary" icon="md-close"></i-button>
                                 </button-group>
