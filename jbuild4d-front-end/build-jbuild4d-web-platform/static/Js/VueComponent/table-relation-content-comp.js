@@ -196,14 +196,27 @@ Vue.component("table-relation-content-comp", {
             }
         },
         connectSelectionNode:function () {
+            var statrData=null;
+            var endData=null;
+
+            var i=0;
             this.tableRelationDiagram.selection.each(function (part) {
                 if (part instanceof go.Node) {
                     console.log(part.data);
+                    if(i==0){
+                        statrData=part.data;
+                        i++;
+                    }
+                    else{
+                        endData=part.data;
+                    }
                 }
                 else if (part instanceof go.Link) {
                     console.log(part.data);
                 }
             });
+
+            this.tableRelationDiagram.model.addLinkData({ from: statrData.key, to: endData.key, text: "[ProductID]0..N", toText: "[Discount]1",items:[{cdata:"1"}],cdata:"1" });
         },
         saveModel:function () {
             alert("location -202 -170");
