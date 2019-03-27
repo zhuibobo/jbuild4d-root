@@ -185,9 +185,9 @@ Vue.component("table-relation-content-comp", {
                         <div class="table-relation-op-buttons-outer-wrap">
                             <div class="table-relation-op-buttons-inner-wrap">
                                 <button-group shape="circle">
-                                    <i-button @click="addRelation" type="success" icon="md-add"></i-button>
-                                    <i-button @click="editRelation" type="primary" icon="md-create"></i-button>
-                                    <i-button @click="editRelation" type="primary" icon="md-close"></i-button>
+                                    <i-button type="success" icon="md-add"></i-button>
+                                    <i-button type="primary" icon="md-create"></i-button>
+                                    <i-button type="primary" icon="md-close"></i-button>
                                 </button-group>
                             </div>
                         </div>
