@@ -77,7 +77,7 @@ Vue.component("table-relation-content-comp", {
                                 margin: new go.Margin(0, 14, 0, 2),  // leave room for Button
                                 font: "bold 16px sans-serif"
                             },
-                            new go.Binding("text", "key")),
+                            new go.Binding("text", "name")),
                         // the collapse/expand button
                         $("PanelExpanderButton", "LIST",  // the name of the element whose visibility this button toggles
                             { row: 0, alignment: go.Spot.TopRight }),
@@ -136,13 +136,15 @@ Vue.component("table-relation-content-comp", {
             var nodeDataArray = [
                 {
                     key: "Products",
-                    items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
-                        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
-                        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
-                        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+                    name:"表",
+                    items: [{ name: "就是不知道表", iskey: true, figure: "Decision", color: yellowgrad },
+                        { name: "就是不知道表", iskey: false, figure: "Cube1", color: bluegrad },
+                        { name: "就是不知道表", iskey: false, figure: "Decision", color: "purple" },
+                        { name: "就是不知道表", iskey: false, figure: "Decision", color: "purple" }]
                 },
                 {
                     key: "Suppliers",
+                    name:"表",
                     items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
                         { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
                         { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
@@ -150,6 +152,7 @@ Vue.component("table-relation-content-comp", {
                 },
                 {
                     key: "Categories",
+                    name:"表",
                     items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
                         { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
                         { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
@@ -158,6 +161,7 @@ Vue.component("table-relation-content-comp", {
                 },
                 {
                     key: "Order Details",
+                    name:"表",
                     items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
                         { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
                         { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
