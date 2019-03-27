@@ -224,9 +224,10 @@ Vue.component("table-relation-content-comp", {
                             <div class="table-relation-op-buttons-inner-wrap">
                                 <button-group shape="circle">
                                     <i-button type="success" icon="md-add"></i-button>
-                                    <i-button @click="saveModel" type="primary" icon="logo-instagram"></i-button>
-                                    <i-button type="primary" icon="md-create"></i-button>
-                                    <i-button @click="connectSelectionNode" type="success" icon="md-add">连接</i-button>
+                                    <i-button @click="saveModel" type="primary" icon="logo-instagram">保存</i-button>
+                                    <i-button @click="connectSelectionNode" type="primary" icon="md-add">连接</i-button>
+                                    <i-button @click="connectSelectionNode" type="primary" icon="md-return-left">引入</i-button>
+                                    <i-button @click="connectSelectionNode" type="primary" icon="md-git-compare">历史</i-button>
                                     <i-button @click="deleteSelection" type="primary" icon="md-close"></i-button>
                                 </button-group>
                             </div>
