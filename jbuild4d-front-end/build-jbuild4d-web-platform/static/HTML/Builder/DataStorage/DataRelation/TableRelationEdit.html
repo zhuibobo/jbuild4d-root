@@ -8,6 +8,7 @@
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak style="margin-top: 0px">
+    <spin size="large" fix v-if="isSubmitting"></spin>
     <tabs>
         <tab-pane label="基本信息">
             <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
@@ -51,6 +52,7 @@
     var appForm = new Vue({
         el: "#appForm",
         data: {
+            isSubmitting:false,
             acInterface: {
                 getDataUrl: "/PlatFormRest/Builder/DataStorage/TableRelation/TableRelation/GetDetailData",
                 saveDataUrl: "/PlatFormRest/Builder/DataStorage/TableRelation/TableRelation/SaveEdit"
@@ -85,6 +87,7 @@
                 var _self = this;
                 this.$refs[name].validate(function (valid) {
                     if (valid) {
+                        _self.isSubmitting=true;
                         var sendData = JSON.stringify(_self.formEntity);
                         AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {

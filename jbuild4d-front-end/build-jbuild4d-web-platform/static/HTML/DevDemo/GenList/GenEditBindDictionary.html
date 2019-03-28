@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="appForm" class="general-edit-page-wrap" v-cloak>
+        <spin size="large" fix v-if="isSubmitting"></spin>
         <div class="general-edit-page-scroll-outer">
             <div class="general-edit-page-scroll-inner">
                 <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
@@ -84,6 +85,7 @@
 
             },
             data: {
+                isSubmitting:false,
                 acInterface:{
                     getDataUrl:"/PlatFormRest/DevDemo/DevDemoGenListBindDictionary/GetDetailData",
                     saveDataUrl:"/PlatFormRest/DevDemo/DevDemoGenListBindDictionary/SaveEdit"
@@ -139,6 +141,7 @@
                     var _self = this;
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
+                            _self.isSubmitting=true;
                             var sendData=JsonUtility.CloneSimple(_self.formEntity);
                             sendData.ddglBindDicMucheckbox=sendData.ddglBindDicMucheckbox.join(";");
                             var sendData = JSON.stringify(sendData);

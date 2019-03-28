@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="appForm" class="general-edit-page-wrap" v-cloak>
+        <spin size="large" fix v-if="isSubmitting"></spin>
         <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
             <form-item label="ddtlGroupId：">
                 <i-input v-model="formEntity.ddtlGroupId"></i-input>
@@ -63,6 +64,7 @@
                 }
             },
             data: {
+                isSubmitting:false,
                 acInterface:{
                     getDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/GetDetailData",
                     saveDataUrl:"/PlatFormRest/DevDemo/TreeAndList/DevDemoTLList/SaveEdit"
@@ -100,6 +102,7 @@
                     var _self = this;
                     this.$refs[name].validate(function (valid) {
                         if (valid) {
+                            _self.isSubmitting=true;
                             var sendData = JSON.stringify(_self.formEntity);
                             AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
                                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
