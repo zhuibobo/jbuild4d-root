@@ -75,7 +75,7 @@ public class TableRestTest extends RestTestBase {
         TableEntity newTable = getTableEntity(getSession(), tableName, tableCaption, tableName);
 
         //验证是否存在同名的表，存在则删除表
-        MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/ValidateTableIsNoExist.do");
+        MockHttpServletRequestBuilder requestBuilder = post("/PlatFormRest/Builder/DataStorage/DataBase/Table/ValidateTableIsNoExist.do");
         requestBuilder.sessionAttr("JB4DSession", getSession());
         requestBuilder.param("tableName", newTable.getTableName());
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -87,7 +87,7 @@ public class TableRestTest extends RestTestBase {
             tableFieldService.deleteByTableId(getSession(),tempTableEntity.getTableId());
             tableService.deletePhysicsTable(getSession(),newTable.getTableName());
         }
-        requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
+        requestBuilder = post("/PlatFormRest/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
         requestBuilder.sessionAttr("JB4DSession", getSession());
 
         String tableEntityJson = URLEncoder.encode(URLEncoder.encode(JsonUtility.toObjectString(newTable), "utf-8"), "utf-8");
@@ -166,7 +166,7 @@ public class TableRestTest extends RestTestBase {
 
         //调用方法
 
-        MockHttpServletRequestBuilder requestBuilder = post("/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
+        MockHttpServletRequestBuilder requestBuilder = post("/PlatFormRest/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
         requestBuilder.sessionAttr("JB4DSession", getSession());
         String tableEntityJson = URLEncoder.encode(URLEncoder.encode(JsonUtility.toObjectString(tableEntity), "utf-8"), "utf-8");
         String fieldVoListJson =  URLEncoder.encode(URLEncoder.encode(JsonUtility.toObjectString(tableFieldVOList), "utf-8"), "utf-8");
@@ -254,7 +254,7 @@ public class TableRestTest extends RestTestBase {
         //JBuild4DResponseVo responseVo= tableController.GetEditTableData("xxx","add","DevGroup");
 
         List<TableFieldVO> tableFieldVOList=new ArrayList<>();
-        List<Map> mapList=((Map<String,List<Map>>)responseVo.getExKVData().get("templateFieldGroup")).get("GeneralTemplate");
+        List<Map> mapList=((Map<String,List<Map>>)responseVo.getExKVData().get("templateFieldGroup")).get("通用模版");
         for (Map mapVo : mapList) {
             String recordString=JsonUtility.toObjectString(mapVo);
             tableFieldVOList.add(JsonUtility.toObject(recordString,TableFieldVO.class));
@@ -263,7 +263,7 @@ public class TableRestTest extends RestTestBase {
     }
 
     private JBuild4DResponseVo getEditTableData(String op,String recordId) throws Exception {
-        MockHttpServletRequestBuilder requestBuilder =post("/PlatForm/Builder/DataStorage/DataBase/Table/GetEditTableData.do");
+        MockHttpServletRequestBuilder requestBuilder =post("/PlatFormRest/Builder/DataStorage/DataBase/Table/GetEditTableData.do");
         requestBuilder.sessionAttr("JB4DSession",getSession());
         requestBuilder.param("op",op);
         requestBuilder.param("groupId","DevGroup");

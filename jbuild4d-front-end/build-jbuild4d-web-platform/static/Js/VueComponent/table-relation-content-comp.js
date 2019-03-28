@@ -20,7 +20,7 @@ Vue.component("table-relation-content-comp", {
         init:function () {
             if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
             var $ = go.GraphObject.make;  // for conciseness in defining templates
-            alert("1");
+            //alert("1");
             this.tableRelationDiagram =
                 $(go.Diagram, "tableRelationDiagramDiv",
                     {
@@ -187,6 +187,10 @@ Vue.component("table-relation-content-comp", {
                     linkDataArray: linkDataArray
                 });
         },
+        addTable:function(){
+            //DialogUtility.AlertText("1111111");
+            this.$refs.selectSingleTableDialog.beginSelectTable();
+        },
         deleteSelection:function () {
             //debugger;
             if (this.tableRelationDiagram.commandHandler.canDeleteSelection()) {
@@ -252,7 +256,7 @@ Vue.component("table-relation-content-comp", {
                                     <radio label="全部"></radio>
                                 </radio-group>
                                 <button-group shape="circle">
-                                    <i-button type="success" icon="md-add"></i-button>
+                                    <i-button @click="addTable" type="success" icon="md-add"></i-button>
                                     <i-button @click="saveModel" type="primary" icon="logo-instagram">保存</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-add">连接</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-return-left">引入</i-button>
@@ -264,5 +268,6 @@ Vue.component("table-relation-content-comp", {
                         </div>
                     </div>
                     <div class="table-relation-content-wrap" id="tableRelationDiagramDiv"></div>
+                    <select-single-table-dialog ref="selectSingleTableDialog"></select-single-table-dialog>
                 </div>`
 });
