@@ -26,15 +26,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_ROLE_GROUP
+        from TSSO_ROLE_GROUP
         where ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_ROLE_GROUP
+        delete from TSSO_ROLE_GROUP
         where ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleGroupEntity">
-        insert into TB4D_ROLE_GROUP (ROLE_GROUP_ID, ROLE_GROUP_NAME, ROLE_GROUP_ORDER_NUM,
+        insert into TSSO_ROLE_GROUP (ROLE_GROUP_ID, ROLE_GROUP_NAME, ROLE_GROUP_ORDER_NUM,
                                      ROLE_GROUP_CREATE_TIME, ROLE_GROUP_DESC, ROLE_GROUP_STATUS,
                                      ROLE_GROUP_PARENT_ID, ROLE_GROUP_ISSYSTEM, ROLE_GROUP_DEL_ENABLE,
                                      ROLE_GROUP_PID_LIST, ROLE_GROUP_CHILD_COUNT,
@@ -46,7 +46,7 @@
                 #{roleGroupCreaterId,jdbcType=VARCHAR}, #{roleGroupOrganId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleGroupEntity">
-        insert into TB4D_ROLE_GROUP
+        insert into TSSO_ROLE_GROUP
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="roleGroupId != null">
                 ROLE_GROUP_ID,
@@ -131,7 +131,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleGroupEntity">
-        update TB4D_ROLE_GROUP
+        update TSSO_ROLE_GROUP
         <set>
             <if test="roleGroupName != null">
                 ROLE_GROUP_NAME = #{roleGroupName,jdbcType=VARCHAR},
@@ -173,7 +173,7 @@
         where ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleGroupEntity">
-        update TB4D_ROLE_GROUP
+        update TSSO_ROLE_GROUP
         set ROLE_GROUP_NAME = #{roleGroupName,jdbcType=VARCHAR},
             ROLE_GROUP_ORDER_NUM = #{roleGroupOrderNum,jdbcType=INTEGER},
             ROLE_GROUP_CREATE_TIME = #{roleGroupCreateTime,jdbcType=TIMESTAMP},

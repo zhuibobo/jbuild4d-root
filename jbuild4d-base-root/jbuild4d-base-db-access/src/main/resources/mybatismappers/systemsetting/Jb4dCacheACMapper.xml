@@ -22,15 +22,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_JB4D_CACHE
+        from TSYS_JB4D_CACHE
         where CACHE_ID = #{cacheId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_JB4D_CACHE
+        delete from TSYS_JB4D_CACHE
         where CACHE_ID = #{cacheId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.Jb4dCacheEntity">
-        insert into TB4D_JB4D_CACHE (CACHE_ID, CACHE_KEY, CACHE_NAME,
+        insert into TSYS_JB4D_CACHE (CACHE_ID, CACHE_KEY, CACHE_NAME,
                                      CACHE_DESC, CACHE_ORDER_NUM, CACHE_STATUS,
                                      CACHE_IS_GLOBAL, CACHE_USER_ID, CACHE_MODE,
                                      CACHE_VERSION)
@@ -40,7 +40,7 @@
                 #{cacheVersion,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.Jb4dCacheEntity">
-        insert into TB4D_JB4D_CACHE
+        insert into TSYS_JB4D_CACHE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="cacheId != null">
                 CACHE_ID,
@@ -107,7 +107,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.Jb4dCacheEntity">
-        update TB4D_JB4D_CACHE
+        update TSYS_JB4D_CACHE
         <set>
             <if test="cacheKey != null">
                 CACHE_KEY = #{cacheKey,jdbcType=VARCHAR},
@@ -140,7 +140,7 @@
         where CACHE_ID = #{cacheId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.Jb4dCacheEntity">
-        update TB4D_JB4D_CACHE
+        update TSYS_JB4D_CACHE
         set CACHE_KEY = #{cacheKey,jdbcType=VARCHAR},
             CACHE_NAME = #{cacheName,jdbcType=VARCHAR},
             CACHE_DESC = #{cacheDesc,jdbcType=VARCHAR},

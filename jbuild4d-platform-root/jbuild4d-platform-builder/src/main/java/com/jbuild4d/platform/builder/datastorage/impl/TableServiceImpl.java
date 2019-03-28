@@ -54,7 +54,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     public void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException {
         try {
             if (this.existLogicTableName(jb4DSession,tableEntity.getTableName())) {
-                throw new JBuild4DGenerallyException("TB4D_TABLE中已经存在表名为" + tableEntity.getTableName() + "的逻辑表!");
+                throw new JBuild4DGenerallyException("TBUILD_TABLE中已经存在表名为" + tableEntity.getTableName() + "的逻辑表!");
             } else {
                 //创建物理表
                 boolean createPhysicalTable = tableBuilederFace.newTable(tableEntity, tableFieldVOList);

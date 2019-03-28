@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.DatasetGroupMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_DATASET_GROUP ORDER by DS_GROUP_ORDER_NUM ASC</select>
-    <delete id="deleteAll">delete from TB4D_DATASET_GROUP</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(DS_GROUP_ORDER_NUM) is null then 1 else max(DS_GROUP_ORDER_NUM)+1 end ORDERNUM from TB4D_DATASET_GROUP</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DATASET_GROUP<where>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_DATASET_GROUP ORDER by DS_GROUP_ORDER_NUM ASC</select>
+    <delete id="deleteAll">delete from TBUILD_DATASET_GROUP</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(DS_GROUP_ORDER_NUM) is null then 1 else max(DS_GROUP_ORDER_NUM)+1 end ORDERNUM from TBUILD_DATASET_GROUP</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_DATASET_GROUP<where>
         <if test="dsGroupValue !=null and dsGroupValue !=''"> and DS_GROUP_VALUE like #{dsGroupValue} </if>
         <if test="dsGroupText !=null and dsGroupText !=''"> and DS_GROUP_TEXT like #{dsGroupText} </if>
         <if test="dsGroupDesc !=null and dsGroupDesc !=''"> and DS_GROUP_DESC like #{dsGroupDesc} </if>
@@ -20,16 +20,16 @@
         <![CDATA[
         select
             *
-        from TB4D_DATASET_GROUP
-        where DS_GROUP_ORDER_NUM = (select max(DS_GROUP_ORDER_NUM) from TB4D_DATASET_GROUP where DS_GROUP_ORDER_NUM<(select DS_GROUP_ORDER_NUM from TB4D_DATASET_GROUP where DS_GROUP_ID=#{id,jdbcType=NVARCHAR}) and DS_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and DS_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        from TBUILD_DATASET_GROUP
+        where DS_GROUP_ORDER_NUM = (select max(DS_GROUP_ORDER_NUM) from TBUILD_DATASET_GROUP where DS_GROUP_ORDER_NUM<(select DS_GROUP_ORDER_NUM from TBUILD_DATASET_GROUP where DS_GROUP_ID=#{id,jdbcType=NVARCHAR}) and DS_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and DS_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
         ]]>
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
         select
             *
-        from TB4D_DATASET_GROUP
-        where DS_GROUP_ORDER_NUM = (select min(DS_GROUP_ORDER_NUM) from TB4D_DATASET_GROUP where DS_GROUP_ORDER_NUM>(select DS_GROUP_ORDER_NUM from TB4D_DATASET_GROUP where DS_GROUP_ID=#{id,jdbcType=NVARCHAR}) and DS_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and DS_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        from TBUILD_DATASET_GROUP
+        where DS_GROUP_ORDER_NUM = (select min(DS_GROUP_ORDER_NUM) from TBUILD_DATASET_GROUP where DS_GROUP_ORDER_NUM>(select DS_GROUP_ORDER_NUM from TBUILD_DATASET_GROUP where DS_GROUP_ID=#{id,jdbcType=NVARCHAR}) and DS_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and DS_GROUP_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
         ]]>
     </select>
 </mapper>

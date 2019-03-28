@@ -3,27 +3,27 @@
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableRelationMapper">
     <select id="selectAll" resultMap="BaseResultMap">select
         <include refid="Base_Column_List"/>
-        from TB4D_TABLE_RELATION ORDER by RELATION_ORDER_NUM DESC
+        from TBUILD_TABLE_RELATION ORDER by RELATION_ORDER_NUM DESC
     </select>
     <select id="selectAllASC" resultMap="BaseResultMap">select
         <include refid="Base_Column_List"/>
-        from TB4D_TABLE_RELATION ORDER by RELATION_ORDER_NUM ASC
+        from TBUILD_TABLE_RELATION ORDER by RELATION_ORDER_NUM ASC
     </select>
 
     <select id="selectByGroupId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from TB4D_TABLE_RELATION where RELATION_GROUP_ID=#{groupId} ORDER by RELATION_ORDER_NUM ASC
+        from TBUILD_TABLE_RELATION where RELATION_GROUP_ID=#{groupId} ORDER by RELATION_ORDER_NUM ASC
     </select>
 
     <delete id="deleteAll">delete
-                           from TB4D_TABLE_RELATION</delete>
+                           from TBUILD_TABLE_RELATION</delete>
     <select id="nextOrderNum" resultType="integer">select case
                                                               when max(RELATION_ORDER_NUM) is null then 1
                                                               else max(RELATION_ORDER_NUM) + 1 end ORDERNUM
-                                                   from TB4D_TABLE_RELATION</select>
+                                                   from TBUILD_TABLE_RELATION</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include
-            refid="Base_Column_List"/>from TB4D_TABLE_RELATION
+            refid="Base_Column_List"/>from TBUILD_TABLE_RELATION
         <where>
             <if test="relationGroupId !=null and relationGroupId !=''">and RELATION_GROUP_ID like #{relationGroupId}
             </if>
@@ -42,11 +42,11 @@
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
         select *
-        from TB4D_TABLE_RELATION
+        from TBUILD_TABLE_RELATION
         where RELATION_ORDER_NUM = (select max(RELATION_ORDER_NUM)
-                                    from TB4D_TABLE_RELATION
+                                    from TBUILD_TABLE_RELATION
                                     where RELATION_ORDER_NUM < (select RELATION_ORDER_NUM
-                                                                from TB4D_TABLE_RELATION
+                                                                from TBUILD_TABLE_RELATION
                                                                 where RELATION_ID = #{id,jdbcType=NVARCHAR})
                                       and RELATION_GROUP_ID = #{groupId,jdbcType=NVARCHAR})
           and RELATION_GROUP_ID = #{groupId,jdbcType=NVARCHAR}
@@ -55,11 +55,11 @@
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
         select *
-        from TB4D_TABLE_RELATION
+        from TBUILD_TABLE_RELATION
         where RELATION_ORDER_NUM = (select min(RELATION_ORDER_NUM)
-                                 from TB4D_TABLE_RELATION
+                                 from TBUILD_TABLE_RELATION
                                  where RELATION_ORDER_NUM >
-                                       (select RELATION_ORDER_NUM from TB4D_TABLE_RELATION where RELATION_ID = #{id,jdbcType=NVARCHAR})
+                                       (select RELATION_ORDER_NUM from TBUILD_TABLE_RELATION where RELATION_ID = #{id,jdbcType=NVARCHAR})
                                    and RELATION_GROUP_ID = #{groupId,jdbcType=NVARCHAR})
           and RELATION_GROUP_ID = #{groupId,jdbcType=NVARCHAR}
         ]]>

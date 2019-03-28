@@ -27,15 +27,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_FILE_INFO
+        from TFS_FILE_INFO
         where FILE_ID = #{fileId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_FILE_INFO
+        delete from TFS_FILE_INFO
         where FILE_ID = #{fileId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity">
-        insert into TB4D_FILE_INFO (FILE_ID, FILE_CREATE_TIME, FILE_CREATER,
+        insert into TFS_FILE_INFO (FILE_ID, FILE_CREATE_TIME, FILE_CREATER,
                                     FILE_NAME, FILE_SIZE, FILE_STORE_TYPE,
                                     FILE_STORE_PATH, FILE_STORE_NAME, FILE_ORGAN_ID,
                                     FILE_ORGAN_NAME, FILE_EXTENSION, FILE_DESCRIPTION,
@@ -47,7 +47,7 @@
                 #{fileReadtime,jdbcType=INTEGER}, #{fileStatus,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity">
-        insert into TB4D_FILE_INFO
+        insert into TFS_FILE_INFO
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="fileId != null">
                 FILE_ID,
@@ -138,7 +138,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity">
-        update TB4D_FILE_INFO
+        update TFS_FILE_INFO
         <set>
             <if test="fileCreateTime != null">
                 FILE_CREATE_TIME = #{fileCreateTime,jdbcType=TIMESTAMP},
@@ -183,7 +183,7 @@
         where FILE_ID = #{fileId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileInfoEntity">
-        update TB4D_FILE_INFO
+        update TFS_FILE_INFO
         set FILE_CREATE_TIME = #{fileCreateTime,jdbcType=TIMESTAMP},
             FILE_CREATER = #{fileCreater,jdbcType=VARCHAR},
             FILE_NAME = #{fileName,jdbcType=VARCHAR},

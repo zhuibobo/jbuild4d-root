@@ -42,15 +42,15 @@
         <include refid="Base_Column_List" />
         ,
         <include refid="Blob_Column_List" />
-        from TB4D_TABLE_RELATION_HIS
+        from TBUILD_TABLE_RELATION_HIS
         where HIS_ID = #{hisId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_TABLE_RELATION_HIS
+        delete from TBUILD_TABLE_RELATION_HIS
         where HIS_ID = #{hisId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
-        insert into TB4D_TABLE_RELATION_HIS (HIS_ID, HIS_GROUP_ID, HIS_NAME,
+        insert into TBUILD_TABLE_RELATION_HIS (HIS_ID, HIS_GROUP_ID, HIS_NAME,
                                              HIS_USER_ID, HIS_USER_NAME, HIS_ORDER_NUM,
                                              HIS_CREATE_TIME, HIS_DESC, HIS_STATUS,
                                              HIS_BELONG_REL_ID, HIS_CONTENT)
@@ -60,7 +60,7 @@
                 #{hisBelongRelId,jdbcType=VARCHAR}, #{hisContent,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
-        insert into TB4D_TABLE_RELATION_HIS
+        insert into TBUILD_TABLE_RELATION_HIS
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="hisId != null">
                 HIS_ID,
@@ -133,7 +133,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
-        update TB4D_TABLE_RELATION_HIS
+        update TBUILD_TABLE_RELATION_HIS
         <set>
             <if test="hisGroupId != null">
                 HIS_GROUP_ID = #{hisGroupId,jdbcType=VARCHAR},
@@ -169,7 +169,7 @@
         where HIS_ID = #{hisId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
-        update TB4D_TABLE_RELATION_HIS
+        update TBUILD_TABLE_RELATION_HIS
         set HIS_GROUP_ID = #{hisGroupId,jdbcType=VARCHAR},
             HIS_NAME = #{hisName,jdbcType=VARCHAR},
             HIS_USER_ID = #{hisUserId,jdbcType=VARCHAR},
@@ -183,7 +183,7 @@
         where HIS_ID = #{hisId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationHisEntity">
-        update TB4D_TABLE_RELATION_HIS
+        update TBUILD_TABLE_RELATION_HIS
         set HIS_GROUP_ID = #{hisGroupId,jdbcType=VARCHAR},
             HIS_NAME = #{hisName,jdbcType=VARCHAR},
             HIS_USER_ID = #{hisUserId,jdbcType=VARCHAR},

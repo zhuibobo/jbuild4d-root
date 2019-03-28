@@ -29,15 +29,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from TB4D_OPERATION_LOG
+    from TSYS_OPERATION_LOG
     where LOG_ID = #{logId,jdbcType=NVARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from TB4D_OPERATION_LOG
+    delete from TSYS_OPERATION_LOG
     where LOG_ID = #{logId,jdbcType=NVARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity">
-    insert into TB4D_OPERATION_LOG (LOG_ID, LOG_TEXT, LOG_ORDER_NUM, 
+    insert into TSYS_OPERATION_LOG (LOG_ID, LOG_TEXT, LOG_ORDER_NUM,
       LOG_CREATE_TIME, LOG_SYSTEM_NAME, LOG_MODULE_NAME, 
       LOG_ACTION_NAME, LOG_DATA, LOG_USER_ID, 
       LOG_USER_NAME, LOG_ORGAN_ID, LOG_ORGAN_NAME, 
@@ -51,7 +51,7 @@
       #{logStatus,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity">
-    insert into TB4D_OPERATION_LOG
+    insert into TSYS_OPERATION_LOG
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logId != null">
         LOG_ID,
@@ -154,7 +154,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity">
-    update TB4D_OPERATION_LOG
+    update TSYS_OPERATION_LOG
     <set>
       <if test="logText != null">
         LOG_TEXT = #{logText,jdbcType=NVARCHAR},
@@ -205,7 +205,7 @@
     where LOG_ID = #{logId,jdbcType=NVARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.OperationLogEntity">
-    update TB4D_OPERATION_LOG
+    update TSYS_OPERATION_LOG
     set LOG_TEXT = #{logText,jdbcType=NVARCHAR},
       LOG_ORDER_NUM = #{logOrderNum,jdbcType=INTEGER},
       LOG_CREATE_TIME = #{logCreateTime,jdbcType=TIMESTAMP},

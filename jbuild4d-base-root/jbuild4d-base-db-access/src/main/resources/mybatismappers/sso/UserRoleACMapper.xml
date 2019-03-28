@@ -19,15 +19,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_USER_ROLE
+        from TSSO_USER_ROLE
         where BIND_ID = #{bindId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_USER_ROLE
+        delete from TSSO_USER_ROLE
         where BIND_ID = #{bindId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserRoleEntity">
-        insert into TB4D_USER_ROLE (BIND_ID, BIND_ROLE_ID, BIND_USER_ID,
+        insert into TSSO_USER_ROLE (BIND_ID, BIND_ROLE_ID, BIND_USER_ID,
                                     BIND_ORDER_NUM, BIND_CREATE_TIME, BIND_CREATER_ID,
                                     BIND_ORGAN_ID)
         values (#{bindId,jdbcType=VARCHAR}, #{bindRoleId,jdbcType=VARCHAR}, #{bindUserId,jdbcType=VARCHAR},
@@ -35,7 +35,7 @@
                 #{bindOrganId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserRoleEntity">
-        insert into TB4D_USER_ROLE
+        insert into TSSO_USER_ROLE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="bindId != null">
                 BIND_ID,
@@ -84,7 +84,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserRoleEntity">
-        update TB4D_USER_ROLE
+        update TSSO_USER_ROLE
         <set>
             <if test="bindRoleId != null">
                 BIND_ROLE_ID = #{bindRoleId,jdbcType=VARCHAR},
@@ -108,7 +108,7 @@
         where BIND_ID = #{bindId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserRoleEntity">
-        update TB4D_USER_ROLE
+        update TSSO_USER_ROLE
         set BIND_ROLE_ID = #{bindRoleId,jdbcType=VARCHAR},
             BIND_USER_ID = #{bindUserId,jdbcType=VARCHAR},
             BIND_ORDER_NUM = #{bindOrderNum,jdbcType=INTEGER},

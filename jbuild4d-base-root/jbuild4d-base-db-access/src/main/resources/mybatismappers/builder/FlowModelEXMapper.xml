@@ -3,15 +3,15 @@
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.FlowModelMapper">
     <select id="selectAll" resultMap="BaseResultMap">select
         <include refid="Base_Column_List"/>
-        from TB4D_FLOW_MODEL ORDER by MODEL_ORDER_NUM DESC
+        from TBUILD_FLOW_MODEL ORDER by MODEL_ORDER_NUM DESC
     </select>
     <delete id="deleteAll">delete
-                           from TB4D_FLOW_MODEL</delete>
+                           from TBUILD_FLOW_MODEL</delete>
     <select id="nextOrderNum" resultType="integer">select case
                                                               when max(MODEL_ORDER_NUM) is null then 1
                                                               else max(MODEL_ORDER_NUM) + 1 end ORDERNUM
-                                                   from TB4D_FLOW_MODEL</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_FLOW_MODEL
+                                                   from TBUILD_FLOW_MODEL</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_FLOW_MODEL
         <where>
             <if test="modelDeId !=null and modelDeId !=''"> and MODEL_DE_ID like #{modelDeId} </if>
             <if test="modelModuleId !=null and modelModuleId !=''"> and MODEL_MODULE_ID like #{modelModuleId} </if>
@@ -32,10 +32,10 @@
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
         select *
-        from TB4D_FLOW_MODEL
+        from TBUILD_FLOW_MODEL
         where MODEL_ORDER_NUM = (select max(MODEL_ORDER_NUM)
-                                 from TB4D_FLOW_MODEL
-                                 where MODEL_ORDER_NUM < (select MODEL_ORDER_NUM from TB4D_FLOW_MODEL where MODEL_ID = #{Id,jdbcType=NVARCHAR})
+                                 from TBUILD_FLOW_MODEL
+                                 where MODEL_ORDER_NUM < (select MODEL_ORDER_NUM from TBUILD_FLOW_MODEL where MODEL_ID = #{Id,jdbcType=NVARCHAR})
                                    and
                                        MODEL_MODULE_ID=#{modelModuleId,jdbcType=NVARCHAR})
           and
@@ -43,10 +43,10 @@
         ]]></select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[
         select *
-        from TB4D_FLOW_MODEL
+        from TBUILD_FLOW_MODEL
         where MODEL_ORDER_NUM = (select min(MODEL_ORDER_NUM)
-                                 from TB4D_FLOW_MODEL
-                                 where MODEL_ORDER_NUM > (select MODEL_ORDER_NUM from TB4D_FLOW_MODEL where MODEL_ID = #{Id,jdbcType=NVARCHAR})
+                                 from TBUILD_FLOW_MODEL
+                                 where MODEL_ORDER_NUM > (select MODEL_ORDER_NUM from TBUILD_FLOW_MODEL where MODEL_ID = #{Id,jdbcType=NVARCHAR})
                                    and
                                        MODEL_MODULE_ID=#{modelModuleId,jdbcType=NVARCHAR})
           and

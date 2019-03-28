@@ -4,32 +4,32 @@
     <select id="selectByGroupId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DICTIONARY where DICT_GROUP_ID=#{id} ORDER by DICT_ORDER_NUM ASC
+        from TSYS_DICTIONARY where DICT_GROUP_ID=#{id} ORDER by DICT_ORDER_NUM ASC
     </select>
     <select id="nextOrderNum" resultType="integer">
-        select case when max(DICT_ORDER_NUM) is null then 1 else max(DICT_ORDER_NUM)+1 end ORDERNUM from TB4D_DICTIONARY
+        select case when max(DICT_ORDER_NUM) is null then 1 else max(DICT_ORDER_NUM)+1 end ORDERNUM from TSYS_DICTIONARY
     </select>
     <select id="selectByParentId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DICTIONARY where DICT_PARENT_ID=#{id} ORDER by DICT_ORDER_NUM ASC
+        from TSYS_DICTIONARY where DICT_PARENT_ID=#{id} ORDER by DICT_ORDER_NUM ASC
     </select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select * from TB4D_DICTIONARY
+        select * from TSYS_DICTIONARY
         where DICT_ORDER_NUM = (
-                select max(DICT_ORDER_NUM) from TB4D_DICTIONARY
-                    where DICT_ORDER_NUM<(select DICT_ORDER_NUM from TB4D_DICTIONARY where DICT_ID=#{dictId,jdbcType=NVARCHAR})
+                select max(DICT_ORDER_NUM) from TSYS_DICTIONARY
+                    where DICT_ORDER_NUM<(select DICT_ORDER_NUM from TSYS_DICTIONARY where DICT_ID=#{dictId,jdbcType=NVARCHAR})
                           and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR})
               and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR}
         ]]>
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select * from TB4D_DICTIONARY
+        select * from TSYS_DICTIONARY
         where DICT_ORDER_NUM = (
-            select min(DICT_ORDER_NUM) from TB4D_DICTIONARY
-            where DICT_ORDER_NUM>(select DICT_ORDER_NUM from TB4D_DICTIONARY where DICT_ID=#{dictId,jdbcType=NVARCHAR})
+            select min(DICT_ORDER_NUM) from TSYS_DICTIONARY
+            where DICT_ORDER_NUM>(select DICT_ORDER_NUM from TSYS_DICTIONARY where DICT_ID=#{dictId,jdbcType=NVARCHAR})
                   and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR})
               and DICT_PARENT_ID=#{dictParentId,jdbcType=NVARCHAR}
         ]]>
@@ -37,6 +37,6 @@
     <select id="selectByGroupValue" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DICTIONARY where DICT_GROUP_ID=(select DICT_GROUP_ID from TB4D_DICTIONARY_GROUP where DICT_GROUP_VALUE=#{id}) ORDER by DICT_ORDER_NUM ASC
+        from TSYS_DICTIONARY where DICT_GROUP_ID=(select DICT_GROUP_ID from TSYS_DICTIONARY_GROUP where DICT_GROUP_VALUE=#{id}) ORDER by DICT_ORDER_NUM ASC
     </select>
 </mapper>

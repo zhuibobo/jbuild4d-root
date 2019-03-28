@@ -19,15 +19,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_ORGAN_TYPE
+        from TSSO_ORGAN_TYPE
         where ORGAN_TYPE_ID = #{organTypeId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_ORGAN_TYPE
+        delete from TSSO_ORGAN_TYPE
         where ORGAN_TYPE_ID = #{organTypeId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity">
-        insert into TB4D_ORGAN_TYPE (ORGAN_TYPE_ID, ORGAN_TYPE_VALUE, ORGAN_TYPE_NAME,
+        insert into TSSO_ORGAN_TYPE (ORGAN_TYPE_ID, ORGAN_TYPE_VALUE, ORGAN_TYPE_NAME,
                                      ORGAN_TYPE_DESC, ORGAN_TYPE_ORDER_NUM, ORGAN_TYPE_STATUS,
                                      ORGAN_TYPE_CREATE_TIME)
         values (#{organTypeId,jdbcType=VARCHAR}, #{organTypeValue,jdbcType=VARCHAR}, #{organTypeName,jdbcType=VARCHAR},
@@ -35,7 +35,7 @@
                 #{organTypeCreateTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity">
-        insert into TB4D_ORGAN_TYPE
+        insert into TSSO_ORGAN_TYPE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="organTypeId != null">
                 ORGAN_TYPE_ID,
@@ -84,7 +84,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity">
-        update TB4D_ORGAN_TYPE
+        update TSSO_ORGAN_TYPE
         <set>
             <if test="organTypeValue != null">
                 ORGAN_TYPE_VALUE = #{organTypeValue,jdbcType=VARCHAR},
@@ -108,7 +108,7 @@
         where ORGAN_TYPE_ID = #{organTypeId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.OrganTypeEntity">
-        update TB4D_ORGAN_TYPE
+        update TSSO_ORGAN_TYPE
         set ORGAN_TYPE_VALUE = #{organTypeValue,jdbcType=VARCHAR},
             ORGAN_TYPE_NAME = #{organTypeName,jdbcType=VARCHAR},
             ORGAN_TYPE_DESC = #{organTypeDesc,jdbcType=VARCHAR},

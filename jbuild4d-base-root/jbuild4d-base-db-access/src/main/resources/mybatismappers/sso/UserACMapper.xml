@@ -27,15 +27,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_USER
+        from TSSO_USER
         where USER_ID = #{userId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_USER
+        delete from TSSO_USER
         where USER_ID = #{userId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
-        insert into TB4D_USER (USER_ID, USER_NAME, USER_ACCOUNT,
+        insert into TSSO_USER (USER_ID, USER_NAME, USER_ACCOUNT,
                                USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER,
                                USER_HEAD_ID, USER_ORGAN_ID, USER_DESC,
                                USER_CREATE_TIME, USER_CREATE_USER_ID, USER_STATUS,
@@ -47,7 +47,7 @@
                 #{userOrderNum,jdbcType=INTEGER}, #{userType,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
-        insert into TB4D_USER
+        insert into TSSO_USER
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">
                 USER_ID,
@@ -138,7 +138,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
-        update TB4D_USER
+        update TSSO_USER
         <set>
             <if test="userName != null">
                 USER_NAME = #{userName,jdbcType=VARCHAR},
@@ -183,7 +183,7 @@
         where USER_ID = #{userId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.UserEntity">
-        update TB4D_USER
+        update TSSO_USER
         set USER_NAME = #{userName,jdbcType=VARCHAR},
             USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
             USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},

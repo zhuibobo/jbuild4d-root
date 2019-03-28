@@ -22,15 +22,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_ROLE
+        from TSSO_ROLE
         where ROLE_ID = #{roleId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_ROLE
+        delete from TSSO_ROLE
         where ROLE_ID = #{roleId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity">
-        insert into TB4D_ROLE (ROLE_ID, ROLE_KEY, ROLE_NAME,
+        insert into TSSO_ROLE (ROLE_ID, ROLE_KEY, ROLE_NAME,
                                ROLE_GROUP_ID, ROLE_ORDER_NUM, ROLE_CREATE_TIME,
                                ROLE_DESC, ROLE_STATUS, ROLE_CREATER_ID,
                                ROLE_ORGAN_ID)
@@ -40,7 +40,7 @@
                 #{roleOrganId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity">
-        insert into TB4D_ROLE
+        insert into TSSO_ROLE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="roleId != null">
                 ROLE_ID,
@@ -107,7 +107,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity">
-        update TB4D_ROLE
+        update TSSO_ROLE
         <set>
             <if test="roleKey != null">
                 ROLE_KEY = #{roleKey,jdbcType=VARCHAR},
@@ -140,7 +140,7 @@
         where ROLE_ID = #{roleId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.RoleEntity">
-        update TB4D_ROLE
+        update TSSO_ROLE
         set ROLE_KEY = #{roleKey,jdbcType=VARCHAR},
             ROLE_NAME = #{roleName,jdbcType=VARCHAR},
             ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR},

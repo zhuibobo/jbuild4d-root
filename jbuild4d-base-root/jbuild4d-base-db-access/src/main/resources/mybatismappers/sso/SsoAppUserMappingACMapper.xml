@@ -19,15 +19,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_SSO_APP_USER_MAPPING
+        from TSSO_SSO_APP_USER_MAPPING
         where MAPPING_ID = #{mappingId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_SSO_APP_USER_MAPPING
+        delete from TSSO_SSO_APP_USER_MAPPING
         where MAPPING_ID = #{mappingId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppUserMappingEntity">
-        insert into TB4D_SSO_APP_USER_MAPPING (MAPPING_ID, MAPPING_BELONG_APP_ID, MAPPING_ACCOUNT,
+        insert into TSSO_SSO_APP_USER_MAPPING (MAPPING_ID, MAPPING_BELONG_APP_ID, MAPPING_ACCOUNT,
                                                MAPPING_PASSWORD, MAPPING_CREATE_TIME, MAPPING_CREATER_ID,
                                                MAPPING_ORGAN_ID)
         values (#{mappingId,jdbcType=VARCHAR}, #{mappingBelongAppId,jdbcType=VARCHAR}, #{mappingAccount,jdbcType=VARCHAR},
@@ -35,7 +35,7 @@
                 #{mappingOrganId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppUserMappingEntity">
-        insert into TB4D_SSO_APP_USER_MAPPING
+        insert into TSSO_SSO_APP_USER_MAPPING
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="mappingId != null">
                 MAPPING_ID,
@@ -84,7 +84,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppUserMappingEntity">
-        update TB4D_SSO_APP_USER_MAPPING
+        update TSSO_SSO_APP_USER_MAPPING
         <set>
             <if test="mappingBelongAppId != null">
                 MAPPING_BELONG_APP_ID = #{mappingBelongAppId,jdbcType=VARCHAR},
@@ -108,7 +108,7 @@
         where MAPPING_ID = #{mappingId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppUserMappingEntity">
-        update TB4D_SSO_APP_USER_MAPPING
+        update TSSO_SSO_APP_USER_MAPPING
         set MAPPING_BELONG_APP_ID = #{mappingBelongAppId,jdbcType=VARCHAR},
             MAPPING_ACCOUNT = #{mappingAccount,jdbcType=VARCHAR},
             MAPPING_PASSWORD = #{mappingPassword,jdbcType=VARCHAR},

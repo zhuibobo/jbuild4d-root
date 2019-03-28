@@ -27,15 +27,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from TB4D_SETTING
+    from TSYS_SETTING
     where SETTING_ID = #{settingId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from TB4D_SETTING
+    delete from TSYS_SETTING
     where SETTING_ID = #{settingId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.SettingEntity">
-    insert into TB4D_SETTING (SETTING_ID, SETTING_KEY, SETTING_NAME,
+    insert into TSYS_SETTING (SETTING_ID, SETTING_KEY, SETTING_NAME,
                               SETTING_VALUE, SETTING_STATUS, SETTING_DESC,
                               SETTING_CREATETIME, SETTING_USER_ID, SETTING_USER_NAME,
                               SETTING_ORGAN_ID, SETTING_ORGAN_NAME, SETTING_API,
@@ -47,7 +47,7 @@
             #{settingIsSystem,jdbcType=VARCHAR}, #{settingOrderNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.SettingEntity">
-    insert into TB4D_SETTING
+    insert into TSYS_SETTING
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="settingId != null">
         SETTING_ID,
@@ -138,7 +138,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.SettingEntity">
-    update TB4D_SETTING
+    update TSYS_SETTING
     <set>
       <if test="settingKey != null">
         SETTING_KEY = #{settingKey,jdbcType=VARCHAR},
@@ -183,7 +183,7 @@
     where SETTING_ID = #{settingId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.SettingEntity">
-    update TB4D_SETTING
+    update TSYS_SETTING
     set SETTING_KEY = #{settingKey,jdbcType=VARCHAR},
         SETTING_NAME = #{settingName,jdbcType=VARCHAR},
         SETTING_VALUE = #{settingValue,jdbcType=VARCHAR},

@@ -37,15 +37,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from TB4D_DICTIONARY
+    from TSYS_DICTIONARY
     where DICT_ID = #{dictId,jdbcType=NVARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from TB4D_DICTIONARY
+    delete from TSYS_DICTIONARY
     where DICT_ID = #{dictId,jdbcType=NVARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryEntity">
-    insert into TB4D_DICTIONARY (DICT_ID, DICT_KEY, DICT_VALUE, 
+    insert into TSYS_DICTIONARY (DICT_ID, DICT_KEY, DICT_VALUE,
       DICT_TEXT, DICT_GROUP_ID, DICT_ORDER_NUM, 
       DICT_CREATE_TIME, DICT_PARENT_ID, DICT_PARENT_IDLIST, 
       DICT_ISSYSTEM, DICT_DEL_ENABLE, DICT_STATUS, 
@@ -63,7 +63,7 @@
       #{dictOrganId,jdbcType=NVARCHAR}, #{dictOrganName,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryEntity">
-    insert into TB4D_DICTIONARY
+    insert into TSYS_DICTIONARY
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="dictId != null">
         DICT_ID,
@@ -208,7 +208,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryEntity">
-    update TB4D_DICTIONARY
+    update TSYS_DICTIONARY
     <set>
       <if test="dictKey != null">
         DICT_KEY = #{dictKey,jdbcType=NVARCHAR},
@@ -280,7 +280,7 @@
     where DICT_ID = #{dictId,jdbcType=NVARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryEntity">
-    update TB4D_DICTIONARY
+    update TSYS_DICTIONARY
     set DICT_KEY = #{dictKey,jdbcType=NVARCHAR},
       DICT_VALUE = #{dictValue,jdbcType=NVARCHAR},
       DICT_TEXT = #{dictText,jdbcType=NVARCHAR},

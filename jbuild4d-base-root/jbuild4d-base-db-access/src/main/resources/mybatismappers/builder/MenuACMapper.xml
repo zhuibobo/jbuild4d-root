@@ -50,15 +50,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from TB4D_MENU
+    from TSYS_MENU
     where MENU_ID = #{menuId,jdbcType=NVARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from TB4D_MENU
+    delete from TSYS_MENU
     where MENU_ID = #{menuId,jdbcType=NVARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.MenuEntity">
-    insert into TB4D_MENU (MENU_ID, MENU_NAME, MENU_TEXT, 
+    insert into TSYS_MENU (MENU_ID, MENU_NAME, MENU_TEXT,
       MENU_VALUE, MENU_TYPE, MENU_USER_ID, 
       MENU_USER_NAME, MENU_ORGAN_ID, MENU_ORGAN_NAME, 
       MENU_IS_EXPAND, MENU_IS_SYSTEM, MENU_LEFT_URL, 
@@ -86,7 +86,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.MenuEntity">
-    insert into TB4D_MENU
+    insert into TSYS_MENU
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="menuId != null">
         MENU_ID,
@@ -291,7 +291,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.MenuEntity">
-    update TB4D_MENU
+    update TSYS_MENU
     <set>
       <if test="menuName != null">
         MENU_NAME = #{menuName,jdbcType=NVARCHAR},
@@ -393,7 +393,7 @@
     where MENU_ID = #{menuId,jdbcType=NVARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.MenuEntity">
-    update TB4D_MENU
+    update TSYS_MENU
     set MENU_NAME = #{menuName,jdbcType=NVARCHAR},
       MENU_TEXT = #{menuText,jdbcType=NVARCHAR},
       MENU_VALUE = #{menuValue,jdbcType=NVARCHAR},

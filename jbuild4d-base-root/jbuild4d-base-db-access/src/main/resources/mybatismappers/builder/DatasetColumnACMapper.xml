@@ -29,15 +29,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DATASET_COLUMN
+        from TBUILD_DATASET_COLUMN
         where COLUMN_ID = #{columnId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_DATASET_COLUMN
+        delete from TBUILD_DATASET_COLUMN
         where COLUMN_ID = #{columnId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity">
-        insert into TB4D_DATASET_COLUMN (COLUMN_ID, COLUMN_DS_ID, COLUMN_CAPTION,
+        insert into TBUILD_DATASET_COLUMN (COLUMN_ID, COLUMN_DS_ID, COLUMN_CAPTION,
                                          COLUMN_NAME, COLUMN_CREATE_TIME, COLUMN_CREATER,
                                          COLUMN_UPDATE_TIME, COLUMN_UPDATER, COLUMN_DESC,
                                          COLUMN_DEFAULT_TYPE, COLUMN_DEFAULT_VALUE,
@@ -51,7 +51,7 @@
                 #{columnIsCustom,jdbcType=VARCHAR}, #{columnFormatter,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity">
-        insert into TB4D_DATASET_COLUMN
+        insert into TBUILD_DATASET_COLUMN
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="columnId != null">
                 COLUMN_ID,
@@ -154,7 +154,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity">
-        update TB4D_DATASET_COLUMN
+        update TBUILD_DATASET_COLUMN
         <set>
             <if test="columnDsId != null">
                 COLUMN_DS_ID = #{columnDsId,jdbcType=VARCHAR},
@@ -205,7 +205,7 @@
         where COLUMN_ID = #{columnId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetColumnEntity">
-        update TB4D_DATASET_COLUMN
+        update TBUILD_DATASET_COLUMN
         set COLUMN_DS_ID = #{columnDsId,jdbcType=VARCHAR},
             COLUMN_CAPTION = #{columnCaption,jdbcType=VARCHAR},
             COLUMN_NAME = #{columnName,jdbcType=VARCHAR},

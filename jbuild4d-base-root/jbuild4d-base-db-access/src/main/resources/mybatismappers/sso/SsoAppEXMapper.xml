@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.SsoAppMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP ORDER by APP_ORDER_NUM DESC</select>
-    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP ORDER by APP_ORDER_NUM ASC</select>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TSSO_SSO_APP ORDER by APP_ORDER_NUM DESC</select>
+    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TSSO_SSO_APP ORDER by APP_ORDER_NUM ASC</select>
 
-    <select id="selectAllMainApp" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP where APP_TYPE='主系统' ORDER by APP_ORDER_NUM ASC</select>
-    <select id="selectALLSubApp" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP where APP_MAIN_ID=#{appId} ORDER by APP_ORDER_NUM ASC</select>
+    <select id="selectAllMainApp" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TSSO_SSO_APP where APP_TYPE='主系统' ORDER by APP_ORDER_NUM ASC</select>
+    <select id="selectALLSubApp" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TSSO_SSO_APP where APP_MAIN_ID=#{appId} ORDER by APP_ORDER_NUM ASC</select>
 
-    <delete id="deleteAll">delete from TB4D_SSO_APP</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(APP_ORDER_NUM) is null then 1 else max(APP_ORDER_NUM)+1 end ORDERNUM from TB4D_SSO_APP</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_SSO_APP<where>
+    <delete id="deleteAll">delete from TSSO_SSO_APP</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(APP_ORDER_NUM) is null then 1 else max(APP_ORDER_NUM)+1 end ORDERNUM from TSSO_SSO_APP</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TSSO_SSO_APP<where>
         <if test="appCode !=null and appCode !=''"> and APP_CODE like #{appCode} </if>
         <if test="appName !=null and appName !=''"> and APP_NAME like #{appName} </if>
         <if test="appPublicKey !=null and appPublicKey !=''"> and APP_PUBLIC_KEY like #{appPublicKey} </if>
@@ -26,8 +26,8 @@
         <if test="appCreaterId !=null and appCreaterId !=''"> and APP_CREATER_ID like #{appCreaterId} </if>
         <if test="appOrganId !=null and appOrganId !=''"> and APP_ORGAN_ID like #{appOrganId} </if>
     </where>ORDER by APP_ORDER_NUM DESC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_SSO_APP
-                                                                                                          where APP_ORDER_NUM = (select max(APP_ORDER_NUM) from TB4D_SSO_APP where APP_ORDER_NUM<(select APP_ORDER_NUM from TB4D_SSO_APP where APP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_SSO_APP
-                                                                                                             where APP_ORDER_NUM = (select min(APP_ORDER_NUM) from TB4D_SSO_APP where APP_ORDER_NUM>(select APP_ORDER_NUM from TB4D_SSO_APP where APP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TSSO_SSO_APP
+                                                                                                          where APP_ORDER_NUM = (select max(APP_ORDER_NUM) from TSSO_SSO_APP where APP_ORDER_NUM<(select APP_ORDER_NUM from TSSO_SSO_APP where APP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TSSO_SSO_APP
+                                                                                                             where APP_ORDER_NUM = (select min(APP_ORDER_NUM) from TSSO_SSO_APP where APP_ORDER_NUM>(select APP_ORDER_NUM from TSSO_SSO_APP where APP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
 </mapper>

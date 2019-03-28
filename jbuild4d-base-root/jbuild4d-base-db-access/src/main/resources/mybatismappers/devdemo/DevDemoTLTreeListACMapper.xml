@@ -25,15 +25,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from TB4D_DEV_DEMO_TL_TREE_LIST
+    from TDEV_DEMO_TL_TREE_LIST
     where DDTL_ID = #{ddtlId,jdbcType=NVARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from TB4D_DEV_DEMO_TL_TREE_LIST
+    delete from TDEV_DEMO_TL_TREE_LIST
     where DDTL_ID = #{ddtlId,jdbcType=NVARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeListEntity">
-    insert into TB4D_DEV_DEMO_TL_TREE_LIST (DDTL_ID, DDTL_KEY, DDTL_NAME, 
+    insert into TDEV_DEMO_TL_TREE_LIST (DDTL_ID, DDTL_KEY, DDTL_NAME,
       DDTL_VALUE, DDTL_STATUS, DDTL_DESC, 
       DDTL_CREATETIME, DDTL_ORDER_NUM, DDTL_BIND_DIC_SELECTED, 
       DDTL_BIND_DIC_RADIO, DDTL_DDTT_BIND_DIC_MUCHECKBOX, 
@@ -45,7 +45,7 @@
       #{ddtlGroupId,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeListEntity">
-    insert into TB4D_DEV_DEMO_TL_TREE_LIST
+    insert into TDEV_DEMO_TL_TREE_LIST
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="ddtlId != null">
         DDTL_ID,
@@ -124,7 +124,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeListEntity">
-    update TB4D_DEV_DEMO_TL_TREE_LIST
+    update TDEV_DEMO_TL_TREE_LIST
     <set>
       <if test="ddtlKey != null">
         DDTL_KEY = #{ddtlKey,jdbcType=NVARCHAR},
@@ -163,7 +163,7 @@
     where DDTL_ID = #{ddtlId,jdbcType=NVARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeListEntity">
-    update TB4D_DEV_DEMO_TL_TREE_LIST
+    update TDEV_DEMO_TL_TREE_LIST
     set DDTL_KEY = #{ddtlKey,jdbcType=NVARCHAR},
       DDTL_NAME = #{ddtlName,jdbcType=NVARCHAR},
       DDTL_VALUE = #{ddtlValue,jdbcType=NVARCHAR},

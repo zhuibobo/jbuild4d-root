@@ -28,15 +28,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_SERVICE_LINK
+        from TBUILD_SERVICE_LINK
         where LINK_ID = #{linkId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_SERVICE_LINK
+        delete from TBUILD_SERVICE_LINK
         where LINK_ID = #{linkId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
-        insert into TB4D_SERVICE_LINK (LINK_ID, LINK_VALUE, LINK_NAME,
+        insert into TBUILD_SERVICE_LINK (LINK_ID, LINK_VALUE, LINK_NAME,
                                        LINK_TYPE, LINK_URL, LINK_PARAS,
                                        LINK_USER, LINK_PASSWORD, LINK_CREATE_TIME,
                                        LINK_ORDER_NUM, LINK_DESC, LINK_IS_LOCATION,
@@ -50,7 +50,7 @@
                        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
-        insert into TB4D_SERVICE_LINK
+        insert into TBUILD_SERVICE_LINK
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="linkId != null">
                 LINK_ID,
@@ -147,7 +147,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
-        update TB4D_SERVICE_LINK
+        update TBUILD_SERVICE_LINK
         <set>
             <if test="linkValue != null">
                 LINK_VALUE = #{linkValue,jdbcType=VARCHAR},
@@ -195,7 +195,7 @@
         where LINK_ID = #{linkId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ServiceLinkEntity">
-        update TB4D_SERVICE_LINK
+        update TBUILD_SERVICE_LINK
         set LINK_VALUE = #{linkValue,jdbcType=VARCHAR},
             LINK_NAME = #{linkName,jdbcType=VARCHAR},
             LINK_TYPE = #{linkType,jdbcType=VARCHAR},

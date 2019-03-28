@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  *
  * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
- * This class corresponds to the database table :tb4d_user
+ * This class corresponds to the database table :TSSO_USER
  *
  * @mbg.generated do_not_delete_during_merge
  */
@@ -31,7 +31,7 @@ public class UserEntity {
     //USER_PHONE_NUMBER:手机号码
     private String userPhoneNumber;
 
-    //USER_HEAD_ID:头像ID,关联到TB4D_FILE_INFO表的FILE_ID
+    //USER_HEAD_ID:头像ID,关联到TFS_FILE_INFO表的FILE_ID
     private String userHeadId;
 
     //USER_ORGAN_ID:所属组织ID

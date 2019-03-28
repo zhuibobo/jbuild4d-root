@@ -1,10 +1,9 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <!--系统设置-->
-    <changeSet author="zhuangrb" id="changeSet-System-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-
-        <createTable tableName="TB4D_DEV_DEMO_GEN_LIST">
+    <!--开发示例模版-->
+    <changeSet author="zhuangrb" id="changeSet-Dev-Demo-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TDEV_DEMO_GEN_LIST">
             <column name="DDGL_ID" remarks="主键" type="NVARCHAR(128)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -29,7 +28,7 @@
             <column name="DDGL_BIND_DIC_MUCHECKBOX" type="NVARCHAR(1000)"/>
         </createTable>
 
-        <createTable tableName="TB4D_DEV_DEMO_TL_TREE">
+        <createTable tableName="TDEV_DEMO_TL_TREE">
             <column name="DDTT_ID" type="NVARCHAR(128)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -45,7 +44,7 @@
             <column name="DDTT_CHILD_COUNT" type="INT"/>
         </createTable>
 
-        <createTable tableName="TB4D_DEV_DEMO_TL_TREE_LIST">
+        <createTable tableName="TDEV_DEMO_TL_TREE_LIST">
             <column name="DDTL_ID" type="NVARCHAR(128)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -62,7 +61,7 @@
             <column name="DDTL_DDTT_BIND_DIC_MUCHECKBOX" type="NVARCHAR(1000)"/>
         </createTable>
 
-        <createTable tableName="TB4D_DEV_DEMO_TREE_TABLE">
+        <createTable tableName="TDEV_DEMO_TREE_TABLE">
             <column name="DDTT_ID" type="NVARCHAR(128)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -80,8 +79,11 @@
             <column name="DDTT_PARENT_IDLIST" type="NVARCHAR(1200)"/>
             <column name="DDTT_CHILD_COUNT" type="INT"/>
         </createTable>
+    </changeSet>
 
-        <createTable tableName="TB4D_DICTIONARY">
+    <!--系统设置-->
+    <changeSet author="zhuangrb" id="changeSet-System-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TSYS_DICTIONARY">
             <column name="DICT_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -117,7 +119,7 @@
             <column name="DICT_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TB4D_DICTIONARY_GROUP">
+        <createTable tableName="TSYS_DICTIONARY_GROUP">
             <column name="DICT_GROUP_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -137,7 +139,7 @@
             <column name="DICT_GROUP_ENP_ITEM" type="NVARCHAR(10)"/>
         </createTable>
 
-        <createTable tableName="TB4D_JB4D_CACHE">
+        <createTable tableName="TSYS_JB4D_CACHE">
             <column name="CACHE_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -156,7 +158,7 @@
             <column name="CACHE_VERSION" type="INT"/>
         </createTable>
 
-        <createTable tableName="TB4D_MENU">
+        <createTable tableName="TSYS_MENU">
             <column name="MENU_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -202,7 +204,7 @@
             <column name="MENU_JS_EXPRESSION" type="NVARCHAR(2000)"/>
         </createTable>
 
-        <createTable tableName="TB4D_OPERATION_LOG">
+        <createTable tableName="TSYS_OPERATION_LOG">
             <column name="LOG_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -225,7 +227,7 @@
             <column name="LOG_STATUS" type="NVARCHAR(50)"/>
         </createTable>
 
-        <createTable tableName="TB4D_SETTING">
+        <createTable tableName="TSYS_SETTING">
             <column name="SETTING_ID" type="NVARCHAR(128)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -244,7 +246,7 @@
             <column name="SETTING_ORDER_NUM" type="INT" remarks="排序号" />
         </createTable>
     
-        <createTable tableName="TB4D_HISTORY_DATA" remarks="历史数据表:存储各个表被删除数据的历史记录">
+        <createTable tableName="TSYS_HISTORY_DATA" remarks="历史数据表:存储各个表被删除数据的历史记录">
             <column name="HISTORY_ID" type="NVARCHAR(128)" remarks="主键,随机生成">
                 <constraints primaryKey="true" nullable="false"></constraints>
             </column>
@@ -258,9 +260,10 @@
             <column name="HISTORY_RECORD_ID" type="NVARCHAR(100)" remarks="删除记录的主键值"/>
         </createTable>
     </changeSet>
+
     <!--模块构建-->
     <changeSet author="zhuangrb" id="changeSet-Module-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TB4D_DATASET">
+        <createTable tableName="TBUILD_DATASET">
             <column name="DS_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -291,7 +294,7 @@
             <column name="DS_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TB4D_DATASET_COLUMN">
+        <createTable tableName="TBUILD_DATASET_COLUMN">
             <column name="COLUMN_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -312,7 +315,7 @@
             <column name="COLUMN_FORMATTER" type="NVARCHAR(200)"/>
         </createTable>
 
-        <createTable tableName="TB4D_DATASET_GROUP">
+        <createTable tableName="TBUILD_DATASET_GROUP">
             <column name="DS_GROUP_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -337,7 +340,7 @@
             <column name="DS_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TB4D_DATASET_RELATED_TABLE">
+        <createTable tableName="TBUILD_DATASET_RELATED_TABLE">
             <column name="RT_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -350,7 +353,7 @@
             <column name="RT_ORDER_NUM" type="INT"/>
         </createTable>
 
-        <createTable tableName="TB4D_FLOW_MODEL">
+        <createTable tableName="TBUILD_FLOW_MODEL">
             <column name="MODEL_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -377,10 +380,10 @@
             <column name="MODEL_START_KEY" type="NVARCHAR(1000)"/>
             <column name="MODEL_RESOURCE_NAME" type="NVARCHAR(1000)"/>
             <column name="MODEL_FROM_TYPE" remarks="流程模型来自上传或者页面设计" type="NVARCHAR(50)"/>
-            <column name="MODEL_MAIN_IMAGE_ID" remarks="关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
+            <column name="MODEL_MAIN_IMAGE_ID" remarks="关联到TFS_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TB4D_FORM_CONFIG">
+        <createTable tableName="TBUILD_FORM_CONFIG">
             <column name="FCONFIG_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -404,7 +407,7 @@
             <column name="FCONFIG_ORDER_NUM" type="INT"/>
         </createTable>
 
-        <createTable tableName="TB4D_FORM_RESOURCE">
+        <createTable tableName="TBUILD_FORM_RESOURCE">
             <column name="FORM_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -444,7 +447,7 @@
             <column name="FORM_CONTENT_URL" type="NVARCHAR(1000)"/>
         </createTable>
 
-        <createTable tableName="TB4D_LIST_RESOURCE">
+        <createTable tableName="TBUILD_LIST_RESOURCE">
             <column name="LIST_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -480,7 +483,7 @@
             <column name="LIST_ENABLE_C_SEAR" remarks="是否启用复杂查询" type="NVARCHAR(10)"/>
         </createTable>
 
-        <createTable tableName="TB4D_MODULE">
+        <createTable tableName="TBUILD_MODULE">
             <column name="MODULE_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -505,7 +508,7 @@
             <column name="MODULE_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TB4D_SERVICE_LINK">
+        <createTable tableName="TBUILD_SERVICE_LINK">
             <column name="LINK_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -525,7 +528,7 @@
             <column name="LINK_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TB4D_TABLE">
+        <createTable tableName="TBUILD_TABLE">
             <column name="TABLE_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -556,7 +559,7 @@
             <column name="TABLE_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TB4D_TABLE_FIELD">
+        <createTable tableName="TBUILD_TABLE_FIELD">
             <column name="FIELD_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -592,7 +595,7 @@
             <column name="FIELD_TEMPLATE_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TB4D_TABLE_GROUP">
+        <createTable tableName="TBUILD_TABLE_GROUP">
             <column name="TABLE_GROUP_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -619,7 +622,7 @@
         </createTable>
 
         <!--表关系只是作为逻辑上的描述,便于了解项目的数据结构,不做实际上表之间的物理关系-->
-        <createTable tableName="TB4D_TABLE_RELATION_GROUP" remarks="表关系分组表">
+        <createTable tableName="TBUILD_TABLE_RELATION_GROUP" remarks="表关系分组表">
             <column name="REL_GROUP_ID" type="NVARCHAR(100)" remarks="关联分组ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -644,7 +647,7 @@
             <column name="REL_GROUP_USER_NAME" type="NVARCHAR(100)" remarks="创建人" />
         </createTable>
 
-        <createTable tableName="TB4D_TABLE_RELATION" remarks="表关系描述信息表">
+        <createTable tableName="TBUILD_TABLE_RELATION" remarks="表关系描述信息表">
             <column name="RELATION_ID" type="NVARCHAR(100)" remarks="表关联ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -659,7 +662,7 @@
             <column name="RELATION_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述" />
         </createTable>
 
-        <createTable tableName="TB4D_TABLE_RELATION_HIS" remarks="表关系描述信息历史表">
+        <createTable tableName="TBUILD_TABLE_RELATION_HIS" remarks="表关系描述信息历史表">
             <column name="HIS_ID" type="NVARCHAR(100)" remarks="表关联ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -675,9 +678,10 @@
             <column name="HIS_BELONG_REL_ID" type="NVARCHAR(100)" remarks="所属记录ID" />
         </createTable>
     </changeSet>
+
     <!--文件存储-->
     <changeSet author="zhuangrb" id="changeSet-File-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TB4D_FILE_CONTENT">
+        <createTable tableName="TFS_FILE_CONTENT">
             <column name="FILE_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -686,7 +690,7 @@
             </column>
         </createTable>
 
-        <createTable tableName="TB4D_FILE_INFO">
+        <createTable tableName="TFS_FILE_INFO">
             <column name="FILE_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -705,7 +709,7 @@
             <column name="FILE_STATUS" type="NVARCHAR(10)"/>
         </createTable>
 
-        <createTable tableName="TB4D_FILE_REF">
+        <createTable tableName="TFS_FILE_REF">
             <column name="REF_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -714,9 +718,10 @@
             <column name="REF_ORDER_NUM" type="INT"/>
         </createTable>
     </changeSet>
+
     <!--单点登录模块-->
     <changeSet author="zhuangrb" id="changeSet-SSO-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TB4D_ORGAN_TYPE" remarks="组织机构类型">
+        <createTable tableName="TSSO_ORGAN_TYPE" remarks="组织机构类型">
             <column name="ORGAN_TYPE_ID" type="NVARCHAR(100)" remarks="组织机构类型ID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -732,7 +737,7 @@
             <column name="ORGAN_TYPE_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
         </createTable>
 
-        <createTable tableName="TB4D_ORGAN" remarks="组织机构表">
+        <createTable tableName="TSSO_ORGAN" remarks="组织机构表">
             <column name="ORGAN_ID" type="NVARCHAR(100)" remarks="组织机构ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -745,7 +750,7 @@
             <column name="ORGAN_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
             <column name="ORGAN_PHONE" type="NVARCHAR(100)" remarks="联系电话" />
             <column name="ORGAN_POST" type="NVARCHAR(20)" remarks="邮政编码" />
-            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(50)" remarks="组织机构类型,关联TB4D_ORGAN_TYPE表"/>
+            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(50)" remarks="组织机构类型,关联TSSO_ORGAN_TYPE表"/>
             <column name="ORGAN_ADDRESS" type="NVARCHAR(1000)" remarks="组织机构地址" />
             <column name="ORGAN_CONTACTS" type="NVARCHAR(100)" remarks="联系人" />
             <column name="ORGAN_CONTACTS_MOBILE" type="NVARCHAR(100)" remarks="联系人电话" />
@@ -758,11 +763,11 @@
             <column name="ORGAN_PARENT_ID_LIST" type="NVARCHAR(1200)" remarks="父节点列表" />
             <column name="ORGAN_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用" />
             <column name="ORGAN_CREATER_ORG_ID" type="NVARCHAR(100)" remarks="创建组织者ID"/>
-            <column name="ORGAN_MAIN_IMAGE_ID" remarks="主题Logo,关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
+            <column name="ORGAN_MAIN_IMAGE_ID" remarks="主题Logo,关联到TFS_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
             <column name="ORGAN_DESC" type="NVARCHAR(2000)" remarks="组织机构备注" />
         </createTable>
 
-        <createTable tableName="TB4D_DEPARTMENT" remarks="组织内部部门表">
+        <createTable tableName="TSSO_DEPARTMENT" remarks="组织内部部门表">
             <column name="DEPT_ID" type="NVARCHAR(100)" remarks="部门ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -784,7 +789,7 @@
             <column name="DEPT_DESC" type="NVARCHAR(2000)" remarks="部门备注" />
         </createTable>
 
-        <createTable tableName="TB4D_DEPARTMENT_USER" remarks="部门与用户关联表">
+        <createTable tableName="TSSO_DEPARTMENT_USER" remarks="部门与用户关联表">
             <column name="DU_ID" type="NVARCHAR(100)" remarks="部门用户ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -799,7 +804,7 @@
             <column name="DU_ORDER_NUM" type="INT" remarks="排序号" />
         </createTable>
 
-        <createTable tableName="TB4D_USER" remarks="用户信息表">
+        <createTable tableName="TSSO_USER" remarks="用户信息表">
             <column name="USER_ID" type="NVARCHAR(100)" remarks="用户ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -808,7 +813,7 @@
             <column name="USER_PASSWORD" type="NVARCHAR(100)" remarks="密码"/>
             <column name="USER_EMAIL" type="NVARCHAR(100)" remarks="邮件地址"/>
             <column name="USER_PHONE_NUMBER" type="NVARCHAR(100)" remarks="手机号码"/>
-            <column name="USER_HEAD_ID" remarks="头像ID,关联到TB4D_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
+            <column name="USER_HEAD_ID" remarks="头像ID,关联到TFS_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
             <column name="USER_ORGAN_ID" type="NVARCHAR(100)" remarks="所属组织ID" />
             <column name="USER_DESC" type="NVARCHAR(2000)" remarks="用户备注"/>
             <column name="USER_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
@@ -818,7 +823,7 @@
             <column name="USER_TYPE" type="NVARCHAR(30)" remarks="用户类型:平台管理员,组织机构管理员,一般用户" />
         </createTable>
 
-        <createTable tableName="TB4D_ROLE_GROUP" remarks="角色组表">
+        <createTable tableName="TSSO_ROLE_GROUP" remarks="角色组表">
             <column name="ROLE_GROUP_ID" type="NVARCHAR(100)" remarks="角色组ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -838,7 +843,7 @@
             <column name="ROLE_GROUP_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
 
-        <createTable tableName="TB4D_ROLE" remarks="角色表">
+        <createTable tableName="TSSO_ROLE" remarks="角色表">
             <column name="ROLE_ID" type="NVARCHAR(100)" remarks="角色ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -853,7 +858,7 @@
             <column name="ROLE_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
 
-        <createTable tableName="TB4D_USER_ROLE" remarks="角色与用户绑定表">
+        <createTable tableName="TSSO_USER_ROLE" remarks="角色与用户绑定表">
             <column name="BIND_ID" type="NVARCHAR(100)" remarks="绑定ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -873,14 +878,14 @@
         </createTable>
 
         <!--未实现-->
-        <createTable tableName="TB4D_AUTHORITY" remarks="角色权限表">
+        <createTable tableName="TSSO_AUTHORITY" remarks="角色权限表">
             <column name="AUTH_ID" type="NVARCHAR(100)" remarks="权限ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="ROLE_ID" type="NVARCHAR(100)" remarks="角色ID,主键" />
         </createTable>
 
-        <createTable tableName="TB4D_SSO_APP" remarks="SSO集成系统表">
+        <createTable tableName="TSSO_SSO_APP" remarks="SSO集成系统表">
             <column name="APP_ID" type="NVARCHAR(100)" remarks="SSO集成系统 ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -897,9 +902,9 @@
             <column name="APP_DOMAIN" type="NVARCHAR(300)" remarks="域名或者ip,用于验证来源使用"></column>
             <column name="APP_INDEX_URL" type="NVARCHAR(1000)" remarks="主页的地址,用于默认登录完成之后的目标地址"></column>
             <column name="APP_INTEGRATED_TYPE" type="NVARCHAR(50)" remarks="系统的集成类型:开发集成或者模拟登录集成,模拟登录为post模拟账号进行登录"></column>
-            <column name="APP_MAIN_IMAGE_ID" type="NVARCHAR(100)" remarks="主题图片ID,关联到TB4D_FILE_INFO表的FILE_ID"/>
+            <column name="APP_MAIN_IMAGE_ID" type="NVARCHAR(100)" remarks="主题图片ID,关联到TFS_FILE_INFO表的FILE_ID"/>
             <column name="APP_TYPE" type="NVARCHAR(50)" remarks="系统类型:主系统或者为子系统"></column>
-            <column name="APP_MAIN_ID" type="NVARCHAR(50)" remarks="为子系统时,用于存储主系统的ID:TB4D_SSO_APP中的APP_ID"></column>
+            <column name="APP_MAIN_ID" type="NVARCHAR(50)" remarks="为子系统时,用于存储主系统的ID:TSSO_SSO_APP中的APP_ID"></column>
             <column name="APP_CATEGORY" type="NVARCHAR(50)" remarks="系统分类:App或者Web系统"></column>
             <column name="APP_DESC" type="NVARCHAR(500)" remarks="备注" />
             <column name="APP_ORDER_NUM" type="INT" remarks="排序号" />
@@ -909,7 +914,7 @@
             <column name="APP_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
 
-        <createTable tableName="TB4D_SSO_APP_INTERFACE" remarks="SSO集成系统的接口配置表">
+        <createTable tableName="TSSO_SSO_APP_INTERFACE" remarks="SSO集成系统的接口配置表">
             <column name="INTERFACE_ID" type="NVARCHAR(100)" remarks="接口ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -927,7 +932,7 @@
             <column name="INTERFACE_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
 
-        <createTable tableName="TB4D_SSO_APP_FILE" remarks="SSO集成系统的相关文件表,主要用于存储模拟登录的html模拟文件">
+        <createTable tableName="TSSO_SSO_APP_FILE" remarks="SSO集成系统的相关文件表,主要用于存储模拟登录的html模拟文件">
             <column name="APP_FILE_ID" type="NVARCHAR(100)" remarks="SSO集成APP的文件ID,主键">
                 <constraints primaryKey="true" nullable="false" />
             </column>
@@ -940,10 +945,10 @@
             <column name="APP_FILE_STATUS" type="NVARCHAR(10)" remarks="状态" />
             <column name="APP_FILE_CREATER_ID" type="NVARCHAR(100)" remarks="创建者的ID" />
             <column name="APP_FILE_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
-            <column name="APP_FILE_CNT_FILE_ID" type="NVARCHAR(100)" remarks="存储的文件ID,关联到TB4D_FILE_INFO表的FILE_ID" />
+            <column name="APP_FILE_CNT_FILE_ID" type="NVARCHAR(100)" remarks="存储的文件ID,关联到TFS_FILE_INFO表的FILE_ID" />
         </createTable>
 
-        <createTable tableName="TB4D_SSO_APP_USER_MAPPING" remarks="SSO集成系统的账号映射表">
+        <createTable tableName="TSSO_SSO_APP_USER_MAPPING" remarks="SSO集成系统的账号映射表">
             <column name="MAPPING_ID" type="NVARCHAR(100)" remarks="账号映射ID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>

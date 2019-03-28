@@ -23,19 +23,19 @@
         <include refid="Base_Column_List" />
         ,
         <include refid="Blob_Column_List" />
-        from TB4D_FILE_CONTENT
+        from TFS_FILE_CONTENT
         where FILE_ID = #{fileId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_FILE_CONTENT
+        delete from TFS_FILE_CONTENT
         where FILE_ID = #{fileId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileContentEntity">
-        insert into TB4D_FILE_CONTENT (FILE_ID, FILE_CONTENT)
+        insert into TFS_FILE_CONTENT (FILE_ID, FILE_CONTENT)
         values (#{fileId,jdbcType=VARCHAR}, #{fileContent,jdbcType=LONGVARBINARY})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileContentEntity">
-        insert into TB4D_FILE_CONTENT
+        insert into TFS_FILE_CONTENT
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="fileId != null">
                 FILE_ID,
@@ -54,7 +54,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileContentEntity">
-        update TB4D_FILE_CONTENT
+        update TFS_FILE_CONTENT
         <set>
             <if test="fileContent != null">
                 FILE_CONTENT = #{fileContent,jdbcType=LONGVARBINARY},
@@ -63,7 +63,7 @@
         where FILE_ID = #{fileId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileContentEntity">
-        update TB4D_FILE_CONTENT
+        update TFS_FILE_CONTENT
         set FILE_CONTENT = #{fileContent,jdbcType=LONGVARBINARY}
         where FILE_ID = #{fileId,jdbcType=VARCHAR}
     </update>

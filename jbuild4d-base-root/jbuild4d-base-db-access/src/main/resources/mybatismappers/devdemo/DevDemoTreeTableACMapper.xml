@@ -27,15 +27,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from TB4D_DEV_DEMO_TREE_TABLE
+    from TDEV_DEMO_TREE_TABLE
     where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from TB4D_DEV_DEMO_TREE_TABLE
+    delete from TDEV_DEMO_TREE_TABLE
     where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTreeTableEntity">
-    insert into TB4D_DEV_DEMO_TREE_TABLE (DDTT_ID, DDTT_KEY, DDTT_NAME, 
+    insert into TDEV_DEMO_TREE_TABLE (DDTT_ID, DDTT_KEY, DDTT_NAME,
       DDTT_VALUE, DDTT_STATUS, DDTT_DESC, 
       DDTT_CREATETIME, DDTT_ORDER_NUM, DDTT_BIND_DIC_SELECTED, 
       DDTT_BIND_DIC_RADIO, DDTT_DDTT_BIND_DIC_MUCHECKBOX, 
@@ -49,7 +49,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTreeTableEntity">
-    insert into TB4D_DEV_DEMO_TREE_TABLE
+    insert into TDEV_DEMO_TREE_TABLE
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="ddttId != null">
         DDTT_ID,
@@ -140,7 +140,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTreeTableEntity">
-    update TB4D_DEV_DEMO_TREE_TABLE
+    update TDEV_DEMO_TREE_TABLE
     <set>
       <if test="ddttKey != null">
         DDTT_KEY = #{ddttKey,jdbcType=NVARCHAR},
@@ -185,7 +185,7 @@
     where DDTT_ID = #{ddttId,jdbcType=NVARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTreeTableEntity">
-    update TB4D_DEV_DEMO_TREE_TABLE
+    update TDEV_DEMO_TREE_TABLE
     set DDTT_KEY = #{ddttKey,jdbcType=NVARCHAR},
       DDTT_NAME = #{ddttName,jdbcType=NVARCHAR},
       DDTT_VALUE = #{ddttValue,jdbcType=NVARCHAR},

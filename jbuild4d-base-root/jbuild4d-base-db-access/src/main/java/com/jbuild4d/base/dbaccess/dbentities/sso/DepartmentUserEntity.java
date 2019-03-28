@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  *
  * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
- * This class corresponds to the database table :tb4d_department_userde
+ * This class corresponds to the database table :TSSO_DEPARTMENT_userde
  *
  * @mbg.generated do_not_delete_during_merge
  */

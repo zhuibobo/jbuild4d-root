@@ -8,6 +8,7 @@
 </head>
 <body>
 <div id="appForm" class="general-edit-page-wrap" v-cloak>
+    <spin size="large" fix v-if="isSubmitting"></spin>
     <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
         <form-item label="分 组 值：" prop="relGroupValue">
             <i-input v-model="formEntity.relGroupValue"></i-input>
@@ -70,6 +71,7 @@
     var appForm = new Vue({
         el:"#appForm",
         data: {
+            isSubmitting:false,
             acInterface:{
                 getDataUrl:"/PlatFormRest/Builder/DataStorage/TableRelation/TableRelationGroup/GetDetailData",
                 saveDataUrl:"/PlatFormRest/Builder/DataStorage/TableRelation/TableRelationGroup/SaveEdit"
@@ -108,6 +110,7 @@
                 var _self = this;
                 this.$refs[name].validate(function (valid) {
                     if (valid) {
+                        _self.isSubmitting=true;
                         var sendData = JSON.stringify(_self.formEntity);
                         AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
                             DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
@@ -119,6 +122,7 @@
                                         window.OpenerWindowObj.appList.updateNode(_self.formEntity);
                                     }
                                 }
+                                _self.isSubmitting=false;
                                 DialogUtility.Frame_CloseDialog(window);
                             });
                         }, "json");

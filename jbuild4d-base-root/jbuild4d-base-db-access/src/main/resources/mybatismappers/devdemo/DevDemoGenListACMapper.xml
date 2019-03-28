@@ -34,15 +34,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from TB4D_DEV_DEMO_GEN_LIST
+    from TDEV_DEMO_GEN_LIST
     where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from TB4D_DEV_DEMO_GEN_LIST
+    delete from TDEV_DEMO_GEN_LIST
     where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity">
-    insert into TB4D_DEV_DEMO_GEN_LIST (DDGL_ID, DDGL_KEY, DDGL_NAME, 
+    insert into TDEV_DEMO_GEN_LIST (DDGL_ID, DDGL_KEY, DDGL_NAME,
       DDGL_VALUE, DDGL_STATUS, DDGL_DESC, 
       DDGL_CREATETIME, DDGL_USER_ID, DDGL_USER_NAME, 
       DDGL_ORGAN_ID, DDGL_ORGAN_NAME, DDGL_API, 
@@ -60,7 +60,7 @@
       #{ddglBindDicMucheckbox,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity">
-    insert into TB4D_DEV_DEMO_GEN_LIST
+    insert into TDEV_DEMO_GEN_LIST
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="ddglId != null">
         DDGL_ID,
@@ -187,7 +187,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity">
-    update TB4D_DEV_DEMO_GEN_LIST
+    update TDEV_DEMO_GEN_LIST
     <set>
       <if test="ddglKey != null">
         DDGL_KEY = #{ddglKey,jdbcType=NVARCHAR},
@@ -250,7 +250,7 @@
     where DDGL_ID = #{ddglId,jdbcType=NVARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoGenListEntity">
-    update TB4D_DEV_DEMO_GEN_LIST
+    update TDEV_DEMO_GEN_LIST
     set DDGL_KEY = #{ddglKey,jdbcType=NVARCHAR},
       DDGL_NAME = #{ddglName,jdbcType=NVARCHAR},
       DDGL_VALUE = #{ddglValue,jdbcType=NVARCHAR},

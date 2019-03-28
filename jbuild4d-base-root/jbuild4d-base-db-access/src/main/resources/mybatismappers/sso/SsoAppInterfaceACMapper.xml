@@ -26,15 +26,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_SSO_APP_INTERFACE
+        from TSSO_SSO_APP_INTERFACE
         where INTERFACE_ID = #{interfaceId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_SSO_APP_INTERFACE
+        delete from TSSO_SSO_APP_INTERFACE
         where INTERFACE_ID = #{interfaceId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity">
-        insert into TB4D_SSO_APP_INTERFACE (INTERFACE_ID, INTERFACE_BELONG_APP_ID,
+        insert into TSSO_SSO_APP_INTERFACE (INTERFACE_ID, INTERFACE_BELONG_APP_ID,
                                             INTERFACE_CODE, INTERFACE_NAME, INTERFACE_URL,
                                             INTERFACE_PARAS, INTERFACE_FORMAT, INTERFACE_DESC,
                                             INTERFACE_ORDER_NUM, INTERFACE_CREATE_TIME,
@@ -48,7 +48,7 @@
                        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity">
-        insert into TB4D_SSO_APP_INTERFACE
+        insert into TSSO_SSO_APP_INTERFACE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="interfaceId != null">
                 INTERFACE_ID,
@@ -133,7 +133,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity">
-        update TB4D_SSO_APP_INTERFACE
+        update TSSO_SSO_APP_INTERFACE
         <set>
             <if test="interfaceBelongAppId != null">
                 INTERFACE_BELONG_APP_ID = #{interfaceBelongAppId,jdbcType=VARCHAR},
@@ -175,7 +175,7 @@
         where INTERFACE_ID = #{interfaceId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppInterfaceEntity">
-        update TB4D_SSO_APP_INTERFACE
+        update TSSO_SSO_APP_INTERFACE
         set INTERFACE_BELONG_APP_ID = #{interfaceBelongAppId,jdbcType=VARCHAR},
             INTERFACE_CODE = #{interfaceCode,jdbcType=VARCHAR},
             INTERFACE_NAME = #{interfaceName,jdbcType=VARCHAR},

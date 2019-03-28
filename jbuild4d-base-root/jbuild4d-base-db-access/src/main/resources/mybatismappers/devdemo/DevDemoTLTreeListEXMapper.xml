@@ -4,12 +4,12 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DEV_DEMO_TL_TREE_LIST ORDER by DDTL_ORDER_NUM DESC
+        from TDEV_DEMO_TL_TREE_LIST ORDER by DDTL_ORDER_NUM DESC
     </select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DEV_DEMO_TL_TREE_LIST
+        from TDEV_DEMO_TL_TREE_LIST
         <where>
             <if test="groupId != null and groupId != ''">
                 DDTL_GROUP_ID like #{groupId}
@@ -24,17 +24,17 @@
         ORDER by DDTL_ORDER_NUM DESC
     </select>
     <delete id="deleteAll">
-        delete from TB4D_DEV_DEMO_TL_TREE_LIST
+        delete from TDEV_DEMO_TL_TREE_LIST
     </delete>
     <select id="nextOrderNum" resultType="integer">
-        select case when max(DDTL_ORDER_NUM) is null then 1 else max(DDTL_ORDER_NUM)+1 end ORDERNUM from TB4D_DEV_DEMO_TL_TREE_LIST
+        select case when max(DDTL_ORDER_NUM) is null then 1 else max(DDTL_ORDER_NUM)+1 end ORDERNUM from TDEV_DEMO_TL_TREE_LIST
     </select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select * from TB4D_DEV_DEMO_TL_TREE_LIST
+        select * from TDEV_DEMO_TL_TREE_LIST
         where DDTL_ORDER_NUM = (
-                    select max(DDTL_ORDER_NUM) from TB4D_DEV_DEMO_TL_TREE_LIST
-                    where DDTL_ORDER_NUM<(select DDTL_ORDER_NUM from TB4D_DEV_DEMO_TL_TREE_LIST where DDTL_ID=#{id,jdbcType=NVARCHAR})
+                    select max(DDTL_ORDER_NUM) from TDEV_DEMO_TL_TREE_LIST
+                    where DDTL_ORDER_NUM<(select DDTL_ORDER_NUM from TDEV_DEMO_TL_TREE_LIST where DDTL_ID=#{id,jdbcType=NVARCHAR})
                           and
                           DDTL_GROUP_ID=#{groupId,jdbcType=NVARCHAR})
               and
@@ -43,10 +43,10 @@
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select * from TB4D_DEV_DEMO_TL_TREE_LIST
+        select * from TDEV_DEMO_TL_TREE_LIST
         where DDTL_ORDER_NUM = (
-            select min(DDTL_ORDER_NUM) from TB4D_DEV_DEMO_TL_TREE_LIST
-            where DDTL_ORDER_NUM>(select DDTL_ORDER_NUM from TB4D_DEV_DEMO_TL_TREE_LIST where DDTL_ID=#{id,jdbcType=NVARCHAR})
+            select min(DDTL_ORDER_NUM) from TDEV_DEMO_TL_TREE_LIST
+            where DDTL_ORDER_NUM>(select DDTL_ORDER_NUM from TDEV_DEMO_TL_TREE_LIST where DDTL_ID=#{id,jdbcType=NVARCHAR})
                   and
                   DDTL_GROUP_ID=#{groupId,jdbcType=NVARCHAR})
               and

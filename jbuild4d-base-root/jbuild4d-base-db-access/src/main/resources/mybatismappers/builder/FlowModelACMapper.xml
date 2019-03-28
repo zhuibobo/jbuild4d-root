@@ -30,15 +30,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_FLOW_MODEL
+        from TBUILD_FLOW_MODEL
         where MODEL_ID = #{modelId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_FLOW_MODEL
+        delete from TBUILD_FLOW_MODEL
         where MODEL_ID = #{modelId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity">
-        insert into TB4D_FLOW_MODEL (MODEL_ID, MODEL_DE_ID, MODEL_MODULE_ID,
+        insert into TBUILD_FLOW_MODEL (MODEL_ID, MODEL_DE_ID, MODEL_MODULE_ID,
                                      MODEL_CODE, MODEL_NAME, MODEL_CREATE_TIME,
                                      MODEL_CREATER, MODEL_UPDATE_TIME, MODEL_UPDATER,
                                      MODEL_DESC, MODEL_STATUS, MODEL_ORDER_NUM,
@@ -52,7 +52,7 @@
                 #{modelFromType,jdbcType=VARCHAR}, #{modelMainImageId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity">
-        insert into TB4D_FLOW_MODEL
+        insert into TBUILD_FLOW_MODEL
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="modelId != null">
                 MODEL_ID,
@@ -161,7 +161,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity">
-        update TB4D_FLOW_MODEL
+        update TBUILD_FLOW_MODEL
         <set>
             <if test="modelDeId != null">
                 MODEL_DE_ID = #{modelDeId,jdbcType=VARCHAR},
@@ -215,7 +215,7 @@
         where MODEL_ID = #{modelId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FlowModelEntity">
-        update TB4D_FLOW_MODEL
+        update TBUILD_FLOW_MODEL
         set MODEL_DE_ID = #{modelDeId,jdbcType=VARCHAR},
             MODEL_MODULE_ID = #{modelModuleId,jdbcType=VARCHAR},
             MODEL_CODE = #{modelCode,jdbcType=VARCHAR},

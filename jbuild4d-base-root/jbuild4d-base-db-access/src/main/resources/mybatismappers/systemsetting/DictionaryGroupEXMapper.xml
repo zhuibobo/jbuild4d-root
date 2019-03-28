@@ -2,25 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.systemsetting.DictionaryGroupMapper">
   <delete id="deleteAll">
-    delete from TB4D_DICTIONARY_GROUP
+    delete from TSYS_DICTIONARY_GROUP
   </delete>
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from TB4D_DICTIONARY_GROUP ORDER by DICT_GROUP_ORDER_NUM ASC
+    from TSYS_DICTIONARY_GROUP ORDER by DICT_GROUP_ORDER_NUM ASC
   </select>
   <select id="nextOrderNum" resultType="integer">
-    select case when max(DICT_GROUP_ORDER_NUM) is null then 1 else max(DICT_GROUP_ORDER_NUM)+1 end ORDERNUM from TB4D_DICTIONARY_GROUP
+    select case when max(DICT_GROUP_ORDER_NUM) is null then 1 else max(DICT_GROUP_ORDER_NUM)+1 end ORDERNUM from TSYS_DICTIONARY_GROUP
   </select>
   <select id="selectChilds" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from TB4D_DICTIONARY_GROUP where DICT_GROUP_PARENT_ID=#{id} ORDER by DICT_GROUP_ORDER_NUM ASC
+    from TSYS_DICTIONARY_GROUP where DICT_GROUP_PARENT_ID=#{id} ORDER by DICT_GROUP_ORDER_NUM ASC
   </select>
   <select id="selectByValue" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from TB4D_DICTIONARY_GROUP
+    from TSYS_DICTIONARY_GROUP
     where DICT_GROUP_VALUE = #{value,jdbcType=NVARCHAR}
   </select>
 </mapper>

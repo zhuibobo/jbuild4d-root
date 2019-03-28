@@ -27,15 +27,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_MODULE
+        from TBUILD_MODULE
         where MODULE_ID = #{moduleId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_MODULE
+        delete from TBUILD_MODULE
         where MODULE_ID = #{moduleId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity">
-        insert into TB4D_MODULE (MODULE_ID, MODULE_VALUE, MODULE_TEXT,
+        insert into TBUILD_MODULE (MODULE_ID, MODULE_VALUE, MODULE_TEXT,
                                  MODULE_ORDER_NUM, MODULE_CREATE_TIME, MODULE_DESC,
                                  MODULE_STATUS, MODULE_PARENT_ID, MODULE_ISSYSTEM,
                                  MODULE_DEL_ENABLE, MODULE_PID_LIST, MODULE_CHILD_COUNT,
@@ -47,7 +47,7 @@
                 #{moduleOrganId,jdbcType=VARCHAR}, #{moduleOrganName,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity">
-        insert into TB4D_MODULE
+        insert into TBUILD_MODULE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="moduleId != null">
                 MODULE_ID,
@@ -138,7 +138,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity">
-        update TB4D_MODULE
+        update TBUILD_MODULE
         <set>
             <if test="moduleValue != null">
                 MODULE_VALUE = #{moduleValue,jdbcType=VARCHAR},
@@ -183,7 +183,7 @@
         where MODULE_ID = #{moduleId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity">
-        update TB4D_MODULE
+        update TBUILD_MODULE
         set MODULE_VALUE = #{moduleValue,jdbcType=VARCHAR},
             MODULE_TEXT = #{moduleText,jdbcType=VARCHAR},
             MODULE_ORDER_NUM = #{moduleOrderNum,jdbcType=INTEGER},

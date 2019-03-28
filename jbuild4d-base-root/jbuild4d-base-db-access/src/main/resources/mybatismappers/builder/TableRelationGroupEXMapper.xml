@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableRelationGroupMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE_RELATION_GROUP ORDER by REL_GROUP_ORDER_NUM DESC</select>
-    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE_RELATION_GROUP ORDER by REL_GROUP_ORDER_NUM ASC</select>
-    <delete id="deleteAll">delete from TB4D_TABLE_RELATION_GROUP</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(REL_GROUP_ORDER_NUM) is null then 1 else max(REL_GROUP_ORDER_NUM)+1 end ORDERNUM from TB4D_TABLE_RELATION_GROUP</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_TABLE_RELATION_GROUP<where>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_TABLE_RELATION_GROUP ORDER by REL_GROUP_ORDER_NUM DESC</select>
+    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_TABLE_RELATION_GROUP ORDER by REL_GROUP_ORDER_NUM ASC</select>
+    <delete id="deleteAll">delete from TBUILD_TABLE_RELATION_GROUP</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(REL_GROUP_ORDER_NUM) is null then 1 else max(REL_GROUP_ORDER_NUM)+1 end ORDERNUM from TBUILD_TABLE_RELATION_GROUP</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_TABLE_RELATION_GROUP<where>
         <if test="relGroupValue !=null and relGroupValue !=''"> and REL_GROUP_VALUE like #{relGroupValue} </if>
         <if test="relGroupText !=null and relGroupText !=''"> and REL_GROUP_TEXT like #{relGroupText} </if>
         <if test="relGroupDesc !=null and relGroupDesc !=''"> and REL_GROUP_DESC like #{relGroupDesc} </if>
@@ -21,11 +21,11 @@
     <select id="selectChilds" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from TB4D_TABLE_RELATION_GROUP where REL_GROUP_PARENT_ID=#{parentId} ORDER by REL_GROUP_ORDER_NUM ASC
+        from TBUILD_TABLE_RELATION_GROUP where REL_GROUP_PARENT_ID=#{parentId} ORDER by REL_GROUP_ORDER_NUM ASC
     </select>
 
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_RELATION_GROUP
-                                                                                                          where REL_GROUP_ORDER_NUM = (select max(REL_GROUP_ORDER_NUM) from TB4D_TABLE_RELATION_GROUP where REL_GROUP_ORDER_NUM<(select REL_GROUP_ORDER_NUM from TB4D_TABLE_RELATION_GROUP where REL_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_RELATION_GROUP
-                                                                                                             where REL_GROUP_ORDER_NUM = (select min(REL_GROUP_ORDER_NUM) from TB4D_TABLE_RELATION_GROUP where REL_GROUP_ORDER_NUM>(select REL_GROUP_ORDER_NUM from TB4D_TABLE_RELATION_GROUP where REL_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TBUILD_TABLE_RELATION_GROUP
+                                                                                                          where REL_GROUP_ORDER_NUM = (select max(REL_GROUP_ORDER_NUM) from TBUILD_TABLE_RELATION_GROUP where REL_GROUP_ORDER_NUM<(select REL_GROUP_ORDER_NUM from TBUILD_TABLE_RELATION_GROUP where REL_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TBUILD_TABLE_RELATION_GROUP
+                                                                                                             where REL_GROUP_ORDER_NUM = (select min(REL_GROUP_ORDER_NUM) from TBUILD_TABLE_RELATION_GROUP where REL_GROUP_ORDER_NUM>(select REL_GROUP_ORDER_NUM from TBUILD_TABLE_RELATION_GROUP where REL_GROUP_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
 </mapper>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.files.FileInfoMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_FILE_INFO ORDER by  DESC</select>
-    <delete id="deleteAll">delete from TB4D_FILE_INFO</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max() is null then 1 else max()+1 end ORDERNUM from TB4D_FILE_INFO</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_FILE_INFO<where>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TFS_FILE_INFO ORDER by  DESC</select>
+    <delete id="deleteAll">delete from TFS_FILE_INFO</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max() is null then 1 else max()+1 end ORDERNUM from TFS_FILE_INFO</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TFS_FILE_INFO<where>
         <if test="fileCreater !=null and fileCreater !=''"> and FILE_CREATER like #{fileCreater} </if>
         <if test="fileName !=null and fileName !=''"> and FILE_NAME like #{fileName} </if>
         <if test="fileStoreType !=null and fileStoreType !=''"> and FILE_STORE_TYPE like #{fileStoreType} </if>
@@ -16,8 +16,8 @@
         <if test="fileDescription !=null and fileDescription !=''"> and FILE_DESCRIPTION like #{fileDescription} </if>
         <if test="fileStatus !=null and fileStatus !=''"> and FILE_STATUS like #{fileStatus} </if>
     </where>ORDER by  DESC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_FILE_INFO
-                                                                                                          where  = (select max() from TB4D_FILE_INFO where <(select  from TB4D_FILE_INFO where FILE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_FILE_INFO
-                                                                                                             where  = (select min() from TB4D_FILE_INFO where >(select  from TB4D_FILE_INFO where FILE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TFS_FILE_INFO
+                                                                                                          where  = (select max() from TFS_FILE_INFO where <(select  from TFS_FILE_INFO where FILE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TFS_FILE_INFO
+                                                                                                             where  = (select min() from TFS_FILE_INFO where >(select  from TFS_FILE_INFO where FILE_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
 </mapper>

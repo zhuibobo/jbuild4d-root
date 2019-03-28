@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  *
  * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
- * This class corresponds to the database table :tb4d_organ
+ * This class corresponds to the database table :TSSO_ORGAN
  *
  * @mbg.generated do_not_delete_during_merge
  */
@@ -38,7 +38,7 @@ public class OrganEntity {
     //ORGAN_POST:邮政编码
     private String organPost;
 
-    //ORGAN_TYPE_VALUE:组织机构类型,关联TB4D_ORGAN_TYPE表
+    //ORGAN_TYPE_VALUE:组织机构类型,关联TSSO_ORGAN_TYPE表
     private String organTypeValue;
 
     //ORGAN_ADDRESS:组织机构地址
@@ -77,7 +77,7 @@ public class OrganEntity {
     //ORGAN_CREATER_ORG_ID:创建组织者ID
     private String organCreaterOrgId;
 
-    //ORGAN_MAIN_IMAGE_ID:主题Logo,关联到TB4D_FILE_INFO表的FILE_ID
+    //ORGAN_MAIN_IMAGE_ID:主题Logo,关联到TFS_FILE_INFO表的FILE_ID
     private String organMainImageId;
 
     //ORGAN_DESC:组织机构备注

@@ -33,15 +33,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_TABLE_FIELD
+        from TBUILD_TABLE_FIELD
         where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_TABLE_FIELD
+        delete from TBUILD_TABLE_FIELD
         where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity">
-        insert into TB4D_TABLE_FIELD (FIELD_ID, FIELD_TABLE_ID, FIELD_NAME,
+        insert into TBUILD_TABLE_FIELD (FIELD_ID, FIELD_TABLE_ID, FIELD_NAME,
         FIELD_CAPTION, FIELD_IS_PK, FIELD_ALLOW_NULL,
         FIELD_DATA_TYPE, FIELD_DATA_LENGTH, FIELD_DECIMAL_LENGTH,
         FIELD_DEFAULT_VALUE, FIELD_DEFAULT_TEXT,
@@ -57,7 +57,7 @@
         #{fieldTemplateName,jdbcType=NVARCHAR}, #{fieldDefaultType,jdbcType=NVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity">
-        insert into TB4D_TABLE_FIELD
+        insert into TBUILD_TABLE_FIELD
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="fieldId != null">
                 FIELD_ID,
@@ -178,7 +178,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity">
-        update TB4D_TABLE_FIELD
+        update TBUILD_TABLE_FIELD
         <set>
             <if test="fieldTableId != null">
                 FIELD_TABLE_ID = #{fieldTableId,jdbcType=NVARCHAR},
@@ -238,7 +238,7 @@
         where FIELD_ID = #{fieldId,jdbcType=NVARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity">
-        update TB4D_TABLE_FIELD
+        update TBUILD_TABLE_FIELD
         set FIELD_TABLE_ID = #{fieldTableId,jdbcType=NVARCHAR},
             FIELD_NAME = #{fieldName,jdbcType=NVARCHAR},
             FIELD_CAPTION = #{fieldCaption,jdbcType=NVARCHAR},

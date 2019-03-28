@@ -27,15 +27,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_TABLE_RELATION_GROUP
+        from TBUILD_TABLE_RELATION_GROUP
         where REL_GROUP_ID = #{relGroupId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_TABLE_RELATION_GROUP
+        delete from TBUILD_TABLE_RELATION_GROUP
         where REL_GROUP_ID = #{relGroupId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity">
-        insert into TB4D_TABLE_RELATION_GROUP (REL_GROUP_ID, REL_GROUP_VALUE, REL_GROUP_TEXT,
+        insert into TBUILD_TABLE_RELATION_GROUP (REL_GROUP_ID, REL_GROUP_VALUE, REL_GROUP_TEXT,
                                                REL_GROUP_ORDER_NUM, REL_GROUP_CREATE_TIME,
                                                REL_GROUP_DESC, REL_GROUP_STATUS, REL_GROUP_PARENT_ID,
                                                REL_GROUP_ISSYSTEM, REL_GROUP_DEL_ENABLE, REL_GROUP_PID_LIST,
@@ -49,7 +49,7 @@
                        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity">
-        insert into TB4D_TABLE_RELATION_GROUP
+        insert into TBUILD_TABLE_RELATION_GROUP
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="relGroupId != null">
                 REL_GROUP_ID,
@@ -140,7 +140,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity">
-        update TB4D_TABLE_RELATION_GROUP
+        update TBUILD_TABLE_RELATION_GROUP
         <set>
             <if test="relGroupValue != null">
                 REL_GROUP_VALUE = #{relGroupValue,jdbcType=VARCHAR},
@@ -185,7 +185,7 @@
         where REL_GROUP_ID = #{relGroupId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity">
-        update TB4D_TABLE_RELATION_GROUP
+        update TBUILD_TABLE_RELATION_GROUP
         set REL_GROUP_VALUE = #{relGroupValue,jdbcType=VARCHAR},
             REL_GROUP_TEXT = #{relGroupText,jdbcType=VARCHAR},
             REL_GROUP_ORDER_NUM = #{relGroupOrderNum,jdbcType=INTEGER},

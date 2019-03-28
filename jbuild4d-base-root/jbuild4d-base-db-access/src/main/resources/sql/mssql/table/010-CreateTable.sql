@@ -1,6 +1,6 @@
 
 -----------------------------------------开发适用DEMO-----------------------------------------
-CREATE TABLE [dbo].[TB4D_DEV_DEMO_GEN_LIST] (
+CREATE TABLE [dbo].[TDEV_DEMO_GEN_LIST] (
   [DDGL_ID]                  [NVARCHAR](128)  NOT NULL PRIMARY KEY,
   [DDGL_KEY]                 [NVARCHAR](128)  NULL,
   [DDGL_NAME]                [NVARCHAR](128)  NULL,
@@ -23,7 +23,7 @@ CREATE TABLE [dbo].[TB4D_DEV_DEMO_GEN_LIST] (
   [DDGL_BIND_DIC_MUCHECKBOX] [NVARCHAR](1000) NULL
 )
 
-CREATE TABLE [dbo].[TB4D_DEV_DEMO_TREE_TABLE] (
+CREATE TABLE [dbo].[TDEV_DEMO_TREE_TABLE] (
   [DDTT_ID]                       [NVARCHAR](128)  NOT NULL PRIMARY KEY,
   [DDTT_KEY]                      [NVARCHAR](128)  NULL,
   [DDTT_NAME]                     [NVARCHAR](128)  NULL,
@@ -40,7 +40,7 @@ CREATE TABLE [dbo].[TB4D_DEV_DEMO_TREE_TABLE] (
   [DDTT_CHILD_COUNT]              [INT]            NULL
 )
 
-CREATE TABLE [dbo].[TB4D_DEV_DEMO_TL_TREE] (
+CREATE TABLE [dbo].[TDEV_DEMO_TL_TREE] (
   [DDTT_ID]                       [NVARCHAR](128)  NOT NULL PRIMARY KEY,
   [DDTT_KEY]                      [NVARCHAR](128)  NULL,
   [DDTT_NAME]                     [NVARCHAR](128)  NULL,
@@ -54,7 +54,7 @@ CREATE TABLE [dbo].[TB4D_DEV_DEMO_TL_TREE] (
   [DDTT_CHILD_COUNT]              [INT]            NULL
 )
 
-CREATE TABLE [dbo].[TB4D_DEV_DEMO_TL_TREE_LIST] (
+CREATE TABLE [dbo].[TDEV_DEMO_TL_TREE_LIST] (
   [DDTL_ID]                       [NVARCHAR](128)  NOT NULL PRIMARY KEY,
   [DDTL_GROUP_ID]                 [NVARCHAR](128)  NULL,
   [DDTL_KEY]                      [NVARCHAR](128)  NULL,
@@ -70,7 +70,7 @@ CREATE TABLE [dbo].[TB4D_DEV_DEMO_TL_TREE_LIST] (
 )
 
 -----------------------------------------系统设置表-----------------------------------------
-CREATE TABLE [dbo].[TB4D_SETTING] (
+CREATE TABLE [dbo].[TSYS_SETTING] (
   [SETTING_ID]         [NVARCHAR](128) NOT NULL PRIMARY KEY,
   [SETTING_KEY]        [NVARCHAR](128) NULL,
   [SETTING_NAME]       [NVARCHAR](128) NULL,
@@ -86,15 +86,15 @@ CREATE TABLE [dbo].[TB4D_SETTING] (
   [SETTING_IS_SYSTEM]  [NVARCHAR](10)  NULL
 )
 
-EXECUTE sp_addextendedproperty N'MS_Description', N'系统基础参数设置表', N'user', N'dbo', N'table', N'TB4D_SETTING', NULL, NULL;
---EXECUTE sp_updateextendedproperty 'MS_Description', '系统基础参数设置表', 'user', 'dbo', 'table', 'TB4D_SETTING', NULL, NULL;
+EXECUTE sp_addextendedproperty N'MS_Description', N'系统基础参数设置表', N'user', N'dbo', N'table', N'TSYS_SETTING', NULL, NULL;
+--EXECUTE sp_updateextendedproperty 'MS_Description', '系统基础参数设置表', 'user', 'dbo', 'table', 'TSYS_SETTING', NULL, NULL;
 
---EXECUTE sp_addextendedproperty N'MS_Description', N'设置参数主键', N'user', N'dbo', N'table', N'TB4D_SETTING', N'column', N'SETTING_ID';
+--EXECUTE sp_addextendedproperty N'MS_Description', N'设置参数主键', N'user', N'dbo', N'table', N'TSYS_SETTING', N'column', N'SETTING_ID';
 
 -----------------------------------------操作日志-----------------------------------------
 
 -----------------------------------------菜单表-----------------------------------------
-CREATE TABLE [dbo].[TB4D_MENU] (
+CREATE TABLE [dbo].[TSYS_MENU] (
   [MENU_ID]                  [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [MENU_NAME]                [NVARCHAR](100)  NULL,
   [MENU_TEXT]                [NVARCHAR](100)  NOT NULL,
@@ -130,22 +130,22 @@ CREATE TABLE [dbo].[TB4D_MENU] (
   [MENU_JS_EXPRESSION]       [NVARCHAR](1000) NULL
 )
 
-EXECUTE sp_addextendedproperty N'MS_Description', N'系统导航菜单表', N'user', N'dbo', N'table', N'TB4D_MENU', NULL, NULL;
+EXECUTE sp_addextendedproperty N'MS_Description', N'系统导航菜单表', N'user', N'dbo', N'table', N'TSYS_MENU', NULL, NULL;
 
-EXECUTE sp_addextendedproperty N'MS_Description', N'菜单ID', N'user', N'dbo', N'table', N'TB4D_MENU', N'column', N'MENU_ID';
+EXECUTE sp_addextendedproperty N'MS_Description', N'菜单ID', N'user', N'dbo', N'table', N'TSYS_MENU', N'column', N'MENU_ID';
 
 -----------------------------------------组织机构类型表-----------------------------------------
-CREATE TABLE [dbo].[TB4D_ORGAN_TYPE] (
+CREATE TABLE [dbo].[TSSO_ORGAN_TYPE] (
   ORGAN_TYPE_ID    [NVARCHAR](100) NOT NULL PRIMARY KEY,
   ORGAN_TYPE_VALUE [NVARCHAR](300) NOT NULL,
   ORGAN_TYPE_NAME  [NVARCHAR](300) NOT NULL,
   ORGAN_TYPE_DESC  [NVARCHAR](2000) NULL
 )
 
-INSERT into TB4D_ORGAN_TYPE(ORGAN_TYPE_ID,ORGAN_TYPE_VALUE,ORGAN_TYPE_NAME) VALUES (1,'10001','一般组织');
+INSERT into TSSO_ORGAN_TYPE(ORGAN_TYPE_ID,ORGAN_TYPE_VALUE,ORGAN_TYPE_NAME) VALUES (1,'10001','一般组织');
 
 -----------------------------------------组织机构表-----------------------------------------
-CREATE TABLE [dbo].[TB4D_ORGAN] (
+CREATE TABLE [dbo].[TSSO_ORGAN] (
   ORGAN_ID               [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   ORGAN_NAME             [NVARCHAR](300)  NOT NULL,
   ORGAN_NO               [NVARCHAR](200)  NULL,
@@ -172,7 +172,7 @@ CREATE TABLE [dbo].[TB4D_ORGAN] (
 )
 
 -----------------------------------------数据字典表-----------------------------------------
-CREATE TABLE TB4D_DICTIONARY_GROUP (
+CREATE TABLE TSYS_DICTIONARY_GROUP (
   [DICT_GROUP_ID]          [NVARCHAR](100) NOT NULL PRIMARY KEY,
   [DICT_GROUP_VALUE]       [NVARCHAR](200) NOT NULL,
   [DICT_GROUP_TEXT]        [NVARCHAR](200) NOT NULL,
@@ -186,7 +186,7 @@ CREATE TABLE TB4D_DICTIONARY_GROUP (
   [DICT_GROUP_ENP_ITEM]    [NVARCHAR](10)  NULL
 )
 -----------------------------------------数据字典表-----------------------------------------
-CREATE TABLE TB4D_DICTIONARY (
+CREATE TABLE TSYS_DICTIONARY (
   [DICT_ID]            [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [DICT_KEY]           [NVARCHAR](200)  NOT NULL,
   [DICT_VALUE]         [NVARCHAR](200)  NOT NULL,
@@ -212,7 +212,7 @@ CREATE TABLE TB4D_DICTIONARY (
   [DICT_ORGAN_NAME]    [NVARCHAR](100)  NULL
 )
 -----------------------------------------操作日志表-----------------------------------------
-CREATE TABLE TB4D_OPERATION_LOG (
+CREATE TABLE TSYS_OPERATION_LOG (
   [LOG_ID]          [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [LOG_TEXT]        [NVARCHAR](2000) NOT NULL,
   [LOG_ORDER_NUM]   [INT]            NULL,
@@ -251,7 +251,7 @@ CREATE TABLE TB4D_DATABASE_SERVICE_LINK (
 )
 
 -----------------------------------------表分组-----------------------------------------
-CREATE TABLE TB4D_TABLE_GROUP (
+CREATE TABLE TBUILD_TABLE_GROUP (
   [TABLE_GROUP_ID]          [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [TABLE_GROUP_VALUE]       [NVARCHAR](200)  NOT NULL,
   [TABLE_GROUP_TEXT]        [NVARCHAR](200)  NOT NULL,
@@ -267,7 +267,7 @@ CREATE TABLE TB4D_TABLE_GROUP (
 )
 
 -----------------------------------------表基础信息-----------------------------------------
-CREATE TABLE TB4D_TABLE (
+CREATE TABLE TBUILD_TABLE (
   [TABLE_ID]            [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [TABLE_CAPTION]       [NVARCHAR](200)  NOT NULL,
   [TABLE_NAME]          [NVARCHAR](200)  NOT NULL,
@@ -287,7 +287,7 @@ CREATE TABLE TB4D_TABLE (
 )
 
 -----------------------------------------表字段信息-----------------------------------------
-CREATE TABLE TB4D_TABLE_FIELD (
+CREATE TABLE TBUILD_TABLE_FIELD (
   [FIELD_ID]             [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [FIELD_TABLE_ID]       [NVARCHAR](100)  NOT NULL,
   [FIELD_NAME]           [NVARCHAR](100)  NOT NULL,
@@ -310,7 +310,7 @@ CREATE TABLE TB4D_TABLE_FIELD (
 )
 
 -----------------------------------------数据集分组-----------------------------------------
-CREATE TABLE TB4D_DATASET_GROUP (
+CREATE TABLE TBUILD_DATASET_GROUP (
   [DS_GROUP_ID]          [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [DS_GROUP_VALUE]       [NVARCHAR](200)  NOT NULL,
   [DS_GROUP_TEXT]        [NVARCHAR](200)  NOT NULL,
@@ -325,7 +325,7 @@ CREATE TABLE TB4D_DATASET_GROUP (
   [DS_GROUP_CHILD_COUNT] [INT]            NULL
 )
 ------------------------------------------数据集------------------------------------------
-CREATE TABLE TB4D_DATASET (
+CREATE TABLE TBUILD_DATASET (
   [DS_ID]          [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [DS_CAPTION]     [NVARCHAR](200)  NOT NULL,
   [DS_NAME]        [NVARCHAR](200)  NOT NULL,
@@ -346,7 +346,7 @@ CREATE TABLE TB4D_DATASET (
   [DS_REST_URL]  [NVARCHAR](500) NULL
 )
 
-CREATE TABLE TB4D_DATASET_RELATED_TABLE (
+CREATE TABLE TBUILD_DATASET_RELATED_TABLE (
   [RT_ID]            [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [RT_DS_ID]         [NVARCHAR](100)  NULL,
   [RT_TABLE_NAME]    [NVARCHAR](200)  NULL,
@@ -357,7 +357,7 @@ CREATE TABLE TB4D_DATASET_RELATED_TABLE (
   [RT_ORDER_NUM]     [INT]            NULL
 )
 
-CREATE TABLE TB4D_DATASET_COLUMN (
+CREATE TABLE TBUILD_DATASET_COLUMN (
   [COLUMN_ID]            [NVARCHAR](100)  NOT NULL PRIMARY KEY,
   [COLUMN_DS_ID]         [NVARCHAR](100)  NULL,
   [COLUMN_CAPTION]       [NVARCHAR](200)  NULL,

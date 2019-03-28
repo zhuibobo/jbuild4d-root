@@ -21,15 +21,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_FORM_CONFIG
+        from TBUILD_FORM_CONFIG
         where FCONFIG_ID = #{fconfigId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_FORM_CONFIG
+        delete from TBUILD_FORM_CONFIG
         where FCONFIG_ID = #{fconfigId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormConfigEntity">
-        insert into TB4D_FORM_CONFIG (FCONFIG_ID, FCONFIG_FORM_ID, FCONFIG_TYPE,
+        insert into TBUILD_FORM_CONFIG (FCONFIG_ID, FCONFIG_FORM_ID, FCONFIG_TYPE,
                                       FCONFIG_NAME, FCONFIG_VALUE, FCONFIG_DESC,
                                       FCONFIG_CREATE_TIME, FCONFIG_CREATER, FCONFIG_ORDER_NUM
                 )
@@ -39,7 +39,7 @@
                        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormConfigEntity">
-        insert into TB4D_FORM_CONFIG
+        insert into TBUILD_FORM_CONFIG
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="fconfigId != null">
                 FCONFIG_ID,
@@ -100,7 +100,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormConfigEntity">
-        update TB4D_FORM_CONFIG
+        update TBUILD_FORM_CONFIG
         <set>
             <if test="fconfigFormId != null">
                 FCONFIG_FORM_ID = #{fconfigFormId,jdbcType=VARCHAR},
@@ -130,7 +130,7 @@
         where FCONFIG_ID = #{fconfigId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormConfigEntity">
-        update TB4D_FORM_CONFIG
+        update TBUILD_FORM_CONFIG
         set FCONFIG_FORM_ID = #{fconfigFormId,jdbcType=VARCHAR},
             FCONFIG_TYPE = #{fconfigType,jdbcType=VARCHAR},
             FCONFIG_NAME = #{fconfigName,jdbcType=VARCHAR},

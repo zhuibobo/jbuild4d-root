@@ -34,15 +34,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DATASET
+        from TBUILD_DATASET
         where DS_ID = #{dsId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_DATASET
+        delete from TBUILD_DATASET
         where DS_ID = #{dsId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
-        insert into TB4D_DATASET (DS_ID, DS_CAPTION, DS_NAME,
+        insert into TBUILD_DATASET (DS_ID, DS_CAPTION, DS_NAME,
                                   DS_CREATE_TIME, DS_CREATER, DS_UPDATE_TIME,
                                   DS_UPDATER, DS_TYPE, DS_ISSYSTEM,
                                   DS_ORDER_NUM, DS_DESC, DS_GROUP_ID,
@@ -58,7 +58,7 @@
                 #{dsOrganId,jdbcType=VARCHAR}, #{dsOrganName,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
-        insert into TB4D_DATASET
+        insert into TBUILD_DATASET
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="dsId != null">
                 DS_ID,
@@ -185,7 +185,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
-        update TB4D_DATASET
+        update TBUILD_DATASET
         <set>
             <if test="dsCaption != null">
                 DS_CAPTION = #{dsCaption,jdbcType=VARCHAR},
@@ -248,7 +248,7 @@
         where DS_ID = #{dsId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
-        update TB4D_DATASET
+        update TBUILD_DATASET
         set DS_CAPTION = #{dsCaption,jdbcType=VARCHAR},
             DS_NAME = #{dsName,jdbcType=VARCHAR},
             DS_CREATE_TIME = #{dsCreateTime,jdbcType=TIMESTAMP},

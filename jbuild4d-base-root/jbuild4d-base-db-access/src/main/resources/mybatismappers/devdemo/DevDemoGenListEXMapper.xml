@@ -4,12 +4,12 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DEV_DEMO_GEN_LIST ORDER by DDGL_ORDER_NUM DESC
+        from TDEV_DEMO_GEN_LIST ORDER by DDGL_ORDER_NUM DESC
     </select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DEV_DEMO_GEN_LIST
+        from TDEV_DEMO_GEN_LIST
         <where>
             <if test="ddglKey != null and ddglKey != ''">
                 DDGL_KEY like #{ddglKey}
@@ -36,25 +36,25 @@
         ORDER by DDGL_ORDER_NUM DESC
     </select>
     <delete id="deleteAll">
-        delete from TB4D_DEV_DEMO_GEN_LIST
+        delete from TDEV_DEMO_GEN_LIST
     </delete>
     <select id="nextOrderNum" resultType="integer">
-        select case when max(DDGL_ORDER_NUM) is null then 1 else max(DDGL_ORDER_NUM)+1 end ORDERNUM from TB4D_DEV_DEMO_GEN_LIST
+        select case when max(DDGL_ORDER_NUM) is null then 1 else max(DDGL_ORDER_NUM)+1 end ORDERNUM from TDEV_DEMO_GEN_LIST
     </select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
             select
             *
-            from TB4D_DEV_DEMO_GEN_LIST
-            where DDGL_ORDER_NUM = (select max(DDGL_ORDER_NUM) from TB4D_DEV_DEMO_GEN_LIST where DDGL_ORDER_NUM<(select DDGL_ORDER_NUM from TB4D_DEV_DEMO_GEN_LIST where DDGL_ID=#{ddglId,jdbcType=NVARCHAR}))
+            from TDEV_DEMO_GEN_LIST
+            where DDGL_ORDER_NUM = (select max(DDGL_ORDER_NUM) from TDEV_DEMO_GEN_LIST where DDGL_ORDER_NUM<(select DDGL_ORDER_NUM from TDEV_DEMO_GEN_LIST where DDGL_ID=#{ddglId,jdbcType=NVARCHAR}))
         ]]>
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
             select
             *
-            from TB4D_DEV_DEMO_GEN_LIST
-            where DDGL_ORDER_NUM = (select min(DDGL_ORDER_NUM) from TB4D_DEV_DEMO_GEN_LIST where DDGL_ORDER_NUM>(select DDGL_ORDER_NUM from TB4D_DEV_DEMO_GEN_LIST where DDGL_ID=#{ddglId,jdbcType=NVARCHAR}))
+            from TDEV_DEMO_GEN_LIST
+            where DDGL_ORDER_NUM = (select min(DDGL_ORDER_NUM) from TDEV_DEMO_GEN_LIST where DDGL_ORDER_NUM>(select DDGL_ORDER_NUM from TDEV_DEMO_GEN_LIST where DDGL_ID=#{ddglId,jdbcType=NVARCHAR}))
         ]]>
     </select>
 </mapper>

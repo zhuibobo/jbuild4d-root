@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableFieldMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE_FIELD ORDER by FIELD_ORDER_NUM DESC</select>
-    <delete id="deleteAll">delete from TB4D_TABLE_FIELD</delete>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_TABLE_FIELD ORDER by FIELD_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TBUILD_TABLE_FIELD</delete>
     <delete id="deleteByTableId">
-        delete from TB4D_TABLE_FIELD where FIELD_TABLE_ID=#{tableId}
+        delete from TBUILD_TABLE_FIELD where FIELD_TABLE_ID=#{tableId}
     </delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(FIELD_ORDER_NUM) is null then 1 else max(FIELD_ORDER_NUM)+1 end ORDERNUM from TB4D_TABLE_FIELD</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_TABLE_FIELD<where>
+    <select id="nextOrderNum" resultType="integer">select case when max(FIELD_ORDER_NUM) is null then 1 else max(FIELD_ORDER_NUM)+1 end ORDERNUM from TBUILD_TABLE_FIELD</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_TABLE_FIELD<where>
         <if test="fieldTableId !=null and fieldTableId !=''"> and FIELD_TABLE_ID like #{fieldTableId} </if>
         <if test="fieldName !=null and fieldName !=''"> and FIELD_NAME like #{fieldName} </if>
         <if test="fieldCaption !=null and fieldCaption !=''"> and FIELD_CAPTION like #{fieldCaption} </if>
@@ -19,41 +19,41 @@
         <if test="fieldDesc !=null and fieldDesc !=''"> and FIELD_DESC like #{fieldDesc} </if>
     </where>ORDER by FIELD_ORDER_NUM DESC</select>
    <select id="selectFieldTemplateName" resultType="string">
-        select distinct FIELD_TEMPLATE_NAME from TB4D_TABLE_FIELD where FIELD_TEMPLATE_NAME!='' and FIELD_TEMPLATE_NAME is not null and FIELD_TABLE_ID='Template'
+        select distinct FIELD_TEMPLATE_NAME from TBUILD_TABLE_FIELD where FIELD_TEMPLATE_NAME!='' and FIELD_TEMPLATE_NAME is not null and FIELD_TABLE_ID='Template'
     </select>
     <select id="selectTemplateFieldsByName" resultMap="BaseResultMap">
-        select<include refid="Base_Column_List"/> from TB4D_TABLE_FIELD where FIELD_TEMPLATE_NAME=#{templateName} and FIELD_TABLE_ID='Template' ORDER BY FIELD_ORDER_NUM ASC
+        select<include refid="Base_Column_List"/> from TBUILD_TABLE_FIELD where FIELD_TEMPLATE_NAME=#{templateName} and FIELD_TABLE_ID='Template' ORDER BY FIELD_ORDER_NUM ASC
     </select>
     <select id="deleteTemplate">
-        delete from TB4D_TABLE_FIELD where FIELD_TEMPLATE_NAME=#{templateName}
+        delete from TBUILD_TABLE_FIELD where FIELD_TEMPLATE_NAME=#{templateName}
     </select>
     <select id="selectByTableId" resultMap="BaseResultMap">
-        select<include refid="Base_Column_List"/> from TB4D_TABLE_FIELD WHERE FIELD_TABLE_ID=#{tableId} order by FIELD_ORDER_NUM asc
+        select<include refid="Base_Column_List"/> from TBUILD_TABLE_FIELD WHERE FIELD_TABLE_ID=#{tableId} order by FIELD_ORDER_NUM asc
     </select>
     <select id="nextOrderNumInTable" resultType="int">
-        select case when max(FIELD_ORDER_NUM) is null then 1 else max(FIELD_ORDER_NUM)+1 end ORDERNUM from TB4D_TABLE_FIELD where FIELD_TABLE_ID=#{tableId}
+        select case when max(FIELD_ORDER_NUM) is null then 1 else max(FIELD_ORDER_NUM)+1 end ORDERNUM from TBUILD_TABLE_FIELD where FIELD_TABLE_ID=#{tableId}
     </select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select * from TB4D_TABLE_FIELD
+        select * from TBUILD_TABLE_FIELD
         where FIELD_ORDER_NUM = (
-                select max(FIELD_ORDER_NUM) from TB4D_TABLE_FIELD
-                    where FIELD_ORDER_NUM<(select FIELD_ORDER_NUM from TB4D_TABLE_FIELD where FIELD_ID=#{fieldId,jdbcType=NVARCHAR})
+                select max(FIELD_ORDER_NUM) from TBUILD_TABLE_FIELD
+                    where FIELD_ORDER_NUM<(select FIELD_ORDER_NUM from TBUILD_TABLE_FIELD where FIELD_ID=#{fieldId,jdbcType=NVARCHAR})
                           and FIELD_TABLE_ID=#{fieldTableId,jdbcType=NVARCHAR})
               and FIELD_TABLE_ID=#{fieldTableId,jdbcType=NVARCHAR}
         ]]>
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select * from TB4D_TABLE_FIELD
+        select * from TBUILD_TABLE_FIELD
         where FIELD_ORDER_NUM = (
-            select min(FIELD_ORDER_NUM) from TB4D_TABLE_FIELD
-            where FIELD_ORDER_NUM>(select FIELD_ORDER_NUM from TB4D_TABLE_FIELD where FIELD_ID=#{fieldId,jdbcType=NVARCHAR})
+            select min(FIELD_ORDER_NUM) from TBUILD_TABLE_FIELD
+            where FIELD_ORDER_NUM>(select FIELD_ORDER_NUM from TBUILD_TABLE_FIELD where FIELD_ID=#{fieldId,jdbcType=NVARCHAR})
                   and FIELD_TABLE_ID=#{fieldTableId,jdbcType=NVARCHAR})
               and FIELD_TABLE_ID=#{fieldTableId,jdbcType=NVARCHAR}
         ]]>
     </select>
     <select id="selectByTableName"  resultMap="BaseResultMap">
-        select<include refid="Base_Column_List"/> from TB4D_TABLE_FIELD WHERE FIELD_TABLE_ID=(select TABLE_ID from TB4D_TABLE where TABLE_NAME= #{tableName}) order by FIELD_ORDER_NUM asc
+        select<include refid="Base_Column_List"/> from TBUILD_TABLE_FIELD WHERE FIELD_TABLE_ID=(select TABLE_ID from TBUILD_TABLE where TABLE_NAME= #{tableName}) order by FIELD_ORDER_NUM asc
     </select>
 </mapper>

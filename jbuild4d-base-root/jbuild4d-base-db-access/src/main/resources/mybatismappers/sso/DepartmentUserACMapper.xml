@@ -22,15 +22,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DEPARTMENT_USER
+        from TSSO_DEPARTMENT_USER
         where DU_ID = #{duId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_DEPARTMENT_USER
+        delete from TSSO_DEPARTMENT_USER
         where DU_ID = #{duId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
-        insert into TB4D_DEPARTMENT_USER (DU_ID, DU_DEPT_ID, DU_USER_ID,
+        insert into TSSO_DEPARTMENT_USER (DU_ID, DU_DEPT_ID, DU_USER_ID,
                                           DU_IS_MAIN, DU_TITLE, DU_DESC,
                                           DU_CREATE_TIME, DU_CREATE_USER_ID, DU_STATUS,
                                           DU_ORDER_NUM)
@@ -40,7 +40,7 @@
                 #{duOrderNum,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
-        insert into TB4D_DEPARTMENT_USER
+        insert into TSSO_DEPARTMENT_USER
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="duId != null">
                 DU_ID,
@@ -107,7 +107,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
-        update TB4D_DEPARTMENT_USER
+        update TSSO_DEPARTMENT_USER
         <set>
             <if test="duDeptId != null">
                 DU_DEPT_ID = #{duDeptId,jdbcType=VARCHAR},
@@ -140,7 +140,7 @@
         where DU_ID = #{duId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentUserEntity">
-        update TB4D_DEPARTMENT_USER
+        update TSSO_DEPARTMENT_USER
         set DU_DEPT_ID = #{duDeptId,jdbcType=VARCHAR},
             DU_USER_ID = #{duUserId,jdbcType=VARCHAR},
             DU_IS_MAIN = #{duIsMain,jdbcType=VARCHAR},

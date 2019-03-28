@@ -29,15 +29,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_TABLE_GROUP
+        from TBUILD_TABLE_GROUP
         where TABLE_GROUP_ID = #{tableGroupId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_TABLE_GROUP
+        delete from TBUILD_TABLE_GROUP
         where TABLE_GROUP_ID = #{tableGroupId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
-        insert into TB4D_TABLE_GROUP (TABLE_GROUP_ID, TABLE_GROUP_VALUE, TABLE_GROUP_TEXT,
+        insert into TBUILD_TABLE_GROUP (TABLE_GROUP_ID, TABLE_GROUP_VALUE, TABLE_GROUP_TEXT,
                                       TABLE_GROUP_ORDER_NUM, TABLE_GROUP_CREATE_TIME,
                                       TABLE_GROUP_DESC, TABLE_GROUP_STATUS, TABLE_GROUP_PARENT_ID,
                                       TABLE_GROUP_ISSYSTEM, TABLE_GROUP_DEL_ENABLE,
@@ -53,7 +53,7 @@
                        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
-        insert into TB4D_TABLE_GROUP
+        insert into TBUILD_TABLE_GROUP
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="tableGroupId != null">
                 TABLE_GROUP_ID,
@@ -150,7 +150,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
-        update TB4D_TABLE_GROUP
+        update TBUILD_TABLE_GROUP
         <set>
             <if test="tableGroupValue != null">
                 TABLE_GROUP_VALUE = #{tableGroupValue,jdbcType=VARCHAR},
@@ -198,7 +198,7 @@
         where TABLE_GROUP_ID = #{tableGroupId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity">
-        update TB4D_TABLE_GROUP
+        update TBUILD_TABLE_GROUP
         set TABLE_GROUP_VALUE = #{tableGroupValue,jdbcType=VARCHAR},
             TABLE_GROUP_TEXT = #{tableGroupText,jdbcType=VARCHAR},
             TABLE_GROUP_ORDER_NUM = #{tableGroupOrderNum,jdbcType=INTEGER},

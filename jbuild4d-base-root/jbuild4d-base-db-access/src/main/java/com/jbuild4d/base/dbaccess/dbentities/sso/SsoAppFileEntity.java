@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  *
  * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
- * This class corresponds to the database table :tb4d_sso_app_file
+ * This class corresponds to the database table :TSSO_SSO_APP_file
  *
  * @mbg.generated do_not_delete_during_merge
  */
@@ -44,7 +44,7 @@ public class SsoAppFileEntity {
     //APP_FILE_ORGAN_ID:创建组织ID
     private String appFileOrganId;
 
-    //APP_FILE_CNT_FILE_ID:存储的文件ID,关联到TB4D_FILE_INFO表的FILE_ID
+    //APP_FILE_CNT_FILE_ID:存储的文件ID,关联到TFS_FILE_INFO表的FILE_ID
     private String appFileCntFileId;
 
     public SsoAppFileEntity(String appFileId, String appBelongAppId, String appFileName, String appFileIsMain, String appFileDesc, Integer appFileOrderNum, Date appFileCreateTime, String appFileStatus, String appFileCreaterId, String appFileOrganId, String appFileCntFileId) {

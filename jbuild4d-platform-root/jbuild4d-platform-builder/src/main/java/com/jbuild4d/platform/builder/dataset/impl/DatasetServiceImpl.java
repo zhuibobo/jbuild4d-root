@@ -183,7 +183,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
                 if (validateResolveResult(resultVo)) {
                     //尝试补充上字段标题
                     List<DataSetColumnVo> dataSetColumnVoList=resultVo.getColumnVoList();
-                    //从dbo.TB4D_TABLE和dbo.TB4D_TABLE_FIELD中尝试查找
+                    //从dbo.TBUILD_TABLE和dbo.TBUILD_TABLE_FIELD中尝试查找
                     for (DataSetRelatedTableVo dataSetRelatedTableVo : resultVo.getRelatedTableVoList()) {
                         List<TableFieldVO> tableFieldEntityList=tableFieldService.getTableFieldsByTableName(dataSetRelatedTableVo.getRtTableName());
                         if(tableFieldEntityList!=null&&tableFieldEntityList.size()>0){

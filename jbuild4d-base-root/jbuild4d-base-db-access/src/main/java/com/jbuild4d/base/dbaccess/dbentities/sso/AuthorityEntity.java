@@ -6,7 +6,7 @@ import com.jbuild4d.base.dbaccess.anno.DBKeyField;
 /**
  *
  * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
- * This class corresponds to the database table :tb4d_authority
+ * This class corresponds to the database table :TSSO_AUTHORITY
  *
  * @mbg.generated do_not_delete_during_merge
  */

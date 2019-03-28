@@ -30,15 +30,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DEPARTMENT
+        from TSSO_DEPARTMENT
         where DEPT_ID = #{deptId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_DEPARTMENT
+        delete from TSSO_DEPARTMENT
         where DEPT_ID = #{deptId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
-        insert into TB4D_DEPARTMENT (DEPT_ID, DEPT_NAME, DEPT_SHORT_NAME,
+        insert into TSSO_DEPARTMENT (DEPT_ID, DEPT_NAME, DEPT_SHORT_NAME,
                                      DEPT_NO, DEPT_PER_CHARGE, DEPT_PER_CHARGE_PHONE,
                                      DEPT_IS_VIRTUAL, DEPT_CHILD_COUNT, DEPT_CREATE_TIME,
                                      DEPT_CREATE_USER_ID, DEPT_ORDER_NUM, DEPT_IS_ROOT,
@@ -52,7 +52,7 @@
                 #{deptOrganId,jdbcType=VARCHAR}, #{deptDesc,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
-        insert into TB4D_DEPARTMENT
+        insert into TSSO_DEPARTMENT
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="deptId != null">
                 DEPT_ID,
@@ -161,7 +161,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
-        update TB4D_DEPARTMENT
+        update TSSO_DEPARTMENT
         <set>
             <if test="deptName != null">
                 DEPT_NAME = #{deptName,jdbcType=VARCHAR},
@@ -215,7 +215,7 @@
         where DEPT_ID = #{deptId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.DepartmentEntity">
-        update TB4D_DEPARTMENT
+        update TSSO_DEPARTMENT
         set DEPT_NAME = #{deptName,jdbcType=VARCHAR},
             DEPT_SHORT_NAME = #{deptShortName,jdbcType=VARCHAR},
             DEPT_NO = #{deptNo,jdbcType=VARCHAR},

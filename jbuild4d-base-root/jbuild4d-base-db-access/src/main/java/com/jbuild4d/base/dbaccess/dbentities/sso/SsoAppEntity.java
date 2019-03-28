@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  *
  * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
- * This class corresponds to the database table :tb4d_sso_app
+ * This class corresponds to the database table :TSSO_SSO_APP
  *
  * @mbg.generated do_not_delete_during_merge
  */
@@ -37,13 +37,13 @@ public class SsoAppEntity {
     //APP_INTEGRATED_TYPE:系统的集成类型:开发集成或者模拟登录集成,模拟登录为post模拟账号进行登录
     private String appIntegratedType;
 
-    //APP_MAIN_IMAGE_ID:主题图片ID,关联到TB4D_FILE_INFO表的FILE_ID
+    //APP_MAIN_IMAGE_ID:主题图片ID,关联到TFS_FILE_INFO表的FILE_ID
     private String appMainImageId;
 
     //APP_TYPE:系统类型:主系统或者为子系统
     private String appType;
 
-    //APP_MAIN_ID:为子系统时,用于存储主系统的ID:TB4D_SSO_APP中的APP_ID
+    //APP_MAIN_ID:为子系统时,用于存储主系统的ID:TSSO_SSO_APP中的APP_ID
     private String appMainId;
 
     //APP_CATEGORY:系统分类:App或者Web系统

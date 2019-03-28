@@ -20,16 +20,16 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DATASET_RELATED_TABLE
+        from TBUILD_DATASET_RELATED_TABLE
         where RT_ID = #{rtId,jdbcType=NVARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_DATASET_RELATED_TABLE
+        delete from TBUILD_DATASET_RELATED_TABLE
         where RT_ID = #{rtId,jdbcType=NVARCHAR}
     </delete>
 
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity">
-        insert into TB4D_DATASET_RELATED_TABLE (RT_ID, RT_DS_ID, RT_TABLE_NAME,
+        insert into TBUILD_DATASET_RELATED_TABLE (RT_ID, RT_DS_ID, RT_TABLE_NAME,
                                                 RT_TABLE_CAPTION, RT_TABLE_ID, RT_TABLE_TYPE,
                                                 RT_DESC, RT_ORDER_NUM)
         values (#{rtId,jdbcType=NVARCHAR}, #{rtDsId,jdbcType=NVARCHAR}, #{rtTableName,jdbcType=NVARCHAR},
@@ -37,7 +37,7 @@
                 #{rtDesc,jdbcType=NVARCHAR}, #{rtOrderNum,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity">
-        insert into TB4D_DATASET_RELATED_TABLE
+        insert into TBUILD_DATASET_RELATED_TABLE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="rtId != null">
                 RT_ID,
@@ -92,7 +92,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity">
-        update TB4D_DATASET_RELATED_TABLE
+        update TBUILD_DATASET_RELATED_TABLE
         <set>
             <if test="rtDsId != null">
                 RT_DS_ID = #{rtDsId,jdbcType=NVARCHAR},
@@ -119,7 +119,7 @@
         where RT_ID = #{rtId,jdbcType=NVARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetRelatedTableEntity">
-        update TB4D_DATASET_RELATED_TABLE
+        update TBUILD_DATASET_RELATED_TABLE
         set RT_DS_ID = #{rtDsId,jdbcType=NVARCHAR},
             RT_TABLE_NAME = #{rtTableName,jdbcType=NVARCHAR},
             RT_TABLE_CAPTION = #{rtTableCaption,jdbcType=NVARCHAR},

@@ -32,15 +32,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_TABLE
+        from TBUILD_TABLE
         where TABLE_ID = #{tableId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_TABLE
+        delete from TBUILD_TABLE
         where TABLE_ID = #{tableId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
-        insert into TB4D_TABLE (TABLE_ID, TABLE_CAPTION, TABLE_NAME,
+        insert into TBUILD_TABLE (TABLE_ID, TABLE_CAPTION, TABLE_NAME,
                                 TABLE_DBNAME, TABLE_CREATE_TIME, TABLE_CREATER,
                                 TABLE_UPDATE_TIME, TABLE_UPDATER, TABLE_SERVICE_VALUE,
                                 TABLE_TYPE, TABLE_ISSYSTEM, TABLE_ORDER_NUM,
@@ -56,7 +56,7 @@
                        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
-        insert into TB4D_TABLE
+        insert into TBUILD_TABLE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="tableId != null">
                 TABLE_ID,
@@ -171,7 +171,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
-        update TB4D_TABLE
+        update TBUILD_TABLE
         <set>
             <if test="tableCaption != null">
                 TABLE_CAPTION = #{tableCaption,jdbcType=VARCHAR},
@@ -228,7 +228,7 @@
         where TABLE_ID = #{tableId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
-        update TB4D_TABLE
+        update TBUILD_TABLE
         set TABLE_CAPTION = #{tableCaption,jdbcType=VARCHAR},
             TABLE_NAME = #{tableName,jdbcType=VARCHAR},
             TABLE_DBNAME = #{tableDbname,jdbcType=VARCHAR},

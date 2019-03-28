@@ -38,15 +38,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_ORGAN
+        from TSSO_ORGAN
         where ORGAN_ID = #{organId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_ORGAN
+        delete from TSSO_ORGAN
         where ORGAN_ID = #{organId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity">
-        insert into TB4D_ORGAN (ORGAN_ID, ORGAN_NAME, ORGAN_SHORT_NAME,
+        insert into TSSO_ORGAN (ORGAN_ID, ORGAN_NAME, ORGAN_SHORT_NAME,
                                 ORGAN_NO, ORGAN_CODE, ORGAN_CREATE_TIME,
                                 ORGAN_PHONE, ORGAN_POST, ORGAN_TYPE_VALUE,
                                 ORGAN_ADDRESS, ORGAN_CONTACTS, ORGAN_CONTACTS_MOBILE,
@@ -64,7 +64,7 @@
                 #{organMainImageId,jdbcType=VARCHAR}, #{organDesc,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity">
-        insert into TB4D_ORGAN
+        insert into TSSO_ORGAN
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="organId != null">
                 ORGAN_ID,
@@ -209,7 +209,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity">
-        update TB4D_ORGAN
+        update TSSO_ORGAN
         <set>
             <if test="organName != null">
                 ORGAN_NAME = #{organName,jdbcType=VARCHAR},
@@ -281,7 +281,7 @@
         where ORGAN_ID = #{organId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.OrganEntity">
-        update TB4D_ORGAN
+        update TSSO_ORGAN
         set ORGAN_NAME = #{organName,jdbcType=VARCHAR},
             ORGAN_SHORT_NAME = #{organShortName,jdbcType=VARCHAR},
             ORGAN_NO = #{organNo,jdbcType=VARCHAR},

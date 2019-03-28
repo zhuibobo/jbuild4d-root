@@ -65,15 +65,15 @@
         <include refid="Base_Column_List" />
         ,
         <include refid="Blob_Column_List" />
-        from TB4D_LIST_RESOURCE
+        from TBUILD_LIST_RESOURCE
         where LIST_ID = #{listId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_LIST_RESOURCE
+        delete from TBUILD_LIST_RESOURCE
         where LIST_ID = #{listId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs">
-        insert into TB4D_LIST_RESOURCE (LIST_ID, LIST_CODE, LIST_NAME,
+        insert into TBUILD_LIST_RESOURCE (LIST_ID, LIST_CODE, LIST_NAME,
                                         LIST_SINGLE_NAME, LIST_CREATE_TIME, LIST_CREATER,
                                         LIST_UPDATE_TIME, LIST_UPDATER, LIST_TYPE,
                                         LIST_ISSYSTEM, LIST_ORDER_NUM, LIST_DESC,
@@ -93,7 +93,7 @@
                        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs">
-        insert into TB4D_LIST_RESOURCE
+        insert into TBUILD_LIST_RESOURCE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="listId != null">
                 LIST_ID,
@@ -238,7 +238,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs">
-        update TB4D_LIST_RESOURCE
+        update TBUILD_LIST_RESOURCE
         <set>
             <if test="listCode != null">
                 LIST_CODE = #{listCode,jdbcType=VARCHAR},
@@ -310,7 +310,7 @@
         where LIST_ID = #{listId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs">
-        update TB4D_LIST_RESOURCE
+        update TBUILD_LIST_RESOURCE
         set LIST_CODE = #{listCode,jdbcType=VARCHAR},
             LIST_NAME = #{listName,jdbcType=VARCHAR},
             LIST_SINGLE_NAME = #{listSingleName,jdbcType=VARCHAR},
@@ -336,7 +336,7 @@
         where LIST_ID = #{listId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntity">
-        update TB4D_LIST_RESOURCE
+        update TBUILD_LIST_RESOURCE
         set LIST_CODE = #{listCode,jdbcType=VARCHAR},
             LIST_NAME = #{listName,jdbcType=VARCHAR},
             LIST_SINGLE_NAME = #{listSingleName,jdbcType=VARCHAR},

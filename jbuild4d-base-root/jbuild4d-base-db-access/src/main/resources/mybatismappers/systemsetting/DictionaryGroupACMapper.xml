@@ -24,15 +24,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from TB4D_DICTIONARY_GROUP
+    from TSYS_DICTIONARY_GROUP
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from TB4D_DICTIONARY_GROUP
+    delete from TSYS_DICTIONARY_GROUP
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryGroupEntity">
-    insert into TB4D_DICTIONARY_GROUP (DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT, 
+    insert into TSYS_DICTIONARY_GROUP (DICT_GROUP_ID, DICT_GROUP_VALUE, DICT_GROUP_TEXT,
       DICT_GROUP_ORDER_NUM, DICT_GROUP_CREATE_TIME, 
       DICT_GROUP_DESC, DICT_GROUP_STATUS, DICT_GROUP_PARENT_ID, 
       DICT_GROUP_ISSYSTEM, DICT_GROUP_DEL_ENABLE, 
@@ -44,7 +44,7 @@
       #{dictGroupEnpItem,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryGroupEntity">
-    insert into TB4D_DICTIONARY_GROUP
+    insert into TSYS_DICTIONARY_GROUP
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="dictGroupId != null">
         DICT_GROUP_ID,
@@ -117,7 +117,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryGroupEntity">
-    update TB4D_DICTIONARY_GROUP
+    update TSYS_DICTIONARY_GROUP
     <set>
       <if test="dictGroupValue != null">
         DICT_GROUP_VALUE = #{dictGroupValue,jdbcType=NVARCHAR},
@@ -153,7 +153,7 @@
     where DICT_GROUP_ID = #{dictGroupId,jdbcType=NVARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.systemsetting.DictionaryGroupEntity">
-    update TB4D_DICTIONARY_GROUP
+    update TSYS_DICTIONARY_GROUP
     set DICT_GROUP_VALUE = #{dictGroupValue,jdbcType=NVARCHAR},
       DICT_GROUP_TEXT = #{dictGroupText,jdbcType=NVARCHAR},
       DICT_GROUP_ORDER_NUM = #{dictGroupOrderNum,jdbcType=INTEGER},

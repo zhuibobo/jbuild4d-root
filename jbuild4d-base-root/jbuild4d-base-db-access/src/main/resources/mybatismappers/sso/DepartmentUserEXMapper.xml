@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.DepartmentUserMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_DEPARTMENT_USER ORDER by DU_ORDER_NUM DESC</select>
-    <delete id="deleteAll">delete from TB4D_DEPARTMENT_USER</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(DU_ORDER_NUM) is null then 1 else max(DU_ORDER_NUM)+1 end ORDERNUM from TB4D_DEPARTMENT_USER</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_DEPARTMENT_USER<where>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TSSO_DEPARTMENT_USER ORDER by DU_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TSSO_DEPARTMENT_USER</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(DU_ORDER_NUM) is null then 1 else max(DU_ORDER_NUM)+1 end ORDERNUM from TSSO_DEPARTMENT_USER</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TSSO_DEPARTMENT_USER<where>
         <if test="duDeptId !=null and duDeptId !=''"> and DU_DEPT_ID like #{duDeptId} </if>
         <if test="duUserId !=null and duUserId !=''"> and DU_USER_ID like #{duUserId} </if>
         <if test="duIsMain !=null and duIsMain !=''"> and DU_IS_MAIN like #{duIsMain} </if>
@@ -13,21 +13,21 @@
         <if test="duCreateUserId !=null and duCreateUserId !=''"> and DU_CREATE_USER_ID like #{duCreateUserId} </if>
         <if test="duStatus !=null and duStatus !=''"> and DU_STATUS like #{duStatus} </if>
     </where>ORDER by DU_ORDER_NUM DESC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DEPARTMENT_USER
-                                                                                                          where DU_ORDER_NUM = (select max(DU_ORDER_NUM) from TB4D_DEPARTMENT_USER where DU_ORDER_NUM<(select DU_ORDER_NUM from TB4D_DEPARTMENT_USER where DU_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_DEPARTMENT_USER
-                                                                                                             where DU_ORDER_NUM = (select min(DU_ORDER_NUM) from TB4D_DEPARTMENT_USER where DU_ORDER_NUM>(select DU_ORDER_NUM from TB4D_DEPARTMENT_USER where DU_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TSSO_DEPARTMENT_USER
+                                                                                                          where DU_ORDER_NUM = (select max(DU_ORDER_NUM) from TSSO_DEPARTMENT_USER where DU_ORDER_NUM<(select DU_ORDER_NUM from TSSO_DEPARTMENT_USER where DU_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TSSO_DEPARTMENT_USER
+                                                                                                             where DU_ORDER_NUM = (select min(DU_ORDER_NUM) from TSSO_DEPARTMENT_USER where DU_ORDER_NUM>(select DU_ORDER_NUM from TSSO_DEPARTMENT_USER where DU_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
     <select id="selectDepartmentUserCount" resultType="int">
-        select count(DU_USER_ID) from TB4D_DEPARTMENT_USER where DU_DEPT_ID=#{Id,jdbcType=NVARCHAR}
+        select count(DU_USER_ID) from TSSO_DEPARTMENT_USER where DU_DEPT_ID=#{Id,jdbcType=NVARCHAR}
     </select>
 
     <select id="selectDUByDepartment" resultType="map">
-        SELECT * FROM TB4D_DEPARTMENT_USER JOIN TB4D_USER ON TB4D_DEPARTMENT_USER.DU_USER_ID=TB4D_USER.USER_ID JOIN TB4D_DEPARTMENT ON TB4D_DEPARTMENT_USER.DU_DEPT_ID=TB4D_DEPARTMENT.DEPT_ID JOIN TB4D_ORGAN ON TB4D_DEPARTMENT.DEPT_ORGAN_ID=TB4D_ORGAN.ORGAN_ID
+        SELECT * FROM TSSO_DEPARTMENT_USER JOIN TSSO_USER ON TSSO_DEPARTMENT_USER.DU_USER_ID=TSSO_USER.USER_ID JOIN TSSO_DEPARTMENT ON TSSO_DEPARTMENT_USER.DU_DEPT_ID=TSSO_DEPARTMENT.DEPT_ID JOIN TSSO_ORGAN ON TSSO_DEPARTMENT.DEPT_ORGAN_ID=TSSO_ORGAN.ORGAN_ID
         <where>
-            <if test="userName !=null and userName !=''"> and TB4D_USER.USER_NAME like #{userName} </if>
-            <if test="account !=null and account !=''"> and TB4D_USER.USER_ACCOUNT like #{account} </if>
-            <if test="userPhoneNumber !=null and userPhoneNumber !=''"> and TB4D_USER.USER_PHONE_NUMBER like #{userPhoneNumber} </if>
-            <if test="departmentId !=null and departmentId !=''"> and TB4D_DEPARTMENT_USER.DU_DEPT_ID like #{departmentId} </if>
+            <if test="userName !=null and userName !=''"> and TSSO_USER.USER_NAME like #{userName} </if>
+            <if test="account !=null and account !=''"> and TSSO_USER.USER_ACCOUNT like #{account} </if>
+            <if test="userPhoneNumber !=null and userPhoneNumber !=''"> and TSSO_USER.USER_PHONE_NUMBER like #{userPhoneNumber} </if>
+            <if test="departmentId !=null and departmentId !=''"> and TSSO_DEPARTMENT_USER.DU_DEPT_ID like #{departmentId} </if>
         </where>
         ORDER by DU_ORDER_NUM asc
     </select>

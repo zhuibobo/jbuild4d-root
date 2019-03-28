@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.OrganMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_ORGAN ORDER by ORGAN_ORDER_NUM ASC</select>
-    <delete id="deleteAll">delete from TB4D_ORGAN</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(ORGAN_ORDER_NUM) is null then 1 else max(ORGAN_ORDER_NUM)+1 end ORDERNUM from TB4D_ORGAN</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_ORGAN<where>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TSSO_ORGAN ORDER by ORGAN_ORDER_NUM ASC</select>
+    <delete id="deleteAll">delete from TSSO_ORGAN</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(ORGAN_ORDER_NUM) is null then 1 else max(ORGAN_ORDER_NUM)+1 end ORDERNUM from TSSO_ORGAN</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TSSO_ORGAN<where>
         <if test="organName !=null and organName !=''"> and ORGAN_NAME like #{organName} </if>
         <if test="organShortName !=null and organShortName !=''"> and ORGAN_SHORT_NAME like #{organShortName} </if>
         <if test="organNo !=null and organNo !=''"> and ORGAN_NO like #{organNo} </if>
@@ -29,23 +29,23 @@
         <![CDATA[
         select
             *
-        from TB4D_ORGAN
-        where ORGAN_ORDER_NUM = (select max(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM<(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{id,jdbcType=NVARCHAR}) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        from TSSO_ORGAN
+        where ORGAN_ORDER_NUM = (select max(ORGAN_ORDER_NUM) from TSSO_ORGAN where ORGAN_ORDER_NUM<(select ORGAN_ORDER_NUM from TSSO_ORGAN where ORGAN_ID=#{id,jdbcType=NVARCHAR}) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
         ]]>
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
         select
             *
-        from TB4D_ORGAN
-        where ORGAN_ORDER_NUM = (select min(ORGAN_ORDER_NUM) from TB4D_ORGAN where ORGAN_ORDER_NUM>(select ORGAN_ORDER_NUM from TB4D_ORGAN where ORGAN_ID=#{id,jdbcType=NVARCHAR} ) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        from TSSO_ORGAN
+        where ORGAN_ORDER_NUM = (select min(ORGAN_ORDER_NUM) from TSSO_ORGAN where ORGAN_ORDER_NUM>(select ORGAN_ORDER_NUM from TSSO_ORGAN where ORGAN_ID=#{id,jdbcType=NVARCHAR} ) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and ORGAN_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
         ]]>
     </select>
 
     <delete id="deleteByOrganName">
-        delete from TB4D_ORGAN
+        delete from TSSO_ORGAN
         where ORGAN_NAME = #{organName,jdbcType=VARCHAR}
     </delete>
 
-    <select id="countChildsOrgan" resultType="int">select count(ORGAN_ID) from TB4D_ORGAN where ORGAN_PARENT_ID=#{id,jdbcType=NVARCHAR}</select>
+    <select id="countChildsOrgan" resultType="int">select count(ORGAN_ID) from TSSO_ORGAN where ORGAN_PARENT_ID=#{id,jdbcType=NVARCHAR}</select>
 </mapper>

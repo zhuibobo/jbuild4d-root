@@ -27,15 +27,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DATASET_GROUP
+        from TBUILD_DATASET_GROUP
         where DS_GROUP_ID = #{dsGroupId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_DATASET_GROUP
+        delete from TBUILD_DATASET_GROUP
         where DS_GROUP_ID = #{dsGroupId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity">
-        insert into TB4D_DATASET_GROUP (DS_GROUP_ID, DS_GROUP_VALUE, DS_GROUP_TEXT,
+        insert into TBUILD_DATASET_GROUP (DS_GROUP_ID, DS_GROUP_VALUE, DS_GROUP_TEXT,
                                         DS_GROUP_ORDER_NUM, DS_GROUP_CREATE_TIME, DS_GROUP_DESC,
                                         DS_GROUP_STATUS, DS_GROUP_PARENT_ID, DS_GROUP_ISSYSTEM,
                                         DS_GROUP_DEL_ENABLE, DS_GROUP_PID_LIST, DS_GROUP_CHILD_COUNT,
@@ -47,7 +47,7 @@
                 #{dsGroupOrganId,jdbcType=VARCHAR}, #{dsGroupOrganName,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity">
-        insert into TB4D_DATASET_GROUP
+        insert into TBUILD_DATASET_GROUP
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="dsGroupId != null">
                 DS_GROUP_ID,
@@ -138,7 +138,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity">
-        update TB4D_DATASET_GROUP
+        update TBUILD_DATASET_GROUP
         <set>
             <if test="dsGroupValue != null">
                 DS_GROUP_VALUE = #{dsGroupValue,jdbcType=VARCHAR},
@@ -183,7 +183,7 @@
         where DS_GROUP_ID = #{dsGroupId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity">
-        update TB4D_DATASET_GROUP
+        update TBUILD_DATASET_GROUP
         set DS_GROUP_VALUE = #{dsGroupValue,jdbcType=VARCHAR},
             DS_GROUP_TEXT = #{dsGroupText,jdbcType=VARCHAR},
             DS_GROUP_ORDER_NUM = #{dsGroupOrderNum,jdbcType=INTEGER},

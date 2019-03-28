@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.SsoAppUserMappingMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_SSO_APP_USER_MAPPING ORDER by  DESC</select>
-    <delete id="deleteAll">delete from TB4D_SSO_APP_USER_MAPPING</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max() is null then 1 else max()+1 end ORDERNUM from TB4D_SSO_APP_USER_MAPPING</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_SSO_APP_USER_MAPPING<where>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TSSO_SSO_APP_USER_MAPPING ORDER by  DESC</select>
+    <delete id="deleteAll">delete from TSSO_SSO_APP_USER_MAPPING</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max() is null then 1 else max()+1 end ORDERNUM from TSSO_SSO_APP_USER_MAPPING</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TSSO_SSO_APP_USER_MAPPING<where>
         <if test="mappingBelongAppId !=null and mappingBelongAppId !=''"> and MAPPING_BELONG_APP_ID like #{mappingBelongAppId} </if>
         <if test="mappingAccount !=null and mappingAccount !=''"> and MAPPING_ACCOUNT like #{mappingAccount} </if>
         <if test="mappingPassword !=null and mappingPassword !=''"> and MAPPING_PASSWORD like #{mappingPassword} </if>

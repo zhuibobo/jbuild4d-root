@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.ListResourceMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_LIST_RESOURCE ORDER by LIST_ORDER_NUM DESC</select>
-    <delete id="deleteAll">delete from TB4D_LIST_RESOURCE</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(LIST_ORDER_NUM) is null then 1 else max(LIST_ORDER_NUM)+1 end ORDERNUM from TB4D_LIST_RESOURCE</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_LIST_RESOURCE<where>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_LIST_RESOURCE ORDER by LIST_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TBUILD_LIST_RESOURCE</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(LIST_ORDER_NUM) is null then 1 else max(LIST_ORDER_NUM)+1 end ORDERNUM from TBUILD_LIST_RESOURCE</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_LIST_RESOURCE<where>
         <if test="listCode !=null and listCode !=''"> and LIST_CODE like #{listCode} </if>
         <if test="listName !=null and listName !=''"> and LIST_NAME like #{listName} </if>
         <if test="listSingleName !=null and listSingleName !=''"> and LIST_SINGLE_NAME like #{listSingleName} </if>
@@ -25,8 +25,8 @@
         <if test="listJsContent !=null and listJsContent !=''"> and LIST_JS_CONTENT like #{listJsContent} </if>
         <if test="listConfigContent !=null and listConfigContent !=''"> and LIST_CONFIG_CONTENT like #{listConfigContent} </if>
     </where>ORDER by LIST_ORDER_NUM DESC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_LIST_RESOURCE
-                                                                                                          where LIST_ORDER_NUM = (select max(LIST_ORDER_NUM) from TB4D_LIST_RESOURCE where LIST_ORDER_NUM<(select LIST_ORDER_NUM from TB4D_LIST_RESOURCE where LIST_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_LIST_RESOURCE
-                                                                                                             where LIST_ORDER_NUM = (select min(LIST_ORDER_NUM) from TB4D_LIST_RESOURCE where LIST_ORDER_NUM>(select LIST_ORDER_NUM from TB4D_LIST_RESOURCE where LIST_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TBUILD_LIST_RESOURCE
+                                                                                                          where LIST_ORDER_NUM = (select max(LIST_ORDER_NUM) from TBUILD_LIST_RESOURCE where LIST_ORDER_NUM<(select LIST_ORDER_NUM from TBUILD_LIST_RESOURCE where LIST_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TBUILD_LIST_RESOURCE
+                                                                                                             where LIST_ORDER_NUM = (select min(LIST_ORDER_NUM) from TBUILD_LIST_RESOURCE where LIST_ORDER_NUM>(select LIST_ORDER_NUM from TBUILD_LIST_RESOURCE where LIST_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
 </mapper>

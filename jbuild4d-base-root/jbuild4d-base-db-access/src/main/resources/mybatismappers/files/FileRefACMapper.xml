@@ -15,21 +15,21 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_FILE_REF
+        from TFS_FILE_REF
         where REF_ID = #{refId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_FILE_REF
+        delete from TFS_FILE_REF
         where REF_ID = #{refId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileRefEntity">
-        insert into TB4D_FILE_REF (REF_ID, REF_FILE_ID, REF_OBJ_ID,
+        insert into TFS_FILE_REF (REF_ID, REF_FILE_ID, REF_OBJ_ID,
                                    REF_ORDER_NUM)
         values (#{refId,jdbcType=VARCHAR}, #{refFileId,jdbcType=VARCHAR}, #{refObjId,jdbcType=VARCHAR},
                 #{refOrderNum,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileRefEntity">
-        insert into TB4D_FILE_REF
+        insert into TFS_FILE_REF
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="refId != null">
                 REF_ID,
@@ -60,7 +60,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileRefEntity">
-        update TB4D_FILE_REF
+        update TFS_FILE_REF
         <set>
             <if test="refFileId != null">
                 REF_FILE_ID = #{refFileId,jdbcType=VARCHAR},
@@ -75,7 +75,7 @@
         where REF_ID = #{refId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.files.FileRefEntity">
-        update TB4D_FILE_REF
+        update TFS_FILE_REF
         set REF_FILE_ID = #{refFileId,jdbcType=VARCHAR},
             REF_OBJ_ID = #{refObjId,jdbcType=VARCHAR},
             REF_ORDER_NUM = #{refOrderNum,jdbcType=INTEGER}

@@ -31,15 +31,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_SSO_APP
+        from TSSO_SSO_APP
         where APP_ID = #{appId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_SSO_APP
+        delete from TSSO_SSO_APP
         where APP_ID = #{appId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
-        insert into TB4D_SSO_APP (APP_ID, APP_CODE, APP_NAME,
+        insert into TSSO_SSO_APP (APP_ID, APP_CODE, APP_NAME,
                                   APP_PUBLIC_KEY, APP_PRIVATE_KEY, APP_DOMAIN,
                                   APP_INDEX_URL, APP_INTEGRATED_TYPE, APP_MAIN_IMAGE_ID,
                                   APP_TYPE, APP_MAIN_ID, APP_CATEGORY,
@@ -55,7 +55,7 @@
                        )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
-        insert into TB4D_SSO_APP
+        insert into TSSO_SSO_APP
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="appId != null">
                 APP_ID,
@@ -170,7 +170,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
-        update TB4D_SSO_APP
+        update TSSO_SSO_APP
         <set>
             <if test="appCode != null">
                 APP_CODE = #{appCode,jdbcType=VARCHAR},
@@ -227,7 +227,7 @@
         where APP_ID = #{appId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.sso.SsoAppEntity">
-        update TB4D_SSO_APP
+        update TSSO_SSO_APP
         set APP_CODE = #{appCode,jdbcType=VARCHAR},
             APP_NAME = #{appName,jdbcType=VARCHAR},
             APP_PUBLIC_KEY = #{appPublicKey,jdbcType=VARCHAR},

@@ -2,28 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.devdemo.DevDemoTreeTableMapper">
     <select id="nextOrderNum" resultType="integer">
-        select case when max(DDTT_ORDER_NUM) is null then 1 else max(DDTT_ORDER_NUM)+1 end ORDERNUM from TB4D_DEV_DEMO_TREE_TABLE
+        select case when max(DDTT_ORDER_NUM) is null then 1 else max(DDTT_ORDER_NUM)+1 end ORDERNUM from TDEV_DEMO_TREE_TABLE
     </select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from TB4D_DEV_DEMO_TREE_TABLE
+        from TDEV_DEMO_TREE_TABLE
         ORDER by DDTT_ORDER_NUM ASC
     </select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
         select
             *
-        from TB4D_DEV_DEMO_TREE_TABLE
-        where DDTT_ORDER_NUM = (select max(DDTT_ORDER_NUM) from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ORDER_NUM<(select DDTT_ORDER_NUM from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ID=#{id,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        from TDEV_DEMO_TREE_TABLE
+        where DDTT_ORDER_NUM = (select max(DDTT_ORDER_NUM) from TDEV_DEMO_TREE_TABLE where DDTT_ORDER_NUM<(select DDTT_ORDER_NUM from TDEV_DEMO_TREE_TABLE where DDTT_ID=#{id,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
         ]]>
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
         select
             *
-        from TB4D_DEV_DEMO_TREE_TABLE
-        where DDTT_ORDER_NUM = (select min(DDTT_ORDER_NUM) from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ORDER_NUM>(select DDTT_ORDER_NUM from TB4D_DEV_DEMO_TREE_TABLE where DDTT_ID=#{id,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
+        from TDEV_DEMO_TREE_TABLE
+        where DDTT_ORDER_NUM = (select min(DDTT_ORDER_NUM) from TDEV_DEMO_TREE_TABLE where DDTT_ORDER_NUM>(select DDTT_ORDER_NUM from TDEV_DEMO_TREE_TABLE where DDTT_ID=#{id,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}) and DDTT_PARENT_ID=#{parentId,jdbcType=NVARCHAR}
         ]]>
     </select>
 </mapper>

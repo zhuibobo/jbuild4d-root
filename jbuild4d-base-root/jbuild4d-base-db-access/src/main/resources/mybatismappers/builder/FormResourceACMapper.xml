@@ -72,15 +72,15 @@
         <include refid="Base_Column_List" />
         ,
         <include refid="Blob_Column_List" />
-        from TB4D_FORM_RESOURCE
+        from TBUILD_FORM_RESOURCE
         where FORM_ID = #{formId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from TB4D_FORM_RESOURCE
+        delete from TBUILD_FORM_RESOURCE
         where FORM_ID = #{formId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
-        insert into TB4D_FORM_RESOURCE (FORM_ID, FORM_CODE, FORM_NAME,
+        insert into TBUILD_FORM_RESOURCE (FORM_ID, FORM_CODE, FORM_NAME,
                                         FORM_SINGLE_NAME, FORM_CREATE_TIME, FORM_CREATER,
                                         FORM_UPDATE_TIME, FORM_UPDATER, FORM_TYPE,
                                         FORM_ISSYSTEM, FORM_ORDER_NUM, FORM_DESC,
@@ -102,7 +102,7 @@
                 #{formConfigContent,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
-        insert into TB4D_FORM_RESOURCE
+        insert into TBUILD_FORM_RESOURCE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="formId != null">
                 FORM_ID,
@@ -271,7 +271,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
-        update TB4D_FORM_RESOURCE
+        update TBUILD_FORM_RESOURCE
         <set>
             <if test="formCode != null">
                 FORM_CODE = #{formCode,jdbcType=VARCHAR},
@@ -355,7 +355,7 @@
         where FORM_ID = #{formId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
-        update TB4D_FORM_RESOURCE
+        update TBUILD_FORM_RESOURCE
         set FORM_CODE = #{formCode,jdbcType=VARCHAR},
             FORM_NAME = #{formName,jdbcType=VARCHAR},
             FORM_SINGLE_NAME = #{formSingleName,jdbcType=VARCHAR},
@@ -385,7 +385,7 @@
         where FORM_ID = #{formId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity">
-        update TB4D_FORM_RESOURCE
+        update TBUILD_FORM_RESOURCE
         set FORM_CODE = #{formCode,jdbcType=VARCHAR},
             FORM_NAME = #{formName,jdbcType=VARCHAR},
             FORM_SINGLE_NAME = #{formSingleName,jdbcType=VARCHAR},

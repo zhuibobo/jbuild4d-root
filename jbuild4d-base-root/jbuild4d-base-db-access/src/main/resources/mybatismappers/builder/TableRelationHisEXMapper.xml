@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableRelationHisMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE_RELATION_HIS ORDER by HIS_ORDER_NUM DESC</select>
-    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_TABLE_RELATION_HIS ORDER by HIS_ORDER_NUM ASC</select>
-    <delete id="deleteAll">delete from TB4D_TABLE_RELATION_HIS</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(HIS_ORDER_NUM) is null then 1 else max(HIS_ORDER_NUM)+1 end ORDERNUM from TB4D_TABLE_RELATION_HIS</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_TABLE_RELATION_HIS<where>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_TABLE_RELATION_HIS ORDER by HIS_ORDER_NUM DESC</select>
+    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_TABLE_RELATION_HIS ORDER by HIS_ORDER_NUM ASC</select>
+    <delete id="deleteAll">delete from TBUILD_TABLE_RELATION_HIS</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(HIS_ORDER_NUM) is null then 1 else max(HIS_ORDER_NUM)+1 end ORDERNUM from TBUILD_TABLE_RELATION_HIS</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_TABLE_RELATION_HIS<where>
         <if test="hisGroupId !=null and hisGroupId !=''"> and HIS_GROUP_ID like #{hisGroupId} </if>
         <if test="hisName !=null and hisName !=''"> and HIS_NAME like #{hisName} </if>
         <if test="hisUserId !=null and hisUserId !=''"> and HIS_USER_ID like #{hisUserId} </if>
@@ -15,8 +15,8 @@
         <if test="hisBelongRelId !=null and hisBelongRelId !=''"> and HIS_BELONG_REL_ID like #{hisBelongRelId} </if>
         <if test="hisContent !=null and hisContent !=''"> and HIS_CONTENT like #{hisContent} </if>
     </where>ORDER by HIS_ORDER_NUM DESC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_RELATION_HIS
-                                                                                                          where HIS_ORDER_NUM = (select max(HIS_ORDER_NUM) from TB4D_TABLE_RELATION_HIS where HIS_ORDER_NUM<(select HIS_ORDER_NUM from TB4D_TABLE_RELATION_HIS where HIS_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TB4D_TABLE_RELATION_HIS
-                                                                                                             where HIS_ORDER_NUM = (select min(HIS_ORDER_NUM) from TB4D_TABLE_RELATION_HIS where HIS_ORDER_NUM>(select HIS_ORDER_NUM from TB4D_TABLE_RELATION_HIS where HIS_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TBUILD_TABLE_RELATION_HIS
+                                                                                                          where HIS_ORDER_NUM = (select max(HIS_ORDER_NUM) from TBUILD_TABLE_RELATION_HIS where HIS_ORDER_NUM<(select HIS_ORDER_NUM from TBUILD_TABLE_RELATION_HIS where HIS_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TBUILD_TABLE_RELATION_HIS
+                                                                                                             where HIS_ORDER_NUM = (select min(HIS_ORDER_NUM) from TBUILD_TABLE_RELATION_HIS where HIS_ORDER_NUM>(select HIS_ORDER_NUM from TBUILD_TABLE_RELATION_HIS where HIS_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
 </mapper>

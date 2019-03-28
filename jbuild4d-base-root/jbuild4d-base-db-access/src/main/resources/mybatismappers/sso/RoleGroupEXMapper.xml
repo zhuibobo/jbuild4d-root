@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.RoleGroupMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_ROLE_GROUP ORDER by ROLE_GROUP_ORDER_NUM DESC</select>
-    <select id="selectAllOrderByAsc" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_ROLE_GROUP ORDER by ROLE_GROUP_ORDER_NUM ASC</select>
-    <delete id="deleteAll">delete from TB4D_ROLE_GROUP</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(ROLE_GROUP_ORDER_NUM) is null then 1 else max(ROLE_GROUP_ORDER_NUM)+1 end ORDERNUM from TB4D_ROLE_GROUP</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_ROLE_GROUP<where>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TSSO_ROLE_GROUP ORDER by ROLE_GROUP_ORDER_NUM DESC</select>
+    <select id="selectAllOrderByAsc" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TSSO_ROLE_GROUP ORDER by ROLE_GROUP_ORDER_NUM ASC</select>
+    <delete id="deleteAll">delete from TSSO_ROLE_GROUP</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(ROLE_GROUP_ORDER_NUM) is null then 1 else max(ROLE_GROUP_ORDER_NUM)+1 end ORDERNUM from TSSO_ROLE_GROUP</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TSSO_ROLE_GROUP<where>
         <if test="roleGroupName !=null and roleGroupName !=''"> and ROLE_GROUP_NAME like #{roleGroupName} </if>
         <if test="roleGroupDesc !=null and roleGroupDesc !=''"> and ROLE_GROUP_DESC like #{roleGroupDesc} </if>
         <if test="roleGroupStatus !=null and roleGroupStatus !=''"> and ROLE_GROUP_STATUS like #{roleGroupStatus} </if>
@@ -20,11 +20,11 @@
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
         select *
-        from TB4D_ROLE_GROUP
+        from TSSO_ROLE_GROUP
         where ROLE_GROUP_ORDER_NUM = (select max(ROLE_GROUP_ORDER_NUM)
-                                       from TB4D_ROLE_GROUP
+                                       from TSSO_ROLE_GROUP
                                        where ROLE_GROUP_ORDER_NUM <
-                                             (select ROLE_GROUP_ORDER_NUM from TB4D_ROLE_GROUP where ROLE_GROUP_ID = #{id,jdbcType=NVARCHAR})
+                                             (select ROLE_GROUP_ORDER_NUM from TSSO_ROLE_GROUP where ROLE_GROUP_ID = #{id,jdbcType=NVARCHAR})
                                          and ROLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR})
           and ROLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR}
         ]]>
@@ -33,15 +33,15 @@
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
         select *
-        from TB4D_ROLE_GROUP
+        from TSSO_ROLE_GROUP
         where ROLE_GROUP_ORDER_NUM = (select min(ROLE_GROUP_ORDER_NUM)
-                                       from TB4D_ROLE_GROUP
+                                       from TSSO_ROLE_GROUP
                                        where ROLE_GROUP_ORDER_NUM >
-                                             (select ROLE_GROUP_ORDER_NUM from TB4D_ROLE_GROUP where ROLE_GROUP_ID = #{id,jdbcType=NVARCHAR})
+                                             (select ROLE_GROUP_ORDER_NUM from TSSO_ROLE_GROUP where ROLE_GROUP_ID = #{id,jdbcType=NVARCHAR})
                                          and ROLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR})
           and ROLE_GROUP_PARENT_ID = #{parentId,jdbcType=NVARCHAR}
         ]]>
     </select>
 
-    <select id="countChildsRoleGroup" resultType="int">select count(ROLE_GROUP_ID) from TB4D_ROLE_GROUP where ROLE_GROUP_PARENT_ID=#{id,jdbcType=NVARCHAR}</select>
+    <select id="countChildsRoleGroup" resultType="int">select count(ROLE_GROUP_ID) from TSSO_ROLE_GROUP where ROLE_GROUP_PARENT_ID=#{id,jdbcType=NVARCHAR}</select>
 </mapper>

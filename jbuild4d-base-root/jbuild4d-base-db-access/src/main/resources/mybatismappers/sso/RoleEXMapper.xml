@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.sso.RoleMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TB4D_ROLE ORDER by ROLE_ORDER_NUM DESC</select>
-    <delete id="deleteAll">delete from TB4D_ROLE</delete>
-    <select id="nextOrderNum" resultType="integer">select case when max(ROLE_ORDER_NUM) is null then 1 else max(ROLE_ORDER_NUM)+1 end ORDERNUM from TB4D_ROLE</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TB4D_ROLE<where>
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TSSO_ROLE ORDER by ROLE_ORDER_NUM DESC</select>
+    <delete id="deleteAll">delete from TSSO_ROLE</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(ROLE_ORDER_NUM) is null then 1 else max(ROLE_ORDER_NUM)+1 end ORDERNUM from TSSO_ROLE</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TSSO_ROLE<where>
         <if test="roleKey !=null and roleKey !=''"> and ROLE_KEY like #{roleKey} </if>
         <if test="roleName !=null and roleName !=''"> and ROLE_NAME like #{roleName} </if>
         <if test="roleGroupId !=null and roleGroupId !=''"> and ROLE_GROUP_ID like #{roleGroupId} </if>
@@ -16,10 +16,10 @@
 
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select * from TB4D_ROLE
+        select * from TSSO_ROLE
         where ROLE_ORDER_NUM = (
-                               select max(ROLE_ORDER_NUM) from TB4D_ROLE
-                               where ROLE_ORDER_NUM<(select ROLE_ORDER_NUM from TB4D_ROLE where ROLE_ID=#{id,jdbcType=NVARCHAR})
+                               select max(ROLE_ORDER_NUM) from TSSO_ROLE
+                               where ROLE_ORDER_NUM<(select ROLE_ORDER_NUM from TSSO_ROLE where ROLE_ID=#{id,jdbcType=NVARCHAR})
                                  and
                                      ROLE_GROUP_ID=#{groupId,jdbcType=NVARCHAR})
           and
@@ -28,10 +28,10 @@
     </select>
     <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
         <![CDATA[
-        select * from TB4D_ROLE
+        select * from TSSO_ROLE
         where ROLE_ORDER_NUM = (
-                               select min(ROLE_ORDER_NUM) from TB4D_ROLE
-                               where ROLE_ORDER_NUM>(select ROLE_ORDER_NUM from TB4D_ROLE where ROLE_ID=#{id,jdbcType=NVARCHAR})
+                               select min(ROLE_ORDER_NUM) from TSSO_ROLE
+                               where ROLE_ORDER_NUM>(select ROLE_ORDER_NUM from TSSO_ROLE where ROLE_ID=#{id,jdbcType=NVARCHAR})
                                  and
                                      ROLE_GROUP_ID=#{groupId,jdbcType=NVARCHAR})
           and
@@ -39,5 +39,5 @@
         ]]>
     </select>
     
-    <select id="countInRoleGroup" resultType="int">select count(ROLE_ID) from TB4D_ROLE where ROLE_GROUP_ID=#{id,jdbcType=NVARCHAR}</select>
+    <select id="countInRoleGroup" resultType="int">select count(ROLE_ID) from TSSO_ROLE where ROLE_GROUP_ID=#{id,jdbcType=NVARCHAR}</select>
 </mapper>
