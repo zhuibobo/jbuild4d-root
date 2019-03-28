@@ -191,6 +191,9 @@ Vue.component("table-relation-content-comp", {
             //DialogUtility.AlertText("1111111");
             this.$refs.selectSingleTableDialog.beginSelectTable();
         },
+        selectedTable:function(tableData){
+            console.log(tableData);
+        },
         deleteSelection:function () {
             //debugger;
             if (this.tableRelationDiagram.commandHandler.canDeleteSelection()) {
@@ -268,6 +271,6 @@ Vue.component("table-relation-content-comp", {
                         </div>
                     </div>
                     <div class="table-relation-content-wrap" id="tableRelationDiagramDiv"></div>
-                    <select-single-table-dialog ref="selectSingleTableDialog"></select-single-table-dialog>
+                    <select-single-table-dialog ref="selectSingleTableDialog" @on-selected-table="selectedTable"></select-single-table-dialog>
                 </div>`
 });

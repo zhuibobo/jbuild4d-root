@@ -36,12 +36,8 @@ Vue.component("select-single-table-dialog", {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
                             if (treeNode.nodeTypeName == "Table") {
-                                //appForm.tableTree.tableTreeObj.checkNode(treeNode, true, true);
-                                //appForm.formResourceEntity.formMainTableCaption=treeNode.attr1;
-                                //appForm.formResourceEntity.formMainTableName=treeNode.value;
-                                var _self = window._dbtablerelationcomp;
-                                $("#divSelectTable").dialog("close");
-                                _self.addTableToRelationTableTree(treeNode);
+                                var _self=this.getZTreeObj(treeId)._host;
+                                _self.selectedTable(event,treeId,treeNode);
                             }
                         }
                     }
@@ -49,7 +45,7 @@ Vue.component("select-single-table-dialog", {
                 treeData: null,
                 clickNode:null
             },
-            selectedOrganData:null
+            selectedTableData:null
         }
     },
     mounted:function(){
@@ -93,9 +89,8 @@ Vue.component("select-single-table-dialog", {
                 }
             }, "json");
         },
-        selectedOrgan:function (tableData) {
-            this.selectedOrganData=tableData;
-            this.$emit('on-selected-organ', tableData)
+        selectedTable:function (event,treeId,tableData) {
+            this.selectedTableData=tableData;
         },
         getSelectedOrganName:function () {
             //debugger;
@@ -117,6 +112,9 @@ Vue.component("select-single-table-dialog", {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                 }
             }, "json");
+        },
+        completed:function () {
+            this.$emit('on-selected-table', this.selectedTableData);
         }
     },
     template: `<div ref="selectTableModelDialogWrap" class="c1-select-model-wrap general-edit-page-wrap" style="display: none">
