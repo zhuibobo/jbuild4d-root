@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="appForm" v-cloak class="general-edit-page-wrap">
+        <spin size="large" fix v-if="isSubmitting"></spin>
         <div class="list-2column">
             <div class="left-outer-wrap" style="bottom: 50px;right: 350px;">
                 <tabs>
@@ -94,6 +95,7 @@
         var appForm = new Vue({
             el:"#appForm",
             data:{
+                isSubmitting:false,
                 acInterface:{
                     getDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetEditTableData",
                     saveDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/SaveTableEdit"
@@ -258,6 +260,7 @@
                         this.tableEntity.tableCreater=this.currUserEntity.userName;
                         this.tableEntity.tableUpdater=this.currUserEntity.userName;
                         this.tableEntity.tableName=result.exKVData.tablePrefix;
+                        this.tablePrefix=result.exKVData.tablePrefix;
                         this.templateFieldGroup=result.exKVData.templateFieldGroup;
                         this.editTableObj.LoadJsonData(result.exKVData.templateFieldGroup[this.useTemplateName]);
                     }
@@ -308,6 +311,8 @@
                     }
                 },
                 saveEditTable:function () {
+                    //this.isSubmitting=true;
+
                     if(this.tableEntity.tableCaption.replace(/(^\s*)|(\s*$)/g, "")==""){
                         DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "表标题不能为空！",null);
                         return false;
@@ -317,14 +322,25 @@
                         return false;
                     }
 
+                    if(this.tablePrefix==this.tableEntity.tableName){
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "不能使用默认的表前缀作为表名！",null);
+                        return false;
+                    }
+
+
+                    //表名必须唯一.
+                    //_self.isSubmitting=true;
+                    //return;
                     if (this.editTableObj.CompletedEditingRow()) {
-                        console.log(this.editTableObj.GetSerializeJson());
+                        //console.log(this.editTableObj.GetSerializeJson());
                         var sendData = {
                             op: this.status,
                             ignorePhysicalError:this.ignorePhysicalError,
                             tableEntityJson: encodeURIComponent(encodeURIComponent(JSON.stringify(this.tableEntity))),
                             fieldVoListJson: encodeURIComponent(encodeURIComponent(JSON.stringify(this.editTableObj.GetSerializeJson())))
                         };
+
+                        this.isSubmitting=true;
                         //return;
                         //var url = '/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do';
                         AjaxUtility.Post(this.acInterface.saveDataUrl, sendData, function (result) {
