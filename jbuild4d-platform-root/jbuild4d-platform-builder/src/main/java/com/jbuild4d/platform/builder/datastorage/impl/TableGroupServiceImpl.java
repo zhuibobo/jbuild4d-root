@@ -86,8 +86,8 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         treeTableEntity.setTableGroupId(rootId);
         treeTableEntity.setTableGroupParentId(rootParentId);
         treeTableEntity.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
-        treeTableEntity.setTableGroupText("表分组");
-        treeTableEntity.setTableGroupValue("表分组");
+        treeTableEntity.setTableGroupText("数据表分组");
+        treeTableEntity.setTableGroupValue("数据表分组");
         this.saveSimple(jb4DSession,treeTableEntity.getTableGroupId(),treeTableEntity);
         return treeTableEntity;
     }
