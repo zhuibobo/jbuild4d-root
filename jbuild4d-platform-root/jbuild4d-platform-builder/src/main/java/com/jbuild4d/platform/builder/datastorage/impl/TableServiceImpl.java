@@ -396,6 +396,9 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         else if(column.getJdbcTypeName().toUpperCase().equals("TIMESTAMP")){
             dbFieldType= TableFieldTypeEnum.DataTimeType.getText().trim();
         }
+        else if(column.getJdbcTypeName().toUpperCase().equals("LONGVARCHAR")){
+            dbFieldType= TableFieldTypeEnum.TextType.getText().trim();
+        }
         else{
             throw new JBuild4DGenerallyException("未知类型:"+column.getJdbcTypeName());
         }

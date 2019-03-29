@@ -115,6 +115,11 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
 
         tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_DICTIONARY_GROUP",jBuild4DSystemSetting);
         tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_DICTIONARY",jBuild4DSystemSetting);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_JB4D_CACHE",jBuild4DSystemSetting);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_MENU",jBuild4DSystemSetting);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_OPERATION_LOG",jBuild4DSystemSetting);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_SETTING",jBuild4DSystemSetting);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_HISTORY_DATA",jBuild4DSystemSetting);
 
         //单点登录相关表
         deleteByKeyNotValidate(jb4DSession, TableGroupJBuild4DSystemSSORelevance, JBuild4DProp.getWarningOperationCode());
