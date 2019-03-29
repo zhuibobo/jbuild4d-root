@@ -99,11 +99,19 @@
                         width: 120,
                         align: "center",
                         render: function (h, params) {
-                            return h('div',{class: "list-row-button-wrap"},[
-                                ListPageUtility.IViewTableInnerButton.ViewButton(h,params,appList.idFieldName,appList),
-                                ListPageUtility.IViewTableInnerButton.EditButton(h,params,appList.idFieldName,appList),
-                                ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,appList.idFieldName,appList)
-                            ]);
+                            //console.log(params);
+                            if(params.row.tableIssystem=="是"){
+                                return h('div', {class: "list-row-button-wrap"}, [
+                                    ListPageUtility.IViewTableInnerButton.ViewButton(h, params, appList.idFieldName, appList),
+                                ]);
+                            }
+                            else {
+                                return h('div', {class: "list-row-button-wrap"}, [
+                                    ListPageUtility.IViewTableInnerButton.ViewButton(h, params, appList.idFieldName, appList),
+                                    ListPageUtility.IViewTableInnerButton.EditButton(h, params, appList.idFieldName, appList),
+                                    ListPageUtility.IViewTableInnerButton.DeleteButton(h, params, appList.idFieldName, appList)
+                                ]);
+                            }
                         }
                     }
                 ],

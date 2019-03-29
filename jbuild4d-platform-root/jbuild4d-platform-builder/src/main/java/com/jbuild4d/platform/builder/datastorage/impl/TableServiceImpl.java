@@ -63,6 +63,21 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     }
 
     @Override
+    public int deleteByKey(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        throw new JBuild4DGenerallyException("未实现该方法");
+    }
+
+    @Override
+    public int deleteByKeyNotValidate(JB4DSession jb4DSession, String id, String warningOperationCode) throws JBuild4DGenerallyException {
+        throw new JBuild4DGenerallyException("未实现该方法");
+    }
+
+    @Override
+    public int deleteAll(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+        throw new JBuild4DGenerallyException("未实现该方法");
+    }
+
+    @Override
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
     public void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException {
         try {

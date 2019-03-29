@@ -65,7 +65,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public int deleteAll(JB4DSession jb4DSession) {
+    public int deleteAll(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
         return defaultBaseMapper.deleteAll();
     }
 

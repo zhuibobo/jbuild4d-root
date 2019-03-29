@@ -27,7 +27,7 @@ public interface IBaseService<T> {
 
     int deleteByKeyNotValidate(JB4DSession jb4DSession, String id, String warningOperationCode) throws JBuild4DGenerallyException;
 
-    int deleteAll(JB4DSession jb4DSession);
+    int deleteAll(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
 
     int add(JB4DSession jb4DSession,T entity);
 
