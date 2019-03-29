@@ -4,6 +4,8 @@ import com.jbuild4d.base.dbaccess.dao.builder.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dao.builder.TableMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
+import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.core.base.exception.JBuild4DPhysicalTableException;
 import com.jbuild4d.core.base.exception.JBuild4DSQLKeyWordException;
 import com.jbuild4d.base.service.ISQLBuilderService;
@@ -18,7 +20,10 @@ import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.platform.builder.vo.UpdateTableResolveVo;
 import com.jbuild4d.platform.builder.vo.ValidateTableUpdateResultVo;
+import com.jbuild4d.platform.system.service.ICodeGenerateService;
+import org.mybatis.generatorex.api.IntrospectedTable;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
@@ -37,6 +42,10 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     TableBuilederFace tableBuilederFace;
     TableMapper tableMapper;
     TableFieldMapper tableFieldMapper;
+
+    @Autowired
+    ICodeGenerateService codeGenerateService;
+
     public TableServiceImpl(TableMapper _tableMapper,TableFieldMapper _tableFieldMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) throws JBuild4DGenerallyException {
         super(_tableMapper, _sqlSessionTemplate, _sqlBuilderService);
         tableMapper=_tableMapper;
@@ -285,12 +294,27 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     }
 
     @Override
-    public boolean deletePhysicsTable(JB4DSession jb4DSession, String tableName) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
-        return tableBuilederFace.deleteTable(tableName);
+    public boolean deletePhysicsTable(JB4DSession jb4DSession, String tableName, String warningOperationCode) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException, JBuild4DGenerallyException {
+        if(JBuild4DProp.getWarningOperationCode().equals(warningOperationCode)) {
+            return tableBuilederFace.deleteTable(tableName);
+        }
+        throw new JBuild4DGenerallyException("删除失败WarningOperationCode错误");
+    }
+
+    @Override
+    public boolean deleteLogicTableAndFields(JB4DSession jb4DSession, String tableName, String warningOperationCode){
+        return true;
     }
 
     @Override
     public TableEntity getByTableName(JB4DSession jb4DSession,String newTableName) {
         return tableMapper.selectByTableName(newTableName);
+    }
+
+    @Override
+    public void registerSystemTableToBuilderToModule(JB4DSession jb4DSession, String tableName, TableGroupEntity tableGroupEntity) {
+        IntrospectedTable tableInfo=codeGenerateService.getTableInfo(tableName);
+        //删除旧的逻辑记录.
+        //写入新的逻辑记录.
     }
 }

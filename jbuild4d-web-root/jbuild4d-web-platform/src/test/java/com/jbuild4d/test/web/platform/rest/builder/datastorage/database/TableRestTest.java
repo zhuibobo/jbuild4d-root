@@ -85,7 +85,7 @@ public class TableRestTest extends RestTestBase {
             TableEntity tempTableEntity=tableService.getByTableName(getSession(),newTable.getTableName());
             tableService.deleteByKeyNotValidate(getSession(),tempTableEntity.getTableId(), JBuild4DProp.getWarningOperationCode());
             tableFieldService.deleteByTableId(getSession(),tempTableEntity.getTableId());
-            tableService.deletePhysicsTable(getSession(),newTable.getTableName());
+            tableService.deletePhysicsTable(getSession(),newTable.getTableName(),JBuild4DProp.getWarningOperationCode());
         }
         requestBuilder = post("/PlatFormRest/Builder/DataStorage/DataBase/Table/SaveTableEdit.do");
         requestBuilder.sessionAttr("JB4DSession", getSession());

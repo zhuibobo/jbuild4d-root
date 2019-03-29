@@ -136,6 +136,108 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
     }
 
     @Override
+    public IntrospectedTable getTableInfo(String tableName){
+        Map<String, String> generateCodeMap = new HashMap<>();
+        List<String> warnings = new ArrayList<String>();
+        boolean overwrite = true;
+
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("MybatisGenerator/generatorConfigToCode.xml");
+
+        Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap=CodeGenerateVo.generateTypeEnumCodeGenerateVoMap().get("JBuild4D-PlatForm");
+
+        codeGenerateVoMap=createAboutFolder(codeGenerateVoMap);
+
+        ConfigurationParser cp = new ConfigurationParser(warnings);
+        Configuration config = null;
+        try {
+            config = cp.parseConfiguration(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XMLParserException e) {
+            e.printStackTrace();
+        }
+        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+        MyBatisGenerator myBatisGenerator = null;
+
+        Context context = config.getContexts().get(0);
+        //设置数据库连接
+        JDBCConnectionConfiguration jdbcConnectionConfiguration=new JDBCConnectionConfiguration();
+        jdbcConnectionConfiguration.setDriverClass(DBProp.getDriverName());
+        jdbcConnectionConfiguration.setConnectionURL(DBProp.getUrl());
+        jdbcConnectionConfiguration.setUserId(DBProp.getUser());
+        jdbcConnectionConfiguration.setPassword(DBProp.getPassword());
+        context.setJdbcConnectionConfiguration(jdbcConnectionConfiguration);
+
+        //设置model的相关信息
+        JavaModelGeneratorConfiguration javaModelGeneratorConfiguration=context.getJavaModelGeneratorConfiguration();
+        String modelPackageName=codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).packageName+".temp";
+        javaModelGeneratorConfiguration.setTargetPackage(modelPackageName);
+        javaModelGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.Entity).getFullSavePath());
+        context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
+
+        //设置dao的相关的信息
+        JavaClientGeneratorConfiguration javaClientGeneratorConfiguration=context.getJavaClientGeneratorConfiguration();
+        String daoPackageName=codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).packageName+".temp";
+        javaClientGeneratorConfiguration.setTargetPackage(daoPackageName);
+        javaClientGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.Dao).getFullSavePath());
+        context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
+
+        //设置mapper的相关信息
+        SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration=context.getSqlMapGeneratorConfiguration();
+        String mapperPackageName=codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).packageName+".temp";
+        sqlMapGeneratorConfiguration.setTargetPackage(mapperPackageName);
+        sqlMapGeneratorConfiguration.setTargetProject(codeGenerateVoMap.get(CodeGenerateTypeEnum.MapperAC).getFullSavePath());
+        context.setSqlMapGeneratorConfiguration(sqlMapGeneratorConfiguration);
+
+        String domainObjectName= StringUtility.fisrtCharUpperThenLower(tableName)+"Entity";
+        String mapperName=StringUtility.fisrtCharUpperThenLower(tableName)+"ACMapper";
+        String daoMapperName=StringUtility.fisrtCharUpperThenLower(tableName)+"Mapper";
+
+        /*if(tableName.indexOf("_")>0){
+            //String shortName=tableName.substring(tableName.indexOf("_")+1);
+            String name="";
+            String[] names=tableName.split("_");
+            for(int i=1;i<names.length;i++){
+                name+=StringUtility.fisrtCharUpperThenLower(names[i]);
+            }
+            domainObjectName=name+"Entity";
+            mapperName=name+"ACMapper";
+            daoMapperName=name+"Mapper";
+        }*/
+        //设置表名称
+        TableConfiguration tc = new TableConfiguration(context);
+        tc.setTableName(tableName);
+        tc.setDomainObjectName(domainObjectName);
+        tc.setMapperName(mapperName);
+        tc.setCountByExampleStatementEnabled(false);
+        tc.setUpdateByExampleStatementEnabled(false);
+        tc.setDeleteByExampleStatementEnabled(false);
+        tc.setSelectByExampleStatementEnabled(false);
+        //tc.setDeleteByPrimaryKeyStatementEnabled(false);
+        context.addTableConfiguration(tc);
+
+        try {
+            myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+        } catch (InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            myBatisGenerator.generate(null);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        List<IntrospectedTable> introspectedTableList=context.getIntrospectedTables();
+        IntrospectedTable introspectedTable=introspectedTableList.get(0);
+        return introspectedTable;
+    }
+
+    @Override
     public Map<String, String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String orderFieldName,String statusFieldName,String packageType,String packageLevel2Name) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
         //根据单表生成代码
         Map<String, String> generateCodeMap = new HashMap<>();

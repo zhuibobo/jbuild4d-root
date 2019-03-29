@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.system.vo.SimpleTableFieldVo;
+import org.mybatis.generatorex.api.IntrospectedTable;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,5 +22,7 @@ public interface ICodeGenerateService {
 
     List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession, String tableName) throws JBuild4DGenerallyException;
 
-    Map<String,String> getTableGenerateCode(JB4DSession jb4DSession, String tableName,String orderFieldName,String statusFieldName, String packageType,String packageLevel2Name) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException;
+    IntrospectedTable getTableInfo(String tableName);
+
+    Map<String,String> getTableGenerateCode(JB4DSession jb4DSession, String tableName, String orderFieldName, String statusFieldName, String packageType, String packageLevel2Name) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException;
 }

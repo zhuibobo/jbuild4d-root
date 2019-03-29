@@ -10,8 +10,11 @@ import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.base.service.general.JBuild4DProp;
+import com.jbuild4d.platform.builder.datastorage.ITableService;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +28,9 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
 {
     TableGroupMapper tableGroupMapper;
 
+    @Autowired
+    ITableService tableService;
+
     @Override
     public String getRootId() {
         return rootId;
@@ -35,7 +41,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
 
     private String TableGroupJBuild4DSystem="TableGroupJBuild4DSystem";
     private String TableGroupJBuild4DSystemSetting="TableGroupJBuild4DSystemSetting";
-    private String TableGroupJBuild4DSystemOrganRelevance="TableGroupJBuild4DSystemOrganRelevance";
+    private String TableGroupJBuild4DSystemSSORelevance ="TableGroupJBuild4DSystemSSORelevance";
     private String TableGroupJBuild4DSystemAuth="TableGroupJBuild4DSystemAuth";
     private String TableGroupJBuild4DSystemBuilder="TableGroupJBuild4DSystemBuilder";
     private String TableGroupJBuild4DSystemDevDemo="TableGroupJBuild4DSystemDevDemo";
@@ -93,9 +99,13 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemBase.setTableGroupId(TableGroupJBuild4DSystem);
         jBuild4DSystemBase.setTableGroupParentId(parentGroup.getTableGroupId());
         jBuild4DSystemBase.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
-        jBuild4DSystemBase.setTableGroupText("基础系统");
-        jBuild4DSystemBase.setTableGroupValue("基础系统");
+        jBuild4DSystemBase.setTableGroupText("JBuild4D-System");
+        jBuild4DSystemBase.setTableGroupValue("JBuild4D-System");
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystem,jBuild4DSystemBase);
+
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_DICTIONARY",jBuild4DSystemBase);
+        //List<String> systemAboutTable=new ArrayList<>();
+        //systemAboutTable.add("");
 
         //系统设置相关表
         deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemSetting, JBuild4DProp.getWarningOperationCode());
@@ -107,25 +117,25 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemSetting.setTableGroupValue("系统设置相关表");
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemSetting,jBuild4DSystemSetting);
 
-        //组织用户相关表
-        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemOrganRelevance, JBuild4DProp.getWarningOperationCode());
-        TableGroupEntity jBuild4DSystemOrganRelevance=new TableGroupEntity();
-        jBuild4DSystemOrganRelevance.setTableGroupId(TableGroupJBuild4DSystemOrganRelevance);
-        jBuild4DSystemOrganRelevance.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
-        jBuild4DSystemOrganRelevance.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
-        jBuild4DSystemOrganRelevance.setTableGroupText("组织用户相关表");
-        jBuild4DSystemOrganRelevance.setTableGroupValue("组织用户相关表");
-        this.saveSimple(jb4DSession,TableGroupJBuild4DSystemOrganRelevance,jBuild4DSystemOrganRelevance);
+        //单点登录相关表
+        deleteByKeyNotValidate(jb4DSession, TableGroupJBuild4DSystemSSORelevance, JBuild4DProp.getWarningOperationCode());
+        TableGroupEntity jBuild4DSSORelevance=new TableGroupEntity();
+        jBuild4DSSORelevance.setTableGroupId(TableGroupJBuild4DSystemSSORelevance);
+        jBuild4DSSORelevance.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
+        jBuild4DSSORelevance.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
+        jBuild4DSSORelevance.setTableGroupText("单点登录相关表");
+        jBuild4DSSORelevance.setTableGroupValue("单点登录相关表");
+        this.saveSimple(jb4DSession, TableGroupJBuild4DSystemSSORelevance,jBuild4DSSORelevance);
 
         //权限相关表
-        deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemAuth, JBuild4DProp.getWarningOperationCode());
+        /*deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemAuth, JBuild4DProp.getWarningOperationCode());
         TableGroupEntity jBuild4DSystemAuth=new TableGroupEntity();
         jBuild4DSystemAuth.setTableGroupId(TableGroupJBuild4DSystemAuth);
         jBuild4DSystemAuth.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
         jBuild4DSystemAuth.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemAuth.setTableGroupText("权限相关表");
         jBuild4DSystemAuth.setTableGroupValue("权限相关表");
-        this.saveSimple(jb4DSession,TableGroupJBuild4DSystemAuth,jBuild4DSystemAuth);
+        this.saveSimple(jb4DSession,TableGroupJBuild4DSystemAuth,jBuild4DSystemAuth);*/
 
         //应用设计相关表
         deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemBuilder, JBuild4DProp.getWarningOperationCode());
