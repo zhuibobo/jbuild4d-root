@@ -14,7 +14,7 @@
                 <tabs>
                     <tab-pane label="表字段">
                         <div style="width: 98%;margin: auto">
-                            <div style="float: right;margin-bottom: 8px">
+                            <div style="float: right;margin-bottom: 8px" v-if="status!='view'">
                                 忽略物理表修改错误: &nbsp;
                                 <i-switch size="small" v-model="ignorePhysicalError"></i-switch>&nbsp;
                                 <i-select v-model="useTemplateName" size="small" style="width:200px" @on-change="changeFieldsTemplate">
@@ -84,7 +84,7 @@
         </div>
         <div class="button-outer-wrap">
             <div class="button-inner-wrap">
-                <button-group>
+                <button-group v-if="status!='view'">
                     <i-button type="primary" @click="saveEditTable()"> 保 存</i-button>
                     <i-button @click="handleClose()">关 闭</i-button>
                 </button-group>
@@ -275,6 +275,10 @@
                         this.tablePrefix=result.exKVData.tablePrefix;
                         this.templateFieldGroup=result.exKVData.templateFieldGroup;
                         this.editTableObj.LoadJsonData(result.exKVData.templateFieldGroup[this.useTemplateName]);
+                    }
+                    else if(this.status=="view"){
+                        this.editTableObj.SetToViewStatus();
+                        this.editTableObj.LoadJsonData(result.exKVData.tableFieldsData);
                     }
                     else {
                         this.editTableObj.LoadJsonData(result.exKVData.tableFieldsData);

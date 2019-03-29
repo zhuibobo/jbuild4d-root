@@ -7,6 +7,7 @@ var EditTable= {
     _Prop_ConfigManager: null,
     _Prop_JsonData: new Object(),
     _$Prop_EditingRowElem: null, //当前选中的行对象<tr>
+    _Status:"Edit",
     /*
      组件初始化
      */
@@ -18,6 +19,9 @@ var EditTable= {
         this._$Prop_TableElem = this.CreateTable();
         this._$Prop_TableElem.append(this.CreateTableTitleRow());
         this._$Prop_RendererToElem.append(this._$Prop_TableElem);
+        if(_C.Status) {
+            this._Status = _C.Status;
+        }
     },
 
     LoadJsonData: function (jsonData) {
@@ -86,56 +90,57 @@ var EditTable= {
 
             }else {
                 var event_data = {host: this};
-                //$rowElem.click(event_data, function (event) {
-                    //alert(1);
-                $rowElem.bind("click", event_data, function (event) {
-                    //debugger;
-                    // 行状态
-                    var rowStatus = $rowElem.attr("status");
-                    // 行状态为禁用状态不做任何操作
-                    if(typeof (rowStatus) !='undefined' && rowStatus == "disabled"){
-                        return false;
-                    }
+                //console.log(this._Status);
+                if(this._Status!="View") {
+                    $rowElem.bind("click", event_data, function (event) {
+                        //debugger;
+                        // 行状态
+                        var rowStatus = $rowElem.attr("status");
+                        // 行状态为禁用状态不做任何操作
+                        if (typeof (rowStatus) != 'undefined' && rowStatus == "disabled") {
+                            return false;
+                        }
 
-                    var _host = event.data.host;
-                    if (_host._$Prop_EditingRowElem!=null&&$(this).attr("id") == _host._$Prop_EditingRowElem.attr("id")) {
-                        return
-                    }
-                    var _C = _host._Prop_ConfigManager.GetConfig();
-                    if(typeof (_C.RowClick) != 'undefined' && typeof (_C.RowClick)== 'function'){
-                        try {
-                            var result = _C.RowClick();
-                            if(result != 'undefined' && result == false) {
-                                return false;
+                        var _host = event.data.host;
+                        if (_host._$Prop_EditingRowElem != null && $(this).attr("id") == _host._$Prop_EditingRowElem.attr("id")) {
+                            return
+                        }
+                        var _C = _host._Prop_ConfigManager.GetConfig();
+                        if (typeof (_C.RowClick) != 'undefined' && typeof (_C.RowClick) == 'function') {
+                            try {
+                                var result = _C.RowClick();
+                                if (result != 'undefined' && result == false) {
+                                    return false;
+                                }
+                            }
+                            catch (e) {
+                                alert("_C.RowClick() Error");
                             }
                         }
-                        catch(e) {
-                            alert("_C.RowClick() Error");
+                        if (_host.CompletedEditingRow()) {
+                            _host._$Prop_EditingRowElem = $(this);
+                            _host.SetRowIsEditStatus(_host._$Prop_EditingRowElem);
+                            var _row = $(this);
+                            _row.find("td").each(function () {
+                                var $td = $(this);
+                                var renderer = $td.attr("renderer");
+                                var templateId = $td.attr("templateId");
+                                var template = _host._Prop_ConfigManager.GetTemplate(templateId);
+                                var rendererObj = eval("Object.create(" + renderer + ")");
+                                var $htmlelem = rendererObj.Get_EditStatus_HtmlElem(_C, template, $td, _row, this._$Prop_TableElem, $td.children());
+                                if (typeof (template.Hidden) != 'undefined' && template.Hidden == true) {
+                                    $td.hide();
+                                }
+                                //alert(template.Style);
+                                if (typeof (template.Style) != 'undefined') {
+                                    $td.css(template.Style);
+                                }
+                                $td.html("");
+                                $td.append($htmlelem);
+                            })
                         }
-                    }
-                    if(_host.CompletedEditingRow()) {
-                        _host._$Prop_EditingRowElem = $(this);
-                        _host.SetRowIsEditStatus(_host._$Prop_EditingRowElem);
-                        var _row = $(this);
-                        _row.find("td").each(function () {
-                            var $td = $(this);
-                            var renderer = $td.attr("renderer");
-                            var templateId = $td.attr("templateId");
-                            var template = _host._Prop_ConfigManager.GetTemplate(templateId);
-                            var rendererObj = eval("Object.create(" + renderer + ")");
-                            var $htmlelem = rendererObj.Get_EditStatus_HtmlElem(_C, template, $td, _row, this._$Prop_TableElem, $td.children());
-                            if(typeof (template.Hidden) != 'undefined' && template.Hidden==true){
-                                $td.hide();
-                            }
-                            //alert(template.Style);
-                            if(typeof (template.Style) != 'undefined') {
-                                $td.css(template.Style);
-                            }
-                            $td.html("");
-                            $td.append($htmlelem);
-                        })
-                    }
-                });
+                    });
+                }
             }
 
             var _C = this._Prop_ConfigManager.GetConfig();
@@ -183,6 +188,9 @@ var EditTable= {
             }
             return rowId;
         }
+    },
+    SetToViewStatus:function(){
+        this._Status="View";
     },
     SetRowIsEditStatus: function (tr) {
         $(tr).attr("EditStatus", "EditStatus");
