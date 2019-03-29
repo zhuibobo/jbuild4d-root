@@ -346,7 +346,7 @@ Vue.component("module-list-flow-comp", {
                                 <div>\
                                     <img :src="defaultFlowModelImageSrc" class="flowModelImg" />\
                                 </div>\
-                                <upload style="margin:10px 12px 0 20px" :data="importEXData" :before-upload="bindUploadExData" :on-success="uploadFlowModelImageSuccess" multiple type="drag" name="file" action="../../../PlatForm/Builder/FlowModel/UploadProcessModelMainImg.do" accept=".png">\
+                                <upload style="margin:10px 12px 0 20px" :data="importEXData" :before-upload="bindUploadExData" :on-success="uploadFlowModelImageSuccess" multiple type="drag" name="file" action="../../../PlatFormRest/Builder/FlowModel/UploadProcessModelMainImg.do" accept=".png">\
                                     <div style="padding:20px 0px">\
                                         <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>\
                                         <p>上传流程主题图片</p>\
@@ -365,7 +365,7 @@ Vue.component("module-list-flow-comp", {
                     </div>\
                     <div style="display: none" id="divImportFlowModelWrap">\
                         <div class="general-edit-page-wrap" style="padding: 10px">\
-                            <upload :data="importEXData" :before-upload="bindUploadExData" :on-success="uploadSuccess" multiple type="drag" name="file" action="../../../PlatForm/Builder/FlowModel/ImportProcessModel.do" accept=".bpmn">\
+                            <upload :data="importEXData" :before-upload="bindUploadExData" :on-success="uploadSuccess" multiple type="drag" name="file" action="../../../PlatFormRest/Builder/FlowModel/ImportProcessModel.do" accept=".bpmn">\
                                 <div style="padding: 20px 0">\
                                     <icon type="ios-cloud-upload" size="52" style="color: #3399ff"></icon>\
                                     <p>Click or drag files here to upload</p>\

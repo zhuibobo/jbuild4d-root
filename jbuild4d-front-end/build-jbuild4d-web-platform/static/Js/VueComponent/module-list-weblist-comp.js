@@ -75,7 +75,7 @@ Vue.component("module-list-weblist-comp", {
     mounted:function(){
         //this.reloadData();
         //将对象附加到window上,提供给后边进行操作
-        window._modulelistwebformcomp=this;
+        window._modulelistweblistcomp=this;
         //alert(this.activeTabName);
         //alert(this.listHeight);
     },

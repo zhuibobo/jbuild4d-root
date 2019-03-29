@@ -2,6 +2,7 @@
 Vue.component("module-list-webform-comp", {
     props:['listHeight','moduleData','activeTabName'],
     data: function () {
+        var _self = this;
         return {
             acInterface:{
                 editView: "/HTML/Builder/Form/FormDesign.html",
@@ -57,8 +58,8 @@ Vue.component("module-list-webform-comp", {
                         //console.log(params);
                         //console.log(this);
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp)
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,_self.idFieldName,_self),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,_self.idFieldName,_self)
                         ]);
                     }
                 }
@@ -75,7 +76,7 @@ Vue.component("module-list-webform-comp", {
     mounted:function(){
         //this.reloadData();
         //将对象附加到window上,提供给后边进行操作
-        window._modulelistwebformcomp=this;
+        //window._modulelistwebformcomp=this;
         //alert(this.activeTabName);
         //alert(this.listHeight);
     },
