@@ -236,6 +236,7 @@
                     var sql=this.getEditSQL();
                     var url = '/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/ValidateSQLEnable.do';
                     AjaxUtility.Post(url, {sqlText:encodeURIComponent(sql)}, function (result) {
+                        debugger;
                         if(result.success){
                             //debugger;
                             result.data.sqlWithEnvText=sql;
@@ -256,7 +257,7 @@
                                 }
                                 $("#relatedTables").html(relatedTables.join("<br />"));
                                 $("#aboutColumns").html(aboutColumns.join("<br />"));
-                                DialogUtility.DialogElem($("#validateSQLEnableWarp"), {
+                                DialogUtility.DialogElemObj($("#validateSQLEnableWarp"), {
                                     modal: true,
                                     title: "校验结果",
                                     width: 900,
