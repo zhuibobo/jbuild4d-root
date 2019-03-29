@@ -232,6 +232,14 @@
                             BindName:"fieldDefaultEntity.fieldDefaultValue",
                             Renderer:"EditTable_SelectDefaultValue",
                             Hidden:false
+                        },{
+                            Title:"备注",
+                            BindName:"fieldDesc",
+                            Renderer:"EditTable_TextBox",
+                            Style:{
+                                width:500
+                            },
+                            Hidden:true
                         }
                     ],
                     RowIdCreater:function(){
@@ -253,6 +261,10 @@
             methods:{
                 bindData:function(result){
                     this.editTableObj=Object.create(EditTable);
+                    //alert(PageStyleUtility.GetPageWidth());
+                    if(PageStyleUtility.GetPageWidth()>1800){
+                        this.editTableConfig.Templates[9].Hidden=false;
+                    }
                     this.editTableObj.Initialization(this.editTableConfig);
                     this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
                     DetailPageUtility.OverrideObjectValue(appForm.tableEntity, result.data);
