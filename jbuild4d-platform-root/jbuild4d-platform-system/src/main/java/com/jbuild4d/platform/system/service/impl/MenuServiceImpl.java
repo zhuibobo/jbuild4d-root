@@ -214,8 +214,8 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
 
         //根菜单->应用管理->桌面设计
         MenuEntity appBuilderDesktopBuilderMenu=createMenu(jb4DSession,appBuilderRootMenu.getMenuId(),"JB4DSystemAppBuilderDesktopBuilder",
-                "桌面设计","桌面设计","桌面设计",
-                "","frame-top-menu-data");
+                "Portal设计","Portal设计","Portal设计",
+                "Portal/LayoutPreview.html","frame-top-menu-data");
 
         //根菜单->应用管理->大屏设计
         createMenu(jb4DSession,appBuilderRootMenu.getMenuId(),"JB4DSystemAppBuilderBigScreen",

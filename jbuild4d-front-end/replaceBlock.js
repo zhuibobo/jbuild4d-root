@@ -154,6 +154,16 @@ let replaceBlock = {
         let levelPath = calculateFilePath(file);
         replaceArray.push(refJs(levelPath + "Js/T3P/Go/go-debug.js"));
         return replaceArray.join("\n\t");
+    },
+    replaceWebixLib:function (search, file) {
+        let replaceArray = new Array();
+        //判断路径后进行引入js的路径
+        let levelPath = calculateFilePath(file);
+
+        replaceArray.push(refJs(levelPath + "Js/T3P/Webix-UI-V.6.2.5/codebase/webix.js"));
+        replaceArray.push(refCss(levelPath + 'Js/T3P/Webix-UI-V.6.2.5/codebase/webix.css'));
+
+        return replaceArray.join("\n\t");
     }
 }
 

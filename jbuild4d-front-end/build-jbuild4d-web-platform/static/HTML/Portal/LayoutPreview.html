@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::Webix"></th:block>
+</head>
+<body>
+
+<div id='divA' style='width:100%;overflow-x: hidden'></div>
+<script type="text/javascript" charset="utf-8">
+
+    webix.ui({
+        container: "divA",
+        type: "space",
+        rows: [
+            {template: "Reordering", type: "header"},
+            {
+                view: "portlet",
+                mode: "replace",
+                height:100,
+                resize:true,
+                body: {
+                    template: "resizer Drag and drop portlets"
+                }
+            },
+            {
+                view: "portlet",
+                mode: "replace",
+                height:100,
+                body: {
+                    template: "row 2"
+                }
+            },
+            {
+                type: "wide",
+                cols: [
+                    {
+                        view: "portlet",
+                        mode: "replace",
+                        height:100,
+                        body: {
+                            template: "A col 1"
+                        }
+                    },
+                    {
+                        view: "portlet",
+                        mode: "replace",
+                        height:200,
+                        body: {
+                            template: "B col 2",
+                        }
+                    },
+                    {
+                        view: "portlet",
+                        mode: "replace",
+                        height:300,
+                        body: {
+                            template: "C col 3"
+                        }
+                    },
+                ]
+            }
+        ]
+    });
+
+</script>
+</body>
+</html>
