@@ -57,6 +57,7 @@ let replaceBlock = {
         replaceArray.push(refJs(levelPath + "Js/T3P/CodeMirror-5.39.2/mode/xml/xml.js"));
         replaceArray.push(refJs(levelPath + "Js/T3P/CodeMirror-5.39.2/mode/javascript/javascript.js"));
         replaceArray.push(refJs(levelPath + "Js/T3P/CodeMirror-5.39.2/mode/css/css.js"));
+        replaceArray.push(refJs(levelPath + "Js/T3P/CodeMirror-5.39.2/mode/sql/sql.js"));
         replaceArray.push(refJs(levelPath + "Js/T3P/CodeMirror-5.39.2/mode/htmlmixed/htmlmixed.js"));
         replaceArray.push(refJs(levelPath + "Js/T3P/CodeMirror-5.39.2/addon/fold/foldcode.js"));
         replaceArray.push(refJs(levelPath + "Js/T3P/CodeMirror-5.39.2/addon/fold/foldgutter.js"));

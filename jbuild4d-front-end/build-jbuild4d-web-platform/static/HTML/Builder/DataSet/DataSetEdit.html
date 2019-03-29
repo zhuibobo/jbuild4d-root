@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="dataSetEditForm" v-cloak class="general-edit-page-wrap">
+        <spin size="large" fix v-if="isSubmitting"></spin>
         <div class="list-2column">
             <div class="left-outer-wrap" style="bottom: 50px;right: 350px;">
                 <div style="width: 98%;margin: auto">
@@ -131,6 +132,7 @@
         var dataSetEditForm = new Vue({
             el:"#dataSetEditForm",
             data:{
+                isSubmitting:false,
                 acInterface:{
                     getDataUrl:"/PlatFormRest/Builder/DataSet/DataSetMain/GetDataSetData",
                     saveDataUrl:"/PlatFormRest/Builder/DataSet/DataSetMain/SaveDataSetEdit",
@@ -147,8 +149,8 @@
                 },
                 datasetEntity:{
                     dsId:"",
-                    dsCaption:"数据集1",
-                    dsName:"DS1",
+                    dsCaption:"",
+                    dsName:"",
                     dsCreateTime:DateUtility.GetCurrentData(),
                     dsCreater:"",
                     dsUpdateTime:DateUtility.GetCurrentData(),
@@ -383,6 +385,7 @@
                             dataSetVoJson: JSON.stringify(this.datasetEntity)
                         };
 
+                        this.isSubmitting=true;
                         //return;
                         AjaxUtility.Post(this.acInterface.saveDataUrl, sendData, function (result) {
                             //debugger;

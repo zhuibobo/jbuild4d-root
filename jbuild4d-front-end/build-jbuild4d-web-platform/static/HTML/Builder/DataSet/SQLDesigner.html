@@ -80,7 +80,7 @@
                                 <input type="text" id="txtSearchTableTree" style="width: 100%" />
                                 <ul id="tableZTreeUL" class="ztree"></ul>
                             </div>
-                            <div class="tableFieldWrap">
+                            <div class="tableFieldWrap iv-list-page-wrap">
                                 表：【<span class="tableName" @click="insertTableNameToCodeMirror">{{tree.selectedTableName}}</span>】
                                 <i-table size="small" height="315" stripe border :columns="tableField.columnsConfig" :data="tableField.fieldData"
                                          class="iv-list-table" :highlight-row="true"></i-table>
@@ -102,8 +102,8 @@
             <div class="button-inner-wrap">
                 <button-group>
                     <i-button type="success" @click="coverSQLDesign"> 覆 盖 </i-button>
-                    <i-button style="margin-left: 8px" @click="appendSQLDesign"> 追 加 </i-button>
-                    <i-button style="margin-left: 8px" @click="handleClose()"> 关 闭 </i-button>
+                    <i-button @click="appendSQLDesign"> 追 加 </i-button>
+                    <i-button @click="handleClose()"> 关 闭 </i-button>
                 </button-group>
             </div>
         </div>
@@ -276,7 +276,7 @@
                             render: function (h, params) {
                                 return h('div',{class: "list-row-button-wrap"},[
                                     h('div', {
-                                        class: "list-row-button list-row-button-listmanager",
+                                        class: "list-row-button listmanager",
                                         on: {
                                             click: function () {
                                                 sqlDesignerForm.insertTableFieldToCodeMirror(params.row);
