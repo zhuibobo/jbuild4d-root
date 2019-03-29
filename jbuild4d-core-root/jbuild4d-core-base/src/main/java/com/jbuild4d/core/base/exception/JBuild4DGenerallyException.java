@@ -40,4 +40,8 @@ public class JBuild4DGenerallyException extends JBuild4DBaseException {
     public static JBuild4DGenerallyException getNotSupportOracleException(){
         return new JBuild4DGenerallyException("暂不支持Oracle！");
     }
+
+    public static JBuild4DGenerallyException getNotSupportMSSQLException(){
+        return new JBuild4DGenerallyException("暂不支持MS SqlServer！");
+    }
 }

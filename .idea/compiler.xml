@@ -30,8 +30,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="build4d-base-service" target="1.8" />
-      <module name="build4d-base-tools" target="1.8" />
       <module name="flowable-ui-common" target="1.8" />
       <module name="flowable-ui-modeler" target="1.8" />
       <module name="flowable-ui-modeler-app" target="1.8" />
@@ -45,30 +43,19 @@
       <module name="jbuild4d-base-tools" target="1.8" />
       <module name="jbuild4d-core-base" target="1.8" />
       <module name="jbuild4d-core-root" target="1.8" />
-      <module name="jbuild4d-java-web-client-demo-root" target="1.8" />
       <module name="jbuild4d-platform-builder" target="1.8" />
       <module name="jbuild4d-platform-files" target="1.8" />
-      <module name="jbuild4d-platform-organ" target="1.8" />
       <module name="jbuild4d-platform-root" target="1.8" />
-      <module name="jbuild4d-platform-sso" target="1.8" />
-      <module name="jbuild4d-platform-sso-client" target="1.8" />
-      <module name="jbuild4d-platform-sso-core" target="1.8" />
       <module name="jbuild4d-platform-sso-service" target="1.8" />
       <module name="jbuild4d-platform-system" target="1.8" />
       <module name="jbuild4d-root" target="1.8" />
       <module name="jbuild4d-sso-client" target="1.8" />
-      <module name="jbuild4d-sso-client-root" target="1.8" />
       <module name="jbuild4d-sso-java-web-client-demo-root" target="1.8" />
       <module name="jbuild4d-sso-java-web-client-demo1" target="1.8" />
       <module name="jbuild4d-sso-java-web-client-demo2" target="1.8" />
       <module name="jbuild4d-sso-root" target="1.8" />
-      <module name="jbuild4d-sso-web-client-demo-root" target="1.8" />
-      <module name="jbuild4d-sso-web-client-demo1" target="1.8" />
-      <module name="jbuild4d-sso-web-client-demo2" target="1.8" />
       <module name="jbuild4d-web-platform" target="1.8" />
       <module name="jbuild4d-web-root" target="1.8" />
-      <module name="jbuild4d-web-sso-client-demo1" target="1.5" />
-      <module name="jbuild4d-web-sso-client-demo2" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

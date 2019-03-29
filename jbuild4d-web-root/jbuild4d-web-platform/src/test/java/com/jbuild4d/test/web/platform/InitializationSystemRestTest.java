@@ -1,6 +1,9 @@
 package com.jbuild4d.test.web.platform;
 
+import com.jbuild4d.base.tools.JsonUtility;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import com.jbuild4d.test.web.platform.RestTestBase;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +51,8 @@ public class InitializationSystemRestTest extends RestTestBase {
         MvcResult result=mockMvc.perform(requestBuilder).andReturn();
         String json=result.getResponse().getContentAsString();
         System.out.println(json);
+
+        JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        Assert.assertTrue(responseVo.isSuccess());
     }
 }

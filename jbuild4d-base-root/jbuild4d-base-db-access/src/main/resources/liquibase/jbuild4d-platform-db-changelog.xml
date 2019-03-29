@@ -83,60 +83,60 @@
 
     <!--系统设置-->
     <changeSet author="zhuangrb" id="changeSet-System-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TSYS_DICTIONARY">
-            <column name="DICT_ID" type="NVARCHAR(100)">
+        <createTable tableName="TSYS_DICTIONARY_GROUP" remarks="数据字典的分组表:本身存在层级结构">
+            <column name="DICT_GROUP_ID" type="NVARCHAR(100)" remarks="字典分组ID:随机的UUID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="DICT_KEY" type="NVARCHAR(200)">
+            <column name="DICT_GROUP_VALUE" type="NVARCHAR(200)" remarks="字典项分组的键值:必须唯一">
                 <constraints nullable="false"/>
             </column>
-            <column name="DICT_VALUE" type="NVARCHAR(200)">
+            <column name="DICT_GROUP_TEXT" type="NVARCHAR(200)" remarks="字典项分组的名称">
                 <constraints nullable="false"/>
             </column>
-            <column name="DICT_TEXT" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DICT_GROUP_ID" type="NVARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DICT_ORDER_NUM" type="INT"/>
-            <column name="DICT_CREATE_TIME" type="datetime(6)"/>
-            <column name="DICT_PARENT_ID" type="NVARCHAR(100)"/>
-            <column name="DICT_PARENT_IDLIST" type="NVARCHAR(1200)"/>
-            <column name="DICT_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="DICT_DEL_ENABLE" type="NVARCHAR(10)"/>
-            <column name="DICT_STATUS" type="NVARCHAR(10)"/>
-            <column name="DICT_IS_SELECTED" type="NVARCHAR(10)"/>
-            <column name="DICT_DESC" type="NVARCHAR(500)"/>
-            <column name="DICT_CHILD_COUNT" type="INT"/>
-            <column name="DICT_EX_ATTR1" type="NVARCHAR(500)"/>
-            <column name="DICT_EX_ATTR2" type="NVARCHAR(500)"/>
-            <column name="DICT_EX_ATTR3" type="NVARCHAR(500)"/>
-            <column name="DICT_EX_ATTR4" type="NVARCHAR(500)"/>
-            <column name="DICT_USER_ID" type="NVARCHAR(100)"/>
-            <column name="DICT_USER_NAME" type="NVARCHAR(100)"/>
-            <column name="DICT_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="DICT_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="DICT_GROUP_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="DICT_GROUP_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+            <column name="DICT_GROUP_DESC" type="NVARCHAR(500)" remarks="备注" />
+            <column name="DICT_GROUP_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用" />
+            <column name="DICT_GROUP_PARENT_ID" type="NVARCHAR(100)" remarks="父节点的ID" />
+            <column name="DICT_GROUP_ISSYSTEM" type="NVARCHAR(10)" remarks="是否是分组" />
+            <column name="DICT_GROUP_DEL_ENABLE" type="NVARCHAR(10)" remarks="能否删除" />
+            <column name="DICT_GROUP_ENP_ITEM" type="NVARCHAR(10)" remarks="是否显示空选项:为是时,将默认显示[请选择]为空选项" />
         </createTable>
 
-        <createTable tableName="TSYS_DICTIONARY_GROUP">
-            <column name="DICT_GROUP_ID" type="NVARCHAR(100)">
+        <createTable tableName="TSYS_DICTIONARY" remarks="数据字典表:用于存储通用的数据字典项,本身存在层次结果[分组->一级字典->二级字典->三级字典">
+            <column name="DICT_ID" type="NVARCHAR(100)" remarks="字典项的ID:随机的UUID,主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="DICT_GROUP_VALUE" type="NVARCHAR(200)">
+            <column name="DICT_KEY" type="NVARCHAR(200)" remarks="字典项的键值:在同一组内必须唯一,用于进行二次开发">
                 <constraints nullable="false"/>
             </column>
-            <column name="DICT_GROUP_TEXT" type="NVARCHAR(200)">
+            <column name="DICT_VALUE" type="NVARCHAR(200)" remarks="字典项的Value:在同一组内必须唯一,绑定到控件时,将使用该值作为Value">
                 <constraints nullable="false"/>
             </column>
-            <column name="DICT_GROUP_ORDER_NUM" type="INT"/>
-            <column name="DICT_GROUP_CREATE_TIME" type="datetime(6)"/>
-            <column name="DICT_GROUP_DESC" type="NVARCHAR(500)"/>
-            <column name="DICT_GROUP_STATUS" type="NVARCHAR(10)"/>
-            <column name="DICT_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
-            <column name="DICT_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="DICT_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
-            <column name="DICT_GROUP_ENP_ITEM" type="NVARCHAR(10)"/>
+            <column name="DICT_TEXT" type="NVARCHAR(200)" remarks="字典项的显示文本">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DICT_GROUP_ID" type="NVARCHAR(100)" remarks="分组ID:字典项所述的分组的ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DICT_ORDER_NUM" type="INT" remarks="排序号"/>
+            <column name="DICT_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="DICT_PARENT_ID" type="NVARCHAR(100)" remarks="父节点的ID"/>
+            <column name="DICT_PARENT_IDLIST" type="NVARCHAR(1200)" remarks="父节点的ID列表"/>
+            <column name="DICT_ISSYSTEM" type="NVARCHAR(10)" remarks="是否是系统字典项"/>
+            <column name="DICT_DEL_ENABLE" type="NVARCHAR(10)" remarks="能否删除"/>
+            <column name="DICT_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用"/>
+            <column name="DICT_IS_SELECTED" type="NVARCHAR(10)" remarks="是否默认选中:需要程序自行实现"/>
+            <column name="DICT_DESC" type="NVARCHAR(500)" remarks="备注"/>
+            <column name="DICT_CHILD_COUNT" type="INT" remarks="子节点的数量:不包含孙节点"/>
+            <column name="DICT_EX_ATTR1" type="NVARCHAR(500)" remarks="扩展属性1:用于开发"/>
+            <column name="DICT_EX_ATTR2" type="NVARCHAR(500)" remarks="扩展属性2:用于开发"/>
+            <column name="DICT_EX_ATTR3" type="NVARCHAR(500)" remarks="扩展属性3:用于开发"/>
+            <column name="DICT_EX_ATTR4" type="NVARCHAR(500)" remarks="扩展属性4:用于开发"/>
+            <column name="DICT_USER_ID" type="NVARCHAR(100)" remarks="创建用户ID"/>
+            <column name="DICT_USER_NAME" type="NVARCHAR(100)" remarks="创建用户名称"/>
+            <column name="DICT_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID"/>
+            <column name="DICT_ORGAN_NAME" type="NVARCHAR(100)" remarks="创建组织名称"/>
         </createTable>
 
         <createTable tableName="TSYS_JB4D_CACHE">

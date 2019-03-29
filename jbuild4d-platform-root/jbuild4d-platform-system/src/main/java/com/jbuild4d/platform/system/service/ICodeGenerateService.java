@@ -22,6 +22,8 @@ public interface ICodeGenerateService {
 
     List<SimpleTableFieldVo> getTableFields(JB4DSession jb4DSession, String tableName) throws JBuild4DGenerallyException;
 
+    String getTableComment(JB4DSession jb4DSession, String tableName) throws JBuild4DGenerallyException;
+
     IntrospectedTable getTableInfo(String tableName);
 
     Map<String,String> getTableGenerateCode(JB4DSession jb4DSession, String tableName, String orderFieldName, String statusFieldName, String packageType, String packageLevel2Name) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException;

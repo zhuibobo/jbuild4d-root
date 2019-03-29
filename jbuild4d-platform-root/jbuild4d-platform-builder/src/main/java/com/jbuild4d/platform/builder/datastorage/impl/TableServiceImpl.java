@@ -5,6 +5,8 @@ import com.jbuild4d.base.dbaccess.dao.builder.TableMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
+import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.core.base.exception.JBuild4DPhysicalTableException;
 import com.jbuild4d.core.base.exception.JBuild4DSQLKeyWordException;
@@ -15,12 +17,14 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.core.base.list.IListWhereCondition;
 import com.jbuild4d.core.base.list.ListUtility;
 import com.jbuild4d.platform.builder.datastorage.dbtablebuilder.TableBuilederFace;
+import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.exenum.TableTypeEnum;
 import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.platform.builder.vo.UpdateTableResolveVo;
 import com.jbuild4d.platform.builder.vo.ValidateTableUpdateResultVo;
 import com.jbuild4d.platform.system.service.ICodeGenerateService;
+import org.mybatis.generatorex.api.IntrospectedColumn;
 import org.mybatis.generatorex.api.IntrospectedTable;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +59,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Override
     public int saveSimple(JB4DSession jb4DSession, String id, TableEntity record) throws JBuild4DGenerallyException {
-        throw new JBuild4DGenerallyException("未使用改方法");
+        throw new JBuild4DGenerallyException("未实现该方法");
     }
 
     @Override
@@ -302,7 +306,13 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     }
 
     @Override
-    public boolean deleteLogicTableAndFields(JB4DSession jb4DSession, String tableName, String warningOperationCode){
+    public boolean deleteLogicTableAndFields(JB4DSession jb4DSession, String tableName, String warningOperationCode) throws JBuild4DGenerallyException {
+        TableEntity tableEntity=tableMapper.selectByTableName(tableName);
+        if(tableEntity!=null){
+            tableMapper.deleteByPrimaryKey(tableEntity.getTableId());
+            tableFieldMapper.deleteByTableId(tableEntity.getTableId());
+            return true;
+        }
         return true;
     }
 
@@ -312,9 +322,97 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     }
 
     @Override
-    public void registerSystemTableToBuilderToModule(JB4DSession jb4DSession, String tableName, TableGroupEntity tableGroupEntity) {
+    public void registerSystemTableToBuilderToModule(JB4DSession jb4DSession, String tableName, TableGroupEntity tableGroupEntity) throws JBuild4DGenerallyException {
         IntrospectedTable tableInfo=codeGenerateService.getTableInfo(tableName);
-        //删除旧的逻辑记录.
-        //写入新的逻辑记录.
+        if(tableInfo!=null) {
+            //删除旧的逻辑记录.
+            this.deleteLogicTableAndFields(jb4DSession, tableName, JBuild4DProp.getWarningOperationCode());
+            //写入新的逻辑记录.
+            //String tableName=tableInfo.getFullyQualifiedTable().getIntrospectedTableName().toUpperCase();
+            String tableComment = tableInfo.getRemarks();
+            if (tableComment == null || tableComment.equals("")) {
+                tableComment = codeGenerateService.getTableComment(jb4DSession, tableName);
+                if(tableComment==null||tableComment.equals("")){
+                    tableComment=tableName;
+                }
+            }
+            TableEntity tableEntity = new TableEntity();
+            tableEntity.setTableId(tableMapper.nextOrderNum()+"_"+tableName);
+            tableEntity.setTableCaption(tableComment.split(":")[0]);
+            tableEntity.setTableName(tableName);
+            tableEntity.setTableDbname("JBuild4D");
+            tableEntity.setTableCreateTime(new Date());
+            tableEntity.setTableCreater(jb4DSession.getUserName());
+            tableEntity.setTableUpdateTime(new Date());
+            tableEntity.setTableUpdater(jb4DSession.getUserName());
+            tableEntity.setTableServiceValue("");
+            tableEntity.setTableType(TableTypeEnum.DBDesign.getText());
+            tableEntity.setTableIssystem(TrueFalseEnum.True.getDisplayName());
+            tableEntity.setTableOrderNum(tableMapper.nextOrderNum());
+            tableEntity.setTableDesc(tableComment);
+            tableEntity.setTableGroupId(tableGroupEntity.getTableGroupId());
+            tableEntity.setTableStatus(EnableTypeEnum.enable.getDisplayName());
+            tableEntity.setTableLinkId("");
+            tableEntity.setTableOrganId(jb4DSession.getOrganId());
+            tableEntity.setTableOrganName(jb4DSession.getOrganName());
+            tableMapper.insert(tableEntity);
+
+            for (IntrospectedColumn primaryKeyColumn : tableInfo.getPrimaryKeyColumns()) {
+                this.registerSystemTableFieldToBuilderToModule(jb4DSession,tableEntity,primaryKeyColumn,true);
+            }
+
+            for (IntrospectedColumn nonPrimaryKeyColumn : tableInfo.getNonPrimaryKeyColumns()) {
+                this.registerSystemTableFieldToBuilderToModule(jb4DSession,tableEntity,nonPrimaryKeyColumn,false);
+            }
+
+        }
+        else {
+            throw new JBuild4DGenerallyException("获取不到表:"+tableName+"的信息!");
+        }
+    }
+
+    private void registerSystemTableFieldToBuilderToModule(JB4DSession jb4DSession,TableEntity tableEntity,IntrospectedColumn column,boolean isKey) throws JBuild4DGenerallyException {
+        TableFieldEntity tableFieldEntity=new TableFieldEntity();
+        tableFieldEntity.setFieldId(tableFieldMapper.nextOrderNumInTable(tableEntity.getTableId())+column.getActualColumnName());
+        tableFieldEntity.setFieldTableId(tableEntity.getTableId());
+        tableFieldEntity.setFieldName(column.getActualColumnName());
+
+        String tableCaption=column.getActualColumnName().toUpperCase();
+        if(column.getRemarks()!=null&&!column.getRemarks().equals("")){
+            tableCaption=column.getRemarks().split(":")[0];
+        }
+
+        tableFieldEntity.setFieldCaption(tableCaption);
+        tableFieldEntity.setFieldIsPk(isKey?TrueFalseEnum.True.getDisplayName():TrueFalseEnum.False.getDisplayName());
+        tableFieldEntity.setFieldAllowNull(column.isNullable()?TrueFalseEnum.True.getDisplayName():TrueFalseEnum.False.getDisplayName());
+
+        String dbFieldType="";
+        if(column.getJdbcTypeName().toUpperCase().equals("VARCHAR")){
+            dbFieldType= TableFieldTypeEnum.NVarCharType.getText().trim();
+        }
+        else if(column.getJdbcTypeName().toUpperCase().equals("INTEGER")){
+            dbFieldType= TableFieldTypeEnum.IntType.getText().trim();
+        }
+        else if(column.getJdbcTypeName().toUpperCase().equals("TIMESTAMP")){
+            dbFieldType= TableFieldTypeEnum.DataTimeType.getText().trim();
+        }
+        else{
+            throw new JBuild4DGenerallyException("未知类型:"+column.getJdbcTypeName());
+        }
+        tableFieldEntity.setFieldDataType(dbFieldType);
+        tableFieldEntity.setFieldDataLength(column.getLength());
+        tableFieldEntity.setFieldDecimalLength(0);
+        tableFieldEntity.setFieldDefaultValue("");
+        tableFieldEntity.setFieldDefaultText("");
+        tableFieldEntity.setFieldCreateTime(new Date());
+        tableFieldEntity.setFieldCreater(jb4DSession.getUserName());
+        tableFieldEntity.setFieldUpdateTime(new Date());
+        tableFieldEntity.setFieldUpdater(jb4DSession.getUserName());
+        tableFieldEntity.setFieldDesc(column.getRemarks());
+        tableFieldEntity.setFieldOrderNum(tableFieldMapper.nextOrderNumInTable(tableEntity.getTableId()));
+        tableFieldEntity.setFieldTemplateName("");
+        tableFieldEntity.setFieldDefaultType("");
+
+        tableFieldMapper.insert(tableFieldEntity);
     }
 }

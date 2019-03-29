@@ -103,10 +103,6 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemBase.setTableGroupValue("JBuild4D-System");
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystem,jBuild4DSystemBase);
 
-        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_DICTIONARY",jBuild4DSystemBase);
-        //List<String> systemAboutTable=new ArrayList<>();
-        //systemAboutTable.add("");
-
         //系统设置相关表
         deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemSetting, JBuild4DProp.getWarningOperationCode());
         TableGroupEntity jBuild4DSystemSetting=new TableGroupEntity();
@@ -116,6 +112,9 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemSetting.setTableGroupText("系统设置相关表");
         jBuild4DSystemSetting.setTableGroupValue("系统设置相关表");
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemSetting,jBuild4DSystemSetting);
+
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_DICTIONARY_GROUP",jBuild4DSystemSetting);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_DICTIONARY",jBuild4DSystemSetting);
 
         //单点登录相关表
         deleteByKeyNotValidate(jb4DSession, TableGroupJBuild4DSystemSSORelevance, JBuild4DProp.getWarningOperationCode());

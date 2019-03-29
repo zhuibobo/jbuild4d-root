@@ -104,6 +104,22 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         return result;
     }
 
+    @Override
+    public String getTableComment(JB4DSession jb4DSession,String tableName) throws JBuild4DGenerallyException {
+        String sql="";
+        if(DBProp.isSqlServer()){
+            throw JBuild4DGenerallyException.getNotSupportMSSQLException();
+        }
+        else if(DBProp.isMySql()){
+            sql="SELECT * FROM information_schema.tables WHERE table_schema = '"+DBProp.getDatabaseName()+"' and table_name=#{tableName}";
+        }
+        else if(DBProp.isOracle()){
+            throw JBuild4DGenerallyException.getNotSupportOracleException();
+        }
+        Map<String, Object> tableInfo=sqlBuilderService.selectOne(sql,tableName);
+        return tableInfo.get("TABLE_COMMENT").toString();
+    }
+
     private String EntityRootFolderKey="EntityRootFolderKey";
     private String DaoRootFolderKey="DaoRootFolderKey";
     private String XmlRootFolderKey="XmlRootFolderKey";

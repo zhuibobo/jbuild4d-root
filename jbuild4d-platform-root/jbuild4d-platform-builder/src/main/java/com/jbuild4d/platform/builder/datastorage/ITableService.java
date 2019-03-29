@@ -43,9 +43,9 @@ public interface ITableService extends IBaseService<TableEntity> {
 
     boolean deletePhysicsTable(JB4DSession jb4DSession, String tableName, String warningOperationCode) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException, JBuild4DGenerallyException;
 
-    boolean deleteLogicTableAndFields(JB4DSession jb4DSession, String tableName, String warningOperationCode);
+    boolean deleteLogicTableAndFields(JB4DSession jb4DSession, String tableName, String warningOperationCode) throws JBuild4DGenerallyException;
 
     TableEntity getByTableName(JB4DSession jb4DSession, String tableName);
 
-    void registerSystemTableToBuilderToModule(JB4DSession jb4DSession, String tableName, TableGroupEntity tableGroupEntity);
+    void registerSystemTableToBuilderToModule(JB4DSession jb4DSession, String tableName, TableGroupEntity tableGroupEntity) throws JBuild4DGenerallyException;
 }
