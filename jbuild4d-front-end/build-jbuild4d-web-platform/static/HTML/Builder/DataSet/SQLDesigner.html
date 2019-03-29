@@ -350,6 +350,7 @@
                     }, "json");
                 },
                 handleClose: function () {
+                    //debugger;
                     DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
                 },
                 coverSQLDesign:function(){
@@ -369,7 +370,7 @@
                     var sql=this.getEditSQL();
                     var url = '/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/ValidateSQLEnable.do';
                     AjaxUtility.Post(url, {sqlText:encodeURIComponent(sql)}, function (result) {
-                        debugger;
+                        //debugger;
                         if(result.success){
                             //debugger;
                             result.data.sqlWithEnvText=sql;

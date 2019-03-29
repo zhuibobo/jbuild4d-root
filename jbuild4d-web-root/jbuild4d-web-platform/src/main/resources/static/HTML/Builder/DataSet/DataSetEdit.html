@@ -269,6 +269,7 @@
                     DialogUtility.Frame_CloseDialog(window);
                 },
                 designSQL:function () {
+                    //debugger;
                     var url=BaseUtility.BuildView("/HTML/Builder/DataSet/SQLDesigner.html",{});
                     DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑SQL语句",modal:true}, 1);
                 },
