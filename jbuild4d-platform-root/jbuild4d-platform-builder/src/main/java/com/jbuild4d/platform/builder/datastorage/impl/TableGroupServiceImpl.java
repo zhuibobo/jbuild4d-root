@@ -45,6 +45,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
     private String TableGroupJBuild4DSystemAuth="TableGroupJBuild4DSystemAuth";
     private String TableGroupJBuild4DSystemBuilder="TableGroupJBuild4DSystemBuilder";
     private String TableGroupJBuild4DSystemDevDemo="TableGroupJBuild4DSystemDevDemo";
+    private String TableGroupJbuild4DFileStore="TableGroupJbuild4DFileStore";
 
     public TableGroupServiceImpl(TableGroupMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
@@ -131,6 +132,20 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSSORelevance.setTableGroupValue("单点登录相关表");
         this.saveSimple(jb4DSession, TableGroupJBuild4DSystemSSORelevance,jBuild4DSSORelevance);
 
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_ORGAN_TYPE",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_ORGAN",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_DEPARTMENT",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_DEPARTMENT_USER",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_USER",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_ROLE_GROUP",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_ROLE",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_USER_ROLE",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_AUTHORITY",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_SSO_APP",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_SSO_APP_INTERFACE",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_SSO_APP_FILE",jBuild4DSSORelevance);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_SSO_APP_USER_MAPPING",jBuild4DSSORelevance);
+
         //权限相关表
         /*deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemAuth, JBuild4DProp.getWarningOperationCode());
         TableGroupEntity jBuild4DSystemAuth=new TableGroupEntity();
@@ -150,6 +165,37 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemBuilder.setTableGroupText("应用设计相关表");
         jBuild4DSystemBuilder.setTableGroupValue("应用设计相关表");
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemBuilder,jBuild4DSystemBuilder);
+
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_SERVICE_LINK",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_TABLE_GROUP",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_TABLE",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_TABLE_FIELD",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_TABLE_RELATION_GROUP",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_TABLE_RELATION",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_TABLE_RELATION_HIS",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_DATASET_GROUP",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_DATASET",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_DATASET_COLUMN",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_DATASET_RELATED_TABLE",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_MODULE",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_FLOW_MODEL",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_FORM_CONFIG",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_FORM_RESOURCE",jBuild4DSystemBuilder);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_LIST_RESOURCE",jBuild4DSystemBuilder);
+
+        //文件存储相关表
+        deleteByKeyNotValidate(jb4DSession,TableGroupJbuild4DFileStore, JBuild4DProp.getWarningOperationCode());
+        TableGroupEntity jbuild4DFileStore=new TableGroupEntity();
+        jbuild4DFileStore.setTableGroupId(TableGroupJbuild4DFileStore);
+        jbuild4DFileStore.setTableGroupParentId(jBuild4DSystemBase.getTableGroupId());
+        jbuild4DFileStore.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
+        jbuild4DFileStore.setTableGroupText("文件存储相关表");
+        jbuild4DFileStore.setTableGroupValue("文件存储相关表");
+        this.saveSimple(jb4DSession,TableGroupJbuild4DFileStore,jbuild4DFileStore);
+
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TFS_FILE_INFO",jbuild4DFileStore);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TFS_FILE_CONTENT",jbuild4DFileStore);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TFS_FILE_REF",jbuild4DFileStore);
 
         //开发示例相关表
         deleteByKeyNotValidate(jb4DSession,TableGroupJBuild4DSystemDevDemo, JBuild4DProp.getWarningOperationCode());

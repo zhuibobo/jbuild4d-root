@@ -263,6 +263,202 @@
 
     <!--模块构建-->
     <changeSet author="zhuangrb" id="changeSet-Module-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+
+        <createTable tableName="TBUILD_SERVICE_LINK">
+            <column name="LINK_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LINK_VALUE" type="NVARCHAR(200)"/>
+            <column name="LINK_NAME" type="NVARCHAR(200)"/>
+            <column name="LINK_TYPE" type="NVARCHAR(200)"/>
+            <column name="LINK_URL" type="NVARCHAR(1000)"/>
+            <column name="LINK_PARAS" type="NVARCHAR(2000)"/>
+            <column name="LINK_USER" type="NVARCHAR(100)"/>
+            <column name="LINK_PASSWORD" type="NVARCHAR(100)"/>
+            <column name="LINK_CREATE_TIME" type="datetime(6)"/>
+            <column name="LINK_ORDER_NUM" type="INT"/>
+            <column name="LINK_DESC" type="NVARCHAR(500)"/>
+            <column name="LINK_IS_LOCATION" type="NVARCHAR(10)"/>
+            <column name="LINK_STATUS" type="NVARCHAR(50)"/>
+            <column name="LINK_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="LINK_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+
+        <createTable tableName="TBUILD_TABLE_GROUP">
+            <column name="TABLE_GROUP_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TABLE_GROUP_VALUE" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_GROUP_TEXT" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_GROUP_ORDER_NUM" type="INT"/>
+            <column name="TABLE_GROUP_CREATE_TIME" type="datetime(6)"/>
+            <column name="TABLE_GROUP_DESC" type="NVARCHAR(500)"/>
+            <column name="TABLE_GROUP_STATUS" type="NVARCHAR(10)"/>
+            <column name="TABLE_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="TABLE_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="TABLE_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
+            <column name="TABLE_GROUP_PID_LIST" type="NVARCHAR(1200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_GROUP_CHILD_COUNT" type="INT"/>
+            <column name="TABLE_GROUP_LINK_ID" type="NVARCHAR(100)"/>
+            <column name="TABLE_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="TABLE_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+
+        <createTable tableName="TBUILD_TABLE">
+            <column name="TABLE_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TABLE_CAPTION" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_NAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_DBNAME" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_CREATE_TIME" type="datetime(6)"/>
+            <column name="TABLE_CREATER" type="NVARCHAR(100)"/>
+            <column name="TABLE_UPDATE_TIME" type="datetime(6)"/>
+            <column name="TABLE_UPDATER" type="NVARCHAR(100)"/>
+            <column name="TABLE_SERVICE_VALUE" type="NVARCHAR(100)"/>
+            <column name="TABLE_TYPE" type="NVARCHAR(100)"/>
+            <column name="TABLE_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="TABLE_ORDER_NUM" type="INT"/>
+            <column name="TABLE_DESC" type="NVARCHAR(2000)"/>
+            <column name="TABLE_GROUP_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_STATUS" type="NVARCHAR(10)"/>
+            <column name="TABLE_LINK_ID" type="NVARCHAR(100)"/>
+            <column name="TABLE_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="TABLE_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+
+        <createTable tableName="TBUILD_TABLE_FIELD">
+            <column name="FIELD_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="FIELD_TABLE_ID" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_NAME" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_CAPTION" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_IS_PK" type="NVARCHAR(10)"/>
+            <column name="FIELD_ALLOW_NULL" type="NVARCHAR(10)"/>
+            <column name="FIELD_DATA_TYPE" type="NVARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_DATA_LENGTH" type="INT"/>
+            <column name="FIELD_DECIMAL_LENGTH" type="INT"/>
+            <column name="FIELD_DEFAULT_TYPE" type="NVARCHAR(50)"/>
+            <column name="FIELD_DEFAULT_VALUE" type="NVARCHAR(1000)"/>
+            <column name="FIELD_DEFAULT_TEXT" type="NVARCHAR(400)"/>
+            <column name="FIELD_CREATE_TIME" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_CREATER" type="NVARCHAR(100)"/>
+            <column name="FIELD_UPDATE_TIME" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELD_UPDATER" type="NVARCHAR(100)"/>
+            <column name="FIELD_DESC" type="NVARCHAR(500)"/>
+            <column name="FIELD_ORDER_NUM" type="INT"/>
+            <column name="FIELD_TEMPLATE_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+
+        <!--表关系只是作为逻辑上的描述,便于了解项目的数据结构,不做实际上表之间的物理关系-->
+        <createTable tableName="TBUILD_TABLE_RELATION_GROUP" remarks="表关系分组表">
+            <column name="REL_GROUP_ID" type="NVARCHAR(100)" remarks="关联分组ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="REL_GROUP_VALUE" type="NVARCHAR(200)" remarks="关联分组值">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REL_GROUP_TEXT" type="NVARCHAR(200)" remarks="关联分组标题">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REL_GROUP_ORDER_NUM" type="INT" remarks="排序号"/>
+            <column name="REL_GROUP_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="REL_GROUP_DESC" type="NVARCHAR(500)" remarks="描述" />
+            <column name="REL_GROUP_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="REL_GROUP_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID" />
+            <column name="REL_GROUP_ISSYSTEM" type="NVARCHAR(10)" remarks="是否系统" />
+            <column name="REL_GROUP_DEL_ENABLE" type="NVARCHAR(10)" remarks="是否允许删除" />
+            <column name="REL_GROUP_PID_LIST" type="NVARCHAR(1200)" remarks="父节点列表" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="REL_GROUP_CHILD_COUNT" type="INT" remarks="子节点数量" />
+            <column name="REL_GROUP_USER_ID" type="NVARCHAR(100)" remarks="创建人ID" />
+            <column name="REL_GROUP_USER_NAME" type="NVARCHAR(100)" remarks="创建人" />
+        </createTable>
+
+        <createTable tableName="TBUILD_TABLE_RELATION" remarks="表关系描述信息表">
+            <column name="RELATION_ID" type="NVARCHAR(100)" remarks="表关联ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="RELATION_GROUP_ID" type="NVARCHAR(100)" remarks="所属分组ID" />
+            <column name="RELATION_NAME" type="NVARCHAR(100)" remarks="表关联名称" />
+            <column name="RELATION_USER_ID" type="NVARCHAR(100)" remarks="创建人ID" />
+            <column name="RELATION_USER_NAME" type="NVARCHAR(100)" remarks="创建人" />
+            <column name="RELATION_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="RELATION_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="RELATION_DESC" type="NVARCHAR(500)" remarks="描述" />
+            <column name="RELATION_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="RELATION_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述" />
+        </createTable>
+
+        <createTable tableName="TBUILD_TABLE_RELATION_HIS" remarks="表关系描述信息历史表">
+            <column name="HIS_ID" type="NVARCHAR(100)" remarks="表关联ID,主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="HIS_GROUP_ID" type="NVARCHAR(100)" remarks="所属分组ID" />
+            <column name="HIS_NAME" type="NVARCHAR(100)" remarks="表关联名称" />
+            <column name="HIS_USER_ID" type="NVARCHAR(100)" remarks="创建人ID" />
+            <column name="HIS_USER_NAME" type="NVARCHAR(100)" remarks="创建人" />
+            <column name="HIS_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="HIS_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="HIS_DESC" type="NVARCHAR(500)" remarks="描述" />
+            <column name="HIS_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="HIS_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述" />
+            <column name="HIS_BELONG_REL_ID" type="NVARCHAR(100)" remarks="所属记录ID" />
+        </createTable>
+
+        <createTable tableName="TBUILD_DATASET_GROUP">
+            <column name="DS_GROUP_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DS_GROUP_VALUE" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_GROUP_TEXT" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_GROUP_ORDER_NUM" type="INT"/>
+            <column name="DS_GROUP_CREATE_TIME" type="datetime(6)"/>
+            <column name="DS_GROUP_DESC" type="NVARCHAR(500)"/>
+            <column name="DS_GROUP_STATUS" type="NVARCHAR(10)"/>
+            <column name="DS_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="DS_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="DS_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
+            <column name="DS_GROUP_PID_LIST" type="NVARCHAR(1200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DS_GROUP_CHILD_COUNT" type="INT"/>
+            <column name="DS_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="DS_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
+        </createTable>
+
         <createTable tableName="TBUILD_DATASET">
             <column name="DS_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -315,31 +511,6 @@
             <column name="COLUMN_FORMATTER" type="NVARCHAR(200)"/>
         </createTable>
 
-        <createTable tableName="TBUILD_DATASET_GROUP">
-            <column name="DS_GROUP_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="DS_GROUP_VALUE" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DS_GROUP_TEXT" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DS_GROUP_ORDER_NUM" type="INT"/>
-            <column name="DS_GROUP_CREATE_TIME" type="datetime(6)"/>
-            <column name="DS_GROUP_DESC" type="NVARCHAR(500)"/>
-            <column name="DS_GROUP_STATUS" type="NVARCHAR(10)"/>
-            <column name="DS_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
-            <column name="DS_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="DS_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
-            <column name="DS_GROUP_PID_LIST" type="NVARCHAR(1200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DS_GROUP_CHILD_COUNT" type="INT"/>
-            <column name="DS_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="DS_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
-        </createTable>
-
         <createTable tableName="TBUILD_DATASET_RELATED_TABLE">
             <column name="RT_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -351,6 +522,31 @@
             <column name="RT_TABLE_TYPE" type="NVARCHAR(200)"/>
             <column name="RT_DESC" type="NVARCHAR(1000)"/>
             <column name="RT_ORDER_NUM" type="INT"/>
+        </createTable>
+
+        <createTable tableName="TBUILD_MODULE">
+            <column name="MODULE_ID" type="NVARCHAR(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="MODULE_VALUE" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODULE_TEXT" type="NVARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODULE_ORDER_NUM" type="INT"/>
+            <column name="MODULE_CREATE_TIME" type="datetime(6)"/>
+            <column name="MODULE_DESC" type="NVARCHAR(500)"/>
+            <column name="MODULE_STATUS" type="NVARCHAR(10)"/>
+            <column name="MODULE_PARENT_ID" type="NVARCHAR(100)"/>
+            <column name="MODULE_ISSYSTEM" type="NVARCHAR(10)"/>
+            <column name="MODULE_DEL_ENABLE" type="NVARCHAR(10)"/>
+            <column name="MODULE_PID_LIST" type="NVARCHAR(1200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODULE_CHILD_COUNT" type="INT"/>
+            <column name="MODULE_ORGAN_ID" type="NVARCHAR(100)"/>
+            <column name="MODULE_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
         <createTable tableName="TBUILD_FLOW_MODEL">
@@ -481,201 +677,6 @@
             <column name="LIST_CONFIG_CONTENT" type="MEDIUMTEXT"/>
             <column name="LIST_ENABLE_S_SEAR" remarks="是否启用简单查询" type="NVARCHAR(10)"/>
             <column name="LIST_ENABLE_C_SEAR" remarks="是否启用复杂查询" type="NVARCHAR(10)"/>
-        </createTable>
-
-        <createTable tableName="TBUILD_MODULE">
-            <column name="MODULE_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="MODULE_VALUE" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="MODULE_TEXT" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="MODULE_ORDER_NUM" type="INT"/>
-            <column name="MODULE_CREATE_TIME" type="datetime(6)"/>
-            <column name="MODULE_DESC" type="NVARCHAR(500)"/>
-            <column name="MODULE_STATUS" type="NVARCHAR(10)"/>
-            <column name="MODULE_PARENT_ID" type="NVARCHAR(100)"/>
-            <column name="MODULE_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="MODULE_DEL_ENABLE" type="NVARCHAR(10)"/>
-            <column name="MODULE_PID_LIST" type="NVARCHAR(1200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="MODULE_CHILD_COUNT" type="INT"/>
-            <column name="MODULE_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="MODULE_ORGAN_NAME" type="NVARCHAR(100)"/>
-        </createTable>
-
-        <createTable tableName="TBUILD_SERVICE_LINK">
-            <column name="LINK_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="LINK_VALUE" type="NVARCHAR(200)"/>
-            <column name="LINK_NAME" type="NVARCHAR(200)"/>
-            <column name="LINK_TYPE" type="NVARCHAR(200)"/>
-            <column name="LINK_URL" type="NVARCHAR(1000)"/>
-            <column name="LINK_PARAS" type="NVARCHAR(2000)"/>
-            <column name="LINK_USER" type="NVARCHAR(100)"/>
-            <column name="LINK_PASSWORD" type="NVARCHAR(100)"/>
-            <column name="LINK_CREATE_TIME" type="datetime(6)"/>
-            <column name="LINK_ORDER_NUM" type="INT"/>
-            <column name="LINK_DESC" type="NVARCHAR(500)"/>
-            <column name="LINK_IS_LOCATION" type="NVARCHAR(10)"/>
-            <column name="LINK_STATUS" type="NVARCHAR(50)"/>
-            <column name="LINK_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="LINK_ORGAN_NAME" type="NVARCHAR(100)"/>
-        </createTable>
-
-        <createTable tableName="TBUILD_TABLE">
-            <column name="TABLE_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="TABLE_CAPTION" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TABLE_NAME" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TABLE_DBNAME" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TABLE_CREATE_TIME" type="datetime(6)"/>
-            <column name="TABLE_CREATER" type="NVARCHAR(100)"/>
-            <column name="TABLE_UPDATE_TIME" type="datetime(6)"/>
-            <column name="TABLE_UPDATER" type="NVARCHAR(100)"/>
-            <column name="TABLE_SERVICE_VALUE" type="NVARCHAR(100)"/>
-            <column name="TABLE_TYPE" type="NVARCHAR(100)"/>
-            <column name="TABLE_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="TABLE_ORDER_NUM" type="INT"/>
-            <column name="TABLE_DESC" type="NVARCHAR(2000)"/>
-            <column name="TABLE_GROUP_ID" type="NVARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TABLE_STATUS" type="NVARCHAR(10)"/>
-            <column name="TABLE_LINK_ID" type="NVARCHAR(100)"/>
-            <column name="TABLE_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="TABLE_ORGAN_NAME" type="NVARCHAR(100)"/>
-        </createTable>
-
-        <createTable tableName="TBUILD_TABLE_FIELD">
-            <column name="FIELD_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="FIELD_TABLE_ID" type="NVARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="FIELD_NAME" type="NVARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="FIELD_CAPTION" type="NVARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="FIELD_IS_PK" type="NVARCHAR(10)"/>
-            <column name="FIELD_ALLOW_NULL" type="NVARCHAR(10)"/>
-            <column name="FIELD_DATA_TYPE" type="NVARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="FIELD_DATA_LENGTH" type="INT"/>
-            <column name="FIELD_DECIMAL_LENGTH" type="INT"/>
-            <column name="FIELD_DEFAULT_TYPE" type="NVARCHAR(50)"/>
-            <column name="FIELD_DEFAULT_VALUE" type="NVARCHAR(1000)"/>
-            <column name="FIELD_DEFAULT_TEXT" type="NVARCHAR(400)"/>
-            <column name="FIELD_CREATE_TIME" type="datetime(6)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="FIELD_CREATER" type="NVARCHAR(100)"/>
-            <column name="FIELD_UPDATE_TIME" type="datetime(6)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="FIELD_UPDATER" type="NVARCHAR(100)"/>
-            <column name="FIELD_DESC" type="NVARCHAR(500)"/>
-            <column name="FIELD_ORDER_NUM" type="INT"/>
-            <column name="FIELD_TEMPLATE_NAME" type="NVARCHAR(100)"/>
-        </createTable>
-
-        <createTable tableName="TBUILD_TABLE_GROUP">
-            <column name="TABLE_GROUP_ID" type="NVARCHAR(100)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="TABLE_GROUP_VALUE" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TABLE_GROUP_TEXT" type="NVARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TABLE_GROUP_ORDER_NUM" type="INT"/>
-            <column name="TABLE_GROUP_CREATE_TIME" type="datetime(6)"/>
-            <column name="TABLE_GROUP_DESC" type="NVARCHAR(500)"/>
-            <column name="TABLE_GROUP_STATUS" type="NVARCHAR(10)"/>
-            <column name="TABLE_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
-            <column name="TABLE_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="TABLE_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
-            <column name="TABLE_GROUP_PID_LIST" type="NVARCHAR(1200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TABLE_GROUP_CHILD_COUNT" type="INT"/>
-            <column name="TABLE_GROUP_LINK_ID" type="NVARCHAR(100)"/>
-            <column name="TABLE_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="TABLE_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
-        </createTable>
-
-        <!--表关系只是作为逻辑上的描述,便于了解项目的数据结构,不做实际上表之间的物理关系-->
-        <createTable tableName="TBUILD_TABLE_RELATION_GROUP" remarks="表关系分组表">
-            <column name="REL_GROUP_ID" type="NVARCHAR(100)" remarks="关联分组ID,主键">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="REL_GROUP_VALUE" type="NVARCHAR(200)" remarks="关联分组值">
-                <constraints nullable="false"/>
-            </column>
-            <column name="REL_GROUP_TEXT" type="NVARCHAR(200)" remarks="关联分组标题">
-                <constraints nullable="false"/>
-            </column>
-            <column name="REL_GROUP_ORDER_NUM" type="INT" remarks="排序号"/>
-            <column name="REL_GROUP_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
-            <column name="REL_GROUP_DESC" type="NVARCHAR(500)" remarks="描述" />
-            <column name="REL_GROUP_STATUS" type="NVARCHAR(10)" remarks="状态" />
-            <column name="REL_GROUP_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID" />
-            <column name="REL_GROUP_ISSYSTEM" type="NVARCHAR(10)" remarks="是否系统" />
-            <column name="REL_GROUP_DEL_ENABLE" type="NVARCHAR(10)" remarks="是否允许删除" />
-            <column name="REL_GROUP_PID_LIST" type="NVARCHAR(1200)" remarks="父节点列表" >
-                <constraints nullable="false"/>
-            </column>
-            <column name="REL_GROUP_CHILD_COUNT" type="INT" remarks="子节点数量" />
-            <column name="REL_GROUP_USER_ID" type="NVARCHAR(100)" remarks="创建人ID" />
-            <column name="REL_GROUP_USER_NAME" type="NVARCHAR(100)" remarks="创建人" />
-        </createTable>
-
-        <createTable tableName="TBUILD_TABLE_RELATION" remarks="表关系描述信息表">
-            <column name="RELATION_ID" type="NVARCHAR(100)" remarks="表关联ID,主键">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="RELATION_GROUP_ID" type="NVARCHAR(100)" remarks="所属分组ID" />
-            <column name="RELATION_NAME" type="NVARCHAR(100)" remarks="表关联名称" />
-            <column name="RELATION_USER_ID" type="NVARCHAR(100)" remarks="创建人ID" />
-            <column name="RELATION_USER_NAME" type="NVARCHAR(100)" remarks="创建人" />
-            <column name="RELATION_ORDER_NUM" type="INT" remarks="排序号" />
-            <column name="RELATION_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
-            <column name="RELATION_DESC" type="NVARCHAR(500)" remarks="描述" />
-            <column name="RELATION_STATUS" type="NVARCHAR(10)" remarks="状态" />
-            <column name="RELATION_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述" />
-        </createTable>
-
-        <createTable tableName="TBUILD_TABLE_RELATION_HIS" remarks="表关系描述信息历史表">
-            <column name="HIS_ID" type="NVARCHAR(100)" remarks="表关联ID,主键">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="HIS_GROUP_ID" type="NVARCHAR(100)" remarks="所属分组ID" />
-            <column name="HIS_NAME" type="NVARCHAR(100)" remarks="表关联名称" />
-            <column name="HIS_USER_ID" type="NVARCHAR(100)" remarks="创建人ID" />
-            <column name="HIS_USER_NAME" type="NVARCHAR(100)" remarks="创建人" />
-            <column name="HIS_ORDER_NUM" type="INT" remarks="排序号" />
-            <column name="HIS_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
-            <column name="HIS_DESC" type="NVARCHAR(500)" remarks="描述" />
-            <column name="HIS_STATUS" type="NVARCHAR(10)" remarks="状态" />
-            <column name="HIS_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述" />
-            <column name="HIS_BELONG_REL_ID" type="NVARCHAR(100)" remarks="所属记录ID" />
         </createTable>
     </changeSet>
 

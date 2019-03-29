@@ -373,7 +373,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     private void registerSystemTableFieldToBuilderToModule(JB4DSession jb4DSession,TableEntity tableEntity,IntrospectedColumn column,boolean isKey) throws JBuild4DGenerallyException {
         TableFieldEntity tableFieldEntity=new TableFieldEntity();
-        tableFieldEntity.setFieldId(tableFieldMapper.nextOrderNumInTable(tableEntity.getTableId())+column.getActualColumnName());
+        tableFieldEntity.setFieldId(tableEntity.getTableName()+tableFieldMapper.nextOrderNumInTable(tableEntity.getTableId())+column.getActualColumnName());
         tableFieldEntity.setFieldTableId(tableEntity.getTableId());
         tableFieldEntity.setFieldName(column.getActualColumnName());
 
@@ -390,13 +390,13 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         if(column.getJdbcTypeName().toUpperCase().equals("VARCHAR")){
             dbFieldType= TableFieldTypeEnum.NVarCharType.getText().trim();
         }
-        else if(column.getJdbcTypeName().toUpperCase().equals("INTEGER")){
+        else if(column.getJdbcTypeName().toUpperCase().equals("INTEGER")||column.getJdbcTypeName().toUpperCase().equals("BIGINT")){
             dbFieldType= TableFieldTypeEnum.IntType.getText().trim();
         }
         else if(column.getJdbcTypeName().toUpperCase().equals("TIMESTAMP")){
             dbFieldType= TableFieldTypeEnum.DataTimeType.getText().trim();
         }
-        else if(column.getJdbcTypeName().toUpperCase().equals("LONGVARCHAR")){
+        else if(column.getJdbcTypeName().toUpperCase().equals("LONGVARCHAR")||column.getJdbcTypeName().toUpperCase().equals("LONGVARBINARY")){
             dbFieldType= TableFieldTypeEnum.TextType.getText().trim();
         }
         else{
