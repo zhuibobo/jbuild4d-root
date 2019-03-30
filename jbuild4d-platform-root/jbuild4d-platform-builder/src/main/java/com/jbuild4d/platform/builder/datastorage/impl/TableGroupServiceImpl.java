@@ -207,6 +207,11 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemDevDemo.setTableGroupValue("开发示例相关表");
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemDevDemo,jBuild4DSystemDevDemo);
 
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TDEV_DEMO_GEN_LIST",jBuild4DSystemDevDemo);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TDEV_DEMO_TL_TREE",jBuild4DSystemDevDemo);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TDEV_DEMO_TL_TREE_LIST",jBuild4DSystemDevDemo);
+        tableService.registerSystemTableToBuilderToModule(jb4DSession,"TDEV_DEMO_TREE_TABLE",jBuild4DSystemDevDemo);
+
         return jBuild4DSystemBase;
     }
 

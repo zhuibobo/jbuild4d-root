@@ -68,6 +68,9 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
 
         tableFieldMapper.deleteTemplate("新闻类模版");
         this.createCMSTableFieldTemplate("新闻类模版",jb4DSession);
+
+        tableFieldMapper.deleteTemplate("树结构数据模版");
+        this.createTreeStructureFieldTemplate("树结构数据模版",jb4DSession);
     }
 
     private void createGeneralTableFieldTemplate(String templateName,JB4DSession jb4DSession){
@@ -180,6 +183,10 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
                 "","","",
                 "",templateName);
         tableFieldMapper.insert(authorField);
+    }
+
+    private void createTreeStructureFieldTemplate(String templateName,JB4DSession jb4DSession){
+        this.createGeneralTableFieldTemplate(templateName,jb4DSession);
     }
 
     @Override
