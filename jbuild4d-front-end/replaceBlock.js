@@ -42,6 +42,7 @@ let replaceBlock = {
         replaceArray.push(refJs(levelPath + "Js/T3P/IView-3.X/dist/iview.min.js"));
         replaceArray.push(refJs(levelPath + "Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"));
         replaceArray.push(refJs(levelPath + "Js/T3P/ZTree-V3/js/jquery.ztree.all.js"));
+        replaceArray.push(refJs(levelPath + "Js/T3P/perfect-scrollbar-14/perfect-scrollbar.js"));
         replaceArray.push(refJs(levelPath + "Js/JBuild4DPlatformLib.js?refVersion=" + refVersion));
         replaceArray.push(refJs(levelPath + "Js/UIEXComponent.js?refVersion=" + refVersion));
         replaceArray.push(refJs(levelPath + "Js/VueEXComponent.js?refVersion=" + refVersion));

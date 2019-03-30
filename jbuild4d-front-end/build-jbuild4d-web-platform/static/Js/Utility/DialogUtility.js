@@ -95,7 +95,9 @@ var DialogUtility={
         $(htmlElem).dialog(defaultConfig);
     },
     AlertJsonCode:function(json){
-        json=JsonUtility.JsonToStringFormat(json);
+        if(typeof(json)=="object") {
+            json = JsonUtility.JsonToStringFormat(json);
+        }
         json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
         json = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
             var cls = 'json-number';

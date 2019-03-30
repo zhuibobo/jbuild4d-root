@@ -21,7 +21,7 @@ Vue.component("table-relation-content-comp", {
             $(".table-relation-op-buttons-outer-wrap").css("width","100%");
         }
         this.initDiagram();
-        this.setFormatJson();
+        this.setDataJson();
         this.loadData();
     },
     methods:{
@@ -425,7 +425,7 @@ Vue.component("table-relation-content-comp", {
 
         },
         loadData:function(){
-            var formatJson=this.getFormatJson();
+            var formatJson=this.formatJson;
             this.convertToFullJson(formatJson,this.drawObjInDiagram)
         },
         convertToFullJson:function(simpleJson,func){
@@ -491,10 +491,36 @@ Vue.component("table-relation-content-comp", {
         getNorFieldBrush:function(){
             return go.GraphObject.make(go.Brush, "Linear", { 0: "rgb(150, 150, 250)", 0.5: "rgb(86, 86, 186)", 1: "rgb(86, 86, 186)" });
         },
-        getFormatJson:function () {
-            return this.formatJson;
+        getDataJson:function () {
+            var dataJson={
+                tableList:[],
+                lineList:[]
+            };
+            this.tableRelationDiagram.nodes.each(function (part) {
+                if (part instanceof go.Node) {
+                    dataJson.tableList.push({
+                        tableId:part.data.tableId,
+                        loc:part.location.x+" "+part.location.y
+                    })
+                }
+                else if (part instanceof go.Link) {
+                    alert("line");
+                }
+            });
+            this.tableRelationDiagram.links.each(function (part) {
+                if (part instanceof go.Link) {
+                    dataJson.lineList.push({
+                        lineId:part.data.lineId,
+                        from:part.data.from,
+                        to:part.data.to,
+                        fromText:part.data.fromText,
+                        toText:part.data.toText,
+                    })
+                }
+            });
+            return dataJson;
         },
-        setFormatJson:function (json) {
+        setDataJson:function (json) {
             var json= {
                 tableList: [
                     {
@@ -530,7 +556,15 @@ Vue.component("table-relation-content-comp", {
             this.formatJson=json;
         },
         getDiagramJson:function () {
-
+            return this.tableRelationDiagram.model.toJson();
+        },
+        alertDataJson:function () {
+            var dataJson=this.getDataJson();
+            DialogUtility.AlertJsonCode(dataJson);
+        },
+        alertDiagramJson:function () {
+            var diagramJson=this.getDiagramJson();
+            DialogUtility.AlertJsonCode(diagramJson);
         }
     },
     template: `<div ref="relationContentOuterWrap" class="table-relation-content-outer-wrap">
@@ -553,8 +587,8 @@ Vue.component("table-relation-content-comp", {
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-return-left">引入</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-albums">全屏</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-git-compare">历史</i-button>
-                                    <i-button @click="connectSelectionNode" type="primary" icon="md-code">数据Json</i-button>
-                                    <i-button @click="connectSelectionNode" type="primary" icon="md-code-working">图形Json</i-button>
+                                    <i-button @click="alertDataJson" type="primary" icon="md-code">数据Json</i-button>
+                                    <i-button @click="alertDiagramJson" type="primary" icon="md-code-working">图形Json</i-button>
                                     <i-button @click="deleteSelection" type="primary" icon="md-close"></i-button>
                                 </button-group>
                             </div>
