@@ -404,7 +404,7 @@
         </createTable>
 
         <createTable tableName="TBUILD_TABLE_RELATION" remarks="表关系描述信息表">
-            <column name="RELATION_ID" type="NVARCHAR(100)" remarks="表关联ID,主键">
+            <column name="RELATION_ID" type="NVARCHAR(100)" remarks="表关联ID:主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="RELATION_GROUP_ID" type="NVARCHAR(100)" remarks="所属分组ID" />
@@ -415,7 +415,8 @@
             <column name="RELATION_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
             <column name="RELATION_DESC" type="NVARCHAR(500)" remarks="描述" />
             <column name="RELATION_STATUS" type="NVARCHAR(10)" remarks="状态" />
-            <column name="RELATION_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述" />
+            <column name="RELATION_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述:抽取元素的组要属性进行存储" />
+            <column name="RELATION_DIAGRAM_JSON" type="MEDIUMTEXT" remarks="画布的原始Json:用于生成图片" />
         </createTable>
 
         <createTable tableName="TBUILD_TABLE_RELATION_HIS" remarks="表关系描述信息历史表">

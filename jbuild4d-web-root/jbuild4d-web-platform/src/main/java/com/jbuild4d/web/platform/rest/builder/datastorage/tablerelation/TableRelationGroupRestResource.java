@@ -3,6 +3,7 @@ package com.jbuild4d.web.platform.rest.builder.datastorage.tablerelation;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import com.jbuild4d.platform.builder.datastorage.ITableRelationGroupService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,9 @@ public class TableRelationGroupRestResource extends GeneralRestResource<TableRel
     }
 
     @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    public List<TableRelationGroupEntity> getTreeData() {
+    public JBuild4DResponseVo getTreeData() {
         List<TableRelationGroupEntity> tableGroupEntityList=tableRelationGroupService.getALLASC(JB4DSessionUtility.getSession());
-        return tableGroupEntityList;
+        return JBuild4DResponseVo.getDataSuccess(tableGroupEntityList);
     }
 
 }

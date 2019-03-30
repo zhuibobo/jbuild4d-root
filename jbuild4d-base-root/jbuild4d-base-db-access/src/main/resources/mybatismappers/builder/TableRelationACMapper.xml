@@ -14,7 +14,7 @@
             <arg column="RELATION_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
-    <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+    <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntityWithBLOBs">
         <constructor>
             <idArg column="RELATION_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="RELATION_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -26,6 +26,7 @@
             <arg column="RELATION_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="RELATION_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="RELATION_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="RELATION_DIAGRAM_JSON" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
@@ -33,7 +34,7 @@
         RELATION_ORDER_NUM, RELATION_CREATE_TIME, RELATION_DESC, RELATION_STATUS
     </sql>
     <sql id="Blob_Column_List">
-        RELATION_CONTENT
+        RELATION_CONTENT, RELATION_DIAGRAM_JSON
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
         select
@@ -47,17 +48,19 @@
         delete from TBUILD_TABLE_RELATION
         where RELATION_ID = #{relationId,jdbcType=VARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntityWithBLOBs">
         insert into TBUILD_TABLE_RELATION (RELATION_ID, RELATION_GROUP_ID, RELATION_NAME,
-                                         RELATION_USER_ID, RELATION_USER_NAME, RELATION_ORDER_NUM,
-                                         RELATION_CREATE_TIME, RELATION_DESC, RELATION_STATUS,
-                                         RELATION_CONTENT)
+                                           RELATION_USER_ID, RELATION_USER_NAME, RELATION_ORDER_NUM,
+                                           RELATION_CREATE_TIME, RELATION_DESC, RELATION_STATUS,
+                                           RELATION_CONTENT, RELATION_DIAGRAM_JSON
+                )
         values (#{relationId,jdbcType=VARCHAR}, #{relationGroupId,jdbcType=VARCHAR}, #{relationName,jdbcType=VARCHAR},
                 #{relationUserId,jdbcType=VARCHAR}, #{relationUserName,jdbcType=VARCHAR}, #{relationOrderNum,jdbcType=INTEGER},
                 #{relationCreateTime,jdbcType=TIMESTAMP}, #{relationDesc,jdbcType=VARCHAR}, #{relationStatus,jdbcType=VARCHAR},
-                #{relationContent,jdbcType=LONGVARCHAR})
+                #{relationContent,jdbcType=LONGVARCHAR}, #{relationDiagramJson,jdbcType=LONGVARCHAR}
+                       )
     </insert>
-    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntityWithBLOBs">
         insert into TBUILD_TABLE_RELATION
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="relationId != null">
@@ -89,6 +92,9 @@
             </if>
             <if test="relationContent != null">
                 RELATION_CONTENT,
+            </if>
+            <if test="relationDiagramJson != null">
+                RELATION_DIAGRAM_JSON,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -122,9 +128,12 @@
             <if test="relationContent != null">
                 #{relationContent,jdbcType=LONGVARCHAR},
             </if>
+            <if test="relationDiagramJson != null">
+                #{relationDiagramJson,jdbcType=LONGVARCHAR},
+            </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntityWithBLOBs">
         update TBUILD_TABLE_RELATION
         <set>
             <if test="relationGroupId != null">
@@ -154,10 +163,13 @@
             <if test="relationContent != null">
                 RELATION_CONTENT = #{relationContent,jdbcType=LONGVARCHAR},
             </if>
+            <if test="relationDiagramJson != null">
+                RELATION_DIAGRAM_JSON = #{relationDiagramJson,jdbcType=LONGVARCHAR},
+            </if>
         </set>
         where RELATION_ID = #{relationId,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntityWithBLOBs">
         update TBUILD_TABLE_RELATION
         set RELATION_GROUP_ID = #{relationGroupId,jdbcType=VARCHAR},
             RELATION_NAME = #{relationName,jdbcType=VARCHAR},
@@ -167,7 +179,8 @@
             RELATION_CREATE_TIME = #{relationCreateTime,jdbcType=TIMESTAMP},
             RELATION_DESC = #{relationDesc,jdbcType=VARCHAR},
             RELATION_STATUS = #{relationStatus,jdbcType=VARCHAR},
-            RELATION_CONTENT = #{relationContent,jdbcType=LONGVARCHAR}
+            RELATION_CONTENT = #{relationContent,jdbcType=LONGVARCHAR},
+            RELATION_DIAGRAM_JSON = #{relationDiagramJson,jdbcType=LONGVARCHAR}
         where RELATION_ID = #{relationId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity">

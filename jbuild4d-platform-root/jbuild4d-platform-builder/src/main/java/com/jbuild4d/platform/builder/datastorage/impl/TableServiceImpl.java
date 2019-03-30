@@ -402,6 +402,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         tableFieldEntity.setFieldAllowNull(column.isNullable()?TrueFalseEnum.True.getDisplayName():TrueFalseEnum.False.getDisplayName());
 
         String dbFieldType="";
+        tableFieldEntity.setFieldDecimalLength(0);
         if(column.getJdbcTypeName().toUpperCase().equals("VARCHAR")){
             dbFieldType= TableFieldTypeEnum.NVarCharType.getText().trim();
         }
@@ -414,12 +415,16 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         else if(column.getJdbcTypeName().toUpperCase().equals("LONGVARCHAR")||column.getJdbcTypeName().toUpperCase().equals("LONGVARBINARY")){
             dbFieldType= TableFieldTypeEnum.TextType.getText().trim();
         }
+        else if(column.getJdbcTypeName().toUpperCase().equals("DECIMAL")){
+            dbFieldType= TableFieldTypeEnum.NumberType.getText().trim();
+            tableFieldEntity.setFieldDecimalLength(2);
+        }
         else{
             throw new JBuild4DGenerallyException("未知类型:"+column.getJdbcTypeName());
         }
         tableFieldEntity.setFieldDataType(dbFieldType);
         tableFieldEntity.setFieldDataLength(column.getLength());
-        tableFieldEntity.setFieldDecimalLength(0);
+
         tableFieldEntity.setFieldDefaultValue("");
         tableFieldEntity.setFieldDefaultText("");
         tableFieldEntity.setFieldCreateTime(new Date());

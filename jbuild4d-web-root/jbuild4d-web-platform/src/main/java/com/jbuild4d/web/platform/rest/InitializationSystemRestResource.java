@@ -1,6 +1,7 @@
 package com.jbuild4d.web.platform.rest;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
@@ -109,7 +110,9 @@ public class InitializationSystemRestResource {
 
         //初始化表关系
         tableRelationGroupService.deleteByKeyNotValidate(jb4DSession,tableRelationGroupService.getRootId(),JBuild4DProp.getWarningOperationCode());
-        tableRelationGroupService.createRootNode(jb4DSession);
+        TableRelationGroupEntity rootTableRelationGroupEntity=tableRelationGroupService.createRootNode(jb4DSession);
+
+        tableRelationGroupService.createSystemTableRelationGroupNode(jb4DSession,rootTableRelationGroupEntity);
 
         //初始化表模版
         tableFieldService.createTableFieldTemplates(jb4DSession);

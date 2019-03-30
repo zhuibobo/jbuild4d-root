@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  *
  * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
- * This class corresponds to the database table :TBUILD_TABLE_relation
+ * This class corresponds to the database table :tbuild_table_relation
  *
  * @mbg.generated do_not_delete_during_merge
  */
@@ -41,9 +41,6 @@ public class TableRelationEntity {
     //RELATION_STATUS:状态
     private String relationStatus;
 
-    //RELATION_CONTENT:表关系的Json描述
-    private String relationContent;
-
     public TableRelationEntity(String relationId, String relationGroupId, String relationName, String relationUserId, String relationUserName, Integer relationOrderNum, Date relationCreateTime, String relationDesc, String relationStatus) {
         this.relationId = relationId;
         this.relationGroupId = relationGroupId;
@@ -54,19 +51,6 @@ public class TableRelationEntity {
         this.relationCreateTime = relationCreateTime;
         this.relationDesc = relationDesc;
         this.relationStatus = relationStatus;
-    }
-
-    public TableRelationEntity(String relationId, String relationGroupId, String relationName, String relationUserId, String relationUserName, Integer relationOrderNum, Date relationCreateTime, String relationDesc, String relationStatus, String relationContent) {
-        this.relationId = relationId;
-        this.relationGroupId = relationGroupId;
-        this.relationName = relationName;
-        this.relationUserId = relationUserId;
-        this.relationUserName = relationUserName;
-        this.relationOrderNum = relationOrderNum;
-        this.relationCreateTime = relationCreateTime;
-        this.relationDesc = relationDesc;
-        this.relationStatus = relationStatus;
-        this.relationContent = relationContent;
     }
 
     public TableRelationEntity() {
@@ -143,13 +127,5 @@ public class TableRelationEntity {
 
     public void setRelationStatus(String relationStatus) {
         this.relationStatus = relationStatus == null ? null : relationStatus.trim();
-    }
-
-    public String getRelationContent() {
-        return relationContent;
-    }
-
-    public void setRelationContent(String relationContent) {
-        this.relationContent = relationContent == null ? null : relationContent.trim();
     }
 }

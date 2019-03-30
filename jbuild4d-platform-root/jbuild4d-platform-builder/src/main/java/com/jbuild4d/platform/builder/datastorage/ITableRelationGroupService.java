@@ -9,4 +9,6 @@ public interface ITableRelationGroupService extends IBaseService<TableRelationGr
     String getRootId();
 
     TableRelationGroupEntity createRootNode(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
+
+    TableRelationGroupEntity createSystemTableRelationGroupNode(JB4DSession jb4DSession, TableRelationGroupEntity parentGroup) throws JBuild4DGenerallyException;
 }

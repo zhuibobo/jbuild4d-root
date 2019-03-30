@@ -1,6 +1,7 @@
 package com.jbuild4d.web.platform.rest.builder.datastorage.tablerelation;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntityWithBLOBs;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
@@ -16,13 +17,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/PlatFormRest/Builder/DataStorage/TableRelation/TableRelation")
-public class TableRelationRestResource  extends GeneralRestResource<TableRelationEntity> {
+public class TableRelationRestResource  extends GeneralRestResource<TableRelationEntityWithBLOBs> {
 
     @Autowired
     ITableRelationService tableRelationService;
 
     @Override
-    protected IBaseService<TableRelationEntity> getBaseService() {
+    protected IBaseService<TableRelationEntityWithBLOBs> getBaseService() {
         return tableRelationService;
     }
 
@@ -38,7 +39,7 @@ public class TableRelationRestResource  extends GeneralRestResource<TableRelatio
 
     @RequestMapping(value = "/GetRelationByGroup", method = RequestMethod.POST)
     public JBuild4DResponseVo getRelationByGroup(String groupId) {
-        List<TableRelationEntity> relationEntityList=tableRelationService.getRelationByGroup(JB4DSessionUtility.getSession(),groupId);
+        List<TableRelationEntityWithBLOBs> relationEntityList=tableRelationService.getRelationByGroup(JB4DSessionUtility.getSession(),groupId);
         return JBuild4DResponseVo.getDataSuccess(relationEntityList);
     }
 }
