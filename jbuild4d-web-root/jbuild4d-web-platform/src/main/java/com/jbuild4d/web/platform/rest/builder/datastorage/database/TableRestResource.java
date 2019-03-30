@@ -3,6 +3,7 @@ package com.jbuild4d.web.platform.rest.builder.datastorage.database;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
@@ -18,9 +19,11 @@ import com.jbuild4d.platform.builder.module.IBuilderConfigService;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import com.jbuild4d.web.platform.model.ZTreeNodeVo;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -196,6 +199,17 @@ public class TableRestResource {
         catch (Exception ex){
             return JBuild4DResponseVo.error(ex.getMessage());
         }
+    }
+
+    @RequestMapping(value = "/GetTablesFieldsByTableIds",method = RequestMethod.POST)
+    public JBuild4DResponseVo getTablesFieldsByTableIds(@RequestParam("tableIds[]") List<String> tableIds){
+        List<TableFieldEntity> tableFieldEntityList=tableFieldService.getTablesFieldsByTableIds(JB4DSessionUtility.getSession(),tableIds);
+        List<TableEntity> tableEntityList=tableService.getTablesByTableIds(JB4DSessionUtility.getSession(),tableIds);
+        JBuild4DResponseVo responseVo=JBuild4DResponseVo.getDataSuccess(tableFieldEntityList);
+        Map<String,Object> exData=new HashedMap();
+        exData.put("Tables",tableEntityList);
+        responseVo.setExKVData(exData);
+        return responseVo;
     }
 
 }

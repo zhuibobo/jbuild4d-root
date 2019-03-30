@@ -208,6 +208,11 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
         tableFieldMapper.deleteByTableId(tableId);
     }
 
+    @Override
+    public List<TableFieldEntity> getTablesFieldsByTableIds(JB4DSession session, List<String> tableIds) {
+        return tableFieldMapper.selectByTableIds(tableIds);
+    }
+
     private TableFieldEntity newFiled(JB4DSession jb4DSession, String tableId, String fieldName, String fieldCaption,
                                       TrueFalseEnum pk, TrueFalseEnum allowNull,
                                       TableFieldTypeEnum fieldDataType,int dataLength,int decimalLength,

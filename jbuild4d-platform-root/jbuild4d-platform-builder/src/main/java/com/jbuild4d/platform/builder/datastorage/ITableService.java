@@ -48,4 +48,6 @@ public interface ITableService extends IBaseService<TableEntity> {
     TableEntity getByTableName(JB4DSession jb4DSession, String tableName);
 
     void registerSystemTableToBuilderToModule(JB4DSession jb4DSession, String tableName, TableGroupEntity tableGroupEntity) throws JBuild4DGenerallyException;
+
+    List<TableEntity> getTablesByTableIds(JB4DSession session, List<String> tableIds);
 }

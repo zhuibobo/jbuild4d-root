@@ -386,6 +386,11 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         }
     }
 
+    @Override
+    public List<TableEntity> getTablesByTableIds(JB4DSession session, List<String> tableIds) {
+        return tableMapper.selectByTableIds(tableIds);
+    }
+
     private void registerSystemTableFieldToBuilderToModule(JB4DSession jb4DSession,TableEntity tableEntity,IntrospectedColumn column,boolean isKey) throws JBuild4DGenerallyException {
         TableFieldEntity tableFieldEntity=new TableFieldEntity();
         tableFieldEntity.setFieldId(tableEntity.getTableName()+tableFieldMapper.nextOrderNumInTable(tableEntity.getTableId())+column.getActualColumnName());

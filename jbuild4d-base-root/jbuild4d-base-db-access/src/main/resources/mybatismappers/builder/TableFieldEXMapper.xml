@@ -56,4 +56,12 @@
     <select id="selectByTableName"  resultMap="BaseResultMap">
         select<include refid="Base_Column_List"/> from TBUILD_TABLE_FIELD WHERE FIELD_TABLE_ID=(select TABLE_ID from TBUILD_TABLE where TABLE_NAME= #{tableName}) order by FIELD_ORDER_NUM asc
     </select>
+
+    <select id="selectByTableIds" resultMap="BaseResultMap">
+        select<include refid="Base_Column_List"/> from TBUILD_TABLE_FIELD WHERE FIELD_TABLE_ID in
+        <foreach item="sId" collection="tableIds" separator="," open="(" close=")">
+            #{sId}
+        </foreach>
+        order by FIELD_TABLE_ID,FIELD_ORDER_NUM asc
+    </select>
 </mapper>

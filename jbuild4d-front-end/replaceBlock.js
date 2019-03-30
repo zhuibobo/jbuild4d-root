@@ -154,6 +154,7 @@ let replaceBlock = {
         let replaceArray = new Array();
         let levelPath = calculateFilePath(file);
         replaceArray.push(refJs(levelPath + "Js/T3P/Go/go-debug.js"));
+        replaceArray.push(refJs(levelPath + "Js/T3P/Go/Figures.js"));
         return replaceArray.join("\n\t");
     },
     replaceWebixLib:function (search, file) {
