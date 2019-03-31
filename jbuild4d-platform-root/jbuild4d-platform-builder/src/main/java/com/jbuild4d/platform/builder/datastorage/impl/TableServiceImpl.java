@@ -24,6 +24,7 @@ import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.platform.builder.vo.UpdateTableResolveVo;
 import com.jbuild4d.platform.builder.vo.ValidateTableUpdateResultVo;
 import com.jbuild4d.platform.system.service.ICodeGenerateService;
+import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generatorex.api.IntrospectedColumn;
 import org.mybatis.generatorex.api.IntrospectedTable;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -351,8 +352,9 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                     tableComment=tableName;
                 }
             }
+            String tableId=StringUtils.join(tableName.split(""), "_");
             TableEntity tableEntity = new TableEntity();
-            tableEntity.setTableId(tableMapper.nextOrderNum()+"_"+tableName);
+            tableEntity.setTableId(tableId);
             tableEntity.setTableCaption(tableComment.split(":")[0]);
             tableEntity.setTableName(tableName);
             tableEntity.setTableDbname("JBuild4D");

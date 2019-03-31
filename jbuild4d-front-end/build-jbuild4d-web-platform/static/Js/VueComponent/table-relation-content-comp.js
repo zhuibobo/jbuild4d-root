@@ -197,6 +197,40 @@ Vue.component("table-relation-content-comp", {
         },
         selectedTable:function(tableData){
             console.log(tableData);
+            var tableId=tableData.id;
+            var tableIds =[tableId];
+            var _self=this;
+            //debugger;
+            AjaxUtility.Post(this.acInterface.getTablesFieldsByTableIds,{"tableIds":tableIds},function (result) {
+                if(result.success){
+                    var allFields=result.data;
+                    var singleTable=result.exKVData.Tables[0];
+
+                    console.log(allFields);
+                    console.log(singleTable);
+                    var allFieldsStyle=[];
+                    for(var i=0;i<allFields.length;i++)
+                    {
+                        allFieldsStyle.push(_self.rendererFieldStyle(allFields[i]));
+                    }
+
+                    var modelNodeData={
+                        tableId: "T_S_S_O___A_U_T_H_O_R_I_T_Y",
+                        loc:"0 0",
+                        fields:allFieldsStyle,
+                        tableData:singleTable,
+                        tableName:singleTable.tableName,
+                        tableCaption:singleTable.tableCaption,
+                        key:singleTable.tableId
+                    }
+                    _self.tableRelationDiagram.model.startTransaction("flash");
+                    _self.tableRelationDiagram.model.addNodeData(modelNodeData);
+                    _self.tableRelationDiagram.model.commitTransaction("flash");
+                }
+                else{
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                }
+            },"json");
         },
         deleteSelection:function () {
             //debugger;
@@ -230,15 +264,15 @@ Vue.component("table-relation-content-comp", {
             this.tableRelationDiagram.model.startTransaction("flash");
             this.tableRelationDiagram.model.addLinkData({
                 lineId:"1",
-                from:"100_TSSO_ROLE",
-                to:"101_TSSO_USER_ROLE",
+                from:"T_S_S_O___A_U_T_H_O_R_I_T_Y",
+                to:"T_S_S_O___R_O_L_E",
                 fromText:"100_TSSO_ROLE",
                 toText:"101_TSSO_USER_ROLE",
             });
             this.tableRelationDiagram.model.addLinkData({
                 lineId:"2",
-                from:"101_TSSO_USER_ROLE",
-                to:"102_TSSO_AUTHORITY",
+                from:"T_S_S_O___R_O_L_E",
+                to:"T_S_S_O___R_O_L_E___G_R_O_U_P",
                 fromText:"101_TSSO_USER_ROLE",
                 toText:"102_TSSO_AUTHORITY",
             });
@@ -332,8 +366,8 @@ Vue.component("table-relation-content-comp", {
                     // clear out any desiredSize set by the ResizingTool.
                     new go.Binding("desiredSize", "visible", function(v) { return new go.Size(NaN, NaN); }).ofObject("LIST"),
                     // define the node's outer shape, which will surround the Table
-                    $(go.Shape, "Rectangle",
-                        { fill: lightgrad, stroke: "#756875", strokeWidth: 3 }),
+                    $(go.Shape, "RoundedRectangle",
+                        { fill: lightgrad, stroke: "#756875", strokeWidth: 1 }),
                     $(go.Panel, "Table",
                         { margin: 8, stretch: go.GraphObject.Fill },
                         $(go.RowColumnDefinition, { row: 0, sizing: go.RowColumnDefinition.None }),
@@ -375,7 +409,7 @@ Vue.component("table-relation-content-comp", {
                         curve: go.Link.JumpOver
                     },
                     $(go.Shape,  // the link shape
-                        { stroke: "#303B45", strokeWidth: 2.5 }),
+                        { stroke: "#303B45", strokeWidth: 1.5 }),
                     $(go.TextBlock,  // the "from" label
                         {
                             textAlign: "center",
@@ -472,18 +506,22 @@ Vue.component("table-relation-content-comp", {
             var result=[];
             for(var i=0;i<allFields.length;i++){
                 if(allFields[i].fieldTableId==tableId){
-                    if(allFields[i].fieldIsPk=="是"){
-                        allFields[i].color=this.getKeyFieldBrush();
-                        allFields[i].figure="Decision";
-                    }
-                    else{
-                        allFields[i].color=this.getNorFieldBrush();
-                        allFields[i].figure="Cube1";
-                    }
-                    result.push(allFields[i]);
+
+                    result.push(this.rendererFieldStyle(allFields[i]));
                 }
             }
             return result;
+        },
+        rendererFieldStyle:function(field){
+            if(field.fieldIsPk=="是"){
+                field.color=this.getKeyFieldBrush();
+                field.figure="Decision";
+            }
+            else{
+                field.color=this.getNorFieldBrush();
+                field.figure="Cube1";
+            }
+            return field;
         },
         getKeyFieldBrush:function(){
             return go.GraphObject.make(go.Brush, "Linear", { 0: "rgb(254, 221, 50)", 1: "rgb(254, 182, 50)" });
@@ -524,30 +562,30 @@ Vue.component("table-relation-content-comp", {
             var json= {
                 tableList: [
                     {
-                        tableId: "100_TSSO_ROLE",
+                        tableId: "T_S_S_O___A_U_T_H_O_R_I_T_Y",
                         loc:"-442.56007570334174 -177.30728902591756"
                     },
                     {
-                        tableId: "101_TSSO_USER_ROLE",
+                        tableId: "T_S_S_O___R_O_L_E",
                         loc:"74.57063403264958 66.25488464739941"
                     },
                     {
-                        tableId: "102_TSSO_AUTHORITY",
+                        tableId: "T_S_S_O___R_O_L_E___G_R_O_U_P",
                         loc:"599.883570676006 -101.30323462238496"
                     }
                 ],
                 lineList: [
                     {
                         lineId:"1",
-                        from:"100_TSSO_ROLE",
-                        to:"101_TSSO_USER_ROLE",
+                        from:"T_S_S_O___A_U_T_H_O_R_I_T_Y",
+                        to:"T_S_S_O___R_O_L_E",
                         fromText:"100_TSSO_ROLE",
                         toText:"101_TSSO_USER_ROLE",
                     },
                     {
                         lineId:"2",
-                        from:"101_TSSO_USER_ROLE",
-                        to:"102_TSSO_AUTHORITY",
+                        from:"T_S_S_O___R_O_L_E",
+                        to:"T_S_S_O___R_O_L_E___G_R_O_U_P",
                         fromText:"101_TSSO_USER_ROLE",
                         toText:"102_TSSO_AUTHORITY",
                     }

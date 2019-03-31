@@ -16,9 +16,9 @@ Vue.component("select-single-table-dialog", {
                         fontCss: {'color': 'black', 'font-weight': 'normal'}
                     },
                     check: {
-                        enable: true,
+                        enable: false,
                         nocheckInherit: false,
-                        chkStyle: "radio",
+                        /*chkStyle: "radio",*/
                         radioType: "all"
                     },
                     data: {
@@ -35,9 +35,12 @@ Vue.component("select-single-table-dialog", {
                     callback: {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
+                            var _self=this.getZTreeObj(treeId)._host;
                             if (treeNode.nodeTypeName == "Table") {
-                                var _self=this.getZTreeObj(treeId)._host;
                                 _self.selectedTable(event,treeId,treeNode);
+                            }
+                            else{
+                                _self.selectedTable(event,treeId,null);
                             }
                         }
                     }
@@ -68,7 +71,7 @@ Vue.component("select-single-table-dialog", {
 
             DialogUtility.DialogElemObj(elem, {
                 modal: true,
-                width: 470,
+                width: 570,
                 height: height,
                 title: "选择表"
             });
@@ -92,29 +95,14 @@ Vue.component("select-single-table-dialog", {
         selectedTable:function (event,treeId,tableData) {
             this.selectedTableData=tableData;
         },
-        getSelectedOrganName:function () {
-            //debugger;
-            if(this.selectedOrganData==null){
-                return "请选择组织机构"
-            }
-            else {
-                return this.selectedOrganData.organName;
-            }
-        },
-        setOldSelectedOrgan:function (organId) {
-            var _self=this;
-            AjaxUtility.Post(this.acInterface.getSingleOrganDataUrl, {"recordId":organId}, function (result) {
-                //debugger;
-                if (result.success) {
-                    _self.selectedOrganData=result.data;
-                }
-                else {
-                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
-                }
-            }, "json");
-        },
         completed:function () {
-            this.$emit('on-selected-table', this.selectedTableData);
+            if(this.selectedTableData) {
+                this.$emit('on-selected-table', this.selectedTableData);
+                this.handleClose();
+            }
+            else{
+                DialogUtility.AlertText("请选择表!");
+            }
         }
     },
     template: `<div ref="selectTableModelDialogWrap" class="c1-select-model-wrap general-edit-page-wrap" style="display: none">

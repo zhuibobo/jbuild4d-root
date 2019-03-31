@@ -3,29 +3,29 @@
 
     <!--开发示例模版-->
     <changeSet author="zhuangrb" id="changeSet-Dev-Demo-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TDEV_DEMO_GEN_LIST">
-            <column name="DDGL_ID" remarks="主键" type="NVARCHAR(128)">
+        <createTable tableName="TDEV_DEMO_GEN_LIST" remarks="开发示例表:通用列表">
+            <column name="DDGL_ID" type="NVARCHAR(128)" remarks="主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="DDGL_KEY" type="NVARCHAR(128)"/>
-            <column name="DDGL_NAME" type="NVARCHAR(128)"/>
-            <column name="DDGL_VALUE" type="NVARCHAR(500)"/>
-            <column name="DDGL_STATUS" type="NVARCHAR(10)"/>
-            <column name="DDGL_DESC" type="NVARCHAR(2000)"/>
-            <column name="DDGL_CREATETIME" type="datetime(6)"/>
-            <column name="DDGL_USER_ID" type="NVARCHAR(100)"/>
-            <column name="DDGL_USER_NAME" type="NVARCHAR(100)"/>
-            <column name="DDGL_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="DDGL_ORGAN_NAME" type="NVARCHAR(100)"/>
-            <column name="DDGL_API" type="NVARCHAR(100)"/>
-            <column name="DDGL_ORDER_NUM" type="INT"/>
-            <column name="DDGL_INPUTNUMBER" type="DECIMAL(18, 2)"/>
-            <column name="DDGL_BIND_DIC_SELECTED" type="NVARCHAR(100)"/>
-            <column name="DDGL_BIND_DIC_RADIO" type="NVARCHAR(100)"/>
-            <column name="DDGL_BIND_DIC_CHECKBOX1" type="NVARCHAR(100)"/>
-            <column name="DDGL_BIND_DIC_CHECKBOX2" type="NVARCHAR(100)"/>
-            <column name="DDGL_BIND_DIC_CHECKBOX3" type="NVARCHAR(100)"/>
-            <column name="DDGL_BIND_DIC_MUCHECKBOX" type="NVARCHAR(1000)"/>
+            <column name="DDGL_KEY" type="NVARCHAR(128)" remarks="键值" />
+            <column name="DDGL_NAME" type="NVARCHAR(128)" remarks="名称" />
+            <column name="DDGL_VALUE" type="NVARCHAR(500)" remarks="值" />
+            <column name="DDGL_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="DDGL_DESC" type="NVARCHAR(2000)" remarks="描述" />
+            <column name="DDGL_CREATETIME" type="datetime(6)" remarks="创建时间" />
+            <column name="DDGL_USER_ID" type="NVARCHAR(100)" remarks="创建用户ID" />
+            <column name="DDGL_USER_NAME" type="NVARCHAR(100)" remarks="创建用户名称" />
+            <column name="DDGL_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
+            <column name="DDGL_ORGAN_NAME" type="NVARCHAR(100)" remarks="创建组织名称" />
+            <column name="DDGL_API" type="NVARCHAR(100)" remarks="API" />
+            <column name="DDGL_ORDER_NUM" type="INT" remarks="排序号"/>
+            <column name="DDGL_INPUTNUMBER" type="DECIMAL(18, 2)" remarks="数字" />
+            <column name="DDGL_BIND_DIC_SELECTED" type="NVARCHAR(100)" remarks="选定字典项" />
+            <column name="DDGL_BIND_DIC_RADIO" type="NVARCHAR(100)" remarks="单选字典项"/>
+            <column name="DDGL_BIND_DIC_CHECKBOX1" type="NVARCHAR(100)" remarks="复现字典项1" />
+            <column name="DDGL_BIND_DIC_CHECKBOX2" type="NVARCHAR(100)" remarks="复现字典项2" />
+            <column name="DDGL_BIND_DIC_CHECKBOX3" type="NVARCHAR(100)" remarks="复现字典项3" />
+            <column name="DDGL_BIND_DIC_MUCHECKBOX" type="NVARCHAR(1000)" remarks="多选字典项" />
         </createTable>
 
         <createTable tableName="TDEV_DEMO_TL_TREE">
@@ -247,7 +247,7 @@
         </createTable>
     
         <createTable tableName="TSYS_HISTORY_DATA" remarks="历史数据表:存储各个表被删除数据的历史记录">
-            <column name="HISTORY_ID" type="NVARCHAR(128)" remarks="主键,随机生成">
+            <column name="HISTORY_ID" type="NVARCHAR(128)" remarks="随机生成:UUID">
                 <constraints primaryKey="true" nullable="false"></constraints>
             </column>
             <column name="HISTORY_RECORD" type="MEDIUMTEXT" remarks="被删除数据的json格式数据"/>
@@ -379,7 +379,7 @@
 
         <!--表关系只是作为逻辑上的描述,便于了解项目的数据结构,不做实际上表之间的物理关系-->
         <createTable tableName="TBUILD_TABLE_RELATION_GROUP" remarks="表关系分组表">
-            <column name="REL_GROUP_ID" type="NVARCHAR(100)" remarks="关联分组ID,主键">
+            <column name="REL_GROUP_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="REL_GROUP_VALUE" type="NVARCHAR(200)" remarks="关联分组值">
@@ -420,7 +420,7 @@
         </createTable>
 
         <createTable tableName="TBUILD_TABLE_RELATION_HIS" remarks="表关系描述信息历史表">
-            <column name="HIS_ID" type="NVARCHAR(100)" remarks="表关联ID,主键">
+            <column name="HIS_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="HIS_GROUP_ID" type="NVARCHAR(100)" remarks="所属分组ID" />
@@ -631,9 +631,9 @@
             <column name="FORM_STATUS" type="NVARCHAR(10)"/>
             <column name="FORM_ORGAN_ID" type="NVARCHAR(100)"/>
             <column name="FORM_ORGAN_NAME" type="NVARCHAR(100)"/>
-            <column name="FORM_MAIN_TABLE_NAME" remarks="表单的主表名称,从数据关系字段提取" type="NVARCHAR(100)"/>
-            <column name="FORM_MAIN_TABLE_CAPTION" remarks="表单的主表标题,从数据关系字段提取" type="NVARCHAR(100)"/>
-            <column name="FORM_DATA_RELATION" remarks="数据关系的设置,根节点为主表" type="NVARCHAR(4000)"/>
+            <column name="FORM_MAIN_TABLE_NAME" remarks="表单的主表名称:从数据关系字段提取" type="NVARCHAR(100)"/>
+            <column name="FORM_MAIN_TABLE_CAPTION" remarks="表单的主表标题:从数据关系字段提取" type="NVARCHAR(100)"/>
+            <column name="FORM_DATA_RELATION" remarks="数据关系的设置:根节点为主表" type="NVARCHAR(4000)"/>
             <column name="FORM_IS_TEMPLATE" type="NVARCHAR(100)"/>
             <column name="FORM_IS_RESOLVE" remarks="是否进行了解析" type="NVARCHAR(10)"/>
             <column name="FORM_HTML_SOURCE" remarks="原始的HTML" type="MEDIUMTEXT"/>
@@ -700,7 +700,7 @@
             <column name="FILE_CREATER" type="NVARCHAR(100)"/>
             <column name="FILE_NAME" type="NVARCHAR(200)"/>
             <column name="FILE_SIZE" type="BIGINT"/>
-            <column name="FILE_STORE_TYPE" remarks="文件的存储位置,小文件可以存储于数据库中" type="NVARCHAR(100)"/>
+            <column name="FILE_STORE_TYPE" remarks="文件的存储位置:小文件可以存储于数据库中" type="NVARCHAR(100)"/>
             <column name="FILE_STORE_PATH" remarks="文件的存储路径" type="NVARCHAR(400)"/>
             <column name="FILE_STORE_NAME" remarks="文件的物理存储名称" type="NVARCHAR(100)"/>
             <column name="FILE_ORGAN_ID" type="NVARCHAR(100)"/>
@@ -727,7 +727,7 @@
             <column name="ORGAN_TYPE_ID" type="NVARCHAR(100)" remarks="组织机构类型ID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(300)" remarks="组织机构编码值,唯一,与组织机构表关联">
+            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(300)" remarks="组织机构编码值:唯一,与组织机构表关联">
                 <constraints nullable="false"/>
             </column>
             <column name="ORGAN_TYPE_NAME" type="NVARCHAR(300)" remarks="组织机构类型名称">
@@ -740,7 +740,7 @@
         </createTable>
 
         <createTable tableName="TSSO_ORGAN" remarks="组织机构表">
-            <column name="ORGAN_ID" type="NVARCHAR(100)" remarks="组织机构ID,主键">
+            <column name="ORGAN_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="ORGAN_NAME" type="NVARCHAR(300)" remarks="组织机构名称">
@@ -752,7 +752,7 @@
             <column name="ORGAN_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
             <column name="ORGAN_PHONE" type="NVARCHAR(100)" remarks="联系电话" />
             <column name="ORGAN_POST" type="NVARCHAR(20)" remarks="邮政编码" />
-            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(50)" remarks="组织机构类型,关联TSSO_ORGAN_TYPE表"/>
+            <column name="ORGAN_TYPE_VALUE" type="NVARCHAR(50)" remarks="组织机构类型:关联TSSO_ORGAN_TYPE表"/>
             <column name="ORGAN_ADDRESS" type="NVARCHAR(1000)" remarks="组织机构地址" />
             <column name="ORGAN_CONTACTS" type="NVARCHAR(100)" remarks="联系人" />
             <column name="ORGAN_CONTACTS_MOBILE" type="NVARCHAR(100)" remarks="联系人电话" />
@@ -765,12 +765,12 @@
             <column name="ORGAN_PARENT_ID_LIST" type="NVARCHAR(1200)" remarks="父节点列表" />
             <column name="ORGAN_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用" />
             <column name="ORGAN_CREATER_ORG_ID" type="NVARCHAR(100)" remarks="创建组织者ID"/>
-            <column name="ORGAN_MAIN_IMAGE_ID" remarks="主题Logo,关联到TFS_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
+            <column name="ORGAN_MAIN_IMAGE_ID" remarks="主题Logo:关联到TFS_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
             <column name="ORGAN_DESC" type="NVARCHAR(2000)" remarks="组织机构备注" />
         </createTable>
 
         <createTable tableName="TSSO_DEPARTMENT" remarks="组织内部部门表">
-            <column name="DEPT_ID" type="NVARCHAR(100)" remarks="部门ID,主键">
+            <column name="DEPT_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="DEPT_NAME" type="NVARCHAR(150)" remarks="部门名称" />
@@ -783,8 +783,8 @@
             <column name="DEPT_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
             <column name="DEPT_CREATE_USER_ID" type="NVARCHAR(100)" remarks="创建用户ID" />
             <column name="DEPT_ORDER_NUM" type="INT" remarks="排序号" />
-            <column name="DEPT_IS_ROOT" type="NVARCHAR(10)" remarks="是否根节点,根节点在组织创建时自动创建" />
-            <column name="DEPT_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID,根节点的ParentId为0" />
+            <column name="DEPT_IS_ROOT" type="NVARCHAR(10)" remarks="是否根节点:根节点在组织创建时自动创建" />
+            <column name="DEPT_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID:根节点的ParentId为0" />
             <column name="DEPT_PARENT_ID_LIST" type="NVARCHAR(1200)" remarks="父节点列表" />
             <column name="DEPT_STATUS" type="NVARCHAR(10)" remarks="状态:启用,禁用" />
             <column name="DEPT_ORGAN_ID" type="NVARCHAR(100)" remarks="所属组织ID" />
@@ -792,7 +792,7 @@
         </createTable>
 
         <createTable tableName="TSSO_DEPARTMENT_USER" remarks="部门与用户关联表">
-            <column name="DU_ID" type="NVARCHAR(100)" remarks="部门用户ID,主键">
+            <column name="DU_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="DU_DEPT_ID" type="NVARCHAR(100)" remarks="部门ID"/>
@@ -807,7 +807,7 @@
         </createTable>
 
         <createTable tableName="TSSO_USER" remarks="用户信息表">
-            <column name="USER_ID" type="NVARCHAR(100)" remarks="用户ID,主键">
+            <column name="USER_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="USER_NAME" type="NVARCHAR(100)" remarks="用户名"/>
@@ -815,7 +815,7 @@
             <column name="USER_PASSWORD" type="NVARCHAR(100)" remarks="密码"/>
             <column name="USER_EMAIL" type="NVARCHAR(100)" remarks="邮件地址"/>
             <column name="USER_PHONE_NUMBER" type="NVARCHAR(100)" remarks="手机号码"/>
-            <column name="USER_HEAD_ID" remarks="头像ID,关联到TFS_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
+            <column name="USER_HEAD_ID" remarks="头像ID:关联到TFS_FILE_INFO表的FILE_ID" type="NVARCHAR(100)"/>
             <column name="USER_ORGAN_ID" type="NVARCHAR(100)" remarks="所属组织ID" />
             <column name="USER_DESC" type="NVARCHAR(2000)" remarks="用户备注"/>
             <column name="USER_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
@@ -826,7 +826,7 @@
         </createTable>
 
         <createTable tableName="TSSO_ROLE_GROUP" remarks="角色组表">
-            <column name="ROLE_GROUP_ID" type="NVARCHAR(100)" remarks="角色组ID,主键">
+            <column name="ROLE_GROUP_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="ROLE_GROUP_NAME" type="NVARCHAR(100)" remarks="角色组名称"/>
@@ -846,7 +846,7 @@
         </createTable>
 
         <createTable tableName="TSSO_ROLE" remarks="角色表">
-            <column name="ROLE_ID" type="NVARCHAR(100)" remarks="角色ID,主键">
+            <column name="ROLE_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="ROLE_KEY" type="NVARCHAR(100)" remarks="角色键值"/>
@@ -861,7 +861,7 @@
         </createTable>
 
         <createTable tableName="TSSO_USER_ROLE" remarks="角色与用户绑定表">
-            <column name="BIND_ID" type="NVARCHAR(100)" remarks="绑定ID,主键">
+            <column name="BIND_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="BIND_ROLE_ID" type="NVARCHAR(100)" remarks="角色ID">
@@ -881,14 +881,14 @@
 
         <!--未实现-->
         <createTable tableName="TSSO_AUTHORITY" remarks="角色权限表">
-            <column name="AUTH_ID" type="NVARCHAR(100)" remarks="权限ID,主键">
+            <column name="AUTH_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="ROLE_ID" type="NVARCHAR(100)" remarks="角色ID,主键" />
+            <column name="ROLE_ID" type="NVARCHAR(100)" remarks="主键:UUID" />
         </createTable>
 
         <createTable tableName="TSSO_SSO_APP" remarks="SSO集成系统表">
-            <column name="APP_ID" type="NVARCHAR(100)" remarks="SSO集成系统 ID,主键">
+            <column name="APP_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="APP_CODE" type="NVARCHAR(100)" remarks="集成系统标识键">
@@ -901,12 +901,12 @@
             </column>
             <column name="APP_PRIVATE_KEY" type="NVARCHAR(1000)" remarks="私钥">
             </column>
-            <column name="APP_DOMAIN" type="NVARCHAR(300)" remarks="域名或者ip,用于验证来源使用"></column>
-            <column name="APP_INDEX_URL" type="NVARCHAR(1000)" remarks="主页的地址,用于默认登录完成之后的目标地址"></column>
+            <column name="APP_DOMAIN" type="NVARCHAR(300)" remarks="域名或者ip:用于验证来源使用"></column>
+            <column name="APP_INDEX_URL" type="NVARCHAR(1000)" remarks="主页的地址:用于默认登录完成之后的目标地址"></column>
             <column name="APP_INTEGRATED_TYPE" type="NVARCHAR(50)" remarks="系统的集成类型:开发集成或者模拟登录集成,模拟登录为post模拟账号进行登录"></column>
-            <column name="APP_MAIN_IMAGE_ID" type="NVARCHAR(100)" remarks="主题图片ID,关联到TFS_FILE_INFO表的FILE_ID"/>
+            <column name="APP_MAIN_IMAGE_ID" type="NVARCHAR(100)" remarks="主题图片ID:关联到TFS_FILE_INFO表的FILE_ID"/>
             <column name="APP_TYPE" type="NVARCHAR(50)" remarks="系统类型:主系统或者为子系统"></column>
-            <column name="APP_MAIN_ID" type="NVARCHAR(50)" remarks="为子系统时,用于存储主系统的ID:TSSO_SSO_APP中的APP_ID"></column>
+            <column name="APP_MAIN_ID" type="NVARCHAR(50)" remarks="主系统ID:为子系统时,用于存储主系统的ID:TSSO_SSO_APP中的APP_ID"></column>
             <column name="APP_CATEGORY" type="NVARCHAR(50)" remarks="系统分类:App或者Web系统"></column>
             <column name="APP_DESC" type="NVARCHAR(500)" remarks="备注" />
             <column name="APP_ORDER_NUM" type="INT" remarks="排序号" />
@@ -917,7 +917,7 @@
         </createTable>
 
         <createTable tableName="TSSO_SSO_APP_INTERFACE" remarks="SSO集成系统的接口配置表">
-            <column name="INTERFACE_ID" type="NVARCHAR(100)" remarks="接口ID,主键">
+            <column name="INTERFACE_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="INTERFACE_BELONG_APP_ID" type="NVARCHAR(100)" remarks="所属系统ID"/>
@@ -934,24 +934,24 @@
             <column name="INTERFACE_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
         </createTable>
 
-        <createTable tableName="TSSO_SSO_APP_FILE" remarks="SSO集成系统的相关文件表,主要用于存储模拟登录的html模拟文件">
-            <column name="APP_FILE_ID" type="NVARCHAR(100)" remarks="SSO集成APP的文件ID,主键">
+        <createTable tableName="TSSO_SSO_APP_FILE" remarks="SSO集成系统的相关文件表:主要用于存储模拟登录的html模拟文件">
+            <column name="APP_FILE_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="APP_BELONG_APP_ID" type="NVARCHAR(100)" remarks="所属系统ID"/>
             <column name="APP_FILE_NAME" type="NVARCHAR(100)" remarks="文件名称"/>
-            <column name="APP_FILE_IS_MAIN" type="NVARCHAR(100)" remarks="是否是主文件,用于Post模拟时的主执行文件"/>
+            <column name="APP_FILE_IS_MAIN" type="NVARCHAR(100)" remarks="是否是主文件:用于Post模拟时的主执行文件"/>
             <column name="APP_FILE_DESC" type="NVARCHAR(500)" remarks="备注" />
             <column name="APP_FILE_ORDER_NUM" type="INT" remarks="排序号" />
             <column name="APP_FILE_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
             <column name="APP_FILE_STATUS" type="NVARCHAR(10)" remarks="状态" />
             <column name="APP_FILE_CREATER_ID" type="NVARCHAR(100)" remarks="创建者的ID" />
             <column name="APP_FILE_ORGAN_ID" type="NVARCHAR(100)" remarks="创建组织ID" />
-            <column name="APP_FILE_CNT_FILE_ID" type="NVARCHAR(100)" remarks="存储的文件ID,关联到TFS_FILE_INFO表的FILE_ID" />
+            <column name="APP_FILE_CNT_FILE_ID" type="NVARCHAR(100)" remarks="存储的文件ID:关联到TFS_FILE_INFO表的FILE_ID" />
         </createTable>
 
         <createTable tableName="TSSO_SSO_APP_USER_MAPPING" remarks="SSO集成系统的账号映射表">
-            <column name="MAPPING_ID" type="NVARCHAR(100)" remarks="账号映射ID,主键">
+            <column name="MAPPING_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="MAPPING_BELONG_APP_ID" type="NVARCHAR(100)" remarks="所属系统ID" />
