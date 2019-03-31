@@ -195,42 +195,46 @@ Vue.component("table-relation-content-comp", {
             //DialogUtility.AlertText("1111111");
             this.$refs.selectSingleTableDialog.beginSelectTable();
         },
-        selectedTable:function(tableData){
+        addTableToDiagram:function(tableData){
             console.log(tableData);
             var tableId=tableData.id;
             var tableIds =[tableId];
             var _self=this;
-            //debugger;
-            AjaxUtility.Post(this.acInterface.getTablesFieldsByTableIds,{"tableIds":tableIds},function (result) {
-                if(result.success){
-                    var allFields=result.data;
-                    var singleTable=result.exKVData.Tables[0];
 
-                    console.log(allFields);
-                    console.log(singleTable);
-                    var allFieldsStyle=[];
-                    for(var i=0;i<allFields.length;i++)
-                    {
-                        allFieldsStyle.push(_self.rendererFieldStyle(allFields[i]));
-                    }
+            if(!this.tableIsExistInDiagram(tableId)) {
+                AjaxUtility.Post(this.acInterface.getTablesFieldsByTableIds, {"tableIds": tableIds}, function (result) {
+                    if (result.success) {
+                        var allFields = result.data;
+                        var singleTable = result.exKVData.Tables[0];
 
-                    var modelNodeData={
-                        tableId: "T_S_S_O___A_U_T_H_O_R_I_T_Y",
-                        loc:"0 0",
-                        fields:allFieldsStyle,
-                        tableData:singleTable,
-                        tableName:singleTable.tableName,
-                        tableCaption:singleTable.tableCaption,
-                        key:singleTable.tableId
+                        console.log(allFields);
+                        console.log(singleTable);
+                        var allFieldsStyle = [];
+                        for (var i = 0; i < allFields.length; i++) {
+                            allFieldsStyle.push(_self.rendererFieldStyle(allFields[i]));
+                        }
+
+                        var modelNodeData = {
+                            tableId: "T_S_S_O___A_U_T_H_O_R_I_T_Y",
+                            loc: "0 0",
+                            fields: allFieldsStyle,
+                            tableData: singleTable,
+                            tableName: singleTable.tableName,
+                            tableCaption: singleTable.tableCaption,
+                            key: singleTable.tableId
+                        }
+                        _self.tableRelationDiagram.model.startTransaction("flash");
+                        _self.tableRelationDiagram.model.addNodeData(modelNodeData);
+                        _self.tableRelationDiagram.model.commitTransaction("flash");
                     }
-                    _self.tableRelationDiagram.model.startTransaction("flash");
-                    _self.tableRelationDiagram.model.addNodeData(modelNodeData);
-                    _self.tableRelationDiagram.model.commitTransaction("flash");
-                }
-                else{
-                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
-                }
-            },"json");
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
+                }, "json");
+            }
+            else{
+                DialogUtility.AlertText("该画布中已经存在表:"+tableData.text);
+            }
         },
         deleteSelection:function () {
             //debugger;
@@ -603,6 +607,17 @@ Vue.component("table-relation-content-comp", {
         alertDiagramJson:function () {
             var diagramJson=this.getDiagramJson();
             DialogUtility.AlertJsonCode(diagramJson);
+        },
+        tableIsExistInDiagram:function (tableId) {
+            var result=false;
+            this.tableRelationDiagram.nodes.each(function (part) {
+                if (part instanceof go.Node) {
+                    if(part.data.tableId==tableId){
+                        result=true;
+                    }
+                }
+            });
+            return result;
         }
     },
     template: `<div ref="relationContentOuterWrap" class="table-relation-content-outer-wrap">
@@ -633,6 +648,6 @@ Vue.component("table-relation-content-comp", {
                         </div>
                     </div>
                     <div class="table-relation-content-wrap" id="tableRelationDiagramDiv"></div>
-                    <select-single-table-dialog ref="selectSingleTableDialog" @on-selected-table="selectedTable"></select-single-table-dialog>
+                    <select-single-table-dialog ref="selectSingleTableDialog" @on-selected-table="addTableToDiagram"></select-single-table-dialog>
                 </div>`
 });
