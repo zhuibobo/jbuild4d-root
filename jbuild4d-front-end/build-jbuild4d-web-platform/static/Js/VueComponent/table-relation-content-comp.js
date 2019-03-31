@@ -191,9 +191,34 @@ Vue.component("table-relation-content-comp", {
 
 
         },
-        addTable:function(){
+        showSelectTableDialog:function(){
             //DialogUtility.AlertText("1111111");
             this.$refs.selectSingleTableDialog.beginSelectTable();
+        },
+        showSelectFieldConnectDialog:function(){
+            var fromTableId="";
+            var toTableId="";
+            //debugger;
+            var i=0;
+            this.tableRelationDiagram.selection.each(function (part) {
+                if (part instanceof go.Node) {
+                    //console.log(part.data);
+                    if(i==0){
+                        fromTableId=part.data.tableId;
+                        i++;
+                    }
+                    else{
+                        toTableId=part.data.tableId;
+                    }
+                }
+            });
+
+            if(fromTableId!=""&&toTableId!=""){
+                this.$refs.tableRelationConnectTwoTableDialog.beginSelectConnect(fromTableId,toTableId);
+            }
+            else{
+                DialogUtility.AlertText("请先选中2个节点");
+            }
         },
         addTableToDiagram:function(tableData){
             console.log(tableData);
@@ -244,28 +269,25 @@ Vue.component("table-relation-content-comp", {
                 return;
             }
         },
-        connectSelectionNode:function () {
-            var statrData=null;
-            var endData=null;
+        connectSelectionNode:function (connectData) {
+            /*var fromTableId=null;
+            var toTableId=null;
 
             var i=0;
             this.tableRelationDiagram.selection.each(function (part) {
                 if (part instanceof go.Node) {
-                    console.log(part.data);
+                    //console.log(part.data);
                     if(i==0){
-                        statrData=part.data;
+                        fromTableId=part.data.tableId;
                         i++;
                     }
                     else{
-                        endData=part.data;
+                        toTableId=part.data.tableId;
                     }
                 }
-                else if (part instanceof go.Link) {
-                    console.log(part.data);
-                }
-            });
+            });*/
 
-            this.tableRelationDiagram.model.startTransaction("flash");
+            /*this.tableRelationDiagram.model.startTransaction("flash");
             this.tableRelationDiagram.model.addLinkData({
                 lineId:"1",
                 from:"T_S_S_O___A_U_T_H_O_R_I_T_Y",
@@ -280,9 +302,22 @@ Vue.component("table-relation-content-comp", {
                 fromText:"101_TSSO_USER_ROLE",
                 toText:"102_TSSO_AUTHORITY",
             });
-            this.tableRelationDiagram.model.commitTransaction("flash");
+            this.tableRelationDiagram.model.commitTransaction("flash");*/
+            /*fromTableId="T_S_S_O___R_O_L_E";
+            toTableId="T_S_S_O___R_O_L_E___G_R_O_U_P";
 
-            this.$refs.tableRelationConnectTwoTableDialog.beginSelectConnect();
+            this.$refs.tableRelationConnectTwoTableDialog.beginSelectConnect(fromTableId,toTableId);*/
+
+            this.tableRelationDiagram.model.startTransaction("flash");
+             var lineData= {
+                 lineId: StringUtility.Guid(),
+                 from: connectData.from.tableId,
+                 to: connectData.to.tableId,
+                 fromText: connectData.from.text,
+                 toText: connectData.to.text,
+             };
+            this.tableRelationDiagram.model.addLinkData(lineData);
+            this.tableRelationDiagram.model.commitTransaction("flash");
         },
         saveModel:function () {
             /*alert("location -202 -1701");
@@ -458,10 +493,10 @@ Vue.component("table-relation-content-comp", {
                     linkDataArray: linkDataArray*/
                 });
 
-            var _self=this;
+            /*var _self=this;
             window.setTimeout(function () {
                 _self.connectSelectionNode();
-            },500);
+            },500);*/
 
         },
         loadData:function(){
@@ -636,11 +671,11 @@ Vue.component("table-relation-content-comp", {
                                     <radio label="标题"></radio>
                                 </radio-group>
                                 <button-group shape="circle">
-                                    <i-button @click="addTable" type="success" icon="md-add"></i-button>
-                                    <i-button @click="connectSelectionNode" type="primary" icon="md-add">连接</i-button>
-                                    <i-button @click="connectSelectionNode" type="primary" icon="md-return-left">引入</i-button>
-                                    <i-button @click="connectSelectionNode" type="primary" icon="md-albums">全屏</i-button>
-                                    <i-button @click="connectSelectionNode" type="primary" icon="md-git-compare">历史</i-button>
+                                    <i-button @click="showSelectTableDialog" type="success" icon="md-add"></i-button>
+                                    <i-button @click="showSelectFieldConnectDialog" type="primary" icon="logo-steam">连接</i-button>
+                                    <i-button disabled type="primary" icon="md-return-left">引入</i-button>
+                                    <i-button disabled type="primary" icon="md-qr-scanner">全屏</i-button>
+                                    <i-button disabled type="primary" icon="md-git-compare">历史</i-button>
                                     <i-button @click="alertDataJson" type="primary" icon="md-code">数据Json</i-button>
                                     <i-button @click="alertDiagramJson" type="primary" icon="md-code-working">图形Json</i-button>
                                     <i-button @click="saveModel" type="primary" icon="logo-instagram">保存</i-button>
@@ -651,6 +686,6 @@ Vue.component("table-relation-content-comp", {
                     </div>
                     <div class="table-relation-content-wrap" id="tableRelationDiagramDiv"></div>
                     <select-single-table-dialog ref="selectSingleTableDialog" @on-selected-table="addTableToDiagram"></select-single-table-dialog>
-                    <table-relation-connect-two-table-dialog ref="tableRelationConnectTwoTableDialog" @on-selected-table="addTableToDiagram"></table-relation-connect-two-table-dialog>
+                    <table-relation-connect-two-table-dialog ref="tableRelationConnectTwoTableDialog" @on-completed-connect="connectSelectionNode"></table-relation-connect-two-table-dialog>
                 </div>`
 });
