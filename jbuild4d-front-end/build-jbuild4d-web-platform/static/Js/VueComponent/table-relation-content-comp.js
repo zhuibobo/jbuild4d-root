@@ -245,7 +245,7 @@ Vue.component("table-relation-content-comp", {
             }
         },
         connectSelectionNode:function () {
-            /*var statrData=null;
+            var statrData=null;
             var endData=null;
 
             var i=0;
@@ -263,7 +263,7 @@ Vue.component("table-relation-content-comp", {
                 else if (part instanceof go.Link) {
                     console.log(part.data);
                 }
-            });*/
+            });
 
             this.tableRelationDiagram.model.startTransaction("flash");
             this.tableRelationDiagram.model.addLinkData({
@@ -281,6 +281,8 @@ Vue.component("table-relation-content-comp", {
                 toText:"102_TSSO_AUTHORITY",
             });
             this.tableRelationDiagram.model.commitTransaction("flash");
+
+            this.$refs.tableRelationConnectTwoTableDialog.beginSelectConnect();
         },
         saveModel:function () {
             /*alert("location -202 -1701");
@@ -635,13 +637,13 @@ Vue.component("table-relation-content-comp", {
                                 </radio-group>
                                 <button-group shape="circle">
                                     <i-button @click="addTable" type="success" icon="md-add"></i-button>
-                                    <i-button @click="saveModel" type="primary" icon="logo-instagram">保存</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-add">连接</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-return-left">引入</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-albums">全屏</i-button>
                                     <i-button @click="connectSelectionNode" type="primary" icon="md-git-compare">历史</i-button>
                                     <i-button @click="alertDataJson" type="primary" icon="md-code">数据Json</i-button>
                                     <i-button @click="alertDiagramJson" type="primary" icon="md-code-working">图形Json</i-button>
+                                    <i-button @click="saveModel" type="primary" icon="logo-instagram">保存</i-button>
                                     <i-button @click="deleteSelection" type="primary" icon="md-close"></i-button>
                                 </button-group>
                             </div>
@@ -649,5 +651,6 @@ Vue.component("table-relation-content-comp", {
                     </div>
                     <div class="table-relation-content-wrap" id="tableRelationDiagramDiv"></div>
                     <select-single-table-dialog ref="selectSingleTableDialog" @on-selected-table="addTableToDiagram"></select-single-table-dialog>
+                    <table-relation-connect-two-table-dialog ref="tableRelationConnectTwoTableDialog" @on-selected-table="addTableToDiagram"></table-relation-connect-two-table-dialog>
                 </div>`
 });
