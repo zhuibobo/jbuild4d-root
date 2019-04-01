@@ -3,6 +3,7 @@ package com.jbuild4d.web.platform.rest.devdemo.treeandlist;
 import com.jbuild4d.base.dbaccess.dbentities.devdemo.DevDemoTLTreeEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import com.jbuild4d.platform.system.devdemo.IDevDemoTLTreeService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class DevDemoTLRestResource extends GeneralRestResource<DevDemoTLTreeEnti
     }
 
     @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    public List<DevDemoTLTreeEntity> getTreeData() {
+    public JBuild4DResponseVo getTreeData() {
         List<DevDemoTLTreeEntity> dictionaryGroupEntityList=devDemoTLTreeService.getALL(JB4DSessionUtility.getSession());
-        return dictionaryGroupEntityList;
+        return JBuild4DResponseVo.getDataSuccess(dictionaryGroupEntityList);
     }
 }

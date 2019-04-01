@@ -133,6 +133,30 @@
                 initTree:function () {
                     this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});
                     this.treeObj=$.fn.zTree.init($("#zTreeUL"), this.treeSetting);
+
+                    var _self=this;
+                    AjaxUtility.Post(this.acInterface.getGroupTreeData, {}, function (result) {
+                        if(result.success){
+                            if(result.data!=null&&result.data.length>0){
+                                for(var i=0;i<result.data.length;i++) {
+                                    /*if(result.data[i].dsGroupIssystem=="是"&&result.data[i].dsGroupChildCount==0) {
+                                        result.data[i].icon = "../../../Themes/Png16X16/table_key.png";
+                                    }
+                                    else if(result.data[i].dsGroupIssystem=="否"&&result.data[i].dsGroupChildCount==0) {
+                                        result.data[i].icon = "../../../Themes/Png16X16/note_edit.png";
+                                    }
+                                    else if(result.data[i].dsGroupParentId=="-1"){
+                                        result.data[i].icon = "../../../Themes/Png16X16/package.png";
+                                    }*/
+                                }
+                            }
+                            _self.treeObj=$.fn.zTree.init($("#zTreeUL"), _self.treeSetting,result.data);
+                            _self.treeObj.expandAll(true);
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
+                    }, "json");
                 },
                 treeNodeSelected:function (event, treeId, treeNode) {
                     // 根节点不触发任何事件
