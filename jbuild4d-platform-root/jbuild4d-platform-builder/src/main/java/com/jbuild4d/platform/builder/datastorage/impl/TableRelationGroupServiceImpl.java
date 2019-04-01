@@ -171,7 +171,67 @@ public class TableRelationGroupServiceImpl extends BaseServiceImpl<TableRelation
         jBuild4DSSORelevance.setRelGroupValue("单点登录相关表关系");
         this.saveSimple(jb4DSession, TableRelationGroupJBuild4DSystemSSORelevance,jBuild4DSSORelevance);
 
-        this.createTableRelation(jb4DSession,jBuild4DSSORelevance,"TSSO_ORGAN_DEPT_USER","机构部门人员关系图","机构部门人员关系图的关系图","","");
+        this.createTableRelation(jb4DSession,jBuild4DSSORelevance,"TSSO_ORGAN_DEPT_USER","机构部门人员关系图","机构部门人员关系图的关系图","{\n" +
+                "  \"tableList\": [\n" +
+                "    {\n" +
+                "      \"tableId\": \"T_S_S_O___O_R_G_A_N___T_Y_P_E\",\n" +
+                "      \"loc\": \"-926 -241\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"tableId\": \"T_S_S_O___O_R_G_A_N\",\n" +
+                "      \"loc\": \"-453 -137\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"tableId\": \"T_S_S_O___D_E_P_A_R_T_M_E_N_T\",\n" +
+                "      \"loc\": \"128 -375\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"tableId\": \"T_S_S_O___D_E_P_A_R_T_M_E_N_T___U_S_E_R\",\n" +
+                "      \"loc\": \"759 -233\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"tableId\": \"T_S_S_O___U_S_E_R\",\n" +
+                "      \"loc\": \"569 258\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"lineList\": [\n" +
+                "    {\n" +
+                "      \"lineId\": \"2c1078db-7b59-1b25-48bc-a9107cd91592\",\n" +
+                "      \"from\": \"T_S_S_O___O_R_G_A_N___T_Y_P_E\",\n" +
+                "      \"to\": \"T_S_S_O___O_R_G_A_N\",\n" +
+                "      \"fromText\": \"ORGAN_TYPE_ID[1]\",\n" +
+                "      \"toText\": \"ORGAN_TYPE_VALUE[0..N]\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"lineId\": \"63c401de-f40b-85d1-f3d4-4f0873a7bec0\",\n" +
+                "      \"from\": \"T_S_S_O___O_R_G_A_N\",\n" +
+                "      \"to\": \"T_S_S_O___D_E_P_A_R_T_M_E_N_T\",\n" +
+                "      \"fromText\": \"ORGAN_ID[1]\",\n" +
+                "      \"toText\": \"DEPT_ORGAN_ID[0..N]\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"lineId\": \"748e5ef1-fc21-0b04-e414-d3f55bc5e524\",\n" +
+                "      \"from\": \"T_S_S_O___D_E_P_A_R_T_M_E_N_T\",\n" +
+                "      \"to\": \"T_S_S_O___D_E_P_A_R_T_M_E_N_T___U_S_E_R\",\n" +
+                "      \"fromText\": \"DEPT_ID[1]\",\n" +
+                "      \"toText\": \"DU_DEPT_ID[0..N]\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"lineId\": \"91686e49-c1e7-022c-78f5-ec82b3866639\",\n" +
+                "      \"from\": \"T_S_S_O___D_E_P_A_R_T_M_E_N_T___U_S_E_R\",\n" +
+                "      \"to\": \"T_S_S_O___U_S_E_R\",\n" +
+                "      \"fromText\": \"DU_USER_ID[1..N]\",\n" +
+                "      \"toText\": \"USER_ID[1]\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"lineId\": \"c5b09c39-b84c-2a4b-78a1-f6d1e44ea329\",\n" +
+                "      \"from\": \"T_S_S_O___O_R_G_A_N\",\n" +
+                "      \"to\": \"T_S_S_O___U_S_E_R\",\n" +
+                "      \"fromText\": \"ORGAN_ID[1]\",\n" +
+                "      \"toText\": \"USER_ORGAN_ID[0..N]\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}","");
 
         //应用设计相关表
         deleteByKeyNotValidate(jb4DSession,TableRelationGroupJBuild4DSystemBuilder, JBuild4DProp.getWarningOperationCode());
