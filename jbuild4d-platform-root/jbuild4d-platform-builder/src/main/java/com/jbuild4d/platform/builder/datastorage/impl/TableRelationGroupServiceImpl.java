@@ -132,7 +132,34 @@ public class TableRelationGroupServiceImpl extends BaseServiceImpl<TableRelation
         jBuild4DSystemSetting.setRelGroupValue("系统设置相关表关系");
         this.saveSimple(jb4DSession,TableRelationGroupJBuild4DSystemSetting,jBuild4DSystemSetting);
 
-        this.createTableRelation(jb4DSession,jBuild4DSystemSetting,"TSYS_DICTIONARY_RELATION","数据字典关系图","数据字典分组与数据字典的关系图","","");
+        this.createTableRelation(jb4DSession,jBuild4DSystemSetting,"TSYS_DICTIONARY_RELATION","数据字典关系图","数据字典分组与数据字典的关系图","{\n" +
+                "  \"tableList\": [\n" +
+                "    {\n" +
+                "      \"tableId\": \"T_S_Y_S___D_I_C_T_I_O_N_A_R_Y\",\n" +
+                "      \"loc\": \"129 -91\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"tableId\": \"T_S_Y_S___D_I_C_T_I_O_N_A_R_Y___G_R_O_U_P\",\n" +
+                "      \"loc\": \"-722 -69\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"lineList\": [\n" +
+                "    {\n" +
+                "      \"lineId\": \"86c490ac-068e-0db0-893b-62817463bcac\",\n" +
+                "      \"from\": \"T_S_Y_S___D_I_C_T_I_O_N_A_R_Y\",\n" +
+                "      \"to\": \"T_S_Y_S___D_I_C_T_I_O_N_A_R_Y\",\n" +
+                "      \"fromText\": \"DICT_PARENT_ID[1]\",\n" +
+                "      \"toText\": \"DICT_ID[1]\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"lineId\": \"030ab739-f5f6-6e8b-581f-afaa9f024688\",\n" +
+                "      \"from\": \"T_S_Y_S___D_I_C_T_I_O_N_A_R_Y___G_R_O_U_P\",\n" +
+                "      \"to\": \"T_S_Y_S___D_I_C_T_I_O_N_A_R_Y\",\n" +
+                "      \"fromText\": \"DICT_GROUP_ID[1]\",\n" +
+                "      \"toText\": \"DICT_GROUP_ID[0..N]\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}","");
 
         //单点登录相关表
         deleteByKeyNotValidate(jb4DSession, TableRelationGroupJBuild4DSystemSSORelevance, JBuild4DProp.getWarningOperationCode());
@@ -143,6 +170,8 @@ public class TableRelationGroupServiceImpl extends BaseServiceImpl<TableRelation
         jBuild4DSSORelevance.setRelGroupText("单点登录相关表关系");
         jBuild4DSSORelevance.setRelGroupValue("单点登录相关表关系");
         this.saveSimple(jb4DSession, TableRelationGroupJBuild4DSystemSSORelevance,jBuild4DSSORelevance);
+
+        this.createTableRelation(jb4DSession,jBuild4DSSORelevance,"TSSO_ORGAN_DEPT_USER","机构部门人员关系图","机构部门人员关系图的关系图","","");
 
         //应用设计相关表
         deleteByKeyNotValidate(jb4DSession,TableRelationGroupJBuild4DSystemBuilder, JBuild4DProp.getWarningOperationCode());

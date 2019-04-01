@@ -217,6 +217,10 @@ Vue.component("table-relation-content-comp", {
                 }
             });
 
+            if(!toTableId){
+                toTableId=fromTableId;
+            }
+            //debugger;
             if(fromTableId!=""&&toTableId!=""){
                 this.$refs.tableRelationConnectTwoTableDialog.beginSelectConnect(fromTableId,toTableId);
             }
@@ -225,7 +229,7 @@ Vue.component("table-relation-content-comp", {
             }
         },
         addTableToDiagram:function(tableData){
-            //console.log(tableData);
+            //debugger;
             var tableId=tableData.id;
             var tableIds =[tableId];
             var _self=this;
@@ -245,7 +249,7 @@ Vue.component("table-relation-content-comp", {
                         }
 
                         var modelNodeData = {
-                            tableId: "T_S_S_O___A_U_T_H_O_R_I_T_Y",
+                            tableId: tableId,
                             loc: "0 0",
                             fields: allFieldsStyle,
                             tableData: singleTable,
