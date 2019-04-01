@@ -93,8 +93,8 @@ public class CompexInitTestSystem extends RestTestBase {
         SQLResolveToDataSetVo resolveToDataSetVo = (SQLResolveToDataSetVo) jBuild4DResponseVo.getData();
         DataSetVo dataSetVo = new DataSetVo();
         dataSetVo.setDsId(newsDataSetId);
-        dataSetVo.setDsCaption("单元测试数据集");
-        dataSetVo.setDsName("单元测试数据集");
+        dataSetVo.setDsCaption("栏目新闻-单元测试数据集");
+        dataSetVo.setDsName("栏目新闻-单元测试数据集");
         dataSetVo.setDsType(DataSetTypeEnum.SQLDataSet.getText());
         dataSetVo.setDsIssystem(TrueFalseEnum.False.getDisplayName());
         dataSetVo.setDsGroupId(newsDatasetGroupEntity.getDsGroupId());
