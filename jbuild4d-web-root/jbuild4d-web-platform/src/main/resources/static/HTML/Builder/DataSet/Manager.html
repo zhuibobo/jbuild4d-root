@@ -128,14 +128,14 @@
                         if(result.success){
                             if(result.data!=null&&result.data.length>0){
                                 for(var i=0;i<result.data.length;i++) {
-                                    if(result.data[i].relGroupIssystem=="是"&&result.data[i].relGroupChildCount==0) {
+                                    if(result.data[i].dsGroupIssystem=="是"&&result.data[i].dsGroupChildCount==0) {
                                         result.data[i].icon = "../../../Themes/Png16X16/table_key.png";
                                     }
-                                    else if(result.data[i].relGroupIssystem=="否"&&result.data[i].relGroupChildCount==0) {
-                                        result.data[i].icon = "../../../Themes/Png16X16/table_edit.png";
+                                    else if(result.data[i].dsGroupIssystem=="否"&&result.data[i].dsGroupChildCount==0) {
+                                        result.data[i].icon = "../../../Themes/Png16X16/note_edit.png";
                                     }
-                                    else if(result.data[i].relGroupParentId=="-1"){
-                                        result.data[i].icon = "../../../Themes/Png16X16/table_relationship.png";
+                                    else if(result.data[i].dsGroupParentId=="-1"){
+                                        result.data[i].icon = "../../../Themes/Png16X16/package.png";
                                     }
                                 }
                             }
