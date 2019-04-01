@@ -19,7 +19,7 @@
         }
 
         .tableTreeWrap {
-            float: left;height: 360px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px;padding: 6px
+            float: left;height: 360px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px;padding: 6px;overflow: auto;
         }
 
         .tableFieldWrap{
@@ -72,10 +72,10 @@
             <div style="height: 120px;width: 100%">
                 <textarea id="TextAreaJsEditor">select TTEST_CMS_NEW.*,TTEST_CMS_COLUMN.F_COLUMN_NAME,'address' ADDRESS,'sex' SEX from TTEST_CMS_NEW join TTEST_CMS_COLUMN on TTEST_CMS_NEW.F_COLUMN_ID=TTEST_CMS_COLUMN.ID where TTEST_CMS_NEW.F_ORGAN_ID='#{ApiVar.当前用户所在组织ID}'</textarea>
             </div>
-            <div>
+            <div style="position: absolute;bottom: 15px;top: 150px;left: 0px;right: 0px">
                 <tabs value="Tables">
                     <tab-pane label="表" name="Tables">
-                        <div>
+                        <div id="tableWraper" style="height: 365px;overflow: auto">
                             <div class="tableTreeWrap">
                                 <input type="text" id="txtSearchTableTree" style="width: 100%" />
                                 <ul id="tableZTreeUL" class="ztree"></ul>
@@ -271,7 +271,7 @@
                         }, {
                             title: '操作',
                             key: 'fieldId',
-                            width: 120,
+                            width: 80,
                             align: "center",
                             render: function (h, params) {
                                 return h('div',{class: "list-row-button-wrap"},[
@@ -306,6 +306,11 @@
                         DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                     }
                 },"json");
+
+                //var _height=PageStyleUtility.GetPageHeight()-300;
+                if(PageStyleUtility.GetPageHeight()<550){
+                    $("#tableWraper").height(190);
+                }
             },
             methods:{
                 bindData:function(result){
