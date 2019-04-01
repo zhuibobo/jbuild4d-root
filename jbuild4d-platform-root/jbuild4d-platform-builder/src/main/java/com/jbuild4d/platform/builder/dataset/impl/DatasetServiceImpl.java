@@ -164,9 +164,15 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
             record.setDsOrganId(jb4DSession.getOrganId());
             record.setDsOrganName(jb4DSession.getOrganName());
             record.setDsOrderNum(datasetMapper.nextOrderNum());
+            record.setDsCreater(jb4DSession.getUserName());
+            record.setDsUpdater(jb4DSession.getUserName());
+            record.setDsCreateTime(new Date());
+            record.setDsUpdateTime(new Date());
             return datasetMapper.insertSelective(record);
         }
         else {
+            record.setDsUpdater(jb4DSession.getUserName());
+            record.setDsUpdateTime(new Date());
             return datasetMapper.updateByPrimaryKeySelective(record);
         }
     }

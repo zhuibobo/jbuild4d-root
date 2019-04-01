@@ -4,6 +4,7 @@ package com.jbuild4d.test.web.platform.rest;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.base.tools.JsonUtility;
@@ -15,10 +16,12 @@ import com.jbuild4d.core.base.tools.StringUtility;
 import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
+import com.jbuild4d.platform.builder.dataset.IDatasetService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.datastorage.ITableService;
+import com.jbuild4d.platform.builder.exenum.DataSetTypeEnum;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
-import com.jbuild4d.platform.builder.vo.TableFieldVO;
+import com.jbuild4d.platform.builder.vo.*;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
@@ -46,6 +49,9 @@ public class CompexInitTestSystem extends RestTestBase {
     @Autowired
     IDatasetGroupService datasetGroupService;
 
+    @Autowired
+    IDatasetService datasetService;
+
     @Test
     public void Init() throws Exception {
         //创建表分组
@@ -54,7 +60,7 @@ public class CompexInitTestSystem extends RestTestBase {
         createDataSetGroup(getSession());
     }
 
-    private void createDataSetGroup(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+    private void createDataSetGroup(JB4DSession jb4DSession) throws Exception {
         String demoRootGroupId="createDataSetForDemoSystem_demoRoot";
         String demoNewsGroupId="createDataSetForDemoSystem_demoNewsGroup";
         String demoPersonGroupId="createDataSetForDemoSystem_demoPersonGroup";
@@ -80,7 +86,47 @@ public class CompexInitTestSystem extends RestTestBase {
         newsDatasetGroupEntity.setDsGroupDelEnable(TrueFalseEnum.True.getDisplayName());
         datasetGroupService.saveSimple(jb4DSession,demoNewsGroupId,newsDatasetGroupEntity);
 
+        //region 关联栏目的新闻集合
+        String newsDataSetId="TEST_DEMO_NEWS_DATASET_1";
+        datasetService.deleteByKeyNotValidate(getSession(),newsDataSetId, JBuild4DProp.getWarningOperationCode());
+        JBuild4DResponseVo jBuild4DResponseVo = this.validateSQLEnable("select TTEST_CMS_NEW.*,TTEST_CMS_COLUMN.F_COLUMN_NAME,'address' ADDRESS,'sex' SEX from TTEST_CMS_NEW join TTEST_CMS_COLUMN on TTEST_CMS_NEW.F_COLUMN_ID=TTEST_CMS_COLUMN.ID where TTEST_CMS_NEW.F_ORGAN_ID='#{ApiVar.当前用户所在组织ID}'");
+        SQLResolveToDataSetVo resolveToDataSetVo = (SQLResolveToDataSetVo) jBuild4DResponseVo.getData();
+        DataSetVo dataSetVo = new DataSetVo();
+        dataSetVo.setDsId(newsDataSetId);
+        dataSetVo.setDsCaption("单元测试数据集");
+        dataSetVo.setDsName("单元测试数据集");
+        dataSetVo.setDsType(DataSetTypeEnum.SQLDataSet.getText());
+        dataSetVo.setDsIssystem(TrueFalseEnum.False.getDisplayName());
+        dataSetVo.setDsGroupId(newsDatasetGroupEntity.getDsGroupId());
+        dataSetVo.setDsStatus(EnableTypeEnum.enable.getDisplayName());
+        dataSetVo.setDsSqlSelectText(resolveToDataSetVo.getSqlWithEnvText());
+        dataSetVo.setDsSqlSelectValue(resolveToDataSetVo.getSqlWithEnvValue());
+        dataSetVo.setDsClassName("");
+        dataSetVo.setDsRestStructureUrl("");
+        dataSetVo.setDsRestDataUrl("");
 
+        for (DataSetColumnVo dataSetColumnVo : resolveToDataSetVo.getDataSetVo().getColumnVoList()) {
+            dataSetColumnVo.setColumnId(UUIDUtility.getUUID());
+        }
+
+        for (DataSetRelatedTableVo dataSetRelatedTableVo : resolveToDataSetVo.getDataSetVo().getRelatedTableVoList()) {
+            dataSetRelatedTableVo.setRtId(UUIDUtility.getUUID());
+        }
+
+        dataSetVo.setColumnVoList(resolveToDataSetVo.getDataSetVo().getColumnVoList());
+        dataSetVo.setRelatedTableVoList(resolveToDataSetVo.getDataSetVo().getRelatedTableVoList());
+
+        MockHttpServletRequestBuilder requestBuilder = post("/PlatFormRest/Builder/DataSet/DataSetMain/SaveDataSetEdit.do");
+        requestBuilder.sessionAttr("JB4DSession", getSession());
+        requestBuilder.param("op","add");
+        requestBuilder.param("dataSetVoJson", JsonUtility.toObjectString(dataSetVo));
+        requestBuilder.param("dataSetId",newsDataSetId);
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String json = result.getResponse().getContentAsString();
+        System.out.printf(json);
+        JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+        Assert.assertTrue(responseVo.getMessage(),responseVo.isSuccess());
+        //endregion
 
         datasetGroupService.deleteByKeyNotValidate(jb4DSession,demoPersonGroupId, JBuild4DProp.getWarningOperationCode());
         DatasetGroupEntity personDatasetGroupEntity=new DatasetGroupEntity();
@@ -290,5 +336,22 @@ public class CompexInitTestSystem extends RestTestBase {
         MvcResult result=mockMvc.perform(requestBuilder).andReturn();
         String json=result.getResponse().getContentAsString();
         return JsonUtility.toObject(json, JBuild4DResponseVo.class);
+    }
+
+    public JBuild4DResponseVo validateSQLEnable(String sqlText) throws Exception {
+        MockHttpServletRequestBuilder requestBuilder = post("/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/ValidateSQLEnable.do");
+        requestBuilder.sessionAttr("JB4DSession", getSession());
+        requestBuilder.param("sqlText", sqlText);
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String json = result.getResponse().getContentAsString();
+        JBuild4DResponseVo responseVo = JsonUtility.toObject(json, JBuild4DResponseVo.class);
+
+        Object obj=responseVo.getData();
+        String temp=JsonUtility.toObjectString(obj);
+        SQLResolveToDataSetVo vo=JsonUtility.toObject(temp,SQLResolveToDataSetVo.class);
+
+        responseVo.setData(vo);
+        System.out.println(json);
+        return responseVo;
     }
 }
