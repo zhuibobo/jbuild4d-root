@@ -80,6 +80,8 @@ public class CompexInitTestSystem extends RestTestBase {
         newsDatasetGroupEntity.setDsGroupDelEnable(TrueFalseEnum.True.getDisplayName());
         datasetGroupService.saveSimple(jb4DSession,demoNewsGroupId,newsDatasetGroupEntity);
 
+
+
         datasetGroupService.deleteByKeyNotValidate(jb4DSession,demoPersonGroupId, JBuild4DProp.getWarningOperationCode());
         DatasetGroupEntity personDatasetGroupEntity=new DatasetGroupEntity();
         personDatasetGroupEntity.setDsGroupId(demoPersonGroupId);
