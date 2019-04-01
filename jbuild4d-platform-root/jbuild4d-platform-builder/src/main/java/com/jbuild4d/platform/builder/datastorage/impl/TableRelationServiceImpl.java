@@ -38,8 +38,21 @@ public class TableRelationServiceImpl extends BaseServiceImpl<TableRelationEntit
     }
 
     @Override
-    public List<TableRelationEntityWithBLOBs> getRelationByGroup(JB4DSession session, String groupId) {
+    public List<TableRelationEntityWithBLOBs> getRelationByGroup(JB4DSession jb4DSession, String groupId) {
         return tableRelationMapper.selectByGroupId(groupId);
+    }
+
+    @Override
+    public void updateDiagram(JB4DSession jb4DSession, String recordId, String relationContent, String relationDiagramJson) throws JBuild4DGenerallyException {
+        TableRelationEntityWithBLOBs tableRelationEntityWithBLOBs=getByPrimaryKey(jb4DSession,recordId);
+        if(tableRelationEntityWithBLOBs!=null){
+            tableRelationEntityWithBLOBs.setRelationContent(relationContent);
+            tableRelationEntityWithBLOBs.setRelationDiagramJson(relationDiagramJson);
+            this.updateByKeySelective(jb4DSession,tableRelationEntityWithBLOBs);
+        }
+        else {
+            throw new JBuild4DGenerallyException("不存在记录为" + recordId + "的数据!");
+        }
     }
 
     @Override

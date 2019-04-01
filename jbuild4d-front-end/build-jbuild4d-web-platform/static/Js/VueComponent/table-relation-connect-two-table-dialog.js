@@ -147,11 +147,11 @@ Vue.component("table-relation-connect-two-table-dialog", {
             return result;
         },
         selectedFromField:function (row,index) {
-            console.log(row);
+            //console.log(row);
             this.resultData.from.text=row.fieldName+"[1]";
         },
         selectedToField:function (row,index) {
-            console.log(row);
+            //console.log(row);
             this.resultData.to.text=row.fieldName+"[0..N]";
         }
     },

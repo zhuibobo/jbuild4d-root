@@ -5,11 +5,14 @@ Vue.component("table-relation-content-comp", {
         return {
             acInterface:{
                 getTablesFieldsByTableIds:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTablesFieldsByTableIds",
+                saveDiagram:"/PlatFormRest/Builder/DataStorage/TableRelation/TableRelation/SaveDiagram",
+                getSingleDiagramData:"/PlatFormRest/Builder/DataStorage/TableRelation/TableRelation/GetDetailData",
                 tableView:"/HTML/Builder/DataStorage/DataBase/TableEdit.html"
             },
             tableRelationDiagram:null,
             displayDesc:true,
-            formatJson:null
+            formatJson:null,
+            recordId:this.relation.relationId
         }
     },
     mounted:function(){
@@ -21,8 +24,9 @@ Vue.component("table-relation-content-comp", {
             $(".table-relation-op-buttons-outer-wrap").css("width","100%");
         }
         this.initDiagram();
-        this.setDataJson();
-        this.loadData();
+        this.loadRelationDetailData();
+        //this.setDataJson(this.relation.relationContent);
+        //this.loadData();
     },
     methods:{
         init:function () {
@@ -221,7 +225,7 @@ Vue.component("table-relation-content-comp", {
             }
         },
         addTableToDiagram:function(tableData){
-            console.log(tableData);
+            //console.log(tableData);
             var tableId=tableData.id;
             var tableIds =[tableId];
             var _self=this;
@@ -232,8 +236,8 @@ Vue.component("table-relation-content-comp", {
                         var allFields = result.data;
                         var singleTable = result.exKVData.Tables[0];
 
-                        console.log(allFields);
-                        console.log(singleTable);
+                        //console.log(allFields);
+                        //console.log(singleTable);
                         var allFieldsStyle = [];
                         for (var i = 0; i < allFields.length; i++) {
                             allFieldsStyle.push(_self.rendererFieldStyle(allFields[i]));
@@ -319,30 +323,19 @@ Vue.component("table-relation-content-comp", {
             this.tableRelationDiagram.model.addLinkData(lineData);
             this.tableRelationDiagram.model.commitTransaction("flash");
         },
-        saveModel:function () {
-            /*alert("location -202 -1701");
-            var node={
-                key: "Order Details11111",
-                loc:"-202 -170",
-                fields: [{ fieldName: "OrderID", iskey: true, figure: "Decision" },
-                    { fieldName: "ProductID", iskey: true, figure: "Decision" },
-                    { fieldName: "UnitPrice", iskey: false, figure: "MagneticData" },
-                    { fieldName: "Quantity", iskey: false, figure: "MagneticData" },
-                    { fieldName: "Discount", iskey: false, figure: "MagneticData" }]
-            };
-            this.tableRelationDiagram.model.addNodeData(node);
-
-            var json=this.tableRelationDiagram.model.toJson();
-            console.log(json);*/
-            this.tableRelationDiagram.nodes.each(function (part) {
-                if (part instanceof go.Node) {
-                    console.log(part.location);
-                    console.log(part.data);
-                }
-                else if (part instanceof go.Link) {
-                    console.log(part.data);
-                }
-            });
+        saveModelToServer:function () {
+            //alert(this.recordId);
+            if(this.recordId) {
+                var sendData = {
+                    recordId: this.recordId,
+                    relationContent:JsonUtility.JsonToString(this.getDataJson()),
+                    relationDiagramJson: this.getDiagramJson()
+                };
+                //var _self=this;
+                AjaxUtility.Post(this.acInterface.saveDiagram, sendData, function (result) {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                }, "json");
+            }
         },
         initDiagram:function(){
             var _self=this;
@@ -378,7 +371,7 @@ Vue.component("table-relation-content-comp", {
                             stroke: "#333333",
                             font: "bold 14px sans-serif"
                         },
-                        new go.Binding("text", "fieldName"))
+                        new go.Binding("text", "displayText"))
                 );
 
             // define the Node template, representing an entity
@@ -393,7 +386,7 @@ Vue.component("table-relation-content-comp", {
                         isShadowed: true,
                         shadowColor: "#C5C1AA",
                         doubleClick: function(e, node) {
-                            console.log(node);
+                            //console.log(node);
                             //alert(node.data.key);
                             var url = BaseUtility.BuildView(_self.acInterface.tableView, {
                                 "op": "view",
@@ -419,7 +412,7 @@ Vue.component("table-relation-content-comp", {
                                 margin: new go.Margin(0, 14, 0, 2),  // leave room for Button
                                 font: "bold 16px sans-serif"
                             },
-                            new go.Binding("text", "tableCaption")),
+                            new go.Binding("text", "tableDisplayText")),
                         // the collapse/expand button
                         $("PanelExpanderButton", "LIST",  // the name of the element whose visibility this button toggles
                             { row: 0, alignment: go.Spot.TopRight }),
@@ -473,6 +466,23 @@ Vue.component("table-relation-content-comp", {
                         new go.Binding("text", "toText"))
                 );
         },
+        loadRelationDetailData:function(){
+            var _self=this;
+            AjaxUtility.Post(this.acInterface.getSingleDiagramData, {recordId:this.recordId,op:"Edit"}, function (result) {
+                //console.log(result);
+                if(result.success){
+                    if(result.data.relationContent) {
+                        var dataJson = JsonUtility.StringToJson(result.data.relationContent);
+                        console.log(dataJson);
+                        _self.setDataJson(dataJson);
+                        _self.convertToFullJson(dataJson,_self.drawObjInDiagram)
+                    }
+                }
+                else{
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                }
+            }, "json");
+        },
         drawObjInDiagram:function(fullJson){
 
             //if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
@@ -484,7 +494,7 @@ Vue.component("table-relation-content-comp", {
             var yellowgrad = $(go.Brush, "Linear", { 0: "rgb(254, 221, 50)", 1: "rgb(254, 182, 50)" });
             var linkDataArray = fullJson.lineList;
             //alert("1");
-            console.log(fullJson);
+            //console.log(fullJson);
             this.tableRelationDiagram.model = $(go.GraphLinksModel,
                 {
                     copiesArrays: true,
@@ -493,15 +503,17 @@ Vue.component("table-relation-content-comp", {
                     linkDataArray: linkDataArray*/
                 });
 
-            /*var _self=this;
+            var _self=this;
             window.setTimeout(function () {
-                _self.connectSelectionNode();
-            },500);*/
+                //_self.connectSelectionNode();
+                _self.tableRelationDiagram.model.startTransaction("flash");
+                for(var i=0;i<fullJson.lineList.length;i++){
+                    var lineData= fullJson.lineList[i];
+                    _self.tableRelationDiagram.model.addLinkData(lineData);
+                }
+                _self.tableRelationDiagram.model.commitTransaction("flash");
+            },500);
 
-        },
-        loadData:function(){
-            var formatJson=this.formatJson;
-            this.convertToFullJson(formatJson,this.drawObjInDiagram)
         },
         convertToFullJson:function(simpleJson,func){
             //将simpleJson装换为fullJson;
@@ -522,10 +534,12 @@ Vue.component("table-relation-content-comp", {
                         fullJson.tableList[i].tableData=singleTableData;
                         fullJson.tableList[i].tableName=singleTableData.tableName;
                         fullJson.tableList[i].tableCaption=singleTableData.tableCaption;
+                        fullJson.tableList[i].tableDisplayText=singleTableData.displayText;
                         var singleTableFieldsData=_self.getSingleTableFieldsData(allFields,fullJson.tableList[i].tableId);
                         fullJson.tableList[i].fields=singleTableFieldsData;
                         fullJson.tableList[i].key=fullJson.tableList[i].tableId;
                     }
+                    //console.log(fullJson);
                     _self.drawObjInDiagram(fullJson);
 
                 }
@@ -538,6 +552,8 @@ Vue.component("table-relation-content-comp", {
         getSingleTableData:function(allTables,tableId){
             for(var i=0;i<allTables.length;i++){
                 if(allTables[i].tableId==tableId){
+                    allTables[i].displayText=allTables[i].tableName+"["+allTables[i].tableCaption+"]"
+                    //console.log(allTables[i]);
                     return allTables[i];
                 }
             }
@@ -547,7 +563,7 @@ Vue.component("table-relation-content-comp", {
             var result=[];
             for(var i=0;i<allFields.length;i++){
                 if(allFields[i].fieldTableId==tableId){
-
+                    allFields[i].displayText=allFields[i].fieldName+"["+allFields[i].fieldCaption+"]";
                     result.push(this.rendererFieldStyle(allFields[i]));
                 }
             }
@@ -600,7 +616,7 @@ Vue.component("table-relation-content-comp", {
             return dataJson;
         },
         setDataJson:function (json) {
-            var json= {
+            /*var json= {
                 tableList: [
                     {
                         tableId: "T_S_S_O___A_U_T_H_O_R_I_T_Y",
@@ -631,7 +647,8 @@ Vue.component("table-relation-content-comp", {
                         toText:"102_TSSO_AUTHORITY",
                     }
                 ]
-            }
+            }*/
+            //console.log(json);
             this.formatJson=json;
         },
         getDiagramJson:function () {
@@ -666,10 +683,6 @@ Vue.component("table-relation-content-comp", {
                         </div>
                         <div class="table-relation-op-buttons-outer-wrap">
                             <div class="table-relation-op-buttons-inner-wrap">
-                                <radio-group type="button">
-                                    <radio label="列名"></radio>
-                                    <radio label="标题"></radio>
-                                </radio-group>
                                 <button-group shape="circle">
                                     <i-button @click="showSelectTableDialog" type="success" icon="md-add"></i-button>
                                     <i-button @click="showSelectFieldConnectDialog" type="primary" icon="logo-steam">连接</i-button>
@@ -678,7 +691,7 @@ Vue.component("table-relation-content-comp", {
                                     <i-button disabled type="primary" icon="md-git-compare">历史</i-button>
                                     <i-button @click="alertDataJson" type="primary" icon="md-code">数据Json</i-button>
                                     <i-button @click="alertDiagramJson" type="primary" icon="md-code-working">图形Json</i-button>
-                                    <i-button @click="saveModel" type="primary" icon="logo-instagram">保存</i-button>
+                                    <i-button @click="saveModelToServer" type="primary" icon="logo-instagram">保存</i-button>
                                     <i-button @click="deleteSelection" type="primary" icon="md-close"></i-button>
                                 </button-group>
                             </div>

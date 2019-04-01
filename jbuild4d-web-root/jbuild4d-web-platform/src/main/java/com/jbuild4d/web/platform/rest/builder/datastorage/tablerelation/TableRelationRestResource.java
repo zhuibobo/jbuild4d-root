@@ -5,6 +5,7 @@ import com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationEntityWithBLOB
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableRelationGroupEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import com.jbuild4d.platform.builder.datastorage.ITableRelationService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
@@ -41,5 +42,11 @@ public class TableRelationRestResource  extends GeneralRestResource<TableRelatio
     public JBuild4DResponseVo getRelationByGroup(String groupId) {
         List<TableRelationEntityWithBLOBs> relationEntityList=tableRelationService.getRelationByGroup(JB4DSessionUtility.getSession(),groupId);
         return JBuild4DResponseVo.getDataSuccess(relationEntityList);
+    }
+
+    @RequestMapping(value = "/SaveDiagram",method = RequestMethod.POST)
+    public JBuild4DResponseVo saveDiagram(String recordId,String relationContent,String relationDiagramJson) throws JBuild4DGenerallyException {
+        tableRelationService.updateDiagram(JB4DSessionUtility.getSession(),recordId,relationContent,relationDiagramJson);
+        return JBuild4DResponseVo.opSuccess();
     }
 }
