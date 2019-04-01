@@ -3,6 +3,7 @@ package com.jbuild4d.web.platform.rest.builder.dataset;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class DataSetGroupRestResource extends GeneralRestResource<DatasetGroupEn
     }
 
     @RequestMapping(value = "GetTreeData", method = RequestMethod.POST)
-    public List<DatasetGroupEntity> getTreeData() {
+    public JBuild4DResponseVo getTreeData() {
         List<DatasetGroupEntity> datasetGroupEntityList=datasetGroupService.getALL(JB4DSessionUtility.getSession());
-        return datasetGroupEntityList;
+        return JBuild4DResponseVo.getDataSuccess(datasetGroupEntityList);
     }
 }
