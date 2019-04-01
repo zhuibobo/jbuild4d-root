@@ -187,6 +187,41 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldEntity> imp
 
     private void createTreeStructureFieldTemplate(String templateName,JB4DSession jb4DSession){
         this.createGeneralTableFieldTemplate(templateName,jb4DSession);
+
+        TableFieldEntity codeField=newFiled(jb4DSession,"Template","F_CODE_VALUE","节点编码",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(codeField);
+
+        TableFieldEntity mainImgField=newFiled(jb4DSession,"Template","F_MAIN_IMG_ID","主题图片ID",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(mainImgField);
+
+        TableFieldEntity parentIdField=newFiled(jb4DSession,"Template","F_PARENT_ID","父节点ID",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,50,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(parentIdField);
+
+        TableFieldEntity parentIdListField=newFiled(jb4DSession,"Template","F_PARENT_IDLIST","父节点ID列表",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.NVarCharType,500,0,
+                "","","",
+                "",templateName);
+        tableFieldMapper.insert(parentIdListField);
+
+        TableFieldEntity parentChildCountField=newFiled(jb4DSession,"Template","F_CHILD_COUNT","子节点的数量",
+                TrueFalseEnum.False,TrueFalseEnum.True,
+                TableFieldTypeEnum.IntType,20,0,
+                "","","",
+                "子节点的数量:不包含孙节点",templateName);
+        tableFieldMapper.insert(parentChildCountField);
     }
 
     @Override

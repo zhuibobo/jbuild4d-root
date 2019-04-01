@@ -70,7 +70,7 @@
                 <div style="clear: bottom"></div>
             </div>
             <div style="height: 120px;width: 100%">
-                <textarea id="TextAreaJsEditor">select TDEV_TEST_1.*,TDEV_TEST_2.F_TABLE1_ID,'address' ADDRESS,'sex' SEX from TDEV_TEST_1 join TDEV_TEST_2 on TDEV_TEST_1.ID=TDEV_TEST_2.F_TABLE1_ID where TDEV_TEST_1.ID='#{ApiVar.当前用户所在组织ID}'</textarea>
+                <textarea id="TextAreaJsEditor">select TTEST_CMS_NEW.*,TTEST_CMS_COLUMN.F_COLUMN_NAME,'address' ADDRESS,'sex' SEX from TTEST_CMS_NEW join TTEST_CMS_COLUMN on TTEST_CMS_NEW.F_COLUMN_ID=TTEST_CMS_COLUMN.ID where TTEST_CMS_NEW.F_ORGAN_ID='#{ApiVar.当前用户所在组织ID}'</textarea>
             </div>
             <div>
                 <tabs value="Tables">

@@ -45,7 +45,7 @@ public class InitializationSystemRestTest extends RestTestBase {
     /*@DisplayName("When zero operands")*/
     public void initializationSystem() throws Exception {
         //context.getServletContext().
-        MockHttpServletRequestBuilder requestBuilder =post("/PlatFormRest/InitializationSystem/Running.do");
+        MockHttpServletRequestBuilder requestBuilder =post("/PlatFormRest/InitializationSystem/Running.do?createTestData=true");
 
         requestBuilder.sessionAttr("JB4DSession",getSession());
         MvcResult result=mockMvc.perform(requestBuilder).andReturn();

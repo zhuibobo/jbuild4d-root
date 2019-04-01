@@ -133,7 +133,8 @@ public class InitializationSystemRestResource {
         roleGroupService.initSystemData(jb4DSession);
 
         if(createTestData!=null&&createTestData.toLowerCase().equals("true")){
-
+            //创建测试的表分组
+            //TableGroupEntity personDBGroup=tableGroupService.createForDemoSystem(jb4DSession);
         }
 
         return JBuild4DResponseVo.success("系统数据初始化成功！");
