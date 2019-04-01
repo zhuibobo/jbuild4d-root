@@ -678,6 +678,43 @@ Vue.component("table-relation-content-comp", {
                 }
             });
             return result;
+        },
+        downLoadModelPNG:function () {
+            function myCallback(blob) {
+                var url = window.URL.createObjectURL(blob);
+                var filename = "myBlobFile1.png";
+
+                var a = document.createElement("a");
+                a.style = "display: none";
+                a.href = url;
+                a.download = filename;
+
+                // IE 11
+                if (window.navigator.msSaveBlob !== undefined) {
+                    window.navigator.msSaveBlob(blob, filename);
+                    return;
+                }
+
+                document.body.appendChild(a);
+                requestAnimationFrame(function() {
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                });
+            }
+            var blob = this.tableRelationDiagram.makeImageData({
+                background: "white",
+                returnType: "blob",
+                scale: 1,
+                callback: myCallback });
+
+            /*var img = this.tableRelationDiagram.makeImage({scale: 1,});
+            var url = img.src;
+            var a = document.createElement('a');
+            var event = new MouseEvent('click');
+            a.download = '下载图片名称';
+            a.href = url;
+            a.dispatchEvent(event);*/
         }
     },
     template: `<div ref="relationContentOuterWrap" class="table-relation-content-outer-wrap">
@@ -697,6 +734,7 @@ Vue.component("table-relation-content-comp", {
                                     <i-button disabled type="primary" icon="md-git-compare">历史</i-button>
                                     <i-button @click="alertDataJson" type="primary" icon="md-code">数据Json</i-button>
                                     <i-button @click="alertDiagramJson" type="primary" icon="md-code-working">图形Json</i-button>
+                                    <i-button @click="downLoadModelPNG" type="primary" icon="md-cloud-download">下载</i-button>
                                     <i-button @click="saveModelToServer" type="primary" icon="logo-instagram">保存</i-button>
                                     <i-button @click="deleteSelection" type="primary" icon="md-close"></i-button>
                                 </button-group>
