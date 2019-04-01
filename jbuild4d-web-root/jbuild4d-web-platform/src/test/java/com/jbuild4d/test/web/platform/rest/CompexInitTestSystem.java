@@ -1,6 +1,7 @@
 package com.jbuild4d.test.web.platform.rest;
 
 
+import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
@@ -13,6 +14,7 @@ import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.core.base.tools.StringUtility;
 import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
+import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
@@ -41,10 +43,52 @@ public class CompexInitTestSystem extends RestTestBase {
     @Autowired
     ITableService tableService;
 
+    @Autowired
+    IDatasetGroupService datasetGroupService;
+
     @Test
     public void Init() throws Exception {
         //创建表分组
         createTableGroup(getSession());
+        //创建数据集
+        createDataSetGroup(getSession());
+    }
+
+    private void createDataSetGroup(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+        String demoRootGroupId="createDataSetForDemoSystem_demoRoot";
+        String demoNewsGroupId="createDataSetForDemoSystem_demoNewsGroup";
+        String demoPersonGroupId="createDataSetForDemoSystem_demoPersonGroup";
+
+        datasetGroupService.deleteByKeyNotValidate(jb4DSession,demoRootGroupId, JBuild4DProp.getWarningOperationCode());
+        DatasetGroupEntity rootDatasetGroupEntity=new DatasetGroupEntity();
+        rootDatasetGroupEntity.setDsGroupId(demoRootGroupId);
+        rootDatasetGroupEntity.setDsGroupValue("业务库数据集");
+        rootDatasetGroupEntity.setDsGroupText("业务库数据集");
+        rootDatasetGroupEntity.setDsGroupParentId(datasetGroupService.getRootId());
+        rootDatasetGroupEntity.setDsGroupIssystem(TrueFalseEnum.False.getDisplayName());
+        rootDatasetGroupEntity.setDsGroupDelEnable(TrueFalseEnum.True.getDisplayName());
+        datasetGroupService.saveSimple(jb4DSession,demoRootGroupId,rootDatasetGroupEntity);
+
+
+        datasetGroupService.deleteByKeyNotValidate(jb4DSession,demoNewsGroupId, JBuild4DProp.getWarningOperationCode());
+        DatasetGroupEntity newsDatasetGroupEntity=new DatasetGroupEntity();
+        newsDatasetGroupEntity.setDsGroupId(demoNewsGroupId);
+        newsDatasetGroupEntity.setDsGroupValue("信息发布");
+        newsDatasetGroupEntity.setDsGroupText("信息发布");
+        newsDatasetGroupEntity.setDsGroupParentId(demoRootGroupId);
+        newsDatasetGroupEntity.setDsGroupIssystem(TrueFalseEnum.False.getDisplayName());
+        newsDatasetGroupEntity.setDsGroupDelEnable(TrueFalseEnum.True.getDisplayName());
+        datasetGroupService.saveSimple(jb4DSession,demoNewsGroupId,newsDatasetGroupEntity);
+
+        datasetGroupService.deleteByKeyNotValidate(jb4DSession,demoPersonGroupId, JBuild4DProp.getWarningOperationCode());
+        DatasetGroupEntity personDatasetGroupEntity=new DatasetGroupEntity();
+        personDatasetGroupEntity.setDsGroupId(demoPersonGroupId);
+        personDatasetGroupEntity.setDsGroupValue("人口信息");
+        personDatasetGroupEntity.setDsGroupText("人口信息");
+        personDatasetGroupEntity.setDsGroupParentId(demoRootGroupId);
+        personDatasetGroupEntity.setDsGroupIssystem(TrueFalseEnum.False.getDisplayName());
+        personDatasetGroupEntity.setDsGroupDelEnable(TrueFalseEnum.True.getDisplayName());
+        datasetGroupService.saveSimple(jb4DSession,demoPersonGroupId,personDatasetGroupEntity);
     }
 
 
