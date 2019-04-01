@@ -263,19 +263,23 @@
             },
             delRelation: function () {
                 var _self=this;
-                AjaxUtility.Delete(this.acInterface.deleteRelation,
-                    {
-                        "recordId": _self.selectedRelationId
-                    },
-                    function (result) {
-                        if (result.success) {
-                            _self.reloadRelations(_self.treeSelectedNode.relGroupId);
-                        }
-                        else
+
+                DialogUtility.Confirm(window, "您确认要删除当前记录吗？", function () {
+
+                    AjaxUtility.Delete(this.acInterface.deleteRelation,
                         {
-                            DialogUtility.AlertError(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
-                        }
-                    }, "json");
+                            "recordId": _self.selectedRelationId
+                        },
+                        function (result) {
+                            if (result.success) {
+                                _self.reloadRelations(_self.treeSelectedNode.relGroupId);
+                            }
+                            else {
+                                DialogUtility.AlertError(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                });
+                            }
+                        }, "json");
+                });
             },
             move:function (type) {
                 var _self=this;

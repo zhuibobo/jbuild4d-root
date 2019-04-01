@@ -240,6 +240,7 @@ Vue.component("table-relation-content-comp", {
                         //console.log(singleTable);
                         var allFieldsStyle = [];
                         for (var i = 0; i < allFields.length; i++) {
+                            allFields[i].displayText=allFields[i].fieldName+"["+allFields[i].fieldCaption+"]";
                             allFieldsStyle.push(_self.rendererFieldStyle(allFields[i]));
                         }
 
@@ -250,6 +251,7 @@ Vue.component("table-relation-content-comp", {
                             tableData: singleTable,
                             tableName: singleTable.tableName,
                             tableCaption: singleTable.tableCaption,
+                            tableDisplayText:singleTable.tableName+"["+singleTable.tableCaption+"]",
                             key: singleTable.tableId
                         }
                         _self.tableRelationDiagram.model.startTransaction("flash");
@@ -552,7 +554,7 @@ Vue.component("table-relation-content-comp", {
         getSingleTableData:function(allTables,tableId){
             for(var i=0;i<allTables.length;i++){
                 if(allTables[i].tableId==tableId){
-                    allTables[i].displayText=allTables[i].tableName+"["+allTables[i].tableCaption+"]"
+                    allTables[i].displayText=allTables[i].tableName+"["+allTables[i].tableCaption+"]";
                     //console.log(allTables[i]);
                     return allTables[i];
                 }
