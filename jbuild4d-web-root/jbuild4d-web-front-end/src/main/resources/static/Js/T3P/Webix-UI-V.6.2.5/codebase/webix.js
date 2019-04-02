@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @license
  * Webix UI v.6.2.5
  * This software is covered by Webix Trial License.
