@@ -27,7 +27,7 @@
     <tabs @on-click="tabChange" v-model="selectedTabName">
         <tab-pane name="Info" label="Info">
             <div style="width: 1024px;margin: auto">
-                <div style="width: 1024px;height: 560px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
+                <div style="width: 1024px;height: 615px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">表单信息</divider>
                     <i-form  :model="formResourceEntity" :label-width="110">
                         <form-item label="表单名称：">
@@ -43,6 +43,22 @@
                         </form-item>
                         <form-item label="备注：" style="margin-bottom: 12px">
                             <i-input v-model="formResourceEntity.formDesc" type="textarea" :autosize="{minRows: 2,maxRows: 2}"></i-input>
+                        </form-item>
+                        <form-item label="每次解析：">
+                            <row>
+                                <i-col span="10">
+                                    <radio-group v-model="formResourceEntity.formEveryTimeResolve" type="button">
+                                        <radio label="是">是</radio>
+                                        <radio label="否">否</radio>
+                                    </radio-group>
+                                </i-col>
+                                <i-col span="4" style="text-align: center">主题：</i-col>
+                                <i-col span="10">
+                                    <i-select v-model="useTemplateName" style="width:200px" @on-change="changeFieldsTemplate">
+                                        <i-option v-for="(item,key) in templateFieldGroup" :value="key" :key="key">使用模版:{{key}}</i-option>
+                                    </i-select>
+                                </i-col>
+                            </row>
                         </form-item>
                     </i-form>
                     <db-table-relation-comp ref="dbTableRelationComp"></db-table-relation-comp>
@@ -135,12 +151,15 @@
                 formDataRelation:"",
                 formIsTemplate:"否",
                 formContentUrl:"",
-                formIsResolve:"",
+                formIsResolve:"否",
                 formHtmlSource:"",
                 formHtmlResolve:"",
                 formJsContent:"",
                 formCssContent:"",
-                formConfigContent:""
+                formConfigContent:"",
+                formEveryTimeResolve:"否",
+                formSource:"Web设计器",
+                formTheme:"123"
             },
             status: BaseUtility.GetUrlParaValue("op"),
             oldSelectedTabName:"",
@@ -148,7 +167,7 @@
         },
         mounted:function () {
             this.initPageUI();
-            this.bindStatusData();
+            //this.bindStatusData();
         },
         methods: {
             initPageUI:function(){
@@ -174,30 +193,36 @@
                 DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formResourceEntity, this.recordId, this.status,null,function (result) {
                     //alert(_self.formResourceEntity.formDataRelation);
                     //debugger;
-                    if(_self.status!="add") {
+                    _self.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
+                    if(_self.status=="add"){
+                        _self.formResourceEntity.formCreater=this.currUserEntity.userName;
+                        _self.formResourceEntity.formUpdater=this.currUserEntity.userName;
+                        _self.formResourceEntity.formType="业务表单";
+                        _self.formResourceEntity.formModuleId=BaseUtility.GetUrlParaValue("moduleId");
+                        _self.oldSelectedTabName="Info";
+                    }
+                    else {
+                        _self.formResourceEntity.formId=BaseUtility.GetUrlParaValue("recordId");
+                        _self.formResourceEntity.formUpdater=this.currUserEntity.userName;
+                        _self.formResourceEntity.formIsResolve="否";
+
+                        _self.oldSelectedTabName="Design";
+                        _self.selectedTabName="Design";
+                        //JBuild4D.FormDesign.SetCKEditorHTML("");
+
                         _self.$refs.dbTableRelationComp.setValue(_self.formResourceEntity.formDataRelation);
                         HTMLEditorUtility.SetHTMLEditorHTML(_self.formResourceEntity.formHtmlSource);
                         CKEditorUtility.SetCKEditorHTML(_self.formResourceEntity.formHtmlSource);
                         JsEditorUtility.SetJsEditorJs(_self.formResourceEntity.formJsContent);
                     }
+
+                    /*if(_self.status!="add") {
+
+                    }*/
                 });
             },
             bindStatusData:function () {
-                this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
-                if(this.status=="add"){
-                    this.formResourceEntity.formCreater=this.currUserEntity.userName;
-                    this.formResourceEntity.formUpdater=this.currUserEntity.userName;
-                    this.formResourceEntity.formType="业务表单";
-                    this.formResourceEntity.formModuleId=BaseUtility.GetUrlParaValue("moduleId");
-                    this.oldSelectedTabName="Info";
-                }
-                else {
-                    this.formResourceEntity.formId=BaseUtility.GetUrlParaValue("recordId");
-                    this.formResourceEntity.formUpdater=this.currUserEntity.userName;
-                    this.oldSelectedTabName="Design";
-                    this.selectedTabName="Design";
-                    //JBuild4D.FormDesign.SetCKEditorHTML("");
-                }
+
             },
             isHTMLToDesign:function(name){
                 if(this.oldSelectedTabName=="HTML"){

@@ -24,7 +24,10 @@
             <arg column="FORM_DATA_RELATION" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_IS_TEMPLATE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_IS_RESOLVE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_EVERY_TIME_RESOLVE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_SOURCE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_CONTENT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_THEME" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
@@ -50,7 +53,10 @@
             <arg column="FORM_DATA_RELATION" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_IS_TEMPLATE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_IS_RESOLVE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_EVERY_TIME_RESOLVE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_SOURCE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_CONTENT_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_THEME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_HTML_SOURCE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="FORM_HTML_RESOLVE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="FORM_JS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
@@ -62,7 +68,8 @@
         FORM_ID, FORM_CODE, FORM_NAME, FORM_SINGLE_NAME, FORM_CREATE_TIME, FORM_CREATER,
         FORM_UPDATE_TIME, FORM_UPDATER, FORM_TYPE, FORM_ISSYSTEM, FORM_ORDER_NUM, FORM_DESC,
         FORM_MODULE_ID, FORM_STATUS, FORM_ORGAN_ID, FORM_ORGAN_NAME, FORM_MAIN_TABLE_NAME,
-        FORM_MAIN_TABLE_CAPTION, FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_IS_RESOLVE, FORM_CONTENT_URL
+        FORM_MAIN_TABLE_CAPTION, FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_IS_RESOLVE, FORM_EVERY_TIME_RESOLVE,
+        FORM_SOURCE, FORM_CONTENT_URL, FORM_THEME
     </sql>
     <sql id="Blob_Column_List">
         FORM_HTML_SOURCE, FORM_HTML_RESOLVE, FORM_JS_CONTENT, FORM_CSS_CONTENT, FORM_CONFIG_CONTENT
@@ -81,15 +88,16 @@
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
         insert into TBUILD_FORM_RESOURCE (FORM_ID, FORM_CODE, FORM_NAME,
-                                        FORM_SINGLE_NAME, FORM_CREATE_TIME, FORM_CREATER,
-                                        FORM_UPDATE_TIME, FORM_UPDATER, FORM_TYPE,
-                                        FORM_ISSYSTEM, FORM_ORDER_NUM, FORM_DESC,
-                                        FORM_MODULE_ID, FORM_STATUS, FORM_ORGAN_ID,
-                                        FORM_ORGAN_NAME, FORM_MAIN_TABLE_NAME, FORM_MAIN_TABLE_CAPTION,
-                                        FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_IS_RESOLVE,
-                                        FORM_CONTENT_URL, FORM_HTML_SOURCE, FORM_HTML_RESOLVE,
-                                        FORM_JS_CONTENT, FORM_CSS_CONTENT,
-                                        FORM_CONFIG_CONTENT)
+                                          FORM_SINGLE_NAME, FORM_CREATE_TIME, FORM_CREATER,
+                                          FORM_UPDATE_TIME, FORM_UPDATER, FORM_TYPE,
+                                          FORM_ISSYSTEM, FORM_ORDER_NUM, FORM_DESC,
+                                          FORM_MODULE_ID, FORM_STATUS, FORM_ORGAN_ID,
+                                          FORM_ORGAN_NAME, FORM_MAIN_TABLE_NAME, FORM_MAIN_TABLE_CAPTION,
+                                          FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_IS_RESOLVE,
+                                          FORM_EVERY_TIME_RESOLVE, FORM_SOURCE, FORM_CONTENT_URL,
+                                          FORM_THEME, FORM_HTML_SOURCE, FORM_HTML_RESOLVE,
+                                          FORM_JS_CONTENT, FORM_CSS_CONTENT,
+                                          FORM_CONFIG_CONTENT)
         values (#{formId,jdbcType=VARCHAR}, #{formCode,jdbcType=VARCHAR}, #{formName,jdbcType=VARCHAR},
                 #{formSingleName,jdbcType=VARCHAR}, #{formCreateTime,jdbcType=TIMESTAMP}, #{formCreater,jdbcType=VARCHAR},
                 #{formUpdateTime,jdbcType=TIMESTAMP}, #{formUpdater,jdbcType=VARCHAR}, #{formType,jdbcType=VARCHAR},
@@ -97,7 +105,8 @@
                 #{formModuleId,jdbcType=VARCHAR}, #{formStatus,jdbcType=VARCHAR}, #{formOrganId,jdbcType=VARCHAR},
                 #{formOrganName,jdbcType=VARCHAR}, #{formMainTableName,jdbcType=VARCHAR}, #{formMainTableCaption,jdbcType=VARCHAR},
                 #{formDataRelation,jdbcType=VARCHAR}, #{formIsTemplate,jdbcType=VARCHAR}, #{formIsResolve,jdbcType=VARCHAR},
-                #{formContentUrl,jdbcType=VARCHAR}, #{formHtmlSource,jdbcType=LONGVARCHAR}, #{formHtmlResolve,jdbcType=LONGVARCHAR},
+                #{formEveryTimeResolve,jdbcType=VARCHAR}, #{formSource,jdbcType=VARCHAR}, #{formContentUrl,jdbcType=VARCHAR},
+                #{formTheme,jdbcType=VARCHAR}, #{formHtmlSource,jdbcType=LONGVARCHAR}, #{formHtmlResolve,jdbcType=LONGVARCHAR},
                 #{formJsContent,jdbcType=LONGVARCHAR}, #{formCssContent,jdbcType=LONGVARCHAR},
                 #{formConfigContent,jdbcType=LONGVARCHAR})
     </insert>
@@ -167,8 +176,17 @@
             <if test="formIsResolve != null">
                 FORM_IS_RESOLVE,
             </if>
+            <if test="formEveryTimeResolve != null">
+                FORM_EVERY_TIME_RESOLVE,
+            </if>
+            <if test="formSource != null">
+                FORM_SOURCE,
+            </if>
             <if test="formContentUrl != null">
                 FORM_CONTENT_URL,
+            </if>
+            <if test="formTheme != null">
+                FORM_THEME,
             </if>
             <if test="formHtmlSource != null">
                 FORM_HTML_SOURCE,
@@ -250,8 +268,17 @@
             <if test="formIsResolve != null">
                 #{formIsResolve,jdbcType=VARCHAR},
             </if>
+            <if test="formEveryTimeResolve != null">
+                #{formEveryTimeResolve,jdbcType=VARCHAR},
+            </if>
+            <if test="formSource != null">
+                #{formSource,jdbcType=VARCHAR},
+            </if>
             <if test="formContentUrl != null">
                 #{formContentUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="formTheme != null">
+                #{formTheme,jdbcType=VARCHAR},
             </if>
             <if test="formHtmlSource != null">
                 #{formHtmlSource,jdbcType=LONGVARCHAR},
@@ -333,8 +360,17 @@
             <if test="formIsResolve != null">
                 FORM_IS_RESOLVE = #{formIsResolve,jdbcType=VARCHAR},
             </if>
+            <if test="formEveryTimeResolve != null">
+                FORM_EVERY_TIME_RESOLVE = #{formEveryTimeResolve,jdbcType=VARCHAR},
+            </if>
+            <if test="formSource != null">
+                FORM_SOURCE = #{formSource,jdbcType=VARCHAR},
+            </if>
             <if test="formContentUrl != null">
                 FORM_CONTENT_URL = #{formContentUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="formTheme != null">
+                FORM_THEME = #{formTheme,jdbcType=VARCHAR},
             </if>
             <if test="formHtmlSource != null">
                 FORM_HTML_SOURCE = #{formHtmlSource,jdbcType=LONGVARCHAR},
@@ -376,7 +412,10 @@
             FORM_DATA_RELATION = #{formDataRelation,jdbcType=VARCHAR},
             FORM_IS_TEMPLATE = #{formIsTemplate,jdbcType=VARCHAR},
             FORM_IS_RESOLVE = #{formIsResolve,jdbcType=VARCHAR},
+            FORM_EVERY_TIME_RESOLVE = #{formEveryTimeResolve,jdbcType=VARCHAR},
+            FORM_SOURCE = #{formSource,jdbcType=VARCHAR},
             FORM_CONTENT_URL = #{formContentUrl,jdbcType=VARCHAR},
+            FORM_THEME = #{formTheme,jdbcType=VARCHAR},
             FORM_HTML_SOURCE = #{formHtmlSource,jdbcType=LONGVARCHAR},
             FORM_HTML_RESOLVE = #{formHtmlResolve,jdbcType=LONGVARCHAR},
             FORM_JS_CONTENT = #{formJsContent,jdbcType=LONGVARCHAR},
@@ -406,7 +445,10 @@
             FORM_DATA_RELATION = #{formDataRelation,jdbcType=VARCHAR},
             FORM_IS_TEMPLATE = #{formIsTemplate,jdbcType=VARCHAR},
             FORM_IS_RESOLVE = #{formIsResolve,jdbcType=VARCHAR},
-            FORM_CONTENT_URL = #{formContentUrl,jdbcType=VARCHAR}
+            FORM_EVERY_TIME_RESOLVE = #{formEveryTimeResolve,jdbcType=VARCHAR},
+            FORM_SOURCE = #{formSource,jdbcType=VARCHAR},
+            FORM_CONTENT_URL = #{formContentUrl,jdbcType=VARCHAR},
+            FORM_THEME = #{formTheme,jdbcType=VARCHAR}
         where FORM_ID = #{formId,jdbcType=VARCHAR}
     </update>
 </mapper>

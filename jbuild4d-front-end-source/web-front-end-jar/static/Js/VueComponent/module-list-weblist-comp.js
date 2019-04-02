@@ -108,6 +108,9 @@ Vue.component("module-list-weblist-comp", {
         }
     },
     methods:{
+        getModuleName: function () {
+            return this.moduleData == null ? "请选中模块" : this.moduleData.moduleText;
+        },
         selectionChange: function (selection) {
             this.selectionRows = selection;
         },
@@ -152,6 +155,7 @@ Vue.component("module-list-weblist-comp", {
     },
     template: '<div class="module-list-wrap">\
                     <div id="list-button-wrap" class="list-button-outer-wrap">\
+                        <div class="module-list-name"><Icon type="ios-arrow-dropright-circle" />&nbsp;模块【{{getModuleName()}}】</div>\
                         <div class="list-button-inner-wrap">\
                             <ButtonGroup>\
                                 <i-button  type="success" @click="add()" icon="md-add">新增</i-button>\
