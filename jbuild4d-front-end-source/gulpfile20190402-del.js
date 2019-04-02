@@ -42,22 +42,7 @@ gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UICo
 
 
 
-/*编译工程相关的前端模版*/
-gulp.task('HTMLTemplates',()=>{
-    return copyAndResolveHtml(srcPlatformStaticPath + "/HTML/**/*.html",srcPlatformStaticPath + "/HTML",publicResourcePath + "/HTML");
-    /*拷贝HTML文件*/
-    /*return gulp.src("build-jbuild4d-web-platform/templates/!**!/!*", {base: "build-jbuild4d-web-platform/templates"})
-        //.pipe(htmlclean({
-        //    protect: /<\!--%fooTemplate\b.*?%-->/g,
-        //    edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
-        //}))
-        .pipe(htmlmin({
-            collapseWhitespace: true,
-            minifyCSS:true,
-            minifyJS:false
-        }))
-        .pipe(gulp.dest("../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/templates"));*/
-});
+
 
 /*HTML设计的基础的工具类*/
 gulp.task('HTMLDesign-Utility',()=> {
@@ -121,32 +106,3 @@ gulp.task('watch', function() {
 /*默认启动文件监控*/
 gulp.task('default', gulp.series('watch'));
 
-function copyAndResolveHtml(sourcePath,base,toPath) {
-    /*拷贝HTML文件*/
-    return gulp.src(sourcePath, {base: base})
-        .pipe(replacecust(replaceBlockObj.replaceBlock('GeneralLib'), replaceBlockObj.replaceGeneralLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('CodeMirrorLib'), replaceBlockObj.replaceCodeMirrorLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('FormDesignLib'), replaceBlockObj.replaceFormDesignLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('JBuild4DFormDesignLib'), replaceBlockObj.replaceJBuild4DFormDesignLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('ZTreeExtendLib'), replaceBlockObj.replaceZTreeExtendLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('ThemesLib'), replaceBlockObj.replaceThemesLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('BootStrap4Lib'), replaceBlockObj.replaceBootStrap4Lib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('FrameV1Lib'), replaceBlockObj.replaceFrameV1Lib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('GoJsLib'), replaceBlockObj.replaceGoJsLib))
-        .pipe(replacecust(replaceBlockObj.replaceBlock('Webix'), replaceBlockObj.replaceWebixLib))
-        .pipe(htmlmin({
-            collapseWhitespace: true,
-            minifyCSS:true,
-            minifyJS:false
-        }))
-        /*.pipe(htmlmin({
-            collapseWhitespace: true,
-            minifyCSS:true,
-            minifyJS:false
-        }))*/
-        //.pipe(htmlclean({
-        //    protect: /<\!--%fooTemplate\b.*?%-->/g,
-        //    edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
-        //}))
-        .pipe(gulp.dest(toPath));
-}

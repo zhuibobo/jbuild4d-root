@@ -1,65 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <th:block th:replace="Fragment/GeneralLib::BootStrap4Lib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
-    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
-</head>
-<body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar"
-      data-open="click" data-menu="vertical-menu" data-col="2-columns">
-<!-- fixed-top-begin-->
-<nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light bg-info navbar-shadow">
-    <div class="navbar-wrapper">
-        <div class="navbar-header">
-            <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mobile-menu d-md-none mr-auto"><a
-                        class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
-                        class="ft-menu font-large-1"></i></a></li>
-                <li class="nav-item">
-                    <a class="navbar-brand">
-                        <img class="brand-logo" alt="modern admin logo" src="../../HTML/FrameV1/images/logo/logo.png">
-                        <h3 class="brand-text">JBuild4D-V0.5</h3>
-                    </a>
-                </li>
-                <li class="nav-item d-md-none">
-                    <a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i
-                            class="la la-ellipsis-v"></i></a>
-                </li>
-            </ul>
-        </div>
-        <div class="navbar-container content">
-            <div class="collapse navbar-collapse" id="navbar-mobile">
-                <ul class="nav navbar-nav mr-auto float-left">
-                    <li class="nav-item d-none d-md-block">
-                        <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="la la-exchange"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="top-right-wrap">
-                <div class="user-warp">
-                    <div class="user-header"></div>
-                    <div class="line"></div>
-                    <div style="float: left">
-                        <div style="line-height:24px;margin-top: 8px">用户名：Alex</div>
-                        <div style="line-height: 24px;overflow-x: hidden;width: 130px;white-space: nowrap;text-overflow:  ellipsis;">
-                            部&nbsp;&nbsp;&nbsp;&nbsp;门：广东省深圳市南山区前海路XX
-                        </div>
-                    </div>
-                </div>
-                <div style="float: left;width: 44px;position: relative;margin-top: 20px">
-                     <a href="#" id="notice_btn" data-toggle="dropdown"><i style="font-size: 24px;color:#ffffff;" class="la la-bell"></i>
-                         <span class="badge badge-pill badge-default badge-danger badge-default badge-glow" style="position: absolute;top: -10px;right: 5px">5</span>
-                     </a>
-                </div>
-                <div style="float: left;width: 40px;position: relative;margin-top: 20px;cursor: pointer" onclick="logout()">
-                    <i style="font-size: 24px;color:#ffffff;" class="la la-sign-in"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
-<script>
-    var notice_is_show=false;
+<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>JBuild4D</title><script type="text/javascript" src="../../static/Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../static/HTML/FrameV1/bootstrap-4.2.1-dist/js/bootstrap.bundle.js"></script><link rel="stylesheet" type="text/css" href="../../static/HTML/FrameV1/bootstrap-4.2.1-dist/css/bootstrap.css"><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../static/Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../static/Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../static/Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../static/Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../static/Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../static/Js/T3P/perfect-scrollbar-14/perfect-scrollbar.js"></script><script type="text/javascript" src="../../static/Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../static/Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../static/Js/VueEXComponent.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../static/Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../static/Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../static/Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../static/Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"></head><body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns"><!-- fixed-top-begin--><nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light bg-info navbar-shadow"><div class="navbar-wrapper"><div class="navbar-header"><ul class="nav navbar-nav flex-row"><li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li><li class="nav-item"><a class="navbar-brand"><img class="brand-logo" alt="modern admin logo" src="../../HTML/FrameV1/images/logo/logo.png"><h3 class="brand-text">JBuild4D-V0.5</h3></a></li><li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="la la-ellipsis-v"></i></a></li></ul></div><div class="navbar-container content"><div class="collapse navbar-collapse" id="navbar-mobile"><ul class="nav navbar-nav mr-auto float-left"><li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="la la-exchange"></i></a></li></ul></div><div class="top-right-wrap"><div class="user-warp"><div class="user-header"></div><div class="line"></div><div style="float:left"><div style="line-height:24px;margin-top:8px">用户名：Alex</div><div style="line-height:24px;overflow-x:hidden;width:130px;white-space:nowrap;text-overflow:ellipsis">部&nbsp;&nbsp;&nbsp;&nbsp;门：广东省深圳市南山区前海路XX</div></div></div><div style="float:left;width:44px;position:relative;margin-top:20px"><a href="#" id="notice_btn" data-toggle="dropdown"><i style="font-size:24px;color:#fff" class="la la-bell"></i> <span class="badge badge-pill badge-default badge-danger badge-default badge-glow" style="position:absolute;top:-10px;right:5px">5</span></a></div><div style="float:left;width:40px;position:relative;margin-top:20px;cursor:pointer" onclick="logout()"><i style="font-size:24px;color:#fff" class="la la-sign-in"></i></div></div></div></div></nav><script>var notice_is_show=false;
     $(function () {
 
         $("#notice_btn").click(function () {
@@ -72,34 +11,14 @@
                 notice_is_show=false;
             }
         })
-    })
-</script>
-<div id="notice-Outer-Wraper" style="position: absolute;right: 10px;top: 0px;background-color: #f9f9f9;height: 100%;width: 0px;display: none">ddd</div>
-<!-- fixed-top-end-->
-<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
-    <div class="main-menu-content">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <!--<li class=" nav-item">
+    })</script><div id="notice-Outer-Wraper" style="position:absolute;right:10px;top:0;background-color:#f9f9f9;height:100%;width:0;display:none">ddd</div><!-- fixed-top-end--><div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true"><div class="main-menu-content"><ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation"><!--<li class=" nav-item">
                 <a href="index.html"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">系统管理</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#" data-i18n="nav.dash.ecommerce">eCommerce</a></li>
                     <li class="active"><a class="menu-item" href="#" data-i18n="nav.dash.crypto">Crypto</a></li>
                     <li><a class="menu-item" href="#" data-i18n="nav.dash.sales">Sales</a></li>
                 </ul>
-            </li>-->
-        </ul>
-    </div>
-</div>
-<div class="content-outer-wrapper">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb" id="menu_breadcrumb">
-            <li class="breadcrumb-item">JBuild4D</li>
-        </ol>
-    </nav>
-    <iframe id="fv_iframe" style="width: 100%;height: 100%" frameborder="0"></iframe>
-</div>
-<script th:inline="javascript">
-    var IsTopFramePage = true;
+            </li>--></ul></div></div><div class="content-outer-wrapper"><nav aria-label="breadcrumb"><ol class="breadcrumb" id="menu_breadcrumb"><li class="breadcrumb-item">JBuild4D</li></ol></nav><iframe id="fv_iframe" style="width:100%;height:100%" frameborder="0"></iframe></div><script th:inline="javascript">var IsTopFramePage = true;
     var myMenusJson=/*[[${myMenusJson}]]*/ 'Sebastian';
     console.log(myMenusJson);
     function logout() {
@@ -211,8 +130,4 @@
         $("#menu_breadcrumb").append("<li class=\"breadcrumb-item\">应用设计</li>").append("<li class=\"breadcrumb-item\">存储设计 </li>").append("<li class=\"breadcrumb-item\">数据关系 </li>");
         $("#fv_iframe").attr("src","/jb4d/HTML/Builder/DataStorage/DataRelation/Manager.html?menuId=JB4DSystemAppBuilderDataRelation")
             //.trigger("click");
-    })();
-</script>
-<th:block th:replace="Fragment/GeneralLib::FrameV1Lib"></th:block>
-</body>
-</html>
+    })();</script><script type="text/javascript" src="../../static/HTML/FrameV1/js/perfect-scrollbar-v0.6.11.js"></script><script type="text/javascript" src="../../static/HTML/FrameV1/js/Unison-JS.js"></script><script type="text/javascript" src="../../static/HTML/FrameV1/js/jQuery-Sliding-Menu.js"></script><script type="text/javascript" src="../../static/HTML/FrameV1/js/app-menu.js"></script><script type="text/javascript" src="../../static/HTML/FrameV1/js/app.js"></script><script type="text/javascript" src="../../static/HTML/FrameV1/js/customizer.js"></script><link rel="stylesheet" type="text/css" href="../../static/HTML/FrameV1/line-awesome/css/line-awesome.min.css"><link rel="stylesheet" type="text/css" href="../../static/HTML/FrameV1/bootstrap-4.2.1-dist/css/bootstrap-extended.css"><link rel="stylesheet" type="text/css" href="../../static/HTML/FrameV1/css/FrameV1.css"><link rel="stylesheet" type="text/css" href="../../static/HTML/FrameV1/css/menu-types/vertical-menu.css"></body></html>
