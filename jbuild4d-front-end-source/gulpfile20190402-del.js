@@ -40,11 +40,7 @@ gulp.task('ES6-JS-Demo',()=>{
 /*编译工程相关的JS*/
 gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UIComponent'));
 
-/*编译Less相关的Images文件*/
-gulp.task('LessImages',()=>{
-    return gulp.src(srcPlatformStaticPath+"/Themes/Default/Less/Images/**/*", {base: srcPlatformStaticPath+"/Themes/Default/Less/Images"})
-        .pipe(gulp.dest(publicResourcePath+"/Themes/Default/Css/Images"));
-});
+
 
 /*编译工程相关的前端模版*/
 gulp.task('HTMLTemplates',()=>{

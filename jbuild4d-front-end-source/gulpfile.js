@@ -84,6 +84,11 @@ gulp.task('Jar-Themes-Less',()=>{
         .pipe(gulp.dest(jarToResourcePath+'/Themes/Default/Css'));
 });
 
+/*编译Less相关的Images文件*/
+gulp.task('Jar-Themes-Less-Images',()=>{
+    return gulp.src(jarFromResourcePath+"/Themes/Default/Less/Images/**/*", {base: jarFromResourcePath+"/Themes/Default/Less/Images"})
+        .pipe(gulp.dest(jarToResourcePath+"/Themes/Default/Css/Images"));
+});
 //region 管理后端的相关的编译
 
 const adminFromResourcePath = "web-platform-admin/static/";
