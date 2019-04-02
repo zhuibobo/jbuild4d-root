@@ -44,43 +44,6 @@ gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UICo
 
 
 
-/*HTML设计的基础的工具类*/
-gulp.task('HTMLDesign-Utility',()=> {
-    return gulp.src([
-        srcPlatformStaticPath + "/Js/HTMLDesign/*.js"
-    ])
-        .pipe(babel())
-        .pipe(sourcemaps.init())
-        .pipe(concat('HTMLDesignUtility.js'))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign"));
-});
-
-gulp.task('HTMLDesign-CKEditorConfig',()=> {
-    return gulp.src([
-        srcPlatformStaticPath + "/Js/HTMLDesign/CKEditorConfig/*.js"
-    ])
-        .pipe(babel())
-        .pipe(sourcemaps.init())
-        .pipe(concat('CKEditorConfig.js'))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/CKEditorConfig"));
-});
-
-/*WebForm相关的插件*/
-gulp.task('HTMLDesign-Plugins',()=>{
-    return gulp.src([
-        srcPlatformStaticPath + "/Js/HTMLDesign/**/Plugins/**/*.js",
-        srcPlatformStaticPath + "/Js/HTMLDesign/**/Plugins/**/*.css",
-        srcPlatformStaticPath + "/Js/HTMLDesign/**/Plugins/**/*.png"
-    ], {base: "build-jbuild4d-web-platform/static/Js/HTMLDesign/**/Plugins"}).
-    pipe(gulp.dest(publicResourcePath + "/Js/HTMLDesign/**/Plugins"));
-});
-
-/*编译表单设计器的相关的HTML文件*/
-gulp.task('HTMLDesign-HTML',()=>{
-    return copyAndResolveHtml(srcPlatformStaticPath + "/Js/HTMLDesign/**/*.html",srcPlatformStaticPath + "/Js/HTMLDesign",publicResourcePath + "/Js/HTMLDesign");
-});
 
 /*编译表单设计器的相关文件*/
 gulp.task('HTMLDesign-ALL', gulp.series('HTMLDesign-Utility','HTMLDesign-CKEditorConfig','HTMLDesign-Plugins','HTMLDesign-HTML'));

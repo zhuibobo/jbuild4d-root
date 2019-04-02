@@ -71,7 +71,6 @@ gulp.task('Jar-JS-UIComponent',()=>{
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(jarToResourcePath + "/Js"));
 });
-//endregion
 
 /*编译工程相关的Less文件*/
 gulp.task('Jar-Themes-Less',()=>{
@@ -89,6 +88,9 @@ gulp.task('Jar-Themes-Less-Images',()=>{
     return gulp.src(jarFromResourcePath+"/Themes/Default/Less/Images/**/*", {base: jarFromResourcePath+"/Themes/Default/Less/Images"})
         .pipe(gulp.dest(jarToResourcePath+"/Themes/Default/Css/Images"));
 });
+
+//endregion
+
 //region 管理后端的相关的编译
 
 const adminFromResourcePath = "web-platform-admin/static/";
@@ -116,6 +118,44 @@ gulp.task('Admin-HTMLTemplates',()=>{
         .pipe(gulp.dest("../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/templates"));*/
 });
 
+/*HTML设计的基础的工具类*/
+gulp.task('Admin-HTMLDesign-Utility',()=> {
+    return gulp.src([
+        adminFromResourcePath + "/Js/HTMLDesign/*.js"
+    ])
+        .pipe(babel())
+        .pipe(sourcemaps.init())
+        .pipe(concat('HTMLDesignUtility.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(adminToResourcePath + "/Js/HTMLDesign"));
+});
+
+/*CKEditor的配置文件*/
+gulp.task('Admin-HTMLDesign-CKEditorConfig',()=> {
+    return gulp.src([
+        adminFromResourcePath + "/Js/HTMLDesign/CKEditorConfig/*.js"
+    ])
+        .pipe(babel())
+        .pipe(sourcemaps.init())
+        .pipe(concat('CKEditorConfig.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(adminToResourcePath + "/Js/HTMLDesign/CKEditorConfig"));
+});
+
+/*WebForm相关的插件*/
+gulp.task('Admin-HTMLDesign-Plugins',()=>{
+    return gulp.src([
+        adminFromResourcePath + "/Js/HTMLDesign/**/Plugins/**/*.js",
+        adminFromResourcePath + "/Js/HTMLDesign/**/Plugins/**/*.css",
+        adminFromResourcePath + "/Js/HTMLDesign/**/Plugins/**/*.png"
+    ], {base: adminFromResourcePath+"/Js/HTMLDesign/**/Plugins"}).
+    pipe(gulp.dest(adminToResourcePath + "/Js/HTMLDesign/**/Plugins"));
+});
+
+/*编译表单设计器的相关的HTML文件*/
+gulp.task('Admin-HTMLDesign-HTML',()=>{
+    return copyAndResolveHtml(adminFromResourcePath + "/Js/HTMLDesign/**/*.html",adminFromResourcePath + "/Js/HTMLDesign",adminToResourcePath + "/Js/HTMLDesign");
+});
 //endregion
 
 //region 管理前端的相关的编译
