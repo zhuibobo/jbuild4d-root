@@ -60,6 +60,8 @@ public class CompexInitTestSystem extends RestTestBase {
         createDataSetGroup(getSession());
     }
 
+
+
     private void createDataSetGroup(JB4DSession jb4DSession) throws Exception {
         String demoRootGroupId="createDataSetForDemoSystem_demoRoot";
         String demoNewsGroupId="createDataSetForDemoSystem_demoNewsGroup";
@@ -138,7 +140,6 @@ public class CompexInitTestSystem extends RestTestBase {
         personDatasetGroupEntity.setDsGroupDelEnable(TrueFalseEnum.True.getDisplayName());
         datasetGroupService.saveSimple(jb4DSession,demoPersonGroupId,personDatasetGroupEntity);
     }
-
 
     public void createTableGroup(JB4DSession jb4DSession) throws Exception {
         String demoRootId="createForDemoSystem_demoRoot";
