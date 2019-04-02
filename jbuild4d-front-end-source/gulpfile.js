@@ -89,6 +89,8 @@ gulp.task('Jar-Themes-Less-Images',()=>{
         .pipe(gulp.dest(jarToResourcePath+"/Themes/Default/Css/Images"));
 });
 
+/*编译工程相关的JS*/
+gulp.task('Jar-JS-Custom-ALL', gulp.series('Jar-JS-VueEXComponent','Jar-JS-Utility','Jar-JS-UIComponent'));
 //endregion
 
 //region 管理后端的相关的编译
@@ -156,6 +158,25 @@ gulp.task('Admin-HTMLDesign-Plugins',()=>{
 gulp.task('Admin-HTMLDesign-HTML',()=>{
     return copyAndResolveHtml(adminFromResourcePath + "/Js/HTMLDesign/**/*.html",adminFromResourcePath + "/Js/HTMLDesign",adminToResourcePath + "/Js/HTMLDesign");
 });
+
+/*编译表单设计器的相关文件*/
+gulp.task('Admin-HTMLDesign-ALL', gulp.series('Admin-HTMLDesign-Utility','Admin-HTMLDesign-CKEditorConfig','Admin-HTMLDesign-Plugins','Admin-HTMLDesign-HTML'));
+
+/*自动监测文件并进行更新*/
+gulp.task('Admin-Watch', function() {
+    let watcherFrameV1=gulp.watch(adminFromResourcePath+"/HTML/FrameV1/**/*", gulp.series('Admin-FrameV1'));
+    let watcherJs=gulp.watch(jarFromResourcePath + '/Js/**/*.js', gulp.series('Jar-JS-Custom-ALL'));
+    let watcherLess=gulp.watch(jarFromResourcePath+"/Themes/Default/Less/*.less", gulp.series('Jar-Themes-Less'));
+    let watcherLessImages=gulp.watch(jarFromResourcePath+"/Themes/Default/Less/Images/**/*", gulp.series('Jar-Themes-Less-Images'));
+    let watcherHTMLTemplates=gulp.watch(adminFromResourcePath+"/HTML/**/*", gulp.series('Admin-HTMLTemplates'));
+    let watcherFormDesign=gulp.watch([
+        adminFromResourcePath + "/Js/HTMLDesign/**/*.js",
+        adminFromResourcePath + "/Js/HTMLDesign/**/*.css",
+        adminFromResourcePath + "/Js/HTMLDesign/**/*.png",
+        adminFromResourcePath + "/Js/HTMLDesign/**/*.html"], gulp.series('Admin-HTMLDesign-ALL'));
+    //let watcherPluginLess=gulp.watch(srcPlatformStaticPath+"/Js/**/*.less", gulp.series('Less'));
+});
+
 //endregion
 
 //region 管理前端的相关的编译

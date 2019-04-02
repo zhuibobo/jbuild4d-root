@@ -37,34 +37,20 @@ gulp.task('ES6-JS-Demo',()=>{
         .pipe(gulp.dest(srcPlatformStaticPath + "/ES6/ES5"));
 });
 
-/*编译工程相关的JS*/
-gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UIComponent'));
 
 
 
 
 
 
-/*编译表单设计器的相关文件*/
-gulp.task('HTMLDesign-ALL', gulp.series('HTMLDesign-Utility','HTMLDesign-CKEditorConfig','HTMLDesign-Plugins','HTMLDesign-HTML'));
+
+
 
 /*编译所有的文件*/
 gulp.task('ALL', gulp.series('JS-Custom-ALL','Less','HTMLTemplates','HTMLDesign-ALL','LessImages','FrameV1'));
 
 /*监控文件更新*/
-gulp.task('watch', function() {
-    let watcherFrameV1=gulp.watch(srcPlatformStaticPath+"/FrameV1/**/*", gulp.series('FrameV1'));
-    let watcherJs=gulp.watch(srcPlatformStaticPath + '/Js/**/*.js', gulp.series('JS-Custom-ALL'));
-    let watcherLess=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/*.less", gulp.series('Less'));
-    let watcherLessImages=gulp.watch(srcPlatformStaticPath+"/Themes/Default/Less/Images/**/*", gulp.series('LessImages'));
-    let watcherHTMLTemplates=gulp.watch("build-jbuild4d-web-platform/static/HTML/**/*", gulp.series('HTMLTemplates'));
-    let watcherFormDesign=gulp.watch([
-        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.js",
-        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.css",
-        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.png",
-        srcPlatformStaticPath + "/Js/HTMLDesign/**/*.html"], gulp.series('HTMLDesign-ALL'));
-    let watcherPluginLess=gulp.watch(srcPlatformStaticPath+"/Js/**/*.less", gulp.series('Less'));
-});
+
 
 /*默认启动文件监控*/
 gulp.task('default', gulp.series('watch'));
