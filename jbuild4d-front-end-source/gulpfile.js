@@ -73,6 +73,17 @@ gulp.task('Jar-JS-UIComponent',()=>{
 });
 //endregion
 
+/*编译工程相关的Less文件*/
+gulp.task('Jar-Themes-Less',()=>{
+    return gulp.src(jarFromResourcePath+"/Themes/Default/Css/*.less")
+        .pipe(sourcemaps.init())
+        .pipe(less({
+            paths: [ path.join(__dirname, 'less', 'includes') ]
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(jarToResourcePath+'/Themes/Default/Css'));
+});
+
 //region 管理后端的相关的编译
 
 const adminFromResourcePath = "web-platform-admin/static/";

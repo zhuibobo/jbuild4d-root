@@ -40,19 +40,6 @@ gulp.task('ES6-JS-Demo',()=>{
 /*编译工程相关的JS*/
 gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UIComponent'));
 
-
-
-/*编译工程相关的Less文件*/
-gulp.task('Less',()=>{
-    return gulp.src(srcPlatformStaticPath+"/Themes/Default/Css/*.less")
-        .pipe(sourcemaps.init())
-        .pipe(less({
-            paths: [ path.join(__dirname, 'less', 'includes') ]
-        }))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest(publicResourcePath+'/Themes/Default/Css'));
-});
-
 /*编译Less相关的Images文件*/
 gulp.task('LessImages',()=>{
     return gulp.src(srcPlatformStaticPath+"/Themes/Default/Less/Images/**/*", {base: srcPlatformStaticPath+"/Themes/Default/Less/Images"})
