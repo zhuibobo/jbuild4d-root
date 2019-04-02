@@ -20,55 +20,6 @@ const publicResourcePath = "../jbuild4d-web-root/jbuild4d-web-front-end/src/main
 const srcPlatformStaticPath = "build-jbuild4d-web-platform/static";
 
 /*拷贝第三方的相关文件*/
-gulp.task('Themes-ALL',()=>{
-   return gulp.src(srcPlatformStaticPath+"/Themes/**/*", {base:srcPlatformStaticPath+"/Themes"}).pipe(gulp.dest(publicResourcePath+"/Themes"));
-});
-
-
-
-/*编译Vue的扩展插件*/
-gulp.task('JS-VueEXComponent',()=>{
-    return gulp.src([srcPlatformStaticPath + '/Js/VueComponent/*.js'])
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
-        .pipe(sourcemaps.init())
-        //.pipe(sourcemaps.identityMap())
-        .pipe(concat('VueEXComponent.js'))
-        //.pipe(uglify())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest(publicResourcePath + "/Js"));
-});
-
-/*编译工程的工具类JS*/
-gulp.task('JS-Utility',()=>{
-    return gulp.src([srcPlatformStaticPath + '/Js/Utility/*.js'])
-        .pipe(babel({
-            presets: ['@babel/env'],
-        }))
-        .pipe(sourcemaps.init())
-        .pipe(concat('JBuild4DPlatformLib.js'))
-        /*.pipe(uglify(
-            {
-                compress: {drop_debugger: false}
-            }
-        ))*/
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest(publicResourcePath + "/Js"));
-});
-
-/*编译旧的UI的组件*/
-gulp.task('JS-UIComponent',()=>{
-    return gulp.src([srcPlatformStaticPath + '/Js/EditTable/**/*.js',srcPlatformStaticPath + '/Js/TreeTable/**/*.js'])
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
-        .pipe(sourcemaps.init())
-        .pipe(concat('UIEXComponent.js'))
-        .pipe(uglify())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest(publicResourcePath + "/Js"));
-});
 
 /*编译Demo的ES6-JS文件*/
 gulp.task('ES6-JS-Demo',()=>{
@@ -89,11 +40,7 @@ gulp.task('ES6-JS-Demo',()=>{
 /*编译工程相关的JS*/
 gulp.task('JS-Custom-ALL', gulp.series('JS-VueEXComponent','JS-Utility','JS-UIComponent'));
 
-/*编译FrameV1的资源文件*/
-gulp.task('FrameV1',()=>{
-    return gulp.src(srcPlatformStaticPath+"/FrameV1/**/*", {base: srcPlatformStaticPath+"/FrameV1"})
-        .pipe(gulp.dest(publicResourcePath+"/FrameV1"));
-});
+
 
 /*编译工程相关的Less文件*/
 gulp.task('Less',()=>{
