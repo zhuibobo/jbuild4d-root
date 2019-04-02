@@ -26,6 +26,7 @@
         <module name="jbuild4d-sso-java-web-client-demo1" />
         <module name="jbuild4d-sso-java-web-client-demo2" />
         <module name="jbuild4d-sso-web-client-demo-root" />
+        <module name="jbuild4d-web-front-end" />
         <module name="jbuild4d-web-platform" />
       </profile>
     </annotationProcessing>
@@ -54,6 +55,7 @@
       <module name="jbuild4d-sso-java-web-client-demo1" target="1.8" />
       <module name="jbuild4d-sso-java-web-client-demo2" target="1.8" />
       <module name="jbuild4d-sso-root" target="1.8" />
+      <module name="jbuild4d-web-front-end" target="1.8" />
       <module name="jbuild4d-web-platform" target="1.8" />
       <module name="jbuild4d-web-root" target="1.8" />
     </bytecodeTargetLevel>

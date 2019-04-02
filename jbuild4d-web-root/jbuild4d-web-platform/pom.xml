@@ -13,6 +13,10 @@
     <dependencies>
         <dependency>
             <groupId>jbuild4d</groupId>
+            <artifactId>jbuild4d-web-front-end</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jbuild4d</groupId>
             <artifactId>jbuild4d-base-exception</artifactId>
         </dependency>
         <dependency>

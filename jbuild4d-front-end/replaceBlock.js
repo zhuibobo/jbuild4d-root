@@ -13,7 +13,7 @@ function calculateFilePath(file) {
     for (let i = 0; i < levelPathArray.length; i++) {
         levelPath += "../";
     }
-    return levelPath;
+    return levelPath+"static/";
 }
 
 function refJs(path) {
