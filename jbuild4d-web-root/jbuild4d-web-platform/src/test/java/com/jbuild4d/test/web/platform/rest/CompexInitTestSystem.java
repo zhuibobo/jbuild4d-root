@@ -2,6 +2,7 @@ package com.jbuild4d.test.web.platform.rest;
 
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
@@ -21,6 +22,7 @@ import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.exenum.DataSetTypeEnum;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
+import com.jbuild4d.platform.builder.module.IModuleService;
 import com.jbuild4d.platform.builder.vo.*;
 import com.jbuild4d.test.web.platform.RestTestBase;
 import org.apache.commons.lang3.StringUtils;
@@ -52,14 +54,57 @@ public class CompexInitTestSystem extends RestTestBase {
     @Autowired
     IDatasetService datasetService;
 
+    @Autowired
+    IModuleService moduleService;
+
     @Test
     public void Init() throws Exception {
         //创建表分组
         createTableGroup(getSession());
         //创建数据集
         createDataSetGroup(getSession());
+        //创建模块分组
+        createModuleGroup(getSession());
     }
 
+    private void createModuleGroup(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+
+        ModuleEntity rootModuleEntity=new ModuleEntity();
+        rootModuleEntity.setModuleId("create_test_business_module");
+        rootModuleEntity.setModuleValue("业务模块");
+        rootModuleEntity.setModuleText("业务模块");
+        rootModuleEntity.setModuleDesc("");
+        rootModuleEntity.setModuleStatus(EnableTypeEnum.enable.getDisplayName());
+        rootModuleEntity.setModuleParentId(moduleService.getRootId());
+        rootModuleEntity.setModuleIssystem(TrueFalseEnum.False.getDisplayName());
+        rootModuleEntity.setModuleDelEnable(TrueFalseEnum.True.getDisplayName());
+        moduleService.deleteByKeyNotValidate(jb4DSession,rootModuleEntity.getModuleId(),JBuild4DProp.getWarningOperationCode());
+        moduleService.saveSimple(jb4DSession,rootModuleEntity.getModuleId(),rootModuleEntity);
+
+        ModuleEntity newsModuleEntity=new ModuleEntity();
+        newsModuleEntity.setModuleId("create_test_news_module");
+        newsModuleEntity.setModuleValue("信息发布");
+        newsModuleEntity.setModuleText("信息发布");
+        newsModuleEntity.setModuleDesc("");
+        newsModuleEntity.setModuleStatus(EnableTypeEnum.enable.getDisplayName());
+        newsModuleEntity.setModuleParentId(rootModuleEntity.getModuleId());
+        newsModuleEntity.setModuleIssystem(TrueFalseEnum.False.getDisplayName());
+        newsModuleEntity.setModuleDelEnable(TrueFalseEnum.True.getDisplayName());
+        moduleService.deleteByKeyNotValidate(jb4DSession,newsModuleEntity.getModuleId(),JBuild4DProp.getWarningOperationCode());
+        moduleService.saveSimple(jb4DSession,newsModuleEntity.getModuleId(),newsModuleEntity);
+
+        ModuleEntity personModuleEntity=new ModuleEntity();
+        personModuleEntity.setModuleId("create_test_person_module");
+        personModuleEntity.setModuleValue("人口信息");
+        personModuleEntity.setModuleText("人口信息");
+        personModuleEntity.setModuleDesc("");
+        personModuleEntity.setModuleStatus(EnableTypeEnum.enable.getDisplayName());
+        personModuleEntity.setModuleParentId(rootModuleEntity.getModuleId());
+        personModuleEntity.setModuleIssystem(TrueFalseEnum.False.getDisplayName());
+        personModuleEntity.setModuleDelEnable(TrueFalseEnum.True.getDisplayName());
+        moduleService.deleteByKeyNotValidate(jb4DSession,personModuleEntity.getModuleId(),JBuild4DProp.getWarningOperationCode());
+        moduleService.saveSimple(jb4DSession,personModuleEntity.getModuleId(),personModuleEntity);
+    }
 
 
     private void createDataSetGroup(JB4DSession jb4DSession) throws Exception {

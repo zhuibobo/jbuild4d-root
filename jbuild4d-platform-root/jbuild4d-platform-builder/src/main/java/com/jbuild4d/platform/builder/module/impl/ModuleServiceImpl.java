@@ -15,8 +15,15 @@ import java.util.Date;
 
 public class ModuleServiceImpl extends BaseServiceImpl<ModuleEntity> implements IModuleService
 {
+    @Override
+    public String getRootId() {
+        return rootId;
+    }
+
     private String rootId="0";
     private String rootParentId="-1";
+
+
 
     ModuleMapper moduleMapper;
     public ModuleServiceImpl(ModuleMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService){

@@ -3,6 +3,7 @@ package com.jbuild4d.web.platform.rest.builder.module;
 import com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import com.jbuild4d.platform.builder.module.IModuleService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class ModuleRestResource extends GeneralRestResource<ModuleEntity> {
     }
 
     @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    public List<ModuleEntity> getTreeData() {
+    public JBuild4DResponseVo getTreeData() {
         List<ModuleEntity> moduleEntityList=moduleService.getALL(JB4DSessionUtility.getSession());
-        return moduleEntityList;
+        return JBuild4DResponseVo.getDataSuccess(moduleEntityList);
     }
 }
