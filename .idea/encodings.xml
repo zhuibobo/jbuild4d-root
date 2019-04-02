@@ -9,7 +9,7 @@
     <file url="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-tools" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jbuild4d-core-root" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-base" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/jbuild4d-front-end/build-jbuild4d-web-platform/buildtemplates.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jbuild4d-front-end-source/build-jbuild4d-web-platform/buildtemplates.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jbuild4d-platform-root" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-builder" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-files" charset="UTF-8" />
