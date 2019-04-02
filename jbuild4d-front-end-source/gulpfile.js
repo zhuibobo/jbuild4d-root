@@ -16,7 +16,7 @@ const replacecust = require("./gulp-plugin/gulp-replace-cust/index.js");
 
 const replaceBlockObj=require("./replaceBlock.js");
 
-const jarFromResourcePath = "web-front-end-jar/static/";
+const jarFromResourcePath = "web-front-end-jar/static";
 const jarToResourcePath = "../jbuild4d-web-root/jbuild4d-web-front-end/src/main/resources/static";
 
 //region 基础Jar包相关的编译
@@ -95,7 +95,7 @@ gulp.task('Jar-JS-Custom-ALL', gulp.series('Jar-JS-VueEXComponent','Jar-JS-Utili
 
 //region 管理后端的相关的编译
 
-const adminFromResourcePath = "web-platform-admin/static/";
+const adminFromResourcePath = "web-platform-admin/static";
 const adminToResourcePath = "../jbuild4d-web-root/jbuild4d-web-platform/src/main/resources/static";
 /*编译管理端框架的资源文件*/
 gulp.task('Admin-FrameV1',()=>{
