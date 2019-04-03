@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config name="ConfigName" desc="ConfigDesc">
-    <Theme name="默认风格" desc="">
+    <Theme value="ThemeDefault" name="默认风格" desc="">
         <Ref type="" path="1"></Ref>
         <Ref type="" path="2"></Ref>
         <Ref type="" path="3"></Ref>
     </Theme>
-    <Theme name="默认风格1" desc="">
+    <Theme value="Theme2" name="默认风格0" desc="">
+        <Ref type="" path="1"></Ref>
+        <Ref type="" path="2"></Ref>
+        <Ref type="" path="3"></Ref>
+    </Theme>
+    <Theme value="Theme2" name="默认风格1" desc="">
         <Ref path=""></Ref>
     </Theme>
-    <Theme name="默认风格2" desc="">
+    <Theme value="Theme2" name="默认风格2" desc="">
         <Ref path=""></Ref>
     </Theme>
 </Config>

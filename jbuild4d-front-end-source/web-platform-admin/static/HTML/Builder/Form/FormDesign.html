@@ -54,8 +54,8 @@
                                 </i-col>
                                 <i-col span="4" style="text-align: center">主题：</i-col>
                                 <i-col span="10">
-                                    <i-select v-model="useTemplateName" style="width:200px" @on-change="changeFieldsTemplate">
-                                        <i-option v-for="(item,key) in templateFieldGroup" :value="key" :key="key">使用模版:{{key}}</i-option>
+                                    <i-select v-model="formResourceEntity.formTheme" style="width:200px">
+                                        <i-option v-for="(item,key) in designThemes" :value="item.value" :key="key">{{item.name}}</i-option>
                                     </i-select>
                                 </i-col>
                             </row>
@@ -180,7 +180,7 @@
                 formConfigContent:"",
                 formEveryTimeResolve:"否",
                 formSource:"Web设计器",
-                formTheme:"123",
+                formTheme:"",
                 formCustServerRenderer:"",
                 formCustRefJs:"",
                 formCustClientRenderer:"",
@@ -188,7 +188,8 @@
             },
             status: BaseUtility.GetUrlParaValue("op"),
             oldSelectedTabName:"",
-            selectedTabName:""
+            selectedTabName:"",
+            designThemes:[]
         },
         mounted:function () {
             this.initPageUI();
@@ -199,8 +200,9 @@
                 $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
                 var _self=this;
                 AjaxUtility.Post(this.acInterface.getPluginsConfig,{},function (result) {
-                    //console.log(result.data);
+                    console.log(result);
 
+                    _self.designThemes=result.exKVData.designThemes;
                     CKEditorUtility.InitializeCKEditor('html_design',result.data,function () {
 
                     },"../../HTMLDesign/CKEditorConfig/CKEditorConfig.js","../../HTMLDesign/WebFormDesign/Plugins/");

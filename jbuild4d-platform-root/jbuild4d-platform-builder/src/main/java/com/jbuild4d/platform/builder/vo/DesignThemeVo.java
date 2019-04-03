@@ -9,11 +9,15 @@ import java.util.List;
 @XmlRootElement(name = "Theme")
 // 控制JAXB 绑定类中属性和字段的排序
 @XmlType(propOrder = {
+        "value",
         "name",
         "desc",
         "refs"
 })
 public class DesignThemeVo {
+
+    @XmlAttribute(name = "value")
+    private String value;
 
     @XmlAttribute(name = "name")
     private String name;
@@ -40,11 +44,19 @@ public class DesignThemeVo {
         this.desc = desc;
     }
 
-    public List getRefs() {
-        return refs;
+    public String getValue() {
+        return value;
     }
 
-    public void setRefs(List refs) {
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public void setRefs(List<DesignThemeRefVo> refs) {
         this.refs = refs;
+    }
+
+    public List getRefs() {
+        return refs;
     }
 }
