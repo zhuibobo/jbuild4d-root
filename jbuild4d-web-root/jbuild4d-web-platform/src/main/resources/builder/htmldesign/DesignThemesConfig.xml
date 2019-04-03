@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
-    <Theme Name="默认风格">
-        <RefCss Path=""></RefCss>
+    <Theme name="默认风格" desc="">
+        <Ref type="" path="1"></Ref>
+        <Ref type="" path="2"></Ref>
+        <Ref type="" path="3"></Ref>
     </Theme>
-    <Theme Name="默认风格1">
-        <RefCss Path=""></RefCss>
+    <Theme name="默认风格1" desc="">
+        <Ref path=""></Ref>
     </Theme>
-    <Theme Name="默认风格2">
-        <RefCss Path=""></RefCss>
+    <Theme name="默认风格2" desc="">
+        <Ref path=""></Ref>
     </Theme>
 </Config>
