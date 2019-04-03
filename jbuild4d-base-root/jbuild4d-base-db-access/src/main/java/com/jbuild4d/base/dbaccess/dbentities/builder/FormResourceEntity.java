@@ -99,7 +99,10 @@ public class FormResourceEntity {
     //FORM_CUST_CLIENT_RENDERER:客户端自定义的渲染方法:需要指明具体的方法名称
     private String formCustClientRenderer;
 
-    public FormResourceEntity(String formId, String formCode, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formDataRelation, String formIsTemplate, String formIsResolve, String formEveryTimeResolve, String formSource, String formContentUrl, String formTheme, String formCustServerRenderer, String formCustRefJs, String formCustClientRenderer) {
+    //FORM_CUST_DESC:自定义设置备注:使用了自定义设置相关方法的备注说明
+    private String formCustDesc;
+
+    public FormResourceEntity(String formId, String formCode, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formDataRelation, String formIsTemplate, String formIsResolve, String formEveryTimeResolve, String formSource, String formContentUrl, String formTheme, String formCustServerRenderer, String formCustRefJs, String formCustClientRenderer, String formCustDesc) {
         this.formId = formId;
         this.formCode = formCode;
         this.formName = formName;
@@ -128,6 +131,7 @@ public class FormResourceEntity {
         this.formCustServerRenderer = formCustServerRenderer;
         this.formCustRefJs = formCustRefJs;
         this.formCustClientRenderer = formCustClientRenderer;
+        this.formCustDesc = formCustDesc;
     }
 
     public FormResourceEntity() {
@@ -356,5 +360,13 @@ public class FormResourceEntity {
 
     public void setFormCustClientRenderer(String formCustClientRenderer) {
         this.formCustClientRenderer = formCustClientRenderer == null ? null : formCustClientRenderer.trim();
+    }
+
+    public String getFormCustDesc() {
+        return formCustDesc;
+    }
+
+    public void setFormCustDesc(String formCustDesc) {
+        this.formCustDesc = formCustDesc == null ? null : formCustDesc.trim();
     }
 }

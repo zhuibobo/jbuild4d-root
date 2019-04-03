@@ -17,6 +17,8 @@ import com.jbuild4d.platform.builder.flow.IFlowModelService;
 import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
 import com.jbuild4d.platform.builder.flow.impl.FlowModelServiceImpl;
 import com.jbuild4d.platform.builder.flow.impl.FlowModelerConfigServiceImpl;
+import com.jbuild4d.platform.builder.htmldesign.IHTMLDesignThemesService;
+import com.jbuild4d.platform.builder.htmldesign.impl.HTMLDesignThemesServiceImpl;
 import com.jbuild4d.platform.builder.list.IListResourceService;
 import com.jbuild4d.platform.builder.list.impl.ListResourceServiceImpl;
 import com.jbuild4d.platform.builder.module.IBuilderConfigService;
@@ -124,6 +126,12 @@ public class BuilderBeansConfig {
     public ICKEditorPluginsService ckEditorPluginsService(IJb4dCacheService jb4dCacheService){
         ICKEditorPluginsService ickEditorPluginsService=new CKEditorPluginsServiceImpl(jb4dCacheService);
         return ickEditorPluginsService;
+    }
+
+    @Bean
+    public IHTMLDesignThemesService htmlDesignThemesService(){
+        IHTMLDesignThemesService htmlDesignThemesService=new HTMLDesignThemesServiceImpl();
+        return htmlDesignThemesService;
     }
 
     @Bean

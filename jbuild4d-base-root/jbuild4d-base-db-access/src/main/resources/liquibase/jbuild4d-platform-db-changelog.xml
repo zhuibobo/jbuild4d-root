@@ -624,6 +624,7 @@
             <column name="FORM_CUST_SERVER_RENDERER" type="NVARCHAR(200)" remarks="服务端自定义的渲染方法:继承IFormSeverRenderer" />
             <column name="FORM_CUST_REF_JS" type="NVARCHAR(500)" remarks="引入的脚本:多个通过;分割" />
             <column name="FORM_CUST_CLIENT_RENDERER" type="NVARCHAR(200)" remarks="客户端自定义的渲染方法:需要指明具体的方法名称" />
+            <column name="FORM_CUST_DESC" type="NVARCHAR(400)" remarks="自定义设置备注:使用了自定义设置相关方法的备注说明" />
         </createTable>
 
         <createTable tableName="TBUILD_FORM_CONFIG">

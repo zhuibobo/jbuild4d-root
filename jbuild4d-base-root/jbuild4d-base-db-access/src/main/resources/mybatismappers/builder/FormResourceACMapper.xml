@@ -31,6 +31,7 @@
             <arg column="FORM_CUST_SERVER_RENDERER" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_CUST_REF_JS" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_CUST_CLIENT_RENDERER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_CUST_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs">
@@ -63,6 +64,7 @@
             <arg column="FORM_CUST_SERVER_RENDERER" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_CUST_REF_JS" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_CUST_CLIENT_RENDERER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="FORM_CUST_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="FORM_HTML_SOURCE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="FORM_HTML_RESOLVE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="FORM_JS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
@@ -76,7 +78,7 @@
         FORM_MODULE_ID, FORM_STATUS, FORM_ORGAN_ID, FORM_ORGAN_NAME, FORM_MAIN_TABLE_NAME,
         FORM_MAIN_TABLE_CAPTION, FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_IS_RESOLVE, FORM_EVERY_TIME_RESOLVE,
         FORM_SOURCE, FORM_CONTENT_URL, FORM_THEME, FORM_CUST_SERVER_RENDERER, FORM_CUST_REF_JS,
-        FORM_CUST_CLIENT_RENDERER
+        FORM_CUST_CLIENT_RENDERER, FORM_CUST_DESC
     </sql>
     <sql id="Blob_Column_List">
         FORM_HTML_SOURCE, FORM_HTML_RESOLVE, FORM_JS_CONTENT, FORM_CSS_CONTENT, FORM_CONFIG_CONTENT
@@ -103,7 +105,7 @@
                                           FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_IS_RESOLVE,
                                           FORM_EVERY_TIME_RESOLVE, FORM_SOURCE, FORM_CONTENT_URL,
                                           FORM_THEME, FORM_CUST_SERVER_RENDERER, FORM_CUST_REF_JS,
-                                          FORM_CUST_CLIENT_RENDERER, FORM_HTML_SOURCE,
+                                          FORM_CUST_CLIENT_RENDERER, FORM_CUST_DESC, FORM_HTML_SOURCE,
                                           FORM_HTML_RESOLVE, FORM_JS_CONTENT,
                                           FORM_CSS_CONTENT, FORM_CONFIG_CONTENT
                 )
@@ -116,7 +118,7 @@
                 #{formDataRelation,jdbcType=VARCHAR}, #{formIsTemplate,jdbcType=VARCHAR}, #{formIsResolve,jdbcType=VARCHAR},
                 #{formEveryTimeResolve,jdbcType=VARCHAR}, #{formSource,jdbcType=VARCHAR}, #{formContentUrl,jdbcType=VARCHAR},
                 #{formTheme,jdbcType=VARCHAR}, #{formCustServerRenderer,jdbcType=VARCHAR}, #{formCustRefJs,jdbcType=VARCHAR},
-                #{formCustClientRenderer,jdbcType=VARCHAR}, #{formHtmlSource,jdbcType=LONGVARCHAR},
+                #{formCustClientRenderer,jdbcType=VARCHAR}, #{formCustDesc,jdbcType=VARCHAR}, #{formHtmlSource,jdbcType=LONGVARCHAR},
                 #{formHtmlResolve,jdbcType=LONGVARCHAR}, #{formJsContent,jdbcType=LONGVARCHAR},
                 #{formCssContent,jdbcType=LONGVARCHAR}, #{formConfigContent,jdbcType=LONGVARCHAR}
                        )
@@ -207,6 +209,9 @@
             </if>
             <if test="formCustClientRenderer != null">
                 FORM_CUST_CLIENT_RENDERER,
+            </if>
+            <if test="formCustDesc != null">
+                FORM_CUST_DESC,
             </if>
             <if test="formHtmlSource != null">
                 FORM_HTML_SOURCE,
@@ -309,6 +314,9 @@
             <if test="formCustClientRenderer != null">
                 #{formCustClientRenderer,jdbcType=VARCHAR},
             </if>
+            <if test="formCustDesc != null">
+                #{formCustDesc,jdbcType=VARCHAR},
+            </if>
             <if test="formHtmlSource != null">
                 #{formHtmlSource,jdbcType=LONGVARCHAR},
             </if>
@@ -410,6 +418,9 @@
             <if test="formCustClientRenderer != null">
                 FORM_CUST_CLIENT_RENDERER = #{formCustClientRenderer,jdbcType=VARCHAR},
             </if>
+            <if test="formCustDesc != null">
+                FORM_CUST_DESC = #{formCustDesc,jdbcType=VARCHAR},
+            </if>
             <if test="formHtmlSource != null">
                 FORM_HTML_SOURCE = #{formHtmlSource,jdbcType=LONGVARCHAR},
             </if>
@@ -457,6 +468,7 @@
             FORM_CUST_SERVER_RENDERER = #{formCustServerRenderer,jdbcType=VARCHAR},
             FORM_CUST_REF_JS = #{formCustRefJs,jdbcType=VARCHAR},
             FORM_CUST_CLIENT_RENDERER = #{formCustClientRenderer,jdbcType=VARCHAR},
+            FORM_CUST_DESC = #{formCustDesc,jdbcType=VARCHAR},
             FORM_HTML_SOURCE = #{formHtmlSource,jdbcType=LONGVARCHAR},
             FORM_HTML_RESOLVE = #{formHtmlResolve,jdbcType=LONGVARCHAR},
             FORM_JS_CONTENT = #{formJsContent,jdbcType=LONGVARCHAR},
@@ -492,7 +504,8 @@
             FORM_THEME = #{formTheme,jdbcType=VARCHAR},
             FORM_CUST_SERVER_RENDERER = #{formCustServerRenderer,jdbcType=VARCHAR},
             FORM_CUST_REF_JS = #{formCustRefJs,jdbcType=VARCHAR},
-            FORM_CUST_CLIENT_RENDERER = #{formCustClientRenderer,jdbcType=VARCHAR}
+            FORM_CUST_CLIENT_RENDERER = #{formCustClientRenderer,jdbcType=VARCHAR},
+            FORM_CUST_DESC = #{formCustDesc,jdbcType=VARCHAR}
         where FORM_ID = #{formId,jdbcType=VARCHAR}
     </update>
 </mapper>

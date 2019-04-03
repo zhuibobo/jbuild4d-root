@@ -111,6 +111,27 @@
                 </div>
             </div>
         </tab-pane>
+        <tab-pane name="EXProp" label="EXProp">
+            <div style="width: 1024px;margin: auto">
+                <div style="width: 1024px;height: 615px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
+                    <divider orientation="left" :dashed="true" style="font-size: 12px">扩展信息</divider>
+                    <i-form :label-width="150">
+                        <form-item label="服务端渲染方法：">
+                            <i-input v-model="formResourceEntity.formCustServerRenderer" placeholder="服务端自定义的渲染方法:继承IFormSeverRenderer"></i-input>
+                        </form-item>
+                        <form-item label="客户端渲染方法：">
+                            <i-input v-model="formResourceEntity.formCustClientRenderer" placeholder="客户端自定义的渲染方法:需要指明具体的方法名称"></i-input>
+                        </form-item>
+                        <form-item label="引入JS：" style="margin-bottom: 12px">
+                            <i-input v-model="formResourceEntity.formCustRefJs" placeholder="引入的脚本:多个通过;分割" type="textarea" :autosize="{minRows: 2,maxRows: 2}"></i-input>
+                        </form-item>
+                        <form-item label="备注：" style="margin-bottom: 12px">
+                            <i-input v-model="formResourceEntity.formCustDesc" type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>
+                        </form-item>
+                    </i-form>
+                </div>
+            </div>
+        </tab-pane>
         <tab-pane name="Be Referred" label="Be Referred"></tab-pane>
         <tab-pane name="Config" label="Config"></tab-pane>
     </tabs>
@@ -159,7 +180,11 @@
                 formConfigContent:"",
                 formEveryTimeResolve:"否",
                 formSource:"Web设计器",
-                formTheme:"123"
+                formTheme:"123",
+                formCustServerRenderer:"",
+                formCustRefJs:"",
+                formCustClientRenderer:"",
+                formCustDesc:""
             },
             status: BaseUtility.GetUrlParaValue("op"),
             oldSelectedTabName:"",
