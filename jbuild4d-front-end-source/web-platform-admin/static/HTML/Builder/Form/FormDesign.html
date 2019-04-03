@@ -54,7 +54,7 @@
                                 </i-col>
                                 <i-col span="4" style="text-align: center">主题：</i-col>
                                 <i-col span="10">
-                                    <i-select v-model="formResourceEntity.formTheme" style="width:200px">
+                                    <i-select v-model="formResourceEntity.formTheme">
                                         <i-option v-for="(item,key) in designThemes" :value="item.value" :key="key">{{item.name}}</i-option>
                                     </i-select>
                                 </i-col>
@@ -220,17 +220,17 @@
                 DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formResourceEntity, this.recordId, this.status,null,function (result) {
                     //alert(_self.formResourceEntity.formDataRelation);
                     //debugger;
-                    _self.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
+                    //_self.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
                     if(_self.status=="add"){
-                        _self.formResourceEntity.formCreater=this.currUserEntity.userName;
-                        _self.formResourceEntity.formUpdater=this.currUserEntity.userName;
+                        //_self.formResourceEntity.formCreater=_self.currUserEntity.userName;
+                        //_self.formResourceEntity.formUpdater=_self.currUserEntity.userName;
                         _self.formResourceEntity.formType="业务表单";
                         _self.formResourceEntity.formModuleId=BaseUtility.GetUrlParaValue("moduleId");
                         _self.oldSelectedTabName="Info";
                     }
                     else {
                         _self.formResourceEntity.formId=BaseUtility.GetUrlParaValue("recordId");
-                        _self.formResourceEntity.formUpdater=this.currUserEntity.userName;
+                        //_self.formResourceEntity.formUpdater=_self.currUserEntity.userName;
                         _self.formResourceEntity.formIsResolve="否";
 
                         _self.oldSelectedTabName="Design";
