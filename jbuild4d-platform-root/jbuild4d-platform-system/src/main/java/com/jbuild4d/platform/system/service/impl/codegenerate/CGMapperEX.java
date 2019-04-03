@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.system.service.impl.codegenerate;
 
-import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLDocumentUtility;
 import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
 import com.jbuild4d.platform.system.vo.CodeGenerateVo;
 import org.mybatis.generatorex.api.IntrospectedColumn;
@@ -28,9 +28,9 @@ public class CGMapperEX {
 
         //String idFieldName=introspectedTableList.get(0).getPrimaryKeyColumns().get(0).getActualColumnName();
 
-        Document document=XMLUtility.parseForDoc(xmlMapperACStr,"utf-8");
-        Node mapperNode=XMLUtility.parseForNode(document.getDocumentElement(),"//mapper");
-        List<Node> mapperChildNodeList=XMLUtility.parseForNodeList(document,"//mapper/*");
+        Document document= XMLDocumentUtility.parseForDoc(xmlMapperACStr,"utf-8");
+        Node mapperNode= XMLDocumentUtility.parseForNode(document.getDocumentElement(),"//mapper");
+        List<Node> mapperChildNodeList= XMLDocumentUtility.parseForNodeList(document,"//mapper/*");
         for(int i=0;i<mapperChildNodeList.size();i++){
             Node node=mapperChildNodeList.get(i);
             mapperNode.removeChild(node);
@@ -121,7 +121,7 @@ public class CGMapperEX {
         selectGreaterThanRecordElem.appendChild(gtTextElem);
         mapperNode.appendChild(selectGreaterThanRecordElem);
 
-        builder.append(XMLUtility.documentToString(document).replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>","<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+        builder.append(XMLDocumentUtility.documentToString(document).replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>","<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">\n"));
         return builder.toString();
     }

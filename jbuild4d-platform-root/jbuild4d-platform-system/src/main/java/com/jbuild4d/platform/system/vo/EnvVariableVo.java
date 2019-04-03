@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.system.vo;
 
 import com.jbuild4d.core.base.tools.UUIDUtility;
-import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLDocumentUtility;
 import org.w3c.dom.Node; /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -94,12 +94,12 @@ public class EnvVariableVo {
 
     public static EnvVariableVo parseEnvVarNode(Node node,String parentId,String type) {
         EnvVariableVo vo=new EnvVariableVo();
-        vo.setText(XMLUtility.getAttribute(node,"Text"));
-        vo.setValue(XMLUtility.getAttribute(node,"Value"));
-        vo.setClassName(XMLUtility.getAttribute(node,"ClassName"));
-        vo.setPara(XMLUtility.getAttribute(node,"Para"));
-        vo.setDesc(XMLUtility.getAttribute(node,"Desc"));
-        vo.setId(XMLUtility.getAttribute(node,"Value"));
+        vo.setText(XMLDocumentUtility.getAttribute(node,"Text"));
+        vo.setValue(XMLDocumentUtility.getAttribute(node,"Value"));
+        vo.setClassName(XMLDocumentUtility.getAttribute(node,"ClassName"));
+        vo.setPara(XMLDocumentUtility.getAttribute(node,"Para"));
+        vo.setDesc(XMLDocumentUtility.getAttribute(node,"Desc"));
+        vo.setId(XMLDocumentUtility.getAttribute(node,"Value"));
         vo.setParentId(parentId);
         vo.setType(type);
         vo.setGroup(false);
@@ -110,9 +110,9 @@ public class EnvVariableVo {
         EnvVariableVo vo=new EnvVariableVo();
         vo.setId(UUIDUtility.getUUID());
         vo.setParentId(parentId);
-        vo.setText(XMLUtility.getAttribute(groupNode,"Text"));
-        vo.setValue(XMLUtility.getAttribute(groupNode,"Text"));
-        vo.setDesc(XMLUtility.getAttribute(groupNode,"Desc"));
+        vo.setText(XMLDocumentUtility.getAttribute(groupNode,"Text"));
+        vo.setValue(XMLDocumentUtility.getAttribute(groupNode,"Text"));
+        vo.setDesc(XMLDocumentUtility.getAttribute(groupNode,"Desc"));
         vo.setGroup(true);
         vo.setType(type);
         return vo;

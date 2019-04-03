@@ -13,7 +13,7 @@ import com.jbuild4d.base.tools.cache.IBuildGeneralObj;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
 import com.jbuild4d.base.tools.BeanUtility;
 import com.jbuild4d.core.base.tools.StringUtility;
-import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLDocumentUtility;
 import com.jbuild4d.platform.sso.service.IOnOrganChangeAware;
 import com.jbuild4d.platform.sso.service.IOrganService;
 import com.jbuild4d.base.service.general.JBuild4DProp;
@@ -96,9 +96,9 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
     private void awareCreatedOrgan(JB4DSession jb4DSession, OrganEntity organEntity) throws JBuild4DGenerallyException {
         xmlDocument=getOrganInitConfigDoc();
         try {
-            List<Node> nodeList=XMLUtility.parseForNodeList(xmlDocument,"//Bean");
+            List<Node> nodeList= XMLDocumentUtility.parseForNodeList(xmlDocument,"//Bean");
             for (Node node : nodeList) {
-                String beanName=XMLUtility.getAttribute(node,"Name");
+                String beanName= XMLDocumentUtility.getAttribute(node,"Name");
                 IOnOrganChangeAware createOrganAware= BeanUtility.getBean(beanName);
                 if(createOrganAware==null){
                     throw new JBuild4DGenerallyException("再容器中找不到名称为"+beanName+"的Bean");
@@ -116,9 +116,9 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
     private void awareUpdatedOrgan(JB4DSession jb4DSession, OrganEntity organEntity) throws JBuild4DGenerallyException {
         xmlDocument=getOrganInitConfigDoc();
         try {
-            List<Node> nodeList=XMLUtility.parseForNodeList(xmlDocument,"//Bean");
+            List<Node> nodeList= XMLDocumentUtility.parseForNodeList(xmlDocument,"//Bean");
             for (Node node : nodeList) {
-                String beanName=XMLUtility.getAttribute(node,"Name");
+                String beanName= XMLDocumentUtility.getAttribute(node,"Name");
                 IOnOrganChangeAware createOrganAware= BeanUtility.getBean(beanName);
                 if(createOrganAware==null){
                     throw new JBuild4DGenerallyException("再容器中找不到名称为"+beanName+"的Bean");
@@ -140,7 +140,7 @@ public class OrganServiceImpl extends BaseServiceImpl<OrganEntity> implements IO
                 try
                 {
                     InputStream inputStream = this.getClass().getResourceAsStream(configResource);
-                    Document _xml = XMLUtility.parseForDoc(inputStream);
+                    Document _xml = XMLDocumentUtility.parseForDoc(inputStream);
                     return _xml;
                 }
                 catch (Exception ex){

@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.module.impl;
 
-import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLDocumentUtility;
 import com.jbuild4d.platform.builder.module.IBuilderConfigService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -32,14 +32,14 @@ public class BuilderConfigServiceImpl implements IBuilderConfigService {
 
     private void loadDocument() throws ParserConfigurationException, SAXException, IOException {
         InputStream inputStream = this.getClass().getResourceAsStream(configResource);
-        xmlDocument = XMLUtility.parseForDoc(inputStream);
+        xmlDocument = XMLDocumentUtility.parseForDoc(inputStream);
     }
 
     @Override
     public String getTablePrefix() throws XPathExpressionException {
         if(_tablePrefix==null){
-            Node tablePrefixNode=XMLUtility.parseForNode(xmlDocument,"/Config/TableConfig/Default/TablePrefix");
-            _tablePrefix=XMLUtility.getAttribute(tablePrefixNode,"Value");
+            Node tablePrefixNode= XMLDocumentUtility.parseForNode(xmlDocument,"/Config/TableConfig/Default/TablePrefix");
+            _tablePrefix= XMLDocumentUtility.getAttribute(tablePrefixNode,"Value");
         }
         return _tablePrefix;
     }
@@ -48,8 +48,8 @@ public class BuilderConfigServiceImpl implements IBuilderConfigService {
     public boolean getResolveSQLEnable() throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
         //重新加载配置文件
         loadDocument();
-        Node resolveSQLEnableNode=XMLUtility.parseForNode(xmlDocument,"/Config/DataSetConfig/ResolveSQLEnable");
-        if(XMLUtility.getAttribute(resolveSQLEnableNode,"Value").toLowerCase().equals("true")){
+        Node resolveSQLEnableNode= XMLDocumentUtility.parseForNode(xmlDocument,"/Config/DataSetConfig/ResolveSQLEnable");
+        if(XMLDocumentUtility.getAttribute(resolveSQLEnableNode,"Value").toLowerCase().equals("true")){
             return true;
         }
         return false;

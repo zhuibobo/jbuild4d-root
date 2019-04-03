@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.builder.dataset.impl;
 
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
-import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLDocumentUtility;
 import com.jbuild4d.platform.builder.dataset.IDataSetColumnCaptionConfigService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -30,16 +30,16 @@ public class DataSetColumnCaptionConfigServiceImpl implements IDataSetColumnCapt
 
     private void loadDocument() throws ParserConfigurationException, SAXException, IOException {
         InputStream inputStream = this.getClass().getResourceAsStream(configResource);
-        xmlDocument = XMLUtility.parseForDoc(inputStream);
+        xmlDocument = XMLDocumentUtility.parseForDoc(inputStream);
     }
 
     @Override
     public String getCaption(String columnName) throws XPathExpressionException, JBuild4DGenerallyException {
-        List<Node> columnNodeList=XMLUtility.parseForNodeList(xmlDocument,"//Column");
+        List<Node> columnNodeList= XMLDocumentUtility.parseForNodeList(xmlDocument,"//Column");
         for (Node node : columnNodeList) {
-            String name=XMLUtility.getAttribute(node,"Name");
+            String name= XMLDocumentUtility.getAttribute(node,"Name");
             if(name.toLowerCase().equals(columnName.toLowerCase())){
-                return XMLUtility.getAttribute(node,"Caption");
+                return XMLDocumentUtility.getAttribute(node,"Caption");
             }
         }
         return "";

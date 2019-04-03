@@ -3,7 +3,7 @@ package com.jbuild4d.platform.builder.flow.impl;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.tools.cache.IBuildGeneralObj;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
-import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLDocumentUtility;
 import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
 import com.jbuild4d.platform.builder.vo.FlowModelerConfigVo;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
@@ -41,14 +41,14 @@ public class FlowModelerConfigServiceImpl implements IFlowModelerConfigService {
     private FlowModelerConfigVo parseXMLDocToVo() throws JBuild4DGenerallyException {
         try {
             InputStream inputStream = this.getClass().getResourceAsStream(configResource);
-            xmlDocument = XMLUtility.parseForDoc(inputStream);
-            Node modelerRestNode = XMLUtility.parseForNode(xmlDocument, "/Config/ModelerRest");
+            xmlDocument = XMLDocumentUtility.parseForDoc(inputStream);
+            Node modelerRestNode = XMLDocumentUtility.parseForNode(xmlDocument, "/Config/ModelerRest");
 
-            String baseUrl=XMLUtility.parseForNode(modelerRestNode,"BaseUrl").getTextContent().trim();
-            String modelDesignView=XMLUtility.parseForNode(modelerRestNode,"ModelDesignView").getTextContent().trim();
-            String modelView=XMLUtility.parseForNode(modelerRestNode,"ModelView").getTextContent().trim();
-            String modelRest=XMLUtility.parseForNode(modelerRestNode,"ModelRest").getTextContent().trim();
-            String importModelRest=XMLUtility.parseForNode(modelerRestNode,"ImportModelRest").getTextContent().trim();
+            String baseUrl= XMLDocumentUtility.parseForNode(modelerRestNode,"BaseUrl").getTextContent().trim();
+            String modelDesignView= XMLDocumentUtility.parseForNode(modelerRestNode,"ModelDesignView").getTextContent().trim();
+            String modelView= XMLDocumentUtility.parseForNode(modelerRestNode,"ModelView").getTextContent().trim();
+            String modelRest= XMLDocumentUtility.parseForNode(modelerRestNode,"ModelRest").getTextContent().trim();
+            String importModelRest= XMLDocumentUtility.parseForNode(modelerRestNode,"ImportModelRest").getTextContent().trim();
 
             FlowModelerConfigVo flowModelerConfigVo=new FlowModelerConfigVo();
             flowModelerConfigVo.setBaseUrl(baseUrl);

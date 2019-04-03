@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.htmldesign.impl;
 
-import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLDocumentUtility;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -40,15 +40,15 @@ public class CKEditorPluginsConfigService {
 
     public List<Node> getWebFormControlNodes() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
         InputStream inputStream = this.getClass().getResourceAsStream(configResource);
-        xmlDocument = XMLUtility.parseForDoc(inputStream);
-        List<Node> nodeList = XMLUtility.parseForNodeList(xmlDocument, "/Config/WebFormControls/Control");
+        xmlDocument = XMLDocumentUtility.parseForDoc(inputStream);
+        List<Node> nodeList = XMLDocumentUtility.parseForNodeList(xmlDocument, "/Config/WebFormControls/Control");
         return nodeList;
     }
 
     public List<Node> getListControlNodes() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
         InputStream inputStream = this.getClass().getResourceAsStream(configResource);
-        xmlDocument = XMLUtility.parseForDoc(inputStream);
-        List<Node> nodeList = XMLUtility.parseForNodeList(xmlDocument, "/Config/ListControls/Control");
+        xmlDocument = XMLDocumentUtility.parseForDoc(inputStream);
+        List<Node> nodeList = XMLDocumentUtility.parseForNodeList(xmlDocument, "/Config/ListControls/Control");
         return nodeList;
     }
 

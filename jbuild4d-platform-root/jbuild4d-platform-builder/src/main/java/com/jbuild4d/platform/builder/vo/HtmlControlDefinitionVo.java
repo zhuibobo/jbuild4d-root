@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.vo;
 
-import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLDocumentUtility;
 import org.w3c.dom.Node;
 
 import javax.xml.xpath.XPathExpressionException;
@@ -109,17 +109,17 @@ public class HtmlControlDefinitionVo {
 
     public static HtmlControlDefinitionVo parseWebFormControlNode(Node node) throws XPathExpressionException {
         HtmlControlDefinitionVo vo=new HtmlControlDefinitionVo();
-        vo.setSingleName(XMLUtility.getAttribute(node,"SingleName"));
-        vo.setText(XMLUtility.getAttribute(node,"Text"));
-        vo.setToolbarLocation(XMLUtility.getAttribute(node,"ToolbarLocation"));
-        vo.setServerResolve(XMLUtility.getAttribute(node,"ServerResolve"));
-        vo.setClientResolve(XMLUtility.getAttribute(node,"ClientResolve"));
-        vo.setClientResolveJs(XMLUtility.getAttribute(node,"ClientResolveJs"));
-        vo.setDialogWidth(Integer.parseInt(XMLUtility.getAttribute(node,"DialogWidth")));
-        vo.setDialogHeight(Integer.parseInt(XMLUtility.getAttribute(node,"DialogHeight")));
-        vo.setDesc(XMLUtility.parseForString(node,"Desc"));
-        vo.setConfig(XMLUtility.parseForString(node,"Config"));
-        vo.setIsJBuild4DData(XMLUtility.getAttribute(node,"IsJBuild4DData"));
+        vo.setSingleName(XMLDocumentUtility.getAttribute(node,"SingleName"));
+        vo.setText(XMLDocumentUtility.getAttribute(node,"Text"));
+        vo.setToolbarLocation(XMLDocumentUtility.getAttribute(node,"ToolbarLocation"));
+        vo.setServerResolve(XMLDocumentUtility.getAttribute(node,"ServerResolve"));
+        vo.setClientResolve(XMLDocumentUtility.getAttribute(node,"ClientResolve"));
+        vo.setClientResolveJs(XMLDocumentUtility.getAttribute(node,"ClientResolveJs"));
+        vo.setDialogWidth(Integer.parseInt(XMLDocumentUtility.getAttribute(node,"DialogWidth")));
+        vo.setDialogHeight(Integer.parseInt(XMLDocumentUtility.getAttribute(node,"DialogHeight")));
+        vo.setDesc(XMLDocumentUtility.parseForString(node,"Desc"));
+        vo.setConfig(XMLDocumentUtility.parseForString(node,"Config"));
+        vo.setIsJBuild4DData(XMLDocumentUtility.getAttribute(node,"IsJBuild4DData"));
         return vo;
     }
 }

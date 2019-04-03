@@ -6,7 +6,7 @@ import com.jbuild4d.base.tools.cache.IBuildGeneralObj;
 import com.jbuild4d.base.tools.cache.JB4DCacheManager;
 import com.jbuild4d.core.base.tools.ClassUtility;
 import com.jbuild4d.core.base.tools.StringUtility;
-import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLDocumentUtility;
 import com.jbuild4d.core.base.list.IListWhereCondition;
 import com.jbuild4d.core.base.list.ListUtility;
 import com.jbuild4d.platform.system.extend.apivariable.IAPIVariableCreater;
@@ -140,19 +140,19 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
             Document xmlDocument = null;
             List<EnvVariableVo> allEnvVariableVoList = null;
             InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configResource);
-            xmlDocument = XMLUtility.parseForDoc(inputStream);
+            xmlDocument = XMLDocumentUtility.parseForDoc(inputStream);
             validateDocumentEnable(xmlDocument);
             allEnvVariableVoList = new ArrayList<>();
             /*List<Node> nodes = XMLUtility.parseForNodeList(xmlDocument, "//EnvVariable");
             for (Node node : nodes) {
                 allEnvVariableVoList.add(EnvVariableVo.parseEnvVarNode(node, "", ""));
             }*/
-            Node groupRootNode = XMLUtility.parseForNode(xmlDocument, "/Config/Type[@Value='DateTime']/Group");
+            Node groupRootNode = XMLDocumentUtility.parseForNode(xmlDocument, "/Config/Type[@Value='DateTime']/Group");
             EnvVariableVo groupRootVo = EnvVariableVo.parseGroupNode(groupRootNode, "-1", "DateTime");
             allEnvVariableVoList.add(groupRootVo);
             loopLoadGroup(allEnvVariableVoList, groupRootNode, groupRootVo, "DateTime");
 
-            groupRootNode = XMLUtility.parseForNode(xmlDocument, "/Config/Type[@Value='ApiVar']/Group");
+            groupRootNode = XMLDocumentUtility.parseForNode(xmlDocument, "/Config/Type[@Value='ApiVar']/Group");
             groupRootVo = EnvVariableVo.parseGroupNode(groupRootNode, "-1", "ApiVar");
             allEnvVariableVoList.add(groupRootVo);
             loopLoadGroup(allEnvVariableVoList, groupRootNode, groupRootVo, "ApiVar");
@@ -182,7 +182,7 @@ public class EnvVariableServiceImpl implements IEnvVariableService {
 
     private void validateDocumentEnable(Document xmlDocument) throws XPathExpressionException, JBuild4DGenerallyException, ParserConfigurationException, SAXException, IOException {
         //Document xmlDocument=XMLUtility.parseForDoc(configResource);
-        List<Node> nodes=XMLUtility.parseForNodeList(xmlDocument,"//EnvVariable");
+        List<Node> nodes= XMLDocumentUtility.parseForNodeList(xmlDocument,"//EnvVariable");
         List<EnvVariableVo> voList=new ArrayList<>();
         for (Node node : nodes) {
             EnvVariableVo vo=EnvVariableVo.parseEnvVarNode(node,"-1","");

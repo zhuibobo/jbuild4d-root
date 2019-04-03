@@ -51,7 +51,7 @@ import org.xml.sax.SAXException;
  * 10.替换node节点。
  * 11.将Node节点转换成字符串。
  */
-public class XMLUtility {
+public class XMLDocumentUtility {
 
     /**
      * 获取Document对象。根据xml文件的名字获取Document对象。
@@ -65,7 +65,7 @@ public class XMLUtility {
      */
     public static Document parseForDoc(final String file) throws SAXException, IOException, SecurityException,
             NullPointerException, ParserConfigurationException {
-        return XMLUtility.parseForDoc(new FileInputStream(file));
+        return XMLDocumentUtility.parseForDoc(new FileInputStream(file));
     }
 
     /**
@@ -84,7 +84,7 @@ public class XMLUtility {
             xmlStr = "";
         }
         ByteArrayInputStream byteInputStream = new ByteArrayInputStream(xmlStr.getBytes(encoding));
-        return XMLUtility.parseForDoc(byteInputStream);
+        return XMLDocumentUtility.parseForDoc(byteInputStream);
     }
 
     public static Document parseForDocUTF8(String xmlStr) throws ParserConfigurationException, SAXException, IOException {
@@ -147,7 +147,7 @@ public class XMLUtility {
             XPathExpressionException
 
     {
-        return (Node) XMLUtility.parseByXpath(obj, xPath, XPathConstants.NODE);
+        return (Node) XMLDocumentUtility.parseByXpath(obj, xPath, XPathConstants.NODE);
     }
 
     /**
@@ -165,7 +165,7 @@ public class XMLUtility {
 
     {
 
-        return (String) XMLUtility.parseByXpath(obj, xPath, XPathConstants.STRING);
+        return (String) XMLDocumentUtility.parseByXpath(obj, xPath, XPathConstants.STRING);
     }
 
     /*
@@ -216,7 +216,7 @@ public class XMLUtility {
             XPathExpressionException
 
     {
-        return (Boolean) XMLUtility.parseByXpath(obj, xPath, XPathConstants.BOOLEAN);
+        return (Boolean) XMLDocumentUtility.parseByXpath(obj, xPath, XPathConstants.BOOLEAN);
     }
 
     /**
@@ -233,7 +233,7 @@ public class XMLUtility {
             RuntimeException, XPathExpressionException
     {
         List lists = new ArrayList();
-        NodeList nList = (NodeList) XMLUtility.parseByXpath(obj, xPath, XPathConstants.NODESET);
+        NodeList nList = (NodeList) XMLDocumentUtility.parseByXpath(obj, xPath, XPathConstants.NODESET);
         if (nList != null) {
             for (int i = 0; i < nList.getLength(); i++) {
                 lists.add(nList.item(i));
@@ -298,7 +298,7 @@ public class XMLUtility {
      */
     public static void saveXml(final String fileName, final Node node, String encoding) throws FileNotFoundException,
             TransformerException {
-        XMLUtility.writeXml(new FileOutputStream(fileName), node, encoding);
+        XMLDocumentUtility.writeXml(new FileOutputStream(fileName), node, encoding);
     }
 
     /**
@@ -312,7 +312,7 @@ public class XMLUtility {
      */
     public static String nodeToString(Node node, String encoding) throws TransformerException, UnsupportedEncodingException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        XMLUtility.writeXml(outputStream, node, encoding);
+        XMLDocumentUtility.writeXml(outputStream, node, encoding);
         return outputStream.toString(encoding);
     }
 

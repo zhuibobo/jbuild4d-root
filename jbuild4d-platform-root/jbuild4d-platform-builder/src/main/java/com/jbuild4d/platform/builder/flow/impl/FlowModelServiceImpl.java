@@ -6,7 +6,7 @@ import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.core.base.tools.XMLUtility;
+import com.jbuild4d.core.base.tools.XMLDocumentUtility;
 import com.jbuild4d.platform.builder.flow.IFlowModelService;
 import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
 import com.jbuild4d.platform.builder.module.IModuleService;
@@ -62,7 +62,7 @@ public class FlowModelServiceImpl extends BaseServiceImpl<FlowModelEntity> imple
     @Override
     public FlowModelEntity importNewModel(JB4DSession jb4DSession, String modelModuleId, MultipartFile file) throws IOException, XMLStreamException, JBuild4DGenerallyException {
 
-        XMLInputFactory xif = XMLUtility.createSafeXmlInputFactory();
+        XMLInputFactory xif = XMLDocumentUtility.createSafeXmlInputFactory();
         InputStreamReader xmlIn = new InputStreamReader(file.getInputStream(), "UTF-8");
         XMLStreamReader xtr = xif.createXMLStreamReader(xmlIn);
         BpmnModel bpmnModel = bpmnXmlConverter.convertToBpmnModel(xtr);
