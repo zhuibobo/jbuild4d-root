@@ -162,6 +162,17 @@ gulp.task('Admin-HTMLDesign-HTML',()=>{
 /*编译表单设计器的相关文件*/
 gulp.task('Admin-HTMLDesign-ALL', gulp.series('Admin-HTMLDesign-Utility','Admin-HTMLDesign-CKEditorConfig','Admin-HTMLDesign-Plugins','Admin-HTMLDesign-HTML'));
 
+/*编译工程相关的Less文件*/
+gulp.task('Admin-Themes-Less',()=>{
+    return gulp.src(adminFromResourcePath+"/Themes/Default/Css/*.less")
+        .pipe(sourcemaps.init())
+        .pipe(less({
+            paths: [ path.join(__dirname, 'less', 'includes') ]
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(adminToResourcePath+'/Themes/Default/Css'));
+});
+
 /*自动监测文件并进行更新*/
 gulp.task('Admin-Watch', function() {
     let watcherFrameV1=gulp.watch(adminFromResourcePath+"/HTML/FrameV1/**/*", gulp.series('Admin-FrameV1'));
@@ -174,6 +185,7 @@ gulp.task('Admin-Watch', function() {
         adminFromResourcePath + "/Js/HTMLDesign/**/*.css",
         adminFromResourcePath + "/Js/HTMLDesign/**/*.png",
         adminFromResourcePath + "/Js/HTMLDesign/**/*.html"], gulp.series('Admin-HTMLDesign-ALL'));
+    let admin_watcherLess=gulp.watch(adminFromResourcePath+"/Js/HTMLDesign/**/*.less", gulp.series('Admin-Themes-Less'));
     //let watcherPluginLess=gulp.watch(srcPlatformStaticPath+"/Js/**/*.less", gulp.series('Less'));
 });
 
