@@ -1,16 +1,20 @@
 refVersion = 1;
 
 function calculateFilePath(file) {
-    //console.log(file.path);
-    let repath = file.path.split('HTML\\');
-    if (repath.length == 1) {
+    console.log(file.path);
+    let repath = file.path.split('static\\');
+    /*if (repath.length == 1) {
         repath = file.path.split('Js\\');
-    }
+    }*/
     //console.log(repath[1]);
     let levelPathArray = repath[1].split("\\");
     //console.log(levelPathArray.length);
     let levelPath = "";
-    for (let i = 0; i < levelPathArray.length; i++) {
+    if(file.path.indexOf("HTMLDesign")>0){
+        //由于HTML下的经过Spring的映射,少了static一层,所以js下的html再加上一层回退
+        levelPath="../";
+    }
+    for (let i = 0; i < levelPathArray.length-1; i++) {
         levelPath += "../";
     }
     return levelPath+"static/";
