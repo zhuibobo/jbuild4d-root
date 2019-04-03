@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Config>
+<Config name="ConfigName" desc="ConfigDesc">
     <Theme name="默认风格" desc="">
         <Ref type="" path="1"></Ref>
         <Ref type="" path="2"></Ref>
