@@ -90,7 +90,16 @@ public class FormResourceEntity {
     //FORM_THEME:风格主题:基于配置文件中的配置
     private String formTheme;
 
-    public FormResourceEntity(String formId, String formCode, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formDataRelation, String formIsTemplate, String formIsResolve, String formEveryTimeResolve, String formSource, String formContentUrl, String formTheme) {
+    //FORM_CUST_SERVER_RENDERER:服务端自定义的渲染方法:继承IFormSeverRenderer
+    private String formCustServerRenderer;
+
+    //FORM_CUST_REF_JS:引入的脚本:多个通过;分割
+    private String formCustRefJs;
+
+    //FORM_CUST_CLIENT_RENDERER:客户端自定义的渲染方法:需要指明具体的方法名称
+    private String formCustClientRenderer;
+
+    public FormResourceEntity(String formId, String formCode, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formDataRelation, String formIsTemplate, String formIsResolve, String formEveryTimeResolve, String formSource, String formContentUrl, String formTheme, String formCustServerRenderer, String formCustRefJs, String formCustClientRenderer) {
         this.formId = formId;
         this.formCode = formCode;
         this.formName = formName;
@@ -116,6 +125,9 @@ public class FormResourceEntity {
         this.formSource = formSource;
         this.formContentUrl = formContentUrl;
         this.formTheme = formTheme;
+        this.formCustServerRenderer = formCustServerRenderer;
+        this.formCustRefJs = formCustRefJs;
+        this.formCustClientRenderer = formCustClientRenderer;
     }
 
     public FormResourceEntity() {
@@ -320,5 +332,29 @@ public class FormResourceEntity {
 
     public void setFormTheme(String formTheme) {
         this.formTheme = formTheme == null ? null : formTheme.trim();
+    }
+
+    public String getFormCustServerRenderer() {
+        return formCustServerRenderer;
+    }
+
+    public void setFormCustServerRenderer(String formCustServerRenderer) {
+        this.formCustServerRenderer = formCustServerRenderer == null ? null : formCustServerRenderer.trim();
+    }
+
+    public String getFormCustRefJs() {
+        return formCustRefJs;
+    }
+
+    public void setFormCustRefJs(String formCustRefJs) {
+        this.formCustRefJs = formCustRefJs == null ? null : formCustRefJs.trim();
+    }
+
+    public String getFormCustClientRenderer() {
+        return formCustClientRenderer;
+    }
+
+    public void setFormCustClientRenderer(String formCustClientRenderer) {
+        this.formCustClientRenderer = formCustClientRenderer == null ? null : formCustClientRenderer.trim();
     }
 }

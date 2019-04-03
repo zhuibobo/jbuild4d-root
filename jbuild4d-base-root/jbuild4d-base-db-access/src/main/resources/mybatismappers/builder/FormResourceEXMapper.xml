@@ -23,7 +23,13 @@
         <if test="formDataRelation !=null and formDataRelation !=''"> and FORM_DATA_RELATION like #{formDataRelation} </if>
         <if test="formIsTemplate !=null and formIsTemplate !=''"> and FORM_IS_TEMPLATE like #{formIsTemplate} </if>
         <if test="formIsResolve !=null and formIsResolve !=''"> and FORM_IS_RESOLVE like #{formIsResolve} </if>
+        <if test="formEveryTimeResolve !=null and formEveryTimeResolve !=''"> and FORM_EVERY_TIME_RESOLVE like #{formEveryTimeResolve} </if>
+        <if test="formSource !=null and formSource !=''"> and FORM_SOURCE like #{formSource} </if>
         <if test="formContentUrl !=null and formContentUrl !=''"> and FORM_CONTENT_URL like #{formContentUrl} </if>
+        <if test="formTheme !=null and formTheme !=''"> and FORM_THEME like #{formTheme} </if>
+        <if test="formCustServerRenderer !=null and formCustServerRenderer !=''"> and FORM_CUST_SERVER_RENDERER like #{formCustServerRenderer} </if>
+        <if test="formCustRefJs !=null and formCustRefJs !=''"> and FORM_CUST_REF_JS like #{formCustRefJs} </if>
+        <if test="formCustClientRenderer !=null and formCustClientRenderer !=''"> and FORM_CUST_CLIENT_RENDERER like #{formCustClientRenderer} </if>
         <if test="formHtmlSource !=null and formHtmlSource !=''"> and FORM_HTML_SOURCE like #{formHtmlSource} </if>
         <if test="formHtmlResolve !=null and formHtmlResolve !=''"> and FORM_HTML_RESOLVE like #{formHtmlResolve} </if>
         <if test="formJsContent !=null and formJsContent !=''"> and FORM_JS_CONTENT like #{formJsContent} </if>

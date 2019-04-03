@@ -621,6 +621,9 @@
             <column name="FORM_SOURCE" type="NVARCHAR(50)" remarks="表单的来源:Web设计器,URL引入..." />
             <column name="FORM_CONTENT_URL" type="NVARCHAR(1000)" remarks="引入表单的URL地址" />
             <column name="FORM_THEME" type="NVARCHAR(50)" remarks="风格主题:基于配置文件中的配置" ></column>
+            <column name="FORM_CUST_SERVER_RENDERER" type="NVARCHAR(200)" remarks="服务端自定义的渲染方法:继承IFormSeverRenderer" />
+            <column name="FORM_CUST_REF_JS" type="NVARCHAR(500)" remarks="引入的脚本:多个通过;分割" />
+            <column name="FORM_CUST_CLIENT_RENDERER" type="NVARCHAR(200)" remarks="客户端自定义的渲染方法:需要指明具体的方法名称" />
         </createTable>
 
         <createTable tableName="TBUILD_FORM_CONFIG">
