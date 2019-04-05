@@ -30,7 +30,7 @@ gulp.task('Jar-Themes-ALL',()=>{
 
 /*编译Vue的扩展插件*/
 gulp.task('Jar-JS-VueEXComponent',()=>{
-    return gulp.src([jarFromResourcePath + '/Js/VueComponent/*.js'])
+    return gulp.src([jarFromResourcePath + '/Js/VueComponent/**/*.js'])
         .pipe(babel({
             presets: ['@babel/env']
         }))
