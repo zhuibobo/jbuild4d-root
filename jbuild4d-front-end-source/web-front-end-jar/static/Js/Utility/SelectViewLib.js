@@ -55,7 +55,7 @@ var JBuild4DSelectView={
             //alert("1");
             $(window.parent.document).find(".ui-widget-overlay").css("zIndex",10100);
             $(window.parent.document).find(".ui-dialog").css("zIndex",10101);
-        }
+        },
     },
     SelectValidateRule:{
         URL:"/HTML/SelectView/SelectValidateRule.html",
