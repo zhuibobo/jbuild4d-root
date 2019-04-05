@@ -138,7 +138,7 @@
     </tabs>
     <div>
         <!--各类对话框的引用-->
-        <fd-control-select-bind-to-single-field-dialog ref="fdControlSelectBindToSingleFieldDialog"></fd-control-select-bind-to-single-field-dialog>
+        <fd-control-select-bind-to-single-field-dialog @on-selected-bind-to-single-field="onSelectedBindToSingleField" ref="fdControlSelectBindToSingleFieldDialog"></fd-control-select-bind-to-single-field-dialog>
     </div>
 </div>
 
@@ -203,10 +203,14 @@
         },
         methods: {
             /*Dialog*/
-            selectBindToSingleFieldDialogBegin:function(){
+            selectBindToSingleFieldDialogBegin:function(targetWindow){
                 var relationConfig=this.$refs.dbTableRelationComp.getValue();
                 //将关联表设置提供给选择绑定字段的组件，判定是否需要重新加载控件的字段
                 this.$refs.fdControlSelectBindToSingleFieldDialog.beginSelect(relationConfig.relationData);
+                this.selectBindToSingleFieldTargetWindow=targetWindow;
+            },
+            onSelectedBindToSingleField:function(result){
+                this.selectBindToSingleFieldTargetWindow._SelectBindObj.setSelectFieldResultValue(result);
             },
             /*Base*/
             initPageUI:function(){

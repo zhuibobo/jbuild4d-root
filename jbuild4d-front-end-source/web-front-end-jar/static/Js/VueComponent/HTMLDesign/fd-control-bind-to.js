@@ -56,8 +56,8 @@ Vue.component("fd-control-bind-to", {
         selectBindFieldView:function () {
             //JBuild4DSelectView.SelectBindToField.beginSelectInFrame(window,"_SelectBindObj",{});
             //将当前对象附着到window上,提供给子窗体使用
-            //window._SelectBindObj = this;
-            window.parent.appForm.selectBindToSingleFieldDialogBegin();
+            window._SelectBindObj = this;
+            window.parent.appForm.selectBindToSingleFieldDialogBegin(window);
         },
         setSelectFieldResultValue:function (result) {
             //debugger;

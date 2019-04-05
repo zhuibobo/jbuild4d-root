@@ -284,8 +284,9 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
         selectComplete:function () {
             var result=this.selectedData;
             if(!StringUtility.IsNullOrEmpty(result.tableId)&&!StringUtility.IsNullOrEmpty(result.fieldName)) {
-                window.OpenerWindowObj[this.getSelectInstanceName()].setSelectFieldResultValue(result);
-                this.setHistorySelectedTableDataToCookie(result.tableId,result.tableName,result.tableCaption);
+                //window.OpenerWindowObj[this.getSelectInstanceName()].setSelectFieldResultValue(result);
+                //this.setHistorySelectedTableDataToCookie(result.tableId,result.tableName,result.tableCaption);
+                this.$emit('on-selected-bind-to-single-field', result);
                 this.handleClose();
             }
             else{
