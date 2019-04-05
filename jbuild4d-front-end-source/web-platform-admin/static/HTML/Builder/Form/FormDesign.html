@@ -16,6 +16,7 @@
 </head>
 <body>
 <div id="appForm" v-cloak>
+    <spin size="large" fix v-if="isLoading"></spin>
     <div style="position: absolute;right: 10px;top: 6px;z-index: 100">
         <button-group size="small">
             <i-button icon="md-cloud-done" type="primary" @click="saveClose()">保存并关闭</i-button>
@@ -137,7 +138,7 @@
     </tabs>
     <div>
         <!--各类对话框的引用-->
-        <select-single-table-dialog></select-single-table-dialog>
+        <fd-control-select-bind-to-single-field-dialog ref="fdControlSelectBindToSingleFieldDialog"></fd-control-select-bind-to-single-field-dialog>
     </div>
 </div>
 
@@ -146,6 +147,7 @@
     var appForm = new Vue({
         el:"#appForm",
         data: {
+            isLoading:false,
             acInterface:{
                 getTablesDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
                 getPluginsConfig:"/PlatFormRest/Builder/HtmlDesign/WebFormDesign/GetPluginsConfig",
@@ -200,7 +202,15 @@
             //this.bindStatusData();
         },
         methods: {
+            /*Dialog*/
+            selectBindToSingleFieldDialogBegin:function(){
+                var relationConfig=this.$refs.dbTableRelationComp.getValue();
+                //将关联表设置提供给选择绑定字段的组件，判定是否需要重新加载控件的字段
+                this.$refs.fdControlSelectBindToSingleFieldDialog.beginSelect(relationConfig.relationData);
+            },
+            /*Base*/
             initPageUI:function(){
+                this.isLoading=true;
                 $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
                 var _self=this;
                 AjaxUtility.Post(this.acInterface.getPluginsConfig,{},function (result) {
@@ -215,6 +225,8 @@
                     _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JsEditorUtility.GetJsEditorInst());
                     //debugger;
                     _self.getServerDataBind();
+
+                    _self.isLoading=false;
 
                 },"json");
             },
