@@ -1,10 +1,13 @@
 /*选择组件绑定的字段*/
 Vue.component("fd-control-select-bind-to-single-field-dialog", {
     data:function () {
+
+        var _self=this;
         return {
             acInterface: {
                 getTablesDataUrl: "/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
-                getTableFieldsDataUrl: "/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTableFieldsByTableId"
+                getTableFieldsDataUrl: "/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTableFieldsByTableId",
+                getTablesFieldsByTableIds:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTablesFieldsByTableIds"
             },
             selectedData: {
                 tableId: "",
@@ -43,7 +46,7 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                     callback: {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
-                            if (treeNode.nodeTypeName == "Table") {
+                            /*if (treeNode.nodeTypeName == "Table") {
                                 appSelectView.tableTree.tableTreeObj.checkNode(treeNode, true, true);
                                 appSelectView.selectedData.tableId = treeNode.id;
                                 //alert(appSelectView.selectedData.tableId);
@@ -64,7 +67,16 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                                 appSelectView.selectedData.fieldDataType = "";
                                 appSelectView.selectedData.fieldLength = "";
                                 appSelectView.fieldTable.fieldData = [];
-                            }
+                            }*/
+                            _self.selectedData.tableId = treeNode.tableId;
+                            _self.selectedData.tableName = treeNode.tableName;
+                            _self.selectedData.tableCaption = treeNode.tableCaption;
+                            _self.selectedData.fieldName = "";
+                            _self.selectedData.fieldCaption = "";
+                            _self.selectedData.fieldDataType = "";
+                            _self.selectedData.fieldLength = "";
+                            _self.fieldTable.fieldData = [];
+                            _self.filterAllFieldsToTable(_self.selectedData.tableId);
                         },
                         onDblClick: function (event, treeId, treeNode) {
 
@@ -93,7 +105,9 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                     }
                 ]
             },
-            oldRelationDataString:""
+            oldRelationDataString:"",
+            relationData:null,
+            allFields:null
         }
     },
     mounted:function (){
@@ -146,10 +160,40 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                 this.tableTree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), this.tableTree.tableTreeSetting,relationData);
                 this.tableTree.tableTreeObj.expandAll(true);
                 this.oldRelationDataString=JsonUtility.JsonToString(relationData);
+                this.relationData=relationData;
+                this.getAllTablesFields(relationData);
             }
 
         },
-        bindTableTree:function () {
+        getAllTablesFields:function(relationData){
+            var tableIds=[];
+            for(var i=0;i<relationData.length;i++){
+                tableIds.push(relationData[i].tableId);
+            }
+            var _self=this;
+            AjaxUtility.Post(this.acInterface.getTablesFieldsByTableIds, {"tableIds": tableIds}, function (result) {
+                if (result.success) {
+                    var allFields = result.data;
+                    var singleTable = result.exKVData.Tables[0];
+                    console.log("重新获取数据");
+                    console.log(allFields);
+                    _self.allFields=allFields;
+                }
+                else {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                }
+            }, "json");
+        },
+        filterAllFieldsToTable:function(tableId){
+            var fields=[];
+            for(var i=0;i<this.allFields.length;i++){
+                if(this.allFields[i].fieldTableId==tableId){
+                    fields.push(this.allFields[i]);
+                }
+            }
+            this.fieldTable.fieldData=fields;
+        },
+        /*bindTableTree:function () {
             var _self=this;
             AjaxUtility.Post(this.acInterface.getTablesDataUrl,{},function (result) {
                 if(result.success) {
@@ -229,7 +273,7 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
         },
         getSelectInstanceName:function () {
             return BaseUtility.GetUrlParaValue("instanceName");
-        },
+        },*/
         selectedField:function(selection,index){
             //alert(selection.fieldName);
             this.selectedData.fieldName=selection.fieldName;
