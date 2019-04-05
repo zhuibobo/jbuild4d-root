@@ -259,6 +259,7 @@ class CKEditorPluginUtility {
                 //var sel=CKEditorUtility.GetCKEditorInst().getSelection();
                 //alert(elem.$.outerHTML);
                 CKEditorUtility.GetCKEditorInst().insertElement(elem);
+                //选中之后会造成控件只能插入一次，意义不明?
                 //CKEditorUtility.GetCKEditorInst().getSelection().selectElement(elem);
                 //CKEDITOR.editor.insertElement(elem);
             }
