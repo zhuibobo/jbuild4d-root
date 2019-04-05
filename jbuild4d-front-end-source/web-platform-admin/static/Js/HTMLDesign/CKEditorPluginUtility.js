@@ -92,11 +92,12 @@ class CKEditorPluginUtility {
             {
                 //对话框确认按钮触发的事件
                 onOk: function () {
+                    //debugger;
                     var props = pluginSetting.IFrameWindow.contentWindow.DialogApp.getControlProps();
                     if (props.success == false) {
                         return false;
                     }
-                    //JBuild4D.FormDesign.Control.BuildGeneralElemToCKWysiwyg("<input type='text' />",ControlSetting,props,ControlSetting.IFrameWindow.contentWindow);
+
                     okFunc(ckEditor, pluginSetting, props, pluginSetting.IFrameWindow.contentWindow);
                     pluginSetting.IFrameExecuteActionName = CKEditorPluginUtility.DialogExecuteInsertActionName;
                 },
@@ -247,13 +248,19 @@ class CKEditorPluginUtility {
         return props;
     }
     static BuildGeneralElemToCKWysiwyg (html,controlSetting,controlProps,_iframe) {
+        //debugger;
         if(this.ValidateBuildEnable(html,controlSetting,controlProps,_iframe)) {
             if (controlSetting.IFrameExecuteActionName == CKEditorPluginUtility.DialogExecuteInsertActionName) {
                 var elem = CKEDITOR.dom.element.createFromHtml(html);
                 this.SerializePropsToElem(elem,controlProps,controlSetting);
                 //debugger;
+                //var elem = CKEDITOR.dom.element.createFromHtml("<input />");
+                //debugger;
+                //var sel=CKEditorUtility.GetCKEditorInst().getSelection();
+                //alert(elem.$.outerHTML);
                 CKEditorUtility.GetCKEditorInst().insertElement(elem);
-                CKEditorUtility.GetCKEditorInst().getSelection().selectElement(elem);
+                //CKEditorUtility.GetCKEditorInst().getSelection().selectElement(elem);
+                //CKEDITOR.editor.insertElement(elem);
             }
             else {
                 //debugger
