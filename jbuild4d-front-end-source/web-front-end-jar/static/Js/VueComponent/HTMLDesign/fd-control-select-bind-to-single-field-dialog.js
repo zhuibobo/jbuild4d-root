@@ -297,12 +297,7 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
             this.handleClose();
         },
         handleClose: function () {
-            if(window.IsOpenForFrame){
-                DialogUtility.Frame_CloseDialog(window)
-            }
-            else {
-                DialogUtility.CloseOpenIframeWindow(window, DialogUtility.DialogId);
-            }
+            DialogUtility.CloseDialogElem(this.$refs.fdControlSelectBindToSingleFieldDialogWrap);
         }
     },
     template: `<div ref="fdControlSelectBindToSingleFieldDialogWrap" class="general-edit-page-wrap design-dialog-wraper-single-dialog" style="display: none">
