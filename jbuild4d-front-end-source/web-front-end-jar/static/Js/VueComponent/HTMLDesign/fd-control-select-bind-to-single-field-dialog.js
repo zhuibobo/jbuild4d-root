@@ -170,6 +170,7 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
             $(window.document).find(".ui-widget-overlay").css("zIndex",10100);
             $(window.document).find(".ui-dialog").css("zIndex",10101);
 
+            this.oldBindFieldData=oldBindFieldData;
             if (JsonUtility.JsonToString(relationData)!=this.oldRelationDataString){
                 for(var i=0;i<relationData.length;i++){
                     relationData[i].displayText=relationData[i].tableName+"["+relationData[i].tableCaption+"]("+relationData[i].relationType+")";
@@ -185,7 +186,6 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
 
                 this.oldRelationDataString=JsonUtility.JsonToString(relationData);
                 this.relationData=relationData;
-                this.oldBindFieldData=oldBindFieldData;
                 this.getAllTablesFields(relationData);
             }
             else{
@@ -199,6 +199,7 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
             }
         },
         resetFieldToSelectedStatus:function(){
+            //debugger;
             for(var i=0;i<this.allFields.length;i++) {
                 this.allFields[i].isSelectedToBind = false;
                 if (this.allFields[i].fieldTableId == this.oldBindFieldData.tableId) {
