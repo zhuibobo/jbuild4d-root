@@ -59,10 +59,10 @@
         },
         methods: {
             /*Dialog*/
-            selectBindToSingleFieldDialogBegin:function(targetWindow){
+            selectBindToSingleFieldDialogBegin:function(targetWindow,oldBindFieldData){
                 var relationConfig=this.$refs.dbTableRelationComp.getValue();
                 //将关联表设置提供给选择绑定字段的组件，判定是否需要重新加载控件的字段
-                this.$refs.fdControlSelectBindToSingleFieldDialog.beginSelect(relationConfig.relationData);
+                this.$refs.fdControlSelectBindToSingleFieldDialog.beginSelect(relationConfig.relationData,oldBindFieldData);
                 this.selectBindToSingleFieldTargetWindow=targetWindow;
             },
             onSelectedBindToSingleField:function(result){

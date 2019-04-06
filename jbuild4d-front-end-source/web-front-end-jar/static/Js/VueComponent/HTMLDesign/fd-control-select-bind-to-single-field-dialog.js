@@ -95,6 +95,26 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                 tableHeight: 470,
                 columnsConfig: [
                     {
+                        title: ' ',
+                        width: 60,
+                        render: function (h, params) {
+                            console.log(params);
+                            if(params.row.isSelectedToBind==true) {
+                                return h('div',{class: "list-row-button-wrap"},[
+                                    h('div', {
+                                        class: "list-row-button selected"
+                                    })
+                                ]);
+                            }
+                            else
+                            {
+                                return h('div', {
+                                    class: "",
+                                }, "");
+                            }
+                        }
+                    },
+                    {
                         title: '名称',
                         key: 'fieldName',
                         align: "center"
@@ -107,11 +127,11 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
             },
             oldRelationDataString:"",
             relationData:null,
-            allFields:null
+            allFields:null,
+            oldBindFieldData:null
         }
     },
     mounted:function (){
-
         /*window.setTimeout(function () {
             appSelectView.bindOldSelectedValue();
             appSelectView.bindHistorySelectedValue();
@@ -119,8 +139,11 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
         },400);*/
     },
     methods:{
-        beginSelect:function (relationData) {
+        beginSelect:function (relationData,oldBindFieldData) {
+            console.log("关联表数据：")
             console.log(relationData);
+            console.log("已经绑定了的数据：")
+            console.log(oldBindFieldData);
             if(relationData==null||relationData==""||relationData.length==0){
                 DialogUtility.AlertText("请先设置表单的数据关联！");
                 $(window.document).find(".ui-widget-overlay").css("zIndex",10100);
@@ -159,11 +182,32 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                 //将关联数据加载成为树，并从服务端加载字段信息。
                 this.tableTree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), this.tableTree.tableTreeSetting,relationData);
                 this.tableTree.tableTreeObj.expandAll(true);
+
                 this.oldRelationDataString=JsonUtility.JsonToString(relationData);
                 this.relationData=relationData;
+                this.oldBindFieldData=oldBindFieldData;
                 this.getAllTablesFields(relationData);
             }
+            else{
+                this.resetFieldToSelectedStatus();
+            }
 
+            if(oldBindFieldData&&oldBindFieldData.tableId&&oldBindFieldData.tableId!="") {
+                var selectedNode = this.tableTree.tableTreeObj.getNodeByParam("tableId", oldBindFieldData.tableId);
+                //debugger;
+                this.tableTree.tableTreeObj.selectNode(selectedNode, false, true);
+            }
+        },
+        resetFieldToSelectedStatus:function(){
+            for(var i=0;i<this.allFields.length;i++) {
+                this.allFields[i].isSelectedToBind = false;
+                if (this.allFields[i].fieldTableId == this.oldBindFieldData.tableId) {
+                    if (this.allFields[i].fieldName == this.oldBindFieldData.fieldName) {
+                        this.allFields[i].isSelectedToBind = true;
+                    }
+                }
+            }
+            this.filterAllFieldsToTable(this.oldBindFieldData.tableId);
         },
         getAllTablesFields:function(relationData){
             var tableIds=[];
@@ -178,6 +222,7 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                     console.log("重新获取数据");
                     console.log(allFields);
                     _self.allFields=allFields;
+                    _self.resetFieldToSelectedStatus();
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
@@ -307,7 +352,7 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                         <!--<input type="text" id="txtSearchTableTree" style="width: 100%;height: 32px;margin-top: 2px" />-->
                         <ul id="tableZTreeUL" class="ztree"></ul>
                     </div>
-                    <div class="select-field-wraper">
+                    <div class="select-field-wraper iv-list-page-wrap">
                         <divider orientation="left" :dashed="true" style="font-size: 12px">选择字段</divider>
                         <i-table border :columns="fieldTable.columnsConfig" :data="fieldTable.fieldData"
                                  class="iv-list-table" :highlight-row="true"
