@@ -97,9 +97,10 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                     {
                         title: ' ',
                         width: 60,
+                        key: 'isSelectedToBind',
                         render: function (h, params) {
-                            console.log(params);
-                            if(params.row.isSelectedToBind==true) {
+                            //console.log(params);
+                            if(params.row.isSelectedToBind=="1") {
                                 return h('div',{class: "list-row-button-wrap"},[
                                     h('div', {
                                         class: "list-row-button selected"
@@ -171,6 +172,7 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
             $(window.document).find(".ui-dialog").css("zIndex",10101);
 
             this.oldBindFieldData=oldBindFieldData;
+            this.selectedData=JsonUtility.CloneSimple(oldBindFieldData);
             if (JsonUtility.JsonToString(relationData)!=this.oldRelationDataString){
                 for(var i=0;i<relationData.length;i++){
                     relationData[i].displayText=relationData[i].tableName+"["+relationData[i].tableCaption+"]("+relationData[i].relationType+")";
@@ -189,7 +191,7 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                 this.getAllTablesFields(relationData);
             }
             else{
-                this.resetFieldToSelectedStatus();
+                this.resetFieldToSelectedStatus(this.allFields);
             }
 
             if(oldBindFieldData&&oldBindFieldData.tableId&&oldBindFieldData.tableId!="") {
@@ -198,15 +200,26 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                 this.tableTree.tableTreeObj.selectNode(selectedNode, false, true);
             }
         },
-        resetFieldToSelectedStatus:function(){
+        resetFieldToSelectedStatus:function(_allFields){
             //debugger;
-            for(var i=0;i<this.allFields.length;i++) {
-                this.allFields[i].isSelectedToBind = false;
-                if (this.allFields[i].fieldTableId == this.oldBindFieldData.tableId) {
-                    if (this.allFields[i].fieldName == this.oldBindFieldData.fieldName) {
-                        this.allFields[i].isSelectedToBind = true;
+            for(var i=0;i<this.fieldTable.fieldData.length;i++){
+                this.fieldTable.fieldData[i].isSelectedToBind="0";
+                //this.fieldTable.fieldData[i].fieldDesc='1';
+            }
+            //console.log(this.fieldTable.fieldData);
+            //var temp=this.fieldTable.fieldData;
+            //this.fieldTable.fieldData=[];
+            //this.fieldTable.fieldData=temp;
+            if(_allFields) {
+                for (var i = 0; i < _allFields.length; i++) {
+                    _allFields[i].isSelectedToBind = "0";
+                    if (_allFields[i].fieldTableId == this.oldBindFieldData.tableId) {
+                        if (_allFields[i].fieldName == this.oldBindFieldData.fieldName) {
+                            _allFields[i].isSelectedToBind = "1";
+                        }
                     }
                 }
+                this.allFields = _allFields;
             }
             this.filterAllFieldsToTable(this.oldBindFieldData.tableId);
         },
@@ -222,8 +235,8 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
                     var singleTable = result.exKVData.Tables[0];
                     console.log("重新获取数据");
                     console.log(allFields);
-                    _self.allFields=allFields;
-                    _self.resetFieldToSelectedStatus();
+
+                    _self.resetFieldToSelectedStatus(allFields);
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
@@ -231,13 +244,16 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
             }, "json");
         },
         filterAllFieldsToTable:function(tableId){
-            var fields=[];
-            for(var i=0;i<this.allFields.length;i++){
-                if(this.allFields[i].fieldTableId==tableId){
-                    fields.push(this.allFields[i]);
+            if(tableId) {
+                var fields = [];
+                for (var i = 0; i < this.allFields.length; i++) {
+                    if (this.allFields[i].fieldTableId == tableId) {
+                        fields.push(this.allFields[i]);
+                    }
                 }
+                this.fieldTable.fieldData = fields;
+                console.log(this.fieldTable.fieldData);
             }
-            this.fieldTable.fieldData=fields;
         },
         /*bindTableTree:function () {
             var _self=this;

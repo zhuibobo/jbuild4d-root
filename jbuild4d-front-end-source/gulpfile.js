@@ -189,6 +189,7 @@ gulp.task('Admin-Watch', function() {
     //let watcherPluginLess=gulp.watch(srcPlatformStaticPath+"/Js/**/*.less", gulp.series('Less'));
 });
 
+gulp.task('Admin-ALL',gulp.series('Admin-FrameV1','Jar-JS-Custom-ALL','Jar-Themes-Less','Jar-Themes-Less-Images','Admin-HTMLTemplates','Admin-HTMLDesign-ALL','Admin-Themes-Less'));
 //endregion
 
 //region 管理前端的相关的编译
