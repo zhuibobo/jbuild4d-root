@@ -118,9 +118,18 @@ class CKEditorPluginUtility {
         });
 
         ckEditor.on('doubleclick', function (event) {
+            //debugger;
+            //alert("1");
             pluginSetting.IFrameExecuteActionName = CKEditorPluginUtility.DialogExecuteEditActionName;
             CKEditorPluginUtility.OnCKWysiwygElemDBClickEvent(event, pluginSetting)
         });
+
+        //ckEditor.on('focus', function (event) {
+            //debugger;
+            //var element=event.data.element;
+            //pluginSetting.IFrameExecuteActionName = CKEditorPluginUtility.DialogExecuteEditActionName;
+            //CKEditorPluginUtility.OnCKWysiwygElemDBClickEvent(event, pluginSetting)
+        //});
     }
 
     static DefaultProps={
@@ -252,6 +261,10 @@ class CKEditorPluginUtility {
         if(this.ValidateBuildEnable(html,controlSetting,controlProps,_iframe)) {
             if (controlSetting.IFrameExecuteActionName == CKEditorPluginUtility.DialogExecuteInsertActionName) {
                 var elem = CKEDITOR.dom.element.createFromHtml(html);
+                /*elem.on('click', function() {
+                    //alert( this == elem );        // true
+                    CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
+                });*/
                 this.SerializePropsToElem(elem,controlProps,controlSetting);
                 //debugger;
                 //var elem = CKEDITOR.dom.element.createFromHtml("<input />");
@@ -259,6 +272,7 @@ class CKEditorPluginUtility {
                 //var sel=CKEditorUtility.GetCKEditorInst().getSelection();
                 //alert(elem.$.outerHTML);
                 CKEditorUtility.GetCKEditorInst().insertElement(elem);
+                this.ElemBindEvent();
                 //选中之后会造成控件只能插入一次，意义不明?
                 //CKEditorUtility.GetCKEditorInst().getSelection().selectElement(elem);
                 //CKEDITOR.editor.insertElement(elem);
@@ -277,6 +291,21 @@ class CKEditorPluginUtility {
             //exsetting.IRCommandName=SimpleControlUtil.PropInsertCommand;
         }
     }
+
+    static ElemBindEvent(){
+        var elements = CKEditorUtility.GetCKEditorInst().document.getBody().getElementsByTag( '*' );
+        for ( var i = 0; i < elements.count(); ++i ) {
+            if(elements.getItem(i).getAttribute("singlename")=="WFDCT_TextBox") {
+                console.log(elements.getItem(i).getName());
+                var elem = elements.getItem(i);
+                elem.on('click', function () {
+                    //alert( this == elem );        // true
+                    CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
+                });
+            }
+        }
+    }
+
     static ValidateBuildEnable(html,controlSetting,controlProps,_iframe){
         return true;
     }

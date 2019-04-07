@@ -78,8 +78,9 @@ class CKEditorUtility {
 
         //注册在编辑器中粘贴的处理事件
         CKEDITOR.instances.html_design.on("paste", function (event) {
+            var sourceHTML = event.data.dataValue;
             try {
-                alert("暂时不支持!");
+                /*alert("暂时不支持!");
                 var copyData = event.data.dataValue;
 
                 var $copyData = $(copyData);
@@ -90,11 +91,38 @@ class CKEditorUtility {
                 var newHtml = $copyData.outerHTML();
                 if (typeof(newHtml) == "string") { //修复bug，在拷贝的是文本时，newhtml会被转换为jquery对象
                     event.data.dataValue = newHtml;
+                }*/
+                //alert(event.data.dataValue);
+
+                var $sourceHTML = $(sourceHTML);
+                //如果其中包含一个用于显示控件呈现的div,取其进行替换
+                if($(sourceHTML).find("div").length==1){
+                    event.data.dataValue = $(sourceHTML).find("div").outerHTML();
                 }
+            }
+            catch (e) {
+                //还原html
+                event.data.dataValue = sourceHTML;
+            }
+        });
+
+        CKEDITOR.instances.html_design.on("afterPaste", function (event) {
+            try {
+                CKEditorPluginUtility.ElemBindEvent();
             }
             catch (e) {
                 alert("粘贴操作失败!")
             }
+        });
+
+        CKEDITOR.instances.html_design.on('insertElement', function (event) {
+            console.log("insertElement");
+            console.log(event);
+        });
+
+        CKEDITOR.instances.html_design.on('insertHtml', function (event) {
+            console.log("insertHtml");
+            console.log(event);
         });
 
         //this._CKEditorInst = CKEDITOR.instances.html_design;
