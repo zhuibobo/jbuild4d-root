@@ -50,6 +50,7 @@ CKEDITOR.editorConfig = function(config) {
     config.stylesSet = false;
     //config.autoParagraph = false;
     config.contentsCss = ['../../../Themes/Default/Css/FormDesignWysiwyg.css','../../../Themes/Default/Css/Jbuild4dPlatform.css'];
+    //config.contentsCss =
     //,Source
     config.removeButtons = 'Maximize,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,' +
         'Replace,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Bold,Italic,' +

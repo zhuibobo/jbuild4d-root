@@ -103,6 +103,23 @@ class CKEditorUtility {
         CKEDITOR.on('instanceReady', function (e) {
             if(typeof(loadCompletedFunc)=="function"){
                 loadCompletedFunc();
+                //console.log(CKEDITOR.instances.html_design.document);
+                //debugger;
+                //console.log(CKEDITOR.instances.html_design.document.$.head);
+
+                /*var link=document.createElement('link');
+                link.href='../../../static/Themes/Default/Css/FormDesignWysiwyg.css';
+                link.rel='rel';
+
+                CKEDITOR.instances.html_design.document.$.head.appendChild(link);
+                var link1=document.createElement('link');
+                link1.href='../../../static/Themes/Default/Css/Jbuild4dPlatform.css';
+                link1.rel='rel';
+
+                CKEDITOR.instances.html_design.document.$.head.appendChild(link1)*/;
+
+                //alert("1");
+                //CKEDITOR.instances.html_design.config.contentsCss = ['../../../Themes/Default/Css/FormDesignWysiwyg1.css','../../../Themes/Default/Css/Jbuild4dPlatform2.css'];
                 /*JBuild4D.FormDesign.SetCKEditorHTML("<div class=\"table-width-wraper-1024\" clientresolve=\"2\" is_jbuild4d_data=\"false\" jbuild4d_custom=\"true\" serialize=\"false\" serverresolve=\"1\" singlename=\"FDCT_Template\">" +
                     "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"wathet-blue-table\">" +
                     "<colgroup>" +
@@ -148,6 +165,8 @@ class CKEditorUtility {
                     "</div>");*/
             }
         });
+
+
     }
 }
 
