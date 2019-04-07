@@ -13,13 +13,13 @@
         </WebFormControl>-->
         <Control SingleName="WFDCT_Template" Text="表格模版" ToolbarLocation="LC_Template,1"
                         ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
-                        DialogWidth="780" DialogHeight="550" IsJBuild4DData="false">
+                        DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlType="ContainerControl">
             <Config></Config>
             <Desc></Desc>
         </Control>
         <Control SingleName="WFDCT_TextBox" Text="单行输入框" ToolbarLocation="LC_Simple,1"
                         ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
-                        DialogWidth="780" DialogHeight="550" IsJBuild4DData="true">
+                        DialogWidth="780" DialogHeight="550" IsJBuild4DData="true" ControlType="InputControl">
             <Config></Config>
             <Desc></Desc>
         </Control>

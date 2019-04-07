@@ -328,4 +328,10 @@ class CKEditorPluginUtility {
             iframeObj.contentWindow.DialogApp.setControlProps(elem,props);
         }
     }
+
+    static GetControlDescText(pluginSetting,props){
+        console.log(pluginSetting);
+        console.log(props);
+        return "123";
+    }
 }
