@@ -342,6 +342,12 @@ Vue.component("fd-control-select-bind-to-single-field-dialog", {
             this.selectedData.fieldCaption=selection.fieldCaption;
             this.selectedData.fieldDataType=selection.fieldDataType;
             this.selectedData.fieldLength=selection.fieldDataLength;
+
+            //根据选中的表id,从树结构中获取表的相关信息
+            var selectedNode = this.tableTree.tableTreeObj.getNodeByParam("tableId", selection.fieldTableId);
+            this.selectedData.tableId = selectedNode.tableId;
+            this.selectedData.tableName = selectedNode.tableName;
+            this.selectedData.tableCaption = selectedNode.tableCaption;
         },
         selectComplete:function () {
             var result=this.selectedData;
