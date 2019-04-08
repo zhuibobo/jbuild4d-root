@@ -205,7 +205,6 @@ class CKEditorUtility {
             }
         });
 
-
     }
 
     static _ThemeVo=null;
@@ -216,6 +215,13 @@ class CKEditorUtility {
         this._ThemeVo=_themeVo;
     }
 
+    //点击的时候自动选中元素,主要用于实现位置拖拽
+    static SingleElemBindDefaultEvent(elem){
+        elem.on('click', function () {
+            //alert( this == elem );        // true
+            CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
+        });
+    }
     static ALLElemBindDefaultEvent(){
         console.log(CKEditorUtility.GetCKEditorInst());
         var elements = CKEditorUtility.GetCKEditorInst().document.getBody().getElementsByTag( '*' );
@@ -223,10 +229,7 @@ class CKEditorUtility {
             if(elements.getItem(i).getAttribute("singlename")=="WFDCT_TextBox") {
                 console.log(elements.getItem(i).getName());
                 var elem = elements.getItem(i);
-                elem.on('click', function () {
-                    //alert( this == elem );        // true
-                    CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
-                });
+                this.SingleElemBindDefaultEvent(elem);
             }
         }
     }
