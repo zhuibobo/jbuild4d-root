@@ -49,7 +49,7 @@ CKEDITOR.editorConfig = function(config) {
     config.allowedContent = true;
     config.stylesSet = false;
     //config.autoParagraph = false;
-    config.contentsCss = ['../../../Themes/Default/Css/FormDesignWysiwyg.css','../../../Themes/Default/Css/Jbuild4dPlatform.css'];
+    config.contentsCss = ['../../../Themes/Default/Css/FormDesignWysiwyg.css','../../../Themes/Default/Css/HTMLDesignWysiwyg.css','../../../Themes/Default/Css/Jbuild4dPlatform.css'];
     //config.contentsCss =
     //,Source
     config.removeButtons = 'Maximize,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,' +

@@ -336,6 +336,6 @@ class CKEditorPluginUtility {
     static GetControlDescText(pluginSetting,props){
         console.log(pluginSetting);
         console.log(props);
-        return "["+pluginSetting.ToolbarLabel+"]&nbsp;&nbsp;绑定:["+props.bindToField.tableCaption+"]->["+props.bindToField.fieldCaption+"]"
+        return "["+pluginSetting.ToolbarLabel+"] 绑定:["+props.bindToField.tableCaption+"-"+props.bindToField.fieldCaption+"]"
     }
 }
