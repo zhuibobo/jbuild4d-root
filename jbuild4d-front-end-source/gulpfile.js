@@ -177,15 +177,15 @@ gulp.task('Admin-HTMLDesign-Plugins-Less',()=>{
 gulp.task('Admin-HTMLDesign-ALL', gulp.series('Admin-HTMLDesign-Utility','Admin-HTMLDesign-CKEditorConfig','Admin-HTMLDesign-Plugins','Admin-HTMLDesign-Plugins-HTML'));
 
 /*编译工程相关的Less文件*/
-/*gulp.task('Admin-Themes-Less',()=>{
-    return gulp.src(adminFromResourcePath+"/Themes/Default/Css/!*.less")
+gulp.task('Admin-Themes-Less',()=>{
+    return gulp.src(adminFromResourcePath+"/Themes/Default/Css/*.less")
         .pipe(sourcemaps.init())
         .pipe(less({
             paths: [ path.join(__dirname, 'less', 'includes') ]
         }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(adminToResourcePath+'/Themes/Default/Css'));
-});*/
+});
 
 /*自动监测文件并进行更新*/
 gulp.task('Admin-Watch', function() {
@@ -199,11 +199,12 @@ gulp.task('Admin-Watch', function() {
         adminFromResourcePath + "/Js/HTMLDesign/**/*.css",
         adminFromResourcePath + "/Js/HTMLDesign/**/*.png",
         adminFromResourcePath + "/Js/HTMLDesign/**/*.html"], gulp.series('Admin-HTMLDesign-ALL'));
-    let admin_watcherLess=gulp.watch(adminFromResourcePath+"/Js/HTMLDesign/**/*.less", gulp.series('Admin-Themes-Less'));
+    let admin_watcherLess=gulp.watch(adminFromResourcePath+"/Js/HTMLDesign/**/*.less", gulp.series('Admin-HTMLDesign-Plugins-Less'));
+    gulp.watch(adminFromResourcePath+"/Themes/Default/Css/*.less", gulp.series('Admin-Themes-Less'));
     //let watcherPluginLess=gulp.watch(srcPlatformStaticPath+"/Js/**/*.less", gulp.series('Less'));
 });
 
-gulp.task('Admin-ALL',gulp.series('Admin-FrameV1','Jar-JS-Custom-ALL','Jar-Themes-Less','Jar-Themes-Less-Images','Admin-HTMLTemplates','Admin-HTMLDesign-ALL','Admin-HTMLDesign-Plugins-Less'));
+gulp.task('Admin-ALL',gulp.series('Admin-FrameV1','Jar-JS-Custom-ALL','Jar-Themes-Less','Jar-Themes-Less-Images','Admin-HTMLTemplates','Admin-HTMLDesign-ALL','Admin-HTMLDesign-Plugins-Less','Admin-Themes-Less'));
 //endregion
 
 //region 管理前端的相关的编译
