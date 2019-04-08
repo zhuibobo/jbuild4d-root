@@ -45,7 +45,7 @@
                         <form-item label="备注：" style="margin-bottom: 12px">
                             <i-input v-model="formResourceEntity.formDesc" type="textarea" :autosize="{minRows: 2,maxRows: 2}"></i-input>
                         </form-item>
-                        <form-item label="每次解析：">
+                        <form-item label="每次解析：" style="margin-bottom: 0px">
                             <row>
                                 <i-col span="10">
                                     <radio-group v-model="formResourceEntity.formEveryTimeResolve" type="button">
@@ -58,6 +58,7 @@
                                     <i-select v-model="formResourceEntity.formTheme">
                                         <i-option v-for="(item,key) in designThemes" :value="item.value" :key="key">{{item.name}}</i-option>
                                     </i-select>
+                                    主题设置必须在保存后再次打开才生效,或者使用保存并预览功能!
                                 </i-col>
                             </row>
                         </form-item>

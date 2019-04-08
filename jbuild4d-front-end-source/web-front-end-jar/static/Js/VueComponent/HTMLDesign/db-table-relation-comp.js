@@ -455,7 +455,7 @@ Vue.component("db-table-relation-comp", {
         }
     },
     template:'<div class="db-table-relation-comp">\
-                <divider orientation="left" :dashed="true" style="font-size: 12px">数据关系关联设置</divider>\
+                <divider orientation="left" :dashed="true" style="font-size: 12px;margin-top: 0px;margin-bottom: 10px">数据关系关联设置</divider>\
                 <div style="float: left;width: 350px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
                     <button-group shape="circle" style="margin: auto">\
                         <i-button type="success" @click="beginSelectTableToRelationTable">&nbsp;添加&nbsp;</i-button>\
