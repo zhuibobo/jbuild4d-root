@@ -32,7 +32,7 @@ class CKEditorUtility {
     static SetCKEditorHTML(html){
         this.GetCKEditorInst().setData(html);
     }
-    static InitializeCKEditor(textAreaElemId,pluginsConfig,loadCompletedFunc,ckeditorConfigFullPath,pluginBasePath) {
+    static InitializeCKEditor(textAreaElemId,pluginsConfig,loadCompletedFunc,ckeditorConfigFullPath,pluginBasePath,themeVo) {
         var extraPlugins=new Array();
         for(var i=0;i<pluginsConfig.length;i++) {
             var singlePluginConfig = pluginsConfig[i];
@@ -67,6 +67,9 @@ class CKEditorUtility {
                 IsJBuild4DData:isJBuild4DData
             }*/
         }
+
+        //console.log(themeVo);
+        this.SetThemeVo(themeVo);
 
         //加载默认配置文件
         var editorConfigUrl = BaseUtility.AppendTimeStampUrl(ckeditorConfigFullPath);
@@ -196,6 +199,14 @@ class CKEditorUtility {
         });
 
 
+    }
+
+    static _ThemeVo=null;
+    static GetThemeVo() {
+        return this._ThemeVo;
+    }
+    static SetThemeVo(_themeVo){
+        this._ThemeVo=_themeVo;
     }
 }
 

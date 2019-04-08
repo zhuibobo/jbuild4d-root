@@ -49,7 +49,21 @@ CKEDITOR.editorConfig = function(config) {
     config.allowedContent = true;
     config.stylesSet = false;
     //config.autoParagraph = false;
-    config.contentsCss = ['../../../Themes/Default/Css/HTMLDesignWysiwygForPlugins.css','../../../Themes/Default/Css/HTMLDesignWysiwyg.css','../../../Themes/Default/Css/Jbuild4dPlatform.css'];
+
+    var themeVo=CKEditorUtility.GetThemeVo();
+    console.log(CKEditorUtility.GetThemeVo());
+    var inputCssArray=[];
+    inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwygForPlugins.css");
+    inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwyg.css");
+
+    for(var i=0;i<themeVo.refs.length;i++){
+        var ref=themeVo.refs[i];
+        if(ref.type=="css"){
+            inputCssArray.push(ref.path.replace("${BasePath}",BaseUtility.GetRootPath()));
+        }
+    }
+
+    config.contentsCss = inputCssArray;//['','../../../Themes/Default/Css/HTMLDesignWysiwyg.css','../../../Themes/Default/Css/Jbuild4dPlatform.css'];
     //config.contentsCss =
     //,Source
     config.removeButtons = 'Maximize,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,' +

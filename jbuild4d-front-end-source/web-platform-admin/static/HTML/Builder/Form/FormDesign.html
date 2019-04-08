@@ -187,7 +187,7 @@
                 formConfigContent:"",
                 formEveryTimeResolve:"否",
                 formSource:"Web设计器",
-                formTheme:"",
+                formTheme:"ThemeDefault",
                 formCustServerRenderer:"",
                 formCustRefJs:"",
                 formCustClientRenderer:"",
@@ -218,22 +218,62 @@
                 this.isLoading=true;
                 $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
                 var _self=this;
+
+                //加载表单插件
                 AjaxUtility.Post(this.acInterface.getPluginsConfig,{},function (result) {
                     console.log(result);
 
                     _self.designThemes=result.exKVData.designThemes;
-                    CKEditorUtility.InitializeCKEditor('html_design',result.data,function () {
 
-                    },"../../HTMLDesign/CKEditorConfig/CKEditorConfig.js","../../HTMLDesign/WebFormDesign/Plugins/");
+                    //加载表单数据
+                    DetailPageUtility.BindFormData(_self.acInterface.getDataUrl, _self.formResourceEntity, _self.recordId, _self.status,null,function (result) {
+
+                        if(_self.status=="add"){
+                            _self.formResourceEntity.formType="业务表单";
+                            _self.formResourceEntity.formModuleId=BaseUtility.GetUrlParaValue("moduleId");
+                            _self.oldSelectedTabName="Info";
+                        }
+                        else {
+                            _self.formResourceEntity.formId=BaseUtility.GetUrlParaValue("recordId");
+                            _self.formResourceEntity.formIsResolve="否";
+
+                            _self.oldSelectedTabName="Design";
+                            _self.selectedTabName="Design";
+
+                            _self.$refs.dbTableRelationComp.setValue(_self.formResourceEntity.formDataRelation);
+                        }
+
+                        //获取主题风格设置,传入表单设计器中进行引用!
+                        //console.log(_self.designThemes);
+                        var themeVo=_self.getTheme(_self.formResourceEntity.formTheme);
+
+                        //初始化表单编辑器
+                        CKEditorUtility.InitializeCKEditor('html_design',result.data,function () {
+                            HTMLEditorUtility.SetHTMLEditorHTML(_self.formResourceEntity.formHtmlSource);
+                            CKEditorUtility.SetCKEditorHTML(_self.formResourceEntity.formHtmlSource);
+                            JsEditorUtility.SetJsEditorJs(_self.formResourceEntity.formJsContent);
+
+                            _self.isLoading=false;
+                        },"../../HTMLDesign/CKEditorConfig/CKEditorConfig.js","../../HTMLDesign/WebFormDesign/Plugins/",themeVo);
+
+                    });
+
                     HTMLEditorUtility.InitializeHTMLCodeDesign();
                     JsEditorUtility.InitializeJsCodeDesign(_self.status);
-                    _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JsEditorUtility.GetJsEditorInst());
-                    //debugger;
-                    _self.getServerDataBind();
 
-                    _self.isLoading=false;
+                    _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JsEditorUtility.GetJsEditorInst());
+
+
 
                 },"json");
+            },
+            getTheme:function(value){
+                for(var i=0;i<this.designThemes.length;i++){
+                    if(this.designThemes[i].value==value){
+                        return this.designThemes[i];
+                    }
+                }
+                return null;
             },
             getServerDataBind:function(){
                 //获取数据并赋值
