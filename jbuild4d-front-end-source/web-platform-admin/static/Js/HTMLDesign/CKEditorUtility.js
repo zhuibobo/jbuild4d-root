@@ -31,6 +31,9 @@ class CKEditorUtility {
     }
     static SetCKEditorHTML(html){
         this.GetCKEditorInst().setData(html);
+        window.setTimeout(function () {
+            CKEditorUtility.ALLElemBindDefaultEvent();
+        },1000);
     }
     static InitializeCKEditor(textAreaElemId,pluginsConfig,loadCompletedFunc,ckeditorConfigFullPath,pluginBasePath,themeVo) {
 
@@ -115,7 +118,7 @@ class CKEditorUtility {
 
         CKEDITOR.instances.html_design.on("afterPaste", function (event) {
             try {
-                CKEditorPluginUtility.ElemBindEvent();
+                CKEditorUtility.ALLElemBindDefaultEvent();
             }
             catch (e) {
                 alert("粘贴操作失败!")
@@ -138,6 +141,7 @@ class CKEditorUtility {
         CKEDITOR.on('instanceReady', function (e) {
             if(typeof(loadCompletedFunc)=="function"){
                 loadCompletedFunc();
+
                 //console.log(CKEDITOR.instances.html_design.document);
                 //debugger;
                 //console.log(CKEDITOR.instances.html_design.document.$.head);
@@ -210,6 +214,21 @@ class CKEditorUtility {
     }
     static SetThemeVo(_themeVo){
         this._ThemeVo=_themeVo;
+    }
+
+    static ALLElemBindDefaultEvent(){
+        console.log(CKEditorUtility.GetCKEditorInst());
+        var elements = CKEditorUtility.GetCKEditorInst().document.getBody().getElementsByTag( '*' );
+        for ( var i = 0; i < elements.count(); ++i ) {
+            if(elements.getItem(i).getAttribute("singlename")=="WFDCT_TextBox") {
+                console.log(elements.getItem(i).getName());
+                var elem = elements.getItem(i);
+                elem.on('click', function () {
+                    //alert( this == elem );        // true
+                    CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
+                });
+            }
+        }
     }
 }
 

@@ -296,20 +296,6 @@ class CKEditorPluginUtility {
         }
     }
 
-    static ElemBindEvent(){
-        var elements = CKEditorUtility.GetCKEditorInst().document.getBody().getElementsByTag( '*' );
-        for ( var i = 0; i < elements.count(); ++i ) {
-            if(elements.getItem(i).getAttribute("singlename")=="WFDCT_TextBox") {
-                console.log(elements.getItem(i).getName());
-                var elem = elements.getItem(i);
-                elem.on('click', function () {
-                    //alert( this == elem );        // true
-                    CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
-                });
-            }
-        }
-    }
-
     static ValidateBuildEnable(html,controlSetting,controlProps,_iframe){
         return true;
     }
