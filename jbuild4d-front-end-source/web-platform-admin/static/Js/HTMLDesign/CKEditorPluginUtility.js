@@ -4,7 +4,7 @@ class CKEditorPluginUtility {
         //来自服务端的插件的相关的配置,在初始的时候写入
     };
 
-    static AddPluginsServerConfig(singleName,toolbarLocation,text,clientResolve,serverResolve,clientResolveJs,dialogWidth,dialogHeight,isJBuild4DData){
+    static AddPluginsServerConfig(singleName,toolbarLocation,text,clientResolve,serverResolve,clientResolveJs,dialogWidth,dialogHeight,isJBuild4DData,controlCategory){
         this.PluginsServerConfig[singleName]={
             SingleName:singleName,
             ToolbarLocation:toolbarLocation,
@@ -14,7 +14,8 @@ class CKEditorPluginUtility {
             ClientResolveJs:clientResolveJs,
             DialogWidth:dialogWidth,
             DialogHeight:dialogHeight,
-            IsJBuild4DData:isJBuild4DData
+            IsJBuild4DData:isJBuild4DData,
+            ControlCategory:controlCategory
         }
     };
 
@@ -64,7 +65,9 @@ class CKEditorPluginUtility {
             ClientResolve: "",
             ServerResolve: "",
             //是否是数据控件
-            IsJBuild4DData: ""
+            IsJBuild4DData: "",
+            //控件类别:输入控件或者为容器控件
+            ControlCategory:""
         };
         //使用方法参数覆盖默认值
         defaultSetting = $.extend(true, {}, defaultSetting, exConfig);
@@ -182,6 +185,7 @@ class CKEditorPluginUtility {
         elem.setAttribute("clientresolve",controlSetting.ClientResolve);
         elem.setAttribute("serverresolve",controlSetting.ServerResolve);
         elem.setAttribute("is_jbuild4d_data",controlSetting.IsJBuild4DData);
+        elem.setAttribute("control_category",controlSetting.ControlCategory);
 
         if(props["baseInfo"]){
             for (var key in props["baseInfo"]) {

@@ -15,6 +15,15 @@ public class HtmlControlDefinitionVo {
     private String desc;
     private String config;
     private String isJBuild4DData;
+    private String controlCategory;
+
+    public String getControlCategory() {
+        return controlCategory;
+    }
+
+    public void setControlCategory(String controlCategory) {
+        this.controlCategory = controlCategory;
+    }
 
     public String getIsJBuild4DData() {
         return isJBuild4DData;
@@ -120,6 +129,7 @@ public class HtmlControlDefinitionVo {
         vo.setDesc(XMLDocumentUtility.parseForString(node,"Desc"));
         vo.setConfig(XMLDocumentUtility.parseForString(node,"Config"));
         vo.setIsJBuild4DData(XMLDocumentUtility.getAttribute(node,"IsJBuild4DData"));
+        vo.setControlCategory(XMLDocumentUtility.getAttribute(node,"ControlCategory"));
         return vo;
     }
 }
