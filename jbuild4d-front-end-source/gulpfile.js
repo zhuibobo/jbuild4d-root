@@ -154,24 +154,38 @@ gulp.task('Admin-HTMLDesign-Plugins',()=>{
     pipe(gulp.dest(adminToResourcePath + "/Js/HTMLDesign/**/Plugins"));
 });
 
-/*编译表单设计器的相关的HTML文件*/
-gulp.task('Admin-HTMLDesign-HTML',()=>{
+/*编译表单设计器插件的相关的HTML文件*/
+gulp.task('Admin-HTMLDesign-Plugins-HTML',()=>{
     return copyAndResolveHtml(adminFromResourcePath + "/Js/HTMLDesign/**/*.html",adminFromResourcePath + "/Js/HTMLDesign",adminToResourcePath + "/Js/HTMLDesign");
 });
 
+
+/*编译表单设计器插件的相关Less文件*/
+gulp.task('Admin-HTMLDesign-Plugins-Less',()=>{
+    return gulp.src(adminFromResourcePath+"/Js/HTMLDesign/**/*.less")
+        .pipe(sourcemaps.init())
+        .pipe(less({
+            paths: [ path.join(__dirname, 'less', 'includes') ]
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(concat('HTMLDesignWysiwygForPlugins.css'))
+        .pipe(gulp.dest(adminToResourcePath+'/Themes/Default/Css'));
+});
+
+
 /*编译表单设计器的相关文件*/
-gulp.task('Admin-HTMLDesign-ALL', gulp.series('Admin-HTMLDesign-Utility','Admin-HTMLDesign-CKEditorConfig','Admin-HTMLDesign-Plugins','Admin-HTMLDesign-HTML'));
+gulp.task('Admin-HTMLDesign-ALL', gulp.series('Admin-HTMLDesign-Utility','Admin-HTMLDesign-CKEditorConfig','Admin-HTMLDesign-Plugins','Admin-HTMLDesign-Plugins-HTML'));
 
 /*编译工程相关的Less文件*/
-gulp.task('Admin-Themes-Less',()=>{
-    return gulp.src(adminFromResourcePath+"/Themes/Default/Css/*.less")
+/*gulp.task('Admin-Themes-Less',()=>{
+    return gulp.src(adminFromResourcePath+"/Themes/Default/Css/!*.less")
         .pipe(sourcemaps.init())
         .pipe(less({
             paths: [ path.join(__dirname, 'less', 'includes') ]
         }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(adminToResourcePath+'/Themes/Default/Css'));
-});
+});*/
 
 /*自动监测文件并进行更新*/
 gulp.task('Admin-Watch', function() {
@@ -189,7 +203,7 @@ gulp.task('Admin-Watch', function() {
     //let watcherPluginLess=gulp.watch(srcPlatformStaticPath+"/Js/**/*.less", gulp.series('Less'));
 });
 
-gulp.task('Admin-ALL',gulp.series('Admin-FrameV1','Jar-JS-Custom-ALL','Jar-Themes-Less','Jar-Themes-Less-Images','Admin-HTMLTemplates','Admin-HTMLDesign-ALL','Admin-Themes-Less'));
+gulp.task('Admin-ALL',gulp.series('Admin-FrameV1','Jar-JS-Custom-ALL','Jar-Themes-Less','Jar-Themes-Less-Images','Admin-HTMLTemplates','Admin-HTMLDesign-ALL','Admin-HTMLDesign-Plugins-Less'));
 //endregion
 
 //region 管理前端的相关的编译
