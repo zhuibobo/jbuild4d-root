@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config name="ConfigName" desc="ConfigDesc">
     <Theme value="ThemeDefault" name="默认风格" desc="">
-        <Ref type="" path="1"></Ref>
-        <Ref type="" path="2"></Ref>
-        <Ref type="" path="3"></Ref>
+        <Ref type="css" path="../../../Themes/Default/Css/Jbuild4dPlatform.css" desc="默认的基础样式"></Ref>
     </Theme>
-    <Theme value="Theme2" name="默认风格0" desc="">
-        <Ref type="" path="1"></Ref>
-        <Ref type="" path="2"></Ref>
-        <Ref type="" path="3"></Ref>
+    <Theme value="ThemeExtend1" name="扩展风格1" desc="">
+        <Ref type="css" path="../../../Themes/Default/Css/Jbuild4dPlatform.css" desc="默认的基础样式"></Ref>
+        <Ref type="css" path="../../../Themes/Default/Css/Jbuild4dPlatform-Override.css" desc="基于默认的基础样式之上的覆盖样式"></Ref>
+        <Ref type="css" path="../../../Themes/Default/Css/Jbuild4dPlatform-New.css" desc="不存在于基础样式中的新样式"></Ref>
     </Theme>
-    <Theme value="Theme2" name="默认风格1" desc="">
-        <Ref path=""></Ref>
+    <Theme value="ThemeExtend2" name="扩展风格2" desc="">
+        <Ref type="css" path="../../../Themes/Default/Css/Jbuild4dPlatform.css" desc="默认的基础样式"></Ref>
     </Theme>
-    <Theme value="Theme2" name="默认风格2" desc="">
-        <Ref path=""></Ref>
+    <Theme value="ThemeExtend3" name="扩展风格3" desc="">
+        <Ref type="css" path="../../../Themes/Default/Css/Jbuild4dPlatform.css" desc="默认的基础样式"></Ref>
     </Theme>
 </Config>
