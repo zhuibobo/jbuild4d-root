@@ -196,7 +196,8 @@
             status: BaseUtility.GetUrlParaValue("op"),
             oldSelectedTabName:"",
             selectedTabName:"",
-            designThemes:[]
+            designThemes:[],
+            pluginVoList:null
         },
         mounted:function () {
             this.initPageUI();
@@ -224,6 +225,7 @@
                     console.log(result);
 
                     _self.designThemes=result.exKVData.designThemes;
+                    _self.pluginVoList=result.data;
 
                     //加载表单数据
                     DetailPageUtility.BindFormData(_self.acInterface.getDataUrl, _self.formResourceEntity, _self.recordId, _self.status,null,function (result) {
@@ -248,7 +250,7 @@
                         var themeVo=_self.getTheme(_self.formResourceEntity.formTheme);
 
                         //初始化表单编辑器
-                        CKEditorUtility.InitializeCKEditor('html_design',result.data,function () {
+                        CKEditorUtility.InitializeCKEditor('html_design',_self.pluginVoList,function () {
                             HTMLEditorUtility.SetHTMLEditorHTML(_self.formResourceEntity.formHtmlSource);
                             CKEditorUtility.SetCKEditorHTML(_self.formResourceEntity.formHtmlSource);
                             JsEditorUtility.SetJsEditorJs(_self.formResourceEntity.formJsContent);

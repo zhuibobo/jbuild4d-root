@@ -33,6 +33,9 @@ class CKEditorUtility {
         this.GetCKEditorInst().setData(html);
     }
     static InitializeCKEditor(textAreaElemId,pluginsConfig,loadCompletedFunc,ckeditorConfigFullPath,pluginBasePath,themeVo) {
+
+        console.log(pluginsConfig);
+
         var extraPlugins=new Array();
         for(var i=0;i<pluginsConfig.length;i++) {
             var singlePluginConfig = pluginsConfig[i];

@@ -51,7 +51,7 @@ CKEDITOR.editorConfig = function(config) {
     //config.autoParagraph = false;
 
     var themeVo=CKEditorUtility.GetThemeVo();
-    console.log(CKEditorUtility.GetThemeVo());
+    //console.log(CKEditorUtility.GetThemeVo());
     var inputCssArray=[];
     inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwygForPlugins.css");
     inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwyg.css");
