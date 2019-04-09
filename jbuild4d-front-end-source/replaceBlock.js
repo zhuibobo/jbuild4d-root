@@ -74,6 +74,9 @@ let replaceBlock = {
         replaceArray.push(refJs(levelPath + "Js/T3P/CodeMirror-5.39.2/addon/util/formatting.js"));
         replaceArray.push(refCss(levelPath + 'Js/T3P/CodeMirror-5.39.2/addon/fold/foldgutter.css'));
 
+        replaceArray.push(refJs(levelPath + "Js/T3P/CodeMirror-5.39.2/addon/search/search.js"));
+        replaceArray.push(refJs(levelPath + "Js/T3P/CodeMirror-5.39.2/addon/search/searchcursor.js"));
+
         return replaceArray.join("\n\t");
     },
     replaceFormDesignLib: function (search, file) {

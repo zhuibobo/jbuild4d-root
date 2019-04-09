@@ -4,8 +4,10 @@ class CKEditorUtility {
         this._$CKEditorSelectElem=$(elemHtml);
     }
     static GetSelectedElem(){
-        if(this._$CKEditorSelectElem.length>0) {
-            return this._$CKEditorSelectElem;
+        if(this._$CKEditorSelectElem) {
+            if (this._$CKEditorSelectElem.length > 0) {
+                return this._$CKEditorSelectElem;
+            }
         }
         return null;
     }
@@ -33,7 +35,7 @@ class CKEditorUtility {
         this.GetCKEditorInst().setData(html);
         window.setTimeout(function () {
             CKEditorUtility.ALLElemBindDefaultEvent();
-        },1000);
+        },500);
     }
     static InitializeCKEditor(textAreaElemId,pluginsConfig,loadCompletedFunc,ckeditorConfigFullPath,pluginBasePath,themeVo) {
 
@@ -220,6 +222,7 @@ class CKEditorUtility {
         elem.on('click', function () {
             //alert( this == elem );        // true
             CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
+            CKEditorUtility.SetSelectedElem(this.getOuterHtml());
         });
     }
     static ALLElemBindDefaultEvent(){
