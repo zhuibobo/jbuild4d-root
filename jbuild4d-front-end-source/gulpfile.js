@@ -59,6 +59,23 @@ gulp.task('Jar-JS-Utility',()=>{
         .pipe(gulp.dest(jarToResourcePath + "/Js"));
 });
 
+/*表单设计器的运行时JS库*/
+gulp.task('Jar-JS-HTMLDesignRuntime',()=>{
+    return gulp.src([jarFromResourcePath + '/Js/HTMLDesignRuntime/**/*.js'])
+        .pipe(babel({
+            presets: ['@babel/env'],
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(concat('HDRuntimeFull.js'))
+        /*.pipe(uglify(
+            {
+                compress: {drop_debugger: false}
+            }
+        ))*/
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(jarToResourcePath + "/Js"));
+});
+
 /*编译旧的UI的组件*/
 gulp.task('Jar-JS-UIComponent',()=>{
     return gulp.src([jarFromResourcePath + '/Js/EditTable/**/*.js',jarFromResourcePath + '/Js/TreeTable/**/*.js'])
@@ -90,7 +107,7 @@ gulp.task('Jar-Themes-Less-Images',()=>{
 });
 
 /*编译工程相关的JS*/
-gulp.task('Jar-JS-Custom-ALL', gulp.series('Jar-JS-VueEXComponent','Jar-JS-Utility','Jar-JS-UIComponent'));
+gulp.task('Jar-JS-Custom-ALL', gulp.series('Jar-JS-VueEXComponent','Jar-JS-Utility','Jar-JS-UIComponent','Jar-JS-HTMLDesignRuntime'));
 //endregion
 
 //region 管理后端的相关的编译
@@ -159,7 +176,6 @@ gulp.task('Admin-HTMLDesign-Plugins-HTML',()=>{
     return copyAndResolveHtml(adminFromResourcePath + "/Js/HTMLDesign/**/*.html",adminFromResourcePath + "/Js/HTMLDesign",adminToResourcePath + "/Js/HTMLDesign");
 });
 
-
 /*编译表单设计器插件的相关Less文件*/
 gulp.task('Admin-HTMLDesign-Plugins-Less',()=>{
     return gulp.src(adminFromResourcePath+"/Js/HTMLDesign/**/*.less")
@@ -171,7 +187,6 @@ gulp.task('Admin-HTMLDesign-Plugins-Less',()=>{
         .pipe(concat('HTMLDesignWysiwygForPlugins.css'))
         .pipe(gulp.dest(adminToResourcePath+'/Themes/Default/Css'));
 });
-
 
 /*编译表单设计器的相关文件*/
 gulp.task('Admin-HTMLDesign-ALL', gulp.series('Admin-HTMLDesign-Utility','Admin-HTMLDesign-CKEditorConfig','Admin-HTMLDesign-Plugins','Admin-HTMLDesign-Plugins-HTML'));
