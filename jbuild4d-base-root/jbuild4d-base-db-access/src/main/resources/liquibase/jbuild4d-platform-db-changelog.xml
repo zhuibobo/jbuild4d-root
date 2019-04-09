@@ -679,12 +679,20 @@
             <column name="LIST_ORGAN_ID" type="NVARCHAR(100)"/>
             <column name="LIST_ORGAN_NAME" type="NVARCHAR(100)"/>
             <column name="LIST_DATASET_ID" type="NVARCHAR(100)"/>
+            <column name="LIST_IS_RESOLVE" type="NVARCHAR(10)" remarks="是否进行了解析:解析过的列表将不再进行服务端的解析" />
+            <column name="LIST_EVERY_TIME_RESOLVE" type="NVARCHAR(10)" remarks="是否每次都进行服务端解析:默认为否,只解析一次" />
             <column name="LIST_HTML_SOURCE" type="MEDIUMTEXT"/>
             <column name="LIST_HTML_RESOLVE" type="MEDIUMTEXT"/>
             <column name="LIST_JS_CONTENT" type="MEDIUMTEXT"/>
             <column name="LIST_CONFIG_CONTENT" type="MEDIUMTEXT"/>
-            <column name="LIST_ENABLE_S_SEAR" remarks="是否启用简单查询" type="NVARCHAR(10)"/>
-            <column name="LIST_ENABLE_C_SEAR" remarks="是否启用复杂查询" type="NVARCHAR(10)"/>
+            <column name="LIST_ENABLE_S_SEAR" type="NVARCHAR(10)" remarks="是否启用简单查询" />
+            <column name="LIST_ENABLE_C_SEAR" type="NVARCHAR(10)" remarks="是否启用复杂查询" />
+
+            <column name="LIST_THEME" type="NVARCHAR(50)" remarks="风格主题:基于配置文件中的配置" ></column>
+            <column name="LIST_CUST_SERVER_RENDERER" type="NVARCHAR(200)" remarks="服务端自定义的渲染方法:继承IFormSeverRenderer" />
+            <column name="LIST_CUST_REF_JS" type="NVARCHAR(500)" remarks="引入的脚本:多个通过;分割" />
+            <column name="LIST_CUST_CLIENT_RENDERER" type="NVARCHAR(200)" remarks="客户端自定义的渲染方法:需要指明具体的方法名称" />
+            <column name="LIST_CUST_DESC" type="NVARCHAR(400)" remarks="自定义设置备注:使用了自定义设置相关方法的备注说明" />
         </createTable>
     </changeSet>
 
