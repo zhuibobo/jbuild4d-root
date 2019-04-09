@@ -12,5 +12,7 @@ public class WebFormTextBoxControl extends WebFormControl implements IWebFormCon
     public void resolve(JB4DSession jb4DSession, FormResourceEntityWithBLOBs record, Document doc, Element singleControlElem) {
         System.out.println(record.getFormHtmlSource());
         singleControlElem.tagName("input");
+        singleControlElem.text("");
+        singleControlElem.attr("type","text");
     }
 }
