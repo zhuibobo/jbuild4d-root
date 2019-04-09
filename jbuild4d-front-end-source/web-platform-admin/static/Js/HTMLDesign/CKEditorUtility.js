@@ -219,21 +219,22 @@ class CKEditorUtility {
 
     //点击的时候自动选中元素,主要用于实现位置拖拽
     static SingleElemBindDefaultEvent(elem){
-        elem.on('click', function () {
-            //alert( this == elem );        // true
-            CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
-            CKEditorUtility.SetSelectedElem(this.getOuterHtml());
-        });
+        if(elem.getAttribute("control_category")=="InputControl") {
+            console.log(elem.getName());
+            //var elem = elements.getItem(i);
+            elem.on('click', function () {
+                //alert( this == elem );        // true
+                CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
+                CKEditorUtility.SetSelectedElem(this.getOuterHtml());
+            });
+        }
     }
     static ALLElemBindDefaultEvent(){
         console.log(CKEditorUtility.GetCKEditorInst());
         var elements = CKEditorUtility.GetCKEditorInst().document.getBody().getElementsByTag( '*' );
         for ( var i = 0; i < elements.count(); ++i ) {
-            if(elements.getItem(i).getAttribute("singlename")=="WFDCT_TextBox") {
-                console.log(elements.getItem(i).getName());
-                var elem = elements.getItem(i);
-                this.SingleElemBindDefaultEvent(elem);
-            }
+            var elem = elements.getItem(i);
+            this.SingleElemBindDefaultEvent(elem);
         }
     }
 }

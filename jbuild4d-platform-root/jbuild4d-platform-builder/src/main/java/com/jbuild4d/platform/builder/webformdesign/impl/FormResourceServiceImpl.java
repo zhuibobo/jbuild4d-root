@@ -10,7 +10,9 @@ import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.builder.module.IModuleService;
 import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
+import com.jbuild4d.platform.builder.webformdesign.IFormRuntimeResolve;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
@@ -24,6 +26,9 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntityW
     FormResourceMapper formResourceMapper;
     IModuleService moduleService;
 
+    @Autowired
+    IFormRuntimeResolve formRuntimeResolve;
+
     public FormResourceServiceImpl(FormResourceMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService, IModuleService _moduleService) {
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
         formResourceMapper = _defaultBaseMapper;
@@ -32,6 +37,14 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntityW
 
     @Override
     public int saveSimple(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record) throws JBuild4DGenerallyException {
+
+        //修改时设置为未解析的状态.
+        //record.setFormIsResolve(TrueFalseEnum.False.getDisplayName());
+        //保存时进行同步的表单内容的解析,并存入对应的字段中.
+        String resolvedHtml=formRuntimeResolve.resolveSourceHTML(jb4DSession,id,record);
+        record.setFormHtmlResolve(resolvedHtml);
+        record.setFormIsResolve(TrueFalseEnum.True.getDisplayName());
+
         return super.save(jb4DSession, id, record, new IAddBefore<FormResourceEntityWithBLOBs>() {
             @Override
             public FormResourceEntityWithBLOBs run(JB4DSession jb4DSession, FormResourceEntityWithBLOBs sourceEntity) throws JBuild4DGenerallyException {

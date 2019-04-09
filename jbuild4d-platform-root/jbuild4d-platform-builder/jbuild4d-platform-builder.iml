@@ -72,6 +72,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-jdbc:5.1.4.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-tx:5.1.4.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-io:commons-io:2.6" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jsoup:jsoup:1.11.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.flowable:flowable-engine:6.4.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.flowable:flowable-process-validation:6.4.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.flowable:flowable-image-generator:6.4.1" level="project" />

@@ -136,7 +136,7 @@ Vue.component("module-list-weblist-comp", {
             }
         },
         edit: function (recordId) {
-            debugger;
+            //debugger;
             var url = BaseUtility.BuildView(this.acInterface.editView, {
                 "op": "update",
                 "recordId": recordId

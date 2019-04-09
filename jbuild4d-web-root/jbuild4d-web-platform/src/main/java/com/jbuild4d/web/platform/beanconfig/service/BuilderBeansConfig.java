@@ -28,8 +28,10 @@ import com.jbuild4d.platform.builder.htmldesign.ICKEditorPluginsService;
 import com.jbuild4d.platform.builder.webformdesign.IFormConfigService;
 import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
 import com.jbuild4d.platform.builder.htmldesign.impl.CKEditorPluginsServiceImpl;
+import com.jbuild4d.platform.builder.webformdesign.IFormRuntimeResolve;
 import com.jbuild4d.platform.builder.webformdesign.impl.FormConfigServiceImpl;
 import com.jbuild4d.platform.builder.webformdesign.impl.FormResourceServiceImpl;
+import com.jbuild4d.platform.builder.webformdesign.impl.FormRuntimeResolveImpl;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -120,6 +122,11 @@ public class BuilderBeansConfig {
     public IFormConfigService formConfigService(ISQLBuilderService _sqlBuilderService, FormConfigMapper mapper, SqlSessionTemplate sqlSessionTemplate){
         IFormConfigService bean=new FormConfigServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
+    }
+
+    @Bean
+    public IFormRuntimeResolve formRuntimeResolve(){
+        return new FormRuntimeResolveImpl();
     }
 
     @Bean

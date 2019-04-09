@@ -12,13 +12,13 @@
             <Desc></Desc>
         </WebFormControl>-->
         <Control SingleName="WFDCT_Template" Text="表格模版" ToolbarLocation="LC_Template,1"
-                        ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
+                        ServerResolve="" ClientResolve="2" ClientResolveJs="3"
                         DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl">
             <Config></Config>
             <Desc></Desc>
         </Control>
         <Control SingleName="WFDCT_TextBox" Text="单行输入框" ToolbarLocation="LC_Simple,1"
-                        ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
+                        ServerResolve="com.jbuild4d.platform.builder.webformdesign.control.impl.WebFormTextBoxControl" ClientResolve="2" ClientResolveJs="3"
                         DialogWidth="780" DialogHeight="550" IsJBuild4DData="true" ControlCategory="InputControl">
             <Config></Config>
             <Desc></Desc>
@@ -29,7 +29,7 @@
     </AppControls>
     <ListControls>
         <Control SingleName="WLDCT_GroupBy" Text="列表分组" ToolbarLocation="LC_Template,1"
-                 ServerResolve="1" ClientResolve="2" ClientResolveJs="3"
+                 ServerResolve="" ClientResolve="2" ClientResolveJs="3"
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" Type="列表查询控件">
             <Config></Config>
             <Desc></Desc>
