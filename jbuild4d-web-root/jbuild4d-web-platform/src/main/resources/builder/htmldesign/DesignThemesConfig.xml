@@ -5,8 +5,8 @@
     </Theme>
     <Theme value="ThemeExtend1" name="扩展风格1" desc="">
         <Ref type="css" path="${BasePath}/static/Themes/Default/Css/Jbuild4dPlatform.css" desc="默认的基础样式"></Ref>
-        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesign-Override.css" desc="基于默认的基础样式之上的覆盖样式"></Ref>
-        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesign-New.css" desc="不存在于基础样式中的新样式"></Ref>
+        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeOverride.css" desc="基于默认的基础样式之上的覆盖样式"></Ref>
+        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeNew.css" desc="不存在于基础样式中的新样式"></Ref>
     </Theme>
     <Theme value="ThemeExtend2" name="扩展风格2" desc="">
         <Ref type="css" path="../../../Themes/Default/Css/Jbuild4dPlatform.css" desc="默认的基础样式"></Ref>

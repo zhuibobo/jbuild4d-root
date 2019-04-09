@@ -54,7 +54,8 @@ CKEDITOR.editorConfig = function(config) {
     //console.log(CKEditorUtility.GetThemeVo());
     var inputCssArray=[];
     inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwygForPlugins.css");
-    inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwyg.css");
+    inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignRuntimeMain.css");
+    inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwygMain.css");
 
     for(var i=0;i<themeVo.refs.length;i++){
         var ref=themeVo.refs[i];
