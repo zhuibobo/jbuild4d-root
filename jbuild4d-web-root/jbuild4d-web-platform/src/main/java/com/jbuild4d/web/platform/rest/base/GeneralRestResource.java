@@ -160,7 +160,7 @@ public abstract class GeneralRestResource<T> implements IGeneralRestResource<T> 
                     this.writeOperationLog("修改数据", "用户[" + jb4DSession.getUserName() + "]修改了ID为" + recordID + "的数据[" + getMyClass().getSimpleName() + "]", JsonUtility.toObjectString(entity), request);
                 }
                 getBaseService().saveSimple(jb4DSession, recordID, entity);
-                return JBuild4DResponseVo.saveSuccess();
+                return JBuild4DResponseVo.saveSuccess(entity);
             }
             else
             {

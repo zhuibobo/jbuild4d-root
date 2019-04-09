@@ -6,8 +6,18 @@
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::HTMLDesignRuntimeLib"></th:block>
+    <script>
+        $(function () {
+            var HTMLDesignRuntimeInst = Object.create(HTMLDesignRuntime);
+            var formId=BaseUtility.GetUrlParaValue("FormId");
+            HTMLDesignRuntimeInst.Initialization({
+                RendererTo: "#htmlDesignRuntimeWrap",
+                FormId:formId
+            })
+        });
+    </script>
 </head>
 <body>
-    <div id="htmlDesignRuntimeWrap"></div>
+<div id="htmlDesignRuntimeWrap"></div>
 </body>
 </html>
