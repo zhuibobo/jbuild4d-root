@@ -226,6 +226,17 @@ class CKEditorUtility {
                 //alert( this == elem );        // true
                 CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
                 CKEditorUtility.SetSelectedElem(this.getOuterHtml());
+
+                var oldDelButtons=CKEditorUtility.GetCKEditorInst().document.find(".del-button");
+                for(var i=0;i<oldDelButtons.count();i++){
+                    oldDelButtons.getItem(i).remove();
+                }
+                var newDelButton = new CKEDITOR.dom.element('div');
+                newDelButton.addClass("del-button");
+                elem.append(newDelButton);
+                newDelButton.on('click', function () {
+                    elem.remove();
+                });
             });
         }
     }
