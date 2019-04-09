@@ -6,4 +6,7 @@ var HTMLDesignRuntime={
     Initialization:function (_config) {
         this._Prop_Config= $.extend(true,{},this._Prop_Config,_config);
     },
+    _LoadHTMLToEl:function () {
+
+    }
 }
