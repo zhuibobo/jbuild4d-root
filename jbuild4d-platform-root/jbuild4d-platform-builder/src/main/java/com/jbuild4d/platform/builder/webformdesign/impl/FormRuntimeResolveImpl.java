@@ -55,8 +55,8 @@ public class FormRuntimeResolveImpl implements IFormRuntimeResolve {
     }
 
     @Override
-    public String dynamicBind(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record, RecordDataVo recordDataVo) {
-        return null;
+    public String dynamicBind(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record,String resolvedHtmlContent, RecordDataVo recordDataVo) {
+        return resolvedHtmlContent;
     }
 
     private IWebFormControl getWebFormControlInstance(String fullClassName) throws IllegalAccessException, InstantiationException,ClassNotFoundException {

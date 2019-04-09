@@ -7,5 +7,5 @@ import com.jbuild4d.platform.builder.vo.RecordDataVo;
 public interface IFormRuntimeResolve {
     String resolveSourceHTML(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record);
 
-    String dynamicBind(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record, RecordDataVo recordDataVo);
+    String dynamicBind(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record,String resolvedHtmlContent, RecordDataVo recordDataVo);
 }

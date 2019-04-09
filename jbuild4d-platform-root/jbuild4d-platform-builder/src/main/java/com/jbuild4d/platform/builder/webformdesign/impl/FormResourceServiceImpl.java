@@ -9,6 +9,7 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.platform.builder.module.IModuleService;
+import com.jbuild4d.platform.builder.vo.RecordDataVo;
 import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
 import com.jbuild4d.platform.builder.webformdesign.IFormRuntimeResolve;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -87,5 +88,17 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntityW
             formResourceMapper.updateByPrimaryKeySelective(toEntity);
             formResourceMapper.updateByPrimaryKeySelective(selfEntity);
         }
+    }
+
+    @Override
+    public String getFormPreviewHTMLContent(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
+        return getFormRuntimeHTMLContent(jb4DSession,id,null);
+    }
+
+    @Override
+    public String getFormRuntimeHTMLContent(JB4DSession jb4DSession, String id, RecordDataVo recordDataVo) throws JBuild4DGenerallyException {
+        FormResourceEntityWithBLOBs formResourceEntityWithBLOBs=getByPrimaryKey(jb4DSession,id);
+        String runtimeForm=formRuntimeResolve.dynamicBind(jb4DSession,id,formResourceEntityWithBLOBs,formResourceEntityWithBLOBs.getFormHtmlResolve(),recordDataVo);
+        return runtimeForm;
     }
 }
