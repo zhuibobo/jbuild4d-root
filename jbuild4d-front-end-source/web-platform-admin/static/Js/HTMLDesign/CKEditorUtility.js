@@ -29,6 +29,7 @@ class CKEditorUtility {
     }
 
     static GetCKEditorHTML(){
+        this.ClearALLForDivElemButton();
         return this.GetCKEditorInst().getData();
     }
     static SetCKEditorHTML(html){
@@ -217,6 +218,12 @@ class CKEditorUtility {
         this._ThemeVo=_themeVo;
     }
 
+    static ClearALLForDivElemButton(){
+        var oldDelButtons=CKEditorUtility.GetCKEditorInst().document.find(".del-button");
+        for(var i=0;i<oldDelButtons.count();i++){
+            oldDelButtons.getItem(i).remove();
+        }
+    }
     //点击的时候自动选中元素,主要用于实现位置拖拽
     static SingleElemBindDefaultEvent(elem){
         if(elem.getAttribute("control_category")=="InputControl") {
@@ -227,10 +234,8 @@ class CKEditorUtility {
                 CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
                 CKEditorUtility.SetSelectedElem(this.getOuterHtml());
 
-                var oldDelButtons=CKEditorUtility.GetCKEditorInst().document.find(".del-button");
-                for(var i=0;i<oldDelButtons.count();i++){
-                    oldDelButtons.getItem(i).remove();
-                }
+                //创建临时用于删除按钮的元素
+                CKEditorUtility.ClearALLForDivElemButton();
                 var newDelButton = new CKEDITOR.dom.element('div');
                 newDelButton.addClass("del-button");
                 elem.append(newDelButton);
