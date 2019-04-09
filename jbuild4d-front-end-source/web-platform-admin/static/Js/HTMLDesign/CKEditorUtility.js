@@ -90,6 +90,10 @@ class CKEditorUtility {
             extraPlugins: extraPlugins.join(",")
         });
 
+        CKEDITOR.instances.html_design.on("beforePaste", function (event) {
+            //CKEditorUtility.ALLElemBindDefaultEvent();
+        });
+
         //注册在编辑器中粘贴的处理事件
         CKEDITOR.instances.html_design.on("paste", function (event) {
             var sourceHTML = event.data.dataValue;
@@ -107,11 +111,13 @@ class CKEditorUtility {
                     event.data.dataValue = newHtml;
                 }*/
                 //alert(event.data.dataValue);
-
+                //CKEditorUtility.ClearALLForDivElemButton();
                 var $sourceHTML = $(sourceHTML);
+                $sourceHTML.find(".del-button").remove();
+                //alert($sourceHTML.find(".del-button").outerHTML());
                 //如果其中包含一个用于显示控件呈现的div,取其进行替换
-                if($(sourceHTML).find("div").length==1){
-                    event.data.dataValue = $(sourceHTML).find("div").outerHTML();
+                if($sourceHTML.find("div").length==1){
+                    event.data.dataValue = $sourceHTML.find("div").outerHTML();
                 }
             }
             catch (e) {
@@ -121,12 +127,12 @@ class CKEditorUtility {
         });
 
         CKEDITOR.instances.html_design.on("afterPaste", function (event) {
-            try {
+            //try {
                 CKEditorUtility.ALLElemBindDefaultEvent();
-            }
+            /*}
             catch (e) {
                 alert("粘贴操作失败!")
-            }
+            }*/
         });
 
         CKEDITOR.instances.html_design.on('insertElement', function (event) {
