@@ -55,6 +55,7 @@ class CKEditorUtility {
             var dialogHeight=singlePluginConfig.dialogHeight;
             var isJBuild4DData=singlePluginConfig.isJBuild4DData;
             var controlCategory=singlePluginConfig.controlCategory;
+            var serverDynamicBind=singlePluginConfig.serverDynamicBind
             //debugger;
             var pluginFileName = singleName + "Plugin.js";
             var pluginFolderName = pluginBasePath + singleName + "/";
@@ -63,7 +64,7 @@ class CKEditorUtility {
             extraPlugins.push(singleName);
 
             //设置默认值
-            CKEditorPluginUtility.AddPluginsServerConfig(singleName,toolbarLocation,text,clientResolve,serverResolve,clientResolveJs,dialogWidth,dialogHeight,isJBuild4DData,controlCategory)
+            CKEditorPluginUtility.AddPluginsServerConfig(singleName,toolbarLocation,text,clientResolve,serverResolve,clientResolveJs,dialogWidth,dialogHeight,isJBuild4DData,controlCategory,serverDynamicBind)
             /*CKEditorPluginUtility.PluginsServerConfig[singleName]={
                 SingleName:singleName,
                 ToolbarLocation:toolbarLocation,

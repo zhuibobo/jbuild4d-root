@@ -16,6 +16,15 @@ public class HtmlControlDefinitionVo {
     private String config;
     private String isJBuild4DData;
     private String controlCategory;
+    private String serverDynamicBind;
+
+    public String getServerDynamicBind() {
+        return serverDynamicBind;
+    }
+
+    public void setServerDynamicBind(String serverDynamicBind) {
+        this.serverDynamicBind = serverDynamicBind;
+    }
 
     public String getControlCategory() {
         return controlCategory;
@@ -130,6 +139,7 @@ public class HtmlControlDefinitionVo {
         vo.setConfig(XMLDocumentUtility.parseForString(node,"Config"));
         vo.setIsJBuild4DData(XMLDocumentUtility.getAttribute(node,"IsJBuild4DData"));
         vo.setControlCategory(XMLDocumentUtility.getAttribute(node,"ControlCategory"));
+        vo.setServerDynamicBind(XMLDocumentUtility.getAttribute(node,"ServerDynamicBind"));
         return vo;
     }
 }
