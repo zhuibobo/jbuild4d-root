@@ -8,9 +8,9 @@
     <th:block th:replace="Fragment/GeneralLib::HTMLDesignRuntimeLib"></th:block>
     <script>
         $(function () {
-            var HTMLDesignRuntimeInst = Object.create(HTMLDesignRuntime);
+            var FormRuntimeInst = Object.create(FormRuntime);
             var formId=BaseUtility.GetUrlParaValue("FormId");
-            HTMLDesignRuntimeInst.Initialization({
+            FormRuntimeInst.Initialization({
                 RendererTo: "#htmlDesignRuntimeWrap",
                 FormId:formId
             })

@@ -66,7 +66,7 @@ gulp.task('Jar-JS-HTMLDesignRuntime',()=>{
             presets: ['@babel/env'],
         }))
         .pipe(sourcemaps.init())
-        .pipe(concat('HDRuntimeFull.js'))
+        .pipe(concat('HTMLDesignRuntimeFull.js'))
         /*.pipe(uglify(
             {
                 compress: {drop_debugger: false}

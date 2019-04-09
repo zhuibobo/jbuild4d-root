@@ -180,7 +180,7 @@ let replaceBlock = {
         //判断路径后进行引入js的路径
         let levelPath = calculateFilePath(file);
 
-        replaceArray.push(refJs(levelPath + "Js/HDRuntimeFull.js"));
+        replaceArray.push(refJs(levelPath + "Js/HTMLDesignRuntimeFull.js"));
 
         return replaceArray.join("\n\t");
     }

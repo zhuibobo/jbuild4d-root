@@ -1,4 +1,4 @@
-var HTMLDesignRuntime={
+var FormRuntime={
     _Prop_Status:"Edit",
     _Prop_Config:{
         RendererTo:null,
