@@ -2,6 +2,7 @@ package com.jbuild4d.platform.builder.webformdesign.control.impl;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs;
 import com.jbuild4d.core.base.session.JB4DSession;
+import com.jbuild4d.platform.builder.vo.RecordDataVo;
 import com.jbuild4d.platform.builder.webformdesign.control.IWebFormControl;
 import com.jbuild4d.platform.builder.webformdesign.control.WebFormControl;
 import org.jsoup.nodes.Document;
@@ -14,5 +15,10 @@ public class WebFormTextBoxControl extends WebFormControl implements IWebFormCon
         singleControlElem.tagName("input");
         singleControlElem.text("");
         singleControlElem.attr("type","text");
+    }
+
+    @Override
+    public void dynamicBind(JB4DSession jb4DSession, FormResourceEntityWithBLOBs record, Document doc, Element singleControlElem, RecordDataVo recordDataVo) {
+
     }
 }
