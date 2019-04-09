@@ -49,10 +49,17 @@ var StringUtility = {
     },*/
     IsSameOrgin:function (url1, url2) {
         var origin1 = /\/\/[\w-.]+(:\d+)?/i.exec(url1)[0];
-        var origin2 = /\/\/[\w-.]+(:\d+)?/i.exec(url2)[0];
-        if(origin1==origin2){
+
+        var open=/\/\/[\w-.]+(:\d+)?/i.exec(url2);
+        if(open==null){
             return true;
         }
-        return false;
+        else {
+            var origin2 = open[0];
+            if (origin1 == origin2) {
+                return true;
+            }
+            return false;
+        }
     }
 };

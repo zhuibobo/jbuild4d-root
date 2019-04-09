@@ -219,7 +219,7 @@
                                 //window.OpenerWindowObj.appList.reloadData();
                                 //DialogUtility.Frame_CloseDialog(window);
                                 window.opener._modulelistwebformcomp.reloadData();
-                                successFunc();
+                                successFunc(result);
                             }
                         });
                     }, "json");
@@ -234,8 +234,14 @@
                 });
             },
             savePreview:function () {
-                this.save(function () {
-
+                this.save(function (result) {
+                    console.log(result);
+                    //window.open();
+                    DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId04,"FormPreview.html?FormId="+result.data.formId, {
+                            width:0,
+                            height:0,
+                            title:"表单预览"
+                        });
                 })
             },
             validateSaveEnable:function(formResourceEntity){
