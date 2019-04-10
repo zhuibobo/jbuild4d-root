@@ -36,8 +36,20 @@
                         <form-item label="唯一名称：">
                             <i-input v-model="listResourceEntity.listSingleName" placeholder="可以为空"></i-input>
                         </form-item>
+                        <form-item label="每次解析：">
+                            <radio-group v-model="listResourceEntity.listEveryTimeResolve" type="button">
+                                <radio label="是">是</radio>
+                                <radio label="否">否</radio>
+                            </radio-group>
+                        </form-item>
+                        <form-item label="主题：">
+                            <i-select v-model="listResourceEntity.listTheme">
+                                <i-option v-for="(item,key) in designThemes" :value="item.value" :key="key">{{item.name}}</i-option>
+                            </i-select>
+                            主题设置必须在保存后再次打开才生效,或者使用保存并预览功能!
+                        </form-item>
                         <form-item label="备注：" style="margin-bottom: 12px">
-                            <i-input v-model="listResourceEntity.listDesc" type="textarea" :autosize="{minRows: 12,maxRows: 12}"></i-input>
+                            <i-input v-model="listResourceEntity.listDesc" type="textarea" :autosize="{minRows: 9,maxRows: 9}"></i-input>
                         </form-item>
                     </i-form>
                 </div>
@@ -93,6 +105,27 @@
                 </div>
             </div>
         </tab-pane>
+        <tab-pane name="EXProp" label="EXProp">
+            <div style="width: 1024px;margin: auto">
+                <div style="width: 1024px;height: 615px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
+                    <divider orientation="left" :dashed="true" style="font-size: 12px">扩展信息</divider>
+                    <i-form :label-width="150">
+                        <form-item label="服务端渲染方法：">
+                            <i-input v-model="listResourceEntity.listCustServerRenderer" placeholder="服务端自定义的渲染方法:继承IFormSeverRenderer"></i-input>
+                        </form-item>
+                        <form-item label="客户端渲染方法：">
+                            <i-input v-model="listResourceEntity.listCustClientRenderer" placeholder="客户端自定义的渲染方法:需要指明具体的方法名称"></i-input>
+                        </form-item>
+                        <form-item label="引入JS：" style="margin-bottom: 12px">
+                            <i-input v-model="listResourceEntity.listCustRefJs" placeholder="引入的脚本:多个通过;分割" type="textarea" :autosize="{minRows: 2,maxRows: 2}"></i-input>
+                        </form-item>
+                        <form-item label="备注：" style="margin-bottom: 12px">
+                            <i-input v-model="listResourceEntity.listCustDesc" type="textarea" :autosize="{minRows: 4,maxRows: 4}"></i-input>
+                        </form-item>
+                    </i-form>
+                </div>
+            </div>
+        </tab-pane>
         <tab-pane name="Be Referred" label="Be Referred"></tab-pane>
         <tab-pane name="Config" label="Config"></tab-pane>
     </tabs>
@@ -130,13 +163,20 @@
                 listOrganId:"",
                 listOrganName:"",
                 listDatasetId:"",
+                listEveryTimeResolve:"否",
                 listEnableSSear:"启用",
                 listEnableCSear:"禁用",
+                listTheme:"ThemeDefault",
+                listCustServerRenderer:"",
+                listCustRefJs:"",
+                listCustClientRenderer:"",
+                listCustDesc:"",
                 listHtmlSource:"",
-                listHtmlResolve:"",
                 listJsContent:"",
+                listCssContent:"",
                 listConfigContent:""
             },
+            designThemes:[],
             status: BaseUtility.GetUrlParaValue("op"),
             oldSelectedTabName:"",
             selectedTabName:""
@@ -149,21 +189,66 @@
             initPageUI:function(){
                 $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
                 var _self=this;
-                AjaxUtility.Post(this.acInterface.getPluginsConfig,{},function (result) {
-                    //console.log(result.data);
-                    CKEditorUtility.InitializeCKEditor('html_design',result.data,function () {
 
-                    },"../../HTMLDesign/CKEditorConfig/CKEditorConfig.js","../../HTMLDesign/WebListDesign/Plugins/");
+                //加载表单插件
+                AjaxUtility.Post(this.acInterface.getPluginsConfig,{},function (result) {
+                    console.log(result);
+
+                    _self.designThemes=result.exKVData.designThemes;
+                    _self.pluginVoList=result.data;
+
+                    //加载表单数据
+                    DetailPageUtility.BindFormData(_self.acInterface.getDataUrl, _self.listResourceEntity, _self.recordId, _self.status,null,function (result) {
+
+                        if(_self.status=="add"){
+                            _self.listResourceEntity.listType="WebList";
+                            _self.listResourceEntity.listModuleId=BaseUtility.GetUrlParaValue("moduleId");
+                            _self.oldSelectedTabName="Info";
+                        }
+                        else {
+                            _self.listResourceEntity.listId=BaseUtility.GetUrlParaValue("recordId");
+
+                            _self.oldSelectedTabName="Design";
+                            _self.selectedTabName="Design";
+
+                            _self.$refs.dbTableRelationComp.setValue(_self.listResourceEntity.formDataRelation);
+                        }
+
+                        //获取主题风格设置,传入表单设计器中进行引用!
+                        //console.log(_self.designThemes);
+                        var themeVo=_self.getTheme(_self.listResourceEntity.listTheme);
+                        console.log(themeVo);
+                        //初始化表单编辑器
+                        CKEditorUtility.InitializeCKEditor('html_design',_self.pluginVoList,function () {
+
+                            HTMLEditorUtility.SetHTMLEditorHTML(_self.listResourceEntity.listHtmlSource);
+                            CKEditorUtility.SetCKEditorHTML(_self.listResourceEntity.listHtmlSource);
+                            JsEditorUtility.SetJsEditorJs(_self.listResourceEntity.listJsContent);
+
+                            _self.isLoading=false;
+                        },"../../HTMLDesign/CKEditorConfig/CKEditorConfig.js","../../HTMLDesign/WebListDesign/Plugins/",themeVo);
+
+                    });
+
                     HTMLEditorUtility.InitializeHTMLCodeDesign();
                     JsEditorUtility.InitializeJsCodeDesign(_self.status);
+
                     _self.$refs.jsDesignCodeFragment.setJSEditorInstance(JsEditorUtility.GetJsEditorInst());
-                    //debugger;
-                    _self.getServerDataBind();
+
                 },"json");
+
+            },
+            getTheme:function(value){
+                for(var i=0;i<this.designThemes.length;i++){
+                    if(this.designThemes[i].value==value){
+                        return this.designThemes[i];
+                    }
+                }
+                return null;
             },
             getServerDataBind:function(){
                 //获取数据并赋值
-                var _self=this;
+                /*var _self=this;
                 DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formResourceEntity, this.recordId, this.status,null,function (result) {
                     //alert(_self.formResourceEntity.formDataRelation);
                     //debugger;
@@ -173,10 +258,10 @@
                         CKEditorUtility.SetCKEditorHTML(_self.formResourceEntity.formHtmlSource);
                         JsEditorUtility.SetJsEditorJs(_self.formResourceEntity.formJsContent);
                     }
-                });
+                });*/
             },
             bindStatusData:function () {
-                this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
+                /*this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
                 if(this.status=="add"){
                     this.listResourceEntity.listCreater=this.currUserEntity.userName;
                     this.listResourceEntity.listUpdater=this.currUserEntity.userName;
@@ -190,7 +275,7 @@
                     this.oldSelectedTabName="Design";
                     this.selectedTabName="Design";
                     //JBuild4D.FormDesign.SetCKEditorHTML("");
-                }
+                }*/
             },
             isHTMLToDesign:function(name){
                 if(this.oldSelectedTabName=="HTML"){

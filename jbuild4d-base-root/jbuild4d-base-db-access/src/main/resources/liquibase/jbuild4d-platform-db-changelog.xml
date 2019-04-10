@@ -651,43 +651,43 @@
             <column name="FCONFIG_ORDER_NUM" type="INT"/>
         </createTable>
 
-        <createTable tableName="TBUILD_LIST_RESOURCE">
-            <column name="LIST_ID" type="NVARCHAR(100)">
+        <createTable tableName="TBUILD_LIST_RESOURCE" remarks="列表资源存储表:用于存储列表设计的文件" >
+            <column name="LIST_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="LIST_CODE" type="NVARCHAR(50)">
+            <column name="LIST_CODE" type="NVARCHAR(50)" remarks="列表编号:无特殊作用,序列生成,便于查找" >
                 <constraints nullable="false"/>
             </column>
-            <column name="LIST_NAME" type="NVARCHAR(200)">
+            <column name="LIST_NAME" type="NVARCHAR(200)" remarks="列表名称" >
                 <constraints nullable="false"/>
             </column>
-            <column name="LIST_SINGLE_NAME" type="NVARCHAR(200)">
+            <column name="LIST_SINGLE_NAME" type="NVARCHAR(200)" remarks="唯一名称:可以为空,如果存在则必须唯一" >
                 <constraints nullable="false"/>
             </column>
-            <column name="LIST_CREATE_TIME" type="datetime(6)"/>
-            <column name="LIST_CREATER" type="NVARCHAR(100)"/>
-            <column name="LIST_UPDATE_TIME" type="datetime(6)"/>
-            <column name="LIST_UPDATER" type="NVARCHAR(100)"/>
-            <column name="LIST_TYPE" type="NVARCHAR(100)"/>
-            <column name="LIST_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="LIST_ORDER_NUM" type="INT"/>
-            <column name="LIST_DESC" type="NVARCHAR(1000)"/>
-            <column name="LIST_MODULE_ID" type="NVARCHAR(100)">
+            <column name="LIST_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+            <column name="LIST_CREATER" type="NVARCHAR(100)" remarks="创建人" />
+            <column name="LIST_UPDATE_TIME" type="datetime(6)" remarks="更新时间" />
+            <column name="LIST_UPDATER" type="NVARCHAR(100)" remarks="更新人" />
+            <column name="LIST_TYPE" type="NVARCHAR(100)" remarks="列表类型:...."/>
+            <column name="LIST_ISSYSTEM" type="NVARCHAR(10)" remarks="是否系统所有" />
+            <column name="LIST_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="LIST_DESC" type="NVARCHAR(1000)" remarks="备注" />
+            <column name="LIST_MODULE_ID" type="NVARCHAR(100)" remarks="所属模块ID">
                 <constraints nullable="false"/>
             </column>
-            <column name="LIST_STATUS" type="NVARCHAR(10)"/>
-            <column name="LIST_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="LIST_ORGAN_NAME" type="NVARCHAR(100)"/>
-            <column name="LIST_DATASET_ID" type="NVARCHAR(100)"/>
+            <column name="LIST_STATUS" type="NVARCHAR(10)" remarks="列表状态" />
+            <column name="LIST_ORGAN_ID" type="NVARCHAR(100)" remarks="组织id" />
+            <column name="LIST_ORGAN_NAME" type="NVARCHAR(100)" remarks="组织名称" />
+            <column name="LIST_DATASET_ID" type="NVARCHAR(100)" remarks="使用的数据集名称:如果布局容器中没有设置自己的数据集,则使用该处的数据集" />
             <column name="LIST_IS_RESOLVE" type="NVARCHAR(10)" remarks="是否进行了解析:解析过的列表将不再进行服务端的解析" />
             <column name="LIST_EVERY_TIME_RESOLVE" type="NVARCHAR(10)" remarks="是否每次都进行服务端解析:默认为否,只解析一次" />
-            <column name="LIST_HTML_SOURCE" type="MEDIUMTEXT"/>
-            <column name="LIST_HTML_RESOLVE" type="MEDIUMTEXT"/>
-            <column name="LIST_JS_CONTENT" type="MEDIUMTEXT"/>
-            <column name="LIST_CONFIG_CONTENT" type="MEDIUMTEXT"/>
+            <column name="LIST_HTML_SOURCE" type="MEDIUMTEXT" remarks="原始的HTML" />
+            <column name="LIST_HTML_RESOLVE" type="MEDIUMTEXT" remarks="解析后的HTML" />
+            <column name="LIST_JS_CONTENT" type="MEDIUMTEXT" remarks="JS编辑器中的内容" />
+            <column name="LIST_CSS_CONTENT" type="MEDIUMTEXT" remarks="CSS编辑器中的内容" />
+            <column name="LIST_CONFIG_CONTENT" type="MEDIUMTEXT" remarks="配置编辑器中的内容" />
             <column name="LIST_ENABLE_S_SEAR" type="NVARCHAR(10)" remarks="是否启用简单查询" />
             <column name="LIST_ENABLE_C_SEAR" type="NVARCHAR(10)" remarks="是否启用复杂查询" />
-
             <column name="LIST_THEME" type="NVARCHAR(50)" remarks="风格主题:基于配置文件中的配置" ></column>
             <column name="LIST_CUST_SERVER_RENDERER" type="NVARCHAR(200)" remarks="服务端自定义的渲染方法:继承IFormSeverRenderer" />
             <column name="LIST_CUST_REF_JS" type="NVARCHAR(500)" remarks="引入的脚本:多个通过;分割" />

@@ -20,8 +20,15 @@
             <arg column="LIST_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_DATASET_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_IS_RESOLVE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_EVERY_TIME_RESOLVE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_ENABLE_S_SEAR" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_ENABLE_C_SEAR" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_THEME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_CUST_SERVER_RENDERER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_CUST_REF_JS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_CUST_CLIENT_RENDERER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_CUST_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs">
@@ -43,22 +50,31 @@
             <arg column="LIST_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_DATASET_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_IS_RESOLVE" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_EVERY_TIME_RESOLVE" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_ENABLE_S_SEAR" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_ENABLE_C_SEAR" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_THEME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_CUST_SERVER_RENDERER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_CUST_REF_JS" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_CUST_CLIENT_RENDERER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="LIST_CUST_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="LIST_HTML_SOURCE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="LIST_HTML_RESOLVE" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="LIST_JS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+            <arg column="LIST_CSS_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
             <arg column="LIST_CONFIG_CONTENT" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         LIST_ID, LIST_CODE, LIST_NAME, LIST_SINGLE_NAME, LIST_CREATE_TIME, LIST_CREATER,
         LIST_UPDATE_TIME, LIST_UPDATER, LIST_TYPE, LIST_ISSYSTEM, LIST_ORDER_NUM, LIST_DESC,
-        LIST_MODULE_ID, LIST_STATUS, LIST_ORGAN_ID, LIST_ORGAN_NAME, LIST_DATASET_ID, LIST_ENABLE_S_SEAR,
-        LIST_ENABLE_C_SEAR
+        LIST_MODULE_ID, LIST_STATUS, LIST_ORGAN_ID, LIST_ORGAN_NAME, LIST_DATASET_ID, LIST_IS_RESOLVE,
+        LIST_EVERY_TIME_RESOLVE, LIST_ENABLE_S_SEAR, LIST_ENABLE_C_SEAR, LIST_THEME, LIST_CUST_SERVER_RENDERER,
+        LIST_CUST_REF_JS, LIST_CUST_CLIENT_RENDERER, LIST_CUST_DESC
     </sql>
     <sql id="Blob_Column_List">
-        LIST_HTML_SOURCE, LIST_HTML_RESOLVE, LIST_JS_CONTENT, LIST_CONFIG_CONTENT
+        LIST_HTML_SOURCE, LIST_HTML_RESOLVE, LIST_JS_CONTENT, LIST_CSS_CONTENT, LIST_CONFIG_CONTENT
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
         select
@@ -74,23 +90,29 @@
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs">
         insert into TBUILD_LIST_RESOURCE (LIST_ID, LIST_CODE, LIST_NAME,
-                                        LIST_SINGLE_NAME, LIST_CREATE_TIME, LIST_CREATER,
-                                        LIST_UPDATE_TIME, LIST_UPDATER, LIST_TYPE,
-                                        LIST_ISSYSTEM, LIST_ORDER_NUM, LIST_DESC,
-                                        LIST_MODULE_ID, LIST_STATUS, LIST_ORGAN_ID,
-                                        LIST_ORGAN_NAME, LIST_DATASET_ID, LIST_ENABLE_S_SEAR,
-                                        LIST_ENABLE_C_SEAR, LIST_HTML_SOURCE, LIST_HTML_RESOLVE,
-                                        LIST_JS_CONTENT, LIST_CONFIG_CONTENT
-                )
+                                          LIST_SINGLE_NAME, LIST_CREATE_TIME, LIST_CREATER,
+                                          LIST_UPDATE_TIME, LIST_UPDATER, LIST_TYPE,
+                                          LIST_ISSYSTEM, LIST_ORDER_NUM, LIST_DESC,
+                                          LIST_MODULE_ID, LIST_STATUS, LIST_ORGAN_ID,
+                                          LIST_ORGAN_NAME, LIST_DATASET_ID, LIST_IS_RESOLVE,
+                                          LIST_EVERY_TIME_RESOLVE, LIST_ENABLE_S_SEAR,
+                                          LIST_ENABLE_C_SEAR, LIST_THEME, LIST_CUST_SERVER_RENDERER,
+                                          LIST_CUST_REF_JS, LIST_CUST_CLIENT_RENDERER,
+                                          LIST_CUST_DESC, LIST_HTML_SOURCE, LIST_HTML_RESOLVE,
+                                          LIST_JS_CONTENT, LIST_CSS_CONTENT,
+                                          LIST_CONFIG_CONTENT)
         values (#{listId,jdbcType=VARCHAR}, #{listCode,jdbcType=VARCHAR}, #{listName,jdbcType=VARCHAR},
                 #{listSingleName,jdbcType=VARCHAR}, #{listCreateTime,jdbcType=TIMESTAMP}, #{listCreater,jdbcType=VARCHAR},
                 #{listUpdateTime,jdbcType=TIMESTAMP}, #{listUpdater,jdbcType=VARCHAR}, #{listType,jdbcType=VARCHAR},
                 #{listIssystem,jdbcType=VARCHAR}, #{listOrderNum,jdbcType=INTEGER}, #{listDesc,jdbcType=VARCHAR},
                 #{listModuleId,jdbcType=VARCHAR}, #{listStatus,jdbcType=VARCHAR}, #{listOrganId,jdbcType=VARCHAR},
-                #{listOrganName,jdbcType=VARCHAR}, #{listDatasetId,jdbcType=VARCHAR}, #{listEnableSSear,jdbcType=VARCHAR},
-                #{listEnableCSear,jdbcType=VARCHAR}, #{listHtmlSource,jdbcType=LONGVARCHAR}, #{listHtmlResolve,jdbcType=LONGVARCHAR},
-                #{listJsContent,jdbcType=LONGVARCHAR}, #{listConfigContent,jdbcType=LONGVARCHAR}
-                       )
+                #{listOrganName,jdbcType=VARCHAR}, #{listDatasetId,jdbcType=VARCHAR}, #{listIsResolve,jdbcType=VARCHAR},
+                #{listEveryTimeResolve,jdbcType=VARCHAR}, #{listEnableSSear,jdbcType=VARCHAR},
+                #{listEnableCSear,jdbcType=VARCHAR}, #{listTheme,jdbcType=VARCHAR}, #{listCustServerRenderer,jdbcType=VARCHAR},
+                #{listCustRefJs,jdbcType=VARCHAR}, #{listCustClientRenderer,jdbcType=VARCHAR},
+                #{listCustDesc,jdbcType=VARCHAR}, #{listHtmlSource,jdbcType=LONGVARCHAR}, #{listHtmlResolve,jdbcType=LONGVARCHAR},
+                #{listJsContent,jdbcType=LONGVARCHAR}, #{listCssContent,jdbcType=LONGVARCHAR},
+                #{listConfigContent,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs">
         insert into TBUILD_LIST_RESOURCE
@@ -146,11 +168,32 @@
             <if test="listDatasetId != null">
                 LIST_DATASET_ID,
             </if>
+            <if test="listIsResolve != null">
+                LIST_IS_RESOLVE,
+            </if>
+            <if test="listEveryTimeResolve != null">
+                LIST_EVERY_TIME_RESOLVE,
+            </if>
             <if test="listEnableSSear != null">
                 LIST_ENABLE_S_SEAR,
             </if>
             <if test="listEnableCSear != null">
                 LIST_ENABLE_C_SEAR,
+            </if>
+            <if test="listTheme != null">
+                LIST_THEME,
+            </if>
+            <if test="listCustServerRenderer != null">
+                LIST_CUST_SERVER_RENDERER,
+            </if>
+            <if test="listCustRefJs != null">
+                LIST_CUST_REF_JS,
+            </if>
+            <if test="listCustClientRenderer != null">
+                LIST_CUST_CLIENT_RENDERER,
+            </if>
+            <if test="listCustDesc != null">
+                LIST_CUST_DESC,
             </if>
             <if test="listHtmlSource != null">
                 LIST_HTML_SOURCE,
@@ -160,6 +203,9 @@
             </if>
             <if test="listJsContent != null">
                 LIST_JS_CONTENT,
+            </if>
+            <if test="listCssContent != null">
+                LIST_CSS_CONTENT,
             </if>
             <if test="listConfigContent != null">
                 LIST_CONFIG_CONTENT,
@@ -217,11 +263,32 @@
             <if test="listDatasetId != null">
                 #{listDatasetId,jdbcType=VARCHAR},
             </if>
+            <if test="listIsResolve != null">
+                #{listIsResolve,jdbcType=VARCHAR},
+            </if>
+            <if test="listEveryTimeResolve != null">
+                #{listEveryTimeResolve,jdbcType=VARCHAR},
+            </if>
             <if test="listEnableSSear != null">
                 #{listEnableSSear,jdbcType=VARCHAR},
             </if>
             <if test="listEnableCSear != null">
                 #{listEnableCSear,jdbcType=VARCHAR},
+            </if>
+            <if test="listTheme != null">
+                #{listTheme,jdbcType=VARCHAR},
+            </if>
+            <if test="listCustServerRenderer != null">
+                #{listCustServerRenderer,jdbcType=VARCHAR},
+            </if>
+            <if test="listCustRefJs != null">
+                #{listCustRefJs,jdbcType=VARCHAR},
+            </if>
+            <if test="listCustClientRenderer != null">
+                #{listCustClientRenderer,jdbcType=VARCHAR},
+            </if>
+            <if test="listCustDesc != null">
+                #{listCustDesc,jdbcType=VARCHAR},
             </if>
             <if test="listHtmlSource != null">
                 #{listHtmlSource,jdbcType=LONGVARCHAR},
@@ -231,6 +298,9 @@
             </if>
             <if test="listJsContent != null">
                 #{listJsContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="listCssContent != null">
+                #{listCssContent,jdbcType=LONGVARCHAR},
             </if>
             <if test="listConfigContent != null">
                 #{listConfigContent,jdbcType=LONGVARCHAR},
@@ -288,11 +358,32 @@
             <if test="listDatasetId != null">
                 LIST_DATASET_ID = #{listDatasetId,jdbcType=VARCHAR},
             </if>
+            <if test="listIsResolve != null">
+                LIST_IS_RESOLVE = #{listIsResolve,jdbcType=VARCHAR},
+            </if>
+            <if test="listEveryTimeResolve != null">
+                LIST_EVERY_TIME_RESOLVE = #{listEveryTimeResolve,jdbcType=VARCHAR},
+            </if>
             <if test="listEnableSSear != null">
                 LIST_ENABLE_S_SEAR = #{listEnableSSear,jdbcType=VARCHAR},
             </if>
             <if test="listEnableCSear != null">
                 LIST_ENABLE_C_SEAR = #{listEnableCSear,jdbcType=VARCHAR},
+            </if>
+            <if test="listTheme != null">
+                LIST_THEME = #{listTheme,jdbcType=VARCHAR},
+            </if>
+            <if test="listCustServerRenderer != null">
+                LIST_CUST_SERVER_RENDERER = #{listCustServerRenderer,jdbcType=VARCHAR},
+            </if>
+            <if test="listCustRefJs != null">
+                LIST_CUST_REF_JS = #{listCustRefJs,jdbcType=VARCHAR},
+            </if>
+            <if test="listCustClientRenderer != null">
+                LIST_CUST_CLIENT_RENDERER = #{listCustClientRenderer,jdbcType=VARCHAR},
+            </if>
+            <if test="listCustDesc != null">
+                LIST_CUST_DESC = #{listCustDesc,jdbcType=VARCHAR},
             </if>
             <if test="listHtmlSource != null">
                 LIST_HTML_SOURCE = #{listHtmlSource,jdbcType=LONGVARCHAR},
@@ -302,6 +393,9 @@
             </if>
             <if test="listJsContent != null">
                 LIST_JS_CONTENT = #{listJsContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="listCssContent != null">
+                LIST_CSS_CONTENT = #{listCssContent,jdbcType=LONGVARCHAR},
             </if>
             <if test="listConfigContent != null">
                 LIST_CONFIG_CONTENT = #{listConfigContent,jdbcType=LONGVARCHAR},
@@ -327,11 +421,19 @@
             LIST_ORGAN_ID = #{listOrganId,jdbcType=VARCHAR},
             LIST_ORGAN_NAME = #{listOrganName,jdbcType=VARCHAR},
             LIST_DATASET_ID = #{listDatasetId,jdbcType=VARCHAR},
+            LIST_IS_RESOLVE = #{listIsResolve,jdbcType=VARCHAR},
+            LIST_EVERY_TIME_RESOLVE = #{listEveryTimeResolve,jdbcType=VARCHAR},
             LIST_ENABLE_S_SEAR = #{listEnableSSear,jdbcType=VARCHAR},
             LIST_ENABLE_C_SEAR = #{listEnableCSear,jdbcType=VARCHAR},
+            LIST_THEME = #{listTheme,jdbcType=VARCHAR},
+            LIST_CUST_SERVER_RENDERER = #{listCustServerRenderer,jdbcType=VARCHAR},
+            LIST_CUST_REF_JS = #{listCustRefJs,jdbcType=VARCHAR},
+            LIST_CUST_CLIENT_RENDERER = #{listCustClientRenderer,jdbcType=VARCHAR},
+            LIST_CUST_DESC = #{listCustDesc,jdbcType=VARCHAR},
             LIST_HTML_SOURCE = #{listHtmlSource,jdbcType=LONGVARCHAR},
             LIST_HTML_RESOLVE = #{listHtmlResolve,jdbcType=LONGVARCHAR},
             LIST_JS_CONTENT = #{listJsContent,jdbcType=LONGVARCHAR},
+            LIST_CSS_CONTENT = #{listCssContent,jdbcType=LONGVARCHAR},
             LIST_CONFIG_CONTENT = #{listConfigContent,jdbcType=LONGVARCHAR}
         where LIST_ID = #{listId,jdbcType=VARCHAR}
     </update>
@@ -353,8 +455,15 @@
             LIST_ORGAN_ID = #{listOrganId,jdbcType=VARCHAR},
             LIST_ORGAN_NAME = #{listOrganName,jdbcType=VARCHAR},
             LIST_DATASET_ID = #{listDatasetId,jdbcType=VARCHAR},
+            LIST_IS_RESOLVE = #{listIsResolve,jdbcType=VARCHAR},
+            LIST_EVERY_TIME_RESOLVE = #{listEveryTimeResolve,jdbcType=VARCHAR},
             LIST_ENABLE_S_SEAR = #{listEnableSSear,jdbcType=VARCHAR},
-            LIST_ENABLE_C_SEAR = #{listEnableCSear,jdbcType=VARCHAR}
+            LIST_ENABLE_C_SEAR = #{listEnableCSear,jdbcType=VARCHAR},
+            LIST_THEME = #{listTheme,jdbcType=VARCHAR},
+            LIST_CUST_SERVER_RENDERER = #{listCustServerRenderer,jdbcType=VARCHAR},
+            LIST_CUST_REF_JS = #{listCustRefJs,jdbcType=VARCHAR},
+            LIST_CUST_CLIENT_RENDERER = #{listCustClientRenderer,jdbcType=VARCHAR},
+            LIST_CUST_DESC = #{listCustDesc,jdbcType=VARCHAR}
         where LIST_ID = #{listId,jdbcType=VARCHAR}
     </update>
 </mapper>

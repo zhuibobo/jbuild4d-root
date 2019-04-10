@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.ListResourceMapper">
     <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_LIST_RESOURCE ORDER by LIST_ORDER_NUM DESC</select>
+    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_LIST_RESOURCE ORDER by LIST_ORDER_NUM ASC</select>
     <delete id="deleteAll">delete from TBUILD_LIST_RESOURCE</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(LIST_ORDER_NUM) is null then 1 else max(LIST_ORDER_NUM)+1 end ORDERNUM from TBUILD_LIST_RESOURCE</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_LIST_RESOURCE<where>
@@ -18,11 +19,19 @@
         <if test="listOrganId !=null and listOrganId !=''"> and LIST_ORGAN_ID like #{listOrganId} </if>
         <if test="listOrganName !=null and listOrganName !=''"> and LIST_ORGAN_NAME like #{listOrganName} </if>
         <if test="listDatasetId !=null and listDatasetId !=''"> and LIST_DATASET_ID like #{listDatasetId} </if>
+        <if test="listIsResolve !=null and listIsResolve !=''"> and LIST_IS_RESOLVE like #{listIsResolve} </if>
+        <if test="listEveryTimeResolve !=null and listEveryTimeResolve !=''"> and LIST_EVERY_TIME_RESOLVE like #{listEveryTimeResolve} </if>
         <if test="listEnableSSear !=null and listEnableSSear !=''"> and LIST_ENABLE_S_SEAR like #{listEnableSSear} </if>
         <if test="listEnableCSear !=null and listEnableCSear !=''"> and LIST_ENABLE_C_SEAR like #{listEnableCSear} </if>
+        <if test="listTheme !=null and listTheme !=''"> and LIST_THEME like #{listTheme} </if>
+        <if test="listCustServerRenderer !=null and listCustServerRenderer !=''"> and LIST_CUST_SERVER_RENDERER like #{listCustServerRenderer} </if>
+        <if test="listCustRefJs !=null and listCustRefJs !=''"> and LIST_CUST_REF_JS like #{listCustRefJs} </if>
+        <if test="listCustClientRenderer !=null and listCustClientRenderer !=''"> and LIST_CUST_CLIENT_RENDERER like #{listCustClientRenderer} </if>
+        <if test="listCustDesc !=null and listCustDesc !=''"> and LIST_CUST_DESC like #{listCustDesc} </if>
         <if test="listHtmlSource !=null and listHtmlSource !=''"> and LIST_HTML_SOURCE like #{listHtmlSource} </if>
         <if test="listHtmlResolve !=null and listHtmlResolve !=''"> and LIST_HTML_RESOLVE like #{listHtmlResolve} </if>
         <if test="listJsContent !=null and listJsContent !=''"> and LIST_JS_CONTENT like #{listJsContent} </if>
+        <if test="listCssContent !=null and listCssContent !=''"> and LIST_CSS_CONTENT like #{listCssContent} </if>
         <if test="listConfigContent !=null and listConfigContent !=''"> and LIST_CONFIG_CONTENT like #{listConfigContent} </if>
     </where>ORDER by LIST_ORDER_NUM DESC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TBUILD_LIST_RESOURCE
