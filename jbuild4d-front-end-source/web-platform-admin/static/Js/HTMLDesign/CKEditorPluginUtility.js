@@ -125,7 +125,7 @@ class CKEditorPluginUtility {
 
         ckEditor.on('doubleclick', function (event) {
             //debugger;
-            //alert("1");
+            alert("1");
             pluginSetting.IFrameExecuteActionName = CKEditorPluginUtility.DialogExecuteEditActionName;
             CKEditorPluginUtility.OnCKWysiwygElemDBClickEvent(event, pluginSetting)
         });

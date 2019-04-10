@@ -13,7 +13,7 @@
         </WebFormControl>-->
         <Control SingleName="WFDCT_Template" Text="表格模版" ToolbarLocation="LC_Template,1"
                         ServerResolve="" ClientResolve="2" ClientResolveJs="3"
-                        DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false">
+                        DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false" >
             <Config></Config>
             <Desc></Desc>
         </Control>
