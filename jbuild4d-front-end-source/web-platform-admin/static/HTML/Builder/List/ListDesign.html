@@ -179,11 +179,11 @@
             designThemes:[],
             status: BaseUtility.GetUrlParaValue("op"),
             oldSelectedTabName:"",
-            selectedTabName:""
+            selectedTabName:"Design"
         },
         mounted:function () {
             this.initPageUI();
-            this.bindStatusData();
+            //this.bindStatusData();
         },
         methods: {
             initPageUI:function(){
@@ -245,37 +245,6 @@
                     }
                 }
                 return null;
-            },
-            getServerDataBind:function(){
-                //获取数据并赋值
-                /*var _self=this;
-                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formResourceEntity, this.recordId, this.status,null,function (result) {
-                    //alert(_self.formResourceEntity.formDataRelation);
-                    //debugger;
-                    if(_self.status!="add") {
-                        _self.$refs.dbTableRelationComp.setValue(_self.formResourceEntity.formDataRelation);
-                        HTMLEditorUtility.SetHTMLEditorHTML(_self.formResourceEntity.formHtmlSource);
-                        CKEditorUtility.SetCKEditorHTML(_self.formResourceEntity.formHtmlSource);
-                        JsEditorUtility.SetJsEditorJs(_self.formResourceEntity.formJsContent);
-                    }
-                });*/
-            },
-            bindStatusData:function () {
-                /*this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
-                if(this.status=="add"){
-                    this.listResourceEntity.listCreater=this.currUserEntity.userName;
-                    this.listResourceEntity.listUpdater=this.currUserEntity.userName;
-                    this.listResourceEntity.listType="WebList";
-                    this.listResourceEntity.listModuleId=BaseUtility.GetUrlParaValue("moduleId");
-                    this.oldSelectedTabName="Info";
-                }
-                else {
-                    this.listResourceEntity.listId=BaseUtility.GetUrlParaValue("recordId");
-                    this.listResourceEntity.listUpdater=this.currUserEntity.userName;
-                    this.oldSelectedTabName="Design";
-                    this.selectedTabName="Design";
-                    //JBuild4D.FormDesign.SetCKEditorHTML("");
-                }*/
             },
             isHTMLToDesign:function(name){
                 if(this.oldSelectedTabName=="HTML"){

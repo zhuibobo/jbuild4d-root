@@ -1,3 +1,5 @@
+@import "Variable.less";
+
 .table-width-wraper-1024 {
     width: 1024px;
     margin: auto;
@@ -84,5 +86,30 @@
     .label {
         background-color: #f0f4fa;
         text-align: right;
+    }
+}
+
+.html-design-list-layout-outer-wrap{
+    width: 100%;
+    min-height: 450px;
+
+    .c2-layout-left-outer-wrap{
+        min-height: 450px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        border: @g-wrap-border-color 1px solid;
+        border-radius: 4px;
+    }
+
+    .c2-layout-right-outer-wrap{
+        min-height: 450px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        border: @g-wrap-border-color 1px solid;
+        border-radius: 4px;
     }
 }

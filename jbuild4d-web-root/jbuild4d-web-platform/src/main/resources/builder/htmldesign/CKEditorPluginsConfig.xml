@@ -27,12 +27,20 @@
     <AppControls>
 
     </AppControls>
-    <ListControls>
-        <Control SingleName="WLDCT_GroupBy" Text="列表分组" ToolbarLocation="LC_Template,1"
+
+    <!--WebList设计相关插件-->
+    <WebListControls>
+        <Control SingleName="WLDCT_LayoutTemplate" Text="布局模版" ToolbarLocation="LC_Template,1"
                  ServerResolve="" ClientResolve="2" ClientResolveJs="3"
-                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" Type="列表查询控件">
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false">
             <Config></Config>
             <Desc></Desc>
         </Control>
-    </ListControls>
+        <Control SingleName="WLDCT_GroupBy" Text="列表分组" ToolbarLocation="LC_Template,2"
+                 ServerResolve="" ClientResolve="2" ClientResolveJs="3"
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false">
+            <Config></Config>
+            <Desc></Desc>
+        </Control>
+    </WebListControls>
 </Config>

@@ -181,6 +181,16 @@ let replaceBlock = {
         let levelPath = calculateFilePath(file);
 
         replaceArray.push(refJs(levelPath + "Js/HTMLDesignRuntimeFull.js"));
+        replaceArray.push(refCss(levelPath + 'Themes/Default/Css/HTMLDesignRuntimeMain.css?refVersion=' + refVersion));
+
+        return replaceArray.join("\n\t");
+    },
+    replaceHTMLDesignWysiwygLib:function (search, file) {
+        let replaceArray = new Array();
+        //判断路径后进行引入js的路径
+        let levelPath = calculateFilePath(file);
+
+        replaceArray.push(refCss(levelPath + 'Themes/Default/Css/HTMLDesignWysiwygMain.css?refVersion=' + refVersion));
 
         return replaceArray.join("\n\t");
     }

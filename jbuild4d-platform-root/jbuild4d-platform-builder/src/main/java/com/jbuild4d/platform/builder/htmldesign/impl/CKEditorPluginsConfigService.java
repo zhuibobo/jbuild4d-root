@@ -48,7 +48,7 @@ public class CKEditorPluginsConfigService {
     public List<Node> getListControlNodes() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
         InputStream inputStream = this.getClass().getResourceAsStream(configResource);
         xmlDocument = XMLDocumentUtility.parseForDoc(inputStream);
-        List<Node> nodeList = XMLDocumentUtility.parseForNodeList(xmlDocument, "/Config/ListControls/Control");
+        List<Node> nodeList = XMLDocumentUtility.parseForNodeList(xmlDocument, "/Config/WebListControls/Control");
         return nodeList;
     }
 
