@@ -17,6 +17,25 @@ public class HtmlControlDefinitionVo {
     private String isJBuild4DData;
     private String controlCategory;
     private String serverDynamicBind;
+    private String showRemoveButton;
+    private String showInEditorToolbar;
+
+
+    public String getShowRemoveButton() {
+        return showRemoveButton;
+    }
+
+    public void setShowRemoveButton(String showRemoveButton) {
+        this.showRemoveButton = showRemoveButton;
+    }
+
+    public String getShowInEditorToolbar() {
+        return showInEditorToolbar;
+    }
+
+    public void setShowInEditorToolbar(String showInEditorToolbar) {
+        this.showInEditorToolbar = showInEditorToolbar;
+    }
 
     public String getServerDynamicBind() {
         return serverDynamicBind;
@@ -140,6 +159,8 @@ public class HtmlControlDefinitionVo {
         vo.setIsJBuild4DData(XMLDocumentUtility.getAttribute(node,"IsJBuild4DData"));
         vo.setControlCategory(XMLDocumentUtility.getAttribute(node,"ControlCategory"));
         vo.setServerDynamicBind(XMLDocumentUtility.getAttribute(node,"ServerDynamicBind"));
+        vo.setShowRemoveButton(XMLDocumentUtility.getAttribute(node,"ShowRemoveButton"));
+        vo.setShowInEditorToolbar(XMLDocumentUtility.getAttribute(node,"ShowInEditorToolbar"));
         return vo;
     }
 }

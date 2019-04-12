@@ -4,7 +4,7 @@ class CKEditorPluginUtility {
         //来自服务端的插件的相关的配置,在初始的时候写入
     };
 
-    static AddPluginsServerConfig(singleName,toolbarLocation,text,clientResolve,serverResolve,clientResolveJs,dialogWidth,dialogHeight,isJBuild4DData,controlCategory,serverDynamicBind){
+    static AddPluginsServerConfig(singleName,toolbarLocation,text,clientResolve,serverResolve,clientResolveJs,dialogWidth,dialogHeight,isJBuild4DData,controlCategory,serverDynamicBind,showRemoveButton,showInEditorToolbar){
         this.PluginsServerConfig[singleName]={
             SingleName:singleName,
             ToolbarLocation:toolbarLocation,
@@ -16,7 +16,9 @@ class CKEditorPluginUtility {
             DialogHeight:dialogHeight,
             IsJBuild4DData:isJBuild4DData,
             ControlCategory:controlCategory,
-            ServerDynamicBind:serverDynamicBind
+            ServerDynamicBind:serverDynamicBind,
+            ShowRemoveButton:showRemoveButton,
+            ShowInEditorToolbar:showInEditorToolbar
         }
     };
 
@@ -70,7 +72,11 @@ class CKEditorPluginUtility {
             //控件类别:输入控件或者为容器控件
             ControlCategory:"",
             //是否进行服务端的动态绑定
-            ServerDynamicBind:""
+            ServerDynamicBind:"",
+            //是否显示移除按钮
+            ShowRemoveButton:"",
+            //是否显示在工具栏
+            ShowInEditorToolbar:""
         };
         //使用方法参数覆盖默认值
         defaultSetting = $.extend(true, {}, defaultSetting, exConfig);
@@ -190,6 +196,7 @@ class CKEditorPluginUtility {
         elem.setAttribute("is_jbuild4d_data",controlSetting.IsJBuild4DData);
         elem.setAttribute("control_category",controlSetting.ControlCategory);
         elem.setAttribute("server_dynamic_bind",controlSetting.ServerDynamicBind);
+        elem.setAttribute("show_remove_button",controlSetting.ShowRemoveButton);
 
         if(props["baseInfo"]){
             for (var key in props["baseInfo"]) {

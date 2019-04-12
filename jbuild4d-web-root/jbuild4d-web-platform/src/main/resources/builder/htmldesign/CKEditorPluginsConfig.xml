@@ -11,15 +11,21 @@
             <Config></Config>
             <Desc></Desc>
         </WebFormControl>-->
+        <!--
+            增加属性是,需要对应修改 HtmlControlDefinitionVo 中的解析
+            CKEditorPluginUtility.js 中的 AddPluginsServerConfig;GetGeneralPluginInstance;
+            CKEditorUtility.js 中的InitializeCKEditor
+
+        -->
         <Control SingleName="WFDCT_Template" Text="表格模版" ToolbarLocation="LC_Template,1"
                         ServerResolve="" ClientResolve="2" ClientResolveJs="3"
-                        DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false" >
+                        DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false" ShowRemoveButton="false" ShowInEditorToolbar="true">
             <Config></Config>
             <Desc></Desc>
         </Control>
         <Control SingleName="WFDCT_TextBox" Text="单行输入框" ToolbarLocation="LC_Simple,1"
                         ServerResolve="com.jbuild4d.platform.builder.webformdesign.control.impl.WebFormTextBoxControl" ClientResolve="2" ClientResolveJs="3"
-                        DialogWidth="780" DialogHeight="550" IsJBuild4DData="true" ControlCategory="InputControl" ServerDynamicBind="false">
+                        DialogWidth="780" DialogHeight="550" IsJBuild4DData="true" ControlCategory="InputControl" ServerDynamicBind="false" ShowRemoveButton="true" ShowInEditorToolbar="true">
             <Config></Config>
             <Desc></Desc>
         </Control>
@@ -32,13 +38,13 @@
     <WebListControls>
         <Control SingleName="WLDCT_LayoutTemplate" Text="布局模版" ToolbarLocation="LC_Template,1"
                  ServerResolve="" ClientResolve="2" ClientResolveJs="3"
-                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false">
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
             <Config></Config>
             <Desc></Desc>
         </Control>
         <Control SingleName="WLDCT_GroupBy" Text="列表分组" ToolbarLocation="LC_Template,2"
                  ServerResolve="" ClientResolve="2" ClientResolveJs="3"
-                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false">
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
             <Config></Config>
             <Desc></Desc>
         </Control>

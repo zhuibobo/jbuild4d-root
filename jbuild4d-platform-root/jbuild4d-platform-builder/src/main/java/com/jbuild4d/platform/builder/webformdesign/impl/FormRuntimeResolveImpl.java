@@ -41,7 +41,7 @@ public class FormRuntimeResolveImpl implements IFormRuntimeResolve {
                     if(serverResolveFullClassName!=null&&!serverResolveFullClassName.equals("")){
                         try {
                             IWebFormControl webFormControl = this.getWebFormControlInstance(serverResolveFullClassName);
-                            webFormControl.resolve(jb4DSession,record,doc,singleControlElem);
+                            webFormControl.resolve(jb4DSession,record,doc,singleControlElem,null);
                         }
                         catch (Exception ex){
                             singleControlElem.html("控件解析出错！【"+ex.getMessage()+"】");

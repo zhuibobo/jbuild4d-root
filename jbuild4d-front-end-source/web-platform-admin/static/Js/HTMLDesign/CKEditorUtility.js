@@ -55,7 +55,9 @@ class CKEditorUtility {
             var dialogHeight=singlePluginConfig.dialogHeight;
             var isJBuild4DData=singlePluginConfig.isJBuild4DData;
             var controlCategory=singlePluginConfig.controlCategory;
-            var serverDynamicBind=singlePluginConfig.serverDynamicBind
+            var serverDynamicBind=singlePluginConfig.serverDynamicBind;
+            var showRemoveButton=singlePluginConfig.showRemoveButton;
+            var showInEditorToolbar=singlePluginConfig.showInEditorToolbar;
             //debugger;
             var pluginFileName = singleName + "Plugin.js";
             var pluginFolderName = pluginBasePath + singleName + "/";
@@ -64,7 +66,7 @@ class CKEditorUtility {
             extraPlugins.push(singleName);
 
             //设置默认值
-            CKEditorPluginUtility.AddPluginsServerConfig(singleName,toolbarLocation,text,clientResolve,serverResolve,clientResolveJs,dialogWidth,dialogHeight,isJBuild4DData,controlCategory,serverDynamicBind)
+            CKEditorPluginUtility.AddPluginsServerConfig(singleName,toolbarLocation,text,clientResolve,serverResolve,clientResolveJs,dialogWidth,dialogHeight,isJBuild4DData,controlCategory,serverDynamicBind,showRemoveButton,showInEditorToolbar);
             /*CKEditorPluginUtility.PluginsServerConfig[singleName]={
                 SingleName:singleName,
                 ToolbarLocation:toolbarLocation,
@@ -233,7 +235,7 @@ class CKEditorUtility {
     }
     //点击的时候自动选中元素,主要用于实现位置拖拽
     static SingleElemBindDefaultEvent(elem){
-        if(elem.getAttribute("control_category")=="InputControl") {
+        if(elem.getAttribute("show_remove_button")=="true") {
             console.log(elem.getName());
             //var elem = elements.getItem(i);
             elem.on('click', function () {
