@@ -122,12 +122,16 @@ class CKEditorPluginUtility {
 
         ckEditor.addCommand(pluginSetting.ToolbarCommand, new CKEDITOR.dialogCommand(pluginSetting.DialogName));
 
-        ckEditor.ui.addButton(pluginSetting.SingleName, {
-            label: pluginSetting.ToolbarLabel,
-            icon: path + pluginSetting.ToolbarIcon,
-            command: pluginSetting.ToolbarCommand,
-            toolbar: pluginSetting.ToolbarLocation
-        });
+        console.log(pluginSetting);
+
+        if(pluginSetting.ShowInEditorToolbar=="true") {
+            ckEditor.ui.addButton(pluginSetting.SingleName, {
+                label: pluginSetting.ToolbarLabel,
+                icon: path + pluginSetting.ToolbarIcon,
+                command: pluginSetting.ToolbarCommand,
+                toolbar: pluginSetting.ToolbarLocation
+            });
+        }
 
         ckEditor.on('doubleclick', function (event) {
             //debugger;

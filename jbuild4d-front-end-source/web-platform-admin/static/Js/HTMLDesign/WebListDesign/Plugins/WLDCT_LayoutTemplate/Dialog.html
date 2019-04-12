@@ -17,6 +17,7 @@
             padding: 10px;
             cursor: pointer;
             border: #ffffff 1px solid;
+            position: relative;
         }
 
         .templateWraper:hover {
@@ -31,17 +32,31 @@
 </head>
 <body>
 <div class="dialog-wraper" id="dialogApp" v-cloak>
-    <tabs size="small">
-        <tab-pane label="左右布局">
+    <tabs size="small" v-model="selectedTabName">
+        <tab-pane name="t1" label="列表">
             <div>
                 <div name="template" class="templateWraper" @click="selectTemplate($event)">
                     <div is_container_root="true" class="html-design-theme-default-root-elem-class">
                         <div class="html-design-list-layout-outer-wrap wysiwyg-html-design-list-layout-outer-wrap">
-                            <div class="c2-layout-left-outer-wrap wysiwyg-c2-layout-left-outer-wrap" style="width: 250px;"  clientresolve="2" control_category="ContainerControl" defaulttext="" defaulttype="" defaultvalue="" desc="" fieldcaption="" fielddatatype="" fieldlength="" fieldname="" id="list_layout_c_1" is_jbuild4d_data="false" jbuild4d_custom="true" name="txt_057901591" placeholder="" serialize="true" server_dynamic_bind="false" serverresolve="" show_remove_button="false" singlename="WLDCT_LayoutContainer">
+                            <div class="c2-layout-left-outer-wrap wysiwyg-c2-layout-left-outer-wrap" style="width: auto;right: 0px"  clientresolve="2" control_category="ContainerControl" defaulttext="" defaulttype="" defaultvalue="" desc="" fieldcaption="" fielddatatype="" fieldlength="" fieldname="" id="list_layout_c_0" is_jbuild4d_data="false" jbuild4d_custom="true" name="list_layout_c_0" placeholder="" serialize="true" server_dynamic_bind="false" serverresolve="" show_remove_button="false" singlename="WLDCT_LayoutContainer">
                                 <label runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">双击编辑该部件</label>
                                 <div class="c2-layout-left-inner-wrap wysiwyg-c2-layout-left-inner-wrap"></div>
                             </div>
-                            <div class="c2-layout-right-outer-wrap wysiwyg-c2-layout-right-outer-wrap" style="left: 260px;"  clientresolve="2" control_category="ContainerControl" defaulttext="" defaulttype="" defaultvalue="" desc="" fieldcaption="" fielddatatype="" fieldlength="" fieldname="" id="list_layout_c_2" is_jbuild4d_data="false" jbuild4d_custom="true" name="txt_057901591" placeholder="" serialize="true" server_dynamic_bind="false" serverresolve="" show_remove_button="false" singlename="WLDCT_LayoutContainer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab-pane>
+        <tab-pane name="t2" label="左右布局">
+            <div>
+                <div name="template" class="templateWraper" @click="selectTemplate($event)">
+                    <div is_container_root="true" class="html-design-theme-default-root-elem-class">
+                        <div class="html-design-list-layout-outer-wrap wysiwyg-html-design-list-layout-outer-wrap">
+                            <div class="c2-layout-left-outer-wrap wysiwyg-c2-layout-left-outer-wrap" style="width: 250px;"  clientresolve="2" control_category="ContainerControl" defaulttext="" defaulttype="" defaultvalue="" desc="" fieldcaption="" fielddatatype="" fieldlength="" fieldname="" id="list_layout_c_1" is_jbuild4d_data="false" jbuild4d_custom="true" name="list_layout_c_1" placeholder="" serialize="true" server_dynamic_bind="false" serverresolve="" show_remove_button="false" singlename="WLDCT_LayoutContainer">
+                                <label runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">双击编辑该部件</label>
+                                <div class="c2-layout-left-inner-wrap wysiwyg-c2-layout-left-inner-wrap"></div>
+                            </div>
+                            <div class="c2-layout-right-outer-wrap wysiwyg-c2-layout-right-outer-wrap" style="left: 260px;"  clientresolve="2" control_category="ContainerControl" defaulttext="" defaulttype="" defaultvalue="" desc="" fieldcaption="" fielddatatype="" fieldlength="" fieldname="" id="list_layout_c_2" is_jbuild4d_data="false" jbuild4d_custom="true" name="list_layout_c_2" placeholder="" serialize="true" server_dynamic_bind="false" serverresolve="" show_remove_button="false" singlename="WLDCT_LayoutContainer">
                                 <label runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">双击编辑该部件</label>
                                 <div class="c2-layout-right-inner-wrap wysiwyg-c2-layout-right-inner-wrap"></div>
                             </div>
@@ -50,13 +65,16 @@
                 </div>
             </div>
         </tab-pane>
+        <tab-pane name="t3" label="左右[上下]布局">
+        </tab-pane>
     </tabs>
 </div>
 <script>
     var DialogApp = new Vue({
         el: "#dialogApp",
         data: {
-            resultHtml: ""
+            resultHtml: "",
+            selectedTabName:"t1"
         },
         mounted: function () {
 
