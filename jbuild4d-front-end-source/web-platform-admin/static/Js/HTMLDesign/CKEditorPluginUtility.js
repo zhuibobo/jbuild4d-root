@@ -318,6 +318,7 @@ class CKEditorPluginUtility {
         }
         return returnResult;
     }
+    //static ValidateSerializeControlDialogCompletedEnable
 
     static DialogExecuteEditActionName="Edit";
     static DialogExecuteInsertActionName="Insert";

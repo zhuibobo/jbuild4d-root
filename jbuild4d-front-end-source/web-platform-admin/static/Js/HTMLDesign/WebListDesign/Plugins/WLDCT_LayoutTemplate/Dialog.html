@@ -35,10 +35,10 @@
             <div>
                 <div name="template" class="templateWraper" @click="selectTemplate($event)">
                     <div class="html-design-list-layout-outer-wrap">
-                        <div class="c2-layout-left-outer-wrap" style="width: 250px;" singleName="">
+                        <div class="c2-layout-left-outer-wrap" style="width: 250px;"  clientresolve="2" control_category="ContainerControl" defaulttext="" defaulttype="" defaultvalue="" desc="" fieldcaption="" fielddatatype="" fieldlength="" fieldname="" id="list_layout_c_1" is_jbuild4d_data="false" jbuild4d_custom="true" name="txt_057901591" placeholder="" serialize="true" server_dynamic_bind="false" serverresolve="" show_remove_button="false" singlename="WLDCT_LayoutContainer">
 
                         </div>
-                        <div class="c2-layout-right-outer-wrap" style="left: 260px;" singleName="">
+                        <div class="c2-layout-right-outer-wrap" style="left: 260px;"  clientresolve="2" control_category="ContainerControl" defaulttext="" defaulttype="" defaultvalue="" desc="" fieldcaption="" fielddatatype="" fieldlength="" fieldname="" id="list_layout_c_2" is_jbuild4d_data="false" jbuild4d_custom="true" name="txt_057901591" placeholder="" serialize="true" server_dynamic_bind="false" serverresolve="" show_remove_button="false" singlename="WLDCT_LayoutContainer">
 
                         </div>
                     </div>
@@ -74,7 +74,14 @@
                         serialize: "false"
                     }
                 };
-                return CKEditorPluginUtility.ValidateSerializeControlDialogCompletedEnable(result);
+                if(this.resultHtml==""){
+                    DialogUtility.AlertText("请选中模版!");
+                    return {success: false};
+                }
+                else {
+                    return CKEditorPluginUtility.ValidateSerializeControlDialogCompletedEnable(result);
+                }
+
             },
             setControlProps: function ($elem, props) {
 

@@ -1,1 +1,39 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Title</title></head><body>绑定数据集</body></html>
+<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../../../../../static/Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/perfect-scrollbar-14/perfect-scrollbar.js"></script><script type="text/javascript" src="../../../../../../static/Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/VueEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/HTMLDesign/HTMLDesignUtility.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"></head><body><div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak><tabs size="small"><tab-pane label="绑定信息"><fd-control-bind-to :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" :validate-rules-prop="validateRules" @on-set-completed="setBindCompleted"></fd-control-bind-to></tab-pane><tab-pane label="基础信息"><fd-control-base-info v-model="baseInfo"></fd-control-base-info></tab-pane></tabs></div><script>var DialogApp=new Vue({
+        el:"#dialogApp",
+        data: {
+            baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
+            bindToField:CKEditorPluginUtility.DefaultProps.bindToField,
+            defaultValue: CKEditorPluginUtility.DefaultProps.defaultValue,
+            validateRules:CKEditorPluginUtility.DefaultProps.validateRules
+        },
+        mounted:function () {
+
+        },
+        methods: {
+            ready:function(actionName){
+                this.baseInfo.id="txt_"+StringUtility.Timestamp();
+                this.baseInfo.name=this.baseInfo.id;
+            },
+            setBindCompleted:function(bindToField,defaultValue,validateRules){
+                this.bindToField=bindToField;
+                this.defaultValue=defaultValue;
+                this.validateRules=validateRules;
+            },
+            getControlProps:function () {
+                var result = {
+                    success: true,
+                    baseInfo: this.baseInfo,
+                    bindToField: this.bindToField,
+                    defaultValue: this.defaultValue,
+                    validateRules: this.validateRules
+                }
+                return result;
+            },
+            setControlProps:function ($elem,props) {
+                this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;
+                this.bindToField = props.bindToField ? props.bindToField : this.bindToField;
+                this.defaultValue = props.defaultValue ? props.defaultValue : this.defaultValue;
+                this.validateRules = props.validateRules ? props.validateRules : this.validateRules;
+            }
+        }
+    });</script></body></html>
