@@ -131,7 +131,7 @@ class CKEditorPluginUtility {
 
         ckEditor.on('doubleclick', function (event) {
             //debugger;
-            alert("1");
+            //alert("1");
             pluginSetting.IFrameExecuteActionName = CKEditorPluginUtility.DialogExecuteEditActionName;
             CKEditorPluginUtility.OnCKWysiwygElemDBClickEvent(event, pluginSetting)
         });
@@ -178,7 +178,7 @@ class CKEditorPluginUtility {
     static OnCKWysiwygElemDBClickEvent(event,controlSetting){
         //debugger;
         var element = event.data.element;
-        if(element.getAttribute("auto_remove")=="true"){
+        if(element.getAttribute("runtime_auto_remove")=="true"){
             element=event.data.element.getParent();
         }
         var singleName=element.getAttribute("singleName");

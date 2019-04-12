@@ -292,5 +292,8 @@ class CKEditorUtility {
             this.SingleElemBindDefaultEvent(elem);
         }
     }
+    static GetAutoRemoveTipLabel(tipMsg) {
+        return "<label auto_remove=\"true\" class=\"autoRemove\">"+tipMsg+"[渲染时将自动移除]</label>";
+    }
 }
 
