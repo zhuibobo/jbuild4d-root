@@ -228,10 +228,14 @@ class CKEditorUtility {
     }
     static SetThemeVo(_themeVo){
         this._ThemeVo=_themeVo;
+        this.ResetRootElemTheme(_themeVo);
+    }
+
+    static ResetRootElemTheme(_themeVo){
         //为编辑器中的is-container-root元素设置样式
         if(this.GetCKEditorInst()) {
             var sourceHTML = this.GetCKEditorHTML();
-            debugger;
+            //debugger;
             if(sourceHTML!=null&&sourceHTML!="") {
                 var rootElem = $(sourceHTML);
                 if(rootElem.attr("is_container_root")!="true") {

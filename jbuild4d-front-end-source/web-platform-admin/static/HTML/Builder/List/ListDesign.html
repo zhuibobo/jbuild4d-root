@@ -46,7 +46,7 @@
                             <i-select v-model="listResourceEntity.listTheme">
                                 <i-option v-for="(item,key) in designThemes" :value="item.value" :key="key">{{item.name}}</i-option>
                             </i-select>
-                            主题设置必须在保存后再次打开才生效,或者使用保存并预览功能!
+                            如果风格重新引入CSS则必须在保存后再次打开才生效,或者使用保存并预览功能!
                         </form-item>
                         <form-item label="备注：" style="margin-bottom: 12px">
                             <i-input v-model="listResourceEntity.listDesc" type="textarea" :autosize="{minRows: 9,maxRows: 9}"></i-input>

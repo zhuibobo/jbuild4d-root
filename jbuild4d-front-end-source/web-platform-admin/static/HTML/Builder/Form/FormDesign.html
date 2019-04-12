@@ -58,7 +58,7 @@
                                     <i-select v-model="formResourceEntity.formTheme" @on-change="changeTheme">
                                         <i-option v-for="(item,key) in designThemes" :value="item.value" :key="key">{{item.name}}</i-option>
                                     </i-select>
-                                    主题设置必须在保存后再次打开才生效,或者使用保存并预览功能!
+                                    如果风格重新引入CSS则必须在保存后再次打开才生效,或者使用保存并预览功能!
                                 </i-col>
                             </row>
                         </form-item>
@@ -349,7 +349,7 @@
                 this.oldSelectedTabName=name;
             },
             save:function (successFunc) {
-                debugger;
+                //debugger;
                 var relationConfig=this.$refs.dbTableRelationComp.getValue();
                 this.formResourceEntity.formDataRelation=JsonUtility.JsonToString(relationConfig.relationData);
                 this.formResourceEntity.formMainTableId=relationConfig.mainTableId;
