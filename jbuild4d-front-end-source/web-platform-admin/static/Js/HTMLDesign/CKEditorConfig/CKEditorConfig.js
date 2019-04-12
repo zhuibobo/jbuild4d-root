@@ -53,7 +53,7 @@ CKEDITOR.editorConfig = function(config) {
     var themeVo=CKEditorUtility.GetThemeVo();
     //console.log(CKEditorUtility.GetThemeVo());
     var inputCssArray=[];
-    inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwygForPlugins.css");
+    /*inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwygForPlugins.css");*/
     inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignRuntimeMain.css");
     inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwygMain.css");
 

@@ -6,9 +6,10 @@
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::JBuild4DFormDesignLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::HTMLDesignRuntimeLib"></th:block>
     <style>
         .table-width-wraper-1024{
-            width: 720px;
+            width: 720px !important;
         }
         .templateWraper{
             padding: 10px;
@@ -32,8 +33,8 @@
                         页宽:1024,6列
                         <div slot="content">
                             <div name="template" class="templateWraper" @click="selectTemplate($event)">
-                                <div class="table-width-wraper-1024">
-                                    <table class="wathet-blue-table" cellpadding="0" cellspacing="0" border="0">
+                                <div class="html-design-theme-default-root-elem-class table-width-wraper-1024">
+                                    <table class="wathet-blue-table-default" cellpadding="0" cellspacing="0" border="0">
                                         <colgroup>
                                             <col style="width: 10%" />
                                             <col style="width: 23%" />
@@ -83,7 +84,7 @@
                         <div slot="content">
                             <div name="template" class="templateWraper">
                                 <div class="table-width-wraper-640">
-                                    <table class="wathet-blue-table" cellpadding="0" cellspacing="0" border="0">
+                                    <table class="wathet-blue-table-default" cellpadding="0" cellspacing="0" border="0">
                                         <colgroup>
                                             <col style="width: 10%" />
                                             <col style="width: 23%" />

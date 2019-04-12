@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config name="ConfigName" desc="ConfigDesc">
-    <Theme value="ThemeDefault" name="默认风格" desc="">
-        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/Jbuild4dPlatform.css" desc="默认的基础样式"></Ref>
+    <!--
+    rootElemClass:必须以html-design-theme-开头.
+    -->
+    <Theme value="ThemeDefault" name="默认风格" desc="" rootElemClass="html-design-theme-default-root-elem-class">
+        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeMain.css" desc="默认的基础样式"></Ref>
     </Theme>
-    <Theme value="ThemeExtend1" name="扩展风格1" desc="">
-        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/Jbuild4dPlatform.css" desc="默认的基础样式"></Ref>
-        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeOverride.css" desc="基于默认的基础样式之上的覆盖样式"></Ref>
-        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeNew.css" desc="不存在于基础样式中的新样式"></Ref>
+    <Theme value="ThemeRed" name="红色风格" desc="" rootElemClass="html-design-theme-red-root-elem-class">
+        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeMain.css" desc="默认的基础样式"></Ref>
     </Theme>
-    <Theme value="ThemeExtend2" name="扩展风格2" desc="">
-        <Ref type="css" path="../../../Themes/Default/Css/Jbuild4dPlatform.css" desc="默认的基础样式"></Ref>
+    <Theme value="ThemeExtend2" name="扩展风格2" desc="" rootElemClass="html-design-theme-extend2-root-elem-class">
+        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeMain.css" desc="默认的基础样式"></Ref>
     </Theme>
-    <Theme value="ThemeExtend3" name="扩展风格3" desc="">
-        <Ref type="css" path="../../../Themes/Default/Css/Jbuild4dPlatform.css" desc="默认的基础样式"></Ref>
+    <Theme value="ThemeExtend3" name="扩展风格3" desc="" rootElemClass="html-design-theme-extend3-root-elem-class">
+        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeMain.css" desc="默认的基础样式"></Ref>
     </Theme>
 </Config>
