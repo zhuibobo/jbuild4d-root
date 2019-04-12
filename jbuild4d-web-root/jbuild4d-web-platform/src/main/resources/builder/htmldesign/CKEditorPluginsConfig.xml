@@ -42,7 +42,13 @@
             <Config></Config>
             <Desc></Desc>
         </Control>
-        <Control SingleName="WLDCT_GroupBy" Text="列表分组" ToolbarLocation="LC_Template,2"
+        <Control SingleName="WLDCT_LayoutContainer" Text="布局区域" ToolbarLocation="LC_Template,2"
+                 ServerResolve="" ClientResolve="2" ClientResolveJs="3"
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="false">
+            <Config></Config>
+            <Desc></Desc>
+        </Control>
+        <Control SingleName="WLDCT_GroupBy" Text="列表分组" ToolbarLocation="LC_Template,3"
                  ServerResolve="" ClientResolve="2" ClientResolveJs="3"
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
             <Config></Config>

@@ -179,7 +179,7 @@
             designThemes:[],
             status: BaseUtility.GetUrlParaValue("op"),
             oldSelectedTabName:"",
-            selectedTabName:"Design"
+            selectedTabName:""
         },
         mounted:function () {
             this.initPageUI();
@@ -246,29 +246,29 @@
                 }
                 return null;
             },
-            isHTMLToDesign:function(name){
+            isHTMLToOther:function(name){
                 if(this.oldSelectedTabName=="HTML"){
-                    if(name=="Design"){
-                        return true;
-                    }
+                    //if(name=="Design"){
+                    return true;
+                    //}
                 }
                 return false;
             },
-            isDesignToHTML:function(name){
+            isDesignToOther:function(name){
                 if(this.oldSelectedTabName=="Design"){
-                    if(name=="HTML"){
-                        return true;
-                    }
+                    //if(name=="HTML"){
+                    return true;
+                    //}
                 }
                 return false;
             },
             tabChange:function (name) {
-                if(this.isDesignToHTML(name)){
+                if(this.isDesignToOther(name)){
                     var html=CKEditorUtility.GetCKEditorHTML();
                     //JBuild4D.FormDesign.SetHTMLEditorHTML("<div id='aaa'><div><div><div>ssssssssss</div></div></div></div>");
                     HTMLEditorUtility.SetHTMLEditorHTML(html);
                 }
-                else if(this.isHTMLToDesign(name)){
+                else if(this.isHTMLToOther(name)){
                     var html=HTMLEditorUtility.GetHtmlEditorHTML();
                     //alert(html);
                     CKEditorUtility.SetCKEditorHTML(html);
