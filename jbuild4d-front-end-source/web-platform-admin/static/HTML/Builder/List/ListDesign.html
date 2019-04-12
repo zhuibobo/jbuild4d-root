@@ -43,13 +43,13 @@
                             </radio-group>
                         </form-item>
                         <form-item label="主题：">
-                            <i-select v-model="listResourceEntity.listTheme">
+                            <i-select v-model="listResourceEntity.listTheme" @on-change="changeTheme">
                                 <i-option v-for="(item,key) in designThemes" :value="item.value" :key="key">{{item.name}}</i-option>
                             </i-select>
                             如果风格重新引入CSS则必须在保存后再次打开才生效,或者使用保存并预览功能!
                         </form-item>
                         <form-item label="备注：" style="margin-bottom: 12px">
-                            <i-input v-model="listResourceEntity.listDesc" type="textarea" :autosize="{minRows: 9,maxRows: 9}"></i-input>
+                            <i-input v-model="listResourceEntity.listDesc" type="textarea" :autosize="{minRows: 8,maxRows: 8}"></i-input>
                         </form-item>
                     </i-form>
                 </div>
@@ -245,6 +245,11 @@
                     }
                 }
                 return null;
+            },
+            changeTheme:function(value){
+                //alert(value);
+                var themeVo=this.getTheme(value);
+                CKEditorUtility.SetThemeVo(themeVo);
             },
             isHTMLToOther:function(name){
                 if(this.oldSelectedTabName=="HTML"){

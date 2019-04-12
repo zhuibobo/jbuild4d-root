@@ -54,8 +54,7 @@ CKEDITOR.editorConfig = function(config) {
     //console.log(CKEditorUtility.GetThemeVo());
     var inputCssArray=[];
     /*inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwygForPlugins.css");*/
-    inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignRuntimeMain.css");
-    inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwygMain.css");
+    //inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignRuntimeMain.css");
 
     for(var i=0;i<themeVo.refs.length;i++){
         var ref=themeVo.refs[i];
@@ -64,6 +63,7 @@ CKEDITOR.editorConfig = function(config) {
         }
     }
 
+    inputCssArray.push(BaseUtility.GetRootPath()+"/static/Themes/Default/Css/HTMLDesignWysiwygMain.css");
     config.contentsCss = inputCssArray;//['','../../../Themes/Default/Css/HTMLDesignWysiwyg.css','../../../Themes/Default/Css/Jbuild4dPlatform.css'];
     //config.contentsCss =
     //,Source
