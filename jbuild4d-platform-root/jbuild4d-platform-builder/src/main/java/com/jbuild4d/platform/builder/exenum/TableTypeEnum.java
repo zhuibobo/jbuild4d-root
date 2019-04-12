@@ -7,7 +7,7 @@ package com.jbuild4d.platform.builder.exenum;
  * To change this template use File | Settings | File Templates.
  */
 public enum  TableTypeEnum {
-    Builder("Builder"),//通过系统设计
+    Builder("Builder"),//通过表设计器设计
     DBDesign("DBDesign");//直接在数据库中设计的
 
     public String getText() {

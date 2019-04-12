@@ -27,7 +27,7 @@
     <tabs @on-click="tabChange" v-model="selectedTabName">
         <tab-pane name="Info" label="Info">
             <div style="width: 1024px;margin: auto">
-                <div style="width: 500px;height: 560px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;float: left">
+                <div style="width: 500px;height: 610px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;float: left">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">表单信息</divider>
                     <i-form  :model="listResourceEntity" :label-width="110">
                         <form-item label="列表名称：">
@@ -42,6 +42,9 @@
                                 <radio label="否">否</radio>
                             </radio-group>
                         </form-item>
+                        <form-item label="每页条数：">
+                            <input-number :max="10" :min="0" v-model="listResourceEntity.listOrderNum"></input-number>
+                        </form-item>
                         <form-item label="主题：">
                             <i-select v-model="listResourceEntity.listTheme" @on-change="changeTheme">
                                 <i-option v-for="(item,key) in designThemes" :value="item.value" :key="key">{{item.name}}</i-option>
@@ -53,7 +56,7 @@
                         </form-item>
                     </i-form>
                 </div>
-                <div style="width: 500px;height: 560px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;float: right">
+                <div style="width: 500px;height: 610px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;float: right">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">绑定数据集</divider>
                     <dataset-simple-select-comp></dataset-simple-select-comp>
                 </div>

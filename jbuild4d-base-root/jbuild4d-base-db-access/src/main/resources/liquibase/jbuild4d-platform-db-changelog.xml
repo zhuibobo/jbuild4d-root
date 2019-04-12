@@ -310,71 +310,74 @@
             <column name="TABLE_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TBUILD_TABLE">
-            <column name="TABLE_ID" type="NVARCHAR(100)">
+        <createTable tableName="TBUILD_TABLE" remarks="表基础信息:分为构建表和系统表">
+            <column name="TABLE_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="TABLE_CAPTION" type="NVARCHAR(200)">
+            <column name="TABLE_CODE" type="NVARCHAR(50)" remarks="表编号:无特殊作用,序列生成,便于查找,禁止用于开发">
                 <constraints nullable="false"/>
             </column>
-            <column name="TABLE_NAME" type="NVARCHAR(200)">
+            <column name="TABLE_CAPTION" type="NVARCHAR(200)" remarks="表标题">
                 <constraints nullable="false"/>
             </column>
-            <column name="TABLE_DBNAME" type="NVARCHAR(200)">
+            <column name="TABLE_NAME" type="NVARCHAR(200)" remarks="表名称:在数据库中的名称">
                 <constraints nullable="false"/>
             </column>
-            <column name="TABLE_CREATE_TIME" type="datetime(6)"/>
-            <column name="TABLE_CREATER" type="NVARCHAR(100)"/>
-            <column name="TABLE_UPDATE_TIME" type="datetime(6)"/>
-            <column name="TABLE_UPDATER" type="NVARCHAR(100)"/>
-            <column name="TABLE_SERVICE_VALUE" type="NVARCHAR(100)"/>
-            <column name="TABLE_TYPE" type="NVARCHAR(100)"/>
-            <column name="TABLE_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="TABLE_ORDER_NUM" type="INT"/>
-            <column name="TABLE_DESC" type="NVARCHAR(2000)"/>
-            <column name="TABLE_GROUP_ID" type="NVARCHAR(100)">
+            <column name="TABLE_DBNAME" type="NVARCHAR(200)" remarks="所属库名">
                 <constraints nullable="false"/>
             </column>
-            <column name="TABLE_STATUS" type="NVARCHAR(10)"/>
-            <column name="TABLE_LINK_ID" type="NVARCHAR(100)"/>
-            <column name="TABLE_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="TABLE_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="TABLE_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="TABLE_CREATER" type="NVARCHAR(100)" remarks="创建人"/>
+            <column name="TABLE_UPDATE_TIME" type="datetime(6)" remarks="更新时间"/>
+            <column name="TABLE_UPDATER" type="NVARCHAR(100)" remarks="更新人"/>
+            <column name="TABLE_SERVICE_VALUE" type="NVARCHAR(100)" remarks="连接服务值"/>
+            <column name="TABLE_TYPE" type="NVARCHAR(100)" remarks="表类型:DBDesign=直接在数据库中设计的,Builder=通过表设计器设计"/>
+            <column name="TABLE_ISSYSTEM" type="NVARCHAR(10)" remarks="是否系统表:系统表不允许修改" />
+            <column name="TABLE_ORDER_NUM" type="INT" remarks="排序号" />
+            <column name="TABLE_DESC" type="NVARCHAR(2000)" remarks="备注" />
+            <column name="TABLE_GROUP_ID" type="NVARCHAR(100)" remarks="所属分组ID" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABLE_STATUS" type="NVARCHAR(10)" remarks="状态" />
+            <column name="TABLE_LINK_ID" type="NVARCHAR(100)" remarks="连接服务ID"/>
+            <column name="TABLE_ORGAN_ID" type="NVARCHAR(100)" remarks="组织ID" />
+            <column name="TABLE_ORGAN_NAME" type="NVARCHAR(100)" remarks="组织名称" />
         </createTable>
 
-        <createTable tableName="TBUILD_TABLE_FIELD">
-            <column name="FIELD_ID" type="NVARCHAR(100)">
+        <createTable tableName="TBUILD_TABLE_FIELD" remarks="表的相关字段表">
+            <column name="FIELD_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="FIELD_TABLE_ID" type="NVARCHAR(100)">
+            <column name="FIELD_TABLE_ID" type="NVARCHAR(100)" remarks="所属表ID">
                 <constraints nullable="false"/>
             </column>
-            <column name="FIELD_NAME" type="NVARCHAR(100)">
+            <column name="FIELD_NAME" type="NVARCHAR(100)" remarks="字段名">
                 <constraints nullable="false"/>
             </column>
-            <column name="FIELD_CAPTION" type="NVARCHAR(100)">
+            <column name="FIELD_CAPTION" type="NVARCHAR(100)" remarks="字段标题">
                 <constraints nullable="false"/>
             </column>
-            <column name="FIELD_IS_PK" type="NVARCHAR(10)"/>
-            <column name="FIELD_ALLOW_NULL" type="NVARCHAR(10)"/>
-            <column name="FIELD_DATA_TYPE" type="NVARCHAR(50)">
+            <column name="FIELD_IS_PK" type="NVARCHAR(10)" remarks="是否主键"/>
+            <column name="FIELD_ALLOW_NULL" type="NVARCHAR(10)" remarks="是否允许为空"/>
+            <column name="FIELD_DATA_TYPE" type="NVARCHAR(50)" remarks="数据类型:类型详见枚举TableFieldTypeEnum">
                 <constraints nullable="false"/>
             </column>
-            <column name="FIELD_DATA_LENGTH" type="INT"/>
-            <column name="FIELD_DECIMAL_LENGTH" type="INT"/>
-            <column name="FIELD_DEFAULT_TYPE" type="NVARCHAR(50)"/>
-            <column name="FIELD_DEFAULT_VALUE" type="NVARCHAR(1000)"/>
-            <column name="FIELD_DEFAULT_TEXT" type="NVARCHAR(400)"/>
-            <column name="FIELD_CREATE_TIME" type="datetime(6)">
+            <column name="FIELD_DATA_LENGTH" type="INT" remarks="字段长度"/>
+            <column name="FIELD_DECIMAL_LENGTH" type="INT" remarks="小数位数"/>
+            <column name="FIELD_DEFAULT_TYPE" type="NVARCHAR(50)" remarks="默认值类型"/>
+            <column name="FIELD_DEFAULT_VALUE" type="NVARCHAR(1000)" remarks="默认值"/>
+            <column name="FIELD_DEFAULT_TEXT" type="NVARCHAR(400)" remarks="默认值描述"/>
+            <column name="FIELD_CREATE_TIME" type="datetime(6)" remarks="创建时间">
                 <constraints nullable="false"/>
             </column>
-            <column name="FIELD_CREATER" type="NVARCHAR(100)"/>
-            <column name="FIELD_UPDATE_TIME" type="datetime(6)">
+            <column name="FIELD_CREATER" type="NVARCHAR(100)" remarks="创建人"/>
+            <column name="FIELD_UPDATE_TIME" type="datetime(6)" remarks="更新时间">
                 <constraints nullable="false"/>
             </column>
-            <column name="FIELD_UPDATER" type="NVARCHAR(100)"/>
-            <column name="FIELD_DESC" type="NVARCHAR(500)"/>
-            <column name="FIELD_ORDER_NUM" type="INT"/>
-            <column name="FIELD_TEMPLATE_NAME" type="NVARCHAR(100)"/>
+            <column name="FIELD_UPDATER" type="NVARCHAR(100)" remarks="更新人"/>
+            <column name="FIELD_DESC" type="NVARCHAR(500)" remarks="备注"/>
+            <column name="FIELD_ORDER_NUM" type="INT" remarks="排序号"/>
+            <column name="FIELD_TEMPLATE_NAME" type="NVARCHAR(100)" remarks="模版名称"/>
         </createTable>
 
         <!--表关系只是作为逻辑上的描述,便于了解项目的数据结构,不做实际上表之间的物理关系-->
@@ -463,6 +466,9 @@
         <createTable tableName="TBUILD_DATASET">
             <column name="DS_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DS_CODE" type="NVARCHAR(50)" remarks="数据集编号:无特殊作用,序列生成,便于查找,禁止用于开发">
+                <constraints nullable="false"/>
             </column>
             <column name="DS_CAPTION" type="NVARCHAR(200)">
                 <constraints nullable="false"/>
@@ -584,7 +590,7 @@
             <column name="FORM_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="FORM_CODE" type="NVARCHAR(50)" remarks="窗体编号:无特殊作用,序列生成,便于查找">
+            <column name="FORM_CODE" type="NVARCHAR(50)" remarks="窗体编号:无特殊作用,序列生成,便于查找,禁止用于开发">
                 <constraints nullable="false"/>
             </column>
             <column name="FORM_NAME" type="NVARCHAR(200)" remarks="窗体名称">
@@ -655,7 +661,7 @@
             <column name="LIST_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="LIST_CODE" type="NVARCHAR(50)" remarks="列表编号:无特殊作用,序列生成,便于查找" >
+            <column name="LIST_CODE" type="NVARCHAR(50)" remarks="列表编号:无特殊作用,序列生成,便于查找,禁止用于开发" >
                 <constraints nullable="false"/>
             </column>
             <column name="LIST_NAME" type="NVARCHAR(200)" remarks="列表名称" >
