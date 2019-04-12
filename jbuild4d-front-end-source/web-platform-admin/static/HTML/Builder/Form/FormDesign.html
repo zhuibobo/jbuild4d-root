@@ -55,7 +55,7 @@
                                 </i-col>
                                 <i-col span="4" style="text-align: center">主题：</i-col>
                                 <i-col span="10">
-                                    <i-select v-model="formResourceEntity.formTheme">
+                                    <i-select v-model="formResourceEntity.formTheme" @on-change="changeTheme">
                                         <i-option v-for="(item,key) in designThemes" :value="item.value" :key="key">{{item.name}}</i-option>
                                     </i-select>
                                     主题设置必须在保存后再次打开才生效,或者使用保存并预览功能!
@@ -277,6 +277,11 @@
                 }
                 return null;
             },
+            changeTheme:function(value){
+                //alert(value);
+                var themeVo=this.getTheme(value);
+                CKEditorUtility.SetThemeVo(themeVo);
+            },
             getServerDataBind:function(){
                 //获取数据并赋值
                 /*var _self=this;
@@ -344,13 +349,13 @@
                 this.oldSelectedTabName=name;
             },
             save:function (successFunc) {
-                //debugger;
+                debugger;
                 var relationConfig=this.$refs.dbTableRelationComp.getValue();
                 this.formResourceEntity.formDataRelation=JsonUtility.JsonToString(relationConfig.relationData);
                 this.formResourceEntity.formMainTableId=relationConfig.mainTableId;
                 this.formResourceEntity.formMainTableName=relationConfig.mainTableName;
                 this.formResourceEntity.formMainTableCaption=relationConfig.mainTableCaption;
-                if(this.oldSelectedTabName=="HTML"){
+                if(this.selectedTabName=="HTML"){
                     this.formResourceEntity.formHtmlSource = HTMLEditorUtility.GetHtmlEditorHTML();
                 }
                 else {

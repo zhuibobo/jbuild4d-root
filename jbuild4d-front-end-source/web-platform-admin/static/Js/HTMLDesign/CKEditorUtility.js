@@ -33,6 +33,9 @@ class CKEditorUtility {
         return this.GetCKEditorInst().getData();
     }
     static SetCKEditorHTML(html){
+        //处理class;
+
+
         this.GetCKEditorInst().setData(html);
         window.setTimeout(function () {
             CKEditorUtility.ALLElemBindDefaultEvent();
@@ -80,7 +83,7 @@ class CKEditorUtility {
             }*/
         }
 
-        //console.log(themeVo);
+        console.log(themeVo);
         this.SetThemeVo(themeVo);
 
         //加载默认配置文件
@@ -225,6 +228,29 @@ class CKEditorUtility {
     }
     static SetThemeVo(_themeVo){
         this._ThemeVo=_themeVo;
+        //为编辑器中的is-container-root元素设置样式
+        if(this.GetCKEditorInst()) {
+            var sourceHTML = this.GetCKEditorHTML();
+            debugger;
+            if(sourceHTML!=null&&sourceHTML!="") {
+                var rootElem = $(sourceHTML);
+                if(rootElem.attr("is_container_root")!="true") {
+                    rootElem=$(sourceHTML).find("[is_container_root]");
+                }
+                if (rootElem.length>0) {
+                    var classList = rootElem.attr('class').split(/\s+/);
+                    var classary=[];
+                    $.each(classList, function (index, item) {
+                        if (item.indexOf('html-design-theme-')>=0) {
+                            rootElem.removeClass(item);
+                        }
+                    });
+
+                    rootElem.addClass(_themeVo.rootElemClass);
+                    this.SetCKEditorHTML(rootElem.outerHTML());
+                }
+            }
+        }
     }
 
     static ClearALLForDivElemButton(){

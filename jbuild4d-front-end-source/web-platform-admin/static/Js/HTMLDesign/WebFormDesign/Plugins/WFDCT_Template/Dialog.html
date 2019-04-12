@@ -23,6 +23,13 @@
             border: #1DC116 1px solid;
         }
     </style>
+    <script>
+        $(function(){
+            console.log("----对话框----");
+            console.log(window.parent.CKEditorUtility.GetThemeVo());
+            $('[is-container-root="true"]').addClass(window.parent.CKEditorUtility.GetThemeVo().rootElemClass);
+        })
+    </script>
 </head>
 <body>
     <div class="dialog-wraper" id="dialogApp" v-cloak>
@@ -33,7 +40,7 @@
                         页宽:1024,6列
                         <div slot="content">
                             <div name="template" class="templateWraper" @click="selectTemplate($event)">
-                                <div class="html-design-theme-default-root-elem-class table-width-wraper-1024">
+                                <div is_container_root="true" class="table-width-wraper-1024">
                                     <table class="wathet-blue-table-default" cellpadding="0" cellspacing="0" border="0">
                                         <colgroup>
                                             <col style="width: 10%" />
@@ -83,7 +90,7 @@
                         页宽:640,4列
                         <div slot="content">
                             <div name="template" class="templateWraper">
-                                <div class="table-width-wraper-640">
+                                <div is_container_root="true" class="table-width-wraper-640">
                                     <table class="wathet-blue-table-default" cellpadding="0" cellspacing="0" border="0">
                                         <colgroup>
                                             <col style="width: 10%" />

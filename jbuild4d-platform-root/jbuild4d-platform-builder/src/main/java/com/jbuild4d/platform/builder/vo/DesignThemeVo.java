@@ -12,6 +12,7 @@ import java.util.List;
         "value",
         "name",
         "desc",
+        "rootElemClass",
         "refs"
 })
 public class DesignThemeVo {
@@ -24,6 +25,9 @@ public class DesignThemeVo {
 
     @XmlAttribute(name = "desc")
     private String desc;
+
+    @XmlAttribute(name="rootElemClass")
+    private String rootElemClass;
 
     @XmlElement(name = "Ref")
     private List<DesignThemeRefVo> refs;
@@ -42,6 +46,14 @@ public class DesignThemeVo {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getRootElemClass() {
+        return rootElemClass;
+    }
+
+    public void setRootElemClass(String rootElemClass) {
+        this.rootElemClass = rootElemClass;
     }
 
     public String getValue() {
