@@ -7,6 +7,7 @@ import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
+import com.jbuild4d.base.service.IMetadataService;
 import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.core.base.exception.JBuild4DPhysicalTableException;
 import com.jbuild4d.core.base.exception.JBuild4DSQLKeyWordException;
@@ -50,6 +51,9 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Autowired
     ICodeGenerateService codeGenerateService;
+
+    @Autowired
+    IMetadataService metadataService;
 
     public TableServiceImpl(TableMapper _tableMapper,TableFieldMapper _tableFieldMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) throws JBuild4DGenerallyException {
         super(_tableMapper, _sqlSessionTemplate, _sqlBuilderService);
@@ -347,7 +351,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             //String tableName=tableInfo.getFullyQualifiedTable().getIntrospectedTableName().toUpperCase();
             String tableComment = tableInfo.getRemarks();
             if (tableComment == null || tableComment.equals("")) {
-                tableComment = codeGenerateService.getTableComment(jb4DSession, tableName);
+                tableComment = metadataService.getTableComment(jb4DSession, tableName);
                 if(tableComment==null||tableComment.equals("")){
                     tableComment=tableName;
                 }

@@ -5,6 +5,8 @@ import com.jbuild4d.base.dbaccess.dao.systemsetting.*;
 import com.jbuild4d.base.dbaccess.dynamic.GeneralMapper;
 import com.jbuild4d.base.dbaccess.dynamic.ISQLBuilderMapper;
 import com.jbuild4d.base.dbaccess.dynamic.SQLBuilderMapper;
+import com.jbuild4d.base.service.IMetadataService;
+import com.jbuild4d.base.service.impl.MetadataServiceImpl;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.ISQLBuilderService;
@@ -42,6 +44,12 @@ public class SystemBeansConfig {
     public ISQLBuilderService sqlBuilderService(ISQLBuilderMapper sqlBuilderMapper) {
         ISQLBuilderService bean=new SQLBuilderServiceImpl(sqlBuilderMapper);
         return bean;
+    }
+
+    @Bean
+    public IMetadataService metadataService(ISQLBuilderService sqlBuilderService){
+        IMetadataService metadataService=new MetadataServiceImpl(sqlBuilderService);
+        return metadataService;
     }
 
     @Bean

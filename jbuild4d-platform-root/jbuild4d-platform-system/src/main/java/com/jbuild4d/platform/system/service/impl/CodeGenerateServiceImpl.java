@@ -104,27 +104,6 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
         return result;
     }
 
-    @Override
-    public String getTableComment(JB4DSession jb4DSession,String tableName) throws JBuild4DGenerallyException {
-        String sql="";
-        if(DBProp.isSqlServer()){
-            //throw JBuild4DGenerallyException.getNotSupportMSSQLException();
-            sql="SELECT " +
-                    "convert(nvarchar(100), A.name) TABLE_NAME,"+
-                    "convert(nvarchar(200), C.value) TABLE_COMMENT "+
-                    "FROM sys.tables A " +
-                    "inner JOIN sys.extended_properties C ON C.major_id = A.object_id  and minor_id=0 and A.name='"+tableName+"'";
-        }
-        else if(DBProp.isMySql()){
-            sql="SELECT * FROM information_schema.tables WHERE table_schema = '"+DBProp.getDatabaseName()+"' and table_name=#{tableName}";
-        }
-        else if(DBProp.isOracle()){
-            throw JBuild4DGenerallyException.getNotSupportOracleException();
-        }
-        Map<String, Object> tableInfo=sqlBuilderService.selectOne(sql,tableName);
-        return tableInfo.get("TABLE_COMMENT").toString();
-    }
-
     private String EntityRootFolderKey="EntityRootFolderKey";
     private String DaoRootFolderKey="DaoRootFolderKey";
     private String XmlRootFolderKey="XmlRootFolderKey";

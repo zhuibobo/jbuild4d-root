@@ -39,6 +39,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.jbuild4d.base.dbaccess.general.DBProp;
+import com.jbuild4d.base.service.IMetadataService;
+import com.jbuild4d.base.tools.BeanUtility;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.core.base.list.IListWhereCondition;
+import com.jbuild4d.core.base.list.ListUtility;
 import org.mybatis.generatorex.api.FullyQualifiedTable;
 import org.mybatis.generatorex.api.IntrospectedColumn;
 import org.mybatis.generatorex.api.IntrospectedTable;
@@ -195,7 +200,23 @@ public class DatabaseIntrospector {
                             }
                         }
                         if(notanyComment){
-
+                            IMetadataService metadataService= BeanUtility.getBean(IMetadataService.class);
+                            try {
+                                List<Map<String,Object>> fieldsInfo=metadataService.getTableFiledComment(tc.getTableName());
+                                for (IntrospectedColumn introspectedColumn : allIntrospectedColumnList) {
+                                    Map<String,Object> singleFieldInfo= ListUtility.WhereSingle(fieldsInfo, new IListWhereCondition<Map<String, Object>>() {
+                                        @Override
+                                        public boolean Condition(Map<String, Object> item) {
+                                            return item.get("COLUMN_NAME").toString().toUpperCase().equals(introspectedColumn.getActualColumnName().toUpperCase());
+                                        }
+                                    });
+                                    if(singleFieldInfo!=null){
+                                        introspectedColumn.setRemarks(singleFieldInfo.get("COLUMN_COMMENT").toString());
+                                    }
+                                }
+                            } catch (JBuild4DGenerallyException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }

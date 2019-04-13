@@ -37,6 +37,10 @@ public class JBuild4DGenerallyException extends JBuild4DBaseException {
         return new JBuild4DGenerallyException("存在子记录,请先删除子记录！");
     }
 
+    public static JBuild4DGenerallyException getNotSupportMySQLException(){
+        return new JBuild4DGenerallyException("暂不支持Oracle！");
+    }
+
     public static JBuild4DGenerallyException getNotSupportOracleException(){
         return new JBuild4DGenerallyException("暂不支持Oracle！");
     }
