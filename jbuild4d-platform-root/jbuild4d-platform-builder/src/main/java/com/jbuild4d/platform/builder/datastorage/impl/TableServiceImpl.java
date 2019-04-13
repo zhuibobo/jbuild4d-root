@@ -355,6 +355,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             String tableId=StringUtils.join(tableName.split(""), "_");
             TableEntity tableEntity = new TableEntity();
             tableEntity.setTableId(tableId);
+            //tableEntity.set
             tableEntity.setTableCaption(tableComment.split(":")[0]);
             tableEntity.setTableName(tableName);
             tableEntity.setTableDbname("JBuild4D");

@@ -463,7 +463,7 @@
             <column name="DS_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TBUILD_DATASET">
+        <createTable tableName="TBUILD_DATASET" remarks="数据集定义表">
             <column name="DS_ID" type="NVARCHAR(100)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
