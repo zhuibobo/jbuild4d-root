@@ -21,7 +21,7 @@
                     //alert(1);
                     var dl = new CKEDITOR.dom.element.createFromHtml(
                         '<dl class="wysiwyg-wldct-group-by">' +
-                            '<dt class="label">简单查询[请在以下的单元格中编辑简单查询]</dt>' +
+                            '<dt class="label" show_remove_button="true">简单查询[请在以下的单元格中编辑简单查询]</dt>' +
                             '<dd class="content"></dd>' +
                             '<dt class="label">操作按钮[请在以下的单元格中编辑操作按钮]</dt>' +
                             '<dd class="content operation-button-wrap"></dd>' +
