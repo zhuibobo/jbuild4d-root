@@ -1,7 +1,7 @@
 package com.jbuild4d.base.dbaccess.dao.builder;
 
 import com.jbuild4d.base.dbaccess.dao.BaseMapper;
-import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs;
+import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,5 +9,5 @@ import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs
  * Date: 2019/2/18
  * To change this template use File | Settings | File Templates.
  */
-public interface ListResourceMapper extends BaseMapper<ListResourceEntityWithBLOBs> {
+public interface ListResourceMapper extends BaseMapper<ListResourceEntity> {
 }

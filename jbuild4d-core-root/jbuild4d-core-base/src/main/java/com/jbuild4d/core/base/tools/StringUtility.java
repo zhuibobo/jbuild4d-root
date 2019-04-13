@@ -1145,4 +1145,8 @@ public class StringUtility {
         name = name.substring(0, 1).toLowerCase() + name.substring(1);
         return name;
     }
+
+    public static String build1W5DCode(int num){
+        return String.format("1%04d", num);
+    }
 }

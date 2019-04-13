@@ -1,6 +1,6 @@
 package com.jbuild4d.web.platform.rest.builder.list;
 
-import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs;
+import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.platform.builder.list.IListResourceService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/PlatFormRest/Builder/List")
-public class ListRestResource extends GeneralRestResource<ListResourceEntityWithBLOBs> {
+public class ListRestResource extends GeneralRestResource<ListResourceEntity> {
 
     @Autowired
     IListResourceService listResourceService;
 
     @Override
-    protected IBaseService<ListResourceEntityWithBLOBs> getBaseService() {
+    protected IBaseService<ListResourceEntity> getBaseService() {
         return listResourceService;
     }
 

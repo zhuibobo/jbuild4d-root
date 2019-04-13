@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.builder.list.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.ListResourceMapper;
-import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntityWithBLOBs;
+import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntity;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
@@ -17,7 +17,7 @@ import org.mybatis.spring.SqlSessionTemplate;
  * Date: 2019/2/18
  * To change this template use File | Settings | File Templates.
  */
-public class ListResourceServiceImpl extends BaseServiceImpl<ListResourceEntityWithBLOBs> implements IListResourceService
+public class ListResourceServiceImpl extends BaseServiceImpl<ListResourceEntity> implements IListResourceService
 {
     IModuleService moduleService;
     ListResourceMapper listResourceMapper;
@@ -29,10 +29,10 @@ public class ListResourceServiceImpl extends BaseServiceImpl<ListResourceEntityW
     }
 
     @Override
-    public int saveSimple(JB4DSession jb4DSession, String id, ListResourceEntityWithBLOBs record) throws JBuild4DGenerallyException {
-        return super.save(jb4DSession,id, record, new IAddBefore<ListResourceEntityWithBLOBs>() {
+    public int saveSimple(JB4DSession jb4DSession, String id, ListResourceEntity record) throws JBuild4DGenerallyException {
+        return super.save(jb4DSession,id, record, new IAddBefore<ListResourceEntity>() {
             @Override
-            public ListResourceEntityWithBLOBs run(JB4DSession jb4DSession,ListResourceEntityWithBLOBs sourceEntity) throws JBuild4DGenerallyException {
+            public ListResourceEntity run(JB4DSession jb4DSession,ListResourceEntity sourceEntity) throws JBuild4DGenerallyException {
                 //设置排序,以及其他参数--nextOrderNum()
                 return sourceEntity;
             }

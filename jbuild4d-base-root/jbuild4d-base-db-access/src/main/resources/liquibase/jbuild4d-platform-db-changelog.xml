@@ -250,7 +250,7 @@
             <column name="HISTORY_ID" type="NVARCHAR(128)" remarks="随机生成:UUID">
                 <constraints primaryKey="true" nullable="false"></constraints>
             </column>
-            <column name="HISTORY_RECORD" type="MEDIUMTEXT" remarks="被删除数据的json格式数据"/>
+            <column name="HISTORY_RECORD" type="CLOB" remarks="被删除数据的json格式数据"/>
             <column name="HISTORY_ORGAN_ID" type="NVARCHAR(100)" remarks="删除用户所在的组织id" />
             <column name="HISTORY_ORGAN_NAME" type="NVARCHAR(100)" remarks="删除用户所在的组织名称"/>
             <column name="HISTORY_USER_ID" type="NVARCHAR(100)" remarks="删除用户的ID"/>
@@ -418,8 +418,8 @@
             <column name="RELATION_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
             <column name="RELATION_DESC" type="NVARCHAR(500)" remarks="描述" />
             <column name="RELATION_STATUS" type="NVARCHAR(10)" remarks="状态" />
-            <column name="RELATION_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述:抽取元素的组要属性进行存储" />
-            <column name="RELATION_DIAGRAM_JSON" type="MEDIUMTEXT" remarks="画布的原始Json:用于生成图片" />
+            <column name="RELATION_CONTENT" type="CLOB" remarks="表关系的Json描述:抽取元素的组要属性进行存储" />
+            <column name="RELATION_DIAGRAM_JSON" type="CLOB" remarks="画布的原始Json:用于生成图片" />
         </createTable>
 
         <createTable tableName="TBUILD_TABLE_RELATION_HIS" remarks="表关系描述信息历史表">
@@ -434,7 +434,7 @@
             <column name="HIS_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
             <column name="HIS_DESC" type="NVARCHAR(500)" remarks="描述" />
             <column name="HIS_STATUS" type="NVARCHAR(10)" remarks="状态" />
-            <column name="HIS_CONTENT" type="MEDIUMTEXT" remarks="表关系的Json描述" />
+            <column name="HIS_CONTENT" type="CLOB" remarks="表关系的Json描述" />
             <column name="HIS_BELONG_REL_ID" type="NVARCHAR(100)" remarks="所属记录ID" />
         </createTable>
 
@@ -619,11 +619,11 @@
             <column name="FORM_IS_TEMPLATE" type="NVARCHAR(100)" remarks="是否模版:未使用" />
             <column name="FORM_IS_RESOLVE" type="NVARCHAR(10)" remarks="是否进行了解析:解析过的表单将不再进行服务端的解析" />
             <column name="FORM_EVERY_TIME_RESOLVE" type="NVARCHAR(10)" remarks="是否每次都进行服务端解析:默认为否,只解析一次" />
-            <column name="FORM_HTML_SOURCE" type="MEDIUMTEXT" remarks="原始的HTML" />
-            <column name="FORM_HTML_RESOLVE" type="MEDIUMTEXT" remarks="解析后的HTML" />
-            <column name="FORM_JS_CONTENT" type="MEDIUMTEXT" remarks="JS编辑器中的内容" />
-            <column name="FORM_CSS_CONTENT" type="MEDIUMTEXT" remarks="CSS编辑器中的内容" />
-            <column name="FORM_CONFIG_CONTENT" type="MEDIUMTEXT" remarks="配置编辑器中的内容" />
+            <column name="FORM_HTML_SOURCE" type="CLOB" remarks="原始的HTML" />
+            <column name="FORM_HTML_RESOLVE" type="CLOB" remarks="解析后的HTML" />
+            <column name="FORM_JS_CONTENT" type="CLOB" remarks="JS编辑器中的内容" />
+            <column name="FORM_CSS_CONTENT" type="CLOB" remarks="CSS编辑器中的内容" />
+            <column name="FORM_CONFIG_CONTENT" type="CLOB" remarks="配置编辑器中的内容" />
             <column name="FORM_SOURCE" type="NVARCHAR(50)" remarks="表单的来源:Web设计器,URL引入..." />
             <column name="FORM_CONTENT_URL" type="NVARCHAR(1000)" remarks="引入表单的URL地址" />
             <column name="FORM_THEME" type="NVARCHAR(50)" remarks="风格主题:基于配置文件中的配置" ></column>
@@ -684,14 +684,16 @@
             <column name="LIST_STATUS" type="NVARCHAR(10)" remarks="列表状态" />
             <column name="LIST_ORGAN_ID" type="NVARCHAR(100)" remarks="组织id" />
             <column name="LIST_ORGAN_NAME" type="NVARCHAR(100)" remarks="组织名称" />
-            <column name="LIST_DATASET_ID" type="NVARCHAR(100)" remarks="使用的数据集名称:如果布局容器中没有设置自己的数据集,则使用该处的数据集" />
+            <column name="LIST_DATASET_ID" type="NVARCHAR(100)" remarks="使用的数据集ID:如果布局容器中没有设置自己的数据集,则使用该处的数据集" />
+            <column name="LIST_DATASET_NAME" type="NVARCHAR(150)" remarks="使用的数据集名称:如果布局容器中没有设置自己的数据集,则使用该处的数据集" />
+            <column name="LIST_DATASET_PAGE_SIZE" type="INT" remarks="使用的数据集的单页数量" />
             <column name="LIST_IS_RESOLVE" type="NVARCHAR(10)" remarks="是否进行了解析:解析过的列表将不再进行服务端的解析" />
             <column name="LIST_EVERY_TIME_RESOLVE" type="NVARCHAR(10)" remarks="是否每次都进行服务端解析:默认为否,只解析一次" />
-            <column name="LIST_HTML_SOURCE" type="MEDIUMTEXT" remarks="原始的HTML" />
-            <column name="LIST_HTML_RESOLVE" type="MEDIUMTEXT" remarks="解析后的HTML" />
-            <column name="LIST_JS_CONTENT" type="MEDIUMTEXT" remarks="JS编辑器中的内容" />
-            <column name="LIST_CSS_CONTENT" type="MEDIUMTEXT" remarks="CSS编辑器中的内容" />
-            <column name="LIST_CONFIG_CONTENT" type="MEDIUMTEXT" remarks="配置编辑器中的内容" />
+            <column name="LIST_HTML_SOURCE" type="CLOB" remarks="原始的HTML" />
+            <column name="LIST_HTML_RESOLVE" type="CLOB" remarks="解析后的HTML" />
+            <column name="LIST_JS_CONTENT" type="CLOB" remarks="JS编辑器中的内容" />
+            <column name="LIST_CSS_CONTENT" type="CLOB" remarks="CSS编辑器中的内容" />
+            <column name="LIST_CONFIG_CONTENT" type="CLOB" remarks="配置编辑器中的内容" />
             <column name="LIST_ENABLE_S_SEAR" type="NVARCHAR(10)" remarks="是否启用简单查询" />
             <column name="LIST_ENABLE_C_SEAR" type="NVARCHAR(10)" remarks="是否启用复杂查询" />
             <column name="LIST_THEME" type="NVARCHAR(50)" remarks="风格主题:基于配置文件中的配置" ></column>

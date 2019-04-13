@@ -17,6 +17,7 @@ import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.core.base.list.IListWhereCondition;
 import com.jbuild4d.core.base.list.ListUtility;
+import com.jbuild4d.core.base.tools.StringUtility;
 import com.jbuild4d.platform.builder.datastorage.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.exenum.TableTypeEnum;
@@ -95,7 +96,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
                     try {
                         //写入逻辑表
-                        tableEntity.setTableCode("T_"+tableMapper.nextOrderNum());
+                        tableEntity.setTableCode("T_"+ StringUtility.build1W5DCode(tableMapper.nextOrderNum()));
                         tableEntity.setTableCreater(jb4DSession.getUserName());
                         tableEntity.setTableCreateTime(new Date());
                         tableEntity.setTableOrderNum(tableMapper.nextOrderNum());
@@ -360,7 +361,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             String tableId=StringUtils.join(tableName.split(""), "_");
             TableEntity tableEntity = new TableEntity();
             tableEntity.setTableId(tableId);
-            tableEntity.setTableCode("T_"+tableMapper.nextOrderNum());
+            tableEntity.setTableCode("T_"+StringUtility.build1W5DCode(tableMapper.nextOrderNum()));
             tableEntity.setTableCaption(tableComment.split(":")[0]);
             tableEntity.setTableName(tableName);
             tableEntity.setTableDbname("JBuild4D");

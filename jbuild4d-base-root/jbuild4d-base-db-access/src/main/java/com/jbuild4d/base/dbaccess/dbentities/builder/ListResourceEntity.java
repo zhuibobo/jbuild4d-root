@@ -7,16 +7,16 @@ import java.util.Date;
 /**
  *
  * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
- * This class corresponds to the database table :tbuild_list_resource
+ * This class corresponds to the database table :nullTBUILD_LIST_RESOURCE
  *
  * @mbg.generated do_not_delete_during_merge
  */
 public class ListResourceEntity {
-    //LIST_ID:
+    //LIST_ID:主键:UUID
     @DBKeyField
     private String listId;
 
-    //LIST_CODE:列表编号:无特殊作用,序列生成,便于查找
+    //LIST_CODE:列表编号:无特殊作用,序列生成,便于查找,禁止用于开发
     private String listCode;
 
     //LIST_NAME:列表名称
@@ -63,14 +63,35 @@ public class ListResourceEntity {
     //LIST_ORGAN_NAME:组织名称
     private String listOrganName;
 
-    //LIST_DATASET_ID:使用的数据集名称:如果布局容器中没有设置自己的数据集,则使用该处的数据集
+    //LIST_DATASET_ID:使用的数据集ID:如果布局容器中没有设置自己的数据集,则使用该处的数据集
     private String listDatasetId;
+
+    //LIST_DATASET_NAME:使用的数据集名称:如果布局容器中没有设置自己的数据集,则使用该处的数据集
+    private String listDatasetName;
+
+    //LIST_DATASET_PAGE_SIZE:使用的数据集的单页数量
+    private Integer listDatasetPageSize;
 
     //LIST_IS_RESOLVE:是否进行了解析:解析过的列表将不再进行服务端的解析
     private String listIsResolve;
 
     //LIST_EVERY_TIME_RESOLVE:是否每次都进行服务端解析:默认为否,只解析一次
     private String listEveryTimeResolve;
+
+    //LIST_HTML_SOURCE:原始的HTML
+    private String listHtmlSource;
+
+    //LIST_HTML_RESOLVE:解析后的HTML
+    private String listHtmlResolve;
+
+    //LIST_JS_CONTENT:JS编辑器中的内容
+    private String listJsContent;
+
+    //LIST_CSS_CONTENT:CSS编辑器中的内容
+    private String listCssContent;
+
+    //LIST_CONFIG_CONTENT:配置编辑器中的内容
+    private String listConfigContent;
 
     //LIST_ENABLE_S_SEAR:是否启用简单查询
     private String listEnableSSear;
@@ -93,7 +114,7 @@ public class ListResourceEntity {
     //LIST_CUST_DESC:自定义设置备注:使用了自定义设置相关方法的备注说明
     private String listCustDesc;
 
-    public ListResourceEntity(String listId, String listCode, String listName, String listSingleName, Date listCreateTime, String listCreater, Date listUpdateTime, String listUpdater, String listType, String listIssystem, Integer listOrderNum, String listDesc, String listModuleId, String listStatus, String listOrganId, String listOrganName, String listDatasetId, String listIsResolve, String listEveryTimeResolve, String listEnableSSear, String listEnableCSear, String listTheme, String listCustServerRenderer, String listCustRefJs, String listCustClientRenderer, String listCustDesc) {
+    public ListResourceEntity(String listId, String listCode, String listName, String listSingleName, Date listCreateTime, String listCreater, Date listUpdateTime, String listUpdater, String listType, String listIssystem, Integer listOrderNum, String listDesc, String listModuleId, String listStatus, String listOrganId, String listOrganName, String listDatasetId, String listDatasetName, Integer listDatasetPageSize, String listIsResolve, String listEveryTimeResolve, String listHtmlSource, String listHtmlResolve, String listJsContent, String listCssContent, String listConfigContent, String listEnableSSear, String listEnableCSear, String listTheme, String listCustServerRenderer, String listCustRefJs, String listCustClientRenderer, String listCustDesc) {
         this.listId = listId;
         this.listCode = listCode;
         this.listName = listName;
@@ -111,8 +132,15 @@ public class ListResourceEntity {
         this.listOrganId = listOrganId;
         this.listOrganName = listOrganName;
         this.listDatasetId = listDatasetId;
+        this.listDatasetName = listDatasetName;
+        this.listDatasetPageSize = listDatasetPageSize;
         this.listIsResolve = listIsResolve;
         this.listEveryTimeResolve = listEveryTimeResolve;
+        this.listHtmlSource = listHtmlSource;
+        this.listHtmlResolve = listHtmlResolve;
+        this.listJsContent = listJsContent;
+        this.listCssContent = listCssContent;
+        this.listConfigContent = listConfigContent;
         this.listEnableSSear = listEnableSSear;
         this.listEnableCSear = listEnableCSear;
         this.listTheme = listTheme;
@@ -262,6 +290,22 @@ public class ListResourceEntity {
         this.listDatasetId = listDatasetId == null ? null : listDatasetId.trim();
     }
 
+    public String getListDatasetName() {
+        return listDatasetName;
+    }
+
+    public void setListDatasetName(String listDatasetName) {
+        this.listDatasetName = listDatasetName == null ? null : listDatasetName.trim();
+    }
+
+    public Integer getListDatasetPageSize() {
+        return listDatasetPageSize;
+    }
+
+    public void setListDatasetPageSize(Integer listDatasetPageSize) {
+        this.listDatasetPageSize = listDatasetPageSize;
+    }
+
     public String getListIsResolve() {
         return listIsResolve;
     }
@@ -276,6 +320,46 @@ public class ListResourceEntity {
 
     public void setListEveryTimeResolve(String listEveryTimeResolve) {
         this.listEveryTimeResolve = listEveryTimeResolve == null ? null : listEveryTimeResolve.trim();
+    }
+
+    public String getListHtmlSource() {
+        return listHtmlSource;
+    }
+
+    public void setListHtmlSource(String listHtmlSource) {
+        this.listHtmlSource = listHtmlSource == null ? null : listHtmlSource.trim();
+    }
+
+    public String getListHtmlResolve() {
+        return listHtmlResolve;
+    }
+
+    public void setListHtmlResolve(String listHtmlResolve) {
+        this.listHtmlResolve = listHtmlResolve == null ? null : listHtmlResolve.trim();
+    }
+
+    public String getListJsContent() {
+        return listJsContent;
+    }
+
+    public void setListJsContent(String listJsContent) {
+        this.listJsContent = listJsContent == null ? null : listJsContent.trim();
+    }
+
+    public String getListCssContent() {
+        return listCssContent;
+    }
+
+    public void setListCssContent(String listCssContent) {
+        this.listCssContent = listCssContent == null ? null : listCssContent.trim();
+    }
+
+    public String getListConfigContent() {
+        return listConfigContent;
+    }
+
+    public void setListConfigContent(String listConfigContent) {
+        this.listConfigContent = listConfigContent == null ? null : listConfigContent.trim();
     }
 
     public String getListEnableSSear() {
