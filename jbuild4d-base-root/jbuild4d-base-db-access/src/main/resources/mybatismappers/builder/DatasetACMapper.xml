@@ -3,65 +3,71 @@
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.DatasetMapper">
     <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         <constructor>
-            <idArg column="DS_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_CAPTION" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <idArg column="DS_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_CODE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_CAPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-            <arg column="DS_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DS_CREATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-            <arg column="DS_UPDATER" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_ISSYSTEM" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DS_UPDATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_ISSYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
-            <arg column="DS_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_SQL_SELECT_TEXT" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_SQL_SELECT_VALUE" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_CLASS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_REST_STRUCTURE_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_REST_DATA_URL" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="DS_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="DS_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_SQL_SELECT_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_SQL_SELECT_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_REST_STRUCTURE_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_REST_DATA_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        DS_ID, DS_CAPTION, DS_NAME, DS_CREATE_TIME, DS_CREATER, DS_UPDATE_TIME, DS_UPDATER,
-        DS_TYPE, DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC, DS_GROUP_ID, DS_STATUS, DS_SQL_SELECT_TEXT,
-        DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_STRUCTURE_URL, DS_REST_DATA_URL, DS_ORGAN_ID,
-        DS_ORGAN_NAME
+        DS_ID, DS_CODE, DS_CAPTION, DS_NAME, DS_CREATE_TIME, DS_CREATER, DS_UPDATE_TIME,
+        DS_UPDATER, DS_TYPE, DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC, DS_GROUP_ID, DS_STATUS,
+        DS_SQL_SELECT_TEXT, DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_STRUCTURE_URL, DS_REST_DATA_URL,
+        DS_ORGAN_ID, DS_ORGAN_NAME
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from TBUILD_DATASET
-        where DS_ID = #{dsId,jdbcType=VARCHAR}
+        where DS_ID = #{dsId,jdbcType=NVARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from TBUILD_DATASET
-        where DS_ID = #{dsId,jdbcType=VARCHAR}
+        where DS_ID = #{dsId,jdbcType=NVARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
-        insert into TBUILD_DATASET (DS_ID, DS_CAPTION, DS_NAME,
-                                  DS_CREATE_TIME, DS_CREATER, DS_UPDATE_TIME,
-                                  DS_UPDATER, DS_TYPE, DS_ISSYSTEM,
-                                  DS_ORDER_NUM, DS_DESC, DS_GROUP_ID,
-                                  DS_STATUS, DS_SQL_SELECT_TEXT, DS_SQL_SELECT_VALUE,
-                                  DS_CLASS_NAME, DS_REST_STRUCTURE_URL, DS_REST_DATA_URL,
-                                  DS_ORGAN_ID, DS_ORGAN_NAME)
-        values (#{dsId,jdbcType=VARCHAR}, #{dsCaption,jdbcType=VARCHAR}, #{dsName,jdbcType=VARCHAR},
-                #{dsCreateTime,jdbcType=TIMESTAMP}, #{dsCreater,jdbcType=VARCHAR}, #{dsUpdateTime,jdbcType=TIMESTAMP},
-                #{dsUpdater,jdbcType=VARCHAR}, #{dsType,jdbcType=VARCHAR}, #{dsIssystem,jdbcType=VARCHAR},
-                #{dsOrderNum,jdbcType=INTEGER}, #{dsDesc,jdbcType=VARCHAR}, #{dsGroupId,jdbcType=VARCHAR},
-                #{dsStatus,jdbcType=VARCHAR}, #{dsSqlSelectText,jdbcType=VARCHAR}, #{dsSqlSelectValue,jdbcType=VARCHAR},
-                #{dsClassName,jdbcType=VARCHAR}, #{dsRestStructureUrl,jdbcType=VARCHAR}, #{dsRestDataUrl,jdbcType=VARCHAR},
-                #{dsOrganId,jdbcType=VARCHAR}, #{dsOrganName,jdbcType=VARCHAR})
+        insert into TBUILD_DATASET (DS_ID, DS_CODE, DS_CAPTION,
+                                    DS_NAME, DS_CREATE_TIME, DS_CREATER,
+                                    DS_UPDATE_TIME, DS_UPDATER, DS_TYPE,
+                                    DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC,
+                                    DS_GROUP_ID, DS_STATUS, DS_SQL_SELECT_TEXT,
+                                    DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_STRUCTURE_URL,
+                                    DS_REST_DATA_URL, DS_ORGAN_ID, DS_ORGAN_NAME
+                )
+        values (#{dsId,jdbcType=NVARCHAR}, #{dsCode,jdbcType=NVARCHAR}, #{dsCaption,jdbcType=NVARCHAR},
+                #{dsName,jdbcType=NVARCHAR}, #{dsCreateTime,jdbcType=TIMESTAMP}, #{dsCreater,jdbcType=NVARCHAR},
+                #{dsUpdateTime,jdbcType=TIMESTAMP}, #{dsUpdater,jdbcType=NVARCHAR}, #{dsType,jdbcType=NVARCHAR},
+                #{dsIssystem,jdbcType=NVARCHAR}, #{dsOrderNum,jdbcType=INTEGER}, #{dsDesc,jdbcType=NVARCHAR},
+                #{dsGroupId,jdbcType=NVARCHAR}, #{dsStatus,jdbcType=NVARCHAR}, #{dsSqlSelectText,jdbcType=NVARCHAR},
+                #{dsSqlSelectValue,jdbcType=NVARCHAR}, #{dsClassName,jdbcType=NVARCHAR}, #{dsRestStructureUrl,jdbcType=NVARCHAR},
+                #{dsRestDataUrl,jdbcType=NVARCHAR}, #{dsOrganId,jdbcType=NVARCHAR}, #{dsOrganName,jdbcType=NVARCHAR}
+                       )
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         insert into TBUILD_DATASET
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="dsId != null">
                 DS_ID,
+            </if>
+            <if test="dsCode != null">
+                DS_CODE,
             </if>
             <if test="dsCaption != null">
                 DS_CAPTION,
@@ -123,151 +129,158 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="dsId != null">
-                #{dsId,jdbcType=VARCHAR},
+                #{dsId,jdbcType=NVARCHAR},
+            </if>
+            <if test="dsCode != null">
+                #{dsCode,jdbcType=NVARCHAR},
             </if>
             <if test="dsCaption != null">
-                #{dsCaption,jdbcType=VARCHAR},
+                #{dsCaption,jdbcType=NVARCHAR},
             </if>
             <if test="dsName != null">
-                #{dsName,jdbcType=VARCHAR},
+                #{dsName,jdbcType=NVARCHAR},
             </if>
             <if test="dsCreateTime != null">
                 #{dsCreateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="dsCreater != null">
-                #{dsCreater,jdbcType=VARCHAR},
+                #{dsCreater,jdbcType=NVARCHAR},
             </if>
             <if test="dsUpdateTime != null">
                 #{dsUpdateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="dsUpdater != null">
-                #{dsUpdater,jdbcType=VARCHAR},
+                #{dsUpdater,jdbcType=NVARCHAR},
             </if>
             <if test="dsType != null">
-                #{dsType,jdbcType=VARCHAR},
+                #{dsType,jdbcType=NVARCHAR},
             </if>
             <if test="dsIssystem != null">
-                #{dsIssystem,jdbcType=VARCHAR},
+                #{dsIssystem,jdbcType=NVARCHAR},
             </if>
             <if test="dsOrderNum != null">
                 #{dsOrderNum,jdbcType=INTEGER},
             </if>
             <if test="dsDesc != null">
-                #{dsDesc,jdbcType=VARCHAR},
+                #{dsDesc,jdbcType=NVARCHAR},
             </if>
             <if test="dsGroupId != null">
-                #{dsGroupId,jdbcType=VARCHAR},
+                #{dsGroupId,jdbcType=NVARCHAR},
             </if>
             <if test="dsStatus != null">
-                #{dsStatus,jdbcType=VARCHAR},
+                #{dsStatus,jdbcType=NVARCHAR},
             </if>
             <if test="dsSqlSelectText != null">
-                #{dsSqlSelectText,jdbcType=VARCHAR},
+                #{dsSqlSelectText,jdbcType=NVARCHAR},
             </if>
             <if test="dsSqlSelectValue != null">
-                #{dsSqlSelectValue,jdbcType=VARCHAR},
+                #{dsSqlSelectValue,jdbcType=NVARCHAR},
             </if>
             <if test="dsClassName != null">
-                #{dsClassName,jdbcType=VARCHAR},
+                #{dsClassName,jdbcType=NVARCHAR},
             </if>
             <if test="dsRestStructureUrl != null">
-                #{dsRestStructureUrl,jdbcType=VARCHAR},
+                #{dsRestStructureUrl,jdbcType=NVARCHAR},
             </if>
             <if test="dsRestDataUrl != null">
-                #{dsRestDataUrl,jdbcType=VARCHAR},
+                #{dsRestDataUrl,jdbcType=NVARCHAR},
             </if>
             <if test="dsOrganId != null">
-                #{dsOrganId,jdbcType=VARCHAR},
+                #{dsOrganId,jdbcType=NVARCHAR},
             </if>
             <if test="dsOrganName != null">
-                #{dsOrganName,jdbcType=VARCHAR},
+                #{dsOrganName,jdbcType=NVARCHAR},
             </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         update TBUILD_DATASET
         <set>
+            <if test="dsCode != null">
+                DS_CODE = #{dsCode,jdbcType=NVARCHAR},
+            </if>
             <if test="dsCaption != null">
-                DS_CAPTION = #{dsCaption,jdbcType=VARCHAR},
+                DS_CAPTION = #{dsCaption,jdbcType=NVARCHAR},
             </if>
             <if test="dsName != null">
-                DS_NAME = #{dsName,jdbcType=VARCHAR},
+                DS_NAME = #{dsName,jdbcType=NVARCHAR},
             </if>
             <if test="dsCreateTime != null">
                 DS_CREATE_TIME = #{dsCreateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="dsCreater != null">
-                DS_CREATER = #{dsCreater,jdbcType=VARCHAR},
+                DS_CREATER = #{dsCreater,jdbcType=NVARCHAR},
             </if>
             <if test="dsUpdateTime != null">
                 DS_UPDATE_TIME = #{dsUpdateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="dsUpdater != null">
-                DS_UPDATER = #{dsUpdater,jdbcType=VARCHAR},
+                DS_UPDATER = #{dsUpdater,jdbcType=NVARCHAR},
             </if>
             <if test="dsType != null">
-                DS_TYPE = #{dsType,jdbcType=VARCHAR},
+                DS_TYPE = #{dsType,jdbcType=NVARCHAR},
             </if>
             <if test="dsIssystem != null">
-                DS_ISSYSTEM = #{dsIssystem,jdbcType=VARCHAR},
+                DS_ISSYSTEM = #{dsIssystem,jdbcType=NVARCHAR},
             </if>
             <if test="dsOrderNum != null">
                 DS_ORDER_NUM = #{dsOrderNum,jdbcType=INTEGER},
             </if>
             <if test="dsDesc != null">
-                DS_DESC = #{dsDesc,jdbcType=VARCHAR},
+                DS_DESC = #{dsDesc,jdbcType=NVARCHAR},
             </if>
             <if test="dsGroupId != null">
-                DS_GROUP_ID = #{dsGroupId,jdbcType=VARCHAR},
+                DS_GROUP_ID = #{dsGroupId,jdbcType=NVARCHAR},
             </if>
             <if test="dsStatus != null">
-                DS_STATUS = #{dsStatus,jdbcType=VARCHAR},
+                DS_STATUS = #{dsStatus,jdbcType=NVARCHAR},
             </if>
             <if test="dsSqlSelectText != null">
-                DS_SQL_SELECT_TEXT = #{dsSqlSelectText,jdbcType=VARCHAR},
+                DS_SQL_SELECT_TEXT = #{dsSqlSelectText,jdbcType=NVARCHAR},
             </if>
             <if test="dsSqlSelectValue != null">
-                DS_SQL_SELECT_VALUE = #{dsSqlSelectValue,jdbcType=VARCHAR},
+                DS_SQL_SELECT_VALUE = #{dsSqlSelectValue,jdbcType=NVARCHAR},
             </if>
             <if test="dsClassName != null">
-                DS_CLASS_NAME = #{dsClassName,jdbcType=VARCHAR},
+                DS_CLASS_NAME = #{dsClassName,jdbcType=NVARCHAR},
             </if>
             <if test="dsRestStructureUrl != null">
-                DS_REST_STRUCTURE_URL = #{dsRestStructureUrl,jdbcType=VARCHAR},
+                DS_REST_STRUCTURE_URL = #{dsRestStructureUrl,jdbcType=NVARCHAR},
             </if>
             <if test="dsRestDataUrl != null">
-                DS_REST_DATA_URL = #{dsRestDataUrl,jdbcType=VARCHAR},
+                DS_REST_DATA_URL = #{dsRestDataUrl,jdbcType=NVARCHAR},
             </if>
             <if test="dsOrganId != null">
-                DS_ORGAN_ID = #{dsOrganId,jdbcType=VARCHAR},
+                DS_ORGAN_ID = #{dsOrganId,jdbcType=NVARCHAR},
             </if>
             <if test="dsOrganName != null">
-                DS_ORGAN_NAME = #{dsOrganName,jdbcType=VARCHAR},
+                DS_ORGAN_NAME = #{dsOrganName,jdbcType=NVARCHAR},
             </if>
         </set>
-        where DS_ID = #{dsId,jdbcType=VARCHAR}
+        where DS_ID = #{dsId,jdbcType=NVARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         update TBUILD_DATASET
-        set DS_CAPTION = #{dsCaption,jdbcType=VARCHAR},
-            DS_NAME = #{dsName,jdbcType=VARCHAR},
+        set DS_CODE = #{dsCode,jdbcType=NVARCHAR},
+            DS_CAPTION = #{dsCaption,jdbcType=NVARCHAR},
+            DS_NAME = #{dsName,jdbcType=NVARCHAR},
             DS_CREATE_TIME = #{dsCreateTime,jdbcType=TIMESTAMP},
-            DS_CREATER = #{dsCreater,jdbcType=VARCHAR},
+            DS_CREATER = #{dsCreater,jdbcType=NVARCHAR},
             DS_UPDATE_TIME = #{dsUpdateTime,jdbcType=TIMESTAMP},
-            DS_UPDATER = #{dsUpdater,jdbcType=VARCHAR},
-            DS_TYPE = #{dsType,jdbcType=VARCHAR},
-            DS_ISSYSTEM = #{dsIssystem,jdbcType=VARCHAR},
+            DS_UPDATER = #{dsUpdater,jdbcType=NVARCHAR},
+            DS_TYPE = #{dsType,jdbcType=NVARCHAR},
+            DS_ISSYSTEM = #{dsIssystem,jdbcType=NVARCHAR},
             DS_ORDER_NUM = #{dsOrderNum,jdbcType=INTEGER},
-            DS_DESC = #{dsDesc,jdbcType=VARCHAR},
-            DS_GROUP_ID = #{dsGroupId,jdbcType=VARCHAR},
-            DS_STATUS = #{dsStatus,jdbcType=VARCHAR},
-            DS_SQL_SELECT_TEXT = #{dsSqlSelectText,jdbcType=VARCHAR},
-            DS_SQL_SELECT_VALUE = #{dsSqlSelectValue,jdbcType=VARCHAR},
-            DS_CLASS_NAME = #{dsClassName,jdbcType=VARCHAR},
-            DS_REST_STRUCTURE_URL = #{dsRestStructureUrl,jdbcType=VARCHAR},
-            DS_REST_DATA_URL = #{dsRestDataUrl,jdbcType=VARCHAR},
-            DS_ORGAN_ID = #{dsOrganId,jdbcType=VARCHAR},
-            DS_ORGAN_NAME = #{dsOrganName,jdbcType=VARCHAR}
-        where DS_ID = #{dsId,jdbcType=VARCHAR}
+            DS_DESC = #{dsDesc,jdbcType=NVARCHAR},
+            DS_GROUP_ID = #{dsGroupId,jdbcType=NVARCHAR},
+            DS_STATUS = #{dsStatus,jdbcType=NVARCHAR},
+            DS_SQL_SELECT_TEXT = #{dsSqlSelectText,jdbcType=NVARCHAR},
+            DS_SQL_SELECT_VALUE = #{dsSqlSelectValue,jdbcType=NVARCHAR},
+            DS_CLASS_NAME = #{dsClassName,jdbcType=NVARCHAR},
+            DS_REST_STRUCTURE_URL = #{dsRestStructureUrl,jdbcType=NVARCHAR},
+            DS_REST_DATA_URL = #{dsRestDataUrl,jdbcType=NVARCHAR},
+            DS_ORGAN_ID = #{dsOrganId,jdbcType=NVARCHAR},
+            DS_ORGAN_NAME = #{dsOrganName,jdbcType=NVARCHAR}
+        where DS_ID = #{dsId,jdbcType=NVARCHAR}
     </update>
 </mapper>

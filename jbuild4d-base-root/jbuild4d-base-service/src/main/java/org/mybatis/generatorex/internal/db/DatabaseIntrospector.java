@@ -211,7 +211,9 @@ public class DatabaseIntrospector {
                                         }
                                     });
                                     if(singleFieldInfo!=null){
-                                        introspectedColumn.setRemarks(singleFieldInfo.get("COLUMN_COMMENT").toString());
+                                        if(singleFieldInfo.get("COLUMN_COMMENT")!=null) {
+                                            introspectedColumn.setRemarks(singleFieldInfo.get("COLUMN_COMMENT").toString());
+                                        }
                                     }
                                 }
                             } catch (JBuild4DGenerallyException e) {

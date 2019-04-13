@@ -464,37 +464,37 @@
         </createTable>
 
         <createTable tableName="TBUILD_DATASET" remarks="数据集定义表">
-            <column name="DS_ID" type="NVARCHAR(100)">
+            <column name="DS_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="DS_CODE" type="NVARCHAR(50)" remarks="数据集编号:无特殊作用,序列生成,便于查找,禁止用于开发">
+            <column name="DS_CODE" type="NVARCHAR(50)" remarks="数据集编号:无特殊作用,序列生成,便于查找,禁止用于开发" >
                 <constraints nullable="false"/>
             </column>
-            <column name="DS_CAPTION" type="NVARCHAR(200)">
+            <column name="DS_CAPTION" type="NVARCHAR(200)" remarks="数据集标题" >
                 <constraints nullable="false"/>
             </column>
-            <column name="DS_NAME" type="NVARCHAR(200)">
+            <column name="DS_NAME" type="NVARCHAR(200)" remarks="数据集名称" >
                 <constraints nullable="false"/>
             </column>
-            <column name="DS_CREATE_TIME" type="datetime(6)"/>
-            <column name="DS_CREATER" type="NVARCHAR(100)"/>
-            <column name="DS_UPDATE_TIME" type="datetime(6)"/>
-            <column name="DS_UPDATER" type="NVARCHAR(100)"/>
-            <column name="DS_TYPE" type="NVARCHAR(100)"/>
-            <column name="DS_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="DS_ORDER_NUM" type="INT"/>
-            <column name="DS_DESC" type="NVARCHAR(1000)"/>
-            <column name="DS_GROUP_ID" type="NVARCHAR(100)">
+            <column name="DS_CREATE_TIME" type="datetime(6)" remarks="创建时间" />
+            <column name="DS_CREATER" type="NVARCHAR(100)" remarks="创建人"/>
+            <column name="DS_UPDATE_TIME" type="datetime(6)" remarks="更新时间"/>
+            <column name="DS_UPDATER" type="NVARCHAR(100)" remarks="更新人"/>
+            <column name="DS_TYPE" type="NVARCHAR(100)" remarks="类型"/>
+            <column name="DS_ISSYSTEM" type="NVARCHAR(10)" remarks="是否系统所有"/>
+            <column name="DS_ORDER_NUM" type="INT" remarks="排序号"/>
+            <column name="DS_DESC" type="NVARCHAR(1000)" remarks="备注"/>
+            <column name="DS_GROUP_ID" type="NVARCHAR(100)" remarks="所属分组ID">
                 <constraints nullable="false"/>
             </column>
-            <column name="DS_STATUS" type="NVARCHAR(10)"/>
-            <column name="DS_SQL_SELECT_TEXT" type="NVARCHAR(4000)"/>
-            <column name="DS_SQL_SELECT_VALUE" type="NVARCHAR(4000)"/>
-            <column name="DS_CLASS_NAME" type="NVARCHAR(300)"/>
-            <column name="DS_REST_STRUCTURE_URL" type="NVARCHAR(500)"/>
-            <column name="DS_REST_DATA_URL" type="NVARCHAR(500)"/>
-            <column name="DS_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="DS_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="DS_STATUS" type="NVARCHAR(10)" remarks="状态"/>
+            <column name="DS_SQL_SELECT_TEXT" type="NVARCHAR(4000)" remarks="查询的SQL原始文本"/>
+            <column name="DS_SQL_SELECT_VALUE" type="NVARCHAR(4000)" remarks="实际用于查询的SQL"/>
+            <column name="DS_CLASS_NAME" type="NVARCHAR(300)" remarks="API类的名称"/>
+            <column name="DS_REST_STRUCTURE_URL" type="NVARCHAR(500)" remarks="REST数据集结构的接口地址"/>
+            <column name="DS_REST_DATA_URL" type="NVARCHAR(500)" remarks="REST数据集的接口地址" />
+            <column name="DS_ORGAN_ID" type="NVARCHAR(100)" remarks="组织ID"/>
+            <column name="DS_ORGAN_NAME" type="NVARCHAR(100)" remarks="组织名称"/>
         </createTable>
 
         <createTable tableName="TBUILD_DATASET_COLUMN">

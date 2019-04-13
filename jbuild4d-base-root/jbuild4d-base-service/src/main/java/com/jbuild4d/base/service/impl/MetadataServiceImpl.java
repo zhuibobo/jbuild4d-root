@@ -36,7 +36,12 @@ public class MetadataServiceImpl implements IMetadataService {
             throw JBuild4DGenerallyException.getNotSupportOracleException();
         }
         Map<String, Object> tableInfo=sqlBuilderService.selectOne(sql,tableName);
-        return tableInfo.get("TABLE_COMMENT").toString();
+        if(tableInfo!=null) {
+            if (tableInfo.get("TABLE_COMMENT") != null) {
+                return tableInfo.get("TABLE_COMMENT").toString();
+            }
+        }
+        return "";
     }
 
     @Override

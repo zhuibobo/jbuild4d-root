@@ -3,63 +3,67 @@
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.TableMapper">
     <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
         <constructor>
-            <idArg column="TABLE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_CAPTION" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_DBNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <idArg column="TABLE_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_CODE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_CAPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_DBNAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="TABLE_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-            <arg column="TABLE_CREATER" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TABLE_CREATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="TABLE_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-            <arg column="TABLE_UPDATER" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_SERVICE_VALUE" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_ISSYSTEM" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TABLE_UPDATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_SERVICE_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_ISSYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="TABLE_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
-            <arg column="TABLE_DESC" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_GROUP_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_LINK_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_ORGAN_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="TABLE_ORGAN_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="TABLE_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_GROUP_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_LINK_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="TABLE_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        TABLE_ID, TABLE_CAPTION, TABLE_NAME, TABLE_DBNAME, TABLE_CREATE_TIME, TABLE_CREATER,
-        TABLE_UPDATE_TIME, TABLE_UPDATER, TABLE_SERVICE_VALUE, TABLE_TYPE, TABLE_ISSYSTEM,
-        TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID, TABLE_STATUS, TABLE_LINK_ID, TABLE_ORGAN_ID,
-        TABLE_ORGAN_NAME
+        TABLE_ID, TABLE_CODE, TABLE_CAPTION, TABLE_NAME, TABLE_DBNAME, TABLE_CREATE_TIME,
+        TABLE_CREATER, TABLE_UPDATE_TIME, TABLE_UPDATER, TABLE_SERVICE_VALUE, TABLE_TYPE,
+        TABLE_ISSYSTEM, TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID, TABLE_STATUS, TABLE_LINK_ID,
+        TABLE_ORGAN_ID, TABLE_ORGAN_NAME
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from TBUILD_TABLE
-        where TABLE_ID = #{tableId,jdbcType=VARCHAR}
+        where TABLE_ID = #{tableId,jdbcType=NVARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from TBUILD_TABLE
-        where TABLE_ID = #{tableId,jdbcType=VARCHAR}
+        where TABLE_ID = #{tableId,jdbcType=NVARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
-        insert into TBUILD_TABLE (TABLE_ID, TABLE_CAPTION, TABLE_NAME,
-                                TABLE_DBNAME, TABLE_CREATE_TIME, TABLE_CREATER,
-                                TABLE_UPDATE_TIME, TABLE_UPDATER, TABLE_SERVICE_VALUE,
-                                TABLE_TYPE, TABLE_ISSYSTEM, TABLE_ORDER_NUM,
-                                TABLE_DESC, TABLE_GROUP_ID, TABLE_STATUS,
-                                TABLE_LINK_ID, TABLE_ORGAN_ID, TABLE_ORGAN_NAME
-                )
-        values (#{tableId,jdbcType=VARCHAR}, #{tableCaption,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR},
-                #{tableDbname,jdbcType=VARCHAR}, #{tableCreateTime,jdbcType=TIMESTAMP}, #{tableCreater,jdbcType=VARCHAR},
-                #{tableUpdateTime,jdbcType=TIMESTAMP}, #{tableUpdater,jdbcType=VARCHAR}, #{tableServiceValue,jdbcType=VARCHAR},
-                #{tableType,jdbcType=VARCHAR}, #{tableIssystem,jdbcType=VARCHAR}, #{tableOrderNum,jdbcType=INTEGER},
-                #{tableDesc,jdbcType=VARCHAR}, #{tableGroupId,jdbcType=VARCHAR}, #{tableStatus,jdbcType=VARCHAR},
-                #{tableLinkId,jdbcType=VARCHAR}, #{tableOrganId,jdbcType=VARCHAR}, #{tableOrganName,jdbcType=VARCHAR}
-                       )
+        insert into TBUILD_TABLE (TABLE_ID, TABLE_CODE, TABLE_CAPTION,
+                                  TABLE_NAME, TABLE_DBNAME, TABLE_CREATE_TIME,
+                                  TABLE_CREATER, TABLE_UPDATE_TIME, TABLE_UPDATER,
+                                  TABLE_SERVICE_VALUE, TABLE_TYPE, TABLE_ISSYSTEM,
+                                  TABLE_ORDER_NUM, TABLE_DESC, TABLE_GROUP_ID,
+                                  TABLE_STATUS, TABLE_LINK_ID, TABLE_ORGAN_ID,
+                                  TABLE_ORGAN_NAME)
+        values (#{tableId,jdbcType=NVARCHAR}, #{tableCode,jdbcType=NVARCHAR}, #{tableCaption,jdbcType=NVARCHAR},
+                #{tableName,jdbcType=NVARCHAR}, #{tableDbname,jdbcType=NVARCHAR}, #{tableCreateTime,jdbcType=TIMESTAMP},
+                #{tableCreater,jdbcType=NVARCHAR}, #{tableUpdateTime,jdbcType=TIMESTAMP}, #{tableUpdater,jdbcType=NVARCHAR},
+                #{tableServiceValue,jdbcType=NVARCHAR}, #{tableType,jdbcType=NVARCHAR}, #{tableIssystem,jdbcType=NVARCHAR},
+                #{tableOrderNum,jdbcType=INTEGER}, #{tableDesc,jdbcType=NVARCHAR}, #{tableGroupId,jdbcType=NVARCHAR},
+                #{tableStatus,jdbcType=NVARCHAR}, #{tableLinkId,jdbcType=NVARCHAR}, #{tableOrganId,jdbcType=NVARCHAR},
+                #{tableOrganName,jdbcType=NVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
         insert into TBUILD_TABLE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="tableId != null">
                 TABLE_ID,
+            </if>
+            <if test="tableCode != null">
+                TABLE_CODE,
             </if>
             <if test="tableCaption != null">
                 TABLE_CAPTION,
@@ -115,137 +119,144 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="tableId != null">
-                #{tableId,jdbcType=VARCHAR},
+                #{tableId,jdbcType=NVARCHAR},
+            </if>
+            <if test="tableCode != null">
+                #{tableCode,jdbcType=NVARCHAR},
             </if>
             <if test="tableCaption != null">
-                #{tableCaption,jdbcType=VARCHAR},
+                #{tableCaption,jdbcType=NVARCHAR},
             </if>
             <if test="tableName != null">
-                #{tableName,jdbcType=VARCHAR},
+                #{tableName,jdbcType=NVARCHAR},
             </if>
             <if test="tableDbname != null">
-                #{tableDbname,jdbcType=VARCHAR},
+                #{tableDbname,jdbcType=NVARCHAR},
             </if>
             <if test="tableCreateTime != null">
                 #{tableCreateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="tableCreater != null">
-                #{tableCreater,jdbcType=VARCHAR},
+                #{tableCreater,jdbcType=NVARCHAR},
             </if>
             <if test="tableUpdateTime != null">
                 #{tableUpdateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="tableUpdater != null">
-                #{tableUpdater,jdbcType=VARCHAR},
+                #{tableUpdater,jdbcType=NVARCHAR},
             </if>
             <if test="tableServiceValue != null">
-                #{tableServiceValue,jdbcType=VARCHAR},
+                #{tableServiceValue,jdbcType=NVARCHAR},
             </if>
             <if test="tableType != null">
-                #{tableType,jdbcType=VARCHAR},
+                #{tableType,jdbcType=NVARCHAR},
             </if>
             <if test="tableIssystem != null">
-                #{tableIssystem,jdbcType=VARCHAR},
+                #{tableIssystem,jdbcType=NVARCHAR},
             </if>
             <if test="tableOrderNum != null">
                 #{tableOrderNum,jdbcType=INTEGER},
             </if>
             <if test="tableDesc != null">
-                #{tableDesc,jdbcType=VARCHAR},
+                #{tableDesc,jdbcType=NVARCHAR},
             </if>
             <if test="tableGroupId != null">
-                #{tableGroupId,jdbcType=VARCHAR},
+                #{tableGroupId,jdbcType=NVARCHAR},
             </if>
             <if test="tableStatus != null">
-                #{tableStatus,jdbcType=VARCHAR},
+                #{tableStatus,jdbcType=NVARCHAR},
             </if>
             <if test="tableLinkId != null">
-                #{tableLinkId,jdbcType=VARCHAR},
+                #{tableLinkId,jdbcType=NVARCHAR},
             </if>
             <if test="tableOrganId != null">
-                #{tableOrganId,jdbcType=VARCHAR},
+                #{tableOrganId,jdbcType=NVARCHAR},
             </if>
             <if test="tableOrganName != null">
-                #{tableOrganName,jdbcType=VARCHAR},
+                #{tableOrganName,jdbcType=NVARCHAR},
             </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
         update TBUILD_TABLE
         <set>
+            <if test="tableCode != null">
+                TABLE_CODE = #{tableCode,jdbcType=NVARCHAR},
+            </if>
             <if test="tableCaption != null">
-                TABLE_CAPTION = #{tableCaption,jdbcType=VARCHAR},
+                TABLE_CAPTION = #{tableCaption,jdbcType=NVARCHAR},
             </if>
             <if test="tableName != null">
-                TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+                TABLE_NAME = #{tableName,jdbcType=NVARCHAR},
             </if>
             <if test="tableDbname != null">
-                TABLE_DBNAME = #{tableDbname,jdbcType=VARCHAR},
+                TABLE_DBNAME = #{tableDbname,jdbcType=NVARCHAR},
             </if>
             <if test="tableCreateTime != null">
                 TABLE_CREATE_TIME = #{tableCreateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="tableCreater != null">
-                TABLE_CREATER = #{tableCreater,jdbcType=VARCHAR},
+                TABLE_CREATER = #{tableCreater,jdbcType=NVARCHAR},
             </if>
             <if test="tableUpdateTime != null">
                 TABLE_UPDATE_TIME = #{tableUpdateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="tableUpdater != null">
-                TABLE_UPDATER = #{tableUpdater,jdbcType=VARCHAR},
+                TABLE_UPDATER = #{tableUpdater,jdbcType=NVARCHAR},
             </if>
             <if test="tableServiceValue != null">
-                TABLE_SERVICE_VALUE = #{tableServiceValue,jdbcType=VARCHAR},
+                TABLE_SERVICE_VALUE = #{tableServiceValue,jdbcType=NVARCHAR},
             </if>
             <if test="tableType != null">
-                TABLE_TYPE = #{tableType,jdbcType=VARCHAR},
+                TABLE_TYPE = #{tableType,jdbcType=NVARCHAR},
             </if>
             <if test="tableIssystem != null">
-                TABLE_ISSYSTEM = #{tableIssystem,jdbcType=VARCHAR},
+                TABLE_ISSYSTEM = #{tableIssystem,jdbcType=NVARCHAR},
             </if>
             <if test="tableOrderNum != null">
                 TABLE_ORDER_NUM = #{tableOrderNum,jdbcType=INTEGER},
             </if>
             <if test="tableDesc != null">
-                TABLE_DESC = #{tableDesc,jdbcType=VARCHAR},
+                TABLE_DESC = #{tableDesc,jdbcType=NVARCHAR},
             </if>
             <if test="tableGroupId != null">
-                TABLE_GROUP_ID = #{tableGroupId,jdbcType=VARCHAR},
+                TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR},
             </if>
             <if test="tableStatus != null">
-                TABLE_STATUS = #{tableStatus,jdbcType=VARCHAR},
+                TABLE_STATUS = #{tableStatus,jdbcType=NVARCHAR},
             </if>
             <if test="tableLinkId != null">
-                TABLE_LINK_ID = #{tableLinkId,jdbcType=VARCHAR},
+                TABLE_LINK_ID = #{tableLinkId,jdbcType=NVARCHAR},
             </if>
             <if test="tableOrganId != null">
-                TABLE_ORGAN_ID = #{tableOrganId,jdbcType=VARCHAR},
+                TABLE_ORGAN_ID = #{tableOrganId,jdbcType=NVARCHAR},
             </if>
             <if test="tableOrganName != null">
-                TABLE_ORGAN_NAME = #{tableOrganName,jdbcType=VARCHAR},
+                TABLE_ORGAN_NAME = #{tableOrganName,jdbcType=NVARCHAR},
             </if>
         </set>
-        where TABLE_ID = #{tableId,jdbcType=VARCHAR}
+        where TABLE_ID = #{tableId,jdbcType=NVARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity">
         update TBUILD_TABLE
-        set TABLE_CAPTION = #{tableCaption,jdbcType=VARCHAR},
-            TABLE_NAME = #{tableName,jdbcType=VARCHAR},
-            TABLE_DBNAME = #{tableDbname,jdbcType=VARCHAR},
+        set TABLE_CODE = #{tableCode,jdbcType=NVARCHAR},
+            TABLE_CAPTION = #{tableCaption,jdbcType=NVARCHAR},
+            TABLE_NAME = #{tableName,jdbcType=NVARCHAR},
+            TABLE_DBNAME = #{tableDbname,jdbcType=NVARCHAR},
             TABLE_CREATE_TIME = #{tableCreateTime,jdbcType=TIMESTAMP},
-            TABLE_CREATER = #{tableCreater,jdbcType=VARCHAR},
+            TABLE_CREATER = #{tableCreater,jdbcType=NVARCHAR},
             TABLE_UPDATE_TIME = #{tableUpdateTime,jdbcType=TIMESTAMP},
-            TABLE_UPDATER = #{tableUpdater,jdbcType=VARCHAR},
-            TABLE_SERVICE_VALUE = #{tableServiceValue,jdbcType=VARCHAR},
-            TABLE_TYPE = #{tableType,jdbcType=VARCHAR},
-            TABLE_ISSYSTEM = #{tableIssystem,jdbcType=VARCHAR},
+            TABLE_UPDATER = #{tableUpdater,jdbcType=NVARCHAR},
+            TABLE_SERVICE_VALUE = #{tableServiceValue,jdbcType=NVARCHAR},
+            TABLE_TYPE = #{tableType,jdbcType=NVARCHAR},
+            TABLE_ISSYSTEM = #{tableIssystem,jdbcType=NVARCHAR},
             TABLE_ORDER_NUM = #{tableOrderNum,jdbcType=INTEGER},
-            TABLE_DESC = #{tableDesc,jdbcType=VARCHAR},
-            TABLE_GROUP_ID = #{tableGroupId,jdbcType=VARCHAR},
-            TABLE_STATUS = #{tableStatus,jdbcType=VARCHAR},
-            TABLE_LINK_ID = #{tableLinkId,jdbcType=VARCHAR},
-            TABLE_ORGAN_ID = #{tableOrganId,jdbcType=VARCHAR},
-            TABLE_ORGAN_NAME = #{tableOrganName,jdbcType=VARCHAR}
-        where TABLE_ID = #{tableId,jdbcType=VARCHAR}
+            TABLE_DESC = #{tableDesc,jdbcType=NVARCHAR},
+            TABLE_GROUP_ID = #{tableGroupId,jdbcType=NVARCHAR},
+            TABLE_STATUS = #{tableStatus,jdbcType=NVARCHAR},
+            TABLE_LINK_ID = #{tableLinkId,jdbcType=NVARCHAR},
+            TABLE_ORGAN_ID = #{tableOrganId,jdbcType=NVARCHAR},
+            TABLE_ORGAN_NAME = #{tableOrganName,jdbcType=NVARCHAR}
+        where TABLE_ID = #{tableId,jdbcType=NVARCHAR}
     </update>
 </mapper>
