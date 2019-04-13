@@ -95,6 +95,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
                     try {
                         //写入逻辑表
+                        tableEntity.setTableCode("T_"+tableMapper.nextOrderNum());
                         tableEntity.setTableCreater(jb4DSession.getUserName());
                         tableEntity.setTableCreateTime(new Date());
                         tableEntity.setTableOrderNum(tableMapper.nextOrderNum());
