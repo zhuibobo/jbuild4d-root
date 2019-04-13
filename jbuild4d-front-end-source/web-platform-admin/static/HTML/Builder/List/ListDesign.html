@@ -36,6 +36,9 @@
                         <form-item label="唯一名称：">
                             <i-input v-model="listResourceEntity.listSingleName" placeholder="可以为空"></i-input>
                         </form-item>
+                        <form-item label="绑定数据：">
+                            <i-input v-model="listResourceEntity.listDatasetName" placeholder=""></i-input>
+                        </form-item>
                         <form-item label="每次解析：">
                             <radio-group v-model="listResourceEntity.listEveryTimeResolve" type="button">
                                 <radio label="是">是</radio>
@@ -43,7 +46,7 @@
                             </radio-group>
                         </form-item>
                         <form-item label="每页条数：">
-                            <input-number :max="10" :min="0" v-model="listResourceEntity.listOrderNum"></input-number>
+                            <input-number :max="50" :min="5" v-model="listResourceEntity.listDatasetPageSize"></input-number>
                         </form-item>
                         <form-item label="主题：">
                             <i-select v-model="listResourceEntity.listTheme" @on-change="changeTheme">
@@ -52,13 +55,13 @@
                             如果风格重新引入CSS则必须在保存后再次打开才生效,或者使用保存并预览功能!
                         </form-item>
                         <form-item label="备注：" style="margin-bottom: 12px">
-                            <i-input v-model="listResourceEntity.listDesc" type="textarea" :autosize="{minRows: 8,maxRows: 8}"></i-input>
+                            <i-input v-model="listResourceEntity.listDesc" type="textarea" :autosize="{minRows: 5,maxRows: 5}"></i-input>
                         </form-item>
                     </i-form>
                 </div>
                 <div style="width: 500px;height: 610px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;float: right">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">绑定数据集</divider>
-                    <dataset-simple-select-comp></dataset-simple-select-comp>
+                    <dataset-simple-select-comp @on-selected-dataset="selectedDataset"></dataset-simple-select-comp>
                 </div>
             </div>
         </tab-pane>
@@ -166,6 +169,7 @@
                 listOrganId:"",
                 listOrganName:"",
                 listDatasetId:"",
+                listDatasetName:"",
                 listEveryTimeResolve:"否",
                 listEnableSSear:"启用",
                 listEnableCSear:"禁用",
@@ -177,7 +181,9 @@
                 listHtmlSource:"",
                 listJsContent:"",
                 listCssContent:"",
-                listConfigContent:""
+                listConfigContent:"",
+                listDatasetPageSize:20,
+
             },
             designThemes:[],
             status: BaseUtility.GetUrlParaValue("op"),
@@ -282,6 +288,10 @@
                     CKEditorUtility.SetCKEditorHTML(html);
                 }
                 this.oldSelectedTabName=name;
+            },
+            selectedDataset:function(treeNode){
+                this.listResourceEntity.listDatasetName=treeNode.text;
+                this.listResourceEntity.listDatasetId=treeNode.id;
             },
             save:function (successFunc) {
                 //debugger;

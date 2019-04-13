@@ -153,7 +153,7 @@ public class ZTreeNodeVo {
             ZTreeNodeVo nodeVo=new ZTreeNodeVo();
             nodeVo.setId(datasetEntity.getDsId());
             nodeVo.setValue(datasetEntity.getDsName());
-            nodeVo.setText(datasetEntity.getDsCaption()+"【"+datasetEntity.getDsName()+"】");
+            nodeVo.setText(datasetEntity.getDsCaption()+"【"+datasetEntity.getDsCode()+"】");
             nodeVo.setAttr1(datasetEntity.getDsCaption());
             nodeVo.setParentId(datasetEntity.getDsGroupId());
             nodeVo.setNodeTypeName("DataSet");

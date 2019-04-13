@@ -245,6 +245,13 @@ class CKEditorPluginUtility {
                 }
             }
         }
+
+        if(props["normalProps"]){
+            for (var key in props["normalProps"]) {
+                elem.setAttribute(key.toLocaleLowerCase(), props["normalProps"][key]);
+            }
+        }
+
         return elem;
     }
     static DeserializePropsFromElem(elem){
@@ -331,7 +338,7 @@ class CKEditorPluginUtility {
         if(actionName==this.DialogExecuteEditActionName) {
             var elem=CKEditorUtility.GetSelectedElem().outerHTML();
             var props=this.DeserializePropsFromElem(elem);
-            iframeObj.contentWindow.DialogApp.setControlProps(elem,props);
+            iframeObj.contentWindow.DialogApp.setControlProps($(elem),props);
         }
     }
 
@@ -339,5 +346,11 @@ class CKEditorPluginUtility {
         console.log(pluginSetting);
         console.log(props);
         return "["+pluginSetting.ToolbarLabel+"] 绑定:["+props.bindToField.tableCaption+"-"+props.bindToField.fieldCaption+"]"
+    }
+    static GetAutoRemoveTipLabel(tipMsg) {
+        if(!tipMsg){
+            tipMsg="双击编辑该部件";
+        }
+        return '<label runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">'+tipMsg+'</label>';
     }
 }

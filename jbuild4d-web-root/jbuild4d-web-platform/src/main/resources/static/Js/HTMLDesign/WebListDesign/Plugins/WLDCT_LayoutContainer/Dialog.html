@@ -1,15 +1,26 @@
-<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../../../../../static/Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/perfect-scrollbar-14/perfect-scrollbar.js"></script><script type="text/javascript" src="../../../../../../static/Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/VueEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/HTMLDesign/HTMLDesignUtility.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"></head><body><div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak><tabs size="small"><tab-pane label="绑定信息"><fd-control-bind-to :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" :validate-rules-prop="validateRules" @on-set-completed="setBindCompleted"></fd-control-bind-to></tab-pane><tab-pane label="基础信息"><fd-control-base-info v-model="baseInfo"></fd-control-base-info></tab-pane></tabs></div><script>var DialogApp=new Vue({
+<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../../../../../static/Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/perfect-scrollbar-14/perfect-scrollbar.js"></script><script type="text/javascript" src="../../../../../../static/Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/VueEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/HTMLDesign/HTMLDesignUtility.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"><script type="text/javascript" src="../../../../../../static/Js/T3P/ZTree-V3/js/jquery.ztree.exhide.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/ZTree-V3/js/fuzzysearch.js"></script></head><body><div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak><tabs size="small"><tab-pane label="数据集"><div style="width:760px;margin:auto"><div style="width:300px;height:480px;border:#ddddf1 1px solid;border-radius:4px;padding:10px 20px 10px 10px;float:left"><divider orientation="left" :dashed="true" style="font-size:12px">表单信息</divider><i-form :model="normalProps" label-position="top"><form-item label="绑定数据：" style="margin-bottom:12px"><i-input v-model="normalProps.datasetName" placeholder=""></i-input></form-item><form-item label="每页条数：" style="margin-bottom:12px"><input-number v-model="normalProps.pageSize"></input-number></form-item><form-item label="条件：" style="margin-bottom:12px"><i-input v-model="normalProps.condition" type="textarea" :autosize="{minRows: 6,maxRows: 6}"></i-input></form-item><form-item label="备注：" style="margin-bottom:12px"><i-input v-model="normalProps.desc" type="textarea" :autosize="{minRows: 3,maxRows: 3}"></i-input></form-item></i-form></div><div style="width:450px;height:480px;border:#ddddf1 1px solid;border-radius:4px;padding:10px 20px 10px 10px;float:right"><divider orientation="left" :dashed="true" style="font-size:12px">绑定数据集</divider><dataset-simple-select-comp @on-selected-dataset="selectedDataset"></dataset-simple-select-comp></div></div></tab-pane><tab-pane label="扩展设置"><i-form :model="normalProps" label-position="top"><form-item label="服务端数据API：" style="margin-bottom:12px"><i-input v-model="normalProps.serverGetDataAPI" placeholder=""></i-input></form-item><form-item label="API参数：" style="margin-bottom:12px"><i-input v-model="normalProps.serverGetDataAPIPara" placeholder=""></i-input></form-item><form-item label="客户端数据处理方法：" style="margin-bottom:12px"><i-input v-model="normalProps.clientResolveDataMethod" placeholder=""></i-input></form-item></i-form></tab-pane><tab-pane label="基础信息"><fd-control-base-info v-model="baseInfo"></fd-control-base-info></tab-pane></tabs></div><script>var DialogApp=new Vue({
         el:"#dialogApp",
         data: {
             baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
-            bindToField:CKEditorPluginUtility.DefaultProps.bindToField,
-            defaultValue: CKEditorPluginUtility.DefaultProps.defaultValue,
-            validateRules:CKEditorPluginUtility.DefaultProps.validateRules
+            normalProps:{
+                datasetName:"",
+                datasetId:"",
+                pageSize:20,
+                desc:"",
+                condition:"",
+                serverGetDataAPI:"",
+                serverGetDataAPIPara:"",
+                clientResolveDataMethod:""
+            }
         },
         mounted:function () {
 
         },
         methods: {
+            selectedDataset:function(treeNode){
+                this.normalProps.datasetName=treeNode.text;
+                this.normalProps.datasetId=treeNode.id;
+            },
             ready:function(actionName){
                 this.baseInfo.id="txt_"+StringUtility.Timestamp();
                 this.baseInfo.name=this.baseInfo.id;
@@ -20,20 +31,36 @@
                 this.validateRules=validateRules;
             },
             getControlProps:function () {
+                if(this.normalProps.datasetName==""){
+                    this.normalProps.datasetId="";
+                }
                 var result = {
                     success: true,
                     baseInfo: this.baseInfo,
-                    bindToField: this.bindToField,
-                    defaultValue: this.defaultValue,
-                    validateRules: this.validateRules
+                    normalProps: this.normalProps
                 }
                 return result;
             },
             setControlProps:function ($elem,props) {
                 this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;
-                this.bindToField = props.bindToField ? props.bindToField : this.bindToField;
-                this.defaultValue = props.defaultValue ? props.defaultValue : this.defaultValue;
-                this.validateRules = props.validateRules ? props.validateRules : this.validateRules;
+                var datasetName = $elem.attr("datasetname");
+                var datasetId = $elem.attr("datasetid");
+                var pageSize = $elem.attr("pagesize");
+                var desc = $elem.attr("desc");
+                var condition = $elem.attr("condition");
+                var serverGetDataAPI = $elem.attr("servergetdataapi");
+                var serverGetDataAPIPara = $elem.attr("servergetdataapipara");
+                var clientResolveDataMethod = $elem.attr("clientresolvedatamethod");
+                this.normalProps.datasetName = datasetName;
+                this.normalProps.datasetId = datasetId;
+                if (pageSize!=""&&pageSize!="null") {
+                    this.normalProps.pageSize = parseInt(pageSize);
+                }
+                this.normalProps.desc = desc;
+                this.normalProps.condition = condition;
+                this.normalProps.serverGetDataAPI = serverGetDataAPI;
+                this.normalProps.serverGetDataAPIPara = serverGetDataAPIPara;
+                this.normalProps.clientResolveDataMethod = clientResolveDataMethod;
             }
         }
     });</script></body></html>
