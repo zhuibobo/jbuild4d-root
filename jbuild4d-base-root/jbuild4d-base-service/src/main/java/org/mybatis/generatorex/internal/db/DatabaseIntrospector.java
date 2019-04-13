@@ -38,6 +38,7 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.jbuild4d.base.dbaccess.general.DBProp;
 import org.mybatis.generatorex.api.FullyQualifiedTable;
 import org.mybatis.generatorex.api.IntrospectedColumn;
 import org.mybatis.generatorex.api.IntrospectedTable;
@@ -177,6 +178,29 @@ public class DatabaseIntrospector {
 
         // get the raw columns from the DB
         Map<ActualTableName, List<IntrospectedColumn>> columns = getColumns(tc);
+
+        //如果获取不到备注字段,尝试重新获取
+        if(DBProp.isSqlServer()){
+            /*for (ActualTableName actualTableName : columns.keySet()) {
+                actualTableName.
+            }*/
+            if(columns.size()==1){
+                for (ActualTableName actualTableName : columns.keySet()) {
+                    if(columns.get(actualTableName).size()>0){
+                        List<IntrospectedColumn> allIntrospectedColumnList=columns.get(actualTableName);
+                        boolean notanyComment=true;
+                        for (IntrospectedColumn introspectedColumn : allIntrospectedColumnList) {
+                            if(introspectedColumn.getRemarks()!=null&&!introspectedColumn.getRemarks().equals("")){
+                                notanyComment=false;
+                            }
+                        }
+                        if(notanyComment){
+
+                        }
+                    }
+                }
+            }
+        }
 
         if (columns.isEmpty()) {
             warnings.add(getString("Warning.19", tc.getCatalog(), //$NON-NLS-1$
