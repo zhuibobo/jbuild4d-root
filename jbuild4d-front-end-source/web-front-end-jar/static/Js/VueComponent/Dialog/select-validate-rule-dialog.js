@@ -171,7 +171,7 @@ Vue.component("select-validate-rule-dialog", {
                                 <radio label="Regular">正则表达式</radio>
                                 <radio label="JsMethod">JS方法</radio>
                             </radio-group>
-                            <i-button type="success" shape="circle" icon="md-add" style="margin-left: 15px" @click="addValidateRule"></i-button>
+                            <i-button type="success" shape="circle" icon="md-add" style="margin-left: 15px;cursor: pointer" @click="addValidateRule"></i-button>
                         </div>
                         <div>
                             <divider orientation="left" :dashed="true" style="font-size: 12px">参数设置</divider>
