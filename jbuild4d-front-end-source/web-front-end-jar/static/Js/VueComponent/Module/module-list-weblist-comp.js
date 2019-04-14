@@ -24,25 +24,25 @@ Vue.component("module-list-weblist-comp", {
                 },
                 {
                     title: '编号',
-                    key: 'formCode',
+                    key: 'listCode',
                     align: "center",
                     width: 80
                 },
                 {
-                    title: '表单名称',
-                    key: 'formName',
+                    title: '列表名称',
+                    key: 'listName',
                     align: "center"
                 }, {
                     title: '唯一名',
-                    key: 'formSingleName',
+                    key: 'listSingleName',
                     align: "center"
                 }, {
                     title: '备注',
-                    key: 'formDesc',
+                    key: 'listDesc',
                     align: "center"
                 }, {
                     title: '编辑时间',
-                    key: 'formUpdateTime',
+                    key: 'listUpdateTime',
                     width: 100,
                     align: "center",
                     render: function (h, params) {
@@ -50,7 +50,7 @@ Vue.component("module-list-weblist-comp", {
                     }
                 }, {
                     title: '操作',
-                    key: 'formId',
+                    key: 'listId',
                     width: 120,
                     align: "center",
                     render: function (h, params) {

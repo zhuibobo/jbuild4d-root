@@ -145,8 +145,8 @@
             acInterface:{
                 getTablesDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
                 getPluginsConfig:"/PlatFormRest/Builder/HtmlDesign/WebListDesign/GetPluginsConfig",
-                saveDataUrl:"/PlatFormRest/Builder/Form/SaveEdit",
-                getDataUrl:"/PlatFormRest/Builder/Form/GetDetailData"
+                saveDataUrl:"/PlatFormRest/Builder/List/SaveEdit",
+                getDataUrl:"/PlatFormRest/Builder/List/GetDetailData"
             },
             currUserEntity:null,
             recordId:BaseUtility.GetUrlParaValue("recordId"),
@@ -182,7 +182,7 @@
                 listJsContent:"",
                 listCssContent:"",
                 listConfigContent:"",
-                listDatasetPageSize:20,
+                listDatasetPageSize:20
 
             },
             designThemes:[],
@@ -294,18 +294,22 @@
                 this.listResourceEntity.listDatasetId=treeNode.id;
             },
             save:function (successFunc) {
-                //debugger;
-                var relationConfig=this.$refs.dbTableRelationComp.getValue();
-                this.formResourceEntity.formDataRelation=JsonUtility.JsonToString(relationConfig.relationData);
-                this.formResourceEntity.formMainTableId=relationConfig.mainTableId;
-                this.formResourceEntity.formMainTableName=relationConfig.mainTableName;
-                this.formResourceEntity.formMainTableCaption=relationConfig.mainTableCaption;
-                this.formResourceEntity.formHtmlSource=CKEditorUtility.GetCKEditorHTML();
-                this.formResourceEntity.formJsContent=JsEditorUtility.GetJsEditorJs();
+                //var relationConfig=this.$refs.dbTableRelationComp.getValue();
+                //this.formResourceEntity.formDataRelation=JsonUtility.JsonToString(relationConfig.relationData);
+                //this.listResourceEntity.formMainTableId=relationConfig.mainTableId;
+                //this.listResourceEntity.formMainTableName=relationConfig.mainTableName;
+                //this.listResourceEntity.formMainTableCaption=relationConfig.mainTableCaption;
+                if(this.selectedTabName=="HTML"){
+                    this.listResourceEntity.listHtmlSource = HTMLEditorUtility.GetHtmlEditorHTML();
+                }
+                else {
+                    this.listResourceEntity.listHtmlSource = CKEditorUtility.GetCKEditorHTML();
+                }
+                this.listResourceEntity.listJsContent=JsEditorUtility.GetJsEditorJs();
 
-                var validateResult=this.validateSaveEnable(this.formResourceEntity);
+                var validateResult=this.validateSaveEnable(this.listResourceEntity);
                 if(validateResult.result){
-                    var sendData = JSON.stringify(this.formResourceEntity);
+                    var sendData = JSON.stringify(this.listResourceEntity);
                     //debugger;
                     AjaxUtility.PostRequestBody(this.acInterface.saveDataUrl, sendData, function (result) {
                         //debugger;
@@ -314,7 +318,7 @@
                                 //window.OpenerWindowObj.appList.reloadData();
                                 //DialogUtility.Frame_CloseDialog(window);
                                 window.opener._modulelistwebformcomp.reloadData();
-                                successFunc();
+                                successFunc(result);
                             }
                         });
                     }, "json");
@@ -333,25 +337,20 @@
 
                 })
             },
-            validateSaveEnable:function(formResourceEntity){
+            validateSaveEnable:function(listResourceEntity){
                 var resultMsg={
                     result:true,
                     msg:[]
                 }
 
-                if(formResourceEntity.formName==""){
+                if(listResourceEntity.listName==""){
                     resultMsg.result=false;
-                    resultMsg.msg.push("请填写表单名称!");
-                }
-                //校验是否设置了主表
-                if(formResourceEntity.formMainTableId==""){
-                    resultMsg.result=false;
-                    resultMsg.msg.push("请设置主表!");
+                    resultMsg.msg.push("请填写列表名称!");
                 }
                 return resultMsg;
             },
-            validateDesign:function (formResourceEntity) {
-                if(this.validateSaveEnable(formResourceEntity)){
+            validateDesign:function (listResourceEntity) {
+                if(this.validateSaveEnable(listResourceEntity)){
 
                 }
             }
