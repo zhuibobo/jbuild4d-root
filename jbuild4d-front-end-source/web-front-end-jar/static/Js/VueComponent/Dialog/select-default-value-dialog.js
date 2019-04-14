@@ -130,6 +130,11 @@ Vue.component("select-default-value-dialog", {
         selectComplete:function () {
             var result={};
             if(this.selectType=="Const"){
+                if(this.selectValue==""){
+                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请设置常量默认值！",null);
+                    return;
+                }
+
                 result.Type="Const";
                 result.Value=this.selectValue;
                 result.Text=this.selectValue;
@@ -138,6 +143,7 @@ Vue.component("select-default-value-dialog", {
                 var selectNodes=this.tree.datetimeTreeObj.getSelectedNodes();
                 if(selectNodes.length==0){
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择一种时间类型！",null);
+                    return;
                 }
                 else {
                     result.Type = "DateTime";
@@ -150,6 +156,7 @@ Vue.component("select-default-value-dialog", {
                 var selectNodes=this.tree.envVarTreeObj.getSelectedNodes();
                 if(selectNodes.length==0){
                     DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择一种API类型！",null);
+                    return;
                 }
                 else {
                     if(selectNodes[0].group==true){
@@ -171,8 +178,9 @@ Vue.component("select-default-value-dialog", {
             //window.OpenerWindowObj[this.getSelectInstanceName()].setSelectEnvVariableResultValue(result);
             this.handleClose();
         },
-        clearEnvVar:function(){
+        clearComplete:function(){
             //window.OpenerWindowObj[this.getSelectInstanceName()].setSelectEnvVariableResultValue(null);
+            this.$emit('on-selected-default-value', null);
             this.handleClose();
         },
         handleClose: function () {
@@ -212,7 +220,7 @@ Vue.component("select-default-value-dialog", {
                         <div class="button-inner-wrap">
                             <button-group>
                                 <i-button type="primary" @click="selectComplete()"> 确 认 </i-button>
-                                <i-button type="primary" @click="clearEnvVar()"> 清 空 </i-button>
+                                <i-button type="primary" @click="clearComplete()"> 清 空 </i-button>
                                 <i-button @click="handleClose()">关 闭</i-button>
                             </button-group>
                         </div>
