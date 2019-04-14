@@ -140,6 +140,7 @@
     <div>
         <!--各类对话框的引用-->
         <fd-control-select-bind-to-single-field-dialog @on-selected-bind-to-single-field="onSelectedBindToSingleField" ref="fdControlSelectBindToSingleFieldDialog"></fd-control-select-bind-to-single-field-dialog>
+        <select-default-value-dialog @on-selected-default-value="onSelectedDefaultValue" ref="selectDefaultValueDialog"></select-default-value-dialog>
     </div>
 </div>
 
@@ -214,7 +215,16 @@
             onSelectedBindToSingleField:function(result){
                 this.selectBindToSingleFieldTargetWindow._SelectBindObj.setSelectFieldResultValue(result);
             },
+            selectDefaultValueDialogBegin:function(targetWindow,oldData){
+                this.$refs.selectDefaultValueDialog.beginSelect(oldData);
+                this.selectDefaultValueTargetWindow=targetWindow;
+            },
+            onSelectedDefaultValue:function(result){
+                this.selectDefaultValueTargetWindow._SelectBindObj.setSelectEnvVariableResultValue(result);
+            },
             /*Base*/
+            //region
+            //#endregion
             initPageUI:function(){
                 this.isLoading=true;
                 $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);

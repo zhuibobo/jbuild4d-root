@@ -96,9 +96,12 @@ Vue.component("fd-control-bind-to", {
             //    modal: true,
             //    title: "选择默认值"
             //});
-            JBuild4DSelectView.SelectEnvVariable.beginSelectInFrame(window,"_SelectBindObj",{});
+            //JBuild4DSelectView.SelectEnvVariable.beginSelectInFrame(window,"_SelectBindObj",{});
             //将当前对象附着到window上,提供给子窗体使用
+            //window._SelectBindObj = this;
+
             window._SelectBindObj = this;
+            window.parent.appForm.selectDefaultValueDialogBegin(window,this.getSelectFieldResultValue());
         },
         setSelectEnvVariableResultValue:function(result){
             if(result!=null) {
