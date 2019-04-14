@@ -11,8 +11,8 @@
     <div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak>
         <tabs size="small">
             <tab-pane label="绑定信息">
-                <fd-control-bind-to :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" :validate-rules-prop="validateRules" @on-set-completed="setBindCompleted">
-                </fd-control-bind-to>
+                <list-search-control-bind-to :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" :validate-rules-prop="validateRules" @on-set-completed="setBindCompleted">
+                </list-search-control-bind-to>
             </tab-pane>
             <tab-pane label="基础信息">
                 <fd-control-base-info v-model="baseInfo">
