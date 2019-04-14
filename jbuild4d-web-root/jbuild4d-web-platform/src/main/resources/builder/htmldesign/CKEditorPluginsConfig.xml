@@ -72,6 +72,12 @@
             <Config></Config>
             <Desc></Desc>
         </Control>
+        <Control SingleName="WLDCT_Search_TextBox" Text="查询-单行输入框" ToolbarLocation="LC_Simple,1"
+                 ServerResolve="" ClientResolve="" ClientResolveJs=""
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="true" ControlCategory="InputControl" ServerDynamicBind="false" ShowRemoveButton="true" ShowInEditorToolbar="true">
+            <Config></Config>
+            <Desc></Desc>
+        </Control>
         <!--<Control SingleName="WLDCT_GroupBy" Text="列表分组" ToolbarLocation="LC_Template,3"
                  ServerResolve="" ClientResolve="2" ClientResolveJs="3"
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">

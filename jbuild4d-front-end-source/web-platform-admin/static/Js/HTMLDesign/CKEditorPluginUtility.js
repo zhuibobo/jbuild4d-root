@@ -351,6 +351,6 @@ class CKEditorPluginUtility {
         if(!tipMsg){
             tipMsg="双击编辑该部件";
         }
-        return '<label runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">'+tipMsg+'</label>';
+        return '<div runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">'+tipMsg+'</div>';
     }
 }
