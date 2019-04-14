@@ -31,7 +31,7 @@
                 <div style="width: 1024px;height: 615px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 20px 10px 10px;">
                     <divider orientation="left" :dashed="true" style="font-size: 12px">表单信息</divider>
                     <i-form  :model="formResourceEntity" :label-width="110">
-                        <form-item label="表单名称：">
+                        <form-item label="表单名称：" style="margin-bottom: 12px">
                             <row>
                                 <i-col span="10">
                                     <i-input v-model="formResourceEntity.formName" placeholder="请输入表单名称"></i-input>
@@ -58,7 +58,7 @@
                                     <i-select v-model="formResourceEntity.formTheme" @on-change="changeTheme">
                                         <i-option v-for="(item,key) in designThemes" :value="item.value" :key="key">{{item.name}}</i-option>
                                     </i-select>
-                                    如果风格重新引入CSS则必须在保存后再次打开才生效,或者使用保存并预览功能!
+                                    如果风格重新引入CSS则必须在保存后再次打开才生效!
                                 </i-col>
                             </row>
                         </form-item>
