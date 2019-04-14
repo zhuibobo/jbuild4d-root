@@ -111,8 +111,47 @@
     .wysiwyg-wldct-list-simple-search-inner-wrap{
         border: #c5c9d4 1px solid;
         border-radius: 4px;
-        min-height: 100px;
+        min-height: 70px;
         margin: 10px;
+    }
+
+    table {
+        margin: 8px auto auto;
+        border-collapse: collapse;
+        font-size: 12px;
+        width: 98%;
+
+        .title {
+            color: #2e6e9e;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        tr {
+            td, th {
+                padding: 6px;
+                border: 1px solid #f0f0f0;
+
+                input[type="text"], textarea, select {
+                    background: transparent;
+                    border: 1px solid #d3d7e0;
+                    box-sizing: border-box;
+                    padding: 4px;
+                    width: 100%;
+                    overflow: auto;
+                    font-size: 12px;
+                }
+            }
+            th {
+                color: #2e6e9e;
+                background-color: #f0f4fa;
+            }
+        }
+
+        .label {
+            background-color: #f7f7f7;
+            text-align: right;
+        }
     }
 }
 
