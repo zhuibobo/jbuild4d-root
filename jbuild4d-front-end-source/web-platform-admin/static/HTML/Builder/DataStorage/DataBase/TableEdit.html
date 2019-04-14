@@ -7,7 +7,7 @@
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
 </head>
 <body>
-    <div id="appForm" v-cloak class="general-edit-page-wrap">
+    <div id="tableDesion" v-cloak class="general-edit-page-wrap">
         <spin size="large" fix v-if="isSubmitting"></spin>
         <div class="list-2column">
             <div class="left-outer-wrap" style="bottom: 50px;right: 350px;">
@@ -90,10 +90,14 @@
                 </button-group>
             </div>
         </div>
+        <div>
+            <!--各类对话框的引用-->
+            <select-default-value-dialog @on-selected-default-value="onSelectedDefaultValue" ref="selectDefaultValueDialog"></select-default-value-dialog>
+        </div>
     </div>
     <script>
-        var appForm = new Vue({
-            el:"#appForm",
+        var tableDesion = new Vue({
+            el:"#tableDesion",
             data:{
                 isSubmitting:false,
                 acInterface:{
@@ -259,6 +263,15 @@
                 $("#divEditTable").height($(".right-outer-wrap").height()-85);
             },
             methods:{
+                //region dialog
+                selectDefaultValueDialogBegin:function(host,oldData){
+                    this.$refs.selectDefaultValueDialog.beginSelect(oldData);
+                    this.selectDefaultValueTargetWindow=host;
+                },
+                onSelectedDefaultValue:function(result){
+                    this.selectDefaultValueTargetWindow.setSelectEnvVariableResultValue(result);
+                },
+                //endregion
                 bindData:function(result){
                     this.editTableObj=Object.create(EditTable);
                     //alert(PageStyleUtility.GetPageWidth());
@@ -267,7 +280,7 @@
                     }
                     this.editTableObj.Initialization(this.editTableConfig);
                     this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
-                    DetailPageUtility.OverrideObjectValue(appForm.tableEntity, result.data);
+                    DetailPageUtility.OverrideObjectValue(tableDesion.tableEntity, result.data);
                     if(this.status=="add"){
                         this.tableEntity.tableCreater=this.currUserEntity.userName;
                         this.tableEntity.tableUpdater=this.currUserEntity.userName;

@@ -55,7 +55,8 @@ var EditTable_SelectDefaultValue={
         //将inputtext对象附加到window上,提供给后续的设置值的方法.
         window.$Temp$Inputtxt=$inputTxt;
         $inputBtn.click(function(){
-            JBuild4DSelectView.SelectEnvVariable.beginSelect("EditTable_SelectDefaultValue");
+            //JBuild4DSelectView.SelectEnvVariable.beginSelect("EditTable_SelectDefaultValue");
+            tableDesion.selectDefaultValueDialogBegin(EditTable_SelectDefaultValue,null)
         });
         return $elem;
     },
