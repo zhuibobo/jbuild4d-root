@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-<div id="appForm" v-cloak>
+<div id="listDesign" v-cloak>
     <div style="position: absolute;right: 10px;top: 6px;z-index: 100">
         <button-group size="small">
             <i-button icon="md-cloud-done" type="primary" @click="saveClose()">保存并关闭</i-button>
@@ -139,14 +139,15 @@
 
 <script>
     var IsTopFramePage=true;
-    var appForm = new Vue({
-        el:"#appForm",
+    var listDesign = new Vue({
+        el:"#listDesign",
         data: {
             acInterface:{
                 getTablesDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
                 getPluginsConfig:"/PlatFormRest/Builder/HtmlDesign/WebListDesign/GetPluginsConfig",
                 saveDataUrl:"/PlatFormRest/Builder/List/SaveEdit",
-                getDataUrl:"/PlatFormRest/Builder/List/GetDetailData"
+                getDataUrl:"/PlatFormRest/Builder/List/GetDetailData",
+                getDataSetUrl:"/PlatFormRest/Builder/DataSet/DataSetMain/GetDataSetData"
             },
             currUserEntity:null,
             recordId:BaseUtility.GetUrlParaValue("recordId"),
@@ -188,7 +189,8 @@
             designThemes:[],
             status: BaseUtility.GetUrlParaValue("op"),
             oldSelectedTabName:"",
-            selectedTabName:""
+            selectedTabName:"",
+            storeDataSet:{}
         },
         mounted:function () {
             this.initPageUI();
@@ -352,6 +354,23 @@
             validateDesign:function (listResourceEntity) {
                 if(this.validateSaveEnable(listResourceEntity)){
 
+                }
+            },
+            getDataSet:function(dataSetId){
+                if(this.storeDataSet[dataSetId]){
+                    return this.storeDataSet[dataSetId];
+                }
+                else{
+                    var _self=this;
+                    AjaxUtility.PostSync(this.acInterface.getDataSetUrl,{"op":"view","recordId":dataSetId},function (result) {
+                        if(result.success) {
+                            _self.storeDataSet[dataSetId] = result.data;
+                        }
+                        else {
+                            DialogUtility.AlertText(result.message);
+                        }
+                    },"json");
+                    return this.storeDataSet[dataSetId];
                 }
             }
         }

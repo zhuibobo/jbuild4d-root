@@ -334,7 +334,16 @@ class CKEditorPluginUtility {
     static DialogExecuteEditActionName="Edit";
     static DialogExecuteInsertActionName="Insert";
     static SetElemPropsInEditDialog(iframeObj,actionName){
-        iframeObj.contentWindow.DialogApp.ready(actionName);
+
+
+        var sel = CKEditorUtility.GetCKEditorInst().getSelection().getStartElement();
+        var parents =null;
+        if(sel) {
+            parents = sel.getParents();
+        }
+        //console.log(parents);
+
+        iframeObj.contentWindow.DialogApp.ready(actionName,sel,parents);
         if(actionName==this.DialogExecuteEditActionName) {
             var elem=CKEditorUtility.GetSelectedElem().outerHTML();
             var props=this.DeserializePropsFromElem(elem);
@@ -343,8 +352,8 @@ class CKEditorPluginUtility {
     }
 
     static GetControlDescText(pluginSetting,props){
-        console.log(pluginSetting);
-        console.log(props);
+        //console.log(pluginSetting);
+        //console.log(props);
         return "["+pluginSetting.ToolbarLabel+"] 绑定:["+props.bindToField.tableCaption+"-"+props.bindToField.fieldCaption+"]"
     }
     static GetAutoRemoveTipLabel(tipMsg) {

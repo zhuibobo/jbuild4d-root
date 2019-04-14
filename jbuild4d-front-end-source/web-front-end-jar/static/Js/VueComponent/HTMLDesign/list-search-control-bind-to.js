@@ -47,6 +47,7 @@ Vue.component("list-search-control-bind-to", {
     },
     mounted:function(){
         this.bindToField=this.bindToFieldProp;
+        //var dataset=window.parent.listDesign.getDataSet();
     },
     methods:{
         setCompleted:function(){
@@ -139,42 +140,57 @@ Vue.component("list-search-control-bind-to", {
                     <colgroup>
                         <col style="width: 100px" />
                         <col style="width: 280px" />
-                        <col style="width: 100px" />
                         <col />
                     </colgroup>
                     <tr>
-                        <td colspan="4">
-                            绑定到表<button class="btn-select fright" v-on:click="selectBindFieldView">...</button>
+                        <td>
+                            标题：
+                        </td>
+                        <td>
+                            <input type="text" />
+                        </td>
+                        <td rowspan="6">
+                        
                         </td>
                     </tr>
-                    <tr
-                        <td>表编号：</td>
-                        <td colspan="3">{{bindToField.tableId}}</td>
-                    </tr
                     <tr>
-                        <td>表名：</td>
-                        <td>{{bindToField.tableName}}</td>
-                        <td>表标题：</td>
-                        <td>{{bindToField.tableCaption}}</td>
+                        <td>
+                            绑定字段：
+                        </td>
+                        <td>
+                            
+                        </td>
                     </tr>
                     <tr>
-                        <td>字段名：</td>
-                        <td>{{bindToField.fieldName}}</td>
-                        <td>字段标题：</td>
-                        <td>{{bindToField.fieldCaption}}</td>
+                        <td>
+                            字段名称：
+                        </td>
+                        <td>
+                            
+                        </td>
                     </tr>
                     <tr>
-                        <td>类型：</td>
-                        <td>{{bindToField.fieldDataType}}</td>
-                        <td>长度：</td>
-                        <td>{{bindToField.fieldLength}}</td>
+                        <td>
+                            运算符：
+                        </td>
+                        <td>
+                            
+                        </td>
                     </tr>
                     <tr>
-                        <td colspan="4">默认值<button class="btn-select fright" v-on:click="selectDefaultValueView">...</button></td>
+                        <td>
+                            默认值：
+                        </td>
+                        <td>
+                            
+                        </td>
                     </tr>
-                    <tr style="height: 35px"
-                        <td colspan="4" style="background-color: #ffffff;">
-                        {{tempData.defaultDisplayText}
+                    <tr>
+                        <td>
+                            备注：
+                        </td>
+                        <td>
+                            <textarea rows="15"></textarea>
                         </td>
                     </tr>
                 </table>`
