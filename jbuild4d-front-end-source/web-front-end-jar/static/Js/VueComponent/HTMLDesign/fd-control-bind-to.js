@@ -120,9 +120,12 @@ Vue.component("fd-control-bind-to", {
         },
         /*绑定验证规则*/
         selectValidateRuleView:function () {
-            JBuild4DSelectView.SelectValidateRule.beginSelectInFrame(window,"_SelectBindObj",{});
+            //JBuild4DSelectView.SelectValidateRule.beginSelectInFrame(window,"_SelectBindObj",{});
             //将当前对象附着到window上,提供给子窗体使用
+            //window._SelectBindObj = this;
+            //alert(1);
             window._SelectBindObj = this;
+            window.parent.appForm.selectValidateRuleDialogBegin(window,this.getSelectValidateRuleResultValue());
         },
         setSelectValidateRuleResultValue:function (result) {
             if(result!=null){
