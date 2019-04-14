@@ -87,7 +87,7 @@ Vue.component("select-default-value-dialog", {
         this.loadData();
     },
     methods:{
-        beginSelect:function(){
+        beginSelect:function(oldData){
             var elem=this.$refs.selectDefaultValueDialogWrap;
             //debugger;
             //this.getTableDataInitTree();
@@ -106,6 +106,12 @@ Vue.component("select-default-value-dialog", {
 
             $(window.document).find(".ui-widget-overlay").css("zIndex",10100);
             $(window.document).find(".ui-dialog").css("zIndex",10101);
+
+            if(oldData==null){
+                this.selectType="Const";
+                this.selectValue="";
+                this.selectText="";
+            }
         },
         loadData:function(){
             var _self=this;

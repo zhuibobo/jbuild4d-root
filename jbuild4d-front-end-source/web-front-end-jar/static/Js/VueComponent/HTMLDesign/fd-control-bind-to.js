@@ -101,7 +101,7 @@ Vue.component("fd-control-bind-to", {
             //window._SelectBindObj = this;
 
             window._SelectBindObj = this;
-            window.parent.appForm.selectDefaultValueDialogBegin(window,this.getSelectFieldResultValue());
+            window.parent.appForm.selectDefaultValueDialogBegin(window,null);
         },
         setSelectEnvVariableResultValue:function(result){
             if(result!=null) {
