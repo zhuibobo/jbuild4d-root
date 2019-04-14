@@ -34,7 +34,7 @@ Vue.component("select-validate-rule-dialog", {
                                 class: "list-row-button del",
                                 on: {
                                     click: function () {
-                                        appSelectView.delValidate(params.row["validateId"]);
+                                        _self.delValidate(params.row["validateId"]);
                                     }
                                 }
                             })
@@ -48,13 +48,13 @@ Vue.component("select-validate-rule-dialog", {
         //this.loadData();
     },
     methods:{
-        beginSelect:function(oldData){
+        beginSelect:function(oldData) {
             //debugger;
-            var elem=this.$refs.selectValidateRuleDialogWrap;
+            var elem = this.$refs.selectValidateRuleDialogWrap;
             //debugger;
             //this.getTableDataInitTree();
 
-            var height=450;
+            var height = 450;
             /*if(PageStyleUtility.GetPageHeight()>550){
                 height=600;
             }*/
@@ -66,14 +66,16 @@ Vue.component("select-validate-rule-dialog", {
                 title: "设置验证规则"
             });
 
-            $(window.document).find(".ui-widget-overlay").css("zIndex",10100);
-            $(window.document).find(".ui-dialog").css("zIndex",10101);
+            $(window.document).find(".ui-widget-overlay").css("zIndex", 10100);
+            $(window.document).find(".ui-dialog").css("zIndex", 10101);
 
-            if(oldData==null){
-                this.selectType="Const";
-                this.selectValue="";
-                this.selectText="";
-            }
+            this.ruleParas.msg = "字段";
+            this.ruleParas.numLength = 4;
+            this.ruleParas.decimalLength = 0;
+            this.ruleParas.jsMethodName = "";
+            this.ruleParas.regularText = "";
+            this.ruleParas.regularMsg = "";
+            this.addedValidateRule=[];
 
             this.bindOldSelectedValue(oldData);
         },
@@ -97,7 +99,7 @@ Vue.component("select-validate-rule-dialog", {
                 };
                 //window.OpenerWindowObj[this.getSelectInstanceName()].setSelectValidateRuleResultValue(result);
 
-                this.$emit('on-selected-validate-rule', result);
+                this.$emit('on-selected-validate-rule', JsonUtility.CloneSimple(result));
                 this.handleClose();
             }
             else{
@@ -118,6 +120,7 @@ Vue.component("select-validate-rule-dialog", {
             DialogUtility.CloseDialogElem(this.$refs.selectValidateRuleDialogWrap);
         },
         addValidateRule:function(){
+            //debugger;
             var validateParas="";
             if(this.selectValidateType=="Number"){
                 validateParas=JsonUtility.JsonToString({
