@@ -1,6 +1,6 @@
 /*查询字段绑定的Vue组件*/
 Vue.component("list-search-control-bind-to", {
-    props:["bindToFieldProp","defaultValueProp","validateRulesProp"],
+    props:["bindToFieldProp"],
     data: function () {
         return {
             bindToField:{
@@ -11,18 +11,6 @@ Vue.component("list-search-control-bind-to", {
                 fieldCaption: "",
                 fieldDataType: "",
                 fieldLength:""
-            },
-            validateRules:{
-                msg:"",
-                rules:[]
-            },
-            defaultValue: {
-                defaultType: "",
-                defaultValue: "",
-                defaultText: ""
-            },
-            tempData:{
-                defaultDisplayText:""
             }
         }
     },
@@ -32,17 +20,11 @@ Vue.component("list-search-control-bind-to", {
         bindToProp :function(newValue) {
             console.log(newValue);
         },
-        bindToFieldProp:function (newValue) {
-            this.bindToField=newValue;
-        },
         defaultValueProp:function (newValue) {
             this.defaultValue=newValue;
             if(!StringUtility.IsNullOrEmpty(this.defaultValue.defaultType)){
                 this.tempData.defaultDisplayText=JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType,this.defaultValue.defaultText);
             }
-        },
-        validateRulesProp:function (newValue) {
-            this.validateRules=newValue;
         }
     },
     mounted:function(){
@@ -50,10 +32,10 @@ Vue.component("list-search-control-bind-to", {
         //var dataset=window.parent.listDesign.getDataSet();
     },
     methods:{
-        setCompleted:function(){
+        /*setCompleted:function(){
             this.$emit('on-set-completed', this.bindToField,this.defaultValue,this.validateRules)
         },
-        /*绑定字段*/
+        /!*绑定字段*!/
         selectBindFieldView:function () {
             //JBuild4DSelectView.SelectBindToField.beginSelectInFrame(window,"_SelectBindObj",{});
             //将当前对象附着到window上,提供给子窗体使用
@@ -90,7 +72,7 @@ Vue.component("list-search-control-bind-to", {
             return JsonUtility.CloneSimple(this.bindToField);
             //return this.bindTo;
         },
-        /*绑定默认值*/
+        /!*绑定默认值*!/
         selectDefaultValueView:function () {
             //var url = BaseUtility.BuildAction("/PlatForm/SelectView/SelectEnvVariable/Select", {instanceName: "_SelectBindObj"});
             //window.parent.JBuild4D.FormDesign.Dialog.ShowIframeDialogInDesignPage(window, url, {
@@ -116,7 +98,7 @@ Vue.component("list-search-control-bind-to", {
             }
             this.setCompleted();
         },
-        /*绑定验证规则*/
+        /!*绑定验证规则*!/
         selectValidateRuleView:function () {
             JBuild4DSelectView.SelectValidateRule.beginSelectInFrame(window,"_SelectBindObj",{});
             //将当前对象附着到window上,提供给子窗体使用
@@ -134,7 +116,7 @@ Vue.component("list-search-control-bind-to", {
         },
         getSelectValidateRuleResultValue:function () {
             return this.validateRules;
-        }
+        }*/
     },
     template: `<table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
                     <colgroup>

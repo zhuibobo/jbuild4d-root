@@ -11,7 +11,7 @@
     <div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak>
         <tabs size="small">
             <tab-pane label="绑定信息">
-                <list-search-control-bind-to :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" :validate-rules-prop="validateRules" @on-set-completed="setBindCompleted">
+                <list-search-control-bind-to :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" @on-set-completed="setBindCompleted">
                 </list-search-control-bind-to>
             </tab-pane>
             <tab-pane label="基础信息">
@@ -25,9 +25,7 @@
             el:"#dialogApp",
             data: {
                 baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
-                bindToField:CKEditorPluginUtility.DefaultProps.bindToField,
                 defaultValue: CKEditorPluginUtility.DefaultProps.defaultValue,
-                validateRules:CKEditorPluginUtility.DefaultProps.validateRules,
                 dataSetId:null
             },
             mounted:function () {
