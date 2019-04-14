@@ -216,7 +216,7 @@
             <column name="LOG_SYSTEM_NAME" type="NVARCHAR(200)"/>
             <column name="LOG_MODULE_NAME" type="NVARCHAR(200)"/>
             <column name="LOG_ACTION_NAME" type="NVARCHAR(200)"/>
-            <column name="LOG_DATA" type="TEXT"/>
+            <column name="LOG_DATA" type="clob"/>
             <column name="LOG_USER_ID" type="NVARCHAR(100)"/>
             <column name="LOG_USER_NAME" type="NVARCHAR(100)"/>
             <column name="LOG_ORGAN_ID" type="NVARCHAR(100)"/>
@@ -260,6 +260,7 @@
             <column name="HISTORY_RECORD_ID" type="NVARCHAR(100)" remarks="删除记录的主键值"/>
         </createTable>
     </changeSet>
+
 
     <!--模块构建-->
     <changeSet author="zhuangrb" id="changeSet-Module-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
@@ -986,4 +987,23 @@
         </createTable>
     </changeSet>
     <!--集成消息与待办-->
+
+    <changeSet author="zhuangrb" id="changeSet-fix-mssql-type-0001" objectQuotingStrategy="QUOTE_ALL_OBJECTS" dbms="mssql">
+
+        <modifyDataType tableName="TSYS_OPERATION_LOG" columnName="LOG_DATA" newDataType="ntext" />
+        <modifyDataType tableName="TSYS_HISTORY_DATA" columnName="HISTORY_RECORD" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_TABLE_RELATION" columnName="RELATION_CONTENT" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_TABLE_RELATION" columnName="RELATION_DIAGRAM_JSON" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_TABLE_RELATION_HIS" columnName="HIS_CONTENT" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_FORM_RESOURCE" columnName="FORM_HTML_SOURCE" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_FORM_RESOURCE" columnName="FORM_HTML_RESOLVE" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_FORM_RESOURCE" columnName="FORM_JS_CONTENT" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_FORM_RESOURCE" columnName="FORM_CSS_CONTENT" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_FORM_RESOURCE" columnName="FORM_CONFIG_CONTENT" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_LIST_RESOURCE" columnName="LIST_HTML_SOURCE" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_LIST_RESOURCE" columnName="LIST_HTML_RESOLVE" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_LIST_RESOURCE" columnName="LIST_JS_CONTENT" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_LIST_RESOURCE" columnName="LIST_CSS_CONTENT" newDataType="ntext" />
+        <modifyDataType tableName="TBUILD_LIST_RESOURCE" columnName="LIST_CONFIG_CONTENT" newDataType="ntext" />
+    </changeSet>
 </databaseChangeLog>
