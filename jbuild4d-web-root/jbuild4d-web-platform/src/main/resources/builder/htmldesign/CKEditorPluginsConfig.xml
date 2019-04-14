@@ -37,22 +37,46 @@
     <!--WebList设计相关插件-->
     <WebListControls>
         <Control SingleName="WLDCT_LayoutTemplate" Text="布局模版" ToolbarLocation="LC_Template,1"
-                 ServerResolve="" ClientResolve="2" ClientResolveJs="3"
+                 ServerResolve="" ClientResolve="" ClientResolveJs=""
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
             <Config></Config>
             <Desc></Desc>
         </Control>
         <Control SingleName="WLDCT_LayoutContainer" Text="布局区域" ToolbarLocation="LC_Template,2"
-                 ServerResolve="" ClientResolve="2" ClientResolveJs="3"
+                 ServerResolve="" ClientResolve="" ClientResolveJs=""
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="false">
+            <Config></Config>
+            <Desc></Desc>
+        </Control>
+        <Control SingleName="WLDCT_ListTemplate" Text="列表模版" ToolbarLocation="LC_Template,3"
+                 ServerResolve="" ClientResolve="" ClientResolveJs=""
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
             <Config></Config>
             <Desc></Desc>
         </Control>
-        <Control SingleName="WLDCT_GroupBy" Text="列表分组" ToolbarLocation="LC_Template,3"
-                 ServerResolve="" ClientResolve="2" ClientResolveJs="3"
+        <Control SingleName="WLDCT_ListSimpleSearchContainer" Text="列表-简单查询区域" ToolbarLocation="LC_Template,4"
+                 ServerResolve="" ClientResolve="" ClientResolveJs=""
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
             <Config></Config>
             <Desc></Desc>
         </Control>
+        <Control SingleName="WLDCT_ListButtonContainer" Text="列表-按钮区域" ToolbarLocation="LC_Template,5"
+                 ServerResolve="" ClientResolve="" ClientResolveJs=""
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
+            <Config></Config>
+            <Desc></Desc>
+        </Control>
+        <Control SingleName="WLDCT_ListTableContainer" Text="列表-表格区域" ToolbarLocation="LC_Template,6"
+                 ServerResolve="" ClientResolve="" ClientResolveJs=""
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
+            <Config></Config>
+            <Desc></Desc>
+        </Control>
+        <!--<Control SingleName="WLDCT_GroupBy" Text="列表分组" ToolbarLocation="LC_Template,3"
+                 ServerResolve="" ClientResolve="2" ClientResolveJs="3"
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
+            <Config></Config>
+            <Desc></Desc>
+        </Control>-->
     </WebListControls>
 </Config>
