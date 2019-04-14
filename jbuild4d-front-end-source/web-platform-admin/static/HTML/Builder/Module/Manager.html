@@ -29,7 +29,7 @@
                 <module-list-webform-comp :list-height="listHeight" :module-data="moduleData" :active-tab-name="selectedTabName"></module-list-webform-comp>
             </tab-pane>
             <tab-pane name="list-weblist" label="列表设计">
-                <module-list-weblist-comp :list-height="listHeight" :module-data="moduleData" :active-tab-name="selectedTabName"></module-list-weblist-comp>
+                <module-list-weblist-comp ref="moduleListWebListComp" :list-height="listHeight" :module-data="moduleData" :active-tab-name="selectedTabName"></module-list-weblist-comp>
             </tab-pane>
             <tab-pane name="list-flow" label="流程设计">
                 <module-list-flow-comp :list-height="listHeight" :module-data="moduleData" :active-tab-name="selectedTabName"></module-list-flow-comp>
@@ -149,6 +149,9 @@
                 // 根节点不触发任何事件
                 this.treeSelectedNode=treeNode;
                 this.moduleData=treeNode;
+                /*window.setTimeout(function () {
+                    appList.$refs.moduleListWebListComp.reloadData();
+                },500);*/
             },
             addModule:function () {
                 if (this.treeSelectedNode != null) {

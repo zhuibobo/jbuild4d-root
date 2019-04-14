@@ -2,6 +2,8 @@
 Vue.component("module-list-weblist-comp", {
     props:['listHeight','moduleData','activeTabName'],
     data: function () {
+        var _self=this;
+
         return {
             acInterface:{
                 editView: "/HTML/Builder/List/ListDesign.html",
@@ -9,7 +11,7 @@ Vue.component("module-list-weblist-comp", {
                 delete: "/PlatFormRest/Builder/List/Delete",
                 move: "/PlatFormRest/Builder/List/Move",
             },
-            idFieldName: "formId",
+            idFieldName: "listId",
             searchCondition: {
                 formModuleId: {
                     value: "",
@@ -46,7 +48,7 @@ Vue.component("module-list-weblist-comp", {
                     width: 100,
                     align: "center",
                     render: function (h, params) {
-                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.formUpdateTime);
+                        return ListPageUtility.IViewTableRenderer.ToDateYYYY_MM_DD(h, params.row.listUpdateTime);
                     }
                 }, {
                     title: '操作',
@@ -57,8 +59,8 @@ Vue.component("module-list-weblist-comp", {
                         //console.log(params);
                         //console.log(this);
                         return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,window._modulelistwebformcomp.idFieldName,window._modulelistwebformcomp)
+                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,_self.idFieldName,_self),
+                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,_self.idFieldName,_self)
                         ]);
                     }
                 }
@@ -75,7 +77,7 @@ Vue.component("module-list-weblist-comp", {
     mounted:function(){
         //this.reloadData();
         //将对象附加到window上,提供给后边进行操作
-        window._modulelistweblistcomp=this;
+        //window._modulelistweblistcomp=this;
         //alert(this.activeTabName);
         //alert(this.listHeight);
     },
@@ -115,7 +117,8 @@ Vue.component("module-list-weblist-comp", {
             this.selectionRows = selection;
         },
         reloadData: function () {
-            if(this.moduleData!=null&&this.activeTabName=="list-webform") {
+            //debugger;
+            if(this.moduleData!=null&&this.activeTabName=="list-weblist") {
                 this.searchCondition.formModuleId.value = this.moduleData.moduleId;
                 ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData, this.pageNum, this.pageSize, this.searchCondition, this, this.idFieldName, true, function (result,pageAppObj) {
                     pageAppObj.tableDataOriginal=result.data.list;
