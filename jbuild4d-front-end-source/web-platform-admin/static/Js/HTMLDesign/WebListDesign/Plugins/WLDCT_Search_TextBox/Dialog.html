@@ -11,7 +11,7 @@
     <div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak>
         <tabs size="small">
             <tab-pane label="绑定信息">
-                <list-search-control-bind-to ref="listSearchControlBindToComp" :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" @on-set-completed="setBindCompleted">
+                <list-search-control-bind-to ref="listSearchControlBindToComp" :bind-to-field-prop="bindToSearchField" :default-value-prop="defaultValue" @on-set-completed="setBindCompleted">
                 </list-search-control-bind-to>
             </tab-pane>
             <tab-pane label="基础信息">
@@ -26,7 +26,7 @@
             data: {
                 baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
                 defaultValue: CKEditorPluginUtility.DefaultProps.defaultValue,
-                bindToField:
+                bindToSearchField:CKEditorPluginUtility.DefaultProps.bindToSearchField,
                 dataSetId:null,
                 bindToField:null
             },

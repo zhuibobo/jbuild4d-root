@@ -13,7 +13,7 @@ Vue.component("module-list-weblist-comp", {
             },
             idFieldName: "listId",
             searchCondition: {
-                formModuleId: {
+                listModuleId: {
                     value: "",
                     type: SearchUtility.SearchFieldType.StringType
                 }
@@ -119,7 +119,7 @@ Vue.component("module-list-weblist-comp", {
         reloadData: function () {
             //debugger;
             if(this.moduleData!=null&&this.activeTabName=="list-weblist") {
-                this.searchCondition.formModuleId.value = this.moduleData.moduleId;
+                this.searchCondition.listModuleId.value = this.moduleData.moduleId;
                 ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadData, this.pageNum, this.pageSize, this.searchCondition, this, this.idFieldName, true, function (result,pageAppObj) {
                     pageAppObj.tableDataOriginal=result.data.list;
                 },false);

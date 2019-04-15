@@ -181,7 +181,7 @@ class CKEditorPluginUtility {
         bindToSearchField:{
             fieldName: "",
             fieldCaption: "",
-
+            fieldDataType: ""
         }
     }
     static OnCKWysiwygElemDBClickEvent(event,controlSetting){
