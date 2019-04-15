@@ -117,6 +117,7 @@ Vue.component("list-search-control-bind-to", {
             this.bindToSearchField.columnDataTypeName=columnVo.columnDataTypeName;
         },
         getData:function(){
+            console.log(this.bindToSearchField);
             return {
                 bindToSearchField:this.bindToSearchField,
                 defaultValue:this.defaultValue

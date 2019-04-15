@@ -330,6 +330,8 @@ class CKEditorPluginUtility {
                     selectedElem.copyAttributes(reFreshElem, {temp: "temp"});
                     this.SerializePropsToElem(reFreshElem,controlProps,controlSetting);
                     reFreshElem.replace(selectedElem);
+
+                    CKEditorUtility.SingleElemBindDefaultEvent(reFreshElem);
                 }
                 //SimpleControlUtil.CommInsertOrReplaceElemInCKEditor(exsetting.IFrameWindow,exsetting.IRCommandName,"");
             }
