@@ -1,5 +1,5 @@
-/*选择表组件*/
-Vue.component("select-single-table-dialog", {
+/*选择webform组件*/
+Vue.component("select-single-webform-dialog", {
     data: function () {
         return {
             acInterface: {
@@ -58,16 +58,13 @@ Vue.component("select-single-table-dialog", {
         handleClose: function () {
             DialogUtility.CloseDialogElem(this.$refs.selectTableModelDialogWrap);
         },
-        beginSelectTable:function () {
+        beginSelectForm:function () {
             //alert(PageStyleUtility.GetPageHeight());
-            var elem=this.$refs.selectTableModelDialogWrap;
+            var elem=this.$refs.selectModelDialogWrap;
             //debugger;
             this.getTableDataInitTree();
 
-            var height=450;
-            if(PageStyleUtility.GetPageHeight()>550){
-                height=600;
-            }
+            var height=500;
 
             DialogUtility.DialogElemObj(elem, {
                 modal: true,
@@ -105,9 +102,9 @@ Vue.component("select-single-table-dialog", {
             }
         }
     },
-    template: `<div ref="selectTableModelDialogWrap" class="c1-select-model-wrap general-edit-page-wrap" style="display: none">
+    template: `<div ref="selectModelDialogWrap" class="c1-select-model-wrap general-edit-page-wrap" style="display: none">
                     <div class="c1-select-model-source-wrap c1-select-model-source-has-buttons-wrap">
-                        <i-input search class="input_border_bottom" ref="txt_table_search_text" placeholder="请输入表名或者标题">
+                        <i-input search class="input_border_bottom" ref="txt_table_search_text" placeholder="请输入表单名称">
                         </i-input>
                         <div class="inner-wrap div-custom-scroll">
                             <ul ref="tableZTreeUL" class="ztree"></ul>
