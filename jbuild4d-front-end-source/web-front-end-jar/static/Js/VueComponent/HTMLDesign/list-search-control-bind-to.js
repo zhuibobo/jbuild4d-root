@@ -1,16 +1,18 @@
 /*查询字段绑定的Vue组件*/
 Vue.component("list-search-control-bind-to", {
-    props:["bindToFieldProp","dataSetId"],
+    props:["bindToSearchFieldProp","dataSetId"],
     data: function () {
+
+        var _self=this;
+
         return {
-            bindToField:{
-                tableId: "",
-                tableName: "",
-                tableCaption: "",
-                fieldName: "",
-                fieldCaption: "",
-                fieldDataType: "",
-                fieldLength:""
+            bindToSearchField:{
+                columnTitle:"",
+                columnTableName: "",
+                columnName: "",
+                columnCaption: "",
+                columnDataTypeName: "",
+                columnOperator: ""
             },
             tree: {
                 treeObj: null,
@@ -28,27 +30,19 @@ Vue.component("list-search-control-bind-to", {
                     },
                     data: {
                         key: {
-                            name: "displayText"
+                            name: "text"
                         },
                         simpleData: {//简单数据模式
                             enable: true,
                             idKey: "id",
-                            pIdKey: "parentId",
+                            pIdKey: "pid",
                             rootPId: "-1"// 1
                         }
                     },
                     callback: {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
-                            _self.selectedData.tableId = treeNode.tableId;
-                            _self.selectedData.tableName = treeNode.tableName;
-                            _self.selectedData.tableCaption = treeNode.tableCaption;
-                            _self.selectedData.fieldName = "";
-                            _self.selectedData.fieldCaption = "";
-                            _self.selectedData.fieldDataType = "";
-                            _self.selectedData.fieldLength = "";
-                            _self.fieldTable.fieldData = [];
-                            _self.filterAllFieldsToTable(_self.selectedData.tableId);
+                            _self.selectColumn(treeNode);
                         },
                         onDblClick: function (event, treeId, treeNode) {
 
@@ -66,7 +60,7 @@ Vue.component("list-search-control-bind-to", {
     //新增result的watch，监听变更同步到openStatus
     //监听父组件对props属性result的修改，并同步到组件内的data属性
     watch: {
-        bindToProp :function(newValue) {
+        bindToSearchFieldProp :function(newValue) {
             console.log(newValue);
         },
         defaultValueProp:function (newValue) {
@@ -83,9 +77,38 @@ Vue.component("list-search-control-bind-to", {
     methods:{
         init:function(dataSetVo){
             console.log(dataSetVo);
-        },
-        bindTreeData:function () {
+            //return;
+            var treeNodeArray=[];
+            //处理column数据为树数据
+            var treeNodeData=dataSetVo.columnVoList;
+            for(var i=0;i<treeNodeData.length;i++) {
+                var singleNode = treeNodeData[i];
+                singleNode.pid = dataSetVo.dsId;
+                singleNode.text = singleNode.columnCaption + "[" + singleNode.columnName + "]";
+                singleNode.nodeType = "DataSetColumn";
+                singleNode.id = singleNode.columnId;
+                singleNode.icon = BaseUtility.GetRootPath()+"/static/Themes/Png16X16/page.png";
+                treeNodeArray.push(singleNode);
+            }
 
+            //创建一个根节点
+            var rootNode={
+                pid:"-1",
+                text:dataSetVo.dsName,
+                id:dataSetVo.dsId,
+                nodeType:"DataSet"
+            };
+
+            treeNodeArray.push(rootNode);
+
+            this.tree.treeObj=$.fn.zTree.init($(this.$refs.zTreeUL), this.tree.treeSetting,treeNodeArray);
+            this.tree.treeObj.expandAll(true);
+        },
+        selectColumn:function (columnVo) {
+            this.bindToSearchField.columnTableName=columnVo.columnTableName;
+            this.bindToSearchField.columnName=columnVo.columnName;
+            this.bindToSearchField.columnCaption=columnVo.columnCaption;
+            this.bindToSearchField.columnDataTypeName=columnVo.columnDataTypeName;
         }
     },
     template: `<table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
@@ -99,10 +122,18 @@ Vue.component("list-search-control-bind-to", {
                             标题：
                         </td>
                         <td>
-                            <input type="text" />
+                            <input type="text" v-model="bindToSearchField.columnTitle" />
                         </td>
-                        <td rowspan="6">
-                            <ul class="ztree"></ul>
+                        <td rowspan="8" valign="top">
+                            <ul ref="zTreeUL" class="ztree"></ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            所属表：
+                        </td>
+                        <td>
+                            {{bindToSearchField.columnTableName}}
                         </td>
                     </tr>
                     <tr>
@@ -110,7 +141,7 @@ Vue.component("list-search-control-bind-to", {
                             绑定字段：
                         </td>
                         <td>
-                            
+                            {{bindToSearchField.columnCaption}}
                         </td>
                     </tr>
                     <tr>
@@ -118,7 +149,15 @@ Vue.component("list-search-control-bind-to", {
                             字段名称：
                         </td>
                         <td>
-                            
+                            {{bindToSearchField.columnName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            字段类型：
+                        </td>
+                        <td>
+                            {{bindToSearchField.columnDataTypeName}}
                         </td>
                     </tr>
                     <tr>
@@ -142,7 +181,7 @@ Vue.component("list-search-control-bind-to", {
                             备注：
                         </td>
                         <td>
-                            <textarea rows="15"></textarea>
+                            <textarea rows="10"></textarea>
                         </td>
                     </tr>
                 </table>`

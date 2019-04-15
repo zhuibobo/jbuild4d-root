@@ -76,7 +76,11 @@ public class SQLDataSetBuilder {
                     ResultSetMetaData resultSetMetaData=ps.getMetaData();
                     for(int i=1;i<=resultSetMetaData.getColumnCount();i++){
                         DataSetColumnVo columnVo=new DataSetColumnVo();
+                        System.out.println(resultSetMetaData.getColumnLabel(i));
+                        System.out.println(resultSetMetaData.getColumnName(i));
+                        System.out.println(resultSetMetaData.getTableName(i));
                         columnVo.setColumnName(resultSetMetaData.getColumnName(i));
+                        columnVo.setColumnTableName(resultSetMetaData.getTableName(i));
                         //System.out.println(resultSetMetaData.getColumnTypeName(i));
                         try {
                             TableFieldTypeEnum columnType=TableFieldTypeEnum.parseDBTypeTo(resultSetMetaData.getColumnTypeName(i));
