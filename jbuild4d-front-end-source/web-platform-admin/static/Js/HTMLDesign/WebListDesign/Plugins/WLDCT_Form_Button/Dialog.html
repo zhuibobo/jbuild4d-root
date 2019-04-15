@@ -12,7 +12,7 @@
 <div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak>
     <tabs size="small">
         <tab-pane label="绑定信息">
-            <select-single-webform-dialog ref="selectSingleWebformDialog"></select-single-webform-dialog>
+            <select-single-webform-dialog ref="selectSingleWebformDialog" @on-selected-form="onSelectedForm"></select-single-webform-dialog>
             <table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
                 <colgroup>
                     <col style="width: 100px" />
@@ -25,6 +25,7 @@
                 </tr>
                 <tr style="height: 35px">
                     <td colspan="4" style="background-color: #ffffff;">
+                        <span v-if="normalProps.formName!=''">模块：【{{normalProps.formModuleName}}】 ----  窗体：【{{normalProps.formName}}】 序号：【{{normalProps.formCode}}】</span>
                     </td>
                 </tr>
                 <tr>
@@ -139,8 +140,13 @@
         el:"#dialogApp",
         data: {
             baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
-            defaultValue: CKEditorPluginUtility.DefaultProps.defaultValue,
-            bindToSearchField:CKEditorPluginUtility.DefaultProps.bindToSearchField,
+            normalProps:{
+                formModuleId:"",
+                formModuleName:"",
+                formId:"",
+                formName:"",
+                formCode:""
+            },
             dataSetId:null,
             bindToField:null
         },
@@ -151,7 +157,13 @@
             selectWebFormBegin:function(){
                 this.$refs.selectSingleWebformDialog.beginSelectForm();
             },
-
+            onSelectedForm:function(formData){
+                this.normalProps.formModuleId=formData.formModuleId;
+                this.normalProps.formModuleName=formData.formModuleName;
+                this.normalProps.formId=formData.formId;
+                this.normalProps.formName=formData.formName;
+                this.normalProps.formCode=formData.formCode;
+            },
             ready:function(actionName,sel,parents){
                 this.baseInfo.id="txt_search_"+StringUtility.Timestamp();
                 this.baseInfo.name=this.baseInfo.id;

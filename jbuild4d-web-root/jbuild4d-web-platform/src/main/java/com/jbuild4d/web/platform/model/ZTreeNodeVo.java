@@ -3,7 +3,9 @@ package com.jbuild4d.web.platform.model;
 import com.jbuild4d.base.dbaccess.dbentities.builder.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -164,6 +166,7 @@ public class ZTreeNodeVo {
     }
 
     public static List<ZTreeNodeVo> parseWebFormToZTreeNodeList(List<ModuleEntity> moduleEntityList, List<FormResourceEntity> formResourceEntityList) {
+        Map<String,ModuleEntity> temp=new HashMap<>();
         List<ZTreeNodeVo> result=new ArrayList<>();
         for (ModuleEntity moduleEntity : moduleEntityList) {
             ZTreeNodeVo nodeVo=new ZTreeNodeVo();
@@ -175,6 +178,8 @@ public class ZTreeNodeVo {
             nodeVo.setNocheck(true);
             nodeVo.setNodeTypeName("Module");
             result.add(nodeVo);
+
+            temp.put(moduleEntity.getModuleId(),moduleEntity);
         }
 
         for (FormResourceEntity formResourceEntity : formResourceEntityList) {
@@ -183,6 +188,9 @@ public class ZTreeNodeVo {
             nodeVo.setValue(formResourceEntity.getFormId());
             nodeVo.setText(formResourceEntity.getFormName()+"【"+formResourceEntity.getFormCode()+"】");
             nodeVo.setAttr1(formResourceEntity.getFormName());
+            nodeVo.setAttr2(formResourceEntity.getFormCode());
+            nodeVo.setAttr3(temp.get(formResourceEntity.getFormModuleId()).getModuleText());
+            nodeVo.setAttr4(formResourceEntity.getFormModuleId());
             nodeVo.setParentId(formResourceEntity.getFormModuleId());
             nodeVo.setNodeTypeName("WebForm");
             nodeVo.setNocheck(false);

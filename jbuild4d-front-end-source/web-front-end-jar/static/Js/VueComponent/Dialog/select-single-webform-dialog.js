@@ -35,11 +35,8 @@ Vue.component("select-single-webform-dialog", {
                         //点击树节点事件
                         onClick: function (event, treeId, treeNode) {
                             var _self=this.getZTreeObj(treeId)._host;
-                            if (treeNode.nodeTypeName == "Table") {
-                                _self.selectedTable(event,treeId,treeNode);
-                            }
-                            else{
-                                _self.selectedTable(event,treeId,null);
+                            if (treeNode.nodeTypeName == "WebForm") {
+                                _self.selectedForm(event,treeId,treeNode);
                             }
                         }
                     }
@@ -47,7 +44,7 @@ Vue.component("select-single-webform-dialog", {
                 treeData: null,
                 clickNode:null
             },
-            selectedTableData:null
+            selectedFormData:null
         }
     },
     mounted:function(){
@@ -55,7 +52,7 @@ Vue.component("select-single-webform-dialog", {
     },
     methods:{
         handleClose: function () {
-            DialogUtility.CloseDialogElem(this.$refs.selectTableModelDialogWrap);
+            DialogUtility.CloseDialogElem(this.$refs.selectModelDialogWrap);
         },
         beginSelectForm:function () {
             //alert(PageStyleUtility.GetPageHeight());
@@ -91,29 +88,37 @@ Vue.component("select-single-webform-dialog", {
                     _self.tree.treeObj = $.fn.zTree.init($(_self.$refs.tableZTreeUL), _self.tree.treeSetting, _self.tree.treeData);
                     _self.tree.treeObj.expandAll(true);
                     _self.tree.treeObj._host=_self;
-                    fuzzySearchTreeObj(_self.tree.treeObj,_self.$refs.txt_table_search_text.$refs.input,null,true);
+                    fuzzySearchTreeObj(_self.tree.treeObj,_self.$refs.txt_form_search_text.$refs.input,null,true);
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                 }
             }, "json");
         },
-        selectedTable:function (event,treeId,tableData) {
-            this.selectedTableData=tableData;
+        selectedForm:function (event,treeId,formData) {
+            this.selectedFormData=formData;
         },
         completed:function () {
-            if(this.selectedTableData) {
-                this.$emit('on-selected-table', this.selectedTableData);
+            if(this.selectedFormData) {
+                var result={
+                    formModuleId:this.selectedFormData.attr4,
+                    formModuleName:this.selectedFormData.attr3,
+                    formId:this.selectedFormData.id,
+                    formName:this.selectedFormData.attr1,
+                    formCode:this.selectedFormData.attr2,
+                }
+
+                this.$emit('on-selected-form', result);
                 this.handleClose();
             }
             else{
-                DialogUtility.AlertText("请选择表!");
+                DialogUtility.AlertText("请选择窗体!");
             }
         }
     },
     template: `<div ref="selectModelDialogWrap" class="c1-select-model-wrap general-edit-page-wrap" style="display: none">
                     <div class="c1-select-model-source-wrap c1-select-model-source-has-buttons-wrap">
-                        <i-input search class="input_border_bottom" ref="txt_table_search_text" placeholder="请输入表单名称">
+                        <i-input search class="input_border_bottom" ref="txt_form_search_text" placeholder="请输入表单名称">
                         </i-input>
                         <div class="inner-wrap div-custom-scroll">
                             <ul ref="tableZTreeUL" class="ztree"></ul>
