@@ -378,7 +378,7 @@ class CKEditorPluginUtility {
         return "["+pluginSetting.ToolbarLabel+"] 绑定:["+props.bindToField.tableCaption+"-"+props.bindToField.fieldCaption+"]"
     }
     static GetSearchControlDescText(pluginSetting,props){
-        return "["+pluginSetting.ToolbarLabel+"] 绑定:["+props.bindToSearchField.columnCaption+"]"
+        return "["+pluginSetting.ToolbarLabel+"] 绑定:["+props.bindToSearchField.columnCaption+"]("+props.bindToSearchField.columnOperator+")"
     }
 
     static GetAutoRemoveTipLabel(tipMsg) {
