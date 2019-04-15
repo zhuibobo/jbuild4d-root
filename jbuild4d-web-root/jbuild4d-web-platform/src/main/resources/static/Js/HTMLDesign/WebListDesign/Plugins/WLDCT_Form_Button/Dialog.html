@@ -17,7 +17,7 @@
         },
         methods: {
             selectWebFormBegin:function(){
-                this.$refs.selectSingleWebformDialog.beginSelectForm();
+                this.$refs.selectSingleWebformDialog.beginSelectForm(this.normalProps.formId);
             },
             onSelectedForm:function(formData){
                 this.normalProps.formModuleId=formData.formModuleId;

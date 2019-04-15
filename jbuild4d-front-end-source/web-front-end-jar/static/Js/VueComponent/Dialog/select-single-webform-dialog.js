@@ -41,10 +41,10 @@ Vue.component("select-single-webform-dialog", {
                         }
                     }
                 },
-                treeData: null,
-                clickNode:null
+                treeData: null
             },
-            selectedFormData:null
+            selectedFormData:null,
+            oldSelectedFormId:""
         }
     },
     mounted:function(){
@@ -54,11 +54,13 @@ Vue.component("select-single-webform-dialog", {
         handleClose: function () {
             DialogUtility.CloseDialogElem(this.$refs.selectModelDialogWrap);
         },
-        beginSelectForm:function () {
+        beginSelectForm:function (formId) {
             //alert(PageStyleUtility.GetPageHeight());
             var elem=this.$refs.selectModelDialogWrap;
             //debugger;
             this.getFormDataInitTree();
+
+            this.oldSelectedFormId=formId;
 
             var height=500;
 
@@ -84,11 +86,19 @@ Vue.component("select-single-webform-dialog", {
                         }
                     }
 
-                    _self.$refs.tableZTreeUL.setAttribute("id","select-table-single-comp-"+StringUtility.Guid());
-                    _self.tree.treeObj = $.fn.zTree.init($(_self.$refs.tableZTreeUL), _self.tree.treeSetting, _self.tree.treeData);
+                    _self.$refs.formZTreeUL.setAttribute("id","select-form-single-comp-"+StringUtility.Guid());
+                    _self.tree.treeObj = $.fn.zTree.init($(_self.$refs.formZTreeUL), _self.tree.treeSetting, _self.tree.treeData);
                     _self.tree.treeObj.expandAll(true);
                     _self.tree.treeObj._host=_self;
                     fuzzySearchTreeObj(_self.tree.treeObj,_self.$refs.txt_form_search_text.$refs.input,null,true);
+
+                    //
+                    if(_self.oldSelectedFormId!=null&&_self.oldSelectedFormId!=""){
+
+                        var selectedNode=_self.tree.treeObj.getNodeByParam("id",_self.oldSelectedFormId);
+                        _self.tree.treeObj.selectNode(selectedNode);
+
+                    }
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
@@ -121,7 +131,7 @@ Vue.component("select-single-webform-dialog", {
                         <i-input search class="input_border_bottom" ref="txt_form_search_text" placeholder="请输入表单名称">
                         </i-input>
                         <div class="inner-wrap div-custom-scroll">
-                            <ul ref="tableZTreeUL" class="ztree"></ul>
+                            <ul ref="formZTreeUL" class="ztree"></ul>
                         </div>
                     </div>
                     <div class="button-outer-wrap" style="bottom: 12px;right: 12px">
