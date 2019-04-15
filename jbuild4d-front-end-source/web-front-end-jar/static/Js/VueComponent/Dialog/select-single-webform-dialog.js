@@ -6,7 +6,7 @@ Vue.component("select-single-webform-dialog", {
                 getTableDataUrl:"/PlatFormRest/Builder/Form/GetWebFormForZTreeNodeList"
             },
             jsEditorInstance:null,
-            tableTree: {
+            tree: {
                 treeObj: null,
                 treeSetting: {
                     view: {
@@ -61,7 +61,7 @@ Vue.component("select-single-webform-dialog", {
             //alert(PageStyleUtility.GetPageHeight());
             var elem=this.$refs.selectModelDialogWrap;
             //debugger;
-            this.getTableDataInitTree();
+            this.getFormDataInitTree();
 
             var height=500;
 
@@ -69,19 +69,29 @@ Vue.component("select-single-webform-dialog", {
                 modal: true,
                 width: 570,
                 height: height,
-                title: "选择表"
+                title: "选择窗体"
             });
         },
-        getTableDataInitTree:function () {
+        getFormDataInitTree:function () {
             var _self = this;
             AjaxUtility.Post(this.acInterface.getTableDataUrl, {}, function (result) {
                 if (result.success) {
-                    _self.tableTree.treeData = result.data;
+                    _self.tree.treeData = result.data;
+
+                    for(var i=0;i<_self.tree.treeData.length;i++){
+                        if(_self.tree.treeData[i].nodeTypeName=="WebForm"){
+                            _self.tree.treeData[i].icon=BaseUtility.GetRootPath()+"/static/Themes/Png16X16/table.png";
+                        }
+                        else if(_self.tree.treeData[i].nodeTypeName=="Module"){
+                            _self.tree.treeData[i].icon=BaseUtility.GetRootPath()+"/static/Themes/Png16X16/folder-table.png";
+                        }
+                    }
+
                     _self.$refs.tableZTreeUL.setAttribute("id","select-table-single-comp-"+StringUtility.Guid());
-                    _self.tableTree.treeObj = $.fn.zTree.init($(_self.$refs.tableZTreeUL), _self.tableTree.treeSetting, _self.tableTree.treeData);
-                    _self.tableTree.treeObj.expandAll(true);
-                    _self.tableTree.treeObj._host=_self;
-                    fuzzySearchTreeObj(_self.tableTree.treeObj,_self.$refs.txt_table_search_text.$refs.input,null,true);
+                    _self.tree.treeObj = $.fn.zTree.init($(_self.$refs.tableZTreeUL), _self.tree.treeSetting, _self.tree.treeData);
+                    _self.tree.treeObj.expandAll(true);
+                    _self.tree.treeObj._host=_self;
+                    fuzzySearchTreeObj(_self.tree.treeObj,_self.$refs.txt_table_search_text.$refs.input,null,true);
                 }
                 else {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
