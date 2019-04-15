@@ -141,74 +141,74 @@ Vue.component("fd-control-bind-to", {
             return this.validateRules;
         }
     },
-    template: '<table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">' +
-        '<colgroup>' +
-        '<col style="width: 100px" />' +
-        '<col style="width: 280px" />' +
-        '<col style="width: 100px" />' +
-        '<col />' +
-        '</colgroup>' +
-        '<tr>' +
-        '<td colspan="4">' +
-        '    绑定到表<button class="btn-select fright" v-on:click="selectBindFieldView">...</button>' +
-        '</td>' +
-        '</tr>' +
-        '<tr>'+
-        '<td>表编号：</td>' +
-        '<td colspan="3">{{bindToField.tableId}}</td>' +
-        '</tr>'+
-        '<tr>' +
-        '<td>表名：</td>' +
-        '<td>{{bindToField.tableName}}</td>' +
-        '<td>表标题：</td>' +
-        '<td>{{bindToField.tableCaption}}</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>字段名：</td>' +
-        '<td>{{bindToField.fieldName}}</td>' +
-        '<td>字段标题：</td>' +
-        '<td>{{bindToField.fieldCaption}}</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>类型：</td>' +
-        '<td>{{bindToField.fieldDataType}}</td>' +
-        '<td>长度：</td>' +
-        '<td>{{bindToField.fieldLength}}</td>' +
-        '</tr>' +
-        '<tr>'+
-        '<td colspan="4">默认值<button class="btn-select fright" v-on:click="selectDefaultValueView">...</button></td>'+
-        '</tr>'+
-        '<tr style="height: 35px">'+
-        '<td colspan="4" style="background-color: #ffffff;">' +
-        '{{tempData.defaultDisplayText}}'+
-        '</td>'+
-        '</tr>'+
-        '<tr>' +
-        '<td colspan="4">' +
-        '    校验规则<button class="btn-select fright" v-on:click="selectValidateRuleView">...</button>' +
-        '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td colspan="4" style="background-color: #ffffff">' +
-        '<table class="html-design-plugin-dialog-table-wraper">' +
-        '<colgroup>' +
-        '<col style="width: 100px" />' +
-        '<col />' +
-        '</colgroup>' +
-        '<tr>' +
-        '<td style="text-align: center;">提示消息：</td>' +
-        '<td>{{validateRules.msg}}</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td style="text-align: center;">验证类型</td>'+
-        '<td style="background: #e8eaec;text-align: center;">参数</td>'+
-        '</tr>'+
-        '<tr v-for="ruleItem in validateRules.rules">' +
-        '<td style="background: #ffffff;text-align: center;color: #ad9361">{{ruleItem.validateType}}</td>'+
-        '<td style="background: #ffffff;text-align: center;"><p v-if="ruleItem.validateParas === \'\'">无参数</p><p v-else>{{ruleItem.validateParas}}</p></td>'+
-        '</tr>'+
-        '</table>' +
-        '</td>' +
-        '</tr>' +
-        '</table>'
+    template: `<table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
+                    <colgroup>
+                        <col style="width: 100px" />
+                        <col style="width: 280px" />
+                        <col style="width: 100px" />
+                        <col />
+                    </colgroup>
+                    <tr>
+                        <td colspan="4">
+                            绑定到表<button class="btn-select fright" v-on:click="selectBindFieldView">...</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>表编号：</td>
+                        <td colspan="3">{{bindToField.tableId}}</td>
+                    </tr>
+                    <tr>
+                        <td>表名：</td>
+                        <td>{{bindToField.tableName}}</td>
+                        <td>表标题：</td>
+                        <td>{{bindToField.tableCaption}}</td>
+                    </tr>
+                    <tr>
+                        <td>字段名：</td>
+                        <td>{{bindToField.fieldName}}</td>
+                        <td>字段标题：</td>
+                        <td>{{bindToField.fieldCaption}}</td>
+                    </tr>
+                    <tr>
+                        <td>类型：</td>
+                        <td>{{bindToField.fieldDataType}}</td>
+                        <td>长度：</td>
+                        <td>{{bindToField.fieldLength}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">默认值<button class="btn-select fright" v-on:click="selectDefaultValueView">...</button></td>
+                    </tr>
+                    <tr style="height: 35px">
+                        <td colspan="4" style="background-color: #ffffff;">
+                        {{tempData.defaultDisplayText}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            校验规则<button class="btn-select fright" v-on:click="selectValidateRuleView">...</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="background-color: #ffffff">
+                            <table class="html-design-plugin-dialog-table-wraper">
+                                <colgroup>
+                                    <col style="width: 100px" />
+                                    <col />
+                                </colgroup>
+                                <tr>
+                                    <td style="text-align: center;">提示消息：</td>
+                                    <td>{{validateRules.msg}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">验证类型</td>
+                                    <td style="background: #e8eaec;text-align: center;">参数</td>
+                                </tr>
+                                <tr v-for="ruleItem in validateRules.rules">
+                                    <td style="background: #ffffff;text-align: center;color: #ad9361">{{ruleItem.validateType}}</td>
+                                    <td style="background: #ffffff;text-align: center;"><p v-if="ruleItem.validateParas === \'\'">无参数</p><p v-else>{{ruleItem.validateParas}}</p></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>`
 });

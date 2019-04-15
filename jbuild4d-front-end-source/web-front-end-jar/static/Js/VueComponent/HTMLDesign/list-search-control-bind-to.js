@@ -12,7 +12,7 @@ Vue.component("list-search-control-bind-to", {
                 columnName: "",
                 columnCaption: "",
                 columnDataTypeName: "",
-                columnOperator: ""
+                columnOperator: "匹配"
             },
             tree: {
                 treeObj: null,
@@ -165,7 +165,18 @@ Vue.component("list-search-control-bind-to", {
                             运算符：
                         </td>
                         <td>
-                            
+                            <i-select v-model="bindToSearchField.columnOperator" style="width:260px">
+                                <i-option value="等于">等于</i-option>
+                                <i-option value="匹配">匹配</i-option>
+                                <i-option value="不等于">不等于</i-option>
+                                <i-option value="大于">大于</i-option>
+                                <i-option value="大于等于">大于等于</i-option>
+                                <i-option value="小于">小于</i-option>
+                                <i-option value="小于等于">小于等于</i-option>
+                                <i-option value="左匹配">左匹配</i-option>
+                                <i-option value="右匹配">右匹配</i-option>
+                                <i-option value="包含">包含</i-option>
+                            </i-select>
                         </td>
                     </tr>
                     <tr>
