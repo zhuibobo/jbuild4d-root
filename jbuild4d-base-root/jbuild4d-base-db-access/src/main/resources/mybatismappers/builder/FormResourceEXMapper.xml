@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.FormResourceMapper">
-    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_FORM_RESOURCE ORDER by FORM_ORDER_NUM DESC</select>
-    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_FORM_RESOURCE ORDER by FORM_ORDER_NUM ASC</select>
+    <resultMap id="BaseResultMapSimple" type="com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity">
+        <id property="formId" column="FORM_ID" javaType="java.lang.String" jdbcType="NVARCHAR"></id>
+        <result property="formCode" column="FORM_CODE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formName" column="FORM_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formSingleName" column="FORM_SINGLE_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formCreateTime" column="FORM_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        <result property="formCreater" column="FORM_CREATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formUpdateTime" column="FORM_UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        <result property="formUpdater" column="FORM_UPDATER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formType" column="FORM_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formIssystem" column="FORM_ISSYSTEM" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formOrderNum" column="FORM_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result property="formDesc" column="FORM_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formModuleId" column="FORM_MODULE_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formStatus" column="FORM_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formOrganId" column="FORM_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formOrganName" column="FORM_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formMainTableName" column="FORM_MAIN_TABLE_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formMainTableCaption" column="FORM_MAIN_TABLE_CAPTION" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formDataRelation" column="FORM_DATA_RELATION" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formIsTemplate" column="FORM_IS_TEMPLATE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formIsResolve" column="FORM_IS_RESOLVE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formEveryTimeResolve" column="FORM_EVERY_TIME_RESOLVE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formSource" column="FORM_SOURCE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formContentUrl" column="FORM_CONTENT_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        <result property="formTheme" column="FORM_THEME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List_Simple">
+        FORM_ID, FORM_CODE, FORM_NAME, FORM_SINGLE_NAME, FORM_CREATE_TIME, FORM_CREATER,
+        FORM_UPDATE_TIME, FORM_UPDATER, FORM_TYPE, FORM_ISSYSTEM, FORM_ORDER_NUM, FORM_DESC,
+        FORM_MODULE_ID, FORM_STATUS, FORM_ORGAN_ID, FORM_ORGAN_NAME, FORM_MAIN_TABLE_NAME,
+        FORM_MAIN_TABLE_CAPTION, FORM_DATA_RELATION, FORM_IS_TEMPLATE, FORM_IS_RESOLVE, FORM_EVERY_TIME_RESOLVE,
+        FORM_SOURCE, FORM_CONTENT_URL, FORM_THEME
+    </sql>
+    <select id="selectAll" resultMap="BaseResultMapSimple">select<include refid="Base_Column_List_Simple"/> from TBUILD_FORM_RESOURCE ORDER by FORM_ORDER_NUM DESC</select>
+    <select id="selectAllASC" resultMap="BaseResultMapSimple">select<include refid="Base_Column_List_Simple"/> from TBUILD_FORM_RESOURCE ORDER by FORM_ORDER_NUM ASC</select>
     <delete id="deleteAll">delete from TBUILD_FORM_RESOURCE</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(FORM_ORDER_NUM) is null then 1 else max(FORM_ORDER_NUM)+1 end ORDERNUM from TBUILD_FORM_RESOURCE</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_FORM_RESOURCE<where>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List_Simple"/>from TBUILD_FORM_RESOURCE<where>
         <if test="formCode !=null and formCode !=''"> and FORM_CODE like #{formCode} </if>
         <if test="formName !=null and formName !=''"> and FORM_NAME like #{formName} </if>
         <if test="formSingleName !=null and formSingleName !=''"> and FORM_SINGLE_NAME like #{formSingleName} </if>
@@ -36,7 +70,7 @@
         <if test="formCssContent !=null and formCssContent !=''"> and FORM_CSS_CONTENT like #{formCssContent} </if>
         <if test="formConfigContent !=null and formConfigContent !=''"> and FORM_CONFIG_CONTENT like #{formConfigContent} </if>
     </where>ORDER by FORM_ORDER_NUM DESC</select>
-    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMapSimple">
         <![CDATA[
         select * from TBUILD_FORM_RESOURCE
         where FORM_ORDER_NUM = (
@@ -48,7 +82,7 @@
               FORM_MODULE_ID=#{formModuleId,jdbcType=NVARCHAR}
         ]]>
     </select>
-    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMapSimple">
         <![CDATA[
         select * from TBUILD_FORM_RESOURCE
         where FORM_ORDER_NUM = (

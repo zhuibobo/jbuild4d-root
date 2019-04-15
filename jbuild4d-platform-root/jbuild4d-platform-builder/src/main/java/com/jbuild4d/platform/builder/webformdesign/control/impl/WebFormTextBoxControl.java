@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.webformdesign.control.impl;
 
-import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs;
+import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.builder.vo.HtmlControlDefinitionVo;
 import com.jbuild4d.platform.builder.vo.RecordDataVo;
@@ -17,7 +17,7 @@ public class WebFormTextBoxControl extends WebFormControl implements IWebFormCon
     IDictionaryService dictionaryService;
 
     @Override
-    public void resolve(JB4DSession jb4DSession, FormResourceEntityWithBLOBs record, Document doc, Element singleControlElem, HtmlControlDefinitionVo htmlControlPluginDefinitionVo) {
+    public void resolve(JB4DSession jb4DSession, FormResourceEntity record, Document doc, Element singleControlElem, HtmlControlDefinitionVo htmlControlPluginDefinitionVo) {
         System.out.println(record.getFormHtmlSource());
         singleControlElem.tagName("input");
         singleControlElem.text("");
@@ -25,7 +25,7 @@ public class WebFormTextBoxControl extends WebFormControl implements IWebFormCon
     }
 
     @Override
-    public void dynamicBind(JB4DSession jb4DSession, FormResourceEntityWithBLOBs record, Document doc, Element singleControlElem, RecordDataVo recordDataVo, HtmlControlDefinitionVo htmlControlPluginDefinitionVo) {
+    public void dynamicBind(JB4DSession jb4DSession, FormResourceEntity record, Document doc, Element singleControlElem, RecordDataVo recordDataVo, HtmlControlDefinitionVo htmlControlPluginDefinitionVo) {
 
     }
 }

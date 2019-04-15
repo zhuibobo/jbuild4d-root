@@ -3,8 +3,7 @@ Vue.component("select-single-table-dialog", {
     data: function () {
         return {
             acInterface: {
-                getTableDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList",
-                getSingleOrganDataUrl:"/PlatFormRest/SSO/Organ/GetDetailData"
+                getTableDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetTablesForZTreeNodeList"
             },
             jsEditorInstance:null,
             tableTree: {

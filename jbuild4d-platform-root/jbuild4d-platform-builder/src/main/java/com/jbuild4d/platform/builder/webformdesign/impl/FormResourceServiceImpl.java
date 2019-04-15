@@ -1,7 +1,7 @@
 package com.jbuild4d.platform.builder.webformdesign.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.FormResourceMapper;
-import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs;
+import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IAddBefore;
@@ -23,7 +23,7 @@ import java.util.Date;
  * Date: 2018/11/13
  * To change this template use File | Settings | File Templates.
  */
-public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntityWithBLOBs> implements IFormResourceService {
+public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntity> implements IFormResourceService {
     FormResourceMapper formResourceMapper;
     IModuleService moduleService;
 
@@ -37,7 +37,7 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntityW
     }
 
     @Override
-    public int saveSimple(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record) throws JBuild4DGenerallyException {
+    public int saveSimple(JB4DSession jb4DSession, String id, FormResourceEntity record) throws JBuild4DGenerallyException {
 
         //修改时设置为未解析的状态.
         //record.setFormIsResolve(TrueFalseEnum.False.getDisplayName());
@@ -46,9 +46,9 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntityW
         record.setFormHtmlResolve(resolvedHtml);
         record.setFormIsResolve(TrueFalseEnum.True.getDisplayName());
 
-        return super.save(jb4DSession, id, record, new IAddBefore<FormResourceEntityWithBLOBs>() {
+        return super.save(jb4DSession, id, record, new IAddBefore<FormResourceEntity>() {
             @Override
-            public FormResourceEntityWithBLOBs run(JB4DSession jb4DSession, FormResourceEntityWithBLOBs sourceEntity) throws JBuild4DGenerallyException {
+            public FormResourceEntity run(JB4DSession jb4DSession, FormResourceEntity sourceEntity) throws JBuild4DGenerallyException {
                 //设置排序,以及其他参数--nextOrderNum()
                 sourceEntity.setFormOrderNum(formResourceMapper.nextOrderNum());
                 sourceEntity.setFormCreater(jb4DSession.getUserName());
@@ -68,19 +68,19 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntityW
 
     @Override
     public void moveUp(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
-        FormResourceEntityWithBLOBs selfEntity = formResourceMapper.selectByPrimaryKey(id);
-        FormResourceEntityWithBLOBs ltEntity = formResourceMapper.selectGreaterThanRecord(id, selfEntity.getFormModuleId());
+        FormResourceEntity selfEntity = formResourceMapper.selectByPrimaryKey(id);
+        FormResourceEntity ltEntity = formResourceMapper.selectGreaterThanRecord(id, selfEntity.getFormModuleId());
         switchOrder(ltEntity, selfEntity);
     }
 
     @Override
     public void moveDown(JB4DSession jb4DSession, String id) throws JBuild4DGenerallyException {
-        FormResourceEntityWithBLOBs selfEntity = formResourceMapper.selectByPrimaryKey(id);
-        FormResourceEntityWithBLOBs ltEntity = formResourceMapper.selectLessThanRecord(id, selfEntity.getFormModuleId());
+        FormResourceEntity selfEntity = formResourceMapper.selectByPrimaryKey(id);
+        FormResourceEntity ltEntity = formResourceMapper.selectLessThanRecord(id, selfEntity.getFormModuleId());
         switchOrder(ltEntity, selfEntity);
     }
 
-    private void switchOrder(FormResourceEntityWithBLOBs toEntity, FormResourceEntityWithBLOBs selfEntity) {
+    private void switchOrder(FormResourceEntity toEntity, FormResourceEntity selfEntity) {
         if (toEntity != null) {
             int newNum = toEntity.getFormOrderNum();
             toEntity.setFormOrderNum(selfEntity.getFormOrderNum());
@@ -97,7 +97,7 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntityW
 
     @Override
     public String getFormRuntimeHTMLContent(JB4DSession jb4DSession, String id, RecordDataVo recordDataVo) throws JBuild4DGenerallyException {
-        FormResourceEntityWithBLOBs formResourceEntityWithBLOBs=getByPrimaryKey(jb4DSession,id);
+        FormResourceEntity formResourceEntityWithBLOBs=getByPrimaryKey(jb4DSession,id);
         String runtimeForm=formRuntimeResolve.dynamicBind(jb4DSession,id,formResourceEntityWithBLOBs,formResourceEntityWithBLOBs.getFormHtmlResolve(),recordDataVo);
         return runtimeForm;
     }

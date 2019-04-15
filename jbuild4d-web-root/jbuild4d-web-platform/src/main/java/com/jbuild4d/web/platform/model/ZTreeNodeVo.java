@@ -1,9 +1,6 @@
 package com.jbuild4d.web.platform.model;
 
-import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity;
-import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
-import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +22,8 @@ public class ZTreeNodeVo {
     String attr4;
     String nodeTypeName;
     boolean nocheck;
+
+
 
     public boolean isNocheck() {
         return nocheck;
@@ -157,6 +156,35 @@ public class ZTreeNodeVo {
             nodeVo.setAttr1(datasetEntity.getDsCaption());
             nodeVo.setParentId(datasetEntity.getDsGroupId());
             nodeVo.setNodeTypeName("DataSet");
+            nodeVo.setNocheck(false);
+            result.add(nodeVo);
+        }
+
+        return result;
+    }
+
+    public static List<ZTreeNodeVo> parseWebFormToZTreeNodeList(List<ModuleEntity> moduleEntityList, List<FormResourceEntity> formResourceEntityList) {
+        List<ZTreeNodeVo> result=new ArrayList<>();
+        for (ModuleEntity moduleEntity : moduleEntityList) {
+            ZTreeNodeVo nodeVo=new ZTreeNodeVo();
+            nodeVo.setId(moduleEntity.getModuleId());
+            nodeVo.setValue(moduleEntity.getModuleValue());
+            nodeVo.setText(moduleEntity.getModuleText());
+            nodeVo.setAttr1(moduleEntity.getModuleText());
+            nodeVo.setParentId(moduleEntity.getModuleParentId());
+            nodeVo.setNocheck(true);
+            nodeVo.setNodeTypeName("Module");
+            result.add(nodeVo);
+        }
+
+        for (FormResourceEntity formResourceEntity : formResourceEntityList) {
+            ZTreeNodeVo nodeVo=new ZTreeNodeVo();
+            nodeVo.setId(formResourceEntity.getFormId());
+            nodeVo.setValue(formResourceEntity.getFormId());
+            nodeVo.setText(formResourceEntity.getFormName()+"【"+formResourceEntity.getFormCode()+"】");
+            nodeVo.setAttr1(formResourceEntity.getFormName());
+            nodeVo.setParentId(formResourceEntity.getFormModuleId());
+            nodeVo.setNodeTypeName("WebForm");
             nodeVo.setNocheck(false);
             result.add(nodeVo);
         }

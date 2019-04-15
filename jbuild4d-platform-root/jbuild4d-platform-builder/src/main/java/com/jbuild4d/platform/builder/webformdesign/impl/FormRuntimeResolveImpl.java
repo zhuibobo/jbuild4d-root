@@ -1,6 +1,6 @@
 package com.jbuild4d.platform.builder.webformdesign.impl;
 
-import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntityWithBLOBs;
+import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.core.base.tools.ClassUtility;
 import com.jbuild4d.platform.builder.htmldesign.HTMLControlAttrs;
@@ -25,7 +25,7 @@ public class FormRuntimeResolveImpl implements IFormRuntimeResolve {
     private AutowireCapableBeanFactory autowireCapableBeanFactory;
 
     @Override
-    public String resolveSourceHTML(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record) {
+    public String resolveSourceHTML(JB4DSession jb4DSession, String id, FormResourceEntity record) {
         String sourceHTML=record.getFormHtmlSource();
         if(sourceHTML!=null&&!sourceHTML.equals("")){
             //获取并构建窗体
@@ -55,7 +55,7 @@ public class FormRuntimeResolveImpl implements IFormRuntimeResolve {
     }
 
     @Override
-    public String dynamicBind(JB4DSession jb4DSession, String id, FormResourceEntityWithBLOBs record,String resolvedHtmlContent, RecordDataVo recordDataVo) {
+    public String dynamicBind(JB4DSession jb4DSession, String id, FormResourceEntity record,String resolvedHtmlContent, RecordDataVo recordDataVo) {
         return resolvedHtmlContent;
     }
 

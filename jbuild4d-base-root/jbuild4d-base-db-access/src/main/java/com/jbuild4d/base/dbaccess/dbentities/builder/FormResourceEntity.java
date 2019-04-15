@@ -7,16 +7,16 @@ import java.util.Date;
 /**
  *
  * This class was generated JBuild4D Creater,Custom By MyBatis Generator.
- * This class corresponds to the database table :tbuild_form_resource
+ * This class corresponds to the database table :nullTBUILD_FORM_RESOURCE
  *
  * @mbg.generated do_not_delete_during_merge
  */
 public class FormResourceEntity {
-    //FORM_ID:
+    //FORM_ID:主键:UUID
     @DBKeyField
     private String formId;
 
-    //FORM_CODE:窗体编号:无特殊作用,序列生成,便于查找
+    //FORM_CODE:窗体编号:无特殊作用,序列生成,便于查找,禁止用于开发
     private String formCode;
 
     //FORM_NAME:窗体名称
@@ -81,6 +81,21 @@ public class FormResourceEntity {
     //FORM_EVERY_TIME_RESOLVE:是否每次都进行服务端解析:默认为否,只解析一次
     private String formEveryTimeResolve;
 
+    //FORM_HTML_SOURCE:原始的HTML
+    private String formHtmlSource;
+
+    //FORM_HTML_RESOLVE:解析后的HTML
+    private String formHtmlResolve;
+
+    //FORM_JS_CONTENT:JS编辑器中的内容
+    private String formJsContent;
+
+    //FORM_CSS_CONTENT:CSS编辑器中的内容
+    private String formCssContent;
+
+    //FORM_CONFIG_CONTENT:配置编辑器中的内容
+    private String formConfigContent;
+
     //FORM_SOURCE:表单的来源:Web设计器,URL引入...
     private String formSource;
 
@@ -102,7 +117,7 @@ public class FormResourceEntity {
     //FORM_CUST_DESC:自定义设置备注:使用了自定义设置相关方法的备注说明
     private String formCustDesc;
 
-    public FormResourceEntity(String formId, String formCode, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formDataRelation, String formIsTemplate, String formIsResolve, String formEveryTimeResolve, String formSource, String formContentUrl, String formTheme, String formCustServerRenderer, String formCustRefJs, String formCustClientRenderer, String formCustDesc) {
+    public FormResourceEntity(String formId, String formCode, String formName, String formSingleName, Date formCreateTime, String formCreater, Date formUpdateTime, String formUpdater, String formType, String formIssystem, Integer formOrderNum, String formDesc, String formModuleId, String formStatus, String formOrganId, String formOrganName, String formMainTableName, String formMainTableCaption, String formDataRelation, String formIsTemplate, String formIsResolve, String formEveryTimeResolve, String formHtmlSource, String formHtmlResolve, String formJsContent, String formCssContent, String formConfigContent, String formSource, String formContentUrl, String formTheme, String formCustServerRenderer, String formCustRefJs, String formCustClientRenderer, String formCustDesc) {
         this.formId = formId;
         this.formCode = formCode;
         this.formName = formName;
@@ -125,6 +140,11 @@ public class FormResourceEntity {
         this.formIsTemplate = formIsTemplate;
         this.formIsResolve = formIsResolve;
         this.formEveryTimeResolve = formEveryTimeResolve;
+        this.formHtmlSource = formHtmlSource;
+        this.formHtmlResolve = formHtmlResolve;
+        this.formJsContent = formJsContent;
+        this.formCssContent = formCssContent;
+        this.formConfigContent = formConfigContent;
         this.formSource = formSource;
         this.formContentUrl = formContentUrl;
         this.formTheme = formTheme;
@@ -312,6 +332,46 @@ public class FormResourceEntity {
 
     public void setFormEveryTimeResolve(String formEveryTimeResolve) {
         this.formEveryTimeResolve = formEveryTimeResolve == null ? null : formEveryTimeResolve.trim();
+    }
+
+    public String getFormHtmlSource() {
+        return formHtmlSource;
+    }
+
+    public void setFormHtmlSource(String formHtmlSource) {
+        this.formHtmlSource = formHtmlSource == null ? null : formHtmlSource.trim();
+    }
+
+    public String getFormHtmlResolve() {
+        return formHtmlResolve;
+    }
+
+    public void setFormHtmlResolve(String formHtmlResolve) {
+        this.formHtmlResolve = formHtmlResolve == null ? null : formHtmlResolve.trim();
+    }
+
+    public String getFormJsContent() {
+        return formJsContent;
+    }
+
+    public void setFormJsContent(String formJsContent) {
+        this.formJsContent = formJsContent == null ? null : formJsContent.trim();
+    }
+
+    public String getFormCssContent() {
+        return formCssContent;
+    }
+
+    public void setFormCssContent(String formCssContent) {
+        this.formCssContent = formCssContent == null ? null : formCssContent.trim();
+    }
+
+    public String getFormConfigContent() {
+        return formConfigContent;
+    }
+
+    public void setFormConfigContent(String formConfigContent) {
+        this.formConfigContent = formConfigContent == null ? null : formConfigContent.trim();
     }
 
     public String getFormSource() {
