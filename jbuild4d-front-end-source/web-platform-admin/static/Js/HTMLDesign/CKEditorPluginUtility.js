@@ -323,6 +323,10 @@ class CKEditorPluginUtility {
                 var selectedElem=CKEditorUtility.GetSelectedCKEditorElem();
                 if(selectedElem) {
                     var reFreshElem = new CKEDITOR.dom.element.createFromHtml(selectedElem.getOuterHtml());
+                    if(reFreshElem.getAttribute("control_category")=="InputControl") {
+                        var newText = $(html).text();
+                        reFreshElem.setText(newText);
+                    }
                     selectedElem.copyAttributes(reFreshElem, {temp: "temp"});
                     this.SerializePropsToElem(reFreshElem,controlProps,controlSetting);
                     reFreshElem.replace(selectedElem);
