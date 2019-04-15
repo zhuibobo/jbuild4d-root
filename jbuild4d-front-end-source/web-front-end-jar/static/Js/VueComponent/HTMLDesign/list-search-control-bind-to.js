@@ -2,9 +2,7 @@
 Vue.component("list-search-control-bind-to", {
     props:["bindToSearchFieldProp","dataSetId"],
     data: function () {
-
         var _self=this;
-
         return {
             bindToSearchField:{
                 columnTitle:"",
@@ -13,6 +11,11 @@ Vue.component("list-search-control-bind-to", {
                 columnCaption: "",
                 columnDataTypeName: "",
                 columnOperator: "匹配"
+            },
+            defaultValue: {
+                defaultType: "",
+                defaultValue: "",
+                defaultText: ""
             },
             tree: {
                 treeObj: null,
@@ -54,6 +57,9 @@ Vue.component("list-search-control-bind-to", {
                     }
                 },
                 treeData: null
+            },
+            tempData:{
+                defaultDisplayText:""
             }
         }
     },
@@ -109,6 +115,22 @@ Vue.component("list-search-control-bind-to", {
             this.bindToSearchField.columnName=columnVo.columnName;
             this.bindToSearchField.columnCaption=columnVo.columnCaption;
             this.bindToSearchField.columnDataTypeName=columnVo.columnDataTypeName;
+        },
+        getData:function(){
+            return {
+                bindToSearchField:this.bindToSearchField,
+                defaultValue:this.defaultValue
+            }
+        },
+        setData:function(bindToSearchField,defaultValue) {
+            console.log(bindToSearchField);
+            this.bindToSearchField = bindToSearchField;
+            this.defaultValue = defaultValue;
+        },
+        /*绑定默认值*/
+        selectDefaultValueView:function () {
+            window._SelectBindObj = this;
+            window.parent.listDesign.selectDefaultValueDialogBegin(window,null);
         }
     },
     template: `<table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
@@ -124,7 +146,7 @@ Vue.component("list-search-control-bind-to", {
                         <td>
                             <input type="text" v-model="bindToSearchField.columnTitle" />
                         </td>
-                        <td rowspan="8" valign="top">
+                        <td rowspan="9" valign="top">
                             <ul ref="zTreeUL" class="ztree"></ul>
                         </td>
                     </tr>
@@ -180,11 +202,11 @@ Vue.component("list-search-control-bind-to", {
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            默认值：
-                        </td>
-                        <td>
-                            
+                        <td colspan="2">默认值<button class="btn-select fright" v-on:click="selectDefaultValueView">...</button></td>
+                    </tr>
+                    <tr style="height: 35px">
+                        <td colspan="2" style="background-color: #ffffff;">
+                            {{tempData.defaultDisplayText}}
                         </td>
                     </tr>
                     <tr>
@@ -192,7 +214,7 @@ Vue.component("list-search-control-bind-to", {
                             备注：
                         </td>
                         <td>
-                            <textarea rows="10"></textarea>
+                            <textarea rows="8"></textarea>
                         </td>
                     </tr>
                 </table>`

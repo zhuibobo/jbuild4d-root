@@ -179,9 +179,12 @@ class CKEditorPluginUtility {
             desc:""
         },
         bindToSearchField:{
-            fieldName: "",
-            fieldCaption: "",
-            fieldDataType: ""
+            columnTitle:"",
+            columnTableName: "",
+            columnName: "",
+            columnCaption: "",
+            columnDataTypeName: "",
+            columnOperator: "匹配"
         }
     }
     static OnCKWysiwygElemDBClickEvent(event,controlSetting){
@@ -257,6 +260,12 @@ class CKEditorPluginUtility {
             }
         }
 
+        if(props["bindToSearchField"]){
+            for (var key in props["bindToSearchField"]) {
+                elem.setAttribute(key.toLocaleLowerCase(), props["bindToSearchField"][key]);
+            }
+        }
+
         return elem;
     }
     static DeserializePropsFromElem(elem){
@@ -280,6 +289,7 @@ class CKEditorPluginUtility {
         props=attrToProp.call(this,props,"baseInfo");
         props=attrToProp.call(this,props,"bindToField");
         props=attrToProp.call(this,props,"defaultValue");
+        props=attrToProp.call(this,props,"bindToSearchField");
 
         if($elem.attr("validateRules")){
             props.validateRules=JsonUtility.StringToJson(decodeURIComponent($elem.attr("validateRules")));
@@ -361,6 +371,10 @@ class CKEditorPluginUtility {
         //console.log(props);
         return "["+pluginSetting.ToolbarLabel+"] 绑定:["+props.bindToField.tableCaption+"-"+props.bindToField.fieldCaption+"]"
     }
+    static GetSearchControlDescText(pluginSetting,props){
+        return "["+pluginSetting.ToolbarLabel+"] 绑定:["+props.bindToSearchField.columnCaption+"]"
+    }
+
     static GetAutoRemoveTipLabel(tipMsg) {
         if(!tipMsg){
             tipMsg="双击编辑该部件";

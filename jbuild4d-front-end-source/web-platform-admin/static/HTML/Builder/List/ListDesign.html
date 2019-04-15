@@ -135,6 +135,10 @@
         <tab-pane name="Be Referred" label="Be Referred"></tab-pane>
         <tab-pane name="Config" label="Config"></tab-pane>
     </tabs>
+    <div>
+        <!--各类对话框的引用-->
+        <select-default-value-dialog @on-selected-default-value="onSelectedDefaultValue" ref="selectDefaultValueDialog"></select-default-value-dialog>
+    </div>
 </div>
 
 <script>
@@ -197,6 +201,16 @@
             //this.bindStatusData();
         },
         methods: {
+            //region dialog
+            selectDefaultValueDialogBegin:function(targetWindow,oldData){
+                this.$refs.selectDefaultValueDialog.beginSelect(oldData);
+                this.selectDefaultValueTargetWindow=targetWindow;
+            },
+            onSelectedDefaultValue:function(result){
+                this.selectDefaultValueTargetWindow._SelectBindObj.setSelectEnvVariableResultValue(result);
+            },
+            //endregion
+
             initPageUI:function(){
                 $(".form-design-wraper").height(PageStyleUtility.GetWindowHeight()-60);
                 var _self=this;

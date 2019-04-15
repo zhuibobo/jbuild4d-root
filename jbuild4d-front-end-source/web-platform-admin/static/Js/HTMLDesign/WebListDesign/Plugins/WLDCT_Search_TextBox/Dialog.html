@@ -11,7 +11,7 @@
     <div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak>
         <tabs size="small">
             <tab-pane label="绑定信息">
-                <list-search-control-bind-to ref="listSearchControlBindToComp" :bind-to-field-prop="bindToSearchField" :default-value-prop="defaultValue" @on-set-completed="setBindCompleted">
+                <list-search-control-bind-to ref="listSearchControlBindToComp">
                 </list-search-control-bind-to>
             </tab-pane>
             <tab-pane label="基础信息">
@@ -35,7 +35,7 @@
             },
             methods: {
                 ready:function(actionName,sel,parents){
-                    this.baseInfo.id="txt_"+StringUtility.Timestamp();
+                    this.baseInfo.id="txt_search_"+StringUtility.Timestamp();
                     this.baseInfo.name=this.baseInfo.id;
 
                     this.dataSetId=CKEditorPluginUtility.TryGetDataSetId(sel,parents);
@@ -50,27 +50,23 @@
                         DialogUtility.AlertText("请先设定DataSet");
                     }
                 },
-                setBindCompleted:function(bindToField,defaultValue,validateRules){
-                    this.bindToField=bindToField;
-                    this.defaultValue=defaultValue;
-                    this.validateRules=validateRules;
-                },
                 getControlProps:function () {
+                    var bindData=this.$refs.listSearchControlBindToComp.getData();
                     var result = {
                         success: true,
                         baseInfo: this.baseInfo,
-                        bindToField: this.bindToField,
-                        defaultValue: this.defaultValue,
-                        validateRules: this.validateRules
+                        bindToSearchField: bindData.bindToSearchField,
+                        defaultValue: bindData.defaultValue
                     }
-                    return CKEditorPluginUtility.ValidateSerializeControlDialogCompletedEnable(result);
+                    return result;
                 },
                 setControlProps:function ($elem,props) {
                     console.log($elem.parent());
                     this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;
-                    this.bindToField = props.bindToField ? props.bindToField : this.bindToField;
+                    this.bindToSearchField = props.bindToSearchField ? props.bindToSearchField : this.bindToSearchField;
                     this.defaultValue = props.defaultValue ? props.defaultValue : this.defaultValue;
-                    this.validateRules = props.validateRules ? props.validateRules : this.validateRules;
+
+                    this.$refs.listSearchControlBindToComp.setData(this.bindToSearchField,this.defaultValue);
                 }
             }
         });
