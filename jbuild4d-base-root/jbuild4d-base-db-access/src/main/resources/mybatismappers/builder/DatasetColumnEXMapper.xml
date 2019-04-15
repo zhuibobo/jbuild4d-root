@@ -12,6 +12,7 @@
         <if test="columnDsId !=null and columnDsId !=''"> and COLUMN_DS_ID like #{columnDsId} </if>
         <if test="columnCaption !=null and columnCaption !=''"> and COLUMN_CAPTION like #{columnCaption} </if>
         <if test="columnName !=null and columnName !=''"> and COLUMN_NAME like #{columnName} </if>
+        <if test="columnDataTypeName !=null and columnDataTypeName !=''"> and COLUMN_DATA_TYPE_NAME like #{columnDataTypeName} </if>
         <if test="columnCreater !=null and columnCreater !=''"> and COLUMN_CREATER like #{columnCreater} </if>
         <if test="columnUpdater !=null and columnUpdater !=''"> and COLUMN_UPDATER like #{columnUpdater} </if>
         <if test="columnDesc !=null and columnDesc !=''"> and COLUMN_DESC like #{columnDesc} </if>
@@ -19,6 +20,8 @@
         <if test="columnDefaultValue !=null and columnDefaultValue !=''"> and COLUMN_DEFAULT_VALUE like #{columnDefaultValue} </if>
         <if test="columnDefaultText !=null and columnDefaultText !=''"> and COLUMN_DEFAULT_TEXT like #{columnDefaultText} </if>
         <if test="columnTableName !=null and columnTableName !=''"> and COLUMN_TABLE_NAME like #{columnTableName} </if>
+        <if test="columnIsCustom !=null and columnIsCustom !=''"> and COLUMN_IS_CUSTOM like #{columnIsCustom} </if>
+        <if test="columnFormatter !=null and columnFormatter !=''"> and COLUMN_FORMATTER like #{columnFormatter} </if>
     </where>ORDER by COLUMN_ORDER_NUM DESC</select>
     <select id="selectByDataSetId" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_DATASET_COLUMN where COLUMN_DS_ID=#{dataSetId} ORDER by COLUMN_ORDER_NUM ASC</select>
     <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TBUILD_DATASET_COLUMN

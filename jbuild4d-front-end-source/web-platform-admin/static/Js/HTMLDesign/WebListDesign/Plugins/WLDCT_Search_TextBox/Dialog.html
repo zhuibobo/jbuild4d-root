@@ -11,7 +11,7 @@
     <div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak>
         <tabs size="small">
             <tab-pane label="绑定信息">
-                <list-search-control-bind-to :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" @on-set-completed="setBindCompleted">
+                <list-search-control-bind-to ref="listSearchControlBindToComp" :bind-to-field-prop="bindToField" :default-value-prop="defaultValue" @on-set-completed="setBindCompleted">
                 </list-search-control-bind-to>
             </tab-pane>
             <tab-pane label="基础信息">
@@ -26,7 +26,9 @@
             data: {
                 baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
                 defaultValue: CKEditorPluginUtility.DefaultProps.defaultValue,
-                dataSetId:null
+                bindToField:
+                dataSetId:null,
+                bindToField:null
             },
             mounted:function () {
 
@@ -36,30 +38,17 @@
                     this.baseInfo.id="txt_"+StringUtility.Timestamp();
                     this.baseInfo.name=this.baseInfo.id;
 
-                    //从html中查找datasetId;
-                    if(sel){
-                        for(var i=parents.length-1;i--;i>=0){
-                            if(parents[i].getAttribute("datasetid")!=null&&parents[i].getAttribute("datasetid")!=""){
-                                console.log(parents[i].getAttribute("datasetid"));
-                                this.dataSetId=parents[i].getAttribute("datasetid");
-                            }
-                        }
+                    this.dataSetId=CKEditorPluginUtility.TryGetDataSetId(sel,parents);
+                    this.bindDataSetFieldTree();
+                },
+                bindDataSetFieldTree:function(){
+                    if(this.dataSetId){
+                        var dataSetVo=window.parent.listDesign.getDataSet(this.dataSetId);
+                        this.$refs.listSearchControlBindToComp.init(dataSetVo);
                     }
-                    //如果查找不到,则使用基础属性中的dataSetId
-                    if(!this.dataSetId){
-                        console.log(window.parent.listDesign.listResourceEntity.listDatasetId);
-                        this.dataSetId=window.parent.listDesign.listResourceEntity.listDatasetId;
-                    }
-                    if(!this.dataSetId){
+                    else {
                         DialogUtility.AlertText("请先设定DataSet");
                     }
-                    else{
-                        this.bindDataSetFieldTree(this.dataSetId);
-                    }
-                },
-                bindDataSetFieldTree:function(dataSetId){
-                    var dataSetVo=window.parent.listDesign.getDataSet(dataSetId);
-                    console.log(dataSetVo);
                 },
                 setBindCompleted:function(bindToField,defaultValue,validateRules){
                     this.bindToField=bindToField;

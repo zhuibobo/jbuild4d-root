@@ -1,6 +1,8 @@
 package com.jbuild4d.platform.builder.dataset.builder;
 
+import com.jbuild4d.core.base.exception.JBuild4DBaseException;
 import com.jbuild4d.core.base.session.JB4DSession;
+import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
 import com.jbuild4d.platform.builder.vo.DataSetRelatedTableVo;
 import com.jbuild4d.platform.builder.vo.DataSetVo;
@@ -75,6 +77,13 @@ public class SQLDataSetBuilder {
                     for(int i=1;i<=resultSetMetaData.getColumnCount();i++){
                         DataSetColumnVo columnVo=new DataSetColumnVo();
                         columnVo.setColumnName(resultSetMetaData.getColumnName(i));
+                        //System.out.println(resultSetMetaData.getColumnTypeName(i));
+                        try {
+                            TableFieldTypeEnum columnType=TableFieldTypeEnum.parseDBTypeTo(resultSetMetaData.getColumnTypeName(i));
+                            columnVo.setColumnDataTypeName(columnType.getText());
+                        } catch (JBuild4DBaseException e) {
+                            throw new SQLException(e.getMessage());
+                        }
                         dataSetColumnVoList.add(columnVo);
                         //System.out.println(resultSetMetaData.getColumnName(i));
                         //System.out.println(resultSetMetaData.getTableName(i));

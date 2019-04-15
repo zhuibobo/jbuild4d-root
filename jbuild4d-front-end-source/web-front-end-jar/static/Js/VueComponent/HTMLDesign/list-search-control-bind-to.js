@@ -1,6 +1,6 @@
 /*查询字段绑定的Vue组件*/
 Vue.component("list-search-control-bind-to", {
-    props:["bindToFieldProp"],
+    props:["bindToFieldProp","dataSetId"],
     data: function () {
         return {
             bindToField:{
@@ -11,6 +11,55 @@ Vue.component("list-search-control-bind-to", {
                 fieldCaption: "",
                 fieldDataType: "",
                 fieldLength:""
+            },
+            tree: {
+                treeObj: null,
+                treeSetting: {
+                    view: {
+                        dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                        showLine: true,//是否显示节点之间的连线
+                        fontCss: {'color': 'black', 'font-weight': 'normal'}
+                    },
+                    check: {
+                        enable: false,
+                        nocheckInherit: false,
+                        chkStyle: "radio",
+                        radioType: "all"
+                    },
+                    data: {
+                        key: {
+                            name: "displayText"
+                        },
+                        simpleData: {//简单数据模式
+                            enable: true,
+                            idKey: "id",
+                            pIdKey: "parentId",
+                            rootPId: "-1"// 1
+                        }
+                    },
+                    callback: {
+                        //点击树节点事件
+                        onClick: function (event, treeId, treeNode) {
+                            _self.selectedData.tableId = treeNode.tableId;
+                            _self.selectedData.tableName = treeNode.tableName;
+                            _self.selectedData.tableCaption = treeNode.tableCaption;
+                            _self.selectedData.fieldName = "";
+                            _self.selectedData.fieldCaption = "";
+                            _self.selectedData.fieldDataType = "";
+                            _self.selectedData.fieldLength = "";
+                            _self.fieldTable.fieldData = [];
+                            _self.filterAllFieldsToTable(_self.selectedData.tableId);
+                        },
+                        onDblClick: function (event, treeId, treeNode) {
+
+                        },
+                        //成功的回调函数
+                        onAsyncSuccess: function (event, treeId, treeNode, msg) {
+
+                        }
+                    }
+                },
+                treeData: null
             }
         }
     },
@@ -32,91 +81,12 @@ Vue.component("list-search-control-bind-to", {
         //var dataset=window.parent.listDesign.getDataSet();
     },
     methods:{
-        /*setCompleted:function(){
-            this.$emit('on-set-completed', this.bindToField,this.defaultValue,this.validateRules)
+        init:function(dataSetVo){
+            console.log(dataSetVo);
         },
-        /!*绑定字段*!/
-        selectBindFieldView:function () {
-            //JBuild4DSelectView.SelectBindToField.beginSelectInFrame(window,"_SelectBindObj",{});
-            //将当前对象附着到window上,提供给子窗体使用
-            window._SelectBindObj = this;
-            window.parent.appForm.selectBindToSingleFieldDialogBegin(window,this.getSelectFieldResultValue());
-        },
-        setSelectFieldResultValue:function (result) {
-            //debugger;
-            this.bindToField={};
-            if(result!=null){
-                this.bindToField.fieldName=result.fieldName;
-                this.bindToField.tableId=result.tableId;
-                this.bindToField.tableName=result.tableName;
-                this.bindToField.tableCaption=result.tableCaption;
-                this.bindToField.fieldCaption=result.fieldCaption;
-                this.bindToField.fieldDataType=result.fieldDataType;
-                this.bindToField.fieldLength=result.fieldLength;
-            }
-            else {
-                this.bindToField.fieldName = "";
-                this.bindToField.tableId = "";
-                this.bindToField.tableName = "";
-                this.bindToField.tableCaption = "";
-                this.bindToField.fieldCaption = "";
-                this.bindToField.fieldDataType = "";
-                this.bindToField.fieldLength = "";
-            }
+        bindTreeData:function () {
 
-            this.setCompleted();
-            //alert(result);
-        },
-        getSelectFieldResultValue:function () {
-            //debugger;
-            return JsonUtility.CloneSimple(this.bindToField);
-            //return this.bindTo;
-        },
-        /!*绑定默认值*!/
-        selectDefaultValueView:function () {
-            //var url = BaseUtility.BuildAction("/PlatForm/SelectView/SelectEnvVariable/Select", {instanceName: "_SelectBindObj"});
-            //window.parent.JBuild4D.FormDesign.Dialog.ShowIframeDialogInDesignPage(window, url, {
-            //    modal: true,
-            //    title: "选择默认值"
-            //});
-            JBuild4DSelectView.SelectEnvVariable.beginSelectInFrame(window,"_SelectBindObj",{});
-            //将当前对象附着到window上,提供给子窗体使用
-            window._SelectBindObj = this;
-        },
-        setSelectEnvVariableResultValue:function(result){
-            if(result!=null) {
-                this.defaultValue.defaultType = result.Type;
-                this.defaultValue.defaultValue = result.Value;
-                this.defaultValue.defaultText = result.Text;
-                this.tempData.defaultDisplayText = JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType, this.defaultValue.defaultText);
-            }
-            else {
-                this.defaultValue.defaultType = "";
-                this.defaultValue.defaultValue = "";
-                this.defaultValue.defaultText = "";
-                this.tempData.defaultDisplayText = "";
-            }
-            this.setCompleted();
-        },
-        /!*绑定验证规则*!/
-        selectValidateRuleView:function () {
-            JBuild4DSelectView.SelectValidateRule.beginSelectInFrame(window,"_SelectBindObj",{});
-            //将当前对象附着到window上,提供给子窗体使用
-            window._SelectBindObj = this;
-        },
-        setSelectValidateRuleResultValue:function (result) {
-            if(result!=null){
-                this.validateRules=result;
-                this.setCompleted();
-            }
-            else{
-                this.validateRules.msg="";
-                this.validateRules.rules=[];
-            }
-        },
-        getSelectValidateRuleResultValue:function () {
-            return this.validateRules;
-        }*/
+        }
     },
     template: `<table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
                     <colgroup>
@@ -132,7 +102,7 @@ Vue.component("list-search-control-bind-to", {
                             <input type="text" />
                         </td>
                         <td rowspan="6">
-                        
+                            <ul class="ztree"></ul>
                         </td>
                     </tr>
                     <tr>

@@ -40,8 +40,8 @@ public enum TableFieldTypeEnum {
         return result;
     }
 
-    public static JBuild4DBaseException NotSupportException() throws JBuild4DBaseException {
-        return new JBuild4DBaseException(0,"TableFieldTypeEnum.ThrowNotSupportException 不支持当前数据类型！"){};
+    public static JBuild4DBaseException NotSupportException(String type) throws JBuild4DBaseException {
+        return new JBuild4DBaseException(0,"TableFieldTypeEnum.ThrowNotSupportException 不支持当前数据类型！["+type+"]"){};
     }
 
     public static TableFieldTypeEnum parseText(String text) throws JBuild4DBaseException {
@@ -60,9 +60,24 @@ public enum TableFieldTypeEnum {
         else if(text.equals(TableFieldTypeEnum.TextType._nText)){
             return TableFieldTypeEnum.TextType;
         }
-        throw NotSupportException();
+        throw NotSupportException(text);
     }
 
+    public static TableFieldTypeEnum parseDBTypeTo(String text) throws JBuild4DBaseException {
+        if(text.toUpperCase().equals("NVARCHAR")||text.toUpperCase().equals("VARCHAR")){
+            return TableFieldTypeEnum.NVarCharType;
+        }
+        else if(text.toUpperCase().equals("DATETIME")){
+            return TableFieldTypeEnum.DataTimeType;
+        }
+        else if(text.toUpperCase().equals("INT")){
+            return TableFieldTypeEnum.IntType;
+        }
+        else if(text.toUpperCase().equals("NTEXT")){
+            return TableFieldTypeEnum.TextType;
+        }
+        throw NotSupportException(text);
+    }
     /*public static TableFieldTypeEnum parseCode(String _nValue) throws JBuild4DBaseException {
         if(_nValue==TableFieldTypeEnum.IntType._nValue){
             return TableFieldTypeEnum.IntType;

@@ -177,6 +177,11 @@ class CKEditorPluginUtility {
             disabled:"nodisabled",
             style:"",
             desc:""
+        },
+        bindToSearchField:{
+            fieldName: "",
+            fieldCaption: "",
+
         }
     }
     static OnCKWysiwygElemDBClickEvent(event,controlSetting){
@@ -361,5 +366,31 @@ class CKEditorPluginUtility {
             tipMsg="双击编辑该部件";
         }
         return '<div runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">'+tipMsg+'</div>';
+    }
+
+    static TryGetDataSetId(sel,parents){
+        //从html中查找datasetId;
+        if(sel){
+            for(var i=parents.length-1;i--;i>=0){
+                if(parents[i].getAttribute("datasetid")!=null&&parents[i].getAttribute("datasetid")!=""){
+                    console.log(parents[i].getAttribute("datasetid"));
+                    //this.dataSetId=parents[i].getAttribute("datasetid");
+                    return parents[i].getAttribute("datasetid");
+                }
+            }
+        }
+        //如果查找不到,则使用基础属性中的dataSetId
+        if(!this.dataSetId){
+            //console.log(window.parent.listDesign.listResourceEntity.listDatasetId);
+            //this.dataSetId=window.parent.listDesign.listResourceEntity.listDatasetId;
+            return window.parent.listDesign.listResourceEntity.listDatasetId;
+        }
+        return null;
+        /*if(!this.dataSetId){
+            DialogUtility.AlertText("请先设定DataSet");
+        }
+        else{
+            this.bindDataSetFieldTree(this.dataSetId);
+        }*/
     }
 }

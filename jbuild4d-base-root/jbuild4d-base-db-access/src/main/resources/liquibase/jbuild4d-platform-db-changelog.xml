@@ -498,25 +498,26 @@
             <column name="DS_ORGAN_NAME" type="NVARCHAR(100)" remarks="组织名称"/>
         </createTable>
 
-        <createTable tableName="TBUILD_DATASET_COLUMN">
-            <column name="COLUMN_ID" type="NVARCHAR(100)">
+        <createTable tableName="TBUILD_DATASET_COLUMN" remarks="数据集包含的列描述表">
+            <column name="COLUMN_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="COLUMN_DS_ID" type="NVARCHAR(100)"/>
-            <column name="COLUMN_CAPTION" type="NVARCHAR(200)"/>
-            <column name="COLUMN_NAME" type="NVARCHAR(200)"/>
-            <column name="COLUMN_CREATE_TIME" type="datetime(6)"/>
-            <column name="COLUMN_CREATER" type="NVARCHAR(100)"/>
-            <column name="COLUMN_UPDATE_TIME" type="datetime(6)"/>
-            <column name="COLUMN_UPDATER" type="NVARCHAR(100)"/>
-            <column name="COLUMN_DESC" type="NVARCHAR(1000)"/>
-            <column name="COLUMN_DEFAULT_TYPE" type="NVARCHAR(50)"/>
-            <column name="COLUMN_DEFAULT_VALUE" type="NVARCHAR(1000)"/>
-            <column name="COLUMN_DEFAULT_TEXT" type="NVARCHAR(400)"/>
-            <column name="COLUMN_ORDER_NUM" type="INT"/>
-            <column name="COLUMN_TABLE_NAME" type="NVARCHAR(50)"/>
-            <column name="COLUMN_IS_CUSTOM" type="NVARCHAR(10)"/>
-            <column name="COLUMN_FORMATTER" type="NVARCHAR(200)"/>
+            <column name="COLUMN_DS_ID" type="NVARCHAR(100)" remarks="所属数据集ID"/>
+            <column name="COLUMN_CAPTION" type="NVARCHAR(200)" remarks="列标题"/>
+            <column name="COLUMN_NAME" type="NVARCHAR(200)" remarks="列名"/>
+            <column name="COLUMN_DATA_TYPE_NAME" type="NVARCHAR(200)" remarks="数据类型"/>
+            <column name="COLUMN_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="COLUMN_CREATER" type="NVARCHAR(100)" remarks="创建人"/>
+            <column name="COLUMN_UPDATE_TIME" type="datetime(6)" remarks="更新时间"/>
+            <column name="COLUMN_UPDATER" type="NVARCHAR(100)" remarks="更新人"/>
+            <column name="COLUMN_DESC" type="NVARCHAR(1000)" remarks="备注"/>
+            <column name="COLUMN_DEFAULT_TYPE" type="NVARCHAR(50)" remarks="默认值类型"/>
+            <column name="COLUMN_DEFAULT_VALUE" type="NVARCHAR(1000)" remarks="默认值"/>
+            <column name="COLUMN_DEFAULT_TEXT" type="NVARCHAR(400)" remarks="默认值描述"/>
+            <column name="COLUMN_ORDER_NUM" type="INT" remarks="排序号"/>
+            <column name="COLUMN_TABLE_NAME" type="NVARCHAR(50)" remarks="所属表名"/>
+            <column name="COLUMN_IS_CUSTOM" type="NVARCHAR(10)" remarks="是否自定义"/>
+            <column name="COLUMN_FORMATTER" type="NVARCHAR(400)" remarks="格式化方法"/>
         </createTable>
 
         <createTable tableName="TBUILD_DATASET_RELATED_TABLE">
