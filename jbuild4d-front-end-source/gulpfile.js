@@ -84,7 +84,7 @@ gulp.task('Jar-JS-UIComponent',()=>{
         }))
         .pipe(sourcemaps.init())
         .pipe(concat('UIEXComponent.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(jarToResourcePath + "/Js"));
 });

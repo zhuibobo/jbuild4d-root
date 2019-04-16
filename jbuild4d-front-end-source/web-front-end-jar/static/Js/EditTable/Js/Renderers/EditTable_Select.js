@@ -39,13 +39,53 @@ var EditTable_Select={
             val=viewStausHtmlElem.attr("Value");
         }
 
-        var txt=configSource[val]
+        //var txt=configSource[val]
 
-        var $elem=$("<select />");
-        for(var i=0;i<configSource.length;i++) {
-            var item=configSource[i];
-            $elem.append("<option Value='"+item.Value+"' Text='"+item.Text+"'>"+item.Text+"</option>");
+        /*configSource=[{
+            group:"name",
+            options:[{
+                value:"1",
+                text:"2"
+            },{
+                value:"",
+                text:""
+            }]
+        },{
+            group:"name",
+            options:[{
+                value:"",
+                text:""
+            },{
+                value:"",
+                text:""
+            }]
+        }]*/
+
+        //debugger;
+        var $elem=$("<select style='width: 100%' />");
+
+        if(configSource[0].group) {
+            for (var i = 0; i < configSource.length; i++) {
+                var optgroup=$("<optgroup />");
+                optgroup.attr("label",configSource[i].group);
+                if(configSource[i].options){
+                    for(var j=0;j<configSource[i].options.length;j++){
+                        var option=$("<option />");
+                        option.attr("value",configSource[i].options[j].value);
+                        option.text(configSource[i].options[j].value);
+                        optgroup.append(option);
+                    }
+                }
+                $elem.append(optgroup);
+            }
         }
+        else{
+            for (var i = 0; i < configSource.length; i++) {
+                //var item=configSource[i];
+                //$elem.append("<option Value='"+item.Value+"' Text='"+item.Text+"'>"+item.Text+"</option>");
+            }
+        }
+
         $elem.val(val);
 
         if(typeof(template.ChangeEvent)=="function") {

@@ -4,6 +4,7 @@ Vue.component("inner-form-button-list-comp", {
         var _self=this;
 
         return {
+
             columnsConfig: [
                 {
                     title: '表单名称',
@@ -47,6 +48,10 @@ Vue.component("inner-form-button-list-comp", {
             ],
             normalProps:{},
             api:{
+                acInterface: {
+                    getButtonApiConfig: "/PlatFormRest/Builder/Button/ButtonApi/GetButtonApiConfig",
+                },
+                apiSelectData:null,
                 editTableObject:null,
                 editTableConfig:{
                     Status: "Edit",
@@ -57,9 +62,8 @@ Vue.component("inner-form-button-list-comp", {
                             Title: "API名称",
                             BindName: "Value",
                             Renderer: "EditTable_Select",
-                            TitleCellClassName: "TitleCell"/*,
-                            ClientDataSourceFunc: this.GetAPIListSelect*/
-
+                            TitleCellClassName: "TitleCell"
+                            /*ClientDataSource: _self.api.apiSelectData*/
                         }, {
                             Title: "调用顺序",
                             BindName: "RunTime",
@@ -110,8 +114,8 @@ Vue.component("inner-form-button-list-comp", {
     },
     mounted:function(){
         //alert(1);
-        this.api.editTableObject = Object.create(EditTable);
-        this.api.editTableObject.Initialization(this.api.editTableConfig);
+
+        this.getApiConfigAndBindToTable();
     },
     methods:{
         getJson:function () {
@@ -120,6 +124,55 @@ Vue.component("inner-form-button-list-comp", {
         setJson:function () {
 
         },
+        //region api列表
+        getApiConfigAndBindToTable:function(){
+            var _self=this;
+            AjaxUtility.Post(this.api.acInterface.getButtonApiConfig,{},function (result) {
+                console.log(result);
+                //var apiSelectData
+                var apiSelectData=[];
+
+                for(var i=0;i<result.data.length;i++){
+                    var group={
+                        group:result.data[i].name
+                    }
+                    var options=[];
+                    for(var j=0;j<result.data[i].buttonAPIVoList.length;j++){
+                        options.push({
+                            value:result.data[i].buttonAPIVoList[j].id,
+                            text:result.data[i].buttonAPIVoList[j].name
+                        });
+                    }
+                    group["options"]=options;
+                    apiSelectData.push(group);
+                }
+
+                /*configSource=[{
+                    group:"name",
+                    options:[{
+                        value:"1",
+                        text:"2"
+                    },{
+                        value:"",
+                        text:""
+                    }]
+                },{
+                    group:"name",
+                    options:[{
+                        value:"",
+                        text:""
+                    },{
+                        value:"",
+                        text:""
+                    }]
+                }]*/
+
+                _self.api.editTableConfig.Templates[0].ClientDataSource=apiSelectData;
+                _self.api.editTableObject = Object.create(EditTable);
+                _self.api.editTableObject.Initialization(_self.api.editTableConfig);
+            },"json");
+        },
+        //endregion
         addInnerFormButton:function(){
             var elem=this.$refs.innerFormButtonEdit;
 
@@ -134,7 +187,7 @@ Vue.component("inner-form-button-list-comp", {
             $(window.document).find(".ui-dialog").css("zIndex",10101);
         },
         addAPI:function () {
-
+            this.api.editTableObject.AddEditingRowByTemplate();
         },
         removeAPI:function () {
 
