@@ -45,11 +45,73 @@ Vue.component("inner-form-button-list-comp", {
                     formName:"123"
                 }
             ],
-            normalProps:{}
+            normalProps:{},
+            api:{
+                editTableObject:null,
+                editTableConfig:{
+                    Status: "Edit",
+                    AddAfterRowEvent: null,
+                    DataField: "fieldName",
+                    Templates: [
+                        {
+                            Title: "API名称",
+                            BindName: "Value",
+                            Renderer: "EditTable_Select",
+                            TitleCellClassName: "TitleCell"/*,
+                            ClientDataSourceFunc: this.GetAPIListSelect*/
+
+                        }, {
+                            Title: "调用顺序",
+                            BindName: "RunTime",
+                            Renderer: "EditTable_Select",
+                            ClientDataSource: [{"Text": "之前", "Value": "之前"}, {"Text": "之后", "Value": "之后"}],
+                            Width: 100
+                        }
+                    ],
+                    RowIdCreater: function () {
+                    },
+                    TableClass: "edit-table",
+                    RendererTo: "apiContainer",
+                    TableId: "apiContainerTable",
+                    TableAttrs: {cellpadding: "1", cellspacing: "1", border: "1"}
+                }
+            },
+            field:{
+                editTableObject:null,
+                editTableConfig:{
+                    Status: "Edit",
+                    AddAfterRowEvent: null,
+                    DataField: "fieldName",
+                    Templates: [
+                        {
+                            Title: "API名称",
+                            BindName: "Value",
+                            Renderer: "EditTable_Select",
+                            TitleCellClassName: "TitleCell"/*,
+                            ClientDataSourceFunc: this.GetAPIListSelect*/
+
+                        }, {
+                            Title: "调用顺序",
+                            BindName: "RunTime",
+                            Renderer: "EditTable_Select",
+                            ClientDataSource: [{"Text": "之前", "Value": "之前"}, {"Text": "之后", "Value": "之后"}],
+                            Width: 100
+                        }
+                    ],
+                    RowIdCreater: function () {
+                    },
+                    TableClass: "edit-table",
+                    RendererTo: "apiContainer",
+                    TableId: "apiContainerTable",
+                    TableAttrs: {cellpadding: "1", cellspacing: "1", border: "1"}
+                }
+            }
         }
     },
     mounted:function(){
-
+        //alert(1);
+        this.api.editTableObject = Object.create(EditTable);
+        this.api.editTableObject.Initialization(this.api.editTableConfig);
     },
     methods:{
         getJson:function () {
@@ -64,22 +126,28 @@ Vue.component("inner-form-button-list-comp", {
             DialogUtility.DialogElemObj(elem, {
                 modal: true,
                 height: 520,
-                width: 620,
+                width: 720,
                 title: "窗体内按钮"
             });
 
             $(window.document).find(".ui-widget-overlay").css("zIndex",10100);
             $(window.document).find(".ui-dialog").css("zIndex",10101);
+        },
+        addAPI:function () {
+
+        },
+        removeAPI:function () {
+
         }
     },
     template: `<div style="height: 210px" class="">
-                    <div ref="innerFormButtonEdit" class="html-design-plugin-dialog-wraper" style="display: none">
+                    <div ref="innerFormButtonEdit" class="html-design-plugin-dialog-wraper general-edit-page-wrap" style="display: none">
                         <tabs size="small">
                             <tab-pane label="绑定信息">
                                 <table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
                                     <colgroup>
-                                        <col style="width: 100px" />
-                                        <col style="width: 180px" />
+                                        <col style="width: 60px" />
+                                        <col style="width: 220px" />
                                         <col style="width: 100px" />
                                         <col />
                                     </colgroup>
@@ -100,13 +168,24 @@ Vue.component("inner-form-button-list-comp", {
                                         <tr>
                                             <td>API：</td>
                                             <td colspan="3">
-                                                <div style="height: 150px"></div>
+                                                <div style="height: 140px">
+                                                    <div style="width: 98%;margin: auto">
+                                                        <div style="float: right;margin-bottom: 8px">
+                                                            <button-group>
+                                                                <i-button size="small" type="success" icon="md-add" @click="addAPI"></i-button>
+                                                                <i-button size="small" type="primary" icon="md-close" @click="removeAPI"></i-button>
+                                                            </button-group>
+                                                        </div>
+                                                        <div style="clear: bottom"></div>
+                                                    </div>
+                                                    <div id="apiContainer" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 98%;margin: auto"></div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>字段：</td>
                                             <td colspan="3">
-                                                <div style="height: 150px"></div>
+                                                <div style="height: 140px"></div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -124,7 +203,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 服务端解析类：
                                             </td>
                                             <td>
-                                                <i-input v-model="normalProps.serverResolveMethod" placeholder="按钮进行服务端解析时,类全称,将调用该类,需要实现接口IFormButtonCustResolve" />
+                                                <i-input v-model="normalProps.serverResolveMethod" size="small" placeholder="按钮进行服务端解析时,类全称,将调用该类,需要实现接口IFormButtonCustResolve" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -132,7 +211,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 参数：
                                             </td>
                                             <td>
-                                                <i-input v-model="normalProps.serverResolveMethodPara" placeholder="服务端解析类的参数" />
+                                                <i-input v-model="normalProps.serverResolveMethodPara" size="small" placeholder="服务端解析类的参数" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -140,7 +219,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 客户端渲染方法：
                                             </td>
                                             <td>
-                                                <i-input v-model="normalProps.clientRendererMethod" placeholder="客户端渲染方法,按钮将经由该方法渲染,最终形成页面元素,需要返回最终元素的HTML对象" />
+                                                <i-input v-model="normalProps.clientRendererMethod" size="small" placeholder="客户端渲染方法,按钮将经由该方法渲染,最终形成页面元素,需要返回最终元素的HTML对象" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -148,7 +227,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 参数：
                                             </td>
                                             <td>
-                                                <i-input v-model="normalProps.clientRendererMethodPara" placeholder="客户端渲染方法的参数" />
+                                                <i-input v-model="normalProps.clientRendererMethodPara" size="small" placeholder="客户端渲染方法的参数" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -156,7 +235,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 客户端渲染后方法：
                                             </td>
                                             <td>
-                                                <i-input v-model="normalProps.clientRendererAfterMethod" placeholder="客户端渲染后调用方法,经过默认的渲染,无返回值" />
+                                                <i-input v-model="normalProps.clientRendererAfterMethod" size="small" placeholder="客户端渲染后调用方法,经过默认的渲染,无返回值" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -164,7 +243,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 参数：
                                             </td>
                                             <td>
-                                                <i-input v-model="normalProps.clientRendererAfterMethodPara" placeholder="客户端渲染后方法的参数" />
+                                                <i-input v-model="normalProps.clientRendererAfterMethodPara" size="small" placeholder="客户端渲染后方法的参数" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -172,7 +251,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 客户端点击前方法：
                                             </td>
                                             <td>
-                                                <i-input v-model="normalProps.clientClickBeforeMethod" placeholder="客户端点击该按钮时的前置方法,如果返回false将阻止默认调用" />
+                                                <i-input v-model="normalProps.clientClickBeforeMethod" size="small" placeholder="客户端点击该按钮时的前置方法,如果返回false将阻止默认调用" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -180,13 +259,21 @@ Vue.component("inner-form-button-list-comp", {
                                                 参数：
                                             </td>
                                             <td>
-                                                <i-input v-model="normalProps.clientClickBeforeMethodPara" placeholder="客户端点击前方法的参数" />
+                                                <i-input v-model="normalProps.clientClickBeforeMethodPara" size="small" placeholder="客户端点击前方法的参数" />
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </tab-pane>
                         </tabs>
+                        <div class="button-outer-wrap">
+                            <div class="button-inner-wrap">
+                                <button-group>
+                                    <i-button type="primary" @click="saveEditTable()"> 保 存</i-button>
+                                    <i-button @click="handleClose()">关 闭</i-button>
+                                </button-group>
+                            </div>
+                        </div>
                     </div>
                     <div style="height: 30px">
                         <div style="float: right;">
