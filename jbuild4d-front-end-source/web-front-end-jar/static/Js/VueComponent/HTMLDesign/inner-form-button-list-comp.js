@@ -190,7 +190,7 @@ Vue.component("inner-form-button-list-comp", {
             this.api.editTableObject.AddEditingRowByTemplate();
         },
         removeAPI:function () {
-
+            this.api.editTableObject.RemoveRow();
         }
     },
     template: `<div style="height: 210px" class="">
