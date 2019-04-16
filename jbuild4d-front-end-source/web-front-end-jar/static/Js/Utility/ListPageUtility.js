@@ -297,6 +297,28 @@ var ListPageUtility={
                 }
             });
         },
+        MoveUpButton:function (h, params,idField,pageAppObj) {
+            return h('div', {
+                class: "list-row-button move-up",
+                on: {
+                    click: function () {
+                        //debugger;
+                        pageAppObj.moveUp(params.row[idField],params);
+                    }
+                }
+            });
+        },
+        MoveDownButton:function (h, params,idField,pageAppObj) {
+            return h('div', {
+                class: "list-row-button move-down",
+                on: {
+                    click: function () {
+                        //debugger;
+                        pageAppObj.moveDown(params.row[idField],params);
+                    }
+                }
+            });
+        },
         SelectedButton:function (h, params,idField,pageAppObj) {
             return h('div', {
                 class: "list-row-button selected",

@@ -100,6 +100,12 @@ var EditTable_Select={
     Get_CompletedStatus_HtmlElem:function(_config,template,hostCell,hostRow,hostTable,editStausHtmlElem) {
         var val = editStausHtmlElem.find("option:selected").attr("Value");
         var text = editStausHtmlElem.find("option:selected").attr("Text");
+        if(!val){
+            val="";
+        }
+        if(!text){
+            text="";
+        }
         var $elem = $("<label IsSerialize='true' BindName='"+template.BindName+"' Value='"+val+"' Text='"+text+"'>" + text + "</label>");
         return $elem;
     },
