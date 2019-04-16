@@ -29,6 +29,18 @@ Vue.component("inner-form-button-list-comp", {
             tableData: [
                 {
                     formName:"123"
+                },{
+                    formName:"123"
+                },{
+                    formName:"123"
+                },{
+                    formName:"123"
+                },{
+                    formName:"123"
+                },{
+                    formName:"123"
+                },{
+                    formName:"123"
                 }
             ]
         }
@@ -44,7 +56,7 @@ Vue.component("inner-form-button-list-comp", {
 
         }
     },
-    template: `<div style="height: 170px" class="">
+    template: `<div style="height: 210px" class="">
                     <div style="height: 30px">
                         <div style="float: right;">
                             <ButtonGroup size="small">
@@ -52,7 +64,7 @@ Vue.component("inner-form-button-list-comp", {
                             </ButtonGroup>
                         </div>
                     </div>
-                    <i-table :height="listHeight" stripe border :columns="columnsConfig" :data="tableData"
+                    <i-table :height="180" stripe border :columns="columnsConfig" :data="tableData"
                                                  class="iv-list-table" :highlight-row="true"
                                                  @on-selection-change="selectionChange" size="small" :show-header="false"></i-table>
                 </div>`

@@ -59,13 +59,7 @@
                                 <radio label="Dialog">对话框</radio>
                                 <radio label="NewWindow">新窗口</radio>
                             </radio-group>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            宽度 * 高度：
-                        </td>
-                        <td colspan="3">
+                            &nbsp;&nbsp;宽度 * 高度&nbsp;&nbsp;：
                             <input-number :max="50" :min="5" v-model="normalProps.windowWidth"></input-number>&nbsp;&nbsp;*&nbsp;&nbsp;
                             <input-number :max="50" :min="5" v-model="normalProps.windowHeight"></input-number>&nbsp;&nbsp;
                             <button-group size="small">
@@ -89,7 +83,7 @@
                             窗体标题：
                         </td>
                         <td>
-                            <input type="text" v-model="normalProps.windowCaption" />
+                            <i-input v-model="normalProps.windowCaption" size="small" />
                         </td>
                     </tr>
                     <tr>
