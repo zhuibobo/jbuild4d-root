@@ -56,7 +56,17 @@ var EditTable_SelectDefaultValue={
         window.$Temp$Inputtxt=$inputTxt;
         $inputBtn.click(function(){
             //JBuild4DSelectView.SelectEnvVariable.beginSelect("EditTable_SelectDefaultValue");
-            tableDesion.selectDefaultValueDialogBegin(EditTable_SelectDefaultValue,null)
+            if(window.tableDesion) {
+                tableDesion.selectDefaultValueDialogBegin(EditTable_SelectDefaultValue, null)
+            }
+            else{
+                window.parent.listDesign.selectDefaultValueDialogBegin(window,null);
+                window._SelectBindObj={
+                    setSelectEnvVariableResultValue:function (result) {
+                        EditTable_SelectDefaultValue.setSelectEnvVariableResultValue(result);
+                    }
+                }
+            }
         });
         return $elem;
     },

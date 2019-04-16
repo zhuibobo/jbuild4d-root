@@ -61,6 +61,10 @@ var JsonUtility = {
         var newJson = jQuery.extend(true,{}, source);
         return newJson;
     },
+    CloneStringify:function(source){
+        var newJson=this.JsonToString(source);
+        return this.StringToJson(newJson);
+    },
     JsonToString:function (obj) {
         return JSON.stringify(obj);
     },

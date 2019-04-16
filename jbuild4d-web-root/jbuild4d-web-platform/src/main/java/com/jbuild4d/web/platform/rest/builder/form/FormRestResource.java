@@ -4,9 +4,13 @@ import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity;
 import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.base.service.general.JB4DSessionUtility;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
+import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
+import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.module.IModuleService;
+import com.jbuild4d.platform.builder.vo.TableFieldVO;
 import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
 import com.jbuild4d.web.platform.model.ZTreeNodeVo;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -26,6 +31,9 @@ public class FormRestResource extends GeneralRestResource<FormResourceEntity> {
 
     @Autowired
     IModuleService moduleService;
+
+    @Autowired
+    ITableFieldService tableFieldService;
 
     @Override
     protected IBaseService<FormResourceEntity> getBaseService() {
@@ -62,5 +70,12 @@ public class FormRestResource extends GeneralRestResource<FormResourceEntity> {
         catch (Exception ex){
             return JBuild4DResponseVo.error(ex.getMessage());
         }
+    }
+
+    @RequestMapping(value = "GetFormMainTableFields",method = RequestMethod.POST)
+    public JBuild4DResponseVo getFormMainTableFields(String formId) throws JBuild4DGenerallyException, IOException {
+        FormResourceEntity formResourceEntity=formResourceService.getByPrimaryKey(JB4DSessionUtility.getSession(),formId);
+        List<TableFieldVO> tableFieldVOList=tableFieldService.getTableFieldsByTableName(formResourceEntity.getFormMainTableName());
+        return JBuild4DResponseVo.getDataSuccess(tableFieldVOList);
     }
 }

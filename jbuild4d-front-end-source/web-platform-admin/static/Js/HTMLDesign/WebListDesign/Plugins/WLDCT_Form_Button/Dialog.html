@@ -121,7 +121,7 @@
                             内部按钮：
                         </td>
                         <td colspan="3">
-                            <inner-form-button-list-comp></inner-form-button-list-comp>
+                            <inner-form-button-list-comp :form-id="normalProps.formId"></inner-form-button-list-comp>
                         </td>
                     </tr>
                 </tbody>
@@ -255,6 +255,7 @@
                 this.normalProps.formId=formData.formId;
                 this.normalProps.formName=formData.formName;
                 this.normalProps.formCode=formData.formCode;
+                console.log(this.normalProps);
             },
             ready:function(actionName,sel,parents){
                 this.baseInfo.id="form_button_"+StringUtility.Timestamp();

@@ -64,16 +64,16 @@ var EditTable_Select={
         //debugger;
         var $elem=$("<select style='width: 100%' />");
 
-        if(configSource[0].group) {
+        if(configSource[0].Group) {
             for (var i = 0; i < configSource.length; i++) {
                 var optgroup=$("<optgroup />");
-                optgroup.attr("label",configSource[i].group);
-                if(configSource[i].options){
-                    for(var j=0;j<configSource[i].options.length;j++){
+                optgroup.attr("label",configSource[i].Group);
+                if(configSource[i].Options){
+                    for(var j=0;j<configSource[i].Options.length;j++){
                         var option=$("<option />");
-                        option.attr("value",configSource[i].options[j].value);
-                        option.attr("Text",configSource[i].options[j].text);
-                        option.text(configSource[i].options[j].text);
+                        option.attr("value",configSource[i].Options[j].Value);
+                        option.attr("text",configSource[i].Options[j].Text);
+                        option.text(configSource[i].Options[j].Text);
                         optgroup.append(option);
                     }
                 }

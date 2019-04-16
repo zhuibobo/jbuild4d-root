@@ -97,6 +97,9 @@ Vue.component("inner-form-button-list-comp", {
                 }
             },
             field:{
+                acInterface: {
+                    getFormMainTableFields: "/PlatFormRest/Builder/Form/GetFormMainTableFields",
+                },
                 editTableObject:null,
                 editTableConfig:{
                     Status: "Edit",
@@ -104,25 +107,25 @@ Vue.component("inner-form-button-list-comp", {
                     DataField: "fieldName",
                     Templates: [
                         {
-                            Title: "API名称",
-                            BindName: "Value",
-                            Renderer: "EditTable_Select",
-                            TitleCellClassName: "TitleCell"/*,
-                            ClientDataSourceFunc: this.GetAPIListSelect*/
-
+                            Title: "表名标题",
+                            BindName: "TableName",
+                            Renderer: "EditTable_Label"
                         }, {
-                            Title: "调用顺序",
-                            BindName: "RunTime",
-                            Renderer: "EditTable_Select",
-                            ClientDataSource: [{"Text": "之前", "Value": "之前"}, {"Text": "之后", "Value": "之后"}],
-                            Width: 100
+                            Title: "字段标题",
+                            BindName: "FieldName",
+                            Renderer: "EditTable_Select"
+                        },{
+                            Title:"默认值",
+                            BindName:"DefaultValue",
+                            Renderer:"EditTable_SelectDefaultValue",
+                            Hidden:false
                         }
                     ],
                     RowIdCreater: function () {
                     },
                     TableClass: "edit-table",
-                    RendererTo: "apiContainer",
-                    TableId: "apiContainerTable",
+                    RendererTo: "fieldContainer",
+                    TableId: "fieldContainerTable",
                     TableAttrs: {cellpadding: "1", cellspacing: "1", border: "1"}
                 }
             }
@@ -132,6 +135,7 @@ Vue.component("inner-form-button-list-comp", {
         //alert(1);
 
         this.getApiConfigAndBindToTable();
+        //this.getTableFieldsAndBindToTable();
     },
     methods:{
         getJson:function () {
@@ -145,7 +149,10 @@ Vue.component("inner-form-button-list-comp", {
         },
         //region 列表按钮相关方法
         edit:function(id,params){
-
+            console.log(params);
+            if(params.row["buttonType"]=="保存按钮"){
+                this.editInnerFormSaveButton(params);
+            }
         },
         del:function(id,params){
             for(var i=0;i<this.tableData.length;i++) {
@@ -176,19 +183,37 @@ Vue.component("inner-form-button-list-comp", {
         //endregion
         //region 保存按钮
         addInnerFormSaveButton:function(){
-            var elem=this.$refs.innerFormButtonEdit;
+            if(this.formId!=null&&this.formId!="") {
+                //重置编辑表单
+                this.resetInnerSaveButtonData();
 
-            DialogUtility.DialogElemObj(elem, {
-                modal: true,
-                height: 520,
-                width: 720,
-                title: "窗体内按钮"
-            });
+                var elem = this.$refs.innerFormButtonEdit;
 
-            $(window.document).find(".ui-widget-overlay").css("zIndex",10100);
-            $(window.document).find(".ui-dialog").css("zIndex",10101);
+                DialogUtility.DialogElemObj(elem, {
+                    modal: true,
+                    height: 520,
+                    width: 720,
+                    title: "窗体内按钮"
+                });
 
-            this.innerSaveButtonEditData.id="inner_form_button_"+StringUtility.Timestamp();
+                $(window.document).find(".ui-widget-overlay").css("zIndex", 10100);
+                $(window.document).find(".ui-dialog").css("zIndex", 10101);
+
+                this.innerSaveButtonEditData.id = "inner_form_button_" + StringUtility.Timestamp();
+
+                if(!this.isLoadTableField){
+                    this.getTableFieldsAndBindToTable();
+                    this.isLoadTableField=true;
+                }
+            }
+            else{
+                DialogUtility.AlertText("请先设置绑定的窗体!");
+            }
+        },
+        editInnerFormSaveButton:function(params){
+            this.addInnerFormSaveButton();
+            this.innerSaveButtonEditData=JsonUtility.CloneStringify(params.row);
+            this.api.editTableObject.LoadJsonData(this.innerSaveButtonEditData.apis);
         },
         resetInnerSaveButtonData:function(){
             this.innerSaveButtonEditData={
@@ -207,17 +232,47 @@ Vue.component("inner-form-button-list-comp", {
                     clientClickBeforeMethod:"",
                     clientClickBeforeMethodPara:"",
             };
+            this.api.editTableObject.RemoveAllRow();
         },
         saveInnerSaveButtonToList:function(){
             //保存到列表
             var singleInnerFormButtonData=JsonUtility.CloneSimple(this.innerSaveButtonEditData);
             this.api.editTableObject.CompletedEditingRow();
             singleInnerFormButtonData.apis=this.api.editTableObject.GetSerializeJson();
-            //重置编辑表单
-            this.resetInnerSaveButtonData();
+
             //存储到列表数据中
             this.tableData.push(singleInnerFormButtonData);
             this.handleClose("innerFormButtonEdit");
+        },
+        //endregion
+
+        //region 字段列表
+        getTableFieldsAndBindToTable:function(){
+            var _self=this;
+            AjaxUtility.Post(this.field.acInterface.getFormMainTableFields,{formId:this.formId},function (result) {
+                console.log(result);
+                var fieldsData=[];
+
+                for(var i=0;i<result.data.length;i++) {
+                    fieldsData.push({
+                        Value: result.data[i].fieldName,
+                        Text: result.data[i].fieldCaption
+                    });
+                }
+                _self.field.editTableConfig.Templates[0].DefaultValue={
+                    Type:"Const",
+                    Value:result.data[0].tableName
+                },
+                _self.field.editTableConfig.Templates[1].ClientDataSource=fieldsData;
+                _self.field.editTableObject = Object.create(EditTable);
+                _self.field.editTableObject.Initialization(_self.field.editTableConfig);
+            },"json");
+        },
+        addField:function(){
+            this.field.editTableObject.AddEditingRowByTemplate();
+        },
+        removeField:function(){
+            this.field.editTableObject.AddEditingRowByTemplate();
         },
         //endregion
 
@@ -231,16 +286,16 @@ Vue.component("inner-form-button-list-comp", {
 
                 for(var i=0;i<result.data.length;i++){
                     var group={
-                        group:result.data[i].name
+                        Group:result.data[i].name
                     }
                     var options=[];
                     for(var j=0;j<result.data[i].buttonAPIVoList.length;j++){
                         options.push({
-                            value:result.data[i].buttonAPIVoList[j].id,
-                            text:result.data[i].buttonAPIVoList[j].name
+                            Value:result.data[i].buttonAPIVoList[j].id,
+                            Text:result.data[i].buttonAPIVoList[j].name
                         });
                     }
-                    group["options"]=options;
+                    group["Options"]=options;
                     apiSelectData.push(group);
                 }
 
@@ -269,7 +324,6 @@ Vue.component("inner-form-button-list-comp", {
                 _self.api.editTableObject.Initialization(_self.api.editTableConfig);
             },"json");
         },
-
         addAPI:function () {
             this.api.editTableObject.AddEditingRowByTemplate();
         },
@@ -278,9 +332,6 @@ Vue.component("inner-form-button-list-comp", {
         },
         //endregion
 
-        edieInnerFormButton:function () {
-
-        },
         addInnerFormCloseButton:function () {
 
         }
@@ -329,7 +380,17 @@ Vue.component("inner-form-button-list-comp", {
                                         <tr>
                                             <td>字段：</td>
                                             <td colspan="3">
-                                                <div style="height: 140px"></div>
+                                                <div style="height: 140px">
+                                                    <div style="float: left;width: 94%">
+                                                        <div id="fieldContainer" class="edit-table-wrap" style="height: 140px;overflow: auto;width: 98%;margin: auto"></div>
+                                                    </div>
+                                                    <div style="float: right;width: 5%">
+                                                        <button-group vertical>
+                                                            <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
+                                                            <i-button size="small" type="primary" icon="md-close" @click="removeField"></i-button>
+                                                        </button-group>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
