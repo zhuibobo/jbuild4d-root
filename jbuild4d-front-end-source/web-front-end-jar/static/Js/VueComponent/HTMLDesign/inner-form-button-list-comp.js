@@ -222,16 +222,15 @@ Vue.component("inner-form-button-list-comp", {
                                             <td>API：</td>
                                             <td colspan="3">
                                                 <div style="height: 140px">
-                                                    <div style="width: 98%;margin: auto">
-                                                        <div style="float: right;margin-bottom: 8px">
-                                                            <button-group>
-                                                                <i-button size="small" type="success" icon="md-add" @click="addAPI"></i-button>
-                                                                <i-button size="small" type="primary" icon="md-close" @click="removeAPI"></i-button>
-                                                            </button-group>
-                                                        </div>
-                                                        <div style="clear: bottom"></div>
+                                                    <div style="float: left;width: 94%">
+                                                        <div id="apiContainer" class="edit-table-wrap" style="height: 140px;overflow: auto;width: 98%;margin: auto"></div>
                                                     </div>
-                                                    <div id="apiContainer" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 98%;margin: auto"></div>
+                                                    <div style="float: right;width: 5%">
+                                                        <button-group vertical>
+                                                            <i-button size="small" type="success" icon="md-add" @click="addAPI"></i-button>
+                                                            <i-button size="small" type="primary" icon="md-close" @click="removeAPI"></i-button>
+                                                        </button-group>
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>

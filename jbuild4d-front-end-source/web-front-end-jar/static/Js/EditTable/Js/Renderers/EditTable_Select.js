@@ -72,7 +72,8 @@ var EditTable_Select={
                     for(var j=0;j<configSource[i].options.length;j++){
                         var option=$("<option />");
                         option.attr("value",configSource[i].options[j].value);
-                        option.text(configSource[i].options[j].value);
+                        option.attr("Text",configSource[i].options[j].text);
+                        option.text(configSource[i].options[j].text);
                         optgroup.append(option);
                     }
                 }
@@ -81,8 +82,8 @@ var EditTable_Select={
         }
         else{
             for (var i = 0; i < configSource.length; i++) {
-                //var item=configSource[i];
-                //$elem.append("<option Value='"+item.Value+"' Text='"+item.Text+"'>"+item.Text+"</option>");
+                var item=configSource[i];
+                $elem.append("<option value='"+item.Value+"' text='"+item.Text+"'>"+item.Text+"</option>");
             }
         }
 
