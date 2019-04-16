@@ -126,7 +126,7 @@ Vue.component("select-single-webform-dialog", {
             }
         }
     },
-    template: `<div ref="selectModelDialogWrap" class="c1-select-model-wrap general-edit-page-wrap" style="display: none">
+    template: `<div ref="selectModelDialogWrap" class="c1-select-model-wrap general-edit-page-wrap" style="display: none;">
                     <div class="c1-select-model-source-wrap c1-select-model-source-has-buttons-wrap">
                         <i-input search class="input_border_bottom" ref="txt_form_search_text" placeholder="请输入表单名称">
                         </i-input>
