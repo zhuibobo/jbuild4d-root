@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ButtonAPIConfig>
+    <Group name="g1">
+        <API name="1" id="1" className="">
+            <Para key="" value=""></Para>
+        </API>
+        <API name="2" id="2" className="">
+        </API>
+    </Group>
+    <Group name="g2">
+        <API name="3" id="3" className="">
+        </API>
+        <API name="4" id="4" className="">
+        </API>
+    </Group>
+</ButtonAPIConfig>

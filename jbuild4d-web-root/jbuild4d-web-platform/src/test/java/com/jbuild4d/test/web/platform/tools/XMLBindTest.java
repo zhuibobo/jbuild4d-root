@@ -34,6 +34,7 @@ public class XMLBindTest {
             System.out.println( xmlContent );
 
 
+
         } catch (JAXBException e) {
             e.printStackTrace();
         }

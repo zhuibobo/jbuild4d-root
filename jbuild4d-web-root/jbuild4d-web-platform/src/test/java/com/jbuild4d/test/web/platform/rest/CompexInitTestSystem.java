@@ -16,6 +16,7 @@ import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.core.base.tools.StringUtility;
 import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
+import com.jbuild4d.platform.builder.button.api.ButtonAPIService;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.platform.builder.dataset.IDatasetService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
@@ -32,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
+import javax.xml.bind.JAXBException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,6 +59,9 @@ public class CompexInitTestSystem extends RestTestBase {
     @Autowired
     IModuleService moduleService;
 
+    @Autowired
+    ButtonAPIService buttonAPIService;
+
     @Test
     public void Init() throws Exception {
         //创建表分组
@@ -65,6 +70,12 @@ public class CompexInitTestSystem extends RestTestBase {
         createDataSetGroup(getSession());
         //创建模块分组
         createModuleGroup(getSession());
+    }
+
+    @Test
+    public void tets1() throws JAXBException {
+        List<ButtonAPIGroupVo> buttonAPIGroupVos=buttonAPIService.getButtonAPIGroupList();
+        System.out.println(buttonAPIGroupVos);
     }
 
     private void createModuleGroup(JB4DSession jb4DSession) throws JBuild4DGenerallyException {

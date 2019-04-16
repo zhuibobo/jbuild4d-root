@@ -15,6 +15,7 @@
         <module name="flowable-ui-modeler-rest" />
         <module name="jbuild4d-base-db-access" />
         <module name="jbuild4d-base-exception" />
+        <module name="jbuild4d-base-project" />
         <module name="jbuild4d-base-service" />
         <module name="jbuild4d-base-tools" />
         <module name="jbuild4d-core-base" />
@@ -39,6 +40,7 @@
       <module name="flowable-ui-modeler-rest" target="1.8" />
       <module name="jbuild4d-base-db-access" target="1.8" />
       <module name="jbuild4d-base-exception" target="1.8" />
+      <module name="jbuild4d-base-project" target="1.8" />
       <module name="jbuild4d-base-root" target="1.8" />
       <module name="jbuild4d-base-service" target="1.8" />
       <module name="jbuild4d-base-tools" target="1.8" />

@@ -16,6 +16,7 @@
         <module>jbuild4d-base-service</module>
         <module>jbuild4d-base-db-access</module>
         <module>jbuild4d-base-exception</module>
+        <module>jbuild4d-base-project</module>
     </modules>
     <dependencies>
         <dependency>

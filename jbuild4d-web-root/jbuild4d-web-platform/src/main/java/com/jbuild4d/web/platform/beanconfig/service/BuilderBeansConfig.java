@@ -3,6 +3,7 @@ package com.jbuild4d.web.platform.beanconfig.service;
 import com.jbuild4d.base.dbaccess.dao.builder.*;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
+import com.jbuild4d.platform.builder.button.api.ButtonAPIService;
 import com.jbuild4d.platform.builder.dataset.IDatasetColumnService;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.platform.builder.dataset.IDatasetRelatedTableService;
@@ -175,5 +176,10 @@ public class BuilderBeansConfig {
     public ITableRelationHisService tableRelationHisService(ISQLBuilderService _sqlBuilderService, TableRelationHisMapper mapper, SqlSessionTemplate sqlSessionTemplate) {
         ITableRelationHisService bean=new TableRelationHisServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
         return bean;
+    }
+
+    @Bean
+    public ButtonAPIService buttonAPIService(){
+        return new ButtonAPIService();
     }
 }

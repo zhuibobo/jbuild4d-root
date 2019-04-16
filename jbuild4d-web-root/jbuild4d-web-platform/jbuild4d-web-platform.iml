@@ -37,6 +37,7 @@
     <orderEntry type="module" module-name="jbuild4d-platform-sso-service" />
     <orderEntry type="module" module-name="jbuild4d-base-tools" />
     <orderEntry type="module" module-name="jbuild4d-base-service" />
+    <orderEntry type="module" module-name="jbuild4d-base-project" />
     <orderEntry type="module" module-name="jbuild4d-base-db-access" />
     <orderEntry type="module" module-name="jbuild4d-platform-system" />
     <orderEntry type="module" module-name="jbuild4d-platform-builder" />
