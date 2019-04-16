@@ -116,8 +116,8 @@
         width: 100%;
         border-collapse: collapse;
 
-        tr {
-            td{
+        >tbody>tr {
+            >td{
                 padding: 8px;
                 border: #d1d1d1 solid 1px;
 
@@ -142,7 +142,7 @@
                     border-color: #57a3f3;
                 }
             }
-            td:nth-child(1), td:nth-child(3), td:nth-child(5) {
+            >td:nth-child(1), td:nth-child(3), td:nth-child(5) {
                 background: #f8f8f8;
                 color: #000000;
             }
