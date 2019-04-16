@@ -79,16 +79,35 @@ Vue.component("inner-form-button-list-comp", {
                                 <table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
                                     <colgroup>
                                         <col style="width: 100px" />
-                                        <col style="width: 280px" />
+                                        <col style="width: 180px" />
                                         <col style="width: 100px" />
                                         <col />
                                     </colgroup>
                                     <tbody>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>标题：</td>
+                                            <td>
+                                                <i-input v-model="normalProps.windowCaption" />
+                                            </td>
+                                            <td>保存并关闭：</td>
+                                            <td>
+                                                <radio-group type="button" style="margin: auto" v-model="normalProps.openType">
+                                                    <radio label="Dialog">是</radio>
+                                                    <radio label="NewWindow">否</radio>
+                                                </radio-group>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>API：</td>
+                                            <td colspan="3">
+                                                <div style="height: 150px"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>字段：</td>
+                                            <td colspan="3">
+                                                <div style="height: 150px"></div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
