@@ -141,10 +141,13 @@ Vue.component("inner-form-button-list-comp", {
     },
     methods:{
         getJson:function () {
-
+            //debugger;
+            return JsonUtility.JsonToString(this.tableData);
         },
-        setJson:function () {
-
+        setJson:function (tableDataJson) {
+            if(tableDataJson!=null&&tableDataJson!=""){
+                this.tableData=JsonUtility.StringToJson(tableDataJson);
+            }
         },
         handleClose:function(dialogElem){
             DialogUtility.CloseDialogElem(this.$refs[dialogElem]);
