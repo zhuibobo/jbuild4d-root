@@ -43,7 +43,7 @@ class CKEditorUtility {
     }
     static InitializeCKEditor(textAreaElemId,pluginsConfig,loadCompletedFunc,ckeditorConfigFullPath,pluginBasePath,themeVo) {
 
-        console.log(pluginsConfig);
+        //console.log(pluginsConfig);
 
         var extraPlugins=new Array();
         for(var i=0;i<pluginsConfig.length;i++) {
@@ -83,7 +83,7 @@ class CKEditorUtility {
             }*/
         }
 
-        console.log(themeVo);
+        //console.log(themeVo);
         this.SetThemeVo(themeVo);
 
         //加载默认配置文件
@@ -266,7 +266,7 @@ class CKEditorUtility {
     //点击的时候自动选中元素,主要用于实现位置拖拽
     static SingleElemBindDefaultEvent(elem){
         if(elem.getAttribute("show_remove_button")=="true") {
-            console.log(elem.getName());
+            //console.log(elem.getName());
             //var elem = elements.getItem(i);
             elem.on('click', function () {
                 //alert( this == elem );        // true
@@ -285,7 +285,7 @@ class CKEditorUtility {
         }
     }
     static ALLElemBindDefaultEvent(){
-        console.log(CKEditorUtility.GetCKEditorInst());
+        //console.log(CKEditorUtility.GetCKEditorInst());
         var elements = CKEditorUtility.GetCKEditorInst().document.getBody().getElementsByTag( '*' );
         for ( var i = 0; i < elements.count(); ++i ) {
             var elem = elements.getItem(i);

@@ -185,6 +185,7 @@ Vue.component("inner-form-button-list-comp", {
         //region 保存按钮
         addInnerFormSaveButton:function(){
             if(this.formId!=null&&this.formId!="") {
+                this.editSaveButtonStatuc="add";
                 //重置编辑表单
                 this.resetInnerSaveButtonData();
 
@@ -214,6 +215,7 @@ Vue.component("inner-form-button-list-comp", {
         },
         editInnerFormSaveButton:function(params){
             this.addInnerFormSaveButton();
+            this.editSaveButtonStatuc="edit";
             this.innerSaveButtonEditData=JsonUtility.CloneStringify(params.row);
             this.api.editTableObject.LoadJsonData(this.innerSaveButtonEditData.apis);
             this.field.editTableObject.LoadJsonData(this.innerSaveButtonEditData.fields);
@@ -245,10 +247,24 @@ Vue.component("inner-form-button-list-comp", {
             var singleInnerFormButtonData=JsonUtility.CloneSimple(this.innerSaveButtonEditData);
             this.api.editTableObject.CompletedEditingRow();
             singleInnerFormButtonData.apis=this.api.editTableObject.GetSerializeJson();
+            this.field.editTableObject.CompletedEditingRow();
             singleInnerFormButtonData.fields=this.field.editTableObject.GetSerializeJson();
+            //debugger;
+            if(this.editSaveButtonStatuc=="add") {
+                //存储到列表数据中
+                this.tableData.push(singleInnerFormButtonData);
+            }
+            else{
+                for(var i=0;i<this.tableData.length;i++){
+                    if(this.tableData[i].id==singleInnerFormButtonData.id) {
+                        //this.tableData[i]=singleInnerFormButtonData;
+                        Vue.set(this.tableData, i, singleInnerFormButtonData);
+                    }
+                }
+            }
 
-            //存储到列表数据中
-            this.tableData.push(singleInnerFormButtonData);
+            console.log(singleInnerFormButtonData);
+
             this.handleClose("innerFormButtonEdit");
         },
         //endregion

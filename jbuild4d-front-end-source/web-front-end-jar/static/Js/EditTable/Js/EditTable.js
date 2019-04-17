@@ -476,6 +476,12 @@ var EditTable= {
                 var bindName=seritem.attr("BindName");
                 var bindValue=seritem.attr("Value");
                 var bindText=seritem.attr("Text");
+                if(!bindText){
+                    bindText="";
+                }
+                if(bindText=="undefined"){
+                    bindText="";
+                }
                 rowdata[bindName]=bindValue;
                 rowdata[bindName+"___Text"]=bindText;
             });
