@@ -23,7 +23,7 @@ var DetailPageUtility={
         },100)
     },
     OverrideObjectValue:function (sourceObject, dataObject) {
-        console.log(dataObject);
+        //console.log(dataObject);
         for(var key in sourceObject){
             if(dataObject[key]!=undefined&&dataObject[key]!=null&&dataObject[key]!=""){
                 sourceObject[key]=dataObject[key];

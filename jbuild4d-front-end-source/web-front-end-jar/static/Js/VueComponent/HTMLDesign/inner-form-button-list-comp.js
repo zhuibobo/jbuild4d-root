@@ -181,6 +181,7 @@ Vue.component("inner-form-button-list-comp", {
             }
         },
         //endregion
+
         //region 保存按钮
         addInnerFormSaveButton:function(){
             if(this.formId!=null&&this.formId!="") {
@@ -201,8 +202,9 @@ Vue.component("inner-form-button-list-comp", {
 
                 this.innerSaveButtonEditData.id = "inner_form_button_" + StringUtility.Timestamp();
 
-                if(!this.isLoadTableField){
+                if(!this.isLoadTableField||this.formId!=this.oldformId){
                     this.getTableFieldsAndBindToTable();
+                    this.oldformId=this.formId;
                     this.isLoadTableField=true;
                 }
             }
@@ -214,6 +216,7 @@ Vue.component("inner-form-button-list-comp", {
             this.addInnerFormSaveButton();
             this.innerSaveButtonEditData=JsonUtility.CloneStringify(params.row);
             this.api.editTableObject.LoadJsonData(this.innerSaveButtonEditData.apis);
+            this.field.editTableObject.LoadJsonData(this.innerSaveButtonEditData.fields);
         },
         resetInnerSaveButtonData:function(){
             this.innerSaveButtonEditData={
@@ -233,12 +236,16 @@ Vue.component("inner-form-button-list-comp", {
                     clientClickBeforeMethodPara:"",
             };
             this.api.editTableObject.RemoveAllRow();
+            if(this.field.editTableObject) {
+                this.field.editTableObject.RemoveAllRow();
+            }
         },
         saveInnerSaveButtonToList:function(){
             //保存到列表
             var singleInnerFormButtonData=JsonUtility.CloneSimple(this.innerSaveButtonEditData);
             this.api.editTableObject.CompletedEditingRow();
             singleInnerFormButtonData.apis=this.api.editTableObject.GetSerializeJson();
+            singleInnerFormButtonData.fields=this.field.editTableObject.GetSerializeJson();
 
             //存储到列表数据中
             this.tableData.push(singleInnerFormButtonData);

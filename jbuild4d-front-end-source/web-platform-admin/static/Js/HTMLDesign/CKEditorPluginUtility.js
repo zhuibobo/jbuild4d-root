@@ -122,7 +122,7 @@ class CKEditorPluginUtility {
 
         ckEditor.addCommand(pluginSetting.ToolbarCommand, new CKEDITOR.dialogCommand(pluginSetting.DialogName));
 
-        console.log(pluginSetting);
+        //console.log(pluginSetting);
 
         if(pluginSetting.ShowInEditorToolbar=="true") {
             ckEditor.ui.addButton(pluginSetting.SingleName, {
@@ -393,7 +393,7 @@ class CKEditorPluginUtility {
         if(sel){
             for(var i=parents.length-1;i--;i>=0){
                 if(parents[i].getAttribute("datasetid")!=null&&parents[i].getAttribute("datasetid")!=""){
-                    console.log(parents[i].getAttribute("datasetid"));
+                    //console.log(parents[i].getAttribute("datasetid"));
                     //this.dataSetId=parents[i].getAttribute("datasetid");
                     return parents[i].getAttribute("datasetid");
                 }

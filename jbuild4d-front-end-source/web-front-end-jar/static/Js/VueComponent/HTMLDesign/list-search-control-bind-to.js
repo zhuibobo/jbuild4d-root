@@ -140,83 +140,85 @@ Vue.component("list-search-control-bind-to", {
                         <col style="width: 280px" />
                         <col />
                     </colgroup>
-                    <tr>
-                        <td>
-                            标题：
-                        </td>
-                        <td>
-                            <input type="text" v-model="bindToSearchField.columnTitle" />
-                        </td>
-                        <td rowspan="9" valign="top">
-                            <ul ref="zTreeUL" class="ztree"></ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            所属表：
-                        </td>
-                        <td>
-                            {{bindToSearchField.columnTableName}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            绑定字段：
-                        </td>
-                        <td>
-                            {{bindToSearchField.columnCaption}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            字段名称：
-                        </td>
-                        <td>
-                            {{bindToSearchField.columnName}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            字段类型：
-                        </td>
-                        <td>
-                            {{bindToSearchField.columnDataTypeName}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            运算符：
-                        </td>
-                        <td>
-                            <i-select v-model="bindToSearchField.columnOperator" style="width:260px">
-                                <i-option value="等于">等于</i-option>
-                                <i-option value="匹配">匹配</i-option>
-                                <i-option value="不等于">不等于</i-option>
-                                <i-option value="大于">大于</i-option>
-                                <i-option value="大于等于">大于等于</i-option>
-                                <i-option value="小于">小于</i-option>
-                                <i-option value="小于等于">小于等于</i-option>
-                                <i-option value="左匹配">左匹配</i-option>
-                                <i-option value="右匹配">右匹配</i-option>
-                                <i-option value="包含">包含</i-option>
-                            </i-select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">默认值<button class="btn-select fright" v-on:click="selectDefaultValueView">...</button></td>
-                    </tr>
-                    <tr style="height: 35px">
-                        <td colspan="2" style="background-color: #ffffff;">
-                            {{tempData.defaultDisplayText}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            备注：
-                        </td>
-                        <td>
-                            <textarea rows="8"></textarea>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>
+                                标题：
+                            </td>
+                            <td>
+                                <input type="text" v-model="bindToSearchField.columnTitle" />
+                            </td>
+                            <td rowspan="9" valign="top">
+                                <ul ref="zTreeUL" class="ztree"></ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                所属表：
+                            </td>
+                            <td>
+                                {{bindToSearchField.columnTableName}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                绑定字段：
+                            </td>
+                            <td>
+                                {{bindToSearchField.columnCaption}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                字段名称：
+                            </td>
+                            <td>
+                                {{bindToSearchField.columnName}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                字段类型：
+                            </td>
+                            <td>
+                                {{bindToSearchField.columnDataTypeName}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                运算符：
+                            </td>
+                            <td>
+                                <i-select v-model="bindToSearchField.columnOperator" style="width:260px">
+                                    <i-option value="等于">等于</i-option>
+                                    <i-option value="匹配">匹配</i-option>
+                                    <i-option value="不等于">不等于</i-option>
+                                    <i-option value="大于">大于</i-option>
+                                    <i-option value="大于等于">大于等于</i-option>
+                                    <i-option value="小于">小于</i-option>
+                                    <i-option value="小于等于">小于等于</i-option>
+                                    <i-option value="左匹配">左匹配</i-option>
+                                    <i-option value="右匹配">右匹配</i-option>
+                                    <i-option value="包含">包含</i-option>
+                                </i-select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">默认值<button class="btn-select fright" v-on:click="selectDefaultValueView">...</button></td>
+                        </tr>
+                        <tr style="height: 35px">
+                            <td colspan="2" style="background-color: #ffffff;">
+                                {{tempData.defaultDisplayText}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                备注：
+                            </td>
+                            <td>
+                                <textarea rows="8"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>`
 });
