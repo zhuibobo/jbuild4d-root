@@ -20,12 +20,14 @@ Vue.component("inner-form-button-list-comp", {
                     width: 200,
                     align: "center",
                     render: function (h, params) {
-                        return h('div',{class: "list-row-button-wrap"},[
-                            ListPageUtility.IViewTableInnerButton.EditButton(h,params,"id",_self),
-                            ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"id",_self),
-                            ListPageUtility.IViewTableInnerButton.MoveUpButton(h,params,"id",_self),
-                            ListPageUtility.IViewTableInnerButton.MoveDownButton(h,params,"id",_self)
-                        ]);
+                        var buttons=[];
+                        if(params.row.buttonType=="保存按钮"){
+                            buttons.push(ListPageUtility.IViewTableInnerButton.EditButton(h,params,"id",_self));
+                        }
+                        buttons.push(ListPageUtility.IViewTableInnerButton.DeleteButton(h,params,"id",_self));
+                        buttons.push(ListPageUtility.IViewTableInnerButton.MoveUpButton(h,params,"id",_self));
+                        buttons.push(ListPageUtility.IViewTableInnerButton.MoveDownButton(h,params,"id",_self));
+                        return h('div',{class: "list-row-button-wrap"},buttons);
                     }
                 }
             ],
@@ -269,6 +271,10 @@ Vue.component("inner-form-button-list-comp", {
         },
         //endregion
 
+        //region 关闭按钮
+
+        //endregion
+
         //region 字段列表
         getTableFieldsAndBindToTable:function(){
             var _self=this;
@@ -298,7 +304,14 @@ Vue.component("inner-form-button-list-comp", {
             this.field.editTableObject.AddEditingRowByTemplate();
         },
         //endregion
-
+        addInnerFormCloseButton:function () {
+            var closeButtonData={
+                caption:"关闭",
+                id:"inner_close_button_"+StringUtility.Timestamp(),
+                buttonType:"关闭按钮"
+            };
+            this.tableData.push(closeButtonData);
+        },
         //region api列表
         getApiConfigAndBindToTable:function(){
             var _self=this;
@@ -352,12 +365,8 @@ Vue.component("inner-form-button-list-comp", {
         },
         removeAPI:function () {
             this.api.editTableObject.RemoveRow();
-        },
-        //endregion
-
-        addInnerFormCloseButton:function () {
-
         }
+        //endregion
     },
     template: `<div style="height: 210px" class="iv-list-page-wrap">
                     <div ref="innerFormButtonEdit" class="html-design-plugin-dialog-wraper general-edit-page-wrap" style="display: none">
@@ -520,7 +529,7 @@ Vue.component("inner-form-button-list-comp", {
                         <div style="float: right;width: 15%">
                             <ButtonGroup vertical>
                                 <i-button type="success" @click="addInnerFormSaveButton()" icon="md-add">保存按钮</i-button>
-                                <i-button type="primary" @click="addInnerFormCloseButton()" icon="md-add">意见按钮</i-button>
+                                <i-button icon="md-add" disabled>意见按钮</i-button>
                                 <i-button type="primary" @click="addInnerFormCloseButton()" icon="md-add">关闭按钮</i-button>
                             </ButtonGroup>
                         </div>
