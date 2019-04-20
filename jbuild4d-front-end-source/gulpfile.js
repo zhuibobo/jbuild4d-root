@@ -244,7 +244,8 @@ function copyAndResolveHtml(sourcePath,base,toPath) {
         .pipe(htmlmin({
             collapseWhitespace: true,
             minifyCSS:true,
-            minifyJS:false
+            minifyJS:false,
+            removeComments:true
         }))
         /*.pipe(htmlmin({
             collapseWhitespace: true,
