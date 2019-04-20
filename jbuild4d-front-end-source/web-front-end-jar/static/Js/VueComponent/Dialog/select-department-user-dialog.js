@@ -1,4 +1,10 @@
-/*选择部门人员组件*/
+/*
+**Created by IntelliJ IDEA.
+**User: zhuangrb
+**Date: 2018/8/26
+**To change this template use File | Settings | File Templates.
+**选择部门人员组件
+*/
 Vue.component("select-department-user-dialog", {
     data: function () {
         return {
