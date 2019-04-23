@@ -23,7 +23,7 @@
             <Config></Config>
             <Desc></Desc>
         </Control>
-        <Control SingleName="WFDCT_TextBox" Text="单行输入框" ToolbarLocation="LC_Simple,1"
+        <Control SingleName="WFDCT_TextBox" Text="单行输入框" ToolbarLocation="LC_Simple_G1,1"
                         ServerResolve="com.jbuild4d.platform.builder.webformdesign.control.impl.WebFormTextBoxControl" ClientResolve="2" ClientResolveJs="3"
                         DialogWidth="780" DialogHeight="550" IsJBuild4DData="true" ControlCategory="InputControl" ServerDynamicBind="false" ShowRemoveButton="true" ShowInEditorToolbar="true">
             <Config></Config>
@@ -72,13 +72,19 @@
             <Config></Config>
             <Desc></Desc>
         </Control>
-        <Control SingleName="WLDCT_Search_TextBox" Text="查询-单行输入框" ToolbarLocation="LC_Simple,1"
+        <Control SingleName="WLDCT_Search_TextBox" Text="查询-单行输入框" ToolbarLocation="LC_Simple_G1,1"
                  ServerResolve="" ClientResolve="" ClientResolveJs=""
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="true" ControlCategory="InputControl" ServerDynamicBind="false" ShowRemoveButton="true" ShowInEditorToolbar="true">
             <Config></Config>
             <Desc></Desc>
         </Control>
-        <Control SingleName="WLDCT_Form_Button" Text="按钮-窗体按钮" ToolbarLocation="LC_Simple,2"
+        <Control SingleName="WLDCT_FormButton" Text="按钮-窗体按钮" ToolbarLocation="LC_Simple_G2,2"
+                 ServerResolve="" ClientResolve="" ClientResolveJs=""
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="true" ControlCategory="InputControl" ServerDynamicBind="false" ShowRemoveButton="true" ShowInEditorToolbar="true">
+            <Config></Config>
+            <Desc></Desc>
+        </Control>
+        <Control SingleName="WLDCT_ListTableLabel" Text="列表-标签" ToolbarLocation="LC_Simple_G3,2"
                  ServerResolve="" ClientResolve="" ClientResolveJs=""
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="true" ControlCategory="InputControl" ServerDynamicBind="false" ShowRemoveButton="true" ShowInEditorToolbar="true">
             <Config></Config>
