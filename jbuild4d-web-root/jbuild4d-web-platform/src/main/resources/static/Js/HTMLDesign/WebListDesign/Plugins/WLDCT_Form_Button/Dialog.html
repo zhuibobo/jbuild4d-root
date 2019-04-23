@@ -31,9 +31,7 @@
                 clientClickBeforeMethodPara:"",
                 //内部按钮
                 innerButtonJsonString:""
-            },
-            dataSetId:null,
-            bindToField:null
+            }
         },
         mounted:function () {
 
@@ -85,8 +83,33 @@
                 return result;
             },
             setControlProps:function ($elem,props) {
-                console.log($elem.parent());
+                console.log($elem);
                 this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;
+                this.normalProps.buttonType = "ListFormButton";
+                //绑定窗体信息
+                this.normalProps.formModuleId = $elem.attr("formmoduleid");
+                this.normalProps.formModuleName = $elem.attr("formmodulename");
+                this.normalProps.formId = $elem.attr("formid");
+                this.normalProps.formName = $elem.attr("formname");
+                this.normalProps.formCode = $elem.attr("formcode");
+                this.normalProps.buttonCaption = $elem.attr("buttoncaption");
+                this.normalProps.windowCaption = $elem.attr("windowcaption");
+                this.normalProps.openType = $elem.attr("opentype");
+                this.normalProps.windowHeight = parseInt($elem.attr("windowheight"));
+                this.normalProps.windowWidth =parseInt($elem.attr("windowwidth"));
+                this.normalProps.isShow = $elem.attr("isshow");
+                this.normalProps.operation = $elem.attr("operation");
+                this.normalProps.bindAuthority = $elem.attr("bindauthority");
+                this.normalProps.serverResolveMethod =$elem.attr("serverresolvemethod");
+                this.normalProps.serverResolveMethodPara = $elem.attr("serverresolvemethodpara");
+                this.normalProps.clientRendererMethod =$elem.attr("clientrenderermethod");
+                this.normalProps.clientRendererMethodPara = $elem.attr("clientrenderermethodpara");
+                this.normalProps.clientRendererAfterMethod =$elem.attr("clientrendereraftermethod");
+                this.normalProps.clientRendererAfterMethodPara = $elem.attr("clientrendereraftermethodpara");
+                this.normalProps.clientClickBeforeMethod = $elem.attr("clientclickbeforemethod");
+                this.normalProps.clientClickBeforeMethodPara = $elem.attr("clientclickbeforemethodpara");
+                this.normalProps.innerButtonJsonString = $elem.attr("innerbuttonjsonstring");
+
                 //this.bindToSearchField = props.bindToSearchField ? props.bindToSearchField : this.bindToSearchField;
                 //this.defaultValue = props.defaultValue ? props.defaultValue : this.defaultValue;
                 //this.$refs.listSearchControlBindToComp.setData(this.bindToSearchField,this.defaultValue);
