@@ -38,9 +38,7 @@ CKEDITOR.editorConfig = function(config) {
         { name: 'LC_Container', groups: [] },
         '/',
         { name: 'LC_Simple_G1', groups: [] },
-        '/',
         { name: 'LC_Simple_G2', groups: [] },
-        '/',
         { name: 'LC_Simple_G3', groups: [] }
     ];
     config.height=jQuery(".form-design-wraper").height()-112;
