@@ -319,7 +319,7 @@ class CKEditorPluginUtility {
                 //CKEDITOR.editor.insertElement(elem);
             }
             else {
-                debugger
+                //debugger
                 var selectedElem=CKEditorUtility.GetSelectedCKEditorElem();
                 if(selectedElem) {
                     var reFreshElem = new CKEDITOR.dom.element.createFromHtml(selectedElem.getOuterHtml());
