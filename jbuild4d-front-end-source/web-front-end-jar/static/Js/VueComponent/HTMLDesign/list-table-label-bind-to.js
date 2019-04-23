@@ -184,7 +184,7 @@ Vue.component("list-table-label-bind-to", {
                         </tr>
                         <tr>
                             <td>
-                                字段类型：
+                                字段类型： 
                             </td>
                             <td>
                                 {{bindToSearchField.columnDataTypeName}}
