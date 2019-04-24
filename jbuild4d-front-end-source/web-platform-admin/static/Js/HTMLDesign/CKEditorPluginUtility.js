@@ -388,6 +388,22 @@ class CKEditorPluginUtility {
         return '<div runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">'+tipMsg+'</div>';
     }
 
+    static TryGetListButtonsInPluginPage(){
+        //debugger;
+        var buttons=[];
+        var html=CKEditorUtility.GetCKEditorHTMLInPluginPage();
+        var $buttons=$(html).find("[buttoncaption]");
+        $buttons.each(function () {
+            var buttonCaption=$(this).attr("buttoncaption");
+            var buttonId=$(this).attr("id");
+            buttons.push({
+                buttonCaption:buttonCaption,
+                buttonId:buttonId
+            })
+        });
+        return buttons;
+    }
+
     static TryGetDataSetId(sel,parents){
         //从html中查找datasetId;
         if(sel){

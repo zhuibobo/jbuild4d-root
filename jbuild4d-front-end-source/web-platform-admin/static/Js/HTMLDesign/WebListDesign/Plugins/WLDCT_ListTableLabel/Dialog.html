@@ -11,8 +11,8 @@
     <div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak>
         <tabs size="small">
             <tab-pane label="绑定信息">
-                <list-table-label-bind-to ref="listSearchControlBindToComp">
-                </list-table-label-bind-to>
+                <list-table-label-bind-to-comp ref="listTableLabelBindToComp">
+                </list-table-label-bind-to-comp>
             </tab-pane>
             <tab-pane label="基础信息">
                 <fd-control-base-info v-model="baseInfo">
@@ -29,9 +29,16 @@
             data: {
                 baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
                 defaultValue: CKEditorPluginUtility.DefaultProps.defaultValue,
-                bindToSearchField:CKEditorPluginUtility.DefaultProps.bindToSearchField,
+                normalProps:{
+                    columnTableName: "",
+                    columnName: "",
+                    columnCaption: "",
+                    columnDataTypeName: "",
+                    targetButtonId: "",
+                    columnAlign:""
+                },
                 dataSetId:null,
-                bindToField:null
+                buttons:[]
             },
             mounted:function () {
 
@@ -42,23 +49,25 @@
                     this.baseInfo.name=this.baseInfo.id;
 
                     this.dataSetId=CKEditorPluginUtility.TryGetDataSetId(sel,parents);
+                    this.buttons=CKEditorPluginUtility.TryGetListButtonsInPluginPage();
+
                     this.bindDataSetFieldTree();
                 },
                 bindDataSetFieldTree:function(){
                     if(this.dataSetId){
                         var dataSetVo=window.parent.listDesign.getDataSet(this.dataSetId);
-                        this.$refs.listSearchControlBindToComp.init(dataSetVo);
+                        this.$refs.listTableLabelBindToComp.init(dataSetVo,this.buttons);
                     }
                     else {
                         DialogUtility.AlertText("请先设定DataSet");
                     }
                 },
                 getControlProps:function () {
-                    var bindData=this.$refs.listSearchControlBindToComp.getData();
+                    var bindData=this.$refs.listTableLabelBindToComp.getData();
                     var result = {
                         success: true,
                         baseInfo: this.baseInfo,
-                        bindToSearchField: bindData.bindToSearchField,
+                        normalProps: bindData.bindProp,
                         defaultValue: bindData.defaultValue
                     }
                     return result;
@@ -66,10 +75,17 @@
                 setControlProps:function ($elem,props) {
                     console.log($elem.parent());
                     this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;
-                    this.bindToSearchField = props.bindToSearchField ? props.bindToSearchField : this.bindToSearchField;
+                    //this.bindToSearchField = props.bindToSearchField ? props.bindToSearchField : this.bindToSearchField;
                     this.defaultValue = props.defaultValue ? props.defaultValue : this.defaultValue;
 
-                    this.$refs.listSearchControlBindToComp.setData(this.bindToSearchField,this.defaultValue);
+                    this.normalProps.columnTableName=$elem.attr("columntablename");
+                    this.normalProps.columnName=$elem.attr("columnname");
+                    this.normalProps.columnCaption=$elem.attr("columncaption");
+                    this.normalProps.columnDataTypeName=$elem.attr("columndatatypename");
+                    this.normalProps.targetButtonId=$elem.attr("targetbuttonid");
+                    this.normalProps.columnAlign=$elem.attr("columnalign");
+
+                    this.$refs.listTableLabelBindToComp.setData(this.normalProps,this.defaultValue);
                 }
             }
         });

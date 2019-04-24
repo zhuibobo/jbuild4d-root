@@ -1,11 +1,18 @@
-<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../../../../../static/Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/perfect-scrollbar-14/perfect-scrollbar.js"></script><script type="text/javascript" src="../../../../../../static/Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/VueEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/HTMLDesign/HTMLDesignUtility.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"></head><body><div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak><tabs size="small"><tab-pane label="绑定信息"><list-table-label-bind-to ref="listSearchControlBindToComp"></list-table-label-bind-to></tab-pane><tab-pane label="基础信息"><fd-control-base-info v-model="baseInfo"></fd-control-base-info></tab-pane><tab-pane label="开发扩展"></tab-pane></tabs></div><script>var DialogApp=new Vue({
+<!DOCTYPE html><html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>Title</title><title>JBuild4D</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript" src="../../../../../../static/Js/T3P/JQuery/jquery-3.3.1.min.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/VUE-2.5.16/vue.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/IView-3.X/dist/iview.min.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/JQuery-UI-1.12.1/jquery-ui.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/ZTree-V3/js/jquery.ztree.all.js"></script><script type="text/javascript" src="../../../../../../static/Js/T3P/perfect-scrollbar-14/perfect-scrollbar.js"></script><script type="text/javascript" src="../../../../../../static/Js/JBuild4DPlatformLib.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/UIEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/VueEXComponent.js?refVersion=1"></script><script type="text/javascript" src="../../../../../../static/Js/HTMLDesign/HTMLDesignUtility.js?refVersion=1"></script><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/Css/Jbuild4dPlatform.css?refVersion=1"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/IView-3.X/iview.css"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/JQueryUI/jquery-ui.css"><link rel="stylesheet" type="text/css" href="../../../../../../static/Themes/Default/ZTree/zTreeStyle/zTreeStyle.css"></head><body><div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak><tabs size="small"><tab-pane label="绑定信息"><list-table-label-bind-to-comp ref="listTableLabelBindToComp"></list-table-label-bind-to-comp></tab-pane><tab-pane label="基础信息"><fd-control-base-info v-model="baseInfo"></fd-control-base-info></tab-pane><tab-pane label="开发扩展"></tab-pane></tabs></div><script>var DialogApp=new Vue({
             el:"#dialogApp",
             data: {
                 baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
                 defaultValue: CKEditorPluginUtility.DefaultProps.defaultValue,
-                bindToSearchField:CKEditorPluginUtility.DefaultProps.bindToSearchField,
+                normalProps:{
+                    columnTableName: "",
+                    columnName: "",
+                    columnCaption: "",
+                    columnDataTypeName: "",
+                    targetButtonId: "",
+                    columnAlign:""
+                },
                 dataSetId:null,
-                bindToField:null
+                buttons:[]
             },
             mounted:function () {
 
@@ -16,23 +23,25 @@
                     this.baseInfo.name=this.baseInfo.id;
 
                     this.dataSetId=CKEditorPluginUtility.TryGetDataSetId(sel,parents);
+                    this.buttons=CKEditorPluginUtility.TryGetListButtonsInPluginPage();
+
                     this.bindDataSetFieldTree();
                 },
                 bindDataSetFieldTree:function(){
                     if(this.dataSetId){
                         var dataSetVo=window.parent.listDesign.getDataSet(this.dataSetId);
-                        this.$refs.listSearchControlBindToComp.init(dataSetVo);
+                        this.$refs.listTableLabelBindToComp.init(dataSetVo,this.buttons);
                     }
                     else {
                         DialogUtility.AlertText("请先设定DataSet");
                     }
                 },
                 getControlProps:function () {
-                    var bindData=this.$refs.listSearchControlBindToComp.getData();
+                    var bindData=this.$refs.listTableLabelBindToComp.getData();
                     var result = {
                         success: true,
                         baseInfo: this.baseInfo,
-                        bindToSearchField: bindData.bindToSearchField,
+                        normalProps: bindData.bindProp,
                         defaultValue: bindData.defaultValue
                     }
                     return result;
@@ -40,10 +49,17 @@
                 setControlProps:function ($elem,props) {
                     console.log($elem.parent());
                     this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;
-                    this.bindToSearchField = props.bindToSearchField ? props.bindToSearchField : this.bindToSearchField;
+                    //this.bindToSearchField = props.bindToSearchField ? props.bindToSearchField : this.bindToSearchField;
                     this.defaultValue = props.defaultValue ? props.defaultValue : this.defaultValue;
 
-                    this.$refs.listSearchControlBindToComp.setData(this.bindToSearchField,this.defaultValue);
+                    this.normalProps.columnTableName=$elem.attr("columntablename");
+                    this.normalProps.columnName=$elem.attr("columnname");
+                    this.normalProps.columnCaption=$elem.attr("columncaption");
+                    this.normalProps.columnDataTypeName=$elem.attr("columndatatypename");
+                    this.normalProps.targetButtonId=$elem.attr("targetbuttonid");
+                    this.normalProps.columnAlign=$elem.attr("columnalign");
+
+                    this.$refs.listTableLabelBindToComp.setData(this.normalProps,this.defaultValue);
                 }
             }
         });</script></body></html>

@@ -1,11 +1,5 @@
-/*
-**Created by IntelliJ IDEA.
-**User: zhuangrb
-**Date: 2019/4/23
-**To change this template use File | Settings | File Templates.
-*/
 /*查询字段绑定的Vue组件*/
-Vue.component("list-table-label-bind-to", {
+Vue.component("list-search-control-bind-to-comp", {
     props:["bindToSearchFieldProp","dataSetId"],
     data: function () {
         var _self=this;
@@ -149,7 +143,7 @@ Vue.component("list-table-label-bind-to", {
                     <tbody>
                         <tr>
                             <td>
-                                对齐方式：
+                                标题：
                             </td>
                             <td>
                                 <input type="text" v-model="bindToSearchField.columnTitle" />
@@ -184,7 +178,7 @@ Vue.component("list-table-label-bind-to", {
                         </tr>
                         <tr>
                             <td>
-                                字段类型： 
+                                字段类型：
                             </td>
                             <td>
                                 {{bindToSearchField.columnDataTypeName}}
@@ -192,7 +186,7 @@ Vue.component("list-table-label-bind-to", {
                         </tr>
                         <tr>
                             <td>
-                                触发按钮：
+                                运算符：
                             </td>
                             <td>
                                 <i-select v-model="bindToSearchField.columnOperator" style="width:260px">

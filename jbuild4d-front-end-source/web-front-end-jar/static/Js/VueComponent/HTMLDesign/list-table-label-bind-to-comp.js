@@ -1,16 +1,22 @@
+/*
+**Created by IntelliJ IDEA.
+**User: zhuangrb
+**Date: 2019/4/23
+**To change this template use File | Settings | File Templates.
+*/
 /*查询字段绑定的Vue组件*/
-Vue.component("list-search-control-bind-to", {
-    props:["bindToSearchFieldProp","dataSetId"],
+Vue.component("list-table-label-bind-to-comp", {
+    props:["bindPropProp","dataSetId"],
     data: function () {
         var _self=this;
         return {
-            bindToSearchField:{
-                columnTitle:"",
+            bindProp:{
                 columnTableName: "",
                 columnName: "",
                 columnCaption: "",
                 columnDataTypeName: "",
-                columnOperator: "匹配"
+                targetButtonId: "",
+                columnAlign:"居中对齐"
             },
             defaultValue: {
                 defaultType: "",
@@ -60,13 +66,14 @@ Vue.component("list-search-control-bind-to", {
             },
             tempData:{
                 defaultDisplayText:""
-            }
+            },
+            buttons:[]
         }
     },
     //新增result的watch，监听变更同步到openStatus
     //监听父组件对props属性result的修改，并同步到组件内的data属性
     watch: {
-        bindToSearchFieldProp :function(newValue) {
+        bindPropProp :function(newValue) {
             console.log(newValue);
         },
         defaultValueProp:function (newValue) {
@@ -81,7 +88,7 @@ Vue.component("list-search-control-bind-to", {
         //var dataset=window.parent.listDesign.getDataSet();
     },
     methods:{
-        init:function(dataSetVo){
+        init:function(dataSetVo,buttons){
             console.log(dataSetVo);
             //return;
             var treeNodeArray=[];
@@ -109,23 +116,28 @@ Vue.component("list-search-control-bind-to", {
 
             this.tree.treeObj=$.fn.zTree.init($(this.$refs.zTreeUL), this.tree.treeSetting,treeNodeArray);
             this.tree.treeObj.expandAll(true);
+
+            this.buttons=buttons;
         },
         selectColumn:function (columnVo) {
-            this.bindToSearchField.columnTableName=columnVo.columnTableName;
-            this.bindToSearchField.columnName=columnVo.columnName;
-            this.bindToSearchField.columnCaption=columnVo.columnCaption;
-            this.bindToSearchField.columnDataTypeName=columnVo.columnDataTypeName;
+            this.bindProp.columnTableName=columnVo.columnTableName;
+            this.bindProp.columnName=columnVo.columnName;
+            this.bindProp.columnCaption=columnVo.columnCaption;
+            this.bindProp.columnDataTypeName=columnVo.columnDataTypeName;
         },
         getData:function(){
-            console.log(this.bindToSearchField);
+            console.log(this.bindProp);
+            if(!this.bindProp.targetButtonId){
+                this.bindProp.targetButtonId="";
+            }
             return {
-                bindToSearchField:this.bindToSearchField,
+                bindProp:this.bindProp,
                 defaultValue:this.defaultValue
             }
         },
-        setData:function(bindToSearchField,defaultValue) {
-            console.log(bindToSearchField);
-            this.bindToSearchField = bindToSearchField;
+        setData:function(bindProp,defaultValue) {
+            console.log(bindProp);
+            this.bindProp = bindProp;
             this.defaultValue = defaultValue;
         },
         /*绑定默认值*/
@@ -143,10 +155,14 @@ Vue.component("list-search-control-bind-to", {
                     <tbody>
                         <tr>
                             <td>
-                                标题：
+                                对齐方式：
                             </td>
                             <td>
-                                <input type="text" v-model="bindToSearchField.columnTitle" />
+                                <i-select v-model="bindProp.columnAlign" style="width:260px">
+                                    <i-option value="左对齐">左对齐</i-option>
+                                    <i-option value="居中对齐">居中对齐</i-option>
+                                    <i-option value="右对齐">右对齐</i-option>
+                                </i-select>
                             </td>
                             <td rowspan="9" valign="top">
                                 <ul ref="zTreeUL" class="ztree"></ul>
@@ -157,7 +173,7 @@ Vue.component("list-search-control-bind-to", {
                                 所属表：
                             </td>
                             <td>
-                                {{bindToSearchField.columnTableName}}
+                                {{bindProp.columnTableName}}
                             </td>
                         </tr>
                         <tr>
@@ -165,7 +181,7 @@ Vue.component("list-search-control-bind-to", {
                                 绑定字段：
                             </td>
                             <td>
-                                {{bindToSearchField.columnCaption}}
+                                {{bindProp.columnCaption}}
                             </td>
                         </tr>
                         <tr>
@@ -173,33 +189,24 @@ Vue.component("list-search-control-bind-to", {
                                 字段名称：
                             </td>
                             <td>
-                                {{bindToSearchField.columnName}}
+                                {{bindProp.columnName}}
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                字段类型：
+                                字段类型： 
                             </td>
                             <td>
-                                {{bindToSearchField.columnDataTypeName}}
+                                {{bindProp.columnDataTypeName}}
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                运算符：
+                                触发按钮：
                             </td>
                             <td>
-                                <i-select v-model="bindToSearchField.columnOperator" style="width:260px">
-                                    <i-option value="等于">等于</i-option>
-                                    <i-option value="匹配">匹配</i-option>
-                                    <i-option value="不等于">不等于</i-option>
-                                    <i-option value="大于">大于</i-option>
-                                    <i-option value="大于等于">大于等于</i-option>
-                                    <i-option value="小于">小于</i-option>
-                                    <i-option value="小于等于">小于等于</i-option>
-                                    <i-option value="左匹配">左匹配</i-option>
-                                    <i-option value="右匹配">右匹配</i-option>
-                                    <i-option value="包含">包含</i-option>
+                                <i-select v-model="bindProp.targetButtonId" style="width:260px" :clearable="true">
+                                    <i-option :value="item.buttonId" v-for="item in buttons">{{item.buttonCaption}}</i-option>
                                 </i-select>
                             </td>
                         </tr>

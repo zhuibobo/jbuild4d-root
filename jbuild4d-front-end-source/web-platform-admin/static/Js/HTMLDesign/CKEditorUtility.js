@@ -34,13 +34,16 @@ class CKEditorUtility {
     }
     static SetCKEditorHTML(html){
         //处理class;
-
-
         this.GetCKEditorInst().setData(html);
         window.setTimeout(function () {
             CKEditorUtility.ALLElemBindDefaultEvent();
         },500);
     }
+
+    static GetCKEditorHTMLInPluginPage(){
+        return window.parent.CKEditorUtility.GetCKEditorHTML();
+    }
+
     static InitializeCKEditor(textAreaElemId,pluginsConfig,loadCompletedFunc,ckeditorConfigFullPath,pluginBasePath,themeVo) {
 
         //console.log(pluginsConfig);
