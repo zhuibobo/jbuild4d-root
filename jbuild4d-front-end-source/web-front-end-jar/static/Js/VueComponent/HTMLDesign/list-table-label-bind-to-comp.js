@@ -139,11 +139,27 @@ Vue.component("list-table-label-bind-to-comp", {
             console.log(bindProp);
             this.bindProp = bindProp;
             this.defaultValue = defaultValue;
+            this.tempData.defaultDisplayText = JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType, this.defaultValue.defaultText);
         },
         /*绑定默认值*/
         selectDefaultValueView:function () {
             window._SelectBindObj = this;
             window.parent.listDesign.selectDefaultValueDialogBegin(window,null);
+        },
+        setSelectEnvVariableResultValue:function(result){
+            if(result!=null) {
+                this.defaultValue.defaultType = result.Type;
+                this.defaultValue.defaultValue = result.Value;
+                this.defaultValue.defaultText = result.Text;
+                this.tempData.defaultDisplayText = JBuild4DSelectView.SelectEnvVariable.formatText(this.defaultValue.defaultType, this.defaultValue.defaultText);
+            }
+            else {
+                this.defaultValue.defaultType = "";
+                this.defaultValue.defaultValue = "";
+                this.defaultValue.defaultText = "";
+                this.tempData.defaultDisplayText = "";
+            }
+            //this.setCompleted();
         }
     },
     template: `<table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
