@@ -1,6 +1,6 @@
 var JBuild4DSelectView={
     SelectEnvVariable:{
-        URL:"/HTML/SelectView/SelectEnvVariable.html",
+        /*URL:"/HTML/SelectView/SelectEnvVariable.html",
         beginSelect:function (instanceName) {
             var url=BaseUtility.BuildView(this.URL, {"instanceName": instanceName});
             DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "选择变量",modal:true}, 2);
@@ -15,7 +15,7 @@ var JBuild4DSelectView={
             //alert("1");
             $(window.parent.document).find(".ui-widget-overlay").css("zIndex",10100);
             $(window.parent.document).find(".ui-dialog").css("zIndex",10101);
-        },
+        },*/
         formatText:function (type,text) {
             //debugger;
             if(type=="Const"){
@@ -38,7 +38,8 @@ var JBuild4DSelectView={
             }
             return "未知类型"+text;
         }
-    },
+    }
+    /*,
     SelectBindToField:{
         URL:"/HTML/SelectView/SelectBindToField.html",
         beginSelect:function (instanceName) {
@@ -74,5 +75,5 @@ var JBuild4DSelectView={
             $(window.parent.document).find(".ui-widget-overlay").css("zIndex",10100);
             $(window.parent.document).find(".ui-dialog").css("zIndex",10101);
         }
-    }
+    }*/
 }
