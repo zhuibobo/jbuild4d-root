@@ -4,8 +4,8 @@
     <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity">
         <constructor>
             <idArg column="DB_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
-            <arg column="DB_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
-            <arg column="DB_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_LINK_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_LINK_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DB_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DB_DRIVER_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DB_DATABASE_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -22,9 +22,9 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        DB_ID, DB_VALUE, DB_NAME, DB_TYPE, DB_DRIVER_NAME, DB_DATABASE_NAME, DB_URL, DB_USER,
-        DB_PASSWORD, DB_CREATE_TIME, DB_ORDER_NUM, DB_DESC, DB_IS_LOCATION, DB_STATUS, DB_ORGAN_ID,
-        DB_ORGAN_NAME
+        DB_ID, DB_LINK_VALUE, DB_LINK_NAME, DB_TYPE, DB_DRIVER_NAME, DB_DATABASE_NAME, DB_URL,
+        DB_USER, DB_PASSWORD, DB_CREATE_TIME, DB_ORDER_NUM, DB_DESC, DB_IS_LOCATION, DB_STATUS,
+        DB_ORGAN_ID, DB_ORGAN_NAME
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -37,13 +37,13 @@
         where DB_ID = #{dbId,jdbcType=NVARCHAR}
     </delete>
     <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity">
-        insert into TBUILD_DB_LINK (DB_ID, DB_VALUE, DB_NAME,
+        insert into TBUILD_DB_LINK (DB_ID, DB_LINK_VALUE, DB_LINK_NAME,
                                     DB_TYPE, DB_DRIVER_NAME, DB_DATABASE_NAME,
                                     DB_URL, DB_USER, DB_PASSWORD,
                                     DB_CREATE_TIME, DB_ORDER_NUM, DB_DESC,
                                     DB_IS_LOCATION, DB_STATUS, DB_ORGAN_ID,
                                     DB_ORGAN_NAME)
-        values (#{dbId,jdbcType=NVARCHAR}, #{dbValue,jdbcType=NVARCHAR}, #{dbName,jdbcType=NVARCHAR},
+        values (#{dbId,jdbcType=NVARCHAR}, #{dbLinkValue,jdbcType=NVARCHAR}, #{dbLinkName,jdbcType=NVARCHAR},
                 #{dbType,jdbcType=NVARCHAR}, #{dbDriverName,jdbcType=NVARCHAR}, #{dbDatabaseName,jdbcType=NVARCHAR},
                 #{dbUrl,jdbcType=NVARCHAR}, #{dbUser,jdbcType=NVARCHAR}, #{dbPassword,jdbcType=NVARCHAR},
                 #{dbCreateTime,jdbcType=TIMESTAMP}, #{dbOrderNum,jdbcType=INTEGER}, #{dbDesc,jdbcType=NVARCHAR},
@@ -56,11 +56,11 @@
             <if test="dbId != null">
                 DB_ID,
             </if>
-            <if test="dbValue != null">
-                DB_VALUE,
+            <if test="dbLinkValue != null">
+                DB_LINK_VALUE,
             </if>
-            <if test="dbName != null">
-                DB_NAME,
+            <if test="dbLinkName != null">
+                DB_LINK_NAME,
             </if>
             <if test="dbType != null">
                 DB_TYPE,
@@ -106,11 +106,11 @@
             <if test="dbId != null">
                 #{dbId,jdbcType=NVARCHAR},
             </if>
-            <if test="dbValue != null">
-                #{dbValue,jdbcType=NVARCHAR},
+            <if test="dbLinkValue != null">
+                #{dbLinkValue,jdbcType=NVARCHAR},
             </if>
-            <if test="dbName != null">
-                #{dbName,jdbcType=NVARCHAR},
+            <if test="dbLinkName != null">
+                #{dbLinkName,jdbcType=NVARCHAR},
             </if>
             <if test="dbType != null">
                 #{dbType,jdbcType=NVARCHAR},
@@ -156,11 +156,11 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity">
         update TBUILD_DB_LINK
         <set>
-            <if test="dbValue != null">
-                DB_VALUE = #{dbValue,jdbcType=NVARCHAR},
+            <if test="dbLinkValue != null">
+                DB_LINK_VALUE = #{dbLinkValue,jdbcType=NVARCHAR},
             </if>
-            <if test="dbName != null">
-                DB_NAME = #{dbName,jdbcType=NVARCHAR},
+            <if test="dbLinkName != null">
+                DB_LINK_NAME = #{dbLinkName,jdbcType=NVARCHAR},
             </if>
             <if test="dbType != null">
                 DB_TYPE = #{dbType,jdbcType=NVARCHAR},
@@ -206,8 +206,8 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity">
         update TBUILD_DB_LINK
-        set DB_VALUE = #{dbValue,jdbcType=NVARCHAR},
-            DB_NAME = #{dbName,jdbcType=NVARCHAR},
+        set DB_LINK_VALUE = #{dbLinkValue,jdbcType=NVARCHAR},
+            DB_LINK_NAME = #{dbLinkName,jdbcType=NVARCHAR},
             DB_TYPE = #{dbType,jdbcType=NVARCHAR},
             DB_DRIVER_NAME = #{dbDriverName,jdbcType=NVARCHAR},
             DB_DATABASE_NAME = #{dbDatabaseName,jdbcType=NVARCHAR},

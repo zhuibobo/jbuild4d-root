@@ -16,11 +16,11 @@ public class DbLinkEntity {
     @DBKeyField
     private String dbId;
 
-    //DB_VALUE:值,唯一
-    private String dbValue;
+    //DB_LINK_VALUE:值,唯一
+    private String dbLinkValue;
 
-    //DB_NAME:数据库名称
-    private String dbName;
+    //DB_LINK_NAME:数据库名称
+    private String dbLinkName;
 
     //DB_TYPE:数据库类型
     private String dbType;
@@ -62,10 +62,10 @@ public class DbLinkEntity {
     //DB_ORGAN_NAME:组织名称
     private String dbOrganName;
 
-    public DbLinkEntity(String dbId, String dbValue, String dbName, String dbType, String dbDriverName, String dbDatabaseName, String dbUrl, String dbUser, String dbPassword, Date dbCreateTime, Integer dbOrderNum, String dbDesc, String dbIsLocation, String dbStatus, String dbOrganId, String dbOrganName) {
+    public DbLinkEntity(String dbId, String dbLinkValue, String dbLinkName, String dbType, String dbDriverName, String dbDatabaseName, String dbUrl, String dbUser, String dbPassword, Date dbCreateTime, Integer dbOrderNum, String dbDesc, String dbIsLocation, String dbStatus, String dbOrganId, String dbOrganName) {
         this.dbId = dbId;
-        this.dbValue = dbValue;
-        this.dbName = dbName;
+        this.dbLinkValue = dbLinkValue;
+        this.dbLinkName = dbLinkName;
         this.dbType = dbType;
         this.dbDriverName = dbDriverName;
         this.dbDatabaseName = dbDatabaseName;
@@ -93,20 +93,20 @@ public class DbLinkEntity {
         this.dbId = dbId == null ? null : dbId.trim();
     }
 
-    public String getDbValue() {
-        return dbValue;
+    public String getDbLinkValue() {
+        return dbLinkValue;
     }
 
-    public void setDbValue(String dbValue) {
-        this.dbValue = dbValue == null ? null : dbValue.trim();
+    public void setDbLinkValue(String dbLinkValue) {
+        this.dbLinkValue = dbLinkValue == null ? null : dbLinkValue.trim();
     }
 
-    public String getDbName() {
-        return dbName;
+    public String getDbLinkName() {
+        return dbLinkName;
     }
 
-    public void setDbName(String dbName) {
-        this.dbName = dbName == null ? null : dbName.trim();
+    public void setDbLinkName(String dbLinkName) {
+        this.dbLinkName = dbLinkName == null ? null : dbLinkName.trim();
     }
 
     public String getDbType() {

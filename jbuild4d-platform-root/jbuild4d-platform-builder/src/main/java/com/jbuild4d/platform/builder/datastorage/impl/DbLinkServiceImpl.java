@@ -1,7 +1,9 @@
 package com.jbuild4d.platform.builder.datastorage.impl;
+import java.util.Date;
 
 import com.jbuild4d.base.dbaccess.dao.builder.DbLinkMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity;
+import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
@@ -23,7 +25,11 @@ public class DbLinkServiceImpl extends BaseServiceImpl<DbLinkEntity> implements 
         return super.save(jb4DSession,id, record, new IAddBefore<DbLinkEntity>() {
             @Override
             public DbLinkEntity run(JB4DSession jb4DSession,DbLinkEntity sourceEntity) throws JBuild4DGenerallyException {
-                //设置排序,以及其他参数--nextOrderNum()
+                sourceEntity.setDbCreateTime(new Date());
+                sourceEntity.setDbOrderNum(dbLinkMapper.nextOrderNum());
+                sourceEntity.setDbStatus(EnableTypeEnum.enable.getDisplayName());
+                sourceEntity.setDbOrganId(jb4DSession.getOrganId());
+                sourceEntity.setDbOrganName(jb4DSession.getOrganName());
                 return sourceEntity;
             }
         });

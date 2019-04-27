@@ -187,6 +187,11 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuEntity> implements IMen
                 "服务链接","服务链接","服务链接",
                 "","top-menu-data");*/
 
+        //根菜单->应用管理->存储设计->数据库连接
+        MenuEntity appBuilderDBLinkMenu=createMenu(jb4DSession,appManagerDataStorageMenu.getMenuId(),"JB4DSystemAppBuilderDBLink",
+                "数据库连接","数据库连接","数据库连接",
+                "Builder/DataStorage/DBLink/DBLinkList.html","frame-top-menu-data");
+
         //根菜单->应用管理->存储设计->数据库管理
         MenuEntity appBuilderDataBaseMenu=createMenu(jb4DSession,appManagerDataStorageMenu.getMenuId(),"JB4DSystemAppBuilderDataBase",
                 "数据库管理","数据库管理","数据库管理",

@@ -289,8 +289,8 @@
             <column name="DB_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="DB_VALUE" type="NVARCHAR(200)" remarks="值,唯一"/>
-            <column name="DB_NAME" type="NVARCHAR(200)" remarks="数据库名称"/>
+            <column name="DB_LINK_VALUE" type="NVARCHAR(200)" remarks="值,唯一"/>
+            <column name="DB_LINK_NAME" type="NVARCHAR(200)" remarks="数据库名称"/>
             <column name="DB_TYPE" type="NVARCHAR(200)" remarks="数据库类型"/>
             <column name="DB_DRIVER_NAME" type="NVARCHAR(200)" remarks="驱动程序名称"/>
             <column name="DB_DATABASE_NAME" type="NVARCHAR(200)" remarks="数据库名称"/>

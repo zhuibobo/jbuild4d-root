@@ -6,8 +6,8 @@
     <delete id="deleteAll">delete from TBUILD_DB_LINK</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(DB_ORDER_NUM) is null then 1 else max(DB_ORDER_NUM)+1 end ORDERNUM from TBUILD_DB_LINK</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_DB_LINK<where>
-        <if test="dbValue !=null and dbValue !=''"> and DB_VALUE like #{dbValue} </if>
-        <if test="dbName !=null and dbName !=''"> and DB_NAME like #{dbName} </if>
+        <if test="dbLinkValue !=null and dbLinkValue !=''"> and DB_LINK_VALUE like #{dbLinkValue} </if>
+        <if test="dbLinkName !=null and dbLinkName !=''"> and DB_LINK_NAME like #{dbLinkName} </if>
         <if test="dbType !=null and dbType !=''"> and DB_TYPE like #{dbType} </if>
         <if test="dbDriverName !=null and dbDriverName !=''"> and DB_DRIVER_NAME like #{dbDriverName} </if>
         <if test="dbDatabaseName !=null and dbDatabaseName !=''"> and DB_DATABASE_NAME like #{dbDatabaseName} </if>
