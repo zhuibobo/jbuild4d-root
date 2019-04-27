@@ -143,7 +143,7 @@
                             服务端解析类：
                         </td>
                         <td>
-                            <i-input v-model="normalProps.serverResolveMethod" placeholder="按钮进行服务端解析时,类全称,将调用该类,需要实现接口IFormButtonCustResolve" />
+                            <i-input v-model="normalProps.custServerResolveMethod" placeholder="按钮进行服务端解析时,保存模版时候调用,类全称,需要实现接口IFormButtonCustResolve" />
                         </td>
                     </tr>
                     <tr>
@@ -151,7 +151,7 @@
                             参数：
                         </td>
                         <td>
-                            <i-input v-model="normalProps.serverResolveMethodPara" placeholder="服务端解析类的参数" />
+                            <i-input v-model="normalProps.custServerResolveMethodPara" placeholder="服务端解析类的参数" />
                         </td>
                     </tr>
                     <tr>
@@ -159,7 +159,7 @@
                             客户端渲染方法：
                         </td>
                         <td>
-                            <i-input v-model="normalProps.clientRendererMethod" placeholder="客户端渲染方法,按钮将经由该方法渲染,最终形成页面元素,需要返回最终元素的HTML对象" />
+                            <i-input v-model="normalProps.custClientRendererMethod" placeholder="客户端渲染方法,按钮将经由该方法渲染,最终形成页面元素,需要返回最终元素的HTML对象" />
                         </td>
                     </tr>
                     <tr>
@@ -167,7 +167,7 @@
                             参数：
                         </td>
                         <td>
-                            <i-input v-model="normalProps.clientRendererMethodPara" placeholder="客户端渲染方法的参数" />
+                            <i-input v-model="normalProps.custClientRendererMethodPara" placeholder="客户端渲染方法的参数" />
                         </td>
                     </tr>
                     <tr>
@@ -175,7 +175,7 @@
                             客户端渲染后方法：
                         </td>
                         <td>
-                            <i-input v-model="normalProps.clientRendererAfterMethod" placeholder="客户端渲染后调用方法,经过默认的渲染,无返回值" />
+                            <i-input v-model="normalProps.custClientRendererAfterMethodPara" placeholder="客户端渲染后调用方法,经过默认的渲染,无返回值" />
                         </td>
                     </tr>
                     <tr>
@@ -183,7 +183,7 @@
                             参数：
                         </td>
                         <td>
-                            <i-input v-model="normalProps.clientRendererAfterMethodPara" placeholder="客户端渲染后方法的参数" />
+                            <i-input v-model="normalProps.custClientRendererAfterMethodParaPara" placeholder="客户端渲染后方法的参数" />
                         </td>
                     </tr>
                     <tr>
@@ -191,7 +191,7 @@
                             客户端点击前方法：
                         </td>
                         <td>
-                            <i-input v-model="normalProps.clientClickBeforeMethod" placeholder="客户端点击该按钮时的前置方法,如果返回false将阻止默认调用" />
+                            <i-input v-model="normalProps.custClientClickBeforeMethod" placeholder="客户端点击该按钮时的前置方法,如果返回false将阻止默认调用" />
                         </td>
                     </tr>
                     <tr>
@@ -199,7 +199,7 @@
                             参数：
                         </td>
                         <td>
-                            <i-input v-model="normalProps.clientClickBeforeMethodPara" placeholder="客户端点击前方法的参数" />
+                            <i-input v-model="normalProps.custClientClickBeforeMethodPara" placeholder="客户端点击前方法的参数" />
                         </td>
                     </tr>
                 </tbody>
@@ -231,14 +231,14 @@
                 operation:"add",
                 bindAuthority:"notAuth",
                 //开发扩展
-                serverResolveMethod:"",
-                serverResolveMethodPara:"",
-                clientRendererMethod:"",
-                clientRendererMethodPara:"",
-                clientRendererAfterMethod:"",
-                clientRendererAfterMethodPara:"",
-                clientClickBeforeMethod:"",
-                clientClickBeforeMethodPara:"",
+                custServerResolveMethod:"",
+                custServerResolveMethodPara:"",
+                custClientRendererMethod:"",
+                custClientRendererMethodPara:"",
+                custClientRendererAfterMethodPara:"",
+                custClientRendererAfterMethodParaPara:"",
+                custClientClickBeforeMethod:"",
+                custClientClickBeforeMethodPara:"",
                 //内部按钮
                 innerButtonJsonString:""
             }
@@ -310,14 +310,14 @@
                 this.normalProps.isShow = $elem.attr("isshow");
                 this.normalProps.operation = $elem.attr("operation");
                 this.normalProps.bindAuthority = $elem.attr("bindauthority");
-                this.normalProps.serverResolveMethod =$elem.attr("serverresolvemethod");
-                this.normalProps.serverResolveMethodPara = $elem.attr("serverresolvemethodpara");
-                this.normalProps.clientRendererMethod =$elem.attr("clientrenderermethod");
-                this.normalProps.clientRendererMethodPara = $elem.attr("clientrenderermethodpara");
-                this.normalProps.clientRendererAfterMethod =$elem.attr("clientrendereraftermethod");
-                this.normalProps.clientRendererAfterMethodPara = $elem.attr("clientrendereraftermethodpara");
-                this.normalProps.clientClickBeforeMethod = $elem.attr("clientclickbeforemethod");
-                this.normalProps.clientClickBeforeMethodPara = $elem.attr("clientclickbeforemethodpara");
+                this.normalProps.custServerResolveMethod =$elem.attr("custserverresolvemethod");
+                this.normalProps.custServerResolveMethodPara = $elem.attr("custserverresolvemethodpara");
+                this.normalProps.custClientRendererMethod =$elem.attr("custclientrenderermethod");
+                this.normalProps.custClientRendererMethodPara = $elem.attr("custclientrenderermethodpara");
+                this.normalProps.custClientRendererAfterMethodPara =$elem.attr("custclientrendereraftermethodpara");
+                this.normalProps.custClientRendererAfterMethodParaPara = $elem.attr("custclientrendereraftermethodparapara");
+                this.normalProps.custClientClickBeforeMethod = $elem.attr("custclientclickbeforemethod");
+                this.normalProps.custClientClickBeforeMethodPara = $elem.attr("custclientclickbeforemethodpara");
                 this.normalProps.innerButtonJsonString = $elem.attr("innerbuttonjsonstring");
 
                 //this.bindToSearchField = props.bindToSearchField ? props.bindToSearchField : this.bindToSearchField;
