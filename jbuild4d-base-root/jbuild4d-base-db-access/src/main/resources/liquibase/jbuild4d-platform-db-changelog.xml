@@ -285,30 +285,51 @@
             <column name="LINK_ORGAN_NAME" type="NVARCHAR(100)"/>
         </createTable>
 
-        <createTable tableName="TBUILD_TABLE_GROUP">
-            <column name="TABLE_GROUP_ID" type="NVARCHAR(100)">
+        <createTable tableName="TBUILD_DB_LINK" remarks="业务数据库连接">
+            <column name="DB_ID" type="NVARCHAR(100)" remarks="主键:UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="TABLE_GROUP_VALUE" type="NVARCHAR(200)">
+            <column name="DB_VALUE" type="NVARCHAR(200)" remarks="值,唯一"/>
+            <column name="DB_NAME" type="NVARCHAR(200)" remarks="数据库名称"/>
+            <column name="DB_TYPE" type="NVARCHAR(200)" remarks="数据库类型"/>
+            <column name="DB_DRIVER_NAME" type="NVARCHAR(200)" remarks="驱动程序名称"/>
+            <column name="DB_DATABASE_NAME" type="NVARCHAR(200)" remarks="数据库名称"/>
+            <column name="DB_URL" type="NVARCHAR(1000)" remarks="数据库URL地址"/>
+            <column name="DB_USER" type="NVARCHAR(100)" remarks="用户名"/>
+            <column name="DB_PASSWORD" type="NVARCHAR(100)" remarks="密码"/>
+            <column name="DB_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="DB_ORDER_NUM" type="INT" remarks="排序号"/>
+            <column name="DB_DESC" type="NVARCHAR(500)" remarks="备注"/>
+            <column name="DB_IS_LOCATION" type="NVARCHAR(10)" remarks="是否本地库,构建库与业务库一体"/>
+            <column name="DB_STATUS" type="NVARCHAR(50)" remarks="状态"/>
+            <column name="DB_ORGAN_ID" type="NVARCHAR(100)" remarks="组织ID"/>
+            <column name="DB_ORGAN_NAME" type="NVARCHAR(100)" remarks="组织名称"/>
+        </createTable>
+
+        <createTable tableName="TBUILD_TABLE_GROUP" remarks="表分组信息表">
+            <column name="TABLE_GROUP_ID" type="NVARCHAR(100)" remarks="主键:UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TABLE_GROUP_VALUE" type="NVARCHAR(200)" remarks="分组值">
                 <constraints nullable="false"/>
             </column>
-            <column name="TABLE_GROUP_TEXT" type="NVARCHAR(200)">
+            <column name="TABLE_GROUP_TEXT" type="NVARCHAR(200)" remarks="分组名称">
                 <constraints nullable="false"/>
             </column>
-            <column name="TABLE_GROUP_ORDER_NUM" type="INT"/>
-            <column name="TABLE_GROUP_CREATE_TIME" type="datetime(6)"/>
-            <column name="TABLE_GROUP_DESC" type="NVARCHAR(500)"/>
-            <column name="TABLE_GROUP_STATUS" type="NVARCHAR(10)"/>
-            <column name="TABLE_GROUP_PARENT_ID" type="NVARCHAR(100)"/>
-            <column name="TABLE_GROUP_ISSYSTEM" type="NVARCHAR(10)"/>
-            <column name="TABLE_GROUP_DEL_ENABLE" type="NVARCHAR(10)"/>
-            <column name="TABLE_GROUP_PID_LIST" type="NVARCHAR(1200)">
+            <column name="TABLE_GROUP_ORDER_NUM" type="INT" remarks="排序号"/>
+            <column name="TABLE_GROUP_CREATE_TIME" type="datetime(6)" remarks="创建时间"/>
+            <column name="TABLE_GROUP_DESC" type="NVARCHAR(500)" remarks="备注"/>
+            <column name="TABLE_GROUP_STATUS" type="NVARCHAR(10)" remarks="状态"/>
+            <column name="TABLE_GROUP_PARENT_ID" type="NVARCHAR(100)" remarks="父节点ID"/>
+            <column name="TABLE_GROUP_ISSYSTEM" type="NVARCHAR(10)" remarks="是否系统所有"/>
+            <column name="TABLE_GROUP_DEL_ENABLE" type="NVARCHAR(10)" remarks="能否删除"/>
+            <column name="TABLE_GROUP_PID_LIST" type="NVARCHAR(1200)" remarks="父节点IDList">
                 <constraints nullable="false"/>
             </column>
-            <column name="TABLE_GROUP_CHILD_COUNT" type="INT"/>
-            <column name="TABLE_GROUP_LINK_ID" type="NVARCHAR(100)"/>
-            <column name="TABLE_GROUP_ORGAN_ID" type="NVARCHAR(100)"/>
-            <column name="TABLE_GROUP_ORGAN_NAME" type="NVARCHAR(100)"/>
+            <column name="TABLE_GROUP_CHILD_COUNT" type="INT" remarks="子节点数量"/>
+            <column name="TABLE_GROUP_LINK_ID" type="NVARCHAR(100)" remarks="所属连接ID:关联到表TBUILD_DB_LINK.DB_ID"/>
+            <column name="TABLE_GROUP_ORGAN_ID" type="NVARCHAR(100)" remarks="组织ID"/>
+            <column name="TABLE_GROUP_ORGAN_NAME" type="NVARCHAR(100)" remarks="组织名称"/>
         </createTable>
 
         <createTable tableName="TBUILD_TABLE" remarks="表基础信息:分为构建表和系统表">
@@ -340,7 +361,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="TABLE_STATUS" type="NVARCHAR(10)" remarks="状态" />
-            <column name="TABLE_LINK_ID" type="NVARCHAR(100)" remarks="连接服务ID"/>
+            <column name="TABLE_LINK_ID" type="NVARCHAR(100)" remarks="所属连接ID:关联到表TBUILD_DB_LINK.DB_ID"/>
             <column name="TABLE_ORGAN_ID" type="NVARCHAR(100)" remarks="组织ID" />
             <column name="TABLE_ORGAN_NAME" type="NVARCHAR(100)" remarks="组织名称" />
         </createTable>

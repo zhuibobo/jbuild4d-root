@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.DbLinkMapper">
+    <resultMap id="BaseResultMap" type="com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity">
+        <constructor>
+            <idArg column="DB_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_TYPE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_DRIVER_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_DATABASE_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_USER" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_PASSWORD" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="DB_ORDER_NUM" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="DB_DESC" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_IS_LOCATION" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_ORGAN_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DB_ORGAN_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        DB_ID, DB_VALUE, DB_NAME, DB_TYPE, DB_DRIVER_NAME, DB_DATABASE_NAME, DB_URL, DB_USER,
+        DB_PASSWORD, DB_CREATE_TIME, DB_ORDER_NUM, DB_DESC, DB_IS_LOCATION, DB_STATUS, DB_ORGAN_ID,
+        DB_ORGAN_NAME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TBUILD_DB_LINK
+        where DB_ID = #{dbId,jdbcType=NVARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from TBUILD_DB_LINK
+        where DB_ID = #{dbId,jdbcType=NVARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity">
+        insert into TBUILD_DB_LINK (DB_ID, DB_VALUE, DB_NAME,
+                                    DB_TYPE, DB_DRIVER_NAME, DB_DATABASE_NAME,
+                                    DB_URL, DB_USER, DB_PASSWORD,
+                                    DB_CREATE_TIME, DB_ORDER_NUM, DB_DESC,
+                                    DB_IS_LOCATION, DB_STATUS, DB_ORGAN_ID,
+                                    DB_ORGAN_NAME)
+        values (#{dbId,jdbcType=NVARCHAR}, #{dbValue,jdbcType=NVARCHAR}, #{dbName,jdbcType=NVARCHAR},
+                #{dbType,jdbcType=NVARCHAR}, #{dbDriverName,jdbcType=NVARCHAR}, #{dbDatabaseName,jdbcType=NVARCHAR},
+                #{dbUrl,jdbcType=NVARCHAR}, #{dbUser,jdbcType=NVARCHAR}, #{dbPassword,jdbcType=NVARCHAR},
+                #{dbCreateTime,jdbcType=TIMESTAMP}, #{dbOrderNum,jdbcType=INTEGER}, #{dbDesc,jdbcType=NVARCHAR},
+                #{dbIsLocation,jdbcType=NVARCHAR}, #{dbStatus,jdbcType=NVARCHAR}, #{dbOrganId,jdbcType=NVARCHAR},
+                #{dbOrganName,jdbcType=NVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity">
+        insert into TBUILD_DB_LINK
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dbId != null">
+                DB_ID,
+            </if>
+            <if test="dbValue != null">
+                DB_VALUE,
+            </if>
+            <if test="dbName != null">
+                DB_NAME,
+            </if>
+            <if test="dbType != null">
+                DB_TYPE,
+            </if>
+            <if test="dbDriverName != null">
+                DB_DRIVER_NAME,
+            </if>
+            <if test="dbDatabaseName != null">
+                DB_DATABASE_NAME,
+            </if>
+            <if test="dbUrl != null">
+                DB_URL,
+            </if>
+            <if test="dbUser != null">
+                DB_USER,
+            </if>
+            <if test="dbPassword != null">
+                DB_PASSWORD,
+            </if>
+            <if test="dbCreateTime != null">
+                DB_CREATE_TIME,
+            </if>
+            <if test="dbOrderNum != null">
+                DB_ORDER_NUM,
+            </if>
+            <if test="dbDesc != null">
+                DB_DESC,
+            </if>
+            <if test="dbIsLocation != null">
+                DB_IS_LOCATION,
+            </if>
+            <if test="dbStatus != null">
+                DB_STATUS,
+            </if>
+            <if test="dbOrganId != null">
+                DB_ORGAN_ID,
+            </if>
+            <if test="dbOrganName != null">
+                DB_ORGAN_NAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dbId != null">
+                #{dbId,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbValue != null">
+                #{dbValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbName != null">
+                #{dbName,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbType != null">
+                #{dbType,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbDriverName != null">
+                #{dbDriverName,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbDatabaseName != null">
+                #{dbDatabaseName,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbUrl != null">
+                #{dbUrl,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbUser != null">
+                #{dbUser,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbPassword != null">
+                #{dbPassword,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbCreateTime != null">
+                #{dbCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dbOrderNum != null">
+                #{dbOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="dbDesc != null">
+                #{dbDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbIsLocation != null">
+                #{dbIsLocation,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbStatus != null">
+                #{dbStatus,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbOrganId != null">
+                #{dbOrganId,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbOrganName != null">
+                #{dbOrganName,jdbcType=NVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity">
+        update TBUILD_DB_LINK
+        <set>
+            <if test="dbValue != null">
+                DB_VALUE = #{dbValue,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbName != null">
+                DB_NAME = #{dbName,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbType != null">
+                DB_TYPE = #{dbType,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbDriverName != null">
+                DB_DRIVER_NAME = #{dbDriverName,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbDatabaseName != null">
+                DB_DATABASE_NAME = #{dbDatabaseName,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbUrl != null">
+                DB_URL = #{dbUrl,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbUser != null">
+                DB_USER = #{dbUser,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbPassword != null">
+                DB_PASSWORD = #{dbPassword,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbCreateTime != null">
+                DB_CREATE_TIME = #{dbCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dbOrderNum != null">
+                DB_ORDER_NUM = #{dbOrderNum,jdbcType=INTEGER},
+            </if>
+            <if test="dbDesc != null">
+                DB_DESC = #{dbDesc,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbIsLocation != null">
+                DB_IS_LOCATION = #{dbIsLocation,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbStatus != null">
+                DB_STATUS = #{dbStatus,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbOrganId != null">
+                DB_ORGAN_ID = #{dbOrganId,jdbcType=NVARCHAR},
+            </if>
+            <if test="dbOrganName != null">
+                DB_ORGAN_NAME = #{dbOrganName,jdbcType=NVARCHAR},
+            </if>
+        </set>
+        where DB_ID = #{dbId,jdbcType=NVARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity">
+        update TBUILD_DB_LINK
+        set DB_VALUE = #{dbValue,jdbcType=NVARCHAR},
+            DB_NAME = #{dbName,jdbcType=NVARCHAR},
+            DB_TYPE = #{dbType,jdbcType=NVARCHAR},
+            DB_DRIVER_NAME = #{dbDriverName,jdbcType=NVARCHAR},
+            DB_DATABASE_NAME = #{dbDatabaseName,jdbcType=NVARCHAR},
+            DB_URL = #{dbUrl,jdbcType=NVARCHAR},
+            DB_USER = #{dbUser,jdbcType=NVARCHAR},
+            DB_PASSWORD = #{dbPassword,jdbcType=NVARCHAR},
+            DB_CREATE_TIME = #{dbCreateTime,jdbcType=TIMESTAMP},
+            DB_ORDER_NUM = #{dbOrderNum,jdbcType=INTEGER},
+            DB_DESC = #{dbDesc,jdbcType=NVARCHAR},
+            DB_IS_LOCATION = #{dbIsLocation,jdbcType=NVARCHAR},
+            DB_STATUS = #{dbStatus,jdbcType=NVARCHAR},
+            DB_ORGAN_ID = #{dbOrganId,jdbcType=NVARCHAR},
+            DB_ORGAN_NAME = #{dbOrganName,jdbcType=NVARCHAR}
+        where DB_ID = #{dbId,jdbcType=NVARCHAR}
+    </update>
+</mapper>

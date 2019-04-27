@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbuild4d.base.dbaccess.dao.builder.DbLinkMapper">
+    <select id="selectAll" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_DB_LINK ORDER by DB_ORDER_NUM DESC</select>
+    <select id="selectAllASC" resultMap="BaseResultMap">select<include refid="Base_Column_List"/> from TBUILD_DB_LINK ORDER by DB_ORDER_NUM ASC</select>
+    <delete id="deleteAll">delete from TBUILD_DB_LINK</delete>
+    <select id="nextOrderNum" resultType="integer">select case when max(DB_ORDER_NUM) is null then 1 else max(DB_ORDER_NUM)+1 end ORDERNUM from TBUILD_DB_LINK</select>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_DB_LINK<where>
+        <if test="dbValue !=null and dbValue !=''"> and DB_VALUE like #{dbValue} </if>
+        <if test="dbName !=null and dbName !=''"> and DB_NAME like #{dbName} </if>
+        <if test="dbType !=null and dbType !=''"> and DB_TYPE like #{dbType} </if>
+        <if test="dbDriverName !=null and dbDriverName !=''"> and DB_DRIVER_NAME like #{dbDriverName} </if>
+        <if test="dbDatabaseName !=null and dbDatabaseName !=''"> and DB_DATABASE_NAME like #{dbDatabaseName} </if>
+        <if test="dbUrl !=null and dbUrl !=''"> and DB_URL like #{dbUrl} </if>
+        <if test="dbUser !=null and dbUser !=''"> and DB_USER like #{dbUser} </if>
+        <if test="dbPassword !=null and dbPassword !=''"> and DB_PASSWORD like #{dbPassword} </if>
+        <if test="dbDesc !=null and dbDesc !=''"> and DB_DESC like #{dbDesc} </if>
+        <if test="dbIsLocation !=null and dbIsLocation !=''"> and DB_IS_LOCATION like #{dbIsLocation} </if>
+        <if test="dbStatus !=null and dbStatus !=''"> and DB_STATUS like #{dbStatus} </if>
+        <if test="dbOrganId !=null and dbOrganId !=''"> and DB_ORGAN_ID like #{dbOrganId} </if>
+        <if test="dbOrganName !=null and dbOrganName !=''"> and DB_ORGAN_NAME like #{dbOrganName} </if>
+    </where>ORDER by DB_ORDER_NUM DESC</select>
+    <select id="selectLessThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TBUILD_DB_LINK
+                                                                                                          where DB_ORDER_NUM = (select max(DB_ORDER_NUM) from TBUILD_DB_LINK where DB_ORDER_NUM<(select DB_ORDER_NUM from TBUILD_DB_LINK where DB_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+    <select id="selectGreaterThanRecord" parameterType="java.lang.String" resultMap="BaseResultMap"><![CDATA[select * from TBUILD_DB_LINK
+                                                                                                             where DB_ORDER_NUM = (select min(DB_ORDER_NUM) from TBUILD_DB_LINK where DB_ORDER_NUM>(select DB_ORDER_NUM from TBUILD_DB_LINK where DB_ID=#{Id,jdbcType=NVARCHAR}))]]></select>
+</mapper>
