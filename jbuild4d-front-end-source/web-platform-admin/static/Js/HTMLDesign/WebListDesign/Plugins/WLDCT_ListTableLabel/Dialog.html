@@ -30,7 +30,7 @@
                                 服务端解析类1：
                             </td>
                             <td>
-                                <i-input v-model="normalProps.serverResolveMethod" placeholder="按钮进行服务端解析时,保存模版时候调用,类全称,需要实现接口IListTableLabelCustResolve" />
+                                <i-input v-model="normalProps.custServerResolveMethod" placeholder="按钮进行服务端解析时,保存模版时候调用,类全称,需要实现接口IListTableLabelCustResolve" />
                             </td>
                         </tr>
                         <tr>
@@ -38,7 +38,7 @@
                                 参数：
                             </td>
                             <td>
-                                <i-input v-model="normalProps.serverResolveMethodPara" placeholder="服务端解析类的参数" />
+                                <i-input v-model="normalProps.custServerResolveMethodPara" placeholder="服务端解析类的参数" />
                             </td>
                         </tr>
                         <tr>
@@ -46,7 +46,7 @@
                                 客户端渲染方法：
                             </td>
                             <td>
-                                <i-input v-model="normalProps.clientRendererMethod" placeholder="客户端渲染方法,生成前端页面时调动,最终形成页面元素,需要返回最终元素的HTML对象" />
+                                <i-input v-model="normalProps.custClientRendererMethod" placeholder="客户端渲染方法,生成前端页面时调动,最终形成页面元素,需要返回最终元素的HTML对象" />
                             </td>
                         </tr>
                         <tr>
@@ -54,7 +54,7 @@
                                 参数：
                             </td>
                             <td>
-                                <i-input v-model="normalProps.clientRendererMethodPara" placeholder="客户端渲染方法的参数" />
+                                <i-input v-model="normalProps.custClientRendererMethodPara" placeholder="客户端渲染方法的参数" />
                             </td>
                         </tr>
                     </tbody>
@@ -76,10 +76,10 @@
                     targetButtonId: "",
                     columnAlign:"",
                     //开发扩展
-                    serverResolveMethod:"",
-                    serverResolveMethodPara:"",
-                    clientRendererMethod:"",
-                    clientRendererMethodPara:""
+                    custServerResolveMethod:"",
+                    custServerResolveMethodPara:"",
+                    custClientRendererMethod:"",
+                    custClientRendererMethodPara:""
                 },
                 dataSetId:null,
                 buttons:[]
@@ -120,10 +120,10 @@
                             targetButtonId: bindData.bindProp.targetButtonId,
                             columnAlign:bindData.bindProp.columnAlign,
                             //开发扩展
-                            serverResolveMethod:this.normalProps.serverResolveMethod,
-                            serverResolveMethodPara:this.normalProps.serverResolveMethodPara,
-                            clientRendererMethod:this.normalProps.clientRendererMethod,
-                            clientRendererMethodPara:this.normalProps.clientRendererMethodPara
+                            custServerResolveMethod:this.normalProps.custServerResolveMethod,
+                            custServerResolveMethodPara:this.normalProps.custServerResolveMethodPara,
+                            custClientRendererMethod:this.normalProps.custClientRendererMethod,
+                            custClientRendererMethodPara:this.normalProps.custClientRendererMethodPara
                         },
                         defaultValue: bindData.defaultValue
                     }
@@ -141,10 +141,10 @@
                     this.normalProps.columnDataTypeName=$elem.attr("columndatatypename");
                     this.normalProps.targetButtonId=$elem.attr("targetbuttonid");
                     this.normalProps.columnAlign=$elem.attr("columnalign");
-                    this.normalProps.serverResolveMethod =$elem.attr("serverresolvemethod");
-                    this.normalProps.serverResolveMethodPara = $elem.attr("serverresolvemethodpara");
-                    this.normalProps.clientRendererMethod =$elem.attr("clientrenderermethod");
-                    this.normalProps.clientRendererMethodPara = $elem.attr("clientrenderermethodpara");
+                    this.normalProps.custServerResolveMethod =$elem.attr("custserverresolvemethod");
+                    this.normalProps.custServerResolveMethodPara = $elem.attr("custserverresolvemethodpara");
+                    this.normalProps.custClientRendererMethod =$elem.attr("custclientrenderermethod");
+                    this.normalProps.custClientRendererMethodPara = $elem.attr("custclientrenderermethodpara");
 
                     this.$refs.listTableLabelBindToComp.setData(this.normalProps,this.defaultValue);
                 }
