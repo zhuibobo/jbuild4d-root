@@ -345,6 +345,11 @@ public class MybatisBeansConfig {
         return sqlSessionTemplate.getMapper(TableRelationHisMapper.class);
     }
 
+    @Bean
+    public DbLinkMapper dbLinkMapper(SqlSessionTemplate sqlSessionTemplate){
+        return sqlSessionTemplate.getMapper(DbLinkMapper.class);
+    }
+
     /*@Bean
     public SpringManagedTransactionFactory getSpringManagedTransactionFactory() throws PropertyVetoException {
         return new SpringManagedTransactionFactory(getDataSourceBean(), TransactionIsolationLevel.SERIALIZABLE,true);

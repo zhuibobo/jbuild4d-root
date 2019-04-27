@@ -182,4 +182,10 @@ public class BuilderBeansConfig {
     public ButtonAPIService buttonAPIService(){
         return new ButtonAPIService();
     }
+
+    @Bean
+    public IDbLinkService dbLinkService(ISQLBuilderService _sqlBuilderService, DbLinkMapper mapper, SqlSessionTemplate sqlSessionTemplate){
+        IDbLinkService bean=new DbLinkServiceImpl(mapper,sqlSessionTemplate,_sqlBuilderService);
+        return bean;
+    }
 }
