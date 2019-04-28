@@ -20,4 +20,6 @@ public interface TableGroupMapper extends BaseMapper<TableGroupEntity> {
     TableGroupEntity selectGreaterThanRecord(@Param("id")String id,@Param("parentId") String tableGroupParentId);
 
     TableGroupEntity selectByGroupText(String groupText);
+
+    TableGroupEntity selectTableGroupRoot(String locationDBLinkId);
 }

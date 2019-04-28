@@ -77,6 +77,9 @@ public class InitializationSystemRestResource {
     @Autowired
     private ITableRelationHisService tableRelationHisService;
 
+    @Autowired
+    private IDbLinkService dbLinkService;
+
     @RequestMapping(value = "/Running", method = RequestMethod.POST)
     @ResponseBody
     public JBuild4DResponseVo running(String createTestData) throws JBuild4DGenerallyException {
@@ -101,10 +104,15 @@ public class InitializationSystemRestResource {
         organService.deleteByKeyNotValidate(jb4DSession,"0", JBuild4DProp.getWarningOperationCode());
         organService.createRootOrgan(jb4DSession);
 
-        //初始化根表分组
-        tableGroupService.deleteByKeyNotValidate(jb4DSession,tableGroupService.getRootId(), JBuild4DProp.getWarningOperationCode());
-        TableGroupEntity rootTableGroupEntity=tableGroupService.createRootNode(jb4DSession);
+        //初始化数据库连接
+        dbLinkService.deleteByKeyNotValidate(jb4DSession,dbLinkService.getLocationDBLinkId(),JBuild4DProp.getWarningOperationCode());
+        dbLinkService.createLocationDBLink(jb4DSession);
 
+        //初始化根表分组
+        //tableGroupService.deleteByKeyNotValidate(jb4DSession,tableGroupService.getRootId(), JBuild4DProp.getWarningOperationCode());
+        //TableGroupEntity rootTableGroupEntity=tableGroupService.createRootNode(jb4DSession);
+
+        TableGroupEntity rootTableGroupEntity=tableGroupService.getLocationTableGroupRoot(jb4DSession);
         tableGroupService.deleteByKeyNotValidate(jb4DSession,"TableGroupJBuild4DSystem", JBuild4DProp.getWarningOperationCode());
         tableGroupService.createSystemTableGroupNode(jb4DSession,rootTableGroupEntity);
 

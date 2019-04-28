@@ -14,9 +14,11 @@ import com.jbuild4d.core.base.session.JB4DSession;
 public interface ITableGroupService  extends IBaseService<TableGroupEntity> {
     String getRootId();
 
-    TableGroupEntity createRootNode(JB4DSession jb4DSession) throws JBuild4DGenerallyException;
+    TableGroupEntity createRootNode(JB4DSession jb4DSession,String dbLinkId,String text,String value) throws JBuild4DGenerallyException;
 
     TableGroupEntity createSystemTableGroupNode(JB4DSession jb4DSession, TableGroupEntity parentGroup) throws JBuild4DGenerallyException;
 
     TableGroupEntity getByGroupText(JB4DSession jb4DSession,String groupText);
+
+    TableGroupEntity getLocationTableGroupRoot(JB4DSession jb4DSession);
 }

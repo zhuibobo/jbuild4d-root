@@ -18,6 +18,14 @@
         from TBUILD_TABLE_group
         where TABLE_GROUP_TEXT = #{groupText,jdbcType=VARCHAR}
     </select>
+
+    <select id="selectTableGroupRoot" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TBUILD_TABLE_group
+        where TABLE_GROUP_LINK_ID = #{locationDBLinkId,jdbcType=VARCHAR} and TABLE_GROUP_PARENT_ID='-1'
+    </select>
+
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_TABLE_GROUP
         <where>
             <if test="tableGroupValue !=null and tableGroupValue !=''"> and TABLE_GROUP_VALUE like #{tableGroupValue} </if>

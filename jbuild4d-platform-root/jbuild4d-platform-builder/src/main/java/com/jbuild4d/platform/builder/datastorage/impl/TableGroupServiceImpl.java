@@ -8,6 +8,7 @@ import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.platform.builder.datastorage.IDbLinkService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.base.service.general.JBuild4DProp;
 import com.jbuild4d.platform.builder.datastorage.ITableService;
@@ -30,6 +31,9 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
 
     @Autowired
     ITableService tableService;
+
+    @Autowired
+    IDbLinkService dbLinkService;
 
     @Override
     public String getRootId() {
@@ -81,13 +85,14 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
     }
 
     @Override
-    public TableGroupEntity createRootNode(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+    public TableGroupEntity createRootNode(JB4DSession jb4DSession,String dbLinkId,String text,String value) throws JBuild4DGenerallyException {
         TableGroupEntity treeTableEntity=new TableGroupEntity();
         treeTableEntity.setTableGroupId(rootId);
         treeTableEntity.setTableGroupParentId(rootParentId);
         treeTableEntity.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
-        treeTableEntity.setTableGroupText("数据表分组");
-        treeTableEntity.setTableGroupValue("数据表分组");
+        treeTableEntity.setTableGroupText(text);
+        treeTableEntity.setTableGroupValue(value);
+        treeTableEntity.setTableGroupLinkId(dbLinkId);
         this.saveSimple(jb4DSession,treeTableEntity.getTableGroupId(),treeTableEntity);
         return treeTableEntity;
     }
@@ -102,6 +107,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemBase.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemBase.setTableGroupText("JBuild4D-System");
         jBuild4DSystemBase.setTableGroupValue("JBuild4D-System");
+        jBuild4DSystemBase.setTableGroupLinkId(dbLinkService.getLocationDBLinkId());
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystem,jBuild4DSystemBase);
 
         //系统设置相关表
@@ -112,6 +118,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemSetting.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemSetting.setTableGroupText("系统设置相关表");
         jBuild4DSystemSetting.setTableGroupValue("系统设置相关表");
+        jBuild4DSystemSetting.setTableGroupLinkId(dbLinkService.getLocationDBLinkId());
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemSetting,jBuild4DSystemSetting);
 
         tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSYS_DICTIONARY_GROUP",jBuild4DSystemSetting);
@@ -130,6 +137,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSSORelevance.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSSORelevance.setTableGroupText("单点登录相关表");
         jBuild4DSSORelevance.setTableGroupValue("单点登录相关表");
+        jBuild4DSSORelevance.setTableGroupLinkId(dbLinkService.getLocationDBLinkId());
         this.saveSimple(jb4DSession, TableGroupJBuild4DSystemSSORelevance,jBuild4DSSORelevance);
 
         tableService.registerSystemTableToBuilderToModule(jb4DSession,"TSSO_ORGAN_TYPE",jBuild4DSSORelevance);
@@ -164,6 +172,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemBuilder.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemBuilder.setTableGroupText("应用设计相关表");
         jBuild4DSystemBuilder.setTableGroupValue("应用设计相关表");
+        jBuild4DSystemBuilder.setTableGroupLinkId(dbLinkService.getLocationDBLinkId());
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemBuilder,jBuild4DSystemBuilder);
 
         tableService.registerSystemTableToBuilderToModule(jb4DSession,"TBUILD_SERVICE_LINK",jBuild4DSystemBuilder);
@@ -191,6 +200,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jbuild4DFileStore.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jbuild4DFileStore.setTableGroupText("文件存储相关表");
         jbuild4DFileStore.setTableGroupValue("文件存储相关表");
+        jbuild4DFileStore.setTableGroupLinkId(dbLinkService.getLocationDBLinkId());
         this.saveSimple(jb4DSession,TableGroupJbuild4DFileStore,jbuild4DFileStore);
 
         tableService.registerSystemTableToBuilderToModule(jb4DSession,"TFS_FILE_INFO",jbuild4DFileStore);
@@ -205,6 +215,7 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
         jBuild4DSystemDevDemo.setTableGroupIssystem(TrueFalseEnum.True.getDisplayName());
         jBuild4DSystemDevDemo.setTableGroupText("开发示例相关表");
         jBuild4DSystemDevDemo.setTableGroupValue("开发示例相关表");
+        jBuild4DSystemDevDemo.setTableGroupLinkId(dbLinkService.getLocationDBLinkId());
         this.saveSimple(jb4DSession,TableGroupJBuild4DSystemDevDemo,jBuild4DSystemDevDemo);
 
         tableService.registerSystemTableToBuilderToModule(jb4DSession,"TDEV_DEMO_GEN_LIST",jBuild4DSystemDevDemo);
@@ -218,6 +229,11 @@ public class TableGroupServiceImpl extends BaseServiceImpl<TableGroupEntity> imp
     @Override
     public TableGroupEntity getByGroupText(JB4DSession jb4DSession, String groupText) {
         return tableGroupMapper.selectByGroupText(groupText);
+    }
+
+    @Override
+    public TableGroupEntity getLocationTableGroupRoot(JB4DSession jb4DSession) {
+        return tableGroupMapper.selectTableGroupRoot(dbLinkService.getLocationDBLinkId());
     }
 
     @Override

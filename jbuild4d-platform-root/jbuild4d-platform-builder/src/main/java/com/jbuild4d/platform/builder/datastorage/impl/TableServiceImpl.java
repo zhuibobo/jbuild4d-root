@@ -18,6 +18,7 @@ import com.jbuild4d.base.service.impl.BaseServiceImpl;
 import com.jbuild4d.core.base.list.IListWhereCondition;
 import com.jbuild4d.core.base.list.ListUtility;
 import com.jbuild4d.core.base.tools.StringUtility;
+import com.jbuild4d.platform.builder.datastorage.IDbLinkService;
 import com.jbuild4d.platform.builder.datastorage.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.exenum.TableTypeEnum;
@@ -55,6 +56,9 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Autowired
     IMetadataService metadataService;
+
+    @Autowired
+    IDbLinkService dbLinkService;
 
     public TableServiceImpl(TableMapper _tableMapper,TableFieldMapper _tableFieldMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) throws JBuild4DGenerallyException {
         super(_tableMapper, _sqlSessionTemplate, _sqlBuilderService);
@@ -379,6 +383,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             tableEntity.setTableLinkId("");
             tableEntity.setTableOrganId(jb4DSession.getOrganId());
             tableEntity.setTableOrganName(jb4DSession.getOrganName());
+            tableEntity.setTableLinkId(dbLinkService.getLocationDBLinkId());
             tableMapper.insert(tableEntity);
 
             for (IntrospectedColumn primaryKeyColumn : tableInfo.getPrimaryKeyColumns()) {
