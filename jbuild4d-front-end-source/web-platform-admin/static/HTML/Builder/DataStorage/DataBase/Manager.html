@@ -11,11 +11,13 @@
     <title>Title</title>
     <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
     <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
 </head>
 <body>
     <div id="appList" class="list-2column">
-        <div class="left-outer-wrap">
-            <div class="inner-wrap" style="width: 250px">
+        <div class="left-outer-wrap" style="width: 250px">
+            <select-dblink-single-comp @on-selected-dblink="changeDBLink" ref="selectDBLinkComp"></select-dblink-single-comp>
+            <div class="inner-wrap" style="position:absolute;top: 30px;bottom: 10px;height: auto">
                 <div class="tool-bar-wrap">
                     <div alt="新增分类组" title="新增分类组" class="add" @click="addGroup()"></div>
                     <div alt="修改分类组" title="修改分类组" class="edit" @click="editGroup"></div>
@@ -77,6 +79,11 @@
             el:"#appList",
             mounted:function () {
                 this.initTree();
+                var oldSelectedDBLinkId=CookieUtility.GetCookie("DBMSLINKID");
+                if(oldSelectedDBLinkId){
+                    this.$refs.selectDBLinkComp.setOldSelectedDBLink(oldSelectedDBLinkId);
+                    this.initTree(oldSelectedDBLinkId);
+                }
                 window.setTimeout(function () {
                     appList.listHeight=ListPageUtility.GetGeneralPageHeight(-20);
                 },500);
@@ -207,13 +214,26 @@
                 }
             },
             methods:{
+                <!--DBLink-->
+                changeDBLink:function(dbLinkData){
+                    console.log(dbLinkData);
+                    CookieUtility.SetCookie1Month("DBMSLINKID",dbLinkData.dbId);
+                    this.initTree(dbLinkData.dbId);
+                    this.clearSearchCondition();
+                    this.tableData=[];
+                },
+                clearSearchCondition:function () {
+                    for(var key in this.searchCondition){
+                        this.searchCondition[key].value="";
+                    }
+                },
                 <!--Tree-->
-                initTree:function () {
+                initTree:function (dbLinkId) {
                     //this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});
                     //this.treeObj=$.fn.zTree.init($("#ztreeUL"), this.treeSetting);
                     var _self=this;
                     //var url = '/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/GetTableField.do';
-                    AjaxUtility.Post(this.acInterface.getGroupTreeData, {}, function (result) {
+                    AjaxUtility.Post(this.acInterface.getGroupTreeData, {dbLinkId:dbLinkId}, function (result) {
                         if(result.success){
                             if(result.data!=null&&result.data.length>0){
                                 for(var i=0;i<result.data.length;i++) {
