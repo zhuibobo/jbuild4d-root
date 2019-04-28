@@ -64,6 +64,8 @@ public class CompexInitTestSystem extends RestTestBase {
 
     @Test
     public void Init() throws Exception {
+        //创建数据库连接
+
         //创建表分组
         createTableGroup(getSession());
         //创建数据集
