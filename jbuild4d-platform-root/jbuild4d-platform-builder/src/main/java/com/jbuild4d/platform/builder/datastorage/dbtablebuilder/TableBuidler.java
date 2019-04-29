@@ -1,11 +1,15 @@
 package com.jbuild4d.platform.builder.datastorage.dbtablebuilder;
 
+import com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.core.base.exception.JBuild4DPhysicalTableException;
 import com.jbuild4d.base.service.ISQLBuilderService;
+import com.jbuild4d.platform.builder.cliendatasource.ClientDataSourceManager;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 
+import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +20,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class TableBuidler {
-    ISQLBuilderService sqlBuilderService;
+    /*ISQLBuilderService sqlBuilderService;
 
     public ISQLBuilderService getSqlBuilderService() {
         return sqlBuilderService;
@@ -24,9 +28,9 @@ public abstract class TableBuidler {
 
     public void setSqlBuilderService(ISQLBuilderService sqlBuilderService) {
         this.sqlBuilderService = sqlBuilderService;
-    }
+    }*/
 
-    public boolean newTable(TableEntity tableEntity, List<TableFieldVO> fieldVos) throws JBuild4DPhysicalTableException {
+    public boolean newTable(TableEntity tableEntity, List<TableFieldVO> fieldVos, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws JBuild4DPhysicalTableException, PropertyVetoException {
         try{
             if(fieldVos==null||fieldVos.size()==0){
                 throw JBuild4DPhysicalTableException.getFieldsCannotBeNullError();
@@ -34,7 +38,7 @@ public abstract class TableBuidler {
             }
 
             //判断是否已经存在同名的表
-            if(isExistTable(tableEntity)){
+            if(isExistTable(tableEntity,dbLinkEntity)){
                 //return BuilderResultMessage.getTableIsExistError(tableEntity.getTableName());
                 throw JBuild4DPhysicalTableException.getTableIsExistError(tableEntity.getTableName());
             }
@@ -43,7 +47,11 @@ public abstract class TableBuidler {
             try {
                 String createTableSQL = buildCreateTableSQL(tableEntity);
                         //"CREATE TABLE " + tableEntity.getTableName() + "("+TEMPFIELDZRB+" VARCHAR(50) NULL)";//使用空的字段创建一个表
-                sqlBuilderService.execute(createTableSQL);
+
+                //sqlBuilderService.execute(createTableSQL);
+
+                ClientDataSourceManager clientDataSourceManager=new ClientDataSourceManager();
+                clientDataSourceManager.execute(dbLinkEntity,createTableSQL);
             }
             catch (Exception ex){
                 ex.printStackTrace();
@@ -53,13 +61,13 @@ public abstract class TableBuidler {
 
             //在表中加入表字段
             for (TableFieldEntity fieldEntity : fieldVos) {
-                boolean newField=newField(tableEntity,fieldEntity);
+                boolean newField=newField(tableEntity,fieldEntity,tableGroupEntity, dbLinkEntity);
                 if(!newField){
                     throw JBuild4DPhysicalTableException.getFieldCreateError();
                 }
             }
 
-            createTableEnd(tableEntity);
+            createTableEnd(tableEntity,dbLinkEntity);
             //删除掉用于建表是的临时字段
             //String dropTempFieldSQL="alter table "+tableEntity.getTableName()+" drop column "+TEMPFIELDZRB;
             //sqlBuilderService.execute(dropTempFieldSQL);
@@ -69,27 +77,27 @@ public abstract class TableBuidler {
         catch (JBuild4DPhysicalTableException ex){
             //删除表
             ex.printStackTrace();
-            deleteTable(tableEntity);
+            deleteTable(tableEntity,dbLinkEntity);
             throw ex;
         }
         catch (Exception ex){
             ex.printStackTrace();
-            deleteTable(tableEntity);
+            deleteTable(tableEntity,dbLinkEntity);
             throw JBuild4DPhysicalTableException.getCreateTableError(ex);
         }
     }
 
-    public boolean updateTable(TableEntity tableEntity,List<TableFieldVO> newFields,List<TableFieldVO> updateFields,List<TableFieldVO> deleteFields) throws JBuild4DPhysicalTableException {
+    public boolean updateTable(TableEntity tableEntity,List<TableFieldVO> newFields,List<TableFieldVO> updateFields,List<TableFieldVO> deleteFields, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws JBuild4DPhysicalTableException {
         try{
             //判断是否存在表
-            if(!isExistTable(tableEntity)){
+            if(!isExistTable(tableEntity,dbLinkEntity)){
                 throw JBuild4DPhysicalTableException.getTableIsNotExistError(tableEntity.getTableName());
             }
 
             //新增字段
             if(newFields!=null) {
                 for (TableFieldEntity fieldEntity : newFields) {
-                    this.newField(tableEntity, fieldEntity);
+                    this.newField(tableEntity, fieldEntity,tableGroupEntity,dbLinkEntity);
                 }
             }
 
@@ -100,7 +108,7 @@ public abstract class TableBuidler {
                         /*if(this.recordCount(tableEntity)>10000){
                             throw JBuild4DPhysicalTableException.getUpdateFieldNoAllowOverCount(10000);
                         }*/
-                        this.updateField(tableEntity, updateField);
+                        this.updateField(tableEntity, updateField,tableGroupEntity,dbLinkEntity);
                     }
                 }
             }
@@ -108,7 +116,7 @@ public abstract class TableBuidler {
             //删除字段
             if(deleteFields!=null) {
                 for (TableFieldVO deleteField : deleteFields) {
-                    deleteField(tableEntity, deleteField);
+                    deleteField(tableEntity, deleteField,tableGroupEntity,dbLinkEntity);
                 }
             }
 
@@ -124,16 +132,17 @@ public abstract class TableBuidler {
         }
     }
 
-    public boolean deleteTable(TableEntity tableEntity) throws JBuild4DPhysicalTableException {
+    public boolean deleteTable(TableEntity tableEntity, DbLinkEntity dbLinkEntity) throws JBuild4DPhysicalTableException, PropertyVetoException {
+        //DbLinkEntity dbLinkEntity=db
         //如果表中已经存在数据,提示需要先手工删除数据后,才能删除物理表.
-        if(isExistRecord(tableEntity)){
+        if(isExistRecord(tableEntity,dbLinkEntity)){
             //return BuilderResultMessage.getTableExistRecordError(tableEntity.getTableName());
             throw JBuild4DPhysicalTableException.getTableExistRecordError(tableEntity.getTableName());
         }
         String dropSQL=buildDeleteTableSQL(tableEntity);
                 //"drop table "+tableEntity.getTableName();
         try{
-            sqlBuilderService.execute(dropSQL);
+            ClientDataSourceManager.execute(dbLinkEntity,dropSQL);
         }
         catch (Exception ex){
             ex.printStackTrace();
@@ -144,28 +153,30 @@ public abstract class TableBuidler {
 
     protected abstract String buildDeleteTableSQL(TableEntity tableEntity);
 
-    protected abstract boolean deleteField(TableEntity tableEntity, TableFieldVO deleteField);
+    protected abstract boolean deleteField(TableEntity tableEntity, TableFieldVO deleteField, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws PropertyVetoException;
 
-    protected abstract boolean updateField(TableEntity tableEntity, TableFieldVO updateField) throws JBuild4DPhysicalTableException;
+    protected abstract boolean updateField(TableEntity tableEntity, TableFieldVO updateField, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws JBuild4DPhysicalTableException;
 
-    protected abstract boolean newField(TableEntity tableEntity, TableFieldEntity fieldEntity) throws JBuild4DPhysicalTableException;
+    protected abstract boolean newField(TableEntity tableEntity, TableFieldEntity fieldEntity, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws JBuild4DPhysicalTableException;
 
-    protected abstract void createTableEnd(TableEntity tableEntity);
+    protected abstract void createTableEnd(TableEntity tableEntity, DbLinkEntity dbLinkEntity) throws PropertyVetoException;
 
-    protected abstract boolean isExistTable(TableEntity tableEntity);
+    protected abstract boolean isExistTable(TableEntity tableEntity, DbLinkEntity dbLinkEntity) throws PropertyVetoException;
 
-    protected boolean isExistRecord(TableEntity tableEntity){
+    protected boolean isExistRecord(TableEntity tableEntity,DbLinkEntity dbLinkEntity) throws PropertyVetoException {
         String sql="select count(*) COUNT from "+tableEntity.getTableName();
-        Map result=sqlBuilderService.selectOne(sql,tableEntity.getTableName());
+        //Map result=sqlBuilderService.selectOne(sql,tableEntity.getTableName());
+        Map result=ClientDataSourceManager.selectOne(dbLinkEntity,sql);
         if(Integer.parseInt(result.get("COUNT").toString())==0){
             return false;
         }
         return true;
     }
 
-    protected int recordCount(TableEntity tableEntity){
+    protected int recordCount(TableEntity tableEntity,DbLinkEntity dbLinkEntity) throws PropertyVetoException {
         String sql="select count(*) COUNT from "+tableEntity.getTableName();
-        Map result=sqlBuilderService.selectOne(sql,tableEntity.getTableName());
+        //Map result=sqlBuilderService.selectOne(sql,tableEntity.getTableName());
+        Map result=ClientDataSourceManager.selectOne(dbLinkEntity,sql);
         return Integer.parseInt(result.get("COUNT").toString());
     }
 

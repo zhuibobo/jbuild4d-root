@@ -112,6 +112,8 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.8" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.flowable:flowable-bpmn-converter:6.4.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.mchange:c3p0:0.9.5.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.mchange:mchange-commons-java:0.2.11" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
   </component>
 </module>

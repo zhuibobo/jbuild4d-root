@@ -2,6 +2,7 @@ package com.jbuild4d.platform.builder.datastorage.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.TableFieldMapper;
 import com.jbuild4d.base.dbaccess.dao.builder.TableMapper;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
@@ -19,6 +20,7 @@ import com.jbuild4d.core.base.list.IListWhereCondition;
 import com.jbuild4d.core.base.list.ListUtility;
 import com.jbuild4d.core.base.tools.StringUtility;
 import com.jbuild4d.platform.builder.datastorage.IDbLinkService;
+import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.datastorage.dbtablebuilder.TableBuilederFace;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.exenum.TableTypeEnum;
@@ -34,6 +36,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,6 +62,9 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Autowired
     IDbLinkService dbLinkService;
+
+    @Autowired
+    ITableGroupService tableGroupService;
 
     public TableServiceImpl(TableMapper _tableMapper,TableFieldMapper _tableFieldMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService) throws JBuild4DGenerallyException {
         super(_tableMapper, _sqlSessionTemplate, _sqlBuilderService);
@@ -89,17 +95,21 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Override
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    public void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException {
+    public void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList,String groupId) throws JBuild4DGenerallyException {
         try {
             if (this.existLogicTableName(jb4DSession,tableEntity.getTableName())) {
                 throw new JBuild4DGenerallyException("TBUILD_TABLE中已经存在表名为" + tableEntity.getTableName() + "的逻辑表!");
             } else {
+                TableGroupEntity tableGroupEntity=tableGroupService.getByPrimaryKey(jb4DSession,groupId);
+                DbLinkEntity dbLinkEntity=dbLinkService.getByPrimaryKey(jb4DSession,tableGroupEntity.getTableGroupLinkId());
+
                 //创建物理表
-                boolean createPhysicalTable = tableBuilederFace.newTable(tableEntity, tableFieldVOList);
+                boolean createPhysicalTable = tableBuilederFace.newTable(tableEntity, tableFieldVOList,tableGroupEntity,dbLinkEntity);
                 if (createPhysicalTable) {
 
                     try {
                         //写入逻辑表
+                        tableEntity.setTableGroupId(groupId);
                         tableEntity.setTableCode("T_"+ StringUtility.build1W5DCode(tableMapper.nextOrderNum()));
                         tableEntity.setTableCreater(jb4DSession.getUserName());
                         tableEntity.setTableCreateTime(new Date());
@@ -125,7 +135,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                     }
                     catch (Exception ex){
                         //清空数据
-                        tableBuilederFace.deleteTable(tableEntity);
+                        tableBuilederFace.deleteTable(tableEntity,dbLinkEntity);
                         tableMapper.deleteByPrimaryKey(tableEntity.getTableId());
                         tableFieldMapper.deleteByTableId(tableEntity.getTableId());
                         throw ex;
@@ -218,14 +228,16 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     }
 
     @Override
-    public ValidateTableUpdateResultVo validateTableUpdateEnable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList) throws JBuild4DGenerallyException, IOException {
+    public ValidateTableUpdateResultVo validateTableUpdateEnable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList) throws JBuild4DGenerallyException, IOException, PropertyVetoException {
         UpdateTableResolveVo updateTableResolveVo=updateTableResolve(jb4DSession,newTableEntity,newTableFieldVOList);
-        return validateTableUpdateEnable(updateTableResolveVo);
+        return validateTableUpdateEnable(jb4DSession,updateTableResolveVo);
     }
 
     @Override
-    public ValidateTableUpdateResultVo validateTableUpdateEnable(UpdateTableResolveVo resolveVo) throws JBuild4DGenerallyException {
+    public ValidateTableUpdateResultVo validateTableUpdateEnable(JB4DSession jb4DSession,UpdateTableResolveVo resolveVo) throws JBuild4DGenerallyException, PropertyVetoException {
         ValidateTableUpdateResultVo validateTableUpdateResultVo=new ValidateTableUpdateResultVo();
+
+        DbLinkEntity dbLinkEntity=dbLinkService.getByPrimaryKey(jb4DSession,resolveVo.getNewTableEntity().getTableLinkId());
 
         if(!resolveVo.getOldTableEntity().getTableName().equals(resolveVo.getNewTableEntity().getTableName())){
             validateTableUpdateResultVo.setEnable(false);
@@ -233,7 +245,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
             return validateTableUpdateResultVo;
         }
         int limitNum=1000;
-        if(tableBuilederFace.recordCount(resolveVo.getOldTableEntity())>limitNum){
+        if(tableBuilederFace.recordCount(resolveVo.getOldTableEntity(),dbLinkEntity)>limitNum){
             if(resolveVo.getUpdateFields().size()>0){
                 validateTableUpdateResultVo.setEnable(false);
                 validateTableUpdateResultVo.setMessage("表"+resolveVo.getOldTableEntity().getTableName()+"的记录条数>"+limitNum+",不允许进行字段的修改,如需修改,请手动修改!");
@@ -253,22 +265,26 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Override
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    public List<String> updateTable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException, IOException {
+    public List<String> updateTable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError,String groupId) throws JBuild4DGenerallyException, IOException, PropertyVetoException {
         List<String> resultMessage=new ArrayList<>();
 
         UpdateTableResolveVo updateTableResolveVo=updateTableResolve(jb4DSession,newTableEntity,newTableFieldVOList);
 
+        TableGroupEntity tableGroupEntity=tableGroupService.getByPrimaryKey(jb4DSession,groupId);
+        DbLinkEntity dbLinkEntity=dbLinkService.getByPrimaryKey(jb4DSession,tableGroupEntity.getTableGroupLinkId());
+
         //判断能否进行表的修改
-        ValidateTableUpdateResultVo validateTableUpdateResultVo=this.validateTableUpdateEnable(updateTableResolveVo);
+        ValidateTableUpdateResultVo validateTableUpdateResultVo=this.validateTableUpdateEnable(jb4DSession,updateTableResolveVo);
         if(!validateTableUpdateResultVo.isEnable()){
             throw new JBuild4DGenerallyException(validateTableUpdateResultVo.getMessage());
         }
 
         try
         {
+
             //修改物理表结构
             try {
-                tableBuilederFace.updateTable(newTableEntity,updateTableResolveVo.getNewFields(),updateTableResolveVo.getUpdateFields(),updateTableResolveVo.getDeleteFields());
+                tableBuilederFace.updateTable(newTableEntity,updateTableResolveVo.getNewFields(),updateTableResolveVo.getUpdateFields(),updateTableResolveVo.getDeleteFields(),tableGroupEntity,dbLinkEntity);
             }
             catch (Exception ex){
                 if(ignorePhysicalError){
@@ -319,14 +335,21 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     }
 
     @Override
-    public boolean existPhysicsTableName(JB4DSession jb4DSession,String tableName) {
-        return tableBuilederFace.isExistTable(tableName);
+    public boolean existPhysicsTableName(JB4DSession jb4DSession,String tableName) throws JBuild4DGenerallyException, PropertyVetoException {
+        TableEntity tableEntity=tableMapper.selectByTableName(tableName);
+        if(tableEntity==null){
+            return false;
+        }
+        DbLinkEntity dbLinkEntity=dbLinkService.getByPrimaryKey(jb4DSession,tableEntity.getTableLinkId());
+        return tableBuilederFace.isExistTable(tableName,dbLinkEntity);
     }
 
     @Override
-    public boolean deletePhysicsTable(JB4DSession jb4DSession, String tableName, String warningOperationCode) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException, JBuild4DGenerallyException {
+    public boolean deletePhysicsTable(JB4DSession jb4DSession, String tableName, String warningOperationCode) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException, JBuild4DGenerallyException, PropertyVetoException {
         if(JBuild4DProp.getWarningOperationCode().equals(warningOperationCode)) {
-            return tableBuilederFace.deleteTable(tableName);
+            TableEntity tableEntity=tableMapper.selectByTableName(tableName);
+            DbLinkEntity dbLinkEntity=dbLinkService.getByPrimaryKey(jb4DSession,tableEntity.getTableLinkId());
+            return tableBuilederFace.deleteTable(tableName,dbLinkEntity);
         }
         throw new JBuild4DGenerallyException("删除失败WarningOperationCode错误");
     }

@@ -93,6 +93,11 @@
             <artifactId>flowable-bpmn-converter</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <!--<dependency>
             <groupId>jbuild4d</groupId>
             <artifactId>jbuild4d-base-exception</artifactId>

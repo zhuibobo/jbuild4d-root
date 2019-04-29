@@ -69,6 +69,8 @@ public class SQLDataSetBuilder {
                 dataSetRelatedTableVoList.add(dataSetRelatedTableVo);
             }
 
+            判断表是否来自一个数据库
+
             //解析相关的字段
             jdbcOperations.execute(sql, new PreparedStatementCallback<Object>() {
                 @Override

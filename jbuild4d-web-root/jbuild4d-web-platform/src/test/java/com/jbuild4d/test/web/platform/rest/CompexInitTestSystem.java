@@ -1,10 +1,7 @@
 package com.jbuild4d.test.web.platform.rest;
 
 
-import com.jbuild4d.base.dbaccess.dbentities.builder.DatasetGroupEntity;
-import com.jbuild4d.base.dbaccess.dbentities.builder.ModuleEntity;
-import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
-import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.*;
 import com.jbuild4d.base.dbaccess.exenum.EnableTypeEnum;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.service.general.JBuild4DProp;
@@ -19,6 +16,7 @@ import com.jbuild4d.core.base.vo.JBuild4DResponseVo;
 import com.jbuild4d.platform.builder.button.api.ButtonAPIService;
 import com.jbuild4d.platform.builder.dataset.IDatasetGroupService;
 import com.jbuild4d.platform.builder.dataset.IDatasetService;
+import com.jbuild4d.platform.builder.datastorage.IDbLinkService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.exenum.DataSetTypeEnum;
@@ -62,10 +60,13 @@ public class CompexInitTestSystem extends RestTestBase {
     @Autowired
     ButtonAPIService buttonAPIService;
 
+    @Autowired
+    IDbLinkService dbLinkService;
+
     @Test
     public void Init() throws Exception {
         //创建数据库连接
-
+        createTestDBLink(getSession());
         //创建表分组
         createTableGroup(getSession());
         //创建数据集
@@ -74,10 +75,27 @@ public class CompexInitTestSystem extends RestTestBase {
         createModuleGroup(getSession());
     }
 
-    @Test
+    /*@Test
     public void tets1() throws JAXBException {
         List<ButtonAPIGroupVo> buttonAPIGroupVos=buttonAPIService.getButtonAPIGroupList();
         System.out.println(buttonAPIGroupVos);
+    }*/
+
+    private String DBLinkMSSQL="DBLinkMSSQL";
+    private void createTestDBLink(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
+        DbLinkEntity dbLinkEntity=new DbLinkEntity();
+        dbLinkEntity.setDbId(DBLinkMSSQL);
+        dbLinkEntity.setDbLinkValue(DBLinkMSSQL);
+        dbLinkEntity.setDbLinkName("JBuild4D_V08_Client");
+        dbLinkEntity.setDbType("sqlserver");
+        dbLinkEntity.setDbDriverName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        dbLinkEntity.setDbDatabaseName("JBuild4D_V08_Client");
+        dbLinkEntity.setDbUrl("jdbc:sqlserver://120.77.56.220:1433; DatabaseName=JBuild4D_V08_Client");
+        dbLinkEntity.setDbUser("sa");
+        dbLinkEntity.setDbPassword("zhenx#88DATA");
+
+        dbLinkService.deleteByKeyNotValidate(jb4DSession,DBLinkMSSQL,JBuild4DProp.getWarningOperationCode());
+        dbLinkService.saveSimple(jb4DSession,dbLinkEntity.getDbId(),dbLinkEntity);
     }
 
     private void createModuleGroup(JB4DSession jb4DSession) throws JBuild4DGenerallyException {
@@ -212,6 +230,7 @@ public class CompexInitTestSystem extends RestTestBase {
         demoRootTableGroup.setTableGroupIssystem(TrueFalseEnum.False.getDisplayName());
         demoRootTableGroup.setTableGroupText("业务库[测试]");
         demoRootTableGroup.setTableGroupValue("业务库[测试]");
+        demoRootTableGroup.setTableGroupLinkId(DBLinkMSSQL);
         tableGroupService.saveSimple(jb4DSession,demoRootId,demoRootTableGroup);
 
         tableGroupService.deleteByKeyNotValidate(jb4DSession,cmsGroupId, JBuild4DProp.getWarningOperationCode());
@@ -221,6 +240,7 @@ public class CompexInitTestSystem extends RestTestBase {
         cmsInfoTableGroup.setTableGroupIssystem(TrueFalseEnum.False.getDisplayName());
         cmsInfoTableGroup.setTableGroupText("信息发布");
         cmsInfoTableGroup.setTableGroupValue("信息发布");
+        cmsInfoTableGroup.setTableGroupLinkId(DBLinkMSSQL);
         tableGroupService.saveSimple(jb4DSession,cmsGroupId,cmsInfoTableGroup);
 
 
@@ -260,6 +280,7 @@ public class CompexInitTestSystem extends RestTestBase {
         requestBuilder.param("tableEntityJson", tableEntityJson);
         requestBuilder.param("fieldVoListJson", fieldVoListJson);
         requestBuilder.param("ignorePhysicalError", "false");
+        requestBuilder.param("groupId",newTable.getTableGroupId());
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         String json = result.getResponse().getContentAsString();
@@ -291,6 +312,7 @@ public class CompexInitTestSystem extends RestTestBase {
         requestBuilder.param("tableEntityJson", tableEntityJson);
         requestBuilder.param("fieldVoListJson", fieldVoListJson);
         requestBuilder.param("ignorePhysicalError", "false");
+        requestBuilder.param("groupId",newTable.getTableGroupId());
 
         result = mockMvc.perform(requestBuilder).andReturn();
         json = result.getResponse().getContentAsString();

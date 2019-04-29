@@ -1,13 +1,17 @@
 package com.jbuild4d.platform.builder.datastorage.dbtablebuilder;
 
+import com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.dbaccess.general.DBProp;
 import com.jbuild4d.core.base.exception.JBuild4DPhysicalTableException;
+import com.jbuild4d.platform.builder.cliendatasource.ClientDataSourceManager;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 
+import java.beans.PropertyVetoException;
 import java.util.Map;
 
 /**
@@ -25,14 +29,15 @@ public class MYSQLTableBuilder extends TableBuidler {
     }
 
     @Override
-    protected boolean deleteField(TableEntity tableEntity, TableFieldVO deleteField) {
+    protected boolean deleteField(TableEntity tableEntity, TableFieldVO deleteField, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws PropertyVetoException {
         String dropTempFieldSQL="alter table "+tableEntity.getTableName()+" drop column "+deleteField.getFieldName();
-        sqlBuilderService.execute(dropTempFieldSQL);
+        //sqlBuilderService.execute(dropTempFieldSQL);
+        ClientDataSourceManager.execute(dbLinkEntity,dropTempFieldSQL);
         return true;
     }
 
     @Override
-    protected boolean updateField(TableEntity tableEntity, TableFieldVO updateField) throws JBuild4DPhysicalTableException {
+    protected boolean updateField(TableEntity tableEntity, TableFieldVO updateField, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws JBuild4DPhysicalTableException {
         try
         {
             //修改列类型
@@ -41,7 +46,8 @@ public class MYSQLTableBuilder extends TableBuidler {
             sqlBuilder.append("ALTER TABLE ");
             sqlBuilder.append(tableEntity.getTableName()+" CHANGE "+updateField.getOldFieldName()+" "+updateField.getFieldName()+" ");
             appendFieldDataTypeTo(updateField, sqlBuilder);
-            sqlBuilderService.execute(sqlBuilder.toString());
+            //sqlBuilderService.execute(sqlBuilder.toString());
+            ClientDataSourceManager.execute(dbLinkEntity,sqlBuilder.toString());
             return true;
         }
         catch (Exception ex){
@@ -75,14 +81,15 @@ public class MYSQLTableBuilder extends TableBuidler {
     }
 
     @Override
-    protected boolean newField(TableEntity tableEntity, TableFieldEntity fieldEntity) throws JBuild4DPhysicalTableException {
+    protected boolean newField(TableEntity tableEntity, TableFieldEntity fieldEntity, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws JBuild4DPhysicalTableException {
         try
         {
             StringBuilder sqlBuilder=new StringBuilder();
             sqlBuilder.append("alter table ");
             sqlBuilder.append(tableEntity.getTableName()+" add column "+fieldEntity.getFieldName());
             appendFieldDataTypeTo(fieldEntity, sqlBuilder);
-            sqlBuilderService.execute(sqlBuilder.toString());
+            //sqlBuilderService.execute(sqlBuilder.toString());
+            ClientDataSourceManager.execute(dbLinkEntity,sqlBuilder.toString());
             return true;
         }
         catch (Exception ex){
@@ -92,16 +99,19 @@ public class MYSQLTableBuilder extends TableBuidler {
     }
 
     @Override
-    protected void createTableEnd(TableEntity tableEntity) {
+    protected void createTableEnd(TableEntity tableEntity, DbLinkEntity dbLinkEntity) throws PropertyVetoException {
         String dropTempFieldSQL="alter table "+tableEntity.getTableName()+" drop column "+TEMPFIELDZRB;
-        sqlBuilderService.execute(dropTempFieldSQL);
+
+        ClientDataSourceManager.execute(dbLinkEntity,dropTempFieldSQL);
+        //sqlBuilderService.execute(dropTempFieldSQL);
     }
 
     @Override
-    protected boolean isExistTable(TableEntity tableEntity) {
+    protected boolean isExistTable(TableEntity tableEntity,DbLinkEntity dbLinkEntity) throws PropertyVetoException {
         //String sql="Select Name as TableName FROM SysObjects Where XType='U' and Name=#{name}";
         String sql="select upper(table_name) TableName from information_schema.tables where table_schema='"+ DBProp.getDatabaseName()+"' and table_name=#{name} and table_type='base table'";
-        Map result=sqlBuilderService.selectOne(sql,tableEntity.getTableName());
+        //Map result=sqlBuilderService.selectOne(sql,tableEntity.getTableName());
+        Map result=ClientDataSourceManager.selectOne(dbLinkEntity,sql);
         if(result==null||result.size()==0){
             return false;
         }

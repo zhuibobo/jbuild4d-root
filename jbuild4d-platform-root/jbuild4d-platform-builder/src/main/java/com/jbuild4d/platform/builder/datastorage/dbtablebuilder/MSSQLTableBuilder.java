@@ -1,12 +1,16 @@
 package com.jbuild4d.platform.builder.datastorage.dbtablebuilder;
 
+import com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.core.base.exception.JBuild4DPhysicalTableException;
+import com.jbuild4d.platform.builder.cliendatasource.ClientDataSourceManager;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 
+import java.beans.PropertyVetoException;
 import java.util.Map;
 
 /**
@@ -20,9 +24,10 @@ public class MSSQLTableBuilder extends TableBuidler {
     String TEMPFIELDZRB="TEMPFIELDZRB";
 
     @Override
-    protected boolean isExistTable(TableEntity tableEntity) {
-        String sql="Select Name as TableName FROM SysObjects Where XType='U' and Name=#{name}";
-        Map result=sqlBuilderService.selectOne(sql,tableEntity.getTableName());
+    protected boolean isExistTable(TableEntity tableEntity, DbLinkEntity dbLinkEntity) throws PropertyVetoException {
+        String sql="Select Name as TableName FROM SysObjects Where XType='U' and Name='"+tableEntity.getTableName()+"'";
+        //Map result=sqlBuilderService.selectOne(sql,tableEntity.getTableName());
+        Map result= ClientDataSourceManager.selectOne(dbLinkEntity,sql);
         if(result==null||result.size()==0){
             return false;
         }
@@ -35,9 +40,9 @@ public class MSSQLTableBuilder extends TableBuidler {
     }
 
     @Override
-    protected void createTableEnd(TableEntity tableEntity) {
+    protected void createTableEnd(TableEntity tableEntity, DbLinkEntity dbLinkEntity) throws PropertyVetoException {
         String dropTempFieldSQL="alter table "+tableEntity.getTableName()+" drop column "+TEMPFIELDZRB;
-        sqlBuilderService.execute(dropTempFieldSQL);
+        ClientDataSourceManager.execute(dbLinkEntity,dropTempFieldSQL);
     }
 
     @Override
@@ -69,14 +74,15 @@ public class MSSQLTableBuilder extends TableBuidler {
     }
 
     @Override
-    protected boolean newField(TableEntity tableEntity,TableFieldEntity fieldEntity) throws JBuild4DPhysicalTableException {
+    protected boolean newField(TableEntity tableEntity, TableFieldEntity fieldEntity, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws JBuild4DPhysicalTableException {
         try
         {
             StringBuilder sqlBuilder=new StringBuilder();
             sqlBuilder.append("alter table ");
             sqlBuilder.append(tableEntity.getTableName()+" add "+fieldEntity.getFieldName());
             appendFieldDataTypeTo(fieldEntity, sqlBuilder);
-            sqlBuilderService.execute(sqlBuilder.toString());
+            //sqlBuilderService.execute(sqlBuilder.toString());
+            ClientDataSourceManager.execute(dbLinkEntity,sqlBuilder.toString());
             return true;
         }
         catch (Exception ex){
@@ -85,7 +91,7 @@ public class MSSQLTableBuilder extends TableBuidler {
         }
     }
 
-    protected boolean updateField(TableEntity tableEntity,TableFieldVO fieldVO) throws JBuild4DPhysicalTableException {
+    protected boolean updateField(TableEntity tableEntity,TableFieldVO fieldVO, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws JBuild4DPhysicalTableException {
         try
         {
             throw JBuild4DPhysicalTableException.getFieldUpdateError();
@@ -104,9 +110,10 @@ public class MSSQLTableBuilder extends TableBuidler {
     }
 
     @Override
-    public boolean deleteField(TableEntity tableEntity,TableFieldVO fieldVO){
+    public boolean deleteField(TableEntity tableEntity,TableFieldVO fieldVO, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws PropertyVetoException {
         String dropTempFieldSQL="alter table "+tableEntity.getTableName()+" drop column "+fieldVO.getFieldName();
-        sqlBuilderService.execute(dropTempFieldSQL);
+        //sqlBuilderService.execute(dropTempFieldSQL);
+        ClientDataSourceManager.execute(dbLinkEntity,dropTempFieldSQL);
         return true;
     }
 }

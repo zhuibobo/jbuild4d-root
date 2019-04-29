@@ -13,6 +13,7 @@ import com.jbuild4d.platform.builder.vo.ValidateTableUpdateResultVo;
 import org.mybatis.generatorex.api.IntrospectedTable;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,24 +25,24 @@ import java.util.List;
  */
 public interface ITableService extends IBaseService<TableEntity> {
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList) throws JBuild4DGenerallyException;
+    void newTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList,String groupId) throws JBuild4DGenerallyException;
 
     UpdateTableResolveVo updateTableResolve(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList) throws IOException, JBuild4DGenerallyException;
 
-    ValidateTableUpdateResultVo validateTableUpdateEnable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList) throws JBuild4DGenerallyException, IOException;
+    ValidateTableUpdateResultVo validateTableUpdateEnable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList) throws JBuild4DGenerallyException, IOException, PropertyVetoException;
 
-    ValidateTableUpdateResultVo validateTableUpdateEnable(UpdateTableResolveVo resolveVo) throws JBuild4DGenerallyException;
+    ValidateTableUpdateResultVo validateTableUpdateEnable(JB4DSession jb4DSession,UpdateTableResolveVo resolveVo) throws JBuild4DGenerallyException, PropertyVetoException;
 
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    List<String> updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException, IOException;
+    List<String> updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList,boolean ignorePhysicalError,String groupId) throws JBuild4DGenerallyException, IOException, PropertyVetoException;
 
     boolean existLogicTableName(JB4DSession jb4DSession,String tableName);
 
     //void deleteTable(TableEntity tableEntity);
 
-    boolean existPhysicsTableName(JB4DSession jb4DSession,String tableName);
+    boolean existPhysicsTableName(JB4DSession jb4DSession,String tableName) throws JBuild4DGenerallyException, PropertyVetoException;
 
-    boolean deletePhysicsTable(JB4DSession jb4DSession, String tableName, String warningOperationCode) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException, JBuild4DGenerallyException;
+    boolean deletePhysicsTable(JB4DSession jb4DSession, String tableName, String warningOperationCode) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException, JBuild4DGenerallyException, PropertyVetoException;
 
     boolean deleteLogicTableAndFields(JB4DSession jb4DSession, String tableName, String warningOperationCode) throws JBuild4DGenerallyException;
 

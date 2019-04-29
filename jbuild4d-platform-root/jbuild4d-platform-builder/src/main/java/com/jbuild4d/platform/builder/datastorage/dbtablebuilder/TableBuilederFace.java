@@ -1,6 +1,8 @@
 package com.jbuild4d.platform.builder.datastorage.dbtablebuilder;
 
+import com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
+import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.base.dbaccess.general.DBProp;
 import com.jbuild4d.core.base.exception.JBuild4DPhysicalTableException;
 import com.jbuild4d.core.base.exception.JBuild4DSQLKeyWordException;
@@ -9,6 +11,7 @@ import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.tools.SQLKeyWordUtility;
 import com.jbuild4d.platform.builder.vo.TableFieldVO;
 
+import java.beans.PropertyVetoException;
 import java.util.List;
 
 /**
@@ -29,11 +32,11 @@ public class TableBuilederFace {
         TableBuilederFace instance=new TableBuilederFace();
         if(DBProp.isSqlServer()){
             instance.dbBuidler=new MSSQLTableBuilder();
-            instance.dbBuidler.setSqlBuilderService(sqlBuilderService);
+            //instance.dbBuidler.setSqlBuilderService(sqlBuilderService);
         }
         else if(DBProp.isMySql()){
             instance.dbBuidler=new MYSQLTableBuilder();
-            instance.dbBuidler.setSqlBuilderService(sqlBuilderService);
+            //instance.dbBuidler.setSqlBuilderService(sqlBuilderService);
             //throw new JBuild4DGenerallyException("暂不支持MYSQL");
         }
         else if(DBProp.isOracle()){
@@ -62,38 +65,38 @@ public class TableBuilederFace {
         return result;
     }
 
-    public boolean newTable(TableEntity tableEntity, List<TableFieldVO> fieldVos) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
+    public boolean newTable(TableEntity tableEntity, List<TableFieldVO> fieldVos, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException, PropertyVetoException {
         this.validateTableEntity(tableEntity);
         this.validateTableFields(fieldVos);
-        return dbBuidler.newTable(tableEntity,fieldVos);
+        return dbBuidler.newTable(tableEntity,fieldVos,tableGroupEntity,dbLinkEntity);
     }
 
-    public boolean isExistTable(String tableName){
+    public boolean isExistTable(String tableName, DbLinkEntity dbLinkEntity) throws PropertyVetoException {
         TableEntity tableEntity=new TableEntity();
         tableEntity.setTableName(tableName);
-        return dbBuidler.isExistTable(tableEntity);
+        return dbBuidler.isExistTable(tableEntity,dbLinkEntity);
     }
 
-    public boolean updateTable(TableEntity tableEntity,List<TableFieldVO> newFields,List<TableFieldVO> updateFields,List<TableFieldVO> deleteFields) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
+    public boolean updateTable(TableEntity tableEntity,List<TableFieldVO> newFields,List<TableFieldVO> updateFields,List<TableFieldVO> deleteFields, TableGroupEntity tableGroupEntity, DbLinkEntity dbLinkEntity) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
         this.validateTableEntity(tableEntity);
         this.validateTableFields(newFields);
         this.validateTableFields(updateFields);
         this.validateTableFields(deleteFields);
-        return dbBuidler.updateTable(tableEntity,newFields,updateFields,deleteFields);
+        return dbBuidler.updateTable(tableEntity,newFields,updateFields,deleteFields,tableGroupEntity,dbLinkEntity);
     }
 
-    public boolean deleteTable(String tableName) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
+    public boolean deleteTable(String tableName, DbLinkEntity dbLinkEntity) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException, PropertyVetoException {
         TableEntity tableEntity=new TableEntity();
         tableEntity.setTableName(tableName);
-        return dbBuidler.deleteTable(tableEntity);
+        return dbBuidler.deleteTable(tableEntity,dbLinkEntity);
     }
 
-    public boolean deleteTable(TableEntity tableEntity) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException {
+    public boolean deleteTable(TableEntity tableEntity, DbLinkEntity dbLinkEntity) throws JBuild4DSQLKeyWordException, JBuild4DPhysicalTableException, PropertyVetoException {
         this.validateTableEntity(tableEntity);
-        return dbBuidler.deleteTable(tableEntity);
+        return dbBuidler.deleteTable(tableEntity,dbLinkEntity);
     }
 
-    public int recordCount(TableEntity oldTableEntity) {
-        return dbBuidler.recordCount(oldTableEntity);
+    public int recordCount(TableEntity oldTableEntity, DbLinkEntity dbLinkEntity) throws PropertyVetoException {
+        return dbBuidler.recordCount(oldTableEntity,dbLinkEntity);
     }
 }
