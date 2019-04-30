@@ -120,6 +120,10 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
                         tableEntity.setTableDbname("JBuild4D");
                         tableEntity.setTableOrganId(jb4DSession.getOrganId());
                         tableEntity.setTableOrganName(jb4DSession.getOrganName());
+                        tableEntity.setTableLinkId(dbLinkEntity.getDbId());
+                        if(tableEntity.getTableStatus()==null||tableEntity.getTableStatus().equals("")){
+                            tableEntity.setTableStatus(EnableTypeEnum.enable.getDisplayName());
+                        }
                         tableMapper.insertSelective(tableEntity);
                         //写入字段
                         List<TableFieldEntity> tableFieldEntityList = TableFieldVO.VoListToEntityList(tableFieldVOList);
@@ -426,6 +430,30 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
     @Override
     public List<TableEntity> getTablesByTableIds(JB4DSession session, List<String> tableIds) {
         return tableMapper.selectByTableIds(tableIds);
+    }
+
+    @Override
+    public boolean testTablesInTheSameDBLink(JB4DSession jb4DSession,List tableList) {
+        String sameDBLinkId="";
+        for (Object o : tableList) {
+            String tableName=o.toString();
+            TableEntity tableEntity=tableMapper.selectByTableName(tableName);
+            if(sameDBLinkId.equals("")){
+                sameDBLinkId=tableEntity.getTableLinkId();
+            }
+            else{
+                if(!sameDBLinkId.equals(tableEntity.getTableLinkId())){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public DbLinkEntity getDBLinkByTableName(JB4DSession jb4DSession,String tableName) throws JBuild4DGenerallyException {
+        TableEntity tableEntity=tableMapper.selectByTableName(tableName);
+        return dbLinkService.getByPrimaryKey(jb4DSession,tableEntity.getTableLinkId());
     }
 
     private void registerSystemTableFieldToBuilderToModule(JB4DSession jb4DSession,TableEntity tableEntity,IntrospectedColumn column,boolean isKey) throws JBuild4DGenerallyException {

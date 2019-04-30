@@ -1,5 +1,6 @@
 package com.jbuild4d.platform.builder.datastorage;
 
+import com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
 import com.jbuild4d.core.base.exception.JBuild4DPhysicalTableException;
@@ -51,4 +52,8 @@ public interface ITableService extends IBaseService<TableEntity> {
     void registerSystemTableToBuilderToModule(JB4DSession jb4DSession, String tableName, TableGroupEntity tableGroupEntity) throws JBuild4DGenerallyException;
 
     List<TableEntity> getTablesByTableIds(JB4DSession session, List<String> tableIds);
+
+    boolean testTablesInTheSameDBLink(JB4DSession jb4DSession,List tableList);
+
+    DbLinkEntity getDBLinkByTableName(JB4DSession jb4DSession,String toString) throws JBuild4DGenerallyException;
 }

@@ -1,7 +1,12 @@
 package com.jbuild4d.platform.builder.dataset.builder;
 
+import com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity;
 import com.jbuild4d.core.base.exception.JBuild4DBaseException;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
+import com.jbuild4d.platform.builder.cliendatasource.ClientDataSourceManager;
+import com.jbuild4d.platform.builder.datastorage.IDbLinkService;
+import com.jbuild4d.platform.builder.datastorage.ITableService;
 import com.jbuild4d.platform.builder.exenum.TableFieldTypeEnum;
 import com.jbuild4d.platform.builder.vo.DataSetColumnVo;
 import com.jbuild4d.platform.builder.vo.DataSetRelatedTableVo;
@@ -14,10 +19,12 @@ import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.util.TablesNamesFinder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 
+import java.beans.PropertyVetoException;
 import java.io.StringReader;
 import java.sql.PreparedStatement;
 import java.sql.ResultSetMetaData;
@@ -33,7 +40,7 @@ import java.util.List;
  */
 public class SQLDataSetBuilder {
 
-    JdbcOperations jdbcOperations;
+    /*JdbcOperations jdbcOperations;
 
     public JdbcOperations getJdbcOperations() {
         return jdbcOperations;
@@ -41,9 +48,15 @@ public class SQLDataSetBuilder {
 
     public void setJdbcOperations(JdbcOperations jdbcOperations) {
         this.jdbcOperations = jdbcOperations;
-    }
+    }*/
 
-    public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession, String sql){
+    @Autowired
+    private IDbLinkService dbLinkService;
+
+    @Autowired
+    private ITableService tableService;
+
+    public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession, String sql) throws PropertyVetoException, JBuild4DGenerallyException {
         DataSetVo dataSetVo=new DataSetVo();
         List<DataSetColumnVo> dataSetColumnVoList=new ArrayList<>();
         List<DataSetRelatedTableVo> dataSetRelatedTableVoList=new ArrayList<>();
@@ -69,10 +82,20 @@ public class SQLDataSetBuilder {
                 dataSetRelatedTableVoList.add(dataSetRelatedTableVo);
             }
 
-            判断表是否来自一个数据库
+            //判断表是否来自一个数据库
+            if(!tableService.testTablesInTheSameDBLink(jb4DSession,tableList)){
+                String tableNames="";
+                for (Object o : tableList) {
+                    tableNames+=o.toString()+";";
+                }
+                throw new JBuild4DGenerallyException("表:"+tableNames+"不是来自同一个数据库,暂时不支持!");
+            }
+
+            DbLinkEntity dbLinkEntity=tableService.getDBLinkByTableName(jb4DSession,tableList.get(0).toString());
 
             //解析相关的字段
-            jdbcOperations.execute(sql, new PreparedStatementCallback<Object>() {
+            //jdbcOperations.execute(sql, new PreparedStatementCallback<Object>() {
+            ClientDataSourceManager.execute(dbLinkEntity,sql,new PreparedStatementCallback<Object>() {
                 @Override
                 public Object doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {
                     ResultSetMetaData resultSetMetaData=ps.getMetaData();

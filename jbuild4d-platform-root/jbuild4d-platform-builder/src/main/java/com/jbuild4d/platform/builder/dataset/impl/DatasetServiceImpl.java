@@ -30,12 +30,15 @@ import com.jbuild4d.platform.system.service.IEnvVariableService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.transaction.annotation.Transactional;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -59,6 +62,9 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     IEnvVariableService envVariableService;
 
     Logger logger = LoggerFactory.getLogger(DatasetServiceImpl.class);
+
+    @Autowired
+    private AutowireCapableBeanFactory autowireCapableBeanFactory;
 
     public DatasetServiceImpl(DatasetMapper _defaultBaseMapper,
                               SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService,JdbcOperations _jdbcOperations,
@@ -179,12 +185,13 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     }
 
     @Override
-    public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession,String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException {
+    public DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession,String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException, PropertyVetoException {
         if(builderConfigService.getResolveSQLEnable()) {
 
             if(validateResolveSqlWithKeyWord(sql)) {
                 SQLDataSetBuilder sqlDataSetBuilder = new SQLDataSetBuilder();
-                sqlDataSetBuilder.setJdbcOperations(jdbcOperations);
+                autowireCapableBeanFactory.autowireBean(sqlDataSetBuilder);
+                //sqlDataSetBuilder.setJdbcOperations(jdbcOperations);
                 DataSetVo resultVo = sqlDataSetBuilder.resolveSQLToDataSet(jb4DSession, sql);
                 //进行返回前的结果验证
                 if (validateResolveResult(resultVo)) {
@@ -327,7 +334,7 @@ public class DatasetServiceImpl extends BaseServiceImpl<DatasetEntity> implement
     }
 
     @Override
-    public SQLResolveToDataSetVo sqlResolveToDataSetVo(JB4DSession jb4DSession, String sqlWithEnvText) throws XPathExpressionException, JBuild4DGenerallyException, IOException, SAXException, ParserConfigurationException {
+    public SQLResolveToDataSetVo sqlResolveToDataSetVo(JB4DSession jb4DSession, String sqlWithEnvText) throws XPathExpressionException, JBuild4DGenerallyException, IOException, SAXException, ParserConfigurationException, PropertyVetoException {
         SQLResolveToDataSetVo resolveToDataSetVo=new SQLResolveToDataSetVo();
         resolveToDataSetVo.setSqlWithEnvText(sqlWithEnvText);
         String sqlReplaceEnvTextToEnvValue=sqlReplaceEnvTextToEnvValue(jb4DSession,sqlWithEnvText);

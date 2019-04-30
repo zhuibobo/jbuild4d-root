@@ -5,6 +5,7 @@ import com.jbuild4d.base.dbaccess.exenum.TrueFalseEnum;
 import com.jbuild4d.base.dbaccess.general.DBProp;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.beans.PropertyVetoException;
@@ -36,6 +37,11 @@ public class ClientDataSourceManager {
     public static void execute(DbLinkEntity dbLinkEntity,String sql) throws PropertyVetoException {
         JdbcTemplate jdbcTemplate=getJdbcTemplate(dbLinkEntity);
         jdbcTemplate.execute(sql);
+    }
+
+    public static void execute(DbLinkEntity dbLinkEntity, String sql, PreparedStatementCallback preparedStatementCallback) throws PropertyVetoException {
+        JdbcTemplate jdbcTemplate=getJdbcTemplate(dbLinkEntity);
+        jdbcTemplate.execute(sql,preparedStatementCallback);
     }
 
     public static Map selectOne(DbLinkEntity dbLinkEntity,String sql) throws PropertyVetoException {

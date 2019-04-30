@@ -247,12 +247,12 @@ public class CompexInitTestSystem extends RestTestBase {
         //region 创建栏目表--开始
         String cmsColumnTableName="TTEST_CMS_COLUMN";
 
-            //删除旧表
-        if(tableService.existLogicTableName(jb4DSession,cmsColumnTableName)) {
-            tableService.deleteLogicTableAndFields(jb4DSession, cmsColumnTableName, JBuild4DProp.getWarningOperationCode());
-        }
+        //删除旧表
         if(tableService.existPhysicsTableName(jb4DSession,cmsColumnTableName)){
             tableService.deletePhysicsTable(jb4DSession, cmsColumnTableName, JBuild4DProp.getWarningOperationCode());
+        }
+        if(tableService.existLogicTableName(jb4DSession,cmsColumnTableName)) {
+            tableService.deleteLogicTableAndFields(jb4DSession, cmsColumnTableName, JBuild4DProp.getWarningOperationCode());
         }
 
         TableEntity newTable = getTableEntity(getSession(), StringUtils.join(cmsColumnTableName.split(""), "_"), "信息栏目表", cmsColumnTableName,cmsInfoTableGroup);
@@ -292,12 +292,13 @@ public class CompexInitTestSystem extends RestTestBase {
         //region 创建新闻表--开始
         String cmsNewTableName="TTEST_CMS_NEW";
 
-        if(tableService.existLogicTableName(jb4DSession,cmsNewTableName)) {
-            tableService.deleteLogicTableAndFields(jb4DSession, cmsNewTableName, JBuild4DProp.getWarningOperationCode());
-        }
         if(tableService.existPhysicsTableName(jb4DSession,cmsNewTableName)){
             tableService.deletePhysicsTable(jb4DSession, cmsNewTableName, JBuild4DProp.getWarningOperationCode());
         }
+        if(tableService.existLogicTableName(jb4DSession,cmsNewTableName)) {
+            tableService.deleteLogicTableAndFields(jb4DSession, cmsNewTableName, JBuild4DProp.getWarningOperationCode());
+        }
+
         newTable = getTableEntity(getSession(), StringUtils.join(cmsNewTableName.split(""), "_"), "栏目新闻表", cmsNewTableName,cmsInfoTableGroup);
 
         //获取模版

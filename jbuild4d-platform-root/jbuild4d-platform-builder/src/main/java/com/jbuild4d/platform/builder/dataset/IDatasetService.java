@@ -11,6 +11,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 
 /**
@@ -24,7 +25,7 @@ public interface IDatasetService extends IBaseService<DatasetEntity> {
 
     int saveDataSetVo(JB4DSession jb4DSession, String id, DataSetVo record) throws JBuild4DGenerallyException, IOException;
 
-    DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession, String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException;
+    DataSetVo resolveSQLToDataSet(JB4DSession jb4DSession, String sql) throws JBuild4DGenerallyException, SAXException, ParserConfigurationException, XPathExpressionException, IOException, PropertyVetoException;
 
     String sqlReplaceEnvTextToEnvValue(JB4DSession jb4DSession, String sqlText) throws JBuild4DGenerallyException, XPathExpressionException, IOException, SAXException, ParserConfigurationException;
 
@@ -32,7 +33,7 @@ public interface IDatasetService extends IBaseService<DatasetEntity> {
 
     String sqlReplaceRunningValueToEmptyFilter(JB4DSession jb4DSession, String sqlRunValue);
 
-    SQLResolveToDataSetVo sqlResolveToDataSetVo(JB4DSession jb4DSession, String sqlWithEnvText) throws XPathExpressionException, JBuild4DGenerallyException, IOException, SAXException, ParserConfigurationException;
+    SQLResolveToDataSetVo sqlResolveToDataSetVo(JB4DSession jb4DSession, String sqlWithEnvText) throws XPathExpressionException, JBuild4DGenerallyException, IOException, SAXException, ParserConfigurationException, PropertyVetoException;
 
     PageInfo<DatasetEntity> getPageByGroupId(JB4DSession jb4DSession, Integer pageNum, Integer pageSize, String groupId);
 
