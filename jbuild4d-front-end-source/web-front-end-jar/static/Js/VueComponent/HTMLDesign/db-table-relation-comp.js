@@ -84,6 +84,7 @@ Vue.component("db-table-relation-comp", {
             },
             selectTableTree: {
                 oldSelectedDBLinkId:"JBuild4dLocationDBLink",
+                disabledDBLink:false,
                 dbLinkEntities:[],
                 tableTreeObj: null,
                 tableTreeSetting: {
@@ -217,10 +218,10 @@ Vue.component("db-table-relation-comp", {
             var _self = this;
             AjaxUtility.Post(this.acInterface.getTablesDataUrl, {}, function (result) {
                 if (result.success) {
-                    console.log(result);
+                    //console.log(result);
                     _self.selectTableTree.dbLinkEntities=result.exKVData.dbLinkEntityList;
                     _self.selectTableTree.allTableTreeData=result.data;
-                    _self.bindSelectTableTree();
+                    _self.bindSelectTableTree(true);
                     //fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
                     fuzzySearchTreeObj(_self.selectTableTree.tableTreeObj,_self.$refs.txt_table_search_text.$refs.input,null,true);
                 }
@@ -229,14 +230,15 @@ Vue.component("db-table-relation-comp", {
                 }
             }, "json");
         },
-        bindSelectTableTree: function () {
+        bindSelectTableTree: function (isGetCookieOldSelected) {
             //debugger;
+
             var oldSelectedDBLinkId=CookieUtility.GetCookie("DBTRCDBLINKID");
-            if(!oldSelectedDBLinkId){
-                oldSelectedDBLinkId=this.selectTableTree.oldSelectedDBLinkId;
+            if(oldSelectedDBLinkId&&isGetCookieOldSelected){
+                this.selectTableTree.oldSelectedDBLinkId=oldSelectedDBLinkId;
             }
             else{
-                this.selectTableTree.oldSelectedDBLinkId=oldSelectedDBLinkId;
+                oldSelectedDBLinkId=this.selectTableTree.oldSelectedDBLinkId;
             }
 
             var bindToTreeData=[];
@@ -254,7 +256,16 @@ Vue.component("db-table-relation-comp", {
         },
         changeDBLink:function(dbLinkId){
             CookieUtility.SetCookie1Month("DBTRCDBLINKID",dbLinkId);
-            this.bindSelectTableTree(dbLinkId);
+            this.bindSelectTableTree(true);
+        },
+        getMainTableDBLinkId:function(){
+            //debugger;
+            for(var i=0;i<this.selectTableTree.allTableTreeData.length;i++){
+                if(this.selectTableTree.allTableTreeData[i].id==this.getMainTableId()){
+                    return this.selectTableTree.allTableTreeData[i].outerId;
+                }
+            }
+            return "";
         },
         deleteSelectedRelationTreeNode:function(){
             if(this.relationTableTree.currentSelectedNode){
@@ -296,6 +307,18 @@ Vue.component("db-table-relation-comp", {
                     height: 600,
                     width: 700
                 });
+
+                //debugger;
+                //如果已经设置了主表,则只能使用相同连接下的表
+                var mainTableDBLinkId=this.getMainTableDBLinkId();
+                if(mainTableDBLinkId){
+                    this.selectTableTree.oldSelectedDBLinkId=mainTableDBLinkId;
+                    this.bindSelectTableTree(false);
+                    this.selectTableTree.disabledDBLink=true;
+                }
+                else{
+                    this.selectTableTree.disabledDBLink=false;
+                }
             }
             else {
                 DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "选择一个父节点!", null);
@@ -564,7 +587,7 @@ Vue.component("db-table-relation-comp", {
                 </div>
                 <div id="divSelectTable" title="请选择表" style="display: none">
                     <i-input search class="input_border_bottom" ref="txt_table_search_text" placeholder="请输入表名或者标题">
-                        <i-select v-model="selectTableTree.oldSelectedDBLinkId" slot="prepend" style="width: 280px" @on-change="changeDBLink">
+                        <i-select v-model="selectTableTree.oldSelectedDBLinkId" slot="prepend" style="width: 280px" @on-change="changeDBLink" :disabled="selectTableTree.disabledDBLink">
                             <i-option :value="item.dbId" v-for="item in selectTableTree.dbLinkEntities">{{item.dbLinkName}}</i-option>
                         </i-select>
                     </i-input>
