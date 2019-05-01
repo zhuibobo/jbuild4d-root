@@ -132,15 +132,14 @@ public class TableRestResource {
     @RequestMapping(value = "/SaveTableEdit")
     public JBuild4DResponseVo saveTableEdit(String op, String tableEntityJson,String fieldVoListJson,String groupId,boolean ignorePhysicalError) throws IOException, JBuild4DGenerallyException {
         try {
-            if(groupId==null||groupId.equals("")){
-                throw new JBuild4DGenerallyException("groupId不能为空!");
-            }
-
             tableEntityJson = URLDecoder.decode(URLDecoder.decode(tableEntityJson, "utf-8"),"utf-8");
             fieldVoListJson = URLDecoder.decode(URLDecoder.decode(fieldVoListJson, "utf-8"),"utf-8");
             TableEntity tableEntity = JsonUtility.toObject(tableEntityJson, TableEntity.class);
             List<TableFieldVO> tableFieldVOList = JsonUtility.toObjectListIgnoreProp(fieldVoListJson, TableFieldVO.class);
             if (op.equals("add")) {
+                if(groupId==null||groupId.equals("")){
+                    throw new JBuild4DGenerallyException("groupId不能为空!");
+                }
                 tableService.newTable(JB4DSessionUtility.getSession(), tableEntity, tableFieldVOList,groupId);
             } else if (op.equals("update")) {
                 tableService.updateTable(JB4DSessionUtility.getSession(), tableEntity, tableFieldVOList, ignorePhysicalError);

@@ -78,7 +78,7 @@
         var appList=new Vue({
             el:"#appList",
             mounted:function () {
-                this.initTree();
+                //this.initTree();
                 var oldSelectedDBLinkId=CookieUtility.GetCookie("DBMSLINKID");
                 if(oldSelectedDBLinkId){
                     this.$refs.selectDBLinkComp.setOldSelectedDBLink(oldSelectedDBLinkId);
@@ -216,7 +216,7 @@
             methods:{
                 <!--DBLink-->
                 changeDBLink:function(dbLinkData){
-                    console.log(dbLinkData);
+                    //console.log(dbLinkData);
                     CookieUtility.SetCookie1Month("DBMSLINKID",dbLinkData.dbId);
                     this.initTree(dbLinkData.dbId);
                     this.clearSearchCondition();
@@ -232,6 +232,7 @@
                     //this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});
                     //this.treeObj=$.fn.zTree.init($("#ztreeUL"), this.treeSetting);
                     var _self=this;
+                    //debugger;
                     //var url = '/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/GetTableField.do';
                     AjaxUtility.Post(this.acInterface.getGroupTreeData, {dbLinkId:dbLinkId}, function (result) {
                         if(result.success){

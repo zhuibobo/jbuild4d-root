@@ -21,5 +21,7 @@ public interface TableGroupMapper extends BaseMapper<TableGroupEntity> {
 
     TableGroupEntity selectByGroupText(String groupText);
 
-    TableGroupEntity selectTableGroupRoot(String locationDBLinkId);
+    TableGroupEntity selectTableGroupRoot(String dbLinkId);
+
+    List<TableGroupEntity> selectTableGroupsByDBLinkId(String dbLinkId);
 }

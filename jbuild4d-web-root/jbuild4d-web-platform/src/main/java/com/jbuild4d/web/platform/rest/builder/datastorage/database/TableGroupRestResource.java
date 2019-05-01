@@ -37,8 +37,9 @@ public class TableGroupRestResource extends GeneralRestResource<TableGroupEntity
     }
 
     @RequestMapping(value = "/GetTreeData", method = RequestMethod.POST)
-    public JBuild4DResponseVo getTreeData() {
-        List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALLASC(JB4DSessionUtility.getSession());
+    public JBuild4DResponseVo getTreeData(String dbLinkId) {
+        //List<TableGroupEntity> tableGroupEntityList=tableGroupService.getALLASC(JB4DSessionUtility.getSession());
+        List<TableGroupEntity> tableGroupEntityList=tableGroupService.getByDBLinkId(JB4DSessionUtility.getSession(),dbLinkId);
         return JBuild4DResponseVo.getDataSuccess(tableGroupEntityList);
     }
 }

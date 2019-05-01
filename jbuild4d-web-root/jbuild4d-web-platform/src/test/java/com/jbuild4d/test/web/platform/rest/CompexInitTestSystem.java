@@ -329,6 +329,7 @@ public class CompexInitTestSystem extends RestTestBase {
         personInfoTableGroup.setTableGroupIssystem(TrueFalseEnum.False.getDisplayName());
         personInfoTableGroup.setTableGroupText("人口信息");
         personInfoTableGroup.setTableGroupValue("人口信息");
+        personInfoTableGroup.setTableGroupLinkId(DBLinkMSSQL);
         tableGroupService.saveSimple(jb4DSession,personGroupId,personInfoTableGroup);
 
         //创建人口信息相关的表
@@ -341,6 +342,7 @@ public class CompexInitTestSystem extends RestTestBase {
         familyInfoTableGroup.setTableGroupIssystem(TrueFalseEnum.False.getDisplayName());
         familyInfoTableGroup.setTableGroupText("家庭信息");
         familyInfoTableGroup.setTableGroupValue("家庭信息");
+        familyInfoTableGroup.setTableGroupLinkId(DBLinkMSSQL);
         tableGroupService.saveSimple(jb4DSession,familyGroupId,familyInfoTableGroup);
 
         //创建家庭信息相关的表

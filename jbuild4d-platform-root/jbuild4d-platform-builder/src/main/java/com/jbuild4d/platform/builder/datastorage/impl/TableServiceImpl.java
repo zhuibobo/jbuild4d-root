@@ -277,8 +277,11 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
         if(newTableEntity.getTableGroupId()==null||newTableEntity.getTableGroupId().equals("")) {
             throw new JBuild4DGenerallyException("newTableEntity中的TableGroupId不能为空!");
         }
+        if(newTableEntity.getTableLinkId()==null||newTableEntity.getTableLinkId().equals("")) {
+            throw new JBuild4DGenerallyException("newTableEntity中的TableLinkId不能为空!");
+        }
         TableGroupEntity tableGroupEntity=tableGroupService.getByPrimaryKey(jb4DSession,newTableEntity.getTableGroupId());
-        DbLinkEntity dbLinkEntity=dbLinkService.getByPrimaryKey(jb4DSession,tableGroupEntity.getTableGroupLinkId());
+        DbLinkEntity dbLinkEntity=dbLinkService.getByPrimaryKey(jb4DSession,newTableEntity.getTableLinkId());
 
         //判断能否进行表的修改
         ValidateTableUpdateResultVo validateTableUpdateResultVo=this.validateTableUpdateEnable(jb4DSession,updateTableResolveVo);

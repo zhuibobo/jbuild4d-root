@@ -5,6 +5,8 @@ import com.jbuild4d.base.service.IBaseService;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
@@ -21,4 +23,6 @@ public interface ITableGroupService  extends IBaseService<TableGroupEntity> {
     TableGroupEntity getByGroupText(JB4DSession jb4DSession,String groupText);
 
     TableGroupEntity getLocationTableGroupRoot(JB4DSession jb4DSession);
+
+    List<TableGroupEntity> getByDBLinkId(JB4DSession session, String dbLinkId);
 }
