@@ -2,6 +2,7 @@ package com.jbuild4d.web.platform.rest.builder.datastorage.database;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
+import com.jbuild4d.base.dbaccess.dbentities.builder.DbLinkEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableFieldEntity;
 import com.jbuild4d.base.dbaccess.dbentities.builder.TableGroupEntity;
@@ -11,6 +12,7 @@ import com.jbuild4d.base.service.general.JB4DSessionUtility;
 import com.jbuild4d.base.tools.JsonUtility;
 import com.jbuild4d.core.base.tools.UUIDUtility;
 import com.jbuild4d.base.service.search.GeneralSearchUtility;
+import com.jbuild4d.platform.builder.datastorage.IDbLinkService;
 import com.jbuild4d.platform.builder.datastorage.ITableFieldService;
 import com.jbuild4d.platform.builder.datastorage.ITableGroupService;
 import com.jbuild4d.platform.builder.datastorage.ITableService;
@@ -51,6 +53,9 @@ public class TableRestResource {
 
     @Autowired
     ITableGroupService tableGroupService;
+
+    @Autowired
+    IDbLinkService dbLinkService;
 
     @RequestMapping(value = "/ValidateTableIsNoExist")
     public JBuild4DResponseVo validateTableIsExist(String tableName){
@@ -196,6 +201,12 @@ public class TableRestResource {
             List<TableEntity> tableEntityList=tableService.getALL(jb4DSession);
 
             responseVo.setData(ZTreeNodeVo.parseTableToZTreeNodeList(tableGroupEntityList,tableEntityList));
+
+            List<DbLinkEntity> dbLinkEntityList=dbLinkService.getALL(jb4DSession);
+
+            Map<String,Object> exKVData=new HashMap<>();
+            exKVData.put("dbLinkEntityList",dbLinkEntityList);
+            responseVo.setExKVData(exKVData);
 
             return responseVo;
         }

@@ -83,6 +83,8 @@ Vue.component("db-table-relation-comp", {
                 tableCaption:""
             },
             selectTableTree: {
+                oldSelectedDBLinkId:"JBuild4dLocationDBLink",
+                dbLinkEntities:[],
                 tableTreeObj: null,
                 tableTreeSetting: {
                     view: {
@@ -122,6 +124,7 @@ Vue.component("db-table-relation-comp", {
                     }
                 },
                 tableTreeData: null,//${tableTreeData},
+                allTableTreeData:null,
                 selectedTableName: "无"
             },
             tempDataStore: {},
@@ -133,7 +136,7 @@ Vue.component("db-table-relation-comp", {
         }
     },
     mounted:function(){
-        this.bindSelectTableTree();
+        this.getTablesAndBindOldSelected();
         //初始化根节点
         this.relationTableTree.treeObj=$.fn.zTree.init($("#dataRelationZTreeUL"), this.relationTableTree.tableTreeSetting,this.relationTableTree.tableTreeRootData);
         this.relationTableTree.treeObj.expandAll(true);
@@ -210,14 +213,14 @@ Vue.component("db-table-relation-comp", {
             }
             return null;
         },
-        bindSelectTableTree: function () {
+        getTablesAndBindOldSelected:function(){
             var _self = this;
             AjaxUtility.Post(this.acInterface.getTablesDataUrl, {}, function (result) {
                 if (result.success) {
-                    _self.selectTableTree.tableTreeData = result.data;
-                    //console.log(_self.tree.tableTreeData);
-                    _self.selectTableTree.tableTreeObj = $.fn.zTree.init($("#selectTableZTreeUL"), _self.selectTableTree.tableTreeSetting, _self.selectTableTree.tableTreeData);
-                    _self.selectTableTree.tableTreeObj.expandAll(true);
+                    console.log(result);
+                    _self.selectTableTree.dbLinkEntities=result.exKVData.dbLinkEntityList;
+                    _self.selectTableTree.allTableTreeData=result.data;
+                    _self.bindSelectTableTree();
                     //fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
                     fuzzySearchTreeObj(_self.selectTableTree.tableTreeObj,_self.$refs.txt_table_search_text.$refs.input,null,true);
                 }
@@ -225,6 +228,33 @@ Vue.component("db-table-relation-comp", {
                     DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
                 }
             }, "json");
+        },
+        bindSelectTableTree: function () {
+            //debugger;
+            var oldSelectedDBLinkId=CookieUtility.GetCookie("DBTRCDBLINKID");
+            if(!oldSelectedDBLinkId){
+                oldSelectedDBLinkId=this.selectTableTree.oldSelectedDBLinkId;
+            }
+            else{
+                this.selectTableTree.oldSelectedDBLinkId=oldSelectedDBLinkId;
+            }
+
+            var bindToTreeData=[];
+
+            for(var i=0;i<this.selectTableTree.allTableTreeData.length;i++) {
+                if (oldSelectedDBLinkId == this.selectTableTree.allTableTreeData[i].outerId) {
+                    bindToTreeData.push(this.selectTableTree.allTableTreeData[i]);
+                }
+            }
+
+            this.selectTableTree.tableTreeData = bindToTreeData;
+            //console.log(_self.tree.tableTreeData);
+            this.selectTableTree.tableTreeObj = $.fn.zTree.init($("#selectTableZTreeUL"), this.selectTableTree.tableTreeSetting, this.selectTableTree.tableTreeData);
+            this.selectTableTree.tableTreeObj.expandAll(true);
+        },
+        changeDBLink:function(dbLinkId){
+            CookieUtility.SetCookie1Month("DBTRCDBLINKID",dbLinkId);
+            this.bindSelectTableTree(dbLinkId);
         },
         deleteSelectedRelationTreeNode:function(){
             if(this.relationTableTree.currentSelectedNode){
@@ -454,87 +484,91 @@ Vue.component("db-table-relation-comp", {
             });
         }
     },
-    template:'<div class="db-table-relation-comp">\
-                <divider orientation="left" :dashed="true" style="font-size: 12px;margin-top: 0px;margin-bottom: 10px">数据关系关联设置</divider>\
-                <div style="float: left;width: 350px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
-                    <button-group shape="circle" style="margin: auto">\
-                        <i-button type="success" @click="beginSelectTableToRelationTable">&nbsp;添加&nbsp;</i-button>\
-                        <i-button @click="deleteSelectedRelationTreeNode">&nbsp;删除&nbsp;</i-button>\
-                        <i-button @click="alertSerializeRelation">序列化</i-button>\
-                        <i-button @click="inputDeserializeRelation">反序列化</i-button>\
-                        <i-button>说明</i-button>\
-                    </button-group>\
-                    <ul id="dataRelationZTreeUL" class="ztree"></ul>\
-                </div>\
-                <div style="float: right;width: 630px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">\
-                    <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0" v-if="relationTableEditorView.isShowTableEditDetail">\
-                        <colgroup>\
-                            <col style="width: 17%" />\
-                            <col style="width: 33%" />\
-                            <col style="width: 15%" />\
-                            <col style="width: 35%" />\
-                        </colgroup>\
-                        <tbody>\
-                            <tr>\
-                                <td class="label">SingleName：</td>\
-                                <td>\
-                                    <i-input v-model="currentEditorData.singleName" size="small" placeholder="本关联中的唯一名称,可以为空" />\
-                                </td>\
-                                <td class="label">PKKey：</td>\
-                                <td>\
-                                    <i-select placeholder="默认使用Id字段" v-model="currentEditorData.pkFieldName" size="small" style="width:199px">\
-                                        <i-option v-for="item in relationTableEditorView.selPKData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
-                                    </i-select>\
-                                </td>\
-                            </tr>\
-                            <tr v-if="relationTableEditorView.isSubEditTr">\
-                                <td class="label">数据关系：</td>\
-                                <td>\
-                                    <radio-group v-model="currentEditorData.relationType" type="button" size="small">\
-                                        <radio label="1To1">1:1</radio>\
-                                        <radio label="1ToN">1:N</radio>\
-                                    </radio-group>\
-                                </td>\
-                                <td class="label">是否保存：</td>\
-                                <td>\
-                                    <radio-group v-model="currentEditorData.isSave" type="button" size="small">\
-                                        <radio label="true">是</radio>\
-                                        <radio label="false">否</radio>\
-                                    </radio-group>\
-                                </td>\
-                            </tr>\
-                            <tr v-if="relationTableEditorView.isSubEditTr">\
-                                <td class="label">本身关联字段：</td>\
-                                <td>\
-                                     <i-select placeholder="默认使用Id字段" v-model="currentEditorData.selfKeyFieldName" size="small" style="width:199px">\
-                                        <i-option v-for="item in relationTableEditorView.selSelfKeyData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
-                                    </i-select>\
-                                </td>\
-                                <td class="label">外联字段：</td>\
-                                <td>\
-                                     <i-select placeholder="默认使用Id字段" v-model="currentEditorData.outerKeyFieldName" size="small" style="width:199px">\
-                                        <i-option v-for="item in relationTableEditorView.selPKData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>\
-                                    </i-select>\
-                                </td>\
-                            </tr>\
-                            <tr>\
-                                <td class="label">Desc：</td>\
-                                <td colspan="3">\
-                                    <i-input v-model="currentEditorData.desc" size="small" placeholder="说明" />\
-                                </td>\
-                            </tr>\
-                            <tr>\
-                                <td class="label">加载条件：</td>\
-                                <td colspan="3">\
-                                    <sql-general-design-comp ref="sqlGeneralDesignComp" :sqlDesignerHeight="74" v-model="currentEditorData.condition"></sql-general-design-comp>\
-                                </td>\
-                            </tr>\
-                        </tbody>\
-                    </table>\
-                </div>\
-                <div id="divSelectTable" title="请选择表" style="display: none">\
-                    <i-input search class="input_border_bottom" ref="txt_table_search_text" placeholder="请输入表名或者标题"></i-input>\
-                    <ul id="selectTableZTreeUL" class="ztree"></ul>\
-                </div>\
-              </div>'
+    template:`<div class="db-table-relation-comp">
+                <divider orientation="left" :dashed="true" style="font-size: 12px;margin-top: 0px;margin-bottom: 10px">数据关系关联设置</divider>
+                <div style="float: left;width: 350px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">
+                    <button-group shape="circle" style="margin: auto">
+                        <i-button type="success" @click="beginSelectTableToRelationTable">&nbsp;添加&nbsp;</i-button>
+                        <i-button @click="deleteSelectedRelationTreeNode">&nbsp;删除&nbsp;</i-button>
+                        <i-button @click="alertSerializeRelation">序列化</i-button>
+                        <i-button @click="inputDeserializeRelation">反序列化</i-button>
+                        <i-button>说明</i-button>
+                    </button-group>
+                    <ul id="dataRelationZTreeUL" class="ztree"></ul>
+                </div>
+                <div style="float: right;width: 630px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">
+                    <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0" v-if="relationTableEditorView.isShowTableEditDetail">
+                        <colgroup>
+                            <col style="width: 17%" />
+                            <col style="width: 33%" />
+                            <col style="width: 15%" />
+                            <col style="width: 35%" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td class="label">SingleName：</td>
+                                <td>
+                                    <i-input v-model="currentEditorData.singleName" size="small" placeholder="本关联中的唯一名称,可以为空" />
+                                </td>
+                                <td class="label">PKKey：</td>
+                                <td>
+                                    <i-select placeholder="默认使用Id字段" v-model="currentEditorData.pkFieldName" size="small" style="width:199px">
+                                        <i-option v-for="item in relationTableEditorView.selPKData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>
+                                    </i-select>
+                                </td>
+                            </tr>
+                            <tr v-if="relationTableEditorView.isSubEditTr">
+                                <td class="label">数据关系：</td>
+                                <td>
+                                    <radio-group v-model="currentEditorData.relationType" type="button" size="small">
+                                        <radio label="1To1">1:1</radio>
+                                        <radio label="1ToN">1:N</radio>
+                                    </radio-group>
+                                </td>
+                                <td class="label">是否保存：</td>
+                                <td>
+                                    <radio-group v-model="currentEditorData.isSave" type="button" size="small">
+                                        <radio label="true">是</radio>
+                                        <radio label="false">否</radio>
+                                    </radio-group>
+                                </td>
+                            </tr>
+                            <tr v-if="relationTableEditorView.isSubEditTr">
+                                <td class="label">本身关联字段：</td>
+                                <td>
+                                     <i-select placeholder="默认使用Id字段" v-model="currentEditorData.selfKeyFieldName" size="small" style="width:199px">
+                                        <i-option v-for="item in relationTableEditorView.selSelfKeyData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>
+                                    </i-select>
+                                </td>
+                                <td class="label">外联字段：</td>
+                                <td>
+                                     <i-select placeholder="默认使用Id字段" v-model="currentEditorData.outerKeyFieldName" size="small" style="width:199px">
+                                        <i-option v-for="item in relationTableEditorView.selPKData" :value="item.fieldName" :key="item.fieldName">{{item.fieldCaption}}</i-option>
+                                    </i-select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">Desc：</td>
+                                <td colspan="3">
+                                    <i-input v-model="currentEditorData.desc" size="small" placeholder="说明" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">加载条件：</td>
+                                <td colspan="3">
+                                    <sql-general-design-comp ref="sqlGeneralDesignComp" :sqlDesignerHeight="74" v-model="currentEditorData.condition"></sql-general-design-comp>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="divSelectTable" title="请选择表" style="display: none">
+                    <i-input search class="input_border_bottom" ref="txt_table_search_text" placeholder="请输入表名或者标题">
+                        <i-select v-model="selectTableTree.oldSelectedDBLinkId" slot="prepend" style="width: 280px" @on-change="changeDBLink">
+                            <i-option :value="item.dbId" v-for="item in selectTableTree.dbLinkEntities">{{item.dbLinkName}}</i-option>
+                        </i-select>
+                    </i-input>
+                    <ul id="selectTableZTreeUL" class="ztree" style="height: 500px;overflow-y:scroll;overflow-x:hidden"></ul>
+                </div>
+              </div>`
 });

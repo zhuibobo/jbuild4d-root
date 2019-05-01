@@ -18,6 +18,7 @@ public class ZTreeNodeVo {
     String text;
     String id;
     String parentId;
+    String outerId;
     String attr1;
     String attr2;
     String attr3;
@@ -107,6 +108,14 @@ public class ZTreeNodeVo {
         this.attr4 = attr4;
     }
 
+    public String getOuterId() {
+        return outerId;
+    }
+
+    public void setOuterId(String outerId) {
+        this.outerId = outerId;
+    }
+
     public static List<ZTreeNodeVo> parseTableToZTreeNodeList(List<TableGroupEntity> tableGroupEntityList, List<TableEntity> tableEntityList){
         List<ZTreeNodeVo> result=new ArrayList<>();
         for (TableGroupEntity tableGroupEntity : tableGroupEntityList) {
@@ -118,6 +127,7 @@ public class ZTreeNodeVo {
             nodeVo.setParentId(tableGroupEntity.getTableGroupParentId());
             nodeVo.setNocheck(true);
             nodeVo.setNodeTypeName("TableGroup");
+            nodeVo.setOuterId(tableGroupEntity.getTableGroupLinkId());
             result.add(nodeVo);
         }
 
@@ -130,6 +140,7 @@ public class ZTreeNodeVo {
             nodeVo.setParentId(tableEntity.getTableGroupId());
             nodeVo.setNodeTypeName("Table");
             nodeVo.setNocheck(false);
+            nodeVo.setOuterId(tableEntity.getTableLinkId());
             result.add(nodeVo);
         }
 
