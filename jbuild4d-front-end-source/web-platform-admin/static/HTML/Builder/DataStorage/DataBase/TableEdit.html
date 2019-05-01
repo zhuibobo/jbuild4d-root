@@ -202,7 +202,7 @@
                             Renderer:"EditTable_TextBox",
                             DefaultValue:{
                                 Type:"Const",
-                                Value:"0"selectDefaultValueDialogBegin
+                                Value:"0"
                             },
                             Style:{
                                 width:68,
@@ -372,7 +372,8 @@
                             op: this.status,
                             ignorePhysicalError:this.ignorePhysicalError,
                             tableEntityJson: encodeURIComponent(encodeURIComponent(JSON.stringify(this.tableEntity))),
-                            fieldVoListJson: encodeURIComponent(encodeURIComponent(JSON.stringify(this.editTableObj.GetSerializeJson())))
+                            fieldVoListJson: encodeURIComponent(encodeURIComponent(JSON.stringify(this.editTableObj.GetSerializeJson()))),
+                            groupId:this.groupId
                         };
 
                         this.isSubmitting=true;

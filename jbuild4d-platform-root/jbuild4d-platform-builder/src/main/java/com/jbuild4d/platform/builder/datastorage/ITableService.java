@@ -35,7 +35,7 @@ public interface ITableService extends IBaseService<TableEntity> {
     ValidateTableUpdateResultVo validateTableUpdateEnable(JB4DSession jb4DSession,UpdateTableResolveVo resolveVo) throws JBuild4DGenerallyException, PropertyVetoException;
 
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    List<String> updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList,boolean ignorePhysicalError,String groupId) throws JBuild4DGenerallyException, IOException, PropertyVetoException;
+    List<String> updateTable(JB4DSession jb4DSession, TableEntity tableEntity, List<TableFieldVO> tableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException, IOException, PropertyVetoException;
 
     boolean existLogicTableName(JB4DSession jb4DSession,String tableName);
 

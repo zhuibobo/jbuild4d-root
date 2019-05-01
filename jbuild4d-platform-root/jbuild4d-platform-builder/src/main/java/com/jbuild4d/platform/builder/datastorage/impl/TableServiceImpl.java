@@ -269,12 +269,15 @@ public class TableServiceImpl extends BaseServiceImpl<TableEntity> implements IT
 
     @Override
     @Transactional(rollbackFor=JBuild4DGenerallyException.class)
-    public List<String> updateTable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError,String groupId) throws JBuild4DGenerallyException, IOException, PropertyVetoException {
+    public List<String> updateTable(JB4DSession jb4DSession, TableEntity newTableEntity, List<TableFieldVO> newTableFieldVOList,boolean ignorePhysicalError) throws JBuild4DGenerallyException, IOException, PropertyVetoException {
         List<String> resultMessage=new ArrayList<>();
 
         UpdateTableResolveVo updateTableResolveVo=updateTableResolve(jb4DSession,newTableEntity,newTableFieldVOList);
 
-        TableGroupEntity tableGroupEntity=tableGroupService.getByPrimaryKey(jb4DSession,groupId);
+        if(newTableEntity.getTableGroupId()==null||newTableEntity.getTableGroupId().equals("")) {
+            throw new JBuild4DGenerallyException("newTableEntity中的TableGroupId不能为空!");
+        }
+        TableGroupEntity tableGroupEntity=tableGroupService.getByPrimaryKey(jb4DSession,newTableEntity.getTableGroupId());
         DbLinkEntity dbLinkEntity=dbLinkService.getByPrimaryKey(jb4DSession,tableGroupEntity.getTableGroupLinkId());
 
         //判断能否进行表的修改

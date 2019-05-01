@@ -143,7 +143,7 @@ public class TableRestResource {
             if (op.equals("add")) {
                 tableService.newTable(JB4DSessionUtility.getSession(), tableEntity, tableFieldVOList,groupId);
             } else if (op.equals("update")) {
-                tableService.updateTable(JB4DSessionUtility.getSession(), tableEntity, tableFieldVOList, ignorePhysicalError,groupId);
+                tableService.updateTable(JB4DSessionUtility.getSession(), tableEntity, tableFieldVOList, ignorePhysicalError);
             }
             return JBuild4DResponseVo.opSuccess();
         }
