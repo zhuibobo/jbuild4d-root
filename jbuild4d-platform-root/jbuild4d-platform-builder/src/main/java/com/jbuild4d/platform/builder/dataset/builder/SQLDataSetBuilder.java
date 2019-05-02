@@ -92,6 +92,7 @@ public class SQLDataSetBuilder {
             }
 
             DbLinkEntity dbLinkEntity=tableService.getDBLinkByTableName(jb4DSession,tableList.get(0).toString());
+            dataSetVo.setDsSqlDbLinkId(dbLinkEntity.getDbId());
 
             //解析相关的字段
             //jdbcOperations.execute(sql, new PreparedStatementCallback<Object>() {

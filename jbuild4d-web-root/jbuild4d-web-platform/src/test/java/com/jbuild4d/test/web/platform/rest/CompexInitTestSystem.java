@@ -182,6 +182,7 @@ public class CompexInitTestSystem extends RestTestBase {
         dataSetVo.setDsClassName("");
         dataSetVo.setDsRestStructureUrl("");
         dataSetVo.setDsRestDataUrl("");
+        dataSetVo.setDsSqlDbLinkId(resolveToDataSetVo.getDataSetVo().getDsSqlDbLinkId());
 
         for (DataSetColumnVo dataSetColumnVo : resolveToDataSetVo.getDataSetVo().getColumnVoList()) {
             dataSetColumnVo.setColumnId(UUIDUtility.getUUID());

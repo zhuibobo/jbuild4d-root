@@ -122,6 +122,9 @@
                     <form-item label="备注：">
                         <i-input v-model="datasetEntity.dsDesc" type="textarea" :autosize="{minRows: 5,maxRows: 5}"></i-input>
                     </form-item>
+                    <form-item label="连接：">
+                        <i-input v-model="datasetEntity.dsSqlDbLinkId" :disabled="true"></i-input>
+                    </form-item>
                 </i-form>
             </div>
         </div>
@@ -172,7 +175,8 @@
                     dsRestStructureUrl:"",
                     dsRestDataUrl:"",
                     columnVoList:null,
-                    relatedTableVoList:null
+                    relatedTableVoList:null,
+                    dsSqlDbLinkId:""
                 },
                 editTableObj:null,
                 editTableConfig:{
@@ -430,8 +434,10 @@
                     DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑SQL语句",modal:true,height: _height, width: 980});
                 },
                 completedSQLDesign:function (result) {
+                    //console.log(result);
                     this.datasetEntity.dsSqlSelectText=result.data.sqlWithEnvText;
                     this.datasetEntity.dsSqlSelectValue=result.data.sqlWithEnvValue;
+                    this.datasetEntity.dsSqlDbLinkId=result.data.dataSetVo.dsSqlDbLinkId;
                     this.relatedTable.data=result.data.dataSetVo.relatedTableVoList;
                     //获取现有的列定义
                     if (this.editTableObj.CompletedEditingRow()) {
