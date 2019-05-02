@@ -147,7 +147,7 @@
                 this.normalProps.datasetId=treeNode.id;
             },
             ready:function(actionName){
-                this.baseInfo.id="txt_"+StringUtility.Timestamp();
+                this.baseInfo.id="list_layout_container_"+StringUtility.Timestamp();
                 this.baseInfo.name=this.baseInfo.id;
             },
             setBindCompleted:function(bindToField,defaultValue,validateRules){
@@ -159,6 +159,7 @@
                 if(this.normalProps.datasetName==""){
                     this.normalProps.datasetId="";
                 }
+                this.baseInfo.serialize="false";
                 var result = {
                     success: true,
                     baseInfo: this.baseInfo,
