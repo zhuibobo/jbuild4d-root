@@ -177,6 +177,7 @@ Vue.component("db-table-relation-comp", {
             toObj.relationType=fromObj.relationType;
             toObj.isSave=fromObj.isSave;
             toObj.condition=fromObj.condition;
+            //toObj.code=fromObj.code;
         },
         getTableFieldsByTableId:function (tableId) {
             if(tableId=="-1"){
@@ -391,6 +392,7 @@ Vue.component("db-table-relation-comp", {
             newResultItem.tableId=newNode.tableId;
             newResultItem.tableName=newNode.value;
             newResultItem.tableCaption=newNode.attr1;
+            newResultItem.tableCode=newNode.code;
 
             this.resultData.push(newResultItem);
         },
@@ -469,7 +471,7 @@ Vue.component("db-table-relation-comp", {
                 var treeNode={
                     "value":tempData[i].tableName,
                     "attr1":tempData[i].tableCaption,
-                    "text":tempData[i].tableCaption+"【"+tempData[i].tableName+"】",
+                    "text":"【"+tempData[i].tableCode+"】"+tempData[i].tableCaption+"【"+tempData[i].tableName+"】",
                     "id":tempData[i].id,
                     "parentId":tempData[i].parentId
                 }
@@ -517,7 +519,7 @@ Vue.component("db-table-relation-comp", {
                         <i-button @click="inputDeserializeRelation">反序列化</i-button>
                         <i-button>说明</i-button>
                     </button-group>
-                    <ul id="dataRelationZTreeUL" class="ztree"></ul>
+                    <ul id="dataRelationZTreeUL" class="ztree" style="overflow-x: hidden"></ul>
                 </div>
                 <div style="float: right;width: 630px;height: 330px;border: #ddddf1 1px solid;border-radius: 4px;padding: 10px 10px 10px 10px;">
                     <table class="light-gray-table" cellpadding="0" cellspacing="0" border="0" v-if="relationTableEditorView.isShowTableEditDetail">
