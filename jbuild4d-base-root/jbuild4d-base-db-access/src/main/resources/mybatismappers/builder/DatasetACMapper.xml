@@ -19,6 +19,7 @@
             <arg column="DS_STATUS" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_SQL_SELECT_TEXT" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_SQL_SELECT_VALUE" javaType="java.lang.String" jdbcType="NVARCHAR" />
+            <arg column="DS_SQL_DB_LINK_ID" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_CLASS_NAME" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_REST_STRUCTURE_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
             <arg column="DS_REST_DATA_URL" javaType="java.lang.String" jdbcType="NVARCHAR" />
@@ -29,8 +30,8 @@
     <sql id="Base_Column_List">
         DS_ID, DS_CODE, DS_CAPTION, DS_NAME, DS_CREATE_TIME, DS_CREATER, DS_UPDATE_TIME,
         DS_UPDATER, DS_TYPE, DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC, DS_GROUP_ID, DS_STATUS,
-        DS_SQL_SELECT_TEXT, DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_STRUCTURE_URL, DS_REST_DATA_URL,
-        DS_ORGAN_ID, DS_ORGAN_NAME
+        DS_SQL_SELECT_TEXT, DS_SQL_SELECT_VALUE, DS_SQL_DB_LINK_ID, DS_CLASS_NAME, DS_REST_STRUCTURE_URL,
+        DS_REST_DATA_URL, DS_ORGAN_ID, DS_ORGAN_NAME
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -48,17 +49,17 @@
                                     DS_UPDATE_TIME, DS_UPDATER, DS_TYPE,
                                     DS_ISSYSTEM, DS_ORDER_NUM, DS_DESC,
                                     DS_GROUP_ID, DS_STATUS, DS_SQL_SELECT_TEXT,
-                                    DS_SQL_SELECT_VALUE, DS_CLASS_NAME, DS_REST_STRUCTURE_URL,
-                                    DS_REST_DATA_URL, DS_ORGAN_ID, DS_ORGAN_NAME
-                )
+                                    DS_SQL_SELECT_VALUE, DS_SQL_DB_LINK_ID, DS_CLASS_NAME,
+                                    DS_REST_STRUCTURE_URL, DS_REST_DATA_URL, DS_ORGAN_ID,
+                                    DS_ORGAN_NAME)
         values (#{dsId,jdbcType=NVARCHAR}, #{dsCode,jdbcType=NVARCHAR}, #{dsCaption,jdbcType=NVARCHAR},
                 #{dsName,jdbcType=NVARCHAR}, #{dsCreateTime,jdbcType=TIMESTAMP}, #{dsCreater,jdbcType=NVARCHAR},
                 #{dsUpdateTime,jdbcType=TIMESTAMP}, #{dsUpdater,jdbcType=NVARCHAR}, #{dsType,jdbcType=NVARCHAR},
                 #{dsIssystem,jdbcType=NVARCHAR}, #{dsOrderNum,jdbcType=INTEGER}, #{dsDesc,jdbcType=NVARCHAR},
                 #{dsGroupId,jdbcType=NVARCHAR}, #{dsStatus,jdbcType=NVARCHAR}, #{dsSqlSelectText,jdbcType=NVARCHAR},
-                #{dsSqlSelectValue,jdbcType=NVARCHAR}, #{dsClassName,jdbcType=NVARCHAR}, #{dsRestStructureUrl,jdbcType=NVARCHAR},
-                #{dsRestDataUrl,jdbcType=NVARCHAR}, #{dsOrganId,jdbcType=NVARCHAR}, #{dsOrganName,jdbcType=NVARCHAR}
-                       )
+                #{dsSqlSelectValue,jdbcType=NVARCHAR}, #{dsSqlDbLinkId,jdbcType=NVARCHAR}, #{dsClassName,jdbcType=NVARCHAR},
+                #{dsRestStructureUrl,jdbcType=NVARCHAR}, #{dsRestDataUrl,jdbcType=NVARCHAR}, #{dsOrganId,jdbcType=NVARCHAR},
+                #{dsOrganName,jdbcType=NVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jbuild4d.base.dbaccess.dbentities.builder.DatasetEntity">
         insert into TBUILD_DATASET
@@ -110,6 +111,9 @@
             </if>
             <if test="dsSqlSelectValue != null">
                 DS_SQL_SELECT_VALUE,
+            </if>
+            <if test="dsSqlDbLinkId != null">
+                DS_SQL_DB_LINK_ID,
             </if>
             <if test="dsClassName != null">
                 DS_CLASS_NAME,
@@ -176,6 +180,9 @@
             <if test="dsSqlSelectValue != null">
                 #{dsSqlSelectValue,jdbcType=NVARCHAR},
             </if>
+            <if test="dsSqlDbLinkId != null">
+                #{dsSqlDbLinkId,jdbcType=NVARCHAR},
+            </if>
             <if test="dsClassName != null">
                 #{dsClassName,jdbcType=NVARCHAR},
             </if>
@@ -241,6 +248,9 @@
             <if test="dsSqlSelectValue != null">
                 DS_SQL_SELECT_VALUE = #{dsSqlSelectValue,jdbcType=NVARCHAR},
             </if>
+            <if test="dsSqlDbLinkId != null">
+                DS_SQL_DB_LINK_ID = #{dsSqlDbLinkId,jdbcType=NVARCHAR},
+            </if>
             <if test="dsClassName != null">
                 DS_CLASS_NAME = #{dsClassName,jdbcType=NVARCHAR},
             </if>
@@ -276,6 +286,7 @@
             DS_STATUS = #{dsStatus,jdbcType=NVARCHAR},
             DS_SQL_SELECT_TEXT = #{dsSqlSelectText,jdbcType=NVARCHAR},
             DS_SQL_SELECT_VALUE = #{dsSqlSelectValue,jdbcType=NVARCHAR},
+            DS_SQL_DB_LINK_ID = #{dsSqlDbLinkId,jdbcType=NVARCHAR},
             DS_CLASS_NAME = #{dsClassName,jdbcType=NVARCHAR},
             DS_REST_STRUCTURE_URL = #{dsRestStructureUrl,jdbcType=NVARCHAR},
             DS_REST_DATA_URL = #{dsRestDataUrl,jdbcType=NVARCHAR},

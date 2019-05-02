@@ -5,6 +5,7 @@
     <delete id="deleteAll">delete from TBUILD_DATASET</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(DS_ORDER_NUM) is null then 1 else max(DS_ORDER_NUM)+1 end ORDERNUM from TBUILD_DATASET</select>
     <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List"/>from TBUILD_DATASET<where>
+        <if test="dsCode !=null and dsCode !=''"> and DS_CODE like #{dsCode} </if>
         <if test="dsCaption !=null and dsCaption !=''"> and DS_CAPTION like #{dsCaption} </if>
         <if test="dsName !=null and dsName !=''"> and DS_NAME like #{dsName} </if>
         <if test="dsCreater !=null and dsCreater !=''"> and DS_CREATER like #{dsCreater} </if>
@@ -16,6 +17,7 @@
         <if test="dsStatus !=null and dsStatus !=''"> and DS_STATUS like #{dsStatus} </if>
         <if test="dsSqlSelectText !=null and dsSqlSelectText !=''"> and DS_SQL_SELECT_TEXT like #{dsSqlSelectText} </if>
         <if test="dsSqlSelectValue !=null and dsSqlSelectValue !=''"> and DS_SQL_SELECT_VALUE like #{dsSqlSelectValue} </if>
+        <if test="dsSqlDbLinkId !=null and dsSqlDbLinkId !=''"> and DS_SQL_DB_LINK_ID like #{dsSqlDbLinkId} </if>
         <if test="dsClassName !=null and dsClassName !=''"> and DS_CLASS_NAME like #{dsClassName} </if>
         <if test="dsRestStructureUrl !=null and dsRestStructureUrl !=''"> and DS_REST_STRUCTURE_URL like #{dsRestStructureUrl} </if>
         <if test="dsRestDataUrl !=null and dsRestDataUrl !=''"> and DS_REST_DATA_URL like #{dsRestDataUrl} </if>

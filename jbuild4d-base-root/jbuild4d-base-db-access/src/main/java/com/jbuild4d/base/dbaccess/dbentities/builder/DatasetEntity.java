@@ -63,6 +63,9 @@ public class DatasetEntity {
     //DS_SQL_SELECT_VALUE:实际用于查询的SQL
     private String dsSqlSelectValue;
 
+    //DS_SQL_DB_LINK_ID:数据库连接ID:数据集为SQL形成时,目标库的ID
+    private String dsSqlDbLinkId;
+
     //DS_CLASS_NAME:API类的名称
     private String dsClassName;
 
@@ -78,7 +81,7 @@ public class DatasetEntity {
     //DS_ORGAN_NAME:组织名称
     private String dsOrganName;
 
-    public DatasetEntity(String dsId, String dsCode, String dsCaption, String dsName, Date dsCreateTime, String dsCreater, Date dsUpdateTime, String dsUpdater, String dsType, String dsIssystem, Integer dsOrderNum, String dsDesc, String dsGroupId, String dsStatus, String dsSqlSelectText, String dsSqlSelectValue, String dsClassName, String dsRestStructureUrl, String dsRestDataUrl, String dsOrganId, String dsOrganName) {
+    public DatasetEntity(String dsId, String dsCode, String dsCaption, String dsName, Date dsCreateTime, String dsCreater, Date dsUpdateTime, String dsUpdater, String dsType, String dsIssystem, Integer dsOrderNum, String dsDesc, String dsGroupId, String dsStatus, String dsSqlSelectText, String dsSqlSelectValue, String dsSqlDbLinkId, String dsClassName, String dsRestStructureUrl, String dsRestDataUrl, String dsOrganId, String dsOrganName) {
         this.dsId = dsId;
         this.dsCode = dsCode;
         this.dsCaption = dsCaption;
@@ -95,6 +98,7 @@ public class DatasetEntity {
         this.dsStatus = dsStatus;
         this.dsSqlSelectText = dsSqlSelectText;
         this.dsSqlSelectValue = dsSqlSelectValue;
+        this.dsSqlDbLinkId = dsSqlDbLinkId;
         this.dsClassName = dsClassName;
         this.dsRestStructureUrl = dsRestStructureUrl;
         this.dsRestDataUrl = dsRestDataUrl;
@@ -232,6 +236,14 @@ public class DatasetEntity {
 
     public void setDsSqlSelectValue(String dsSqlSelectValue) {
         this.dsSqlSelectValue = dsSqlSelectValue == null ? null : dsSqlSelectValue.trim();
+    }
+
+    public String getDsSqlDbLinkId() {
+        return dsSqlDbLinkId;
+    }
+
+    public void setDsSqlDbLinkId(String dsSqlDbLinkId) {
+        this.dsSqlDbLinkId = dsSqlDbLinkId == null ? null : dsSqlDbLinkId.trim();
     }
 
     public String getDsClassName() {

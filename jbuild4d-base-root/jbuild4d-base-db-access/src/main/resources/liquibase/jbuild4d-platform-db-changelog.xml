@@ -512,6 +512,7 @@
             <column name="DS_STATUS" type="NVARCHAR(10)" remarks="状态"/>
             <column name="DS_SQL_SELECT_TEXT" type="NVARCHAR(4000)" remarks="查询的SQL原始文本"/>
             <column name="DS_SQL_SELECT_VALUE" type="NVARCHAR(4000)" remarks="实际用于查询的SQL"/>
+            <column name="DS_SQL_DB_LINK_ID" type="NVARCHAR(100)" remarks="数据库连接ID:数据集为SQL形成时,目标库的ID"/>
             <column name="DS_CLASS_NAME" type="NVARCHAR(300)" remarks="API类的名称"/>
             <column name="DS_REST_STRUCTURE_URL" type="NVARCHAR(500)" remarks="REST数据集结构的接口地址"/>
             <column name="DS_REST_DATA_URL" type="NVARCHAR(500)" remarks="REST数据集的接口地址" />
