@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.list.impl;
+package com.jbuild4d.platform.builder.weblist.impl;
 import java.util.Date;
 
 import com.jbuild4d.base.dbaccess.dao.builder.ListResourceMapper;
@@ -9,7 +9,7 @@ import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
-import com.jbuild4d.platform.builder.list.IListResourceService;
+import com.jbuild4d.platform.builder.weblist.IListResourceService;
 import com.jbuild4d.platform.builder.module.IModuleService;
 import org.mybatis.spring.SqlSessionTemplate;
 

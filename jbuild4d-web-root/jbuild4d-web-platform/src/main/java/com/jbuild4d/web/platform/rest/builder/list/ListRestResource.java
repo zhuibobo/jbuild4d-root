@@ -2,7 +2,7 @@ package com.jbuild4d.web.platform.rest.builder.list;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntity;
 import com.jbuild4d.base.service.IBaseService;
-import com.jbuild4d.platform.builder.list.IListResourceService;
+import com.jbuild4d.platform.builder.weblist.IListResourceService;
 import com.jbuild4d.web.platform.rest.base.GeneralRestResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

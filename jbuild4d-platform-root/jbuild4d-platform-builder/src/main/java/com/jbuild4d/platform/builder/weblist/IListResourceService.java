@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.list;
+package com.jbuild4d.platform.builder.weblist;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.ListResourceEntity;
 import com.jbuild4d.base.service.IBaseService;
