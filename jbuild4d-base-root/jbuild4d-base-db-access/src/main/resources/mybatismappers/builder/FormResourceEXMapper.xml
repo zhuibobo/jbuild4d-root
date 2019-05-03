@@ -39,7 +39,7 @@
     <select id="selectAllASC" resultMap="BaseResultMapSimple">select<include refid="Base_Column_List_Simple"/> from TBUILD_FORM_RESOURCE ORDER by FORM_ORDER_NUM ASC</select>
     <delete id="deleteAll">delete from TBUILD_FORM_RESOURCE</delete>
     <select id="nextOrderNum" resultType="integer">select case when max(FORM_ORDER_NUM) is null then 1 else max(FORM_ORDER_NUM)+1 end ORDERNUM from TBUILD_FORM_RESOURCE</select>
-    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMap">select<include refid="Base_Column_List_Simple"/>from TBUILD_FORM_RESOURCE<where>
+    <select id="selectBySearch" parameterType="java.util.Map" resultMap="BaseResultMapSimple">select<include refid="Base_Column_List_Simple"/>from TBUILD_FORM_RESOURCE<where>
         <if test="formCode !=null and formCode !=''"> and FORM_CODE like #{formCode} </if>
         <if test="formName !=null and formName !=''"> and FORM_NAME like #{formName} </if>
         <if test="formSingleName !=null and formSingleName !=''"> and FORM_SINGLE_NAME like #{formSingleName} </if>
