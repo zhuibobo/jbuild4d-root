@@ -42,7 +42,7 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntity>
         //修改时设置为未解析的状态.
         //record.setFormIsResolve(TrueFalseEnum.False.getDisplayName());
         //保存时进行同步的表单内容的解析,并存入对应的字段中.
-        String resolvedHtml=htmlRuntimeResolve.resolveSourceHTML(jb4DSession,id,record);
+        String resolvedHtml=htmlRuntimeResolve.resolveSourceHTML(jb4DSession,id,record.getFormHtmlSource());
         record.setFormHtmlResolve(resolvedHtml);
         record.setFormIsResolve(TrueFalseEnum.True.getDisplayName());
 
@@ -97,8 +97,8 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntity>
 
     @Override
     public String getFormRuntimeHTMLContent(JB4DSession jb4DSession, String id, RecordDataVo recordDataVo) throws JBuild4DGenerallyException {
-        FormResourceEntity formResourceEntityWithBLOBs=getByPrimaryKey(jb4DSession,id);
-        String runtimeForm=htmlRuntimeResolve.dynamicBind(jb4DSession,id,formResourceEntityWithBLOBs,formResourceEntityWithBLOBs.getFormHtmlResolve(),recordDataVo);
+        FormResourceEntity formResourceEntity=getByPrimaryKey(jb4DSession,id);
+        String runtimeForm=htmlRuntimeResolve.dynamicBind(jb4DSession,id,formResourceEntity.getFormHtmlResolve());
         return runtimeForm;
     }
 }
