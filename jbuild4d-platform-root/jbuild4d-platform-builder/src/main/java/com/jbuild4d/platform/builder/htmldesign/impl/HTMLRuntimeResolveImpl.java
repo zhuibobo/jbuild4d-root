@@ -1,12 +1,10 @@
 package com.jbuild4d.platform.builder.htmldesign.impl;
 
-import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.core.base.tools.ClassUtility;
 import com.jbuild4d.platform.builder.htmldesign.HTMLControlAttrs;
 import com.jbuild4d.platform.builder.htmldesign.IHTMLControl;
 import com.jbuild4d.platform.builder.htmldesign.IHTMLRuntimeResolve;
-import com.jbuild4d.platform.builder.vo.RecordDataVo;
 import com.jbuild4d.platform.builder.vo.ResolveHTMLControlContextVo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -64,7 +62,7 @@ public class HTMLRuntimeResolveImpl implements IHTMLRuntimeResolve {
                 if(serverResolveFullClassName!=null&&!serverResolveFullClassName.equals("")){
                     try {
                         IHTMLControl htmlControl = this.getHTMLControlInstance(serverResolveFullClassName);
-                        htmlControl.resolve(jb4DSession,sourceHTML,doc,singleElem,parentElem,lastParentJbuild4dCustomElem,resolveHTMLControlContextVo);
+                        htmlControl.resolve(jb4DSession,sourceHTML,doc,singleElem,parentElem,lastParentJbuild4dCustomElem,resolveHTMLControlContextVo,null);
                     }
                     catch (Exception ex){
                         singleElem.html("控件解析出错！【"+ex.getMessage()+"】");

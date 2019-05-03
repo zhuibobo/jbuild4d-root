@@ -4,6 +4,7 @@ import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.builder.htmldesign.HTMLControl;
 import com.jbuild4d.platform.builder.htmldesign.IHTMLControl;
+import com.jbuild4d.platform.builder.vo.DynamicBindHTMLControlContextVo;
 import com.jbuild4d.platform.builder.vo.HtmlControlDefinitionVo;
 import com.jbuild4d.platform.builder.vo.RecordDataVo;
 import com.jbuild4d.platform.builder.vo.ResolveHTMLControlContextVo;
@@ -18,7 +19,7 @@ public class WebFormTextBoxControl extends HTMLControl implements IHTMLControl {
     IDictionaryService dictionaryService;
 
     @Override
-    public void resolve(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo) {
+    public void resolve(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo,HtmlControlDefinitionVo htmlControlDefinitionVo) {
         System.out.println(sourceHTML);
         singleControlElem.tagName("input");
         singleControlElem.text("");
@@ -26,7 +27,7 @@ public class WebFormTextBoxControl extends HTMLControl implements IHTMLControl {
     }
 
     @Override
-    public void dynamicBind(JB4DSession jb4DSession, FormResourceEntity record, Document doc, Element singleControlElem, RecordDataVo recordDataVo, HtmlControlDefinitionVo htmlControlPluginDefinitionVo) {
+    public void dynamicBind(JB4DSession jb4DSession, String sourceHTML, String resolveHTML, Document doc, Element singleControlElem, DynamicBindHTMLControlContextVo dynamicBindHTMLControlContextVo, HtmlControlDefinitionVo htmlControlPluginDefinitionVo) {
 
     }
 }
