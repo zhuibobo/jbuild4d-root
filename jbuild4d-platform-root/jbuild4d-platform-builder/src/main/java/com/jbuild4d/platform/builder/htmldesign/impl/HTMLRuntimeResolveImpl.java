@@ -79,6 +79,7 @@ public class HTMLRuntimeResolveImpl implements IHTMLRuntimeResolve {
         }
     }
 
+    //控件是否动态绑定,交由控件解析时,控件本身解析自行设定,动态绑定完成字后,需要控件自身移除敏感属性.
     @Override
     public String dynamicBind(JB4DSession jb4DSession, String id, String resolveHtml) {
         return resolveHtml;
