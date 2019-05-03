@@ -18,21 +18,22 @@ import com.jbuild4d.platform.builder.flow.IFlowModelService;
 import com.jbuild4d.platform.builder.flow.IFlowModelerConfigService;
 import com.jbuild4d.platform.builder.flow.impl.FlowModelServiceImpl;
 import com.jbuild4d.platform.builder.flow.impl.FlowModelerConfigServiceImpl;
+import com.jbuild4d.platform.builder.htmldesign.ICKEditorPluginsService;
 import com.jbuild4d.platform.builder.htmldesign.IHTMLDesignThemesService;
+import com.jbuild4d.platform.builder.htmldesign.IHTMLRuntimeResolve;
+import com.jbuild4d.platform.builder.htmldesign.impl.CKEditorPluginsServiceImpl;
 import com.jbuild4d.platform.builder.htmldesign.impl.HTMLDesignThemesServiceImpl;
+import com.jbuild4d.platform.builder.htmldesign.impl.HTMLRuntimeResolveImpl;
 import com.jbuild4d.platform.builder.list.IListResourceService;
 import com.jbuild4d.platform.builder.list.impl.ListResourceServiceImpl;
 import com.jbuild4d.platform.builder.module.IBuilderConfigService;
 import com.jbuild4d.platform.builder.module.IModuleService;
-import com.jbuild4d.platform.builder.module.impl.*;
-import com.jbuild4d.platform.builder.htmldesign.ICKEditorPluginsService;
-import com.jbuild4d.platform.builder.webformdesign.IFormConfigService;
-import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
-import com.jbuild4d.platform.builder.htmldesign.impl.CKEditorPluginsServiceImpl;
-import com.jbuild4d.platform.builder.webformdesign.IFormRuntimeResolve;
-import com.jbuild4d.platform.builder.webformdesign.impl.FormConfigServiceImpl;
-import com.jbuild4d.platform.builder.webformdesign.impl.FormResourceServiceImpl;
-import com.jbuild4d.platform.builder.webformdesign.impl.FormRuntimeResolveImpl;
+import com.jbuild4d.platform.builder.module.impl.BuilderConfigServiceImpl;
+import com.jbuild4d.platform.builder.module.impl.ModuleServiceImpl;
+import com.jbuild4d.platform.builder.webform.IFormConfigService;
+import com.jbuild4d.platform.builder.webform.IFormResourceService;
+import com.jbuild4d.platform.builder.webform.impl.FormConfigServiceImpl;
+import com.jbuild4d.platform.builder.webform.impl.FormResourceServiceImpl;
 import com.jbuild4d.platform.system.service.IEnvVariableService;
 import com.jbuild4d.platform.system.service.IJb4dCacheService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -126,8 +127,8 @@ public class BuilderBeansConfig {
     }
 
     @Bean
-    public IFormRuntimeResolve formRuntimeResolve(){
-        return new FormRuntimeResolveImpl();
+    public IHTMLRuntimeResolve htmlRuntimeResolve(){
+        return new HTMLRuntimeResolveImpl();
     }
 
     @Bean

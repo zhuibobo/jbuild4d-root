@@ -6,6 +6,7 @@ import com.jbuild4d.core.base.tools.ClassUtility;
 import com.jbuild4d.platform.builder.htmldesign.HTMLControlAttrs;
 import com.jbuild4d.platform.builder.htmldesign.IHTMLControl;
 import com.jbuild4d.platform.builder.htmldesign.IHTMLRuntimeResolve;
+import com.jbuild4d.platform.builder.vo.RecordDataVo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -34,6 +35,11 @@ public class HTMLRuntimeResolveImpl implements IHTMLRuntimeResolve {
             return doc.getElementsByTag("body").html();
         }
         return "";
+    }
+
+    @Override
+    public String dynamicBind(JB4DSession jb4DSession, String id, FormResourceEntity formResourceEntityWithBLOBs, String formHtmlResolve, RecordDataVo recordDataVo) {
+        return null;
     }
 
     //Element lastParentJbuild4dCustomElem=null;

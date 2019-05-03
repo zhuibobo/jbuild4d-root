@@ -1,24 +1,24 @@
-package com.jbuild4d.platform.builder.webformdesign.control.impl;
+package com.jbuild4d.platform.builder.htmldesign.webform.control;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.core.base.session.JB4DSession;
+import com.jbuild4d.platform.builder.htmldesign.HTMLControl;
+import com.jbuild4d.platform.builder.htmldesign.IHTMLControl;
 import com.jbuild4d.platform.builder.vo.HtmlControlDefinitionVo;
 import com.jbuild4d.platform.builder.vo.RecordDataVo;
-import com.jbuild4d.platform.builder.webformdesign.control.IWebFormControl;
-import com.jbuild4d.platform.builder.webformdesign.control.WebFormControl;
 import com.jbuild4d.platform.system.service.IDictionaryService;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class WebFormTextBoxControl extends WebFormControl implements IWebFormControl {
+public class WebFormTextBoxControl extends HTMLControl implements IHTMLControl {
 
     @Autowired
     IDictionaryService dictionaryService;
 
     @Override
-    public void resolve(JB4DSession jb4DSession, FormResourceEntity record, Document doc, Element singleControlElem, HtmlControlDefinitionVo htmlControlPluginDefinitionVo) {
-        System.out.println(record.getFormHtmlSource());
+    public void resolve(JB4DSession jb4DSession, FormResourceEntity formResourceEntity, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem) {
+        System.out.println(formResourceEntity.getFormHtmlSource());
         singleControlElem.tagName("input");
         singleControlElem.text("");
         singleControlElem.attr("type","text");

@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.webformdesign.impl;
+package com.jbuild4d.platform.builder.webform.impl;
 
 import com.jbuild4d.base.dbaccess.dao.builder.FormResourceMapper;
 import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
@@ -8,10 +8,10 @@ import com.jbuild4d.base.service.IAddBefore;
 import com.jbuild4d.base.service.ISQLBuilderService;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.base.service.impl.BaseServiceImpl;
+import com.jbuild4d.platform.builder.htmldesign.IHTMLRuntimeResolve;
 import com.jbuild4d.platform.builder.module.IModuleService;
 import com.jbuild4d.platform.builder.vo.RecordDataVo;
-import com.jbuild4d.platform.builder.webformdesign.IFormResourceService;
-import com.jbuild4d.platform.builder.webformdesign.IFormRuntimeResolve;
+import com.jbuild4d.platform.builder.webform.IFormResourceService;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,7 +28,7 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntity>
     IModuleService moduleService;
 
     @Autowired
-    IFormRuntimeResolve formRuntimeResolve;
+    IHTMLRuntimeResolve htmlRuntimeResolve;
 
     public FormResourceServiceImpl(FormResourceMapper _defaultBaseMapper, SqlSessionTemplate _sqlSessionTemplate, ISQLBuilderService _sqlBuilderService, IModuleService _moduleService) {
         super(_defaultBaseMapper, _sqlSessionTemplate, _sqlBuilderService);
@@ -42,7 +42,7 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntity>
         //修改时设置为未解析的状态.
         //record.setFormIsResolve(TrueFalseEnum.False.getDisplayName());
         //保存时进行同步的表单内容的解析,并存入对应的字段中.
-        String resolvedHtml=formRuntimeResolve.resolveSourceHTML(jb4DSession,id,record);
+        String resolvedHtml=htmlRuntimeResolve.resolveSourceHTML(jb4DSession,id,record);
         record.setFormHtmlResolve(resolvedHtml);
         record.setFormIsResolve(TrueFalseEnum.True.getDisplayName());
 
@@ -98,7 +98,7 @@ public class FormResourceServiceImpl extends BaseServiceImpl<FormResourceEntity>
     @Override
     public String getFormRuntimeHTMLContent(JB4DSession jb4DSession, String id, RecordDataVo recordDataVo) throws JBuild4DGenerallyException {
         FormResourceEntity formResourceEntityWithBLOBs=getByPrimaryKey(jb4DSession,id);
-        String runtimeForm=formRuntimeResolve.dynamicBind(jb4DSession,id,formResourceEntityWithBLOBs,formResourceEntityWithBLOBs.getFormHtmlResolve(),recordDataVo);
+        String runtimeForm=htmlRuntimeResolve.dynamicBind(jb4DSession,id,formResourceEntityWithBLOBs,formResourceEntityWithBLOBs.getFormHtmlResolve(),recordDataVo);
         return runtimeForm;
     }
 }
