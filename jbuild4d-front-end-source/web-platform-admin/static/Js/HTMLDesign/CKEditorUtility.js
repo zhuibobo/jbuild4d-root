@@ -273,6 +273,7 @@ class CKEditorUtility {
             //var elem = elements.getItem(i);
             elem.on('click', function () {
                 //alert( this == elem );        // true
+                //debugger;
                 CKEditorUtility.GetCKEditorInst().getSelection().selectElement(this);
                 CKEditorUtility.SetSelectedElem(this.getOuterHtml());
 
@@ -281,8 +282,14 @@ class CKEditorUtility {
                 var newDelButton = new CKEDITOR.dom.element('div');
                 newDelButton.addClass("del-button");
                 elem.append(newDelButton);
-                newDelButton.on('click', function () {
+                newDelButton.on('click', function (ev) {
                     elem.remove();
+                    //debugger;
+                    // The DOM event object is passed by the 'data' property.
+                    var domEvent = ev.data;
+                    // Prevent the click to chave any effect in the element.
+                    domEvent.preventDefault();
+                    domEvent.stopPropagation();
                 });
             });
         }

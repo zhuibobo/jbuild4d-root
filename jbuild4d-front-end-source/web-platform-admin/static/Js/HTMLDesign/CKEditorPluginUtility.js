@@ -201,7 +201,7 @@ class CKEditorPluginUtility {
     }
 
     static SerializePropsToElem(elem,props,controlSetting){
-        debugger;
+        //debugger;
         elem.setAttribute("jbuild4d_custom", "true");
         elem.setAttribute("singlename",controlSetting.SingleName);
         elem.setAttribute("is_jbuild4d_data",controlSetting.IsJBuild4DData);
