@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.builder.htmldesign.webform.control;
+package com.jbuild4d.platform.builder.htmldesign.control.webform;
 
 import com.jbuild4d.base.dbaccess.dbentities.builder.FormResourceEntity;
 import com.jbuild4d.core.base.session.JB4DSession;

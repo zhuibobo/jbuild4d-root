@@ -24,7 +24,7 @@
             <Desc></Desc>
         </Control>
         <Control SingleName="WFDCT_TextBox" Text="单行输入框" ToolbarLocation="LC_Simple_G1,1"
-                 ServerResolve="com.jbuild4d.platform.builder.htmldesign.webform.control.WebFormTextBoxControl" ClientResolve="2" ClientResolveJs="3"
+                 ServerResolve="com.jbuild4d.platform.builder.htmldesign.control.webform.WebFormTextBoxControl" ClientResolve="2" ClientResolveJs="3"
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="true" ControlCategory="InputControl" ServerDynamicBind="false" ShowRemoveButton="true" ShowInEditorToolbar="true">
             <Config></Config>
             <Desc></Desc>
