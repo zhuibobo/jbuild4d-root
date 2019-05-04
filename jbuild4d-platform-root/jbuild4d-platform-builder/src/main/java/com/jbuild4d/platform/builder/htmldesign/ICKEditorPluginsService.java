@@ -15,4 +15,8 @@ public interface ICKEditorPluginsService {
     List<HtmlControlDefinitionVo> getWebFormControlVoList() throws JBuild4DGenerallyException;
 
     List<HtmlControlDefinitionVo> getListControlVoList() throws JBuild4DGenerallyException;
+
+    List<HtmlControlDefinitionVo> getAllControlVoList() throws JBuild4DGenerallyException;
+
+    HtmlControlDefinitionVo getVo(String singleName) throws JBuild4DGenerallyException;
 }

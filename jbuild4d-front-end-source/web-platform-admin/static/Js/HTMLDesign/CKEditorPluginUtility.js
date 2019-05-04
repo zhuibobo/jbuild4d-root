@@ -201,14 +201,17 @@ class CKEditorPluginUtility {
     }
 
     static SerializePropsToElem(elem,props,controlSetting){
+        debugger;
         elem.setAttribute("jbuild4d_custom", "true");
         elem.setAttribute("singlename",controlSetting.SingleName);
-        elem.setAttribute("clientresolve",controlSetting.ClientResolve);
-        elem.setAttribute("serverresolve",controlSetting.ServerResolve);
         elem.setAttribute("is_jbuild4d_data",controlSetting.IsJBuild4DData);
         elem.setAttribute("control_category",controlSetting.ControlCategory);
-        elem.setAttribute("server_dynamic_bind",controlSetting.ServerDynamicBind);
         elem.setAttribute("show_remove_button",controlSetting.ShowRemoveButton);
+        elem.setAttribute("clientresolve",controlSetting.ClientResolve);
+
+        //将服务端解析方法,动态绑定属性设置,移到服务端进行解析时处理
+        //elem.setAttribute("serverresolve",controlSetting.ServerResolve);
+        //elem.setAttribute("server_dynamic_bind",controlSetting.ServerDynamicBind);
 
         if(props["baseInfo"]){
             for (var key in props["baseInfo"]) {

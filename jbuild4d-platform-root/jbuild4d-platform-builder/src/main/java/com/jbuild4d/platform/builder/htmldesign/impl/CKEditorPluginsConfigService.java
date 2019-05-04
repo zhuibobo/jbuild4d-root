@@ -52,6 +52,13 @@ public class CKEditorPluginsConfigService {
         return nodeList;
     }
 
+    public List<Node> getALLControlNodes() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
+        InputStream inputStream = this.getClass().getResourceAsStream(configResource);
+        xmlDocument = XMLDocumentUtility.parseForDoc(inputStream);
+        List<Node> nodeList = XMLDocumentUtility.parseForNodeList(xmlDocument, "/Config//Control");
+        return nodeList;
+    }
+
     /*private List<HtmlControlDefinitionVo> parseXMLDocToVoList() throws JBuild4DGenerallyException {
         try {
             InputStream inputStream = this.getClass().getResourceAsStream(configResource);

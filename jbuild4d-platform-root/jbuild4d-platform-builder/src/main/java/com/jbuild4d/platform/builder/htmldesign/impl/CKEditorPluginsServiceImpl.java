@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,7 +29,7 @@ public class CKEditorPluginsServiceImpl implements ICKEditorPluginsService {
     @Override
     public List<HtmlControlDefinitionVo> getWebFormControlVoList() throws JBuild4DGenerallyException {
         CKEditorPluginsConfigService configService=new CKEditorPluginsConfigService(jb4dCacheService);
-        return JB4DCacheManager.autoGetFromCache(JB4DCacheManager.jb4dPlatformBuilderCacheName, jb4dCacheService.sysRunStatusIsDebug(), "EnvVariableVoList", new IBuildGeneralObj<List<HtmlControlDefinitionVo>>() {
+        return JB4DCacheManager.autoGetFromCache(JB4DCacheManager.jb4dPlatformBuilderCacheName, jb4dCacheService.sysRunStatusIsDebug(), "getWebFormControlVoList", new IBuildGeneralObj<List<HtmlControlDefinitionVo>>() {
             @Override
             public List<HtmlControlDefinitionVo> BuildObj() throws JBuild4DGenerallyException {
                 try
@@ -47,7 +48,7 @@ public class CKEditorPluginsServiceImpl implements ICKEditorPluginsService {
     @Override
     public List<HtmlControlDefinitionVo> getListControlVoList() throws JBuild4DGenerallyException {
         CKEditorPluginsConfigService configService=new CKEditorPluginsConfigService(jb4dCacheService);
-        return JB4DCacheManager.autoGetFromCache(JB4DCacheManager.jb4dPlatformBuilderCacheName, jb4dCacheService.sysRunStatusIsDebug(), "EnvVariableVoList", new IBuildGeneralObj<List<HtmlControlDefinitionVo>>() {
+        return JB4DCacheManager.autoGetFromCache(JB4DCacheManager.jb4dPlatformBuilderCacheName, jb4dCacheService.sysRunStatusIsDebug(), "getListControlVoList", new IBuildGeneralObj<List<HtmlControlDefinitionVo>>() {
             @Override
             public List<HtmlControlDefinitionVo> BuildObj() throws JBuild4DGenerallyException {
                 try
@@ -61,6 +62,31 @@ public class CKEditorPluginsServiceImpl implements ICKEditorPluginsService {
                 }
             }
         });
+    }
+
+    @Override
+    public List<HtmlControlDefinitionVo> getAllControlVoList() throws JBuild4DGenerallyException {
+        CKEditorPluginsConfigService configService=new CKEditorPluginsConfigService(jb4dCacheService);
+        return JB4DCacheManager.autoGetFromCache(JB4DCacheManager.jb4dPlatformBuilderCacheName, jb4dCacheService.sysRunStatusIsDebug(), "getAllControlVoList", new IBuildGeneralObj<List<HtmlControlDefinitionVo>>() {
+            @Override
+            public List<HtmlControlDefinitionVo> BuildObj() throws JBuild4DGenerallyException {
+                try
+                {
+                    List<Node> nodeList=configService.getALLControlNodes();
+                    return parseNodeListToVoList(nodeList);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                    throw new JBuild4DGenerallyException(ex.getMessage());
+                }
+            }
+        });
+    }
+
+    @Override
+    public HtmlControlDefinitionVo getVo(String singleName) throws JBuild4DGenerallyException {
+        List<HtmlControlDefinitionVo> allControlVoList=getAllControlVoList();
+        return allControlVoList.stream().filter(item->item.getSingleName().equals(singleName)).collect(Collectors.toList()).get(0);
     }
 
     private List<HtmlControlDefinitionVo> parseNodeListToVoList(List<Node> nodeList) throws JBuild4DGenerallyException {
