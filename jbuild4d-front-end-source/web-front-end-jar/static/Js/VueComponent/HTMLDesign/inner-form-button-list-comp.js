@@ -56,14 +56,14 @@ Vue.component("inner-form-button-list-comp", {
                 //开发扩展
                 id:"",
                 buttonType:"保存按钮",
-                serverResolveMethod:"",
-                serverResolveMethodPara:"",
-                clientRendererMethod:"",
-                clientRendererMethodPara:"",
-                clientRendererAfterMethod:"",
-                clientRendererAfterMethodPara:"",
-                clientClickBeforeMethod:"",
-                clientClickBeforeMethodPara:"",
+                custServerResolveMethod:"",
+                custServerResolveMethodPara:"",
+                custClientRendererMethod:"",
+                custClientRendererMethodPara:"",
+                custClientRendererAfterMethod:"",
+                custClientRendererAfterMethodPara:"",
+                custClientClickBeforeMethod:"",
+                custClientClickBeforeMethodPara:"",
             },
             api:{
                 acInterface: {
@@ -233,14 +233,14 @@ Vue.component("inner-form-button-list-comp", {
                     fields:[],
                     id:"",
                     buttonType:"保存按钮",
-                    serverResolveMethod:"",
-                    serverResolveMethodPara:"",
-                    clientRendererMethod:"",
-                    clientRendererMethodPara:"",
-                    clientRendererAfterMethod:"",
-                    clientRendererAfterMethodPara:"",
-                    clientClickBeforeMethod:"",
-                    clientClickBeforeMethodPara:"",
+                    custServerResolveMethod:"",
+                    custServerResolveMethodPara:"",
+                    custClientRendererMethod:"",
+                    custClientRendererMethodPara:"",
+                    custClientRendererAfterMethod:"",
+                    custClientRendererAfterMethodPara:"",
+                    custClientClickBeforeMethod:"",
+                    custClientClickBeforeMethodPara:"",
             };
             this.api.editTableObject.RemoveAllRow();
             if(this.field.editTableObject) {
@@ -451,7 +451,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 服务端解析类：
                                             </td>
                                             <td>
-                                                <i-input v-model="innerSaveButtonEditData.serverResolveMethod" size="small" placeholder="按钮进行服务端解析时,类全称,将调用该类,需要实现接口IFormButtonCustResolve" />
+                                                <i-input v-model="innerSaveButtonEditData.custServerResolveMethod" size="small" placeholder="按钮进行服务端解析时,类全称,将调用该类,需要实现接口IFormButtonCustResolve" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -459,7 +459,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 参数：
                                             </td>
                                             <td>
-                                                <i-input v-model="innerSaveButtonEditData.serverResolveMethodPara" size="small" placeholder="服务端解析类的参数" />
+                                                <i-input v-model="innerSaveButtonEditData.custServerResolveMethodPara" size="small" placeholder="服务端解析类的参数" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -467,7 +467,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 客户端渲染方法：
                                             </td>
                                             <td>
-                                                <i-input v-model="innerSaveButtonEditData.clientRendererMethod" size="small" placeholder="客户端渲染方法,按钮将经由该方法渲染,最终形成页面元素,需要返回最终元素的HTML对象" />
+                                                <i-input v-model="innerSaveButtonEditData.custClientRendererMethod" size="small" placeholder="客户端渲染方法,按钮将经由该方法渲染,最终形成页面元素,需要返回最终元素的HTML对象" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -475,7 +475,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 参数：
                                             </td>
                                             <td>
-                                                <i-input v-model="innerSaveButtonEditData.clientRendererMethodPara" size="small" placeholder="客户端渲染方法的参数" />
+                                                <i-input v-model="innerSaveButtonEditData.custClientRendererMethodPara" size="small" placeholder="客户端渲染方法的参数" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -483,7 +483,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 客户端渲染后方法：
                                             </td>
                                             <td>
-                                                <i-input v-model="innerSaveButtonEditData.clientRendererAfterMethod" size="small" placeholder="客户端渲染后调用方法,经过默认的渲染,无返回值" />
+                                                <i-input v-model="innerSaveButtonEditData.custClientRendererAfterMethod" size="small" placeholder="客户端渲染后调用方法,经过默认的渲染,无返回值" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -491,7 +491,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 参数：
                                             </td>
                                             <td>
-                                                <i-input v-model="innerSaveButtonEditData.clientRendererAfterMethodPara" size="small" placeholder="客户端渲染后方法的参数" />
+                                                <i-input v-model="innerSaveButtonEditData.custClientRendererAfterMethodPara" size="small" placeholder="客户端渲染后方法的参数" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -499,7 +499,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 客户端点击前方法：
                                             </td>
                                             <td>
-                                                <i-input v-model="innerSaveButtonEditData.clientClickBeforeMethod" size="small" placeholder="客户端点击该按钮时的前置方法,如果返回false将阻止默认调用" />
+                                                <i-input v-model="innerSaveButtonEditData.custClientClickBeforeMethod" size="small" placeholder="客户端点击该按钮时的前置方法,如果返回false将阻止默认调用" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -507,7 +507,7 @@ Vue.component("inner-form-button-list-comp", {
                                                 参数：
                                             </td>
                                             <td>
-                                                <i-input v-model="innerSaveButtonEditData.clientClickBeforeMethodPara" size="small" placeholder="客户端点击前方法的参数" />
+                                                <i-input v-model="innerSaveButtonEditData.custClientClickBeforeMethodPara" size="small" placeholder="客户端点击前方法的参数" />
                                             </td>
                                         </tr>
                                     </tbody>
