@@ -2,32 +2,22 @@ package com.jbuild4d.platform.builder.htmldesign.impl;
 
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
-import com.jbuild4d.core.base.tools.ClassUtility;
-import com.jbuild4d.platform.builder.htmldesign.HTMLControlAttrs;
 import com.jbuild4d.platform.builder.htmldesign.ICKEditorPluginsService;
-import com.jbuild4d.platform.builder.htmldesign.control.IHTMLControl;
 import com.jbuild4d.platform.builder.htmldesign.IHTMLRuntimeResolve;
-import com.jbuild4d.platform.builder.vo.HtmlControlDefinitionVo;
+import com.jbuild4d.platform.builder.htmldesign.control.BodyControl;
 import com.jbuild4d.platform.builder.vo.ResolveHTMLControlContextVo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class HTMLRuntimeResolveImpl implements IHTMLRuntimeResolve {
-
-
 
     @Autowired
     private AutowireCapableBeanFactory autowireCapableBeanFactory;
 
     @Autowired
     private ICKEditorPluginsService ckEditorPluginsService;
-
 
     @Override
     public String resolveSourceHTML(JB4DSession jb4DSession, String id, String htmlSource) throws JBuild4DGenerallyException {
@@ -38,6 +28,9 @@ public class HTMLRuntimeResolveImpl implements IHTMLRuntimeResolve {
 
             ResolveHTMLControlContextVo resolveHTMLControlContextVo=new ResolveHTMLControlContextVo();
 
+            BodyControl bodyControl= BodyControl.getInstance();
+            autowireCapableBeanFactory.autowireBean(bodyControl);
+            bodyControl.rendererChain(jb4DSession,htmlSource,doc,doc,doc,null,resolveHTMLControlContextVo);
             //this.loopResolveElem(jb4DSession,doc,doc,sourceHTML,null,resolveHTMLControlContextVo);
 
             return doc.getElementsByTag("body").html();
@@ -46,7 +39,7 @@ public class HTMLRuntimeResolveImpl implements IHTMLRuntimeResolve {
     }
 
     //Element lastParentJbuild4dCustomElem=null;
-    public void loopResolveElem(JB4DSession jb4DSession, Document doc, Element parentElem, String sourceHTML, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo, boolean resolveSelf) throws JBuild4DGenerallyException {
+    //public void loopResolveElem(JB4DSession jb4DSession, Document doc, Element parentElem, String sourceHTML, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo, boolean resolveSelf) throws JBuild4DGenerallyException {
         /*for (Element singleElem : parentElem.children()) {
 
             if(singleElem.attr(HTMLControlAttrs.JBUILD4D_CUSTOM).equals("true")){
@@ -79,7 +72,7 @@ public class HTMLRuntimeResolveImpl implements IHTMLRuntimeResolve {
                 }
             }
         }*/
-    }
+    //}
 
     //控件是否动态绑定,交由控件解析时,控件本身解析自行设定,动态绑定完成字后,需要控件自身移除敏感属性.
     @Override

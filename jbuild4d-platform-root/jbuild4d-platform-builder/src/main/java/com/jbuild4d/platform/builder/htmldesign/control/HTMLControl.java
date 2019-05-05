@@ -40,7 +40,7 @@ public abstract class HTMLControl implements IHTMLControl {
 
     @Override
     public void rendererChain(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo) throws JBuild4DGenerallyException {
-        for (Element singleElem : parentElem.children()) {
+        for (Element singleElem : singleControlElem.children()) {
 
             if(singleElem.attr(HTMLControlAttrs.JBUILD4D_CUSTOM).equals("true")){
                 //String serverResolveFullClassName = singleElem.attr(HTMLControlAttrs.SERVERRESOLVE);
@@ -62,11 +62,15 @@ public abstract class HTMLControl implements IHTMLControl {
                         singleElem.html("控件解析出错！【"+ex.getMessage()+"】");
                     }
                 }
+                else
+                {
+                    rendererChain(jb4DSession, sourceHTML, doc, singleElem, singleElem, lastParentJbuild4dCustomElem, resolveHTMLControlContextVo);
+                }
             }
             else{
                 //如果是普通html元素则直接递归处理,如果是自定义控件,则由控件显示调用
                 if(singleElem.childNodeSize()>0){
-                    rendererChain(jb4DSession, sourceHTML, doc, singleElem, parentElem, lastParentJbuild4dCustomElem, resolveHTMLControlContextVo);
+                    rendererChain(jb4DSession, sourceHTML, doc, singleElem, singleElem, lastParentJbuild4dCustomElem, resolveHTMLControlContextVo);
                 }
             }
         }

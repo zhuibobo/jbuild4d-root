@@ -86,7 +86,8 @@ public class CKEditorPluginsServiceImpl implements ICKEditorPluginsService {
     @Override
     public HtmlControlDefinitionVo getVo(String singleName) throws JBuild4DGenerallyException {
         List<HtmlControlDefinitionVo> allControlVoList=getAllControlVoList();
-        return allControlVoList.stream().filter(item->item.getSingleName().equals(singleName)).collect(Collectors.toList()).get(0);
+        List<HtmlControlDefinitionVo> temp=allControlVoList.stream().filter(item->item.getSingleName().equals(singleName)).collect(Collectors.toList());
+        return temp.get(0);
     }
 
     private List<HtmlControlDefinitionVo> parseNodeListToVoList(List<Node> nodeList) throws JBuild4DGenerallyException {
