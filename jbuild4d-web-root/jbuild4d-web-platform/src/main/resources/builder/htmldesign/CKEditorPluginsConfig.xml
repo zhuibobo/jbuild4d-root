@@ -60,13 +60,19 @@
             <Config></Config>
             <Desc></Desc>
         </Control>
-        <Control SingleName="WLDCT_ListButtonContainer" Text="列表-按钮区域" ToolbarLocation="LC_Template,5"
+        <Control SingleName="WLDCT_ListComplexSearchContainer" Text="列表-弹出查询区域" ToolbarLocation="LC_Template,5"
                  ServerResolve="" ClientResolve="" ClientResolveJs=""
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
             <Config></Config>
             <Desc></Desc>
         </Control>
-        <Control SingleName="WLDCT_ListTableContainer" Text="列表-表格区域" ToolbarLocation="LC_Template,6"
+        <Control SingleName="WLDCT_ListButtonContainer" Text="列表-按钮区域" ToolbarLocation="LC_Template,6"
+                 ServerResolve="" ClientResolve="" ClientResolveJs=""
+                 DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
+            <Config></Config>
+            <Desc></Desc>
+        </Control>
+        <Control SingleName="WLDCT_ListTableContainer" Text="列表-表格区域" ToolbarLocation="LC_Template,7"
                  ServerResolve="" ClientResolve="" ClientResolveJs=""
                  DialogWidth="780" DialogHeight="550" IsJBuild4DData="false" ControlCategory="ContainerControl" ServerDynamicBind="false"  ShowRemoveButton="false" ShowInEditorToolbar="true">
             <Config></Config>
