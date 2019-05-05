@@ -36,6 +36,16 @@
                     "        <td class=\"label\">(到):</td>" +
                     "        <td></td>" +
                     "    </tr>" +
+                    "    <tr>" +
+                    "        <td class=\"label\">名称:</td>" +
+                    "        <td></td>" +
+                    "        <td class=\"label\">标题:</td>" +
+                    "        <td></td>" +
+                    "        <td class=\"label\">时间(从):</td>" +
+                    "        <td></td>" +
+                    "        <td class=\"label\">(到):</td>" +
+                    "        <td></td>" +
+                    "    </tr>" +
                     "</table>" +
                     "</div>" +
                     "</div>", pluginSetting, props, contentWindow);
