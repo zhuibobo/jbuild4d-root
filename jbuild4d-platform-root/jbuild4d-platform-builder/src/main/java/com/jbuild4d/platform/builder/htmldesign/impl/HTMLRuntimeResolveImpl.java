@@ -2,12 +2,15 @@ package com.jbuild4d.platform.builder.htmldesign.impl;
 
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
+import com.jbuild4d.platform.builder.htmldesign.HTMLControlAttrs;
 import com.jbuild4d.platform.builder.htmldesign.ICKEditorPluginsService;
 import com.jbuild4d.platform.builder.htmldesign.IHTMLRuntimeResolve;
 import com.jbuild4d.platform.builder.htmldesign.control.BodyControl;
 import com.jbuild4d.platform.builder.vo.ResolveHTMLControlContextVo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
@@ -27,6 +30,14 @@ public class HTMLRuntimeResolveImpl implements IHTMLRuntimeResolve {
             Document doc= Jsoup.parseBodyFragment(sourceHTML);
 
             ResolveHTMLControlContextVo resolveHTMLControlContextVo=new ResolveHTMLControlContextVo();
+
+            //将标识为runtime_auto_remove的标签移除掉
+            Elements removeElems = doc.getElementsByAttribute(HTMLControlAttrs.RUNTIME_AUTO_REMOVE);
+            if(removeElems!=null&&removeElems.size()>0){
+                for (Element elem : removeElems) {
+                    elem.remove();
+                }
+            }
 
             BodyControl bodyControl= BodyControl.getInstance();
             autowireCapableBeanFactory.autowireBean(bodyControl);
