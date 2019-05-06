@@ -4,15 +4,13 @@
     rootElemClass:必须以html-design-theme-开头.
     -->
     <Theme value="ThemeDefault" name="默认风格" desc="" rootElemClass="html-design-theme-default-root-elem-class">
-        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeMain.css" desc="默认的基础样式"></Ref>
+        <!--Ref节点暂时没有作用-->
+        <Ref type="css" path="" desc="默认的基础样式"></Ref>
     </Theme>
     <Theme value="ThemeRed" name="红色风格" desc="" rootElemClass="html-design-theme-red-root-elem-class">
-        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeMain.css" desc="默认的基础样式"></Ref>
     </Theme>
     <Theme value="ThemeExtend2" name="扩展风格2" desc="" rootElemClass="html-design-theme-extend2-root-elem-class">
-        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeMain.css" desc="默认的基础样式"></Ref>
     </Theme>
     <Theme value="ThemeExtend3" name="扩展风格3" desc="" rootElemClass="html-design-theme-extend3-root-elem-class">
-        <Ref type="css" path="${BasePath}/static/Themes/Default/Css/HTMLDesignRuntimeMain.css" desc="默认的基础样式"></Ref>
     </Theme>
 </Config>

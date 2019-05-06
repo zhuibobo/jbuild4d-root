@@ -206,8 +206,13 @@
                 });
             },
             savePreview:function () {
-                this.save(function () {
-
+                this.save(function (result) {
+                    console.log(result);
+                    DialogUtility.Frame_OpenIframeWindow(window,DialogUtility.DialogId04,"ListPreview.html?ListId="+result.data.listId, {
+                        width:0,
+                        height:0,
+                        title:"列表预览"
+                    });
                 })
             },
             validateSaveEnable:function(listResourceEntity){

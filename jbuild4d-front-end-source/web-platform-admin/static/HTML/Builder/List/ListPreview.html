@@ -5,12 +5,25 @@
   To change this template use File | Settings | File Templates.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>列表预览</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::HTMLDesignRuntimeLib"></th:block>
+    <script>
+        $(function () {
+            var ListRuntimeInst = Object.create(ListRuntime);
+            var listId=BaseUtility.GetUrlParaValue("ListId");
+            ListRuntimeInst.Initialization({
+                RendererTo: "#htmlDesignRuntimeWrap",
+                ListId:listId
+            })
+        });
+    </script>
 </head>
 <body>
-
+<div id="htmlDesignRuntimeWrap"></div>
 </body>
 </html>
