@@ -2,7 +2,8 @@
         el: "#dialogApp",
         data: {
             resultHtml: "",
-            selectedTabName:"t1"
+            selectedTabName:"t1",
+            isInsertToBody:false
         },
         mounted: function () {
 
@@ -15,10 +16,14 @@
                 this.resultHtml = $sender.html().replace(/&nbsp;/ig, '');
 
             },
-            ready: function (actionName) {
-
+            ready: function (actionName,sel,parents) {
+                //debugger;
+                if(sel.getName()=="body"){
+                    this.isInsertToBody=true;
+                }
             },
             getControlProps: function () {
+                debugger;
                 var result = {
                     resultHtml: this.resultHtml,
                     baseInfo: {
@@ -30,6 +35,10 @@
                     return {success: false};
                 }
                 else {
+                    if(this.isInsertToBody){
+                        result.resultHtml=$(result.resultHtml).addClass(window.parent.CKEditorUtility.GetThemeVo().rootElemClass).outerHTML();
+                    }
+
                     return CKEditorPluginUtility.ValidateSerializeControlDialogCompletedEnable(result);
                 }
 

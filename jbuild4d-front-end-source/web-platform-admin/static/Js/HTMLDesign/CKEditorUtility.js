@@ -235,15 +235,20 @@ class CKEditorUtility {
     }
 
     static ResetRootElemTheme(_themeVo){
+
         //为编辑器中的is-container-root元素设置样式
         if(this.GetCKEditorInst()) {
+            //debugger;
+            //this.GetCKEditorInst().document.getBody().addClass('html-design-theme-default-root-elem-class');
+            //this.GetCKEditorInst().editable().attachClass('html-design-theme-default-root-elem-class');
+
             var sourceHTML = this.GetCKEditorHTML();
             //debugger;
             if(sourceHTML!=null&&sourceHTML!="") {
                 var rootElem = $(sourceHTML);
-                if(rootElem.attr("is_container_root")!="true") {
-                    rootElem=$(sourceHTML).find("[is_container_root]");
-                }
+                //if(rootElem.attr("is_container_root")!="true") {
+                //    rootElem=$(sourceHTML).find("[is_container_root]");
+                //}
                 if (rootElem.length>0) {
                     var classList = rootElem.attr('class').split(/\s+/);
                     var classary=[];
