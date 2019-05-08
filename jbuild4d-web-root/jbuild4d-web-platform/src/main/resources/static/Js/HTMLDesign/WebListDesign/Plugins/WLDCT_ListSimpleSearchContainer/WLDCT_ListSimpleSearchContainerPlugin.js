@@ -7,8 +7,8 @@
             function addToEditor(ckEditor, pluginSetting, props, contentWindow) {
                 //var controlDescText=CKEditorPluginUtility.GetControlDescText(pluginSetting,props);
                 var tip = CKEditorPluginUtility.GetAutoRemoveTipLabel("简单查询区域[双击编辑该部件],在下边div中编辑查询内容");
-                CKEditorPluginUtility.BuildGeneralElemToCKWysiwyg("<div class=\"wysiwyg-wldct-list-simple-search-outer-wrap\">" + tip +
-                    "   <div class=\"wysiwyg-wldct-list-simple-search-inner-wrap\">" +
+                CKEditorPluginUtility.BuildGeneralElemToCKWysiwyg("<div class=\"wysiwyg-wldct-list-simple-search-outer-wrap wldct-list-simple-search-outer-wrap\">" + tip +
+                    "   <div class=\"wysiwyg-wldct-list-simple-search-inner-wrap wldct-list-simple-search-inner-wrap\">" +
                     "       <table>" +
                     "           <colgroup>" +
                     "               <col style=\"width: 8%\" />" +
