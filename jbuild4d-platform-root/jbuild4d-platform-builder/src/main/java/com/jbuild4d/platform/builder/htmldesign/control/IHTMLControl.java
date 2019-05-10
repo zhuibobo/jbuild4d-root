@@ -22,4 +22,13 @@ public interface IHTMLControl {
     void dynamicBind(JB4DSession jb4DSession, String sourceHTML, String resolveHTML, Document doc, Element singleControlElem, DynamicBindHTMLControlContextVo dynamicBindHTMLControlContextVo, HtmlControlDefinitionVo htmlControlPluginDefinitionVo);
 
     void rendererChain(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo) throws JBuild4DGenerallyException;
+
+    String parseToJson(JB4DSession jb4DSession,
+                       String sourceHTML,
+                       Document doc,
+                       Element singleControlElem,
+                       Element parentElem,
+                       Element lastParentJbuild4dCustomElem,
+                       ResolveHTMLControlContextVo resolveHTMLControlContextVo,
+                       HtmlControlDefinitionVo htmlControlDefinitionVo);
 }

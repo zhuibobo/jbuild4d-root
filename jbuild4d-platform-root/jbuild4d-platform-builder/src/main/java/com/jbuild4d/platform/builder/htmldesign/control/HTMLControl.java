@@ -20,12 +20,12 @@ public abstract class HTMLControl implements IHTMLControl {
     private static Map<String,IHTMLControl> controlInstanceMap=new HashMap<String,IHTMLControl>();
 
     @Autowired
-    private ICKEditorPluginsService ckEditorPluginsService;
+    protected ICKEditorPluginsService ckEditorPluginsService;
 
     @Autowired
-    private AutowireCapableBeanFactory autowireCapableBeanFactory;
+    protected AutowireCapableBeanFactory autowireCapableBeanFactory;
 
-    private IHTMLControl getHTMLControlInstance(String fullClassName) throws IllegalAccessException, InstantiationException,ClassNotFoundException {
+    public IHTMLControl getHTMLControlInstance(String fullClassName) throws IllegalAccessException, InstantiationException,ClassNotFoundException {
 
         if(controlInstanceMap.containsKey(fullClassName)){
             return controlInstanceMap.get(fullClassName);
@@ -74,5 +74,10 @@ public abstract class HTMLControl implements IHTMLControl {
                 }
             }
         }
+    }
+
+    @Override
+    public String parseToJson(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo, HtmlControlDefinitionVo htmlControlDefinitionVo) {
+        return "{}";
     }
 }
