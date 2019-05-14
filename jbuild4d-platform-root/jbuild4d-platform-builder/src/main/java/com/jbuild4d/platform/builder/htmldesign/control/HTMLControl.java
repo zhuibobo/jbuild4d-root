@@ -54,6 +54,7 @@ public abstract class HTMLControl implements IHTMLControl {
                     try {
                         IHTMLControl htmlControl = this.getHTMLControlInstance(serverResolveFullClassName);
 
+                        htmlControl.resolveDefAttr(jb4DSession, sourceHTML, doc, singleElem, parentElem, lastParentJbuild4dCustomElem, resolveHTMLControlContextVo, htmlControlDefinitionVo);
                         htmlControl.resolveSelf(jb4DSession, sourceHTML, doc, singleElem, parentElem, lastParentJbuild4dCustomElem, resolveHTMLControlContextVo, htmlControlDefinitionVo);
 
                         htmlControl.rendererChain(jb4DSession, sourceHTML, doc, singleElem, parentElem, lastParentJbuild4dCustomElem, resolveHTMLControlContextVo);
@@ -76,8 +77,32 @@ public abstract class HTMLControl implements IHTMLControl {
         }
     }
 
+    //todo 绑定默认值
+    @Override
+    public void bindDefaultValue(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo, HtmlControlDefinitionVo htmlControlDefinitionVo) {
+
+    }
+
+    @Override
+    public void resolveDefAttr(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo, HtmlControlDefinitionVo htmlControlDefinitionVo) {
+        //附件上客户端解析对象,适用于简单控件
+        singleControlElem.attr("client_resolve",htmlControlDefinitionVo.getClientResolve());
+
+        //附加上自定义的样式
+        String className=singleControlElem.attr("classname");
+        if(!className.equals("")){
+            singleControlElem.addClass(className);
+        }
+
+        //处理自读属性
+        //处理disable属性
+        //todo 5-14处理到这里
+    }
+
     @Override
     public String parseToJson(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo, HtmlControlDefinitionVo htmlControlDefinitionVo) {
         return "{}";
     }
+
+
 }

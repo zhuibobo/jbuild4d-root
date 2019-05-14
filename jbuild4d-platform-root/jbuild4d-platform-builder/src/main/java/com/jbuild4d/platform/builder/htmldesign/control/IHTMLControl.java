@@ -19,6 +19,24 @@ public interface IHTMLControl {
                      ResolveHTMLControlContextVo resolveHTMLControlContextVo,
                      HtmlControlDefinitionVo htmlControlDefinitionVo);
 
+    void resolveDefAttr(JB4DSession jb4DSession,
+                        String sourceHTML,
+                        Document doc,
+                        Element singleControlElem,
+                        Element parentElem,
+                        Element lastParentJbuild4dCustomElem,
+                        ResolveHTMLControlContextVo resolveHTMLControlContextVo,
+                        HtmlControlDefinitionVo htmlControlDefinitionVo);
+
+    void bindDefaultValue(JB4DSession jb4DSession,
+                          String sourceHTML,
+                          Document doc,
+                          Element singleControlElem,
+                          Element parentElem,
+                          Element lastParentJbuild4dCustomElem,
+                          ResolveHTMLControlContextVo resolveHTMLControlContextVo,
+                          HtmlControlDefinitionVo htmlControlDefinitionVo);
+
     void dynamicBind(JB4DSession jb4DSession, String sourceHTML, String resolveHTML, Document doc, Element singleControlElem, DynamicBindHTMLControlContextVo dynamicBindHTMLControlContextVo, HtmlControlDefinitionVo htmlControlPluginDefinitionVo);
 
     void rendererChain(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo) throws JBuild4DGenerallyException;

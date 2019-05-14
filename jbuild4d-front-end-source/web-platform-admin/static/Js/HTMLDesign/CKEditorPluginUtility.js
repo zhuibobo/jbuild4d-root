@@ -207,7 +207,7 @@ class CKEditorPluginUtility {
         elem.setAttribute("is_jbuild4d_data",controlSetting.IsJBuild4DData);
         elem.setAttribute("control_category",controlSetting.ControlCategory);
         elem.setAttribute("show_remove_button",controlSetting.ShowRemoveButton);
-        elem.setAttribute("clientresolve",controlSetting.ClientResolve);
+        //elem.setAttribute("clientresolve",controlSetting.ClientResolve);
 
         //将服务端解析方法,动态绑定属性设置,移到服务端进行解析时处理
         //elem.setAttribute("serverresolve",controlSetting.ServerResolve);
