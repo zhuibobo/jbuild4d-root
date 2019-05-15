@@ -103,6 +103,4 @@ public abstract class HTMLControl implements IHTMLControl {
     public String parseToJson(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo, HtmlControlDefinitionVo htmlControlDefinitionVo) {
         return "{}";
     }
-
-
 }
