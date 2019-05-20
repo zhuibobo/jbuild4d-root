@@ -9,8 +9,8 @@ Vue.component("fd-control-base-info", {
                 name: "",
                 className: "",
                 placeholder: "",
-                readonly: "",
-                disabled: "",
+                custReadonly: "",
+                custDisabled: "",
                 style: "",
                 desc: ""
             }
@@ -72,14 +72,14 @@ Vue.component("fd-control-base-info", {
                             </td>
                             <td>Readonly：</td>
                             <td style="text-align: center">
-                                <radio-group type="button" style="margin: auto" v-model="baseInfo.readonly">
+                                <radio-group type="button" style="margin: auto" v-model="baseInfo.custReadonly">
                                     <radio label="readonly">是</radio>
                                     <radio label="noreadonly">否</radio>
                                 </radio-group>
                             </td>
                             <td>Disabled：</td>
                             <td style="text-align: center">
-                                <radio-group type="button" style="margin: auto" v-model="baseInfo.disabled">
+                                <radio-group type="button" style="margin: auto" v-model="baseInfo.custDisabled">
                                     <radio label="disabled">是</radio>
                                     <radio label="nodisabled">否</radio>
                                 </radio-group>

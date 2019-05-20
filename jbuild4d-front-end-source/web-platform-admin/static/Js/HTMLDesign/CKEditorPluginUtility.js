@@ -173,8 +173,8 @@ class CKEditorPluginUtility {
             name:"",
             className:"",
             placeholder:"",
-            readonly:"noreadonly",
-            disabled:"nodisabled",
+            custReadonly:"noreadonly",
+            custDisabled:"nodisabled",
             style:"",
             desc:""
         },
