@@ -17,7 +17,7 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
 public class WebListListButtonContainer  extends HTMLControl implements IHTMLControl {
 
-    @Override
+    /*@Override
     public void rendererChain(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo) throws JBuild4DGenerallyException {
 
         StringBuilder buttonsJson=new StringBuilder();
@@ -52,7 +52,7 @@ public class WebListListButtonContainer  extends HTMLControl implements IHTMLCon
         }
 
         return;
-    }
+    }*/
 
     @Override
     public void resolveSelf(JB4DSession jb4DSession, String sourceHTML, Document doc, Element singleControlElem, Element parentElem, Element lastParentJbuild4dCustomElem, ResolveHTMLControlContextVo resolveHTMLControlContextVo, HtmlControlDefinitionVo htmlControlDefinitionVo) {

@@ -18,8 +18,7 @@ var ListRuntime={
     _LoadHTMLToEl:function () {
         //debugger;
         $(this._Prop_Config.RendererTo).load(BaseUtility.GetRootPath()+"/PlatFormRest/Builder/ListRuntime/ListPreview?listId="+this._Prop_Config.ListId, function() {
-            //alert( "Load was performed." );
-            console.log("加载预览窗体成功!");
+            console.log("加载预览列表成功!");
         });
     }
 }

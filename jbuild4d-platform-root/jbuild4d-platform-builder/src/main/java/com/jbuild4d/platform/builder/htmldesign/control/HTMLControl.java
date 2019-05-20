@@ -88,11 +88,20 @@ public abstract class HTMLControl implements IHTMLControl {
         //附件上客户端解析对象,适用于简单控件
         singleControlElem.attr("client_resolve",htmlControlDefinitionVo.getClientResolve());
 
+        //移除掉编辑模式下的样式
+        for (String className : singleControlElem.classNames()) {
+            if(className.indexOf("wysiwyg-")>=0){
+                singleControlElem.removeClass(className);
+            }
+        }
+
+
         //附加上自定义的样式
         String className=singleControlElem.attr("classname");
         if(!className.equals("")){
             singleControlElem.addClass(className);
         }
+        singleControlElem.removeAttr("classname");
 
         //处理自读属性
         String custReadonly=singleControlElem.attr("custreadonly");
@@ -107,7 +116,6 @@ public abstract class HTMLControl implements IHTMLControl {
             singleControlElem.attr("disabled",custDisabled);
         }
         singleControlElem.removeAttr("custdisabled");
-        //todo 5-14处理到这里
     }
 
     @Override
