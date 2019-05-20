@@ -95,7 +95,18 @@ public abstract class HTMLControl implements IHTMLControl {
         }
 
         //处理自读属性
+        String custReadonly=singleControlElem.attr("custreadonly");
+        if(custReadonly.equals("readonly")){
+            singleControlElem.attr("readonly",custReadonly);
+        }
+        singleControlElem.removeAttr("custreadonly");
+
         //处理disable属性
+        String custDisabled=singleControlElem.attr("custdisabled");
+        if(custDisabled.equals("disabled")){
+            singleControlElem.attr("disabled",custDisabled);
+        }
+        singleControlElem.removeAttr("custdisabled");
         //todo 5-14处理到这里
     }
 
