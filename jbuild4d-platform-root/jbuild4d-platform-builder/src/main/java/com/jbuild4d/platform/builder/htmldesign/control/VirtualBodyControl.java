@@ -7,10 +7,10 @@ import com.jbuild4d.platform.builder.vo.ResolveHTMLControlContextVo;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-public class BodyControl extends HTMLControl implements IHTMLControl {
+public class VirtualBodyControl extends HTMLControl implements IHTMLControl {
 
-    public static BodyControl getInstance(){
-        return new BodyControl();
+    public static VirtualBodyControl getInstance(){
+        return new VirtualBodyControl();
     }
 
     @Override

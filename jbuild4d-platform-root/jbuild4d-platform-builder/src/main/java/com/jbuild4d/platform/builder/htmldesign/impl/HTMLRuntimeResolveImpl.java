@@ -5,7 +5,7 @@ import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.platform.builder.htmldesign.HTMLControlAttrs;
 import com.jbuild4d.platform.builder.htmldesign.ICKEditorPluginsService;
 import com.jbuild4d.platform.builder.htmldesign.IHTMLRuntimeResolve;
-import com.jbuild4d.platform.builder.htmldesign.control.BodyControl;
+import com.jbuild4d.platform.builder.htmldesign.control.VirtualBodyControl;
 import com.jbuild4d.platform.builder.vo.ResolveHTMLControlContextVo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,7 +39,7 @@ public class HTMLRuntimeResolveImpl implements IHTMLRuntimeResolve {
                 }
             }
 
-            BodyControl bodyControl= BodyControl.getInstance();
+            VirtualBodyControl bodyControl= VirtualBodyControl.getInstance();
             autowireCapableBeanFactory.autowireBean(bodyControl);
             bodyControl.rendererChain(jb4DSession,htmlSource,doc,doc,doc,null,resolveHTMLControlContextVo);
             //this.loopResolveElem(jb4DSession,doc,doc,sourceHTML,null,resolveHTMLControlContextVo);
