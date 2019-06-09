@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>jbuild4d</groupId>
-            <artifactId>jbuild4d-web-front-end</artifactId>
+            <artifactId>jbuild4d-front-end-jar</artifactId>
         </dependency>
         <dependency>
             <groupId>jbuild4d</groupId>

@@ -50,7 +50,7 @@
             <!--前端资源工程-->
             <dependency>
                 <groupId>jbuild4d</groupId>
-                <artifactId>jbuild4d-web-front-end</artifactId>
+                <artifactId>jbuild4d-front-end-jar</artifactId>
                 <version>${platform.version}</version>
             </dependency>
             <!--单点登录相关工程-->
