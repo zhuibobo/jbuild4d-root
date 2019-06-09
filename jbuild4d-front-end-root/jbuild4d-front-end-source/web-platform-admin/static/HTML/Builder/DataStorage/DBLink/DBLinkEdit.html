@@ -1,0 +1,189 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/4/27
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+</head>
+<body>
+<div id="appForm" class="general-edit-page-wrap" v-cloak>
+    <spin size="large" fix v-if="isSubmitting"></spin>
+    <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
+        <form-item label="值：" prop="dbLinkValue">
+            <row>
+                <i-col span="10">
+                    <form-item prop="dbLinkValue">
+                        <i-input v-model="formEntity.dbLinkValue"></i-input>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center"><span style="color: red">*</span> 名称：</i-col>
+                <i-col span="10">
+                    <form-item prop="dbLinkName">
+                        <i-input v-model="formEntity.dbLinkName"></i-input>
+                    </form-item>
+                </i-col>
+            </row>
+        </form-item>
+        <form-item label="数据库类型：" prop="dbType">
+            <row>
+                <i-col span="10">
+                    <form-item prop="dbType">
+                        <i-select v-model="formEntity.dbType" style="width:280px">
+                            <i-option value="sqlserver">SqlServer</i-option>
+                            <i-option value="oracle">Oracle</i-option>
+                            <i-option value="mysql">MySql</i-option>
+                        </i-select>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center">创建时间：</i-col>
+                <i-col span="10">
+                    <form-item>
+                        <date-picker type="date" placeholder="选择创建时间" v-model="formEntity.dbCreateTime" disabled readonly></date-picker>
+                    </form-item>
+                </i-col>
+            </row>
+        </form-item>
+        <form-item label="驱动名称：" prop="dbDriverName">
+            <row>
+                <i-col span="10">
+                    <form-item prop="dbDriverName">
+                        <i-select v-model="formEntity.dbDriverName" style="width:280px">
+                            <i-option value="com.microsoft.sqlserver.jdbc.SQLServerDriver">com.microsoft.sqlserver.jdbc.SQLServerDriver</i-option>
+                            <i-option value="oracle">Oracle.XXXXXX</i-option>
+                            <i-option value="com.mysql.cj.jdbc.Driver">com.mysql.cj.jdbc.Driver</i-option>
+                        </i-select>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center"><span style="color: red">*</span> 数据库名称：</i-col>
+                <i-col span="10">
+                    <form-item prop="dbDatabaseName">
+                        <i-input v-model="formEntity.dbDatabaseName"></i-input>
+                    </form-item>
+                </i-col>
+            </row>
+        </form-item>
+        <form-item label="连接地址：" prop="dbUrl">
+            <i-input v-model="formEntity.dbUrl"></i-input>
+        </form-item>
+        <form-item label="用户名：" prop="dbUser">
+            <row>
+                <i-col span="10">
+                    <form-item prop="dbUser">
+                        <i-input v-model="formEntity.dbUser"></i-input>
+                    </form-item>
+                </i-col>
+                <i-col span="4" style="text-align: center"><span style="color: red">*</span> 密码：</i-col>
+                <i-col span="10">
+                    <form-item prop="dbPassword">
+                        <i-input v-model="formEntity.dbPassword"></i-input>
+                    </form-item>
+                </i-col>
+            </row>
+        </form-item>
+        <form-item label="备注：">
+            <i-input v-model="formEntity.dbDesc" type="textarea" :autosize="{minRows: 8,maxRows: 8}"></i-input>
+        </form-item>
+    </i-form>
+    <div class="button-outer-wrap">
+        <div class="button-inner-wrap">
+            <button-group>
+                <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')" icon="md-checkmark">保存</i-button>
+                <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button>
+            </button-group>
+        </div>
+    </div>
+</div>
+<script>
+    var appForm =new Vue({
+        el: "#appForm",
+        mounted:function () {
+            this.bindFormData();
+        },
+        data: {
+            isSubmitting:false,
+            acInterface:{
+                getDataUrl:"/PlatFormRest/Builder/DataStorage/DBLink/GetDetailData",
+                saveDataUrl:"/PlatFormRest/Builder/DataStorage/DBLink/SaveEdit"
+            },
+            recordId:BaseUtility.GetUrlParaValue("recordId"),
+            formEntity: {
+                dbId:"",
+                dbLinkValue:"",
+                dbLinkName:"",
+                dbType:"",
+                dbDriverName:"",
+                dbDatabaseName:"",
+                dbUrl:"",
+                dbUser:"",
+                dbPassword:"",
+                dbCreateTime:DateUtility.GetCurrentData(),
+                dbDesc:"",
+                dbIsLocation:""
+            },
+            ruleValidate: {
+                dbLinkValue: [
+                    {required: true, message: '【值】不能空！', trigger: 'blur'}
+                ],
+                dbLinkName: [
+                    {required: true, message: '【连接名称】不能空！', trigger: 'blur'}
+                ],
+                dbType:[
+                    {required: true, message: '【数据库类型】不能空！', trigger: 'blur'}
+                ],
+                dbDriverName: [
+                    {required: true, message: '【驱动名称】不能空！', trigger: 'blur'}
+                ],
+                dbDatabaseName: [
+                    {required: true, message: '【数据库名称】不能空！', trigger: 'blur'}
+                ],
+                dbUrl: [
+                    {required: true, message: '【连接地址】不能空！', trigger: 'blur'}
+                ],
+                dbUser: [
+                    {required: true, message: '【用户名】不能空！', trigger: 'blur'}
+                ],
+                dbPassword: [
+                    {required: true, message: '【密码】不能空！', trigger: 'blur'}
+                ]
+            },
+            status: BaseUtility.GetUrlParaValue("op")
+        },
+        methods: {
+            bindFormData:function(){
+                //获取数据并赋值
+                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status);
+            },
+            handleSubmit: function (name) {
+                var _self = this;
+                this.$refs[name].validate(function (valid) {
+                    if (valid) {
+                        _self.isSubmitting=true;
+                        var sendData = JSON.stringify(_self.formEntity);
+                        //debugger;
+                        AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                //debugger;
+                                window.OpenerWindowObj.appList.reloadData();
+                                DialogUtility.Frame_CloseDialog(window);
+                            });
+                        }, "json");
+                    } else {
+                        this.$Message.error('Fail!');
+                    }
+                })
+            },
+            handleClose: function () {
+                DialogUtility.Frame_CloseDialog(window);
+            }
+        }
+    });
+</script>
+</body>
+</html>

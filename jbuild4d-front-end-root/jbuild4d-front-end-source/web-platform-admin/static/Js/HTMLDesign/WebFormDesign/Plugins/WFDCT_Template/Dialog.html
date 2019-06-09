@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JBuild4DFormDesignLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::HTMLDesignRuntimeLib"></th:block>
+    <style>
+        .table-width-wraper-1024{
+            width: 720px !important;
+        }
+        .templateWraper{
+            padding: 10px;
+            cursor: pointer;
+            border: #ffffff 1px solid;
+        }
+        .templateWraper:hover{
+            border: #1DC116 1px solid;
+        }
+        .templateWraper-selected{
+            border: #1DC116 1px solid;
+        }
+    </style>
+    <script>
+        $(function(){
+            console.log("----对话框----");
+            console.log(window.parent.CKEditorUtility.GetThemeVo());
+            $("div[name='template']>div").addClass(window.parent.CKEditorUtility.GetThemeVo().rootElemClass);
+        })
+    </script>
+</head>
+<body>
+    <div class="dialog-wraper" id="dialogApp" v-cloak>
+        <tabs size="small">
+            <tab-pane label="风格一">
+                <collapse value="1" accordion>
+                    <panel name="1">
+                        页宽:1024,6列
+                        <div slot="content">
+                            <div name="template" class="templateWraper" @click="selectTemplate($event)">
+                                <div class="table-width-wraper-1024">
+                                    <table class="wathet-blue-table-default" cellpadding="0" cellspacing="0" border="0">
+                                        <colgroup>
+                                            <col style="width: 10%" />
+                                            <col style="width: 23%" />
+                                            <col style="width: 10%" />
+                                            <col style="width: 23%" />
+                                            <col style="width: 10%" />
+                                            <col style="width: 24%" />
+                                        </colgroup>
+                                        <tbody>
+                                            <tr>
+                                                <td height="60" colspan="6">
+                                                    <h3 class="title">请输入表单名称</h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td class="label">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </panel>
+                    <panel name="2">
+                        页宽:640,4列
+                        <div slot="content">
+                            <div name="template" class="templateWraper">
+                                <div class="table-width-wraper-640">
+                                    <table class="wathet-blue-table-default" cellpadding="0" cellspacing="0" border="0">
+                                        <colgroup>
+                                            <col style="width: 10%" />
+                                            <col style="width: 23%" />
+                                            <col style="width: 10%" />
+                                            <col style="width: 23%" />
+                                            <col style="width: 10%" />
+                                            <col style="width: 24%" />
+                                        </colgroup>
+                                        <tbody>
+                                        <tr>
+                                            <td height="60" colspan="6">
+                                                <h3 class="title">请输入表单名称</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="label">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </panel>
+                    <panel name="3">
+                        页宽:1024,6列,头像上传
+                    </panel>
+                </collapse>
+            </tab-pane>
+            <tab-pane label="风格二">
+            </tab-pane>
+            <tab-pane label="风格三">
+            </tab-pane>
+            <tab-pane label="风格四">
+            </tab-pane>
+            <tab-pane label="风格五">
+            </tab-pane>
+        </tabs>
+    </div>
+    <script>
+        var DialogApp=new Vue({
+            el:"#dialogApp",
+            data: {
+                resultHtml:""
+            },
+            mounted:function () {
+
+            },
+            methods: {
+                selectTemplate:function(event){
+                    //alert("1");
+                    var $sender=$(event.currentTarget);
+                    $sender.addClass("templateWraper-selected");
+                    this.resultHtml=$sender.html().replace(/&nbsp;/ig, '');
+                    //alert(this.resultHtml);
+                },
+                ready:function(actionName){
+                },
+                getControlProps:function () {
+                    var result = {
+                        resultHtml:this.resultHtml,
+                        baseInfo:{
+                            serialize:"false"
+                        }
+                    };
+                    return CKEditorPluginUtility.ValidateSerializeControlDialogCompletedEnable(result);
+                },
+                setControlProps:function ($elem,props) {
+                }
+            }
+        });
+    </script>
+</body>
+</html>

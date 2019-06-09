@@ -1,0 +1,119 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/3/2
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="appList" class="apps-manager-outer-wrap">
+        <div class="apps-outer-wrap">
+            <div v-for="app in appList" class="app-outer-wrap">
+                <div class="title">
+                    <span>{{app.appName}}</span>
+                </div>
+                <div class="content">
+                    <div class="mainImg">
+                        <img :src="buildLogoUrl(app)" />
+                    </div>
+                    <div class="button-wrap">
+                        <div class="button setting-button" @click="settingApp(app)">
+                            系统设置
+                        </div>
+                        <div class="button remove-button" @click="removeApp(app)">
+                            注销
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-outer-wrap new-system-outer-wrap">
+                <div class="add-system-button" @click="addIntegratedSystem()">添加集成系统</div>
+                <div class="add-system-button" @click="addPostSystem()" style="background-color: #f7f7f7;color: #0b0c0f">添加模拟系统</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var appList = new Vue({
+            el:"#appList",
+            data: {
+                acInterface:{
+                    integratedSystemEditView:"/HTML/SSO/Application/IntegratedAppEdit.html",
+                    postSystemEditView:"/HTML/SSO/Department/PostAppEdit.html",
+                    reloadData:"/PlatFormRest/SSO/Application/GetAllMainSsoApp",
+                    appLogoUrl:"/PlatFormRest/SSO/Application/GetAppLogo",
+                    delete:"/PlatFormRest/SSO/Application/Delete"
+                },
+                appList: [
+
+                ]
+            },
+            mounted:function () {
+                this.reloadData();
+            },
+            methods: {
+                addIntegratedSystem:function() {
+                    var url = BaseUtility.BuildView(this.acInterface.integratedSystemEditView, {
+                        "op": "add"
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "添加集成系统"}, 1);
+                },
+                addPostSystem:function () {
+
+                },
+                reloadData :function () {
+                    var _self=this;
+                    AjaxUtility.Post(this.acInterface.reloadData,{},function (result) {
+                        if(result.success){
+                            console.log(result.data);
+                            _self.appList=result.data;
+                        }
+                        else{
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                        }
+                    },"json");
+                },
+                buildLogoUrl:function (app) {
+                    if(app.appMainImageId==""){
+                        return BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId: "defaultSSOAppLogoImage"});
+                    }
+                    else{
+                        return BaseUtility.BuildAction(this.acInterface.appLogoUrl, {fileId:app.appMainImageId});
+                    }
+                },
+                settingApp:function (app) {
+                    var url = BaseUtility.BuildView(this.acInterface.integratedSystemEditView, {
+                        "op": "update",
+                        "recordId": app.appId
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑集成系统"}, 1);
+                },
+                removeApp:function (app) {
+                    var _self=this;
+                    DialogUtility.Confirm(window, "确认要注销系统["+app.appName+"]吗？", function () {
+                        AjaxUtility.Delete(_self.acInterface.delete, {appId: app.appId}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    _self.reloadData();
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                            }
+                        }, "json");
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+</html>

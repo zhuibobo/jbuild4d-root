@@ -1,0 +1,435 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/1/26
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
+</head>
+<body>
+    <div id="appList" class="list-2column">
+        <div class="left-outer-wrap" style="width: 250px">
+            <select-dblink-single-comp @on-selected-dblink="changeDBLink" ref="selectDBLinkComp"></select-dblink-single-comp>
+            <div class="inner-wrap" style="position:absolute;top: 30px;bottom: 10px;height: auto">
+                <div class="tool-bar-wrap">
+                    <div alt="新增分类组" title="新增分类组" class="add" @click="addGroup()"></div>
+                    <div alt="修改分类组" title="修改分类组" class="edit" @click="editGroup"></div>
+                    <div alt="删除分类组" title="删除分类组" class="del" @click="delGroup"></div>
+                    <div alt="浏览分类组" title="浏览分类组" class="view" @click="viewGroup"></div>
+                    <div alt="上移" title="上移" class="order-up" @click="moveGroup('up')"></div>
+                    <div alt="下移" title="下移" class="order-down last" @click="moveGroup('down')"></div>
+                </div>
+                <div>
+                    <ul id="ztreeUL" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="right-outer-wrap iv-list-page-wrap" style="padding: 10px;left: 260px">
+            <div class="list-simple-search-wrap" id="list-simple-search-wrap">
+                <table class="ls-table">
+                    <colgroup>
+                        <col style="width: 80px">
+                        <col style="">
+                        <col style="width: 80px">
+                        <col style="">
+                        <col style="width: 80px">
+                    </colgroup>
+                    <tr class="ls-table-row">
+                        <td>标题：</td>
+                        <td>
+                            <i-input v-model="searchCondition.tableCaption.value" placeholder=""></i-input>
+                        </td>
+                        <td>表名：</td>
+                        <td>
+                            <i-input v-model="searchCondition.tableName.value" placeholder=""></i-input>
+                        </td>
+                        <td><i-button type="primary" @click="search"><Icon type="android-search"></Icon> 查询 </i-button></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="list-button-wrap" class="list-button-outer-wrap">
+                <div class="list-button-inner-wrap">
+                    <button-group>
+                        <i-button type="success" @click="add()" icon="md-add"> 新增 </i-button>
+                        <i-button type="primary" @click="move('up')" icon="md-arrow-up"> 上移 </i-button>
+                        <i-button type="primary" @click="move('down')" icon="md-arrow-down"> 下移 </i-button>
+                        <i-button type="primary" v-if="listButton.showExportDocument" @click="exportDBDocument()" icon="md-cloud-download"> 导出表结构文档 </i-button>
+                    </button-group>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <i-table :height="listHeight" stripe border :columns="columnsConfig" :data="tableData"
+                     class="iv-list-table" :highlight-row="true"
+                     @on-selection-change="selectionChange"></i-table>
+            <div style="float: right;" id="list-pager-wrap">
+                <page @on-change="changePage" :current.sync="pageNum" :page-size="pageSize" show-total
+                      :total="pageTotal"></page>
+            </div>
+        </div>
+    </div>
+    <script>
+        var appList=new Vue({
+            el:"#appList",
+            mounted:function () {
+                //this.initTree();
+                var oldSelectedDBLinkId=CookieUtility.GetCookie("DBMSLINKID");
+                if(oldSelectedDBLinkId){
+                    this.$refs.selectDBLinkComp.setOldSelectedDBLink(oldSelectedDBLinkId);
+                    this.initTree(oldSelectedDBLinkId);
+                }
+                window.setTimeout(function () {
+                    appList.listHeight=ListPageUtility.GetGeneralPageHeight(-20);
+                },500);
+            },
+            data:{
+                acInterface:{
+                    <!--Tree -->
+                    getGroupTreeData:"/PlatFormRest/Builder/DataStorage/DataBase/TableGroup/GetTreeData",
+                    groupEditView:"/HTML/Builder/DataStorage/DataBase/TableGroupEdit.html",
+                    deleteGroup:"/PlatFormRest/Builder/DataStorage/DataBase/TableGroup/Delete",
+                    moveGroup:"/PlatFormRest/Builder/DataStorage/DataBase/TableGroup/Move",
+                    <!--List -->
+                    editTableView:"/HTML/Builder/DataStorage/DataBase/TableEdit.html",
+                    reloadTableListData:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetListData",
+                    deleteTable:"/PlatFormRest/Builder/DataStorage/DataBase/Table/Delete",
+                    tableMove:"/PlatFormRest/Builder/DataStorage/DataBase/Table/Move"
+                },
+                <!--Tree-->
+                treeIdFieldName:"tableGroupId",
+                treeObj:null,
+                treeSelectedNode:null,
+                treeSetting:{
+                    async : {
+                        enable : true,
+                        // Ajax 获取数据的 URL 地址
+                        url :""
+                    },
+                    // 必须使用data
+                    data:{
+                        key:{
+                            name:"tableGroupText"
+                        },
+                        simpleData : {
+                            enable : true,
+                            idKey : "tableGroupId", // id编号命名
+                            pIdKey : "tableGroupParentId",  // 父id编号命名
+                            rootId : 0
+                        }
+                    },
+                    // 回调函数
+                    callback : {
+                        onClick : function(event, treeId, treeNode) {
+                            appList.treeNodeSelected(event,treeId,treeNode);
+                        },
+                        //成功的回调函数
+                        onAsyncSuccess : function(event, treeId, treeNode, msg){
+                            appList.treeObj.expandAll(true);
+                        }
+                    }
+                },
+                <!--List-->
+                idFieldName:"tableId",
+                searchCondition:{
+                    tableGroupId:{
+                        value:"",
+                        type:SearchUtility.SearchFieldType.StringType
+                    },
+                    tableCaption:{
+                        value:"",
+                        type:SearchUtility.SearchFieldType.LikeStringType
+                    },
+                    tableName:{
+                        value:"",
+                        type:SearchUtility.SearchFieldType.LikeStringType
+                    }
+                },
+                columnsConfig: [
+                    {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
+                        title: '编号',
+                        key: 'tableCode',
+                        align: "center",
+                        width: 120
+                    },
+                    {
+                        title: '标题',
+                        key: 'tableCaption',
+                        align: "center"
+                    }, {
+                        title: '名称',
+                        key: 'tableName',
+                        align: "center"
+                    }, {
+                        title: '备注',
+                        key: 'tableDesc'
+                    }, {
+                        title: '更新时间',
+                        key: 'tableUpdateTime',
+                        width: 100,
+                        align: "center",
+                        render: function (h, params) {
+                            return ListPageUtility.IViewTableRenderer.StringToDateYYYY_MM_DD(h, params.row.tableUpdateTime);
+                        }
+                    }, {
+                        title: '操作',
+                        key: 'tableId',
+                        width: 120,
+                        align: "center",
+                        render: function (h, params) {
+                            //console.log(params);
+                            if(params.row.tableIssystem=="是"){
+                                return h('div', {class: "list-row-button-wrap"}, [
+                                    ListPageUtility.IViewTableInnerButton.ViewButton(h, params, appList.idFieldName, appList),
+                                ]);
+                            }
+                            else {
+                                return h('div', {class: "list-row-button-wrap"}, [
+                                    ListPageUtility.IViewTableInnerButton.ViewButton(h, params, appList.idFieldName, appList),
+                                    ListPageUtility.IViewTableInnerButton.EditButton(h, params, appList.idFieldName, appList),
+                                    ListPageUtility.IViewTableInnerButton.DeleteButton(h, params, appList.idFieldName, appList)
+                                ]);
+                            }
+                        }
+                    }
+                ],
+                tableData: [],
+                selectionRows: null,
+                pageTotal: 0,
+                pageSize: 12,
+                pageNum: 1,
+                listHeight: ListPageUtility.DefaultListHeight_50(),
+                listButton:{
+                    showExportDocument:false
+                }
+            },
+            methods:{
+                <!--DBLink-->
+                changeDBLink:function(dbLinkData){
+                    //console.log(dbLinkData);
+                    CookieUtility.SetCookie1Month("DBMSLINKID",dbLinkData.dbId);
+                    this.initTree(dbLinkData.dbId);
+                    this.clearSearchCondition();
+                    this.tableData=[];
+                },
+                clearSearchCondition:function () {
+                    for(var key in this.searchCondition){
+                        this.searchCondition[key].value="";
+                    }
+                },
+                <!--Tree-->
+                initTree:function (dbLinkId) {
+                    //this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getGroupTreeData, {});
+                    //this.treeObj=$.fn.zTree.init($("#ztreeUL"), this.treeSetting);
+                    var _self=this;
+                    //debugger;
+                    //var url = '/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/GetTableField.do';
+                    AjaxUtility.Post(this.acInterface.getGroupTreeData, {dbLinkId:dbLinkId}, function (result) {
+                        if(result.success){
+                            if(result.data!=null&&result.data.length>0){
+                                for(var i=0;i<result.data.length;i++) {
+                                    if(result.data[i].tableGroupIssystem=="是"&&result.data[i].tableGroupChildCount==0) {
+                                        result.data[i].icon = "../../../../Themes/Png16X16/database_key.png";
+                                    }
+                                    else if(result.data[i].tableGroupIssystem=="否"&&result.data[i].tableGroupChildCount==0) {
+                                        result.data[i].icon = "../../../../Themes/Png16X16/database_edit.png";
+                                    }
+                                    else if(result.data[i].tableGroupParentId=="-1"){
+                                        result.data[i].icon = "../../../../Themes/Png16X16/server_database.png";
+                                    }
+                                }
+                            }
+                            _self.treeObj=$.fn.zTree.init($("#ztreeUL"), _self.treeSetting,result.data);
+                            _self.treeObj.expandAll(true);
+                            //$.fn.zTree.init($("#datetimeZTreeUL"), this.tree.datetimeTreeSetting,this.tree.datetimeTreeData);
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
+                    }, "json");
+                },
+                treeNodeSelected:function (event, treeId, treeNode) {
+                    // 根节点不触发任何事件
+                    //if(treeNode.level != 0) {
+                    this.treeSelectedNode=treeNode;
+                    this.selectionRows=null;
+                    this.pageNum=1;
+                    this.clearSearchCondition();
+                    this.searchCondition.tableGroupId.value=this.treeSelectedNode[this.treeIdFieldName];
+                    this.listButton.showExportDocument=false;
+                    if(treeNode.tableGroupId==0){
+                        this.searchCondition.tableGroupId.value="";
+                        this.listButton.showExportDocument=true;
+                    }
+                    this.reloadData();
+                    //appList.reloadTreeTableData();
+                    //}
+                },
+                addGroup:function () {
+                    if(this.treeSelectedNode!=null) {
+                        var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
+                            "op": "add",
+                            "parentId": this.treeSelectedNode[appList.treeIdFieldName]
+                        });
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                    }
+                    else {
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择父节点!",null);
+                    }
+                },
+                editGroup:function () {
+                    if(this.treeSelectedNode!=null) {
+                        var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
+                            "op": "update",
+                            "recordId": this.treeSelectedNode[appList.treeIdFieldName]
+                        });
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                    }
+                    else {
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
+                    }
+                },
+                viewGroup:function () {
+                    //var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/TableGroup/Detail.do?op=view&recordId=" + this.treeSelectedNode[appList.treeIdFieldName]);
+                    var url = BaseUtility.BuildView(this.acInterface.groupEditView, {
+                        "op": "update",
+                        "recordId": this.treeSelectedNode[appList.treeIdFieldName]
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "分组"}, 2);
+                },
+                delGroup:function () {
+                    var _self=this;
+                    var recordId=this.treeSelectedNode[appList.treeIdFieldName];
+                    DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
+                        AjaxUtility.Post(_self.acInterface.deleteGroup, {recordId: recordId}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    appList.treeObj.removeNode(appList.treeSelectedNode);
+                                    appList.treeSelectedNode=null;
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                            }
+                        }, "json");
+                    });
+                },
+                moveGroup:function (type) {
+                    if(this.treeSelectedNode!=null) {
+                        var recordId = this.treeSelectedNode[appList.treeIdFieldName];
+                        AjaxUtility.Post(this.acInterface.moveGroup, {recordId: recordId,type:type}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    if(type=="down") {
+                                        if(appList.treeSelectedNode.getNextNode()!=null) {
+                                            appList.treeObj.moveNode(appList.treeSelectedNode.getNextNode(), appList.treeSelectedNode, "next", false)
+                                        }
+                                    }else{
+                                        if(appList.treeSelectedNode.getPreNode()!=null) {
+                                            appList.treeObj.moveNode(appList.treeSelectedNode.getPreNode(), appList.treeSelectedNode, "prev", false);
+                                        }
+                                    }
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
+                            }
+                        }, "json");
+                    }
+                    else {
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
+                    }
+                },
+                newTreeNode : function (newNodeData) {
+                    var silent = false;
+                    appList.treeObj.addNodes(this.treeSelectedNode,newNodeData,silent);
+                },
+                updateNode : function (newNodeData) {
+                    this.treeSelectedNode=$.extend(true,this.treeSelectedNode, newNodeData);
+                    appList.treeObj.updateNode(this.treeSelectedNode);
+                },
+                <!--List-->
+                clearSearchCondition:function () {
+                    for(var key in this.searchCondition){
+                        this.searchCondition[key].value="";
+                    }
+                },
+                selectionChange: function (selection) {
+                    this.selectionRows = selection;
+                },
+                reloadData: function () {
+                    ListPageUtility.IViewTableLoadDataSearch(this.acInterface.reloadTableListData,this.pageNum,this.pageSize,this.searchCondition,this,this.idFieldName,true,null);
+                    //this.selectionRows=null;
+                },
+                add: function () {
+                    if(this.treeSelectedNode!=null) {
+                        var url = BaseUtility.BuildView(this.acInterface.editTableView, {
+                            "op": "add",
+                            "groupId": this.treeSelectedNode[appList.treeIdFieldName]
+                        });
+                        DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 0);
+                    }
+                    else {
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择分组!",null);
+                    }
+                },
+                edit: function (recordId) {
+                    var url = BaseUtility.BuildView(this.acInterface.editTableView, {
+                        "op": "update",
+                        "recordId": recordId
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 0);
+                },
+                view:function (recordId) {
+                    //var url = BaseUtility.BuildUrl("/PlatForm/Builder/DataStorage/DataBase/Table/EditTable.do?op=view&recordId=" + recordId);
+                    var url = BaseUtility.BuildView(this.acInterface.editTableView, {
+                        "op": "view",
+                        "recordId": recordId
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "表设计"}, 0);
+                },
+                del: function (recordId) {
+                    var _self = this;
+                    DialogUtility.Confirm(window, "确认要删除当前表吗？删除表时将只是删除表的描述,物理表和字段描述将保留，如果需要删除，请手工删除。", function () {
+                        AjaxUtility.Post(_self.acInterface.deleteTable, {recordId: recordId}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    appList.reloadData();
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                            }
+                        }, "json");
+                    });
+                },
+                move:function (type) {
+                    ListPageUtility.IViewMoveFace(this.acInterface.tableMove,this.selectionRows,appList.idFieldName,type,appList);
+                },
+                changePage: function (pageNum) {
+                    this.pageNum = pageNum;
+                    this.reloadData();
+                    this.selectionRows=null;
+                },
+                search:function () {
+                    this.pageNum=1;
+                    this.reloadData();
+                },
+                exportDBDocument:function () {
+                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"未实现！",null);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

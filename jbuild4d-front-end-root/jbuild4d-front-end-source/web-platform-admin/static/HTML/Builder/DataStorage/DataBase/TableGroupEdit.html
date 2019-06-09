@@ -1,0 +1,143 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/1/26
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+</head>
+<body>
+    <div id="appForm" class="general-edit-page-wrap" v-cloak>
+        <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
+            <form-item label="分 组 值：" prop="tableGroupValue">
+                <i-input v-model="formEntity.tableGroupValue"></i-input>
+            </form-item>
+            <form-item label="分组名称：" prop="tableGroupText">
+                <i-input v-model="formEntity.tableGroupText"></i-input>
+            </form-item>
+            <form-item label="创建时间：">
+                <row>
+                    <i-col span="10">
+                        <date-picker type="date" placeholder="选择创建时间" v-model="formEntity.tableGroupCreateTime" disabled
+                                     readonly></date-picker>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">状态：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <radio-group v-model="formEntity.tableGroupStatus">
+                                <radio label="启用">启用</radio>
+                                <radio label="禁用">禁用</radio>
+                            </radio-group>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="是否系统：">
+                <row>
+                    <i-col span="10">
+                        <form-item>
+                            <radio-group v-model="formEntity.tableGroupIssystem">
+                                <radio label="是">是</radio>
+                                <radio label="否">否</radio>
+                            </radio-group>
+                        </form-item>
+                    </i-col>
+                    <i-col span="4" style="text-align: center">能否删除：</i-col>
+                    <i-col span="10">
+                        <form-item>
+                            <radio-group v-model="formEntity.tableGroupDelEnable">
+                                <radio label="是">是</radio>
+                                <radio label="否">否</radio>
+                            </radio-group>
+                        </form-item>
+                    </i-col>
+                </row>
+            </form-item>
+            <form-item label="备注：">
+                <i-input v-model="formEntity.tableGroupDesc" type="textarea" :autosize="{minRows: 10,maxRows: 10}"></i-input>
+            </form-item>
+        </i-form>
+        <div class="button-outer-wrap">
+            <div class="button-inner-wrap">
+                <button-group>
+                    <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')" icon="md-checkmark">保存</i-button>
+                    <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button>
+                </button-group>
+            </div>
+        </div>
+    </div>
+    <script>
+        var appForm = new Vue({
+            el:"#appForm",
+            data: {
+                acInterface:{
+                    getDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/TableGroup/GetDetailData",
+                    saveDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/TableGroup/SaveEdit"
+                },
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
+                formEntity: {
+                    tableGroupId: "",
+                    tableGroupValue: "",
+                    tableGroupText: "",
+                    tableGroupCreateTime: DateUtility.GetCurrentData(),
+                    tableGroupDesc: "",
+                    tableGroupParentId: BaseUtility.GetUrlParaValue("parentId"),
+                    tableGroupStatus:"启用",
+                    tableGroupIssystem: "否",
+                    tableGroupDelEnable: "是"
+                },
+                ruleValidate: {
+                    tableGroupValue: [
+                        {required: true, message: '【值】不能空！', trigger: 'blur'}
+                    ],
+                    tableGroupText: [
+                        {required: true, message: '【名称】不能空！', trigger: 'blur'}
+                    ]
+                },
+                status: BaseUtility.GetUrlParaValue("op")
+            },
+            mounted:function () {
+                this.bindFormData();
+            },
+            methods: {
+                bindFormData:function(){
+                    //获取数据并赋值
+                    DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status,null,null);
+                },
+                handleSubmit: function (name) {
+                    var _self = this;
+                    this.$refs[name].validate(function (valid) {
+                        if (valid) {
+                            var sendData = JSON.stringify(_self.formEntity);
+                            AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    if(result.success) {
+                                        if (appForm.status == "add") {
+                                            window.OpenerWindowObj.appList.newTreeNode(_self.formEntity);
+                                        }
+                                        else if (appForm.status == "update") {
+                                            window.OpenerWindowObj.appList.updateNode(_self.formEntity);
+                                        }
+                                    }
+                                    DialogUtility.Frame_CloseDialog(window);
+                                });
+                            }, "json");
+                        } else {
+                            this.$Message.error('Fail!');
+                        }
+                    })
+                },
+                handleClose: function () {
+                    DialogUtility.Frame_CloseDialog(window);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

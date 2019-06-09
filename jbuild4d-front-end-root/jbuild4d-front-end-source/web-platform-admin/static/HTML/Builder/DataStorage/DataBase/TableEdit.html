@@ -1,0 +1,405 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/1/26
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+</head>
+<body>
+    <div id="tableDesion" v-cloak class="general-edit-page-wrap">
+        <spin size="large" fix v-if="isSubmitting"></spin>
+        <div class="list-2column">
+            <div class="left-outer-wrap" style="bottom: 50px;right: 350px;">
+                <tabs>
+                    <tab-pane label="表字段">
+                        <div style="width: 98%;margin: auto">
+                            <div style="float: right;margin-bottom: 8px" v-if="status!='view'">
+                                忽略物理表修改错误: &nbsp;
+                                <i-switch size="small" v-model="ignorePhysicalError"></i-switch>&nbsp;
+                                <i-select v-model="useTemplateName" size="small" style="width:200px" @on-change="changeFieldsTemplate">
+                                    <i-option v-for="(item,key) in templateFieldGroup" :value="key" :key="key">使用模版:{{key}}</i-option>
+                                </i-select>&nbsp;
+                                <button-group>
+                                    <i-button size="small" type="success" icon="md-add" @click="addField"></i-button>
+                                    <i-button size="small" type="primary" icon="md-close" @click="removeField"></i-button>
+                                    <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveField('up')"></i-button>
+                                    <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveField('down')"></i-button>
+                                </button-group>
+                            </div>
+                            <div style="clear: bottom"></div>
+                        </div>
+                        <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 98%;margin: auto"></div>
+                    </tab-pane>
+                    <tab-pane label="关联设置">
+
+                    </tab-pane>
+                </tabs>
+            </div>
+            <div class="right-outer-wrap" style="bottom: 50px;width: 340px;padding: 10px">
+                <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px;margin-top: 7px">表信息</divider>
+                <i-form :model="tableEntity" :label-width="65" style="margin-right: 10px">
+                    <form-item label="标题：" prop="">
+                        <i-input v-model="tableEntity.tableCaption"></i-input>
+                    </form-item>
+                    <form-item label="表名：" prop="">
+                        <i-input v-model="tableEntity.tableName"></i-input>
+                    </form-item>
+                    <form-item label="创建人：">
+                        <row>
+                            <i-col span="6">
+                                <i-input v-model="tableEntity.tableCreater"></i-input>
+                            </i-col>
+                            <i-col span="8" style="text-align: center">创建时间：</i-col>
+                            <i-col span="10">
+                                <form-item>
+                                    <date-picker type="date" placeholder="选择创建时间" v-model="tableEntity.tableCreateTime" disabled
+                                                 readonly style="width: 100%"></date-picker>
+                                </form-item>
+                            </i-col>
+                        </row>
+                    </form-item>
+                    <form-item label="修改人：">
+                        <row>
+                            <i-col span="6">
+                                <i-input v-model="tableEntity.tableUpdater"></i-input>
+                            </i-col>
+                            <i-col span="8" style="text-align: center">修改时间：</i-col>
+                            <i-col span="10">
+                                <form-item>
+                                    <date-picker type="date" placeholder="选择修改时间" v-model="tableEntity.tableUpdateTime" disabled
+                                                 readonly style="width: 100%"></date-picker>
+                                </form-item>
+                            </i-col>
+                        </row>
+                    </form-item>
+                    <form-item label="系统表：">
+                        <i-input v-model="tableEntity.tableIssystem" readonly></i-input>
+                    </form-item>
+                    <form-item label="备注：">
+                        <i-input v-model="tableEntity.tableDesc" type="textarea" :autosize="{minRows: 5,maxRows: 5}"></i-input>
+                    </form-item>
+                </i-form>
+            </div>
+        </div>
+        <div class="button-outer-wrap">
+            <div class="button-inner-wrap">
+                <button-group v-if="status!='view'">
+                    <i-button type="primary" @click="saveEditTable()"> 保 存</i-button>
+                    <i-button @click="handleClose()">关 闭</i-button>
+                </button-group>
+            </div>
+        </div>
+        <div>
+            <!--各类对话框的引用-->
+            <select-default-value-dialog @on-selected-default-value="onSelectedDefaultValue" ref="selectDefaultValueDialog"></select-default-value-dialog>
+        </div>
+    </div>
+    <script>
+        var tableDesion = new Vue({
+            el:"#tableDesion",
+            data:{
+                isSubmitting:false,
+                acInterface:{
+                    getDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/GetEditTableData",
+                    saveDataUrl:"/PlatFormRest/Builder/DataStorage/DataBase/Table/SaveTableEdit"
+                },
+                recordId:BaseUtility.GetUrlParaValue("recordId"),
+                useTemplateName:"通用模版",
+                currUserEntity:null,
+                templateFieldGroup:null,
+                ignorePhysicalError:false,
+                tablePrefix:"",
+                tableEntity:{
+                    tableId:"",
+                    tableCaption:"",
+                    tableName:"",
+                    tableCreateTime:DateUtility.GetCurrentData(),
+                    tableCreater:"",
+                    tableUpdateTime:DateUtility.GetCurrentData(),
+                    tableUpdater:"",
+                    tableType:"",
+                    tableIssystem:"否",
+                    tableDesc: "",
+                    tableGroupId:"",
+                    tableLinkId:""
+                },
+                editTableObj:null,
+                editTableConfig:{
+                    Status:"Edit",//状态 编辑 Edit 浏览 View
+                    DataField:"fieldName",
+                    //AddAfterRowEvent:TableDetailUtil.AfterInitEvent,
+                    Templates:[
+                        {
+                            Title:"字段ID",
+                            BindName:"fieldId",
+                            Renderer:"EditTable_Label",
+                            TitleCellClassName:"TitleCell",
+                            DefaultValue:{
+                                Type:"GUID",
+                                Value:0
+                            },
+                            Hidden:true
+                        },
+                        {
+                            Title:"字段标题",
+                            BindName:"fieldCaption",
+                            Renderer:"EditTable_TextBox",
+                            TitleCellClassName:"TitleCell",
+                            Validate:{
+                                Type:"NotEmpty"
+                            },
+                            Hidden:false,
+                            TitleCellAttrs:{},
+                            Style:{
+                                width:120
+                            }
+                        },{
+                            Title:"字段名称",
+                            BindName:"fieldName",
+                            Renderer:"EditTable_FieldName",
+                            Validate:{
+                                Type:"SQLKeyWord"
+                            },
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"F_"
+                            },
+                            Style:{
+                                width:150
+                            },
+                            Hidden:false
+                        },{
+                            Title:"字段类型",
+                            BindName:"fieldDataType",
+                            Renderer:"EditTable_SelectFieldType",
+                            Hidden:false,
+                            Style:{
+                                width:68,
+                                textAlign:"center"
+                            }
+                        },{
+                            Title:"字段长度",
+                            BindName:"fieldDataLength",
+                            Renderer:"EditTable_TextBox",
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"50"
+                            },
+                            Style:{
+                                width:68,
+                                textAlign:"center"
+                            },
+                            Hidden:false
+                        },{
+                            Title:"小数位数",
+                            BindName:"fieldDecimalLength",
+                            Renderer:"EditTable_TextBox",
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"0"
+                            },
+                            Style:{
+                                width:68,
+                                textAlign:"center"
+                            },
+                            Hidden:false
+                        },{
+                            Title:"是否主键",
+                            BindName:"fieldIsPk",
+                            Renderer:"EditTable_CheckBox",
+                            IsCNValue:true,
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"否"
+                            },
+                            Style:{
+                                width:68,
+                                textAlign:"center"
+                            },
+                            Hidden:false
+                        },{
+                            Title:"允许为空",
+                            BindName:"fieldAllowNull",
+                            Renderer:"EditTable_CheckBox",
+                            Hidden:false,
+                            IsCNValue:true,
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"是"
+                            },
+                            Style:{
+                                width:68,
+                                textAlign:"center"
+                            }
+                        },{
+                            Title:"默认值",
+                            BindName:"fieldDefaultEntity.fieldDefaultValue",
+                            Renderer:"EditTable_SelectDefaultValue",
+                            Hidden:false
+                        },{
+                            Title:"备注",
+                            BindName:"fieldDesc",
+                            Renderer:"EditTable_TextBox",
+                            Style:{
+                                width:500
+                            },
+                            Hidden:true
+                        }
+                    ],
+                    RowIdCreater:function(){
+
+                    },
+                    TableClass:"edit-table",
+                    RendererTo:"divEditTable",//div elem
+                    TableId:"TableFields",
+                    TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
+                },
+                tableFieldsData:null,
+                status: BaseUtility.GetUrlParaValue("op"),
+                groupId:BaseUtility.GetUrlParaValue("groupId")
+            },
+            mounted:function () {
+                this.getDataFromServerAndBind();
+                $("#divEditTable").height($(".right-outer-wrap").height()-85);
+            },
+            methods:{
+                //region dialog
+                selectDefaultValueDialogBegin:function(host,oldData){
+                    this.$refs.selectDefaultValueDialog.beginSelect(oldData);
+                    this.selectDefaultValueTargetWindow=host;
+                },
+                onSelectedDefaultValue:function(result){
+                    this.selectDefaultValueTargetWindow.setSelectEnvVariableResultValue(result);
+                },
+                //endregion
+                bindData:function(result){
+                    this.editTableObj=Object.create(EditTable);
+                    //alert(PageStyleUtility.GetPageWidth());
+                    if(PageStyleUtility.GetPageWidth()>1800){
+                        this.editTableConfig.Templates[9].Hidden=false;
+                    }
+                    this.editTableObj.Initialization(this.editTableConfig);
+                    this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
+                    DetailPageUtility.OverrideObjectValue(tableDesion.tableEntity, result.data);
+                    if(this.status=="add"){
+                        this.tableEntity.tableCreater=this.currUserEntity.userName;
+                        this.tableEntity.tableUpdater=this.currUserEntity.userName;
+                        this.tableEntity.tableName=result.exKVData.tablePrefix;
+                        this.tablePrefix=result.exKVData.tablePrefix;
+                        this.templateFieldGroup=result.exKVData.templateFieldGroup;
+                        this.editTableObj.LoadJsonData(result.exKVData.templateFieldGroup[this.useTemplateName]);
+                    }
+                    else if(this.status=="view"){
+                        this.editTableObj.SetToViewStatus();
+                        this.editTableObj.LoadJsonData(result.exKVData.tableFieldsData);
+                    }
+                    else {
+                        this.editTableObj.LoadJsonData(result.exKVData.tableFieldsData);
+                        this.tableEntity.tableUpdater=this.currUserEntity.userName;
+                    }
+                },
+                getDataFromServerAndBind:function(){
+                    //获取数据并赋值
+                    var _self=this;
+                    AjaxUtility.Post(this.acInterface.getDataUrl,{recordId:this.recordId,op:this.status,groupId:this.groupId},function (result) {
+                        if(result.success) {
+                            _self.bindData(result);
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                        }
+                    },"json");
+                },
+                addField:function(){
+                    this.editTableObj.AddEditingRowByTemplate();
+                },
+                removeField:function () {
+                    this.editTableObj.RemoveRow();
+                },
+                moveField:function (type) {
+                    var editRow=this.editTableObj.GetEditRow();
+                    if(editRow!=null){
+                        var _self=this;
+                        var rowId=editRow.attr("id");
+                        var fieldId=this.editTableObj.GetSelectRowDataByRowId(rowId).fieldId;
+                        var url = '/PlatFormRest/Builder/DataStorage/DataBase/Table/Move.do';
+                        AjaxUtility.Post(url, {recordId: fieldId,type:type}, function (result) {
+                            if (result.success) {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                    if(type=="down") {
+                                        _self.editTableObj.MoveDown();
+                                    }else{
+                                        _self.editTableObj.MoveUp();
+                                    }
+                                });
+                            }
+                            else {
+                                DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
+                            }
+                        }, "json");
+                    }
+                },
+                saveEditTable:function () {
+                    //this.isSubmitting=true;
+
+                    if(this.tableEntity.tableCaption.replace(/(^\s*)|(\s*$)/g, "")==""){
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "表标题不能为空！",null);
+                        return false;
+                    }
+                    if(/^[a-zA-Z][a-zA-Z0-9_]{0,}$/.test(this.tableEntity.tableName) == false){
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "表名称不能为空且只能是字母、下划线、数字并以字母开头！",null);
+                        return false;
+                    }
+
+                    if(this.tablePrefix==this.tableEntity.tableName){
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "不能使用默认的表前缀作为表名！",null);
+                        return false;
+                    }
+
+
+                    //表名必须唯一.
+                    //_self.isSubmitting=true;
+                    //return;
+                    if (this.editTableObj.CompletedEditingRow()) {
+                        //console.log(this.editTableObj.GetSerializeJson());
+                        var sendData = {
+                            op: this.status,
+                            ignorePhysicalError:this.ignorePhysicalError,
+                            tableEntityJson: encodeURIComponent(encodeURIComponent(JSON.stringify(this.tableEntity))),
+                            fieldVoListJson: encodeURIComponent(encodeURIComponent(JSON.stringify(this.editTableObj.GetSerializeJson()))),
+                            groupId:this.groupId
+                        };
+
+                        this.isSubmitting=true;
+                        //return;
+                        //var url = '/PlatForm/Builder/DataStorage/DataBase/Table/SaveTableEdit.do';
+                        AjaxUtility.Post(this.acInterface.saveDataUrl, sendData, function (result) {
+                            //debugger;
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                if (result.success) {
+                                    window.OpenerWindowObj.appList.reloadData();
+                                    DialogUtility.Frame_CloseDialog(window);
+                                }
+                            });
+                        }, "json");
+                    }
+                },
+                handleClose: function () {
+                    DialogUtility.Frame_CloseDialog(window);
+                },
+                changeFieldsTemplate:function (value) {
+                    this.editTableObj.RemoveAllRow();
+                    this.editTableObj.LoadJsonData(this.templateFieldGroup[value]);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

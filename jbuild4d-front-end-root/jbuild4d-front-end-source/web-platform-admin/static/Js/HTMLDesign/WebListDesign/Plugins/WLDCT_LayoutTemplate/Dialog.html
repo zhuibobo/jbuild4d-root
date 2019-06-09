@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JBuild4DFormDesignLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::HTMLDesignRuntimeLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::HTMLDesignWysiwygLib"></th:block>
+    <style>
+        .table-width-wraper-1024 {
+            width: 720px;
+        }
+
+        .templateWraper {
+            padding: 10px;
+            cursor: pointer;
+            border: #ffffff 1px solid;
+            position: relative;
+        }
+
+        .templateWraper:hover {
+            border: #1DC116 1px solid;
+            background-color: #f8f8f8;
+        }
+
+        .templateWraper-selected {
+            border: #1DC116 1px solid;
+        }
+    </style>
+</head>
+<body>
+<div class="dialog-wraper" id="dialogApp" v-cloak>
+    <tabs size="small" v-model="selectedTabName">
+        <tab-pane name="t1" label="列表">
+            <div>
+                <div name="template" class="templateWraper" @click="selectTemplate($event)">
+                    <div class="html-design-theme-default-root-elem-class">
+                        <div class="html-design-list-layout-outer-wrap wysiwyg-html-design-list-layout-outer-wrap">
+                            <div class="c2-layout-left-outer-wrap wysiwyg-c2-layout-left-outer-wrap"
+                                 style="width: auto;right: 0px"
+                                 classname=""
+                                 clientresolve=""
+                                 condition=""
+                                 control_category="ContainerControl"
+                                 custclientrenderermethod=""
+                                 custclientrenderermethodpara=""
+                                 custclientresolvedatamethod=""
+                                 custclientresolvedatamethodpara=""
+                                 custservergetdataapi=""
+                                 custservergetdataapipara=""
+                                 custserverresolvemethod=""
+                                 custserverresolvemethodpara=""
+                                 datasetid=""
+                                 datasetname=""
+                                 desc=""
+                                 id="list_layout_container_0"
+                                 is_jbuild4d_data="false"
+                                 jbuild4d_custom="true"
+                                 name="list_layout_container_0"
+                                 pagesize="20"
+                                 placeholder=""
+                                 serialize="false"
+                                 server_dynamic_bind="false"
+                                 serverresolve=""
+                                 show_remove_button="false"
+                                 singlename="WLDCT_LayoutContainer"
+                            >
+                                <div runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">双击编辑该部件</div>
+                                <div class="c2-layout-left-inner-wrap wysiwyg-c2-layout-left-inner-wrap"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab-pane>
+        <tab-pane name="t2" label="左右布局">
+            <div>
+                <div name="template" class="templateWraper" @click="selectTemplate($event)">
+                    <div class="html-design-theme-default-root-elem-class">
+                        <div class="html-design-list-layout-outer-wrap wysiwyg-html-design-list-layout-outer-wrap">
+                            <div class="c2-layout-left-outer-wrap wysiwyg-c2-layout-left-outer-wrap"
+                                 style="width: 250px;"
+                                 classname=""
+                                 clientresolve=""
+                                 condition=""
+                                 control_category="ContainerControl"
+                                 custclientrenderermethod=""
+                                 custclientrenderermethodpara=""
+                                 custclientresolvedatamethod=""
+                                 custclientresolvedatamethodpara=""
+                                 custservergetdataapi=""
+                                 custservergetdataapipara=""
+                                 custserverresolvemethod=""
+                                 custserverresolvemethodpara=""
+                                 datasetid=""
+                                 datasetname=""
+                                 desc=""
+                                 id="list_layout_container_1"
+                                 is_jbuild4d_data="false"
+                                 jbuild4d_custom="true"
+                                 name="list_layout_container_1"
+                                 pagesize="20"
+                                 placeholder=""
+                                 serialize="false"
+                                 server_dynamic_bind="false"
+                                 serverresolve=""
+                                 show_remove_button="false"
+                                 singlename="WLDCT_LayoutContainer"
+                            >
+                                <div runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">双击编辑该部件</div>
+                                <div class="c2-layout-left-inner-wrap wysiwyg-c2-layout-left-inner-wrap"></div>
+                            </div>
+                            <div class="c2-layout-right-outer-wrap wysiwyg-c2-layout-right-outer-wrap"
+                                 style="left: 260px;"
+                                 classname=""
+                                 clientresolve=""
+                                 condition=""
+                                 control_category="ContainerControl"
+                                 custclientrenderermethod=""
+                                 custclientrenderermethodpara=""
+                                 custclientresolvedatamethod=""
+                                 custclientresolvedatamethodpara=""
+                                 custservergetdataapi=""
+                                 custservergetdataapipara=""
+                                 custserverresolvemethod=""
+                                 custserverresolvemethodpara=""
+                                 datasetid=""
+                                 datasetname=""
+                                 desc=""
+                                 id="list_layout_container_2"
+                                 is_jbuild4d_data="false"
+                                 jbuild4d_custom="true"
+                                 name="list_layout_container_2"
+                                 pagesize="20"
+                                 placeholder=""
+                                 serialize="false"
+                                 server_dynamic_bind="false"
+                                 serverresolve=""
+                                 show_remove_button="false"
+                                 singlename="WLDCT_LayoutContainer"
+                            >
+                                <div runtime_auto_remove="true" class="wysiwyg-auto-remove-tip">双击编辑该部件</div>
+                                <div class="c2-layout-right-inner-wrap wysiwyg-c2-layout-right-inner-wrap"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab-pane>
+        <tab-pane name="t3" label="左右[上下]布局">
+        </tab-pane>
+    </tabs>
+</div>
+<script>
+    var DialogApp = new Vue({
+        el: "#dialogApp",
+        data: {
+            resultHtml: "",
+            selectedTabName:"t1"
+        },
+        mounted: function () {
+
+        },
+        methods: {
+            selectTemplate: function (event) {
+                //alert("1");
+                var $sender = $(event.currentTarget);
+                $sender.addClass("templateWraper-selected");
+                this.resultHtml = $sender.html().replace(/&nbsp;/ig, '');
+                //alert(this.resultHtml);
+            },
+            ready: function (actionName) {
+
+            },
+            getControlProps: function () {
+                var result = {
+                    resultHtml: this.resultHtml,
+                    baseInfo: {
+                        serialize: "false"
+                    }
+                };
+                if(this.resultHtml==""){
+                    DialogUtility.AlertText("请选中模版!");
+                    return {success: false};
+                }
+                else {
+                    return CKEditorPluginUtility.ValidateSerializeControlDialogCompletedEnable(result);
+                }
+
+            },
+            setControlProps: function ($elem, props) {
+
+            }
+        }
+    });
+</script>
+</body>
+</html>

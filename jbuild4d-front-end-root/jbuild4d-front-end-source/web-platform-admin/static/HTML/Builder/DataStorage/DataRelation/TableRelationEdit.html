@@ -1,0 +1,116 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/1/26
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+</head>
+<body>
+<div id="appForm" class="general-edit-page-wrap" v-cloak style="margin-top: 0px">
+    <spin size="large" fix v-if="isSubmitting"></spin>
+    <tabs>
+        <tab-pane label="基本信息">
+            <i-form ref="formEntity" :model="formEntity" :rules="ruleValidate" :label-width="100">
+                <form-item label="名 称：" prop="relationName">
+                    <i-input v-model="formEntity.relationName"></i-input>
+                </form-item>
+                <form-item label="创建时间：">
+                    <row>
+                        <i-col span="10">
+                            <date-picker type="date" placeholder="选择创建时间" v-model="formEntity.relationCreateTime" disabled
+                                         readonly></date-picker>
+                        </i-col>
+                        <i-col span="4" style="text-align: center">创建人：</i-col>
+                        <i-col span="10">
+                            <form-item>
+                                <i-input v-model="formEntity.relationUserName"></i-input>
+                            </form-item>
+                        </i-col>
+                    </row>
+                </form-item>
+                <form-item label="备注：">
+                    <i-input v-model="formEntity.relationDesc" type="textarea" :autosize="{minRows: 14,maxRows: 14}"></i-input>
+                </form-item>
+            </i-form>
+        </tab-pane>
+        <tab-pane label="关联内容">
+            <i-input v-model="formEntity.relationContent" type="textarea" :autosize="{minRows: 20,maxRows: 20}"></i-input>
+        </tab-pane>
+    </tabs>
+
+    <div class="button-outer-wrap">
+        <div class="button-inner-wrap">
+            <button-group>
+                <i-button type="primary" v-if="status!='view'" @click="handleSubmit('formEntity')" icon="md-checkmark">保存</i-button>
+                <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button>
+            </button-group>
+        </div>
+    </div>
+</div>
+<script>
+    var appForm = new Vue({
+        el: "#appForm",
+        data: {
+            isSubmitting:false,
+            acInterface: {
+                getDataUrl: "/PlatFormRest/Builder/DataStorage/TableRelation/TableRelation/GetDetailData",
+                saveDataUrl: "/PlatFormRest/Builder/DataStorage/TableRelation/TableRelation/SaveEdit"
+            },
+            recordId: BaseUtility.GetUrlParaValue("recordId"),
+            formEntity: {
+                relationId: "",
+                relationGroupId: BaseUtility.GetUrlParaValue("groupId"),
+                relationName: "",
+                relationUserId: "",
+                relationUserName: "",
+                relationCreateTime: DateUtility.GetCurrentData(),
+                relationDesc: "",
+                relationContent: ""
+            },
+            ruleValidate: {
+                relationName: [
+                    {required: true, message: '【名称】不能空！', trigger: 'blur'}
+                ]
+            },
+            status: BaseUtility.GetUrlParaValue("op")
+        },
+        mounted: function () {
+            this.bindFormData();
+        },
+        methods: {
+            bindFormData: function () {
+                //获取数据并赋值
+                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.formEntity, this.recordId, this.status, null, null);
+            },
+            handleSubmit: function (name) {
+                var _self = this;
+                this.$refs[name].validate(function (valid) {
+                    if (valid) {
+                        _self.isSubmitting=true;
+                        var sendData = JSON.stringify(_self.formEntity);
+                        AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                window.OpenerWindowObj.appList.reloadRelations(_self.formEntity.relationGroupId);
+                                DialogUtility.Frame_CloseDialog(window);
+                            });
+                        }, "json");
+                    } else {
+                        this.$Message.error('Fail!');
+                    }
+                })
+            },
+            handleClose: function () {
+                DialogUtility.Frame_CloseDialog(window);
+            }
+        }
+    })
+</script>
+</body>
+</html>

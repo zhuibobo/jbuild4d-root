@@ -1,0 +1,29 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/1/26
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>表单预览</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::HTMLDesignRuntimeLib"></th:block>
+    <script>
+        $(function () {
+            var FormRuntimeInst = Object.create(FormRuntime);
+            var formId=BaseUtility.GetUrlParaValue("FormId");
+            FormRuntimeInst.Initialization({
+                RendererTo: "#htmlDesignRuntimeWrap",
+                FormId:formId
+            })
+        });
+    </script>
+</head>
+<body>
+<div id="htmlDesignRuntimeWrap"></div>
+</body>
+</html>

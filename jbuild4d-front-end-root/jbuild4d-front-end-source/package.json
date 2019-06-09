@@ -1,0 +1,38 @@
+{
+  "name": "jbuild4d-front-end",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-stage-3": "^7.0.0",
+    "@babel/runtime": "^7.2.0",
+    "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
+    "fs-extra": "^7.0.1",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-copy": "^4.0.1",
+    "gulp-htmlclean": "^2.7.22",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-less": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.1",
+    "gulp-useref": "^3.1.6",
+    "istextorbinary": "^2.3.0",
+    "less": "^3.9.0",
+    "replacestream": "^4.0.3"
+  },
+  "scripts": {
+    "buildplatform": "chcp 65001 && node build-jbuild4d-web-platform\\buildtemplates.js",
+    "buildplatformless": "lessc build-jbuild4d-web-platform\\static\\Themes\\Default\\Css\\Jbuild4dPlatform.less ..\\jbuild4d-web-root\\jbuild4d-web-platform\\src\\main\\resources\\static\\Themes\\Default\\Css\\Jbuild4dPlatform.css --source-map",
+    "buildplatformjs": "babel build-jbuild4d-web-platform\\static\\Js\\Jbuild4dPlatform.js -o ..\\jbuild4d-web-root\\jbuild4d-web-platform\\src\\main\\resources\\static\\Js\\Jbuild4dPlatform.js",
+    "gulpdebug": "node inspect gulpfile",
+    "gulp": "gulp"
+  }
+}

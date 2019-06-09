@@ -1,0 +1,99 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/3/2
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+</head>
+<body>
+<div id="appForm" class="general-edit-page-wrap" v-cloak>
+    <i-form ref="organTypeEntity" :model="organTypeEntity" :rules="ruleValidate" :label-width="100">
+        <form-item label="类型值：" prop="organTypeValue">
+            <i-input v-model="organTypeEntity.organTypeValue"></i-input>
+        </form-item>
+        <form-item label="类型名称：" prop="organTypeName">
+            <i-input v-model="organTypeEntity.organTypeName"></i-input>
+        </form-item>
+        <form-item label="备注：">
+            <i-input v-model="organTypeEntity.organTypeDesc" type="textarea" :autosize="{minRows: 6,maxRows: 6}"></i-input>
+        </form-item>
+    </i-form>
+    <div class="button-outer-wrap">
+        <div class="button-inner-wrap">
+            <button-group>
+                <i-button type="primary" v-if="status!='view'" @click="handleSubmit('organTypeEntity')" icon="md-checkmark">保存</i-button>
+                <i-button v-if="status!='view'" @click="handleClose()" icon="md-close">取消</i-button>
+            </button-group>
+        </div>
+    </div>
+</div>
+<script>
+    var appForm =new Vue({
+        el: "#appForm",
+        mounted:function () {
+            this.bindFormData();
+        },
+        data: {
+            acInterface:{
+                getDataUrl:"/PlatFormRest/SSO/OrganType/GetDetailData",
+                saveDataUrl:"/PlatFormRest/SSO/OrganType/SaveEdit"
+            },
+            recordId:BaseUtility.GetUrlParaValue("recordId"),
+            /*Js Bean*/
+            organTypeEntity:{
+                organTypeId:"",
+                organTypeValue:"",
+                organTypeName:"",
+                organTypeDesc:"",
+                organTypeOrderNum:"",
+                organTypeStatus:"启用",
+                organTypeCreateTime:DateUtility.GetCurrentData()
+            },
+            ruleValidate: {
+                organTypeValue: [
+                    {required: true, message: '【组织类型值】不能空！', trigger: 'blur'}
+                ],
+                organTypeName: [
+                    {required: true, message: '【组织类型名称】不能空！', trigger: 'blur'}
+                ]
+            },
+            status: BaseUtility.GetUrlParaValue("op")
+        },
+        methods: {
+            bindFormData:function(){
+                //获取数据并赋值
+                DetailPageUtility.BindFormData(this.acInterface.getDataUrl, this.organTypeEntity, this.recordId, this.status);
+            },
+            handleSubmit: function (name) {
+                var _self = this;
+                this.$refs[name].validate(function (valid) {
+                    if (valid) {
+                        var sendData = JSON.stringify(_self.organTypeEntity);
+                        //debugger;
+                        AjaxUtility.PostRequestBody(_self.acInterface.saveDataUrl, sendData, function (result) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                //debugger;
+                                window.OpenerWindowObj.appList.reloadData();
+                                DialogUtility.Frame_CloseDialog(window);
+                            });
+                        }, "json");
+                    } else {
+                        this.$Message.error('Fail!');
+                    }
+                })
+            },
+            handleClose: function () {
+                DialogUtility.Frame_CloseDialog(window);
+            }
+        }
+    });
+</script>
+</body>
+</html>

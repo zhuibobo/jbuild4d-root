@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JBuild4DFormDesignLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
+</head>
+<body>
+<div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak>
+    <tabs size="small">
+        <tab-pane label="基础信息">
+            <fd-control-base-info v-model="baseInfo">
+            </fd-control-base-info>
+        </tab-pane>
+    </tabs>
+</div>
+<script>
+    var DialogApp=new Vue({
+        el:"#dialogApp",
+        data: {
+            baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo
+        },
+        mounted:function () {
+
+        },
+        methods: {
+            ready:function(actionName){
+                this.baseInfo.id="list_table_wrap_"+StringUtility.Timestamp();
+                this.baseInfo.name=this.baseInfo.id;
+            },
+            getControlProps:function () {
+                this.baseInfo.serialize="false";
+                var result = {
+                    success: true,
+                    baseInfo: this.baseInfo
+                }
+                return result;
+            },
+            setControlProps:function ($elem,props) {
+                this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;
+            }
+        }
+    });
+</script>
+</body>
+</html>

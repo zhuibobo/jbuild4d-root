@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JBuild4DFormDesignLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+</head>
+<body>
+    <div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak>
+        <tabs size="small">
+            <tab-pane label="绑定信息">
+                <list-table-label-bind-to-comp ref="listTableLabelBindToComp">
+                </list-table-label-bind-to-comp>
+            </tab-pane>
+            <tab-pane label="基础信息">
+                <fd-control-base-info v-model="baseInfo">
+                </fd-control-base-info>
+            </tab-pane>
+            <tab-pane label="开发扩展">
+                <table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
+                    <colgroup>
+                        <col style="width: 150px" />
+                        <col />
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td>
+                                服务端解析类1：
+                            </td>
+                            <td>
+                                <i-input v-model="normalProps.custServerResolveMethod" placeholder="按钮进行服务端解析时,保存模版时候调用,类全称,需要实现接口IListTableLabelCustResolve" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                参数：
+                            </td>
+                            <td>
+                                <i-input v-model="normalProps.custServerResolveMethodPara" placeholder="服务端解析类的参数" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                客户端渲染方法：
+                            </td>
+                            <td>
+                                <i-input v-model="normalProps.custClientRendererMethod" placeholder="客户端渲染方法,生成前端页面时调动,最终形成页面元素,需要返回最终元素的HTML对象" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                参数：
+                            </td>
+                            <td>
+                                <i-input v-model="normalProps.custClientRendererMethodPara" placeholder="客户端渲染方法的参数" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tab-pane>
+        </tabs>
+    </div>
+    <script>
+        var DialogApp=new Vue({
+            el:"#dialogApp",
+            data: {
+                baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
+                defaultValue: CKEditorPluginUtility.DefaultProps.defaultValue,
+                normalProps:{
+                    columnTableName: "",
+                    columnName: "",
+                    columnCaption: "",
+                    columnDataTypeName: "",
+                    targetButtonId: "",
+                    columnAlign:"",
+                    //开发扩展
+                    custServerResolveMethod:"",
+                    custServerResolveMethodPara:"",
+                    custClientRendererMethod:"",
+                    custClientRendererMethodPara:""
+                },
+                dataSetId:null,
+                buttons:[]
+            },
+            mounted:function () {
+
+            },
+            methods: {
+                ready:function(actionName,sel,parents){
+                    this.baseInfo.id="txt_search_"+StringUtility.Timestamp();
+                    this.baseInfo.name=this.baseInfo.id;
+
+                    this.dataSetId=CKEditorPluginUtility.TryGetDataSetId(sel,parents);
+                    this.buttons=CKEditorPluginUtility.TryGetListButtonsInPluginPage();
+
+                    this.bindDataSetFieldTree();
+                },
+                bindDataSetFieldTree:function(){
+                    if(this.dataSetId){
+                        var dataSetVo=window.parent.listDesign.getDataSet(this.dataSetId);
+                        this.$refs.listTableLabelBindToComp.init(dataSetVo,this.buttons);
+                    }
+                    else {
+                        DialogUtility.AlertText("请先设定DataSet");
+                    }
+                },
+                getControlProps:function () {
+                    var bindData=this.$refs.listTableLabelBindToComp.getData();
+                    //for(var key in this.normalProps)
+                    var result = {
+                        success: true,
+                        baseInfo: this.baseInfo,
+                        normalProps:{
+                            columnTableName: bindData.bindProp.columnTableName,
+                            columnName: bindData.bindProp.columnName,
+                            columnCaption: bindData.bindProp.columnCaption,
+                            columnDataTypeName: bindData.bindProp.columnDataTypeName,
+                            targetButtonId: bindData.bindProp.targetButtonId,
+                            columnAlign:bindData.bindProp.columnAlign,
+                            //开发扩展
+                            custServerResolveMethod:this.normalProps.custServerResolveMethod,
+                            custServerResolveMethodPara:this.normalProps.custServerResolveMethodPara,
+                            custClientRendererMethod:this.normalProps.custClientRendererMethod,
+                            custClientRendererMethodPara:this.normalProps.custClientRendererMethodPara
+                        },
+                        defaultValue: bindData.defaultValue
+                    }
+                    return result;
+                },
+                setControlProps:function ($elem,props) {
+                    console.log(props);
+                    this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;
+                    //this.bindToSearchField = props.bindToSearchField ? props.bindToSearchField : this.bindToSearchField;
+                    this.defaultValue = props.defaultValue ? props.defaultValue : this.defaultValue;
+
+                    this.normalProps.columnTableName=$elem.attr("columntablename");
+                    this.normalProps.columnName=$elem.attr("columnname");
+                    this.normalProps.columnCaption=$elem.attr("columncaption");
+                    this.normalProps.columnDataTypeName=$elem.attr("columndatatypename");
+                    this.normalProps.targetButtonId=$elem.attr("targetbuttonid");
+                    this.normalProps.columnAlign=$elem.attr("columnalign");
+                    this.normalProps.custServerResolveMethod =$elem.attr("custserverresolvemethod");
+                    this.normalProps.custServerResolveMethodPara = $elem.attr("custserverresolvemethodpara");
+                    this.normalProps.custClientRendererMethod =$elem.attr("custclientrenderermethod");
+                    this.normalProps.custClientRendererMethodPara = $elem.attr("custclientrenderermethodpara");
+
+                    this.$refs.listTableLabelBindToComp.setData(this.normalProps,this.defaultValue);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

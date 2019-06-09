@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::JBuild4DFormDesignLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
+    <style>
+        .ivu-table-small td{
+            height: 30px;
+        }
+        .edit-table{
+            line-height: 1em;
+        }
+        .TitleCell{
+            padding: 4px 6px !important;
+        }
+        .iv-list-page-wrap .iv-list-table{
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+<div class="html-design-plugin-dialog-wraper" id="dialogApp" v-cloak>
+    <select-single-webform-dialog ref="selectSingleWebformDialog" @on-selected-form="onSelectedForm"></select-single-webform-dialog>
+    <tabs size="small">
+        <tab-pane label="绑定信息">
+            <table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
+                <colgroup>
+                    <col style="width: 100px" />
+                    <col style="width: 280px" />
+                    <col style="width: 100px" />
+                    <col />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td colspan="4">绑定窗体：<button class="btn-select fright" @click="selectWebFormBegin">...</button></td>
+                    </tr>
+                    <tr style="height: 35px">
+                        <td colspan="4" style="background-color: #ffffff;">
+                            <span v-if="normalProps.formName!=''">模块：【{{normalProps.formModuleName}}】 ----  窗体：【{{normalProps.formName}}】 序号：【{{normalProps.formCode}}】---  <a>编辑窗体</a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            按钮标题：
+                        </td>
+                        <td colspan="3">
+                            <input type="text" v-model="normalProps.buttonCaption" style="width: 120px" />&nbsp;&nbsp;
+                            <button-group size="small">
+                                <i-button @click="setButtonCaption('新增')">新增</i-button>
+                                <i-button @click="setButtonCaption('修改')">修改</i-button>
+                                <i-button @click="setButtonCaption('删除')">删除</i-button>
+                                <i-button @click="setButtonCaption('查看')">查看</i-button>
+                                <i-button @click="setButtonCaption('处理')">处理</i-button>
+                                <i-button @click="setButtonCaption('审核')">审核</i-button>
+                            </button-group>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            打开方式：
+                        </td>
+                        <td colspan="3">
+                            <radio-group type="button" style="margin: auto" v-model="normalProps.openType" size="small">
+                                <radio label="Dialog">对话框</radio>
+                                <radio label="NewWindow">新窗口</radio>
+                            </radio-group>
+                            &nbsp;&nbsp;宽度 * 高度&nbsp;&nbsp;：
+                            <input-number :max="50" :min="5" v-model="normalProps.windowWidth"></input-number>&nbsp;&nbsp;*&nbsp;&nbsp;
+                            <input-number :max="50" :min="5" v-model="normalProps.windowHeight"></input-number>&nbsp;&nbsp;
+                            <button-group size="small">
+                                <i-button @click="setWindowWH(800,640)">800*640</i-button>
+                                <i-button @click="setWindowWH(1024,768)">1024*768</i-button>
+                                <i-button @click="setWindowWH(0,0)">0*0</i-button>
+                            </button-group>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            是否显示：
+                        </td>
+                        <td>
+                            <radio-group type="button" style="margin: auto" v-model="normalProps.isShow" size="small">
+                                <radio label="true">是</radio>
+                                <radio label="false">否</radio>
+                            </radio-group>
+                        </td>
+                        <td>
+                            窗体标题：
+                        </td>
+                        <td>
+                            <i-input v-model="normalProps.windowCaption" size="small" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            操作类型：
+                        </td>
+                        <td>
+                            <radio-group type="button" style="margin: auto" v-model="normalProps.operation" size="small">
+                                <radio label="add">新增数据</radio>
+                                <radio label="update">修改数据</radio>
+                                <radio label="view">查看数据</radio>
+                            </radio-group>
+                        </td>
+                        <td>
+                            绑定权限：
+                        </td>
+                        <td>
+                            <i-select v-model="normalProps.bindAuthority" size="small" style="width: 200px">
+                                <i-option value="notAuth">无权限绑定</i-option>
+                            </i-select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            内部按钮：
+                        </td>
+                        <td colspan="3">
+                            <inner-form-button-list-comp ref="innerFormButtonListComp" :form-id="normalProps.formId"></inner-form-button-list-comp>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </tab-pane>
+        <tab-pane label="基础信息">
+            <fd-control-base-info v-model="baseInfo">
+            </fd-control-base-info>
+        </tab-pane>
+        <tab-pane label="开发扩展">
+            <table cellpadding="0" cellspacing="0" border="0" class="html-design-plugin-dialog-table-wraper">
+                <colgroup>
+                    <col style="width: 150px" />
+                    <col />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td>
+                            服务端解析类：
+                        </td>
+                        <td>
+                            <i-input v-model="normalProps.custServerResolveMethod" placeholder="服务端解析,保存模版时候调用一次,类全称,需要实现接口IFormButtonCustResolve" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            参数：
+                        </td>
+                        <td>
+                            <i-input v-model="normalProps.custServerResolveMethodPara" placeholder="服务端解析类的参数" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            客户端渲染方法：
+                        </td>
+                        <td>
+                            <i-input v-model="normalProps.custClientRendererMethod" placeholder="客户端渲染方法,按钮将经由该方法渲染,最终形成页面元素,需要返回最终元素的HTML对象" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            参数：
+                        </td>
+                        <td>
+                            <i-input v-model="normalProps.custClientRendererMethodPara" placeholder="客户端渲染方法的参数" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            客户端渲染后方法：
+                        </td>
+                        <td>
+                            <i-input v-model="normalProps.custClientRendererAfterMethodPara" placeholder="客户端渲染后调用方法,经过默认的渲染,无返回值" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            参数：
+                        </td>
+                        <td>
+                            <i-input v-model="normalProps.custClientRendererAfterMethodParaPara" placeholder="客户端渲染后方法的参数" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            客户端点击前方法：
+                        </td>
+                        <td>
+                            <i-input v-model="normalProps.custClientClickBeforeMethod" placeholder="客户端点击该按钮时的前置方法,如果返回false将阻止默认调用" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            参数：
+                        </td>
+                        <td>
+                            <i-input v-model="normalProps.custClientClickBeforeMethodPara" placeholder="客户端点击前方法的参数" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </tab-pane>
+    </tabs>
+</div>
+<script>
+    var DialogApp=new Vue({
+        el:"#dialogApp",
+        data: {
+            baseInfo:CKEditorPluginUtility.DefaultProps.baseInfo,
+            normalProps:{
+                //按钮类型
+                buttonType:"ListFormButton",
+                //绑定窗体信息
+                formModuleId:"",
+                formModuleName:"",
+                formId:"",
+                formName:"",
+                formCode:"",
+                //其他信息
+                buttonCaption:"",
+                windowCaption:"JBUILD4D",
+                openType:"Dialog",
+                windowHeight:640,
+                windowWidth:800,
+                isShow:"true",
+                operation:"add",
+                bindAuthority:"notAuth",
+                //开发扩展
+                custServerResolveMethod:"",
+                custServerResolveMethodPara:"",
+                custClientRendererMethod:"",
+                custClientRendererMethodPara:"",
+                custClientRendererAfterMethodPara:"",
+                custClientRendererAfterMethodParaPara:"",
+                custClientClickBeforeMethod:"",
+                custClientClickBeforeMethodPara:"",
+                //内部按钮
+                innerButtonJsonString:""
+            }
+        },
+        mounted:function () {
+
+        },
+        methods: {
+            setWindowWH:function(width,height){
+                this.normalProps.windowWidth=width;
+                this.normalProps.windowHeight=height;
+            },
+            setButtonCaption:function(buttonCaption){
+                this.normalProps.buttonCaption=buttonCaption;
+            },
+            selectWebFormBegin:function(){
+                this.$refs.selectSingleWebformDialog.beginSelectForm(this.normalProps.formId);
+            },
+            onSelectedForm:function(formData){
+                this.normalProps.formModuleId=formData.formModuleId;
+                this.normalProps.formModuleName=formData.formModuleName;
+                this.normalProps.formId=formData.formId;
+                this.normalProps.formName=formData.formName;
+                this.normalProps.formCode=formData.formCode;
+                console.log(this.normalProps);
+            },
+            ready:function(actionName,sel,parents){
+                this.baseInfo.id="form_button_"+StringUtility.Timestamp();
+                this.baseInfo.name=this.baseInfo.id;
+            },
+            getControlProps:function () {
+                //var bindData=this.$refs.listSearchControlBindToComp.getData();
+                this.normalProps.innerButtonJsonString=this.$refs.innerFormButtonListComp.getJson();
+                this.baseInfo.serialize="false";
+
+                if(this.normalProps.buttonCaption==""){
+                    DialogUtility.AlertText("请设置按钮标题");
+                    return {success: false};
+                }
+
+                if(this.normalProps.formId==""){
+                    DialogUtility.AlertText("请设置绑定的窗体");
+                    return {success: false};
+                }
+
+                var result = {
+                    success: true,
+                    baseInfo: this.baseInfo,
+                    normalProps: this.normalProps
+                };
+                console.log(result);
+                return result;
+            },
+            setControlProps:function ($elem,props) {
+                console.log($elem);
+                this.baseInfo = props.baseInfo ? props.baseInfo : this.baseInfo;
+                this.normalProps.buttonType = "ListFormButton";
+                //绑定窗体信息
+                this.normalProps.formModuleId = $elem.attr("formmoduleid");
+                this.normalProps.formModuleName = $elem.attr("formmodulename");
+                this.normalProps.formId = $elem.attr("formid");
+                this.normalProps.formName = $elem.attr("formname");
+                this.normalProps.formCode = $elem.attr("formcode");
+                this.normalProps.buttonCaption = $elem.attr("buttoncaption");
+                this.normalProps.windowCaption = $elem.attr("windowcaption");
+                this.normalProps.openType = $elem.attr("opentype");
+                this.normalProps.windowHeight = parseInt($elem.attr("windowheight"));
+                this.normalProps.windowWidth =parseInt($elem.attr("windowwidth"));
+                this.normalProps.isShow = $elem.attr("isshow");
+                this.normalProps.operation = $elem.attr("operation");
+                this.normalProps.bindAuthority = $elem.attr("bindauthority");
+                this.normalProps.custServerResolveMethod =$elem.attr("custserverresolvemethod");
+                this.normalProps.custServerResolveMethodPara = $elem.attr("custserverresolvemethodpara");
+                this.normalProps.custClientRendererMethod =$elem.attr("custclientrenderermethod");
+                this.normalProps.custClientRendererMethodPara = $elem.attr("custclientrenderermethodpara");
+                this.normalProps.custClientRendererAfterMethodPara =$elem.attr("custclientrendereraftermethodpara");
+                this.normalProps.custClientRendererAfterMethodParaPara = $elem.attr("custclientrendereraftermethodparapara");
+                this.normalProps.custClientClickBeforeMethod = $elem.attr("custclientclickbeforemethod");
+                this.normalProps.custClientClickBeforeMethodPara = $elem.attr("custclientclickbeforemethodpara");
+                this.normalProps.innerButtonJsonString = $elem.attr("innerbuttonjsonstring");
+
+                //this.bindToSearchField = props.bindToSearchField ? props.bindToSearchField : this.bindToSearchField;
+                //this.defaultValue = props.defaultValue ? props.defaultValue : this.defaultValue;
+                //this.$refs.listSearchControlBindToComp.setData(this.bindToSearchField,this.defaultValue);
+            }
+        }
+    });
+</script>
+</body>
+</html>

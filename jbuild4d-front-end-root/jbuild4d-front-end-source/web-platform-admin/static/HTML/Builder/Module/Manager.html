@@ -1,0 +1,251 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/1/26
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+</head>
+<body>
+<div id="appList" class="list-2column">
+    <div class="left-outer-wrap">
+        <div class="inner-wrap" style="width: 250px">
+            <div class="tool-bar-wrap">
+                <div alt="新增分类组" title="新增分类组" class="add" @click="addModule()"></div>
+                <div alt="修改分类组" title="修改分类组" class="edit" @click="editModule()"></div>
+                <div alt="删除分类组" title="删除分类组" class="del" @click="delModule()"></div>
+                <div alt="浏览分类组" title="浏览分类组" class="view" @click="viewModule()"></div>
+                <div alt="上移" title="上移" class="order-up" @click="moveModule('up')"></div>
+                <div alt="下移" title="下移" class="order-down last" @click="moveModule('down')"></div>
+            </div>
+            <div>
+                <ul id="zTreeUL" class="ztree"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="right-outer-wrap iv-list-page-wrap" style="padding: 10px;left: 260px">
+        <tabs @on-click="tabChange" v-model="selectedTabName">
+            <tab-pane name="list-webform" label="表单设计">
+                <module-list-webform-comp :list-height="listHeight" :module-data="moduleData" :active-tab-name="selectedTabName"></module-list-webform-comp>
+            </tab-pane>
+            <tab-pane name="list-weblist" label="列表设计">
+                <module-list-weblist-comp ref="moduleListWebListComp" :list-height="listHeight" :module-data="moduleData" :active-tab-name="selectedTabName"></module-list-weblist-comp>
+            </tab-pane>
+            <tab-pane name="list-flow" label="流程设计">
+                <module-list-flow-comp :list-height="listHeight" :module-data="moduleData" :active-tab-name="selectedTabName"></module-list-flow-comp>
+            </tab-pane>
+            <tab-pane name="list-appform" label="APP表单设计" disabled>
+
+            </tab-pane>
+            <tab-pane name="list-applist" label="APP列表设计" disabled>
+
+            </tab-pane>
+            <tab-pane name="list-report" label="报表设计" disabled>
+                <div style="width: 100%;height: 60px">
+                </div>
+            </tab-pane>
+            <tab-pane name="list-authority-name" label="权限别名" disabled>
+                <div style="width: 100%;height: 60px">
+                </div>
+            </tab-pane>
+            <tab-pane name="list-about-config" label="相关设置" disabled>
+                <div style="width: 100%;height: 60px">
+                </div>
+            </tab-pane>
+        </tabs>
+    </div>
+</div>
+<script>
+    var appList=new Vue({
+        el:"#appList",
+        mounted:function () {
+            this.initTree();
+            window.setTimeout(function () {
+                appList.listHeight=ListPageUtility.GetGeneralPageHeight(-70);
+            },500);
+        },
+        data:{
+            acInterface:{
+                <!--Module -->
+                getModuleData:"/PlatFormRest/Builder/Module/GetTreeData",
+                moduleEditView:"/HTML/Builder/Module/ModuleEdit.html",
+                deleteModule:"/PlatFormRest/Builder/Module/Delete",
+                moveModule:"/PlatFormRest/Builder/Module/Move",
+                <!--Template-->
+                form:{
+                    designView:"/PlatForm/Builder/Form/DetailView"
+                }
+                <!--List-->
+                <!--AboutConfig-->
+            },
+            <!--Tree-->
+            treeIdFieldName:"moduleId",
+            treeObj:null,
+            treeSelectedNode:null,
+            treeSetting:{
+                async : {
+                    enable : true,
+                    // Ajax 获取数据的 URL 地址
+                    url :""
+                },
+                // 必须使用data
+                data:{
+                    key:{
+                        name:"moduleText"
+                    },
+                    simpleData : {
+                        enable : true,
+                        idKey : "moduleId", // id编号命名
+                        pIdKey : "moduleParentId",  // 父id编号命名
+                        rootId : 0
+                    }
+                },
+                // 回调函数
+                callback : {
+                    onClick : function(event, treeId, treeNode) {
+                        appList.treeNodeSelected(event,treeId,treeNode);
+                    },
+                    //成功的回调函数
+                    onAsyncSuccess : function(event, treeId, treeNode, msg){
+                        appList.treeObj.expandAll(true);
+                    }
+                }
+            },
+            listHeight:ListPageUtility.DefaultListHeight-30,
+            moduleData:null,
+            selectedTabName:"list-webform"
+        },
+        methods:{
+            <!--Module-->
+            initTree:function () {
+                /*this.treeSetting.async.url = BaseUtility.BuildAction(this.acInterface.getModuleData, {});
+                this.treeObj=$.fn.zTree.init($("#zTreeUL"), this.treeSetting);*/
+
+                var _self=this;
+                AjaxUtility.Post(this.acInterface.getModuleData, {}, function (result) {
+                    if(result.success){
+                        if(result.data!=null&&result.data.length>0){
+                            for(var i=0;i<result.data.length;i++) {
+                                if(result.data[i].moduleIssystem=="是"&&result.data[i].moduleChildCount==0) {
+                                    result.data[i].icon = "../../../Themes/Png16X16/layout_error.png";
+                                }
+                                else if(result.data[i].moduleIssystem=="否"&&result.data[i].moduleChildCount==0) {
+                                    result.data[i].icon = "../../../Themes/Png16X16/layout_content.png";
+                                }
+                                else if(result.data[i].moduleParentId=="-1"){
+                                    result.data[i].icon = "../../../Themes/Png16X16/folder_brick.png";
+                                }
+                            }
+                        }
+                        _self.treeObj=$.fn.zTree.init($("#zTreeUL"), _self.treeSetting,result.data);
+                        _self.treeObj.expandAll(true);
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                    }
+                }, "json");
+            },
+            treeNodeSelected:function (event, treeId, treeNode) {
+                // 根节点不触发任何事件
+                this.treeSelectedNode=treeNode;
+                this.moduleData=treeNode;
+                /*window.setTimeout(function () {
+                    appList.$refs.moduleListWebListComp.reloadData();
+                },500);*/
+            },
+            addModule:function () {
+                if (this.treeSelectedNode != null) {
+                    var url = BaseUtility.BuildView(this.acInterface.moduleEditView, {
+                        "op": "add",
+                        "parentId": this.treeSelectedNode[appList.treeIdFieldName]
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "模块分组"}, 2);
+                }
+                else {
+                    DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, "请选择父节点!", null);
+                }
+            },
+            editModule:function () {
+                if(this.treeSelectedNode!=null) {
+                    var url = BaseUtility.BuildView(this.acInterface.moduleEditView, {
+                        "op": "update",
+                        "recordId": this.treeSelectedNode[appList.treeIdFieldName]
+                    });
+                    DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "模块分组"}, 2);
+                }
+                else {
+                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
+                }
+            },
+            viewModule:function () {
+                var url = BaseUtility.BuildView(this.acInterface.moduleEditView, {
+                    "op": "view",
+                    "recordId": this.treeSelectedNode[appList.treeIdFieldName]
+                });
+                DialogUtility.Frame_OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "模块分组"}, 2);
+            },
+            delModule:function () {
+                var _self=this;
+                var recordId=this.treeSelectedNode[appList.treeIdFieldName];
+                DialogUtility.Confirm(window, "确认要删除选定的节点吗？", function () {
+                    AjaxUtility.Post(_self.acInterface.deleteModule, {recordId: recordId}, function (result) {
+                        if (result.success) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                appList.treeObj.removeNode(appList.treeSelectedNode);
+                                appList.treeSelectedNode=null;
+                            });
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
+                    }, "json");
+                });
+            },
+            moveModule:function (type) {
+                if(this.treeSelectedNode!=null) {
+                    var recordId = this.treeSelectedNode[appList.treeIdFieldName];
+                    AjaxUtility.Post(this.acInterface.moveModule, {recordId: recordId,type:type}, function (result) {
+                        if (result.success) {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                if(type=="down") {
+                                    if(appList.treeSelectedNode.getNextNode()!=null) {
+                                        appList.treeObj.moveNode(appList.treeSelectedNode.getNextNode(), appList.treeSelectedNode, "next", false)
+                                    }
+                                }else{
+                                    if(appList.treeSelectedNode.getPreNode()!=null) {
+                                        appList.treeObj.moveNode(appList.treeSelectedNode.getPreNode(), appList.treeSelectedNode, "prev", false);
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message,null);
+                        }
+                    }, "json");
+                }
+                else {
+                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"请选择需要编辑的节点!",null);
+                }
+            },
+            newTreeNode : function (newNodeData) {
+                var silent = false;
+                appList.treeObj.addNodes(this.treeSelectedNode,newNodeData,silent);
+            },
+            updateNode : function (newNodeData) {
+                this.treeSelectedNode=$.extend(true,this.treeSelectedNode, newNodeData);
+                appList.treeObj.updateNode(this.treeSelectedNode);
+            },
+            tabChange:function (name) {
+
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/1/26
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::CodeMirrorLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ZTreeExtendLib"></th:block>
+    <style>
+        .CodeMirror {
+            height: 100px;
+            width: 100%;
+        }
+
+        #TextAreaJsEditor {
+            width: 100%;
+            height: 100px;
+        }
+
+        .tableTreeWrap {
+            float: left;height: 360px;width: 40%;border: #01a0e4 1px solid;border-radius: 4px;padding: 6px;overflow: auto;
+        }
+
+        .tableFieldWrap{
+            float: left;height: 360px;width: 57%;border: #01a0e4 1px solid;border-radius: 4px;margin-left: 10px;padding: 10px
+        }
+
+        .tableName{
+            color: #3b97ed;
+            cursor: pointer;
+        }
+
+        .tableName:hover{
+            color: red;
+        }
+
+        .validate-sql-enable-warp{
+
+        }
+
+        .validate-sql-enable-warp .result-item{
+            border: #c8dcfe 1px solid;
+            border-radius: 4px;
+            padding: 4px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="sqlDesignerForm" v-cloak class="general-edit-page-wrap">
+        <div>
+            <div style="width: 100%">请编辑SQL语句[字段请统一使用大写]
+                <div style="float: right;margin-bottom: 8px">
+                    <!--<button-group>-->
+                        <Tooltip content="校验SQL" placement="left">
+                            <i-button size="small" type="success" icon="md-checkmark" @click="validateSQLEnable(null)"></i-button>
+                        </Tooltip>
+                        <Tooltip content="历史版本" placement="left">
+                            <i-button size="small" type="primary" icon="md-timer" ></i-button>
+                        </Tooltip>
+                        <Tooltip content="预览数据" placement="left">
+                            <i-button size="small" type="primary" icon="md-search" ></i-button>
+                        </Tooltip>
+                        <Tooltip content="格式化" placement="left">
+                            <i-button size="small" type="primary" icon="md-code" ></i-button>
+                        </Tooltip>
+                    <!--</button-group>-->
+                </div>
+                <div style="clear: bottom"></div>
+            </div>
+            <div style="height: 120px;width: 100%">
+                <textarea id="TextAreaJsEditor">select TTEST_CMS_NEW.*,TTEST_CMS_COLUMN.F_COLUMN_NAME,'address' ADDRESS,'sex' SEX from TTEST_CMS_NEW join TTEST_CMS_COLUMN on TTEST_CMS_NEW.F_COLUMN_ID=TTEST_CMS_COLUMN.ID where TTEST_CMS_NEW.F_ORGAN_ID='#{ApiVar.当前用户所在组织ID}'</textarea>
+            </div>
+            <div style="position: absolute;bottom: 15px;top: 150px;left: 0px;right: 0px">
+                <tabs value="Tables">
+                    <tab-pane label="表" name="Tables">
+                        <div id="tableWraper" style="height: 365px;overflow: auto">
+                            <div class="tableTreeWrap">
+                                <input type="text" id="txtSearchTableTree" style="width: 100%" />
+                                <ul id="tableZTreeUL" class="ztree"></ul>
+                            </div>
+                            <div class="tableFieldWrap iv-list-page-wrap">
+                                表：【<span class="tableName" @click="insertTableNameToCodeMirror">{{tree.selectedTableName}}</span>】
+                                <i-table size="small" height="315" stripe border :columns="tableField.columnsConfig" :data="tableField.fieldData"
+                                         class="iv-list-table" :highlight-row="true"></i-table>
+                            </div>
+                        </div>
+                    </tab-pane>
+                    <tab-pane label="API变量" name="ApiVar">
+                        <ul id="apiVarZTreeUL" class="ztree"></ul>
+                    </tab-pane>
+                    <tab-pane label="日期时间" name="DateTime">
+                        <ul id="datetimeZTreeUL" class="ztree"></ul>
+                    </tab-pane>
+                    <tab-pane label="参考SQL" name="EgSQL">
+                    </tab-pane>
+                </tabs>
+            </div>
+        </div>
+        <div class="button-outer-wrap">
+            <div class="button-inner-wrap">
+                <button-group>
+                    <i-button type="success" @click="coverSQLDesign"> 覆 盖 </i-button>
+                    <i-button @click="appendSQLDesign"> 追 加 </i-button>
+                    <i-button @click="handleClose()"> 关 闭 </i-button>
+                </button-group>
+            </div>
+        </div>
+        <div id="validateSQLEnableWarp" style="display: none" class="validate-sql-enable-warp">
+            <div>解析为SQL</div>
+            <div class="result-item" id="sqlWithEnvValue">
+
+            </div>
+            <div>变量替换SQL</div>
+            <div class="result-item" id="sqlWithEnvRunningValue">
+
+            </div>
+            <div>获取结构SQL</div>
+            <div class="result-item" id="sqlWithEmptyData">
+
+            </div>
+            <div>包含表</div>
+            <div class="result-item" id="relatedTables">
+
+            </div>
+            <div>包含字段</div>
+            <div class="result-item" id="aboutColumns">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        var sqlDesignerForm = new Vue({
+            el:"#sqlDesignerForm",
+            data:{
+                acInterface:{
+                    getDataUrl:"/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/GetSqlDesignerViewData"
+                },
+                formResourceEntity:{
+                    formId:"",
+
+                },
+                tree:{
+                    datetimeTreeObj:null,
+                    datetimeTreeSetting:{
+                        view: {
+                            dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                            showLine: true,//是否显示节点之间的连线
+                            fontCss: {'color': 'black', 'font-weight': 'normal'}
+                        },
+                        data: {
+                            key: {
+                                name: "text",
+                            },
+                            simpleData: {//简单数据模式
+                                enable: true,
+                                idKey: "id",
+                                pIdKey: "parentId",
+                                rootPId: "-1"// 1
+                            }
+                        },
+                        callback: {
+                            //点击树节点事件
+                            onClick: function (event, treeId, treeNode) {
+                                if(treeNode.group==true){
+                                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"不能选择分组！",null);
+                                    return
+                                }
+                                else {
+                                    sqlDesignerForm.insertCodeAtCursor("#\{"+treeNode.type + "." + treeNode.text+"}");
+                                }
+                            },
+                            onDblClick: function (event, treeId, treeNode) {
+
+                            },
+                            //成功的回调函数
+                            onAsyncSuccess: function (event, treeId, treeNode, msg) {
+
+                            }
+                        }
+                    },
+                    datetimeTreeData:null,//${datetimeTreeData},
+                    apiVarTreeObj:null,
+                    apiVarTreeSetting:{
+                        view: {
+                            dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                            showLine: true,//是否显示节点之间的连线
+                            fontCss: {'color': 'black', 'font-weight': 'normal'}
+                        },
+                        data: {
+                            key: {
+                                name: "text",
+                            },
+                            simpleData: {//简单数据模式
+                                enable: true,
+                                idKey: "id",
+                                pIdKey: "parentId",
+                                rootPId: "-1"// 1
+                            }
+                        },
+                        callback: {
+                            //点击树节点事件
+                            onClick: function (event, treeId, treeNode) {
+                                //alert(treeNode.text);
+                                if(treeNode.group==true){
+                                    DialogUtility.Alert(window,DialogUtility.DialogAlertId,{},"不能选择分组！",null);
+                                    return
+                                }
+                                else {
+                                    sqlDesignerForm.insertCodeAtCursor("#\{"+treeNode.type + "." + treeNode.text+"}");
+                                }
+                            },
+                            onDblClick: function (event, treeId, treeNode) {
+
+                            },
+                            //成功的回调函数
+                            onAsyncSuccess: function (event, treeId, treeNode, msg) {
+
+                            }
+                        }
+                    },
+                    apiVarTreeData:null,//${apiVarTreeData},
+                    tableTreeObj:null,
+                    tableTreeSetting:{
+                        view: {
+                            dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                            showLine: true,//是否显示节点之间的连线
+                            fontCss: {'color': 'black', 'font-weight': 'normal'}
+                        },
+                        data: {
+                            key: {
+                                name: "text",
+                            },
+                            simpleData: {//简单数据模式
+                                enable: true,
+                                idKey: "id",
+                                pIdKey: "parentId",
+                                rootPId: "-1"// 1
+                            }
+                        },
+                        callback: {
+                            //点击树节点事件
+                            onClick: function (event, treeId, treeNode) {
+                                sqlDesignerForm.getTableFields(treeNode);
+                                sqlDesignerForm.tree.selectedTableName=treeNode.value;
+                            },
+                            onDblClick: function (event, treeId, treeNode) {
+
+                            },
+                            //成功的回调函数
+                            onAsyncSuccess: function (event, treeId, treeNode, msg) {
+
+                            }
+                        }
+                    },
+                    tableTreeData:null,//${tableTreeData},
+                    selectedTableName:"无"
+                },
+                tableField:{
+                    fieldData:[],
+                    columnsConfig: [
+                        {
+                            title: '字段名称',
+                            key: 'fieldName',
+                            align: "center"
+                        }, {
+                            title: '标题',
+                            key: 'fieldCaption',
+                            align: "center"
+                        }, {
+                            title: '操作',
+                            key: 'fieldId',
+                            width: 80,
+                            align: "center",
+                            render: function (h, params) {
+                                return h('div',{class: "list-row-button-wrap"},[
+                                    h('div', {
+                                        class: "list-row-button listmanager",
+                                        on: {
+                                            click: function () {
+                                                sqlDesignerForm.insertTableFieldToCodeMirror(params.row);
+                                            }
+                                        }
+                                    })
+                                ]);
+                            }
+                        }
+                    ]
+                },
+                sqlCodeMirror:null
+            },
+            mounted:function () {
+                this.sqlCodeMirror = CodeMirror.fromTextArea($("#TextAreaJsEditor")[0], {
+                    mode: "text/x-sql",
+                    lineNumbers: true,
+                    lineWrapping: true,
+                    foldGutter: true,
+                    theme: "monokai"
+                });
+                AjaxUtility.Post(this.acInterface.getDataUrl,{},function (result) {
+                    if(result.success) {
+                        sqlDesignerForm.bindData(result);
+                    }
+                    else {
+                        DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                    }
+                },"json");
+
+                //var _height=PageStyleUtility.GetPageHeight()-300;
+                if(PageStyleUtility.GetPageHeight()<550){
+                    $("#tableWraper").height(190);
+                }
+            },
+            methods:{
+                bindData:function(result){
+                    this.tree.datetimeTreeData=result.exKVData.datetimeTreeData;
+                    this.tree.datetimeTreeObj=$.fn.zTree.init($("#datetimeZTreeUL"), this.tree.datetimeTreeSetting,this.tree.datetimeTreeData);
+                    this.tree.datetimeTreeObj.expandAll(true);
+                    this.tree.apiVarTreeData=result.exKVData.apiVarTreeData;
+                    this.tree.apiVarTreeObj=$.fn.zTree.init($("#apiVarZTreeUL"), this.tree.apiVarTreeSetting,this.tree.apiVarTreeData);
+                    this.tree.apiVarTreeObj.expandAll(true);
+                    this.tree.tableTreeData=result.exKVData.tableTreeData;
+                    this.tree.tableTreeObj=$.fn.zTree.init($("#tableZTreeUL"), this.tree.tableTreeSetting,this.tree.tableTreeData);
+                    this.tree.tableTreeObj.expandAll(true);
+
+                    fuzzySearch("tableZTreeUL","#txtSearchTableTree",null,true);
+                },
+                insertCodeAtCursor:function(code){
+                    var doc = this.sqlCodeMirror.getDoc();
+                    var cursor = doc.getCursor();
+                    doc.replaceRange(code, cursor);
+                },
+                insertTableNameToCodeMirror:function () {
+                    this.insertCodeAtCursor(this.tree.selectedTableName);
+                },
+                insertTableFieldToCodeMirror:function (fieldJson) {
+                    this.insertCodeAtCursor(this.tree.selectedTableName+"."+fieldJson.fieldName);
+                },
+                getEditSQL:function () {
+                    return this.sqlCodeMirror.getValue();
+                },
+                getTableFields:function (treeNode) {
+                    //debugger;
+                    var tableId=treeNode.id;
+                    var _self=this;
+                    var url = '/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/GetTableField.do';
+                    AjaxUtility.Post(url, {tableId:tableId}, function (result) {
+                        if(result.success){
+                            _self.tableField.fieldData=result.data;
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
+                    }, "json");
+                },
+                handleClose: function () {
+                    //debugger;
+                    DialogUtility.CloseOpenIframeWindow(window,DialogUtility.DialogId);
+                },
+                coverSQLDesign:function(){
+                    this.validateSQLEnable(function (result) {
+                        window.parent.dataSetEditForm.clearColumn();
+                        window.parent.dataSetEditForm.completedSQLDesign(result);
+                        sqlDesignerForm.handleClose();
+                    });
+                },
+                appendSQLDesign:function () {
+                    this.validateSQLEnable(function (result) {
+                        window.parent.dataSetEditForm.completedSQLDesign(result);
+                        sqlDesignerForm.handleClose();
+                    });
+                },
+                validateSQLEnable:function (func) {
+                    var sql=this.getEditSQL();
+                    var url = '/PlatFormRest/Builder/DataSet/DataSetSQLDesigner/ValidateSQLEnable.do';
+                    AjaxUtility.Post(url, {sqlText:encodeURIComponent(sql)}, function (result) {
+                        //debugger;
+                        if(result.success){
+                            //debugger;
+                            result.data.sqlWithEnvText=sql;
+                            if(typeof(func)=="function"){
+                                func(result);
+                            }
+                            else {
+                                $("#sqlWithEnvValue").html(result.data.sqlWithEnvValue);
+                                $("#sqlWithEnvRunningValue").html(result.data.sqlWithEnvRunningValue);
+                                $("#sqlWithEmptyData").html(result.data.sqlWithEmptyData);
+                                var relatedTables = new Array();
+                                for (var i = 0; i < result.data.dataSetVo.relatedTableVoList.length; i++) {
+                                    relatedTables.push(result.data.dataSetVo.relatedTableVoList[i].rtTableName + ":" + result.data.dataSetVo.relatedTableVoList[i].rtTableCaption);
+                                }
+                                var aboutColumns = new Array();
+                                for (var i = 0; i < result.data.dataSetVo.columnVoList.length; i++) {
+                                    aboutColumns.push(result.data.dataSetVo.columnVoList[i].columnName + ":" + result.data.dataSetVo.columnVoList[i].columnCaption);
+                                }
+                                $("#relatedTables").html(relatedTables.join("<br />"));
+                                $("#aboutColumns").html(aboutColumns.join("<br />"));
+                                DialogUtility.DialogElemObj($("#validateSQLEnableWarp"), {
+                                    modal: true,
+                                    title: "校验结果",
+                                    width: 900,
+                                    height: 550
+                                });
+                            }
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {});
+                        }
+                    }, "json");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: zhuangrb
+  Date: 2019/1/26
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="Fragment/GeneralLib::GeneralLib"></th:block>
+    <th:block th:replace="Fragment/GeneralLib::ThemesLib"></th:block>
+</head>
+<body>
+    <div id="dataSetEditForm" v-cloak class="general-edit-page-wrap">
+        <spin size="large" fix v-if="isSubmitting"></spin>
+        <div class="list-2column">
+            <div class="left-outer-wrap" style="bottom: 50px;right: 350px;">
+                <div style="width: 98%;margin: auto">
+                    <tabs v-model="datasetEntity.dsType">
+                        <tab-pane label="SQL数据集" name="SQLDataSet" >
+                            <div style="width: 100%;height: 60px">
+                                <div style="float:left;width: 86%;border: #2c77d6 1px solid;border-radius: 4px;height: 50px;padding: 4px;overflow: auto">
+                                    {{datasetEntity.dsSqlSelectText}}
+                                </div>
+                                <div @click="designSQL" style="color: #FFFFFF;background-color: #47cb89;float: left;width: 5%;border: red 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
+                                    编辑
+                                </div>
+                                <div style="float: left;width: 5%;border: #2c77d6 1px solid;border-radius: 4px;height: 50px;text-align: center;line-height: 50px;margin-left: 10px;cursor: pointer">
+                                    预览
+                                </div>
+                            </div>
+                        </tab-pane>
+                        <tab-pane label="API数据集" name="APIDataSet">
+                            <div style="width: 100%;height: 30px" name="APIDataSetInnerWraper">
+                                <i-input v-model="datasetEntity.dsClassName" search enter-button="加载" @on-search="loadApiDataSetVo">
+                                    <span slot="prepend">类全称[继承com.jbuild4d.platform.builder.extend.IDataSetAPI]：</span>
+                                </i-input>
+                            </div>
+                        </tab-pane>
+                        <tab-pane label="REST数据集" name="RESTDataSet">
+                            <div style="width: 100%;height: 60px">
+                                <i-input size="small" v-model="datasetEntity.dsRestStructureUrl" search enter-button="加载" @on-search="loadRestDataSetVo">
+                                    <span slot="prepend">获取结构URL：</span>
+                                </i-input>
+                                <i-input style="margin-top: 4px" size="small" v-model="datasetEntity.dsRestDataUrl" search enter-button="测试" @on-search="testRestDataSetVo">
+                                    <span slot="prepend">数据提供URL：</span>
+                                </i-input>
+                            </div>
+                        </tab-pane>
+                        <tab-pane label="自定义数据集" name="CUSTOMDataSet">
+                        </tab-pane>
+                    </tabs>
+                    <div style="width: 70%;float: left;margin-right: 10px">
+                        <div style="width: 100%">
+                            <div style="float: right;margin-bottom: 8px">
+                                编辑列 &nbsp;
+                                <button-group>
+                                    <i-button size="small" type="success" icon="md-add" @click="addColumn"></i-button>
+                                    <i-button size="small" type="primary" icon="md-close" @click="removeColumn"></i-button>
+                                    <i-button size="small" type="primary" icon="ios-arrow-up" @click="moveColumn('up')"></i-button>
+                                    <i-button size="small" type="primary" icon="ios-arrow-down" @click="moveColumn('down')"></i-button>
+                                    <i-button size="small" type="primary" icon="md-trash" @click="clearColumn()"></i-button>
+                                </button-group>
+                            </div>
+                            <div style="clear: bottom"></div>
+                        </div>
+                        <div id="divEditTable" class="edit-table-wrap" style="height: 100px;overflow: auto;width: 100%"></div>
+                    </div>
+                    <div style="width: 28%;float: left">
+                        <div style="height: 22px;margin-bottom: 8px;line-height: 22px;padding-right: 10px">
+                            <div style="float: right">
+                                相关表
+                            </div>
+                        </div>
+                        <i-table size="small" stripe border :columns="relatedTable.config" :data="relatedTable.data"
+                                 class="iv-list-table" :highlight-row="true"></i-table>
+                    </div>
+                </div>
+            </div>
+            <div class="right-outer-wrap" style="bottom: 50px;width: 340px;padding: 10px">
+                <divider orientation="left" :dashed="true" style="font-size: 12px;padding: 10px">数据集信息</divider>
+                <i-form :model="datasetEntity" :rules="ruleValidate" :label-width="90" style="margin-right: 10px">
+                    <form-item label="标题：" prop="dsCaption">
+                        <i-input v-model="datasetEntity.dsCaption"></i-input>
+                    </form-item>
+                    <form-item label="名称：" prop="dsName">
+                        <i-input v-model="datasetEntity.dsName"></i-input>
+                    </form-item>
+                    <form-item label="创建人：">
+                        <row>
+                            <i-col span="6">
+                                <i-input v-model="datasetEntity.dsCreater"></i-input>
+                            </i-col>
+                            <i-col span="8" style="text-align: center">创建时间：</i-col>
+                            <i-col span="10">
+                                <form-item>
+                                    <date-picker type="date" placeholder="选择创建时间" v-model="datasetEntity.dsCreateTime" disabled
+                                                 readonly style="width: 100%"></date-picker>
+                                </form-item>
+                            </i-col>
+                        </row>
+                    </form-item>
+                    <form-item label="修改人：">
+                        <row>
+                            <i-col span="6">
+                                <i-input v-model="datasetEntity.dsUpdater"></i-input>
+                            </i-col>
+                            <i-col span="8" style="text-align: center">修改时间：</i-col>
+                            <i-col span="10">
+                                <form-item>
+                                    <date-picker type="date" placeholder="选择创建时间" v-model="datasetEntity.dsUpdateTime" disabled
+                                                 readonly style="width: 100%"></date-picker>
+                                </form-item>
+                            </i-col>
+                        </row>
+                    </form-item>
+                    <form-item label="系统表：">
+                        <i-input v-model="datasetEntity.dsIssystem" readonly></i-input>
+                    </form-item>
+                    <form-item label="备注：">
+                        <i-input v-model="datasetEntity.dsDesc" type="textarea" :autosize="{minRows: 5,maxRows: 5}"></i-input>
+                    </form-item>
+                    <form-item label="连接：">
+                        <i-input v-model="datasetEntity.dsSqlDbLinkId" :disabled="true"></i-input>
+                    </form-item>
+                </i-form>
+            </div>
+        </div>
+        <div class="button-outer-wrap">
+            <div class="button-inner-wrap">
+                <button-group>
+                    <i-button type="primary" @click="saveEditDataSet()"> 保 存</i-button>
+                    <i-button @click="handleClose()">关 闭</i-button>
+                </button-group>
+            </div>
+        </div>
+    </div>
+    <script>
+        var dataSetEditForm = new Vue({
+            el:"#dataSetEditForm",
+            data:{
+                isSubmitting:false,
+                acInterface:{
+                    getDataUrl:"/PlatFormRest/Builder/DataSet/DataSetMain/GetDataSetData",
+                    saveDataUrl:"/PlatFormRest/Builder/DataSet/DataSetMain/SaveDataSetEdit",
+                    loadApiDataUrl:"/PlatFormRest/Builder/DataSet/DataSetMain/GetApiDataSetVoStructure"
+                },
+                currUserEntity:null,
+                ruleValidate: {
+                    dsCaption: [
+                        {required: true, message: '【标题】不能空！', trigger: 'blur'}
+                    ],
+                    dsName: [
+                        {required: true, message: '【名称】不能空！', trigger: 'blur'}
+                    ]
+                },
+                datasetEntity:{
+                    dsId:"",
+                    dsCaption:"",
+                    dsName:"",
+                    dsCreateTime:DateUtility.GetCurrentData(),
+                    dsCreater:"",
+                    dsUpdateTime:DateUtility.GetCurrentData(),
+                    dsUpdater:"",
+                    dsType:"",
+                    dsIssystem:"否",
+                    dsDesc: "",
+                    dsGroupId:"",
+                    dsStatus:"启用",
+                    dsSqlSelectText:"",
+                    dsSqlSelectValue:"",
+                    dsClassName:"com.jbuild4d.platform.builder.extend.impl.DemoDataSetAPI",
+                    dsRestStructureUrl:"",
+                    dsRestDataUrl:"",
+                    columnVoList:null,
+                    relatedTableVoList:null,
+                    dsSqlDbLinkId:""
+                },
+                editTableObj:null,
+                editTableConfig:{
+                    Status:"Edit",//状态 编辑 Edit 浏览 View
+                    DataField:"fieldName",
+                    //AddAfterRowEvent:TableDetailUtil.AfterInitEvent,
+                    Templates:[
+                        {
+                            Title:"字段ID",
+                            BindName:"columnId",
+                            Renderer:"EditTable_Label",
+                            TitleCellClassName:"TitleCell",
+                            DefaultValue:{
+                                Type:"GUID",
+                                Value:0
+                            },
+                            Hidden:true
+                        },
+                        {
+                            Title:"标题",
+                            BindName:"columnCaption",
+                            Renderer:"EditTable_TextBox",
+                            TitleCellClassName:"TitleCell",
+                            Validate:{
+                                Type:"NotEmpty"
+                            },
+                            Hidden:false,
+                            TitleCellAttrs:{},
+                            Style:{
+                                width:150
+                            }
+                        },{
+                            Title:"名称",
+                            BindName:"columnName",
+                            Renderer:"EditTable_FieldName",
+                            Validate:{
+                                Type:"SQLKeyWord"
+                            },
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"F_"
+                            },
+                            Style:{
+                                width:150
+                            },
+                            Hidden:false
+                        },{
+                            Title:"字段类型",
+                            BindName:"columnDataTypeName",
+                            Renderer:"Column_SelectFieldType",
+                            Hidden:false,
+                            Style:{
+                                width:68,
+                                textAlign:"center"
+                            }
+                        },{
+                            Title:"自定义",
+                            BindName:"columnIsCustom",
+                            Renderer:"EditTable_Label",
+                            Style:{
+                                width:80,
+                                textAlign:"center"
+                            },
+                            DefaultValue:{
+                                Type:"Const",
+                                Value:"是"
+                            },
+                            Hidden:false
+                        },{
+                            Title:"备注",
+                            BindName:"columnDesc",
+                            Renderer:"EditTable_TextBox",
+                            Hidden:false,
+                            Style:{
+                                width:180,
+                                textAlign:"center"
+                            }
+                        },{
+                            Title:"格式化方法",
+                            BindName:"columnFormatter",
+                            Renderer:"EditTable_TextBox",
+                            Hidden:false
+                        },{
+                            Title:"默认值",
+                            BindName:"columnDefaultValue",
+                            Renderer:"Column_SelectDefaultValue",
+                            Hidden:false,
+                            Style:{
+                                width:220
+                            }
+                        }
+                    ],
+                    RowIdCreater:function(){
+
+                    },
+                    TableClass:"edit-table",
+                    RendererTo:"divEditTable",//div elem
+                    TableId:"dsColumns",
+                    TableAttrs:{cellpadding:"1",cellspacing:"1",border:"1"}
+                },
+                status: BaseUtility.GetUrlParaValue("op"),
+                relatedTable: {
+                    config: [
+                        {
+                            title: '表名',
+                            key: 'rtTableName',
+                            align: "center"
+                        }, {
+                            title: '标题',
+                            key: 'rtTableCaption',
+                            align: "center"
+                        }
+                    ],
+                    data: []
+                }
+                /*,sqlWithEnvText:"请编辑SQL"*/
+            },
+            mounted:function(){
+                this.editTableObj=Object.create(EditTable);
+                this.editTableObj.Initialization(this.editTableConfig);
+                this.currUserEntity=CacheDataUtility.GetCurrentUserInfo();
+                if(this.status=="add"){
+                    //this.editTableObj.LoadJsonData(this.templateFieldGroup[this.useTemplateName]);
+                    this.datasetEntity.dsCreater=this.currUserEntity.userName;
+                    this.datasetEntity.dsUpdater=this.currUserEntity.userName;
+                    this.datasetEntity.dsId=StringUtility.Guid();
+                    this.datasetEntity.dsGroupId=BaseUtility.GetUrlParaValue("groupId");
+                    this.datasetEntity.dsType="SQLDataSet";
+                    this.datasetEntity.dsSqlSelectText="请编辑SQL";
+                }
+                else {
+                    //this.editTableObj.LoadJsonData(this.tableFieldsData);
+                    this.datasetEntity.dsId=BaseUtility.GetUrlParaValue("recordId");
+                    this.datasetEntity.dsUpdater=this.currUserEntity.userName;
+                    this.loadData(this.datasetEntity.dsId,this.status);
+                }
+                $("#divEditTable").height($(".right-outer-wrap").height()-185);
+            },
+            created:function () {
+
+            },
+            methods:{
+                loadData:function(recordId,op){
+                    var _self=this;
+                    //获取数据并赋值
+                    AjaxUtility.Post(this.acInterface.getDataUrl,{recordId:recordId,op:op},function (result) {
+                        if(result.success) {
+                            console.log(result);
+                            _self.datasetEntity=result.data;
+                            //alert(_self.datasetEntity.dsType);
+                            _self.editTableObj.LoadJsonData(_self.datasetEntity.columnVoList);
+                            _self.relatedTable.data=_self.datasetEntity.relatedTableVoList;
+                            if(op=="view") {
+                                DetailPageUtility.IViewPageToViewStatus();
+                            }
+
+                            //不明所以...没有切换可见的状态...
+                            if(_self.datasetEntity.dsType=="APIDataSet"){
+                                window.setTimeout(function () {
+                                    $("[name='APIDataSetInnerWraper']").css("visibility","visible");
+                                },500);
+                                //alert(_self.datasetEntity.dsType);
+                            }
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                        }
+                    },"json");
+                },
+                addColumn:function(){
+                    this.editTableObj.AddEditingRowByTemplate();
+                },
+                removeColumn:function () {
+                    this.editTableObj.RemoveRow();
+                },
+                clearColumn:function(){
+                    this.editTableObj.RemoveAllRow();
+                },
+                moveColumn:function (type) {
+                    if(type=="up"){
+                        this.editTableObj.MoveUp();
+                    }
+                    else {
+                        this.editTableObj.MoveDown();
+                    }
+                },
+                saveEditDataSet:function () {
+                    if(this.datasetEntity.dsCaption.replace(/(^\s*)|(\s*$)/g, "")==""){
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "数据集标题不能为空！",null);
+                        return false;
+                    }
+                    if(/^[a-zA-Z][a-zA-Z0-9_]{0,}$/.test(this.datasetEntity.dsName) == false){
+                        DialogUtility.Alert(window,DialogUtility.DialogAlertId,{}, "数据集名称不能为空且只能是字母、下划线、数字并以字母开头！",null);
+                        return false;
+                    }
+                    //alert("做到这里");
+                    if (this.editTableObj.CompletedEditingRow()) {
+                        console.log(this.editTableObj.GetSerializeJson());
+
+                        //补完数据
+                        this.datasetEntity.columnVoList=this.editTableObj.GetSerializeJson();
+                        this.datasetEntity.relatedTableVoList=this.relatedTable.data;
+                        //设置ID;
+
+                        if(this.datasetEntity.columnVoList) {
+                            for (var i = 0; i < this.datasetEntity.columnVoList.length; i++) {
+                                if (this.datasetEntity.columnVoList[i].columnId == ""||this.datasetEntity.columnVoList[i].columnId==null) {
+                                    this.datasetEntity.columnVoList[i].columnId = StringUtility.Guid();
+                                }
+                                //this.datasetEntity.columnVoList[i].columnDsId=
+                            }
+                        }
+                        //debugger;
+                        if(this.datasetEntity.relatedTableVoList) {
+                            for (var i = 0; i < this.datasetEntity.relatedTableVoList.length; i++) {
+                                if (this.datasetEntity.relatedTableVoList[i].rtId == ""||this.datasetEntity.relatedTableVoList[i].rtId == null) {
+                                    this.datasetEntity.relatedTableVoList[i].rtId = StringUtility.Guid();
+                                }
+                            }
+                        }
+
+                        var sendData = {
+                            op: this.status,
+                            dataSetId:this.datasetEntity.dsId,
+                            dataSetVoJson: JSON.stringify(this.datasetEntity)
+                        };
+
+                        this.isSubmitting=true;
+                        //return;
+                        AjaxUtility.Post(this.acInterface.saveDataUrl, sendData, function (result) {
+                            //debugger;
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, function () {
+                                if (result.success) {
+                                    window.OpenerWindowObj.appList.reloadData();
+                                    DialogUtility.Frame_CloseDialog(window);
+                                }
+                            });
+                        }, "json");
+                    }
+                },
+                handleClose: function () {
+                    DialogUtility.Frame_CloseDialog(window);
+                },
+                designSQL:function () {
+                    //debugger;
+                    var url=BaseUtility.BuildView("/HTML/Builder/DataSet/SQLDesigner.html",{});
+
+                    var _height=690;
+
+                    if(PageStyleUtility.GetPageHeight()<600)
+                    {
+                        _height=500;
+                    }
+                    //alert(_height);
+                    DialogUtility.OpenIframeWindow(window, DialogUtility.DialogId, url, {title: "编辑SQL语句",modal:true,height: _height, width: 980});
+                },
+                completedSQLDesign:function (result) {
+                    //console.log(result);
+                    this.datasetEntity.dsSqlSelectText=result.data.sqlWithEnvText;
+                    this.datasetEntity.dsSqlSelectValue=result.data.sqlWithEnvValue;
+                    this.datasetEntity.dsSqlDbLinkId=result.data.dataSetVo.dsSqlDbLinkId;
+                    this.relatedTable.data=result.data.dataSetVo.relatedTableVoList;
+                    //获取现有的列定义
+                    if (this.editTableObj.CompletedEditingRow()) {
+                        var oldColumnData = this.editTableObj.GetSerializeJson();
+                        if (oldColumnData.length == 0) {
+                            this.editTableObj.LoadJsonData(result.data.dataSetVo.columnVoList);
+                        }
+                        else {
+                            var newColumnData = this.editTableObj.GetSerializeJson();
+                            //debugger;
+                            for (var j = 0; j < result.data.dataSetVo.columnVoList.length; j++) {
+                                var tempColumnName = result.data.dataSetVo.columnVoList[j].columnName;
+
+                                var canAdd=true;
+                                for (var i = 0; i < oldColumnData.length; i++) {
+                                    var columnName = oldColumnData[i].columnName;
+                                    if (columnName == tempColumnName) {
+                                        canAdd=false;
+                                        break;
+                                    }
+                                }
+                                if(canAdd) {
+                                    newColumnData.push(result.data.dataSetVo.columnVoList[j]);
+                                }
+                            }
+                            //debugger;
+                            //清空旧的列设置并进覆盖
+                            this.editTableObj.RemoveAllRow();
+                            this.editTableObj.LoadJsonData(newColumnData);
+                        }
+                    }
+                },
+                loadApiDataSetVo:function () {
+                    var _self=this;
+                    //获取数据并赋值
+                    var recordId=this.datasetEntity.dsId;
+                    var op=this.status;
+                    var groupId=this.datasetEntity.dsGroupId;
+                    var fullClassName=this.datasetEntity.dsClassName;
+                    AjaxUtility.Post(this.acInterface.loadApiDataUrl,{recordId:recordId,op:op,groupId:groupId,fullClassName:fullClassName},function (result) {
+                        if(result.success) {
+                            _self.clearColumn();
+                            _self.datasetEntity.dsCaption=result.data.dsCaption;
+                            _self.datasetEntity.dsName=result.data.dsName;
+                            _self.editTableObj.LoadJsonData(result.data.columnVoList);
+                            _self.relatedTable.data=result.data.relatedTableVoList;
+                        }
+                        else {
+                            DialogUtility.Alert(window, DialogUtility.DialogAlertId, {}, result.message, null);
+                        }
+                    },"json");
+                },
+                loadRestDataSetVo:function () {
+
+                },
+                testRestDataSetVo:function () {
+
+                }
+            }
+        });
+    </script>
+</body>
+</html>
