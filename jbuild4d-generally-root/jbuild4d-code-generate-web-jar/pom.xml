@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jbuild4d-code-generate-web-system</artifactId>
+    <artifactId>jbuild4d-code-generate-web-jar</artifactId>
 
 
 </project>

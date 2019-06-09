@@ -18,6 +18,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/jbuild4d-front-end-jar/pom.xml" />
+        <option value="$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-web-system/pom.xml" />
         <option value="$PROJECT_DIR$/jbuild4d-platform-root/build4d-platform-sso/pom.xml" />
         <option value="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-organ/pom.xml" />
         <option value="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-sso-client/pom.xml" />

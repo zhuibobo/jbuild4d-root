@@ -11,8 +11,8 @@
         <module name="jbuild4d-sso-java-web-client-demo1" />
         <module name="jbuild4d-front-end-jar" />
         <module name="jbuild4d-base-exception" />
+        <module name="jbuild4d-code-generate-web-jar" />
         <module name="jbuild4d-platform-files" />
-        <module name="jbuild4d-code-generate-web-system" />
         <module name="jbuild4d-front-end-source" />
         <module name="jbuild4d-web-platform" />
         <module name="flowable-ui-common" />
@@ -49,6 +49,7 @@
       <module name="jbuild4d-base-service" target="1.8" />
       <module name="jbuild4d-base-tools" target="1.8" />
       <module name="jbuild4d-code-generate-service" target="1.8" />
+      <module name="jbuild4d-code-generate-web-jar" target="1.8" />
       <module name="jbuild4d-code-generate-web-system" target="1.8" />
       <module name="jbuild4d-core-base" target="1.8" />
       <module name="jbuild4d-core-root" target="1.8" />

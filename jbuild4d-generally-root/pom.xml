@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>jbuild4d-code-generate-service</module>
-        <module>jbuild4d-code-generate-web-system</module>
+        <module>jbuild4d-code-generate-web-jar</module>
     </modules>
 
     <dependencies>
