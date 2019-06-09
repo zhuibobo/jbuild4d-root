@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title></title>
+    <link href="/SSSWeb/UIComponent/TreeTable/Css/TreeTable.css" rel="stylesheet"/>
+
+    <script src="/SSSWeb/Js/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="/SSSWeb/Js/SSSBaseLib.js" type="text/javascript"></script>
+    <script src="/SSSWeb/UIComponent/TreeTable/Js/TreeTable.js" type="text/javascript"></script>
+    <script src="/SSSWeb/UIComponent/TreeTable/demo/TreeTableConfig.js" type="text/javascript"></script>
+    <script>
+        var treeTableObj=null;
+        $(function(){
+            //treeTableObj=Object.create(TreeTable);
+            //treeTableObj.Initialization(TreeTableConfig);
+            //treeTableObj.LoadJsonData(TreeTableJsonData);
+
+            var treedata=JsonUtility.ParseArrayJsonToTreeJson({
+                KeyField: "Organ_Id",
+                RelationField:"Parent_Id",
+                ChildFieldName:"Nodes"
+            },TreeTableJsonDataList,0);
+            //window.document.write(StringLib.Level1JsonToString(treedata));
+            treeTableObj=Object.create(TreeTable);
+            treeTableObj.Initialization(TreeTableConfig);
+            treeTableObj.LoadJsonData(TreeTableJsonData);
+        })
+
+        var PageFunc={
+            Add:function(){
+                var nodeData=treeTableObj.GetSelectedRowData();
+                var newrowData={
+                    Organ_Id:StringUtility.Guid(),
+                    Organ_Name:StringUtility.Guid(),
+                    Organ_ShortName:StringUtility.Guid(),
+                    Organ_Code:StringUtility.Guid(),
+                    Child_Count:0
+                };
+                treeTableObj.AppendChildRowToCurrentSelectedRow(newrowData);
+            },
+            Update:function(){
+                //alert(treeTableObj._Prop_JsonData.Nodes.length);
+                var newrowData={
+                    Organ_Id:"2",
+                    Organ_Name:StringUtility.Guid(),
+                    Organ_ShortName:StringUtility.Guid(),
+                    Organ_Code:StringUtility.Guid(),
+                    Child_Count:0
+                };
+                rowId=newrowData.Organ_Id;
+                treeTableObj.UpdateToRow(rowId,newrowData);
+
+            },
+            Del:function(){
+                treeTableObj.DeleteRow("1");
+            },
+            MoveUp:function(){
+                var nodeData=treeTableObj.GetSelectedRowData();
+                treeTableObj.MoveUpRow(nodeData.Organ_Id);
+            },
+            MoveDown:function(){
+                var nodeData=treeTableObj.GetSelectedRowData();
+                treeTableObj.MoveDownRow(nodeData.Organ_Id);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <input value="新增" type="button" onclick="PageFunc.Add()"/>
+        <input value="修改" type="button" onclick="PageFunc.Update()"/>
+        <input value="删除" type="button" onclick="PageFunc.Del()"/>
+        <input value="上移" type="button" onclick="PageFunc.MoveUp()"/>
+        <input value="下移" type="button" onclick="PageFunc.MoveDown()"/>
+    </div>
+    <div id="divEditTable"></div>
+</body>
+</html>
