@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.system.exenum;
+package com.jbuild4d.code.generate.exenum;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,9 +1,8 @@
-package com.jbuild4d.platform.system.vo;
+package com.jbuild4d.code.generate.vo;
 
-import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
+import com.jbuild4d.code.generate.exenum.CodeGenerateTypeEnum;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

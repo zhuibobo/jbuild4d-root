@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.system.service.impl.codegenerate;
+package com.jbuild4d.code.generate.service.impl.codegenerate;
 
 /**
  * Created with IntelliJ IDEA.
@@ -6,5 +6,5 @@ package com.jbuild4d.platform.system.service.impl.codegenerate;
  * Date: 2018/7/27
  * To change this template use File | Settings | File Templates.
  */
-public class CGBean {
+public class CGDetailJsp {
 }

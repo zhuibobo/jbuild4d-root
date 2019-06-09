@@ -1,11 +1,14 @@
-package com.jbuild4d.platform.system.service.impl.codegenerate;
+package com.jbuild4d.code.generate.service.impl.codegenerate;
 
+import com.jbuild4d.code.generate.exenum.CodeGenerateTypeEnum;
+import com.jbuild4d.code.generate.vo.CodeGenerateVo;
 import com.jbuild4d.core.base.tools.XMLDocumentUtility;
-import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
-import com.jbuild4d.platform.system.vo.CodeGenerateVo;
 import org.mybatis.generatorex.api.IntrospectedColumn;
 import org.mybatis.generatorex.api.IntrospectedTable;
-import org.w3c.dom.*;
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -22,8 +25,8 @@ import java.util.Map;
  */
 public class CGMapperEX {
 
-    public static String generate(String idFieldName,IntrospectedTable introspectedTable, String tableName,String orderFieldName,String statusFieldName,
-                                  Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap,String xmlMapperACStr) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+    public static String generate(String idFieldName, IntrospectedTable introspectedTable, String tableName, String orderFieldName, String statusFieldName,
+                                  Map<CodeGenerateTypeEnum, CodeGenerateVo> codeGenerateVoMap, String xmlMapperACStr) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
         StringBuilder builder=new StringBuilder();
 
         //String idFieldName=introspectedTableList.get(0).getPrimaryKeyColumns().get(0).getActualColumnName();

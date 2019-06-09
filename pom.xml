@@ -19,6 +19,7 @@
         <module>jbuild4d-core-root</module>
         <module>jbuild4d-sso-root</module>
         <module>jbuild4d-front-end-root</module>
+        <module>jbuild4d-generally-root</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -105,6 +106,12 @@
             <dependency>
                 <groupId>jbuild4d</groupId>
                 <artifactId>jbuild4d-platform-files</artifactId>
+                <version>${platform.version}</version>
+            </dependency>
+            <!--项目本身的相关工程-代码生成-->
+            <dependency>
+                <groupId>jbuild4d</groupId>
+                <artifactId>jbuild4d-code-generate-service</artifactId>
                 <version>${platform.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->

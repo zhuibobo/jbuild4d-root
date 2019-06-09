@@ -14,11 +14,14 @@
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-root.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-service/jbuild4d-base-service.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-service/jbuild4d-base-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-tools/jbuild4d-base-tools.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-tools/jbuild4d-base-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-service/jbuild4d-code-generate-service.iml" filepath="$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-service/jbuild4d-code-generate-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-web-system/jbuild4d-code-generate-web-system.iml" filepath="$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-web-system/jbuild4d-code-generate-web-system.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-base/jbuild4d-core-base.iml" filepath="$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-base/jbuild4d-core-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-root.iml" filepath="$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-front-end-root/jbuild4d-front-end-jar/jbuild4d-front-end-jar.iml" filepath="$PROJECT_DIR$/jbuild4d-front-end-root/jbuild4d-front-end-jar/jbuild4d-front-end-jar.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-front-end-root/jbuild4d-front-end-root.iml" filepath="$PROJECT_DIR$/jbuild4d-front-end-root/jbuild4d-front-end-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-front-end-root/jbuild4d-front-end-source/jbuild4d-front-end-source.iml" filepath="$PROJECT_DIR$/jbuild4d-front-end-root/jbuild4d-front-end-source/jbuild4d-front-end-source.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-generally-root.iml" filepath="$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-generally-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-builder/jbuild4d-platform-builder.iml" filepath="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-builder/jbuild4d-platform-builder.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-files/jbuild4d-platform-files.iml" filepath="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-files/jbuild4d-platform-files.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-root.iml" filepath="$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-root.iml" />
@@ -30,6 +33,7 @@
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-java-web-client-demo-root/jbuild4d-sso-java-web-client-demo1/jbuild4d-sso-java-web-client-demo1.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-java-web-client-demo-root/jbuild4d-sso-java-web-client-demo1/jbuild4d-sso-java-web-client-demo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-java-web-client-demo-root/jbuild4d-sso-java-web-client-demo2/jbuild4d-sso-java-web-client-demo2.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-java-web-client-demo-root/jbuild4d-sso-java-web-client-demo2/jbuild4d-sso-java-web-client-demo2.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-root.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-web-system/jbuild4d-sso-web-system.iml" filepath="$PROJECT_DIR$/jbuild4d-sso-root/jbuild4d-sso-web-system/jbuild4d-sso-web-system.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-web-root/jbuild4d-web-platform/jbuild4d-web-platform.iml" filepath="$PROJECT_DIR$/jbuild4d-web-root/jbuild4d-web-platform/jbuild4d-web-platform.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-web-root/jbuild4d-web-root.iml" filepath="$PROJECT_DIR$/jbuild4d-web-root/jbuild4d-web-root.iml" />
     </modules>

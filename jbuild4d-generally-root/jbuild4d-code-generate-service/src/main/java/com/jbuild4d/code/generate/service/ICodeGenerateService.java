@@ -1,9 +1,9 @@
-package com.jbuild4d.platform.system.service;
+package com.jbuild4d.code.generate.service;
 
 import com.github.pagehelper.PageInfo;
+import com.jbuild4d.code.generate.vo.SimpleTableFieldVo;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
-import com.jbuild4d.platform.system.vo.SimpleTableFieldVo;
 import org.mybatis.generatorex.api.IntrospectedTable;
 import org.xml.sax.SAXException;
 
@@ -11,7 +11,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map; /**
+import java.util.Map;
+
+/**
  * Created with IntelliJ IDEA.
  * User: zhuangrb
  * Date: 2018/7/25

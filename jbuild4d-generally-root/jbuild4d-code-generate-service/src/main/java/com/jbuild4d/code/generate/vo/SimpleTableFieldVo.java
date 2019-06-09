@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.system.vo;
+package com.jbuild4d.code.generate.vo;
 
 /**
  * Created with IntelliJ IDEA.

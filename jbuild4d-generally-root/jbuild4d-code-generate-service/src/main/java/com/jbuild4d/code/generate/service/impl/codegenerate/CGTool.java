@@ -1,4 +1,4 @@
-package com.jbuild4d.platform.system.service.impl.codegenerate;
+package com.jbuild4d.code.generate.service.impl.codegenerate;
 
 /**
  * Created with IntelliJ IDEA.

@@ -7,6 +7,8 @@ import com.jbuild4d.base.dbaccess.dynamic.ISQLBuilderMapper;
 import com.jbuild4d.base.dbaccess.dynamic.SQLBuilderMapper;
 import com.jbuild4d.base.service.IMetadataService;
 import com.jbuild4d.base.service.impl.MetadataServiceImpl;
+import com.jbuild4d.code.generate.service.ICodeGenerateService;
+import com.jbuild4d.code.generate.service.impl.CodeGenerateServiceImpl;
 import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.IGeneralService;
 import com.jbuild4d.base.service.ISQLBuilderService;

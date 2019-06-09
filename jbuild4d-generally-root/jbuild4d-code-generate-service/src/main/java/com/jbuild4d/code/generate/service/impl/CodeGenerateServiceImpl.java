@@ -1,22 +1,22 @@
-package com.jbuild4d.platform.system.service.impl;
+package com.jbuild4d.code.generate.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jbuild4d.base.dbaccess.general.DBProp;
-import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.base.service.ISQLBuilderService;
+import com.jbuild4d.base.tools.PathUtility;
+import com.jbuild4d.code.generate.exenum.CodeGenerateTypeEnum;
+import com.jbuild4d.code.generate.service.ICodeGenerateService;
+import com.jbuild4d.code.generate.service.impl.codegenerate.CGCodeFragment;
+import com.jbuild4d.code.generate.service.impl.codegenerate.CGIService;
+import com.jbuild4d.code.generate.service.impl.codegenerate.CGMapperEX;
+import com.jbuild4d.code.generate.service.impl.codegenerate.CGServiceImpl;
+import com.jbuild4d.code.generate.vo.CodeGenerateVo;
+import com.jbuild4d.code.generate.vo.SimpleTableFieldVo;
+import com.jbuild4d.core.base.exception.JBuild4DGenerallyException;
 import com.jbuild4d.core.base.session.JB4DSession;
 import com.jbuild4d.core.base.tools.DateUtility;
-import com.jbuild4d.base.tools.PathUtility;
 import com.jbuild4d.core.base.tools.StringUtility;
-import com.jbuild4d.platform.system.exenum.CodeGenerateTypeEnum;
-import com.jbuild4d.platform.system.service.ICodeGenerateService;
-import com.jbuild4d.platform.system.service.impl.codegenerate.CGCodeFragment;
-import com.jbuild4d.platform.system.service.impl.codegenerate.CGIService;
-import com.jbuild4d.platform.system.service.impl.codegenerate.CGMapperEX;
-import com.jbuild4d.platform.system.service.impl.codegenerate.CGServiceImpl;
-import com.jbuild4d.platform.system.vo.CodeGenerateVo;
-import com.jbuild4d.platform.system.vo.SimpleTableFieldVo;
 import org.mybatis.generatorex.api.IntrospectedTable;
 import org.mybatis.generatorex.api.MyBatisGenerator;
 import org.mybatis.generatorex.config.*;
@@ -107,7 +107,7 @@ public class CodeGenerateServiceImpl implements ICodeGenerateService {
     private String EntityRootFolderKey="EntityRootFolderKey";
     private String DaoRootFolderKey="DaoRootFolderKey";
     private String XmlRootFolderKey="XmlRootFolderKey";
-    private Map<CodeGenerateTypeEnum,CodeGenerateVo> createAboutFolder(Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap){
+    private Map<CodeGenerateTypeEnum, CodeGenerateVo> createAboutFolder(Map<CodeGenerateTypeEnum,CodeGenerateVo> codeGenerateVoMap){
         String GenerateCodeFilesPath=PathUtility.getWebInfPath()+"/GenerateCodeFiles"+"/"+DateUtility.getDate_yyyyMMddHHmmssSSS();
         File tempRootFolder=new File(GenerateCodeFilesPath);
         tempRootFolder.mkdirs();
