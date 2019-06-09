@@ -17,6 +17,8 @@
     <file url="file://$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-web-jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-web-system" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-dev-mock-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-dev-mock-web-system" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jbuild4d-platform-root" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-builder" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jbuild4d-platform-root/jbuild4d-platform-files" charset="UTF-8" />
