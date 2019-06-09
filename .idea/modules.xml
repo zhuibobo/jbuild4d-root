@@ -14,6 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-root.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-service/jbuild4d-base-service.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-service/jbuild4d-base-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-tools/jbuild4d-base-tools.iml" filepath="$PROJECT_DIR$/jbuild4d-base-root/jbuild4d-base-tools/jbuild4d-base-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbuild4d-builder-root/jbuild4d-builder-root.iml" filepath="$PROJECT_DIR$/jbuild4d-builder-root/jbuild4d-builder-root.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-service/jbuild4d-code-generate-service.iml" filepath="$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-service/jbuild4d-code-generate-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-web-jar/jbuild4d-code-generate-web-jar.iml" filepath="$PROJECT_DIR$/jbuild4d-generally-root/jbuild4d-code-generate-web-jar/jbuild4d-code-generate-web-jar.iml" />
       <module fileurl="file://$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-base/jbuild4d-core-base.iml" filepath="$PROJECT_DIR$/jbuild4d-core-root/jbuild4d-core-base/jbuild4d-core-base.iml" />

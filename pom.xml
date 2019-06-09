@@ -20,6 +20,7 @@
         <module>jbuild4d-sso-root</module>
         <module>jbuild4d-front-end-root</module>
         <module>jbuild4d-generally-root</module>
+        <module>jbuild4d-builder-root</module>
     </modules>
     <packaging>pom</packaging>
 

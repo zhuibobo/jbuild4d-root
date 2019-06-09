@@ -6,35 +6,36 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="jbuild4d-sso-client" />
-        <module name="jbuild4d-sso-java-web-client-demo2" />
-        <module name="jbuild4d-sso-java-web-client-demo1" />
-        <module name="jbuild4d-front-end-jar" />
-        <module name="jbuild4d-base-exception" />
-        <module name="jbuild4d-code-generate-web-jar" />
-        <module name="jbuild4d-platform-files" />
-        <module name="jbuild4d-front-end-source" />
         <module name="jbuild4d-dev-mock-web-system" />
-        <module name="jbuild4d-web-platform" />
-        <module name="flowable-ui-common" />
-        <module name="jbuild4d-base-tools" />
-        <module name="jbuild4d-platform-sso-service" />
-        <module name="jbuild4d-platform-builder" />
-        <module name="flowable-ui-modeler-app" />
-        <module name="jbuild4d-dev-mock-service" />
-        <module name="jbuild4d-platform-system" />
-        <module name="jbuild4d-core-base" />
+        <module name="jbuild4d-platform-files" />
+        <module name="jbuild4d-code-generate-web-jar" />
         <module name="flowable-ui-modeler-rest" />
-        <module name="build4d-base-tools" />
-        <module name="jbuild4d-code-generate-service" />
+        <module name="jbuild4d-front-end-source" />
+        <module name="jbuild4d-dev-mock-service" />
         <module name="jbuild4d-base-db-access" />
+        <module name="jbuild4d-platform-system" />
+        <module name="jbuild4d-sso-web-system" />
+        <module name="flowable-ui-modeler-conf" />
+        <module name="flowable-ui-common" />
+        <module name="jbuild4d-front-end-jar" />
+        <module name="jbuild4d-web-platform" />
+        <module name="jbuild4d-base-tools" />
+        <module name="jbuild4d-platform-builder" />
+        <module name="jbuild4d-builder-root" />
+        <module name="jbuild4d-code-generate-service" />
+        <module name="jbuild4d-base-project" />
         <module name="jbuild4d-sso-web-client-demo-root" />
         <module name="build4d-base-service" />
-        <module name="flowable-ui-modeler-logic" />
-        <module name="jbuild4d-sso-web-system" />
-        <module name="jbuild4d-base-project" />
-        <module name="flowable-ui-modeler-conf" />
+        <module name="jbuild4d-base-exception" />
+        <module name="flowable-ui-modeler-app" />
         <module name="jbuild4d-base-service" />
+        <module name="jbuild4d-sso-client" />
+        <module name="flowable-ui-modeler-logic" />
+        <module name="jbuild4d-core-base" />
+        <module name="jbuild4d-sso-java-web-client-demo2" />
+        <module name="jbuild4d-sso-java-web-client-demo1" />
+        <module name="jbuild4d-platform-sso-service" />
+        <module name="build4d-base-tools" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -50,6 +51,7 @@
       <module name="jbuild4d-base-root" target="1.8" />
       <module name="jbuild4d-base-service" target="1.8" />
       <module name="jbuild4d-base-tools" target="1.8" />
+      <module name="jbuild4d-builder-root" target="1.8" />
       <module name="jbuild4d-code-generate-service" target="1.8" />
       <module name="jbuild4d-code-generate-web-jar" target="1.8" />
       <module name="jbuild4d-code-generate-web-system" target="1.8" />
