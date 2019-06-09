@@ -17,7 +17,7 @@ const replacecust = require("./gulp-plugin/gulp-replace-cust/index.js");
 const replaceBlockObj=require("./replaceBlock.js");
 
 const jarFromResourcePath = "web-front-end-jar/static";
-const jarToResourcePath = "../jbuild4d-web-root/jbuild4d-web-front-end/src/main/resources/static";
+const jarToResourcePath = "../jbuild4d-front-end-jar/src/main/resources/static";
 
 //region 基础Jar包相关的编译
 gulp.task('Jar-JS-T3P',()=>{
@@ -108,6 +108,10 @@ gulp.task('Jar-Themes-Less-Images',()=>{
 
 /*编译工程相关的JS*/
 gulp.task('Jar-JS-Custom-ALL', gulp.series('Jar-JS-VueEXComponent','Jar-JS-Utility','Jar-JS-UIComponent','Jar-JS-HTMLDesignRuntime'));
+
+/*编译Jar相关的所有文件,包括第三方包*/
+gulp.task('Jar-ALL-Include-T3P', gulp.series('Jar-JS-T3P','Jar-Themes-ALL','Jar-Themes-Less','Jar-Themes-Less-Images','Jar-JS-Custom-ALL'));
+
 //endregion
 
 //region 管理后端的相关的编译
