@@ -1,3 +1,0 @@
-var WFDCT_TextBox={
-
-}
